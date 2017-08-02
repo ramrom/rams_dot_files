@@ -34,18 +34,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/.bash_aliases_8b ]; then
-    . ~/.bash_aliases_8b
-fi
-
 if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
-
-if [ -f ~/.bash_functions_8b ]; then
-    . ~/.bash_functions_8b
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -75,14 +66,9 @@ if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
 fi
 
-if [ -d ~/8b/bin ] ; then
-    PATH=~/8b/bin:"${PATH}"
-fi
-
-export DISPLAY='localhost:10.0'
+# export DISPLAY='localhost:10.0'
 
 if [ -d ~/.rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
-
