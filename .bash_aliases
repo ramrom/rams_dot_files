@@ -38,6 +38,7 @@ fi
 
 # GIT
 alias gp='git pull'
+alias gpsm='git pull --recurse-submodules'
 alias gs='git status'
 alias gd='git diff'
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
