@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/smittapalli/.vim'
-let g:netrw_dirhist_2='/Users/smittapalli/.vim/nerdtree_plugin'
-let g:netrw_dirhist_3='/Users/smittapalli/.vim'
-let g:netrw_dirhist_4='/Users/smittapalli/Downloads/tmp/autoload'
-let g:netrw_dirhist_5='/Users/smittapalli/Downloads/tmp/autoload/nerdtree'
-let g:netrw_dirhist_6='/Users/smittapalli/.vim'
