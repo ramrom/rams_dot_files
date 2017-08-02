@@ -2,12 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-CHRUBY_FILE=/usr/local/share/chruby/chruby.sh
-if [ -f "$CHRUBY_FILE" ]; then
-  source $CHRUBY_FILE
-  source /usr/local/share/chruby/auto.sh
-fi
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -68,7 +62,14 @@ fi
 
 # export DISPLAY='localhost:10.0'
 
+# Ruby stuff
 if [ -d ~/.rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+fi
+
+CHRUBY_FILE=/usr/local/share/chruby/chruby.sh
+if [ -f "$CHRUBY_FILE" ]; then
+  source $CHRUBY_FILE
+  source /usr/local/share/chruby/auto.sh
 fi
