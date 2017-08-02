@@ -97,5 +97,3 @@ if [ `uname` = "Linux" ]; then
   alias acknt='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
   alias ackn='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
 fi
-
-alias myenovaenvsync='cd ~/RamsEnovaEnvFiles; git pull; source ~/.bashrc; source ~/.bash_profile; cd -'
