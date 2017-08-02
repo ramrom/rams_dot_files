@@ -1,0 +1,88 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+CHRUBY_FILE=/usr/local/share/chruby/chruby.sh
+if [ -f "$CHRUBY_FILE" ]; then
+  source $CHRUBY_FILE
+  source /usr/local/share/chruby/auto.sh
+fi
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+export HISTCONTROL=ignoredups
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Colorize ls
+if [ `uname` == "Darwin" ]; then
+  LSCOLORS='GxFxCxDxBxegedabagaced'
+  export LSCOLORS
+fi
+
+# Alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -f ~/.bash_aliases_8b ]; then
+    . ~/.bash_aliases_8b
+fi
+
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
+if [ -f ~/.bash_functions_8b ]; then
+    . ~/.bash_functions_8b
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# enable programmable completion for git
+if [ -f ~/.git_completion.sh ]; then
+    . ~/.git_completion.sh
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+
+if [ -f ~/.lessfilter ]; then
+    export LESS='-R'
+    export LESSOPEN='|~/.lessfilter %s'
+fi
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
+export GOPATH=~/go
+export GOBIN=~/go/bin
+
+# set PATH so it includes user's private bin if it exists
+if [ -d ~/bin ] ; then
+    PATH=~/bin:"${PATH}"
+fi
+
+if [ -d ~/8b/bin ] ; then
+    PATH=~/8b/bin:"${PATH}"
+fi
+
+export DISPLAY='localhost:10.0'
+
+if [ -d ~/.rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+

@@ -1,0 +1,51 @@
+#vbell on
+## replace ctrl-A by ctrl-O
+
+shell -$SHELL
+
+# Taken from cnuapp.screenrc
+#
+startup_message off
+bind ^x chdir ${HOME}/
+bind f chdir ${HOME}/
+defscrollback 10000
+termcapinfo xterm|xterms|xs ti=\E7\E[?47l
+#
+#########################################
+
+#bindkey -k ^[[5 next
+#bindkey -k ^[[6 prev 
+
+# enable SHIFT-PGUP / SHIFT-PGDOWN scroll
+#
+#termcapinfo rxvt ti@:te@
+
+vbell off
+
+# Common QA screens
+screen -t one 1
+screen -t two 2
+screen -t three 3
+screen -t four 4
+screen -t five 5
+screen -t six 6
+screen -t p4 7
+screen -t config 8
+screen -t editor 9 
+screen -t main 0
+
+# hardstatus breakdown (repeated portions are ommitted)
+# # %{= wk}
+# #   = clear all attributes
+# #   w grey background
+# #   k black text
+# # %H host name
+# # %-w all windows before current window
+# # %{+u r} underline and red text
+# # %n number
+# # %t title
+# # %+w all windows after current window
+#caption always "%{= BW}%H | %-w%{= kw}%n %t%{-}%+w %-= %LD %LM %d - %c"
+caption always "%{= kw}%H | %-w%{+u b}%n %t%{-}%+w %-= %LD %LM %d - %c"
+#hardstatus alwayslastline "%{= BW}%H | %-w%{= kw}%n %t%{-}%+w %-= %LD %LM %d - %c"
+#hardstatus alwayslastline "%{= wk}%H | %-w%{+u r}%n %t%{= wk}%+w%{= wk}" 
