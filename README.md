@@ -4,7 +4,7 @@ My dot files for POSIX environments and some scripts
 
 ## Vim
 Included my `.vim/` dir.  
-Currently uses Vundle and two plugins:
+Currently uses Vundle with two plugins:
 - CtrlP
 - nerdtree
 
