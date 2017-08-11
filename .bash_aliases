@@ -30,7 +30,7 @@ if [ "$TERM" != "dumb" ]; then
     alias egrep='egrep --color=auto'
   fi
 fi
-#for my macbookpro
+# OSX changes
 if [ `uname` == "Darwin" ]; then
   alias psx='ps auxh'
   alias ls='ls -CFG'
