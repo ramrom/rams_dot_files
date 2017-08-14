@@ -1,15 +1,4 @@
 #Bash functions
-function private_data() {
-  echo $(cat ~/.creds/enova_creds | grep $1 | awk '{print $2}')
-}
-
-function apipfprod { http --auth-type=api-auth --auth=$(private_data portfolio_user):$(private_data portfolio_pass) $@; }
-function apiidprod { http --auth-type=api-auth --auth=$(private_data identity_user):$(private_data identity_pass) $@; }
-function apipgsprod { http --auth-type=api-auth --auth=$(private_data pgs_user):$(private_data pgs_pass) $@; }
-function apipfprodpost { http --auth-type=api-auth --auth=$(private_data portfolio_user):$(private_data portfolio_pass) -f POST $@; }
-
-function apidev { http --auth-type=api-auth --auth=dev:dev $@; }
-
 function fullpath() {
       ruby -e '
         $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
