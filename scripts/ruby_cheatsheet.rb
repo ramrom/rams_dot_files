@@ -1,3 +1,6 @@
+# Find all objects of a type and do something to them
+ObjectSpace.each_object(Array) { |ob| puts ob.object_id }
+
 # Find which parent class or module defines a method
 Array.instance_method(:map)
 
