@@ -21,6 +21,7 @@ alias sourceprofile='source ~/.bash_profile'
 alias sourcerc='source ~/.bashrc'
 alias ch_date='sudo date --set 1998-11-02'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs *'
+alias list_func='typeset -F'
 
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
