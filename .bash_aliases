@@ -23,6 +23,7 @@ alias ch_date='sudo date --set 1998-11-02'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs *'
 alias list_functions='typeset -F'
 alias lsoftcplisten='lsof -i -sTCP:LISTEN'
+alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
