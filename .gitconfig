@@ -1,32 +1,34 @@
 [user]
-	name = Sreeram Mittapalli
-	email = sreeram.mittapalli@gmail.com
+  name = Sreeram Mittapalli
+  email = smittapalli@enovafinancial.com
 [github]
-	user = ramrom
-	token = 582faccbf62738503f24d0f1ba0cb1a6
+  user = smittapalli
+  token = 582faccbf62738503f24d0f1ba0cb1a6
+[credential]
+  helper=
 [color]
-	branch = auto
-	diff = auto
-	status = auto
+  branch = auto
+  diff = auto
+  status = auto
 [color "branch"]
- current = yellow reverse
- local = yellow
- remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
- meta = yellow bold
- frag = magenta bold
- old = red
- new = cyan
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = cyan
 [color "status"]
- added = yellow
- changed = green
- untracked = cyan
+  added = yellow
+  changed = green
+  untracked = cyan
 [core]
- excludesfile = ~/.gitignore
-	editor = vim --noplugin
+  excludesfile = ~/.gitignore
+  editor = vim --noplugin
 [alias]
-co = checkout
-aa = add --all
-cm = commit .
-hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --d
-shas = log --pretty=format:\"%H\"
+  co = checkout
+  aa = add --all
+  cm = commit .
+  hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --d
+  shas = log --pretty=format:\"%H\"
