@@ -24,6 +24,7 @@ alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exc
 alias list_functions='typeset -F'
 alias lsoftcplisten='lsof -i -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
+alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
 
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
