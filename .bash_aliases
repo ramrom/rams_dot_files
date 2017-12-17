@@ -4,9 +4,9 @@ alias ls='ls -CF'
 alias ll='ls -l'
 alias la='ls -A'
 alias lal='ls -al'
-alias lalpow='ls -al ~/.pow/'
 alias lahl='ls -alh'
 alias lrt='ls -lrt'
+alias lalpow='ls -al ~/.pow/'
 alias grep='grep --colour=always'
 alias ag='ack-grep'
 alias fxg='find . -type f | xargs grep'
@@ -25,7 +25,8 @@ alias list_functions='typeset -F'
 alias lsoftcplisten='lsof -i -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
-alias rsyncprog='rsync -avzh --progress'
+alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
+alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checking changes
 
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
