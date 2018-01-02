@@ -6,6 +6,10 @@ function fullpath() {
       ' "$@"
 }
 
+function filenamediff() {
+  diff <(cd $1; find . -type f) <(cd $2; find . -type f)
+}
+
 function f_findfilesbysize() {
   sudo find "$1" -type f -size +"$2" | xargs du -sh
 }
