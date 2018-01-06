@@ -14,3 +14,6 @@ Array.instance_method(:map).source_location
 require 'objspace'
 i = 342423423423423423432342
 ObjectSpace.memsize_of(i)
+
+# Another method, probably better to get an idea of mem size:
+Marshal.dump(a).size
