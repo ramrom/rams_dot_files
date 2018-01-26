@@ -10,6 +10,9 @@ Array.method(:try_convert)
 # Get source location
 Array.instance_method(:map).source_location
 
+# pp source code for method
+Array.instance_method(:map).source.display
+
 # To get mem consumption of object
 require 'objspace'
 i = 342423423423423423432342
