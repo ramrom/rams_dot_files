@@ -29,6 +29,7 @@ alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t pres
 alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checking changes
 alias rysncdryrun='rsync -rv --size-only --dry-run /my/source/ /my/dest/ > diff.out'
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
+alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=dude,password=werd'
 
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
