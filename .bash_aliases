@@ -69,8 +69,8 @@ alias ber="bundle exec rspec"
 alias bi="bundle install"
 
 # Go
-alias cdgosh='cd ~/go/src'
-alias cdgosgh='cd ~/go/src/github.com'
+alias gosr='cd ~/go/src'
+alias gosrghub='cd ~/go/src/github.com'
 
 # Memcached, Redis
 alias memcachestop='sudo /etc/init.d/memcached stop'
