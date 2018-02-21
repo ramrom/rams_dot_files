@@ -28,6 +28,8 @@ alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfo
 alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
 alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checking changes
 alias rysncdryrun='rsync -rv --size-only --dry-run /my/source/ /my/dest/ > diff.out'
+alias smbcl='smbclient //192.168.1.1/Backups -U admin'
+alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=dude,password=werd'
 
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
