@@ -10,8 +10,8 @@ SEARCH_URL = 'https://freida.ama-assn.org/Freida/user/search/programSearch.do'
 
 SEARCH_RESULTS_URL = 'https://freida.ama-assn.org/Freida/user/search/programSearchSubmit.do?specialtiesToSearch=120&statesToSearch=&regionsToSearch=&keywordBlobToSearch='
 
-USERNAME = 'gopi999'
-PASSWORD = 'password'
+USERNAME = 'foo'
+PASSWORD = 'bar'
 
 class Program
   ATTRIBUTES =  [:program_name, :program_id, :city_state, :last_updated]
