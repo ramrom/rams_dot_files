@@ -73,6 +73,7 @@ alias bi="bundle install"
 # Go
 alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
+alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
 # Memcached, Redis
 alias memcachestop='sudo /etc/init.d/memcached stop'
