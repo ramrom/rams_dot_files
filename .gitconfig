@@ -4,8 +4,6 @@
 [github]
   user = smittapalli
   token = 582faccbf62738503f24d0f1ba0cb1a6
-[credential]
-  helper=
 [color]
   branch = auto
   diff = auto
