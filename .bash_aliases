@@ -45,6 +45,9 @@ if [ `uname` == "Darwin" ]; then
   alias ls='ls -CFG'
 fi
 
+# Logs
+alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
+
 # GIT
 alias gp='git pull'
 alias gpsm='git pull --recurse-submodules'
@@ -81,6 +84,7 @@ alias memcachestart='sudo /etc/init.d/memcached start'
 alias memcacherestart='sudo /etc/init.d/memcached restart'
 
 alias startredis='/usr/local/bin/redis-server'
+
 
 #POSTGRES
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
