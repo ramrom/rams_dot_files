@@ -1,5 +1,8 @@
 package main
 
+// see this blog on directly writing the http client code instead of the gotwilio package:
+// https://www.twilio.com/blog/2017/09/send-text-messages-golang.html
+
 import (
     //"github.com/go-yaml/yaml" // TODO: make file yaml and parse
     "github.com/sfreiberg/gotwilio"
