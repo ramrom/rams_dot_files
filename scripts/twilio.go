@@ -4,38 +4,33 @@ package main
 // https://www.twilio.com/blog/2017/09/send-text-messages-golang.html
 
 import (
-    //"github.com/go-yaml/yaml" // TODO: make file yaml and parse
     "github.com/sfreiberg/gotwilio"
     "fmt"
-    "os/user"
     "io/ioutil"
-    "regexp"
+    "os/user"
+    "encoding/json"
+    //"regexp"
 )
 
-var (
-  apikey  string
-  sid     string
-  fromnum string
-)
+var creds credentials
+
+type credentials struct {
+  AuthToken  string `json:"auth_token"`
+  SID        string `json:"sid"`
+  PhoneNum   string `json:"phone_num"`
+}
 
 func get_twilio_creds() {
   usr, _ := user.Current()
-  creds, err := ioutil.ReadFile(usr.HomeDir + "/.creds/twilio_api")
+  cred_file, err := ioutil.ReadFile(usr.HomeDir + "/.creds/twilio_api")
   if err != nil { panic(fmt.Sprintf("failed to read twilio creds file!:  %v",err)) }
-  r := regexp.MustCompile(`sid:\s(\w*)\n`)
-  results := r.FindStringSubmatch(string(creds))
-  sid = results[1] //will get 2 results, i want the second, the first has the full match "sid: ..."
-  r = regexp.MustCompile(`auth_token:\s(\w*)\n`)
-  results = r.FindStringSubmatch(string(creds))
-  apikey = results[1]
-  r = regexp.MustCompile(`phone_num:\s(\w*)\n`)
-  results = r.FindStringSubmatch(string(creds))
-  fromnum = results[1]
+  err = json.Unmarshal(cred_file, &creds)
+  if err != nil { panic(fmt.Sprintf("failed to json parse twilio creds file!:  %v",err)) }
 }
 
 func send_twilio_text(to string, msg string) {
-  twilio := gotwilio.NewTwilioClient(sid, apikey)
-  res, ex, err := twilio.SendSMS(fromnum, to, msg, "", "")
+  twilio := gotwilio.NewTwilioClient(creds.SID, creds.AuthToken)
+  res, ex, err := twilio.SendSMS(creds.PhoneNum, to, msg, "", "")
   fmt.Println("sms response body: %v", res)
   fmt.Println("exception: %v", ex)
   fmt.Println("error: %v", err)
