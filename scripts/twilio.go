@@ -9,7 +9,6 @@ import (
     "io/ioutil"
     "os/user"
     "encoding/json"
-    //"regexp"
 )
 
 var creds credentials
