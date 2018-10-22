@@ -21,7 +21,7 @@ type credentials struct {
 
 func get_twilio_creds() {
   usr, _ := user.Current()
-  cred_file, err := ioutil.ReadFile(usr.HomeDir + "/.creds/twilio_api")
+  cred_file, err := ioutil.ReadFile(usr.HomeDir + "/.creds/twilio_api.json")
   if err != nil { panic(fmt.Sprintf("failed to read twilio creds file!:  %v",err)) }
   err = json.Unmarshal(cred_file, &creds)
   if err != nil { panic(fmt.Sprintf("failed to json parse twilio creds file!:  %v",err)) }
