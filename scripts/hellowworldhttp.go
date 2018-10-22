@@ -21,7 +21,7 @@ func myjson(w http.ResponseWriter,r *http.Request) {
 
 
 func web(w http.ResponseWriter,r *http.Request) {
-  w.Header().Set("Content-Type","html")
-  html := fmt.Sprintf(`<html><body><h1>Werd</h1><p>Your IP: %v</p></body></html>`,r.RemoteAddr)
+  w.Header().Set("Content-Type","text/html")
+  html := fmt.Sprintf(`<html><body><h1>Werd</h1><p style="color:blue">Your IP: %v</p></body></html>`,r.RemoteAddr)
   w.Write([]byte(html))
 }
