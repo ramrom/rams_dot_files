@@ -48,6 +48,7 @@ fi
 
 # Logs
 alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
+alias pumastatus='http -v localhost/status Host:puma-dev'
 
 # GIT
 alias gp='git pull'
