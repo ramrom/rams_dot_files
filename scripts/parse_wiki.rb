@@ -28,14 +28,6 @@ class ParseWiki
     os_sup & maintained & hidden_cont
   end
 
-  def css(cs)
-    @page.css(cs)
-  end
-
-  def xpath(cs)
-    @page.xpath(cs)
-  end
-
   def tables_by_name(name)
     #res = @page.css('h2').select { |h| h.text =~ /.*#{regex}.*/ }
     @page.xpath("//h2[span[contains(text(),'#{name}')]]/following-sibling::table[1]")
