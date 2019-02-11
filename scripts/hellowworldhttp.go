@@ -11,7 +11,11 @@ func main() {
   http.Handle("/json", http.HandlerFunc(myjson))
   http.Handle("/web", http.HandlerFunc(web))
   fmt.Printf("starting server on %v\n", port)
-  http.ListenAndServe(fmt.Sprintf(":%v",port),nil)
+  // generate cert with opensll: https://www.linode.com/docs/security/ssl/create-a-self-signed-tls-certificate/
+  err := http.ListenAndServeTLS(fmt.Sprintf(":%v",port),"MyCertificate.crt","MyKey.key",nil)
+  if err != nil {
+    panic(err)
+  }
 }
 
 func myjson(w http.ResponseWriter,r *http.Request) {
