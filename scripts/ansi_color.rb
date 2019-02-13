@@ -1,3 +1,4 @@
+# for golang see https://github.com/bclicn/color
 # add ANSI colors to strings
 #
 # Example Usage: `puts "I'm bold and green and backround red".bold.green.bg_red`
