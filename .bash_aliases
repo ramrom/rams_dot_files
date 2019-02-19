@@ -60,13 +60,9 @@ alias gitconfigs='echo ""; git config --system --list; echo ""; git config --glo
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 
 #remote connections
-VORTEXPUBIP=73.50.170.24
-alias rdpvortex='rdesktop -f -d HAUS -u Sreeram 192.168.1.2'
-alias rdppubvortex="rdesktop -k en-us -f ${VORTEXPUBIP}"
-alias sshvortex='ssh RemoteUser@50.129.133.39'
+alias rdpvision='rdesktop -u ramrom ramrom.hopto.org'
 alias sshvision='ssh ramrom@192.168.1.102'
 alias sshfsvortexB='sshfs RemoteUser@vortex:/cygdrive/b vortexB/ -oauto_cache,reconnect,defer_permissions'
-alias sshfspubvortexB="sshfs RemoteUser@${VORTEXPUBIP}:/cygdrive/b vortexB/ -oauto_cache,reconnect,defer_permissions"
 alias fusemounts='mount -t fuse4x'
 alias startvexmacroserver='cd ~/vexmacroserver; be rails s -p 3001 &'
 
