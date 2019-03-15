@@ -1,9 +1,9 @@
 [user]
   name = Sreeram Mittapalli
-  email = smittapalli@enovafinancial.com
+  email = sreeram.mittapalli@gmail.com
 [github]
-  user = smittapalli
-  token = 582faccbf62738503f24d0f1ba0cb1a6
+  user = ramrom
+  token = token
 [color]
   branch = auto
   diff = auto
@@ -21,6 +21,14 @@
   added = yellow
   changed = green
   untracked = cyan
+[fetch]
+  recurseSubmodules = true
+[grep]
+  extendedRegexp = true
+[merge]
+  ff = true
+  conflictstyle = diff3
+  verbosity = 3
 [core]
   excludesfile = ~/.gitignore
   editor = vim --noplugin
@@ -30,3 +38,4 @@
   cm = commit .
   hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --d
   shas = log --pretty=format:\"%H\"
+	alias = config --get-regexp ^alias\\.
