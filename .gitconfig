@@ -4,6 +4,8 @@
 [github]
   user = ramrom
   token = token
+[include]
+  path = ~/.gitconfig.local
 [color]
   branch = auto
   diff = auto
@@ -38,4 +40,4 @@
   cm = commit .
   hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --d
   shas = log --pretty=format:\"%H\"
-	alias = config --get-regexp ^alias\\.
+  alias = config --get-regexp ^alias\\.
