@@ -60,4 +60,4 @@ if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
 fi
 
-# export DISPLAY='localhost:10.0'
+#export DISPLAY='localhost:10.0'
