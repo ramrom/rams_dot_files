@@ -38,6 +38,6 @@
   co = checkout
   aa = add --all
   cm = commit .
-  hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --d
+  hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --dense
   shas = log --pretty=format:\"%H\"
   alias = config --get-regexp ^alias\\.
