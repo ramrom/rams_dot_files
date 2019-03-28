@@ -37,7 +37,25 @@
 [alias]
   co = checkout
   aa = add --all
-  cm = commit .
+  cm = commit -m
+  b = branch
+  bvv = branch -vv
+
+  # automatically checkout a GitHub PR as a local branch
+  # https://help.github.com/articles/checking-out-pull-requests-locally/#modifying-an-inactive-pull-request-locally
+  ghpr = "!f() { \
+    // https://medium.com/@vitalyb/creating-powerful-git-aliases-3dfc0efc9a31 \
+    trap 'echo ERROR: Operation failed; return' ERR; \
+    [ -z \"$1\" ] && echo 'PR number required' && exit 1; \
+    git fetch upstream pull/$1/head:github_pr_$1; \
+    git co github_pr_$1; \
+    }; f"
+
+  ss = stash save
+  sl = stash list
+  sp = stash pop
+
+  logsc = log --stat --color
   hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --dense
   shas = log --pretty=format:\"%H\"
   alias = config --get-regexp ^alias\\.
