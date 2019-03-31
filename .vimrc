@@ -116,6 +116,8 @@ endfunction
 
 "vim73 thinks *.md is modula2, markdown files also have this extension
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+" robot.vim syntax file obtained from https://github.com/seeamkhan/robotframework-vim
+autocmd BufNewFile,BufRead *.robot set filetype=robot
 
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
