@@ -31,9 +31,9 @@ set nobackup                                    " no backup files
 set nowritebackup                               " only in case you don't want a backup file while editing
 set noswapfile                                  " no swap files
 
-set tabstop=8
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4                                " use indents of 4 spaces
+set tabstop=4                                   " an indentation every four columns
+set softtabstop=4                               " let backspace delete indent
 set expandtab
 
 set autoindent
