@@ -53,7 +53,7 @@ fi
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 export GOPATH=~/go
-export GOBIN=~/go/bin
+export GOBIN=${GOBIN}/bin
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
