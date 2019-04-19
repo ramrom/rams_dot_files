@@ -23,7 +23,7 @@ alias rrc='source ~/.bashrc'
 alias ch_date='sudo date --set 1998-11-02'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs *'
 alias list_functions='typeset -F'
-alias lsoftcplisten='lsof -i -sTCP:LISTEN'
+alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
 alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
