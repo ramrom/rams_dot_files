@@ -5,13 +5,30 @@ package main
 
 import (
     "github.com/sfreiberg/gotwilio"
+    "flag"
     "fmt"
     "io/ioutil"
     "os/user"
     "encoding/json"
 )
 
-var creds credentials
+var credFileFormat string =`
+Cred file must be in the format:
+>>  {
+>>      "auth_token": "foo token value",
+>>      "sid": "foo sid",
+>>      "phone_num": "foo source phone number"
+>>  }`
+
+var (
+    creds              credentials
+    defaultCredFileLoc string = "/usr/local/etc/twilio_api.json"
+    credFileLocation   *string = flag.String("creds", defaultCredFileLoc, "location of creds file")
+
+    toNumber           *string = flag.String("to", "", "destination phone number")
+    message            *string = flag.String("msg", "", "SMS message content to deliver")
+    debug              *bool = flag.Bool("debug", false, "spit out extra debug info")
+)
 
 type credentials struct {
   AuthToken  string `json:"auth_token"`
@@ -24,7 +41,10 @@ func get_twilio_creds() {
   cred_file, err := ioutil.ReadFile(usr.HomeDir + "/.creds/twilio_api.json")
   if err != nil { panic(fmt.Sprintf("failed to read twilio creds file!:  %v",err)) }
   err = json.Unmarshal(cred_file, &creds)
-  if err != nil { panic(fmt.Sprintf("failed to json parse twilio creds file!:  %v",err)) }
+  if err != nil {
+      fmt.Println(credFileFormat)
+      panic(fmt.Sprintf("failed to json parse twilio creds file!:  %v",err))
+  }
 }
 
 func send_twilio_text(to string, msg string) {
@@ -37,8 +57,11 @@ func send_twilio_text(to string, msg string) {
 
 func init() {
   get_twilio_creds()
+  flag.Parse()
 }
 
 func main() {
-  send_twilio_text(`1112223333`,`werd to ya motha, golang script`)
+    fmt.Println(*credFileLocation)
+    fmt.Println(*message)
+    //send_twilio_text(`1112223333`,`werd to ya motha, golang script`)
 }
