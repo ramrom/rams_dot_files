@@ -7,13 +7,15 @@ import (
     "github.com/sfreiberg/gotwilio"
     "flag"
     "fmt"
+    //"io"
+    //"bufio"
+    //"os"
     "io/ioutil"
-    "os/user"
     "encoding/json"
 )
 
 var credFileFormat string =`
-Cred file must be in the format:
+Cred file must be JSON with the fields:
 >>  {
 >>      "auth_token": "foo token value",
 >>      "sid": "foo sid",
@@ -21,47 +23,70 @@ Cred file must be in the format:
 >>  }`
 
 var (
+    // escape sequence for color below not working
+    // rederror           string =  "\e[31mfailed to parse twilio creds file\e[0m"
+
     creds              credentials
     defaultCredFileLoc string = "/usr/local/etc/twilio_api.json"
     credFileLocation   *string = flag.String("creds", defaultCredFileLoc, "location of creds file")
 
     toNumber           *string = flag.String("to", "", "destination phone number")
-    message            *string = flag.String("msg", "", "SMS message content to deliver")
     debug              *bool = flag.Bool("debug", false, "spit out extra debug info")
+
+    message             string = ""
 )
 
 type credentials struct {
-  AuthToken  string `json:"auth_token"`
-  SID        string `json:"sid"`
-  PhoneNum   string `json:"phone_num"`
+    AuthToken  string `json:"auth_token"`
+    SID        string `json:"sid"`
+    PhoneNum   string `json:"phone_num"`
 }
 
 func get_twilio_creds() {
-  usr, _ := user.Current()
-  cred_file, err := ioutil.ReadFile(usr.HomeDir + "/.creds/twilio_api.json")
-  if err != nil { panic(fmt.Sprintf("failed to read twilio creds file!:  %v",err)) }
-  err = json.Unmarshal(cred_file, &creds)
-  if err != nil {
-      fmt.Println(credFileFormat)
-      panic(fmt.Sprintf("failed to json parse twilio creds file!:  %v",err))
-  }
+    cred_file, err := ioutil.ReadFile(*credFileLocation)
+    if err != nil { panic(fmt.Sprintf("failed to read twilio creds file!:  %v",err)) }
+    err = json.Unmarshal(cred_file, &creds)
+    if err != nil {
+        panic(fmt.Sprintf("failed to json parse twilio creds file!:  %v\n%v",err,credFileFormat))
+        //panic(fmt.Sprintf("%v!: %v\n%v",rederror,err,credFileFormat))
+    }
 }
 
 func send_twilio_text(to string, msg string) {
-  twilio := gotwilio.NewTwilioClient(creds.SID, creds.AuthToken)
-  res, ex, err := twilio.SendSMS(creds.PhoneNum, to, msg, "", "")
-  fmt.Println("sms response body: %v", res)
-  fmt.Println("exception: %v", ex)
-  fmt.Println("error: %v", err)
+    twilio := gotwilio.NewTwilioClient(creds.SID, creds.AuthToken)
+    res, ex, err := twilio.SendSMS(creds.PhoneNum, to, msg, "", "")
+    if *debug {
+        fmt.Printf("sms response body: %v\n", res)
+        fmt.Printf("exception: %v\n", ex)
+        fmt.Printf("error: %v\n", err)
+    } else {
+        fmt.Printf("exception: %v\n", ex)
+        fmt.Printf("error: %v\n", err)
+    }
 }
 
 func init() {
-  get_twilio_creds()
-  flag.Parse()
+    flag.Parse()
+    if *toNumber == "" {
+        panic("must specify a destination phone number")
+    }
+    //m := readFromStdIn()
+    get_twilio_creds()
+    if len(flag.Args()) == 0 {
+        panic("must specify message")
+    }
+    for _, word := range flag.Args() {
+        message += word + " "
+    }
+}
+
+func readFromStdIn() string {
+    // read https://flaviocopes.com/go-shell-pipes/
+    return "hi"
 }
 
 func main() {
     fmt.Println(*credFileLocation)
-    fmt.Println(*message)
-    //send_twilio_text(`1112223333`,`werd to ya motha, golang script`)
+    fmt.Println(flag.Args())
+    send_twilio_text(*toNumber, message)
 }
