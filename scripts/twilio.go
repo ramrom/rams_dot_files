@@ -78,7 +78,6 @@ func SendTwilioSMS(to string, msg string) {
     req.SetBasicAuth(creds.SID, creds.AuthToken)
     req.Header.Add("Accept","application/json")
     req.Header.Add("Content-Type","application/x-www-form-urlencoded")
-    fmt.Println(req)
 
     client := &http.Client{}
     resp, err := client.Do(req)
@@ -155,7 +154,7 @@ func init() {
 func main() {
     if *debug {
         fmt.Println(*credFileLocation)
-        fmt.Println(flag.Args())
+        fmt.Println(message)
     }
     SendTwilioSMS(*toNumber, message)
 }
