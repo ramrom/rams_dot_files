@@ -1,4 +1,3 @@
-alias vi='vim'
 alias svi='vim -u ~/.vimrc_simple'
 alias ls='ls -CF'
 alias ll='ls -l'
@@ -6,8 +5,6 @@ alias la='ls -A'
 alias lal='ls -al'
 alias lahl='ls -alh'
 alias lrt='ls -lrt'
-alias lalpow='ls -al ~/.pow/'
-alias lalpuma='ls -al ~/.puma-dev/'
 alias grep='grep --colour=always'
 alias ag='ack-grep'
 alias fxg='find . -type f | xargs grep'
@@ -78,11 +75,11 @@ alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
 # Memcached, Redis
-alias memcachestop='sudo /etc/init.d/memcached stop'
-alias memcachestart='sudo /etc/init.d/memcached start'
-alias memcacherestart='sudo /etc/init.d/memcached restart'
+# alias memcachestop='sudo /etc/init.d/memcached stop'
+# alias memcachestart='sudo /etc/init.d/memcached start'
+# alias memcacherestart='sudo /etc/init.d/memcached restart'
 
-alias startredis='/usr/local/bin/redis-server'
+# alias startredis='/usr/local/bin/redis-server'
 
 
 #POSTGRES
@@ -91,22 +88,22 @@ alias psqlvim='PAGER=~/vimpager.sh psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
 alias getdbsizes='psql -c "SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;" -d postgres'
 alias postgrecon='sudo -u postgres psql'
-alias pgstart="sudo /etc/init.d/postgresql start"
-alias pgstop="sudo /etc/init.d/postgresql stop"
-alias pgstopnow="sudo /etc/init.d/postgresql stop"
-alias pgrestart="sudo /etc/init.d/postgresql restart"
-if [ `uname` = "Darwin" ]; then
-  alias pgstart="pg_ctlcluster 9.4 main start"
-  alias pgstop="pg_ctlcluster 9.4 main stop"
-  alias pgstopfast="pg_ctlcluster 9.4 main stop -m fast"
-  alias pgrestart="pgstopfast && pgstart"
-
-  if [ `hostname` = "vex" ] || [ `hostname` = "vex.local" ] || [ `hostname` = "vex.enova.com" ]; then
-    alias pgstart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile start"
-    alias pgstop="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile stop"
-    alias pgstopfast="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile -m fast stop"
-  fi
-fi
+# alias pgstart="sudo /etc/init.d/postgresql start"
+# alias pgstop="sudo /etc/init.d/postgresql stop"
+# alias pgstopnow="sudo /etc/init.d/postgresql stop"
+# alias pgrestart="sudo /etc/init.d/postgresql restart"
+# if [ `uname` = "Darwin" ]; then
+#   alias pgstart="pg_ctlcluster 9.4 main start"
+#   alias pgstop="pg_ctlcluster 9.4 main stop"
+#   alias pgstopfast="pg_ctlcluster 9.4 main stop -m fast"
+#   alias pgrestart="pgstopfast && pgstart"
+# 
+#   if [ `hostname` = "vex" ] || [ `hostname` = "vex.local" ] || [ `hostname` = "vex.enova.com" ]; then
+#     alias pgstart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile start"
+#     alias pgstop="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile stop"
+#     alias pgstopfast="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile -m fast stop"
+#   fi
+# fi
 
 # ACK
 alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
