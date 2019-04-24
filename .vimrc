@@ -38,6 +38,9 @@ set expandtab
 
 set autoindent
 
+" ignore compiled scala/java files, added so CtrlP will ignore these files
+set wildignore+=*/target/*
+
 "set list
 "set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
 "set colorcolumn=81
@@ -126,8 +129,6 @@ cnoremap jk  <Esc>
 inoremap dk  <Esc>
 cnoremap dk  <Esc>
 
-map <leader>q :filetype plugin on<CR>:filetype indent on<CR>
-
 map <leader>t :tabnew<CR>
 map gb :tabprevious<CR>
 
@@ -140,6 +141,7 @@ map <leader>x :set number!<CR>
 map <leader>p :vsplit<CR><leader>w
 map <leader>h :split<CR><leader>w
 map <leader>s :mksession! ~/MyCurrentVimSession<CR>
+
 " This next line will open a ctag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
