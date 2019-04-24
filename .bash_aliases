@@ -6,7 +6,6 @@ alias lal='ls -al'
 alias lahl='ls -alh'
 alias lrt='ls -lrt'
 alias grep='grep --colour=always'
-alias ag='ack-grep'
 alias fxg='find . -type f | xargs grep'
 alias dubydir='ls -l | awk '"'"'{print $9}'"'"' | xargs du -hs'
 alias sudubydir='ls -l | awk '"'"'{print $9}'"'"' | sudo xargs du -hs'
@@ -33,6 +32,7 @@ alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 if [ "$TERM" != "dumb" ]; then
   if [ `uname` == "Linux" ]; then
     eval "`dircolors -b`"
+    alias ack='ack-grep'
     alias ls='ls --color=auto'
     alias rgrep='rgrep --color=auto'
     alias egrep='egrep --color=auto'
