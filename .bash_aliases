@@ -13,7 +13,9 @@ alias sudubydir='ls -l | awk '"'"'{print $9}'"'"' | sudo xargs du -hs'
 alias findlargefiles='sudo find -X . -type f -size +1M | xargs du -sh'
 alias psx='ps auxf'
 alias psxfull='ps auxhfww'
-alias netstatip='sudo netstat -lpnut'
+if [ `uname` == "Linux" ]; then
+    alias netstatip='sudo netstat -lpnut'
+fi
 alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
 alias sourceprofile='source ~/.bash_profile'
 alias rrc='source ~/.bashrc'
@@ -46,8 +48,8 @@ if [ `uname` == "Darwin" ]; then
 fi
 
 # Logs
-alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
-alias pumastatus='http -v localhost/status Host:puma-dev'
+# alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
+# alias pumastatus='http -v localhost/status Host:puma-dev'
 
 # GIT
 alias gp='git pull'
@@ -58,12 +60,21 @@ alias gd='git diff'
 alias gitconfigs='echo ""; git config --system --list; echo ""; git config --global --list; echo ""; git config --local --list'
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 
+# ACK
+alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+alias ackn='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+
+if [ `uname` = "Linux" ]; then
+  alias acknt='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+  alias ackn='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+fi
 #remote connections
 alias rdpvision='rdesktop -u ramrom ramrom.hopto.org'
 alias sshvision='ssh ramrom@192.168.1.102'
 alias sshfsvortexB='sshfs RemoteUser@vortex:/cygdrive/b vortexB/ -oauto_cache,reconnect,defer_permissions'
 alias fusemounts='mount -t fuse4x'
-alias startvexmacroserver='cd ~/vexmacroserver; be rails s -p 3001 &'
 
 # Ruby
 alias be="bundle exec"
@@ -75,17 +86,9 @@ alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
-# Memcached, Redis
-# alias memcachestop='sudo /etc/init.d/memcached stop'
-# alias memcachestart='sudo /etc/init.d/memcached start'
-# alias memcacherestart='sudo /etc/init.d/memcached restart'
-
-# alias startredis='/usr/local/bin/redis-server'
-
-
 #POSTGRES
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
-alias psqlvim='PAGER=~/vimpager.sh psql'
+ alias psqlvim='PAGER=~/vimpager.sh psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
 alias getdbsizes='psql -c "SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;" -d postgres'
 alias postgrecon='sudo -u postgres psql'
@@ -106,13 +109,9 @@ alias postgrecon='sudo -u postgres psql'
 #   fi
 # fi
 
-# ACK
-alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias ackn='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+# Memcached, Redis
+# alias memcachestop='sudo /etc/init.d/memcached stop'
+# alias memcachestart='sudo /etc/init.d/memcached start'
+# alias memcacherestart='sudo /etc/init.d/memcached restart'
 
-if [ `uname` = "Linux" ]; then
-  alias acknt='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-  alias ackn='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-fi
+# alias startredis='/usr/local/bin/redis-server'
