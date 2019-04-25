@@ -11,13 +11,6 @@ alias fxg='find . -type f | xargs grep'
 alias dubydir='ls -l | awk '"'"'{print $9}'"'"' | xargs du -hs'
 alias sudubydir='ls -l | awk '"'"'{print $9}'"'"' | sudo xargs du -hs'
 alias findlargefiles='sudo find -X . -type f -size +1M | xargs du -sh'
-alias psx='ps auxf'
-alias psxfull='ps auxhfww'
-if [ `uname` == "Linux" ]; then
-    alias netstatip='sudo netstat -lpnut'
-fi
-alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
-alias sourceprofile='source ~/.bash_profile'
 alias rrc='source ~/.bashrc'
 alias ch_date='sudo date --set 1998-11-02'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs *'
@@ -33,20 +26,21 @@ alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=d
 alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 
 if [ "$TERM" != "dumb" ]; then
-  if [ `uname` == "Linux" ]; then
-    eval "`dircolors -b`"
-    alias ack='ack-grep'
-    alias ls='ls --color=auto'
-    alias rgrep='rgrep --color=auto'
-    alias egrep='egrep --color=auto'
-  fi
+    if [ `uname` == "Linux" ]; then
+        eval "`dircolors -b`"
+        alias ls='ls --color=auto'
+        alias rgrep='rgrep --color=auto'
+        alias egrep='egrep --color=auto'
+        alias netstatip='sudo netstat -lpnut'
+        alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
+        alias psx='ps auxf'
+        alias psxfull='ps auxhfww'
+    else  # assuming Darwin here
+        alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
+        alias psx='ps auxh'
+        alias ls='ls -CFG'
+    fi
 fi
-# OSX changes
-if [ `uname` == "Darwin" ]; then
-  alias psx='ps auxh'
-  alias ls='ls -CFG'
-fi
-
 # Logs
 # alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
 # alias pumastatus='http -v localhost/status Host:puma-dev'
@@ -61,15 +55,16 @@ alias gitconfigs='echo ""; git config --system --list; echo ""; git config --glo
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 
 # ACK
-alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias ackn='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-
+# TODO: Maybe replace ack aliases with using .ackrc
 if [ `uname` = "Linux" ]; then
-  alias acknt='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-  alias ackn='ack-grep --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+  alias ack='ack-grep'
 fi
+alias ackn='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
+
+
 #remote connections
 alias rdpvision='rdesktop -u ramrom ramrom.hopto.org'
 alias sshvision='ssh ramrom@192.168.1.102'
