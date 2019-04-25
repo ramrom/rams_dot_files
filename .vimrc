@@ -21,9 +21,10 @@ syntax on					"syntax highlighting
 set t_Co=256
 colorscheme ir_black
 set number					" line numbers
-set ls=2					" line status, two lines for status and command
 set hlsearch  					" highlight search
 set incsearch					" incremental search
+
+set ls=2					" line status, two lines for status and command
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ 
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ 
 
@@ -31,12 +32,12 @@ set nobackup                                    " no backup files
 set nowritebackup                               " only in case you don't want a backup file while editing
 set noswapfile                                  " no swap files
 
+set autoindent                                  " indent on new line for inner scopes in code
 set shiftwidth=4                                " use 4 spaces for autoindent (cindent)
-set tabstop=4                                   " an indentation every four columns
-set softtabstop=4                               " let backspace delete indent
-set expandtab
+set tabstop=4                                   " space 4 columns when reading a <tab> char in file
+set softtabstop=4                               " complicated, see docs
+set expandtab                                   " use spaces when tab is pressed
 
-set autoindent
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
