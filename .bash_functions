@@ -1,4 +1,13 @@
 #Bash functions
+#
+function bsixfour_dec() {
+  ruby -e '
+    require "base64"
+    puts ""
+    puts Base64.decode64(ARGV[0])
+  ' "$@"
+}
+
 function fullpath() {
       ruby -e '
         $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
