@@ -31,6 +31,11 @@ function winname {
   printf "\e]2;$1\a"
 }
 
+function tmuxclrallhist {
+    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
+        | xargs -I PANE tmux clear-history -t PANE
+}
+
 # GIT
 f_getbranchname()
 {
