@@ -125,8 +125,6 @@ autocmd BufNewFile,BufRead *.robot set filetype=robot
 
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
-inoremap jk  <Esc>
-cnoremap jk  <Esc>
 inoremap dk  <Esc>
 cnoremap dk  <Esc>
 
