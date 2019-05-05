@@ -31,6 +31,7 @@ set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 set nobackup                                    " no backup files
 set nowritebackup                               " only in case you don't want a backup file while editing
 set noswapfile                                  " no swap files
+"set backupdir=~/.vim,~/.tmp/,~/tmp,/tmp
 
 set autoindent                                  " indent on new line for inner scopes in code
 set shiftwidth=4                                " use 4 spaces for autoindent (cindent)
@@ -38,6 +39,8 @@ set tabstop=4                                   " space 4 columns when reading a
 set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
+" TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
+set clipboard=unnamed
 
 "set list
 "set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
