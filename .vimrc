@@ -39,9 +39,6 @@ set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
 
-" ignore compiled scala/java files, added so CtrlP will ignore these files
-set wildignore+=*/target/*
-
 "set list
 "set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
 "set colorcolumn=81
@@ -117,6 +114,13 @@ function MyTabLine()
         return s
 endfunction
 
+"Quickly switch between up to 9 vimtabs
+let i=0
+while i<10
+  exe 'map g'.i.' :tabn '.i.'<CR>'
+  let i+=1
+endwhile
+
 
 "vim73 thinks *.md is modula2, markdown files also have this extension
 autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -155,8 +159,5 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
 
-let i=0
-while i<10
-  exe 'map g'.i.' :tabn '.i.'<CR>'
-  let i+=1
-endwhile
+" ignore compiled scala/java files, added so CtrlP will ignore these files
+set wildignore+=*/target/*
