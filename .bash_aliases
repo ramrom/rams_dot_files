@@ -13,7 +13,7 @@ alias sudubydir='ls -l | awk '"'"'{print $9}'"'"' | sudo xargs du -hs'
 alias findlargefiles='sudo find -X . -type f -size +1M | xargs du -sh'
 alias rrc='source ~/.bash_profile && source ~/.bashrc'
 alias ch_date='sudo date --set 1998-11-02'
-alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs *'
+alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 alias list_functions='typeset -F'
 alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
