@@ -46,9 +46,9 @@ function build_my_prompt {
   PS1="${PS1}\[\033[1;34m\])"
 
   local git_branch=`parse_git_branch` 
-  PS1="${PS1} \[\033[1;35m\]<"
-  PS1="${PS1}\[\033[0;32m\]${git_branch}"
-  PS1="${PS1}\[\033[1;35m\]>"
+  PS1="${PS1} \[\033[1;34m\]<"
+  PS1="${PS1}\[\033[0;35m\]${git_branch}"
+  PS1="${PS1}\[\033[1;34m\]>"
  
   PS1="${PS1}\n\[\033[00m\]\$ "
 }
@@ -72,7 +72,7 @@ function build_my_promptv2 {
  
   PS1="${PS1}\n${reset}${green}\$${reset} "
 }
-PROMPT_COMMAND='build_my_promptv2'
+PROMPT_COMMAND='build_my_prompt'
 
 #old set my prompt
 #PS1='\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
