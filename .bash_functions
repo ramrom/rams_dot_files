@@ -1,5 +1,17 @@
 #Bash functions
 #
+
+function tailc() {
+    local reset=$(tput sgr0)
+    local yel=$(tput setaf 3)
+    tail $1 | awk '
+        {f=0}
+        /^ul/ {print "\033[1;32;44m" $0 "\033[0m";f=1}
+        /SBT/ {print "\033[31m" $0 "\033[0m";f=1}
+        f==0 { print $0 }
+    '
+}
+
 function bsixfour_dec() {
   ruby -e '
     require "base64"
@@ -51,4 +63,37 @@ function terminate_db_connections() {
 function parse_comma_delim_error() {
   local str="File.write(\"${1}\", File.read(\"${1}\").split(',').join(\"\\n\"))"
   ruby -e "$str"
+}
+
+function colorgrid( )
+{
+    iter=16
+    while [ $iter -lt 52 ]
+    do
+        second=$[$iter+36]
+        third=$[$second+36]
+        four=$[$third+36]
+        five=$[$four+36]
+        six=$[$five+36]
+        seven=$[$six+36]
+        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
+
+        echo -en "\033[38;5;${iter}m█ "
+        printf "%03d" $iter
+        echo -en "   \033[38;5;${second}m█ "
+        printf "%03d" $second
+        echo -en "   \033[38;5;${third}m█ "
+        printf "%03d" $third
+        echo -en "   \033[38;5;${four}m█ "
+        printf "%03d" $four
+        echo -en "   \033[38;5;${five}m█ "
+        printf "%03d" $five
+        echo -en "   \033[38;5;${six}m█ "
+        printf "%03d" $six
+        echo -en "   \033[38;5;${seven}m█ "
+        printf "%03d" $seven
+
+        iter=$[$iter+1]
+        printf '\r\n'
+    done
 }
