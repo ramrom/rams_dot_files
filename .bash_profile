@@ -10,9 +10,6 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-#the old prompt
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
