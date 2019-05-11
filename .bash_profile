@@ -38,6 +38,7 @@ function build_my_prompt {
   local blue=`tput setaf 4`
   local magenta=`tput setaf 5`
   local cyan=`tput setaf 6`
+
   PS1="${yellow}${bold}\u"
   PS1="${PS1}${reset}${bold}@"
   PS1="${PS1}${yellow}\h "
