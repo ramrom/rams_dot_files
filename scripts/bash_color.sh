@@ -54,6 +54,9 @@ txtrst='\e[0m'    # Text Reset
 # below gives me a light orange on tan
 echo -e "\033[48;5;95;38;5;214mhello world\033[0m"
 
+lor_on_tan="\033[48;5;95;38;5;214m"
+echo -e $lor_on_tan orange on tan $(tput sgr0) normal
+
 function colorgrid( )
 {
     iter=16
