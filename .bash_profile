@@ -39,14 +39,14 @@ function build_my_prompt {
   local magenta=`tput setaf 5`
   local cyan=`tput setaf 6`
 
+  local git_branch=`parse_git_branch`
+
   PS1="${yellow}${bold}\u"
   PS1="${PS1}${reset}${bold}@"
   PS1="${PS1}${yellow}\h "
   PS1="${PS1}${blue}("
   PS1="${PS1}${reset}${cyan}\w"
   PS1="${PS1}${bold}${blue})"
-
-  local git_branch=`parse_git_branch` 
   PS1="${PS1} <${reset}${magenta}${git_branch}"
   PS1="${PS1}${bold}${blue}>"
  
