@@ -63,19 +63,19 @@ function colorgrid( )
         seven=$[$six+36]
         if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
 
-        echo -en "\033[38;5;$(echo $iter)m█ "
+        echo -en "\033[38;5;${iter}m█ "
         printf "%03d" $iter
-        echo -en "   \033[38;5;$(echo $second)m█ "
+        echo -en "   \033[38;5;${second}m█ "
         printf "%03d" $second
-        echo -en "   \033[38;5;$(echo $third)m█ "
+        echo -en "   \033[38;5;${third}m█ "
         printf "%03d" $third
-        echo -en "   \033[38;5;$(echo $four)m█ "
+        echo -en "   \033[38;5;${four}m█ "
         printf "%03d" $four
-        echo -en "   \033[38;5;$(echo $five)m█ "
+        echo -en "   \033[38;5;${five}m█ "
         printf "%03d" $five
-        echo -en "   \033[38;5;$(echo $six)m█ "
+        echo -en "   \033[38;5;${six}m█ "
         printf "%03d" $six
-        echo -en "   \033[38;5;$(echo $seven)m█ "
+        echo -en "   \033[38;5;${seven}m█ "
         printf "%03d" $seven
 
         iter=$[$iter+1]
