@@ -27,6 +27,9 @@ function parse_git_branch {
     echo "$branch"
   fi
 }
+
+# TODO: tput, especially reset does fucking things to prompt, should use direct ANSI codes/sequences
+# https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt {
   local bold=`tput bold`
   local reset=`tput sgr0`
@@ -45,9 +48,9 @@ function build_my_prompt {
   PS1="${PS1}${reset}${cyan}\w"
   PS1="${PS1}${bold}${blue})"
   PS1="${PS1} <${reset}${magenta}${git_branch}"
-  PS1="${PS1}${bold}${blue}>"
+  PS1="${PS1}${bold}${blue}>${reset}"
  
-  PS1="${PS1}\n${reset}$ "
+  PS1="${PS1}\n$ "
 }
 
 PROMPT_COMMAND='build_my_prompt'
