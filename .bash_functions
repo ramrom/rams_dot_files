@@ -1,16 +1,4 @@
 #Bash functions
-#
-
-function tailc() {
-    local reset=$(tput sgr0)
-    local yel=$(tput setaf 3)
-    tail $1 | awk '
-        {f=0}
-        /^ul/ {print "\033[1;32;44m" $0 "\033[0m";f=1}
-        /SBT/ {print "\033[31m" $0 "\033[0m";f=1}
-        f==0 { print $0 }
-    '
-}
 
 function bsixfour_dec() {
   ruby -e '

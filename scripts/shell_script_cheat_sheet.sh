@@ -27,7 +27,10 @@ tail -f $1 | awk \
     -v reset=$(tput sgr0) -v yel=$(tput setaf 3) '
     {f=0}
     (/Join/ && f==0) {print yel $0 reset;f=1; fflush()}   # fflush force flush to stdout, important if this is piped into another cmd
-    /HTTPie/ {print bblue $0 reset;f=1; fflush()}
-    /io\.Abs[a-z]*C/ {print mag bold $0 reset;f=1; fflush()}
+    /HTTPie/ {print "\033[31m" $0 "\033[0m", "dude"; f=1; fflush()}  # space b/w strings concats, comma adds a space
+    /io\.Abs[a-z]*C/ {print yel $0 reset;f=1; fflush()}
     f==0 { print $0; fflush() }
 '
+
+# quick jp (JMESPath CLI tool) query
+echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u strips double quotes
