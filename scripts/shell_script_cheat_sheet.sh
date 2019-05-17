@@ -34,3 +34,8 @@ tail -f $1 | awk \
 
 # quick jp (JMESPath CLI tool) query
 echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u strips double quotes
+
+# programatically create env variables
+A=FOO
+export BAR${A}="somestring"
+echo $FOOBAR # will print something
