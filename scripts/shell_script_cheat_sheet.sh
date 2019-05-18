@@ -38,4 +38,7 @@ echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u 
 # programatically create env variables
 A=FOO
 export BAR${A}="somestring"
-echo $FOOBAR # will print something
+echo $FOOBAR # will print somestring
+
+# tells a shell script to abort running subsequent statements if a statement exits with non-zero code
+set -e
