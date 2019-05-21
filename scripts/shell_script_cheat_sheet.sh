@@ -42,3 +42,5 @@ echo $FOOBAR # will print somestring
 
 # tells a shell script to abort running subsequent statements if a statement exits with non-zero code
 set -e
+
+set -x # spit out each expanded statement to terminal before it's executed
