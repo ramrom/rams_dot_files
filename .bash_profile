@@ -28,7 +28,7 @@ function parse_git_branch {
   fi
 }
 
-# TODO: tput, especially reset does fucking things to prompt, should use direct ANSI codes/sequences
+# TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
 # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt {
   local bold=`tput bold`
