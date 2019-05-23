@@ -1,28 +1,25 @@
 "Sreeram's VI RC
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
+""""""""" VUNDLE PLUGIN MANAGEMENT"""""""""""""""""""""""""""""""""""
+set nocompatible                    " be iMproved, required
+filetype off                        " required
+set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and initialize
 call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-" added nerdtree
+Plugin 'gmarik/Vundle.vim'          " let Vundle manage Vundle, required
 Plugin 'scrooloose/nerdtree'
-" add CtrlP
 Plugin 'ctrlpvim/ctrlp.vim'
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 syntax on					"syntax highlighting
 set t_Co=256
 colorscheme ir_black
 set number					" line numbers
-set hlsearch  					" highlight search
-set incsearch					" incremental search
+set hlsearch  				" highlight search
+set incsearch				" incremental search
 
 set ls=2					" line status, two lines for status and command
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ 
