@@ -2,3 +2,6 @@
 *.swp
 tags
 tmp/*
+
+.vim/bundle/*
+!.vim/bundle/Vundle.vim
