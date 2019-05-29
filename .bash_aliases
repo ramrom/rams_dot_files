@@ -71,15 +71,15 @@ alias sshvision='ssh ramrom@192.168.1.102'
 alias sshfsvortexB='sshfs RemoteUser@vortex:/cygdrive/b vortexB/ -oauto_cache,reconnect,defer_permissions'
 alias fusemounts='mount -t fuse4x'
 
-# Ruby
-alias be="bundle exec"
-alias ber="bundle exec rspec"
-alias bi="bundle install"
-
 # Go
 alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
+
+# Ruby
+alias be="bundle exec"
+alias ber="bundle exec rspec"
+alias bi="bundle install"
 
 #POSTGRES
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
