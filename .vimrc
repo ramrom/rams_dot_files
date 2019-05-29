@@ -79,6 +79,7 @@ let g:airline_theme='bubblegum'
 "let g:airline_solarized_bg='dark'
 "let g:airline_powerline_fonts = 1 " TODO: this needs instal https://github.com/powerline/fonts
 
+let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#tab_nr_type = 1
