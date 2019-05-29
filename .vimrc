@@ -10,7 +10,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'mkitt/tabline.vim'       " TODO: try this
+
+"Plugin 'dracula/vim'  dracula theme
+"https://github.com/morhetz/gruvbox
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -81,7 +83,7 @@ let g:airline_theme='bubblegum'
 
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#formatter = 'unique_tail'    " 'unique_tail_improved' to show shorted path
 let g:airline#extensions#tabline#tab_nr_type = 1
 
 "CTRLP Fuzzyfinder 
