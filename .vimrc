@@ -18,7 +18,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 syntax on					"syntax highlighting
 set t_Co=256
 colorscheme ir_black
@@ -42,17 +41,16 @@ set tabstop=4                                   " space 4 columns when reading a
 set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
+
+"TODO: experiment with autoreloading buffers when they are outdated
+"set autoread
+"au FocusGained,BufEnter * :silent! !
+"au CursorHold * checktime
+
+
 " TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
 set clipboard=unnamed
 
-"set list
-"set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
-"set colorcolumn=81
-
-"vim73 thinks *.md is modula2, markdown files also have this extension
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-" robot.vim syntax file obtained from https://github.com/seeamkhan/robotframework-vim
-autocmd BufNewFile,BufRead *.robot set filetype=robot
 
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
@@ -75,7 +73,20 @@ map <leader>s :mksession! ~/MyCurrentVimSession<CR>
 " This next line will open a ctag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-"Airline
+"set list
+"set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
+"set colorcolumn=81
+
+"vim73 thinks *.md is modula2, markdown files also have this extension
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+" robot.vim syntax file obtained from https://github.com/seeamkhan/robotframework-vim
+autocmd BufNewFile,BufRead *.robot set filetype=robot
+
+" ignore compiled scala/java files, added so CtrlP will ignore these files
+set wildignore+=*/target/*
+
+
+"""""""""""""""""Airline"""""""""""""""""""""""""""""""""""
 "let g:airline_theme='luna'
 let g:airline_theme='bubblegum'
 "let g:airline_solarized_bg='dark'
@@ -86,7 +97,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'    " 'unique_tail_improved' to show shorted path
 let g:airline#extensions#tabline#tab_nr_type = 1
 
-"CTRLP Fuzzyfinder 
+
+"""""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
 map <leader>f :CtrlP 
 let g:ctrlp_max_files = 20000
 let g:ctrlp_max_height = 20
@@ -96,6 +108,3 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.exe$\|\.so$\|\.dll$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
-
-" ignore compiled scala/java files, added so CtrlP will ignore these files
-set wildignore+=*/target/*
