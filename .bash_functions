@@ -42,6 +42,27 @@ f_getbranchname()
     git branch | grep "*" | awk '{print $2}'
 }
 
+function git_ctag_update() {
+    if [ -f tags ]; then
+        if [ -d .git ]; then
+            local commit=$(git rev-parse HEAD)
+            if [ -f ctag_git_ver ]; then
+                if [ "$(cat ctag_git_ver)" != "$commit" ]; then
+                    echo ${commit} > ctag_git_ver
+                    ctag_create
+                fi
+            else
+                echo ${commit} > ctag_git_ver
+                ctag_create
+            fi
+        else
+            ctag_create
+        fi
+    else
+        ctag_create
+    fi
+}
+
 # DB
 function terminate_db_connections() {
     psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres
