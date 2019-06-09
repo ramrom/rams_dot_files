@@ -43,7 +43,7 @@ set expandtab                                   " use spaces when tab is pressed
 
 
 "TODO: experiment with autoreloading buffers when they are outdated
-"set autoread
+set autoread
 "au FocusGained,BufEnter * :silent! !
 "au CursorHold * checktime
 
