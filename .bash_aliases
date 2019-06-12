@@ -61,8 +61,8 @@ if [ `uname` = "Linux" ]; then
 fi
 #alias ackn='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
 #alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/'
-alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/'
+alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/ --ignore-file=match:/\.vim$/'
+alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/ --ignore-file=match:/\.vim$/'
 
 
 #remote connections
