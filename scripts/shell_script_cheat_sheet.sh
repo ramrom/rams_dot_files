@@ -32,6 +32,29 @@ tail -f $1 | awk \
     f==0 { print $0; fflush() }
 '
 
+# Perl script to colorize logs
+function perl_log_color() {
+    A=$(echo -e "\033[48;5;95;38;5;214m") # yay this worked, orange on tan, passing it in as a arg
+    B=$(tput setaf 4)
+    export TESTVAR=MYVAL
+    export PVAR=1
+    perl -nse '   # n for loop over each line, s for the cmd line var inputs, e for in-line compilation
+        use Term::ANSIColor;
+        print $Term::ANSIColor::VERSION . "\n";
+        $r = color("reset"); $bbbr = color("bright_blue on_bright_red"); $b = color("ansi15");
+        $ENV{"PVAR"} = $ENV{"PVAR"} + 1; print $ENV{"PVAR"} . "\n";
+        print "environment var TESTVAR= " . $ENV{TESTVAR} . " foo arg= " . $foo . " baz arg= " . $baz . $r . " uncolor";
+        s/(the )(foo)( the)/$1$bbbr$2$r$3/g;
+        if (m/werd/) { s/(\[)(d.de)(\])/$1$bbbr$2$r$3/g }
+        # if ($_ =~ m/the d.de/) { $_ =~ s/(d.d)/$bbbr$1$r/g } # equivalent to previous line
+        elsif ($_ =~ m/bash/) { print color("bold grey23 on_ansi1"), "BASH", color("reset") }
+        elsif ($_ =~ m/test/) { print colored("test", "blue"), "test", color("reset"), "\n" }
+        $_ = color("green") . "PREFIX: " . color("reset") . $_;           # string concatenation
+        print $_
+        ' -- -foo="$A" -baz=bam
+    #tail -f $1 | perl -pe 's/window/BLUBBER/g'
+}
+
 # quick jp (JMESPath CLI tool) query
 echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u strips double quotes
 
