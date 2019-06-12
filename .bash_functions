@@ -8,6 +8,10 @@ function bsixfour_dec() {
     ' "$@"
 }
 
+function srch_alias_func() {
+    { alias; typeset -F; } | grep "$1"
+}
+
 function fullpath() {
     ruby -e '
         $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
