@@ -1,4 +1,6 @@
-\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
+\set PROMPT1 '%[%033[38;5;27m%]host:%M %[%033[32;5;27m%]user:%n %[%033[38;5;102m%]db:%/%[%033[0m%]%R%#\n%[%033[36;1m%]%$%[%033[0m%] '
+\set HISTCONTROL ignoredups
+\pset pager always
 \pset border 1
 \pset null '(null)'
 \timing
