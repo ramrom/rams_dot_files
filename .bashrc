@@ -51,6 +51,11 @@ if [ -f ~/.lessfilter ]; then
     export LESSOPEN='|~/.lessfilter %s'
 fi
 
+# For PSQL colorization
+GREEN=`echo -e '\033[0;32m'`
+NOCOLOR=`echo -e '\033[0m'`
+export PAGER="sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
+
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 export GOPATH=~/go
 export GOBIN=${GOBIN}/bin
