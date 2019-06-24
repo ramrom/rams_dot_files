@@ -8,6 +8,22 @@ function bsixfour_dec() {
     ' "$@"
 }
 
+function psql_pager() {
+    # For PSQL colorization #TODO: not really working
+    GREEN=`echo -e '\033[0;32m'`
+    NOCOLOR=`echo -e '\033[0m'`
+    echo "sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
+
+    #YELLOW=`echo -e '\033[1;33m'`
+    #LIGHT_CYAN=`echo -e '\033[1;36m'`
+    #NOCOLOR=`echo -e '\033[0m'`
+
+    #PAGER="sed \"s/\([[:space:]]\+[0-9.\-]\+\)$/${LIGHT_CYAN}\1$NOCOLOR/;"
+    #PAGER+="s/\([[:space:]]\+[0-9.\-]\+[[:space:]]\)/${LIGHT_CYAN}\1$NOCOLOR/g;"
+    #PAGER+="s/|/$YELLOW|$NOCOLOR/g;s/^\([-+]\+\)/$YELLOW\1$NOCOLOR/\" 2>/dev/null"
+    #export PAGER
+}
+
 function srch_alias_func() {
     { alias; typeset -F; } | grep "$1"
 }
