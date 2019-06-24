@@ -12,6 +12,10 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+function load_or_err() {
+    if [ -f "$1" ]; then . $1 else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
+}
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
