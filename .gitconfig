@@ -34,6 +34,7 @@
 [core]
   excludesfile = ~/.gitignore
   editor = vim --noplugin
+  pager = less
 [alias]
   co = checkout
   aa = add --all
