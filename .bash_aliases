@@ -87,6 +87,8 @@ alias bi="bundle install"
 #POSTGRES
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
 alias psqlvim='PAGER=~/vimpager.sh psql'
+alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/11.3/bin/psql'
+#alias psqlp='PAGER=$(psql_pager) psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
 alias getdbsizes='psql -c "SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;" -d postgres'
 alias postgrecon='sudo -u postgres psql'
