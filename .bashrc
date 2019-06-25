@@ -12,16 +12,8 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # Colorize ls
-if [ `uname` == "Darwin" ]; then
-  LSCOLORS='GxFxCxDxBxegedabagaced'
-  export LSCOLORS
-fi
+[ `uname` == "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1 else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
@@ -36,9 +28,10 @@ load_or_err ~/rams_dot_files/.bash_functions
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then . /etc/bash_completion; fi
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 
-if [ ! -f ~/.ramrom_gittoken ]; then echo "$(tput setaf 1)ERROR: $(tput sgr0)Did not find ~/.ramrom_gittoken"; fi
+# some funcs/aliases use github API token for hitting github API for user ramrom
+[ ! -f ~/.ramrom_gittoken ] && echo "$(tput setaf 1)ERROR: $(tput sgr0)Did not find ~/.ramrom_gittoken"
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
@@ -48,18 +41,13 @@ if [ -f ~/.lessfilter ]; then
     export LESSOPEN='|~/.lessfilter %s'
 fi
 
-# For PSQL colorization
-GREEN=`echo -e '\033[0;32m'`
-NOCOLOR=`echo -e '\033[0m'`
-export PAGER="sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
-
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
+
+# GO STUFF
 export GOPATH=~/go
 export GOBIN=${GOBIN}/bin
 
 # set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
-fi
+[ -d ~/bin ] && PATH=~/bin:"${PATH}"
 
 #export DISPLAY='localhost:10.0'
