@@ -56,6 +56,13 @@ function tmuxclrallhist {
         | xargs -I PANE tmux clear-history -t PANE
 }
 
+# TODO: WIP, want to print each pane and it's background jobs
+function tmux_pane_bg_jobs() {
+    cat /dev/null > /tmp/tmux_pane_bg_jobs
+    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
+        | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
+}
+
 # GIT
 f_getbranchname()
 {
