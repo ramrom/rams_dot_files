@@ -51,6 +51,11 @@ function winname {
     printf "\e]2;$1\a"
 }
 
+function tmuxclrhist {
+    tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
+        | xargs -I PANE sh -c 'tmux send-keys -t PANE "clear" C-m; tmux clear-history -t PANE'
+}
+
 function tmuxclrallhist {
     tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
         | xargs -I PANE tmux clear-history -t PANE

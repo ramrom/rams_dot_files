@@ -58,6 +58,11 @@ function perl_log_color() {
 # quick jp (JMESPath CLI tool) query
 echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u strips double quotes
 
+# jq pass in a regex as variable and filter out a json object with "id" field values that match the regex
+func filt() {
+    echo '[{"id":"/foo/"},{"id":"bar"}]' | jq -r --arg ENVR "^/$1/" '.[] | select(.id | test($ENVR))'
+}
+
 # programatically create env variables
 A=FOO
 export BAR${A}="somestring"
