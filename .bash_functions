@@ -24,6 +24,15 @@ function psql_pager() {
     #export PAGER
 }
 
+function tmux_window_any_bg_jobs() {
+    local pane_pids=$(tmux list-panes -F "#{pane_pid}")
+    for pane_pid in $pane_pids; do
+        # -P returns child PIDs of given PID, pgrep returns 1 exit code if no children found
+        pgrep -P $pane_pid > /dev/null && echo JOBS #return 1
+    done
+    return 0
+}
+
 function srch_alias_func() {
     { alias; typeset -F; } | grep "$1"
 }
