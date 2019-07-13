@@ -24,6 +24,11 @@ function psql_pager() {
     #export PAGER
 }
 
+function chrome_cookies() {
+    local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
+    sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
+}
+
 function tmux_window_any_bg_jobs() {
     local pane_pids=$(tmux list-panes -F "#{pane_pid}")
     for pane_pid in $pane_pids; do
