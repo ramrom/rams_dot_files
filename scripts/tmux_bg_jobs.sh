@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 # TODO: i source this func file and "typeset -F | wc -l", much less # of funcs than in file...
 #source ~/rams_dot_files/.bash_functions
