@@ -1,13 +1,5 @@
 #Bash functions
 
-function bsixfour_dec() {
-    ruby -e '
-        require "base64"
-        puts ""
-        puts Base64.decode64(ARGV[0])
-    ' "$@"
-}
-
 function psql_pager() {
     # For PSQL colorization #TODO: not really working
     GREEN=`echo -e '\033[0;32m'`
