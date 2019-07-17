@@ -6,6 +6,9 @@ cat /etc/hosts | python -m json.tool
 # redirect stderr to out
 cat 2>&1 blah
 
+# bash for loop
+for run in {1..10}; do echo "hello"; done
+
 # Bash index/slicing on string 
 A="foobar"
 S=${A:0:3} # => "foo", so chars from index 0 to 2 (not 3!)
