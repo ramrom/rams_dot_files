@@ -24,6 +24,12 @@ function psql_pager() {
     #export PAGER
 }
 
+function ryamltojson() {
+    ruby -e 'require "yaml"; require "json"
+        puts YAML.load_file(ARGV[0]).to_json
+    ' "$@"
+}
+
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
     sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
@@ -32,6 +38,25 @@ function chrome_cookies() {
 function del_chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
     sqlite3 "$chrome_cookie_db" "DELETE FROM cookies WHERE host_key LIKE \"%$1%\";"
+}
+
+
+# TMUX
+function tmuxclrhist {
+    tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
+        | xargs -I PANE sh -c 'tmux send-keys -t PANE "clear" C-m; tmux clear-history -t PANE'
+}
+
+function tmuxclrallhist {
+    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
+        | xargs -I PANE tmux clear-history -t PANE
+}
+
+# TODO: WIP, want to print each pane and it's background jobs
+function tmux_pane_bg_jobs() {
+    cat /dev/null > /tmp/tmux_pane_bg_jobs
+    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
+        | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
 function tmux_window_any_bg_jobs() {
@@ -68,23 +93,6 @@ function tabname {
 
 function winname {
     printf "\e]2;$1\a"
-}
-
-function tmuxclrhist {
-    tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
-        | xargs -I PANE sh -c 'tmux send-keys -t PANE "clear" C-m; tmux clear-history -t PANE'
-}
-
-function tmuxclrallhist {
-    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
-        | xargs -I PANE tmux clear-history -t PANE
-}
-
-# TODO: WIP, want to print each pane and it's background jobs
-function tmux_pane_bg_jobs() {
-    cat /dev/null > /tmp/tmux_pane_bg_jobs
-    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
-        | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
 # GIT
