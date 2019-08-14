@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TODO: i source this func file and "typeset -F | wc -l", much less # of funcs than in file...
+# TODO: i source this func file and "typeset -F | wc -l", when run as tmux status script, much less # of funcs than in file...
 #source ~/rams_dot_files/.bash_functions
 #typeset -F | wc -l
 
