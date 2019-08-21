@@ -28,7 +28,7 @@ set incsearch				" incremental search
 
 " Status Line
 set ls=2					" line status, two lines for status and command
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ 
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
 set nobackup                                    " no backup files
@@ -43,22 +43,18 @@ set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
 
-""""""""" TODO: experiment with autoreloading buffers when they are outdated
+"""""""" Reloading buffers changed outside of vim session """""""""""""""""
+"au FocusGained,BufEnter * :silent! !
 set autoread
-au CursorHold,CursorHoldI * checktime
-au FocusGained,BufEnter * :silent! !
 
-"" Triger `autoread` when files changes on disk
-" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-" "
-" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-" autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' |
-" checktime | endif
-" " Notification after file change
-" " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
-" autocmd FileChangedShellPost *
-"   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." |
-"   echohl None
+" Alone autoread doesn't work, triggers on external commands
+    " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+    " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+
+" Notification after file change (https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread)
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
@@ -112,7 +108,7 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 
 
 """""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
-map <leader>f :CtrlP 
+map <leader>f :CtrlP
 let g:ctrlp_max_files = 20000
 let g:ctrlp_max_height = 20
 let g:ctrlp_dotfiles = 1
