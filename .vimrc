@@ -10,6 +10,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 "Plugin 'dracula/vim'  dracula theme
 "https://github.com/morhetz/gruvbox
@@ -42,11 +43,23 @@ set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
 
-"TODO: experiment with autoreloading buffers when they are outdated
+""""""""" TODO: experiment with autoreloading buffers when they are outdated
 set autoread
-"au FocusGained,BufEnter * :silent! !
-"au CursorHold * checktime
+au CursorHold,CursorHoldI * checktime
+au FocusGained,BufEnter * :silent! !
 
+"" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" "
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+" autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' |
+" checktime | endif
+" " Notification after file change
+" " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+" autocmd FileChangedShellPost *
+"   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." |
+"   echohl None
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
 set clipboard=unnamed
