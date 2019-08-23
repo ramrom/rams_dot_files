@@ -1,5 +1,6 @@
 alias svi='vim -u ~/.vimrc_simple'
 alias ssvi='vim -u NONE'
+alias vina='NO_AUTOREAD=1 vi'
 alias ls='ls -CF'
 alias ll='ls -l'
 alias la='ls -A'
