@@ -1,6 +1,19 @@
 host = db.serverStatus().host;
-
 prompt = function() { return db+"@"+host+"$ "; }
+
+function ldtools() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_tools.js'); }
+
+// http://tylerbrock.github.com/mongo-hacker
+function ldmongohacker() {
+    if (typeof(mongo_hacker_config) == "object") {  // loading the js multiple times definitely will screw things up
+        print("!! mongo_hacker_config object defined, mongo hacker already loaded!!")
+    } else {
+        load('/Users/sreeram.mittapalli/rams_dot_files/mongo_hacker.js');
+    }
+}
+
+ldtools()
+ldmongohacker()
 
 // see https://github.com/xavierguihot/mongorc
 print("Aliases - Helpers:");
@@ -11,12 +24,12 @@ print(" * cleanCache(): drops cache collections");
 
 /** Prints a pretty tree of the database/collection structure */
 Object.defineProperty(this, "tree", {
-	get: function() { return _walk_through_dbs_and_collections(db, false) },
+    get: function() { return _walk_through_dbs_and_collections(db, false) },
 });
 
 /** Prints a pretty tree of the database/collection/index structure */
 Object.defineProperty(this, "indexes", {
-	get: function() { return _walk_through_dbs_and_collections(db, true) },
+    get: function() { return _walk_through_dbs_and_collections(db, true) },
 });
 
 /** Common implementation for tree and indexes aliases.
@@ -27,9 +40,9 @@ Object.defineProperty(this, "indexes", {
  */
 function _walk_through_dbs_and_collections(db, displayIndexes) {
 
-	// The database tree we'll progressively build and which is finally returned
-	// to be printed in the console:
-	var prettyTree = "";
+    // The database tree we'll progressively build and which is finally returned
+    // to be printed in the console:
+    var prettyTree = "";
 
 	// The list of databases:
 	var databaseList = db.adminCommand({ listDatabases: 1 })["databases"];
