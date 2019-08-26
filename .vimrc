@@ -42,7 +42,6 @@ set tabstop=4                                   " space 4 columns when reading a
 set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
-
 """""""" Reloading buffers changed outside of vim session """""""""""""""""
 function RamAutoRead()
     "au FocusGained,BufEnter * :silent! !

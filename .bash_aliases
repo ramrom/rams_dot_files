@@ -102,7 +102,7 @@ alias postgrecon='sudo -u postgres psql'
 #   alias pgstop="pg_ctlcluster 9.4 main stop"
 #   alias pgstopfast="pg_ctlcluster 9.4 main stop -m fast"
 #   alias pgrestart="pgstopfast && pgstart"
-# 
+#
 #   if [ `hostname` = "vex" ] || [ `hostname` = "vex.local" ] || [ `hostname` = "vex.enova.com" ]; then
 #     alias pgstart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile start"
 #     alias pgstop="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile stop"
