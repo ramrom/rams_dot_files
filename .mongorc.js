@@ -44,42 +44,42 @@ function _walk_through_dbs_and_collections(db, displayIndexes) {
     // to be printed in the console:
     var prettyTree = "";
 
-	// The list of databases:
-	var databaseList = db.adminCommand({ listDatabases: 1 })["databases"];
+    // The list of databases:
+    var databaseList = db.adminCommand({ listDatabases: 1 })["databases"];
 
-	// We walk through databases:
-	databaseList.forEach( function(database) {
+    // We walk through databases:
+    databaseList.forEach( function(database) {
 
-		// Let's enter the database:
-		db = db.getSiblingDB(database["name"]);
+        // Let's enter the database:
+        db = db.getSiblingDB(database["name"]);
 
-		// We gather data for the current database:
-		var dbSizeOnDisk = (database["sizeOnDisk"] / (1024*1024*1024)).toFixed(3) + "GB";
-		var dbStats = db.runCommand({ dbStats: 1, scale: 1024*1024*1024 });
-		var dataSize = (dbStats["dataSize"]).toFixed(3) + "GB";
-		var indexSize = (dbStats["indexSize"]).toFixed(3) + "GB";
-		var nbrOfDocuments = dbStats["objects"].toString();
+        // We gather data for the current database:
+        var dbSizeOnDisk = (database["sizeOnDisk"] / (1024*1024*1024)).toFixed(3) + "GB";
+        var dbStats = db.runCommand({ dbStats: 1, scale: 1024*1024*1024 });
+	    var dataSize = (dbStats["dataSize"]).toFixed(3) + "GB";
+	    var indexSize = (dbStats["indexSize"]).toFixed(3) + "GB";
+	    var nbrOfDocuments = dbStats["objects"].toString();
 
-		prettyTree += (
-			" * " + dbSizeOnDisk + "-" + dataSize + "-" + indexSize +
-			" (" + nbrOfDocuments + ")              " + database["name"] + "\r\n"
-		);
+	    prettyTree += (
+	    	" * " + dbSizeOnDisk + "-" + dataSize + "-" + indexSize +
+	    	" (" + nbrOfDocuments + ")              " + database["name"] + "\r\n"
+	    );
 
-		// The list of collections in the current database:
-		var collections = db.runCommand("listCollections")["cursor"]["firstBatch"];
+	    // The list of collections in the current database:
+	    var collections = db.runCommand("listCollections")["cursor"]["firstBatch"];
 
-		collections.forEach( function(collection) {
-			if (collection["name"] != "system.indexes") {
+	    collections.forEach( function(collection) {
+	    	if (collection["name"] != "system.indexes") {
 
-				// The nbr of documents this collection contains:
-				var count = db.runCommand({ count: collection["name"] })["n"];
+			    // The nbr of documents this collection contains:
+			    var count = db.runCommand({ count: collection["name"] })["n"];
 
-				prettyTree += "	* " + collection["name"] + " (" + count.toString() + ")\r\n";
+			    prettyTree += "	* " + collection["name"] + " (" + count.toString() + ")\r\n";
 
-				if (displayIndexes) {
+			    if (displayIndexes) {
 
 					var indexes = db.runCommand({
-						collStats: collection["name"], scale: 1024 * 1024
+					    collStats: collection["name"], scale: 1024 * 1024
 					})["indexSizes"];
 
 					var pretty_indexes = ""
