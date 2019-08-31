@@ -27,6 +27,7 @@ alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checki
 alias rysncdryrun='rsync -rv --size-only --dry-run /my/source/ /my/dest/ > diff.out'
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
 alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=dude,password=werd'
+alias mntosxsamba='mount_smbfs //admin@192.168.1.1/Backups mynfs'
 alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 
 if [ "$TERM" != "dumb" ]; then
