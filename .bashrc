@@ -16,7 +16,7 @@ shopt -s checkwinsize
 [ `uname` == "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 
 function load_or_err() {
-    if [ -f "$1" ]; then . $1 else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
+    if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
 
 # enable programmable completion for git
