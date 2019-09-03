@@ -20,6 +20,8 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on					"syntax highlighting
+set foldmethod=syntax
+set nofoldenable
 set t_Co=256
 colorscheme ir_black
 set number					" line numbers
