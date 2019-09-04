@@ -87,6 +87,13 @@ map <leader>s :mksession! ~/MyCurrentVimSession<CR>
 " This next line will open a ctag in a new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
+"Quickly switch between up to 9 vimtabs
+let i=0
+while i<10
+  exe 'map g'.i.' :tabn '.i.'<CR>'
+  let i+=1
+endwhile
+
 "set list
 "set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
 "set colorcolumn=81
