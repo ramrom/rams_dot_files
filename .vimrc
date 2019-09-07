@@ -77,6 +77,13 @@ map gb :tabprevious<CR>
 map <leader>f :bn<CR>
 map <leader>d :bp<CR>
 
+" TODO: think off adding these if i use vim windows more
+" ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line
+"noremap <C-l> <C-w>l
+"noremap <C-h> <C-w>h
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+
 map <leader>e :Explore<CR>
 map <leader>w <C-w>w
 map <Leader>c :s/^/#/<CR>
