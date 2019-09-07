@@ -72,7 +72,10 @@ inoremap jk  <Esc>
 "cnoremap jk  <Esc>
 
 map <leader>t :tabnew<CR>
+"gb easier to type than gT
 map gb :tabprevious<CR>
+map <leader>f :bn<CR>
+map <leader>d :bp<CR>
 
 map <leader>e :Explore<CR>
 map <leader>w <C-w>w
@@ -120,7 +123,6 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 
 
 """""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
-map <leader>f :CtrlP
 let g:ctrlp_max_files = 20000
 let g:ctrlp_max_height = 20
 let g:ctrlp_dotfiles = 1
