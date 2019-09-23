@@ -2,6 +2,9 @@ host = db.serverStatus().host;
 prompt = function() { return db+"@"+host+"$ "; }
 
 function ldtools() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_tools.js'); }
+Object.defineProperty(this, "rt", {
+    get: function() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_tmp.js'); },
+});
 
 // http://tylerbrock.github.com/mongo-hacker
 function ldmongohacker() {

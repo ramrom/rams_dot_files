@@ -30,6 +30,12 @@ function ryamltojson() {
     ' "$@"
 }
 
+# https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
+function chrome_open() {
+    open -a "Google Chrome" $1
+    #e.g. `open -a "Google Chrome" https://www.reddit.com`
+}
+
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
     sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
