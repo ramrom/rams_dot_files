@@ -1,7 +1,24 @@
 host = db.serverStatus().host;
 prompt = function() { return db+"@"+host+"$ "; }
 
-function ldtools() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_tools.js'); }
+function thisgetter(cmd_name, getterfunc) {
+    //if (typeof(Object.getOwnPropertyDescriptor(this, cmd_name)) == 'undefined') { Object.defineProperty(this, cmd_name, { get: getterfunc }) }
+    Object.defineProperty(this, cmd_name, { get: getterfunc, configurable: true })
+}
+
+// function sc() { printjson(db.getCollectionNames()); }
+thisgetter("sc", function() { printjson(db.getCollectionNames()); })
+
+//function sd() { printjson(db.adminCommand({ listDatabases: 1 })) }  //NOTE: cant define foo prop on Object and func foo()
+thisgetter("sd", function() { printjson(db.adminCommand({ listDatabases: 1 })) })
+
+thisgetter('sdh', function() { printjson(db.getMongo().getDatabaseNames()) }) // mongohacker way
+
+function ssov() { db.ssoVendorConfig.find().select({_id:0,vendorId:1,ssoPartnerName:1,ssoType:1}).forEach(printjson) }
+
+
+function ldrallytools() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_rally_tools.js'); }
+function ldramtools() { load('/Users/sreeram.mittapalli/code/rams_dot_files/mongo/mongo_ram_tools.js'); }
 Object.defineProperty(this, "rt", {
     get: function() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_tmp.js'); },
 });
@@ -15,8 +32,12 @@ function ldmongohacker() {
     }
 }
 
-ldtools()
+//ldramtools()
+ldrallytools()
 ldmongohacker()
+
+
+
 
 // see https://github.com/xavierguihot/mongorc
 print("Aliases - Helpers:");
