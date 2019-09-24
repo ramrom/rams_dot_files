@@ -58,7 +58,7 @@ db.fooCollection.find({field1:"exactValue"}, {field2:0}) // return all fields ex
 db.fooCollection.find({field1:"exactValue"},{field3:1, "field2.embeddedfield4":1}) // get field3 and emmbedded field4 in field
 
 db.fooCollection.find( { item: null } ) // find docs where item field equals `null` value OR doc doesnt have field named item
-db.fooCollection.find( { item: { $exist: false } } ) // find docs which dont have field named item
+db.fooCollection.find( { item: { $exists: false } } ) // find docs which dont have field named item
 
 // MONGO HACKER QUERY
 db.partner.find().sort({shortName:1}).reverse().limit(3).select({fullName:1,dude:1}).ugly()
