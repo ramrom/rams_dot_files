@@ -11,7 +11,7 @@ function ldmongohacker() {
     if (typeof(mongo_hacker_config) == "object") {  // loading the js multiple times definitely will screw things up
         print("!! mongo_hacker_config object defined, mongo hacker already loaded!!")
     } else {
-        load('/Users/sreeram.mittapalli/rams_dot_files/mongo_hacker.js');
+        load('/Users/sreeram.mittapalli/rams_dot_files/mongo/mongo_hacker.js');
     }
 }
 
