@@ -14,11 +14,8 @@ thisgetter("sd", function() { printjson(db.adminCommand({ listDatabases: 1 })) }
 
 thisgetter('sdh', function() { printjson(db.getMongo().getDatabaseNames()) }) // mongohacker way
 
-function ssov() { db.ssoVendorConfig.find().select({_id:0,vendorId:1,ssoPartnerName:1,ssoType:1}).forEach(printjson) }
-
-
 function ldrallytools() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_rally_tools.js'); }
-function ldramtools() { load('/Users/sreeram.mittapalli/code/rams_dot_files/mongo/mongo_ram_tools.js'); }
+function ldramtools() { load('/Users/sreeram.mittapalli/rams_dot_files/mongo/mongo_ram_tools.js'); }
 Object.defineProperty(this, "rt", {
     get: function() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_files/db_queries/mongo_tmp.js'); },
 });
@@ -32,7 +29,7 @@ function ldmongohacker() {
     }
 }
 
-//ldramtools()
+ldramtools()
 ldrallytools()
 ldmongohacker()
 
