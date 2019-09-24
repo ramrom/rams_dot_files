@@ -1,15 +1,18 @@
 function cpobj(obj, keys) {  //compact print object
     str=""
-    if (typeof(keys) == 'undefined') 
+    if (typeof(keys) == 'undefined')
         Object.keys(obj).forEach(function(key){ str=str + key + ": " + obj[key] + "  " })
-    else { 
+    else {
         keys.forEach(function(key) { str=str + key + ": " + obj[key] + "  " })
     }
     print(str)
 }
 
 // fineOne() returns a simple single result, find() returns a big json with a lot of metadata including _query property, and forEach is apparently defined on it and it will iterate over just the query results
-function findprint(x) { if (typeof(x['_query']) == "object") { x.forEach(printjson) } else { printjson(x) } }
+function findprint(x, compact = false) {
+    if (compact) { printer = cpobj } else { printer = printjson }
+    if (typeof(x['_query']) == "object") { x.forEach(printer) } else { printer(x) }
+}
 
 // see https://github.com/xavierguihot/mongorc
 print("Aliases - Helpers:");
@@ -20,12 +23,12 @@ print(" * cleanCache(): drops cache collections");
 
 /** Prints a pretty tree of the database/collection structure */
 Object.defineProperty(this, "tree", {
-    get: function() { return _walk_through_dbs_and_collections(db, false) },
+    get: function() { return _walk_through_dbs_and_collections(db, false) }, configurable: true
 });
 
 /** Prints a pretty tree of the database/collection/index structure */
 Object.defineProperty(this, "indexes", {
-    get: function() { return _walk_through_dbs_and_collections(db, true) },
+    get: function() { return _walk_through_dbs_and_collections(db, true) }, configurable: true
 });
 
 /** Common implementation for tree and indexes aliases.
