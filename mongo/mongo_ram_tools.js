@@ -8,6 +8,8 @@ function cpobj(obj, keys) {  //compact print object
     print(str)
 }
 
+// fineOne() returns a simple single result, find() returns a big json with a lot of metadata including _query property, and forEach is apparently defined on it and it will iterate over just the query results
+function findprint(x) { if (typeof(x['_query']) == "object") { x.forEach(printjson) } else { printjson(x) } }
 
 // see https://github.com/xavierguihot/mongorc
 print("Aliases - Helpers:");
