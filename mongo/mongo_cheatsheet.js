@@ -4,6 +4,9 @@ load('external_file.js')
 //console clear
 cls
 
+//saving doc result in mongo shell is dumb: https://stackoverflow.com/questions/21284857/how-to-store-query-result-a-single-document-into-a-variable
+var res = db.collection.find().toArray()
+
 // keys of object
 Object.keys({"a":1,"b":2})  // will return ["a","b"]
 Object.keys({"a":1,"b":2}).length  // will return 2
