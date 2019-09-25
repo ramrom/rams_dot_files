@@ -1,3 +1,4 @@
+// TODO: implement printing for nested arrays and objects
 function cpobj(obj, keys) {  //compact print object
     str=""
     if (typeof(keys) == 'undefined')
