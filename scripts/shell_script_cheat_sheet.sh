@@ -6,6 +6,16 @@ cat /etc/hosts | python -m json.tool
 # redirect stderr to out
 cat 2>&1 blah
 
+array=(1 two thre)
+for i in "${array[@]}"
+do
+    echo $i
+done
+
+for (( i=1; i<=3; i++)); do
+    echo $i
+done
+
 # bash for loop
 for run in {1..10}; do echo "hello"; done
 
