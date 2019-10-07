@@ -65,7 +65,7 @@ function tmux_pane_bg_jobs() {
         | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
-function srch_alias_func() {
+function search_alias_func() {
     { alias; typeset -F; } | grep "$1"
 }
 
