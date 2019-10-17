@@ -1,3 +1,8 @@
+function thisgetter(cmd_name, getterfunc) {
+    //if (typeof(Object.getOwnPropertyDescriptor(this, cmd_name)) == 'undefined') { Object.defineProperty(this, cmd_name, { get: getterfunc }) }
+    Object.defineProperty(this, cmd_name, { get: getterfunc, configurable: true })
+}
+
 // TODO: implement printing for nested arrays and objects
 function cpobj(obj, keys) {  //compact print object
     str=""
