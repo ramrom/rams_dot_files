@@ -7,6 +7,7 @@ cat /etc/hosts | python -m json.tool
 cat 2>&1 blah
 
 array=(1 two thre)
+echo ${array[1]}  # ref 2nd element in array, in this case this prints "two"
 for i in "${array[@]}"
 do
     echo $i
@@ -18,6 +19,9 @@ done
 
 # bash for loop
 for run in {1..10}; do echo "hello"; done
+
+# remove non-ascii chars
+tr -cd '\11\12\15\40-\176' < file-with-binary-chars > clean-file
 
 # Bash index/slicing on string 
 A="foobar"
