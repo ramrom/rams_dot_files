@@ -28,6 +28,7 @@ set t_Co=256
 colorscheme ir_black
 set number					" line numbers
 set hlsearch  				" highlight search
+set ignorecase              " searches are case insensitive
 set incsearch				" incremental search
 
 " Status Line
