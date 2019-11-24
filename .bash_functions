@@ -50,6 +50,10 @@ function chrome_tabs_summary() {
     osascript -e 'tell application "Google Chrome" to get URL of tab 1 of window 1'
     osascript -e 'tell application "Google Chrome" to get title of tab 1 of window 1'
     #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
+
+    #open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
+    #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
+    # open -na "Google Chrome" --args --new-window "https://georgegarside.com"
 }
 
 
