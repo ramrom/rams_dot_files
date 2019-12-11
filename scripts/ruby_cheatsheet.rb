@@ -20,3 +20,7 @@ ObjectSpace.memsize_of(i)
 
 # Another method, probably better to get an idea of mem size:
 Marshal.dump(a).size
+
+f = File.open 'path/somefile'; 
+require 'json'; j = JSON.parse(f)
+j.each_with_index { |data,i| f= File.open("newfile#{i}",'w'); f.write(data.to_json); f.close }
