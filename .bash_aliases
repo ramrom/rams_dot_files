@@ -30,6 +30,10 @@ alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=d
 alias mntosxsamba='mount_smbfs //admin@192.168.1.1/Backups mynfs'
 alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 
+# neat trick, running aliases as sudo fails as root doesnt have them defined
+# bash only looks for first word to alias expand, but if word is alias, it expands subsequent words
+alias sudo='sudo '
+
 if [ "$TERM" != "dumb" ]; then
     if [ `uname` == "Linux" ]; then
         eval "`dircolors -b`"
