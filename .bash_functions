@@ -10,9 +10,9 @@ function ruby_base64_dec() {
 
 function display_notif() {
     if [ `uname` == "Darwin" ]; then
-        osascript -e 'display notification "hi!"'
-    else  # really for linux, specifically ubuntu
-        notify-send "hi!"
+        osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
+    else  # really for ubuntu
+        notify-send -i face-wink "a title" "hi!"
     fi
 }
 
