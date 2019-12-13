@@ -8,6 +8,14 @@ function ruby_base64_dec() {
     ' "$@"
 }
 
+function display_notif() {
+    if [ `uname` == "Darwin" ]; then
+        osascript -e 'display notification "hi!"'
+    else  # really for linux, specifically ubuntu
+        notify-send "hi!"
+    fi
+}
+
 function psql_pager() {
     # For PSQL colorization #TODO: not really working
     GREEN=`echo -e '\033[0;32m'`
