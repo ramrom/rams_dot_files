@@ -30,6 +30,8 @@ alias mntntfslinux='sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 /media/w
 alias mntosxsamba='mount_smbfs //admin@192.168.1.1/Backups mynfs'
 alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 
+alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
+
 # neat trick, running aliases as sudo fails as root doesnt have them defined
 # bash only looks for first word to alias expand, but if word is alias, it expands subsequent words
 alias sudo='sudo '
