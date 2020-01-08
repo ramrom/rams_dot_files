@@ -13,17 +13,26 @@ do
     echo $i
 done
 
-for (( i=1; i<=3; i++)); do
-    echo $i
-done
+# command line substitution to preserve newline chars after field splitting
+# see https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
+IFS=
+A=$(env)
+echo $A | grep "something"
+# OR
+A=$(env)
+echo "$A" | grep "something"
 
 # bash for loop
 for run in {1..10}; do echo "hello"; done
 
+for (( i=1; i<=3; i++)); do
+    echo $i
+done
+
 # remove non-ascii chars
 tr -cd '\11\12\15\40-\176' < file-with-binary-chars > clean-file
 
-# Bash index/slicing on string 
+# Bash index/slicing on string
 A="foobar"
 S=${A:0:3} # => "foo", so chars from index 0 to 2 (not 3!)
 
