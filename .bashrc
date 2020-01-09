@@ -2,7 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# If not running interactively, don't do anything
+# so .bashrc isn't run for non-interactive shells by default.
+# this PS1 check is still useful b/c bashrc is still run for remote non-interactive, which i want to prevent
+#   - see https://unix.stackexchange.com/questions/257571/why-does-bashrc-check-whether-the-current-shell-is-interactive
 [ -z "$PS1" ] && return
 
 # don't put duplicate lines in the history. See bash(1) for more options
