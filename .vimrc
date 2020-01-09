@@ -65,11 +65,7 @@ endfunction
 if empty($NO_AUTOREAD) | call RamAutoRead() | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function WriteAndCommit()
-    :w
-    silent !clear
-    execute "!" . "git add . && git commit -m 'added stuff'"
-endfunction
+command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
 
 " TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
 set clipboard=unnamed
@@ -95,7 +91,7 @@ map <leader>d :bp<CR>
 
 map <leader>e :Explore<CR>
 map <leader>w <C-w>w
-map <leader>g :call WriteAndCommit()<CR>
+map <leader>g :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 map <Leader>c :s/^/#/<CR>
 map <Leader>u :s/^#//<CR>
 map <leader>n :NERDTreeToggle<CR>
