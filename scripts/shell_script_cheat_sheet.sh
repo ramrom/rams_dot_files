@@ -13,6 +13,23 @@ do
     echo $i
 done
 
+# bash for loop
+for run in {1..10}; do echo "hello"; done
+
+for (( i=1; i<=3; i++)); do
+    echo $i
+done
+
+# case statements
+case "$FOO" in
+partialstring*|someother*)
+    A=1
+    ;;
+*)
+    A=3
+    ;;
+esac
+
 # command line substitution to preserve newline chars after field splitting
 # see https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
 IFS=
@@ -21,13 +38,6 @@ echo $A | grep "something"
 # OR
 A=$(env)
 echo "$A" | grep "something"
-
-# bash for loop
-for run in {1..10}; do echo "hello"; done
-
-for (( i=1; i<=3; i++)); do
-    echo $i
-done
 
 # remove non-ascii chars
 tr -cd '\11\12\15\40-\176' < file-with-binary-chars > clean-file
