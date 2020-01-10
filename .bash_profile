@@ -6,9 +6,7 @@
 #umask 022
 
 # include .bashrc if it exists
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
+[ -f ~/.bashrc ] && . ~/.bashrc
 
 function parse_git_branch {
   branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
@@ -44,16 +42,8 @@ function build_my_prompt {
   PS1="${PS1}\n$ "
 }
 
+PROMPT_COMMAND='build_my_prompt'
+
 #old set my prompt
 # PS1='\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-*)
-    PROMPT_COMMAND='build_my_prompt'
-    ;;
-esac
-
+# PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
