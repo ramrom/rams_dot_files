@@ -50,6 +50,8 @@ if [ "$TERM" != "dumb" ]; then
         alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
         alias psx='ps auxh'
         alias ls='ls -CFG'
+        alias gl="cd ~/Google\ Drive/Lists"
+        alias gr="cd ~/Google\ Drive/Rally"
     fi
 fi
 # Logs
@@ -94,9 +96,9 @@ alias ber="bundle exec rspec"
 alias bi="bundle install"
 
 #POSTGRES
-alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
-alias psqlvim='PAGER=~/vimpager.sh psql'
 alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/11.3/bin/psql'
+alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
+#alias psqlvim='PAGER=~/vimpager.sh psql'
 #alias psqlp='PAGER=$(psql_pager) psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
 alias getdbsizes='psql -c "SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;" -d postgres'
