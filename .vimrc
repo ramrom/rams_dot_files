@@ -22,10 +22,12 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on					"syntax highlighting
-set foldmethod=syntax
-set nofoldenable
 set t_Co=256
 colorscheme ir_black
+
+set foldmethod=syntax
+set nofoldenable
+
 set number					" line numbers
 set hlsearch  				" highlight search
 set ignorecase              " searches are case insensitive
@@ -76,11 +78,11 @@ let mapleader = ","				"set metakey for vim shortcuts
 inoremap jk  <Esc>
 "cnoremap jk  <Esc>
 
-map <leader>t :tabnew<CR>
+noremap <leader>t :tabnew<CR>
 "gb easier to type than gT
-map gb :tabprevious<CR>
-map <leader>f :bn<CR>
-map <leader>d :bp<CR>
+noremap gb :tabprevious<CR>
+noremap <leader>f :bn<CR>
+noremap <leader>d :bp<CR>
 
 " TODO: think off adding these if i use vim windows more
 " ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line
@@ -89,19 +91,19 @@ map <leader>d :bp<CR>
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
 
-map <leader>e :Explore<CR>
-map <leader>w <C-w>w
-map <leader>g :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
-map <Leader>c :s/^/#/<CR>
-map <Leader>u :s/^#//<CR>
-map <leader>n :NERDTreeToggle<CR>
-map <leader>x :set number!<CR>
-map <leader>p :vsplit<CR><leader>w
-map <leader>h :split<CR><leader>w
-map <leader>s :mksession! ~/MyCurrentVimSession<CR>
+noremap <leader>e :Explore<CR>
+noremap <leader>w <C-w>w
+noremap <leader>g :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
+noremap <Leader>c :s/^/#/<CR>
+noremap <Leader>u :s/^#//<CR>
+norema <leader>n :NERDTreeToggle<CR>
+noremap <leader>x :set number!<CR>
+noremap <leader>p :vsplit<CR><leader>w
+noremap <leader>h :split<CR><leader>w
+noremap <leader>s :mksession! ~/MyCurrentVimSession<CR>
 
 " This next line will open a ctag in a new tab
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "Quickly switch between up to 9 vimtabs
 let i=0
