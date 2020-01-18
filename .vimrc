@@ -11,6 +11,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+Plugin 'chrisbra/unicode.vim'   " unicode helper
 
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
