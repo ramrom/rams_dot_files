@@ -7,6 +7,8 @@ setopt histignoredups
 
 # Colorize ls
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
+# TODO: how to get brew tree colors working, below LS_COLORS doesnt work
+# [ `uname` = "Darwin" ] && export LS_COLORS='GxFxCxDxBxegedabagaced'
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
