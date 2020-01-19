@@ -1,11 +1,6 @@
-#Bash functions
-
-function ruby_base64_dec() {
-    ruby -e '
-        require "base64"
-        puts ""
-        puts Base64.decode64(ARGV[0])
-    ' "$@"
+#shell functions
+function search_alias_func() {
+    { alias; typeset -F; } | grep "$1"
 }
 
 function display_notif() {
@@ -14,28 +9,6 @@ function display_notif() {
     else  # really for ubuntu
         notify-send -i face-wink "a title" "hi!"
     fi
-}
-
-function psql_pager() {
-    # For PSQL colorization #TODO: not really working
-    GREEN=`echo -e '\033[0;32m'`
-    NOCOLOR=`echo -e '\033[0m'`
-    echo "sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
-
-    #YELLOW=`echo -e '\033[1;33m'`
-    #LIGHT_CYAN=`echo -e '\033[1;36m'`
-    #NOCOLOR=`echo -e '\033[0m'`
-
-    #PAGER="sed \"s/\([[:space:]]\+[0-9.\-]\+\)$/${LIGHT_CYAN}\1$NOCOLOR/;"
-    #PAGER+="s/\([[:space:]]\+[0-9.\-]\+[[:space:]]\)/${LIGHT_CYAN}\1$NOCOLOR/g;"
-    #PAGER+="s/|/$YELLOW|$NOCOLOR/g;s/^\([-+]\+\)/$YELLOW\1$NOCOLOR/\" 2>/dev/null"
-    #export PAGER
-}
-
-function ryamltojson() {
-    ruby -e 'require "yaml"; require "json"
-        puts YAML.load_file(ARGV[0]).to_json
-    ' "$@"
 }
 
 # https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
@@ -94,17 +67,6 @@ function tmux_pane_bg_jobs() {
         | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
-function search_alias_func() {
-    { alias; typeset -F; } | grep "$1"
-}
-
-function fullpath() {
-    ruby -e '
-        $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
-        ARGV.each { |path| puts File.expand_path path }         unless ARGV.empty?
-    ' "$@"
-}
-
 # doesnt work with sh(3.2)
 function filenamediff() {
     diff <(cd $1; find . -type f) <(cd $2; find . -type f)
@@ -114,19 +76,12 @@ function f_findfilesbysize() {
     sudo find "$1" -type f -size +"$2" | xargs du -sh
 }
 
-function tabname {
-    printf "\e]1;$1\a"
-}
+function tabname { printf "\e]1;$1\a"; }
 
-function winname {
-    printf "\e]2;$1\a"
-}
+function winname { printf "\e]2;$1\a"; }
 
 # GIT
-f_getbranchname()
-{
-    git branch | grep "*" | awk '{print $2}'
-}
+f_getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 function git_ctag_update() {
     if [ -f tags ]; then
@@ -154,10 +109,44 @@ function terminate_db_connections() {
     psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres
 }
 
-# OTHER
+#TODO: not really working
+function psql_pager() {
+    #YELLOW=`echo -e '\033[1;33m'`
+    #LIGHT_CYAN=`echo -e '\033[1;36m'`
+    GREEN=`echo -e '\033[0;32m'`
+    NOCOLOR=`echo -e '\033[0m'`
+    echo "sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
+
+    #PAGER="sed \"s/\([[:space:]]\+[0-9.\-]\+\)$/${LIGHT_CYAN}\1$NOCOLOR/;"
+    #PAGER+="s/\([[:space:]]\+[0-9.\-]\+[[:space:]]\)/${LIGHT_CYAN}\1$NOCOLOR/g;"
+    #PAGER+="s/|/$YELLOW|$NOCOLOR/g;s/^\([-+]\+\)/$YELLOW\1$NOCOLOR/\" 2>/dev/null"
+    #export PAGER
+}
+
+function ruby_base64_dec() {
+    ruby -e '
+        require "base64"
+        puts ""
+        puts Base64.decode64(ARGV[0])
+    ' "$@"
+}
+
+function ryamltojson() {
+    ruby -e 'require "yaml"; require "json"
+        puts YAML.load_file(ARGV[0]).to_json
+    ' "$@"
+}
+
 function parse_comma_delim_error() {
     local str="File.write(\"${1}\", File.read(\"${1}\").split(',').join(\"\\n\"))"
     ruby -e "$str"
+}
+
+function fullpath() {
+    ruby -e '
+        $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
+        ARGV.each { |path| puts File.expand_path path }         unless ARGV.empty?
+    ' "$@"
 }
 
 function colorgrid( )
