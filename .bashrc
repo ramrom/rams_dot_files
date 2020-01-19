@@ -22,7 +22,7 @@ function load_or_err() {
 }
 
 # enable programmable completion for git
-load_or_err ~/.git_completion.sh
+load_or_err ~/.git-completion.bash
 
 load_or_err ~/rams_dot_files/.shell_aliases.sh
 load_or_err ~/rams_dot_files/.shell_functions.sh

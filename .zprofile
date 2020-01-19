@@ -1,4 +1,6 @@
-function parse_git_branch {
+# TODO: FIX ME
+
+function parse_git_branch() {
   branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
   if [ "HEAD" = "$branch" ]; then
     echo "(no branch)"
@@ -9,7 +11,7 @@ function parse_git_branch {
 
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
 # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
-function build_my_prompt {
+function build_my_prompt() {
   local exit_code="$?" # store current exit code
 
   local bold=`tput bold`
