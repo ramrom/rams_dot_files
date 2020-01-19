@@ -3,6 +3,8 @@ setopt histignoredups
 
 # TODO: like .bashrc do i need PS1 check for the remote connection non-interactive case?
 
+#autoload -Uz compinit && compinit
+
 # Colorize ls
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 
@@ -12,7 +14,7 @@ function load_or_err() {
 
 # enable programmable completion for git
 # TODO: causing "complete:13: command not found: compdef" errors
-load_or_err ~/.git_completion.sh
+# load_or_err ~/
 
 load_or_err ~/rams_dot_files/.shell_aliases.sh
 load_or_err ~/rams_dot_files/.shell_functions.sh
