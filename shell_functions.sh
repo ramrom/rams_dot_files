@@ -1,8 +1,13 @@
 #shell functions
 function search_alias_func() {
-    # TODO: zsh use "print -l ${(ok)functions}"
-    # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
-    { alias; typeset -F; } | grep "$1"
+    if [ $(detect_shell) = "zsh" ]; then
+        # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
+        local get_functions='print -l ${(ok)functions}'
+    else  # Assumes BASH
+        local get_functions='typeset -F'
+    fi
+    { alias; eval $get_functions; } | grep "$1"
+    # { alias; typeset -F; } | grep "$1"
 }
 
 function display_notif() {
@@ -13,6 +18,7 @@ function display_notif() {
     fi
 }
 
+#TODO: get method 2 working
 function detect_shell() {
     # METHOD 1: use ps
         # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
@@ -21,6 +27,8 @@ function detect_shell() {
         echo "bash"
     elif [ -n "$ZSH_VERSION" ]; then
         echo "zsh"
+    else
+        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)"
     fi
 }
 
