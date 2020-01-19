@@ -54,6 +54,7 @@ function del_chrome_cookies() {
     sqlite3 "$chrome_cookie_db" "DELETE FROM cookies WHERE host_key LIKE \"%$1%\";"
 }
 
+# TODO: WIP
 function chrome_tabs_summary() {
     osascript -e 'tell application "Google Chrome" to get URL of tab 1 of window 1'
     osascript -e 'tell application "Google Chrome" to get title of tab 1 of window 1'
@@ -104,6 +105,7 @@ function fullpath() {
     ' "$@"
 }
 
+# doesnt work with sh(3.2)
 function filenamediff() {
     diff <(cd $1; find . -type f) <(cd $2; find . -type f)
 }
