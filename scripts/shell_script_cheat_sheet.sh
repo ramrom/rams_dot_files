@@ -108,6 +108,9 @@ echo $FOOBAR # will print somestring
 
 bash "==" is lexical comparison vs "=" is numerical comparison
 
+echo $$ # print PID of current shell process
+echo $? # print exit code of last command
+
 # tells a shell script to abort running subsequent statements if a statement exits with non-zero code
 set -e
 

@@ -1,6 +1,7 @@
 #shell functions
 function search_alias_func() {
-    #TODO: typeset not zsh
+    # TODO: zsh use "print -l ${(ok)functions}"
+    # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
     { alias; typeset -F; } | grep "$1"
 }
 
@@ -9,6 +10,17 @@ function display_notif() {
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
     else  # really for ubuntu
         notify-send -i face-wink "a title" "hi!"
+    fi
+}
+
+function detect_shell() {
+    # METHOD 1: use ps
+        # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
+    # METHOD 2:
+    if [ -n "$BASH_VERSION" ]; then
+        echo "bash"
+    elif [ -n "$ZSH_VERSION" ]; then
+        echo "zsh"
     fi
 }
 
