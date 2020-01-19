@@ -24,8 +24,8 @@ function load_or_err() {
 # enable programmable completion for git
 load_or_err ~/.git_completion.sh
 
-load_or_err ~/rams_dot_files/.bash_aliases
-load_or_err ~/rams_dot_files/.bash_functions
+load_or_err ~/rams_dot_files/.bash_aliases.sh
+load_or_err ~/rams_dot_files/.bash_functions.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
