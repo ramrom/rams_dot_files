@@ -10,6 +10,14 @@ function search_alias_func() {
     # { alias; typeset -F; } | grep "$1"
 }
 
+function rrc() {
+    if [ $(detect_shell) = "zsh" ]; then
+        source ~/.zprofile && source ~/.zshrc
+    else  # Assumes BASH
+        source ~/.bash_profile && source ~/.bashrc
+    fi
+}
+
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
