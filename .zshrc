@@ -11,6 +11,7 @@ function load_or_err() {
 }
 
 # enable programmable completion for git
+# TODO: causing "complete:13: command not found: compdef" errors
 load_or_err ~/.git_completion.sh
 
 load_or_err ~/rams_dot_files/.shell_aliases.sh
