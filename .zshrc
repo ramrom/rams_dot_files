@@ -1,8 +1,10 @@
 # don't put duplicate lines in the history.
 setopt histignoredups
 
+# TODO: like .bashrc do i need PS1 check for the remote connection non-interactive case?
+
 # Colorize ls
-[ `uname` == "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
+[ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi

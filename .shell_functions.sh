@@ -149,8 +149,7 @@ function fullpath() {
     ' "$@"
 }
 
-function colorgrid( )
-{
+function colorgrid() {
     iter=16
     while [ $iter -lt 52 ]
     do

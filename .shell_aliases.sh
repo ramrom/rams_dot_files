@@ -38,8 +38,7 @@ alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
 alias sudo='sudo '
 
 if [ "$TERM" != "dumb" ]; then
-    #TODO: zsh doesnt like == here
-    if [ `uname` == "Linux" ]; then
+    if [ `uname` = "Linux" ]; then
         eval "`dircolors -b`"
         alias ls='ls --color=auto'
         alias rgrep='rgrep --color=auto'
