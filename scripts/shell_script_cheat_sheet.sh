@@ -104,6 +104,10 @@ A=FOO
 export BAR${A}="somestring"
 echo $FOOBAR # will print somestring
 
+"[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
+
+bash "==" is lexical comparison vs "=" is numerical comparison
+
 # tells a shell script to abort running subsequent statements if a statement exits with non-zero code
 set -e
 
