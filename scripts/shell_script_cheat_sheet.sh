@@ -49,11 +49,39 @@ S=${A:0:3} # => "foo", so chars from index 0 to 2 (not 3!)
 echo ${#S} # prints length of S, so will echo 3
 S=${A:1:${#A}-1}  # will print "fooba", omitted the last char
 
+# POSIX arithmetic expansion (http://mywiki.wooledge.org/ArithmeticExpression)
+$((3+3)) # 6
+$((3*3)) # 9
+$((3**3)) # 27
+$((3*3+4/10)) # 9
+$((3%2)) # mod, 1
+let a="3+3" a+=4 # 10
+
 # union of two stdouts into one, note each command is run sequentially, so if one (e.g. tail -f) doesn't end then next will never run
 { head a; tail b; } | grep "foo"  # same as running "cat a b"
 
 # printf for may newlines
 printf "${A}\n\n"
+
+# programatically create env variables
+A=FOO
+export BAR${A}="somestring"
+echo $FOOBAR # will print somestring
+
+"[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
+
+bash "==" is lexical comparison vs "=" is numerical comparison
+
+echo $$ # print PID of current shell process
+echo $? # print exit code of last command
+
+set -e # shell script will abort running subsequent statements if a statement exits with non-zero code
+
+set -x # spit out each expanded statement to terminal before it's executed
+
+# ZSH
+- autoload <keyword>, makes keyword a function and not a script to be autoloaded
+############
 
 # from https://superuser.com/questions/380772/removing-ansi-color-codes-from-text-stream, perl does not remove the tab/indent formatting
 echo "$(tput setaf 3)yellow" | perl -pe 's/\x1b\[[0-9;]*[mG]//g'
@@ -98,20 +126,3 @@ echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u 
 func filt() {
     echo '[{"id":"/foo/"},{"id":"bar"}]' | jq -r --arg ENVR "^/$1/" '.[] | select(.id | test($ENVR))'
 }
-
-# programatically create env variables
-A=FOO
-export BAR${A}="somestring"
-echo $FOOBAR # will print somestring
-
-"[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
-
-bash "==" is lexical comparison vs "=" is numerical comparison
-
-echo $$ # print PID of current shell process
-echo $? # print exit code of last command
-
-# tells a shell script to abort running subsequent statements if a statement exits with non-zero code
-set -e
-
-set -x # spit out each expanded statement to terminal before it's executed

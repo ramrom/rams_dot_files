@@ -3,7 +3,7 @@ setopt histignoredups
 
 # TODO: like .bashrc do i need PS1 check for the remote connection non-interactive case?
 
-#autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
 # Colorize ls
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
