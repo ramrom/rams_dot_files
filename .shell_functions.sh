@@ -1,10 +1,11 @@
 #shell functions
 function search_alias_func() {
+    #TODO: typeset not zsh
     { alias; typeset -F; } | grep "$1"
 }
 
 function display_notif() {
-    if [ `uname` == "Darwin" ]; then
+    if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
     else  # really for ubuntu
         notify-send -i face-wink "a title" "hi!"
