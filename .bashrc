@@ -14,8 +14,9 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Colorize ls
+# modify ls colors, ubuntu bash 4.4 doesnt need this for color on ls and tree
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
+# [ `uname` = "Darwin" ] && export LS_COLORS='GxFxCxDxBxegedabagaced'
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi

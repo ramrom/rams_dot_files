@@ -80,7 +80,8 @@ set -e # shell script will abort running subsequent statements if a statement ex
 set -x # spit out each expanded statement to terminal before it's executed
 
 # ZSH
-- autoload <keyword>, makes keyword a function and not a script to be autoloaded
+# compinit defines compdef
+# autoload <keyword>, makes keyword a function and not a script to be autoloaded
 ############
 
 # from https://superuser.com/questions/380772/removing-ansi-color-codes-from-text-stream, perl does not remove the tab/indent formatting

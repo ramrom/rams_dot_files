@@ -35,16 +35,17 @@ function build_my_prompt() {
   #    PS1="${PS1}${red}˟${exit_code}${reset} "    # Add green for success
   #fi
 
-  PS1="${PS1}${yellow}${bold}\u"
+  PS1="${PS1}${yellow}${bold}%n"
   PS1="${PS1}${reset}${bold}@"
-  PS1="${PS1}${yellow}\h "
+  PS1="${PS1}${yellow}%m "
   PS1="${PS1}${blue}("
-  PS1="${PS1}${reset}${cyan}\w"
+  PS1="${PS1}${reset}${cyan}%~"
   PS1="${PS1}${bold}${blue})"
   PS1="${PS1} <${reset}${magenta}${git_branch}"
   PS1="${PS1}${bold}${blue}>${reset}"
 
-  PS1="${PS1}\n$ "
+  #PS1="${PS1}"$'\n'"$ "
+  echo "${PS1}"$'\n'"$ "
 }
 
-PROMPT_COMMAND='build_my_prompt'
+PROMPT=$(build_my_prompt)
