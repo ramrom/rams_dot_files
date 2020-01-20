@@ -9,6 +9,9 @@ function parse_git_branch() {
     fi
 }
 
+# needed to make git function for cmd substitution in prompt
+setopt prompt_subst
+
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
 # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt() {
@@ -24,28 +27,24 @@ function build_my_prompt() {
     local magenta=`tput setaf 5`
     local cyan=`tput setaf 6`
 
-    local git_branch=`parse_git_branch`
 
-    PS1=""
-
+    PROMPT=''
     # display icon if last command succeeded or failed
     #if [[ $exit_code -eq 0 ]]; then
-    #    PS1="${PS1}${green}√${reset} "      # Add green for success
+    #    PROMPT="${PROMPT}${green}√${reset} "      # Add green for success
     #else
-    #    PS1="${PS1}${red}˟${exit_code}${reset} "    # Add green for success
+    #    PROMPT="${PROMPT}${red}˟${exit_code}${reset} "    # Add green for success
     #fi
+    PROMPT="${PROMPT}${yellow}${bold}%n"
+    PROMPT="${PROMPT}${reset}${bold}@"
+    PROMPT="${PROMPT}${yellow}%m "
+    PROMPT="${PROMPT}${blue}("
+    PROMPT="${PROMPT}${reset}${cyan}%~"
+    PROMPT="${PROMPT}${bold}${blue})"
+    PROMPT="${PROMPT} <${reset}${magenta}"'$(parse_git_branch)'
+    PROMPT="${PROMPT}${bold}${blue}>${reset}"
 
-    PS1="${PS1}${yellow}${bold}%n"
-    PS1="${PS1}${reset}${bold}@"
-    PS1="${PS1}${yellow}%m "
-    PS1="${PS1}${blue}("
-    PS1="${PS1}${reset}${cyan}%~"
-    PS1="${PS1}${bold}${blue})"
-    PS1="${PS1} <${reset}${magenta}${git_branch}"
-    PS1="${PS1}${bold}${blue}>${reset}"
-
-    #PS1="${PS1}"$'\n'"$ "
-    echo "${PS1}"$'\n'"$ "
+    echo "${PROMPT}"$'\n'"$ "
 }
 
 PROMPT=$(build_my_prompt)
