@@ -45,7 +45,8 @@ function sensor_data() {
     # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
     local IFS=
     local s=$(sensors)
-    echo $s
+    echo $s | grep -E "CPU Temperature"
+    echo $s | grep -E "CPU Fan"
 }
 
 # https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
