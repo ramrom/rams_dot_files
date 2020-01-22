@@ -23,6 +23,10 @@ for (( i=1; i<=3; i++)); do
     echo $i
 done
 
+# POSIX
+: "$((init))"
+while [ "$((test))" -ne 0 ]; do foo; : "$((next))"; done
+
 # case statements
 case "$FOO" in
 partialstring*|someother*)

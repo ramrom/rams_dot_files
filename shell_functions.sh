@@ -89,8 +89,25 @@ function del_chrome_cookies() {
 
 # TODO: WIP
 function chrome_tabs_summary() {
-    osascript -e 'tell application "Google Chrome" to get URL of tab 1 of window 1'
-    osascript -e 'tell application "Google Chrome" to get title of tab 1 of window 1'
+    local wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
+    [ "$wincount" -eq 0 ] && echo "zero windows!" && return
+
+    for (( i=1; i<=$wincount; i++)); do
+        echo $i
+        local cmd="osascript -e 'tell application \"Google Chrome\" to get number of tabs in window $i'"
+        local tabcount=$(eval $cmd)
+        echo $tabcount
+        for (( j=1; j<=$tabcount; j++)); do
+            local cmd="osascript -e 'tell application \"Google Chrome\" to get URL of tab $j of window $i'"
+            local url=$(eval $cmd)
+            echo $url
+            #local cmd="osascript -e 'tell application \"Google Chrome\" to get title of tab $j of window $i'"
+            #local title=$(eval $cmd)
+        done
+    done
+
+    # osascript -e 'tell application "Google Chrome" to get URL of tab 1 of window 1'
+    # osascript -e 'tell application "Google Chrome" to get title of tab 1 of window 1'
     #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
 
     #open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
