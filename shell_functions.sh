@@ -40,6 +40,14 @@ function detect_shell() {
     fi
 }
 
+# TODO: finish
+function sensor_data() {
+    # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
+    local IFS=
+    local s=$(sensors)
+    echo $s
+}
+
 # https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
 function chrome_open() {
     open -a "Google Chrome" $1
