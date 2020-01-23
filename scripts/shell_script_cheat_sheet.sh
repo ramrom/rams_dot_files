@@ -16,16 +16,22 @@ do
     echo $i
 done
 
-# bash for loop
+###### LOOPS
+# bash
 for run in {1..10}; do echo "hello"; done
 
 for (( i=1; i<=3; i++)); do
     echo $i
 done
 
-# POSIX
-: "$((init))"
-while [ "$((test))" -ne 0 ]; do foo; : "$((next))"; done
+# POSIX/sh
+i=1
+while [ "$i" -ne 10 ]
+do
+    echo "$i"
+    i=$((i + 1))
+done
+
 
 # case statements
 case "$FOO" in
