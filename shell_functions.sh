@@ -55,20 +55,26 @@ function tmux_status() {
     ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
     echo $ver
 
-    if [ $(echo "$ver > 2.1" | bc) -eq 1 ]; then
-        #tmux set status 2
-        echo "> 2.1"
-    fi
-
     local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
     local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
     local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
     local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
-    tmux set -g status-left "#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp} "
 
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
     local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
-    tmux set -g status-right "${tmux_spotify}   ${tmux_host_datetime}"
+
+    if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
+        tmux set status on
+        echo "tmux at least ver 2.9"
+        # TODO: research zsh more on this
+        setopt +o nomatch # turn off zsh globbing, it has an issue with `[]`
+        local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
+        local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
+        tmux set status-format[0] "$left $right"
+    fi
+
+    #tmux set status-left "#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp} "
+    #tmux set status-right "${tmux_spotify}   ${tmux_host_datetime}"
 }
 
 # https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
