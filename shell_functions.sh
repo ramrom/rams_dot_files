@@ -66,11 +66,10 @@ function tmux_status() {
     if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
         tmux set status on
         echo "tmux at least ver 2.9"
-        # TODO: research zsh more on this
         setopt +o nomatch # turn off zsh globbing, it has an issue with `[]`
         local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
         local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
-        tmux set status-format[0] "$left $right"
+        noglob tmux set status-format[0] "$left $right"
     fi
 
     #tmux set status-left "#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp} "
