@@ -5,6 +5,9 @@ setopt histignoredups
 
 # autoload -Uz compinit && compinit
 
+# turn off zsh globbing, particularly `[]` (brackets)
+# setopt +o nomatch
+
 # Colorize ls
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 # TODO: how to get brew tree colors working, below LS_COLORS doesnt work
