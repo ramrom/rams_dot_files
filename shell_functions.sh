@@ -68,7 +68,10 @@ function tmux_status() {
         echo "tmux at least ver 2.9"
         local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
         local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
-        noglob tmux set status-format[0] "$left $right"
+
+        local cmd="tmux"
+        [ $(detect_shell) = "zsh" ] && cmd="noglob tmux"
+        eval "$cmd set status-format[0] \"$left $right\""
     fi
 
     #tmux set status-left "#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp} "
