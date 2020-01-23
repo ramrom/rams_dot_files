@@ -6,7 +6,7 @@ setopt histignoredups
 # autoload -Uz compinit && compinit
 
 # turn off zsh globbing, particularly `[]` (brackets)
-# setopt +o nomatch
+setopt +o no_nomatch #(or setopt NO_NOMATCH)
 
 # Colorize ls
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
