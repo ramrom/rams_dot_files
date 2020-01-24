@@ -63,15 +63,25 @@ function tmux_status() {
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
     local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
 
+    # TODO: how to i set the window status component with status-format[] ???
     if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
         tmux set status on
         echo "tmux at least ver 2.9"
         local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
         local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
+        if [ -n "$simple" ]; then
+            left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
+            right="#[align=right]  ${tmux_host_datetime}"
+        fi
+        # local center="[align=centre]"
+        tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
+        tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
 
         local cmd="tmux"
-        [ $(detect_shell) = "zsh" ] && cmd="noglob tmux"
-        eval "$cmd set status-format[0] \"$left $right\""
+        [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
+        # eval "$cmd set status-format[0] \"$left $right\""
+        eval "$cmd set status-left \"$left\""
+        eval "$cmd set status-right \"$right\""
     fi
 
     #tmux set status-left "#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp} "

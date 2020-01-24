@@ -43,6 +43,9 @@ partialstring*|someother*)
     ;;
 esac
 
+# split on ":" delimiter, each on newline
+echo foo:bar:baz | tr : \\n
+
 # command line substitution to preserve newline chars after field splitting
 # see https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
 IFS=
