@@ -109,24 +109,31 @@ function chrome_tabs_summary() {
     local wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
     [ "$wincount" -eq 0 ] && echo "zero windows!" && return
 
+    local json="["
     for (( i=1; i<=$wincount; i++)); do
-        echo $i
+        #echo $i
+        json="$json""["
         local cmd="osascript -e 'tell application \"Google Chrome\" to get number of tabs in window $i'"
         local tabcount=$(eval $cmd)
-        echo $tabcount
+        #echo $tabcount
         for (( j=1; j<=$tabcount; j++)); do
             local cmd="osascript -e 'tell application \"Google Chrome\" to get URL of tab $j of window $i'"
             local url=$(eval $cmd)
-            echo $url
+            [ $j -eq $tabcount ] && json="$json\"$url\"" || json="$json\"$url\","
+            #echo $url
             #local cmd="osascript -e 'tell application \"Google Chrome\" to get title of tab $j of window $i'"
             #local title=$(eval $cmd)
         done
+       [ $i -eq $wincount ] && json="$json]" || json="$json],"
     done
+    json="$json]"
+    echo $json
 
-    # osascript -e 'tell application "Google Chrome" to get URL of tab 1 of window 1'
-    # osascript -e 'tell application "Google Chrome" to get title of tab 1 of window 1'
     #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
+}
 
+# TODO: WIP
+function chrome_json_restore() {
     #open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
     #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
     # open -na "Google Chrome" --args --new-window "https://georgegarside.com"
