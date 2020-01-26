@@ -124,7 +124,9 @@ function chrome_json_summary() {
     echo "$json]"
 }
 
-# TODO: mostly working, it's doing wierd things with extra sets of tabs/windows opening
+function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_$(date +'%m_%d_%y'); }
+
+# TODO: mostly working, it's doing wierd things with extra sets of tabs/windows opening, works when chrome already is open
 function chrome_json_restore() {
     local wincount=$(echo $1 | jq '. | length')
     for (( i=0; i<$wincount; i++)); do
@@ -141,8 +143,6 @@ function chrome_json_restore() {
     #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
     # open -na "Google Chrome" --args --new-window "https://georgegarside.com"
 }
-
-function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_$(date +'%m_%d_%y'); }
 
 function spotify_toggle_play() {
     osascript -e 'using terms from application "Spotify"
