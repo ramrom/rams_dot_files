@@ -88,12 +88,6 @@ function tmux_status() {
     #tmux set status-right "${tmux_spotify}   ${tmux_host_datetime}"
 }
 
-# https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
-function chrome_open() {
-    open -a "Google Chrome" $1
-    #e.g. `open -a "Google Chrome" https://www.reddit.com`
-}
-
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
     sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
@@ -124,7 +118,8 @@ function chrome_json_summary() {
     echo "$json]"
 }
 
-# TODO: mostly working, it's doing wierd things with extra sets of tabs/windows opening, works when chrome already is open
+#open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
+#open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
 function chrome_json_restore() {
     local wincount=$(echo $1 | jq '. | length')
     for (( i=0; i<$wincount; i++)); do
@@ -136,9 +131,6 @@ function chrome_json_restore() {
         done
         eval $cmd
     done
-    #open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
-    #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
-    # open -na "Google Chrome" --args --new-window "https://georgegarside.com"
 }
 
 function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
