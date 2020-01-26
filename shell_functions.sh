@@ -28,9 +28,7 @@ function display_notif() {
 
 #TODO: get method 2 working
 function detect_shell() {
-    # METHOD 1: use ps
-        # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
-    # METHOD 2:
+    # METHOD 1:
     if [ -n "$BASH_VERSION" ]; then
         echo "bash"
     elif [ -n "$ZSH_VERSION" ]; then
@@ -38,6 +36,8 @@ function detect_shell() {
     else
         echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)"
     fi
+    # METHOD 2: use ps
+        # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
 }
 
 # TODO: finish
@@ -134,6 +134,7 @@ function chrome_json_restore() {
 }
 
 function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
+
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
 function spotify_toggle_play() {
