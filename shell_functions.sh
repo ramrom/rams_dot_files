@@ -124,7 +124,7 @@ function chrome_json_summary() {
     echo "$json]"
 }
 
-function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_$(date +'%m_%d_%y'); }
+function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup; }
 
 # TODO: mostly working, it's doing wierd things with extra sets of tabs/windows opening, works when chrome already is open
 function chrome_json_restore() {
