@@ -124,14 +124,11 @@ function chrome_json_summary() {
     echo "$json]"
 }
 
-function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup; }
-
 # TODO: mostly working, it's doing wierd things with extra sets of tabs/windows opening, works when chrome already is open
 function chrome_json_restore() {
     local wincount=$(echo $1 | jq '. | length')
     for (( i=0; i<$wincount; i++)); do
         local tabcount=$(echo $1 | jq --arg WINNUM $i '.[($WINNUM | tonumber)] | length')
-        echo $tabcount
         local cmd="open -na \"Google Chrome\" --args --new-window"
         #cmd="$cmd $(echo $1 | jq -r --arg WINNUM $i '.[($WINNUM | tonumber)] | join(" ")')" # "&" chars cause bg job
         for (( j=0; j<$tabcount; j++)); do
@@ -143,6 +140,9 @@ function chrome_json_restore() {
     #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
     # open -na "Google Chrome" --args --new-window "https://georgegarside.com"
 }
+
+function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
+function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
 function spotify_toggle_play() {
     osascript -e 'using terms from application "Spotify"
