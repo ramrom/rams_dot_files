@@ -126,14 +126,23 @@ function chrome_tabs_summary() {
         done
        [ $i -eq $wincount ] && json="$json]" || json="$json],"
     done
-    json="$json]"
-    echo $json
+    echo "$json]"
 
     #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
 }
 
-# TODO: WIP
+# TODO: mostly working, it's doing wierd things with extra sets of tabs/windows opening
 function chrome_json_restore() {
+    local wincount=$(echo $1 | jq '. | length')
+    for (( i=0; i<$wincount; i++)); do
+        local tabcount=$(echo $1 | jq --arg WINNUM $i '.[($WINNUM | tonumber)] | length')
+        echo $tabcount
+        local cmd="open -na \"Google Chrome\" --args --new-window"
+        for (( j=0; j<$tabcount; j++)); do
+            cmd="$cmd $(echo $1 | jq --arg WINNUM $i --arg TABNUM $j '.[($WINNUM | tonumber)][($TABNUM | tonumber)]')"
+        done
+        eval $cmd
+    done
     #open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
     #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
     # open -na "Google Chrome" --args --new-window "https://georgegarside.com"
