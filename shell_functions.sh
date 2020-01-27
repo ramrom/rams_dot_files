@@ -63,7 +63,7 @@ function tmux_status() {
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
     local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
 
-    # TODO: how to i set the window status component with status-format[] ???
+    # TODO: how do i set the window status component with status-format[] ???
     if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
         tmux set status on
         echo "tmux at least ver 2.9"
