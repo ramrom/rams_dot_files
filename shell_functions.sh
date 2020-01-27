@@ -55,6 +55,17 @@ function tmux_winlist() {
     # need #[nolist] at the end here to let next items align
 }
 
+function tmux_test_data() {
+    # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
+    #local IFS=
+    #local s=$(sensors)
+    # local tmp=$(echo $s | grep -E "CPU Temperature")
+    # echo $s | grep -E "CPU Fan"
+    local t=$(uptime | awk '{print $10}')
+    local cpu="#[fg=brightyellow]cpuusage: $t"
+    echo $cpu
+}
+
 function tmux_status() {
     #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
     # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
@@ -83,6 +94,7 @@ function tmux_status() {
         echo "tmux ver >= 2.9, can use multi-line status"
         tmux set status on
         eval "$cmd set status-format[0] \"#[align=left]$left #[align=centre]$(tmux_winlist) #[align=right]$right\""
+        #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
     else
         echo "tmux ver < 2.9, using basic one line status format"
         tmux set status on
@@ -187,20 +199,18 @@ function winname { printf "\e]2;$1\a"; }
 # GIT
 f_getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
+# TODO: WIP
 function git_ctag_update() {
-    if [ -f tags ]; then
-        if [ -d .git ]; then
-            local commit=$(git rev-parse HEAD)
-            if [ -f ctag_git_ver ]; then
-                if [ "$(cat ctag_git_ver)" != "$commit" ]; then
-                    echo ${commit} > ctag_git_ver
-                    ctag_create
-                fi
-            else
+    [ ! -f tags ]  && ctag_create && return 0 || return 1
+    if [ -d .git ]; then
+        local commit=$(git rev-parse HEAD)
+        if [ -f ctag_git_ver ]; then
+            if [ "$(cat ctag_git_ver)" != "$commit" ]; then
                 echo ${commit} > ctag_git_ver
                 ctag_create
             fi
         else
+            echo ${commit} > ctag_git_ver
             ctag_create
         fi
     else
