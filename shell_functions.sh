@@ -56,11 +56,6 @@ function tmux_winlist() {
 }
 
 function tmux_test_data() {
-    # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
-    #local IFS=
-    #local s=$(sensors)
-    # local tmp=$(echo $s | grep -E "CPU Temperature")
-    # echo $s | grep -E "CPU Fan"
     local t=$(uptime | awk '{print $10}')
     local cpu="#[fg=brightyellow]cpuusage: $t"
     echo $cpu
