@@ -8,7 +8,7 @@ alias lal='ls -al'
 alias lahl='ls -alh'
 alias lrt='ls -lrt'
 alias grep='grep --colour=always'
-alias killalljobs='kill $(jobs -p)'
+alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
 alias fxg='find . -type f | xargs grep'
 alias rd='cd ~/rams_dot_files'

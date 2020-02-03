@@ -13,7 +13,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
 Plugin 'chrisbra/unicode.vim'   " unicode helper
 
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+if has('nvim')
+    Plugin 'neoclide/coc.nvim', { 'branch': 'release' }
+endif
 
 "Plugin 'dracula/vim'  dracula theme
 "https://github.com/morhetz/gruvbox
