@@ -31,6 +31,7 @@ colorscheme ir_black
 set foldmethod=syntax
 set nofoldenable
 
+set showcmd                 " show commands i'm process of typing in status bar
 set number					" line numbers
 set hlsearch  				" highlight search
 set ignorecase              " searches are case insensitive
