@@ -1,3 +1,4 @@
+# alias vi='nvim'
 alias svi='vim -u ~/.vimrc_simple'
 alias ssvi='vim -u NONE'
 alias vina='NO_AUTOREAD=1 vi'
@@ -18,7 +19,7 @@ alias ch_date='sudo date --set 1998-11-02'
 alias httpv='http -v'
 alias httpcn='httpv http://api.icndb.com/jokes/random'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
-alias list_functions='typeset -F'
+alias list_functions='typeset -F' #TODO: fix for zsh
 alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
@@ -43,18 +44,25 @@ if [ "$TERM" != "dumb" ]; then
         alias ls='ls --color=auto'
         alias rgrep='rgrep --color=auto'
         alias egrep='egrep --color=auto'
-        alias netstatip='sudo netstat -lpnut'
-        alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
-        alias psx='ps auxf'
-        alias psxfull='ps auxhfww'
     else  # assuming Darwin here
-        alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
-        alias psx='ps auxh'
         alias ls='ls -CFG'
-        alias gl="cd ~/Google\ Drive/Lists"
-        alias gr="cd ~/Google\ Drive/Rally"
     fi
+else
+    echo "TERMINAL IS DUMB!, not setting some color aliases"
 fi
+
+if [ `uname` = "Linux" ]; then
+    alias netstatip='sudo netstat -lpnut'
+    alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
+    alias psx='ps auxf'
+    alias psxfull='ps auxhfww'
+else  # assuming Darwin here
+    alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
+    alias psx='ps auxh'
+    alias gl="cd ~/Google\ Drive/Lists"
+    alias gr="cd ~/Google\ Drive/Rally"
+fi
+
 # Logs
 # alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
 # alias pumastatus='http -v localhost/status Host:puma-dev'
