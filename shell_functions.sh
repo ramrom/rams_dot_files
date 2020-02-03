@@ -56,8 +56,11 @@ function tmux_winlist() {
 }
 
 function tmux_test_data() {
-    local t=$(uptime | awk '{print $10}')
-    local cpu="#[fg=brightyellow]cpuusage: $t"
+    numcpu=$(sysctl -n hw.ncpu)
+    local usage=$(uptime | awk '{print $10}')
+    echo $usage
+    local au=$(($usage * 100 / $numcpu))
+    local cpu="#[fg=brightyellow]cpuusage: $au"
     echo $cpu
 }
 

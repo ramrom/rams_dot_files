@@ -1,4 +1,4 @@
-# alias vi='nvim'
+alias vin='nvim'
 alias svi='vim -u ~/.vimrc_simple'
 alias ssvi='vim -u NONE'
 alias vina='NO_AUTOREAD=1 vi'
