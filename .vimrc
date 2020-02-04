@@ -12,6 +12,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
 Plugin 'chrisbra/unicode.vim'   " unicode helper
+Plugin 'tpope/vim-commentary'   " smart code commenting
 
 "Plugin 'derekwyatt/vim-scala'   " scalametals reccomends
 if has('nvim')
@@ -97,11 +98,13 @@ noremap <leader>d :bp<CR>
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
 
+" ugly commenting hack, using tpope commenter
+" noremap <Leader>c :s/^/#/<CR>
+" noremap <Leader>u :s/^#//<CR>
+
 noremap <leader>e :Explore<CR>
 noremap <leader>w <C-w>w
 noremap <leader>g :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
-noremap <Leader>c :s/^/#/<CR>
-noremap <Leader>u :s/^#//<CR>
 norema <leader>n :NERDTreeToggle<CR>
 noremap <leader>x :set number!<CR>
 noremap <leader>p :vsplit<CR><leader>w
