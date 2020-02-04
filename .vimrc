@@ -16,6 +16,7 @@ Plugin 'chrisbra/unicode.vim'   " unicode helper
 "Plugin 'derekwyatt/vim-scala'   " scalametals reccomends
 if has('nvim')
     Plugin 'neoclide/coc.nvim', { 'branch': 'release' }
+    Plugin 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 endif
 
 "Plugin 'dracula/vim'  dracula theme
