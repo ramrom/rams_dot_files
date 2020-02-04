@@ -13,6 +13,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
 Plugin 'chrisbra/unicode.vim'   " unicode helper
 
+"Plugin 'derekwyatt/vim-scala'   " scalametals reccomends
 if has('nvim')
     Plugin 'neoclide/coc.nvim', { 'branch': 'release' }
 endif
@@ -120,6 +121,9 @@ endwhile
 "set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
 "set colorcolumn=81
 
+" for jsonc format, which supports commenting, this will highlight comments
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 "vim73 thinks *.md is modula2, markdown files also have this extension
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 " robot.vim syntax file obtained from https://github.com/seeamkhan/robotframework-vim
@@ -127,6 +131,10 @@ autocmd BufNewFile,BufRead *.robot set filetype=robot
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
+
+" let netrw file explorer use nerdtree-like expansion on dirs
+let g:netrw_liststyle = 3
+" let g:netrw_winsize = 25
 
 
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
