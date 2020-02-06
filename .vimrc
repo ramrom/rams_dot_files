@@ -23,7 +23,7 @@ if has('nvim')
     Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 endif
 
-" automatically runs filetype plugin indent on and syntax enable
+" plug#end automatically runs filetype plugin indent on and syntax enable
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
