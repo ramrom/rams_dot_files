@@ -22,11 +22,13 @@ alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exc
 alias list_functions='typeset -F' #TODO: fix for zsh
 alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
-alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
+
+# backup and mount
 alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
 alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checking changes
 alias rysncdryrun='rsync -rv --size-only --dry-run /my/source/ /my/dest/ > diff.out'
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
+alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
 alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=dude,password=werd'
 alias mntntfslinux='sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 /media/windows'
 alias mntosxsamba='mount_smbfs //admin@192.168.1.1/Backups mynfs'
@@ -64,8 +66,6 @@ else  # assuming Darwin here
 fi
 
 # Logs
-# alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
-# alias pumastatus='http -v localhost/status Host:puma-dev'
 
 # GIT
 alias gp='git pull'
@@ -82,17 +82,8 @@ alias gaddallcmt="git add . && pgit commit -m 'added stuff!'"
 if [ `uname` = "Linux" ]; then
   alias ack='ack-grep'
 fi
-#alias ackn='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=features --ignore-dir=spec --ignore-dir=exspec --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
-#alias acknt='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/'
 alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/ --ignore-file=match:/\.vim$/'
 alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/ --ignore-file=match:/\.vim$/'
-
-
-#remote connections
-alias rdpvision='rdesktop -u ramrom ramrom.hopto.org'
-alias sshvision='ssh ramrom@192.168.1.102'
-alias sshfsvortexB='sshfs RemoteUser@vortex:/cygdrive/b vortexB/ -oauto_cache,reconnect,defer_permissions'
-alias fusemounts='mount -t fuse4x'
 
 # Go
 alias gosr='cd ~/go/src'
@@ -108,30 +99,6 @@ alias bi="bundle install"
 alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/11.3/bin/psql'
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
 #alias psqlvim='PAGER=~/vimpager.sh psql'
-#alias psqlp='PAGER=$(psql_pager) psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
 alias getdbsizes='psql -c "SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;" -d postgres'
 alias postgrecon='sudo -u postgres psql'
-# alias pgstart="sudo /etc/init.d/postgresql start"
-# alias pgstop="sudo /etc/init.d/postgresql stop"
-# alias pgstopnow="sudo /etc/init.d/postgresql stop"
-# alias pgrestart="sudo /etc/init.d/postgresql restart"
-# if [ `uname` = "Darwin" ]; then
-#   alias pgstart="pg_ctlcluster 9.4 main start"
-#   alias pgstop="pg_ctlcluster 9.4 main stop"
-#   alias pgstopfast="pg_ctlcluster 9.4 main stop -m fast"
-#   alias pgrestart="pgstopfast && pgstart"
-#
-#   if [ `hostname` = "vex" ] || [ `hostname` = "vex.local" ] || [ `hostname` = "vex.enova.com" ]; then
-#     alias pgstart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile start"
-#     alias pgstop="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile stop"
-#     alias pgstopfast="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/logfile -m fast stop"
-#   fi
-# fi
-
-# Memcached, Redis
-# alias memcachestop='sudo /etc/init.d/memcached stop'
-# alias memcachestart='sudo /etc/init.d/memcached start'
-# alias memcacherestart='sudo /etc/init.d/memcached restart'
-
-# alias startredis='/usr/local/bin/redis-server'
