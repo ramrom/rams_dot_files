@@ -1,33 +1,33 @@
 "Sreeram's VI RC
 
-""""""""" VUNDLE PLUGIN MANAGEMENT"""""""""""""""""""""""""""""""""""
-set nocompatible                    " be iMproved, required
-filetype off                        " required
-set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and initialize
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'          " let Vundle manage Vundle, required
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
-Plugin 'chrisbra/unicode.vim'   " unicode helper
-Plugin 'tpope/vim-commentary'   " smart code commenting
-
-"Plugin 'derekwyatt/vim-scala'   " scalametals reccomends
-if has('nvim')
-    Plugin 'neoclide/coc.nvim', { 'branch': 'release' }
-    Plugin 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+""""""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
+" Install vim-plug if we don't already have it
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-"Plugin 'dracula/vim'  dracula theme
-"https://github.com/morhetz/gruvbox
+call plug#begin('~/.vim/plugged')
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+Plug 'chrisbra/unicode.vim'   " unicode helper
+Plug 'tpope/vim-commentary'   " smart code commenting
+
+if has('nvim')
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+    Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+endif
+
+" automatically runs filetype plugin indent on and syntax enable
+call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-syntax on					"syntax highlighting
+"syntax on					"syntax highlighting
 set t_Co=256
 colorscheme ir_black
 
