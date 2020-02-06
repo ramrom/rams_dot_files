@@ -3,5 +3,5 @@
 tags
 tmp/*
 
-.vim/bundle/*
-!.vim/bundle/Vundle.vim
+.vim/autoload/
+.vim/plugged/
