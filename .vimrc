@@ -85,6 +85,7 @@ let mapleader = ","				"set metakey for vim shortcuts
 inoremap jk  <Esc>
 "cnoremap jk  <Esc>
 
+"Tabs
 noremap <leader>t :tabnew<CR>
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
@@ -97,10 +98,6 @@ noremap <leader>d :bp<CR>
 "noremap <C-h> <C-w>h
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
-
-" ugly commenting hack, using tpope commenter
-" noremap <Leader>c :s/^/#/<CR>
-" noremap <Leader>u :s/^#//<CR>
 
 noremap <leader>e :Explore<CR>
 noremap <leader>w <C-w>w
