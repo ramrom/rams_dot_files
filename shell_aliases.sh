@@ -84,6 +84,8 @@ if [ `uname` = "Linux" ]; then
 fi
 alias acks='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-dir=test --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/ --ignore-file=match:/\.vim$/'
 alias ackst='ack --ignore-dir=docs --ignore-dir=coverage --ignore-dir=tmp --ignore-dir=target --ignore-file=match:/\.log$/ --ignore-file=match:/\.sql$/ --ignore-file=match:/tags/ --ignore-file=match:/\.xml$/ --ignore-file=match:/\.html$/ --ignore-file=match:/\.vim$/'
+alias ags='ag --ignore docs --ignore coverage --ignore tmp --ignore target --ignore test --ignore /\.log$/ --ignore /\.sql$/ --ignore /tags/ --ignore /\.xml$/ --ignore /\.html$/ --ignore /\.vim$/'
+alias agst='ag --ignore docs --ignore coverage --ignore tmp --ignore target --ignore /\.log$/ --ignore /\.sql$/ --ignore /tags/ --ignore /\.xml$/ --ignore /\.html$/ --ignore /\.vim$/'
 
 # Go
 alias gosr='cd ~/go/src'
