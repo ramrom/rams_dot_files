@@ -1,14 +1,15 @@
 # Rams Dot Files
 
-My dot files for POSIX environments and some scripts
+My dot files for Unix-like environments and some scripts
 
 ## Vim
-Included my `.vim/` dir.  
-Currently uses Vundle with plugins:
-- CtrlP
-- nerdtree
-- vim-airline
-- vim-tmux-focus-events (to help make autoreload better)
+- Vim Plug for plugin manager
+- neovim for better integration with coc and scala metals
 
-## Submodules
-Vundle
+### Plugins
+- coc (conqueror of completion)
+- CtrlP
+- NERDtree
+- vim-airline
+- vim-commentary
+- vim-tmux-focus-events (to help make autoreload better)
