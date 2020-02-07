@@ -10,6 +10,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+"TODO: find one of these that's better than ir_black
+Plug 'rafi/awesome-vim-colorschemes'
+
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
@@ -136,6 +139,19 @@ set wildignore+=*/target/*
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
+
+
+""""" The Silver Searcher """"""""""""""""""
+if executable('ag')
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
 
 
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
