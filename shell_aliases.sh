@@ -90,11 +90,6 @@ alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
-# Ruby
-alias be="bundle exec"
-alias ber="bundle exec rspec"
-alias bi="bundle install"
-
 #POSTGRES
 alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/11.3/bin/psql'
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'

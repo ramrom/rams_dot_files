@@ -52,6 +52,11 @@ if [ `uname` = "Darwin" ]; then
   fi
 fi
 
+# Ruby
+alias be="bundle exec"
+alias ber="bundle exec rspec"
+alias bi="bundle install"
+
 # Memcached, Redis
 alias memcachestop='sudo /etc/init.d/memcached stop'
 alias memcachestart='sudo /etc/init.d/memcached start'
