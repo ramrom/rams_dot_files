@@ -32,7 +32,6 @@ alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfo
 alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=dude,password=werd'
 alias mntntfslinux='sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 /media/windows'
 alias mntosxsamba='mount_smbfs //admin@192.168.1.1/Backups mynfs'
-alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 
 alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
 
@@ -63,6 +62,7 @@ else  # assuming Darwin here
     alias psx='ps auxh'
     alias gl="cd ~/Google\ Drive/Lists"
     alias gr="cd ~/Google\ Drive/Rally"
+    alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
 fi
 
 # GIT
