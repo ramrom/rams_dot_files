@@ -10,16 +10,18 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"TODO: find one of these that's better than ir_black
-Plug 'rafi/awesome-vim-colorschemes'
+if empty($VIM_SIMPLE)
+    "TODO: find one of these that's better than ir_black
+    Plug 'rafi/awesome-vim-colorschemes'
 
-Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
-Plug 'chrisbra/unicode.vim'   " unicode helper
-Plug 'tpope/vim-commentary'   " smart code commenting
+    Plug 'scrooloose/nerdtree'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+    Plug 'chrisbra/unicode.vim'   " unicode helper
+    Plug 'tpope/vim-commentary'   " smart code commenting
+endif
 
 if has('nvim')
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
