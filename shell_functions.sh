@@ -49,60 +49,6 @@ function sensor_data() {
     echo $s | grep -E "CPU Fan"
 }
 
-function tmux_winlist() {
-    #echo "#[align=left range=left #{status-left-style}]#{T;=/#{status-left-length}:status-left}#[norange default]#[list=on align=#{status-justify}]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index} #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-format}#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{window-status-current-style},default},#{window-status-current-style},#{window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist align=right range=right #{status-right-style}]#{T;=/#{status-right-length}:status-right}#[norange default]"
-    echo "#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index} #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-format}#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{window-status-current-style},default},#{window-status-current-style},#{window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist]"
-    # need #[nolist] at the end here to let next items align
-}
-
-function tmux_test_data() {
-    numcpu=$(sysctl -n hw.ncpu)
-    local usage=$(uptime | awk '{print $10}')
-    echo $usage
-    local au=$(($usage * 100 / $numcpu))
-    local cpu="#[fg=brightyellow]cpuusage: $au"
-    echo $cpu
-}
-
-function tmux_status() {
-    #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
-    # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-    ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
-    echo $ver
-
-    local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
-    local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
-    local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
-    local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
-
-    local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
-    local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
-
-    local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
-    local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
-    if [ -n "$simple" ]; then
-        left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
-        right="#[align=right]  ${tmux_host_datetime}"
-    fi
-
-    local cmd="tmux"
-    [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
-
-    if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
-        echo "tmux ver >= 2.9, can use multi-line status"
-        tmux set status on
-        eval "$cmd set status-format[0] \"#[align=left]$left #[align=centre]$(tmux_winlist) #[align=right]$right\""
-        #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
-    else
-        echo "tmux ver < 2.9, using basic one line status format"
-        tmux set status on
-        # tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
-        # tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
-        #eval "$cmd set status-left \"$left\""
-        #eval "$cmd set status-right \"$right\""
-    fi
-}
-
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
     sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
@@ -163,7 +109,61 @@ function spotify_toggle_play() {
 }
 
 
-# TMUX
+########## TMUX ##############################
+function tmux_winlist() {
+    #echo "#[align=left range=left #{status-left-style}]#{T;=/#{status-left-length}:status-left}#[norange default]#[list=on align=#{status-justify}]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index} #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-format}#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{window-status-current-style},default},#{window-status-current-style},#{window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist align=right range=right #{status-right-style}]#{T;=/#{status-right-length}:status-right}#[norange default]"
+    echo "#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index} #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-format}#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus #{?#{!=:#{window-status-current-style},default},#{window-status-current-style},#{window-status-style}}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}}, #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}}, #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}}, #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist]"
+    # need #[nolist] at the end here to let next items align
+}
+
+function tmux_test_data() {
+    numcpu=$(sysctl -n hw.ncpu)
+    local usage=$(uptime | awk '{print $10}')
+    echo $usage
+    local au=$(($usage * 100 / $numcpu))
+    local cpu="#[fg=brightyellow]cpuusage: $au"
+    echo $cpu
+}
+
+function tmux_status() {
+    #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+    # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+    ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
+    echo $ver
+
+    local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
+    local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
+    local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
+    local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
+
+    local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
+    local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
+
+    local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
+    local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
+    if [ -n "$simple" ]; then
+        left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
+        right="#[align=right]  ${tmux_host_datetime}"
+    fi
+
+    local cmd="tmux"
+    [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
+
+    if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
+        echo "tmux ver >= 2.9, can use multi-line status"
+        tmux set status on
+        eval "$cmd set status-format[0] \"#[align=left]$left #[align=centre]$(tmux_winlist) #[align=right]$right\""
+        #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
+    else
+        echo "tmux ver < 2.9, using basic one line status format"
+        tmux set status on
+        # tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
+        # tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
+        #eval "$cmd set status-left \"$left\""
+        #eval "$cmd set status-right \"$right\""
+    fi
+}
+
 function tmuxclrhist {
     tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
         | xargs -I PANE sh -c 'tmux send-keys -t PANE "clear" C-m; tmux clear-history -t PANE'
@@ -181,20 +181,7 @@ function tmux_pane_bg_jobs() {
         | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
-# doesnt work with sh(3.2)
-function filenamediff() {
-    diff <(cd $1; find . -type f) <(cd $2; find . -type f)
-}
-
-function f_findfilesbysize() {
-    sudo find "$1" -type f -size +"$2" | xargs du -sh
-}
-
-function tabname { printf "\e]1;$1\a"; }
-
-function winname { printf "\e]2;$1\a"; }
-
-# GIT
+######### GIT  ####################
 f_getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 # TODO: WIP
@@ -216,7 +203,7 @@ function git_ctag_update() {
     fi
 }
 
-# DB
+#####  DB  ############
 function terminate_db_connections() {
     psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres
 }
@@ -254,11 +241,34 @@ function parse_comma_delim_error() {
     ruby -e "$str"
 }
 
+# doesnt work with sh(3.2)
+function filenamediff() {
+    diff <(cd $1; find . -type f) <(cd $2; find . -type f)
+}
+
+function f_findfilesbysize() {
+    sudo find "$1" -type f -size +"$2" | xargs du -sh
+}
+
+function tabname { printf "\e]1;$1\a"; }
+
+function winname { printf "\e]2;$1\a"; }
+
 function fullpath() {
     ruby -e '
         $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
         ARGV.each { |path| puts File.expand_path path }         unless ARGV.empty?
     ' "$@"
+}
+
+function vim_plug_ver() {
+    pushd ~/.vim/plugged > /dev/null
+    for dir in */; do
+         pushd $dir > /dev/null
+         echo "${dir}: $(git rev-parse HEAD)"
+         popd > /dev/null
+     done
+     popd > /dev/null
 }
 
 function colorgrid() {

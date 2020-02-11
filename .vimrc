@@ -87,13 +87,17 @@ set clipboard=unnamed
 
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
+
+"way faster and easier way to hit escape
 inoremap jk  <Esc>
 "cnoremap jk  <Esc>
 
-"Tabs
+"Fast tab nav
 noremap <leader>t :tabnew<CR>
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
+
+"Fast buffer nav
 noremap <leader>f :bn<CR>
 noremap <leader>d :bp<CR>
 
