@@ -90,6 +90,7 @@ let mapleader = ","				"set metakey for vim shortcuts
 
 "way faster and easier way to hit escape
 inoremap jk  <Esc>
+vnoremap jk  <Esc>
 "cnoremap jk  <Esc>
 
 "Fast tab nav

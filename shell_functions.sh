@@ -34,7 +34,7 @@ function detect_shell() {
     elif [ -n "$ZSH_VERSION" ]; then
         echo "zsh"
     else
-        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)"
+        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && return 1
     fi
     # METHOD 2: use ps
         # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
@@ -49,6 +49,17 @@ function sensor_data() {
     echo $s | grep -E "CPU Fan"
 }
 
+function spotify_toggle_play() {
+    osascript -e 'using terms from application "Spotify"
+                      if player state of application "Spotify" is paused then
+                          tell application "Spotify" to play
+                      else
+                          tell application "Spotify" to pause
+                      end if
+                  end using terms from'
+}
+
+############## CHROME #############################################
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
     sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
@@ -97,17 +108,6 @@ function chrome_json_restore() {
 function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
 
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
-
-function spotify_toggle_play() {
-    osascript -e 'using terms from application "Spotify"
-                      if player state of application "Spotify" is paused then
-                          tell application "Spotify" to play
-                      else
-                          tell application "Spotify" to pause
-                      end if
-                  end using terms from'
-}
-
 
 ########## TMUX ##############################
 function tmux_winlist() {
