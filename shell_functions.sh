@@ -1,4 +1,4 @@
-#shell functions
+# shell functions
 function search_alias_func() {
     if [ $(detect_shell) = "zsh" ]; then
         # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
