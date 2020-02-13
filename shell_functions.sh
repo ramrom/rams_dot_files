@@ -18,6 +18,8 @@ function rrc() {
     fi
 }
 
+function vil() { vi -p $(cat $1); }
+
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
