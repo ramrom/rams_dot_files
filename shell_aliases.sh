@@ -71,6 +71,7 @@ alias gpsm='git pull --recurse-submodules'
 alias gsubp='git submodule foreach git pull origin master'
 alias gs='git status'
 alias gd='git diff'
+alias gdd='git -c core.pager="delta -dark"'
 alias gitconfigs='echo ""; git config --system --list; echo ""; git config --global --list; echo ""; git config --local --list'
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 alias gaddallcmt="git add . && pgit commit -m 'added stuff!'"
