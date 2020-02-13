@@ -111,12 +111,14 @@ noremap <leader>d :bp<CR>
 
 noremap <leader>e :Explore<CR>
 noremap <leader>w <C-w>w
-noremap <leader>g :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
+noremap <leader>W <C-w>W
+noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 norema <leader>n :NERDTreeToggle<CR>
 noremap <leader>x :set number!<CR>
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>s :mksession! ~/MyCurrentVimSession<CR>
+noremap <leader>gf :set foldmethod=indent<cr>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>

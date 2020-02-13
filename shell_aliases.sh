@@ -22,6 +22,7 @@ alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exc
 alias list_functions='typeset -F' #TODO: fix for zsh
 alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
+alias tmxhor='tmux select-layout even-horizontal'
 
 # backup and mount
 alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
