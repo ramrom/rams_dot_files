@@ -24,7 +24,7 @@ if empty($VIM_SIMPLE)
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
 endif
 
-if has('nvim')
+if has('nvim') && !empty($VIM_METALS)
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 endif
@@ -120,6 +120,7 @@ noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>s :mksession! ~/MyCurrentVimSession<CR>
 noremap <leader>gf :set foldmethod=indent<cr>
+noremap <leader>i :IndentLinesToggle<cr>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
