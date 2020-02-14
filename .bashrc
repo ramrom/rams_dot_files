@@ -45,7 +45,7 @@ if [ -f ~/.lessfilter ]; then
     export LESSOPEN='|~/.lessfilter %s'
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
+# export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
 # GO STUFF
 export GOPATH=~/go
