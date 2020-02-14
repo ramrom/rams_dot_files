@@ -21,6 +21,7 @@ if empty($VIM_SIMPLE)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'   " unicode helper
     Plug 'tpope/vim-commentary'   " smart code commenting
+    Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
 endif
 
 if has('nvim')
