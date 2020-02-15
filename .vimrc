@@ -22,6 +22,7 @@ if empty($VIM_SIMPLE)
     Plug 'chrisbra/unicode.vim'   " unicode helper
     Plug 'tpope/vim-commentary'   " smart code commenting
 
+    "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
     " Plug 'nathanaelkane/vim-indent-guides'  " visual guides, alternates odd/even line colors, indentLine doesnt
 endif
@@ -81,7 +82,7 @@ function RamAutoRead()
       \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 endfunction
 
-if empty($NO_AUTOREAD) | call RamAutoRead() | endif
+if empty($VIM_NO_AUTOREAD) | call RamAutoRead() | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
@@ -164,6 +165,7 @@ let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
+" autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
 
 
 """"" The Silver Searcher """"""""""""""""""
