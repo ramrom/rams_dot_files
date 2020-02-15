@@ -24,7 +24,7 @@ if empty($VIM_SIMPLE)
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
-    " Plug 'nathanaelkane/vim-indent-guides'  " visual guides, alternates odd/even line colors, indentLine doesnt
+    " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 endif
 
 if has('nvim') && !empty($VIM_METALS)
@@ -42,13 +42,12 @@ call plug#end()
 set t_Co=256
 colorscheme ir_black
 
-set foldmethod=syntax
+set foldmethod=indent
 set nofoldenable
 
 set showcmd                 " show commands i'm process of typing in status bar
 set number					" line numbers
 set hlsearch  				" highlight search
-set ignorecase              " searches are case insensitive
 set incsearch				" incremental search
 
 " Status Line
@@ -87,6 +86,15 @@ if empty($VIM_NO_AUTOREAD) | call RamAutoRead() | endif
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
 
+function ToggleFoldMethod()
+    "1 ? echo 'indent' : echo 'not indent'  "TODO: wtf vim, basic ternary errors
+    if &foldmethod == "indent"
+        set foldmethod=syntax
+    else
+        set foldmethod=indent
+    endif
+endfunction
+
 " TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
 set clipboard=unnamed
 
@@ -121,11 +129,12 @@ noremap <leader>W <C-w>W
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>x :set number!<CR>
+noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>s :mksession! ~/MyCurrentVimSession<CR>
-noremap <leader>gf :set foldmethod=indent<cr>
-" noremap <leader>i :IndentLinesToggle<cr>
+noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
+noremap <leader>gI :IndentLinesToggle<cr>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
