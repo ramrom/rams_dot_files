@@ -36,8 +36,6 @@ endif
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
 "syntax on					"syntax highlighting
 set t_Co=256
 colorscheme ir_black
@@ -94,10 +92,6 @@ function ToggleFoldMethod()
         set foldmethod=indent
     endif
 endfunction
-
-" TODO: this should copy into system clipbard, not working as of 5/5/19 on OSX
-set clipboard=unnamed
-
 
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
