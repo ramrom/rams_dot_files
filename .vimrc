@@ -21,7 +21,9 @@ if empty($VIM_SIMPLE)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'   " unicode helper
     Plug 'tpope/vim-commentary'   " smart code commenting
+
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+    " Plug 'nathanaelkane/vim-indent-guides'  " visual guides, alternates odd/even line colors, indentLine doesnt
 endif
 
 if has('nvim') && !empty($VIM_METALS)
@@ -32,6 +34,8 @@ endif
 " plug#end automatically runs filetype plugin indent on and syntax enable
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 
 "syntax on					"syntax highlighting
 set t_Co=256
@@ -114,13 +118,13 @@ noremap <leader>e :Explore<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
-norema <leader>n :NERDTreeToggle<CR>
+noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>x :set number!<CR>
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>s :mksession! ~/MyCurrentVimSession<CR>
 noremap <leader>gf :set foldmethod=indent<cr>
-noremap <leader>i :IndentLinesToggle<cr>
+" noremap <leader>i :IndentLinesToggle<cr>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -150,6 +154,16 @@ set wildignore+=*/target/*
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
+
+
+""""""""""""""" VIN-INDENT-GUIDES """""""""""""""""""""""""""""""""""""""""
+let g:indent_guides_guide_size = 1   " guide line is only one col wide
+let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
+
+" feb 2020: plugin uses black(000) for IndentGuidesOdd background=dark, ir_black uses 000 so... need custom
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
 
 
 """"" The Silver Searcher """"""""""""""""""
