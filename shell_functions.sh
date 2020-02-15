@@ -19,6 +19,7 @@ function rrc() {
 }
 
 function vil() { vi -p $(cat $1); }
+function viln() { vin -p $(cat $1); }
 
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
