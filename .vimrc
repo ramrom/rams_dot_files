@@ -118,17 +118,17 @@ noremap <leader>d :bp<CR>
 "noremap <C-k> <C-w>k
 
 noremap <leader>e :Explore<CR>
+noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
-noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
-noremap <leader>n :NERDTreeToggle<CR>
-noremap <leader>x :set number!<CR>
-noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
-noremap <leader>s :mksession! ~/MyCurrentVimSession<CR>
+noremap <leader>x :set number!<CR>
+noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
+noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
+noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
