@@ -40,24 +40,28 @@ call plug#end()
 set t_Co=256
 colorscheme ir_black
 
-set foldmethod=indent
-set nofoldenable
+set nobackup                                    " no backup files
+set nowritebackup                               " only in case you don't want a backup file while editing
+set noswapfile                                  " no swap files
+"set backupdir=~/.vim,~/.tmp/,~/tmp,/tmp
 
+set wildmenu                " display command line's tab complete options as menu
+set linebreak               " avoid wrapping line in middle of a word
 set showcmd                 " show commands i'm process of typing in status bar
 set number					" line numbers
+
 set hlsearch  				" highlight search
 set incsearch				" incremental search
+
+set foldmethod=indent
+set nofoldenable
 
 " Status Line
 set ls=2					" line status, two lines for status and command
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
-set nobackup                                    " no backup files
-set nowritebackup                               " only in case you don't want a backup file while editing
-set noswapfile                                  " no swap files
-"set backupdir=~/.vim,~/.tmp/,~/tmp,/tmp
-
+""" Indent Options
 set autoindent                                  " indent on new line for inner scopes in code
 set shiftwidth=4                                " use 4 spaces for autoindent (cindent)
 set tabstop=4                                   " space 4 columns when reading a <tab> char in file
@@ -167,6 +171,7 @@ noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
+noremap <leader>gs :set spell!<cr>
 noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " This next line will open a ctag in a new tab
