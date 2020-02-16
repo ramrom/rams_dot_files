@@ -36,7 +36,7 @@ endif
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"syntax on					"syntax highlighting
+"syntax on                  "syntax highlighting
 set t_Co=256
 colorscheme ir_black
 
@@ -63,6 +63,16 @@ set shiftwidth=4                                " use 4 spaces for autoindent (c
 set tabstop=4                                   " space 4 columns when reading a <tab> char in file
 set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
+
+" TODO: maybe find a good trailing char
+" set list
+" set listchars=tab:>-,trail:.              "display tab chars as '>-', trailing spaces as '.'
+
+" set cursorline                              " highlight line cursor is on
+" set cursorcolumn                            " highlight column cursor is on
+
+" let &colorcolumn=join(range(81,999),",")  "highlight columns >80
+highlight ColorColumn ctermbg=235
 
 """""""" Reloading buffers changed outside of vim session """""""""""""""""
 function RamAutoRead()
@@ -93,13 +103,40 @@ function ToggleFoldMethod()
     endif
 endfunction
 
+"cycle between line 80, 120, and no colorcolumn
+function CycleColorCol()
+    if &colorcolumn == 81
+        set colorcolumn=121
+    elseif &colorcolumn == 121
+        set colorcolumn=
+    else
+        set colorcolumn=81
+    endif
+endfunction
+
+function ToggleDisplayTrailSpaces()
+    " from https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
+    if !exists('#MyTrailSpaces#BufWinEnter')
+        highlight ExtraWhitespace ctermbg=red guibg=red
+        match ExtraWhitespace /\s\+$/
+        augroup MyTrailSpaces
+            autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+            autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+            autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+            autocmd BufWinLeave * call clearmatches()
+        augroup END
+    else
+        hi clear ExtraWhitespace
+        autocmd! MyTrailSpaces
+    endif
+endfunction
+
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
 
 "way faster and easier way to hit escape
 inoremap jk  <Esc>
-vnoremap jk  <Esc>
-"cnoremap jk  <Esc>
+" vnoremap jk  <Esc>            " unfortunately causes delay b/c jk is used to navigate
 
 "Fast tab nav
 noremap <leader>t :tabnew<CR>
@@ -126,7 +163,9 @@ noremap <leader>h :split<CR><leader>w
 noremap <leader>x :set number!<CR>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
+noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
+noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
@@ -139,10 +178,6 @@ while i<10
   exe 'map g'.i.' :tabn '.i.'<CR>'
   let i+=1
 endwhile
-
-"set list
-"set listchars=tab:>-,trail:.  			"when spacing/tabbing show temp chars
-"set colorcolumn=81
 
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -158,7 +193,6 @@ set wildignore+=*/target/*
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
-
 
 """"""""""""""" VIN-INDENT-GUIDES """""""""""""""""""""""""""""""""""""""""
 let g:indent_guides_guide_size = 1   " guide line is only one col wide
