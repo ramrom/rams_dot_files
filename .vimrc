@@ -51,6 +51,7 @@ set showcmd                 " show commands i'm process of typing in status bar
 set number					" line numbers
 
 set hlsearch  				" highlight search
+highlight Search cterm=underline ctermbg=238
 set incsearch				" incremental search
 
 set foldmethod=indent
@@ -172,6 +173,8 @@ noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gs :set spell!<cr>
+" turn off highlighting till next search
+noremap <leader>n :noh<cr>
 noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " This next line will open a ctag in a new tab
