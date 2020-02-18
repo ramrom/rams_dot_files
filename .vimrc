@@ -122,7 +122,7 @@ function ToggleDisplayTrailSpaces()
     " from https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
     if !exists('#MyTrailSpaces#BufWinEnter')
         highlight ExtraWhitespace ctermbg=red guibg=red
-        match ExtraWhitespace /\s\+$/
+        syntax match ExtraWhitespace /\s\+$/
         augroup MyTrailSpaces
             autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
             autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -201,7 +201,7 @@ set wildignore+=*/target/*
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
 
-""""""""""""""" VIN-INDENT-GUIDES """""""""""""""""""""""""""""""""""""""""
+""""""""""""""" VIM-INDENT-GUIDES """""""""""""""""""""""""""""""""""""""""
 let g:indent_guides_guide_size = 1   " guide line is only one col wide
 let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
 
