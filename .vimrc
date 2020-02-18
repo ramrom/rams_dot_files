@@ -14,13 +14,18 @@ if empty($VIM_SIMPLE)
     "TODO: find one of these that's better than ir_black
     Plug 'rafi/awesome-vim-colorschemes'
 
+    "TODO: try these out
+    " Plug 'tpop/vim-fugitive'        " git-vim synergy
+    " Plug 'vim-syntastic/syntastic'  " syntax
+
     Plug 'scrooloose/nerdtree'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
-    Plug 'chrisbra/unicode.vim'   " unicode helper
-    Plug 'tpope/vim-commentary'   " smart code commenting
+    Plug 'chrisbra/unicode.vim'     " unicode helper
+    Plug 'tpope/vim-commentary'     " smart code commenting
+
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
@@ -47,6 +52,7 @@ set noswapfile                                  " no swap files
 
 set wildmenu                " display command line's tab complete options as menu
 set linebreak               " avoid wrapping line in middle of a word
+" set tw=0                    " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
 set showcmd                 " show commands i'm process of typing in status bar
 set number					" line numbers
 
@@ -138,9 +144,8 @@ endfunction
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
 
-"way faster and easier way to hit escape
+"way faster and easier way to hit escape, rarely hit jk successively in insert mode
 inoremap jk  <Esc>
-" vnoremap jk  <Esc>            " unfortunately causes delay b/c jk is used to navigate
 
 "Fast tab nav
 noremap <leader>t :tabnew<CR>
@@ -173,8 +178,8 @@ noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gs :set spell!<cr>
 " turn off highlighting till next search
-noremap <leader>n :noh<cr>
-noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
+noremap <leader>s :noh<cr>
+" noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
