@@ -55,6 +55,6 @@ export GOBIN=${GOBIN}/bin
 [ -d ~/bin ] && PATH=~/bin:"${PATH}"
 
 # execute local settings
-[ -x ~/local_shell_settings ] && . ~/local_shell_settings
+[ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
 
 #export DISPLAY='localhost:10.0'

@@ -177,9 +177,10 @@ noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gs :set spell!<cr>
+" noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
+
 " turn off highlighting till next search
 noremap <leader>s :noh<cr>
-" noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
