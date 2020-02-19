@@ -47,4 +47,7 @@ export GOBIN=${GOBIN}/bin
 # set PATH so it includes user's private bin if it exists
 [ -d ~/bin ] && PATH=~/bin:"${PATH}"
 
+# execute local settings
+[ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
+
 #export DISPLAY='localhost:10.0'
