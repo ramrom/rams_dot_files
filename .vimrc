@@ -141,6 +141,8 @@ function ToggleDisplayTrailSpaces()
     endif
 endfunction
 
+call ToggleDisplayTrailSpaces()
+
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
 
