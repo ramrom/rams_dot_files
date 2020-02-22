@@ -188,11 +188,7 @@ noremap <leader>s :noh<cr>
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "Quickly switch between up to 9 vimtabs
-let i=0
-while i<10
-  exe 'map g'.i.' :tabn '.i.'<CR>'
-  let i+=1
-endwhile
+for i in range(0,9) | exe 'map g'.i.' :tabn '.i.'<CR>' | endfor
 
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
