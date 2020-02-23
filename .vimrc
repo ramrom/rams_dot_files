@@ -26,6 +26,9 @@ if empty($VIM_SIMPLE)
     Plug 'chrisbra/unicode.vim'     " unicode helper
     Plug 'tpope/vim-commentary'     " smart code commenting
 
+    "Plug 'costallat/robotframework-vim'
+    Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
+
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
@@ -195,8 +198,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "vim73 thinks *.md is modula2, markdown files also have this extension
 autocmd BufNewFile,BufRead *.md set filetype=markdown
-" robot.vim syntax file obtained from https://github.com/seeamkhan/robotframework-vim
-autocmd BufNewFile,BufRead *.robot set filetype=robot
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
