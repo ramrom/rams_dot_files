@@ -21,7 +21,10 @@ function rrc() {
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
-function gits() { GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*; }
+function gits() {
+    [ -z "$GIT_SSH_SCRIPT_LOC" ] && echo "GIT_SSH_SCRIPT_LOC NOT SET!" && return 1
+    GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*;
+}
 
 function display_notif() {
     if [ `uname` = "Darwin" ]; then

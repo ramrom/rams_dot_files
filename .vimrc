@@ -31,6 +31,7 @@ if empty($VIM_SIMPLE)
 
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
+    "TODO: indentLine displays `"` chars `|` or disspapear in json files...
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
     " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 endif
@@ -206,7 +207,7 @@ set wildignore+=*/target/*
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
 
-""""""""""""""" VIM-INDENT-GUIDES """""""""""""""""""""""""""""""""""""""""
+""""""""""""""" VIM-INDENT-GUIDES PLUGIN"""""""""""""""""""""""""""""""""""""""""
 let g:indent_guides_guide_size = 1   " guide line is only one col wide
 let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
 
