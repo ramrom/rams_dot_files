@@ -22,8 +22,8 @@ function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
 function gits() {
-    [ -z "$GIT_SSH_SCRIPT_LOC" ] && echo "GIT_SSH_SCRIPT_LOC NOT SET!" && return 1
-    GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*;
+    [ -z "$GIT_SSH_SCRIPT_LOC" ] && echo "$(tput setaf 1)GIT_SSH_SCRIPT_LOC NOT SET!$(tput sgr0)" && return 1
+    GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*
 }
 
 function display_notif() {

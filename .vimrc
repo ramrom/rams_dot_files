@@ -25,6 +25,7 @@ if empty($VIM_SIMPLE)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
     Plug 'tpope/vim-commentary'     " smart code commenting
+    Plug 'mhinz/vim-signify'        " use sign col to show revision ctrl changed lines
 
     "Plug 'costallat/robotframework-vim'
     Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
