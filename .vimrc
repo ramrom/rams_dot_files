@@ -183,7 +183,8 @@ noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
-noremap <leader>gs :set spell!<cr>
+noremap <leader>gu :set spell!<cr>
+noremap <leader>gs :SignifyToggle<cr>
 " noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " turn off highlighting till next search
@@ -203,6 +204,9 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
+
+" disable vim-signify by default
+let g:signify_disable_by_default = 1
 
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
