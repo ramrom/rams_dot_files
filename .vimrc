@@ -28,6 +28,7 @@ if empty($VIM_SIMPLE)
     Plug 'mhinz/vim-signify'        " use sign col to show revision ctrl changed lines
 
     "Plug 'costallat/robotframework-vim'
+    "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
 
 
@@ -205,8 +206,8 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
 
-" disable vim-signify by default
-let g:signify_disable_by_default = 1
+" globally disable vim-signify by default
+if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
