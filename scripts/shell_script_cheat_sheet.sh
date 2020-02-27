@@ -143,3 +143,16 @@ echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u 
 func filt() {
     echo '[{"id":"/foo/"},{"id":"bar"}]' | jq -r --arg ENVR "^/$1/" '.[] | select(.id | test($ENVR))'
 }
+
+### BREW
+brew deps --tree httpie  # show deps of httpie in tree output
+
+# show all formula that need this formula
+brew uses httpie
+brew uses --installed httpie # only formula installed that need this formula
+
+# all brew formulas not depended by other brew formulas
+brew leaves
+
+# for each brew leaf formula: show flat list of deps for that formula
+brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"

@@ -31,7 +31,6 @@ if empty($VIM_SIMPLE)
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
 
-
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     "TODO: indentLine displays `"` chars `|` or disspapear in json files...
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
