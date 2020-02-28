@@ -64,6 +64,8 @@ set number					" line numbers
 set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
 set incsearch				" incremental search
+set ignorecase              " case-insensitive searches
+set smartcase               " intelligent case-sensitive searching
 
 set foldmethod=indent
 set nofoldenable
