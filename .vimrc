@@ -50,6 +50,9 @@ call plug#end()
 set t_Co=256
 colorscheme ir_black
 
+" TODO: find better timeout length
+" set timeoutlen=500          " default is 1000ms
+
 set nobackup                                    " no backup files
 set nowritebackup                               " only in case you don't want a backup file while editing
 set noswapfile                                  " no swap files
@@ -65,7 +68,7 @@ set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
 set incsearch				" incremental search
 set ignorecase              " case-insensitive searches
-set smartcase               " intelligent case-sensitive searching
+set smartcase               " with ignorecase, all lowercase means caseinsensitive, any uppercase means case sensitive
 
 set foldmethod=indent
 set nofoldenable
@@ -81,7 +84,7 @@ set tabstop=4                                   " space 4 columns when reading a
 set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
-" TODO: maybe find a good trailing char
+" TODO: find a good char for tab and other non-\s whitespaces
 " set list
 " set listchars=tab:>-,trail:.              "display tab chars as '>-', trailing spaces as '.'
 
