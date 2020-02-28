@@ -165,10 +165,10 @@ function tmux_status() {
     else
         echo "tmux ver < 2.9, using basic one line status format"
         tmux set status on
-        # tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
-        # tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
-        #eval "$cmd set status-left \"$left\""
-        #eval "$cmd set status-right \"$right\""
+        tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
+        tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
+        eval "$cmd set status-left \"$left\""
+        eval "$cmd set status-right \"$right\""
     fi
 }
 
