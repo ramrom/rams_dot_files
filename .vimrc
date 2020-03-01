@@ -204,9 +204,6 @@ for i in range(0,9) | exe 'map g'.i.' :tabn '.i.'<CR>' | endfor
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-"vim73 thinks *.md is modula2, markdown files also have this extension
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
 
@@ -216,6 +213,11 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
+
+"vim73 thinks *.md is modula2, markdown files also have this extension
+if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
+    autocmd BufNewFile,BufRead *.md set filetype=markdown
+endif
 
 """"""""""""""" VIM-INDENT-GUIDES PLUGIN"""""""""""""""""""""""""""""""""""""""""
 let g:indent_guides_guide_size = 1   " guide line is only one col wide
