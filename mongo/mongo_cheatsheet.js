@@ -73,7 +73,9 @@ db.fooCollection.find().ugly()  // no query newlines and indenting
 //default max size is 20, can change this
 DBQuery.shellBatchSize = 100
 
-
+//deletion
+db.fooCollection.deleteMany({field1: "foo"}) //delete all that match
+db.fooCollection.deleteOne({field1: "foo"})  //delete only first record that matches
 
 // SH/ELIG queries
 db.ssoVendorConfig.find().select({_id:0,vendorId:1,ssoPartnerName:1,ssoType:1}).ugly()
