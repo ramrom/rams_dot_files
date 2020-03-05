@@ -14,6 +14,16 @@ und=`tput smul`
 remove_und=`tput rmul`
 reset=`tput sgr0`
 
+# ANSI supports italics, bold, underline, strikethrough
+# https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
+ansi()          { echo -e "\e[${1}m${*:2}\e[0m"; }
+bold()          { ansi 1 "$@"; }
+italic()        { ansi 3 "$@"; }
+underline()     { ansi 4 "$@"; }
+strikethrough() { ansi 9 "$@"; }
+red()           { ansi 31 "$@"; }
+
+
 echo "${yellow}${bold}BOLD AND YELLOW...${reset}"
 
 txtblk='\e[0;30m' # Black - Regular
@@ -49,16 +59,6 @@ bakpur='\e[45m'   # Purple
 bakcyn='\e[46m'   # Cyan
 bakwht='\e[47m'   # White
 txtrst='\e[0m'    # Text Reset
-
-
-# ANSI supports italics, bold, underline, strikethrough
-# https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
-ansi()          { echo -e "\e[${1}m${*:2}\e[0m"; }
-bold()          { ansi 1 "$@"; }
-italic()        { ansi 3 "$@"; }
-underline()     { ansi 4 "$@"; }
-strikethrough() { ansi 9 "$@"; }
-red()           { ansi 31 "$@"; }
 
 
 # ANSI sequence: 48;5 for background, 38;5 for foreground, then color number
