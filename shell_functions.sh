@@ -58,13 +58,14 @@ function sensor_data() {
 }
 
 function spotify_toggle_play() {
-    osascript -e 'using terms from application "Spotify"
-                      if player state of application "Spotify" is paused then
-                          tell application "Spotify" to play
-                      else
-                          tell application "Spotify" to pause
-                      end if
-                  end using terms from'
+    osascript -e \
+        'using terms from application "Spotify"
+            if player state of application "Spotify" is paused then
+                tell application "Spotify" to play
+            else
+                tell application "Spotify" to pause
+            end if
+        end using terms from'
 }
 
 ############## CHROME #############################################
