@@ -52,6 +52,7 @@ txtrst='\e[0m'    # Text Reset
 
 
 # ANSI supports italics, bold, underline, strikethrough
+# https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
 ansi()          { echo -e "\e[${1}m${*:2}\e[0m"; }
 bold()          { ansi 1 "$@"; }
 italic()        { ansi 3 "$@"; }
