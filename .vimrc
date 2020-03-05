@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 
 if empty($VIM_SIMPLE)
     "TODO: find one of these that's better than ir_black
+    " grubbox, dractula, molokai are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
 
     "TODO: try these out
@@ -25,11 +26,13 @@ if empty($VIM_SIMPLE)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
     Plug 'tpope/vim-commentary'     " smart code commenting
-    Plug 'mhinz/vim-signify'        " use sign col to show revision ctrl changed lines
 
-    "Plug 'costallat/robotframework-vim'
+    "sign col shows revision ctrl changed lines, internet say faster and better than gitgutter
+    Plug 'mhinz/vim-signify'
+
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
+    "Plug 'costallat/robotframework-vim'
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     "TODO: indentLine displays `"` chars `|` or disspapear in json files...
@@ -68,7 +71,7 @@ set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
 set incsearch				" incremental search
 set ignorecase              " case-insensitive searches
-set smartcase               " with ignorecase, all lowercase means caseinsensitive, any uppercase means case sensitive
+set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
 
 set foldmethod=indent
 set nofoldenable
