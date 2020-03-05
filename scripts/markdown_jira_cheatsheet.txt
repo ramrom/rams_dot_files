@@ -1,0 +1,56 @@
+MARKDOWN CHEATSHEET:
+- https://en.wikipedia.org/wiki/Markdown
+
+# header 1
+## header 2
+
+**bold**
+`monospace`
+_italic_
+~strikethrough~
+
+horizontal rule:
+---
+
+* bullet 1
+* bullet 2
+
+1. numbered 1
+1. numbered 2
+
+> blockquote
+> blockquote line 2
+
+[link name](https://someplace.com)
+
+![image name](someimage.png "icon")
+![image name](https://somewhere/someimage.png)
+
+
+JIRA:
+- https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
+
+h1. biggest heading
+h6. smallest heading
+
+*strong*  (bold)
+_emphasis_ (italic)
+-deleted-  (strikethrough)
++inserted+  (underlined)
+^superscript^
+~subscript~
+{{monospaced}}  (kind of different font)
+
+bq. some blocked quote
+
+---    solid line
+--     smaller solid line
+----   horizontal ruler
+
+* bullet
+** subbullet
+
+# number
+## subnumber
+# number 2
+#* bullet under number
