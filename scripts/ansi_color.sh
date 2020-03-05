@@ -50,6 +50,16 @@ bakcyn='\e[46m'   # Cyan
 bakwht='\e[47m'   # White
 txtrst='\e[0m'    # Text Reset
 
+
+# ANSI supports italics, bold, underline, strikethrough
+ansi()          { echo -e "\e[${1}m${*:2}\e[0m"; }
+bold()          { ansi 1 "$@"; }
+italic()        { ansi 3 "$@"; }
+underline()     { ansi 4 "$@"; }
+strikethrough() { ansi 9 "$@"; }
+red()           { ansi 31 "$@"; }
+
+
 # ANSI sequence: 48;5 for background, 38;5 for foreground, then color number
 # below gives me a light orange on tan
 echo -e "\033[48;5;95;38;5;214mhello world\033[0m"
