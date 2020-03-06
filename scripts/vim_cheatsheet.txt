@@ -1,0 +1,34 @@
+VIM:
+- :help i_^N, what does ctrl-n do in insert mode, :helpgrep pattern - find all help docs matchin g`pattern`
+- "+(op-motion) or "*(op-motion) will go to special */+ register, which is in system clipboard for pasting!
+- cmd-/ (highlight the cursor, this is a iterm thing, not vim technically)
+- autocomplete, c-x before c-n search only in current file, c-x c-f find file at current path, c-x c-] use tags
+- * to search next occurence of word under cursor, # will search backward
+- /\C force case-sensitive search, /\c opposite
+- :g/ after search will print line # and occurence of each match
+- gf - goto filename undercursor, <c-w>f gotofilename undercursor in new window, <c-w>gf in new tab
+- H M L, home middle last for cursor on viewport
+- zt zz zb, move viewport so cursor is top mid bottom
+- 100G or 100gg normal mode goes to line 100, like :100<CR> in command
+- "120gg3yy, yank lines 20-23 into reg 1, or without moving cursor into reg a: `:20,23y a<CR>`, paste reg a under line 7: `:7pu a<CR>`
+    -  yank from mark a to cursor: y'a
+- fold:
+    - zo (open), zO (open all nested)
+    - zc (close), zC (close all)
+    - za (toggle), zA (toggle all)
+    - zm fold one level, zM - close ALL folds
+    - zr expand one level, zR - open ALL folds
+- hold command mac key, hover over link in vim txt, it will become clickable
+- :bd 3, closes buffer # 3
+- :hi, spit out all highlighting rules, :syntax spits out current syntax rules
+    - use :redir > foofile, :sytnax, :hi, :redir end, to record to file
+- help in single window `:h sometopic | only`
+- CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
+- insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2");  utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
+- `:filter *pattern* let g:`
+    - also works with `let`, `set`, `map`, `hi` and `fun`, **NOT** `syn` or `autocmd` though...
+- command mode, `:verbose set fo?`, will show fo(formatoptions) value and verbose says to tell u what last set it
+- ga -> show char encoding
+- :tabc (tabclose, close tab with all windows in it), :tabonly - close all other tabs
+
+- vi -p foo bar, open file foo and bar in tabs
