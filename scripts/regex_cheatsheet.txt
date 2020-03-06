@@ -1,0 +1,5 @@
+Good references:
+- https://remram44.github.io/regex-cheatsheet/regex.html
+    - has POSIX ERE, BRE, Perl, vim, python
+
+
