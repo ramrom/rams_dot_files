@@ -32,3 +32,8 @@ VIM:
 - :tabc (tabclose, close tab with all windows in it), :tabonly - close all other tabs
 
 - vi -p foo bar, open file foo and bar in tabs
+- :vsp or :vs filename, open file in vertical split
+- :sp filename, horizontal split
+
+windows:
+- :1quit - quit win 1, :9quit quit win 9, :-quit :+quit quit prev/next win
