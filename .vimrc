@@ -1,9 +1,9 @@
 "Sreeram's VI RC
 
 """"""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
-" Install vim-plug if we don't already have it
 if empty(glob('~/.vim/autoload/plug.vim'))
     echo "WARNING! VIM-PLUG NOT INSTALLED, SKIPPING LOADING PLUGINS"
+    " Install vim-plug
     " silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     "     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -180,6 +180,9 @@ noremap <leader>d :bp<CR>
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
 
+noremap <leader>q :q<cr>
+noremap <leader>aa :map ,<cr>
+noremap <leader>ar :vsplit ~/rams_dot_files/scripts/regex_cheatsheet.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
