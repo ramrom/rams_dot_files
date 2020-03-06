@@ -69,6 +69,7 @@ set number					" line numbers
 
 set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
+" highlight Search cterm=italic ctermbg=238  "TODO: italics not showing...
 set incsearch				" incremental search
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
@@ -202,7 +203,7 @@ noremap <leader>s :noh<cr>
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "Quickly switch between up to 9 vimtabs
-for i in range(0,9) | exe 'map g'.i.' :tabn '.i.'<CR>' | endfor
+for i in range(0,9) | exe 'noremap g'.i.' :tabn '.i.'<CR>' | endfor
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*

@@ -51,7 +51,7 @@ echo foo:bar:baz | tr : \\n
 IFS=
 A=$(env)
 echo $A | grep "something"
-# OR
+# OR (double quoting the var)
 A=$(env)
 echo "$A" | grep "something"
 
