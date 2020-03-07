@@ -1,16 +1,18 @@
 # shell functions
 function search_alias_func() {
-    if [ $(detect_shell) = "zsh" ]; then
-        # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
-        local get_functions='print -l ${(ok)functions}'
-    else  # Assumes BASH
-        local get_functions='typeset -F'
-    fi
-    { alias; eval $get_functions; } | grep "$1"
-    # { alias; typeset -F; } | grep "$1"
+    { alias; $(list_funcs); } | grep "$1"
 }
 
-fucntion ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
+function list_funcs() {
+    if [ $(detect_shell) = "zsh" ]; then
+        # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
+        print -l ${(ok)functions}
+    else  # Assumes BASH
+        typeset -F
+    fi
+}
+
+function ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
 function italic() { ansi_fmt 3 "$@"; }
 
 function rrc() {
