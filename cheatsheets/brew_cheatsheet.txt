@@ -1,0 +1,16 @@
+### BREW
+brew deps --tree httpie  # show deps of httpie in tree output
+
+# show all formula that need this formula
+brew uses httpie
+brew uses --installed httpie # only formula installed that need this formula
+
+# all brew formulas not depended by other brew formulas
+brew leaves
+
+# for each brew leaf formula: show flat list of deps for that formula
+brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"
+
+# removing packages deps of a uninstalled FORMULA that isn't a dep on something else
+# from https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies)
+`brew rm $(join <(brew leaves) <(brew deps FORMULA))`
