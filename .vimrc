@@ -185,6 +185,7 @@ noremap <leader>aa :map ,<cr>
 noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
+noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
