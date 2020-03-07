@@ -100,42 +100,6 @@ set -x # spit out each expanded statement to terminal before it's executed
 # autoload <keyword>, makes keyword a function and not a script to be autoloaded
 ############
 
-# from https://superuser.com/questions/380772/removing-ansi-color-codes-from-text-stream, perl does not remove the tab/indent formatting
-echo "$(tput setaf 3)yellow" | perl -pe 's/\x1b\[[0-9;]*[mG]//g'
-
-# awk script to colorize
-tail -f $1 | awk \
-    -v reset=$(tput sgr0) -v yel=$(tput setaf 3) '
-    {f=0}
-    (/Join/ && f==0) {print yel $0 reset;f=1; fflush()}   # fflush force flush to stdout, important if this is piped into another cmd
-    /HTTPie/ {print "\033[31m" $0 "\033[0m", "dude"; f=1; fflush()}  # space b/w strings concats, comma adds a space
-    /io\.Abs[a-z]*C/ {print yel $0 reset;f=1; fflush()}
-    f==0 { print $0; fflush() }
-'
-
-# Perl script to colorize logs
-function perl_log_color() {
-    A=$(echo -e "\033[48;5;95;38;5;214m") # yay this worked, orange on tan, passing it in as a arg
-    B=$(tput setaf 4)
-    export TESTVAR=MYVAL
-    export PVAR=1
-    perl -nse '   # n for loop over each line, s for the cmd line var inputs, e for in-line compilation
-        use Term::ANSIColor;
-        print $Term::ANSIColor::VERSION . "\n";
-        $r = color("reset"); $bbbr = color("bright_blue on_bright_red"); $b = color("ansi15");
-        $ENV{"PVAR"} = $ENV{"PVAR"} + 1; print $ENV{"PVAR"} . "\n";
-        print "environment var TESTVAR= " . $ENV{TESTVAR} . " foo arg= " . $foo . " baz arg= " . $baz . $r . " uncolor";
-        s/(the )(foo)( the)/$1$bbbr$2$r$3/g;
-        if (m/werd/) { s/(\[)(d.de)(\])/$1$bbbr$2$r$3/g }
-        # if ($_ =~ m/the d.de/) { $_ =~ s/(d.d)/$bbbr$1$r/g } # equivalent to previous line
-        elsif ($_ =~ m/bash/) { print color("bold grey23 on_ansi1"), "BASH", color("reset") }
-        elsif ($_ =~ m/test/) { print colored("test", "blue"), "test", color("reset"), "\n" }
-        $_ = color("green") . "PREFIX: " . color("reset") . $_;           # string concatenation
-        print $_
-        ' -- -foo="$A" -baz=bam
-    #tail -f $1 | perl -pe 's/window/BLUBBER/g'
-}
-
 # quick jp (JMESPath CLI tool) query
 echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u strips double quotes
 
@@ -143,20 +107,3 @@ echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u 
 func filt() {
     echo '[{"id":"/foo/"},{"id":"bar"}]' | jq -r --arg ENVR "^/$1/" '.[] | select(.id | test($ENVR))'
 }
-
-### BREW
-brew deps --tree httpie  # show deps of httpie in tree output
-
-# show all formula that need this formula
-brew uses httpie
-brew uses --installed httpie # only formula installed that need this formula
-
-# all brew formulas not depended by other brew formulas
-brew leaves
-
-# for each brew leaf formula: show flat list of deps for that formula
-brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"
-
-# removing packages deps of a uninstalled FORMULA that isn't a dep on something else
-# from https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies)
-`brew rm $(join <(brew leaves) <(brew deps FORMULA))`
