@@ -1,5 +1,8 @@
 # SHELL SCRIPT CHEAT SHEET
 
+# send EOF to stdin, which bash/zsh/sh interpret as exit shell
+Ctrl-d
+
 # PP with python: json.tool will indent/format, no colorization tho
 cat /etc/hosts | python -m json.tool
 

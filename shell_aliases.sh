@@ -25,7 +25,7 @@ alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG files
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 alias tmxhor='tmux select-layout even-horizontal'
-alias tmc='clear && tmux clear-history'
+alias clt='clear && tmux clear-history'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager
 
 # backup and mount
