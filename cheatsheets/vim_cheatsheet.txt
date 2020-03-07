@@ -1,9 +1,9 @@
 VIM:
+- <,> are indenting in normal mode
 - :help i_^N, what does ctrl-n do in insert mode, :helpgrep pattern - find all help docs matchin g`pattern`
 - "+(op-motion) or "*(op-motion) will go to special */+ register, which is in system clipboard for pasting!
 - cmd-/ (highlight the cursor, this is a iterm thing, not vim technically)
 - autocomplete, c-x before c-n search only in current file, c-x c-f find file at current path, c-x c-] use tags
-- * to search next occurence of word under cursor, # will search backward
 - /\C force case-sensitive search, /\c opposite
 - :g/ after search will print line # and occurence of each match
 - gf - goto filename undercursor, <c-w>f gotofilename undercursor in new window, <c-w>gf in new tab
@@ -11,12 +11,6 @@ VIM:
 - 100G or 100gg normal mode goes to line 100, like :100<CR> in command
 - "120gg3yy, yank lines 20-23 into reg 1, or without moving cursor into reg a: `:20,23y a<CR>`, paste reg a under line 7: `:7pu a<CR>`
     -  yank from mark a to cursor: y'a
-- fold:
-    - zo (open), zO (open all nested)
-    - zc (close), zC (close all)
-    - za (toggle), zA (toggle all)
-    - zm fold one level, zM - close ALL folds
-    - zr expand one level, zR - open ALL folds
 - hold command mac key, hover over link in vim txt, it will become clickable
 - :bd 3, closes buffer # 3
 - :hi, spit out all highlighting rules, :syntax spits out current syntax rules
@@ -166,6 +160,13 @@ D - delete (cut) to the end of the line
 d$ - delete (cut) to the end of the line
 x - delete (cut) character
 
+Folds:
+zo (open), zO (open all nested)
+zc (close), zC (close all)
+za (toggle), zA (toggle all)
+zm fold one level, zM - close ALL folds
+zr expand one level, zR - open ALL folds
+
 Exiting:
 :w - write (save) the file, but don't exit
 :w !sudo tee % - write out the current file using sudo
@@ -182,6 +183,8 @@ n - repeat search in same direction
 N - repeat search in opposite direction
 :%s/old/new/g - replace all old with new throughout file
 :%s/old/new/gc - replace all old with new throughout file with confirmations
+* to search next occurence of word under cursor
+# will search backward
 :noh - remove highlighting of search matches
 
 Search in multiple files:
