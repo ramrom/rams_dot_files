@@ -182,7 +182,8 @@ noremap <leader>d :bp<CR>
 
 noremap <leader>q :q<cr>
 noremap <leader>aa :map ,<cr>
-noremap <leader>ar :vsplit ~/rams_dot_files/scripts/regex_cheatsheet.txt<cr>
+noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
+noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
