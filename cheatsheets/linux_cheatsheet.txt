@@ -1,0 +1,45 @@
+ubuntu/gnome:
+dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+xrandr  - check graphics stuff
+    - ssh session, i `export DISPLAY=:1` and xrandr finds displays
+    - xrandr --output DP-0 --mode 2560x1440
+    - off: `xrandr --output HDMI-0 --off`, on: `xrandr --output HDMI-0 --auto'
+     turn on and be left of other display: `xrandr --output HDMI-0 --auto --left-of DP-0`
+wmctrl - window manager control
+    - NEEDS DISPLAY VAR SET
+    - display window number/ID in hexadecimal, xdotool display in decimal
+    - wmctrl -l, will list all windows in window manager, wmctrl -d list desktops, wmctrl -m list name of window manager
+    - -G option tells geometry info, heightxwidth, and x,y position on desktop
+    - moving a "firefox" named window, `wmctrl -r Firefox -e '0,6,0,1040,708'`
+        - can target window by ID with -i `wmctrl -i -r 0x03000003 -t 2`
+    - `wmctrl -s 1`, set active desktop to 1
+    - `wmctrl -r Psensor -b toggle,fullscreen` , goto fullscreen
+    - `wmctrl -r :ACTIVE: -b toggle,shaded` - toggle shade on active window
+    - wmctrl -c , close window gracefull
+xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
+    - NEEDS DISPLAY VAR SET
+    xdotool search --onlyvisible --name firefox  # say firefox is window id 123
+    xdotool getwindowname 123   # should print `firefox`
+    xdotool windowsize 123 800 600
+    xdotool windowmove 123 0 1080
+nvidia-smi - show nvidia card mem usage, gpu temp, X processes
+dconf  - like gsettings?
+gsettings  - gnome settings tool
+notify-send - pops up notification
+`lsusb -D /dev/bus/usb/002/004`
+    - get detailed info about a specific usb device
+bluetoothctl - good cli bluetooth tool, see device list, paired, unpaired, connect/disconnect
+pacmd - pulseaudio cli tool, query sound devices
+    - pacmd list-sinks  # list audio out devices
+    - ALSA is sound manager for kernel, can only do one stream
+    - pulseaudio is userland program, can mix many
+Pavucontrol - pulseaudio cli tool, CHECK IT OUT
+    - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
+        - https://ubuntuforums.org/showthread.php?t=1810812
+ss  - good way to see socket usage
+pcsx2 -
+    - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
+retroarch -
+    - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
+    - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
+    - z=a button, x=b button, h=reset state, o=toggle record movie
