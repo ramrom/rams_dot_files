@@ -3,6 +3,12 @@
 # send EOF to stdin, which bash/zsh/sh interpret as exit shell
 Ctrl-d
 
+# print recent history in bash/zsh
+history
+
+# zsh run cmd with no globbing
+noglob http
+
 # PP with python: json.tool will indent/format, no colorization tho
 cat /etc/hosts | python -m json.tool
 
