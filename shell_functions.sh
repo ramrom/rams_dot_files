@@ -1,4 +1,18 @@
 # shell functions
+#TODO: get method 2 working
+function detect_shell() {
+    # METHOD 1:
+    if [ -n "$BASH_VERSION" ]; then
+        echo "bash"
+    elif [ -n "$ZSH_VERSION" ]; then
+        echo "zsh"
+    else
+        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && return 1
+    fi
+    # METHOD 2: use ps
+        # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
+}
+
 function search_alias_func() {
     { alias; $(list_funcs); } | grep "$1"
 }
@@ -37,20 +51,6 @@ function display_notif() {
     else  # really for ubuntu
         notify-send -i face-wink "a title" "hi!"
     fi
-}
-
-#TODO: get method 2 working
-function detect_shell() {
-    # METHOD 1:
-    if [ -n "$BASH_VERSION" ]; then
-        echo "bash"
-    elif [ -n "$ZSH_VERSION" ]; then
-        echo "zsh"
-    else
-        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && return 1
-    fi
-    # METHOD 2: use ps
-        # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
 }
 
 # TODO: finish
