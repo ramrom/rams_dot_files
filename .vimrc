@@ -2,11 +2,13 @@
 
 """"""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
 if empty(glob('~/.vim/autoload/plug.vim'))
-    echo "WARNING! VIM-PLUG NOT INSTALLED, SKIPPING LOADING PLUGINS"
+    echo "WARNING! VIM-PLUG NOT INSTALLED, SKIPPING LOADING PLUGINS, rerun with VIM_INSTALLPLUG set to install"
     " Install vim-plug
-    " silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    "     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    if !empty($VIM_INSTALLPLUG)
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
 else
     call plug#begin('~/.vim/plugged')
 
