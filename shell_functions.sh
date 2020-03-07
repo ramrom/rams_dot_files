@@ -10,6 +10,9 @@ function search_alias_func() {
     # { alias; typeset -F; } | grep "$1"
 }
 
+fucntion ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
+function italic() { ansi_fmt 3 "$@"; }
+
 function rrc() {
     if [ $(detect_shell) = "zsh" ]; then
         source ~/.zprofile && source ~/.zshrc
@@ -132,6 +135,15 @@ function tmux_test_data() {
     local au=$(($usage * 100 / $numcpu))
     local cpu="#[fg=brightyellow]cpuusage: $au"
     echo $cpu
+}
+
+# function ts() { tmux_status $*; }
+function ts_tmux_cheat() {
+    echo "cpy-mode: \`Space\`-start/reset copy, \`Enter\`-stop, \`C-]\'-paste"
+}
+
+function ts_regex_cheat() {
+    echo "\s whitesp, \S not whitesp, * 0more, + 1more, ? 0-1"
 }
 
 function tmux_status() {
