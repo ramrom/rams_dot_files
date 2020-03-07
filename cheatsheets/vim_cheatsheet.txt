@@ -2,7 +2,9 @@ VIM:
 <,> are indenting in normal mode
 :help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
-"+(op-motion) or "*(op-motion) - will go to special */+ register, which is in system clipboard for pasting!
+"+y - */+ reg, goes to sys clipboard!
+"*y - mostly same as + reg
+"+p - paste from sys clipboard
 cmd-/  - highlight the cursor, iterm thing, not vim
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
@@ -98,6 +100,8 @@ o - append (open) a new line below the current line
 O - append (open) a new line above the current line
 ea - insert (append) at the end of the word
 Esc - exit insert mode
+C-T - indent current line by shiftwidth
+C-D - un-indent current line by shiftwidth
 
 Editing:
 r - replace a single character
@@ -142,6 +146,11 @@ Registers:
 "xp - paste contents of register x
 Tip Registers are being stored in ~/.viminfo, and will be loaded again on next restart of vim.
 Tip Register 0 contains always the value of the last yank command.
+"+y - yank to + register, can be used by sys clipboard
+"*y - yank to * register, can be used by sys clipboard
+"*p - paste from sys clipboard
+- https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+
 Marks
 :marks - list of marks
 ma - set current position for mark A
