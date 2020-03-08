@@ -47,6 +47,8 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 - :vsp or :vs filename, open file in vertical split
 - :sp filename, horizontal split
 
+:mkview foo  - vimscript that saves view(tab) state
+:source foo  - load a view
 
 
 Vim Cheat Sheet:
