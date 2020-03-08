@@ -64,18 +64,27 @@ set nowritebackup                               " only in case you don't want a 
 set noswapfile                                  " no swap files
 "set backupdir=~/.vim,~/.tmp/,~/tmp,/tmp
 
-set wildmenu                " display command line's tab complete options as menu
-set linebreak               " avoid wrapping line in middle of a word
-" set tw=0                    " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
-set showcmd                 " show commands i'm process of typing in status bar
-set number					" line numbers
+set wildmenu                    " display command line's tab complete options as menu
+set wrap                        " wrap lines longer than width to next line
+set linebreak                   " avoid wrapping line in middle of a word
+set scrolloff=1                 " always show at least one line above or below the cursor
+" set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
+set showcmd                     " show commands i'm process of typing in status bar
+set number					    " line numbers
+set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
+set display+=lastline           " display lastline even if its super long
+" set formatoptions+=j            " Delete comment character when joining commented lines
+
 
 set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
 " highlight Search cterm=italic ctermbg=238  "TODO: italics not showing...
-set incsearch				" incremental search
+set incsearch				" searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
+
+"TODO: fix, i - included files, kspell dictionary
+" set complete-=i | set complete+=kspell
 
 set foldmethod=indent
 set nofoldenable
@@ -163,7 +172,7 @@ call ToggleDisplayTrailSpaces()
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
 
-" TODO: semicolon does nothing in normal, make it goto command mode
+" TODO: semicolon repeats last f/F motions, maybe make it goto command mode
 " nmap ; :
 
 "way faster and easier way to hit escape, rarely hit jk successively in insert mode
