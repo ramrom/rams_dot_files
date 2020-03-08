@@ -163,6 +163,9 @@ call ToggleDisplayTrailSpaces()
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
 
+" TODO: semicolon does nothing in normal, make it goto command mode
+" nmap ; :
+
 "way faster and easier way to hit escape, rarely hit jk successively in insert mode
 inoremap jk  <Esc>
 
