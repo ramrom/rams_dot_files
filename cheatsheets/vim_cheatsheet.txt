@@ -1,11 +1,8 @@
 VIM:
 <,> are indenting in normal mode
-:help i_^N, what does ctrl-n do in insert mode
-:helpgrep pattern - find all help docs matchin g`pattern`
 "+y - */+ reg, goes to sys clipboard!
 "*y - mostly same as + reg
 "+p - paste from sys clipboard
-cmd-/  - highlight the cursor, iterm thing, not vim
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
@@ -14,31 +11,41 @@ gf   - goto filename undercursor
 <c-w>f - goto filename undercursor in new window
 <c-w>gf - in new tab
 100G or 100gg - goes to line 100 like :100<CR> in command
-- "120gg3yy, yank lines 20-23 into reg 1
-without moving cursor into reg a: `:20,23y a<CR>`, paste reg a under line 7: `:7pu a<CR>`
+"120gg3yy -  yank lines 20-23 into reg 1
+:20,23y a<CR> - without moving cursor into reg a
+:7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
-hold command mac key, hover over link, clickable
 bd 3, closes buffer # 3
+
 hi  - spit out all highlighting rules
 :syntax - spits out current syntax rules
-    - use :redir > foofile, :sytnax, :hi, :redir end, to record to file
-help in single window `:h sometopic | only`
+    - use :redir > foofile, :sytnax, :hi, :redir end
+    - to record to file
 - `:filter *pattern* let g:`
-    - also works with `let`, `set`, `map`, `hi` and `fun`, **NOT** `syn` or `autocmd` though...
-:verbose set fo? - will show fo(formatoptions), verbose to tell u what last set it
+    - works on `let`, `set`, `map`, `hi` and `fun`
+    - **NOT** `syn` or `autocmd` though...
+:verbose set fo?
+    - will show fo(formatoptions)
+    - verbose to tell u what last set it
+
 :tabc - tabclose, close tab with all windows in it
 :tabonly - close all other tabs
+:1quit - quit win 1
+:9quit quit win 9
+:-quit :+quit   - quit prev/next win
+
+:help i_^N, what does ctrl-n do in insert mode
+:helpgrep pattern - find all help docs matchin g`pattern`
+:h sometopic | only   - help in single window
 
 - ga -> show char encoding
-- insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2");  utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
+- insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
+- utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
 CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
+
 - vi -p foo bar, open file foo and bar in tabs
 - :vsp or :vs filename, open file in vertical split
 - :sp filename, horizontal split
-
-windows:
-- :1quit - quit win 1, :9quit quit win 9, :-quit :+quit quit prev/next win
-
 
 
 
