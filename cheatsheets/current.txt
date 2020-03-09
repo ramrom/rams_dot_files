@@ -1,1 +1,3 @@
 https://devhints.io/  (great reference for all types for developers)
+
+- TIP: once a buffer autoreloads, you can still undo

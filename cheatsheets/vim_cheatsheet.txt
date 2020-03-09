@@ -50,6 +50,7 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 :mkview foo  - vimscript that saves view(tab) state
 :source foo  - load a view
 
+- TIP: once a buffer autoreloads, you can still undo
 
 Vim Cheat Sheet:
 ------------------------------------

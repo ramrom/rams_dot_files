@@ -1,5 +1,11 @@
 # SHELL SCRIPT CHEAT SHEET
 
+# Bash (and AFAIK zsh)
+set -e # exit script/shell if any command returns with non-zero
+set -x # Print commands and args as they are executed.
+set +x # remove x, bash is backwards
+echo $- #query all set options on in shell
+
 # send EOF to stdin, which bash/zsh/sh interpret as exit shell
 Ctrl-d
 
