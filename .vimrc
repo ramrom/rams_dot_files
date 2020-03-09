@@ -3,7 +3,7 @@
 """"""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
 if empty(glob('~/.vim/autoload/plug.vim'))
     echo "WARNING! VIM-PLUG NOT INSTALLED, SKIPPING LOADING PLUGINS, rerun with VIM_INSTALLPLUG set to install"
-    " Install vim-plug
+    " Install vim-plug if env var is set
     if !empty($VIM_INSTALLPLUG)
         silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -68,11 +68,11 @@ set wildmenu                    " display command line's tab complete options as
 set wrap                        " wrap lines longer than width to next line
 set linebreak                   " avoid wrapping line in middle of a word
 set scrolloff=1                 " always show at least one line above or below the cursor
-" set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
 set showcmd                     " show commands i'm process of typing in status bar
 set number					    " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
+" set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
 " set formatoptions+=j            " Delete comment character when joining commented lines
 
 
