@@ -110,8 +110,12 @@ o - append (open) a new line below the current line
 O - append (open) a new line above the current line
 ea - insert (append) at the end of the word
 Esc - exit insert mode
+C-[ - exist insert mode
+C-C - exist insert mode, dont trigger autocommands
 C-T - indent current line by shiftwidth
 C-D - un-indent current line by shiftwidth
+C-W - delete word before cursor
+C-U - delete all chars on current line
 
 Editing:
 r - replace a single character
