@@ -1,3 +1,16 @@
 https://devhints.io/  (great reference for all types for developers)
 
-- TIP: once a buffer autoreloads, you can still undo
+TIP: once a buffer autoreloads, you can still undo
+
+EMACS
+c-x c-c to quit
+
+GIT:
+git show-ref --tags     - tags with it's commit
+git show-ref --tags -d  - above + what commit tag points to
+git remote prune remote - remove outdated references in remote
+git branch -m OLD_B NEW_B  - rename branch
+
+git branch --set-upstream-to=origin/oidc710-cachecontrol-jwks oidc710-cachecontrol-jwks
+git push -u remote local_branch  - push/track branch
+git push -u remote      - push/track current branch
