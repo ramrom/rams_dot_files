@@ -118,14 +118,6 @@ C-D - un-indent current line by shiftwidth
 C-W - delete word before cursor
 C-U - delete all chars on current line
 
-Text Objects:
-{,},(,),[,] - block surrounded by these literals
-b           - block defined by ()
-B           - block defined by {}
-p           - paragraph
-s           - sentence
-w           - word
-
 Editing:
 r - replace a single character
 J - join line below to the current one with one space in between
@@ -150,12 +142,27 @@ V - start linewise visual mode
 o - move to other end of marked area
 Ctrl + v - start visual block mode
 O - move to other corner of block
-aw - mark a word
-ab - a block with ()
-aB - a block with {}
-ib - inner block with ()
-iB - inner block with {}
 Esc - exit visual mode
+
+Text objects:
+<number><operator/command><number><text object>
+i = inner, a = all
+aw - word with surrounding whitespace
+iw - word without surrounding whitespace
+as - sentence
+ip - inner paragraph
+ab - a block with ()
+ab - block within and including ()
+aB - block within and including {}
+ib - block within and not including ()
+iB - block within and not including {}
+<operator><a/i><"/'/(/)/{/}/[/]>  programming language text objects
+
+motion+objects:
+v3ta - visual select up to the 3rd occurence of a
+d2fn - delete up to 2nd occurence of n
+c2aw - delete 2 full words and insert
+c2w - delete from cursor current word, then next word, then insert
 
 Visual commands:
 > - shift text right

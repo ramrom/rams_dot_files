@@ -5,6 +5,10 @@ TIP: once a buffer autoreloads, you can still undo
 EMACS
 c-x c-c to quit
 
+VIM:
+o - toggle move within visual
+O - toggle left right of visual block mode
+
 
 TMUX:
 - in copymode
@@ -23,3 +27,6 @@ git branch -m OLD_B NEW_B  - rename branch
 git branch --set-upstream-to=origin/oidc710-cachecontrol-jwks oidc710-cachecontrol-jwks
 git push -u remote local_branch  - push/track branch
 git push -u remote      - push/track current branch
+
+git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
+git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
