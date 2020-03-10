@@ -5,6 +5,15 @@ TIP: once a buffer autoreloads, you can still undo
 EMACS
 c-x c-c to quit
 
+
+TMUX:
+- in copymode
+    - space to start selection (or reset it), enter to end/copy it
+    - esc cancels selection, still in copy mode
+- ctrl-] to paste clipboard
+- tmux new session is 80x25: https://www.reddit.com/r/tmux/comments/7i9dd2/tmux_resizepane_sizes_are_wrong_after_updating_to/
+
+
 GIT:
 git show-ref --tags     - tags with it's commit
 git show-ref --tags -d  - above + what commit tag points to
