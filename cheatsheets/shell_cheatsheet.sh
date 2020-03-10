@@ -15,6 +15,9 @@ history
 # zsh run cmd with no globbing
 noglob http
 
+# kill background job 1
+kill %1
+
 # PP with python: json.tool will indent/format, no colorization tho
 cat /etc/hosts | python -m json.tool
 
