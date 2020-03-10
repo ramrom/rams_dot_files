@@ -50,6 +50,7 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 :mkview foo  - vimscript that saves view(tab) state
 :source foo  - load a view
 
+- NEAT: visual select, then :sort to sort alphabetically
 - TIP: once a buffer autoreloads, you can still undo
 
 Vim Cheat Sheet:
@@ -117,6 +118,14 @@ C-D - un-indent current line by shiftwidth
 C-W - delete word before cursor
 C-U - delete all chars on current line
 
+Text Objects:
+{,},(,),[,] - block surrounded by these literals
+b           - block defined by ()
+B           - block defined by {}
+p           - paragraph
+s           - sentence
+w           - word
+
 Editing:
 r - replace a single character
 J - join line below to the current one with one space in between
@@ -126,6 +135,7 @@ cc - change (replace) entire line
 C - change (replace) to the end of the line
 c$ - change (replace) to the end of the line
 ciw - change (replace) entire word
+vab - visual select all block
 cw - change (replace) to the end of the word
 s - delete character and substitute text
 S - delete line and substitute text (same as cc)
@@ -158,7 +168,8 @@ Registers:
 :reg - show registers content
 "xy - yank into register x
 "xp - paste contents of register x
-Tip Registers are being stored in ~/.viminfo, and will be loaded again on next restart of vim.
+Tip Registers are being stored in ~/.viminfo, and will be loaded again
+    on next restart of vim.
 Tip Register 0 contains always the value of the last yank command.
 "+y - yank to + register, can be used by sys clipboard
 "*y - yank to * register, can be used by sys clipboard
@@ -186,7 +197,8 @@ p - put (paste) the clipboard after cursor
 P - put (paste) before cursor
 dd - delete (cut) a line
 2dd - delete (cut) 2 lines
-dw - delete (cut) the characters of the word from the cursor position to the start of the next word
+dw - delete (cut) the characters of the word from the cursor position
+     to the start of the next word
 D - delete (cut) to the end of the line
 d$ - delete (cut) to the end of the line
 x - delete (cut) character
