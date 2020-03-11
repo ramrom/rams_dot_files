@@ -62,9 +62,9 @@ function sensor_data() {
     echo $s | grep -E "CPU Fan"
 }
 
-function osx_set_volume() { sudo osascript -e "set Volume $1" }   # 0 mute, 10 max
-function osx_mute() { sudo osascript -e "set Volume 0" }
-function osx_get_volume() { sudo osascript -e 'get volume settings' }
+function osx_set_volume() { sudo osascript -e "set Volume $1"; }   # 0 mute, 10 max
+function osx_mute() { sudo osascript -e "set Volume 0"; }
+function osx_get_volume() { sudo osascript -e 'get volume settings'; }
 
 function osx_spotify_toggle_play() {
     osascript -e \
