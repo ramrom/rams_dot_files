@@ -15,28 +15,13 @@ gf   - goto filename undercursor
 :20,23y a<CR> - without moving cursor into reg a
 :7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
-bd 3, closes buffer # 3
 
-hi  - spit out all highlighting rules
-:syntax - spits out current syntax rules
-    - use :redir > foofile, :sytnax, :hi, :redir end
-    - to record to file
-- `:filter *pattern* let g:`
-    - works on `let`, `set`, `map`, `hi` and `fun`
-    - **NOT** `syn` or `autocmd` though...
-:verbose set fo?
-    - will show fo(formatoptions)
-    - verbose to tell u what last set it
 
 :tabc - tabclose, close tab with all windows in it
 :tabonly - close all other tabs
 :1quit - quit win 1
 :9quit quit win 9
 :-quit :+quit   - quit prev/next win
-
-:help i_^N, what does ctrl-n do in insert mode
-:helpgrep pattern - find all help docs matchin g`pattern`
-:h sometopic | only   - help in single window
 
 - ga -> show char encoding
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
@@ -53,9 +38,28 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 - NEAT: visual select, then :sort to sort alphabetically
 - TIP: once a buffer autoreloads, you can still undo
 
+
 Vim Cheat Sheet:
 ------------------------------------
-Global
+Help:
+:help i_^N, what does ctrl-n do in insert mode
+:helpgrep pattern - find all help docs matchin g`pattern`
+:h sometopic | only   - help in single window
+
+Command mode:
+bd 3, closes buffer # 3
+hi  - spit out all highlighting rules
+:syntax - spits out current syntax rules
+    - use :redir > foofile, :sytnax, :hi, :redir end
+    - to record to file
+- `:filter *pattern* let g:`
+    - works on `let`, `set`, `map`, `hi` and `fun`
+    - **NOT** `syn` or `autocmd` though...
+:verbose set fo?
+    - will show fo(formatoptions)
+    - verbose to tell u what last set it
+
+Global:
 :help keyword - open help for keyword
 :saveas file - save file as
 :close - close current pane
