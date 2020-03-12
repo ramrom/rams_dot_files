@@ -16,9 +16,9 @@ function detect_shell() {
 function search_alias_func() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
-        { alias; ; print -l ${(ok)functions} } | grep "$1"
+        { alias; print -l ${(ok)functions}; } | grep "$1"
     else
-        { alias; ; typeset -F } | grep "$1"
+        { alias; typeset -F; } | grep "$1"
     fi
 }
 
