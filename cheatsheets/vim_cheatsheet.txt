@@ -8,6 +8,9 @@ c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
 :g/  - print line # and occurence of each search match
 gf   - goto filename undercursor
+gd   - goto variable/fucntion declaration
+g;   - jump back to last edit point
+g,   - jump back to newer edit point
 <c-w>f - goto filename undercursor in new window
 <c-w>gf - in new tab
 100G or 100gg - goes to line 100 like :100<CR> in command
