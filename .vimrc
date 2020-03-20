@@ -172,6 +172,7 @@ call ToggleDisplayTrailSpaces()
 
 "Mappings
 let mapleader = ","				"set metakey for vim shortcuts
+" let mapleader = " "				"set metakey for vim shortcuts
 
 " TODO: semicolon repeats last f/F motions, maybe make it goto command mode
 " nmap ; :
@@ -197,6 +198,7 @@ noremap <leader>d :bp<CR>
 
 noremap <leader>q :q<cr>
 noremap <leader>aa :map ,<cr>
+" noremap <leader>aa :map <Space><cr>
 noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
@@ -208,6 +210,7 @@ noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
+noremap <leader>y "+y
 noremap <leader>x :set number!<CR>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
