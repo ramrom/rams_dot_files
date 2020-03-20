@@ -45,11 +45,6 @@ function rrc() {
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
-function gits() {
-    [ -z "$GIT_SSH_SCRIPT_LOC" ] && echo "$(tput setaf 1)GIT_SSH_SCRIPT_LOC NOT SET!$(tput sgr0)" && return 1
-    GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*
-}
-
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
@@ -214,6 +209,18 @@ function tmux_pane_bg_jobs() {
 }
 
 ######### GIT  ####################
+function gitclean() {
+    local masterb=master
+    [ -n "$1" ]  && masterb=$1
+    git branch –-merged $masterb | grep -v $masterb | cut -d/ -f2- | xargs -n 1 git push –delete origin
+    git branch –-merged $masterb | grep -v $masterb | xargs -n 1 git branch -d
+}
+
+function gits() {
+    [ -z "$GIT_SSH_SCRIPT_LOC" ] && echo "$(tput setaf 1)GIT_SSH_SCRIPT_LOC NOT SET!$(tput sgr0)" && return 1
+    GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*
+}
+
 f_getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 # TODO: WIP

@@ -42,6 +42,7 @@ else
         " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
     endif
 
+    "neovim offers best coc/metals experience
     if has('nvim') && !empty($VIM_METALS)
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
@@ -200,6 +201,7 @@ noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
 noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
+noremap <leader>ad :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
