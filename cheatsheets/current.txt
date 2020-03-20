@@ -8,25 +8,27 @@ c-x c-c to quit
 VIM:
 o - toggle move within visual
 O - toggle left right of visual block mode
+nerdtree r - refresh
 
 
 TMUX:
 - in copymode
-    - space to start selection (or reset it), enter to end/copy it
+    - space starts selection(or reset it), enter to end/copy it
     - esc cancels selection, still in copy mode
 - ctrl-] to paste clipboard
-- tmux new session is 80x25: https://www.reddit.com/r/tmux/comments/7i9dd2/tmux_resizepane_sizes_are_wrong_after_updating_to/
+- tmux new session is 80x25:
+    - https://www.reddit.com/r/tmux/comments/7i9dd2/tmux_resizepane_sizes_are_wrong_after_updating_to/
 
 
 GIT:
 git show-ref --tags     - tags with it's commit
 git show-ref --tags -d  - above + what commit tag points to
-git remote prune remote - remove outdated references in remote
+git remote prune foo    - remove outdated references in remote
 git branch -m OLD_B NEW_B  - rename branch
 
 git branch --set-upstream-to=origin/oidc710-cachecontrol-jwks oidc710-cachecontrol-jwks
-git push -u remote local_branch  - push/track branch
-git push -u remote      - push/track current branch
+git push -u remote local_branch - push/track branch
+git push -u remote              - push/track current branch
 
 git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch

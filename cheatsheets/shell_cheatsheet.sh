@@ -113,6 +113,12 @@ set -e # shell script will abort running subsequent statements if a statement ex
 
 set -x # spit out each expanded statement to terminal before it's executed
 
+# sudo -S option reads password from stdin
+echo somepassword | sudo -S ls
+
+# ssh can take arg that is a complex command and run it remote and spit output locally
+ssh foouser@192.168.1.1 'echo "hi" && cat somefile | grep dude'
+
 # ZSH
 # compinit defines compdef
 # autoload <keyword>, makes keyword a function and not a script to be autoloaded
