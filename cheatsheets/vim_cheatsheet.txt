@@ -74,13 +74,6 @@ hi  - spit out all highlighting rules
 
 
 Insert mode - inserting/appending text:
-i - insert before the cursor
-I - insert at the beginning of the line
-a - insert (append) after the cursor
-A - insert (append) at the end of the line
-o - append (open) a new line below the current line
-O - append (open) a new line above the current line
-ea - insert (append) at the end of the word
 Esc - exit insert mode
 C-[ - exit insert mode
 C-C - exist insert mode, dont trigger autocommands
@@ -93,18 +86,47 @@ C-H - delete last character
 C-W - delete word before cursor
 C-U - delete all chars on current line up to cursor
 C-O - execute command return to insert mode
+C-N - next match in autocomplete
+C-P - last match in autocomplete
+C-X - subcommand mode used with autocomplete stuff
+C-G k - move cursor up one
+C-G j - move cursor down one
 C-R<i> - insert from reg i
+C-L - when insertmode on, go to normal mode
+C-Y - insert char above the cursor
+C-E - insert char below the cursor
+C-Q - same as C-V, but some terms kill its usage, ctrl flow
+C-S - (docs) like C-V, deals with control flow
+C-V - insert next non-digit literally, e.g. unicode deq
+C-A - insert previously inserted text
+C-F - when ! precedes key, reindent?
+C-Z - should suspend vim
+C-B - used to toggle revins, now disabled
 
 
-Normal Mode Misc:
+Normal Mode:
+i - insert before the cursor
+I - insert at the beginning of the line
+a - insert (append) after the cursor
+A - insert (append) at the end of the line
+o - append (open) a new line below the current line
+O - append (open) a new line above the current line
+ea - insert (append) at the end of the word
 K - open man page for word under the cursor
 C-K - enter digraph
 C-L - clear and redraw screen
+C-A - add [count] to # of alpha char at or after cursor
+C-G - print file, line location, file status
+C-S - ???
+C-Q - terminals, stty start signal
 
 Cursor movement:
 h - move cursor left
+C-h - move cursor left
 j - move cursor down
 C-j - move cursor down
+C-n - move cursor down
+C-m - move cursor down and to first non-blank char
 k - move cursor up
 l - move cursor right
 H - move to top of screen
@@ -146,6 +168,8 @@ Ctrl + b - move back one full screen
 Ctrl + f - move forward one full screen
 Ctrl + d - move forward 1/2 a screen
 Ctrl + u - move back 1/2 a screen
+Ctrl + i - go to newer cursor position in jump list
+Ctrl + o - go to older cursor position in jump list
 Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
