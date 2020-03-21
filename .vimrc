@@ -196,14 +196,12 @@ noremap <leader>d :bp<CR>
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
 
-"TODO: not sure i want to keep this
 inoremap <C-l>  <C-o>:w<cr>
 " inoremap <C-k>  <C-o>:w<cr>
 
-" TODO: not sure, c-m/c-j/c-n/c-g/c-s/c-q/c-h
-" all seem like better alternatives
+" TODO: not sure, c-m/c-j/c-n/c-g/c-s/c-q/c-h all seem like better alternatives
 " C-l in normal defaults to clear and redraw screen
-noremap <C-l>   :w<cr>
+" noremap <C-l>   :w<cr>
 
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 
