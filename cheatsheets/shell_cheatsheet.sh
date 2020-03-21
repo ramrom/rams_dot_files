@@ -6,6 +6,18 @@ set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
 
+# command line navigation
+ctrl-a - goto beg of line
+ctrl-e - goto end of line
+ctrl-b - go back one space
+ctrl-f - go forward one space
+ctrl w - delete back one word
+ctrl-h - delete last char, VIM insert mode and command too!
+ctrl-j / ctrl-m - begin new line, VIM insert mode too!
+ctrl-p - go back one command in the history
+ctrl-n - go forward one command in the history
+ctrl-r - fuzzy search command history
+
 # send EOF to stdin, which bash/zsh/sh interpret as exit shell
 Ctrl-d
 
