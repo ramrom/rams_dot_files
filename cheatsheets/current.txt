@@ -2,10 +2,15 @@ https://devhints.io/  (great reference for all types for developers)
 
 TIP: once a buffer autoreloads, you can still undo
 
-EMACS
-c-x c-c to quit
+SHELL:
+ctrl-h - delete last char, VIM insert mode and command too!
+ctrl-j / ctrl-m - begin new line, VIM insert mode too!
 
 VIM:
+ctrl-f - command mode, edit as if in normal mode
+ctrl-w - insert mode and command mode, delete last word
+ctrl-u - insert mode and command mode, delete from beg line to cursor
+ctrl-r<i> - insert mode, insert from reg i
 o - toggle move within visual
 O - toggle left right of visual block mode
 nerdtree r - refresh
@@ -32,3 +37,6 @@ git push -u remote              - push/track current branch
 
 git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
+
+EMACS
+c-x c-c to quit

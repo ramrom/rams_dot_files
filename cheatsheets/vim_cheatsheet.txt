@@ -50,6 +50,12 @@ Help:
 :h sometopic | only   - help in single window
 
 Command mode:
+C-h - delete last char
+C-w - delete last word
+C-b - goto beg of line
+C-e - goto end of line
+C-f - edit commands as if in normal, then can yank old command history
+      in insert of cur line, write command and hit enter
 bd 3, closes buffer # 3
 hi  - spit out all highlighting rules
 :syntax - spits out current syntax rules
@@ -82,7 +88,8 @@ e - jump forwards to the end of a word
 E - jump forwards to the end of a word (words can contain punctuation)
 b - jump backwards to the start of a word
 B - jump backwards to the start of a word (words can contain punctuation)
-% - move to matching character (default supported pairs: '()', '{}', '[]' - use <code>:h matchpairs</code> in vim for more info)
+% - move to matching character (default supported pairs: '()', '{}', '[]'
+    - use <code>:h matchpairs</code> in vim for more info)
 0 - jump to the start of the line
 ^ - jump to the first non-blank character of the line
 $ - jump to the end of the line
@@ -107,7 +114,8 @@ Ctrl + b - move back one full screen
 Ctrl + f - move forward one full screen
 Ctrl + d - move forward 1/2 a screen
 Ctrl + u - move back 1/2 a screen
-Tip Prefix a cursor movement command with a number to repeat it. For example, 4j moves down 4 lines.
+Tip Prefix a cursor movement command with a number to repeat it.
+    For example, 4j moves down 4 lines.
 
 Insert mode - inserting/appending text:
 i - insert before the cursor
@@ -121,9 +129,14 @@ Esc - exit insert mode
 C-[ - exist insert mode
 C-C - exist insert mode, dont trigger autocommands
 C-T - indent current line by shiftwidth
+C-I - indent current line by shiftwidth
 C-D - un-indent current line by shiftwidth
+C-J - begin new line
+C-M - begin new line
+C-H - delete last character
 C-W - delete word before cursor
-C-U - delete all chars on current line
+C-U - delete all chars on current line up to cursor
+C-R<i> - insert from reg i
 
 Editing:
 r - replace a single character
@@ -205,7 +218,8 @@ q - stop recording macro
 Cut and paste:
 yy - yank (copy) a line
 2yy - yank (copy) 2 lines
-yw - yank (copy) the characters of the word from the cursor position to the start of the next word
+yw - yank (copy) the characters of the word from the cursor position
+    to the start of the next word
 y$ - yank (copy) to end of line
 p - put (paste) the clipboard after cursor
 P - put (paste) before cursor
@@ -235,7 +249,8 @@ Exiting:
 Search and replace:
 /pattern - search for pattern
 ?pattern - search backward for pattern
-\vpattern - 'very magic' pattern: non-alphanumeric characters are interpreted as special regex symbols (no escaping needed)
+\vpattern - 'very magic' pattern: non-alphanumeric characters
+    are interpreted as special regex symbols (no escaping needed)
 n - repeat search in same direction
 N - repeat search in opposite direction
 :%s/old/new/g - replace all old with new throughout file

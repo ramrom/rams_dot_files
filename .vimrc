@@ -171,8 +171,7 @@ endfunction
 call ToggleDisplayTrailSpaces()
 
 "Mappings
-let mapleader = ","				"set metakey for vim shortcuts
-" let mapleader = " "				"set metakey for vim shortcuts
+let mapleader = " "				"set metakey for vim shortcuts
 
 " TODO: semicolon repeats last f/F motions, maybe make it goto command mode
 " nmap ; :
@@ -182,7 +181,6 @@ inoremap jk  <Esc>
 
 "Fast tab nav
 noremap <leader>t :tabnew<CR>
-noremap <Space>t :tabnew<CR>
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
 
@@ -198,16 +196,13 @@ noremap <leader>d :bp<CR>
 "noremap <C-k> <C-w>k
 
 noremap <leader>q :q<cr>
-noremap <Space>q :q<cr>
-noremap <leader>aa :map ,<cr>
-" noremap <leader>aa :map <Space><cr>
+noremap <leader>aa :map <Space><cr>
 noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
 noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>ad :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>e :Explore<CR>
-noremap <Space>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
