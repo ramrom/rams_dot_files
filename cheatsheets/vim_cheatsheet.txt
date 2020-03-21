@@ -3,6 +3,7 @@ VIM:
 "+y - */+ reg, goes to sys clipboard!
 "*y - mostly same as + reg
 "+p - paste from sys clipboard
+"*p - paste from sys clipboard (tmux yank goes in this reg)
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
@@ -48,6 +49,8 @@ Help:
 :help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
 :h sometopic | only   - help in single window
+:h normal-index  - normal default mappings
+:h insert-index  - insert default mappings
 
 Command mode:
 C-h - delete last char
@@ -65,6 +68,7 @@ hi  - spit out all highlighting rules
 - `:filter *pattern* let g:`
     - works on `let`, `set`, `map`, `hi` and `fun`
     - **NOT** `syn` or `autocmd` though...
+:verbose nmap <C-j>  - plugin/custom mapping normal C-j
 :verbose set fo?
     - will show fo(formatoptions)
     - verbose to tell u what last set it
@@ -93,6 +97,7 @@ C-G k - move cursor up one
 C-G j - move cursor down one
 C-R<i> - insert from reg i
 C-L - when insertmode on, go to normal mode
+C-K - enter char with digraph, e.g. ñ or ë
 C-Y - insert char above the cursor
 C-E - insert char below the cursor
 C-Q - same as C-V, but some terms kill its usage, ctrl flow

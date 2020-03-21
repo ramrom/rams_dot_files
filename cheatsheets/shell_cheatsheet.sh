@@ -30,9 +30,6 @@ noglob http
 # kill background job 1
 kill %1
 
-# PP with python: json.tool will indent/format, no colorization tho
-cat /etc/hosts | python -m json.tool
-
 # redirect stderr to out
 cat 2>&1 blah
 
@@ -118,12 +115,32 @@ echo $FOOBAR # will print somestring
 
 bash "==" is lexical comparison vs "=" is numerical comparison
 
+# number comparison
+gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne = not equal
+[ 3 -gt 1 ] && echo hi   # will print hi
+[ -3 -lt 0 ] && echo hi   # will print hi
+
+# string comparison
+[ "a" = "dude" ] && echo hi   # wont print hi
+[ "z" != "x" ] && echo hi   # will print hi
+[ "foo" = foo ] && echo hi   # will print hi
+[ $FOO \> "dude" ] && echo hi  # if FOO's value is > "dude" print hi
+[ -n $FOO ] && echo hi  # if FOO as length > 0, will print hi
+[ -z $FOO ] && echo hi  # if FOO as length = 0, will print hi
+
+# other conditionals
+[ -f ~/foo ] && print hi  # if regular file ~/foo exists print hi
+-d  # check if dir exists
+-e  # check if "file" exists, works for dirs and reg files
+-w  # is file writable
+-x  # is file executable
+-r  # is file readable
+[ ~/foo -nt ~/bar ] && echo hi  # if foo is newer than bar, print hi
+
+
+# special variables
 echo $$ # print PID of current shell process
 echo $? # print exit code of last command
-
-set -e # shell script will abort running subsequent statements if a statement exits with non-zero code
-
-set -x # spit out each expanded statement to terminal before it's executed
 
 # sudo -S option reads password from stdin
 echo somepassword | sudo -S ls
@@ -135,6 +152,9 @@ ssh foouser@192.168.1.1 'echo "hi" && cat somefile | grep dude'
 # compinit defines compdef
 # autoload <keyword>, makes keyword a function and not a script to be autoloaded
 ############
+
+# PP with python: json.tool will indent/format, no colorization tho
+cat /etc/hosts | python -m json.tool
 
 # quick jp (JMESPath CLI tool) query
 echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u strips double quotes
