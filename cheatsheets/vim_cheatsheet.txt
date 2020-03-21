@@ -54,7 +54,8 @@ C-h - delete last char
 C-w - delete last word
 C-b - goto beg of line
 C-e - goto end of line
-C-f - edit commands as if in normal, then can yank old command history
+C-f - edit commands as if in normal,
+      then can yank old command history
       in insert of cur line, write command and hit enter
 bd 3, closes buffer # 3
 hi  - spit out all highlighting rules
@@ -67,28 +68,59 @@ hi  - spit out all highlighting rules
 :verbose set fo?
     - will show fo(formatoptions)
     - verbose to tell u what last set it
-
-Global:
 :help keyword - open help for keyword
 :saveas file - save file as
 :close - close current pane
+
+
+Insert mode - inserting/appending text:
+i - insert before the cursor
+I - insert at the beginning of the line
+a - insert (append) after the cursor
+A - insert (append) at the end of the line
+o - append (open) a new line below the current line
+O - append (open) a new line above the current line
+ea - insert (append) at the end of the word
+Esc - exit insert mode
+C-[ - exit insert mode
+C-C - exist insert mode, dont trigger autocommands
+C-T - indent current line by shiftwidth
+C-I - indent current line by shiftwidth
+C-D - un-indent current line by shiftwidth
+C-J - begin new line
+C-M - begin new line
+C-H - delete last character
+C-W - delete word before cursor
+C-U - delete all chars on current line up to cursor
+C-O - execute command return to insert mode
+C-R<i> - insert from reg i
+
+
+Normal Mode Misc:
 K - open man page for word under the cursor
+C-K - enter digraph
+C-L - clear and redraw screen
 
 Cursor movement:
 h - move cursor left
 j - move cursor down
+C-j - move cursor down
 k - move cursor up
 l - move cursor right
 H - move to top of screen
 M - move to middle of screen
 L - move to bottom of screen
 w - jump forwards to the start of a word
-W - jump forwards to the start of a word (words can contain punctuation)
+W - jump forwards to the start of a word
+    (words can contain punctuation)
 e - jump forwards to the end of a word
-E - jump forwards to the end of a word (words can contain punctuation)
+E - jump forwards to the end of a word
+    (words can contain punctuation)
 b - jump backwards to the start of a word
-B - jump backwards to the start of a word (words can contain punctuation)
-% - move to matching character (default supported pairs: '()', '{}', '[]'
+B - jump backwards to the start of a word
+    (words can contain punctuation)
+% - move to matching character
+    (default supported pairs: '()', '{}', '[]'
     - use <code>:h matchpairs</code> in vim for more info)
 0 - jump to the start of the line
 ^ - jump to the first non-blank character of the line
@@ -116,27 +148,6 @@ Ctrl + d - move forward 1/2 a screen
 Ctrl + u - move back 1/2 a screen
 Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
-
-Insert mode - inserting/appending text:
-i - insert before the cursor
-I - insert at the beginning of the line
-a - insert (append) after the cursor
-A - insert (append) at the end of the line
-o - append (open) a new line below the current line
-O - append (open) a new line above the current line
-ea - insert (append) at the end of the word
-Esc - exit insert mode
-C-[ - exist insert mode
-C-C - exist insert mode, dont trigger autocommands
-C-T - indent current line by shiftwidth
-C-I - indent current line by shiftwidth
-C-D - un-indent current line by shiftwidth
-C-J - begin new line
-C-M - begin new line
-C-H - delete last character
-C-W - delete word before cursor
-C-U - delete all chars on current line up to cursor
-C-R<i> - insert from reg i
 
 Editing:
 r - replace a single character
