@@ -58,7 +58,7 @@ set t_Co=256
 colorscheme ir_black
 
 " TODO: find better timeout length
-" set timeoutlen=500          " default is 1000ms
+" set timeoutlen=1000          " default is 1000ms
 
 set nobackup                                    " no backup files
 set nowritebackup                               " only in case you don't want a backup file while editing
@@ -178,6 +178,7 @@ let mapleader = " "				"set metakey for vim shortcuts
 
 "way faster and easier way to hit escape, rarely hit jk successively in insert mode
 inoremap jk  <Esc>
+inoremap jj  <Esc>
 
 "Fast tab nav
 noremap <leader>t :tabnew<CR>
@@ -194,6 +195,15 @@ noremap <leader>d :bp<CR>
 "noremap <C-h> <C-w>h
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
+
+"TODO: not sure i want to keep this
+inoremap <C-l>  <C-o>:w<cr>
+" inoremap <C-k>  <C-o>:w<cr>
+
+" TODO: not sure, c-m/c-j/c-n/c-g/c-s/c-q/c-h
+" all seem like better alternatives
+" C-l in normal defaults to clear and redraw screen
+noremap <C-l>   :w<cr>
 
 noremap <leader>q :q<cr>
 noremap <leader>aa :map <Space><cr>
