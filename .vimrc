@@ -205,8 +205,10 @@ inoremap <C-l>  <C-o>:w<cr>
 " C-l in normal defaults to clear and redraw screen
 noremap <C-l>   :w<cr>
 
+exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
+
 noremap <leader>q :q<cr>
-noremap <leader>aa :map <Space><cr>
+noremap <leader>aa :call MyLeaderMap()<cr>
 noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
