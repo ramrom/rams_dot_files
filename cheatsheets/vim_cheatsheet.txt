@@ -113,9 +113,11 @@ o - append (open) a new line below the current line
 O - append (open) a new line above the current line
 ea - insert (append) at the end of the word
 K - open man page for word under the cursor
+C-Z - suspend process
 C-K - enter digraph
 C-L - clear and redraw screen
 C-A - add [count] to # of alpha char at or after cursor
+C-X - sub [count] to # of alpha char at or after cursor
 C-G - print file, line location, file status
 C-S - ???
 C-Q - terminals, stty start signal
