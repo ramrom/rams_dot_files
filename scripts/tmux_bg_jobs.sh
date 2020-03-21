@@ -9,7 +9,7 @@ for pane_pid in $pane_pids; do
     child_procs=$(pgrep -P $pane_pid)
     for child in $child_procs; do
         # a ps status without a "+" should mean it's running in the background
-        if [ ! $(ps -o stat= $child | grep -E "\+") ]; then 
+        if [ ! $(ps -o stat= $child | grep -E "\+") ]; then
             echo BJOBS
         fi
     done
