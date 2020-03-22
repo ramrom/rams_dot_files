@@ -4,14 +4,26 @@ Good references:
 - https://remram44.github.io/regex-cheatsheet/regex.html
     - has POSIX ERE, BRE, Perl, vim, python
 
+Linux/GNU:
+use grep -P for PCRE (perl) style regexes
+grep -E, is ERE, but doesn't have things like \d
+
+OSX:
+use grep -E, this apparently has things like \d, wtf apple....
+
+
 Character classes
 .	Any character, except newline
+\d	Digit           - PCRE
+[[:digit:]] Digit   - PCRE, ERE
+\D	Not digit        - PCRE
+[^[:digit:]] Digit   - PCRE, ERE
 \w	Word
-\d	Digit
-\s	Whitespace
 \W	Not word
-\D	Not digit
-\S	Not whitespace
+\s	Whitespace               - PCRE
+[[:space:]] Whitespace       - PCRE, ERE
+\S	Not whitespace           - PCRE
+[^[:space:]] Not Whitespace  - PCRE, ERE
 [abc]	Any of a, b, or c
 [a-e]	Characters between a and e
 [1-9]	Digit between 1 and 9
