@@ -120,6 +120,10 @@ echo $FOOBAR # will print somestring
 
 "[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
 
+#test if command exists in bash/zsh
+# exit 1  not found, exit 0 and output path if found
+command -v foo > /dev/null
+
 bash "==" is lexical comparison vs "=" is numerical comparison
 
 # number comparison
