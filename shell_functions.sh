@@ -77,18 +77,33 @@ function osx_spotify_toggle_play() {
         end using terms from'
 }
 
-function progress_bar() {
+function verify_percent() {
     if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
-        echo "$(tput setaf 1)Percent must be a positive integer!" && return 1
+        echo "$(tput setaf 1)$2 must be a positive integer!" && return 1
     fi
-    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)Percent must be between 0 and 100!" && return 1
+    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)$2 must be between 0 and 100!" && return 1
+    return 0
+}
 
-    local bar_width=$(tput cols)
+function progress_bar() {
+    verify_percent $1 "task percentage done" || return 1
+
+    #determine bar width, default to 100% of column width of viewport
+    local percentage_of_window=100
+    if [ -n "$2" ]; then
+        verify_percent $2 "window width percentage" || return 1
+        percentage_of_window=$2
+    fi
+    local bar_width=$(echo "$(tput cols) * $percentage_of_window / 100" | bc)
+
     local completed_width=$(echo "$bar_width * $1 / 100" | bc)
     local uncompleted_width=$(($bar_width - $completed_width))
-    # printf '=%.0s' {1..$bar_width}
+
+    # TODO: fix this for bash
+    echo $completed_width
+    echo $uncompleted_width
     printf '=%.0s' {1..$completed_width}
-    printf '-%.0s' {1..$uncompleted_width}
+    printf '&%.0s' {1..$uncompleted_width}
 }
 
 ############## CHROME #############################################
