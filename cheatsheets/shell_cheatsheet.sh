@@ -82,8 +82,11 @@ echo $A | grep "something"
 A=$(env)
 echo "$A" | grep "something"
 
-# remove non-ascii chars
+# remove non-ascii chars, tr is bin that works on removing/replacing individual characters
 tr -cd '\11\12\15\40-\176' < file-with-binary-chars > clean-file
+
+#print char '=' 100 times
+printf '=%.0s' {1..100}
 
 # Bash index/slicing on string
 A="foobar"
@@ -99,6 +102,10 @@ $((3**3)) # 27
 $((3*3+4/10)) # 9
 $((3%2)) # mod, 1
 let a="3+3" a+=4 # 10
+
+# for float point math can use bc bin or awk
+echo "3.1 * 4.5" | bc       # = 13.9
+echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
 # union of two stdouts into one, note each command is run sequentially, so if one (e.g. tail -f) doesn't end then next will never run
 { head a; tail b; } | grep "foo"  # same as running "cat a b"
