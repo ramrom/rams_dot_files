@@ -219,6 +219,7 @@ noremap <leader>W <C-w>W
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>y "+y
+noremap <leader>p "+p
 noremap <leader>x :set number!<CR>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
