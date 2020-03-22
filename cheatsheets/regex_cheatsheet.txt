@@ -9,7 +9,7 @@ use grep -P for PCRE (perl) style regexes
 grep -E, is ERE, but doesn't have things like \d
 
 OSX:
-use grep -E, this apparently has things like \d, wtf apple....
+use grep -E, this apparently has things like \d, apple confusing shit...
 
 
 Character classes
