@@ -40,6 +40,7 @@ fi
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
+# TODO: dont add to PATH if it already contains this
 # set PATH so it includes user's private bin if it exists
 [ -d ~/bin ] && PATH=~/bin:"${PATH}"
 
