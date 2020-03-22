@@ -99,11 +99,12 @@ function progress_bar() {
     local completed_width=$(echo "$bar_width * $1 / 100" | bc)
     local uncompleted_width=$(($bar_width - $completed_width))
 
-    # TODO: fix this for bash
-    echo $completed_width
-    echo $uncompleted_width
-    printf '=%.0s' {1..$completed_width}
-    printf '&%.0s' {1..$uncompleted_width}
+    for (( i=1; i<=$completed_width; i++ )); do
+        printf "#"
+    done
+    for (( i=1; i<=$uncompleted_width; i++ )); do
+        printf "-"
+    done
 }
 
 ############## CHROME #############################################
