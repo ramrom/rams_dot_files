@@ -77,6 +77,16 @@ function osx_spotify_toggle_play() {
         end using terms from'
 }
 
+function progress_bar() {
+    if [ -z $(echo $1 | grep -E "^\d*$") ]; then
+        echo "$(tput setaf 1)Percent must be a positive integer!" && return 1
+    fi
+    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)Percent must be between 1 and 100!" && return 1
+
+    local bar_width=$(tput cols)
+    printf '=%.0s' {1..$bar_width}
+}
+
 ############## CHROME #############################################
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'

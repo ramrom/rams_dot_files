@@ -136,6 +136,11 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 -x  # is file executable
 -r  # is file readable
 [ ~/foo -nt ~/bar ] && echo hi  # if foo is newer than bar, print hi
+[ 3 -eq 3 -o 1 -eq 2 ] && echo hi # if 3 = 3 or 1 eq 2, print hi
+[ 3 -eq 3 ] || [ 1 -eq 2 ] && echo hi #same as above
+-a  # "and"
+&&  # "and" like using "||"
+[ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
 
 # special variables
