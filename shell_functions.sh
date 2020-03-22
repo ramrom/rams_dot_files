@@ -107,6 +107,12 @@ function progress_bar() {
     done
 }
 
+# args are unix times in seconds, e.g. `date +%s`
+function percent_time_left() {
+    local total=$(($2 - $1))
+    echo "( $(date +%s)- $1 ) * 100 / $total" | bc
+}
+
 ############## CHROME #############################################
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
