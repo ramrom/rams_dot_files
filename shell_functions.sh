@@ -86,6 +86,7 @@ function verify_percent() {
 }
 
 function progress_bar() {
+    command -v bc > /dev/null || echo "$(tput setaf 1)bc not installed!"
     verify_percent $1 "task percentage done" || return 1
 
     #determine bar width, default to 100% of column width of viewport
