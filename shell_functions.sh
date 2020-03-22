@@ -78,7 +78,7 @@ function osx_spotify_toggle_play() {
 }
 
 function progress_bar() {
-    if [ -z $(echo $1 | grep -E "^\d*$") ]; then
+    if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
         echo "$(tput setaf 1)Percent must be a positive integer!" && return 1
     fi
     [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)Percent must be between 0 and 100!" && return 1
