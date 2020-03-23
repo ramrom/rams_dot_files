@@ -191,24 +191,19 @@ endif
 inoremap jk  <Esc>
 inoremap jj  <Esc>
 
-"Fast tab nav
-noremap <leader>t :tabnew<CR>
-"gb easier to type than gT
-noremap gb :tabprevious<CR>
+inoremap <C-l>  <C-o>:w<cr>
+" inoremap <C-k>  <C-o>:w<cr>
 
 "Fast buffer nav
 noremap <leader>f :bn<CR>
 noremap <leader>d :bp<CR>
 
 " TODO: think off adding these if i use vim windows more
-" ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line
+" ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
 "noremap <C-l> <C-w>l
 "noremap <C-h> <C-w>h
 "noremap <C-j> <C-w>j
 "noremap <C-k> <C-w>k
-
-inoremap <C-l>  <C-o>:w<cr>
-" inoremap <C-k>  <C-o>:w<cr>
 
 " TODO: not sure, c-m/c-j/c-n/c-g/c-s/c-q/c-h all seem like better alternatives
 " C-l in normal defaults to clear and redraw screen
@@ -227,6 +222,7 @@ noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
+noremap <leader>t :tabnew<CR>
 noremap <leader>p :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>y "+y
@@ -241,6 +237,9 @@ noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :set spell!<cr>
 " noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
+
+"gb easier to type than gT
+noremap gb :tabprevious<CR>
 
 " turn off highlighting till next search
 noremap <leader>s :noh<cr>
