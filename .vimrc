@@ -170,6 +170,13 @@ endfunction
 
 call ToggleDisplayTrailSpaces()
 
+"globally disable indentLine by default
+let g:indentLine_enabled = 0
+
+" globally disable vim-signify by default
+if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
+
+
 "Mappings
 let mapleader = " "				"set metakey for vim shortcuts
 
@@ -230,13 +237,17 @@ noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
+noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :set spell!<cr>
-noremap <leader>gs :SignifyToggle<cr>
 " noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 " turn off highlighting till next search
 noremap <leader>s :noh<cr>
+
+" TODO: i think these maps are seriously useful
+" nnoremap <C-J> a<CR><Esc>k$
+" nnoremap <CR> o<Esc>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -246,9 +257,6 @@ for i in range(0,9) | exe 'noremap g'.i.' :tabn '.i.'<CR>' | endfor
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
-
-" globally disable vim-signify by default
-if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
@@ -263,14 +271,14 @@ if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
 endif
 
 """"""""""""""" VIM-INDENT-GUIDES PLUGIN"""""""""""""""""""""""""""""""""""""""""
-let g:indent_guides_guide_size = 1   " guide line is only one col wide
-let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
+" let g:indent_guides_guide_size = 1   " guide line is only one col wide
+" let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
 
-" feb 2020: plugin uses black(000) for IndentGuidesOdd background=dark, ir_black uses 000 so... need custom
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
-autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
-" autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
+" " feb 2020: plugin uses black(000) for IndentGuidesOdd background=dark, ir_black uses 000 so... need custom
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
+" autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
+" " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
 
 
 """"" The Silver Searcher """"""""""""""""""

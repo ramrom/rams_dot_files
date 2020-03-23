@@ -129,6 +129,7 @@ C-S - ???
 C-Q - terminals, stty start signal
 
 Cursor movement:
+<enter> - move cursor to beginning of next line
 h - move cursor left
 C-h - move cursor left
 j - move cursor down
