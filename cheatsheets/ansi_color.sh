@@ -11,6 +11,7 @@ blue_on_yellow=`tput setaf 4; tput setab 3`
 bold=`tput bold`
 dim=`tput dim`
 und=`tput smul`
+italic=`tput sitm`
 remove_und=`tput rmul`
 reset=`tput sgr0`
 
