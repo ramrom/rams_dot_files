@@ -7,16 +7,24 @@ set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
 
 # command line navigation
+ctrl-l - clear screen
 ctrl-a - goto beg of line
 ctrl-e - goto end of line
 ctrl-b - go back one space
 ctrl-f - go forward one space
-ctrl w - delete back one word
+ctrl-k - delete line after cursor (cut to clipboard)
+ctrl-u - delete line before cursor (cut to cliboard)
+ctrl w - delete word before curosr (cut to clipboard)
+ctrl y - paste what was cut
 ctrl-h - delete last char, VIM insert mode and command too!
+ctrl-[ - escape
+ctrl-i - tab
 ctrl-j / ctrl-m - begin new line, VIM insert mode too!
 ctrl-p - go back one command in the history
 ctrl-n - go forward one command in the history
 ctrl-r - fuzzy search command history
+ctrl-7 - undo
+ctrl-8 - backward delete char
 
 # send EOF to stdin, which bash/zsh/sh interpret as exit shell
 Ctrl-d
@@ -106,6 +114,9 @@ let a="3+3" a+=4 # 10
 # for float point math can use bc bin or awk
 echo "3.1 * 4.5" | bc       # = 13.9
 echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
+
+# for mult and division with integers in zsh/bash
+$(( 3 * 4 / 10 ))   # rounds down to nearest int, so 1 here
 
 # union of two stdouts into one, note each command is run sequentially, so if one (e.g. tail -f) doesn't end then next will never run
 { head a; tail b; } | grep "foo"  # same as running "cat a b"

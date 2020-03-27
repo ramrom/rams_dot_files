@@ -1,4 +1,18 @@
 ubuntu/gnome:
+
+desktop shortcuts:
+super - usually the "windows" key on keyboards
+alt+ctr+t, super+t  - open terminal
+alt+ctr+l, super+l  - lock screen
+super+tab, alt+tab  - switch between running apps
+super+left/right-arrow - snap to left or right half of desktop
+super+up/down-arrow - full screen, original
+super+m - toggle notif tray
+alt+f2  - run command
+ctrl+alt arrow - move between desktops
+ctrl+alt+delete - logout
+
+
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays

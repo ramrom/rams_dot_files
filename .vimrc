@@ -189,7 +189,7 @@ endif
 
 "way faster and easier way to hit escape, rarely hit jk successively in insert mode
 inoremap jk  <Esc>
-inoremap jj  <Esc>
+" inoremap jj  <Esc>
 
 inoremap <C-l>  <C-o>:w<cr>
 " inoremap <C-k>  <C-o>:w<cr>
