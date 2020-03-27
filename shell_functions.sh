@@ -85,23 +85,25 @@ function verify_percent() {
     return 0
 }
 
-function progress_bar() {
-    command -v bc > /dev/null || echo "$(tput setaf 1)bc not installed!"
-    verify_percent $1 "task percentage done" || return 1
-
+function local_bar_width() {
     #determine bar width, default to 100% of column width of viewport
     local percentage_of_window=100
-    if [ -n "$2" ]; then
-        verify_percent $2 "window width percentage" || return 1
-        percentage_of_window=$2
+    if [ -n "$1" ]; then
+        verify_percent $1 "window width percentage" || return 1
+        percentage_of_window=$1
     fi
-    local bar_width=$(echo "$(tput cols) * $percentage_of_window / 100" | bc)
+    echo "$(tput cols) * $percentage_of_window / 100" | bc
+}
 
-    local completed_width=$(echo "$bar_width * $1 / 100" | bc)
+function progress_bar() {
+    verify_percent $1 "task percentage done" || return 1
+
+    local bar_width=$2
+    local completed_width=$(($bar_width * $1 / 100 ))
     local uncompleted_width=$(($bar_width - $completed_width))
 
     for (( i=1; i<=$completed_width; i++ )); do
-        printf "#"
+        printf "%"
     done
     for (( i=1; i<=$uncompleted_width; i++ )); do
         printf "-"
@@ -180,13 +182,26 @@ function tmux_test_data() {
     echo $cpu
 }
 
-# function ts() { tmux_status $*; }
-function ts_tmux_cheat() {
-    echo "cpy-mode: \`Space\`-start/reset copy, \`Enter\`-stop, \`C-]\'-paste"
+function tmux_status_timer() {
+    tmux set status 5
+    tmux set status-interval 1
+    # tmux set status-format[1] "#[align=left,fg=red]$(progress_bar 0)"
+
+    # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
+    # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
+
+    tmux set -q @foo 1
+    echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
+    # tmux set status-format[1] "#[align=left,bg=colour164,fg=brightwhite]50%% - testing m#[bg=colour237]ore          "
+
+    tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh)"
 }
 
-function ts_regex_cheat() {
-    echo "\s whitesp, \S not whitesp, * 0more, + 1more, ? 0-1"
+function tmux_status_reset() {
+    # tmux set -u status-left; tmux set -u status-right
+    tmux set -u status-format
+    tmux set -u status-format[0]
+    tmux set -u status
 }
 
 function tmux_status() {
