@@ -77,12 +77,6 @@ function osx_spotify_toggle_play() {
         end using terms from'
 }
 
-# args are unix times in seconds, e.g. `date +%s`
-function percent_time_left() {
-    local total=$(($2 - $1))
-    echo "( $(date +%s)- $1 ) * 100 / $total" | bc
-}
-
 ############## CHROME #############################################
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
@@ -158,13 +152,12 @@ function local_bar_width() {
     echo "$(tput cols) * $percentage_of_window / 100" | bc
 }
 
-function tmux_progress_bar() {
+function tmux_render_progress_bar() {
     verify_percent $2 "task percentage done" || return 1
-    local text="$2%% ⏰ $1 "  # arg 1 is descriptive name like "egg timer"
-    local text_size=${#text}
-    local bar_width=$3
-    if [ $text_size -gt $bar_width ]; then;
-        echo "#[fg=red]$text is larger than $bar_width chars!" && return 1
+    local text="$2%% ⏰ $1"  # arg 1 is descriptive name like "egg timer"
+    local text_size=${#text}; local bar_width=$3
+    if [ $text_size -gt $bar_width ]; then
+        echo "#[fg=brightyellow,bg=red]error: $1 > $bar_width chars!" && return 1
     fi
 
     local num_white_space=$(($bar_width - $text_size))
@@ -172,10 +165,9 @@ function tmux_progress_bar() {
         text+=" "
     done
 
-    local col=21
-    [ -n "$color" ] && local col=$color
+    local col=21; [ -n "$color" ] && col=$color
+
     local completed_width=$(($bar_width * $2 / 100 ))
-    # local uncompleted_width=$(($bar_width - $completed_width))
     text="${text:0:$completed_width}#[bg=colour237]${text:$completed_width:${#text}}"
     text="#[fg=brightwhite,bg=colour$col]$text"
 
@@ -185,31 +177,38 @@ function tmux_progress_bar() {
     echo "$text#[default]"
 }
 
-function tmux_test_data() {
-    numcpu=$(sysctl -n hw.ncpu)
-    local usage=$(uptime | awk '{print $10}')
-    echo $usage
-    local au=$(($usage * 100 / $numcpu))
-    local cpu="#[fg=brightyellow]cpuusage: $au"
-    echo $cpu
+function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
+function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
+
+function foob() { echo "hi"; }
+
+function tmux_render_timer_bar() {
+    # echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
+    local now=$(date +%s)
+    local start=$(tmux show -v @$1-start)
+    local duration=$(tmux show -v @$1-duration)
+    # local end=$(( $start + $duration ))
+    local elapsed=$(( $now - $start ))
+    local percent_done=$(( $elapsed * 100 / $duration ))
+    # echo $percent_done
+
+    local progbar=$(tmux_progress_bar "$1 timer" $percent_done 100)
+    echo $progbar
+    # tmux set status-format[0] "$progbar"
+    # tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"
 }
 
-function tmux_status_timer() {
+function tmux_status_foo() {
     tmux set status 5
     tmux set status-interval 2
-    # tmux set status-format[1] "#[align=left,fg=red]$(progress_bar 0)"
 
     # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
     # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
 
-    # tmux set -q @foo 1
-    # echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
-    # tmux set status-format[1] "#[align=left,bg=colour164,fg=brightwhite]50%% - testing m#[bg=colour237]ore          "
-
-    # tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh)"
-    local progbar=$(tmux_progress_bar "foo timer" 10 100)
-    tmux set status-format[0] "$progbar"
-    tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"
+    tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
+    # local progbar=$(tmux_progress_bar "foo timer" 10 100)
+    # tmux set status-format[0] "$progbar"
+    # tmux set status-format[1] "$(color=128 tmux_progress_bar "bar timer" 30 100)"
 }
 
 function tmux_status_reset() {
@@ -220,6 +219,15 @@ function tmux_status_reset() {
     tmux set -u status-format[0]
     tmux set -u status-format[1]
     tmux set -u status
+}
+
+function tmux_test_data() {
+    numcpu=$(sysctl -n hw.ncpu)
+    local usage=$(uptime | awk '{print $10}')
+    echo $usage
+    local au=$(($usage * 100 / $numcpu))
+    local cpu="#[fg=brightyellow]cpuusage: $au"
+    echo $cpu
 }
 
 function tmux_status() {
