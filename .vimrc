@@ -42,6 +42,9 @@ else
         " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
     endif
 
+    if has('nvim') && !empty($VIM_BASH)
+        Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+    endif
     "neovim offers best coc/metals experience
     if has('nvim') && !empty($VIM_METALS)
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
