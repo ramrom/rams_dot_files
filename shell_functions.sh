@@ -172,10 +172,12 @@ function tmux_progress_bar() {
         text+=" "
     done
 
+    local col=21
+    [ -n "$color" ] && local col=$color
     local completed_width=$(($bar_width * $2 / 100 ))
     # local uncompleted_width=$(($bar_width - $completed_width))
-    text="${text:0:$completed_width}#[bg=colour242]${text:$completed_width:${#text}}"
-    text="#[fg=brightwhite,bg=colour21]$text"
+    text="${text:0:$completed_width}#[bg=colour237]${text:$completed_width:${#text}}"
+    text="#[fg=brightwhite,bg=colour$col]$text"
 
     # for (( i=1; i<=$uncompleted_width; i++ )); do
     #     printf "-"
@@ -206,8 +208,8 @@ function tmux_status_timer() {
 
     # tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh)"
     local progbar=$(tmux_progress_bar "foo timer" 10 100)
-    echo $progbar
     tmux set status-format[0] "$progbar"
+    tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"
 }
 
 function tmux_status_reset() {
