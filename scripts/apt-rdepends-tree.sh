@@ -24,7 +24,7 @@ T5="         ├─"
 T6="         └─"
 
 # mark '1' for parent node, '2' for child node
-TEXT="$(apt-rdepends $1 | sed -e 's/^/1 /' -e 's/.*: /2 /'; echo '-')"
+TEXT="$(apt-rdepends $args $1 | sed -e 's/^/1 /' -e 's/.*: /2 /'; echo '-')"
 TOTAL=$(echo "$TEXT" | grep '^1' | wc -l) # total parent
 
 COUNT=0
