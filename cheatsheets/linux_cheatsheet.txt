@@ -1,6 +1,7 @@
 ubuntu/gnome:
 
 desktop shortcuts:
+-------------------------------------------
 super - usually the "windows" key on keyboards
 alt+ctr+t, super+t  - open terminal
 alt+ctr+l, super+l  - lock screen
@@ -12,7 +13,28 @@ alt+f2  - run command
 ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout
 
+APT:
+------------------------------------------
+apt-rdepends pkg    - shows decent one level dep tree of pkg (only 1 level tho)
+apt-rdepends -r pkg  - show reverse deps
+apt-cache showpkg pkg - shows deps and reverse deps, shows versions, also shows SHAs and more info
+apt-cache rdepends pkg  -r(reverse), show other packages dependent on it i think
+apt-cache depends pkg  - show raw dep info of package pkg
 
+apt list --installed - show installed packages
+apt list --upgradable - show installed packages
+sudo apt-get install packageName --no-upgrade  - install new pkg and dont upgrade dependend packages
+sudo apt-get purge vsftpd  - remove package and config files
+apt-get changelog pkg - see changelog
+apt-get check  - check for broken deps
+sudo apt-get autoremove pkg - remove a package and it's dependencies
+
+
+
+
+
+General linux/ubuntu tools:
+------------------------------------------
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays

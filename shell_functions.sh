@@ -58,7 +58,7 @@ function sensor_data() {
     # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
     local IFS=
     local s=$(sensors)
-    echo $s | grep -E "CPU Temperature"
+    echo $s | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
     echo $s | grep -E "CPU Fan"
 }
 
@@ -154,7 +154,7 @@ function local_bar_width() {
 
 function tmux_render_progress_bar() {
     verify_percent $2 "task percentage done" || return 1
-    local text="$2%% ⏰ $1"  # arg 1 is descriptive name like "egg timer"
+    local text="$2%% $1"  # arg 1 is descriptive name like "egg timer"
     local text_size=${#text}; local bar_width=$3
     if [ $text_size -gt $bar_width ]; then
         echo "#[fg=brightyellow,bg=red]error: $1 > $bar_width chars!" && return 1
@@ -180,7 +180,10 @@ function tmux_render_progress_bar() {
 function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
 function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
 
-# TODO: default tmux status script shell is sh(3.2), it compresses white spaces into one
+# NOTE: default tmux status script shell is sh(3.2), it compresses white spaces into one
+# TODO: verify if timer exists and return error
+# TODO: expiration and notif logic
+# TODO: diff format for secs and percent maybe?
 function tmux_render_timer_bar() {
     # echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
     local now=$(date +%s)
@@ -191,7 +194,7 @@ function tmux_render_timer_bar() {
     local percent_done=$(( $elapsed * 100 / $duration ))
     # echo $percent_done
 
-    local progbar=$(tmux_render_progress_bar "$1 timer - ${duration}s" $percent_done 100)
+    local progbar=$(tmux_render_progress_bar "⏰ $1 timer - ${duration}s" $percent_done 100)
     echo $progbar
     # tmux set status-format[0] "$progbar"
     # tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"
