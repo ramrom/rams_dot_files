@@ -180,8 +180,7 @@ function tmux_render_progress_bar() {
 function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
 function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
 
-function foob() { echo "hi"; }
-
+# TODO: default tmux status script shell is sh(3.2), it compresses white spaces into one
 function tmux_render_timer_bar() {
     # echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
     local now=$(date +%s)
@@ -192,7 +191,7 @@ function tmux_render_timer_bar() {
     local percent_done=$(( $elapsed * 100 / $duration ))
     # echo $percent_done
 
-    local progbar=$(tmux_progress_bar "$1 timer" $percent_done 100)
+    local progbar=$(tmux_render_progress_bar "$1 timer - ${duration}s" $percent_done 100)
     echo $progbar
     # tmux set status-format[0] "$progbar"
     # tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"
@@ -212,13 +211,11 @@ function tmux_status_foo() {
 }
 
 function tmux_status_reset() {
-    # tmux set -u status-left; tmux set -u status-right
-    tmux set -u status-interval
-    tmux set -u status-left
-    tmux set -u status-format
     tmux set -u status-format[0]
-    tmux set -u status-format[1]
     tmux set -u status
+    tmux set -u status-interval
+    tmux set -u status-left; tmux set -u status-right
+    tmux set -u status-format
 }
 
 function tmux_test_data() {
