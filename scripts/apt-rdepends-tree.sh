@@ -1,8 +1,8 @@
 #! /bin/bash
 # Description: show dependency tree
 
-if [ $# != 1 ]; then
-	echo 'Usage: apt-rdepends-tree <package>'
+if [ $# -lt 1 ]; then
+	echo 'Usage: apt-rdepends-tree [-r] <package>'
 	echo 'Required packages: apt-rdepends'
 	exit 1
 fi
