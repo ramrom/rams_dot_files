@@ -9,38 +9,36 @@ if empty(glob('~/.vim/autoload/plug.vim'))
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
-else
+elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
-    if empty($VIM_SIMPLE)
-        "TODO: find one of these that's better than ir_black
-        " grubbox, dractula, molokai are decent, maybe abstract
-        Plug 'rafi/awesome-vim-colorschemes'
+    "TODO: find one of these that's better than ir_black
+    " grubbox, dractula, molokai are decent, maybe abstract
+    Plug 'rafi/awesome-vim-colorschemes'
 
-        "TODO: try these out
-        " Plug 'tpop/vim-fugitive'        " git-vim synergy
-        " Plug 'vim-syntastic/syntastic'  " syntax
+    "TODO: try these out
+    " Plug 'tpop/vim-fugitive'        " git-vim synergy
+    " Plug 'vim-syntastic/syntastic'  " syntax
 
-        Plug 'scrooloose/nerdtree'
-        Plug 'ctrlpvim/ctrlp.vim'
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
-        Plug 'chrisbra/unicode.vim'     " unicode helper
-        Plug 'tpope/vim-commentary'     " smart code commenting
+    Plug 'scrooloose/nerdtree'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+    Plug 'chrisbra/unicode.vim'     " unicode helper
+    Plug 'tpope/vim-commentary'     " smart code commenting
 
-        "sign col shows revision ctrl changed lines, internet say faster and better than gitgutter
-        Plug 'mhinz/vim-signify'
+    "sign col shows revision ctrl changed lines, internet say faster and better than gitgutter
+    Plug 'mhinz/vim-signify'
 
-        "NOTE: will detect .txt files with `***` chars in first line as robot
-        Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
-        "Plug 'costallat/robotframework-vim'
+    "NOTE: will detect .txt files with `***` chars in first line as robot
+    Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
+    "Plug 'costallat/robotframework-vim'
 
-        "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
-        "TODO: indentLine displays `"` chars `|` or disspapear in json files...
-        Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
-        " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
-    endif
+    "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
+    "TODO: indentLine displays `"` chars `|` or disspapear in json files...
+    Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+    " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 
     if has('nvim') && !empty($VIM_BASH)
         Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
