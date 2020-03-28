@@ -5,6 +5,9 @@
 SESSION_NAME=ram
 GDRIVE=~/"Google Drive"
 
+tmux has-session -t $SESSION_NAME
+[ $? == 0 ] && echo "$(tput setaf 1) $SESSION_NAME session already exists!" && exit 1
+
 tmux new-session -d -s $SESSION_NAME
 tmux select-pane -T 'admin'
 tmux split-window -h -c "$GDRIVE"
