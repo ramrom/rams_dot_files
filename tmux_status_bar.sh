@@ -1,5 +1,5 @@
 #!/bin/zsh
-source ~/.zshrc
+setopt NO_NOMATCH
 source ~/rams_dot_files/shell_functions.sh
 
 # s=$(tmux display-message -p '#S')
