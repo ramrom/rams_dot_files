@@ -77,39 +77,6 @@ function osx_spotify_toggle_play() {
         end using terms from'
 }
 
-function verify_percent() {
-    if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
-        echo "$(tput setaf 1)$2 must be a positive integer!" && return 1
-    fi
-    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)$2 must be between 0 and 100!" && return 1
-    return 0
-}
-
-function local_bar_width() {
-    #determine bar width, default to 100% of column width of viewport
-    local percentage_of_window=100
-    if [ -n "$1" ]; then
-        verify_percent $1 "window width percentage" || return 1
-        percentage_of_window=$1
-    fi
-    echo "$(tput cols) * $percentage_of_window / 100" | bc
-}
-
-function progress_bar() {
-    verify_percent $1 "task percentage done" || return 1
-
-    local bar_width=$2
-    local completed_width=$(($bar_width * $1 / 100 ))
-    local uncompleted_width=$(($bar_width - $completed_width))
-
-    for (( i=1; i<=$completed_width; i++ )); do
-        printf "%"
-    done
-    for (( i=1; i<=$uncompleted_width; i++ )); do
-        printf "-"
-    done
-}
-
 # args are unix times in seconds, e.g. `date +%s`
 function percent_time_left() {
     local total=$(($2 - $1))
@@ -173,6 +140,49 @@ function tmux_winlist() {
     # need #[nolist] at the end here to let next items align
 }
 
+function verify_percent() {
+    if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
+        echo "$(tput setaf 1)$2 must be a positive integer!" && return 1
+    fi
+    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)$2 must be between 0 and 100!" && return 1
+    return 0
+}
+
+function local_bar_width() {
+    #determine bar width, default to 100% of column width of viewport
+    local percentage_of_window=100
+    if [ -n "$1" ]; then
+        verify_percent $1 "window width percentage" || return 1
+        percentage_of_window=$1
+    fi
+    echo "$(tput cols) * $percentage_of_window / 100" | bc
+}
+
+function tmux_progress_bar() {
+    verify_percent $2 "task percentage done" || return 1
+    local text="$2%% ⏰ $1 "  # arg 1 is descriptive name like "egg timer"
+    local text_size=${#text}
+    local bar_width=$3
+    if [ $text_size -gt $bar_width ]; then;
+        echo "#[fg=red]$text is larger than $bar_width chars!" && return 1
+    fi
+
+    local num_white_space=$(($bar_width - $text_size))
+    for (( i=1; i<=$num_white_space; i++ )); do
+        text+=" "
+    done
+
+    local completed_width=$(($bar_width * $2 / 100 ))
+    # local uncompleted_width=$(($bar_width - $completed_width))
+    text="${text:0:$completed_width}#[bg=colour242]${text:$completed_width:${#text}}"
+    text="#[fg=brightwhite,bg=colour21]$text"
+
+    # for (( i=1; i<=$uncompleted_width; i++ )); do
+    #     printf "-"
+    # done
+    echo "$text#[default]"
+}
+
 function tmux_test_data() {
     numcpu=$(sysctl -n hw.ncpu)
     local usage=$(uptime | awk '{print $10}')
@@ -184,23 +194,29 @@ function tmux_test_data() {
 
 function tmux_status_timer() {
     tmux set status 5
-    tmux set status-interval 1
+    tmux set status-interval 2
     # tmux set status-format[1] "#[align=left,fg=red]$(progress_bar 0)"
 
     # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
     # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
 
-    tmux set -q @foo 1
-    echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
+    # tmux set -q @foo 1
+    # echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
     # tmux set status-format[1] "#[align=left,bg=colour164,fg=brightwhite]50%% - testing m#[bg=colour237]ore          "
 
-    tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh)"
+    # tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh)"
+    local progbar=$(tmux_progress_bar "foo timer" 10 100)
+    echo $progbar
+    tmux set status-format[0] "$progbar"
 }
 
 function tmux_status_reset() {
     # tmux set -u status-left; tmux set -u status-right
+    tmux set -u status-interval
+    tmux set -u status-left
     tmux set -u status-format
     tmux set -u status-format[0]
+    tmux set -u status-format[1]
     tmux set -u status
 }
 
