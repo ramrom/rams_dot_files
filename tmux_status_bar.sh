@@ -1,4 +1,6 @@
-# source ~/rams_dot_files/shell_functions.sh
+#!/bin/zsh
+source ~/.zshrc
+source ~/rams_dot_files/shell_functions.sh
 
 # s=$(tmux display-message -p '#S')
 # tmux list-windows -F "#{window_width}" -t $s 2>&1
@@ -10,7 +12,9 @@
 counter=$(tmux show -v @status-bar-interval-counter)
 tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
-tmux set -a status-format[1] "*"
+# foo=$(tmux_render_timer_bar eggs)
+# tmux set status-format[1] "$foo"
+tmux set status-format[1] "$(tmux_render_timer_bar eggs)"
 
 if [ $(( $counter % 2 )) -eq 0 ]; then
     tmux set -a status-format[2] "*"
