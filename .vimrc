@@ -16,10 +16,7 @@ elseif empty($VIM_NOPLUG)
     " grubbox, dractula, molokai are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
 
-    "TODO: try these out
-    " Plug 'tpop/vim-fugitive'        " git-vim synergy
-    " Plug 'vim-syntastic/syntastic'  " syntax
-
+    Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'scrooloose/nerdtree'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-airline/vim-airline'
