@@ -181,20 +181,24 @@ function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duratio
 function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
 
 # NOTE: default tmux status script shell is sh(3.2), it compresses white spaces into one
-# TODO: verify if timer exists and return error
-# TODO: expiration and notif logic
 # TODO: diff format for secs and percent maybe?
 function tmux_render_timer_bar() {
-    # echo $(($(tmux show -v @foo) + 1)) # will = 2, using a counter and bash modding i can set selective intervals
-    local now=$(date +%s)
     local start=$(tmux show -v @$1-start)
+    [ -z $start ] && echo "#[fg=brightred]$1 timer not found!" && return 1
+
+    local now=$(date +%s)
     local duration=$(tmux show -v @$1-duration)
-    # local end=$(( $start + $duration ))
     local elapsed=$(( $now - $start ))
     local percent_done=$(( $elapsed * 100 / $duration ))
     # echo $percent_done
 
-    local progbar=$(tmux_render_progress_bar "⏰ $1 timer - ${duration}s" $percent_done 100)
+    if [ $percent_done -gt 100 ]; then
+        local excess=$(( $elapsed - $duration ))
+        local progbar=$(color=89 tmux_render_progress_bar "⏰ $1 timer - ${duration}s - #[bg=red,underscore]COMPLETED#[bg=colour89,nounderscore] ${excess}s ago" 100 100)
+    else
+        local progbar=$(tmux_render_progress_bar "⏰ $1 timer - ${duration}s" $percent_done 100)
+    fi
+
     echo $progbar
     # tmux set status-format[0] "$progbar"
     # tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"

@@ -43,6 +43,8 @@ elseif empty($VIM_NOPLUG)
 
     if has('nvim')
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+        "TODO: can enable coc by filetype
+        " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
     endif
 
     if has('nvim') && !empty($VIM_BASH)
