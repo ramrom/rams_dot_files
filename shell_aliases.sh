@@ -12,6 +12,7 @@ alias grep='grep --colour=always'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
 alias fxg='find . -type f | xargs grep'
+alias fzfp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
 alias rd='cd ~/rams_dot_files'
 alias dubydir='du -sh *'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works

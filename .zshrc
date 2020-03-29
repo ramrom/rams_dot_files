@@ -15,6 +15,17 @@ if [ `uname` = "Darwin" ]; then
     export LSCOLORS='GxFxCxDxBxegedabagaced'  # ls uses this per man docs
 fi
 
+# apparently osx ps doesnt support this env var per man docs
+if [ `uname` = "Linux" ]; then
+    export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
+fi
+
+# follow symlink
+# export FD_OPTIONS="--follow"
+
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-info"
+export FZF_COMPLETION_TRIGGER='**'
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
