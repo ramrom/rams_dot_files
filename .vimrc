@@ -18,6 +18,8 @@ elseif empty($VIM_NOPLUG)
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'scrooloose/nerdtree'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -202,8 +204,8 @@ inoremap <C-l>  <C-o>:w<cr>
 " inoremap <C-k>  <C-o>:w<cr>
 
 "Fast buffer nav
-noremap <leader>f :bn<CR>
-noremap <leader>d :bp<CR>
+" noremap <leader>f :bn<CR>
+" noremap <leader>d :bp<CR>
 
 " TODO: think off adding these if i use vim windows more
 " ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
@@ -227,6 +229,8 @@ noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>ad :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
+noremap <leader>f :Files<CR>
+noremap <leader>b :Buffers<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
 noremap <leader>t :tabnew<CR>
