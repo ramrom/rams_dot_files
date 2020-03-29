@@ -20,6 +20,13 @@ g,   - jump back to newer edit point
 :7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
 
+vim-fugitive:
+Gedit HEAD~3:%  - git show HEAD~3:<current file>
+G               - git status
+G diff          - git diff
+G blame         - sidepane with git blame
+G log %         - git log <current file>
+
 
 :tabc - tabclose, close tab with all windows in it
 :tabonly - close all other tabs

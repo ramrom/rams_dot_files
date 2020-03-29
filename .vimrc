@@ -41,13 +41,15 @@ elseif empty($VIM_NOPLUG)
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
     " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 
-    if has('nvim') && !empty($VIM_BASH)
+    if has('nvim')
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+    endif
+
+    if has('nvim') && !empty($VIM_BASH)
         Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
     endif
     "neovim offers best coc/metals experience
     if has('nvim') && !empty($VIM_METALS)
-        Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
     endif
 
