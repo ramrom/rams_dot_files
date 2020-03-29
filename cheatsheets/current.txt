@@ -13,6 +13,13 @@ vim -o `fzf -m`   - open vim windows for all fzf matches
 fzf | xargs bat   - invoke bat on result
 fzf -e   - exact match
 fzf -m   - multi select
+fzf -1   - if 1 match select it
+search:
+    !foo        (not foo)
+    foo | bar   (foo or bar)
+    ^foo        (foo at beg of line)
+    foo$        (foo at end of line)
+    'foo        (exact match foo)
 
 SHELL:
 ctrl-h - delete last char, VIM insert mode and command too!
