@@ -1,6 +1,8 @@
 https://devhints.io/  (great reference for all types for developers)
 
 RG:
+rg -uuu      - gets close to rgrep
+             - u:nogitingore, uu:hidden, uuu:binary
 rg --type-list      - list filetype defs
 rg -tgo -tsh -Tjs   - search go and sh types, not javascript
 

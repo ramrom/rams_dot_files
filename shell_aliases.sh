@@ -11,8 +11,11 @@ alias lrt='ls -lrt'
 alias grep='grep --colour=always'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
-alias fxg='find . -type f | xargs grep'
+alias fig='find . -type f | xargs grep'
+alias fdg='fd --hidden --exclude .git | xargs grep'
 alias fzfp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
+alias fzfe="export | fzf"
+alias fzfa="search_alias_func | fzf"
 alias rd='cd ~/rams_dot_files'
 alias dubydir='du -sh *'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
