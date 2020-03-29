@@ -3,7 +3,6 @@ alias vinmetals='VIM_METALS=1 vin'
 alias svi='VIM_NOPLUG=1 vim'    # simple
 alias ssvi='vim -u NONE'        # super simple
 alias vina='VIM_NO_AUTOREAD=1 vi'
-alias ls='ls -CF'
 alias ll='ls -l'
 alias la='ls -A'
 alias lal='ls -al'
