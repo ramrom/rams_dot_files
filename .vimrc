@@ -294,19 +294,6 @@ endif
 " " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
 
 
-""""" RipGrep and FD """"""""""""""""""
-if executable('rg')
-    set grepprg=rg\ --color=never
-    let g:ctrlp_use_caching = 0
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-endif
-
-" if fd installed prefer that over rg
-if executable('fd')
-    let g:ctrlp_user_command = 'fd --hidden --exclude .git'
-endif
-
-
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
 "let g:airline_theme='luna'
 let g:airline_theme='bubblegum'
@@ -328,3 +315,19 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.exe$\|\.so$\|\.dll$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
+
+"""""""""""""""""" FZF """"""""""""""""""
+" Files will use FZF_DEFAULT_COMMAND
+" Commits needs vim-fugitive
+
+""""" RipGrep and FD """""""""""""""""""
+if executable('rg')
+    set grepprg=rg\ --color=never
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+endif
+
+" if fd installed prefer that over rg
+if executable('fd')
+    let g:ctrlp_user_command = 'fd --hidden --exclude .git'
+endif

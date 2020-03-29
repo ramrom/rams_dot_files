@@ -24,6 +24,8 @@ fzf:
 Rg            - ripgrep dynamic fuzzy search with bat preview!
 Files, ctrl-v - opens in new vert split
 Files, ctrl-t - opens in new tab
+GFiles!?    - git modified files in full screen
+Lines       - search lines in buffer (like / and ?)
 
 vim-fugitive:
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
