@@ -1,12 +1,23 @@
 https://devhints.io/  (great reference for all types for developers)
 
-TIP: once a buffer autoreloads, you can still undo
+RG:
+rg --type-list      - list filetype defs
+rg -tgo -tsh -Tjs   - search go and sh types, not javascript
+
+FZF:
+fzf --preview 'bat --style=numbers --color=always {} | head -500'              - preview with bat
+fzf --height 40   - only take 40% of screen
+vim -o `fzf -m`   - open vim windows for all fzf matches
+fzf | xargs bat   - invoke bat on result
+fzf -e   - exact match
+fzf -m   - multi select
 
 SHELL:
 ctrl-h - delete last char, VIM insert mode and command too!
 ctrl-j / ctrl-m - begin new line, VIM insert mode too!
 
 VIM:
+TIP: once a buffer autoreloads, you can still undo
 ctrl-f - command mode, edit as if in normal mode
 ctrl-w - insert mode and command mode, delete last word
 ctrl-u - insert mode and command mode, delete from beg line to cursor
