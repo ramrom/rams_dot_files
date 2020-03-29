@@ -29,7 +29,11 @@ elseif empty($VIM_NOPLUG)
     Plug 'tpope/vim-commentary'     " smart code commenting
 
     "sign col shows revision ctrl changed lines, internet say faster and better than gitgutter
-    Plug 'mhinz/vim-signify'
+    if has('nvim') || has('patch-8.0.902')
+        Plug 'mhinz/vim-signify'
+    else
+        Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+    endif
 
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
@@ -41,6 +45,7 @@ elseif empty($VIM_NOPLUG)
     " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 
     if has('nvim') && !empty($VIM_BASH)
+        Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
     endif
     "neovim offers best coc/metals experience
