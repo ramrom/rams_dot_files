@@ -194,14 +194,13 @@ function tmux_render_timer_bar() {
 
     if [ $percent_done -gt 100 ]; then
         local excess=$(( $elapsed - $duration ))
-        local progbar=$(color=89 tmux_render_progress_bar "⏰ $1 timer - ${duration}s - #[bg=red,underscore]COMPLETED#[bg=colour89,nounderscore] ${excess}s ago" 100 100)
+        local progbar=$(tmux_render_progress_bar \
+            "⏰ $1 timer (${duration}s) - #[bg=red,underscore]!COMPLETED!#[bg=$color,nounderscore] ${excess}s ago" 100 100)
     else
-        local progbar=$(tmux_render_progress_bar "⏰ $1 timer - ${duration}s" $percent_done 100)
+        local progbar=$(tmux_render_progress_bar "⏰ $1 timer (${duration}s)" $percent_done 100)
     fi
 
     echo $progbar
-    # tmux set status-format[0] "$progbar"
-    # tmux set status-format[1] "$(color=124 tmux_progress_bar "bar timer" 30 100)"
 }
 
 function tmux_status_foo() {
