@@ -53,7 +53,7 @@ function display_notif() {
     fi
 }
 
-# TODO: finish
+# TODO: finish this
 function sensor_data() {
     # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
     local IFS=
