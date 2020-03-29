@@ -19,6 +19,11 @@ shopt -s checkwinsize
 # TODO: how to get brew tree colors working, below LS_COLORS doesnt work
 # [ `uname` = "Darwin" ] && export LS_COLORS='GxFxCxDxBxegedabagaced'
 
+# apparently osx ps doesnt support this env var per man docs
+if [ `uname` = "Linux" ]; then
+    export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
+fi
+
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }

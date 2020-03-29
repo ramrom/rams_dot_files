@@ -204,8 +204,8 @@ inoremap <C-l>  <C-o>:w<cr>
 " inoremap <C-k>  <C-o>:w<cr>
 
 "Fast buffer nav
-" noremap <leader>f :bn<CR>
-" noremap <leader>d :bp<CR>
+noremap <leader>f :bn<CR>
+noremap <leader>d :bp<CR>
 
 " TODO: think off adding these if i use vim windows more
 " ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
@@ -229,8 +229,11 @@ noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>ad :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
-noremap <leader>f :Files<CR>
+noremap <leader>o :Files<CR>
+noremap <leader>O :Files!<CR>
+noremap <leader>l :Lines<CR>
 noremap <leader>b :Buffers<CR>
+noremap <leader>r :Rg<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
 noremap <leader>t :tabnew<CR>
