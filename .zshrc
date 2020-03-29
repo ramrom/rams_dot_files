@@ -26,8 +26,8 @@ fi
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-info"
 export FZF_COMPLETION_TRIGGER='**'
-# export FZF_CTRL_T_COMMAND="fd"
-# export FZF_ALT_C_COMMAND="fd --type d"
+export FZF_CTRL_T_COMMAND="fd"
+export FZF_ALT_C_COMMAND="fd --type d"
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
