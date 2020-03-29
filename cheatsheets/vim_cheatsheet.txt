@@ -20,6 +20,11 @@ g,   - jump back to newer edit point
 :7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
 
+fzf:
+Rg            - ripgrep dynamic fuzzy search with bat preview!
+Files, ctrl-v - opens in new vert split
+Files, ctrl-t - opens in new tab
+
 vim-fugitive:
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
