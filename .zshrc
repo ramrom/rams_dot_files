@@ -20,6 +20,8 @@ if [ `uname` = "Linux" ]; then
     export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 fi
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # follow symlink
 # export FD_OPTIONS="--follow"
 
