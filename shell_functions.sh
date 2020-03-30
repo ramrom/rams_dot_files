@@ -31,9 +31,6 @@ function list_funcs() {
     fi
 }
 
-function ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
-function italic() { ansi_fmt 3 "$@"; }
-
 function rrc() {
     if [ $(detect_shell) = "zsh" ]; then
         source ~/.zprofile && source ~/.zshrc
@@ -44,6 +41,13 @@ function rrc() {
 
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
+
+function findgrep() {
+    find . -type f -regex $1 | xargs grep $2
+}
+
+function ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
+function italic() { ansi_fmt 3 "$@"; }
 
 function display_notif() {
     if [ `uname` = "Darwin" ]; then

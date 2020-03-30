@@ -20,14 +20,14 @@ g,   - jump back to newer edit point
 :7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
 
-fzf:
+FZF:
 Rg            - ripgrep dynamic fuzzy search with bat preview!
 Files, ctrl-v - opens in new vert split
 Files, ctrl-t - opens in new tab
 GFiles!?    - git modified files in full screen
-Lines       - search lines in buffer (like / and ?)
+Lines       - search lines in open buffers
 
-vim-fugitive:
+VIM-FUGITIVE:
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
 G diff          - git diff
@@ -89,6 +89,7 @@ hi  - spit out all highlighting rules
 :help keyword - open help for keyword
 :saveas file - save file as
 :close - close current pane
+:e #    - open last opened file
 
 
 Insert mode - inserting/appending text:
@@ -141,6 +142,8 @@ C-X - sub [count] to # of alpha char at or after cursor
 C-G - print file, line location, file status
 C-S - ???
 C-Q - terminals, stty start signal
+C-] - open tag in new buffer
+C-^ - open last editted file
 
 Cursor movement:
 <enter> - move cursor to beginning of next line
