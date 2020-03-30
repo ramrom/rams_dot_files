@@ -1,1 +1,9 @@
+--glob=!tags
+
+--colors=path:fg:green
+--colors=path:style:bold
+--colors=line:fg:yellow
 --colors=line:style:bold
+--colors=match:bg:yellow
+--colors=match:fg:black
+--colors=match:style:bold
