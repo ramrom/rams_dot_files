@@ -24,6 +24,8 @@ if [ `uname` = "Linux" ]; then
     export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 fi
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
