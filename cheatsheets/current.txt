@@ -5,6 +5,7 @@ rg -uuu      - gets close to rgrep
              - u:nogitingore, uu:hidden, uuu:binary
 rg --type-list      - list filetype defs
 rg -tgo -tsh -Tjs   - search go and sh types, not javascript
+rg --json       - print results in json!
 
 FZF:
 fzf --preview 'bat --style=numbers --color=always {} | head -500'              - preview with bat
