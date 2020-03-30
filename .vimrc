@@ -232,7 +232,9 @@ noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
 noremap <leader>l :Lines<CR>
+noremap <leader>L :Lines!<CR>
 noremap <leader>b :Buffers<CR>
+noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W

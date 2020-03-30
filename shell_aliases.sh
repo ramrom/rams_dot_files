@@ -14,6 +14,7 @@ alias ifschar='printf "%q\n" "$IFS"'
 alias fig='find . -type f | xargs grep'
 alias fdg='fd --hidden --exclude .git | xargs grep'
 alias fzfp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
+alias fzfh="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
 alias fzfe="export | fzf"
 alias fzfa="search_alias_func | fzf"
 alias rd='cd ~/rams_dot_files'
