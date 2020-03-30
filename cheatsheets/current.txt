@@ -22,6 +22,10 @@ search:
     foo$        (foo at end of line)
     'foo        (exact match foo)
 
+FD:
+fd -p        - match on full path (default file/dir name)
+fd --type f  - close to find, old match on file types
+
 SHELL:
 ctrl-h - delete last char, VIM insert mode and command too!
 ctrl-j / ctrl-m - begin new line, VIM insert mode too!
