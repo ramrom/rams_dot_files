@@ -38,6 +38,7 @@
 [alias]
   co = checkout
   aa = add --all
+  au= add -u
   cm = commit -m
   b = branch
   bvv = branch -vv

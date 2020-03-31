@@ -15,10 +15,13 @@ ctrl+alt+delete - logout
 
 APT:
 ------------------------------------------
-apt-rdepends pkg    - shows decent one level dep tree of pkg (only 1 level tho)
+apt-rdepends pkg    - shows decent one level dep tree of pkg
+                      (only 1 level tho)
 apt-rdepends -r pkg  - show reverse deps
-apt-cache showpkg pkg - shows deps and reverse deps, shows versions, also shows SHAs and more info
-apt-cache rdepends pkg  -r(reverse), show other packages dependent on it i think
+apt-cache showpkg pkg - shows deps and reverse deps,
+            shows versions, also shows SHAs and more info
+apt-cache rdepends pkg  -r(reverse), show other packages
+                        dependent on it i think
 apt-cache depends pkg  - show raw dep info of package pkg
 
 apt list --installed - show installed packages
