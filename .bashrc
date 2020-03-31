@@ -24,6 +24,16 @@ if [ `uname` = "Linux" ]; then
     export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 fi
 
+# Linux bin name for fd is fdfind
+local fdname="fd"
+[ `uname` = "Linux" ] && fdname="fdfind"
+
+export FZF_DEFAULT_COMMAND="$fdname --type f --hidden --exclude .git"
+export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-info"
+export FZF_COMPLETION_TRIGGER='**'
+export FZF_CTRL_T_COMMAND="$fdname"
+export FZF_ALT_C_COMMAND="$fdname --type d"
+
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 function load_or_err() {
