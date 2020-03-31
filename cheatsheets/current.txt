@@ -1,5 +1,8 @@
 https://devhints.io/  (great reference for all types for developers)
 
+JIRA:
+.   - bring up search menu
+
 RG:
 rg -uuu      - gets close to rgrep
              - u:nogitingore, uu:hidden, uuu:binary

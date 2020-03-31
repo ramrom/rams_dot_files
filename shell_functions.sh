@@ -42,13 +42,11 @@ function rrc() {
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
-# using ripgrep with fzf+preview, preserving rg match color in preview
+# ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 rgf() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
     rg --files-with-matches --no-messages "$1" | fzf --preview \
-        "highlight -O ansi -l {} 2> /dev/null | \
-         rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' \
-         || rg --ignore-case --pretty --context 10 '$1' {}"
+        "rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
