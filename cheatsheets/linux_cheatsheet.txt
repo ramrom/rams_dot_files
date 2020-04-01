@@ -32,6 +32,10 @@ apt-get changelog pkg - see changelog
 apt-get check  - check for broken deps
 sudo apt-get autoremove pkg - remove a package and it's dependencies
 
+sudo apt --dry-run autoremove
+    - autoremove remove uneeded pkgs
+    - dry-run just shows what it would remove
+
 
 
 
