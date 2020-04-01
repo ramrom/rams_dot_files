@@ -1,21 +1,17 @@
+# VIM
 alias vin='nvim'
 alias vinmetals='VIM_METALS=1 vin'
 alias svi='VIM_NOPLUG=1 vim'    # simple
 alias ssvi='vim -u NONE'        # super simple
 alias vina='VIM_NO_AUTOREAD=1 vi'
-alias g='git'
+
 alias ll='ls -l'
 alias la='ls -A'
 alias lal='ls -al'
 alias lahl='ls -alh'
 alias lrt='ls -lrt'
-alias grep='grep --colour=always'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
-alias fzfp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
-alias fzfh="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
-alias fzfe="export | fzf"
-alias fzfa="search_alias_func | fzf"
 alias rd='cd ~/rams_dot_files'
 alias dubydir='du -sh *'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
@@ -75,19 +71,24 @@ else  # assuming Darwin here
 fi
 
 # GIT
+alias g='git'
 alias gp='git pull'
-alias gpsm='git pull --recurse-submodules'
-alias gsubp='git submodule foreach git pull origin master'
 alias gs='git status'
 alias gd='git diff'
 alias gdd='git -c core.pager="delta --dark" diff'
-alias gitconfigs='echo ""; git config --system --list; echo ""; git config --global --list; echo ""; git config --local --list'
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
-alias gaddallcmt="git add . && pgit commit -m 'added stuff!'"
+alias gaddallcmt="git add -u . && pgit commit -m 'added stuff!'"
+# alias gpsm='git pull --recurse-submodules'
+# alias gsubp='git submodule foreach git pull origin master'
 
-# RG (ripgrep)
+# GREP and RG (ripgrep) and FZF
+alias grep='grep --colour=always'
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/'"
+alias fzfp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
+alias fzfh="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
+alias fzfe="export | fzf"
+alias fzfa="search_alias_func | fzf"
 
 # Go
 alias gosr='cd ~/go/src'
