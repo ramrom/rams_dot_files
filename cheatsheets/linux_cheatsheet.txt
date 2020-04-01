@@ -37,7 +37,9 @@ sudo apt --dry-run autoremove
     - dry-run just shows what it would remove
 
 
-
+sudo shutdown -h now (halt now)
+sudo shutdown -k (kick everyone off and login disabled, no halting)
+sudo shutdown -r now (reboot now)
 
 
 General linux/ubuntu tools:

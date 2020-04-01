@@ -45,9 +45,15 @@ function viln() { vin -p $(cat $1); }
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 rgf() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-    rg --files-with-matches --no-messages "$1" | fzf --preview \
-        "rg --ignore-case --pretty --context 10 '$1' {}"
+    # rg --files-with-matches --no-messages "$1" | fzf --preview \
+    rg $RG_FILTER --files-with-matches --no-messages "$1" | fzf --preview \
+        "rg $RG_FILTER --ignore-case --pretty --context 10 '$1' {}"
+        # "rg --ignore-case --pretty --context 10 '$1' {}"
 }
+
+#TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
+rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
+rgfst() { RG_FILTER="-tscala" rgf $1; }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
 function findgrepp() { find . -type f -regex $1 | xargs grep $2; }
@@ -218,7 +224,7 @@ function tmux_render_timer_bar() {
 
 function tmux_status_foo() {
     tmux set status 5
-    tmux set status-interval 2
+    tmux set status-interval 1
 
     # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
     # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
