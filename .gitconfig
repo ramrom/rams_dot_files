@@ -62,4 +62,6 @@
   hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --dense
   shas = log --pretty=format:\"%H\"
   cll   = config --local --list
+  cgl   = config --global --list
+  csl   = config --system --list
   alias = config --get-regexp ^alias\\.
