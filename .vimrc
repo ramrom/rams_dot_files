@@ -192,9 +192,7 @@ let mapleader = " "				"set metakey for vim shortcuts
 " TODO: semicolon repeats last f/F motions, maybe make it goto command mode
 " nmap ; :
 
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
+if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 
 "way faster and easier way to hit escape, rarely hit jk successively in insert mode
 inoremap jk  <Esc>

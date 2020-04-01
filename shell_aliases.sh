@@ -75,11 +75,11 @@ alias g='git'
 alias gp='git pull'
 alias gs='git status'
 alias gd='git diff'
-alias gdd='git -c core.pager="delta --dark" diff'
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
-alias gaddallcmt="git add -u . && pgit commit -m 'added stuff!'"
+alias gdd='git -c core.pager="delta --dark" diff'
 # alias gpsm='git pull --recurse-submodules'
 # alias gsubp='git submodule foreach git pull origin master'
+
 
 # GREP and RG (ripgrep) and FZF
 alias grep='grep --colour=always'
