@@ -41,6 +41,9 @@ kill %1
 # redirect stderr to out
 cat 2>&1 blah
 
+# list all files recursively in dir and their disk usage
+du -a /foo
+
 # find a file recursive starting with current dir
 find . -type f -name "*pattern*"
 
