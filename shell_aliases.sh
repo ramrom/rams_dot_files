@@ -62,6 +62,7 @@ if [ `uname` = "Linux" ]; then
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
     alias psx='ps auxf'
     alias psxfull='ps auxhfww'
+    alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
 else  # assuming Darwin here
     alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
     alias psx='ps auxh'
