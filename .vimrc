@@ -75,6 +75,7 @@ set nowritebackup                               " only in case you don't want a 
 set noswapfile                                  " no swap files
 "set backupdir=~/.vim,~/.tmp/,~/tmp,/tmp
 
+set splitbelow splitright       " open new windows on bottom for horizontal, right for vertical
 set wildmenu                    " display command line's tab complete options as menu
 set wrap                        " wrap lines longer than width to next line
 set linebreak                   " avoid wrapping line in middle of a word
@@ -84,7 +85,10 @@ set number					    " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
-" set formatoptions+=j            " Delete comment character when joining commented lines
+set formatoptions+=j            " Delete comment character when joining commented lines
+
+" TODO: get this working, think i need -c and -r
+set formatoptions-=o            " disable autocommenting on newline
 
 
 set hlsearch  				" highlight search
@@ -179,6 +183,10 @@ function ToggleDisplayTrailSpaces()
 endfunction
 
 call ToggleDisplayTrailSpaces()
+
+" TODO: make toggleable, or a command/func i can manually invoke
+" delete all trailing white space
+" autocmd BufWritePre * %s/\s\+$//e
 
 "globally disable indentLine by default
 let g:indentLine_enabled = 0
