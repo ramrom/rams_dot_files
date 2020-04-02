@@ -9,6 +9,7 @@ rg -uuu      - gets close to rgrep
 rg --type-list      - list filetype defs
 rg -tgo -tsh -Tjs   - search go and sh types, not javascript
 rg --json       - print results in json!
+rg -g '**/*foo*/**' pattern  - would search in file /bar/befooyar/dude/wut
 
 FZF:
 fzf --preview 'bat --style=numbers --color=always {} | head -500'              - preview with bat
@@ -71,6 +72,7 @@ git push -u remote              - push/track current branch
 
 git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
+git commit --amend --author="Author Name <email@address.com>"
 
 EMACS
 c-x c-c to quit

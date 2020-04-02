@@ -1,4 +1,5 @@
 "Sreeram's VI RC
+set nocompatible     " must be iMproved
 
 """"""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -17,6 +18,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'rafi/awesome-vim-colorschemes'
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
+    Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'scrooloose/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -25,7 +27,6 @@ elseif empty($VIM_NOPLUG)
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
-    Plug 'tpope/vim-commentary'     " smart code commenting
 
     "sign col shows revision ctrl changed lines, internet say faster and better than gitgutter
     if has('nvim') || has('patch-8.0.902')

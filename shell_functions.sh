@@ -44,10 +44,12 @@ function viln() { vin -p $(cat $1); }
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 rgf() {
-    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-    # rg --files-with-matches --no-messages "$1" | fzf --preview \
-    rg $RG_FILTER --files-with-matches --no-messages "$1" | fzf --preview \
-        "rg $RG_FILTER --ignore-case --pretty --context 10 '$1' {}"
+    [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
+    local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
+    local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
+    # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
+    rg $RG_FILTER --files-with-matches --no-messages "$1" "$rgdir" | fzf --preview \
+        "rg $RG_FILTER --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
         # "rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
