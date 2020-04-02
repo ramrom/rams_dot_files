@@ -1,9 +1,9 @@
 VIM:
 <,> are indenting in normal mode
-"+y - */+ reg, goes to sys clipboard!
-"*y - mostly same as + reg
+"+y - + reg goes to sys clipboard!
+"*y - in linux * is primary selection, like + reg
 "+p - paste from sys clipboard
-"*p - paste from sys clipboard (tmux yank goes in this reg)
+"*p - paste from sys clipboard
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
