@@ -54,6 +54,14 @@ do
     echo $i
 done
 
+# bash IFS field split will see 3 items
+string="foo bar baz"
+for i in $string
+do
+    echo $i
+done
+
+
 ###### LOOPS
 # bash
 for run in {1..10}; do echo "hello"; done
@@ -84,12 +92,16 @@ esac
 # split on ":" delimiter, each on newline
 echo foo:bar:baz | tr : \\n
 
-# command line substitution to preserve newline chars after field splitting
-# see https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
+# command line substitution field splitting
+    - bash field splits by default, zsh doesnt (need to set an shell option)
+    - IFS  var determines chars to use as delimter for splitting
+    - https://stackoverflow.com/questions/41320199/ifs-in-zsh-behave-differently-than-bash
+    - https://unix.stackexchange.com/questions/26661/what-is-word-splitting-why-is-it-important-in-shell-programming
+    - https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
 IFS=
 A=$(env)
 echo $A | grep "something"
-# OR (double quoting the var)
+# OR (double quoting var also prevents field splitting)
 A=$(env)
 echo "$A" | grep "something"
 
