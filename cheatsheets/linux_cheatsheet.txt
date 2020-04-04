@@ -12,6 +12,7 @@ super+m - toggle notif tray
 alt+f2  - run command
 ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout
+ctrl+shift+ c/p - copy and paste
 
 APT:
 ------------------------------------------

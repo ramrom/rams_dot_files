@@ -102,7 +102,7 @@ set smartcase               " with ignorecase, search with all lowercase means I
 " set complete-=i | set complete+=kspell
 
 set foldmethod=indent
-set nofoldenable
+set nofoldenable            " dont fold everything when opening buffers
 
 """ Status Line
 set ls=2					" line status, two lines for status and command

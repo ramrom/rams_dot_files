@@ -25,7 +25,7 @@ if [ `uname` = "Linux" ]; then
 fi
 
 # Linux bin name for fd is fdfind
-local fdname="fd"
+fdname="fd"
 [ `uname` = "Linux" ] && fdname="fdfind"
 
 export FZF_DEFAULT_COMMAND="$fdname --type f --hidden --exclude .git"
