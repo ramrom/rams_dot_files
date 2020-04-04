@@ -19,6 +19,7 @@ alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sor
 alias ch_date='sudo date --set 1998-11-02'
 alias httpv='http -v'
 alias httpcn='httpv http://api.icndb.com/jokes/random'
+alias weather='http wttr.in'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
 alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG files

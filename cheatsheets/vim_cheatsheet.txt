@@ -1,7 +1,8 @@
 VIM:
 <,> are indenting in normal mode
 "+y - + reg goes to sys clipboard!
-"*y - in linux * is primary selection, like + reg
+"*y - in linux * is primary selection
+      contents of what u simply highlighted/selected
 "+p - paste from sys clipboard
 "*p - paste from sys clipboard
 c-x before c-n autocomplete search only in current file
@@ -19,6 +20,8 @@ g,   - jump back to newer edit point
 :20,23y a<CR> - without moving cursor into reg a
 :7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
+:read ~/foo     - insert contents of file foo
+:read !jq . foo - can take stdout of shell cmd
 
 FZF:
 Rg            - ripgrep dynamic fuzzy search with bat preview!
@@ -57,16 +60,18 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 - TIP: once a buffer autoreloads, you can still undo
 
 
-Vim Cheat Sheet:
+VIM CHEAT SHEET:
 ------------------------------------
-Help:
+:version  - get version and features compiled
+
+HELP:
 :help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
 :h sometopic | only   - help in single window
 :h normal-index  - normal default mappings
 :h insert-index  - insert default mappings
 
-Command mode:
+COMMAND MODE:
 C-h - delete last char
 C-w - delete last word
 C-b - goto beg of line
@@ -92,7 +97,7 @@ hi  - spit out all highlighting rules
 :e #    - open last opened file
 
 
-Insert mode - inserting/appending text:
+INSERT MODE - inserting/appending text:
 Esc - exit insert mode
 C-[ - exit insert mode
 C-C - exist insert mode, dont trigger autocommands
@@ -124,7 +129,7 @@ C-Z - should suspend vim
 C-B - used to toggle revins, now disabled
 
 
-Normal Mode:
+NORMAL MODE:
 i - insert before the cursor
 I - insert at the beginning of the line
 a - insert (append) after the cursor
@@ -145,7 +150,7 @@ C-Q - terminals, stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file
 
-Cursor movement:
+CURSOR MOVEMENT:
 <enter> - move cursor to beginning of next line
 h - move cursor left
 C-h - move cursor left
@@ -199,7 +204,7 @@ Ctrl + o - go to older cursor position in jump list
 Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
-Editing:
+EDITING:
 r - replace a single character
 J - join line below to the current one with one space in between
 gJ - join line below to the current one without space in between
@@ -217,7 +222,7 @@ u - undo
 Ctrl + r - redo
 . - repeat last command
 
-Marking text (visual mode):
+MARKING TEXT (visual mode):
 v - start visual mode, mark lines, then do a command (like y-yank)
 V - start linewise visual mode
 o - move to other end of marked area
@@ -225,7 +230,7 @@ Ctrl + v - start visual block mode
 O - move to other corner of block
 Esc - exit visual mode
 
-Text objects:
+TEXT OBJECTS:
 <number><operator/command><number><text object>
 i = inner, a = all
 aw - word with surrounding whitespace
@@ -239,20 +244,20 @@ ib - block within and not including ()
 iB - block within and not including {}
 <operator><a/i><"/'/(/)/{/}/[/]>  programming language text objects
 
-motion+objects:
+MOTION+OBJECTS:
 v3ta - visual select up to the 3rd occurence of a
 d2fn - delete up to 2nd occurence of n
 c2aw - delete 2 full words and insert
 c2w - delete from cursor current word, then next word, then insert
 
-Visual commands:
+VISUAL COMMANDS:
 > - shift text right
 < - shift text left
 y - yank (copy) marked text
 d - delete marked text
 ~ - switch case
 
-Registers:
+REGISTERS:
 :reg - show registers content
 "xy - yank into register x
 "xp - paste contents of register x
