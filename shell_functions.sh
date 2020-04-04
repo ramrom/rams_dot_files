@@ -42,6 +42,17 @@ function rrc() {
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
+function fzfm() {
+    local IFS=$'\n'
+    local files=($(fzf))
+    echo "$(tput setaf 2)FILES TO BE MOVED:$(tput sgr0)"
+    for i in ${files[@]}; do echo "    $(tput setaf 3)$i"; done
+    local dest=$(fd --type d | fzf --no-multi)
+    [ -z "$dest" ] && return 1
+    for i in ${files[@]}; do mv $i $dest; done
+    echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
+}
+
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 function rgf() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1

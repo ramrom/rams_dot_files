@@ -64,6 +64,13 @@ VIM CHEAT SHEET:
 ------------------------------------
 :version  - get version and features compiled
 
+STARTING VIM:
+vim -u NONE     - start without running vimrc
+vim foo bar     - foo and bar buffers
+vim -o  foo bar - foo and bar in diff windows
+vim -p  foo bar - foo and bar in diff tabs
+vim -V  foo     - verbose output
+
 HELP:
 :help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
