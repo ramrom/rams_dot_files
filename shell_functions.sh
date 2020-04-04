@@ -43,7 +43,7 @@ function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
-rgf() {
+function rgf() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
@@ -54,8 +54,8 @@ rgf() {
 }
 
 #TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
-rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
-rgfst() { RG_FILTER="-tscala" rgf $1; }
+function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
+function rgfst() { RG_FILTER="-tscala" rgf $1; }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
 function findgrepp() { find . -type f -regex $1 | xargs grep $2; }
