@@ -62,6 +62,8 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 VIM CHEAT SHEET:
 ------------------------------------
+- good resource on learning vim: http://vimcasts.org/
+
 :version  - get version and features compiled
 
 STARTING VIM:
