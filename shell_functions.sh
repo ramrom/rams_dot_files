@@ -49,7 +49,8 @@ function fzfm() {
     for i in ${files[@]}; do echo "    $(tput setaf 3)$i"; done
     local dest=$(fd --type d | fzf --no-multi)
     [ -z "$dest" ] && return 1
-    for i in ${files[@]}; do mv $i $dest; done
+    local mvcmd="mv"; git rev-parse --git-dir > /dev/null 2>&1 && mvcmd="git mv"
+    for i in ${files[@]}; do eval "$mvcmd $i $dest"; done
     echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
 }
 
