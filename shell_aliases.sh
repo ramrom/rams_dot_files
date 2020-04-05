@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # VIM
 alias vin='nvim'
 alias vinmetals='VIM_METALS=1 vin'
@@ -46,8 +48,8 @@ alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
 alias sudo='sudo '
 
 if [ "$TERM" != "dumb" ]; then
-    if [ `uname` = "Linux" ]; then
-        eval "`dircolors -b`"
+    if [ "$(uname)" = "Linux" ]; then
+        eval "$(dircolors -b)"
         alias ls='ls --color=auto'
         alias rgrep='rgrep --color=auto'
         alias egrep='egrep --color=auto'
@@ -58,7 +60,7 @@ else
     echo "TERMINAL IS DUMB!, not setting some color aliases"
 fi
 
-if [ `uname` = "Linux" ]; then
+if [ "$(uname)" = "Linux" ]; then
     alias netstatip='sudo netstat -lpnut'
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
     alias psx='ps auxf'
