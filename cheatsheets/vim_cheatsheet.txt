@@ -31,11 +31,14 @@ GFiles!?    - git modified files in full screen
 Lines       - search lines in open buffers
 
 VIM-FUGITIVE:
+- cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
 G diff          - git diff
 G blame         - sidepane with git blame
 G log %         - git log <current file>
+    `:cnext`, `:cprevious`, `:cfirst` and `:clast`
+    :0Glog      - logs only that change current file
 
 
 :tabc - tabclose, close tab with all windows in it

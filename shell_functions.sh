@@ -1,5 +1,6 @@
+#!/bin/sh
 # shell functions
-#TODO: get method 2 working
+#TODO: get method 2/3 or all of them working
 function detect_shell() {
     # METHOD 1:
     if [ -n "$BASH_VERSION" ]; then
@@ -11,6 +12,7 @@ function detect_shell() {
     fi
     # METHOD 2: use ps
         # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
+    # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
 function search_alias_func() {
@@ -73,10 +75,10 @@ function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
 function rgfst() { RG_FILTER="-tscala" rgf $1; }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
-function findgrepp() { find . -type f -regex $1 | xargs grep $2; }
+function findgrepp() { find . -type f -regex $1 -exec grep $2; }
 
 # last component of pathname, pattern not regex, e.g. ("*go")
-function findgrep() { find . -type f -name $1 | xargs grep $2; }
+function findgrep() { find . -type f -name $1 -exec grep $2; }
 
 function ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
 function italic() { ansi_fmt 3 "$@"; }
@@ -216,7 +218,7 @@ function tmux_render_progress_bar() {
 function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
 function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
 
-# NOTE: default tmux status script shell is sh(3.2), it compresses white spaces into one
+# NOTE: default tmux status script shell is sh(3.2)
 # TODO: diff format for secs and percent maybe?
 function tmux_render_timer_bar() {
     local start=$(tmux show -v @$1-start)
@@ -236,7 +238,8 @@ function tmux_render_timer_bar() {
         local progbar=$(tmux_render_progress_bar "⏰ $1 timer (${duration}s)" $percent_done 100)
     fi
 
-    echo $progbar
+    # NOTE: quotes needed to preserve spaces, otherwise sh/bash will interpret as args and compress
+    echo "$progbar"
 }
 
 function tmux_status_foo() {
@@ -397,7 +400,7 @@ function parse_comma_delim_error() {
     ruby -e "$str"
 }
 
-# doesnt work with sh(3.2)
+# doesnt work with sh(3.2),`<(foo>)` is process substitution, and a bash(and zsh) thing
 function filenamediff() {
     diff <(cd $1; find . -type f) <(cd $2; find . -type f)
 }

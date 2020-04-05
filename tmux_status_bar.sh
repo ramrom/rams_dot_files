@@ -1,4 +1,5 @@
-#!/bin/zsh
+#!/bin/sh
+
 setopt NO_NOMATCH
 source ~/rams_dot_files/shell_functions.sh
 

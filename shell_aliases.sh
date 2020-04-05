@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # VIM
 alias vin='nvim'
 alias vinmetals='VIM_METALS=1 vin'
