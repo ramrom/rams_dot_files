@@ -16,9 +16,11 @@ function detect_shell() {
 function search_alias_func() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
-        { alias; print -l ${(ok)functions}; } | grep "$1"
+        local cmd="functions"; [ -z $fullfunc ]  && cmd='print -l ${(ok)functions}'
+        { alias; eval $cmd; } | grep "$1"
     else
-        { alias; typeset -F; } | grep "$1"
+        local cmd="set"; [ -z $fullfunc ]  && cmd='typeset -F'
+        { alias; eval $cmd; } | grep "$1"
     fi
 }
 
@@ -42,7 +44,8 @@ function rrc() {
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
-function fzfm() {
+# fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
+function fmv() {
     local IFS=$'\n'
     local files=($(fzf))
     echo "$(tput setaf 2)FILES TO BE MOVED:$(tput sgr0)"

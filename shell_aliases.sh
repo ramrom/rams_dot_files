@@ -87,10 +87,11 @@ alias gdd='git -c core.pager="delta --dark" diff'
 alias grep='grep --colour=always'
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/'"
-alias fzfp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
-alias fzfh="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
-alias fzfe="export | fzf"
-alias fzfa="search_alias_func | fzf"
+alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
+alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
+alias fe="export | fzf"
+alias fs="search_alias_func | fzf"
+alias ffs="fullfunc=1 search_alias_func | fzf"
 
 # Go
 alias gosr='cd ~/go/src'
