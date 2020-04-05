@@ -14,16 +14,16 @@ tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
 # foo=$(tmux_render_timer_bar eggs)
 # tmux set status-format[1] "$foo"
-tmux set status-format[1] "$(tmux_render_timer_bar eggs)"
 
 if [ $(( $counter % 2 )) -eq 0 ]; then
-    tmux set -a status-format[2] "*"
+    tmux set status-format[1] "$(color=200 tmux_render_timer_bar eggs)"
+    # tmux set -a status-format[2] "*"
 fi
 
-if [ $(( $counter % 4 )) -eq 0 ]; then
-    tmux set -a status-format[3] "*"
-fi
+# if [ $(( $counter % 4 )) -eq 0 ]; then
+#     tmux set -a status-format[3] "*"
+# fi
 
-if [ $(( $counter % 8 )) -eq 0 ]; then
-    tmux set -a status-format[4] "*"
-fi
+# if [ $(( $counter % 8 )) -eq 0 ]; then
+#     tmux set -a status-format[4] "*"
+# fi

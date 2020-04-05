@@ -41,6 +41,9 @@ kill %1
 # redirect stderr to out
 cat 2>&1 blah
 
+# redir stderr and stdout to /dev/null
+cat > /dev/null 2>&1 blah
+
 # list all files recursively in dir and their disk usage
 du -a /foo
 
