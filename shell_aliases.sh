@@ -84,6 +84,7 @@ alias gdd='git -c core.pager="delta --dark" diff'
 
 
 # GREP and RG (ripgrep) and FZF
+alias f="fzf"
 alias grep='grep --colour=always'
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/'"
