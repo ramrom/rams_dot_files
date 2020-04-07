@@ -40,6 +40,24 @@ G log %         - git log <current file>
     `:cnext`, `:cprevious`, `:cfirst` and `:clast`
     :0Glog      - logs only that change current file
 
+NERDTree:
+?   - toggle quickhelp
+m   - bring up menu to move/rename/delete
+q   - close nerdtree
+A   - toggle zooming the nerdtree window
+r/R - refresh dir/refresh tree root
+I   - toggle showing hidden files
+F   - toggle showing file nodes
+NERDTreeFind - no arg, show file for buf in tree
+go - open file but stay in nerdtree
+i/gi - open in new split/new split stay cursor
+s/gs - open in new/ vert split
+x - close current dir
+p - jump to parent node of selected node
+P - jump to tree root
+K/J - jmp to first/last child node of current node's parent
+C - make selected dir node the new root node
+
 
 :tabc - tabclose, close tab with all windows in it
 :tabonly - close all other tabs
