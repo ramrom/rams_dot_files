@@ -1,4 +1,3 @@
-#!/bin/sh
 # shell functions
 #TODO: get method 2/3 or all of them working
 function detect_shell() {
@@ -92,6 +91,8 @@ function display_notif() {
 }
 
 # TODO: finish this
+# TODO: benchmark: 1) momoization and grep 2) dont memoize
+# hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
 function sensor_data() {
     # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
     local IFS=
@@ -402,7 +403,7 @@ function parse_comma_delim_error() {
 
 # doesnt work with sh(3.2),`<(foo>)` is process substitution, and a bash(and zsh) thing
 function filenamediff() {
-    diff <(cd $1; find . -type f) <(cd $2; find . -type f)
+    diff <(cd $1; find . -type f | sort) <(cd $2; find . -type f | sort)
 }
 
 function f_findfilesbysize() {

@@ -37,7 +37,8 @@ G               - git status
 G diff          - git diff
 G blame         - sidepane with git blame
 G log %         - git log <current file>
-    `:cnext`, `:cprevious`, `:cfirst` and `:clast`
+    `:cnext`, `:cprevious`,
+    `:cfirst` and `:clast`
     :0Glog      - logs only that change current file
 
 NERDTree:
@@ -48,7 +49,7 @@ A   - toggle zooming the nerdtree window
 r/R - refresh dir/refresh tree root
 I   - toggle showing hidden files
 F   - toggle showing file nodes
-NERDTreeFind - no arg, show file for buf in tree
+NERDTreeFind - no args, show file for buf in tree
 go - open file but stay in nerdtree
 i/gi - open in new split/new split stay cursor
 s/gs - open in new/ vert split
@@ -130,7 +131,7 @@ hi  - spit out all highlighting rules
 INSERT MODE - inserting/appending text:
 Esc - exit insert mode
 C-[ - exit insert mode
-C-C - exist insert mode, dont trigger autocommands
+C-C - exit insert mode, dont trigger autocommands
 C-T - indent current line by shiftwidth
 C-I - indent current line by shiftwidth
 C-D - un-indent current line by shiftwidth
