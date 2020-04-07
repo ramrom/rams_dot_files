@@ -28,7 +28,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
-    "sign col shows revision ctrl changed lines, internet say faster and better than gitgutter
+    "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
     if has('nvim') || has('patch-8.0.902')
         Plug 'mhinz/vim-signify'
     else
@@ -90,7 +90,7 @@ set formatoptions+=j            " Delete comment character when joining commente
 " TODO: get this working, think i need -c and -r
 set formatoptions-=o            " disable autocommenting on newline
 
-
+"Searching
 set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
 " highlight Search cterm=italic ctermbg=238  "TODO: italics not showing...
@@ -115,15 +115,16 @@ set tabstop=4                                   " space 4 columns when reading a
 set softtabstop=4                               " complicated, see docs
 set expandtab                                   " use spaces when tab is pressed
 
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
 " TODO: find a good char for tab and other non-\s whitespaces
 " set list
 " set listchars=tab:>-,trail:.              "display tab chars as '>-', trailing spaces as '.'
 
-" set cursorline                              " highlight line cursor is on
-" set cursorcolumn                            " highlight column cursor is on
-
-" let &colorcolumn=join(range(81,999),",")  "highlight columns >80
-highlight ColorColumn ctermbg=235
+" set cursorline cursorcolumn                " highlight line and column cursor is on
 
 """""""" Reloading buffers changed outside of vim session """""""""""""""""
 function RamAutoRead()
@@ -153,6 +154,9 @@ function ToggleFoldMethod()
         set foldmethod=indent
     endif
 endfunction
+
+" let &colorcolumn=join(range(81,999),",")  "highlight columns >80
+highlight ColorColumn ctermbg=235
 
 "cycle between line 80, 120, and no colorcolumn
 function CycleColorCol()
