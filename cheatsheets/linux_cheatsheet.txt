@@ -45,6 +45,8 @@ sudo shutdown -r now (reboot now)
 
 General linux/ubuntu tools:
 ------------------------------------------
+stat - get metadata on a file
+lsblk - show block level devices
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
