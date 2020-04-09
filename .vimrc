@@ -240,6 +240,7 @@ noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>ad :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
+noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
 noremap <leader>l :Lines<CR>

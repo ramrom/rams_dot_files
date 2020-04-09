@@ -46,6 +46,7 @@ function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
 # fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
+# NOTE: zsh give "bad math expression" on first for loop, bash works; when i rebooted it works, maybe shell opt?
 function fmv() {
     local IFS=$'\n'
     local files=($(fzf))
