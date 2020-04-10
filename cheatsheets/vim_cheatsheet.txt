@@ -369,6 +369,8 @@ Working with multiple files:
 :bprev or :bp - go to the previous buffer
 :bd - delete a buffer (close a file)
 :ls - list all open buffers
+
+WINDOWS:
 :sp file - open a file in a new buffer and split window
 :vsp file - open a file in a new buffer and vertically split window
 Ctrl + ws - split window
@@ -379,6 +381,13 @@ Ctrl + wh - move cursor to the left window (vertical split)
 Ctrl + wl - move cursor to the right window (vertical split)
 Ctrl + wj - move cursor to the window below (horizontal split)
 Ctrl + wk - move cursor to the window above (horizontal split)
+ctrl + w_ - max height of window
+ctrl + w| - max width of window
+ctrl + w= - normalize all window sizes
+ctrl + wR - swap top/bottom or left/right windows
+ctrl + wT - break window out to new tab
+ctrl + wo - close all windows except current one in tab
+
 
 Tabs:
 :tabnew or :tabnew file - open a file in a new tab
