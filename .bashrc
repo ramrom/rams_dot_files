@@ -70,6 +70,8 @@ export GOBIN=${GOBIN}/bin
 
 # set PATH so it includes user's private bin if it exists
 [ -d ~/bin ] && PATH=~/bin:"${PATH}"
+# ubuntu has python stuff in ~/.local
+[ -d ~/.local/bin ] && PATH=~/.local/bin:"${PATH}"
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
