@@ -86,9 +86,7 @@ set backspace=indent,eol,start  " backspace like most wordprocessors in insert m
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
 set formatoptions+=j            " Delete comment character when joining commented lines
-
-" TODO: get this working, think i need -c and -r
-set formatoptions-=o            " disable autocommenting on newline
+set formatoptions-=o            " disable autocommenting on o and O in normal
 
 "Searching
 set hlsearch  				" highlight search
