@@ -5,6 +5,7 @@ alias svi='VIM_NOPLUG=1 vim'    # simple
 alias ssvi='vim -u NONE'        # super simple
 alias vina='VIM_NO_AUTOREAD=1 vi'
 
+alias ..='cd ..'
 alias ll='ls -l'
 alias la='ls -A'
 alias lal='ls -al'
@@ -48,7 +49,7 @@ alias sudo='sudo '
 if [ "$TERM" != "dumb" ]; then
     if [ "$(uname)" = "Linux" ]; then
         eval "$(dircolors -b)"
-        alias ls='ls --color=auto'
+        alias ls='ls --color=auto -F'
         alias rgrep='rgrep --color=auto'
         alias egrep='egrep --color=auto'
     else  # assuming Darwin here
