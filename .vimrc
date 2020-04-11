@@ -235,6 +235,13 @@ noremap <leader>d :bp<CR>
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 
 noremap <leader>q :q<cr>
+noremap <leader>y "+y
+noremap <leader>p "+p
+noremap <leader>t :tabnew<CR>
+noremap <leader>v :vsplit<CR><leader>w
+noremap <leader>h :split<CR><leader>w
+noremap <leader>w <C-w>w
+noremap <leader>W <C-w>W
 noremap <leader>aa :call MyLeaderMap()<cr>
 noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
@@ -251,15 +258,6 @@ noremap <leader>L :Lines!<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
-noremap <leader>w <C-w>w
-noremap <leader>W <C-w>W
-noremap <leader>t :tabnew<CR>
-noremap <leader>v :vsplit<CR><leader>w
-noremap <leader>h :split<CR><leader>w
-noremap <leader>y "+y
-noremap <leader>p "+p
-noremap <leader>x :set number!<CR>
-noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
@@ -267,6 +265,8 @@ noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
+noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
+noremap <leader>gx :set number!<CR>
 " noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
 
 "gb easier to type than gT
