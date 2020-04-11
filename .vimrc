@@ -85,6 +85,7 @@ set number					    " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
+
 set formatoptions+=j            " Delete comment character when joining commented lines
 set formatoptions-=o            " disable autocommenting on o and O in normal
 
@@ -209,6 +210,7 @@ if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 inoremap jk  <Esc>
 " inoremap jj  <Esc>
 
+" insert C-l is obscure vim insert thing, C-k is enter digraph, also good candidate
 inoremap <C-l>  <C-o>:w<cr>
 " inoremap <C-k>  <C-o>:w<cr>
 
