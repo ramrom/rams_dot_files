@@ -254,7 +254,7 @@ noremap <leader>r :Rg<CR>
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
 noremap <leader>t :tabnew<CR>
-noremap <leader>p :vsplit<CR><leader>w
+noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>y "+y
 noremap <leader>p "+p
