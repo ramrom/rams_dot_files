@@ -96,6 +96,7 @@ vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
 
 HELP:
+:help shell<Tab> - tab complete a help topic
 :help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
 :h sometopic | only   - help in single window
@@ -122,6 +123,7 @@ hi  - spit out all highlighting rules
 :verbose set fo?
     - will show fo(formatoptions)
     - verbose to tell u what last set it
+:args show arg list that vim was invoked with
 :help keyword - open help for keyword
 :saveas file - save file as
 :close - close current pane
@@ -171,6 +173,7 @@ ea - insert (append) at the end of the word
 K - open man page for word under the cursor
 Q - enter ex mode
 q: - enter command mode insert/edit mode (like C-F in cmd)
+q/ - see prev searches
 gq - format text over motion
 C-Z - suspend process
 C-K - enter digraph
@@ -182,6 +185,7 @@ C-S - ???
 C-Q - terminals, stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file
+. - repeat last command
 
 CURSOR MOVEMENT:
 <enter> - move cursor to beginning of next line
@@ -196,6 +200,9 @@ l - move cursor right
 H - move to top of screen
 M - move to middle of screen
 L - move to bottom of screen
+10L - move to 10th line from the bottom
+5H - move to 5th line from the top
+30% - go to line that is 30% from the top
 w - jump forwards to the start of a word
 W - jump forwards to the start of a word
     (words can contain punctuation)
@@ -213,6 +220,7 @@ B - jump backwards to the start of a word
 $ - jump to the end of the line
 g_ - jump to the last non-blank character of the line
 gg - go to the first line of the document
+gi - if left insert mode, go back to where u were in insert
 G - go to the last line of the document
 5G - go to line 5
 fx - jump to next occurrence of character x
@@ -223,6 +231,8 @@ Tx - jump to after previous occurence of character x
 , - repeat previous f, t, F or T movement, backwards
 } - jump to next paragraph (or function/block, when editing code)
 { - jump to previous paragraph (or function/block, when editing code)
+( - back a sentence
+) - forward a sentence
 zz - center cursor on screen
 zt - cursor on top of screen
 zb - cursor on bottom screen
@@ -238,9 +248,17 @@ Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
 EDITING:
+y - yank (copy) marked text
+d - delete marked text
+~ - switch case
 r - replace a single character
+R - enter replace mode to repeatedly replace the character under the cursor
 J - join line below to the current one with one space in between
 gJ - join line below to the current one without space in between
+gu - make selected text lower case
+guu - make current line lower case
+gU - make selected text upper case
+gUU - make current line upper case
 gwip - reflow paragraph
 cc - change (replace) entire line
 C - change (replace) to the end of the line
@@ -250,10 +268,31 @@ vab - visual select all block
 cw - change (replace) to the end of the word
 s - delete character and substitute text
 S - delete line and substitute text (same as cc)
+& - repeat last substitution
 xp - transpose two letters (delete and paste)
 u - undo
+U - undo all latest changes on one line
 Ctrl + r - redo
-. - repeat last command
+> - shift text right
+< - shift text left
+= - autoindent selected text
+== - autoindent current line
+
+Cut and paste:
+yy - yank (copy) a line
+2yy - yank (copy) 2 lines
+yw - yank (copy) the characters of the word from the cursor position
+    to the start of the next word
+y$ - yank (copy) to end of line
+p - put (paste) the clipboard after cursor
+P - put (paste) before cursor
+dd - delete (cut) a line
+2dd - delete (cut) 2 lines
+dw - delete (cut) the characters of the word from the cursor position
+     to the start of the next word
+D - delete (cut) to the end of the line
+d$ - delete (cut) to the end of the line
+x - delete (cut) character
 
 MARKING TEXT (visual mode):
 v - start visual mode, mark lines, then do a command (like y-yank)
@@ -283,14 +322,8 @@ d2fn - delete up to 2nd occurence of n
 c2aw - delete 2 full words and insert
 c2w - delete from cursor current word, then next word, then insert
 
-VISUAL COMMANDS:
-> - shift text right
-< - shift text left
-y - yank (copy) marked text
-d - delete marked text
-~ - switch case
-
 REGISTERS:
+:let @a=foo  - manually set reg a to something
 :reg - show registers content
 "xy - yank into register x
 "xp - paste contents of register x
@@ -314,22 +347,6 @@ q - stop recording macro
 @a - run macro a
 @@ - rerun last run macro
 
-Cut and paste:
-yy - yank (copy) a line
-2yy - yank (copy) 2 lines
-yw - yank (copy) the characters of the word from the cursor position
-    to the start of the next word
-y$ - yank (copy) to end of line
-p - put (paste) the clipboard after cursor
-P - put (paste) before cursor
-dd - delete (cut) a line
-2dd - delete (cut) 2 lines
-dw - delete (cut) the characters of the word from the cursor position
-     to the start of the next word
-D - delete (cut) to the end of the line
-d$ - delete (cut) to the end of the line
-x - delete (cut) character
-
 Folds:
 zo (open), zO (open all nested)
 zc (close), zC (close all)
@@ -344,6 +361,7 @@ Exiting:
 :q - quit (fails if there are unsaved changes)
 :q! or ZQ - quit and throw away unsaved changes
 :wqa - write (save) and quit on all tabs
+ZZ - same as :wq
 
 Search and replace:
 /pattern - search for pattern
@@ -356,6 +374,7 @@ N - repeat search in opposite direction
 :%s/old/new/gc - replace all old with new throughout file with confirmations
 * to search next occurence of word under cursor
 # will search backward
+[I - show all occurences of word under cursor
 :noh - remove highlighting of search matches
 
 Search in multiple files:
