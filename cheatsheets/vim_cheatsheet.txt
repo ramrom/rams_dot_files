@@ -124,10 +124,12 @@ hi  - spit out all highlighting rules
 :verbose set fo?
     - will show fo(formatoptions)
     - verbose to tell u what last set it
-:args show arg list that vim was invoked with
+:args   - show arg list that vim was invoked with
 :help keyword - open help for keyword
 :saveas file - save file as
-:close - close current pane
+:close - close current window
+:new    - open new window and new buffer
+:tabnew foo - open foo in new tab
 :e #    - open last opened file
 
 
@@ -249,8 +251,9 @@ Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
 EDITING:
-y - yank (copy) marked text
-d - delete marked text
+y - yank (copy) text
+d - delete text
+c - delete text and insert to change
 ~ - switch case
 r - replace a single character
 R - enter replace mode to repeatedly replace the character under the cursor
