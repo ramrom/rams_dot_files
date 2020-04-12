@@ -217,9 +217,18 @@ inoremap jk  <Esc>
 inoremap <C-l>  <C-o>:w<cr>
 " inoremap <C-k>  <C-o>:w<cr>
 
-"Fast buffer nav
-noremap <leader>f :bn<CR>
-noremap <leader>d :bp<CR>
+" if there is one tab, move forward/back buffer, otherwise forward/back tabs
+function TabBufMove(direction)
+    if len(gettabinfo()) == 1
+        if (a:direction == "f") | execute ":bn" | else |  execute ":bp" | endif
+    else
+        if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
+    endif
+endfunction
+
+"fast buffer or tab nav
+noremap <leader>f :call TabBufMove("f")<CR>
+noremap <leader>d :call TabBufMove("b")<CR>
 
 " TODO: think off adding these if i use vim windows more
 " ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
