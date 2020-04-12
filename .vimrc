@@ -293,6 +293,7 @@ noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "Quickly switch between up to 9 vimtabs
 for i in range(0,9) | exe 'noremap g'.i.' :tabn '.i.'<CR>' | endfor
+"TODO: maybe try this:  noremap <Leader><Leader>a :tabn 2<CR>
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
