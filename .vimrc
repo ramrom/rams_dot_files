@@ -229,6 +229,9 @@ endfunction
 noremap <leader>f :call TabBufMove("f")<CR>
 noremap <leader>d :call TabBufMove("b")<CR>
 
+"gb easier to type than gT
+noremap gb :tabprevious<CR>
+
 " default mappings: ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
@@ -240,21 +243,18 @@ noremap <C-k> <C-w>k
 
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 
+"TODO: <Leader>a is prime real estate! find a good map
+" noremap <leader>a ??????
 noremap <leader>q :q<cr>
+noremap <leader>s :w<cr>
 noremap <leader>y "+y
 noremap <leader>p "+p
 noremap <leader>t :tabnew<CR>
+noremap <leader>e :Explore<CR>
 noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
-noremap <leader>aa :call MyLeaderMap()<cr>
-noremap <leader>af :vsplit ~/tmp/scratch.txt<cr>
-noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
-noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
-noremap <leader>ad :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.sh<cr>
-noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
-noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>
@@ -264,6 +264,7 @@ noremap <leader>L :Lines!<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
+noremap <leader>R :Rg!<CR>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
@@ -273,13 +274,17 @@ noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
-" noremap <leader>s :mksession! ~/MyCurrentVimSession.vim<CR>
-
-"gb easier to type than gT
-noremap gb :tabprevious<CR>
+noremap <leader>S :mksession! ~/MyCurrentVimSession.vim<CR>
+noremap <leader>cc :call MyLeaderMap()<cr>
+noremap <leader>cf :vsplit ~/tmp/scratch.txt<cr>
+noremap <leader>ca :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
+noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
+noremap <leader>cd :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
+noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
+noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
 
 " turn off highlighting till next search
-noremap <leader>s :noh<cr>
+noremap <leader>j :noh<cr>
 
 " TODO: i think these maps are seriously useful
 " nnoremap <C-J> a<CR><Esc>k$

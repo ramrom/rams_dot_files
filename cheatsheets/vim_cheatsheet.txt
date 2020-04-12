@@ -26,6 +26,7 @@ g,   - jump back to newer edit point
 FZF:
 Rg            - ripgrep dynamic fuzzy search with bat preview!
 Files, ctrl-v - opens in new vert split
+Files, ctrl-x - opens in new horizontal split
 Files, ctrl-t - opens in new tab
 GFiles!?    - git modified files in full screen
 Lines       - search lines in open buffers
@@ -280,6 +281,7 @@ Ctrl + r - redo
 > - shift text right
 < - shift text left
 = - autoindent selected text
+=ip - autoindent inner paragraph
 == - autoindent current line
 
 Cut and paste:
