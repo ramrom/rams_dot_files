@@ -201,11 +201,13 @@ let g:indentLine_enabled = 0
 if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 
-"Mappings
-let mapleader = " "				"set metakey for vim shortcuts
+"TODO: Prime open real estate for normal mode!
+"<Leader>a
+"c-m/c-g/c-s/c-q/c-n
+"; " semicolon repeats last f/F motions, maybe make it goto command mode
 
-" TODO: semicolon repeats last f/F motions, maybe make it goto command mode
-" nmap ; :
+"""" MAPPINGS
+let mapleader = " "				"set metakey for vim shortcuts
 
 if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 
@@ -237,14 +239,7 @@ noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
-" TODO: c-m/c-g/c-s/c-q are some alternatives, would be nice to match this key for insert mode
-" noremap <C-n>   :w<cr>
 
-
-exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
-
-"TODO: <Leader>a is prime real estate! find a good map
-" noremap <leader>a ??????
 noremap <leader>q :q<cr>
 noremap <leader>s :w<cr>
 noremap <leader>y "+y
@@ -275,6 +270,7 @@ noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
 noremap <leader>S :mksession! ~/MyCurrentVimSession.vim<CR>
+exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call MyLeaderMap()<cr>
 noremap <leader>cf :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>ca :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
