@@ -185,7 +185,7 @@ C-L - clear and redraw screen
 C-A - add [count] to # of alpha char at or after cursor
 C-X - sub [count] to # of alpha char at or after cursor
 C-G - print file, line location, file status
-C-S - ???
+C-S - pause flow ctrl, terminal accepts input, no output
 C-Q - terminals, stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file

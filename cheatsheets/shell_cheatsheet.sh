@@ -7,6 +7,7 @@ set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
 
 # command line navigation
+ctrl-s - linux pauses output to screen
 ctrl-l - clear screen
 ctrl-a - goto beg of line
 ctrl-e - goto end of line
