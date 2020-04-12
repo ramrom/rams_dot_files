@@ -87,6 +87,7 @@ VIM CHEAT SHEET:
 - good resource on learning vim: http://vimcasts.org/
 
 :version  - get version and features compiled
+:cd <dir> - change vims current working dir
 
 STARTING VIM:
 vim -u NONE     - start without running vimrc
