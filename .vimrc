@@ -226,20 +226,17 @@ function TabBufMove(direction)
     endif
 endfunction
 
-"fast buffer or tab nav
 noremap <leader>f :call TabBufMove("f")<CR>
 noremap <leader>d :call TabBufMove("b")<CR>
 
-" TODO: think off adding these if i use vim windows more
-" ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
-"noremap <C-l> <C-w>l
-"noremap <C-h> <C-w>h
-"noremap <C-j> <C-w>j
-"noremap <C-k> <C-w>k
+" default mappings: ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+" TODO: c-m/c-g/c-s/c-q are some alternatives, would be nice to match this key for insert mode
+" noremap <C-n>   :w<cr>
 
-" TODO: not sure, c-m/c-j/c-n/c-g/c-s/c-q/c-h all seem like better alternatives
-" C-l in normal defaults to clear and redraw screen
-" noremap <C-l>   :w<cr>
 
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 
@@ -252,11 +249,11 @@ noremap <leader>h :split<CR><leader>w
 noremap <leader>w <C-w>w
 noremap <leader>W <C-w>W
 noremap <leader>aa :call MyLeaderMap()<cr>
+noremap <leader>af :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>as :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
-noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>av :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
-noremap <leader>ab :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
-noremap <leader>ad :vsplit ~/tmp/scratch.txt<cr>
+noremap <leader>ad :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.sh<cr>
+noremap <leader>ar :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>e :Explore<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
