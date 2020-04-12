@@ -20,7 +20,7 @@ class ParseWiki
     t = tables_by_name("Background").first
     maintained = software_with_prop(t, "Maintained?", "Yes")
     puts "maintained: #{maintained}\n\n"
-   
+
     t = tables_by_name("Features").first
     hidden_cont = software_with_prop(t, "Hidden containers", "Yes")
     puts "has hidden cont: #{hidden_cont}\n\n"

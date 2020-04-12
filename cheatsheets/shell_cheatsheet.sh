@@ -26,7 +26,8 @@ ctrl-r - fuzzy search command history
 ctrl-7 - undo
 ctrl-8 - backward delete char
 
-# send EOF to stdin, which bash/zsh/sh interpret as exit shell
+# send EOF to stdin, bash/zsh/sh interpret as exit shell
+# if not at 1st char in prompt, delete char in front of it
 Ctrl-d
 
 # print recent history in bash/zsh
