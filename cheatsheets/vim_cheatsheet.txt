@@ -28,6 +28,7 @@ Rg            - ripgrep dynamic fuzzy search with bat preview!
 Files, ctrl-v - opens in new vert split
 Files, ctrl-x - opens in new horizontal split
 Files, ctrl-t - opens in new tab
+:Files ../    - invoke on parent dir (can specify base path as first arg)
 GFiles!?    - git modified files in full screen
 Lines       - search lines in open buffers
 
@@ -106,6 +107,9 @@ HELP:
 :h normal-index  - normal default mappings
 :h insert-index  - insert default mappings
 
+OPTIONS:
+:set lazyredraw - for macros dont redraw screen, faster replay
+
 COMMAND MODE:
 C-h - delete last char
 C-w - delete last word
@@ -137,7 +141,7 @@ hi  - spit out all highlighting rules
 
 INSERT MODE - inserting/appending text:
 Esc - exit insert mode
-C-[ - exit insert mode
+C-[ - exit insert mode (most sysmtes, htting esc is this char)
 C-C - exit insert mode, dont trigger autocommands
 C-T - indent current line by shiftwidth
 C-I - indent current line by shiftwidth
@@ -229,6 +233,7 @@ gi - if left insert mode, go back to where u were in insert
 G - go to the last line of the document
 5G - go to line 5
 fx - jump to next occurrence of character x
+3fx - jump to 3rd occurence of char x
 tx - jump to before next occurrence of character x
 Fx - jump to previous occurence of character x
 Tx - jump to after previous occurence of character x

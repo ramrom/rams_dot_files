@@ -213,13 +213,11 @@ let mapleader = " "				"set metakey for vim shortcuts
 
 if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 
-"way faster and easier way to hit escape, rarely hit jk successively in insert mode
+"much faster than escape, almost never hit jk successively in insert, jj might be good too
 inoremap jk  <Esc>
-" inoremap jj  <Esc>
 
 " insert C-l is obscure vim insert thing, C-k is enter digraph, also good candidate
 inoremap <C-l>  <C-o>:w<cr>
-" inoremap <C-k>  <C-o>:w<cr>
 
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
 function TabBufMove(direction)

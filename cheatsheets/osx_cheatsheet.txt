@@ -20,8 +20,8 @@ OTHER:
 cmd-/  - highlight the cursor, iterm thing, not vim
 hold command mac key, hover over link, clickable
     - works in iterm and terminal
-
 - take screenshot of app window: cmd + shift + 4 -> then space
+
 
 COMMAND:
 mdls    - get metadata on a file
