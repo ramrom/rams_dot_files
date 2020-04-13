@@ -32,6 +32,7 @@ sudo apt-get purge vsftpd  - remove package and config files
 apt-get changelog pkg - see changelog
 apt-get check  - check for broken deps
 sudo apt-get autoremove pkg - remove a package and it's dependencies
+sudo update-alternatives --config foopkg - select alt
 
 sudo apt --dry-run autoremove
     - autoremove remove uneeded pkgs
