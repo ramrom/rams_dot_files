@@ -76,6 +76,7 @@ fi
 # GIT
 alias g='git'
 alias gp='git pull'
+alias gu='git push'
 alias gs='git status'
 alias gd='git diff'
 alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
