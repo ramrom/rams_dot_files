@@ -190,9 +190,11 @@ endfunction
 
 call ToggleDisplayTrailSpaces()
 
-" TODO: make toggleable, or a command/func i can manually invoke
 " delete all trailing white space
-" autocmd BufWritePre * %s/\s\+$//e
+" NOTE: to make it automatic: autocmd BufWritePre * %s/\s\+$//e
+function RemoveTrailingWhiteSpace()
+    execute '%s/\s\+$//e'
+endfunction
 
 "globally disable indentLine by default
 let g:indentLine_enabled = 0
@@ -201,12 +203,12 @@ let g:indentLine_enabled = 0
 if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 
+"""" MAPPINGS
 "TODO: Prime open real estate for normal mode!
-"<Leader>a
+"<Leader>a/k/;
 "c-m/c-g/c-s/c-q/c-n
 "; " semicolon repeats last f/F motions, maybe make it goto command mode
 
-"""" MAPPINGS
 let mapleader = " "				"set metakey for vim shortcuts
 
 if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
@@ -261,6 +263,7 @@ noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
 noremap <leader>R :Rg!<CR>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
+noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
