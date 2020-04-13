@@ -85,6 +85,7 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 VIM CHEAT SHEET:
 ------------------------------------
+- :h index.txt basically has comprehensive default mappings
 - good resource on learning vim: http://vimcasts.org/
 
 :version  - get version and features compiled
@@ -320,6 +321,7 @@ ab - block within and including ()
 aB - block within and including {}
 ib - block within and not including ()
 iB - block within and not including {}
+at - all tag block
 <operator><a/i><"/'/(/)/{/}/[/]>  programming language text objects
 
 MOTION+OBJECTS:
