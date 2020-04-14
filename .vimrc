@@ -205,7 +205,7 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 """" MAPPINGS
 "TODO: Prime open real estate for normal mode!
-"<Leader>a/k/;
+"<Leader>a/k/i/u;
 "c-m/c-g/c-s/c-q/c-n
 "; " semicolon repeats last f/F motions
 "," ; in reverse direction
@@ -229,6 +229,12 @@ function TabBufMove(direction)
     endif
 endfunction
 
+" FIXME: improve, when last buffer closes it should quit vim
+function SmartQuit()
+    let i=gettabinfo()
+    if len(i) == 1 && len(i[0]['windows']) | exe ":bd" | else | exe ":q" | endif
+endfunction
+
 noremap <leader>f :call TabBufMove("f")<CR>
 noremap <leader>d :call TabBufMove("b")<CR>
 
@@ -241,7 +247,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
-noremap <leader>q :q<cr>
+noremap <leader>q :call SmartQuit()<cr>
+" noremap <leader>q :q<cr>
+noremap <leader>Q :qa<cr>
 noremap <leader>s :w<cr>
 noremap <leader>y "+y
 noremap <leader>p "+p
