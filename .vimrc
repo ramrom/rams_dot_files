@@ -261,6 +261,8 @@ noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
 noremap <leader>R :Rg!<CR>
+noremap <leader>gd :tab Gvdiffsplit<cr>
+noremap <leader>gD :tab Gdiffsplit<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
