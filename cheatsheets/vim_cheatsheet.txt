@@ -31,6 +31,7 @@ Files, ctrl-t - opens in new tab
 :Files ../    - invoke on parent dir (can specify base path as first arg)
 GFiles!?    - git modified files in full screen
 Lines       - search lines in open buffers
+BCommits    - commit hist for current buffer
 
 VIM-FUGITIVE:
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
@@ -110,16 +111,23 @@ HELP:
 OPTIONS:
 :set lazyredraw - for macros dont redraw screen, faster replay
 
+EX MODE:
+visual -exit ex mode
+vi - short for visual
+
+
 COMMAND MODE:
 C-h - delete last char
 C-w - delete last word
 C-b - goto beg of line
 C-e - goto end of line
-C-f - edit commands as if in normal,
+C-f - command-line-window, edit as if in insert/normal
       then can yank old command history
       in insert of cur line, write command and hit enter
 bd 3, closes buffer # 3
-hi  - spit out all highlighting rules
+:command - spit out all usr defined commands
+    - fzf's Command to fuzzy search em!
+:hi  - spit out all highlighting rules
 :syntax - spits out current syntax rules
     - use :redir > foofile, :sytnax, :hi, :redir end
     - to record to file
@@ -182,6 +190,8 @@ ea - insert (append) at the end of the word
 K - open man page for word under the cursor
 Q - enter ex mode
 q: - enter command mode insert/edit mode (like C-F in cmd)
+q? - same as q:
+q/ - same as q:
 q/ - see prev searches
 gq - format text over motion
 C-Z - suspend process
