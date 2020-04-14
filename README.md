@@ -8,8 +8,12 @@ My dot files for Unix-like environments and some scripts
 
 ### Plugins
 - coc (conqueror of completion)
-- CtrlP
-- NERDtree
+- FZF
+- CtrlP (being phased out in favor of fzf)
 - vim-airline
+- NERDtree
 - vim-commentary
+- vim-fugitive
+- vim-signify
+- indentLine
 - vim-tmux-focus-events (to help make autoreload better)
