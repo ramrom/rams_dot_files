@@ -229,11 +229,11 @@ function TabBufMove(direction)
     endif
 endfunction
 
+"close tabs and windows if more than one of either, otherwise closes buffers until none and then quit vim
 function SmartQuit()
     let tinfo=gettabinfo()
     if len(tinfo) == 1 && len(tinfo[0]['windows'])
-        let binfo=getbufinfo({'buflisted':1})
-        if len(binfo) && binfo[0].name == "" | exe ":q" | else | exe ":bd" | endif
+        if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
     else | exe ":q" | endif
 endfunction
 
@@ -250,7 +250,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
 noremap <leader>q :call SmartQuit()<cr>
-" noremap <leader>q :q<cr>
 noremap <leader>Q :qa<cr>
 noremap <leader>s :w<cr>
 noremap <leader>y "+y
