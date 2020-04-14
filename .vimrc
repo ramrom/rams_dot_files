@@ -248,8 +248,9 @@ noremap <leader>t :tabnew<CR>
 noremap <leader>e :Explore<CR>
 noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
-noremap <leader>w <C-w>w
-noremap <leader>W <C-w>W
+noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
+" noremap <leader>w <C-w>w
+" noremap <leader>W <C-w>W
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>
