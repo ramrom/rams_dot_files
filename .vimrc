@@ -232,7 +232,7 @@ endfunction
 "close tabs and windows if more than one of either, otherwise closes buffers until none and then quit vim
 function TabBufQuit()
     let tinfo=gettabinfo()
-    if len(tinfo) == 1 && len(tinfo[0]['windows'])
+    if len(tinfo) == 1 && len(tinfo[0]['windows']) == 1
         if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
     else | exe ":q" | endif
 endfunction
