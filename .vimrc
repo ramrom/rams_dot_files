@@ -207,7 +207,8 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 "TODO: Prime open real estate for normal mode!
 "<Leader>a/k/;
 "c-m/c-g/c-s/c-q/c-n
-"; " semicolon repeats last f/F motions, maybe make it goto command mode
+"; " semicolon repeats last f/F motions
+"," ; in reverse direction
 
 let mapleader = " "				"set metakey for vim shortcuts
 
@@ -248,6 +249,8 @@ noremap <leader>t :tabnew<CR>
 noremap <leader>e :Explore<CR>
 noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
+"poormans zoom, opens buffer in current window in new tab
+noremap <leader>z :tabnew %<CR>
 noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
 " noremap <leader>w <C-w>w
 " noremap <leader>W <C-w>W
