@@ -14,7 +14,7 @@ elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
     "TODO: find one of these that's better than ir_black
-    " grubbox, dractula, molokai are decent, maybe abstract
+    " grubbox, dracula, molokai are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
@@ -229,10 +229,12 @@ function TabBufMove(direction)
     endif
 endfunction
 
-" FIXME: improve, when last buffer closes it should quit vim
 function SmartQuit()
-    let i=gettabinfo()
-    if len(i) == 1 && len(i[0]['windows']) | exe ":bd" | else | exe ":q" | endif
+    let tinfo=gettabinfo()
+    if len(tinfo) == 1 && len(tinfo[0]['windows'])
+        let binfo=getbufinfo({'buflisted':1})
+        if len(binfo) && binfo[0].name == "" | exe ":q" | else | exe ":bd" | endif
+    else | exe ":q" | endif
 endfunction
 
 noremap <leader>f :call TabBufMove("f")<CR>
