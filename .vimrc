@@ -230,7 +230,7 @@ function TabBufMove(direction)
 endfunction
 
 "close tabs and windows if more than one of either, otherwise closes buffers until none and then quit vim
-function SmartQuit()
+function TabBufQuit()
     let tinfo=gettabinfo()
     if len(tinfo) == 1 && len(tinfo[0]['windows'])
         if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
@@ -249,7 +249,7 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
-noremap <leader>q :call SmartQuit()<cr>
+noremap <leader>q :call TabBufQuit()<cr>
 noremap <leader>Q :qa<cr>
 noremap <leader>s :w<cr>
 noremap <leader>y "+y
