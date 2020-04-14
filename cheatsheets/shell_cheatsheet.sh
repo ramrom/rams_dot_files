@@ -185,7 +185,12 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
 
-# special variables
+# SPECIAL VARIABLES
+# bash/zsh/sh all seem to define these shell variables
+# these are not env vars, and not exported to child processes
+LINES   # horizontal size of viewport
+COLUMNS # vertical size of viewport
+
 echo $$ # print PID of current shell process
 echo $? # print exit code of last command
 
