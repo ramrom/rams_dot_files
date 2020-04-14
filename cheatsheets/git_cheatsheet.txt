@@ -1,0 +1,14 @@
+GIT:
+git rm -rf --cached foo bar - keep on disk but rm from git
+git show-ref --tags     - tags with it's commit
+git show-ref --tags -d  - above + what commit tag points to
+git remote prune foo    - remove outdated references in remote
+git branch -m OLD_B NEW_B  - rename branch
+
+git branch --set-upstream-to=origin/foo foo
+git push -u remote local_branch - push branch to remote and track
+git push -u remote              - push/track current branch to remote and track
+
+git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
+git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
+git commit --amend --author="Author Name <email@address.com>"

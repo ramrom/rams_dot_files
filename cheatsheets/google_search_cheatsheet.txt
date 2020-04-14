@@ -1,0 +1,6 @@
+GOOGLE SEARCH:
+"literal string"
+-excludethis
+foo OR bar              - default spaced words is OR
+*foo                    - wildcard search
+foo site:www.site.com   - search a specific site

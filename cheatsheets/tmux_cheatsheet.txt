@@ -1,0 +1,13 @@
+TMUX:
+- in copymode
+    - space starts selection(or reset it), enter to end/copy it
+    - esc cancels selection, still in copy mode
+- ctrl-] to paste clipboard
+- tmux new session is 80x25:
+    - https://www.reddit.com/r/tmux/comments/7i9dd2/tmux_resizepane_sizes_are_wrong_after_updating_to/
+- tmux set -u option   - will unset that option
+- tmux set status-left "#(executable #{@foo})"
+    - pass tmux var @foo as arg to executable
+- #(blah) is execute every time, $(blah) is single sub
+- tmux set -qg @foo "something"
+    - so this is global to all sessions

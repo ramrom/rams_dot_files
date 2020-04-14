@@ -288,6 +288,7 @@ noremap <leader>gx :set number!<CR>
 noremap <leader>S :mksession! ~/MyCurrentVimSession.vim<CR>
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call MyLeaderMap()<cr>
+noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>cf :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>ca :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
