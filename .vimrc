@@ -280,9 +280,9 @@ noremap <leader>S :mksession! ~/MyCurrentVimSession.vim<CR>
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call MyLeaderMap()<cr>
 noremap <leader>cf :vsplit ~/tmp/scratch.txt<cr>
-noremap <leader>ca :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
-noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
-noremap <leader>cd :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
+noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
+noremap <leader>ca :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
+noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
 noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
 
