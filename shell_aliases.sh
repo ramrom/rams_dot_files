@@ -23,6 +23,7 @@ alias httpcn='httpv http://api.icndb.com/jokes/random'
 alias weather='http wttr.in'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 alias lsoftcplisten='lsof -iTCP -sTCP:LISTEN'
+# didnt work for FUSE filemount dir.., but lsof | grep foodir found it
 alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG files
 alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 alias tmxhor='tmux select-layout even-horizontal'

@@ -43,6 +43,7 @@ sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
 sudo shutdown -r now (reboot now)
 
+lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
 
 General linux/ubuntu tools:
 ------------------------------------------
