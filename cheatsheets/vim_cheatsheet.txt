@@ -201,19 +201,19 @@ C-A - add [count] to # of alpha char at or after cursor
 C-X - sub [count] to # of alpha char at or after cursor
 C-G - print file, line location, file status
 C-S - pause flow ctrl, terminal accepts input, no output
-C-Q - terminals, stty start signal
+C-Q - start block-visual, some terminals stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file
 . - repeat last command
 
 CURSOR MOVEMENT:
 <enter> - move cursor to beginning of next line
-h - move cursor left
 C-h - move cursor left
-j - move cursor down
 C-j - move cursor down
 C-n - move cursor down
 C-m - move cursor down and to first non-blank char
+h - move cursor left
+j - move cursor down
 k - move cursor up
 l - move cursor right
 H - move to top of screen
@@ -256,14 +256,15 @@ Tx - jump to after previous occurence of character x
 zz - center cursor on screen
 zt - cursor on top of screen
 zb - cursor on bottom screen
-Ctrl + e - move screen down one line (without moving cursor)
-Ctrl + y - move screen up one line (without moving cursor)
-Ctrl + b - move back one full screen
-Ctrl + f - move forward one full screen
-Ctrl + d - move forward 1/2 a screen
-Ctrl + u - move back 1/2 a screen
-Ctrl + i - go to newer cursor position in jump list
-Ctrl + o - go to older cursor position in jump list
+C-e - move screen down one line (without moving cursor)
+C-y - move screen up one line (without moving cursor)
+C-b - move back one full screen
+C-f - move forward one full screen
+C-d - move forward 1/2 a screen
+C-u - move back 1/2 a screen
+C-i - go to newer cursor position in jump list
+C-o - go to older cursor position in jump list
+C-t - go back one in tag stack
 Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
