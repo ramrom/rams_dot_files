@@ -206,7 +206,9 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 """" MAPPINGS
 "TODO: Prime open real estate for normal mode!
 "<Leader>a/k/i/u;
-"c-m/c-g/c-s/c-q/c-n
+"c-m/c-n/c-g/c-s/c-q
+"c-x (opposite of c-a which i clobber for tmux meta)
+"c-p (once i get rid of CtrlP plugin)
 "; " semicolon repeats last f/F motions
 "," ; in reverse direction
 
