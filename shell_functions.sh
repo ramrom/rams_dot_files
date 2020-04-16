@@ -21,6 +21,7 @@ function search_alias_func() {
         local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
         { eval $alias_cmd; eval $func_cmd; } | grep "$1"
     else
+        # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
         { eval $alias_cmd; eval $func_cmd; } | grep "$1"
     fi
