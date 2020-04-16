@@ -223,6 +223,15 @@ inoremap jk  <Esc>
 " insert C-l is obscure vim insert thing, C-k is enter digraph, also good candidate
 inoremap <C-l>  <C-o>:w<cr>
 
+function SaveDefinedSession()
+    if exists("g:defined_session_name")
+        exe ":mksession!" g:defined_session_name
+    else
+        echo "NO DEFINED SESSION NAME!"
+        " exe ":mksession! ~/MyCurrentVimSession.vim"
+    endif
+endfunction
+
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
 function TabBufMove(direction)
     if len(gettabinfo()) == 1
@@ -255,6 +264,7 @@ noremap <C-k> <C-w>k
 noremap <leader>q :call TabBufQuit()<cr>
 noremap <leader>Q :qa<cr>
 noremap <leader>s :w<cr>
+noremap <leader>S :call SaveDefinedSession()<CR>
 noremap <leader>y "+y
 noremap <leader>p "+p
 noremap <leader>t :tabnew<CR>
@@ -288,7 +298,6 @@ noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
-noremap <leader>S :mksession! ~/MyCurrentVimSession.vim<CR>
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call MyLeaderMap()<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
