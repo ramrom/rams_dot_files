@@ -22,6 +22,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'scrooloose/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    " Plug 'pbogut/fzf-mru.vim'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'

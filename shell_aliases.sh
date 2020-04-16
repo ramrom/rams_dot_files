@@ -14,6 +14,7 @@ alias lrt='ls -lrt'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
+alias tp='cd ~/tmp'
 alias dubydir='du -sh *'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works

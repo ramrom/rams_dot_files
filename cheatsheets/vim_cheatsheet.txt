@@ -134,6 +134,7 @@ bd 3, closes buffer # 3
 - `:filter *pattern* let g:`
     - works on `let`, `set`, `map`, `hi` and `fun`
     - **NOT** `syn` or `autocmd` though...
+- verbose filter *Diff* hi  - all Diff highlight rules and sources
 :verbose nmap <C-j>  - plugin/custom mapping normal C-j
 :verbose set fo?
     - will show fo(formatoptions)
