@@ -31,6 +31,9 @@ alias tmxhor='tmux select-layout even-horizontal'
 alias clt='clear && tmux clear-history'
 alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager
+alias ssf='source ~/rams_dot_files/shell_functions.sh'
+alias saf='search_alias_func'
+alias safn='aliasname=1 funcname=1 search_alias_func'
 
 # backup and mount
 alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
@@ -95,8 +98,12 @@ alias rgs="rg -tscala -g '!it/' -g '!test/'"
 alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
 alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
 alias fe="export | fzf"
-alias fs="search_alias_func | fzf"
-alias ffs="fullfunc=1 search_alias_func | fzf"
+alias fs="saf | fzf"
+alias fsn="safn | fzf"
+# TODO: sourcing aliases works, but calling the alias after fails
+# alias fsp='safn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; source ~/rams_dot_files/shell_functions.sh; \
+alias fsp='safn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; ssf; \
+           which {} | bat --style=numbers --color=always -l bash"'
 
 # Go
 alias gosr='cd ~/go/src'

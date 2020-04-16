@@ -17,11 +17,12 @@ function detect_shell() {
 function search_alias_func() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
-        local cmd="functions"; [ -z $fullfunc ]  && cmd='print -l ${(ok)functions}'
-        { alias; eval $cmd; } | grep "$1"
+        local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
+        local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
+        { eval $alias_cmd; eval $func_cmd; } | grep "$1"
     else
-        local cmd="set"; [ -z $fullfunc ]  && cmd='typeset -F'
-        { alias; eval $cmd; } | grep "$1"
+        local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
+        { eval $alias_cmd; eval $func_cmd; } | grep "$1"
     fi
 }
 
