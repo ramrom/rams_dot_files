@@ -223,12 +223,14 @@ inoremap jk  <Esc>
 " insert C-l is obscure vim insert thing, C-k is enter digraph, also good candidate
 inoremap <C-l>  <C-o>:w<cr>
 
+"TODO: improve, setting sessionoptions here might not be best, maybe also set lobal var in another func
 function SaveDefinedSession()
-    if exists("g:defined_session_name")
-        exe ":mksession!" g:defined_session_name
+    set sessionoptions+=globals
+    if exists("g:DefinedSessionName")
+        exe ":mksession!" g:DefinedSessionName
     else
-        echo "NO DEFINED SESSION NAME!"
-        " exe ":mksession! ~/MyCurrentVimSession.vim"
+        exe ":mksession! ./MyCurrentVimSession.vim"
+        echo "NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim"
     endif
 endfunction
 
