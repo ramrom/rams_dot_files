@@ -225,8 +225,8 @@ inoremap <C-l>  <C-o>:w<cr>
 
 "TODO: improve, setting sessionoptions here might not be best, maybe also set lobal var in another func
 function SaveDefinedSession()
-    set sessionoptions+=globals
     if exists("g:DefinedSessionName")
+        set sessionoptions+=globals
         exe ":mksession!" g:DefinedSessionName
     else
         exe ":mksession! ./MyCurrentVimSession.vim"

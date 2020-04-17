@@ -108,6 +108,23 @@ function osx_set_volume() { sudo osascript -e "set Volume $1"; }   # 0 mute, 10 
 function osx_mute() { sudo osascript -e "set Volume 0"; }
 function osx_get_volume() { sudo osascript -e 'get volume settings'; }
 
+function osx_spotify_dec_volume() {
+    osascript -e \
+        'tell application "Spotify"
+            set sound volume to (sound volume - 10)
+        end tell'
+}
+
+function osx_spotify_inc_volume() {
+    # set the sound volume to 20
+    osascript -e \
+        'tell application "Spotify"
+            if sound volume is less than 50 then
+                set sound volume to (sound volume + 10)
+            end if
+        end tell'
+}
+
 function osx_spotify_toggle_play() {
     osascript -e \
         'using terms from application "Spotify"
