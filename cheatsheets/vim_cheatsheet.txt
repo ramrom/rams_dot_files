@@ -1,10 +1,7 @@
 VIM:
-<,> are indenting in normal mode
-"+y - + reg goes to sys clipboard!
-"*y - in linux * is primary selection
-      contents of what u simply highlighted/selected
-"+p - paste from sys clipboard
-"*p - paste from sys clipboard
+------------------------------
+- great resource: https://devhints.io/vimscript
+
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
@@ -348,15 +345,16 @@ c2aw - delete 2 full words and insert
 c2w - delete from cursor current word, then next word, then insert
 
 REGISTERS:
+- Registers stored in ~/.viminfo, loaded on next restart
+- Register 0 contains he value of the last yank command.
 :let @a=foo  - manually set reg a to something
 :reg - show registers content
 "xy - yank into register x
 "xp - paste contents of register x
-Tip Registers are being stored in ~/.viminfo, and will be loaded again
-    on next restart of vim.
-Tip Register 0 contains always the value of the last yank command.
-"+y - yank to + register, can be used by sys clipboard
-"*y - yank to * register, can be used by sys clipboard
+"+y - + reg goes to sys clipboard!
+"*y - in linux * is primary selection
+      contents of what u simply highlighted/selected
+"+p - paste from sys clipboard
 "*p - paste from sys clipboard
 - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 
