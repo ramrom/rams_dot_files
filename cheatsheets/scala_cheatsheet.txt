@@ -1,0 +1,57 @@
+************* SCALA **************************
+- carter recomendation: scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
+- run command and redirect to file
+import sys.process._
+import java.io.File
+("ls -al" #> new File("files.txt")).!
+
+import scala.concurrent.ExecutionContext.Implicits.global
+
+- joda time parsing and conversion:
+    - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
+
+json:
+val a: String = """ {"a":1,"b":[1,2,"c"]} """
+val j: JsValue = Json.parse(a)
+println(a == j.toString)  // should print true
+
+file reading
+- import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
+- import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
+    - should close file too: val a = Source.fromFile("example.txt"), a.close
+
+PlaySpecification/spec2, to skip test:
+    - skipped("some reason")
+    - append .pendingUntilFixed("message about the issue")
+
+Enumeration:
+- play 2.5 json doesnt supports scala enumerators
+- use https://github.com/AudaxHealthInc/lib-spartan/blob/master/lib-spartan-play-json/src/main/scala/com/rallyhealth/spartan/v2/util/serialization/RallyEnumerationJsonHelpers.scala
+- or also enumeratum
+
+Macwire/dependency-inject:
+- macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
+- macwire happens pre-compile, guice i think happens runtime
+- from doug roper:
+    For DI, I care about:
+    1. Late binding, e.g. At the last moment, I can override ANY component in the graph WITHOUT refactoring my wirings. (Yes: Guice, cake, registry. No: macwire modules)
+    2. Nearly as fast as `new` (Yes: macwire modules, cake. No: Guice)
+    3. Multibinding (Yes: Guice, macwire modules sorta. No: cake)
+    Also other things, but those are the big ones that differ in those approaches. (edited)
+- portkey uses @module annotation above class declarations, it must make classes vals' available in scope
+
+AUTOMATION TESTING:
+- org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
+- private method testing, supported by ScalaTest
+    - org.scalatest.PrivateMethodTester._
+    - val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess)
+    - val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2...)
+
+REST ASSURED:
+- ENVIRONMENT sets env
+- INCLUDE, EXCLUDE env vars specify tags
+
+******* PLAY FRAMEWORK **************************
+- per mike r. - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
+
+---------------------------------

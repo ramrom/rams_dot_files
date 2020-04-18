@@ -126,6 +126,7 @@ bd 3, closes buffer # 3
 :command - spit out all usr defined commands
     - fzf's Command to fuzzy search em!
 :hi  - spit out all highlighting rules
+:hi clear - reset highlighting
 :syntax - spits out current syntax rules
     - use :redir > foofile, :sytnax, :hi, :redir end
     - to record to file
