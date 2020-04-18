@@ -223,7 +223,6 @@ inoremap jk  <Esc>
 " insert C-l is obscure vim insert thing, C-k is enter digraph, also good candidate
 inoremap <C-l>  <C-o>:w<cr>
 
-"TODO: improve, setting sessionoptions here might not be best, maybe also set lobal var in another func
 function SaveDefinedSession()
     if exists("g:DefinedSessionName")
         set sessionoptions+=globals  " mksession wont save global vars by default
