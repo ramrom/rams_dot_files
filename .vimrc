@@ -66,7 +66,7 @@ endif
 
 "syntax on                  "syntax highlighting
 set t_Co=256
-colorscheme ram_ir_black
+colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
 
 " TODO: find better timeout length
 " set timeoutlen=1000          " default is 1000ms
