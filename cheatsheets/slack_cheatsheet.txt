@@ -1,0 +1,11 @@
+SLACK:
+- *foo*<ctrl-z> - to use literal * in this case
+- command K , quick search/switch
+- syntax highlighted code snippets, click paperclip icon on left side of input text bar
+- press "up" arrow to edit last message
+- ¯\_(ツ)_/¯
+    - our slack also has /shrug plugin
+- option + up/down, move up/down channels/person
+
+- google drive account data quota usage: https://drive.google.com/drive/quota
+    - https://one.google.com/u/0/storage?hl=en
