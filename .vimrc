@@ -1,7 +1,7 @@
 "Sreeram's VI RC
 set nocompatible     " must be iMproved
 
-""""""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
+"""""""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
 if empty(glob('~/.vim/autoload/plug.vim'))
     echo "WARNING! VIM-PLUG NOT INSTALLED, SKIPPING LOADING PLUGINS, rerun with VIM_INSTALLPLUG set to install"
     " Install vim-plug if env var is set
@@ -217,8 +217,9 @@ let mapleader = " "				"set metakey for vim shortcuts
 
 if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 
+"TODO: i think c-l is good enough, prolly remove this after training muscle memory to c-l
 "much faster than escape, almost never hit jk successively in insert, jj might be good too
-inoremap jk  <Esc>
+" inoremap jk  <Esc>
 " when vim in insertmode(awful) c-l goes to normal mode from insert
 inoremap <C-l>  <Esc>
 
@@ -263,6 +264,9 @@ noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
+noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
+" noremap <leader>w <C-w>w
+" noremap <leader>W <C-w>W
 
 noremap <leader>q :call TabBufQuit()<cr>
 noremap <leader>Q :qa<cr>
@@ -276,9 +280,10 @@ noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 "poormans zoom, opens buffer in current window in new tab
 noremap <leader>z :tabnew %<CR>
-noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
-" noremap <leader>w <C-w>w
-" noremap <leader>W <C-w>W
+" turn off highlighting till next search
+noremap <leader>j :noh<cr>
+
+"fzf and nerdtree maps
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>
@@ -289,6 +294,7 @@ noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
 noremap <leader>R :Rg!<CR>
+
 noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gdiffsplit<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
@@ -301,6 +307,8 @@ noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
+
+"cheatsheet maps
 exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call MyLeaderMap()<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
@@ -310,9 +318,6 @@ noremap <leader>ca :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
 noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
 noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
-
-" turn off highlighting till next search
-noremap <leader>j :noh<cr>
 
 " TODO: i think these maps are seriously useful
 " nnoremap <C-J> a<CR><Esc>k$
@@ -331,6 +336,9 @@ set wildignore+=*/target/*
 " let netrw file explorer use nerdtree-like expansion on dirs
 let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
+
+" dont save netrw hist file
+" au VimLeave * if filereadable("~/.vim/.netrwhist") | call delete("~/vim/.netrwhist") | endif
 
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
