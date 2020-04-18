@@ -1,4 +1,5 @@
 MARKDOWN CHEATSHEET:
+-----------------------
 - https://en.wikipedia.org/wiki/Markdown
 
 # header 1
@@ -28,8 +29,12 @@ horizontal rule:
 
 
 JIRA:
+-----------------------
 - https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
+.  - bring up search menu
+
+JIRA MARKUP:
 h1. biggest heading
 h6. smallest heading
 
