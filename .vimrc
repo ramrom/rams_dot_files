@@ -219,9 +219,11 @@ if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 
 "much faster than escape, almost never hit jk successively in insert, jj might be good too
 inoremap jk  <Esc>
+" when vim in insertmode(awful) c-l goes to normal mode from insert
+inoremap <C-l>  <Esc>
 
-" insert C-l is obscure vim insert thing, C-k is enter digraph, also good candidate
-inoremap <C-l>  <C-o>:w<cr>
+" TODO: dont think i really needs this, leader-s saves from normal, c-k is enter digraph
+inoremap <C-k>  <C-o>:w<cr>
 
 function SaveDefinedSession()
     if exists("g:DefinedSessionName")
