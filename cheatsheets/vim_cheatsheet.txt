@@ -2,6 +2,7 @@ VIM:
 ------------------------------
 - great resource: https://devhints.io/vimscript
 
+so $VIMRUNTIME/syntax/hitest.vim
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
