@@ -66,7 +66,7 @@ endif
 
 "syntax on                  "syntax highlighting
 set t_Co=256
-colorscheme ir_black
+colorscheme ram_ir_black
 
 " TODO: find better timeout length
 " set timeoutlen=1000          " default is 1000ms
@@ -226,7 +226,7 @@ inoremap <C-l>  <C-o>:w<cr>
 "TODO: improve, setting sessionoptions here might not be best, maybe also set lobal var in another func
 function SaveDefinedSession()
     if exists("g:DefinedSessionName")
-        set sessionoptions+=globals
+        set sessionoptions+=globals  " mksession wont save global vars by default
         exe ":mksession!" g:DefinedSessionName
     else
         exe ":mksession! ./MyCurrentVimSession.vim"
