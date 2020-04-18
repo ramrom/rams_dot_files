@@ -1,0 +1,39 @@
+GOOGLE SEARCH:
+"literal string"
+-excludethis
+foo OR bar              - default spaced words is OR
+*foo                    - wildcard search
+foo site:www.site.com   - search a specific site
+
+
+GMAIL:
+- see https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DDesktop&hl=en
+c - compose new email
+/ - put cursor on searchbox
+shift-U - mark email unread
+s - toggle star on email
+gs - unread
+gd - drafts,
+gi - inbox,
+gt - sent
+f - forward email
+c - compose
+jk - up/down email
+
+
+CALENDER:
+/ - put cursor in searchbox
+a - agenda view, shows list of events
+w - week view
+m - month view
+y - year view
+d - day
+t - today, fix to today's week/month/year if you are in those views
+j - next time period (this feels reversed)
+k - last time period
+s - goto settings page
+g - popup goto specific date box
+c - create an event
+z - undo
+r - refresh
+esc - return to calender grid from event details
