@@ -3,34 +3,6 @@ https://devhints.io/  (great reference for all types for developers)
 JIRA:
 .   - bring up search menu
 
-RG:
-rg -uuu      - gets close to rgrep
-             - u:nogitingore, uu:hidden, uuu:binary
-rg --type-list      - list filetype defs
-rg -tgo -tsh -Tjs   - search go and sh types, not javascript
-rg --json       - print results in json!
-rg -g '**/*foo*/**' pattern  - would search in file /bar/befooyar/dude/wut
-
-FZF:
-fzf --preview 'bat --style=numbers --color=always {} | head -500'              - preview with bat
-fzf --height 40   - only take 40% of screen
-vim -o `fzf -m`   - open vim windows for all fzf matches
-fzf | xargs bat   - invoke bat on result
-fzf -e   - exact match
-fzf -m   - multi select
-fzf -1   - if 1 match select it
-search:
-    !foo        (not foo)
-    foo | bar   (foo or bar)
-    ^foo        (foo at beg of line)
-    foo$        (foo at end of line)
-    'foo        (exact match foo)
-    'foo\ bar   (exact match with space "foo bar")
-
-FD:
-fd -p        - match on full path (default file/dir name)
-fd --type f  - close to find, old match on file types
-
 VIM:
 TIP: once a buffer autoreloads, you can still undo
 ctrl-f - command mode, edit as if in normal mode
