@@ -54,4 +54,9 @@ REST ASSURED:
 ******* PLAY FRAMEWORK **************************
 - per mike r. - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 
----------------------------------
+
+AMMONITE:
+- https://ammonite.io/
+- loading external script:
+    - if script in in subfolder foo and named MyScript.sc `import $file.foo.MyScript`
+    - if script is in grandfather dir and named MyScript.sc `import $file.^.^.MyScript`

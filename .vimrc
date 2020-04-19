@@ -348,6 +348,9 @@ if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
     autocmd BufNewFile,BufRead *.md set filetype=markdown
 endif
 
+"vim 8.2 thinks .sc is markdown...
+autocmd BufNewFile,BufRead *.sc set filetype=scala
+
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
 "let g:airline_theme='luna'
 let g:airline_theme='bubblegum'
