@@ -1,4 +1,5 @@
 RG:
+- rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
 rg -uuu      - gets close to rgrep
              - u:nogitingore, uu:hidden, uuu:binary
 rg --type-list      - list filetype defs

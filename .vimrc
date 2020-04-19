@@ -348,17 +348,6 @@ if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
     autocmd BufNewFile,BufRead *.md set filetype=markdown
 endif
 
-""""""""""""""" VIM-INDENT-GUIDES PLUGIN"""""""""""""""""""""""""""""""""""""""""
-" let g:indent_guides_guide_size = 1   " guide line is only one col wide
-" let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
-
-" " feb 2020: plugin uses black(000) for IndentGuidesOdd background=dark, ir_black uses 000 so... need custom
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
-" autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
-" " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
-
-
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
 "let g:airline_theme='luna'
 let g:airline_theme='bubblegum'
@@ -371,6 +360,11 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'    " 'unique_tail_imp
 let g:airline#extensions#tabline#tab_nr_type = 1
 
 
+"""""""""""""""""" FZF """"""""""""""""""
+" Files will use FZF_DEFAULT_COMMAND
+" Commits needs vim-fugitive
+
+
 """""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
 let g:ctrlp_max_files = 20000
 let g:ctrlp_max_height = 20
@@ -380,10 +374,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.exe$\|\.so$\|\.dll$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
-
-"""""""""""""""""" FZF """"""""""""""""""
-" Files will use FZF_DEFAULT_COMMAND
-" Commits needs vim-fugitive
 
 """"" RipGrep and FD """""""""""""""""""
 if executable('rg')
@@ -396,3 +386,13 @@ endif
 if executable('fd')
     let g:ctrlp_user_command = 'fd --hidden --exclude .git'
 endif
+
+""""""""""""""" VIM-INDENT-GUIDES PLUGIN"""""""""""""""""""""""""""""""""""""""""
+" let g:indent_guides_guide_size = 1   " guide line is only one col wide
+" let g:indent_guides_start_level = 2  " start guide lines at 2nd level indent
+
+" " feb 2020: plugin uses black(000) for IndentGuidesOdd background=dark, ir_black uses 000 so... need custom
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
+" autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
+" " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
