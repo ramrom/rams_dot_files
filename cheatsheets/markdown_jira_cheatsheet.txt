@@ -33,6 +33,7 @@ JIRA:
 - https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
 .  - bring up search menu
+\* - use backslash, escape char for literals
 
 JIRA MARKUP:
 h1. biggest heading

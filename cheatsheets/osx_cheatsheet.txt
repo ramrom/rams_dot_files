@@ -25,3 +25,4 @@ hold command mac key, hover over link, clickable
 
 COMMAND:
 mdls    - get metadata on a file
+sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc

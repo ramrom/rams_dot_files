@@ -23,7 +23,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     " Plug 'pbogut/fzf-mru.vim'
-    Plug 'ctrlpvim/ctrlp.vim'
+    " Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
@@ -151,11 +151,7 @@ command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
 
 function ToggleFoldMethod()
     "1 ? echo 'indent' : echo 'not indent'  "TODO: wtf vim, basic ternary errors
-    if &foldmethod == "indent"
-        set foldmethod=syntax
-    else
-        set foldmethod=indent
-    endif
+    if &foldmethod == "indent" | set foldmethod=syntax | else | set foldmethod=indent | endif
 endfunction
 
 " let &colorcolumn=join(range(81,999),",")  "highlight columns >80
@@ -230,6 +226,7 @@ function SaveDefinedSession()
     if exists("g:DefinedSessionName")
         set sessionoptions+=globals  " mksession wont save global vars by default
         exe ":mksession!" g:DefinedSessionName
+        echo "Saved session".g:DefinedSessionName
     else
         exe ":mksession! ./MyCurrentVimSession.vim"
         echo "NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim"
