@@ -59,4 +59,10 @@ AMMONITE:
 - https://ammonite.io/
 - loading external script:
     - if script in in subfolder foo and named MyScript.sc `import $file.foo.MyScript`
+        - then MyScript.someFunc("arg")
     - if script is in grandfather dir and named MyScript.sc `import $file.^.^.MyScript`
+    - can `import MyScript._`
+- watch mode!, will run a script, and rerun if changes occur on it
+    - amm -w foo.sc
+- predef: open REPL to see results, inspect values, ca be combined with watch
+    - amm --watch --predef foo.sc
