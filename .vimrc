@@ -226,7 +226,7 @@ function SaveDefinedSession()
     if exists("g:DefinedSessionName")
         set sessionoptions+=globals  " mksession wont save global vars by default
         exe ":mksession!" g:DefinedSessionName
-        echo "Saved session".g:DefinedSessionName
+        echo "Saved session: ".g:DefinedSessionName
     else
         exe ":mksession! ./MyCurrentVimSession.vim"
         echo "NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim"

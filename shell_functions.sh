@@ -421,7 +421,7 @@ function parse_comma_delim_error() {
     ruby -e "$str"
 }
 
-# doesnt work with sh(3.2),`<(foo>)` is process substitution, and a bash(and zsh) thing
+# TODO: doesnt work with sh(3.2),`<(foo>)` is process substitution, and a bash(and zsh) thing
 function filenamediff() {
     diff <(cd $1; find . -type f | sort) <(cd $2; find . -type f | sort)
 }

@@ -33,16 +33,17 @@ JIRA:
 - https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
 .  - bring up search menu
-\* - use backslash, escape char for literals
 
 JIRA MARKUP:
+\* - use backslash, escape char for literals
+
 h1. biggest heading
 h6. smallest heading
 
 *strong*  (bold)
 _emphasis_ (italic)
--deleted-  (strikethrough)
 +inserted+  (underlined)
+-deleted-  (strikethrough)
 ^superscript^
 ~subscript~
 {{monospaced}}  (kind of different font)
@@ -60,3 +61,23 @@ bq. some blocked quote
 ## subnumber
 # number 2
 #* bullet under number
+
+{noformat}
+preformatted piece of text
+ so *no* further _formatting_ is done here
+{noformat}
+
+{color:#FF0000}text{color}
+
+{code:title=Bar.java|borderStyle=solid}
+// Some comments here
+public String getFoo()
+{
+    return foo;
+}
+{code}
+
+{panel:title=My Title|borderStyle=dashed|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}
+a block of text surrounded with a *panel*
+yet _another_ line
+{panel}
