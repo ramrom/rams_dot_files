@@ -450,5 +450,12 @@ gT or :tabprev or :tabp - move to the previous tab
 
 SPELLING:
 - set spell
+- set spelllang=es - set spell language to spanish
+[s - previous spelling error
+]s - next spelling error
+]S/[S - next/prev major (non-regional) spelling error
+z= - bring up autocorrect menu
 zg - exclude word
 zug - undo exclude adding word
+zw - add to wrong word list
+zuw - remove from wrong word list
