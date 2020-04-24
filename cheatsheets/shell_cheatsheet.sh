@@ -7,29 +7,29 @@ set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
 
 # command line navigation
-ctrl-s - linux pauses output to screen
-ctrl-l - clear screen
-ctrl-a - goto beg of line
-ctrl-e - goto end of line
-ctrl-b - go back one space
-ctrl-f - go forward one space
-ctrl-k - delete line after cursor (cut to clipboard)
-ctrl-u - delete line before cursor (cut to cliboard)
-ctrl w - delete word before curosr (cut to clipboard)
-ctrl y - paste what was cut
-ctrl-h - delete last char, VIM insert mode and command too!
-ctrl-[ - escape
-ctrl-i - tab
-ctrl-j / ctrl-m - begin new line, VIM insert mode too!
-ctrl-p - go back one command in the history
-ctrl-n - go forward one command in the history
-ctrl-r - fuzzy search command history
-ctrl-7 - undo
-ctrl-8 - backward delete char
+# ctrl-s - linux pauses output to screen
+# ctrl-l - clear screen
+# ctrl-a - goto beg of line
+# ctrl-e - goto end of line
+# ctrl-b - go back one space
+# ctrl-f - go forward one space
+# ctrl-k - delete line after cursor (cut to clipboard)
+# ctrl-u - delete line before cursor (cut to cliboard)
+# ctrl w - delete word before curosr (cut to clipboard)
+# ctrl y - paste what was cut
+# ctrl-h - delete last char, VIM insert mode and command too!
+# ctrl-[ - escape
+# ctrl-i - tab
+# ctrl-j / ctrl-m - begin new line, VIM insert mode too!
+# ctrl-p - go back one command in the history
+# ctrl-n - go forward one command in the history
+# ctrl-r - fuzzy search command history
+# ctrl-7 - undo
+# ctrl-8 - backward delete char
 
 # send EOF to stdin, bash/zsh/sh interpret as exit shell
 # if not at 1st char in prompt, delete char in front of it
-Ctrl-d
+# Ctrl-d
 
 # print recent history in bash/zsh
 history
@@ -98,11 +98,11 @@ esac
 echo foo:bar:baz | tr : \\n
 
 # command line substitution field splitting
-    - bash field splits by default, zsh doesnt (need to set an shell option)
-    - IFS  var determines chars to use as delimter for splitting
-    - https://stackoverflow.com/questions/41320199/ifs-in-zsh-behave-differently-than-bash
-    - https://unix.stackexchange.com/questions/26661/what-is-word-splitting-why-is-it-important-in-shell-programming
-    - https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
+#   bash field splits by default, zsh doesnt (need to set an shell option)
+#   IFS  var determines chars to use as delimter for splitting
+#   https://stackoverflow.com/questions/41320199/ifs-in-zsh-behave-differently-than-bash
+#   https://unix.stackexchange.com/questions/26661/what-is-word-splitting-why-is-it-important-in-shell-programming
+#   https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
 IFS=
 A=$(env)
 echo $A | grep "something"
