@@ -96,7 +96,7 @@ autocmd FileType * setlocal formatoptions-=o
 "Searching
 set hlsearch  				" highlight search
 highlight Search cterm=underline ctermbg=238
-" highlight Search cterm=italic ctermbg=238  "TODO: italics not showing...
+" highlight Search cterm=italic ctermbg=238  "TODO: italics works in neovim, brew vim8.2 doesnt do it
 set incsearch				" searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
