@@ -7,9 +7,9 @@ My dot files for Unix-like environments and some scripts
 - neovim for better integration with coc and scala metals
 
 ### Plugins
-- coc (conqueror of completion)
 - FZF
 - CtrlP (being phased out in favor of fzf)
+- coc (conqueror of completion)
 - vim-airline
 - NERDtree
 - vim-commentary

@@ -14,11 +14,15 @@
   current = magenta reverse
   local = magenta
   remote = green
+[diff]
+  colorMoved = zebra
 [color "diff"]
   meta = yellow bold
   frag = magenta bold
   old = red
   new = green
+  oldMoved = cyan
+  newMoved = cyan bold
 [color "status"]
   added = yellow
   changed = green

@@ -95,8 +95,12 @@ autocmd FileType * setlocal formatoptions-=o
 
 "Searching
 set hlsearch  				" highlight search
-highlight Search cterm=underline ctermbg=238
-" highlight Search cterm=italic ctermbg=238  "TODO: italics works in neovim, brew vim8.2 doesnt do it
+if has('nvim')
+    hi Search cterm=italic ctermbg=238
+else
+    "TODO: italics works in neovim, brew vim8.2 and sys vim8.1 dont do it
+    hi Search cterm=underline ctermbg=238
+endif
 set incsearch				" searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
@@ -202,7 +206,7 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 """" MAPPINGS
 "TODO: Prime open real estate for normal mode!
-"<Leader>a/k/i/u;
+"<Leader>a/k/i/u/;/'
 "c-m/c-n/c-g/c-s/c-q
 "c-x (opposite of c-a which i clobber for tmux meta)
 "c-p (once i get rid of CtrlP plugin)
