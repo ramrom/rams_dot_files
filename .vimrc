@@ -95,10 +95,10 @@ autocmd FileType * setlocal formatoptions-=o
 
 "Searching
 set hlsearch  				" highlight search
+"TODO: italics works in neovim, brew vim8.2 and sys vim8.1 dont do it
 if has('nvim')
     hi Search cterm=italic ctermbg=238
 else
-    "TODO: italics works in neovim, brew vim8.2 and sys vim8.1 dont do it
     hi Search cterm=underline ctermbg=238
 endif
 set incsearch				" searching as you type (before hitting enter)
@@ -297,7 +297,7 @@ noremap <leader>r :Rg<CR>
 noremap <leader>R :Rg!<CR>
 
 noremap <leader>gd :tab Gvdiffsplit<cr>
-noremap <leader>gD :tab Gdiffsplit<cr>
+noremap <leader>gD :tab Gvdiffsplit master<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
