@@ -74,7 +74,9 @@ mybindir=~/bin
 [ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" && PATH="$mybindir":"${PATH}"
 
 # ubuntu has python stuff in ~/.local
-[ -d ~/.local/bin ] && PATH=~/.local/bin:"${PATH}"
+mylocalpythondir=~/.local/bin
+[ -d "$mylocalpythondir" ] && echo "$PATH" | grep -v "$mylocalpythondir:\|$mylocalpythondir$" \
+    && PATH="$mylocalpythondir":"${PATH}"
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
