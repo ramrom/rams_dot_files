@@ -72,11 +72,12 @@ export GOBIN=${GOBIN}/bin
 # set PATH so it includes user's private bin if it exists
 mybindir=~/bin
 [ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" > /dev/null && PATH="$mybindir":"${PATH}"
+unset mybindir
 
 # ubuntu has python stuff in ~/.local
 mylocalpythondir=~/.local/bin
 [ -d "$mylocalpythondir" ] && echo "$PATH" | grep -v "$mylocalpythondir:\|$mylocalpythondir$" > /dev/null \
-    && PATH="$mylocalpythondir":"${PATH}"
+    && PATH="$mylocalpythondir":"${PATH}"; unset mylocalpythondir
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings

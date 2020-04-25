@@ -63,6 +63,7 @@ fi
 # set PATH so it includes user's private bin if it exists
 mybindir=~/bin
 [ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" && PATH="$mybindir":"${PATH}"
+unset mybindir
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
