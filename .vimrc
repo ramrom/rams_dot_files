@@ -163,12 +163,12 @@ highlight ColorColumn ctermbg=235
 
 "cycle between line 80, 120, and no colorcolumn
 function CycleColorCol()
-    if &colorcolumn == 81
-        set colorcolumn=121
-    elseif &colorcolumn == 121
+    if &colorcolumn == 121
+        set colorcolumn=81
+    elseif &colorcolumn == 81
         set colorcolumn=
     else
-        set colorcolumn=81
+        set colorcolumn=121
     endif
 endfunction
 
