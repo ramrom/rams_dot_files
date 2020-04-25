@@ -70,7 +70,7 @@ export GOPATH=~/go
 export GOBIN=${GOBIN}/bin
 
 # set PATH so it includes user's private bin if it exists
-local mybindir=~/bin
+mybindir=~/bin
 [ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" && PATH="$mybindir":"${PATH}"
 
 # ubuntu has python stuff in ~/.local
