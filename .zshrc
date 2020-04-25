@@ -60,9 +60,9 @@ fi
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
-# TODO: dont add to PATH if it already contains this
 # set PATH so it includes user's private bin if it exists
-[ -d ~/bin ] && PATH=~/bin:"${PATH}"
+local mybindir=~/bin
+[ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" && PATH="$mybindir":"${PATH}"
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
