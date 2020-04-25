@@ -7,6 +7,10 @@ c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
 /\C  - force case-sensitive search, /\c opposite
 :g/  - print line # and occurence of each search match
+gx    - osx invokes file handler "open",
+        opens urls, images, files, videos
+        nvim good, vim fails on urls but files/imgs ok
+        nvim and vim work fine for all in ubunutu
 gf   - goto filename undercursor
 gd   - goto variable/fucntion declaration
 g;   - jump back to last edit point

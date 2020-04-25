@@ -112,7 +112,7 @@ alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
 #POSTGRES
-alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/11.3/bin/psql'
+alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/12.2_1/bin/psql'
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
 #alias psqlvim='PAGER=~/vimpager.sh psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
