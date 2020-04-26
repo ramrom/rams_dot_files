@@ -17,9 +17,9 @@ function parse_git_branch() {
   fi
 }
 
-function set_ps1_hostname_color() {
-    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=$(tput setaf 3)$(tput bold)
-    echo $PS1_HOSTNAME_COLOR
+function set_ps1_hostname() {
+    [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)\h"
+    echo $PS1_HOSTNAME
 }
 
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
@@ -38,7 +38,7 @@ function build_my_prompt() {
   local cyan=`tput setaf 6`
 
   local git_branch=`parse_git_branch`
-  local ps1_hostname=$(set_ps1_hostname_color)
+  local ps1_hostname=$(set_ps1_hostname)
 
   PS1=""
 
@@ -51,7 +51,7 @@ function build_my_prompt() {
 
   PS1="${PS1}${yellow}\u"
   PS1="${PS1}${reset}${bold}@"
-  PS1="${PS1}${reset}${ps1_hostname}\h "
+  PS1="${PS1}${reset}${ps1_hostname} "
   PS1="${PS1}${blue}${bold}("
   PS1="${PS1}${reset}${cyan}\w"
   PS1="${PS1}${bold}${blue})"
