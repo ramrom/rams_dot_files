@@ -13,7 +13,7 @@ function parse_git_branch() {
 setopt prompt_subst
 
 function set_ps1_hostname_color() {
-    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=${yellow}
+    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=$(tput setaf 3)
     echo $PS1_HOSTNAME_COLOR
 }
 
@@ -40,11 +40,11 @@ function build_my_prompt() {
     #else
     #    PROMPT="${PROMPT}${red}˟${exit_code}${reset} "    # Add green for success
     #fi
-    PROMPT="${PROMPT}${yellow}${bold}%n"
+    PROMPT="${PROMPT}${yellow}%n"
     PROMPT="${PROMPT}${reset}${bold}@"
-    PROMPT="${PROMPT}"'$(set_ps1_hostname_color)'"%m "
+    PROMPT="${PROMPT}${reset}"'$(set_ps1_hostname_color)'"%m "
 
-    PROMPT="${PROMPT}${blue}("
+    PROMPT="${PROMPT}${blue}${bold}("
     PROMPT="${PROMPT}${reset}${cyan}%~"
     PROMPT="${PROMPT}${bold}${blue})"
     PROMPT="${PROMPT} <${reset}${magenta}"'$(parse_git_branch)'
