@@ -10,7 +10,8 @@ function detect_shell() {
         echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && return 1
     fi
     # METHOD 2: use ps
-        # LINUX: `ps -p $$ -o cmd=`, OSX: `ps -p $$ -o command=`
+        # LINUX: `ps -p $$ -o cmd=`
+        # OSX: `ps -p $$ -o command=` # i will get "-zsh" so need to remove "-" char
     # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
