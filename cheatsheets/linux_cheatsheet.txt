@@ -47,6 +47,7 @@ lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proces
 
 General linux/ubuntu tools:
 ------------------------------------------
+inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 stat - get metadata on a file
 lsblk - show block level devices
 /etc/fstab - file systems mounted at boot

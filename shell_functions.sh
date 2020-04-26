@@ -82,9 +82,6 @@ function findgrepp() { find . -type f -regex $1 -exec grep $2; }
 # last component of pathname, pattern not regex, e.g. ("*go")
 function findgrep() { find . -type f -name $1 -exec grep $2; }
 
-function ansi_fmt() { echo -e "\e[${1}m${*:2}\e[0m"; }
-function italic() { ansi_fmt 3 "$@"; }
-
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
@@ -199,6 +196,16 @@ function verify_percent() {
     fi
     [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)$2 must be between 0 and 100!" && return 1
     return 0
+}
+
+function ansi256() {
+    local lbld=""; [ -n "$bld" ] && lbld="\033[1m"
+    local lstrike=""; [ -n "$strike" ] && lstrike="\033[9m"
+    local lund=""; [ -n "$und" ] && lund="\033[4m"
+    local lit=""; [ -n "$it" ] && lit="\033[3m"
+    local lbg=016; [ -n "$bg" ] && lbg=$bg
+    local lfg=007; [ -n "$fg" ] && lfg=$fg
+    echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}\033[0m"
 }
 
 function local_bar_width() {

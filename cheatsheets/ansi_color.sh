@@ -1,4 +1,9 @@
 #/bin/bash
+
+Good reads:
+- https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+- https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#progress-indicator
+
 black=`tput setaf 0`
 red=`tput setaf 1`
 green=`tput setaf 2`
@@ -68,6 +73,17 @@ echo -e "\033[48;5;95;38;5;214mhello world\033[0m"
 
 lor_on_tan="\033[48;5;95;38;5;214m"
 echo -e $lor_on_tan orange on tan $(tput sgr0) normal
+
+# foreground256, background256, + add strikethrough, italics, bold, and italics
+function ansi256() {
+    local lbld=""; [ -n "$bld" ] && lbld="\033[1m"
+    local lstrike=""; [ -n "$strike" ] && lstrike="\033[9m"
+    local lund=""; [ -n "$und" ] && lund="\033[4m"
+    local lit=""; [ -n "$it" ] && lit="\033[3m"
+    local lbg=016; [ -n "$bg" ] && lbg=$bg
+    local lfg=007; [ -n "$fg" ] && lfg=$fg
+    echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}\033[0m"
+}
 
 function colorgrid( )
 {
