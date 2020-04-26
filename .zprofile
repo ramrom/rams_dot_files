@@ -12,6 +12,11 @@ function parse_git_branch() {
 # needed to make git function for cmd substitution in prompt
 setopt prompt_subst
 
+function set_ps1_hostname_color() {
+    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=${yellow}
+    echo $PS1_HOSTNAME_COLOR
+}
+
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
 # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt() {
@@ -37,7 +42,8 @@ function build_my_prompt() {
     #fi
     PROMPT="${PROMPT}${yellow}${bold}%n"
     PROMPT="${PROMPT}${reset}${bold}@"
-    PROMPT="${PROMPT}${yellow}%m "
+    PROMPT="${PROMPT}"'$(set_ps1_hostname_color)'"%m "
+
     PROMPT="${PROMPT}${blue}("
     PROMPT="${PROMPT}${reset}${cyan}%~"
     PROMPT="${PROMPT}${bold}${blue})"
