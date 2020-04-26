@@ -17,6 +17,11 @@ function parse_git_branch() {
   fi
 }
 
+function set_ps1_hostname_color() {
+    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=$(tput setaf 3)
+    echo $PS1_HOSTNAME_COLOR
+}
+
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
 # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt() {
@@ -33,6 +38,7 @@ function build_my_prompt() {
   local cyan=`tput setaf 6`
 
   local git_branch=`parse_git_branch`
+  local ps1_hostname=$(set_ps1_hostname_color)
 
   PS1=""
 
@@ -45,8 +51,8 @@ function build_my_prompt() {
 
   PS1="${PS1}${yellow}${bold}\u"
   PS1="${PS1}${reset}${bold}@"
-  PS1="${PS1}${yellow}\h "
-  PS1="${PS1}${blue}("
+  PS1="${PS1}${reset}${ps1_hostname}\h "
+  PS1="${PS1}${blue}${bold}("
   PS1="${PS1}${reset}${cyan}\w"
   PS1="${PS1}${bold}${blue})"
   PS1="${PS1} <${reset}${magenta}${git_branch}"
