@@ -46,12 +46,6 @@ cat 2>&1 blah
 # redir stderr and stdout to /dev/null
 cat > /dev/null 2>&1 blah
 
-# list all files recursively in dir and their disk usage
-du -a /foo
-
-# find a file recursive starting with current dir
-find . -type f -name "*pattern*"
-
 array=(1 two thre)
 echo ${array[1]}  # ref 2nd element in array, in this case this prints "two"
 for i in "${array[@]}"
