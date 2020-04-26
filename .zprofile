@@ -12,9 +12,9 @@ function parse_git_branch() {
 # needed to make git function for cmd substitution in prompt
 setopt prompt_subst
 
-function set_ps1_hostname_color() {
-    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=$(tput setaf 3)$(tput bold)
-    echo $PS1_HOSTNAME_COLOR
+function set_ps1_hostname() {
+    [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)%m"
+    echo $PS1_HOSTNAME
 }
 
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
@@ -42,7 +42,7 @@ function build_my_prompt() {
     #fi
     PROMPT="${PROMPT}${yellow}%n"
     PROMPT="${PROMPT}${reset}${bold}@"
-    PROMPT="${PROMPT}${reset}"'$(set_ps1_hostname_color)'"%m "
+    PROMPT="${PROMPT}${reset}"'$(set_ps1_hostname)'" "
 
     PROMPT="${PROMPT}${blue}${bold}("
     PROMPT="${PROMPT}${reset}${cyan}%~"
