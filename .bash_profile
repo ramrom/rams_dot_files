@@ -49,7 +49,7 @@ function build_my_prompt() {
   #    PS1="${PS1}${red}˟${exit_code}${reset} "    # Add green for success
   #fi
 
-  PS1="${PS1}${yellow}${bold}\u"
+  PS1="${PS1}${yellow}\u"
   PS1="${PS1}${reset}${bold}@"
   PS1="${PS1}${reset}${ps1_hostname}\h "
   PS1="${PS1}${blue}${bold}("
