@@ -18,7 +18,7 @@ function parse_git_branch() {
 }
 
 function set_ps1_hostname_color() {
-    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=$(tput setaf 3)
+    [ -z "${PS1_HOSTNAME_COLOR}" ] && PS1_HOSTNAME_COLOR=$(tput setaf 3)$(tput bold)
     echo $PS1_HOSTNAME_COLOR
 }
 
