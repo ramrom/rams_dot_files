@@ -66,3 +66,12 @@ AMMONITE:
     - amm -w foo.sc
 - predef: open REPL to see results, inspect values, ca be combined with watch
     - amm --watch --predef foo.sc
+
+
+SBT:
+----------------------------------------
+ sbt "test-only some.path.to.test another.path.to.test"
+ sbt "testOnly some.path.to.test another.path.to.test"
+ integration tests: sbt "it:testOnly some.path.to.test another.path.to.test"
+ sbt 'testOnly *SSO* -- -z "foo bar desc"'
+   - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
