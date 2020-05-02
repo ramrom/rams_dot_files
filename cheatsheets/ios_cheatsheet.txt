@@ -1,0 +1,20 @@
+# IPHONE
+command + tab  - switch between apps
+command + space - spotlight search
+command + H - goto home screen
+command + N - compose new email in mail app
+
+command + c copy
+command + v paste
+command + x cut
+command + a select all
+command + z undo
+
+safari:
+command + T - open new tab in safari
+command + W - close tab in safari
+command + R - refresh tab in safari
+command + . - stop loading tab in safari
+command + rightarrow - go to future page in safari history
+command + leftarrow - go to previow page in safari history
+up/down arrow  - scroll up and down in safari
