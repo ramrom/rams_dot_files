@@ -102,6 +102,18 @@ function sensor_data() {
     echo $s | grep -E "CPU Fan"
 }
 
+# pass noreset=1 and empty/no string to format external string
+function ansi256() {
+    local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
+    local lbld=""; [ -n "$bld" ] && lbld="\033[1m"
+    local lstrike=""; [ -n "$strike" ] && lstrike="\033[9m"
+    local lund=""; [ -n "$und" ] && lund="\033[4m"
+    local lit=""; [ -n "$it" ] && lit="\033[3m"
+    local lbg=016; [ -n "$bg" ] && lbg=$bg
+    local lfg=007; [ -n "$fg" ] && lfg=$fg
+    echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
+}
+
 function osx_set_volume() { sudo osascript -e "set Volume $1"; }   # 0 mute, 10 max
 function osx_mute() { sudo osascript -e "set Volume 0"; }
 function osx_get_volume() { sudo osascript -e 'get volume settings'; }
@@ -199,18 +211,6 @@ function verify_percent() {
     return 0
 }
 
-# pass noreset=1 and empty/no string to format external string
-function ansi256() {
-    local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
-    local lbld=""; [ -n "$bld" ] && lbld="\033[1m"
-    local lstrike=""; [ -n "$strike" ] && lstrike="\033[9m"
-    local lund=""; [ -n "$und" ] && lund="\033[4m"
-    local lit=""; [ -n "$it" ] && lit="\033[3m"
-    local lbg=016; [ -n "$bg" ] && lbg=$bg
-    local lfg=007; [ -n "$fg" ] && lfg=$fg
-    echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
-}
-
 function local_bar_width() {
     #determine bar width, default to 100% of column width of viewport
     local percentage_of_window=100
@@ -221,6 +221,28 @@ function local_bar_width() {
     echo "$(tput cols) * $percentage_of_window / 100" | bc
 }
 
+# ubuntu and osx uptime have diff format ofcourse
+function cpu_usage() {
+    # uptime always uses d.dd format, so remove '.' will result in x100 integer
+    local numcpu=$(sysctl -n hw.ncpu)  #osx
+    local minave=$(uptime | awk '{print $8}' | tr -d .)  # 1min ave
+    # local fiveminave=$(uptime | awk '{print $9}' | tr -d .)  # 1min ave
+
+    local minavepercent=$(($minave / $numcpu))
+    echo $minavepercent
+}
+
+function tmux_percent_usage_color() {
+    verify_percent $1 "cpu percent usage" || return 1
+    [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 " && return 0
+    [ $1 -gt 80 ] && echo "#[fg=colour198] $1 " && return 0
+    [ $1 -gt 40 ] && echo "#[fg=colour208] $1 " && return 0
+    [ $1 -gt 10 ] && echo "#[fg=colour190] $1 " && return 0
+    echo "#[fg=colour083] $1 "
+    # echo "$(fg=083 ansi256 "! $1 !")"
+}
+
+# $1 - timer name, $2 - percent (e.g. 50), $3 - bar width in chars
 function tmux_render_progress_bar() {
     verify_percent $2 "task percentage done" || return 1
     local text="$2%% $1"  # arg 1 is descriptive name like "egg timer"
@@ -292,15 +314,6 @@ function tmux_status_reset() {
     tmux set -u status-interval
     tmux set -u status-left; tmux set -u status-right
     tmux set -u status-format
-}
-
-function tmux_test_data() {
-    numcpu=$(sysctl -n hw.ncpu)
-    local usage=$(uptime | awk '{print $10}')
-    echo $usage
-    local au=$(($usage * 100 / $numcpu))
-    local cpu="#[fg=brightyellow]cpuusage: $au"
-    echo $cpu
 }
 
 function tmux_status() {
