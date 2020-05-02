@@ -6,6 +6,9 @@ SLACK:
 - ¯\_(ツ)_/¯
     - our slack also has /shrug plugin
 - option + up/down, move up/down channels/person
+- command + /  - bring up keyboard shortcuts
+- option up/down-arrow - up/down channels/DM
+- cmd + shift + [/] - next/prev workspace
 
 - google drive account data quota usage: https://drive.google.com/drive/quota
     - https://one.google.com/u/0/storage?hl=en
