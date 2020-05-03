@@ -21,6 +21,12 @@ echo "2.03" | tr -d .  # -d to delete, this will print 203
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
 
+# wc - word count
+wc -l   # count # of lines
+
+# xargs - read lines from stdin and execute a command on each line
+find . -name foo -type f | xargs cat  # find all files named foo and spit out contents to stdout
+
 # head/tail - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
 tail foofile  # last 10 lines
