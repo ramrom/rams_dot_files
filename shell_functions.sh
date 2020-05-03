@@ -197,7 +197,8 @@ function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
 ########## TMUX ##############################
-function tmux_basic_status() {
+# set first line of tmux status for multi-line mode
+function tmux_main_status() {
     #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
     # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
     ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
@@ -212,25 +213,20 @@ function tmux_basic_status() {
 
     local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
     local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
+    # local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
+    # local right="#[align=right]   ${tmux_host_datetime}"
     if [ -n "$simple" ]; then
         left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
         right="#[align=right]  ${tmux_host_datetime}"
     fi
 
+    # "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
     local cmd="tmux"
     [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
-    if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
-        echo "tmux ver >= 2.9, can use multi-line status"
-        eval "$cmd set status-format[0] \"#[align=left]$left #[align=centre]$(tmux_default_winlist) #[align=right]$right\""
-        #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
-    else
-        echo "tmux ver < 2.9, using basic one line status format"
-        tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
-        tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
-        eval "$cmd set status-left \"$left\""
-        eval "$cmd set status-right \"$right\""
-    fi
+    eval "$cmd set status-format[0] \"#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"\
+    "#[align=left]$left #[align=centre]$(tmux_default_winlist) #[align=right]$right\""
+    #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
 }
 
 function tmux_default_winlist() {
@@ -248,29 +244,16 @@ function tmux_default_winlist() {
     # need #[nolist] at the end here to let next items align
 }
 
-alias ts='tmux_status'
+alias tms='tmux_status'
 function tmux_status() {
     ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
     [ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!"
     [ "$1" = "off" ] && tmux_status_reset
     if [ "$1" = "on" ]; then
         tmux set status-interval 1
-        tmux_basic_status
-        tmux set status-format[1] "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
+        tmux set status 2
+        tmux_main_status        # set first line, which runs the master script
     fi
-}
-
-function tmux_status_foo() {
-    tmux set status 5
-    tmux set status-interval 1
-
-    # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
-    # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
-
-    tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
-    # local progbar=$(tmux_progress_bar "foo timer" 10 100)
-    # tmux set status-format[0] "$progbar"
-    # tmux set status-format[1] "$(color=128 tmux_progress_bar "bar timer" 30 100)"
 }
 
 function tmux_status_reset() {
@@ -279,6 +262,28 @@ function tmux_status_reset() {
     tmux set -u status-interval
     tmux set -u status-left; tmux set -u status-right
     tmux set -u status-format
+}
+
+function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
+
+function cpu_usage() {
+    # uptime always uses d.dd format, so remove '.' will result in x100 integer
+    local numcpu=$(sysctl -n hw.ncpu)  #osx
+    local minave=$(uptime | awk '{print $10}' | tr -d .)  # 1min ave
+    # local fiveminave=$(uptime | awk '{print $9}' | tr -d .)  # 1min ave
+
+    local minavepercent=$(($minave / $numcpu))
+    echo $minavepercent
+}
+
+function tmux_percent_usage_color() {
+    verify_percent $1 "cpu percent usage" || return 1
+    [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
+    [ $1 -gt 80 ] && echo "#[fg=colour198] $1%#[default]%%" && return 0
+    [ $1 -gt 40 ] && echo "#[fg=colour208] $1%#[default]%%" && return 0
+    [ $1 -gt 10 ] && echo "#[fg=colour190] $1%#[default]%%" && return 0
+    echo "#[fg=colour083] $1 #[default]"
+    # echo "$(fg=083 ansi256 "! $1 !")"
 }
 
 function verify_percent() {
@@ -300,26 +305,6 @@ function local_bar_width() {
 }
 
 # ubuntu and osx uptime have diff format ofcourse
-function cpu_usage() {
-    # uptime always uses d.dd format, so remove '.' will result in x100 integer
-    local numcpu=$(sysctl -n hw.ncpu)  #osx
-    local minave=$(uptime | awk '{print $8}' | tr -d .)  # 1min ave
-    # local fiveminave=$(uptime | awk '{print $9}' | tr -d .)  # 1min ave
-
-    local minavepercent=$(($minave / $numcpu))
-    echo $minavepercent
-}
-
-function tmux_percent_usage_color() {
-    verify_percent $1 "cpu percent usage" || return 1
-    [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 " && return 0
-    [ $1 -gt 80 ] && echo "#[fg=colour198] $1 " && return 0
-    [ $1 -gt 40 ] && echo "#[fg=colour208] $1 " && return 0
-    [ $1 -gt 10 ] && echo "#[fg=colour190] $1 " && return 0
-    echo "#[fg=colour083] $1 "
-    # echo "$(fg=083 ansi256 "! $1 !")"
-}
-
 # $1 - timer name, $2 - percent (e.g. 50), $3 - bar width in chars
 function tmux_render_progress_bar() {
     verify_percent $2 "task percentage done" || return 1
@@ -463,9 +448,9 @@ function parse_comma_delim_error() {
 }
 
 # TODO: doesnt work with sh(3.2),`<(foo)` is process substitution, and a bash(and zsh) thing
-function filenamediff() {
-    diff <(cd $1; find . -type f | sort) <(cd $2; find . -type f | sort)
-}
+# function filenamediff() {
+#     diff <(cd $1; find . -type f | sort) <(cd $2; find . -type f | sort)
+# }
 
 function f_findfilesbysize() {
     sudo find "$1" -type f -size +"$2" | xargs du -sh
