@@ -6,11 +6,12 @@ TMUX:
 - tmux new session is 80x25:
     - https://www.reddit.com/r/tmux/comments/7i9dd2/tmux_resizepane_sizes_are_wrong_after_updating_to/
 - tmux set -u option   - will unset that option
+- tmux @foo are called user options
 - tmux set status-left "#(executable #{@foo})"
     - pass tmux var @foo as arg to executable
 - #(blah) is execute every time, $(blah) is single sub
 - tmux set -qg @foo "something"
-    - so this is global to all sessions
+    - -g makes this global to all sessions
 
 # running shell command on a tmux hook
 - tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'

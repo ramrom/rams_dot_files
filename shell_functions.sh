@@ -197,6 +197,42 @@ function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
 ########## TMUX ##############################
+function tmux_basic_status() {
+    #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+    # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+    ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
+
+    local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
+    local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
+    local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
+    local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
+
+    local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
+    local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
+
+    local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
+    local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
+    if [ -n "$simple" ]; then
+        left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
+        right="#[align=right]  ${tmux_host_datetime}"
+    fi
+
+    local cmd="tmux"
+    [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
+
+    if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
+        echo "tmux ver >= 2.9, can use multi-line status"
+        eval "$cmd set status-format[0] \"#[align=left]$left #[align=centre]$(tmux_default_winlist) #[align=right]$right\""
+        #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
+    else
+        echo "tmux ver < 2.9, using basic one line status format"
+        tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
+        tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
+        eval "$cmd set status-left \"$left\""
+        eval "$cmd set status-right \"$right\""
+    fi
+}
+
 function tmux_default_winlist() {
     echo "#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
         #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},
@@ -217,7 +253,32 @@ function tmux_status() {
     ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
     [ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!"
     [ "$1" = "off" ] && tmux_status_reset
-    [ "$1" = "on" ] && tmux_status_reset
+    if [ "$1" = "on" ]; then
+        tmux set status-interval 1
+        tmux_basic_status
+        tmux set status-format[1] "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
+    fi
+}
+
+function tmux_status_foo() {
+    tmux set status 5
+    tmux set status-interval 1
+
+    # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
+    # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
+
+    tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
+    # local progbar=$(tmux_progress_bar "foo timer" 10 100)
+    # tmux set status-format[0] "$progbar"
+    # tmux set status-format[1] "$(color=128 tmux_progress_bar "bar timer" 30 100)"
+}
+
+function tmux_status_reset() {
+    tmux set -u status-format[0]
+    tmux set -u status
+    tmux set -u status-interval
+    tmux set -u status-left; tmux set -u status-right
+    tmux set -u status-format
 }
 
 function verify_percent() {
@@ -312,66 +373,6 @@ function tmux_render_timer_bar() {
     echo "$progbar"
 }
 
-function tmux_status_foo() {
-    tmux set status 5
-    tmux set status-interval 1
-
-    # TODO: tput cols x lines with tput reports 80 x 25, the default, in reality i have it set to 135
-    # tmux set status-format[1] "#[align=left,fg=red]#(tput cols; tput lines)"
-
-    tmux set status-format[0] "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
-    # local progbar=$(tmux_progress_bar "foo timer" 10 100)
-    # tmux set status-format[0] "$progbar"
-    # tmux set status-format[1] "$(color=128 tmux_progress_bar "bar timer" 30 100)"
-}
-
-function tmux_status_reset() {
-    tmux set -u status-format[0]
-    tmux set -u status
-    tmux set -u status-interval
-    tmux set -u status-left; tmux set -u status-right
-    tmux set -u status-format
-}
-
-function tmux_basic_status() {
-    #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
-    # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-    ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
-    echo $ver
-
-    local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
-    local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
-    local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
-    local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
-
-    local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
-    local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
-
-    local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
-    local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
-    if [ -n "$simple" ]; then
-        left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
-        right="#[align=right]  ${tmux_host_datetime}"
-    fi
-
-    local cmd="tmux"
-    [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
-
-    if [ $(echo "$ver >= 2.9" | bc) -eq 1 ]; then
-        echo "tmux ver >= 2.9, can use multi-line status"
-        tmux set status on
-        eval "$cmd set status-format[0] \"#[align=left]$left #[align=centre]$(tmux_default_winlist) #[align=right]$right\""
-        #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
-    else
-        echo "tmux ver < 2.9, using basic one line status format"
-        tmux set status on
-        tmux set-window-option window-status-format '#[fg=colour244]#I:#W#[fg=grey]#F'
-        tmux set-window-option window-status-current-format '#[fg=brightgreen]#I:#W'
-        eval "$cmd set status-left \"$left\""
-        eval "$cmd set status-right \"$right\""
-    fi
-}
-
 function tmuxclrhist {
     tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
         | xargs -I PANE sh -c 'tmux send-keys -t PANE "clear" C-m; tmux clear-history -t PANE'
@@ -461,7 +462,7 @@ function parse_comma_delim_error() {
     ruby -e "$str"
 }
 
-# TODO: doesnt work with sh(3.2),`<(foo>)` is process substitution, and a bash(and zsh) thing
+# TODO: doesnt work with sh(3.2),`<(foo)` is process substitution, and a bash(and zsh) thing
 function filenamediff() {
     diff <(cd $1; find . -type f | sort) <(cd $2; find . -type f | sort)
 }
