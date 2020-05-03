@@ -6,6 +6,12 @@ set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
 
+# https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
+# hyphens aren't guarenteed to be cross-shell compatible :(
+function foo-bar() {
+    echo "POSIX makes ram sad"
+}
+
 # command line navigation
 # ctrl-s - linux pauses output to screen
 # ctrl-l - clear screen

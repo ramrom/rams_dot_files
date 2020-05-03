@@ -1,13 +1,13 @@
 #!/bin/sh
 
-setopt NO_NOMATCH
+# setopt NO_NOMATCH  #needed if this was zsh
+
+#TODO: separate tmux funcs into seperate script of add here
 source ~/rams_dot_files/shell_functions.sh
 
 # s=$(tmux display-message -p '#S')
 # tmux list-windows -F "#{window_width}" -t $s 2>&1
 # width=$(tmux list-windows -F "#{window_width}" 2>&1 | head -n 1)
-
-# progress_bar 98 $width
 
 # 2520 is least common multiple of all integers from 1-10
 counter=$(tmux show -v @status-bar-interval-counter)
