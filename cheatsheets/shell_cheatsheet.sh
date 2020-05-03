@@ -34,7 +34,7 @@ function foo-bar() {
 # ctrl-8 - backward delete char
 
 # send EOF to stdin, bash/zsh/sh interpret as exit shell
-# if not at 1st char in prompt, delete char in front of it
+# if not at 1st char in prompt, delete char in front of it (forward delete)
 # Ctrl-d
 
 # print recent history in bash/zsh

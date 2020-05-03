@@ -16,12 +16,6 @@ brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 
 `brew rm $(join <(brew leaves) <(brew deps FORMULA))`
 
 
-OTHER:
-cmd-/  - highlight the cursor, iterm thing, not vim
-hold command mac key, hover over link, clickable
-    - works in iterm and terminal
-- take screenshot of app window: cmd + shift + 4 -> then space
-
 
 COMMAND:
 mdls    - get metadata on a file
@@ -33,3 +27,12 @@ cmd + forward/back-arrow  - back and forth web page history
 cmd + up/down-arrow     - scroll up/down web page
 cmd + shift [/]         - back/forward tabs in window
 cmd + `                 - cycle through windows
+
+
+
+OTHER:
+cmd-/  - highlight the cursor, iterm thing, not vim
+hold command mac key, hover over link, clickable
+    - works in iterm and terminal
+- take screenshot of app window: cmd + shift + 4 -> then space
+- microsoft word ctrl-h doesnt work, it opens a find and replace
