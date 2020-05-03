@@ -9,6 +9,10 @@ find . -type f -name "*pattern*"
 # get terminal info
 infocmp
 
+# grep (varies widely b/w osx and gnu/linux)
+# grab only the matched text with -o, works on osx and gnu/linux
+echo "foo bar baz" | grep -o "fo." # will only return "foo"
+
 #awk - multi purpose tool
 echo "foo bar baz" | awk '{print $2}'  # will print bar
 

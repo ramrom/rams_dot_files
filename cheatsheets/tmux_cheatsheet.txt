@@ -24,3 +24,7 @@ tmux show -g    - show global session options
 tmux showw      - show window options
 tmux showw -g   - show global window options
 tmux show -p    - show pane options
+
+# display menu
+tmux display-menu -x S foomenu a "display-message hello" bar b "display-message world"
+    - will display 2 item menu, hit "a" or "b" as valid inputs
