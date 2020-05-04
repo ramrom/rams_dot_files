@@ -22,12 +22,21 @@ mdls    - get metadata on a file
 sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
 
 
-browser nav:
+BROWSER(CHROME):
 cmd + forward/back-arrow  - back and forth web page history
+cmd + [/]               - back/forward page history
 cmd + up/down-arrow     - scroll up/down web page
 cmd + shift [/]         - back/forward tabs in window
 cmd + `                 - cycle through windows
+cmd + L                 - select url bar
+spacebar                - scroll down
+spacebar + shift        - scroll up
+tab/shift+tab           - goto next/prev field in browsertab+page
 
+
+PREVIEW:
+option + downarray      - next page/item
+downarrow               - scroll down
 
 
 OTHER:

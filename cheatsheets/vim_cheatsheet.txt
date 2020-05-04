@@ -150,8 +150,8 @@ INSERT MODE - inserting/appending text:
 Esc - exit insert mode
 C-[ - exit insert mode (most sysmtes, htting esc is this char)
 C-C - exit insert mode, dont trigger autocommands
-C-T - indent current line by shiftwidth
-C-I - indent current line by shiftwidth
+C-T - insert shiftwidth of indent
+C-I - same as Tab
 C-D - un-indent current line by shiftwidth
 C-J - begin new line
 C-M - begin new line
