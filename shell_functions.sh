@@ -193,10 +193,12 @@ function chrome_json_restore() {
 }
 
 function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
-
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
-########## TMUX ##############################
+################################################################################
+#############                  TMUX                   ##########################
+################################################################################
+
 # set first line of tmux status for multi-line mode
 function tmux_main_status() {
     #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
@@ -268,9 +270,14 @@ function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl
 
 function cpu_usage() {
     # uptime always uses d.dd format, so remove '.' will result in x100 integer
+    # using awk to print field N doesnt work, sometimes relative fields change
+    # local fiveminave=$(uptime | awk '{print $9}' | tr -d .)  # 5min ave
+
     local numcpu=$(sysctl -n hw.ncpu)  #osx
-    local minave=$(uptime | awk '{print $10}' | tr -d .)  # 1min ave
-    # local fiveminave=$(uptime | awk '{print $9}' | tr -d .)  # 1min ave
+    local minave=$(uptime | grep --color=never -o ":\s[0-9]\.[0-9]*" | cut -c 3- | tr -d .) #1min ave
+    local fifteenminave=$(uptime | grep --color=never -o "[0-9]\.[0-9]*$" | tr -d .) #15min ave
+    # need to cut space at end of line
+    # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
 
     local minavepercent=$(($minave / $numcpu))
     echo $minavepercent
