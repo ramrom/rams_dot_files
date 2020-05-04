@@ -13,3 +13,8 @@ ctrl-r<i> - insert mode, insert from reg i
 
 EMACS
 c-x c-c to quit
+
+
+HYPERFINE:
+hyperfine -i 'uptime | grep foo' 'uptime'
+    - yells if non-zero exit code, use -i to ignore, in this case grep didnt find "foo" and returns non-zero

@@ -1,3 +1,5 @@
+#!/usr/bin/osascript
+
 if application "Spotify" is running then
     tell application "Spotify"
         set theName to name of the current track
