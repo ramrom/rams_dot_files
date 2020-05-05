@@ -91,17 +91,6 @@ function display_notif() {
     fi
 }
 
-# TODO: finish this
-# TODO: benchmark: 1) momoization and grep 2) dont memoize
-# hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
-function sensor_data() {
-    # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
-    local IFS=
-    local s=$(sensors)
-    echo $s | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
-    echo $s | grep -E "CPU Fan"
-}
-
 # pass noreset=1 and empty/no string to format external string
 function ansi256() {
     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
@@ -114,15 +103,26 @@ function ansi256() {
     echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
 }
 
-function osx_set_volume() { sudo osascript -e "set Volume $1"; }   # 0 mute, 10 max
-function osx_mute() { sudo osascript -e "set Volume 0"; }
-function osx_get_volume() { sudo osascript -e 'get volume settings'; }
-function osx_open_discord() { open -a "Discord.app"; }
+# TODO: finish this
+# TODO: benchmark: 1) momoization and grep 2) dont memoize
+# hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
+function sensor_data() {
+    # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
+    local IFS=
+    local s=$(sensors)
+    echo $s | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
+    echo $s | grep -E "CPU Fan"
+}
 
-# TODO: oftentimes do nothing
+
+# TODO: oftentimes do nothing, peeps rec brew brightness tool
 function osx_inc_brightness() { osascript -e 'tell application "System Events"' -e 'key code 144' -e ' end tell'; }
 function osx_dec_brightness() { osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell'; }
 
+function osx_open_discord() { open -a "Discord"; }
+function osx_set_volume() { sudo osascript -e "set Volume $1"; }   # 0 mute, 10 max
+function osx_mute() { sudo osascript -e "set Volume 0"; }
+function osx_get_volume() { sudo osascript -e 'get volume settings'; }
 
 function osx_spotify_dec_volume() {
     osascript -e \

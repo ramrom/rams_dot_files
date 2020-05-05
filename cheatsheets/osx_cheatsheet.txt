@@ -22,7 +22,7 @@ mdls    - get metadata on a file
 sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
 
 
-BROWSER(CHROME):
+BROWSER(CHROME/FIREFOX verified):
 cmd + forward/back-arrow  - back and forth web page history
 cmd + [/]               - back/forward page history
 cmd + up/down-arrow     - scroll up/down web page
@@ -40,8 +40,12 @@ downarrow               - scroll down
 
 
 OTHER:
+ctrl left/right arrow   - left/right desktops
 cmd-/  - highlight the cursor, iterm thing, not vim
 hold command mac key, hover over link, clickable
     - works in iterm and terminal
 - take screenshot of app window: cmd + shift + 4 -> then space
 - microsoft word ctrl-h doesnt work, it opens a find and replace
+
+
+notification center     - side bar (by default) with widgets for weather and stocks and notifs and so on
