@@ -3,5 +3,6 @@
 tags
 tmp/*
 
+.netrwhist
 .vim/autoload/
 .vim/plugged/
