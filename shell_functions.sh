@@ -120,9 +120,10 @@ function osx_inc_brightness() { osascript -e 'tell application "System Events"' 
 function osx_dec_brightness() { osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell'; }
 
 function osx_open_discord() { open -a "Discord"; }
-function osx_set_volume() { sudo osascript -e "set Volume $1"; }   # 0 mute, 10 max
-function osx_mute() { sudo osascript -e "set Volume 0"; }
-function osx_get_volume() { sudo osascript -e 'get volume settings'; }
+function osx_activate_slack() { osascript -e 'tell application "Slack" to activate'; }
+function osx_set_volume() { osascript -e "set Volume $1"; }   # 0 mute, 10 max
+function osx_mute() { osascript -e "set Volume 0"; }
+function osx_get_volume() { osascript -e 'get volume settings'; }
 
 function osx_spotify_dec_volume() {
     osascript -e \
