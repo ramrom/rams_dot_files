@@ -24,6 +24,7 @@ ctrl-b  - bring up bookmarks
 ctrl-t  - new tab
 ctrl-l  - select url bar
 ctrl-r  - reload page
+space/space-shift - scroll up/down page
 
 APT:
 ------------------------------------------
