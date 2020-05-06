@@ -2,6 +2,8 @@ ubuntu/gnome:
 
 desktop shortcuts:
 -------------------------------------------
+- see https://help.ubuntu.com/community/KeyboardShortcuts
+
 super - usually the "windows" key on keyboards
 alt+ctr+t, super+t  - open terminal
 alt+ctr+l, super+l  - lock screen
@@ -15,10 +17,13 @@ ctrl+alt+delete - logout
 ctrl+shift+ c/p - copy and paste
 
 browsers(chrome/firefox):
+ctrl-tab    - cycle through tabs
 ctrl-w  - close
 ctrl-h  - open history
+ctrl-b  - bring up bookmarks
 ctrl-t  - new tab
 ctrl-l  - select url bar
+ctrl-r  - reload page
 
 APT:
 ------------------------------------------
