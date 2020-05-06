@@ -1,15 +1,18 @@
 SLACK:
+- cmd + shift + [/] - next/prev workspace
 - command + /  - bring up keyboard shortcuts
-- function + up/down arrow - scroll up and down convo
-- option up/down-arrow - up/down channels/DM
-- option + shift +  up/down-arrow - next/prev unread convo
-- *foo*<ctrl-z> - to use literal * in this case
+- option + up/down-arrow - up/down next channel/person
+- option + shift + up/down-arrow - up/down next unread channel/person
+- cmd + shift + [/] - switch up/down workspaces
+- cmd (number) - switch to (number) workspace
 - command K/T , quick search/switch
-- syntax highlighted code snippets, click paperclip icon on left side of input text bar
+- page up/down - scroll up and down convo
 - press "up" arrow to edit last message
+
+- syntax highlighted code snippets, click paperclip icon on left side of input text bar
+- *foo*<ctrl-z> - to use literal * in this case
 - ¯\_(ツ)_/¯
     - our slack also has /shrug plugin
-- cmd + shift + [/] - next/prev workspace
 
 - google drive account data quota usage: https://drive.google.com/drive/quota
     - https://one.google.com/u/0/storage?hl=en

@@ -1,4 +1,4 @@
-"Sreeram's VI RC
+"Sreeram's .vimrc
 set nocompatible     " must be iMproved
 
 """""""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
@@ -95,7 +95,7 @@ autocmd FileType * setlocal formatoptions-=o
 
 "Searching
 set hlsearch  				" highlight search
-"TODO: italics works in neovim, brew vim8.2 and sys vim8.1 dont do it
+"TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont do it
 if has('nvim')
     hi Search cterm=italic ctermbg=238
 else

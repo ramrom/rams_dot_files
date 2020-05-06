@@ -33,6 +33,9 @@ spacebar                - scroll down
 spacebar + shift        - scroll up
 tab/shift+tab           - goto next/prev field in browsertab+page
 
+Whatsapp native:
+cmd + shift + [/]       - up/down conversations/groups
+page up/down            - scroll up/down in the convo
 
 PREVIEW:
 option + downarray      - next page/item
