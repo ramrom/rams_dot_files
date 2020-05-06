@@ -14,6 +14,12 @@ ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout
 ctrl+shift+ c/p - copy and paste
 
+browsers(chrome/firefox):
+ctrl-w  - close
+ctrl-h  - open history
+ctrl-t  - new tab
+ctrl-l  - select url bar
+
 APT:
 ------------------------------------------
 apt-rdepends pkg    - shows decent one level dep tree of pkg
