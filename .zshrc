@@ -3,8 +3,6 @@ setopt histignoredups
 
 # TODO: similar to .bashrc do i need PS1 check for the remote connection non-interactive case?
 
-# autoload -Uz compinit && compinit
-
 # turn off zsh globbing, particularly `[]` (brackets)
 setopt NO_NOMATCH
 
@@ -41,8 +39,9 @@ function load_or_err() {
 }
 
 # enable programmable completion for git
-# TODO: causing "complete:13: command not found: compdef" errors
-# load_or_err ~/
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit && compinit
 
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh

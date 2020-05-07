@@ -13,6 +13,7 @@ gx    - osx invokes file handler "open",
         nvim and vim work fine for all in ubunutu
 gf   - goto filename undercursor
 gd   - goto variable/fucntion declaration
+gy   - goto type definition
 g;   - jump back to last edit point
 g,   - jump back to newer edit point
 <c-w>f - goto filename undercursor in new window

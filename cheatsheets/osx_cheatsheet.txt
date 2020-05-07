@@ -17,12 +17,24 @@ brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 
 
 
 
-COMMAND:
+CLI:
+- ref: https://www.mitchchn.me/2014/os-x-terminal/
+say - speech synth to audio out a sentence
+    - supports speaking a file like "say -f prose.txt -o audobook.aiff"
+        - -o will save it to an audio file
+screencapture - capture screenshot images
+mdfind - cli way to find whatever spotlight does
+open - open a app like u would double click on it
+pbcopy  - cli way to copy to sys clipboard
+    - lal | pbcopy   (copy ls long listing to clipboard)
+pbpaste - cli way to paste from clipboard
+    - pbpaste | grep foo
 mdls    - get metadata on a file
 sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
 
 
 BROWSER(CHROME/FIREFOX verified):
+cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab
 cmd + forward/back-arrow  - back and forth web page history
 cmd + [/]               - back/forward page history
 cmd + up/down-arrow     - scroll up/down web page
@@ -47,7 +59,10 @@ ctrl left/right arrow   - left/right desktops
 cmd-/  - highlight the cursor, iterm thing, not vim
 hold command mac key, hover over link, clickable
     - works in iterm and terminal
-- take screenshot of app window: cmd + shift + 4 -> then space
+take screenshot:
+    - screenshot to select current desktop: cmd + shift + 4
+    - screenshot to select specific area: cmd + shift + 3
+    - screenshot to select all of one app window: cmd + shift + 4 -> then space
 - microsoft word ctrl-h doesnt work, it opens a find and replace
 
 
