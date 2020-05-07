@@ -53,7 +53,7 @@ load_or_err ~/rams_dot_files/shell_functions.sh
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 
 # enable git-completions for bash in ubuntu
-[ -x /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
+[ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
 
 
 # some funcs/aliases use github API token for hitting github API for user ramrom
