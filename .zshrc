@@ -59,7 +59,7 @@ fi
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
-# set PATH so it includes user's private bin if it exists
+# set PATH so it includes user's private bin if it exists and it's not already in PATH
 mybindir=~/bin
 [ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" && PATH="$mybindir":"${PATH}"
 unset mybindir
