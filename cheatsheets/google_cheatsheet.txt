@@ -4,6 +4,7 @@ GOOGLE SEARCH:
 foo OR bar              - default spaced words is OR
 *foo                    - wildcard search
 foo site:www.site.com   - search a specific site
+- should be a "tools" submenu below search bar that lets you filter by most recent (e.g. last year only)
 
 
 GMAIL:
