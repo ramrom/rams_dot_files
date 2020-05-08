@@ -1,0 +1,6 @@
+/******************************
+## GOLANG:
+*******************************/
+
+// print src code for go doc symbol/type/func
+go doc -src fmt.Println
