@@ -194,6 +194,11 @@ COLUMNS # vertical size of viewport
 echo $$ # print PID of current shell process
 echo $? # print exit code of last command
 
+# splat argument that expands to all command-line arguments seperated by spaces
+# note: $0 is not passed in $@
+echo $@
+echo "$@" # usually want this to avoid misparsing args containing spaces/wildcards
+
 # sudo -S option reads password from stdin
 echo somepassword | sudo -S ls
 
