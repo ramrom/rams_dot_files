@@ -31,6 +31,7 @@ alias tmxhor='tmux select-layout even-horizontal'
 alias clt='clear && tmux clear-history'
 alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager
+alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
 alias ssf='source ~/rams_dot_files/shell_functions.sh'
 alias saf='search_alias_func'
 alias safn='aliasname=1 funcname=1 search_alias_func'

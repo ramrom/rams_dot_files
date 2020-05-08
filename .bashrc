@@ -41,9 +41,6 @@ function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
 
-# TODO: enable programmable completion for git, not working...
-load_or_err ~/rams_dot_files/git-completion.bash
-
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh
 
@@ -54,7 +51,6 @@ load_or_err ~/rams_dot_files/shell_functions.sh
 
 # enable git-completions for bash in ubuntu
 [ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
-
 
 # some funcs/aliases use github API token for hitting github API for user ramrom
 [ ! -f ~/.ramrom_gittoken ] && echo "$(tput setaf 1)ERROR: $(tput sgr0)Did not find ~/.ramrom_gittoken"
