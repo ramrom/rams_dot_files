@@ -94,6 +94,14 @@ function display_notif() {
     fi
 }
 
+# colorize every 3rd line lighter background (assuming black background) to help readability
+function colr_row() {
+    while read line
+    do
+      bg=235 ansi256 $line; read line; echo $line; read line; echo $line
+    done
+}
+
 # pass noreset=1 and empty/no string to format external string
 function ansi256() {
     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
