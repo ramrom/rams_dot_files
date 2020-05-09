@@ -29,6 +29,9 @@ echo "2.03" | sed 's/\.//g'  # will print 203
 # wc - word count
 wc -l   # count # of lines
 
+# sort - sort stdin of lines, waits for all input till EOF
+echo "b\na" | sort   # will print a on first line, b on second line
+
 # xargs - read lines from stdin and execute a command on each line
 find . -name foo -type f | xargs cat  # find all files named foo and spit out contents to stdout
 
