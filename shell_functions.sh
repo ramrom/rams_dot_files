@@ -413,7 +413,7 @@ function gits() {
     GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*
 }
 
-f_getbranchname() { git branch | grep "*" | awk '{print $2}'; }
+function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 # TODO: WIP
 function git_ctag_update() {

@@ -4,7 +4,13 @@
 set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
+set -o vi # VI mode in bash!
 echo $- #query all set options on in shell
+
+# bash print out all key bindinds
+bind -P
+# zsh vi mode
+bindkey -v
 
 # https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
 # hyphens aren't guarenteed to be cross-shell compatible :(
