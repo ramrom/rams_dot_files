@@ -282,6 +282,7 @@ noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
 "poormans zoom, opens buffer in current window in new tab
 noremap <leader>z :tabnew %<CR>
+noremap <leader>m :tabm 
 " turn off highlighting till next search
 noremap <leader>j :noh<cr>
 

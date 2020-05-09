@@ -83,9 +83,8 @@ function findgrepp() { find . -type f -regex $1 -exec grep $2; }
 # last component of pathname, pattern not regex, e.g. ("*go")
 function findgrep() { find . -type f -name $1 -exec grep $2; }
 
-function godbat() {
-    go doc $@ | bat -l go
-}
+# go docs with syntax highlighting!
+function godbat() { go doc $@ | bat -l go; }
 
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
