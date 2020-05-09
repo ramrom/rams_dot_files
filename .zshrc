@@ -6,6 +6,11 @@ setopt histignoredups
 # turn off zsh globbing, particularly `[]` (brackets)
 setopt NO_NOMATCH
 
+# use vi mode (-e emacs is default), press escape to go to normal
+bindkey -v
+# export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
+
+
 # Colorize
 if [ `uname` = "Darwin" ]; then
     # tree uses this per man docs

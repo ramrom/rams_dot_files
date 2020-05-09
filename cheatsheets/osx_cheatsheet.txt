@@ -55,6 +55,8 @@ downarrow               - scroll down
 
 
 OTHER:
+- options key in osx is same as alt key in other Oses (like windows)
+option + cmd + esc  - bring up force quit menu for applications
 ctrl left/right arrow   - left/right desktops
 cmd-/  - highlight the cursor, iterm thing, not vim
 hold command mac key, hover over link, clickable

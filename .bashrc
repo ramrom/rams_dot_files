@@ -14,6 +14,9 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# use vi mode (press esc to go to normal)
+set -o vi
+
 # modify ls colors, ubuntu bash 4.4 doesnt need this for color on ls and tree
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 # TODO: how to get brew tree colors working, below LS_COLORS doesnt work
