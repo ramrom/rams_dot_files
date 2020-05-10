@@ -73,9 +73,12 @@ if [ "$(uname)" = "Linux" ]; then
     alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
 else  # assuming Darwin here
     alias oc='open -a "Google Chrome"'
+    alias oam='open -a "Activity Monitor"'
+    alias osy='open -a "System Preferences"'
+    alias ote='open -a "TextEdit"'
+    alias osp='open -a Spotify'
     alias os='open -a Slack'
     alias ow='open -a Whatsapp'
-    alias osp='open -a Spotify'
     alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
     alias psx='ps auxh'
     alias gl="cd ~/Google\ Drive/Lists"
