@@ -7,7 +7,7 @@ setopt histignoredups
 setopt NO_NOMATCH
 
 # use vi mode (-e emacs is default), press escape to go to normal
-bindkey -v
+# bindkey -v
 # TODO: need delete-before-cursor, forward-delete char
 # bindkey '^A' beginning-of-line
 # bindkey '^E' end-of-line
