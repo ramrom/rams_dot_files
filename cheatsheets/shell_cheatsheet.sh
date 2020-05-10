@@ -4,13 +4,17 @@
 set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
-set -o vi # VI mode in bash!
 echo $- #query all set options on in shell
 
-# bash print out all key bindinds
-bind -P
-# zsh vi mode
-bindkey -v
+
+# KEYBINDINGS
+# good ref on ZLE (zsh line editor):  ZLE (zsh line editor): http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
+bind -P     # bash print out all key bindinds, for sh too
+bindkey     # for zsh
+
+# NOTE: these clobber ctrl-n, ctrl-p (for cmd history), ctrl-r (history fuzzy search)
+bindkey -v  # zsh vi mode
+set -o vi   # bash vi mode
 
 # https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
 # hyphens aren't guarenteed to be cross-shell compatible :(
@@ -18,7 +22,7 @@ function foo-bar() {
     echo "POSIX makes ram sad"
 }
 
-# command line navigation
+# command line navigation (zsh and bash defaults)
 # ctrl-s - linux pauses output to screen
 # ctrl-l - clear screen
 # ctrl-a - goto beg of line

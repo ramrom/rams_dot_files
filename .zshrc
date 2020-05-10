@@ -8,6 +8,14 @@ setopt NO_NOMATCH
 
 # use vi mode (-e emacs is default), press escape to go to normal
 bindkey -v
+# TODO: need delete-before-cursor, forward-delete char
+# bindkey '^A' beginning-of-line
+# bindkey '^E' end-of-line
+# bindkey '^B' backward-char
+# bindkey '^F' forward-char
+# bindkey '^P' up-history
+# bindkey '^N' down-history
+# bindkey '^r' history-incremental-search-backward
 # export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
 
 
