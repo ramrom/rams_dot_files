@@ -1,11 +1,11 @@
 # SHELL SCRIPT CHEAT SHEET
+# good references: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
 
 # Bash (and AFAIK zsh)
 set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
-
 
 # KEYBINDINGS
 # good ref on ZLE (zsh line editor):  ZLE (zsh line editor): http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
@@ -15,12 +15,6 @@ bindkey     # for zsh
 # NOTE: these clobber ctrl-n, ctrl-p (for cmd history), ctrl-r (history fuzzy search)
 bindkey -v  # zsh vi mode
 set -o vi   # bash vi mode
-
-# https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
-# hyphens aren't guarenteed to be cross-shell compatible :(
-function foo-bar() {
-    echo "POSIX makes ram sad"
-}
 
 # command line navigation (zsh and bash defaults)
 # ctrl-s - linux pauses output to screen
@@ -46,6 +40,36 @@ function foo-bar() {
 # send EOF to stdin, bash/zsh/sh interpret as exit shell
 # if not at 1st char in prompt, delete char in front of it (forward delete)
 # Ctrl-d
+
+# FUNCTIONS
+# bash/posix/zsh: delete a function or a variable
+unset foo
+
+# https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
+# hyphens aren't guarenteed to be cross-shell compatible :(
+function foo-bar() {
+    echo "POSIX makes ram sad"
+}
+
+# VARIABLES
+# bash/zsh and bsd/gnu sh support local scoped variables
+# - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
+local foo=1
+
+# SPECIAL VARIABLES
+# bash/zsh/sh all seem to define these shell variables
+# these are not env vars, and not exported to child processes
+LINES   # horizontal size of viewport
+COLUMNS # vertical size of viewport
+
+echo $$ # print PID of current shell process
+echo $? # print exit code of last command
+
+# splat argument that expands to all command-line arguments seperated by spaces
+# note: $0 is not passed in $@
+echo $@
+echo "$@" # usually want this to avoid misparsing args containing spaces/wildcards
+
 
 # print recent history in bash/zsh
 history
@@ -164,6 +188,7 @@ echo $FOOBAR # will print somestring
 #test if command exists in bash/zsh
 # exit 1  not found, exit 0 and output path if found
 command -v foo > /dev/null
+command -V foo # prints more info, (is it alias, shell func, or bin/script file
 
 bash "==" is lexical comparison vs "=" is numerical comparison
 
@@ -195,20 +220,8 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
 
-# SPECIAL VARIABLES
-# bash/zsh/sh all seem to define these shell variables
-# these are not env vars, and not exported to child processes
-LINES   # horizontal size of viewport
-COLUMNS # vertical size of viewport
 
-echo $$ # print PID of current shell process
-echo $? # print exit code of last command
-
-# splat argument that expands to all command-line arguments seperated by spaces
-# note: $0 is not passed in $@
-echo $@
-echo "$@" # usually want this to avoid misparsing args containing spaces/wildcards
-
+### RANDOM
 # sudo -S option reads password from stdin
 echo somepassword | sudo -S ls
 

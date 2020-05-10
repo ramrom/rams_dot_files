@@ -1,3 +1,5 @@
+#!/usr/bin/osascript
+
 if application "GlobalProtect" is running then
     tell application "GlobalProtect"
         -- click button "Connect" of menu bar
