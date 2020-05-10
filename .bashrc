@@ -14,8 +14,8 @@ export HISTCONTROL=ignoredups
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# use vi mode (press esc to go to normal)
-set -o vi
+# TODO: use vi mode (press esc to go to normal), need to manually bind default keys still, like back/forward char
+# set -o vi
 
 # modify ls colors, ubuntu bash 4.4 doesnt need this for color on ls and tree
 [ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'

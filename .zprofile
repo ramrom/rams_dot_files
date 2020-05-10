@@ -9,7 +9,7 @@ function parse_git_branch() {
     fi
 }
 
-# needed to make git function for cmd substitution in prompt
+# needed to make git/hostname function for cmd substitution in prompt
 setopt prompt_subst
 
 function set_ps1_hostname() {
