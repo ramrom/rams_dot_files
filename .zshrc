@@ -52,9 +52,14 @@ function load_or_err() {
 }
 
 # enable programmable completion for git
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh $fpath)
-autoload -Uz compinit && compinit
+local git_completion_file=~/.zsh/git-completion.bash
+if [ -f "$git_completion_file" ]; then
+    zstyle ':completion:*:*:git:*' script $git_completion_file
+    fpath=(~/.zsh $fpath)
+    autoload -Uz compinit && compinit
+else
+    echo "$(tput setaf 1) $git_completion_file not found! $(tput sgr0)"
+fi
 
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh

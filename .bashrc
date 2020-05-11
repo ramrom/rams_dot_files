@@ -47,13 +47,14 @@ function load_or_err() {
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh
 
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-[ -f /etc/bash_completion ] && . /etc/bash_completion
+load_or_err /etc/bash_completion
 
 # enable git-completions for bash in ubuntu
-[ -f /usr/share/bash-completion/completions/git ] && . /usr/share/bash-completion/completions/git
+load_or_err /usr/share/bash-completion/completions/git
 
 # some funcs/aliases use github API token for hitting github API for user ramrom
 [ ! -f ~/.ramrom_gittoken ] && echo "$(tput setaf 1)ERROR: $(tput sgr0)Did not find ~/.ramrom_gittoken"
