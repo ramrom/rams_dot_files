@@ -16,6 +16,7 @@ alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
 alias tp='cd ~/tmp'
 alias dubydir='du -sh * 2>/dev/null'  # throw away errors, permission failure messages
+alias dubydircolor='dubydir | colr_du'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works
 alias ch_date='sudo date --set 1998-11-02'
