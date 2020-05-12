@@ -86,6 +86,16 @@ cat 2>&1 blah
 # redir stderr and stdout to /dev/null
 cat > /dev/null 2>&1 blah
 
+# PIPES
+# most commands line-buffer STDOUT if its goin to a terminal
+# but if STDOUT goes to a pipe input, they will buffer more than a line (e.g. 4k bytes)
+# grep buffers like this, tail used to but modern versions dont, echo does
+tail -f foofile | grep foopattern | grep foo2
+# force grep to line buffer
+tail -f foofile | grep --line-buffered foopattern | grep foo2
+# in perl inline scripts add `$|++` to line-buffer
+
+
 array=(1 two thre)
 echo ${array[1]}  # ref 2nd element in array, in this case this prints "two"
 for i in "${array[@]}"
