@@ -97,27 +97,21 @@ function display_notif() {
 # filter for dubydir, color by order of magnitude (Byte/Kibibyte/Mibibyte/Gibibyte)
 # TODO: du buffers, doing `stdbuf -o 0 -e 0 du -sh * | grep` still buffers :(
 function colr_du() {
-    while read line
-    do
+    while read line; do
         local size=$(echo "$line" | awk '{print $1}' | grep --colour=never -o ".$")
         case "$size" in
-        B)
-            echo "$(fg=8 ansi256 "$line")" ;;
-        K)
-            echo "$(fg=28 ansi256 "$line")" ;;
-        M)
-            echo "$(fg=208 ansi256 "$line")" ;;
-        G)
-            echo "$(bg=1 fg=3 ansi256 "$line")" ;;
+            B) echo "$(fg=8 ansi256 "$line")" ;;
+            K) echo "$(fg=28 ansi256 "$line")" ;;
+            M) echo "$(fg=208 ansi256 "$line")" ;;
+            G) echo "$(bg=1 fg=3 ansi256 "$line")" ;;
         esac
     done
 }
 
 # colorize every 3rd line lighter background (assuming black background) to help readability
 function colr_row() {
-    while read line
-    do
-      bg=235 ansi256 $line; read line; echo $line; read line; echo $line
+    while read line; do
+      bg=235 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
     done
 }
 
