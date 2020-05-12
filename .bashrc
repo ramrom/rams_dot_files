@@ -37,6 +37,7 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-i
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_CTRL_T_COMMAND="$fdname"
 export FZF_ALT_C_COMMAND="$fdname --type d"
+unset fdname
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
