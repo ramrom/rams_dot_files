@@ -37,7 +37,7 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 # export FD_OPTIONS="--follow"
 
 # Linux bin name for fd is fdfind
-local fdname="fd"
+fdname="fd"
 [ `uname` = "Linux" ] && fdname="fdfind"
 
 export FZF_DEFAULT_COMMAND="$fdname --type f --hidden --exclude .git"
@@ -46,13 +46,14 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-i
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_CTRL_T_COMMAND="$fdname"
 export FZF_ALT_C_COMMAND="$fdname --type d"
+unset fdname
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
 
 # enable programmable completion for git
-local git_completion_file=~/.zsh/git-completion.bash
+git_completion_file=~/.zsh/git-completion.bash
 if [ -f "$git_completion_file" ]; then
     zstyle ':completion:*:*:git:*' script $git_completion_file
     fpath=(~/.zsh $fpath)
@@ -60,6 +61,7 @@ if [ -f "$git_completion_file" ]; then
 else
     echo "$(tput setaf 1) $git_completion_file not found! $(tput sgr0)"
 fi
+unset git_completion_file
 
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh
