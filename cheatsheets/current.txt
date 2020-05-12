@@ -9,6 +9,8 @@ ctrl-f - command mode, edit as if in normal mode
 ctrl-w - insert mode and command mode, delete last word
 ctrl-u - insert mode and command mode, delete from beg line to cursor
 ctrl-r<i> - insert mode, insert from reg i
+_       - goto first nonblank char on line
+==      - auto indent current line
 
 
 EMACS

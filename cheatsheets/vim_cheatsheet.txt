@@ -186,6 +186,8 @@ a - insert (append) after the cursor
 A - insert (append) at the end of the line
 o - append (open) a new line below the current line
 O - append (open) a new line above the current line
+s - delete character and substitute text
+S - delete line and substitute text (same as cc)
 ea - insert (append) at the end of the word
 K - open man page for word under the cursor
 Q - enter ex mode
@@ -236,6 +238,7 @@ B - jump backwards to the start of a word
     - use <code>:h matchpairs</code> in vim for more info)
 0 - jump to the start of the line
 ^ - jump to the first non-blank character of the line
+_ - jump to the first non-blank character of the line
 $ - jump to the end of the line
 g_ - jump to the last non-blank character of the line
 gg - go to the first line of the document
@@ -288,8 +291,6 @@ c$ - change (replace) to the end of the line
 ciw - change (replace) entire word
 vab - visual select all block
 cw - change (replace) to the end of the word
-s - delete character and substitute text
-S - delete line and substitute text (same as cc)
 & - repeat last substitution
 xp - transpose two letters (delete and paste)
 u - undo
