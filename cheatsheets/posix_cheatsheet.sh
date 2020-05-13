@@ -20,8 +20,11 @@ echo "foo bar baz" | awk '{print $2}'  # will print bar
 echo "foo; bar - baz" | cut -d ';' -f 2     # delimiter semicolon , extract field 2, so " bar - baz" will print
 echo "foo; bar - baz" | cut -c 5-           # remove first 4 chars of each line
 
-# tr - translate chars, find and replace on specific chars
+# TR - translate chars, find and replace on specific chars
 echo "2.03" | tr -d .  # -d to delete, this will print 203
+# split on ":" delimiter, each on newline
+echo foo:bar:baz | tr : \\n
+
 
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
