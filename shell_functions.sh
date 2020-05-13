@@ -68,8 +68,9 @@ function rgf() {
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
     # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
-    rg $RG_FILTER --files-with-matches --no-messages "$1" "$rgdir" | fzf --preview \
-        "rg $RG_FILTER --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
+    rg "$RG_FILTER" --files-with-matches --no-messages "$1" "$rgdir" | fzf --preview \
+        "rg \"$RG_FILTER\" --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
+        # "rg -tscala -g '!it/' -g '!test/' --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
         # "rg --ignore-case --pretty --context 10 '$1' {}"
 }
 

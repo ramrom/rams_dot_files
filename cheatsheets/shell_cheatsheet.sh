@@ -138,8 +138,11 @@ partialstring*|someother*)
     ;;
 esac
 
-# split on ":" delimiter, each on newline
-echo foo:bar:baz | tr : \\n
+# more compact, works in zsh/bash/sh
+case "$BAR" in
+    yar) A=1 ;;
+    far) B=2 ;;
+esac
 
 # command line substitution field splitting
 #   bash field splits by default, zsh doesnt (need to set an shell option)
