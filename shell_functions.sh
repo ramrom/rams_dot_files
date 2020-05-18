@@ -21,7 +21,7 @@ function search_alias_func() {
         local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
         local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
         { eval $alias_cmd; eval $func_cmd; } | grep "$1"
-    else
+    else # Assuming BASH
         # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
         { eval $alias_cmd; eval $func_cmd; } | grep "$1"
@@ -151,14 +151,10 @@ function osx_set_volume() { osascript -e "set Volume $1"; }   # 0 mute, 10 max
 function osx_get_volume() { osascript -e 'get volume settings'; }
 
 function osx_spotify_dec_volume() {
-    osascript -e \
-        'tell application "Spotify"
-            set sound volume to (sound volume - 10)
-        end tell'
+    osascript -e 'tell application "Spotify"' -e 'set sound volume to (sound volume - 10)' -e 'end tell'
 }
 
 function osx_spotify_inc_volume() {
-    # set the sound volume to 20
     osascript -e \
         'tell application "Spotify"
             if sound volume is less than 50 then

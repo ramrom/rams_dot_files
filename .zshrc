@@ -53,6 +53,7 @@ function load_or_err() {
 }
 
 # enable programmable completion for git
+# NOTE: this completion code the most time to load, relatively speaking (say 1/2sec)
 git_completion_file=~/.zsh/git-completion.bash
 if [ -f "$git_completion_file" ]; then
     zstyle ':completion:*:*:git:*' script $git_completion_file
