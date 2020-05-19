@@ -143,7 +143,6 @@ function sensor_data() {
 function osx_inc_brightness() { osascript -e 'tell application "System Events"' -e 'key code 144' -e ' end tell'; }
 function osx_dec_brightness() { osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell'; }
 
-function osx_open_discord() { open -a "Discord"; }
 function osx_activate_slack() { osascript -e 'tell application "Slack" to activate'; }
 
 function osx_mute() { osascript -e "set Volume 0"; }
