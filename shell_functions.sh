@@ -97,7 +97,8 @@ function display_notif() {
 
 # filter for dubydir, color by order of magnitude (Byte/Kibibyte/Mibibyte/Gibibyte)
 # TODO: du buffers, doing `stdbuf -o 0 -e 0 du -sh * | grep` still buffers :(
-function colr_du() {
+function dubydircolor() {
+    dubydir | \
     while read line; do
         local size=$(echo "$line" | awk '{print $1}' | grep --colour=never -o ".$")
         case "$size" in
@@ -126,6 +127,38 @@ function ansi256() {
     local lbg=016; [ -n "$bg" ] && lbg=$bg
     local lfg=007; [ -n "$fg" ] && lfg=$fg
     echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
+}
+
+function print_ansi256() {
+    iter=16
+    while [ $iter -lt 52 ]
+    do
+        second=$[$iter+36]
+        third=$[$second+36]
+        four=$[$third+36]
+        five=$[$four+36]
+        six=$[$five+36]
+        seven=$[$six+36]
+        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
+
+        echo -en "\033[38;5;${iter}m█ "
+        printf "%03d" $iter
+        echo -en "   \033[38;5;${second}m█ "
+        printf "%03d" $second
+        echo -en "   \033[38;5;${third}m█ "
+        printf "%03d" $third
+        echo -en "   \033[38;5;${four}m█ "
+        printf "%03d" $four
+        echo -en "   \033[38;5;${five}m█ "
+        printf "%03d" $five
+        echo -en "   \033[38;5;${six}m█ "
+        printf "%03d" $six
+        echo -en "   \033[38;5;${seven}m█ "
+        printf "%03d" $seven
+
+        iter=$[$iter+1]
+        printf '\r\n'
+    done
 }
 
 # TODO: finish this
@@ -509,36 +542,4 @@ function vim_plug_ver() {
          popd > /dev/null
      done
      popd > /dev/null
-}
-
-function colorgrid() {
-    iter=16
-    while [ $iter -lt 52 ]
-    do
-        second=$[$iter+36]
-        third=$[$second+36]
-        four=$[$third+36]
-        five=$[$four+36]
-        six=$[$five+36]
-        seven=$[$six+36]
-        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
-
-        echo -en "\033[38;5;${iter}m█ "
-        printf "%03d" $iter
-        echo -en "   \033[38;5;${second}m█ "
-        printf "%03d" $second
-        echo -en "   \033[38;5;${third}m█ "
-        printf "%03d" $third
-        echo -en "   \033[38;5;${four}m█ "
-        printf "%03d" $four
-        echo -en "   \033[38;5;${five}m█ "
-        printf "%03d" $five
-        echo -en "   \033[38;5;${six}m█ "
-        printf "%03d" $six
-        echo -en "   \033[38;5;${seven}m█ "
-        printf "%03d" $seven
-
-        iter=$[$iter+1]
-        printf '\r\n'
-    done
 }
