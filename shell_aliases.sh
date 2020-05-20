@@ -72,6 +72,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias psx='ps auxf'
     alias psxfull='ps auxhfww'
     alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
+    alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
 else  # assuming Darwin here
     alias oc='open -a "Google Chrome"'
     alias ow='open -a Whatsapp'
