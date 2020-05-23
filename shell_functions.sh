@@ -37,6 +37,15 @@ function list_funcs() {
     fi
 }
 
+# example usage: `debug_arg FOO $FOO`, if FOO is defined $FOO will be non-zero
+function debug_arg() {
+    if [ -z "$2" ]; then
+        echo "variable $(tput setaf 1)$1$(tput sgr0) undefined!"
+    else
+        printf "Variable $(tput setaf 3)$1 = $(tput setaf 10)$2$(tput sgr0);   "
+    fi
+}
+
 function rrc() {
     if [ $(detect_shell) = "zsh" ]; then
         source ~/.zprofile && source ~/.zshrc
@@ -85,7 +94,7 @@ function findgrepp() { find . -type f -regex $1 -exec grep $2; }
 function findgrep() { find . -type f -name $1 -exec grep $2; }
 
 # go docs with syntax highlighting!
-function godbat() { go doc $@ | bat -l go; }
+function batgod() { go doc $@ | bat -l go; }
 
 function display_notif() {
     if [ `uname` = "Darwin" ]; then

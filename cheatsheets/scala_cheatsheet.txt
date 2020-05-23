@@ -1,9 +1,10 @@
 ###################### SCALA #########################
+- https://docs.scala-lang.org/cheatsheets/index.html
 - carter recomendation: scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - run command and redirect to file
-import sys.process._
-import java.io.File
-("ls -al" #> new File("files.txt")).!
+    import sys.process._
+    import java.io.File
+    ("ls -al" #> new File("files.txt")).!
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
