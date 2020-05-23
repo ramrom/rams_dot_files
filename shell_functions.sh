@@ -39,10 +39,11 @@ function list_funcs() {
 
 # example usage: `debug_arg FOO $FOO`, if FOO is defined $FOO will be non-zero
 function debug_arg() {
+    local spacing="\n"; [ -n "$tab" ] && spacing=";    "
     if [ -z "$2" ]; then
         echo "variable $(tput setaf 1)$1$(tput sgr0) undefined!"
     else
-        printf "Variable $(tput setaf 3)$1 = $(tput setaf 10)$2$(tput sgr0);   "
+        printf "Variable $(tput setaf 3)$1 = $(tput setaf 10)$2$(tput sgr0)${spacing}"
     fi
 }
 
