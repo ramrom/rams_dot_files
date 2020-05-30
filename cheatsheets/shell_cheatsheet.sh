@@ -45,6 +45,13 @@ set -o vi   # bash vi mode
 # bash/posix/zsh: delete a function or a variable
 unset foo
 
+# make a variable or function unmodifiable
+readonly foo=1
+foo=2  # will error
+
+#print all readonly variables
+readonly
+
 # https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
 # hyphens aren't guarenteed to be cross-shell compatible :(
 function foo-bar() {
