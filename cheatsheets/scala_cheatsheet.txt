@@ -42,6 +42,7 @@ Macwire/dependency-inject:
 - portkey uses @module annotation above class declarations, it must make classes vals' available in scope
 
 AUTOMATION TESTING:
+- https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
 - private method testing, supported by ScalaTest
     - org.scalatest.PrivateMethodTester._
