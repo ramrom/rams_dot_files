@@ -88,7 +88,7 @@ else  # assuming Darwin here
     alias gl="cd ~/Google\ Drive/Lists"
     alias gr="cd ~/Google\ Drive/Rally"
     alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
-    alias brew_leave_deps="brew leaves | xargs brew deps --installed --for-each | \
+    alias brew_leaf_deps="brew leaves | xargs brew deps --installed --for-each | \
         sed \"s/^.*:/$(tput setaf 4)&$(tput sgr0)/\""
 fi
 
