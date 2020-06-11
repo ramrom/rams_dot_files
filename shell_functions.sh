@@ -130,12 +130,12 @@ function colr_row() {
 # pass noreset=1 and empty/no string to format external string
 function ansi256() {
     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
-    local lbld=""; [ -n "$bld" ] && lbld="\033[1m"
-    local lstrike=""; [ -n "$strike" ] && lstrike="\033[9m"
-    local lund=""; [ -n "$und" ] && lund="\033[4m"
-    local lit=""; [ -n "$it" ] && lit="\033[3m"
-    local lbg=016; [ -n "$bg" ] && lbg=$bg
-    local lfg=007; [ -n "$fg" ] && lfg=$fg
+    local lbld="";              [ -n "$bld" ] && lbld="\033[1m"
+    local lstrike="";           [ -n "$strike" ] && lstrike="\033[9m"
+    local lund="";              [ -n "$und" ] && lund="\033[4m"
+    local lit="";               [ -n "$it" ] && lit="\033[3m"
+    local lbg=016;              [ -n "$bg" ] && lbg=$bg
+    local lfg=007;              [ -n "$fg" ] && lfg=$fg
     echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
 }
 
