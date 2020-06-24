@@ -97,6 +97,8 @@ function findgrep() { find . -type f -name $1 -exec grep $2; }
 # go docs with syntax highlighting!
 function batgod() { go doc $@ | bat -l go; }
 
+function batsh() { which $@ | bat -l sh; }
+
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
