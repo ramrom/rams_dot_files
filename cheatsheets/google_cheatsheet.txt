@@ -27,6 +27,10 @@ f - forward email
 c - compose
 z - undo last action
 
+YOUTUBE:
+- j/l - back/forward 10 sec
+- k - play/pause
+
 
 CALENDER:
 / - put cursor in searchbox
