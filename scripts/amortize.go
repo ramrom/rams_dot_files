@@ -16,6 +16,10 @@ const (
 
 var debug = flag.Bool("debug", false, "output debug info about schedule")
 
+func init() {
+    flag.Parse()
+}
+
 // 186,706 principle, 2551.92 pmt monthly
 // 27621 - 4 percent
 // 18231 - 2.8 percent
