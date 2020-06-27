@@ -16,6 +16,11 @@ horizontal rule:
 * bullet 1
 * bullet 2
 
+- bullet 1
+-- subbullet 1
+-- subbullet 2
+- bullet 2
+
 1. numbered 1
 1. numbered 2
 
