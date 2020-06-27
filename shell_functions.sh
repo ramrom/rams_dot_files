@@ -43,7 +43,7 @@ function debug_arg() {
     if [ -z "$2" ]; then
         echo "variable $(tput setaf 1)$1$(tput sgr0) undefined!"
     else
-        printf "Variable $(tput setaf 3)$1 = $(tput setaf 10)$2$(tput sgr0)${spacing}"
+        printf "Variable $(tput bold)$(tput setaf 3)$1 = $(tput setaf 10)$2$(tput sgr0)${spacing}"
     fi
 }
 
