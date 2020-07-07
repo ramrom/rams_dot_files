@@ -3,6 +3,7 @@ package main
 import "time"
 import "fmt"
 import "flag"
+import color "github.com/logrusorgru/aurora"
 
 type Date struct { year, month, day int; dtime time.Time }
 
@@ -22,9 +23,9 @@ func init() {
 
 // 186,706 principle, 2551.92 pmt monthly
 // 27621 - 4 percent
-// 18231 - 2.8 percent
-// 19719 - 3 percent
 // 21238 - 3.2 percent
+// 19719 - 3 percent
+// 18231 - 2.8 percent
 func main() {
 
     dates := generate_dates(Date{2020,5,1,time.Now()}, 365 * 15, Monthly)
@@ -50,6 +51,7 @@ func Amortize(apr float64, loan float64, pmt float64, dates []Date) {
         principle, interest = waterfall(principle, interest, pmt)
         last_date = date
     }
+    fmt.Println(color.Bold("testing"))
     fmt.Printf("total_interest_paid: %v\n", total_interest)
 }
 
