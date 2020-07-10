@@ -56,6 +56,9 @@ downarrow               - scroll down
 
 
 OTHER:
+- spotify shortcuts
+    - https://support.spotify.com/us/using_spotify/system_settings/keyboard-shortcuts/
+    - cmd-left/right next/prev song, cmd-up/down vol up/down, cmd-shift-up max volume, cmd-shift-down mute
 - function keys go up to f19, not f20-f24
     - f14, f15 are brightness up/down
     - f20 in iterm does same thing as hitting ctrl-p
