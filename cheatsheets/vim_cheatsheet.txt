@@ -110,6 +110,7 @@ OPTIONS:
 :set lazyredraw - for macros dont redraw screen, faster replay
 
 EX MODE:
+Q - in normal mode will go into ex model
 visual -exit ex mode
 vi - short for visual
 
