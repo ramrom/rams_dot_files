@@ -17,6 +17,9 @@ elseif empty($VIM_NOPLUG)
     " grubbox, dracula, molokai are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
 
+    " real-time render markdown in browser window as you edit the source
+    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+
     Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'scrooloose/nerdtree'
