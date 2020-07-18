@@ -83,3 +83,8 @@ SBT:
  integration tests: sbt "it:testOnly some.path.to.test another.path.to.test"
  sbt 'testOnly *SSO* -- -z "foo bar desc"'
    - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
+
+
+AKKA:
+----------------------------------------
+- akka streams main goal is to implement backpressure
