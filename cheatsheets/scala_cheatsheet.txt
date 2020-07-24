@@ -41,6 +41,11 @@ Macwire/dependency-inject:
     Also other things, but those are the big ones that differ in those approaches. (edited)
 - portkey uses @module annotation above class declarations, it must make classes vals' available in scope
 
+SCALATEST:
+- https://www.scalatest.org/user_guide/using_the_runner#filtering
+- using with sbt: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
+
+
 AUTOMATION TESTING:
 - https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
@@ -87,4 +92,4 @@ SBT:
 
 AKKA:
 ----------------------------------------
-- akka streams main goal is to implement backpressure
+- mark waks: akka streams main goal is to implement backpressure
