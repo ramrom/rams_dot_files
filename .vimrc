@@ -25,7 +25,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'scrooloose/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    " Plug 'pbogut/fzf-mru.vim'
+    Plug 'pbogut/fzf-mru.vim'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -40,7 +40,7 @@ elseif empty($VIM_NOPLUG)
     endif
 
     "NOTE: will detect .txt files with `***` chars in first line as robot
-    Plug 'mfukar/robotframework-vim'    "more recent, i think formed from costallet
+    Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet
     "Plug 'costallat/robotframework-vim'
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
@@ -221,8 +221,8 @@ let mapleader = " "				"set metakey for vim shortcuts
 
 if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
 
-"TODO: i think c-l is good enough, prolly remove this after training muscle memory to c-l
-"much faster than escape, almost never hit jk successively in insert, jj might be good too
+" TODO: i think c-l is good enough, prolly remove this after training muscle memory to c-l
+" much faster than escape, almost never hit jk successively in insert, jj might be good too
 " inoremap jk  <Esc>
 " when vim in insertmode(awful) c-l goes to normal mode from insert
 inoremap <C-l>  <Esc>
@@ -300,6 +300,7 @@ noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
 noremap <leader>R :Rg!<CR>
+noremap <leader>i :FZFMru<CR>
 
 noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gvdiffsplit master<cr>
@@ -373,6 +374,8 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 " Files will use FZF_DEFAULT_COMMAND
 " Commits needs vim-fugitive
 
+" for FZF-Mru plugin, prevent fzf from sorting, show by recency
+let g:fzf_mru_no_sort = 1
 
 """""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
 let g:ctrlp_max_files = 20000
