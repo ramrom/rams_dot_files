@@ -100,7 +100,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gdw='git diff --color-words'
 alias gdd='git -c core.pager="delta --dark" diff'
-alias gbranchclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
+alias gbranchclean='git branch --merged master | egrep -v "^\*|master" | xargs -n 1 git branch -d'
 # alias gpsm='git pull --recurse-submodules'
 # alias gsubp='git submodule foreach git pull origin master'
 
