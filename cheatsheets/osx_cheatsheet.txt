@@ -32,6 +32,8 @@ pbpaste - cli way to paste from clipboard
     - pbpaste | grep foo
 mdls    - get metadata on a file
 sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
+- CLICOLOR_FORCE=1 ls -l | less
+    - force color to pipe output, be default ls wont colorize
 
 
 BROWSER(CHROME/FIREFOX verified):

@@ -41,6 +41,7 @@ VIM-FUGITIVE:
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
+    s - stage, u - unstage, = - toggle diff of file
 G diff          - git diff
 G blame         - sidepane with git blame
 G log %         - git log <current file>

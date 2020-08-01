@@ -5,6 +5,15 @@ git show-ref --tags -d  - above + what commit tag points to
 git remote prune foo    - remove outdated references in remote
 git branch -m OLD_B NEW_B  - rename branch
 
+git branch --merged relativebranch
+    - show branches with commits merged into relativebranch
+    - NOTE: authn squash commits a branch to new commit before merge, so commit number is diff
+git branch --no-merged relativebranch
+    - shows opposite
+
+git branch | egrep -v "^\*|master" | xargs git branch -D
+    - delete all branches not master or current
+
 git co -b foobranch
 git push --set-upstream remote foobranch
 
