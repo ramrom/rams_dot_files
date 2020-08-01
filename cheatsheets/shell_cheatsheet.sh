@@ -102,6 +102,15 @@ tail -f foofile | grep foopattern | grep foo2
 tail -f foofile | grep --line-buffered foopattern | grep foo2
 # in perl inline scripts add `$|++` to line-buffer
 
+# IF else syntax
+if [ "a" = "a" ]; then
+    echo "hi"
+elif [ "b" = "b" ]; then
+    echo "word"
+else
+    echo "hi"
+fi
+
 
 array=(1 two thre)
 echo ${array[1]}  # ref 2nd element in array, in this case this prints "two"
@@ -147,7 +156,7 @@ esac
 
 # more compact, works in zsh/bash/sh
 case "$BAR" in
-    yar) A=1 ;;
+    yar|gar) A=1 ;;
     far) B=2 ;;
 esac
 
