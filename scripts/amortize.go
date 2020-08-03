@@ -27,9 +27,9 @@ func init() {
 // 19719 - 3 percent
 // 18231 - 2.8 percent
 func main() {
-
     dates := generate_dates(Date{2020,5,1,time.Now()}, 365 * 15, Monthly)
     Amortize(0.04, 186706.0, 2551.92, dates)
+    // Amortize(0.028, 186706.0, 2551.92, dates)
     // dates := generate_dates(Date{2018,6,1,time.Now()}, 365 * 15, Monthly)
     // Amortize(0.04, 345000.0, 2551.92, dates)
 }

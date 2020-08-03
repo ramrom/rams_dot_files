@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# setup alert, prolly tmux status, for not connected to Rally wifi:
+# TODO: make faster, hyperfine has it run in 30ms
 function get_wifi_ssid() {
     if [ "$(uname)" = "Darwin" ]; then
         local wifi_info=$(/System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport -I)
