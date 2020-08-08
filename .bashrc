@@ -18,18 +18,18 @@ shopt -s checkwinsize
 # set -o vi
 
 # modify ls colors, ubuntu bash 4.4 doesnt need this for color on ls and tree
-[ `uname` = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
+[ $(uname) = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'
 # TODO: how to get brew tree colors working, below LS_COLORS doesnt work
 # [ `uname` = "Darwin" ] && export LS_COLORS='GxFxCxDxBxegedabagaced'
 
 # apparently osx ps doesnt support this env var per man docs
-if [ `uname` = "Linux" ]; then
+if [ $(uname) = "Linux" ]; then
     export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 fi
 
 # Linux bin name for fd is fdfind
 fdname="fd"
-[ `uname` = "Linux" ] && fdname="fdfind"
+[ $(uname) = "Linux" ] && fdname="fdfind"
 
 export FZF_DEFAULT_COMMAND="$fdname --type f --hidden --exclude .git"
 export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-info \
