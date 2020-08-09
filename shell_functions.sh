@@ -99,6 +99,12 @@ function batgod() { go doc $@ | bat -l go; }
 
 function batsh() { which $@ | bat -l sh; }
 
+function rename() {
+    # linux, gawk doesnt exist on osx
+    # echo $1 | gawk -F'(' '{print gensub(/ /, "-","g", $1) "(" $2}'
+    echo $1 | sed 's/ /-/g'
+}
+
 function display_notif() {
     if [ `uname` = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
@@ -125,7 +131,7 @@ function dubydircolor() {
 # colorize every 3rd line lighter background (assuming black background) to help readability
 function colr_row() {
     while read line; do
-      bg=235 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
+      bg=237 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
     done
 }
 
@@ -172,6 +178,19 @@ function sensor_data() {
     local s=$(sensors)
     echo $s | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
     echo $s | grep -E "CPU Fan"
+}
+
+# https://n0tablog.wordpress.com/2009/02/09/controlling-vlc-via-rc-remote-control-interface-using-a-unix-domain-socket-and-no-programming/
+# seek 100" - goto 100sec after start, "get_time" - current position in seconds since start
+# "volume 250" - 250 is 100%, "volume" - return current volume, "volup 10"/"voldown 10" - up/down volume 10 steps
+# "info" - codecs/frame-rate/resolution, "stats" - some metrics on data encoded/decoded
+# ~/Library/Preferences/org.videolan.vlc/vlcrc contains the perferences config state, including where unix sock is located
+# osx: bin to start vlc: /Applications/VLC.app/Contents/MacOS/VLC
+function vlc_cli() {
+    # [ "$(uname)" = "Darwin" -a $1 = "launch" ] && /Applications/VLC.app/Contents/MacOS/VLC
+    local vlc_socks_loc=~/vlc.sock
+    [ ! -S "$vlc_socks_loc" ] && echo "vlc socks file at $vlc_socks_loc not found!" && return 1
+    echo $1 | nc -U $vlc_socks_loc
 }
 
 # TODO: oftentimes do nothing, peeps rec brew brightness tool

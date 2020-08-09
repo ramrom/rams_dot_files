@@ -25,12 +25,12 @@ PlaySpecification/spec2, to skip test:
     - skipped("some reason")
     - append .pendingUntilFixed("message about the issue")
 
-Enumeration:
+ENUMERATION:
 - play 2.5 json doesnt supports scala enumerators
 - use https://github.com/AudaxHealthInc/lib-spartan/blob/master/lib-spartan-play-json/src/main/scala/com/rallyhealth/spartan/v2/util/serialization/RallyEnumerationJsonHelpers.scala
 - or also enumeratum
 
-Macwire/dependency-inject:
+MACWIRE/DEPENDENCY-INJECT:
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
 - macwire happens pre-compile, guice i think happens runtime
 - from doug roper:
@@ -63,6 +63,7 @@ REST ASSURED:
 
 
 AMMONITE:
+----------------------------------------
 - https://ammonite.io/
 - block input:
     @ { <enter>
