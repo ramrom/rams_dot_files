@@ -99,10 +99,24 @@ function batgod() { go doc $@ | bat -l go; }
 
 function batsh() { which $@ | bat -l sh; }
 
-function rename() {
-    # linux, gawk doesnt exist on osx
-    # echo $1 | gawk -F'(' '{print gensub(/ /, "-","g", $1) "(" $2}'
-    echo $1 | sed 's/ /-/g'
+# e.g. "Some Title (2000) [1080p] [FOO]"
+function file_rename() {
+    local f=$(echo "$1" | sed 's/ /-/g')
+    local charsbeforefirstparen=$(echo "$f" | rg -o  "([^\(].*)\(.*$" -r '$1' --color never)
+    local charsafterfirstparen=$(echo "$f" | rg -o  "[^\(].*(\(.*$)" -r '$1' --color never)
+    local a=$(echo $charsbeforefirstparen | sed 's/-/_/g')
+    local a=$(echo $a | sed 's/.$/-/')
+    # local b=$(echo $charsafterfirstparen | sed 's/[()\[]//g')  # sed fails literal \] in [] char class
+    local b=$(echo $charsafterfirstparen | tr -d "()[]")
+    echo $a$b
+}
+
+function file_rename_all() {
+    for f in *; do
+        echo $f
+        file_rename $f
+        # mv $f $(rename $f)
+    done
 }
 
 function display_notif() {

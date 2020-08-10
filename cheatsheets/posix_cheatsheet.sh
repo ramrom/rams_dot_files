@@ -28,6 +28,7 @@ echo foo:bar:baz | tr : \\n
 
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
+echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
 
 # wc - word count
 wc -l   # count # of lines
