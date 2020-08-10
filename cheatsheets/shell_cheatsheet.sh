@@ -143,7 +143,6 @@ do
     i=$((i + 1))
 done
 
-
 # case statements
 case "$FOO" in
 partialstring*|someother*)
@@ -248,6 +247,17 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 &&  # "and" like using "||"
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
+
+# FILES AND DIRS
+# iterate just through all files in curent dir
+for d in *; do
+    echo $d
+done
+# iterate just through dirs in current dir, NOTE: edge case of no dirs, will have one interation with d="*/"
+for d in */ ; do
+
+# if there is a dir named "foo (bar) [baz]", to move it to "foobarbaz"
+mv foo\ \(bar\)\ \[baz\] foobarbaz
 
 
 ### RANDOM
