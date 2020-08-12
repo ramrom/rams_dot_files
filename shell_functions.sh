@@ -101,7 +101,7 @@ function batsh() { which $@ | bat -l sh; }
 
 # e.g. "Some Title (2000) [1080p] [FOO]"
 function file_rename() {
-    local f=$(echo "$1" | sed 's/ /-/g')
+    local f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
     local charsbeforefirstparen=$(echo "$f" | rg -o  "([^\(].*)\(.*$" -r '$1' --color never)
     local charsafterfirstparen=$(echo "$f" | rg -o  "[^\(].*(\(.*$)" -r '$1' --color never)
     local a=$(echo $charsbeforefirstparen | sed 's/-/_/g')
@@ -111,11 +111,31 @@ function file_rename() {
     echo $a$b
 }
 
+# e.g. "Some.Title.2000.1080p.[FOO].mp4"
+function file_rename2() {
+    local charsbeforeyear=$(echo "$1" | rg -o "(.*)\.\d{4}\..*" -r '$1' --color never)
+    local charsafteryear=$(echo "$1" | rg -o ".*(\.\d{4}\..*)" -r '$1' --color never)
+
+    charsbeforeyear=$(echo $charsbeforeyear | sed 's/\./_/g')
+
+    charsafteryear=$(echo $charsafteryear | sed -E 's/(\[.*)\.(.*\])/\1_\2/g')
+    charsafteryear=$(echo $charsafteryear | tr -d "()[]")
+    charsafteryear=$(echo $charsafteryear | sed 's/\./-/g')            # replace all dots with dash
+    charsafteryear=$(echo $charsafteryear | sed -E 's/-(.{3})$/\.\1/') # except keep last file extention dot
+    echo $charsbeforeyear$charsafteryear
+}
+
 function file_rename_all() {
     for f in *; do
-        echo $f
-        file_rename $f
-        # mv $f $(rename $f)
+        local rename=$(file_rename $f)
+        if [ -z "$rename" ]; then
+            echo "ERROR: file $f, has no parentheses"
+        elif [ -n "$forreal" ]; then
+            # echo $f
+            echo "mv $f $rename"
+        else
+            echo $rename
+        fi
     done
 }
 
