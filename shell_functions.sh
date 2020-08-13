@@ -324,14 +324,16 @@ function tmux_main_status() {
     local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
     local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
     local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
+    local tmux_mounted_drive="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/mounted_drives.sh)#[default]"
+    local tmux_wifi_ssid="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/check_wifi.sh)#[default]"
+    local tmux_vpn_on="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/vpn_connected.sh)#[default]"
 
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
     local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
 
-    local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs} ${tmux_ssh_jmp}"
+    local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs}\
+ ${tmux_ssh_jmp} ${tmux_mounted_drive} ${tmux_wifi_ssid} ${tmux_vpn_on} "
     local right="#[align=right]${tmux_spotify}   ${tmux_host_datetime}"
-    # local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
-    # local right="#[align=right]   ${tmux_host_datetime}"
     if [ -n "$simple" ]; then
         left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
         right="#[align=right]  ${tmux_host_datetime}"
@@ -367,7 +369,7 @@ function tmux_status() {
     [ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!"
     [ "$1" = "off" ] && tmux_status_reset
     if [ "$1" = "on" ]; then
-        tmux set status-interval 1
+        tmux set status-interval 5
         tmux set status 2
         tmux_main_status        # set first line, which runs the master script
     fi
