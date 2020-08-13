@@ -82,7 +82,7 @@ fi
 
 # set PATH so it includes user's private bin if it exists and it's not already in PATH
 mybindir=~/bin
-[ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" && PATH="$mybindir":"${PATH}"
+[ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" > /dev/null && PATH="$mybindir":"${PATH}"
 unset mybindir
 
 # execute local settings
