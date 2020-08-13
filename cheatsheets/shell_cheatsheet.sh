@@ -199,6 +199,7 @@ echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
 # for mult and division with integers in zsh/bash
 $(( 3 * 4 / 10 ))   # rounds down to nearest int, so 1 here
+$(( 10 % 3 ))  # returns 1, % is mod operator
 
 # union of two stdouts into one, note each command is run sequentially, so if one (e.g. tail -f) doesn't end then next will never run
 { head a; tail b; } | grep "foo"  # same as running "cat a b"
