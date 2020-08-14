@@ -67,6 +67,7 @@ else
 fi
 
 if [ "$(uname)" = "Linux" ]; then
+    alias watchtopcpu="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
     alias netstatip='sudo netstat -lpnut'
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
     alias psx='ps auxf'
@@ -75,6 +76,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
     alias vcrypt='veracrypt'
 else  # assuming Darwin here
+    alias watchtopcpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
     alias oc='open -a "Google Chrome"'
     alias ow='open -a Whatsapp'
     alias os='open -a Slack'
