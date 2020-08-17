@@ -385,6 +385,14 @@ function tmux_status_reset() {
 
 function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
 
+function top_cpu_processes() {
+    if [ `uname` = "Darwin" ]; then
+        # ps -Ao user,uid,command,pid,pcpu,tty -r | head -n 6   # -r sorts by cpu usage
+        ps -Ao pcpu,user,command -r | head -n 6   # do command last so it string doesnt get truncated
+        # TODO: parsing, if /Applications in string then get app name after /
+    fi
+}
+
 function cpu_usage() {
     # uptime always uses d.dd format, so remove '.' will result in x100 integer
     # using awk to print field N doesnt work, sometimes relative fields change
@@ -396,6 +404,7 @@ function cpu_usage() {
     # need to cut space at end of line
     # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
 
+    # FIXME: with uptime should be able to go above 100
     local minavepercent=$(($minave / $numcpu))
     echo $minavepercent
 }
