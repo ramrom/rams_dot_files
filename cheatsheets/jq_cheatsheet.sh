@@ -7,7 +7,7 @@ echo "[1, 2, {"a":1,"b":2} ]" | jq '.[2] | keys'    # will output [ "a", "b" ]
 echo "[1, 2, 222] " | jq '. | length'    # will output 3
 
 # can do many statements with comma:
-echo "{"a":1,"b":2} | jq '.a, .b, .'    # will output 1, then 2 on next line, then full has on subsequent lines
+echo '{"a":1,"b":2}' | jq '.a, .b, .' # will output 1, then 2 on next line, then full has on subsequent lines
 
 # using contains method on sting field, need to remove null values first
 jq --arg FOO $somevar 'select(.somefield != null) | select(.somefield | contains($FOO))'
