@@ -159,6 +159,11 @@ case "$BAR" in
     far) B=2 ;;
 esac
 
+# also valid
+case "$FOO" in
+    bar) A=1 ;; baz) Z=1 ;; far) B=2 ;;
+esac
+
 # command line substitution field splitting
 #   bash field splits by default, zsh doesnt (need to set an shell option)
 #   IFS  var determines chars to use as delimter for splitting

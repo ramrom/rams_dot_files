@@ -170,14 +170,15 @@ function colr_row() {
 }
 
 # pass noreset=1 and empty/no string to format external string
+# TODO: have 'fg' var also support ansi8 color names
 function ansi256() {
     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
     local lbld="";              [ -n "$bld" ] && lbld="\033[1m"
     local lstrike="";           [ -n "$strike" ] && lstrike="\033[9m"
     local lund="";              [ -n "$und" ] && lund="\033[4m"
     local lit="";               [ -n "$it" ] && lit="\033[3m"
-    local lbg=016;              [ -n "$bg" ] && lbg=$bg
-    local lfg=007;              [ -n "$fg" ] && lfg=$fg
+    local lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
+    local lfg=007;              [ -n "$fg" ] && lfg=$(ansi8_name $fg)
     echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
 }
 
@@ -201,6 +202,18 @@ function print_ansi256() {
         iter=$[$iter+1]
         printf '\r\n'
     done
+}
+
+function ansi8_name() {
+    case "$1" in
+        red) echo 1 ;; brightred) echo 9 ;;
+        green) echo 2 ;; brightgreen) echo 10 ;;
+        yellow) echo 3 ;; brightyellow) echo 11 ;;
+        blue) echo 4 ;; brightblue) echo 12 ;;
+        magenta) echo 5 ;; brightmagenta) echo 13 ;;
+        teal) echo 6 ;; brightteal) echo 14 ;;
+        *) echo $1 ;;
+    esac
 }
 
 # TODO: finish this
