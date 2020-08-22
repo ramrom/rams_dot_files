@@ -90,6 +90,9 @@ kill %1
 # redirect stderr to out
 cat 2>&1 blah
 
+# redirect stdout to stderr
+>&2 echo "goes to error"
+
 # redir stderr and stdout to /dev/null
 cat > /dev/null 2>&1 blah
 

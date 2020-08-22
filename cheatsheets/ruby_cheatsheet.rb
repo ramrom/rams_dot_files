@@ -1,3 +1,6 @@
+# puts
+STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout
+
 # Find all objects of a type and do something to them
 ObjectSpace.each_object(Array) { |ob| puts ob.object_id }
 

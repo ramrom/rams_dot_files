@@ -162,6 +162,7 @@ function dubydircolor() {
     done
 }
 
+####################### ANSI COLORS ###################
 # colorize every 3rd line lighter background (assuming black background) to help readability
 function colr_row() {
     while read line; do
@@ -170,11 +171,11 @@ function colr_row() {
 }
 
 # pass noreset=1 and empty/no string to format external string
-# TODO: have 'fg' var also support ansi8 color names
+# TODO: validate fg and bg values, after ansi8 translation values must be numbers 1-250
 function ansi256() {
     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
-    local lbld="";              [ -n "$bld" ] && lbld="\033[1m"
     local lstrike="";           [ -n "$strike" ] && lstrike="\033[9m"
+    local lbld="";              [ -n "$bld" ] && lbld="\033[1m"
     local lund="";              [ -n "$und" ] && lund="\033[4m"
     local lit="";               [ -n "$it" ] && lit="\033[3m"
     local lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
@@ -211,10 +212,13 @@ function ansi8_name() {
         yellow) echo 3 ;; brightyellow) echo 11 ;;
         blue) echo 4 ;; brightblue) echo 12 ;;
         magenta) echo 5 ;; brightmagenta) echo 13 ;;
-        teal) echo 6 ;; brightteal) echo 14 ;;
+        cyan) echo 6 ;; brightcyan) echo 14 ;;
+        white) echo 7 ;; brightwhite) echo 15 ;;
+        black) echo 8 ;; brightblack) echo 16 ;;   # should really call it dark black, it's 100% black
         *) echo $1 ;;
     esac
 }
+#############################################################################
 
 # TODO: finish this
 # TODO: benchmark: 1) momoization and grep 2) dont memoize
