@@ -363,6 +363,13 @@ REGISTERS:
 "*p - paste from sys clipboard
 - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 
+JUMP LIST:
+things that add to jump list:
+    - normal mode G
+    - searching, / and ?, # and *, n and N
+    - window size jumps: L M and H
+    - text block jumps: ( ) { }
+
 Marks
 :marks - list of marks
 ma - set current position for mark A

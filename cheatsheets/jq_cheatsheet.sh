@@ -15,3 +15,13 @@ jq --arg FOO $somevar 'select(.somefield != null) | select(.somefield | contains
 # -r option strips `"` quotations characters from strings
 echo '{"a":"z"}' | jq '.a'    # prints `"z"`
 echo '{"a":"z"}' | jq -r '.a'    # prints `z`
+
+# jq regex on a field
+regex=fo
+echo '[ { "id":"foo" }, { "id":"fo" }, { "id":"bar" } ]' | jq --arg RGX $regex 'keys | select(. | test($RGX))'
+# this will output `{ "id":"foo" } { "id":"fo" }`
+
+# force color with -C and no color with -M, e.g. jq will remove color when stdout is pipe or redir to file
+echo '{"a":"z"}' | jq -C . > foo
+echo '{"a":"z"}' | jq -c . > foo # -c is compact, so no indents/newlines, but keeps color
+cat foo  # this should have color and indents that jq formatted
