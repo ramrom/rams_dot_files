@@ -41,9 +41,9 @@ function list_funcs() {
 function debug_arg() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
     if [ -z "$2" ]; then
-        echo "variable $(tput setaf 1)$1$(tput sgr0) undefined!"
+        echo $(und=1 ansi256 "DEBUG:")" Variable $(tput setaf 1)$1$(tput sgr0) undefined!"
     else
-        printf "Variable $(tput bold)$(tput setaf 3)$1 = $(tput setaf 10)$2$(tput sgr0)${spacing}"
+        printf $(und=1 ansi256 "DEBUG:")" Variable $(fg=brightyellow ansi256 $1)"" = "$(fg=brightgreen ansi256 $2)"${spacing}"
     fi
 }
 
