@@ -138,6 +138,13 @@ for (( i=1; i<=3; i++)); do
     echo $i
 done
 
+# break terminates for loop, so 4th and 5th iteration dont run, continue skips to next iteration so 1st iter skips echo
+for (( i=0; i<5; i++)); do
+    [ $i -eq 3 ] && break
+    [ $i -eq 0 ] && continue
+    echo $i
+done
+
 # POSIX/sh
 i=1
 while [ "$i" -ne 10 ]
@@ -256,6 +263,8 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 &&  # "and" like using "||"
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
+# USER INPUT
+echo ""; printf "Hit any key: "; read resultsinput   # resultsinptu will have string user entered after hitting enter
 
 # FILES AND DIRS
 # iterate just through all files in curent dir
