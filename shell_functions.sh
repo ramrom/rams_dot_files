@@ -52,7 +52,11 @@ function httpie_all() {
     local url=$1
     local method=GET
     local body_file=/tmp/httpie_body
-    # local headers=$(http -v -do $body_file --pretty all http://api.icndb.com/jokes/random 2>&1) #TODO: get status with color
+
+    # gets 3 digit status code with ansi color chars:
+        # local headers=$(http -v -do $body_file --pretty all http://api.icndb.com/jokes/random 2>&1)
+        # echo $headers | grep "HTTP.*\d\d\d" | grep -o "\d\d\d"
+
     local headers=$(http -v -do $body_file $method $url 2>&1)
     local http_status=$(echo $headers | grep "^HTTP" | cut -d ' ' -f 2)
     echo $headers; echo
@@ -303,6 +307,7 @@ function del_chrome_cookies() {
 }
 
 function chrome_json_summary() {
+    [ ! "$(uname)" = "Darwin" ] && >&2 echo "RLY-ERROR: chrome_json_summary needs applescript, only Darwin os" && return 1
     local wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
     [ "$wincount" -eq 0 ] && echo "zero windows!" && return
 
@@ -413,6 +418,10 @@ function tmux_status_reset() {
     tmux set -u status-format
 }
 
+# TODO: faster way to store data for status bar
+# hyperfine 'grep --color=never foo bar | grep --color=never -Eo "[^:]*$"'
+    # e.g. a foo file, each line has key value with ":" delim, e.g. "barkey:value" => has runs in 3ms
+# the `tmux set -q` runs in 9ms
 function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
 
 function top_cpu_processes() {
@@ -423,24 +432,24 @@ function top_cpu_processes() {
     fi
 }
 
+# NOTE: with uptime based usage, can go >100%
 function cpu_usage() {
     # uptime always uses d.dd format, so remove '.' will result in x100 integer
-    # using awk to print field N doesnt work, sometimes relative fields change
-    # local fiveminave=$(uptime | awk '{print $9}' | tr -d .)  # 5min ave
 
     local numcpu=$(sysctl -n hw.ncpu)  #osx
-    local minave=$(uptime | grep --color=never -o ":\s[0-9]\.[0-9]*" | cut -c 3- | tr -d .) #1min ave
-    local fifteenminave=$(uptime | grep --color=never -o "[0-9]\.[0-9]*$" | tr -d .) #15min ave
-    # need to cut space at end of line
+    local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d .) #1min ave
+    # local fifteenminave=$(uptime | grep --color=never -o "[0-9]{1,2}\.[0-9]*$" | tr -d .) #15min ave
+
+    # TODO: need to cut space at end of line
     # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
 
-    # FIXME: with uptime should be able to go above 100
     local minavepercent=$(($minave / $numcpu))
     echo $minavepercent
 }
 
 function tmux_percent_usage_color() {
-    verify_percent $1 "cpu percent usage" || return 1
+    # TODO: disabling for uptime based cpu usage, this can def go above 100%
+    # verify_percent $1 "cpu percent usage" || return 1
     [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
     [ $1 -gt 80 ] && echo "#[fg=colour198] $1%#[default]%%" && return 0
     [ $1 -gt 40 ] && echo "#[fg=colour208] $1%#[default]%%" && return 0
