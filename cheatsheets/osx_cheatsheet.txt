@@ -15,6 +15,9 @@ brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 
 # from https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies)
 `brew rm $(join <(brew leaves) <(brew deps FORMULA))`
 
+# upgrade one formula
+brew upgrade fooformula
+
 
 
 CLI:

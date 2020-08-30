@@ -24,3 +24,8 @@ git push -u remote              - push/track current branch to remote and track
 git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
 git commit --amend --author="Author Name <email@address.com>"
+
+# SSH auth
+# can use GIT_SSH to specify a script that can run a custom ssh commmand
+    # this ssh command could do something like use a different config file or a different identity file
+# git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
