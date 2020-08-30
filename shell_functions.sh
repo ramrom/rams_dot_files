@@ -38,7 +38,7 @@ function list_funcs() {
 }
 
 # TODO: /bin/sh in osx does not like the printf's
-function debug_args() {
+function debug_vars() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
     for arg in "$@"; do
@@ -55,17 +55,6 @@ function debug_args() {
         fi
     done
     [ -n "$tab" ] && echo
-}
-
-# example usage: `debug_arg FOO $FOO`, if FOO is defined $FOO will be non-zero
-# TODO: replace with debug_args
-function debug_arg() {
-    local spacing="\n"; [ -n "$tab" ] && spacing=";    "
-    if [ -z "$2" ]; then
-        echo $(und=1 ansi256 "DEBUG:")" Variable $(tput setaf 1)$1$(tput sgr0) undefined!"
-    else
-        printf $(und=1 ansi256 "DEBUG:")" Variable $(fg=brightyellow ansi256 $1)"" = "$(fg=brightgreen ansi256 $2)"${spacing}"
-    fi
 }
 
 # TODO: finish, script to pp all headers and body and have programatic access to status code, other header values, and body

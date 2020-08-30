@@ -1,6 +1,7 @@
 ################### SSH ####################
 
 # ssh-agent can remember the passphrase of a private key, if the key has a passphrase, which is a good idea
+# this ssh-agent only applies to the current shell/terminal session!
 eval `ssh-agent -s`  # starting the agent, have to eval, running cmd plain fails, gives "could not open conn to auth agent" error
 
 # ssh-agent can remember your passwords
