@@ -48,3 +48,15 @@ tail -f foofile  # spit out last lines and continue to print them as new ones ar
 # bc - float point math
 echo "3.1 * 4.5" | bc       # = 13.9
 echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
+
+# arp cache
+arp -a   # display the apr cache
+
+# nslookup - dns lookup
+nskookup example.com
+nslookup example.com 1.1.1.1 # use dns server 1.1.1.1 to lookup
+
+# dig - dns lookup, better/newer than nslookup
+dig example.com
+dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
+# google public dns servers are 8.8.8.8 and 8.8.4.4
