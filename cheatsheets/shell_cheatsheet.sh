@@ -59,9 +59,19 @@ function foo-bar() {
 }
 
 # VARIABLES
-# bash/zsh and bsd/gnu sh support local scoped variables
+# bash/zsh and bsd/gnu sh support local scoped variables in a function
 # - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
-local foo=1
+local foo=1   # only hold value in scope of current function and called function, once func finishes local var is removed
+              # if a called function also decluares a `local foo=3`, then it and it's downstream func calls will use 3
+foo=1         # shell variable, so persists even when function exits
+
+export FOO=1  # environment variable, subshells inhert these variables
+FOO=1         # shell variable,       same as "set"ing, subshells dont inherit these
+
+# programatically create env variables
+A=FOO
+export BAR${A}="somestring"
+echo $FOOBAR # will print somestring
 
 # SPECIAL VARIABLES
 # bash/zsh/sh all seem to define these shell variables
@@ -221,11 +231,6 @@ $(( 10 % 3 ))  # returns 1, % is mod operator
 
 # printf for may newlines
 printf "${A}\n\n"
-
-# programatically create env variables
-A=FOO
-export BAR${A}="somestring"
-echo $FOOBAR # will print somestring
 
 "[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
 
