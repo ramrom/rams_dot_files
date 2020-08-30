@@ -37,6 +37,7 @@ function list_funcs() {
     fi
 }
 
+# TODO: /bin/sh in osx does not like the printf's
 function debug_args() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
@@ -46,11 +47,11 @@ function debug_args() {
         if [ -z "$var_value" ]; then
             local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
             local msg2=$(fg=brightred ansi256 " is undefined!")"${spacing}"
-            printf $msg$msg2
+            printf "$msg$msg2"
         else
             local msg=$(und=1 ansi256 "DEBUG:")" Variable $(fg=yellow ansi256 $arg)"
             local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
-            printf $msg$msg2
+            printf "$msg$msg2"
         fi
     done
     [ -n "$tab" ] && echo

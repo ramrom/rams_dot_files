@@ -58,7 +58,7 @@ function foo-bar() {
     echo "POSIX makes ram sad"
 }
 
-# VARIABLES
+####### VARIABLES
 # bash/zsh and bsd/gnu sh support local scoped variables in a function
 # - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
 local foo=1   # only hold value in scope of current function and called function, once func finishes local var is removed
@@ -73,6 +73,15 @@ A=FOO
 export BAR${A}="somestring"
 echo $FOOBAR # will print somestring
 
+# BASH get value of arbitrary variable
+var1="this is the real value"
+a="var1"
+echo "${!a}" # outputs 'this is the real value'
+# works everywhere
+X=foo
+Y=X
+eval "Z=\$$Y"  # z will equal "foo"
+
 # SPECIAL VARIABLES
 # bash/zsh/sh all seem to define these shell variables
 # these are not env vars, and not exported to child processes
@@ -86,7 +95,6 @@ echo $? # print exit code of last command
 # note: $0 is not passed in $@
 echo $@
 echo "$@" # usually want this to avoid misparsing args containing spaces/wildcards
-
 
 # print recent history in bash/zsh
 history
