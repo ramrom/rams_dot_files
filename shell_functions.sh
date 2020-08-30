@@ -37,7 +37,27 @@ function list_funcs() {
     fi
 }
 
+function debug_args() {
+    local spacing="\n"; [ -n "$tab" ] && spacing=";    "
+
+    for arg in "$@"; do
+        local var_value=$(eval "echo \$${arg}")
+
+        if [ -z "$var_value" ]; then
+            local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
+            local msg2=$(fg=brightred ansi256 " is undefined!")"${spacing}"
+            printf $msg$msg2
+        else
+            local msg=$(und=1 ansi256 "DEBUG:")" Variable $(fg=yellow ansi256 $arg)"
+            local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
+            printf $msg$msg2
+        fi
+    done
+    [ -n "$tab" ] && echo
+}
+
 # example usage: `debug_arg FOO $FOO`, if FOO is defined $FOO will be non-zero
+# TODO: replace with debug_args
 function debug_arg() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
     if [ -z "$2" ]; then
