@@ -555,7 +555,7 @@ function gitclean() {
     git branch –-merged $masterb | grep -v $masterb | xargs -n 1 git branch -d
 }
 
-function gits() {
+function gg() {
     [ -z "$GIT_SSH_SCRIPT_LOC" ] && echo "$(tput setaf 1)GIT_SSH_SCRIPT_LOC NOT SET!$(tput sgr0)" && return 1
     GIT_SSH=$GIT_SSH_SCRIPT_LOC git $*
 }
