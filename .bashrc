@@ -56,9 +56,6 @@ load_or_err /etc/bash_completion
 # enable git-completions for bash in ubuntu
 load_or_err /usr/share/bash-completion/completions/git
 
-# some funcs/aliases use github API token for hitting github API for user ramrom
-[ ! -f ~/.ramrom_gittoken ] && echo "$(tput setaf 1)ERROR: $(tput sgr0)Did not find ~/.ramrom_gittoken"
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
