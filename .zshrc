@@ -77,10 +77,14 @@ fi
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
-# set PATH so it includes user's private bin if it exists and it's not already in PATH
-mybindir=~/bin
-[ -d "$mybindir" ] && echo "$PATH" | grep -v "$mybindir:\|$mybindir$" > /dev/null && PATH="$mybindir":"${PATH}"
-unset mybindir
+function append_dir_to_path() {
+    local dir=$1
+    [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && PATH="$dir":"${PATH}"
+    unset dir
+}
+
+append_dir_to_path /usr/local/sbin
+append_dir_to_path ~/bin    # includes user's private bin if it exists and it's not already in PATH
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings

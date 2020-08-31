@@ -1,4 +1,10 @@
 ### BREW
+Terminology:
+- see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
+- bottle: pre-compiled code, just installs
+- cask: installs a program exactly as if it were a native osx appliation install
+- tap: a repository of formula
+
 brew deps --tree httpie  # show deps of httpie in tree output
 
 # show all formula that need this formula
