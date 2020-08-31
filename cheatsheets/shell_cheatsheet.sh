@@ -133,6 +133,7 @@ else
 fi
 
 
+# technically proper POSIX doesnt do arrays but osx's /bin/sh supports this
 array=(1 two thre)
 echo ${array[1]}  # ref 2nd element in array, in this case this prints "two"
 for i in "${array[@]}"
