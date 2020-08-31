@@ -16,6 +16,8 @@
   remote = green
 [diff]
   colorMoved = zebra
+[pull]
+    ff = only
 [color "diff"]
   meta = yellow bold
   frag = magenta bold
