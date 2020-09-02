@@ -1,4 +1,5 @@
 ###################### SCALA #########################
+- nice typeclass definition: https://scalac.io/typeclasses-in-scala/
 - https://docs.scala-lang.org/cheatsheets/index.html
 - carter recomendation: scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - run command and redirect to file

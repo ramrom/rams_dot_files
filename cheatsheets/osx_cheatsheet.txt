@@ -74,6 +74,8 @@ OTHER:
     - f14, f15 are brightness up/down
     - f20 in iterm does same thing as hitting ctrl-p
 - options key in osx is same as alt key in other Oses (like windows)
+- shift + cmd + [/]    - move back/forward "tabs"
+    - works with iterm2 tabs, chrome tabs, whatsapp convos
 option + cmd + esc  - bring up force quit menu for applications
 ctrl left/right arrow   - left/right desktops
     - ctrl 1/2          - move to desktop 1/2

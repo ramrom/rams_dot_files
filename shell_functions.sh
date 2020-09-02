@@ -124,7 +124,11 @@ function findgrep() { find . -type f -name $1 -exec grep $2; }
 # go docs with syntax highlighting!
 function batgod() { go doc $@ | bat -l go; }
 
-function batsh() { which $@ | bat -l sh; }
+function batsh() {
+    local definition_cmd=which
+    [ $(detect_shell) = "bash" ] && definition_cmd=type
+    $definition_cmd $@ | bat -l sh
+}
 
 # e.g. "Some Title (2000) [1080p] [FOO]"
 function file_rename() {
@@ -628,11 +632,6 @@ function parse_comma_delim_error() {
     local str="File.write(\"${1}\", File.read(\"${1}\").split(',').join(\"\\n\"))"
     ruby -e "$str"
 }
-
-# TODO: doesnt work with sh(3.2),`<(foo)` is process substitution, and a bash(and zsh) thing
-# function filenamediff() {
-#     diff <(cd $1; find . -type f | sort) <(cd $2; find . -type f | sort)
-# }
 
 function f_findfilesbysize() {
     sudo find "$1" -type f -size +"$2" | xargs du -sh
