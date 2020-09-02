@@ -26,6 +26,8 @@ echo "2.03" | tr -d .  # -d to delete, this will print 203
 # split on ":" delimiter, each on newline
 echo foo:bar:baz | tr : \\n
 
+# file - determine file type (osx and ubuntu has it)
+file foo   # example output: "foo: ASCII text"
 
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
