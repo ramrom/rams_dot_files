@@ -36,6 +36,8 @@ Files, ctrl-t - opens in new tab
 GFiles!?    - git modified files in full screen
 Lines       - search lines in open buffers
 BCommits    - commit hist for current buffer
+FZF-MRU:
+    - does MRU for local sessions, other vim session no affectd
 
 VIM-FUGITIVE:
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67

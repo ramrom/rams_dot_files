@@ -16,3 +16,7 @@ ssh-copy-id foouser@fooserver
 # can include other config files
 
 # ssh multihop: http://sshmenu.sourceforge.net/articles/transparent-mulithop.html
+
+# github only allows a key to be used with one github account
+# see https://docs.github.com/en/github/authenticating-to-github/error-key-already-in-use
+ssh -ai ~/.ssh/id_rsa git@github.com   # to verify the github account the key belongs to
