@@ -31,7 +31,7 @@ print(tojson(a))
 printjson(a)  // same as above, indented 2 spaces, colorized, printjson(x) = print(tojson(x))
 
 //print result to console for singular result i think...
-r = db.eligiblityRecord.find({rallyId:"95ebbaf6-d55a-4eac-85f7-24fb8dc63fd3"})
+r = db.someCollection.find({fooId:"95ebbaf6-d55a-4eac-85f7-24fb8dc63fd3"})
 print(r)
 
 //print result to console for multiple results of find() i think...

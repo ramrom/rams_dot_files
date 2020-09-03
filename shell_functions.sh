@@ -372,7 +372,7 @@ function tmux_main_status() {
     local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
     local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
     local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
-    local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rally_ram_dot_files/tmux_ssh_jmp.sh)#[default]"
+    local tmux_ssh_jmp="#[fg=brightyellow]#[bg=red]#(~/code/rams_dot_files/scripts/tmux_ssh_listen.sh)#[default]"
     local tmux_mounted_drive="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/mounted_drives.sh)#[default]"
     local tmux_wifi_ssid="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/check_wifi.sh)#[default]"
     local tmux_vpn_on="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/vpn_connected.sh)#[default]"
