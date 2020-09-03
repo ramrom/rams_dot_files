@@ -23,6 +23,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'scrooloose/nerdtree'
+    " FIXME: vim 7.4 doesnt like this below syntax
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
@@ -219,7 +220,9 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 let mapleader = " "				"set metakey for vim shortcuts
 
-if has('nvim') | tnoremap <Esc> <C-\><C-n> | endif
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
 
 " TODO: i think c-l is good enough, prolly remove this after training muscle memory to c-l
 " much faster than escape, almost never hit jk successively in insert, jj might be good too
@@ -242,6 +245,7 @@ function SaveDefinedSession()
 endfunction
 
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
+" FIXME: vim 7.4 doesnt have gettabinfo
 function TabBufMove(direction)
     if len(gettabinfo()) == 1
         if (a:direction == "f") | execute ":bn" | else |  execute ":bp" | endif
