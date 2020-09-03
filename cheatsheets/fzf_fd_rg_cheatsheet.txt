@@ -16,12 +16,14 @@ fzf -e   - exact match
 fzf -m   - multi select
 fzf -1   - if 1 match select it
 search:
-    !foo        (not foo)
-    foo | bar   (foo or bar)
-    ^foo        (foo at beg of line)
-    foo$        (foo at end of line)
+    foo         (fuzzy foo)
+    !foo        (exact, not foo)
     'foo        (exact match foo)
+    ^foo        (exact prefix, foo at beg of line)
+    foo$        (eact suffix, foo at end of line)
     'foo\ bar   (exact match with space "foo bar")
+    foo | bar   (fuzzy, foo or bar)
+    foo bar     (fuzzy, foo and bar)
 
 FD:
 fd -p        - match on full path (default file/dir name)

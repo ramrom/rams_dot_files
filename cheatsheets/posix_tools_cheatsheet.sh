@@ -1,4 +1,4 @@
-# Posix type stuff
+# 'Nix general tooling type stuff
 
 # list all files recursively in dir and their disk usage
 du -a /foo

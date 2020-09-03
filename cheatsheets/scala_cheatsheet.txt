@@ -1,4 +1,7 @@
 ###################### SCALA #########################
+- string interpolation:
+    - case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")  # prints `this is Foo(3)`
+    - toString method is called if fooObject isnt a String
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
 - https://docs.scala-lang.org/cheatsheets/index.html
 - carter recomendation: scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
@@ -91,6 +94,7 @@ SBT:
  integration tests: sbt "it:testOnly some.path.to.test another.path.to.test"
  sbt 'testOnly *SSO* -- -z "foo bar desc"'
    - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
+- possible to define diff scala versions for subprojects, but has limits, can work around limits though
 
 
 AKKA:
