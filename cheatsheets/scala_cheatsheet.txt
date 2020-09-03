@@ -28,8 +28,7 @@ PlaySpecification/spec2, to skip test:
 
 ENUMERATION:
 - play 2.5 json doesnt supports scala enumerators
-- use https://github.com/AudaxHealthInc/lib-spartan/blob/master/lib-spartan-play-json/src/main/scala/com/rallyhealth/spartan/v2/util/serialization/RallyEnumerationJsonHelpers.scala
-- or also enumeratum
+- can use enumeratum
 
 MACWIRE/DEPENDENCY-INJECT:
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
