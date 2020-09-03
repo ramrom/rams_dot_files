@@ -245,8 +245,11 @@ function SaveDefinedSession()
 endfunction
 
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
-" FIXME: vim 7.4 doesnt have gettabinfo
 function TabBufMove(direction)
+    if !exists('*gettabinfo')  " vim 7.4(and earlier) dont have this func
+        if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
+        return
+    endif
     if len(gettabinfo()) == 1
         if (a:direction == "f") | execute ":bn" | else |  execute ":bp" | endif
     else
@@ -256,6 +259,7 @@ endfunction
 
 "close tabs and windows if more than one of either, otherwise closes buffers until none and then quit vim
 function TabBufQuit()
+    if !exists('*gettabinfo') | execute ":q" | return | endif   " vim 7.4(and earlier) dont have this func
     let tinfo=gettabinfo()
     if len(tinfo) == 1 && len(tinfo[0]['windows']) == 1
         if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
