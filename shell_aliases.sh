@@ -68,12 +68,13 @@ fi
 
 if [ "$(uname)" = "Linux" ]; then
     alias watch_top_cpu="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
+    alias psx='ps auxhf'
+    alias psxfull='ps auxhfww'
     alias netstatip='sudo netstat -lpnut'
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
-    alias psx='ps auxf'
-    alias psxfull='ps auxhfww'
     alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
     alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
+    alias dfl='df -h | grep -v loop' # grep out loop devices in ubuntu
     alias vcrypt='veracrypt'
 else  # assuming Darwin here
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
@@ -86,7 +87,6 @@ else  # assuming Darwin here
     alias osp='open -a Spotify'
     alias odisc='open -a Discord'
     alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
-    alias psx='ps auxh'
     alias gl="cd ~/Google\ Drive/Lists"
     alias gr="cd ~/Google\ Drive/Rally"
     alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
