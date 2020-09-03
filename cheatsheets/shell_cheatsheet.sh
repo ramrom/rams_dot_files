@@ -243,10 +243,25 @@ printf "${A}\n\n"
 
 "[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
 
-#test if command exists in bash/zsh
-# exit 1  not found, exit 0 and output path if found
-command -v foo > /dev/null
-command -V foo # prints more info, (is it alias, shell func, or bin/script file
+# INTROSPECTION
+# COMMAND is shell built-in
+command foo             # will ignore any aliases or functions named foo, and run only bins/files
+# -v option can let us test if command exists
+# exit 1  not found, exit 0 found, prints info
+# zsh, osx /bin/sh, bash
+command -v foo  # zsh/bash/osx-bourne: print the name if it's a function/builtin, path if bin/file, short alias def
+command -V foo  # prints more info: is it alias, shell func, builtin or bin/script file
+
+# TYPE is shell builtin, return non-zero error code if nothing found
+# ubuntu /bin/sh is limited, osx /bin/sh is good
+type foo        # prints "type" (alias/function/file(bin)/builtin/keyword) and def of alias/func, path of file
+type -t foo     # prints just alias/function/file/builtin, nothing (exit code 1) if not found
+                    # bash supports it, osx /bin/sh supports it
+                    # zsh and ubuntu /bin/sh does NOT support -t
+type -a foo     # dislay all info, including all hits. if foo was alias and 2 bins, would show all 3 in precedent order
+
+# WHICH is bin
+which foo
 
 bash "==" is lexical comparison vs "=" is numerical comparison
 
