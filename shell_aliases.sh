@@ -74,7 +74,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
     alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
     alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
-    alias dfl='df -h | grep -v loop' # grep out loop devices in ubuntu
+    alias dfl='df -h | grep -v loop | grep -v tmpfs' # grep out loop and tmpfs in ubuntu
     alias vcrypt='veracrypt'
 else  # assuming Darwin here
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
