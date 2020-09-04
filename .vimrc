@@ -23,8 +23,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'scrooloose/nerdtree'
-    " FIXME: vim 7.4 doesnt like this below syntax
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
     Plug 'ctrlpvim/ctrlp.vim'     "generally use fzf and fzf-mru instead
