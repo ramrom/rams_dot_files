@@ -1,7 +1,10 @@
 # SHELL SCRIPT CHEAT SHEET
+# history of /bin/sh and shells: https://unix.stackexchange.com/questions/145522/what-does-it-mean-to-be-sh-compatible
 # good references: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
-# good zsh feature overview: https://github.com/hmml/awesome-zsh
-# zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
+# ZSH:
+    # feature overview: https://github.com/hmml/awesome-zsh
+    # zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
+        # order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
 
 # Bash (and AFAIK zsh)
 set -e # exit script/shell if any command returns with non-zero

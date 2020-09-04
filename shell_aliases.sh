@@ -11,15 +11,14 @@ alias la='ls -A'
 alias lal='ls -al'
 alias lahl='ls -alh'
 alias lrt='ls -lrt'
+alias ch_date='sudo date --set 1998-11-02'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
 alias tp='cd ~/tmp'
 alias dubydir='du -sh * 2>/dev/null'  # throw away errors, permission failure messages
-alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works
-alias ch_date='sudo date --set 1998-11-02'
 alias httpv='http -v'
 alias httpcn='httpv http://api.icndb.com/jokes/random'
 alias weather='http --print=b wttr.in'
@@ -33,7 +32,9 @@ alias clt='clear && tmux clear-history'
 # alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
-alias ssf='source ~/rams_dot_files/shell_functions.sh'
+
+alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
+alias rf='source ~/rams_dot_files/shell_functions.sh'
 alias saf='search_alias_func'
 alias safn='aliasname=1 funcname=1 search_alias_func'
 
