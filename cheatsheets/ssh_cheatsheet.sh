@@ -5,7 +5,12 @@
 eval `ssh-agent -s`  # starting the agent, have to eval, running cmd plain fails, gives "could not open conn to auth agent" error
 
 # ssh-agent can remember your passwords
-ssh-add  # will add default locations for keys
+ssh-add                  # will add default locations for keys
+ssh-add ~/path/to/key    # add a specific key
+
+ssh-add -l  # check the saved keys
+
+ssh-ad -D   # delete all cached keys
 
 # copy current users public key to authorized keys in remoteserver, now you can public/private key auth instead of password
 ssh-copy-id foouser@fooserver

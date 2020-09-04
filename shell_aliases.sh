@@ -78,6 +78,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias dfl='df -h | grep -v loop | grep -v tmpfs' # grep out loop and tmpfs in ubuntu
     alias vcrypt='veracrypt'
 else  # assuming Darwin here
+    alias psx='ps -axhf'
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
     alias oc='open -a "Google Chrome"'
     alias ow='open -a Whatsapp'
