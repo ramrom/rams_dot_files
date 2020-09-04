@@ -1,5 +1,6 @@
 # SHELL SCRIPT CHEAT SHEET
 # good references: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
+# good zsh feature overview: https://github.com/hmml/awesome-zsh
 
 # Bash (and AFAIK zsh)
 set -e # exit script/shell if any command returns with non-zero
@@ -41,7 +42,7 @@ set -o vi   # bash vi mode
 # if not at 1st char in prompt, delete char in front of it (forward delete)
 # Ctrl-d
 
-# FUNCTIONS
+###### FUNCTIONS
 # bash/posix/zsh: delete a function or a variable
 unset foo
 
@@ -243,7 +244,7 @@ printf "${A}\n\n"
 
 "[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
 
-# INTROSPECTION
+####### INTROSPECTION
 # COMMAND is shell built-in, this is POSIX standard
 command foo             # will ignore any aliases or functions named foo, and run only bins/files
 # -v option can let us test if command exists
@@ -267,6 +268,7 @@ which -a foo     # return all paths of bins matching foo in PATH
 
 bash "==" is lexical comparison vs "=" is numerical comparison
 
+####### CONDITIONALS
 # number comparison
 gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne = not equal
 [ 3 -gt 1 ] && echo hi   # will print hi
@@ -288,8 +290,11 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 -x  # is file executable
 -r  # is file readable
 [ ~/foo -nt ~/bar ] && echo hi  # if foo is newer than bar, print hi
+
+# other logical operators
 [ 3 -eq 3 -o 1 -eq 2 ] && echo hi # if 3 = 3 or 1 eq 2, print hi
-[ 3 -eq 3 ] || [ 1 -eq 2 ] && echo hi #same as above
+#same logically as above, EXCEPT if first conditions is true, second condition doesnt get run
+[ 3 -eq 3 ] || [ 1 -eq 2 ] && echo hi
 -a  # "and"
 &&  # "and" like using "||"
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi

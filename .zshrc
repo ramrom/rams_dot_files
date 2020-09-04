@@ -6,6 +6,9 @@ setopt histignoredups
 # turn off zsh globbing, particularly `[]` (brackets)
 setopt NO_NOMATCH
 
+# autochange dirs: no need to type `cd` before dir
+setopt auto_cd
+
 # use vi mode (-e emacs is default), press escape to go to normal
 # bindkey -v
 # TODO: need delete-before-cursor, forward-delete char
@@ -58,7 +61,7 @@ git_completion_file=~/.zsh/git-completion.bash
 if [ -f "$git_completion_file" ]; then
     zstyle ':completion:*:*:git:*' script $git_completion_file
     fpath=(~/.zsh $fpath)
-    autoload -Uz compinit && compinit
+    autoload -Uz compinit && compinit  # e.g. gives `cp -<TAB>` and `kill <TAB>` completion magic
 else
     echo "$(tput setaf 1) $git_completion_file not found! $(tput sgr0)"
 fi
