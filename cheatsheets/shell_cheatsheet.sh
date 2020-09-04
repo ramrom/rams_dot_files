@@ -299,6 +299,10 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 &&  # "and" like using "||"
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
+true || echo foo && echo bar   # this will print dude
+true || { echo foo && echo bar; }   # this wont print anything, braces make the two staements one
+
+
 # USER INPUT
 echo ""; printf "Hit any key: "; read resultsinput   # resultsinptu will have string user entered after hitting enter
 

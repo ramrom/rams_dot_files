@@ -15,6 +15,13 @@ function detect_shell() {
     # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
+# return 0 if all are defined, spit out error with exit 1 if one is not
+function cmds_defined() {
+    for cmd in "$@"; do
+        command -v $cmd > /dev/null || { echo "$cmd no defined!" && return 1; }
+    done
+}
+
 function search_alias_func() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
