@@ -1,4 +1,6 @@
-ubuntu/gnome:
+ubuntu/debian/gnome:
+- lsb_release -a        - show distro name and version
+- cat /etc/issue        - show distro and version
 
 desktop shortcuts:
 -------------------------------------------

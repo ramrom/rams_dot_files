@@ -244,15 +244,16 @@ printf "${A}\n\n"
 "[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
 
 # INTROSPECTION
-# COMMAND is shell built-in
+# COMMAND is shell built-in, this is POSIX standard
 command foo             # will ignore any aliases or functions named foo, and run only bins/files
 # -v option can let us test if command exists
 # exit 1  not found, exit 0 found, prints info
 # zsh, osx /bin/sh, bash
-command -v foo  # zsh/bash/osx-bourne: print the name if it's a function/builtin, path if bin/file, short alias def
+command -v foo  # zsh/bash/osx-bourne/ubuntu-borne: prints name if func/builtin/keyword, path if bin/file, short alias def
 command -V foo  # prints more info: is it alias, shell func, builtin or bin/script file
+                # zsh prints it's source path where it's defined, bash prints the definition itself
 
-# TYPE is shell builtin, return non-zero error code if nothing found
+# TYPE is shell builtin, made for bourne shell, but not in POSIX standard
 # ubuntu /bin/sh is limited, osx /bin/sh is good
 type foo        # prints "type" (alias/function/file(bin)/builtin/keyword) and def of alias/func, path of file
 type -t foo     # prints just alias/function/file/builtin, nothing (exit code 1) if not found
@@ -260,8 +261,9 @@ type -t foo     # prints just alias/function/file/builtin, nothing (exit code 1)
                     # zsh and ubuntu /bin/sh does NOT support -t
 type -a foo     # dislay all info, including all hits. if foo was alias and 2 bins, would show all 3 in precedent order
 
-# WHICH is bin
+# WHICH is bin, will return path of bin, exit non-zero otherwise
 which foo
+which -a foo     # return all paths of bins matching foo in PATH
 
 bash "==" is lexical comparison vs "=" is numerical comparison
 
