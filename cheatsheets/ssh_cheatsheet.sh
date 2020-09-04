@@ -8,9 +8,12 @@ eval `ssh-agent -s`  # starting the agent, have to eval, running cmd plain fails
 ssh-add                  # will add default locations for keys
 ssh-add ~/path/to/key    # add a specific key
 
-ssh-add -l  # check the saved keys
+ssh-add -l  # list the cached keys in the ssh-agent
 
 ssh-ad -D   # delete all cached keys
+
+# using multiple ssh keys for git on the same host: https://gist.github.com/jexchan/2351996
+    # created ssh config file and had to change the repo remote name to match
 
 # copy current users public key to authorized keys in remoteserver, now you can public/private key auth instead of password
 ssh-copy-id foouser@fooserver
