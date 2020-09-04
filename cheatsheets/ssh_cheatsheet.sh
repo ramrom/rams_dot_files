@@ -10,7 +10,7 @@ ssh-add ~/path/to/key    # add a specific key
 
 ssh-add -l  # list the cached keys in the ssh-agent
 
-ssh-ad -D   # delete all cached keys
+ssh-add -D   # delete all cached keys
 
 # using multiple ssh keys for git on the same host: https://gist.github.com/jexchan/2351996
     # created ssh config file and had to change the repo remote name to match
@@ -28,3 +28,7 @@ ssh-copy-id foouser@fooserver
 # github only allows a key to be used with one github account
 # see https://docs.github.com/en/github/authenticating-to-github/error-key-already-in-use
 ssh -ai ~/.ssh/id_rsa git@github.com   # to verify the github account the key belongs to
+
+# can tell ssh server, in sshd_config, to allow specific users from specific address ranges or hostnames
+# here foouser is allowed from anywhere, but bar users is only allowed from private C addresses (everyone else denied)
+AllowUsers foouser@* baruser@192.168.*

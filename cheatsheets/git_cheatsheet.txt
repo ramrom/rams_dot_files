@@ -29,3 +29,11 @@ git commit --amend --author="Author Name <email@address.com>"
 # can use GIT_SSH to specify a script that can run a custom ssh commmand
     # this ssh command could do something like use a different config file or a different identity file
 # git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
+
+# GITHUB AUTH
+- TFA:
+    - browser login requires the TFA
+    - local cli, on a push/write to public repo or anything on private repo
+        - git@ url repos: ssh keys dont require TFA
+        - https:// url repos: can use personal api token as password
+

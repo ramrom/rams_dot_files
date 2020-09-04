@@ -2,6 +2,13 @@ ubuntu/debian/gnome:
 - lsb_release -a        - show distro name and version
 - cat /etc/issue        - show distro and version
 
+# USER stuff
+sudo useradd foouser        - create new user with home dir
+sudo passwd foouser         - change users password, seems to bypass strength rules
+sudo useradd foouser foogroup    - add existing user to new group
+sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
+
+
 desktop shortcuts:
 -------------------------------------------
 - see https://help.ubuntu.com/community/KeyboardShortcuts
