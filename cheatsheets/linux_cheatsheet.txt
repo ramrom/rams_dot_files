@@ -8,6 +8,18 @@ sudo passwd foouser         - change users password, seems to bypass strength ru
 sudo useradd foouser foogroup    - add existing user to new group
 sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
 
+INIT SYSTEMS
+-------------------------------------------
+# systemd
+systemctl start/stop/restart
+systemctl status
+
+# SysV
+- uses pidfile in /var/run
+- script that generally defines bin,conf/pidfile, defines start/stop/reload/status functions for ur bin
+
+service script-name start/stop/restart
+service --status-all
 
 desktop shortcuts:
 -------------------------------------------
