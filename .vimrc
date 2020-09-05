@@ -13,13 +13,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
-    "TODO: find one of these that's better than ir_black
-    " grubbox, dracula, molokai are decent, maybe abstract
-    Plug 'rafi/awesome-vim-colorschemes'
-
-    " real-time render markdown in browser window as you edit the source
-    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
     Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'scrooloose/nerdtree'
@@ -39,10 +32,6 @@ elseif empty($VIM_NOPLUG)
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
 
-    "NOTE: will detect .txt files with `***` chars in first line as robot
-    Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet
-    "Plug 'costallat/robotframework-vim'
-
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     "TODO: indentLine displays `"` chars `|` or disspapear in json files...
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
@@ -61,6 +50,16 @@ elseif empty($VIM_NOPLUG)
     if has('nvim') && !empty($VIM_METALS)
         Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
     endif
+
+    "TODO: find one of these that's better than ir_black
+    " grubbox, dracula, molokai are decent, maybe abstract
+    Plug 'rafi/awesome-vim-colorschemes'
+
+    " real-time render markdown in browser window as you edit the source
+    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+
+    "NOTE: will detect .txt files with `***` chars in first line as robot
+    Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
 
     " plug#end automatically runs filetype plugin indent on and syntax enable
     call plug#end()
