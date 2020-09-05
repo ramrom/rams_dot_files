@@ -374,7 +374,7 @@ function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_ba
 function tmux_main_status() {
     #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
     # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-    ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
+    local ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
 
     local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
     local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
@@ -421,8 +421,8 @@ function tmux_default_winlist() {
 
 alias tms='tmux_status'
 function tmux_status() {
-    ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
-    [ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!"
+    local ver=$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")  # need tmux 2.9 to set multi-line statuses
+    [ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && return 1
     [ "$1" = "off" ] && tmux_status_reset
     if [ "$1" = "on" ]; then
         tmux set status-interval 5
@@ -439,10 +439,6 @@ function tmux_status_reset() {
     tmux set -u status-format
 }
 
-# TODO: faster way to store data for status bar
-# hyperfine 'grep --color=never foo bar | grep --color=never -Eo "[^:]*$"'
-    # e.g. a foo file, each line has key value with ":" delim, e.g. "barkey:value" => has runs in 3ms
-# the `tmux set -q` runs in 9ms
 function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
 
 function top_cpu_processes() {
