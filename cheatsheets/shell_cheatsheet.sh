@@ -47,6 +47,9 @@ set -o vi   # bash vi mode
 # Ctrl-d
 
 ###### FUNCTIONS
+source fooscript    # run script in current shell, not subshell, def zsh way
+. fooscript         # bash cononical way to source
+
 # bash/posix/zsh: delete a function or a variable
 unset foo
 

@@ -12,6 +12,8 @@ TMUX:
 - #(blah) is execute every time, $(blah) is single sub
 - tmux set -qg @foo "something"
     - -g makes this global to all sessions
+- tmux has buffers (like vim registers), when u copy in copy mode it goes in buffer
+    - `tmux list-buffers` will show content of buffers
 
 # running shell command on a tmux hook
 - tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'
@@ -32,3 +34,7 @@ tmux display-menu -x S foomenu a "display-message hello" bar b "display-message 
 # clients
 tmux list-clients -t some_session      # show clients
 prefix D                               # show client list, and basically detach the rest
+
+good resource on condition version checks in tmux conf file:
+- https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+    - it also details the changes, breaking changes, with increasing versions

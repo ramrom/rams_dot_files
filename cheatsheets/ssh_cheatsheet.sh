@@ -32,3 +32,10 @@ ssh -ai ~/.ssh/id_rsa git@github.com   # to verify the github account the key be
 # can tell ssh server, in sshd_config, to allow specific users from specific address ranges or hostnames
 # here foouser is allowed from anywhere, but bar users is only allowed from private C addresses (everyone else denied)
 AllowUsers foouser@* baruser@192.168.*
+
+# creating keys
+# good ref: https://linuxnatives.net/2019/how-to-create-good-ssh-keys
+ssh-keygen
+
+# change passphrase on particular private key
+$ ssh-keygen -p -f ~/.ssh/id_rsa
