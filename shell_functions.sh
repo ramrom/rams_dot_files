@@ -453,7 +453,11 @@ function top_cpu_processes() {
 function cpu_usage() {
     # uptime always uses d.dd format, so remove '.' will result in x100 integer
 
-    local numcpu=$(sysctl -n hw.ncpu)  #osx
+    if [ $(uname) = "Darwin" ]; then
+        local numcpu=$(sysctl -n hw.ncpu)
+    else  # assume linux otherwise
+        local numcpu=$(grep -c processor /proc/cpuinfo)
+    fi
     local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d .) #1min ave
     # local fifteenminave=$(uptime | grep --color=never -o "[0-9]{1,2}\.[0-9]*$" | tr -d .) #15min ave
 
