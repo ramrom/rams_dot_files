@@ -385,7 +385,7 @@ function tmux_main_status() {
     local tmux_vpn_on="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/vpn_connected.sh)#[default]"
 
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
-    local tmux_host_datetime="#[fg=brightyellow]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
+    local tmux_host_datetime="#[fg=colour199]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
 
     local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs}\
  ${tmux_ssh_jmp} ${tmux_mounted_drive} ${tmux_wifi_ssid} ${tmux_vpn_on} "
