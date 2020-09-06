@@ -316,6 +316,12 @@ function osx_spotify_toggle_play() {
         end using terms from'
 }
 
+function toggle_bulb() {
+    python3 -c 'import magichue; l = magichue.Light("192.168.1.101"); \
+        l.on = False if l.on else True
+        '
+}
+
 ############## CHROME #############################################
 function chrome_cookies() {
     local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'

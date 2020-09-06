@@ -1,6 +1,7 @@
 MARKDOWN CHEATSHEET:
 -----------------------
 - https://en.wikipedia.org/wiki/Markdown
+- original markdown spec: https://daringfireball.net/projects/markdown/
 
 # header 1
 ## header 2

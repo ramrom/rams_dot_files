@@ -63,6 +63,6 @@ dig example.com
 dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
 # google public dns servers are 8.8.8.8 and 8.8.4.4
 
-# GPG
+# GNU GPG
 gpg -c --no-symkey-cache file.txt  # encrypt file, and dont cahce the passphrase
 gpg --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
