@@ -458,7 +458,7 @@ function cpu_usage() {
     else  # assume linux otherwise
         local numcpu=$(grep -c processor /proc/cpuinfo)
     fi
-    local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d .) #1min ave
+    local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d . | sed 's/^0*//') #1min ave
     # local fifteenminave=$(uptime | grep --color=never -o "[0-9]{1,2}\.[0-9]*$" | tr -d .) #15min ave
 
     # TODO: need to cut space at end of line
