@@ -464,6 +464,8 @@ function cpu_usage() {
     # TODO: need to cut space at end of line
     # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
 
+    # TODO: for ubuntu/bash, $((099 / 16)) => i get error "bash: 099: value too great for base (error token is "099")"
+    # happens numbers 078 - 099 range
     local minavepercent=$(($minave / $numcpu))
     echo $minavepercent
 }
