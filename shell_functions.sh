@@ -458,14 +458,14 @@ function cpu_usage() {
     else  # assume linux otherwise
         local numcpu=$(grep -c processor /proc/cpuinfo)
     fi
+
+    # NOTE: bash $(()) doesnt like leading zeros, e.g. $(( 078 / 16)) caused an error
     local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d . | sed 's/^0*//') #1min ave
     # local fifteenminave=$(uptime | grep --color=never -o "[0-9]{1,2}\.[0-9]*$" | tr -d .) #15min ave
 
     # TODO: need to cut space at end of line
     # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
 
-    # TODO: for ubuntu/bash, $((099 / 16)) => i get error "bash: 099: value too great for base (error token is "099")"
-    # happens numbers 078 - 099 range
     local minavepercent=$(($minave / $numcpu))
     echo $minavepercent
 }
