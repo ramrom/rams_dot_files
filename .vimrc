@@ -61,7 +61,7 @@ elseif empty($VIM_NOPLUG)
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
 
-    " plug#end automatically runs filetype plugin indent on and syntax enable
+    "NOTE: plug#end automatically runs filetype plugin indent on and syntax enable
     call plug#end()
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
