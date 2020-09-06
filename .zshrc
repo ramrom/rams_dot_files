@@ -94,6 +94,8 @@ append_dir_to_path ~/bin    # includes user's private bin if it exists and it's 
 
 #export DISPLAY='localhost:10.0'
 
-# GO STUFF
-export GOPATH=~/go
-export GOBIN=${GOBIN}/bin
+# set go vars if go bin exists/installed
+if [ $(command -v go) ]; then
+    export GOPATH=~/go
+    export GOBIN=${GOBIN}/bin
+fi

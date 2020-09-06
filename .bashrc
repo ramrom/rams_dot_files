@@ -66,15 +66,12 @@ fi
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
-# GO STUFF
-export GOPATH=~/go
-export GOBIN=${GOBIN}/bin
-
 function append_dir_to_path() {
     local dir=$1
     [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && PATH="$dir":"${PATH}"
     unset dir
 }
+
 # set PATH so it includes user's private bin if it exists
 append_dir_to_path ~/bin
 
@@ -85,3 +82,9 @@ append_dir_to_path ~/.local/bin
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
 
 #export DISPLAY='localhost:10.0'
+
+# set go vars if go bin exists/installed
+if [ $(command -v go) ]; then
+    export GOPATH=~/go
+    export GOBIN=${GOBIN}/bin
+fi
