@@ -317,9 +317,9 @@ function osx_spotify_toggle_play() {
 }
 
 function toggle_bulb() {
-    python3 -c 'import magichue; l = magichue.Light("192.168.1.101"); \
+    python3 -c 'import sys; import magichue; print(sys.argv[1]); l = magichue.Light(sys.argv[1]); \
         l.on = False if l.on else True
-        '
+        ' $1
 }
 
 ############## CHROME #############################################
