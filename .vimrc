@@ -25,6 +25,11 @@ elseif empty($VIM_NOPLUG)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
+    " TODO: check out junegunn vim-easy-align instead of tabular
+    Plug 'godlygeek/tabular'        " vim-markdown uses this to format tables
+    "NOTE: header highlighting fails, open issue in repo
+    Plug 'plasticboy/vim-markdown'
+
     "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
     if has('nvim') || has('patch-8.0.902')
         Plug 'mhinz/vim-signify'
@@ -117,6 +122,11 @@ set nofoldenable            " dont fold everything when opening buffers
 set ls=2					" line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
+"show tabs and trailing spaces with special cars
+set list
+set listchars=tab:»_,trail:·
+highlight SpecialKey ctermfg=8 guifg=DimGrey
+
 """ Indent Options
 set autoindent                                  " indent on new line for inner scopes in code
 set shiftwidth=4                                " use 4 spaces for autoindent (cindent)
@@ -128,10 +138,6 @@ set expandtab                                   " use spaces when tab is pressed
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
-
-" TODO: find a good char for tab and other non-\s whitespaces
-" set list
-" set listchars=tab:>-,trail:.              "display tab chars as '>-', trailing spaces as '.'
 
 " set cursorline cursorcolumn                " highlight line and column cursor is on
 
@@ -174,6 +180,7 @@ function CycleColorCol()
     endif
 endfunction
 
+" TODO: remove this as listchars display trailing spaces, or update to toggle listchar display
 function ToggleDisplayTrailSpaces()
     " from https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
     if !exists('#MyTrailSpaces#BufWinEnter')
@@ -207,7 +214,7 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 
 """" MAPPINGS
-"TODO: Prime open real estate for normal mode!
+"""TODO: Prime open real estate for normal mode!
 "<Leader>a/k/i/u/;/'
 "<Leader><Leader>
 "c-m/c-n/c-g/c-s/c-q
@@ -215,6 +222,7 @@ if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 "c-p (once i get rid of CtrlP plugin)
 "; " semicolon repeats last f/F motions
 "," ; in reverse direction
+""" For insert mode: c-s
 
 let mapleader = " "				"set metakey for vim shortcuts
 
