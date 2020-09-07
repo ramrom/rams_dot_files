@@ -1,7 +1,8 @@
 MARKDOWN CHEATSHEET:
 -----------------------
 - https://en.wikipedia.org/wiki/Markdown
-- original markdown spec: https://daringfireball.net/projects/markdown/
+- original md: https://commonmark.org/
+- github flavored md: https://github.github.com/gfm/
 
 # header 1
 ## header 2
