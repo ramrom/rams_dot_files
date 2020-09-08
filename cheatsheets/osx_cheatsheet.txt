@@ -66,6 +66,17 @@ option + downarray      - next page/item
 downarrow               - scroll down
 
 
+FILESYSTEMS:
+----------------------------
+- ISO filesystems can be mounted through disk utitlity application
+- MacFUSE defunct, used to be only way to mount NTFS
+- MacFUSE replaced by OSXFuse (FUSE = Filesystem in USErland)
+    - with Fuse-ext2, can mount a ext2/3/4 filesystem
+- NTFS:
+    - ntfs-3g is free cli util to mount NTFS partitions for read/write
+    - best paid option is probably Paragon
+
+
 OTHER:
 - spotify shortcuts
     - https://support.spotify.com/us/using_spotify/system_settings/keyboard-shortcuts/
