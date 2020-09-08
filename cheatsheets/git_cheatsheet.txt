@@ -18,8 +18,8 @@ git co -b foobranch
 git push --set-upstream remote foobranch
 
 git branch --set-upstream-to=origin/foobranch foobranch
-git push -u remote local_branch - push branch to remote and track
-git push -u remote              - push/track current branch to remote and track
+git push -u remote local_branch - push branch to remote
+git push -u remote              - push/track current branch to remote
 
 git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
