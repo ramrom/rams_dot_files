@@ -125,7 +125,7 @@ set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 "show tabs and trailing spaces with special cars
 set list
 set listchars=tab:»_,trail:·
-if has('nvim')  " highlight darkgrey, vim and neovim use diff group name
+if has('nvim')  " highlight dimgrey, vim and neovim use diff group name
     highlight WhiteSpace ctermfg=8 guifg=DimGrey
 else
     highlight SpecialKey ctermfg=8 guifg=DimGrey
