@@ -125,7 +125,9 @@ set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 "show tabs and trailing spaces with special cars
 set list
 set listchars=tab:»_,trail:·
+" SpecialKey used by vim, WhiteSpace used by neovim
 highlight SpecialKey ctermfg=8 guifg=DimGrey
+highlight WhiteSpace ctermfg=8 guifg=DimGrey
 
 """ Indent Options
 set autoindent                                  " indent on new line for inner scopes in code
@@ -142,13 +144,13 @@ endif
 " set cursorline cursorcolumn                " highlight line and column cursor is on
 
 """""""" Reloading buffers changed outside of vim session """""""""""""""""
+" autoread alone doesn't really work, triggers on external commands
+    " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+    " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 function RamAutoRead()
     "au FocusGained,BufEnter * :silent! !
     set autoread
 
-    " autoread alone doesn't really work, triggers on external commands
-        " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-        " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
     autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
     " Notification after file change (https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread)
@@ -213,7 +215,7 @@ let g:indentLine_enabled = 0
 if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 
-"""" MAPPINGS
+"""""""""" MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
 "<Leader>a/k/i/u/;/'
 "<Leader><Leader>
