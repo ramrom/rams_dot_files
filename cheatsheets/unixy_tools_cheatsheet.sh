@@ -1,10 +1,12 @@
 # 'Nix general tooling type stuff
 
-# list all files recursively in dir and their disk usage
-du -a /foo
-
-# find a file recursive starting with current dir
+# FIND: find files recursive starting with current dir
 find . -type f -name "*pattern*"
+# find all hard links to /path/foo that exist in /blahdir
+find /blahdir/ -samefile /path/foo
+find /blahdir/ -xdev -samefile /path/foo  # xdev means only search same partiion (deviceid) as what foo is on
+find /tmp/ -inum 4065089 # find all hard links with a inode #
+
 
 # get terminal info
 infocmp
@@ -26,9 +28,6 @@ echo "2.03" | tr -d .  # -d to delete, this will print 203
 # split on ":" delimiter, each on newline
 echo foo:bar:baz | tr : \\n
 
-# file - determine file type (osx and ubuntu has it)
-file foo   # example output: "foo: ASCII text"
-
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
@@ -39,35 +38,39 @@ wc -l   # count # of lines
 # sort - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line
 
-# xargs - read lines from stdin and execute a command on each line
+# XARGS - read lines from stdin and execute a command on each line
 find . -name foo -type f | xargs cat  # find all files named foo and spit out contents to stdout
+# print0 in find says to seperate items with a null char, -0 in xargs tells it to seperate by null char (vs space/newline)
+# -I here means replace string, so you can specify where the input goes
+find . -name foo -print0 | xargs -I -0 rm -v {}
 
-# head/tail - spit out beggining/last lines in a file
+# HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
 tail foofile  # last 10 lines
 tail -f foofile  # spit out last lines and continue to print them as new ones are written
 
-# bc - float point math
+# BC - float point math
 echo "3.1 * 4.5" | bc       # = 13.9
 echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
-# arp cache
+# ARP cache
 arp -a   # display the apr cache
 
-# nslookup - dns lookup
+# NSLOOKUP - dns lookup
 nskookup example.com
 nslookup example.com 1.1.1.1 # use dns server 1.1.1.1 to lookup
 
-# dig - dns lookup, better/newer than nslookup
+# DIG - dns lookup, better/newer than nslookup
 dig example.com
 dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
 # google public dns servers are 8.8.8.8 and 8.8.4.4
 
 # GNU GPG
-gpg -c --no-symkey-cache file.txt  # encrypt file, and dont cahce the passphrase
-gpg --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
+gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
+gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
+gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
 
-signals:
+# signals
 1 -  sighup    # hangup
 2 -  sigint    # interrupt, what ctrl-c usually sends
 3 -  sigquit   # exit, and dump core, what ctrl-\ usually does
@@ -77,3 +80,20 @@ signals:
 # processes
 pgrep foo       # search for processes with "foo" in command and return PIDs
 killall -3 foo  # send signal (sigquit) to all proceses with gnome-shell in the name
+
+# RSYNC
+rsync /dir /dir2  # basic copy/sync over files from one dir to another
+rsync -a /dir /dir2  # -a (archive), preserves permissions, symlinks, and ownership, usually want this
+rsync -H /dir /dir2  # -H (hardlinks), will preserve hard links, otherwise same hardlinks will be treated as sepearte files
+rsync --delete /dir /dir2  # delete will remove files in target dir2 that dont exist in source dir
+
+# STAT - show metadata info of file, last access, modify time, change time, etc.
+stat foo
+stat -x foo   # osx only: extended info, on osx version, linux version does this by default
+stat -t foo   # linux only: one line concise format (useful if u want to script it easier)
+
+# FILE - determine file type (osx and ubuntu has it)
+file foo   # example output: "foo: ASCII text"
+
+# list all files recursively in dir and their disk usage
+du -a /foo

@@ -256,7 +256,7 @@ endfunction
 
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
 function TabBufMove(direction)
-    if !exists('*gettabinfo')  " vim 7.4(and earlier) dont have this func
+    if !exists('*gettabinfo')  " vim 7.4(and earlier) dont have `gettabinfo`
         if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
         return
     endif
@@ -269,7 +269,7 @@ endfunction
 
 "close tabs and windows if more than one of either, otherwise closes buffers until none and then quit vim
 function TabBufQuit()
-    if !exists('*gettabinfo') | execute ":q" | return | endif   " vim 7.4(and earlier) dont have this func
+    if !exists('*gettabinfo') | execute ":q" | return | endif   " vim 7.4(and earlier) dont have `gettabinfo`
     let tinfo=gettabinfo()
     if len(tinfo) == 1 && len(tinfo[0]['windows']) == 1
         if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
@@ -334,8 +334,8 @@ noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
 
 "cheatsheet maps
-exe ":function! MyLeaderMap() \n :map <leader> \n endfunction"
-noremap <leader>cc :call MyLeaderMap()<cr>
+exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
+noremap <leader>cc :call ShowMyLeaderMap()<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>ca :vsplit ~/tmp/scratch.txt<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
