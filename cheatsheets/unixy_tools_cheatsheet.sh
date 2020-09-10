@@ -66,3 +66,13 @@ dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
 # GNU GPG
 gpg -c --no-symkey-cache file.txt  # encrypt file, and dont cahce the passphrase
 gpg --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
+
+signals:
+1 -  sighup    # hangup
+2 -  sigint    # interrupt, what ctrl-c usually sends
+3 -  sigquit   # exit, and dump core, what ctrl-\ usually does
+9 -  sigkill   # exit without cleanup
+24 - sigtstp   # suspend,what ctrl-z usually does
+
+# processes
+pgrep foo   # search for processes with "foo" in command and return PIDs
