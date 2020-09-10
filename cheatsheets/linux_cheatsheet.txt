@@ -3,6 +3,7 @@ ubuntu/debian/gnome:
 - lsb_release -a        - show distro name and version
 - cat /etc/issue        - show distro and version
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
+- ctr + alt + FnX - switch to tty x
 
 # USER stuff
 ---------------------------------------
