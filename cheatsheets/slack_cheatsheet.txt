@@ -1,4 +1,5 @@
 SLACK:
+- shift + enter  - newline without sending message
 - cmd + shift + [/] - next/prev workspace
 - command + /  - bring up keyboard shortcuts
 - option + up/down-arrow - up/down next channel/person

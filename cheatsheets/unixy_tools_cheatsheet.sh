@@ -75,4 +75,5 @@ signals:
 24 - sigtstp   # suspend,what ctrl-z usually does
 
 # processes
-pgrep foo   # search for processes with "foo" in command and return PIDs
+pgrep foo       # search for processes with "foo" in command and return PIDs
+killall -3 foo  # send signal (sigquit) to all proceses with gnome-shell in the name
