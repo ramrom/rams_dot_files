@@ -9,6 +9,9 @@ setopt NO_NOMATCH
 # autochange dirs: no need to type `cd` before dir
 setopt auto_cd
 
+# use IFS word splitting
+setopt sh_word_split
+
 # use vi mode (-e emacs is default), press escape to go to normal
 # bindkey -v
 # TODO: need delete-before-cursor, forward-delete char
