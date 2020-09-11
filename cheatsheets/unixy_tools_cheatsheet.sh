@@ -2,9 +2,9 @@
 
 # FIND: find files recursive starting with current dir
 find . -type f -name "*pattern*"
-# find all hard links to /path/foo that exist in /blahdir
-find /blahdir/ -samefile /path/foo
-find /blahdir/ -xdev -samefile /path/foo  # xdev means only search same partiion (deviceid) as what foo is on
+# find all hard links to /path/foo that exist in /searchdir
+find /searchdir/ -samefile /path/foo
+find /searchdir/ -xdev -samefile /path/foo  # xdev means only search same partiion (deviceid) as what foo is on
 find /tmp/ -inum 4065089 # find all hard links with a inode #
 
 # get terminal info
@@ -100,3 +100,6 @@ file foo   # example output: "foo: ASCII text"
 
 # list all files recursively in dir and their disk usage
 du -a /foo
+
+# CP
+cp -l     # make copies but just hard links, gnu/linux has this, osx does not
