@@ -576,7 +576,26 @@ function tmux_pane_bg_jobs() {
         | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
-######### GIT  ####################
+function tmux_open_pane() {
+    # for pane in $(tmux list-panes -F "#{pane_id};#{pane_pid}"); do  # works if no IFS splitting is on
+    local panes=$(tmux list-panes -F "#{pane_id};#{pane_pid}")
+    for pane in $panes; do
+        local pane_id=$(echo $pane | cut -d ';' -f 1)
+        local pane_pid=$(echo $pane | cut -d ';' -f 2)
+        # echo $pane_id; echo $pane_pid
+        pgrep -P $pane_pid > /dev/null || { echo $pane_id && return; } # if pane has no child processes return it
+    done
+    echo "NO-OPEN-PANES" && return 1
+}
+
+function tmux_run_in_pane() {
+    local open_pane=$(tmux_open_pane)
+    echo $open_pane | grep "NO-OPEN" && echo "No open panes" && return 1
+    tmux send-keys -t $open_pane $1 Enter
+}
+
+######### GIT ####################
+# delete branches that are already merged into another branch, master by default, delete locally and in remote
 function gitclean() {
     local masterb=master
     [ -n "$1" ]  && masterb=$1

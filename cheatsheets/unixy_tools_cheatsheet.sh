@@ -7,7 +7,6 @@ find /blahdir/ -samefile /path/foo
 find /blahdir/ -xdev -samefile /path/foo  # xdev means only search same partiion (deviceid) as what foo is on
 find /tmp/ -inum 4065089 # find all hard links with a inode #
 
-
 # get terminal info
 infocmp
 
@@ -39,10 +38,14 @@ wc -l   # count # of lines
 echo "b\na" | sort   # will print a on first line, b on second line
 
 # XARGS - read lines from stdin and execute a command on each line
+echo "foo bar baz" | xargs -t echo    # -t prints what the command being run is for every iteration, good for debugging
+echo "foo bar baz" | xargs -t -n 1 echo  # -n specifies max number of args to take for each iteration
+echo "foo bar baz" | xargs -I % echo "prefix % postfix"  # can specify where to substitute input str
 find . -name foo -type f | xargs cat  # find all files named foo and spit out contents to stdout
 # print0 in find says to seperate items with a null char, -0 in xargs tells it to seperate by null char (vs space/newline)
-# -I here means replace string, so you can specify where the input goes
-find . -name foo -print0 | xargs -I -0 rm -v {}
+find . -name foo -print0 | xargs -0 rm -v
+printf "foo\0bar\0baz" | xargs -E '\0' echo   # OSX: specify delimiter char
+printf "foo\0bar\0baz" | xargs -d '\0' echo   # linux: specify delimiter char
 
 # HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file

@@ -11,6 +11,7 @@ set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
+setopt # query all set shell options in ZSH
 
 # KEYBINDINGS
 # good ref on ZLE (zsh line editor):  ZLE (zsh line editor): http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
@@ -202,7 +203,7 @@ case "$FOO" in
 esac
 
 # command line substitution field splitting
-#   bash field splits by default, zsh doesnt (need to set an shell option)
+#   bash field splits by default, zsh doesnt (need to set sh_word_split shell option)
 #   IFS  var determines chars to use as delimter for splitting
 #   https://stackoverflow.com/questions/41320199/ifs-in-zsh-behave-differently-than-bash
 #   https://unix.stackexchange.com/questions/26661/what-is-word-splitting-why-is-it-important-in-shell-programming
