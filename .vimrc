@@ -255,7 +255,7 @@ function SaveDefinedSession()
 endfunction
 
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
-function TabBufMove(direction)
+function TabBufNav(direction)
     if !exists('*gettabinfo')  " vim 7.4(and earlier) dont have `gettabinfo`
         if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
         return
@@ -276,8 +276,8 @@ function TabBufQuit()
     else | exe ":q" | endif
 endfunction
 
-noremap <leader>f :call TabBufMove("f")<CR>
-noremap <leader>d :call TabBufMove("b")<CR>
+noremap <leader>f :call TabBufNav("f")<CR>
+noremap <leader>d :call TabBufNav("b")<CR>
 
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
