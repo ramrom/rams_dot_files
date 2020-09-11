@@ -142,22 +142,6 @@ else
 fi
 
 
-# technically proper POSIX doesnt do arrays but osx's /bin/sh supports this
-array=(1 two thre)
-echo ${array[1]}  # ref 2nd element in array, in this case this prints "two"
-for i in "${array[@]}"
-do
-    echo $i
-done
-
-# bash IFS field split will see 3 items
-string="foo bar baz"
-for i in $string
-do
-    echo $i
-done
-
-
 ###### LOOPS
 # bash
 for run in {1..10}; do echo "hello"; done
@@ -202,9 +186,22 @@ case "$FOO" in
     bar) A=1 ;; baz) Z=1 ;; far) B=2 ;;
 esac
 
-# command line substitution field splitting
+
+##### ARRAYS
+# bash and zsh support them. osx /bin/sh supports it
+    # bash arrays index start from zero, zsh from one.....
+# POSIX does not support arrays
+array=(1 two three)
+
+echo ${array[1]}  # ref 2nd element in array (bash, zsh this is 1st), in bash will print "two"
+
+for i in ${array[@]}; do; echo $i; done   # bash
+for i in $array; do; echo $i; done        # zsh
+
+
+#####  IFS: string field splitting
 #   bash field splits by default, zsh doesnt (need to set sh_word_split shell option)
-#   IFS  var determines chars to use as delimter for splitting
+#   IFS variable determines chars to use as delimter for splitting
 #   https://stackoverflow.com/questions/41320199/ifs-in-zsh-behave-differently-than-bash
 #   https://unix.stackexchange.com/questions/26661/what-is-word-splitting-why-is-it-important-in-shell-programming
 #   https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
@@ -214,6 +211,14 @@ echo $A | grep "something"
 # OR (double quoting var also prevents field splitting)
 A=$(env)
 echo "$A" | grep "something"
+
+# for loops, bash IFS field split will get 3 items, split because of space char
+string="foo bar baz"
+for i in $string
+do
+    echo $i
+done
+
 
 # remove non-ascii chars, tr is bin that works on removing/replacing individual characters
 tr -cd '\11\12\15\40-\176' < file-with-binary-chars > clean-file
