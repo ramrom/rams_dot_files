@@ -195,7 +195,7 @@ array=(1 two three)
 
 echo ${array[1]}  # ref 2nd element in array (bash, zsh this is 1st), in bash will print "two"
 
-for i in ${array[@]}; do; echo $i; done   # bash
+for i in ${array[@]}; do; echo $i; done   # bash, and zsh
 for i in $array; do; echo $i; done        # zsh
 
 
