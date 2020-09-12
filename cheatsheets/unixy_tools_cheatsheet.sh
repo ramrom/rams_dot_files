@@ -103,3 +103,9 @@ du -a /foo
 
 # CP
 cp -l     # make copies but just hard links, gnu/linux has this, osx does not
+
+# MEMORY
+# free - show memory/swap usage, total/used/free/cached
+free -h   # -h is human readale
+# /proc/meminfo
+cat /proc/meminfo   # shows detailed memory usage
