@@ -1,9 +1,8 @@
-#/bin/bash
+# Good reads:
+# - https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+# - https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#progress-indicator
 
-Good reads:
-- https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
-- https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#progress-indicator
-
+# TPUT
 black=`tput setaf 0`
 red=`tput setaf 1`
 green=`tput setaf 2`
