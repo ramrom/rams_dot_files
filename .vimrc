@@ -25,6 +25,9 @@ elseif empty($VIM_NOPLUG)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
+    " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
+    Plug 'majutsushi/tagbar'
+
     " TODO: check out junegunn vim-easy-align instead of tabular
     Plug 'godlygeek/tabular'        " vim-markdown uses this to format tables
     "NOTE: header highlighting fails, open issue in repo
@@ -46,14 +49,14 @@ elseif empty($VIM_NOPLUG)
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         "TODO: can enable coc by filetype
         " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
-    endif
 
-    if has('nvim') && !empty($VIM_BASH)
-        Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-    endif
-    "neovim offers best coc/metals experience
-    if has('nvim') && !empty($VIM_METALS)
-        Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+        if !empty($VIM_BASH)
+            Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+        endif
+        "neovim offers best coc/metals experience
+        if !empty($VIM_METALS)
+            Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+        endif
     endif
 
     "TODO: find one of these that's better than ir_black
@@ -261,7 +264,7 @@ function TabBufNav(direction)
         return
     endif
     if len(gettabinfo()) == 1
-        if (a:direction == "f") | execute ":bn" | else |  execute ":bp" | endif
+        if (a:direction == "f") | execute ":bn!" | else |  execute ":bp!" | endif
     else
         if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
     endif
