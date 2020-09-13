@@ -135,6 +135,22 @@ retroarch -
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
 
+loopdevices
+- regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
+- if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
+
+drive naming convention:
+- fd - SATA, sd - SCSI/SATA, hd - IDE
+- fda - first SATA drive, hdb - 2nd IDE drive
+- hdb1 - 1st partition on 2nd IDE drive
+
+mount conventions:
+- /         - root filesystem
+- /home     - user directories
+- /export   - data shared over the network mount
+- /mnt      - temporary mount point
+- /media    - removable devices like usb (so not internal HDD)
+
 General CLI Unix-like tools:
 -------------------------------------
 infocmp - get terminal info
