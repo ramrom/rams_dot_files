@@ -10,6 +10,7 @@ alias ll='ls -l'
 alias la='ls -A'
 alias lal='ls -al'
 alias lahl='ls -alh'
+alias lail='ls -ailh'
 alias lrt='ls -lrt'
 alias ch_date='sudo date --set 1998-11-02'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
