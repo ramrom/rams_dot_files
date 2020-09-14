@@ -124,8 +124,10 @@ df      # will show block devices and where they are mounted
     # nfs
         # best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
         # supports hard links well
-# mount samba share in osx
-mount -t smbfs //someuser@192.168.1.1/folder destfolder/
-mount -t smbfs smb://someuser:somepass@192.168.1.1111/folder destfolder/
+# mount samba share in osx, -v verbose
+mount -t -v smbfs //someuser@192.168.1.1/folder destfolder/
+mount -t smbfs smb://someuser:somepass@192.168.1.1/folder destfolder/
 # mount afp share in osx
-mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
+mount -t afp afp://someuser:somepass@192.168.1.1/folder destfolder/
+# mount nfs share in linux
+sudo mount -t nfs 192.168.1.1:/fullpath/to/folder destfolder/
