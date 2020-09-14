@@ -144,13 +144,9 @@ drive naming convention:
 - fda - first SATA drive, hdb - 2nd IDE drive
 - hdb1 - 1st partition on 2nd IDE drive
 
-mount conventions:
-- /         - root filesystem
-- /home     - user directories
-- /export   - data shared over the network mount
-- /mnt      - temporary mount point
-- /media    - removable devices like usb (so not internal HDD)
-
-General CLI Unix-like tools:
--------------------------------------
-infocmp - get terminal info
+- DIR conventions
+    - /         - root filesystem
+    - /home     - user directories
+    - /export   - data shared over the network mount
+    - /mnt      - temporary mount point
+    - /media    - removable devices like usb (so not internal HDD)
