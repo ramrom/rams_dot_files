@@ -215,10 +215,18 @@ echo "$A" | grep "something"
 
 # for loops, bash IFS field split will get 3 items, split because of space char
 string="foo bar baz"
-for i in $string
-do
+for i in $string; do
     echo $i
 done
+
+# ZSH, command expansions are always split, so if you didnt have sh_word_split on you could loop over a string like
+string="foo bar baz"
+for i in $(echo "$string"); do
+    echo $i
+done
+# ZSH splitting can also happen when:
+ # 1. calling splitting explicitly: `echo ${=var}`.
+ # 3. Using read to split to a list of vars (or an array with `-A`).
 
 
 # remove non-ascii chars, tr is bin that works on removing/replacing individual characters
