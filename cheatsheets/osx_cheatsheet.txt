@@ -75,6 +75,11 @@ FILESYSTEMS:
 - NTFS:
     - ntfs-3g is free cli util to mount NTFS partitions for read/write
     - best paid option is probably Paragon
+- mount samba share in osx
+    mount -t smbfs //someuser@192.168.1.1/folder destfolder/
+    mount -t smbfs smb://someuser:somepass@192.168.1.1111/folder destfolder/
+- mount afp share in osx
+    mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
 
 
 OTHER:

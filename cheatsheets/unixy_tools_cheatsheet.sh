@@ -113,7 +113,19 @@ cat /proc/meminfo   # shows detailed memory usage
 infocmp  # get terminal info
 
 # FILESYSTEMs
-# afs (apple file system), nfs (unix designed, osx/windows no support), smb/cifs(windows designed, supported well by all)
-# cifs/smb info: https://linux.die.net/man/8/mount.cifs
 mount  # alone shows info about mounts
 df      # will show block devices and where they are mounted
+# NETWORK PROTCOLS:
+    # afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
+    # osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
+    # cifs/smb info: https://linux.die.net/man/8/mount.cifs
+        # supports hardlinks with unix extensions and/or servinfo
+        # osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
+    # nfs
+        # best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
+        # supports hard links well
+# mount samba share in osx
+mount -t smbfs //someuser@192.168.1.1/folder destfolder/
+mount -t smbfs smb://someuser:somepass@192.168.1.1111/folder destfolder/
+# mount afp share in osx
+mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
