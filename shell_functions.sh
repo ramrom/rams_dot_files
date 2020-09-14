@@ -22,6 +22,26 @@ function cmds_defined() {
     done
 }
 
+# TODO: /bin/sh in osx does not like the printf's
+function debug_vars() {
+    local spacing="\n"; [ -n "$tab" ] && spacing=";    "
+
+    for arg in "$@"; do
+        local var_value=$(eval "echo \$${arg}")
+
+        if [ -z "$var_value" ]; then
+            local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
+            local msg2=$(fg=brightred ansi256 " is undefined!")"${spacing}"
+            printf "$msg$msg2"
+        else
+            local msg=$(und=1 ansi256 "DEBUG:")" Variable $(fg=yellow ansi256 $arg)"
+            local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
+            printf "$msg$msg2"
+        fi
+    done
+    [ -n "$tab" ] && echo
+}
+
 function search_alias_func() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
@@ -44,24 +64,12 @@ function list_funcs() {
     fi
 }
 
-# TODO: /bin/sh in osx does not like the printf's
-function debug_vars() {
-    local spacing="\n"; [ -n "$tab" ] && spacing=";    "
-
-    for arg in "$@"; do
-        local var_value=$(eval "echo \$${arg}")
-
-        if [ -z "$var_value" ]; then
-            local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
-            local msg2=$(fg=brightred ansi256 " is undefined!")"${spacing}"
-            printf "$msg$msg2"
-        else
-            local msg=$(und=1 ansi256 "DEBUG:")" Variable $(fg=yellow ansi256 $arg)"
-            local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
-            printf "$msg$msg2"
-        fi
-    done
-    [ -n "$tab" ] && echo
+function rrc() {
+    if [ $(detect_shell) = "zsh" ]; then
+        source ~/.zprofile && source ~/.zshrc
+    else  # Assumes BASH
+        source ~/.bash_profile && source ~/.bashrc
+    fi
 }
 
 # TODO: finish, script to pp all headers and body and have programatic access to status code, other header values, and body
@@ -79,14 +87,6 @@ function httpie_all() {
     echo $headers; echo
     echo "STATUS CODE IS: $http_status"; echo
     jq . $body_file || echo $(fg=brightred ansi256 "$body_file NOT VALID JSON") && cat $body_file
-}
-
-function rrc() {
-    if [ $(detect_shell) = "zsh" ]; then
-        source ~/.zprofile && source ~/.zshrc
-    else  # Assumes BASH
-        source ~/.bash_profile && source ~/.bashrc
-    fi
 }
 
 function vil() { vi -p $(cat $1); }

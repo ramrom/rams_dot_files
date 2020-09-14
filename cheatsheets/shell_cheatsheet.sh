@@ -280,9 +280,10 @@ type -a foo     # dislay all info, including all hits. if foo was alias and 2 bi
 which foo
 which -a foo     # return all paths of bins matching foo in PATH
 
-bash "==" is lexical comparison vs "=" is numerical comparison
 
 ####### CONDITIONALS
+bash "==" is lexical comparison vs "=" is numerical comparison
+
 # number comparison
 gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne = not equal
 [ 3 -gt 1 ] && echo hi   # will print hi

@@ -135,6 +135,9 @@ retroarch -
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
 
+
+Devices and file systems:
+------------------------------------------------
 loopdevices
 - regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
 - if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
