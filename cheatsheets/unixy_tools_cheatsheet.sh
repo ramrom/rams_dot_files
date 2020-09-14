@@ -108,3 +108,12 @@ cp -l     # make copies but just hard links, gnu/linux has this, osx does not
 free -h   # -h is human readale
 # /proc/meminfo
 cat /proc/meminfo   # shows detailed memory usage
+
+# TERMINAL
+infocmp  # get terminal info
+
+# FILESYSTEMs
+# afs (apple file system), nfs (unix designed, osx/windows no support), smb/cifs(windows designed, supported well by all)
+# cifs/smb info: https://linux.die.net/man/8/mount.cifs
+mount  # alone shows info about mounts
+df      # will show block devices and where they are mounted
