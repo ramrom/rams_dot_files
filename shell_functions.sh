@@ -598,10 +598,9 @@ function tmux_run_in_pane() {
 ######### GIT ####################
 function gitdelupdatebranch() {
     local curbranch=$(getbranchname)
-    git pull || { echo "current branch, $curbranch, is not tracked from a remote!" && return 1; }
+    git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
     git checkout master || { echo "no master branch to checkout!" && return 1; }
     git branch -D $curbranch
-    git fetch
     git checkout --track origin/$curbranch
 }
 
