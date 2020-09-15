@@ -127,7 +127,12 @@ df      # will show block devices and where they are mounted
 # mount samba share in osx, -v verbose
 mount -t -v smbfs //someuser@192.168.1.1/folder destfolder/
 mount -t smbfs smb://someuser:somepass@192.168.1.1/folder destfolder/
+# -o lets u speficy options, like user/pass
+mount -t smbfs smb://192.168.1.1/folder destfolder/ -o username=foouser,password=foobar
 # mount afp share in osx
 mount -t afp afp://someuser:somepass@192.168.1.1/folder destfolder/
+
 # mount nfs share in linux
 sudo mount -t nfs 192.168.1.1:/fullpath/to/folder destfolder/
+# mount ntfs in linux
+sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 destfolder/
