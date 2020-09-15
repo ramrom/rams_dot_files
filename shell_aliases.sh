@@ -75,6 +75,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
     alias dfl='df -h | grep -v loop | grep -v tmpfs' # grep out loop and tmpfs in ubuntu
     alias vcrypt='veracrypt'
+    alias trashsize='du -hs ~/.local/share/Trash'
 else  # assuming Darwin here
     alias psx='ps -axhf'
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
