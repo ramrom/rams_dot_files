@@ -45,9 +45,6 @@ alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checki
 alias rysncdryrun='rsync -rv --size-only --dry-run /my/source/ /my/dest/ > diff.out'
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
-alias mntcifssmb='sudo mount -t cifs //192.168.1.1/Backups ~/smbhd -o username=dude,password=werd'
-alias mntntfslinux='sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 /media/windows'
-alias mntosxsamba='mount_smbfs //admin@192.168.1.1/Backups mynfs'
 
 alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
 
