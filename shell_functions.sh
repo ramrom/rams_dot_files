@@ -596,6 +596,14 @@ function tmux_run_in_pane() {
 }
 
 ######### GIT ####################
+function gitdelupdatebranch() {
+    git checkout master
+    local curbranch=$(getbranchname)
+    git branch -D $curbranch
+    git fetch
+    git checkout --track origin/$curbranch
+}
+
 # delete branches that are already merged into another branch, master by default, delete locally and in remote
 function gitclean() {
     local masterb=master
