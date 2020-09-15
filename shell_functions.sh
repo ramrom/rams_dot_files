@@ -599,6 +599,7 @@ function tmux_run_in_pane() {
 function gitdelupdatebranch() {
     local curbranch=$(getbranchname)
     git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
+    git fetch origin $curbranch || { echo "failed to fetch $curbranch from origin!" && return 1; }
     git checkout master || { echo "no master branch to checkout!" && return 1; }
     git branch -D $curbranch
     git checkout --track origin/$curbranch
