@@ -213,13 +213,13 @@ function colr_row() {
 # TODO: validate fg and bg values, after ansi8 translation values must be numbers 1-250
 function ansi256() {
     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
-    local lstrike="";           [ -n "$strike" ] && lstrike="\033[9m"
-    local lbld="";              [ -n "$bld" ] && lbld="\033[1m"
-    local lund="";              [ -n "$und" ] && lund="\033[4m"
-    local lit="";               [ -n "$it" ] && lit="\033[3m"
+    local maybestrike="";       [ -n "$strike" ] && maybestrike="\033[9m"
+    local maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
+    local maybeund="";          [ -n "$und" ] && maybeund="\033[4m"
+    local maybeit="";           [ -n "$it" ] && maybeit="\033[3m"
     local lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
     local lfg=007;              [ -n "$fg" ] && lfg=$(ansi8_name $fg)
-    echo -e "${lbld}${lstrike}${lund}${lit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
+    echo -e "${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
 }
 
 function print_ansi256() {
