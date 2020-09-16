@@ -3,6 +3,8 @@
 # - https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#progress-indicator
 
 # TPUT
+# NOTE: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
+    # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 black=`tput setaf 0`
 red=`tput setaf 1`
 green=`tput setaf 2`
