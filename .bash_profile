@@ -18,7 +18,8 @@ function parse_git_branch() {
 }
 
 function set_ps1_hostname() {
-    [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)\h"
+    # [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)\h"
+    [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(bld=1 fg=003 ansi256 "\h")"
     echo $PS1_HOSTNAME
 }
 
@@ -28,8 +29,6 @@ function ansi256() {
     echo -e "${maybebld}\033[48;5;016;38;5;${lfg}m${1}\033[0m"
 }
 
-# TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
-# https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt() {
   local exit_code="$?" # store current exit code
 
