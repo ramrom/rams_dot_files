@@ -16,7 +16,7 @@ function set_ps1_hostname() {
 }
 
 function build_my_prompt() {
-    local exit_code="$?" # store current exit code
+    # local exit_code=$? # store current exit code
 
     local bold=$(echo -e "\033[1m")
     local reset=$(echo -e "\033[0m")
@@ -25,13 +25,13 @@ function build_my_prompt() {
     local magenta=$(echo -e "\033[0;35m")
     local cyan=$(echo -e "\033[0;36m")
 
-    # TODO: display icon if last command succeeded or failed
-    #if [[ $exit_code -eq 0 ]]; then
-    #    PROMPT="${PROMPT}${green}√${reset} "      # Add green for success
-    #else
-    #    PROMPT="${PROMPT}${red}˟${exit_code}${reset} "    # Add green for success
-    #fi
     PROMPT=''
+    # # TODO: display icon if last command succeeded or failed
+    # if [[ $exit_code -eq 0 ]]; then
+    #     PROMPT="${PROMPT}${green}√${reset} "      # Add green for success
+    # else
+    #     PROMPT="${PROMPT}${red}˟${exit_code}${reset} "    # Add green for success
+    # fi
 
     PROMPT="${PROMPT}${yellow}%n"
     PROMPT="${PROMPT}${reset}${bold}@"
