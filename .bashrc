@@ -60,8 +60,6 @@ if [ -f ~/.lessfilter ]; then
     export LESSOPEN='|~/.lessfilter %s'
 fi
 
-# export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
-
 function append_dir_to_path() {
     local dir=$1
     [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && PATH="$dir":"${PATH}"
