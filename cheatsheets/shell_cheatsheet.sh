@@ -14,6 +14,7 @@ echo $- #query all set options on in shell
 setopt # query all set shell options in ZSH
 
 # KEYBINDINGS
+# readline lib used by bash and zsh. lets you choose vi or emacs mode
 # good ref on ZLE (zsh line editor):  ZLE (zsh line editor): http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
 bind -P     # bash print out all key bindinds, for sh too
 bindkey     # for zsh
@@ -46,6 +47,19 @@ set -o vi   # bash vi mode
 # send EOF to stdin, bash/zsh/sh interpret as exit shell
 # if not at 1st char in prompt, delete char in front of it (forward delete)
 # Ctrl-d
+
+# LINE EDITING MODE
+set -o vi    # set zsh to use vi mode, emacs is default
+# zsh, if vi mode is used, will need to bindkey some nice line editing keys that are missing
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+bindkey '^B' backward-char
+bindkey '^F' forward-char
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^r' history-incremental-search-backward
+export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
+
 
 ###### FUNCTIONS
 source fooscript    # run script in current shell, zsh, bash works too
