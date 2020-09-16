@@ -63,8 +63,8 @@ export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will m
 
 ###### FUNCTIONS
 source fooscript    # run script in current shell, zsh, bash works too
-. fooscript         # bash cononical way to source
-. ./fooscript       # works in bash and zsh
+. fooscript         # bash cononical way to source, doesnt work in zsh
+. ./fooscript       # force execute, executes even if file perm doesnt have execute, works in bash and zsh
 
 # bash/posix/zsh: delete a function or a variable
 unset foo
