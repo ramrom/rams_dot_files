@@ -22,20 +22,16 @@ function set_ps1_hostname() {
     echo $PS1_HOSTNAME
 }
 
+function ansi256() {
+    local maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
+    local lfg=007;              [ -n "$fg" ] && lfg=$fg
+    echo -e "${maybebld}\033[48;5;016;38;5;${lfg}m${1}\033[0m"
+}
+
 # TODO: tput, especially using reset, does wierd things to prompt, should use direct ANSI codes/sequences
 # https://apple.stackexchange.com/questions/256449/iterm2-cursor-doesnt-return-to-line-beginning
 function build_my_prompt() {
   local exit_code="$?" # store current exit code
-
-  local bold=`tput bold`
-  local reset=`tput sgr0`
-  local black=`tput setaf 0`
-  local red=`tput setaf 1`
-  local yellow=`tput setaf 3`
-  local green=`tput setaf 2`
-  local blue=`tput setaf 4`
-  local magenta=`tput setaf 5`
-  local cyan=`tput setaf 6`
 
   local git_branch=`parse_git_branch`
   local ps1_hostname=$(set_ps1_hostname)
@@ -49,14 +45,14 @@ function build_my_prompt() {
   #    PS1="${PS1}${red}˟${exit_code}${reset} "    # Add green for success
   #fi
 
-  PS1="${PS1}${yellow}\u"
-  PS1="${PS1}${reset}${bold}@"
-  PS1="${PS1}${reset}${ps1_hostname} "
-  PS1="${PS1}${blue}${bold}("
-  PS1="${PS1}${reset}${cyan}\w"
-  PS1="${PS1}${bold}${blue})"
-  PS1="${PS1} <${reset}${magenta}${git_branch}"
-  PS1="${PS1}${bold}${blue}>${reset}"
+  PS1="${PS1}$(fg=003 ansi256 "\u")"                # 3 - yellow, user
+  PS1="${PS1}$(bld=1 ansi256 "@")"
+  PS1="${PS1}${ps1_hostname} "                      # hostname with color from env
+  PS1="${PS1}$(bld=1 fg=004 ansi256 "(")"           # 4 - blue
+  PS1="${PS1}$(fg=006 ansi256 "\w")"                # 6 -cyan, working dir
+  PS1="${PS1}$(bld=1 fg=004 ansi256 ") <")"
+  PS1="${PS1}$(fg=005 ansi256 "${git_branch}")"     # 5 - magenta, git branch
+  PS1="${PS1}$(bld=1 fg=004 ansi256 ">")"
 
   PS1="${PS1}\n$ "
 }

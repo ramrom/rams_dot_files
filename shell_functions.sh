@@ -597,6 +597,7 @@ function tmux_run_in_pane() {
 
 ######### GIT ####################
 function gitdelupdatebranch() {
+    echo "try git reset --hard someremote/branchname"; return 1
     local curbranch=$(getbranchname)
     git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
     git fetch origin $curbranch || { echo "failed to fetch $curbranch from origin!" && return 1; }
