@@ -596,7 +596,7 @@ function tmux_run_in_pane() {
 }
 
 ######### GIT ####################
-function gitdelupdatebranch() {
+function gitfetchresetbranch() {
     local curbranch=$(getbranchname)
     git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
     git reset --hard origin/$curbranch
