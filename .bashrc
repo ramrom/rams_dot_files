@@ -1,6 +1,5 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) for examples
 
 # so .bashrc isn't run for non-interactive shells by default.
 # this PS1 check is still useful b/c bashrc is still run for remote non-interactive, which i want to prevent
@@ -13,9 +12,6 @@ export HISTCONTROL=ignoredups
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# TODO: use vi mode (press esc to go to normal), need to manually bind default keys still, like back/forward char
-# set -o vi
 
 # modify ls colors, ubuntu bash 4.4 doesnt need this for color on ls and tree
 [ $(uname) = "Darwin" ] && export LSCOLORS='GxFxCxDxBxegedabagaced'

@@ -597,13 +597,9 @@ function tmux_run_in_pane() {
 
 ######### GIT ####################
 function gitdelupdatebranch() {
-    echo "try git reset --hard someremote/branchname"; return 1
     local curbranch=$(getbranchname)
     git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
-    git fetch origin $curbranch || { echo "failed to fetch $curbranch from origin!" && return 1; }
-    git checkout master || { echo "no master branch to checkout!" && return 1; }
-    git branch -D $curbranch
-    git checkout --track origin/$curbranch
+    git reset --hard origin/$curbranch
 }
 
 # delete branches that are already merged into another branch, master by default, delete locally and in remote
