@@ -42,7 +42,7 @@ unset fdname
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 function load_or_err() {
-    if [ -f "$1" ]; then . $1; else echo "!!!! $1 not found !!!!"; fi
+    if [ -f "$1" ]; then . $1; else echo "!!!! bashrc: $1 not found !!!!"; fi
 }
 
 load_or_err ~/rams_dot_files/shell_aliases.sh
