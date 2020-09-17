@@ -121,7 +121,7 @@ set smartcase               " with ignorecase, search with all lowercase means I
 set foldmethod=indent
 set nofoldenable            " dont fold everything when opening buffers
 
-""" Status Line
+""" Default Status Line
 set ls=2					" line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
@@ -168,6 +168,10 @@ if empty($VIM_NO_AUTOREAD) | call RamAutoRead() | endif
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
 
+function! SourceIfExists(file)
+  if filereadable(expand(a:file)) | exe 'source' a:file | echo 'source found and loaded' | endif
+endfunction
+
 function ToggleFoldMethod()
     "1 ? echo 'indent' : echo 'not indent'  "TODO: wtf vim, basic ternary errors
     if &foldmethod == "indent" | set foldmethod=syntax | else | set foldmethod=indent | endif
@@ -188,7 +192,7 @@ function CycleColorCol()
 endfunction
 
 " TODO: remove this as listchars display trailing spaces, or update to toggle listchar display
-function ToggleDisplayTrailSpaces()
+function ToggleDisplayTrailSpaces(showmsg)
     " from https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
     if !exists('#MyTrailSpaces#BufWinEnter')
         highlight ExtraWhitespace ctermbg=red guibg=red
@@ -199,13 +203,15 @@ function ToggleDisplayTrailSpaces()
             autocmd InsertLeave * match ExtraWhitespace /\s\+$/
             autocmd BufWinLeave * call clearmatches()
         augroup END
+        if (a:showmsg == "t") | echo "ToggleDisplayTrailSpaces ENABLED" | endif
     else
         hi clear ExtraWhitespace
         autocmd! MyTrailSpaces
+        if (a:showmsg == "t") | echo "ToggleDisplayTrailSpaces DISABLED" | endif
     endif
 endfunction
 
-call ToggleDisplayTrailSpaces()
+call ToggleDisplayTrailSpaces('f')
 
 " delete all trailing white space
 " NOTE: to make it automatic: autocmd BufWritePre * %s/\s\+$//e
@@ -216,8 +222,15 @@ endfunction
 "globally disable indentLine by default
 let g:indentLine_enabled = 0
 
+function ToggleSignifyAll()
+    if !exists('g:signify_disable_by_default') || g:signify_disable_by_default == 1
+        exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
+    else
+        exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
+    endif
+endfunction
 " globally disable vim-signify by default
-if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
+" if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
 
 
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
@@ -327,10 +340,11 @@ noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gvdiffsplit master<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
-noremap <leader>gt :call ToggleDisplayTrailSpaces()<cr>
+noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
-noremap <leader>gs :SignifyToggle<cr>
+noremap <leader>gs :call ToggleSignifyAll()<cr>
+noremap <leader>gh :SignifyToggleHighlight<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
@@ -429,3 +443,6 @@ endif
 " autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
 " " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
+
+" load a local vimrc file if it exists
+call SourceIfExists('~/.vimrc.local')
