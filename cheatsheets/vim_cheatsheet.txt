@@ -100,6 +100,7 @@ vim foo bar     - foo and bar buffers
 vim -o  foo bar - foo and bar in diff windows
 vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
+    - has many level, see `:help vbs`
 
 HELP:
 :help shell<Tab> - tab complete a help topic
