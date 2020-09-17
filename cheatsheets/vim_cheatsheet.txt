@@ -2,6 +2,7 @@ VIM:
 ------------------------------
 - great resource: https://devhints.io/vimscript
 
+
 so $VIMRUNTIME/syntax/hitest.vim
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
@@ -477,3 +478,9 @@ zg - exclude word
 zug - undo exclude adding word
 zw - add to wrong word list
 zuw - remove from wrong word list
+
+
+SCRIPTING:
+-----------------------------
+- checking existence of variable
+    if exists('g:some_global_var') | echo "hi" | endif

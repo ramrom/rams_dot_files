@@ -222,10 +222,10 @@ endfunction
 "globally disable indentLine by default
 let g:indentLine_enabled = 0
 
-"NOTE!:disable all still requires you to toggle/disable individual buffers
+"NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers
 let g:signify_disable_by_default = 0
 function ToggleSignifyAll()
-    if !exists('g:signify_disable_by_default') || g:signify_disable_by_default == 1
+    if g:signify_disable_by_default == 1
         exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
     else
         exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
