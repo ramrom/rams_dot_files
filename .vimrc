@@ -222,6 +222,7 @@ endfunction
 "globally disable indentLine by default
 let g:indentLine_enabled = 0
 
+"NOTE!:disable all still requires you to toggle/disable individual buffers
 function ToggleSignifyAll()
     if !exists('g:signify_disable_by_default') || g:signify_disable_by_default == 1
         exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
@@ -229,8 +230,7 @@ function ToggleSignifyAll()
         exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
     endif
 endfunction
-" globally disable vim-signify by default
-" if empty($VIM_SIGNIFY) | let g:signify_disable_by_default = 1 | endif
+au VimEnter * SignifyDisableAll
 
 
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
@@ -343,7 +343,8 @@ noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
-noremap <leader>gs :call ToggleSignifyAll()<cr>
+noremap <leader>gS :call ToggleSignifyAll()<cr>
+noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gh :SignifyToggleHighlight<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
