@@ -223,6 +223,7 @@ endfunction
 let g:indentLine_enabled = 0
 
 "NOTE!:disable all still requires you to toggle/disable individual buffers
+let g:signify_disable_by_default = 0
 function ToggleSignifyAll()
     if !exists('g:signify_disable_by_default') || g:signify_disable_by_default == 1
         exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
@@ -230,7 +231,6 @@ function ToggleSignifyAll()
         exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
     endif
 endfunction
-au VimEnter * SignifyDisableAll
 
 
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
