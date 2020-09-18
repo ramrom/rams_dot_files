@@ -15,7 +15,7 @@ elseif empty($VIM_NOPLUG)
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
     Plug 'tpope/vim-commentary'     " smart code commenting
-    Plug 'scrooloose/nerdtree'
+    Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
@@ -24,6 +24,11 @@ elseif empty($VIM_NOPLUG)
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
+
+    " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
+    Plug 'ryanoasis/vim-devicons'
+    " colored icons, needs devicons
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
     Plug 'majutsushi/tagbar'
