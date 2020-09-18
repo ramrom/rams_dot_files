@@ -44,6 +44,7 @@ sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usa
 - CLICOLOR_FORCE=1 ls -l | less
     - force color to pipe output, be default ls wont colorize
 - vm_stat - show some raw memory usage
+- nettop - like top but for tcp/udp sockets only and their bandwidth usage!
 
 
 BROWSER(CHROME/FIREFOX verified):
@@ -83,6 +84,27 @@ FILESYSTEMS:
     mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
 
 
+KEYBOARD SHORTCUTS:
+command + tab  - switch between apps
+command + space - spotlight search
+command + H - goto home screen
+command + N - compose new email in mail app
+
+command + c copy
+command + v paste
+command + x cut
+command + a select all
+command + z undo
+
+safari:
+command + T - open new tab in safari
+command + W - close tab in safari
+command + R - refresh tab in safari
+command + . - stop loading tab in safari
+command + rightarrow - go to future page in safari history
+command + leftarrow - go to previow page in safari history
+up/down arrow  - scroll up and down in safari
+
 OTHER:
 - spotify shortcuts
     - https://support.spotify.com/us/using_spotify/system_settings/keyboard-shortcuts/
@@ -90,6 +112,8 @@ OTHER:
 - function keys go up to f19, not f20-f24
     - f14, f15 are brightness up/down
     - f20 in iterm does same thing as hitting ctrl-p
+- option + wifiicon(menu bar) - show diagnostic info like MAC and RSSI of wifi
+    - also option + bluetoothicon
 - options key in osx is same as alt key in other Oses (like windows)
 - shift + cmd + [/]    - move back/forward "tabs"
     - works with iterm2 tabs, chrome tabs, whatsapp convos
@@ -104,6 +128,9 @@ take screenshot:
     - screenshot to select specific area: cmd + shift + 3
     - screenshot to select all of one app window: cmd + shift + 4 -> then space
 - microsoft word ctrl-h doesnt work, it opens a find and replace
+- ~/Library/LaunchAgents - user dir of plist files for starting processes at user login
 
-
+GUI Components:
+menu bar                - top screen bar with apple menu on left, app menus, status menu and date/user on right
 notification center     - side bar (by default) with widgets for weather and stocks and notifs and so on
+dock                    - bottom (by default) panel with app shortcuts

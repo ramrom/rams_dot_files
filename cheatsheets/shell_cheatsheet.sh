@@ -82,7 +82,8 @@ function foo-bar() {
     echo "POSIX makes ram sad"
 }
 
-####### VARIABLES
+####### VARIABLES #######
+# SCOPES
 # bash/zsh and bsd/gnu sh support local scoped variables in a function
 # - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
 local foo=1   # only hold value in scope of current function and called function, once func finishes local var is removed
@@ -91,6 +92,12 @@ foo=1         # shell variable, so persists even when function exits
 
 export FOO=1  # environment variable, subshells inhert these variables
 FOO=1         # shell variable,       same as "set"ing, subshells dont inherit these
+# NOTE!! command substition subshells are different then a script run in a subshell, cmd subs duplicate shell and env vars
+# for bash(and zsh from my tests): https://www.gnu.org/software/bash/manual/html_node/Command-Execution-Environment.html
+FOO=1
+BAR=$(echo "$FOO")
+echo $BAR       # will print 1
+
 
 # programatically create env variables
 A=FOO
@@ -105,6 +112,15 @@ echo "${!a}" # outputs 'this is the real value'
 X=foo
 Y=X
 eval "Z=\$$Y"  # z will equal "foo"
+
+#DEFAULT values, works in bash and zsh, (osx /bin/sh and ubunutu /bin/sh too)
+FOO=${VARIABLE:-default}  # If variable not set or null, FOO changes value to "default"
+FOO=${VARIABLE:=default}  # If variable not set or null, FOO AND VARIABLE changes value to "default"
+# can use it for function args, this sets VARIABLE to DEFAULTVALUE if 1st arg isnt set
+VARIABLE=${1:-$DEFAULTVALUE}
+# if var is the same
+VARIABLE="${VARIABLE:=DEFAULT_VALUE}"
+: "${VARIABLE:=DEFAULT_VALUE}"          # colon operator, shorter and equivalent
 
 # SPECIAL VARIABLES
 # bash/zsh/sh all seem to define these shell variables
@@ -301,6 +317,20 @@ type -a foo     # dislay all info, including all hits. if foo was alias and 2 bi
 # WHICH is bin, will return path of bin, exit non-zero otherwise
 which foo
 which -a foo     # return all paths of bins matching foo in PATH
+
+# VARIABLE INTROSPECTION
+# see https://stackoverflow.com/questions/307503/whats-a-concise-way-to-check-that-environment-variables-are-set-in-a-unix-shell
+# using parameter expansion, works in bash and zsh, `?` operator dates back to ver 7 unix and bourne shell
+FOO=1
+echo ${FOO?"not set"}       # will print 1 to stdout
+echo ${BAR?"not set"}       # assuming BAR not set, will print "not set" to stderr
+# with `:?`, verifies it is set AND non-empty, this operator more recent than "?", also POSIX
+FOO=
+echo ${FOO?"not set"}     # will print blank line to stdout
+echo ${FOO:?"var is not set or empty"}    # will print "var is not set or empty" to stderr
+# to prevent globbing and field splitting best practice is to double quote whole expression
+echo "${FOO:?var is not set or empty}"
+
 
 
 ####### CONDITIONALS

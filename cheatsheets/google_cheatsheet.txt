@@ -48,3 +48,8 @@ c - create an event
 z - undo
 r - refresh
 esc - return to calender grid from event details
+
+VOICE:
+- voice legacy: in very top left menu, botton item is "legacy google voice"
+- legacy voice lets you screen calls just for certain groups
+    - e.g. you can turn off for all contacts group, and screen for anonymous callers
