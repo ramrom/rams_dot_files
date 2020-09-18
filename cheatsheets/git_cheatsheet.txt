@@ -1,4 +1,7 @@
 GIT:
+- good reference: https://git-scm.com/
+    - basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+
 git rm -rf --cached foo bar - keep on disk but rm from git
 git show-ref --tags     - tags with it's commit
 git show-ref --tags -d  - above + what commit tag points to
