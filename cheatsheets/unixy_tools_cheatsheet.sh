@@ -112,6 +112,9 @@ cat /proc/meminfo   # shows detailed memory usage
 # TERMINAL
 infocmp  # get terminal info
 
+# LSOF
+lsof
+
 # FILESYSTEMs
 mount  # alone shows info about mounts
 df      # will show block devices and where they are mounted
