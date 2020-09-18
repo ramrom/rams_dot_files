@@ -25,18 +25,23 @@ elseif empty($VIM_NOPLUG)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
-    " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
-    Plug 'ryanoasis/vim-devicons'
-    " colored icons, needs devicons
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    if !empty($VIM_DEVICONS)
+        " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
+        Plug 'ryanoasis/vim-devicons'
+        " colored icons, needs devicons
+        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    endif
 
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
     Plug 'majutsushi/tagbar'
 
     " TODO: check out junegunn vim-easy-align instead of tabular
-    Plug 'godlygeek/tabular'        " vim-markdown uses this to format tables
+    Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
     "NOTE: header highlighting fails, open issue in repo
     Plug 'plasticboy/vim-markdown'
+
+    " real-time render markdown in browser window as you edit the source
+    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
     "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
     if has('nvim') || has('patch-8.0.902')
@@ -68,9 +73,6 @@ elseif empty($VIM_NOPLUG)
     " grubbox, dracula, molokai are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
 
-    " real-time render markdown in browser window as you edit the source
-    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
 
@@ -89,7 +91,6 @@ colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
 set nobackup                                    " no backup files
 set nowritebackup                               " only in case you don't want a backup file while editing
 set noswapfile                                  " no swap files
-"set backupdir=~/.vim,~/.tmp/,~/tmp,/tmp
 
 set splitbelow splitright       " open new windows on bottom for horizontal, right for vertical
 set wildmenu                    " display command line's tab complete options as menu
