@@ -31,7 +31,7 @@ function debug_vars() {
 
         if [ -z "$var_value" ]; then
             local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
-            local msg2=$(fg=brightred ansi256 " is undefined!")"${spacing}"
+            local msg2=$(fg=brightred ansi256 " is undefined or null!")"${spacing}"
             printf "$msg$msg2"
         else
             local msg=$(und=1 ansi256 "DEBUG:")" Variable $(fg=yellow ansi256 $arg)"
@@ -604,8 +604,7 @@ function gitfetchresetbranch() {
 
 # delete branches that are already merged into another branch, master by default, delete locally and in remote
 function gitclean() {
-    local masterb=master
-    [ -n "$1" ]  && masterb=$1
+    local masterb=${1:-master}
     git branch –-merged $masterb | grep -v $masterb | cut -d/ -f2- | xargs -n 1 git push –delete origin
     git branch –-merged $masterb | grep -v $masterb | xargs -n 1 git branch -d
 }

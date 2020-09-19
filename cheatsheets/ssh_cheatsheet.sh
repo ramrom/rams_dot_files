@@ -14,6 +14,7 @@ ssh-add -D   # delete all cached keys
 
 # using multiple ssh keys for git on the same host: https://gist.github.com/jexchan/2351996
     # created ssh config file and had to change the repo remote name to match
+    # https://www.freecodecamp.org/news/how-to-manage-multiple-ssh-keys
 
 # copy current users public key to authorized keys in remoteserver, now you can public/private key auth instead of password
 ssh-copy-id foouser@fooserver
@@ -24,6 +25,7 @@ ssh-copy-id foouser@fooserver
 # can include other config files
 
 # ssh multihop: http://sshmenu.sourceforge.net/articles/transparent-mulithop.html
+ssh -t user@foo.com ssh -t user2@bar.com
 
 # github only allows a key to be used with one github account
 # see https://docs.github.com/en/github/authenticating-to-github/error-key-already-in-use
