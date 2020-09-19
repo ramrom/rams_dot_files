@@ -331,6 +331,13 @@ echo ${FOO:?"var is not set or empty"}    # will print "var is not set or empty"
 # to prevent globbing and field splitting best practice is to double quote whole expression
 echo "${FOO:?var is not set or empty}"
 
+# declare shows if variable is exported, it's value
+# zsh will show "typeset" for non-exported, "export" for exported, "no such var" if it doesnt exist
+# bash shows "-x" for exported, "--" for non exporeted, "not found" if not set
+foo=1
+export bar=1
+declare -p foo bar
+
 
 
 ####### CONDITIONALS

@@ -67,6 +67,11 @@ dig example.com
 dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
 # google public dns servers are 8.8.8.8 and 8.8.4.4
 
+# SNMP
+# ref: https://www.networkmanagementsoftware.com/snmp-tutorial/
+# assuming v 2c and community string is foobar
+snmpwalk -Os -c foobar -v2c 192.168.1.1 some.oid.path
+
 # GNU GPG
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
 gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
