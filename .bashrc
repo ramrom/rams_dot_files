@@ -62,7 +62,7 @@ fi
 
 function append_dir_to_path() {
     local dir=$1
-    [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && PATH="$dir":"${PATH}"
+    [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && export PATH="$dir":"${PATH}"
     unset dir
 }
 
@@ -82,3 +82,6 @@ if [ $(command -v go) ]; then
     export GOPATH=~/go
     export GOBIN=${GOBIN}/bin
 fi
+
+# set rust PATH if rustup exists/intsalled
+[ -x ~/.cargo/bin/rustup ] && append_dir_to_path "$HOME/.cargo/bin"
