@@ -10,8 +10,8 @@ function detect_shell() {
         echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && return 1
     fi
     # METHOD 2: use ps
-        # LINUX: `ps -p $$ -o cmd=`
-        # OSX: `ps -p $$ -o command=` # i will get "-zsh" so need to remove "-" char
+        # LINUX: $(ps -p $$ -o cmd=)
+        # OSX: $(ps -p $$ -o command=) # i will get "-zsh" so need to remove "-" char
     # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
@@ -179,7 +179,7 @@ function file_rename_all() {
 }
 
 function display_notif() {
-    if [ `uname` = "Darwin" ]; then
+    if [ $(uname) = "Darwin" ]; then
         osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
     else  # really for ubuntu
         notify-send -i face-wink "a title" "hi!"
@@ -187,7 +187,7 @@ function display_notif() {
 }
 
 # filter for dubydir, color by order of magnitude (Byte/Kibibyte/Mibibyte/Gibibyte)
-# TODO: du buffers, doing `stdbuf -o 0 -e 0 du -sh * | grep` still buffers :(
+# TODO: du buffers, doing $(stdbuf -o 0 -e 0 du -sh * | grep) still buffers :(
 function dubydircolor() {
     dubydir | \
     while read line; do
@@ -449,7 +449,7 @@ function tmux_status_reset() {
 function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
 
 function top_cpu_processes() {
-    if [ `uname` = "Darwin" ]; then
+    if [ $(uname) = "Darwin" ]; then
         # ps -Ao user,uid,command,pid,pcpu,tty -r | head -n 6   # -r sorts by cpu usage
         ps -Ao pcpu,user,command -r | head -n 6   # do command last so it string doesnt get truncated
         # TODO: parsing, if /Applications in string then get app name after /
@@ -637,10 +637,10 @@ function terminate_db_connections() {
 
 #TODO: not really working
 function psql_pager() {
-    #YELLOW=`echo -e '\033[1;33m'`
-    #LIGHT_CYAN=`echo -e '\033[1;36m'`
-    GREEN=`echo -e '\033[0;32m'`
-    NOCOLOR=`echo -e '\033[0m'`
+    #YELLOW=$(echo -e '\033[1;33m')
+    #LIGHT_CYAN=$(echo -e '\033[1;36m')
+    GREEN=$(echo -e '\033[0;32m')
+    NOCOLOR=$(echo -e '\033[0m')
     echo "sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
 
     #PAGER="sed \"s/\([[:space:]]\+[0-9.\-]\+\)$/${LIGHT_CYAN}\1$NOCOLOR/;"
