@@ -266,8 +266,8 @@ function sensor_data() {
     # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
     local IFS=
     local s=$(sensors)
-    echo $s | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
-    echo $s | grep -E "CPU Fan"
+    echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
+    echo "$s" | grep -E "CPU Fan"
 }
 
 # https://n0tablog.wordpress.com/2009/02/09/controlling-vlc-via-rc-remote-control-interface-using-a-unix-domain-socket-and-no-programming/
@@ -649,18 +649,10 @@ function psql_pager() {
     #export PAGER
 }
 
-function ruby_base64_dec() {
-    ruby -e '
-        require "base64"
-        puts ""
-        puts Base64.decode64(ARGV[0])
-    ' "$@"
-}
+function ruby_base64_dec() { ruby -e 'require "base64"; puts Base64.decode64(ARGV[0])' "$@"; }
 
 function ryamltojson() {
-    ruby -e 'require "yaml"; require "json"
-        puts YAML.load_file(ARGV[0]).to_json
-    ' "$@"
+    ruby -e 'require "yaml"; require "json"; puts YAML.load_file(ARGV[0]).to_json' "$@"
 }
 
 function parse_comma_delim_error() {
@@ -668,12 +660,9 @@ function parse_comma_delim_error() {
     ruby -e "$str"
 }
 
-function f_findfilesbysize() {
-    sudo find "$1" -type f -size +"$2" | xargs du -sh
-}
+function f_findfilesbysize() { sudo find "$1" -type f -size +"$2" | xargs du -sh; }
 
 function tabname { printf "\e]1;$1\a"; }
-
 function winname { printf "\e]2;$1\a"; }
 
 function fullpath() {
@@ -683,6 +672,7 @@ function fullpath() {
     ' "$@"
 }
 
+# NOTE: can do PlugSnapshot in vim also
 function vim_plug_ver() {
     pushd ~/.vim/plugged > /dev/null
     for dir in */; do
