@@ -55,6 +55,10 @@ tail -f foofile  # spit out last lines and continue to print them as new ones ar
 echo "3.1 * 4.5" | bc       # = 13.9
 echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
+# LSOF, list file handles, swiss army knife since 'everything is a file' in unixy OSes
+lsof
+
+###### NETWORK TOOLS
 # ARP cache
 arp -a   # display the apr cache
 
@@ -71,6 +75,12 @@ dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
 # ref: https://www.networkmanagementsoftware.com/snmp-tutorial/
 # assuming v 2c and community string is foobar
 snmpwalk -Os -c foobar -v2c 192.168.1.1 some.oid.path
+
+# Bandwidth usage
+sudo bandwhich    # rust terrminal UI tool, nice, by connection, by process and by remote IP
+nettop            # osx terminal UI tool, tree view, by process and each connect in process
+iftop             # monitor a interface, usage by connection, has text bars and number rates
+
 
 # GNU GPG
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
@@ -114,13 +124,7 @@ free -h   # -h is human readale
 # /proc/meminfo
 cat /proc/meminfo   # shows detailed memory usage
 
-# TERMINAL
-infocmp  # get terminal info
-
-# LSOF
-lsof
-
-# FILESYSTEMs
+###### FILESYSTEMs
 mount  # alone shows info about mounts
 df      # will show block devices and where they are mounted
 # NETWORK PROTCOLS:
