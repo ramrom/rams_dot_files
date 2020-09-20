@@ -5,7 +5,7 @@ ubuntu/debian/gnome:
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
 - ctr + alt + FnX - switch to tty x
 - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
- 
+
 sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
 sudo shutdown -r now (reboot now)
@@ -21,9 +21,25 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 
 INIT SYSTEMS
 -------------------------------------------
-# systemd
+# SYSTEMD
+- good cmt by arch linux init maintainer on why systemd is good:
+    - https://www.reddit.com/r/archlinux/comments/4lzxs3/why_did_archlinux_embrace_systemd/
 systemctl start/stop/restart
 systemctl status
+    - show full status of systemd with full tree
+systemctl status foo
+    - show status of a unit named foo
+systemctl status foo*
+    - status of all units that starts with foo
+journalctl -u foo
+    - show full log of service foo,  "-u is unit"
+journalctl -u foo.service
+    - same as above, if unit is not service type need to type fully, e.g. foo.socket
+journalctl -u foo -b
+    - show logs since last boot
+journalctl --list-boots
+    - show list of times system was booted up
+
 
 # SysV
 - uses pidfile in /var/run
@@ -90,6 +106,14 @@ apt-cache search --names-only .*foo.*
     - searches regex in package name only
 apt search --names-only *something*
     - same
+
+SNAP:
+-----------------
+# snap invented by ubuntu, more rapid/flexible package system than .deb/apt
+# snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
+    - snap keeps the old version of the package
+snap list
+    - list all snap packages installed
 
 
 General linux/ubuntu tools:
