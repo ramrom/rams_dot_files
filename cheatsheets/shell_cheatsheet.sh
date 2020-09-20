@@ -315,6 +315,7 @@ type -t foo     # prints just alias/function/file/builtin, nothing (exit code 1)
 type -a foo     # dislay all info, including all hits. if foo was alias and 2 bins, would show all 3 in precedent order
 
 # WHICH is bin, will return path of bin, exit non-zero otherwise
+# zsh will say if it's built-in/keyword/alias/bin/(prints out func def), bash only shows bins, other types return error
 which foo
 which -a foo     # return all paths of bins matching foo in PATH
 

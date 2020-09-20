@@ -33,6 +33,7 @@ alias clt='clear && tmux clear-history'
 # alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
+alias tmr='transmission-remote'
 
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
 alias rf='source ~/rams_dot_files/shell_functions.sh'
