@@ -78,6 +78,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias vcrypt='veracrypt'
     alias trashsize='du -hs ~/.local/share/Trash'
     alias sbw='sudo ~/.cargo/bin/bandwhich'
+    alias smd='systemctl'
 else  # assuming Darwin here
     alias psx='ps -axhf'
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"

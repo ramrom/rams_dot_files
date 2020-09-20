@@ -143,6 +143,8 @@ retroarch -
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
+transmission - gret torrent program
+- https://wiki.archlinux.org/index.php/transmission
 
 
 Devices and file systems:
