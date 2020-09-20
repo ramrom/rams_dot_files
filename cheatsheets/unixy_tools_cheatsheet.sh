@@ -128,7 +128,12 @@ free -h   # -h is human readale
 # /proc/meminfo
 cat /proc/meminfo   # shows detailed memory usage
 
-###### FILESYSTEMs
+###### FILESYSTEMs/STORAGE-DEVICES
+fdisk       # manipulate partitions
+fdisk -l   # linux show all dev devices and storage device info
+
+parted # show phsyical partitions available, some detailed info. doesnt exist on osx
+        # has interactive menu
 mount  # alone shows info about mounts
 df      # will show block devices and where they are mounted
 # NETWORK PROTCOLS:
