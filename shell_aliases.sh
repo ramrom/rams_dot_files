@@ -111,17 +111,17 @@ alias gbranchclean='git branch --merged master | egrep -v "^\*|master" | xargs -
 # alias gsubp='git submodule foreach git pull origin master'
 
 
-# GREP and RG (ripgrep) and FZF
-alias f="fzf"
+# FZF, RG (ripgrep), FD, GREP
+alias fdh1='fd -H -d 1'
 alias grep='grep --colour=always'
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/'"
+alias f="fzf"
 alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
 alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
 alias fe="export | fzf"
 alias fs="saf | fzf"
 alias fsn="safn | fzf"
-alias fdh1='fd -H -d 1'
 # TODO: sourcing aliases works, but calling the alias after fails
 # alias fsp='safn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; source ~/rams_dot_files/shell_functions.sh; \
 alias fsp='safn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; ssf; \
