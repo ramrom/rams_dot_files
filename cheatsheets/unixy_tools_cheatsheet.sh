@@ -118,6 +118,10 @@ du -a /foo
 # CP
 cp -l     # make copies but just hard links, gnu/linux has this, osx does not
 
+# shred  - overwrite data in file or whole device
+sudo shred -v /dev/sdb1
+shred foofile
+
 # MEMORY
 # free - show memory/swap usage, total/used/free/cached
 free -h   # -h is human readale
