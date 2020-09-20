@@ -89,3 +89,6 @@ if [ $(command -v go) ]; then
     export GOPATH=~/go
     export GOBIN=${GOBIN}/bin
 fi
+
+# set rust PATH if rustup exists/intsalled
+[ -x ~/.cargo/bin/rustup ] && append_dir_to_path "$HOME/.cargo/bin"
