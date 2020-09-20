@@ -5,6 +5,12 @@ ubuntu/debian/gnome:
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
 - ctr + alt + FnX - switch to tty x
 - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
+ 
+sudo shutdown -h now (halt now)
+sudo shutdown -k (kick everyone off and login disabled, no halting)
+sudo shutdown -r now (reboot now)
+
+lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
 
 # USER stuff
 ---------------------------------------
@@ -64,7 +70,7 @@ apt-cache rdepends pkg  -r(reverse), show other packages
 apt-cache depends pkg  - show raw dep info of package pkg
 
 apt list --installed - show installed packages
-apt list --upgradable - show installed packages
+apt list --upgradable - show upgradable packages
 sudo apt-get install packageName --no-upgrade  - install new pkg and dont upgrade dependend packages
 sudo apt-get purge vsftpd  - remove package and config files
 apt-get changelog pkg - see changelog
@@ -76,12 +82,15 @@ sudo apt --dry-run autoremove
     - autoremove remove uneeded pkgs
     - dry-run just shows what it would remove
 
+apt-cache search .*realregex$
+    - search locally cached package info only
+apt search *something*
 
-sudo shutdown -h now (halt now)
-sudo shutdown -k (kick everyone off and login disabled, no halting)
-sudo shutdown -r now (reboot now)
+apt-cache search --names-only .*foo.*
+    - searches regex in package name only
+apt search --names-only *something*
+    - same
 
-lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
 
 General linux/ubuntu tools:
 ------------------------------------------
