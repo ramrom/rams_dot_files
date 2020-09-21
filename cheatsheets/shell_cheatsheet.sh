@@ -7,6 +7,7 @@
         # order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
 
 # Bash (and AFAIK zsh)
+    # good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
@@ -229,6 +230,10 @@ echo ${array[1]}  # ref 2nd element in array (bash, zsh this is 1st), in bash wi
 for i in ${array[@]}; do; echo $i; done   # bash, and zsh
 for i in $array; do; echo $i; done        # zsh
 
+# bash: parse a bunch of lines into array
+IFS=$'\r\n' x=( $(cat somefile) )
+IFS=$'\r\n' x=( $(printf "foo\nbar\nbaz\n") )    # x is array with 3 items
+
 
 #####  IFS: string field splitting
 #   bash field splits by default, zsh doesnt (need to set sh_word_split shell option)
@@ -378,8 +383,17 @@ true || echo foo && echo bar   # this will print dude
 true || { echo foo && echo bar; }   # this wont print anything, braces make the two staements one
 
 
-# USER INPUT
+# USER INPUT (from keyboard really)
 echo ""; printf "Hit any key: "; read resultsinput   # resultsinptu will have string user entered after hitting enter
+
+# bash select menus, works in zsh too
+PS3="choose an option: "
+options=(foo bar baz)   # bash array
+select menu in "${options[@]}";
+do
+    echo -e "you picked $menu ($REPLY)"   # REPLY var contains line read (number)
+    break;
+done
 
 # FILES AND DIRS
 # iterate just through all files in curent dir
