@@ -106,6 +106,10 @@ command + leftarrow - go to previow page in safari history
 up/down arrow  - scroll up and down in safari
 
 OTHER:
+- osx memory system, what is wired/active/inactive/free:
+    - https://apple.stackexchange.com/questions/67031/isnt-inactive-memory-a-waste-of-resources
+- how does process monitor know a process is "not responding"? how to automate CLI
+    - https://superuser.com/questions/688024/how-can-i-determine-if-an-application-is-not-responding
 - spotify shortcuts
     - https://support.spotify.com/us/using_spotify/system_settings/keyboard-shortcuts/
     - cmd-left/right next/prev song, cmd-up/down vol up/down, cmd-shift-up max volume, cmd-shift-down mute
