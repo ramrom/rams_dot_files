@@ -1,0 +1,22 @@
+#!/bin/bash
+
+resfile=res
+# http $1 > $resfile
+
+IFS=$'\r\n' choices=( $(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -r '$1' $resfile) )
+PS3="select a magnet link: "
+select name in "${choices[@]}";
+do
+    echo "you selected $name ($REPLY)" >&2
+    index=($REPLY)
+    break;
+done
+
+[ "$index" -gt "${#choices[@]}" ] && echo "choice is out of range!" && exit 1
+
+# this get the magnet links themsvles, no color or line numbers
+magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed -n "${index}p")
+echo $magnet
+
+
+unset resfile
