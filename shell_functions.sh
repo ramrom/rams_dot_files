@@ -90,7 +90,7 @@ function httpie_all() {
     jq . $body_file || echo $(fg=brightred ansi256 "$body_file NOT VALID JSON") && cat $body_file
 }
 
-function yts_query() { http https://yts.mx/ajax/search query==$1; }
+function yts_query() { http https://yts.mx/ajax/search query=="$1"; }
 
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }

@@ -116,13 +116,10 @@ snap list
     - list all snap packages installed
 
 
-General linux/ubuntu tools:
-------------------------------------------
-inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
-stat - get metadata on a file
-lsblk - show block level devices
-/etc/fstab - file systems mounted at boot
-dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+Graphical systems:
+-----------------------------
+- definitions: display server / display manager / window manager / desktop envrionment
+    - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
 xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
     - xrandr --output DP-0 --mode 2560x1440
@@ -146,6 +143,34 @@ xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
     xdotool windowsize 123 800 600
     xdotool windowmove 123 0 1080
 nvidia-smi - show nvidia card mem usage, gpu temp, X processes
+
+
+Devices and file systems:
+------------------------------------------------
+loopdevices
+- regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
+- if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
+
+drive naming convention:
+- fd - SATA, sd - SCSI/SATA, hd - IDE
+- fda - first SATA drive, hdb - 2nd IDE drive
+- hdb1 - 1st partition on 2nd IDE drive
+
+- DIR conventions
+    - /         - root filesystem
+    - /home     - user directories
+    - /export   - data shared over the network mount
+    - /mnt      - temporary mount point
+    - /media    - removable devices like usb (so not internal HDD)
+
+
+other linux/ubuntu tools:
+------------------------------------------
+inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
+stat - get metadata on a file
+lsblk - show block level devices
+/etc/fstab - file systems mounted at boot
+dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 dconf  - like gsettings?
 gsettings  - gnome settings tool
     - can change basically any setting at cli like you could in GNOME settings menu
@@ -167,24 +192,6 @@ retroarch -
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
-transmission - gret torrent program
-- https://wiki.archlinux.org/index.php/transmission
+transmission - great torrent program
+    - https://wiki.archlinux.org/index.php/transmission
 
-
-Devices and file systems:
-------------------------------------------------
-loopdevices
-- regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
-- if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
-
-drive naming convention:
-- fd - SATA, sd - SCSI/SATA, hd - IDE
-- fda - first SATA drive, hdb - 2nd IDE drive
-- hdb1 - 1st partition on 2nd IDE drive
-
-- DIR conventions
-    - /         - root filesystem
-    - /home     - user directories
-    - /export   - data shared over the network mount
-    - /mnt      - temporary mount point
-    - /media    - removable devices like usb (so not internal HDD)

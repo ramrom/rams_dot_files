@@ -140,7 +140,7 @@ else
     highlight SpecialKey ctermfg=8 guifg=DimGrey
 endif
 
-""" Indent Options
+""" Indent/Tabs
 set autoindent                                  " indent on new line for inner scopes in code
 set shiftwidth=4                                " use 4 spaces for autoindent (cindent)
 set tabstop=4                                   " space 4 columns when reading a <tab> char in file
@@ -256,13 +256,13 @@ if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
 
-" TODO: i think c-l is good enough, prolly remove this after training muscle memory to c-l
+" TODO: probably remove, c-l seems to work well enough
 " much faster than escape, almost never hit jk successively in insert, jj might be good too
 " inoremap jk  <Esc>
 " when vim in insertmode(awful) c-l goes to normal mode from insert
 inoremap <C-l>  <Esc>
 
-" TODO: dont think i really needs this, leader-s saves from normal, c-k is enter digraph
+" TODO: should i keep?, leader-s saves from normal is nuff i thinks. (c-k default map is enter digraph)
 inoremap <C-k>  <C-o>:w<cr>
 
 function SaveDefinedSession()
