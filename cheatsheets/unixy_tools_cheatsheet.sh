@@ -29,6 +29,7 @@ echo foo:bar:baz | tr : \\n     # split on ":" delimiter, replace ":" with newli
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
+printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
 
 # wc - word count
 wc -l   # count # of lines
