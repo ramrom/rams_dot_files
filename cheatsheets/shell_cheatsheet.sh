@@ -227,6 +227,8 @@ array=(1 two three)
 
 echo ${array[1]}  # ref 2nd element in array (bash, zsh this is 1st), in bash will print "two"
 
+echo "${#array[@]}"    # echo array size
+
 for i in ${array[@]}; do; echo $i; done   # bash, and zsh
 for i in $array; do; echo $i; done        # zsh
 
@@ -387,6 +389,7 @@ true || { echo foo && echo bar; }   # this wont print anything, braces make the 
 echo ""; printf "Hit any key: "; read resultsinput   # resultsinptu will have string user entered after hitting enter
 
 # bash select menus, works in zsh too
+# select menu goes to STDERR
 PS3="choose an option: "
 options=(foo bar baz)   # bash array
 select menu in "${options[@]}";
