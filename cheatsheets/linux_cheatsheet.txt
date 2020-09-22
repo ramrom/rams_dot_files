@@ -19,18 +19,37 @@ sudo passwd foouser         - change users password, seems to bypass strength ru
 sudo useradd foouser foogroup    - add existing user to new group
 sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
 
-INIT SYSTEMS
--------------------------------------------
+
 # SYSTEMD
+-------------------------------------------
+- great wiki on it: https://wiki.archlinux.org/index.php/Systemd
 - good cmt by arch linux init maintainer on why systemd is good:
     - https://www.reddit.com/r/archlinux/comments/4lzxs3/why_did_archlinux_embrace_systemd/
-systemctl start/stop/restart
+- base type is unit
+    - service (processes/daemons), mount (filesystems), device (/dev devices), socket (sockets)
+    - slice, scope
+    - timer - replacement for cron basically, specify a service unit to run and a schedule for it
+    - target - this unit type similar to runlelvel in sysV, so a desired state for the whole system
+        - services and other units can be tied to a target, multiple targets can be active simultaneously
+systemctl start/stop/restart/reload
+    - reload doesnt stop and start the service, often is a HUP signal
 systemctl status
     - show full status of systemd with full tree
 systemctl status foo
     - show status of a unit named foo
 systemctl status foo*
     - status of all units that starts with foo
+systemctl cat foo
+    - get contents of unit file defintion of foo
+systemctl list-dependencies foo
+    - print a nice tree of unit dependencies for foo
+systemctl show foo
+    - low levle details of units settings
+systemctl get-default
+    - print the default target for the system
+
+- journalctl was also debian/ubuntu tool to access logs, in /var/log
+    - systemd logs are stored in binary format, use journalctl to access them
 journalctl -u foo
     - show full log of service foo,  "-u is unit"
 journalctl -u foo.service
@@ -39,9 +58,15 @@ journalctl -u foo -b
     - show logs since last boot
 journalctl --list-boots
     - show list of times system was booted up
+journalctl -f -u foounit
+    - -f is follow or tail the unit's log
+journalctl -f
+    - tail ALL units
+journalctl -n 100 -u foo
+    - see just last 100 last lines for foo unit
 
 
-# SysV
+# SysV (old init system)
 - uses pidfile in /var/run
 - script that generally defines bin,conf/pidfile, defines start/stop/reload/status functions for ur bin
 
