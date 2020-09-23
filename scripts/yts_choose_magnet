@@ -1,18 +1,34 @@
 #!/bin/bash
 
 resfile=res
-# http $1 > $resfile
+printf "\nEnter Query: "; read resultsinput
+http --download --output movie_results https://yts.mx/ajax/search query=="$resultsinput"
+movie_choices=$(jq -r '.data[].title' movie_results)
+echo ""
 
-IFS=$'\r\n' choices=( $(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -r '$1' $resfile) )
+IFS=$'\r\n'
+PS3="select a movie: "
+select movie in $movie_choices;
+do
+    index=($REPLY)
+    break;
+done
+
+movie_link=$(jq -r --arg INDX $index '.data[($INDX | tonumber) - 1].url' movie_results)
+
+http --download --output $resfile "$movie_link"
+
+choices=$(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -r '$1' $resfile)
 PS3="select a magnet link: "
 select name in "${choices[@]}";
+# select name in $choices;
 do
     index=($REPLY)
     break;
 done
 
 echo "$index" | grep -v "^\d$" > /dev/null && echo "input, $index, is not a single digit!" && exit 1
-[ "$index" -gt "${#choices[@]}" ] && echo "choice is out of range!" && exit 1
+[ "$index" -gt "${#choices[@]}" ] && echo "choice value $index, is out of range!" && exit 1
 
 # this get the magnet links themsvles, no color or line numbers
 magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed -n "${index}p")

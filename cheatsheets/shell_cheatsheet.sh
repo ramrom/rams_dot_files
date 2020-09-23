@@ -61,8 +61,11 @@ bindkey '^N' down-history
 bindkey '^r' history-incremental-search-backward
 export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
 
-
-###### FUNCTIONS
+### EXECUTION ENVIRONENT
+# non-interactive shells, like when running a shell script
+    # aliases are not expanded
+    # bashrc or zshrc are not run
+    # only exported variabled are inherited, regular shell variables are not
 source fooscript    # run script in current shell, zsh, bash works too
 . fooscript         # bash cononical way to source, doesnt work in zsh
 . ./fooscript       # force execute, executes even if file perm doesnt have execute, works in bash and zsh
