@@ -393,6 +393,7 @@ echo ""; printf "Hit any key: "; read resultsinput   # resultsinptu will have st
 
 # bash select menus, works in zsh too
 # select menu goes to STDERR
+# select works with IFS splittting too
 PS3="choose an option: "
 options=(foo bar baz)   # bash array
 select menu in "${options[@]}";
