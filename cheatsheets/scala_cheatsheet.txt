@@ -64,6 +64,10 @@ REST ASSURED:
 ******* PLAY FRAMEWORK **************************
 - per mike r. - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 
+PLAY JSON:
+- parse a json string into play AST JsValue
+Json.parse("""{"id":1,"name":"dude"}""")
+
 
 AMMONITE:
 ----------------------------------------

@@ -1,4 +1,5 @@
 #!/bin/bash
+command -v http > /dev/null || { echo "http bin(HTTPie) doesnt exist!" && exit 1; }
 
 resfile=res
 printf "\nEnter Query: "; read resultsinput
