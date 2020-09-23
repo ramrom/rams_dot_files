@@ -82,6 +82,9 @@ sudo bandwhich    # rust terrminal UI tool, nice, by connection, by process and 
 nettop            # osx terminal UI tool, tree view, by process and each connect in process
 iftop             # monitor a interface, usage by connection, has text bars and number rates
 
+# HTOP
+# "/" vim-like search
+htop
 
 # GNU GPG
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase

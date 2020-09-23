@@ -67,6 +67,7 @@ else
 fi
 
 if [ "$(uname)" = "Linux" ]; then
+    alias smd='systemctl'
     alias watch_top_cpu="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
     alias psx='ps auxhf'
     alias psxfull='ps auxhfww'
@@ -78,8 +79,8 @@ if [ "$(uname)" = "Linux" ]; then
     alias vcrypt='veracrypt'
     alias trashsize='du -hs ~/.local/share/Trash'
     alias sbw='sudo ~/.cargo/bin/bandwhich'
-    alias smd='systemctl'
 else  # assuming Darwin here
+    alias lc='launchctl'
     alias psx='ps -axhf'
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
     alias oc='open -a "Google Chrome"'

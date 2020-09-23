@@ -7,11 +7,11 @@ IFS=$'\r\n' choices=( $(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -
 PS3="select a magnet link: "
 select name in "${choices[@]}";
 do
-    echo "you selected $name ($REPLY)" >&2
     index=($REPLY)
     break;
 done
 
+echo "$index" | grep -v "^\d$" > /dev/null && echo "input, $index, is not a single digit!" && exit 1
 [ "$index" -gt "${#choices[@]}" ] && echo "choice is out of range!" && exit 1
 
 # this get the magnet links themsvles, no color or line numbers
