@@ -30,6 +30,7 @@ elseif empty($VIM_NOPLUG)
         Plug 'ryanoasis/vim-devicons'
         " colored icons, needs devicons
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+        let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
     endif
 
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
