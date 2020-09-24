@@ -234,4 +234,6 @@ retroarch -
     - z=a button, x=b button, h=reset state, o=toggle record movie
 transmission - great torrent program
     - https://wiki.archlinux.org/index.php/transmission
+    - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
+        - configuring daemon with a user and allow a private address range
 
