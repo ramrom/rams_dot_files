@@ -1,10 +1,12 @@
 # JENKINS
+A CI/CD open source tool
 
 ## API
 main reference: https://wiki.jenkins.io/display/JENKINS/Remote+access+API
 
 ### General Notes
 - can only query build numbers in known history (same as what u see in UI)
+- can create a api token and use basic auth to use the API
 
 ### Query/Read
 base job build ULR: `https://foojenkins.org/job/someJob/build/1`
