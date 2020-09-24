@@ -79,8 +79,8 @@ if [ "$(uname)" = "Linux" ]; then
     alias vcrypt='veracrypt'
     alias trashsize='du -hs ~/.local/share/Trash'
     alias sbw='sudo ~/.cargo/bin/bandwhich'
-    alias tsm='transmission-remote'
-    alias tsd='transmission-daemon'
+    alias tmr='transmission-remote'
+    alias tmd='transmission-daemon'
 else  # assuming Darwin here
     alias lc='launchctl'
     alias psx='ps -axhf'
