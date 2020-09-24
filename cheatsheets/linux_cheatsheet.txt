@@ -34,7 +34,7 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
     - timer - replacement for cron basically, specify a service unit to run and a schedule for it
     - target - this unit type similar to runlelvel in sysV, so a desired state for the whole system
         - services and other units can be tied to a target, multiple targets can be active simultaneously
-systemctl start/stop/restart/reload
+systemctl start/stop/restart/reload foo
     - reload doesnt stop and start the service, often is a HUP signal
 systemctl status
     - show full status of systemd with full tree
