@@ -140,7 +140,8 @@ parted # show phsyical partitions available, some detailed info. doesnt exist on
         # has interactive menu
 mount  # alone shows info about mounts
 df      # will show block devices and where they are mounted
-# NETWORK PROTCOLS:
+cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount dir, mode, etc
+# NETWORK FILESYSTEM PROTOCOLS:
     # afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
     # osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
     # cifs/smb info: https://linux.die.net/man/8/mount.cifs

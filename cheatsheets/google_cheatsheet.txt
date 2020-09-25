@@ -1,3 +1,8 @@
+GOOGLE:
+-------------------------
+- console.developers.google.com     - configure my apps and whatnot as google developer
+- cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
+
 GOOGLE SEARCH:
 "literal string"
 -excludethis
@@ -6,6 +11,11 @@ foo OR bar              - default spaced words is OR
 foo site:www.site.com   - search a specific site
 - should be a "tools" submenu below search bar that lets you filter by most recent (e.g. last year only)
 
+CHROME:
+- chrome://flags  - see advanced/experimental options
+- accept self signed certificates:
+    - https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
+        - typing "thisisunsafe" worked for chrome 85 on osx!
 
 GMAIL:
 - (goto settings and turn on keyboard shortcuts)
