@@ -5,6 +5,7 @@ ubuntu/debian/gnome:
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
 - ctr + alt + FnX - switch to tty x
 - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
+- when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
 
 sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
