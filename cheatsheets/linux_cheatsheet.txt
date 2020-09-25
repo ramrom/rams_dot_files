@@ -6,6 +6,7 @@ ubuntu/debian/gnome:
 - ctr + alt + FnX - switch to tty x
 - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
+- dash is used as /bin/sh b/c it's much faster than bash, so boots are faster
 
 sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)

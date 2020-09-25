@@ -79,7 +79,7 @@ function find_mult_hardlink() {
     if [ "$(uname)" = "Darwin" ]; then
         fd . -t f "$1" -x sh -c 'num=$(stat -f %l "{}"); (( "$num" > 1 )) && stat -f "%i %N" "{}" ' | sort -V
     else
-        fd . -t f "$1" -x sh -c 'num=$(stat -c %h "{}"); (( "$num" > 1 )) && stat -c "%i %n" "{}" ' | sort -V
+        fd . -t f "$1" -x bash -c 'num=$(stat -c %h "{}"); (( "$num" > 1 )) && stat -c "%i %n" "{}" ' | sort -V
     fi
 }
 
