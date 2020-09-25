@@ -73,6 +73,16 @@ function rrc() {
     fi
 }
 
+function find_mult_hardlink() {
+    # using find(linux):       find . -links +1 -type f -name '*' -printf '%i %p\n' | sort
+    [ -d "$1" ] || { echo "$1 not a directory!" && return 1; }
+    if [ "$(uname)" = "Darwin" ]; then
+        fd . -t f "$1" -x sh -c 'num=$(stat -f %l "{}"); (( "$num" > 1 )) && stat -f "%i %N" "{}" ' | sort -V
+    else
+        fd . -t f "$1" -x sh -c 'num=$(stat -c %h "{}"); (( "$num" > 1 )) && stat -c "%i %n" "{}" ' | sort -V
+    fi
+}
+
 # TODO: finish, script to pp all headers and body and have programatic access to status code, other header values, and body
 function httpie_all() {
     local url=$1

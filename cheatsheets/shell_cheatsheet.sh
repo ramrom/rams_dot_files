@@ -87,6 +87,8 @@ function foo-bar() {
 }
 
 ####### VARIABLES #######
+# MAX SIZE
+    # see https://stackoverflow.com/questions/5076283/shell-variable-capacity
 # SCOPES
 # bash/zsh and bsd/gnu sh support local scoped variables in a function
 # - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script

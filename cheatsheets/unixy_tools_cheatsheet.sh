@@ -40,12 +40,14 @@ echo "b\na" | sort   # will print a on first line, b on second line
 # XARGS - read lines from stdin and execute a command on each line
 echo "foo bar baz" | xargs -t echo    # -t prints what the command being run is for every iteration, good for debugging
 echo "foo bar baz" | xargs -t -n 1 echo  # -n specifies max number of args to take for each iteration
-echo "foo bar baz" | xargs -I % echo "prefix % postfix"  # can specify where to substitute input str
 find . -name foo -type f | xargs cat  # find all files named foo and spit out contents to stdout
+find . -name foo -print0 | xargs -0 rm -v  # safer thans spaces/newlines for file items
+# NOTE: https://stackoverflow.com/questions/6958689/running-multiple-commands-with-xargs
+    # use "$arg" vs -I, specify -d '$\n' to prevent shell-like parsing
+printf "foo\0bar\0baz" | xargs -d '\0' echo   # linux: specify delimiter char (must be single char)
+echo "foo bar baz" | xargs -I % echo "prefix % postfix"  # can specify where to substitute input str
+echo "foo bar baz" | xargs -I _ sh -c 'echo before; echo "_"; echo after' # sh trick here to run many commands
 # print0 in find says to seperate items with a null char, -0 in xargs tells it to seperate by null char (vs space/newline)
-find . -name foo -print0 | xargs -0 rm -v
-printf "foo\0bar\0baz" | xargs -E '\0' echo   # OSX: specify delimiter char
-printf "foo\0bar\0baz" | xargs -d '\0' echo   # linux: specify delimiter char
 
 # HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
