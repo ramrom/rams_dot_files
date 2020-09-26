@@ -25,25 +25,6 @@ elseif empty($VIM_NOPLUG)
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
-    if !empty($VIM_DEVICONS)
-        " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
-        Plug 'ryanoasis/vim-devicons'
-        " colored icons, needs devicons
-        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-        let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
-    endif
-
-    " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
-    Plug 'majutsushi/tagbar'
-
-    " TODO: check out junegunn vim-easy-align instead of tabular
-    Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
-    "NOTE: header highlighting fails, open issue in repo
-    Plug 'plasticboy/vim-markdown'
-
-    " real-time render markdown in browser window as you edit the source
-    " Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
     "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
     if has('nvim') || has('patch-8.0.902')
         Plug 'mhinz/vim-signify'
@@ -51,10 +32,17 @@ elseif empty($VIM_NOPLUG)
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
 
-    "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
-    "TODO: indentLine displays `"` chars `|` or disspapear in json files...
-    Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
-    " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
+    " TODO: check out junegunn vim-easy-align instead of tabular
+    Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
+    "NOTE: header highlighting fails, open issue in repo
+    Plug 'plasticboy/vim-markdown'
+
+    " real-time render markdown in browser window as you edit the source
+    Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+    let g:instant_markdown_autostart = 0
+
+    " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
+    Plug 'majutsushi/tagbar'
 
     if has('nvim')
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -73,6 +61,19 @@ elseif empty($VIM_NOPLUG)
     "TODO: find one of these that's better than ir_black
     " grubbox, dracula, molokai are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
+
+    "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
+    "TODO: indentLine displays `"` chars `|` or disspapear in json files...
+    Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+    " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
+
+    if !empty($VIM_DEVICONS)
+        " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
+        Plug 'ryanoasis/vim-devicons'
+        " colored icons, needs devicons
+        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+        let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
+    endif
 
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
@@ -239,6 +240,14 @@ function ToggleSignifyAll()
     endif
 endfunction
 
+let g:instant_markdown_state = 0
+function ToggleInstantMarkdown()
+    if g:instant_markdown_state == 0
+        let g:instant_markdown_state = 1 | exe ':InstantMarkdownPreview' | echo 'instant markdown ON'
+    else
+        let g:instant_markdown_state = 0 | exe ':InstantMarkdownStop' | echo 'instant markdown OFF'
+    endif
+endfunction
 
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
@@ -353,6 +362,7 @@ noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gS :call ToggleSignifyAll()<cr>
 noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gh :SignifyToggleHighlight<cr>
+noremap <leader>gm :call ToggleInstantMarkdown()<cr>
 noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
