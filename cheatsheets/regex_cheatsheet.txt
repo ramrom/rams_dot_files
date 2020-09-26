@@ -66,3 +66,10 @@ a(?=b)	Match a in baby but not in bay
 a(?!b)	Match a in Stan but not in Stab
 (?<=a)b	Match b in crabs but not in cribs
 (?<!a)b	Match b in fib but not in fab
+
+
+
+# Examples
+repeating a character sequence. (gnu grep)
+echo "abba habba looba zzz aza " | grep -P '(a\w+a\s)+'   -> find match
+echo "abba habba looba zzz aza " | grep -P '^(a\w+a\s)+$'   -> does NOT find match, the "zzz " kills it

@@ -3,6 +3,7 @@ MARKDOWN CHEATSHEET:
 - https://en.wikipedia.org/wiki/Markdown
 - original md: https://commonmark.org/
 - github flavored md: https://github.github.com/gfm/
+- https://devhints.io/markdown
 
 # header 1
 ## header 2
@@ -34,6 +35,12 @@ horizontal rule:
 ![image name](someimage.png "icon")
 ![image name](https://somewhere/someimage.png)
 
+Tables:
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
 JIRA:
 -----------------------

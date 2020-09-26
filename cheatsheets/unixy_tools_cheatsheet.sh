@@ -134,6 +134,7 @@ free -h   # -h is human readale
 # /proc/meminfo
 cat /proc/meminfo   # shows detailed memory usage
 
+
 ###### FILESYSTEMs/STORAGE-DEVICES
 fdisk       # manipulate partitions
 fdisk -l   # linux show all dev devices and storage device info
