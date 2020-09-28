@@ -106,18 +106,27 @@ pgrep foo       # search for processes with "foo" in command and return PIDs
 killall -3 foo  # send sigquit to all proceses with foo in the name, default is sigterm
 
 # RSYNC
-rsync /dir /dir2  # basic copy/sync over files from one dir to another
-rsync -a /dir /dir2  # -a (archive), preserves permissions, symlinks, and ownership, usually want this
-rsync -r /dir /dir2  # -r is recurse into directories
-rsync -z /dir /dir2  # -z compress changes during transfer (nice for slow network connection)
-rsync -H /dir /dir2  # -H (hardlinks), will preserve hard links, otherwise same hardlinks will be treated as sepearte files
-rsync --delete /dir /dir2  # delete will remove files in target dir2 that dont exist in source dir
-rsync -h --progress /dir /dir2      # show progress, -h output numbers in human readable format
-rsync -vh --dry-run /dir /dir2       # show just what would happens withotu doing it
+rsync /src /dest  # basic copy/sync over files from one dir to another
+rsync -a /src /dest  # -a (archive), preserves permissions, symlinks, and ownership, usually want this
+rsync -r /src /dest  # -r is recurse into directories
+rsync -z /src /dest  # -z compress changes during transfer (nice for slow network connection)
+rsync -H /src /dest  # -H (hardlinks), will preserve hard links, otherwise same hardlinks will be treated as sepearte files
+    # file rename/moves syncing with hardlinks: https://lincolnloop.com/blog/detecting-file-moves-renames-rsync/
+    # if source file changes, use --inplace, inplace update on dest will preserve hard links
+rsync --inplace /src /dest          # if file changed on dest, then dest file is changed in place, this will preserve hard links
+                                    # without option, will see a file.xxxx type tmp file while that file is being transferred over
+rsync --delete /src /dest  # delete will remove files in target dir2 that dont exist in source dir
+rsync -v /src /dest      # show each file being transferred, total sent/received summary at end
+rsync --stats /src /dest      # show very detailed summary info
+rsync -h --progress /src /dest      # show progress(bytes transferred for each file), -h output numbers in human readable format
+rsync -h --dry-run /src /dest       # (also -n), show just what would happens withotu doing it
     # dry-run shows if a hard-link is copied (-H option enabled), shows file deletions (--delete options)
-rsync -vh --checksum /dir /dir2       # use checksum algorithm instead of file-size/mod-time to figure out if copying is needed
+rsync -vh --checksum /src /dest       # use checksum algorithm instead of file-size/mod-time to figure out if copying is needed
+# NOTE: delta-transfers wont really work if remote is a network file share, e.g. samaba
+    # this is because entire file has to be read and thus transfered over network anyway to caluclate rolling checksums
+    # ideally with network file share, you connect local rsync client to rsync server on remote file share
 
-rsync -hvar --progress /dir /dir2  # freuent options
+rsync -hvar --progress /src /dest  # freuent options
 
 # STAT - show metadata info of file, last access, modify time, change time, etc.
 stat foo
