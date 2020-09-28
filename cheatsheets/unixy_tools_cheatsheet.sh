@@ -171,16 +171,21 @@ cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount 
     # nfs
         # best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
         # supports hard links well
-# mount samba share in osx, -v verbose
+# NOTE: to see flags/options/attributes on a samba share, just look at `mount` command output
+# OSX samba share -v verbose
 # -o with username(or user) does not work
 mount -v -t smbfs //someuser@192.168.1.1/folder destfolder/
 mount -t smbfs smb://someuser:somepass@192.168.1.1/folder destfolder/
 # mount afp share in osx
 mount -t afp afp://someuser:somepass@192.168.1.1/folder destfolder/
 
-# mount samba/cifs in linux, -o lets u speficy options, like user/pass
+# LINUX samba samba/cifs, -o lets u speficy options, like user/pass
 mount -t cifs //192.168.1.1/folder destfolder/ -o username=foouser,password=foobar
 # mount nfs share in linux
 sudo mount -t nfs 192.168.1.1:/fullpath/to/folder destfolder/
 # mount ntfs in linux
 sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 destfolder/
+# NOTE!!!:
+    # samba share ver 3, nounix set, seems to largely support hard links
+     # hard link a file, then modify one: it shows same inode number
+    # BUT `du -hs` says they arent same, anso when i rsync they are diff inode # files on destination
