@@ -41,9 +41,6 @@ alias saf='search_alias_func'
 alias safn='aliasname=1 funcname=1 search_alias_func'
 
 # backup and mount
-alias rsyncprog='rsync -avzh --progress'               # -a archive sets -t preserve timestamps for checking changes
-alias rsyncchecksum='rsync -vzh --checksum --progress' #uses checksum for checking changes
-alias rysncdryrun='rsync -rv --size-only --dry-run /my/source/ /my/dest/ > diff.out'
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
 

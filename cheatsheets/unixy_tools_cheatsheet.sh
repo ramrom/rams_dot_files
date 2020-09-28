@@ -101,14 +101,23 @@ gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
 24 - sigtstp   # suspend,what ctrl-z usually does
 
 # processes
+kill            # send signal to process, by default sigterm
 pgrep foo       # search for processes with "foo" in command and return PIDs
-killall -3 foo  # send signal (sigquit) to all proceses with gnome-shell in the name
+killall -3 foo  # send sigquit to all proceses with foo in the name, default is sigterm
 
 # RSYNC
 rsync /dir /dir2  # basic copy/sync over files from one dir to another
 rsync -a /dir /dir2  # -a (archive), preserves permissions, symlinks, and ownership, usually want this
+rsync -r /dir /dir2  # -r is recurse into directories
+rsync -z /dir /dir2  # -z compress changes during transfer (nice for slow network connection)
 rsync -H /dir /dir2  # -H (hardlinks), will preserve hard links, otherwise same hardlinks will be treated as sepearte files
 rsync --delete /dir /dir2  # delete will remove files in target dir2 that dont exist in source dir
+rsync -h --progress /dir /dir2      # show progress, -h output numbers in human readable format
+rsync -vh --dry-run /dir /dir2       # show just what would happens withotu doing it
+    # dry-run shows if a hard-link is copied (-H option enabled), shows file deletions (--delete options)
+rsync -vh --checksum /dir /dir2       # use checksum algorithm instead of file-size/mod-time to figure out if copying is needed
+
+rsync -hvar --progress /dir /dir2  # freuent options
 
 # STAT - show metadata info of file, last access, modify time, change time, etc.
 stat foo
