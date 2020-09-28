@@ -157,9 +157,10 @@ apt search --names-only *something*
 
 SNAP:
 -----------------
-# snap invented by ubuntu, more rapid/flexible package system than .deb/apt
-# snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
+- snap invented by ubuntu, more rapid/flexible package system than .deb/apt
+- snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
     - snap keeps the old version of the package
+- snapd runs to update (like ~ 4/day default) snap packages; https://snapcraft.io/docs/keeping-snaps-up-to-date
 snap list
     - list all snap packages installed
 

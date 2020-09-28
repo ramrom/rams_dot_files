@@ -113,6 +113,7 @@ rsync -z /src /dest  # -z compress changes during transfer (nice for slow networ
 rsync -H /src /dest  # -H (hardlinks), will preserve hard links, otherwise same hardlinks will be treated as sepearte files
     # file rename/moves syncing with hardlinks: https://lincolnloop.com/blog/detecting-file-moves-renames-rsync/
     # if source file changes, use --inplace, inplace update on dest will preserve hard links
+    # smb -> ext4 and smb -> NTFS  both seem to support this well
 rsync --inplace /src /dest          # if file changed on dest, then dest file is changed in place, this will preserve hard links
                                     # without option, will see a file.xxxx type tmp file while that file is being transferred over
 rsync --delete /src /dest  # delete will remove files in target dir2 that dont exist in source dir
@@ -136,8 +137,12 @@ stat -t foo   # linux only: one line concise format (useful if u want to script 
 # FILE - determine file type (osx and ubuntu has it)
 file foo   # example output: "foo: ASCII text"
 
+# MEDIAINFO     - show mediafile metadata (like mdls for osx)
+mediainfo foo.mp4
+
 # list all files recursively in dir and their disk usage
 du -a /foo
+
 
 # CP
 cp -l     # make copies but just hard links, gnu/linux has this, osx does not
@@ -187,5 +192,6 @@ sudo mount -t nfs 192.168.1.1:/fullpath/to/folder destfolder/
 sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 destfolder/
 # NOTE!!!:
     # samba share ver 3, nounix set, seems to largely support hard links
-     # hard link a file, then modify one: it shows same inode number
-    # BUT `du -hs` says they arent same, anso when i rsync they are diff inode # files on destination
+        # hard link a file, then modify one: it shows same inode number
+        # BUT `du -hs` says they arent same, anso when i rsync they are diff inode # files on destination
+    # in linux if i mnt with ver=1.0, i see unix set, and this behavious doesnt happen

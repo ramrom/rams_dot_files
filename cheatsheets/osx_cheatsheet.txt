@@ -95,6 +95,7 @@ command + v paste
 command + x cut
 command + a select all
 command + z undo
+command + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
 
 safari:
 command + T - open new tab in safari

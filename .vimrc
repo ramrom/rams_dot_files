@@ -59,7 +59,7 @@ elseif empty($VIM_NOPLUG)
     endif
 
     "TODO: find one of these that's better than ir_black
-    " grubbox, dracula, molokai are decent, maybe abstract
+    " grubbox, dracula, molokai, jellybean are decent, maybe abstract
     Plug 'rafi/awesome-vim-colorschemes'
 
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
@@ -372,7 +372,7 @@ noremap <leader>gx :set number!<CR>
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call ShowMyLeaderMap()<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
-noremap <leader>ca :vsplit ~/tmp/scratch.txt<cr>
+noremap <leader>ca :vsplit ~/tmp/scratch.md<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
