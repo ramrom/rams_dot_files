@@ -1,0 +1,4 @@
+# SKHDRC
+
+cmd - f19 : open /etc/zshrc
+cmd - f20 : ~/bin/spotify_decrease_volume.scpt

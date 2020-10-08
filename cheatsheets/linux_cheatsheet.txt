@@ -59,7 +59,7 @@ systemctl show foo
 systemctl get-default
     - print the default target for the system
 
-## JOURNALCTL
+### JOURNALCTL
 - journalctl was also by debian/ubuntu tool to access logs, in /var/log
 - it is the cli util to query logs by systemd's logging service, journald
 - systemd logs are stored in binary format, use journalctl to access them
@@ -85,8 +85,13 @@ journalctl --verify
     - verify integrity of logs
 journalctl config file: /etc/systemd/journald.conf, can restrict max size
 
+### LOGINCTL
+- systemd bin interface for login sessions
+loginctl
+    - with no args is same as `loginctl list-sessions`
 
-# SysV (old init system)
+
+## SYSV (OLD INIT SYSTEM)
 - uses pidfile in /var/run
 - script that generally defines bin,conf/pidfile, defines start/stop/reload/status functions for ur bin
 
