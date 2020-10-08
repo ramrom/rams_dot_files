@@ -192,6 +192,6 @@ sudo mount -t nfs 192.168.1.1:/fullpath/to/folder destfolder/
 sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 destfolder/
 # NOTE!!!:
     # samba share ver 3, nounix set, serverino set, serverino seems to largely support hard links
-    # hard link a file, then modify one: it shows same inode number
-    # BUT `du -hs` says they arent same, anso when i rsync they are diff inode # files on destination
+    # hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
+    # Also when i rsync they are diff inode # files on destination
     # in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this behavious doesnt happen
