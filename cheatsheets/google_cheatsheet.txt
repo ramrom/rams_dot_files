@@ -17,6 +17,11 @@ CHROME:
     - https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
         - typing "thisisunsafe" worked for chrome 85 on osx!
 
+CHROMEBOOK:
+- mounting a samba share, chromebook needs samba ver 2 or higher
+    - open file explorer, hit 3 dot icon on top right -> "add new service" -> samba share
+    - url is like "\\192.168.1.111\somefolder"
+
 GMAIL:
 - (goto settings and turn on keyboard shortcuts)
 - see https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DDesktop&hl=en
