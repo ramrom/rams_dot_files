@@ -1,4 +1,4 @@
-VIM:
+# VIM:
 ------------------------------
 - great resource: https://devhints.io/vimscript
 

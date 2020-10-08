@@ -58,10 +58,6 @@ elseif empty($VIM_NOPLUG)
         endif
     endif
 
-    "TODO: find one of these that's better than ir_black
-    " grubbox, dracula, molokai, jellybean are decent, maybe abstract
-    Plug 'rafi/awesome-vim-colorschemes'
-
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     "TODO: indentLine displays `"` chars `|` or disspapear in json files...
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
@@ -74,6 +70,10 @@ elseif empty($VIM_NOPLUG)
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
     endif
+
+    "TODO: find one of these that's better than ir_black
+    " grubbox, dracula, molokai, jellybean are decent, maybe abstract
+    Plug 'rafi/awesome-vim-colorschemes'
 
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
@@ -230,7 +230,7 @@ endfunction
 "globally disable indentLine by default
 let g:indentLine_enabled = 0
 
-"NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers
+"NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers (call SignifyToggle)
 let g:signify_disable_by_default = 0
 function ToggleSignifyAll()
     if g:signify_disable_by_default == 1
