@@ -1,4 +1,4 @@
-ubuntu/debian/gnome:
+# UBUNTU/DEBIAN/GNOME:
 -----------------------------------------
 - lsb_release -a        - show distro name and version
 - cat /etc/issue        - show distro and version
@@ -15,7 +15,7 @@ sudo shutdown -r now (reboot now)
 
 lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
 
-# USER stuff
+## USER STUFF
 ---------------------------------------
 sudo useradd foouser        - create new user with home dir
 sudo passwd foouser         - change users password, seems to bypass strength rules
@@ -23,12 +23,12 @@ sudo useradd foouser foogroup    - add existing user to new group
 sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
 
 
-# SYSTEMD
+## SYSTEMD
 -------------------------------------------
 - great wiki on it: https://wiki.archlinux.org/index.php/Systemd
 - inspired by and basically a ripoff of osx's launchd
 - makes heavy uses of messages and events, using dbus
-- good cmt by arch linux init maintainer on why systemd is good:
+- good comment by arch linux init maintainer on why systemd is good:
     - https://www.reddit.com/r/archlinux/comments/4lzxs3/why_did_archlinux_embrace_systemd/
 - supports explicit order with After/Before directives: e.g. if unit2 has `After=unit1.service`, unit1 is up b4 unit2 started
     - sysV, a service config has to explicity specify sequence #, systemd the sequence by reading unit file deps/order
@@ -119,7 +119,7 @@ ctrl-l  - select url bar
 ctrl-r  - reload page
 space/space-shift - scroll up/down page
 
-APT:
+## APT:
 ------------------------------------------
 apt-rdepends pkg    - shows decent one level dep tree of pkg
                       (only 1 level tho)
@@ -155,7 +155,7 @@ apt-cache search --names-only .*foo.*
 apt search --names-only *something*
     - same
 
-SNAP:
+## SNAP:
 -----------------
 - snap invented by ubuntu, more rapid/flexible package system than .deb/apt
 - snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
@@ -165,7 +165,7 @@ snap list
     - list all snap packages installed
 
 
-Graphical systems:
+## GRAPHICAL SYSTEMS:
 -----------------------------
 - definitions: display server / display manager / window manager / desktop envrionment
     - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
@@ -194,7 +194,7 @@ xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
 nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 
 
-Devices and file systems:
+## DEVICES AND FILE SYSTEMS:
 ------------------------------------------------
 loopdevices
 - regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
@@ -213,7 +213,7 @@ drive naming convention:
     - /media    - removable devices like usb (so not internal HDD)
 
 
-other linux/ubuntu tools:
+## OTHER LINUX/UBUNTU TOOLS:
 ------------------------------------------
 inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 stat - get metadata on a file
