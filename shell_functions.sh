@@ -22,6 +22,20 @@ function cmds_defined() {
     done
 }
 
+function require_vars() {
+    local vars_required=0
+    for arg in "$@"; do
+        local var_value=$(eval "echo \$${arg}")
+
+        if [ -z "$var_value" ]; then
+            vars_required=1
+            [ -z "$quiet" ] && echo "RLY-ERROR: Variable "$(fg=yellow ansi256 "$arg")" is required!"
+        fi
+    done
+    [ "$vars_required" = "1" ] && return 1
+    return 0
+}
+
 # TODO: /bin/sh in osx does not like the printf's
 function debug_vars() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
