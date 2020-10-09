@@ -331,6 +331,10 @@ type -a foo     # dislay all info, including all hits. if foo was alias and 2 bi
 which foo
 which -a foo     # return all paths of bins matching foo in PATH
 
+# ZSH - rebuild hash table cache of commands/bins in PATH
+rehash
+hash -rf
+
 # VARIABLE INTROSPECTION
 # see https://stackoverflow.com/questions/307503/whats-a-concise-way-to-check-that-environment-variables-are-set-in-a-unix-shell
 # using parameter expansion, works in bash and zsh, `?` operator dates back to ver 7 unix and bourne shell
