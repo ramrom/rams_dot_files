@@ -1,4 +1,7 @@
-### BREW
+# OSX CHEATSHEET
+-------------------------------------------
+
+## BREW
 Terminology:
 - see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
 - bottle: pre-compiled code, just installs
@@ -26,7 +29,7 @@ brew upgrade fooformula
 
 
 
-CLI:
+## CLI:
 - ref: https://www.mitchchn.me/2014/os-x-terminal/
 say - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
@@ -45,6 +48,9 @@ sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usa
     - force color to pipe output, be default ls wont colorize
 - vm_stat - show some raw memory usage
 - nettop - like top but for tcp/udp sockets only and their bandwidth usage!
+skhd
+    - `brew services` to see if it's running
+    - `skhd -r` to reload config file with shortcuts
 
 
 BROWSER(CHROME/FIREFOX verified):
