@@ -383,6 +383,12 @@ function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_ba
 #############                  TMUX                   ##########################
 ################################################################################
 
+function tmux_version() {
+    #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+    # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+    tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p"
+}
+
 # set first line of tmux status for multi-line mode
 function tmux_main_status() {
     #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
