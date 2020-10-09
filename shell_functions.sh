@@ -293,10 +293,10 @@ function ansi8_name() {
 # TODO: benchmark: 1) momoization and grep 2) dont memoize
 # hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
 function sensor_data() {
-    # needed for newlines: https://unix.stackexchange.com/questions/164508/why-do-newline-characters-get-lost-when-using-command-substitution
-    local IFS=
+    [ ! "$(uname)" = "Linux" ] && { echo "this is for linux sensors" && return 1; }
+
     local s=$(sensors)
-    echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' | grep -oEi '[0-9]+.[0-9]+'
+    echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' # | grep --color=never -Eoi '[0-9]+.[0-9]+'
     echo "$s" | grep -E "CPU Fan"
 }
 
