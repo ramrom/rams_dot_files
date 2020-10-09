@@ -74,7 +74,7 @@ option + downarray      - next page/item
 downarrow               - scroll down
 
 
-FILESYSTEMS:
+## FILESYSTEMS:
 ----------------------------
 - ISO filesystems can be mounted through disk utitlity application
 - MacFUSE defunct, used to be only way to mount NTFS
@@ -90,7 +90,7 @@ FILESYSTEMS:
     mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
 
 
-KEYBOARD SHORTCUTS:
+## KEYBOARD SHORTCUTS:
 command + tab  - switch between apps
 command + space - spotlight search
 command + H - goto home screen
@@ -112,7 +112,7 @@ command + rightarrow - go to future page in safari history
 command + leftarrow - go to previow page in safari history
 up/down arrow  - scroll up and down in safari
 
-OTHER:
+## OTHER:
 - osx memory system, what is wired/active/inactive/free:
     - https://apple.stackexchange.com/questions/67031/isnt-inactive-memory-a-waste-of-resources
 - how does process monitor know a process is "not responding"? how to automate CLI
@@ -145,3 +145,11 @@ GUI Components:
 menu bar                - top screen bar with apple menu on left, app menus, status menu and date/user on right
 notification center     - side bar (by default) with widgets for weather and stocks and notifs and so on
 dock                    - bottom (by default) panel with app shortcuts
+
+## APPLESCRIPT
+- shell script inline applescript with multiline in one line example
+    ```zsh
+    function osx_spotify_dec_volume() {
+        osascript -e 'tell application "Spotify"' -e 'set sound volume to (sound volume - 10)' -e 'end tell'
+    }
+    ```
