@@ -1,4 +1,5 @@
 # SKHDRC
 
-cmd - f19 : open /etc/zshrc
-cmd - f20 : ~/bin/spotify_decrease_volume.scpt
+f15 : ~/bin/spotify_decrease_volume.scpt
+f16 : ~/bin/spotify_increase_volume.scpt
+f19 : ~/bin/spotify_toggle_play.scpt
