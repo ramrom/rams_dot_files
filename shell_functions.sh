@@ -309,30 +309,6 @@ function osx_mute() { osascript -e "set Volume 0"; }
 function osx_set_volume() { osascript -e "set Volume $1"; }   # 0 mute, 10 max
 function osx_get_volume() { osascript -e 'get volume settings'; }
 
-function osx_spotify_dec_volume() {
-    osascript -e 'tell application "Spotify"' -e 'set sound volume to (sound volume - 10)' -e 'end tell'
-}
-
-function osx_spotify_inc_volume() {
-    osascript -e \
-        'tell application "Spotify"
-            if sound volume is less than 50 then
-                set sound volume to (sound volume + 10)
-            end if
-        end tell'
-}
-
-function osx_spotify_toggle_play() {
-    osascript -e \
-        'using terms from application "Spotify"
-            if player state of application "Spotify" is paused then
-                tell application "Spotify" to play
-            else
-                tell application "Spotify" to pause
-            end if
-        end using terms from'
-}
-
 function toggle_bulb() {
     python3 -c 'import sys; import magichue; print(sys.argv[1]); l = magichue.Light(sys.argv[1]); \
         l.on = False if l.on else True
