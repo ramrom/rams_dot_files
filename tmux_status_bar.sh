@@ -19,7 +19,7 @@ tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
 # foo=$(tmux_render_timer_bar eggs)
 cpu=$(tmux_percent_usage_color $(cpu_usage))
-tmux set status-format[1] "CPU-Usage:$cpu"
+tmux set status-format[1] "Uptime 1min %:$cpu"
 
 # if [ $(( $counter % 2 )) -eq 0 ]; then
 #     tmux set status-format[1] "$(color=200 tmux_render_timer_bar eggs)"
