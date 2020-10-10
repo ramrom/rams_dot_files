@@ -11,8 +11,8 @@ function parse_git_branch() {
 setopt prompt_subst
 
 function set_ps1_hostname() {
-    [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)%m"
-    echo $PS1_HOSTNAME
+    [ -z "${ZSH_PS1_HOSTNAME}" ] && ZSH_PS1_HOSTNAME="$(tput setaf 3)$(tput bold)%m"
+    echo $ZSH_PS1_HOSTNAME
 }
 
 function build_my_prompt() {
