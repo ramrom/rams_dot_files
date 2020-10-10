@@ -19,8 +19,8 @@ function parse_git_branch() {
 
 function set_ps1_hostname() {
     # [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)\h"
-    [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(bld=1 fg=003 ansi256 "\h")"
-    echo $PS1_HOSTNAME
+    [ -z "${BASH_PS1_HOSTNAME}" ] && BASH_PS1_HOSTNAME="$(bld=1 fg=003 ansi256 "\h")"
+    echo $BASH_PS1_HOSTNAME
 }
 
 function ansi256() {
