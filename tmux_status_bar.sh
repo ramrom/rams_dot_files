@@ -18,7 +18,7 @@ counter=$(tmux show -v @status-bar-interval-counter)
 tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
 # foo=$(tmux_render_timer_bar eggs)
-cpu=$(tmux_percent_usage_color $(cpu_usage))
+cpu=$(tmux_percent_usage_color $(uptime_loadave))
 tmux set status-format[1] "Uptime 1min %%:$cpu"
 
 # if [ $(( $counter % 2 )) -eq 0 ]; then

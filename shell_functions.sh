@@ -466,7 +466,7 @@ function top_cpu_processes() {
 }
 
 # NOTE: with uptime based usage, can go >100%
-function cpu_usage() {
+function uptime_loadave() {
     # uptime always uses d.dd format, so remove '.' will result in x100 integer
 
     if [ $(uname) = "Darwin" ]; then
@@ -484,6 +484,10 @@ function cpu_usage() {
 
     local minavepercent=$(($minave / $numcpu))
     echo $minavepercent
+}
+
+function cpu_util() {
+    ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
 }
 
 function tmux_percent_usage_color() {
