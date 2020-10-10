@@ -400,7 +400,7 @@ function tmux_main_status() {
     local tmux_vpn_on="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/vpn_connected.sh)#[default]"
 
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
-    HOSTNAME_ANSI_COLOR="${HOSTNAME_ANSI_COLOR:=014}"   # default to bright cyan if custom hostname color isnt specified
+    HOSTNAME_ANSI_COLOR="${HOSTNAME_ANSI_COLOR:=011}"   # default to bright yellow if custom hostname color isnt specified
     local tmux_host_datetime="#[fg=colour${HOSTNAME_ANSI_COLOR}]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
 
     local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs}\
