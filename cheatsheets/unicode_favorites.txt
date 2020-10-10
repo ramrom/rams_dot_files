@@ -50,3 +50,5 @@ Unicodes:
 🦖  rex
 🐉  dragon
 🐹  hamster
+🌡  thermometer
+⚡  high voltage

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # setopt NO_NOMATCH  #needed if this was zsh
 
