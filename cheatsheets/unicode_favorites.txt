@@ -1,8 +1,9 @@
 Unicodes:
 - see https://unicode.org/emoji/charts/full-emoji-list.html
 
-꩜   spiral
-🎯  bullseye U+1F3AF
+🌡  thermometer
+⚡  high voltage
+🔋  battery
 💻  laptop
 🖥  desktop computer
 🔌  electric plug
@@ -15,7 +16,8 @@ Unicodes:
 🎼  musical score
 🎵  musical note
 🎶  musical notes
-🔋  battery
+꩜   spiral
+🎯  bullseye U+1F3AF
 💰  money bag
 🗝  old key
 🔒  locked
@@ -32,7 +34,6 @@ Unicodes:
 🔥  fire
 ❄   snowflake
 💧  droplet
-⚡  high voltage
 ⭐  star
 ☀   sun
 🌓  first quarter moon
@@ -50,5 +51,3 @@ Unicodes:
 🦖  rex
 🐉  dragon
 🐹  hamster
-🌡  thermometer
-⚡  high voltage
