@@ -391,8 +391,6 @@ function tmux_version() {
 
 # set first line of tmux status for multi-line mode
 function tmux_main_status() {
-    local ver=$(tmux_version)
-
     local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
     local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
     local tmux_wind_bg_jobs="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/tmux_bg_jobs.sh)#[default]"
@@ -402,7 +400,8 @@ function tmux_main_status() {
     local tmux_vpn_on="#[fg=brightyellow]#[bg=red]#(~/rams_dot_files/scripts/vpn_connected.sh)#[default]"
 
     local tmux_spotify="#[fg=colour208]#(osascript ~/rams_dot_files/scripts/spotify_song.scpt)"
-    local tmux_host_datetime="#[fg=colour199]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
+    HOSTNAME_ANSI_COLOR="${HOSTNAME_ANSI_COLOR:=014}"   # default to bright cyan if custom hostname color isnt specified
+    local tmux_host_datetime="#[fg=colour${HOSTNAME_ANSI_COLOR}]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
 
     local left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes} ${tmux_wind_bg_jobs}\
  ${tmux_ssh_jmp} ${tmux_mounted_drive} ${tmux_wifi_ssid} ${tmux_vpn_on} "
