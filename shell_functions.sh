@@ -18,7 +18,7 @@ function detect_shell() {
 # return 0 if all are defined, spit out error with exit 1 if one is not
 function cmds_defined() {
     for cmd in "$@"; do
-        command -v $cmd > /dev/null || { echo "$cmd no defined!" && return 1; }
+        command -v $cmd > /dev/null || { echo "$cmd not defined!" && return 1; }
     done
 }
 
@@ -379,12 +379,19 @@ function sensor_data() {
     echo "$s" | grep -E "CPU Fan"
 }
 
+# expects raw input from `sensors` command
 function linux_cpu_temp() {
     sensor_data=$1
     cputemp=$(echo "$sensor_data" | grep -E "CPU Temperature" | awk '{print $3;}')
     echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+'
 }
 
+# NOTE: hyperfine says nvidia-smi takes ~40ms, so refresh less frequent
+function linux_nvidia() {
+    cmds_defined nvidia-smi || return 1
+    nvid=$(nvidia-smi)
+    echo "$nvid"
+}
 ################################################################################
 #############                  TMUX                   ##########################
 ################################################################################
@@ -509,11 +516,11 @@ function tmux_temp_color() {
 function tmux_percent_cpu_usage_color() {
     # TODO: disabling for uptime based cpu usage, this can def go above 100%
     # verify_percent $1 "cpu percent usage" || return 1
-    [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
+    [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]%%" && return 0
     [ $1 -gt 80 ] && echo "#[fg=colour198] $1%#[default]%%" && return 0
     [ $1 -gt 40 ] && echo "#[fg=colour208] $1%#[default]%%" && return 0
     [ $1 -gt 10 ] && echo "#[fg=colour190] $1%#[default]%%" && return 0
-    echo "#[fg=colour083] $1 #[default]"
+    echo "#[fg=colour083] $1#[default]%%"
     # echo "$(fg=083 ansi256 "! $1 !")"
 }
 
