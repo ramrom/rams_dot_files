@@ -368,6 +368,9 @@ function chrome_json_restore() {
 function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
+
+#####################  SYSTEM DATA/HEALTH ####################################################
+
 # TODO: finish this
 # TODO: benchmark: 1) momoization and grep 2) dont memoize
 # hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
