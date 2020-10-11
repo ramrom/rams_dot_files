@@ -289,17 +289,6 @@ function ansi8_name() {
 }
 #############################################################################
 
-# TODO: finish this
-# TODO: benchmark: 1) momoization and grep 2) dont memoize
-# hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
-function sensor_data() {
-    [ ! "$(uname)" = "Linux" ] && { echo "this is for linux sensors" && return 1; }
-
-    local s=$(sensors)
-    echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' # | grep --color=never -Eoi '[0-9]+.[0-9]+'
-    echo "$s" | grep -E "CPU Fan"
-}
-
 # https://n0tablog.wordpress.com/2009/02/09/controlling-vlc-via-rc-remote-control-interface-using-a-unix-domain-socket-and-no-programming/
 # seek 100" - goto 100sec after start, "get_time" - current position in seconds since start
 # "volume 250" - 250 is 100%, "volume" - return current volume, "volup 10"/"voldown 10" - up/down volume 10 steps
@@ -378,6 +367,23 @@ function chrome_json_restore() {
 
 function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
+
+# TODO: finish this
+# TODO: benchmark: 1) momoization and grep 2) dont memoize
+# hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
+function sensor_data() {
+    [ ! "$(uname)" = "Linux" ] && { echo "this is for linux sensors" && return 1; }
+
+    local s=$(sensors)
+    echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' # | grep --color=never -Eoi '[0-9]+.[0-9]+'
+    echo "$s" | grep -E "CPU Fan"
+}
+
+function linux_cpu_temp() {
+    sensor_data=$1
+    cputemp=$(echo "$sensor_data" | grep -E "CPU Temperature" | awk '{print $3;}')
+    echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+'
+}
 
 ################################################################################
 #############                  TMUX                   ##########################
