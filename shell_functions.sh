@@ -379,6 +379,40 @@ function sensor_data() {
     echo "$s" | grep -E "CPU Fan"
 }
 
+function top_cpu_processes() {
+    if [ $(uname) = "Darwin" ]; then
+        # ps -Ao user,uid,command,pid,pcpu,tty -r | head -n 6   # -r sorts by cpu usage
+        ps -Ao pcpu,user,command -r | head -n 6   # do command last so it string doesnt get truncated
+        # TODO: parsing, if /Applications in string then get app name after /
+    fi
+}
+
+# NOTE: with uptime based usage, can go >100%
+function uptime_loadave() {
+    # uptime always uses d.dd format, so remove '.' will result in x100 integer
+
+    if [ $(uname) = "Darwin" ]; then
+        local numcpu=$(sysctl -n hw.ncpu)
+    else  # assume linux otherwise
+        local numcpu=$(grep -c processor /proc/cpuinfo)
+    fi
+
+    # NOTE: bash $(()) doesnt like leading zeros, e.g. $(( 078 / 16)) caused an error
+    local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d . | sed 's/^0*//') #1min ave
+    # local fifteenminave=$(uptime | grep --color=never -o "[0-9]{1,2}\.[0-9]*$" | tr -d .) #15min ave
+
+    # TODO: need to cut space at end of line
+    # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
+
+    local minavepercent=$(($minave / $numcpu))
+    echo $minavepercent
+}
+
+function cpu_util() {
+    # top -l 2 | grep -E "^CPU"  # very slow relatively speaking (-l doesnt work in linux)
+    ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
+}
+
 # expects raw input from `sensors` command
 function linux_cpu_temp() {
     sensor_data=$1
@@ -469,40 +503,6 @@ function tmux_status_reset() {
 }
 
 function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
-
-function top_cpu_processes() {
-    if [ $(uname) = "Darwin" ]; then
-        # ps -Ao user,uid,command,pid,pcpu,tty -r | head -n 6   # -r sorts by cpu usage
-        ps -Ao pcpu,user,command -r | head -n 6   # do command last so it string doesnt get truncated
-        # TODO: parsing, if /Applications in string then get app name after /
-    fi
-}
-
-# NOTE: with uptime based usage, can go >100%
-function uptime_loadave() {
-    # uptime always uses d.dd format, so remove '.' will result in x100 integer
-
-    if [ $(uname) = "Darwin" ]; then
-        local numcpu=$(sysctl -n hw.ncpu)
-    else  # assume linux otherwise
-        local numcpu=$(grep -c processor /proc/cpuinfo)
-    fi
-
-    # NOTE: bash $(()) doesnt like leading zeros, e.g. $(( 078 / 16)) caused an error
-    local minave=$(uptime | grep --color=never -Eo ":\s[0-9]{1,2}\.[0-9]*" | cut -c 3- | tr -d . | sed 's/^0*//') #1min ave
-    # local fifteenminave=$(uptime | grep --color=never -o "[0-9]{1,2}\.[0-9]*$" | tr -d .) #15min ave
-
-    # TODO: need to cut space at end of line
-    # local fiveminave=$(uptime | grep --color=never -o "[0-9]\s[0-9]\.[0-9]*\s" | cut -c 3- | tr -d .)
-
-    local minavepercent=$(($minave / $numcpu))
-    echo $minavepercent
-}
-
-function cpu_util() {
-    # top -l 2 | grep -E "^CPU"  # very slow relatively speaking (-l doesnt work in linux)
-    ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
-}
 
 # assuming celcius
 function tmux_temp_color() {
