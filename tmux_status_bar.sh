@@ -19,7 +19,7 @@ tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
 # foo=$(tmux_render_timer_bar eggs)
 cpu=$(tmux_percent_cpu_usage_color $(uptime_loadave))
-status_line1="Uptime 1min %%:$cpu"
+status_line1="Uptime 1min:$cpu"
 if [ "$(uname)" == "Linux" ]; then
     s=$(sensors)
     cpufan=$(echo "$s" | grep -E "CPU Fan" | awk '{print $3;}') # | grep --color=never -Eoi '[0-9]+.[0-9]+'
