@@ -490,7 +490,16 @@ function cpu_util() {
     ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
 }
 
-function tmux_percent_usage_color() {
+# assuming celcius
+function tmux_temp_color() {
+    [ $1 -gt 80 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
+    [ $1 -gt 65 ] && echo "#[fg=colour198]$1#[default]" && return 0
+    [ $1 -gt 55 ] && echo "#[fg=colour208]$1#[default]" && return 0
+    [ $1 -gt 45 ] && echo "#[fg=colour190]$1#[default]" && return 0
+    echo "#[fg=colour083]$1#[default]"
+}
+
+function tmux_percent_cpu_usage_color() {
     # TODO: disabling for uptime based cpu usage, this can def go above 100%
     # verify_percent $1 "cpu percent usage" || return 1
     [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
