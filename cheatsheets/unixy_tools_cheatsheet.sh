@@ -13,9 +13,12 @@ infocmp
 # grep (varies widely b/w osx and gnu/linux)
 # grab only the matched text with -o, works on osx and gnu/linux
 echo "foo bar baz" | grep -o "fo." # will only return "foo"
+# print just the line after a matched line, here would print baz
+printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
 
 #awk - multi purpose tool
 echo "foo bar baz" | awk '{print $2}'  # will print bar
+awk '/blah/{getline; print}' logfile   # print the next line after the line that matches patter "blah"
 
 # cut - select data in each line by byte/char position or delimiter char
 echo "foo; bar - baz" | cut -d ';' -f 2     # delimiter semicolon , extract field 2, so " bar - baz" will print
@@ -30,6 +33,7 @@ echo foo:bar:baz | tr : \\n     # split on ":" delimiter, replace ":" with newli
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
+echo "foobar" | sed 's/..$//'  # remove last 2 chars, so output is "foob"
 
 # wc - word count
 wc -l   # count # of lines

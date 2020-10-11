@@ -390,7 +390,7 @@ function linux_cpu_temp() {
 function linux_nvidia() {
     cmds_defined nvidia-smi || return 1
     nvid=$(nvidia-smi)
-    echo "$nvid"
+    echo "$nvid" | sed -n '10p'   # the 10th line has most of the info we want
 }
 ################################################################################
 #############                  TMUX                   ##########################
@@ -514,14 +514,14 @@ function tmux_temp_color() {
 }
 
 function tmux_percent_cpu_usage_color() {
-    # TODO: disabling for uptime based cpu usage, this can def go above 100%
+    # TODO: disabling validation for uptime based cpu usage, this can def go above 100%
     # verify_percent $1 "cpu percent usage" || return 1
+
     [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]%%" && return 0
     [ $1 -gt 80 ] && echo "#[fg=colour198] $1#[default]%%" && return 0
     [ $1 -gt 40 ] && echo "#[fg=colour208] $1#[default]%%" && return 0
     [ $1 -gt 10 ] && echo "#[fg=colour190] $1#[default]%%" && return 0
     echo "#[fg=colour083] $1#[default]%%"
-    # echo "$(fg=083 ansi256 "! $1 !")"
 }
 
 function verify_percent() {
