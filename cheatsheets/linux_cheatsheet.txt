@@ -218,6 +218,14 @@ drive naming convention:
     - /media    - removable devices like usb (so not internal HDD)
 
 
+## GRAPHICS/WINE
+---------------------------------
+- protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
+- steam play, lets you play windows only games in linux steam, uses protonDB
+- lutris, lets you play windows only games (including steam installs) and has wine configurations configured
+- dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
+
+
 ## OTHER LINUX/UBUNTU TOOLS:
 ------------------------------------------
 sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
