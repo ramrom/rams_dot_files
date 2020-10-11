@@ -517,9 +517,9 @@ function tmux_percent_cpu_usage_color() {
     # TODO: disabling for uptime based cpu usage, this can def go above 100%
     # verify_percent $1 "cpu percent usage" || return 1
     [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]%%" && return 0
-    [ $1 -gt 80 ] && echo "#[fg=colour198] $1%#[default]%%" && return 0
-    [ $1 -gt 40 ] && echo "#[fg=colour208] $1%#[default]%%" && return 0
-    [ $1 -gt 10 ] && echo "#[fg=colour190] $1%#[default]%%" && return 0
+    [ $1 -gt 80 ] && echo "#[fg=colour198] $1#[default]%%" && return 0
+    [ $1 -gt 40 ] && echo "#[fg=colour208] $1#[default]%%" && return 0
+    [ $1 -gt 10 ] && echo "#[fg=colour190] $1#[default]%%" && return 0
     echo "#[fg=colour083] $1#[default]%%"
     # echo "$(fg=083 ansi256 "! $1 !")"
 }
