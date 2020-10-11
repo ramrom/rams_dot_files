@@ -27,6 +27,12 @@ if [ "$(uname)" == "Linux" ]; then
     cputemp_num=$(echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+')
     cputemp_color=$(tmux_temp_color $cputemp_num)
     status_line1="$status_line1 CPU-Temp: #[fg=green]$cputemp_color#[default]C  CPU-Fan: #[fg=green]$cpufan#[default]"
+
+    # GPU stats
+    stats=$(linux_nvidia)
+    gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
+    gputemp_color=$(tmux_temp_color $gpu_temp)
+    status_line1="$status_line1 GPU-Temp: #[fg=green]$gputemp_color#[default]C"
 fi
 tmux set status-format[1] "$status_line1"
 
