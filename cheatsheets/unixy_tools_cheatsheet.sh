@@ -104,6 +104,13 @@ gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
 9 -  sigkill   # exit without cleanup
 24 - sigtstp   # suspend,what ctrl-z usually does
 
+
+# SUDO
+sudo ls             # run ls command as superuser(root)
+sudo -u foouser ls  # run ls command as foouser
+sudo bash           # start a bash session as root
+su foouser          # login as foouser
+
 # processes
 kill            # send signal to process, by default sigterm
 pgrep foo       # search for processes with "foo" in command and return PIDs
