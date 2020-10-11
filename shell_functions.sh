@@ -493,6 +493,7 @@ function uptime_loadave() {
 }
 
 function cpu_util() {
+    # top -l 2 | grep -E "^CPU"  # very slow relatively speaking (-l doesnt work in linux)
     ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
 }
 
