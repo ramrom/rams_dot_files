@@ -516,9 +516,8 @@ function tmux_temp_color() {
     echo "#[fg=colour083]$1#[default]"
 }
 
-function tmux_percent_cpu_usage_color() {
-    # TODO: disabling validation for uptime based cpu usage, this can def go above 100%
-    # verify_percent $1 "cpu percent usage" || return 1
+function tmux_percent_usage_color() {
+    [ -z "$skip_verify" ] && { verify_percent $1 "$2" || return 1; }
 
     [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]%%" && return 0
     [ $1 -gt 80 ] && echo "#[fg=colour198] $1#[default]%%" && return 0
@@ -529,9 +528,9 @@ function tmux_percent_cpu_usage_color() {
 
 function verify_percent() {
     if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
-        echo "$(tput setaf 1)$2 must be a positive integer!" && return 1
+        echo "$(tput setaf 1) val: $2: must be a positive integer!" && return 1
     fi
-    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)$2 must be between 0 and 100!" && return 1
+    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)val $2: must be between 0 and 100!" && return 1
     return 0
 }
 
