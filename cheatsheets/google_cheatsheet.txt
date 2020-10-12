@@ -3,6 +3,10 @@ GOOGLE:
 - console.developers.google.com     - configure my apps and whatnot as google developer
 - cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
 
+DRIVE:
+- see drive usage at https://drive.google.com/drive/u/0/quota
+-  gmail/drive/photos breakdown of usage: https://one.google.com/storage
+
 GOOGLE SEARCH:
 "literal string"
 -excludethis
