@@ -26,7 +26,7 @@ if [ "$(uname)" == "Linux" ]; then
     cputemp=$(echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}')
     cputemp_num=$(echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+')
     cputemp_color=$(tmux_temp_color $cputemp_num)
-    status_line1="$status_line1  CPU-Temp: #[fg=green]$cputemp_color#[default]C CPU-Fan: #[fg=green]$cpufan#[default]"
+    status_line1="$status_line1  CPU-Temp: #[fg=green]$cputemp_color#[default]C CPU-Fan: #[fg=green]$cpufan#[default] |"
 
     # GPU stats
     stats=$(linux_nvidia)
@@ -36,8 +36,12 @@ if [ "$(uname)" == "Linux" ]; then
     gpu_fan=$(echo $stats | awk '{print $2}')
     gpu_util=$(echo $stats | awk '{print $13}' | sed 's/.$//')
     gpu_util_color=$(tmux_percent_cpu_usage_color $gpu_util)
-    status_line1="$status_line1  GPU-Temp: #[fg=green]$gputemp_color#[default]C GPU-Util:$gpu_util_color GPU-Mem: $gpu_mem"
-    status_line1="$status_line1 GPU-Fan: $gpu_fan"
+
+    gpu_legend_color=colour240
+    status_line1="$status_line1 #[fg=$gpu_legend_color]GPU-Temp:#[default] #[fg=green]$gputemp_color#[default]C"
+    status_line1="$status_line1 #[fg=$gpu_legend_color]GPU-Util:#[default]$gpu_util_color"
+    status_line1="$status_line1 #[fg=$gpu_legend_color]GPU-Mem:#[default] $gpu_mem"
+    status_line1="$status_line1 #[fg=$gpu_legend_color]GPU-Fan:#[default] $gpu_fan"
 fi
 tmux set status-format[1] "$status_line1"
 
