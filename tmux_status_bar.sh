@@ -24,15 +24,31 @@ status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
 if [ "$(uname)" == "Linux" ]; then
     s=$(sensors)
 
+    #### CPU Stats
     cpufan=$(echo "$s" | grep -E "CPU Fan" | awk '{print $3;}') # | grep --color=never -Eoi '[0-9]+.[0-9]+'
     cputemp=$(echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}')
     cputemp_num=$(echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+')
     cputemp_color=$(tmux_temp_color $cputemp_num)
     status_line1="$status_line1 #[$cpu_legend_color]CPU-Temp:#[default] #[fg=green]$cputemp_color#[default]C"
     status_line1="$status_line1 #[$cpu_legend_color]CPU-Fan:#[default] #[fg=green]$cpufan#[default]"
-    status_line1="$status_line1 #[bg=colour104,fg=colour000]|#[default]"
+    status_line1="$status_line1 #[fg=colour184]|#[default]"
 
-    # GPU stats
+
+    ##### System Memory Stats
+    sys_mem=$(free -g | sed -n '2p')
+    sys_mem_total=$(echo "$sys_mem" | awk '{print $2}')
+    sys_mem_used=$(echo "$sys_mem" | awk '{print $3}')
+    sys_mem_free=$(echo "$sys_mem" | awk '{print $4}')
+    sys_mem_buf=$(echo "$sys_mem" | awk '{print $6}')
+    status_line1="$status_line1 #[$cpu_legend_color]Sys-Mem(GiB)[free-used-buf/total]#[default]"
+    sys_mem_usg=$(($sys_mem_used * 100 / $sys_mem_total))
+    sys_mem_col=040; [ "$sys_mem_usg" -gt 50 ] && sys_mem_col=208; [ "$sys_mem_usg" -gt 90 ] && sys_mem_col=196
+    status_line1="$status_line1 #[fg=colour$sys_mem_col] $sys_mem_free - $sys_mem_used - $sys_mem_buf#[default]"
+    status_line1="$status_line1 #[fg=colour007] / $sys_mem_total#[default]"
+    status_line1="$status_line1 #[fg=colour184]|#[default]"
+
+
+    #### GPU Stats
     stats=$(linux_nvidia)
     gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
     gputemp_color=$(tmux_temp_color $gpu_temp)
