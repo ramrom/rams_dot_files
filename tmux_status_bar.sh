@@ -20,7 +20,7 @@ tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 # foo=$(tmux_render_timer_bar eggs)
 cpu_legend_color="fg=colour242"
 cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime_loadave) "uptimeload")
-status_line1="#[$cpu_legend_color]Uptime 1min:#[default]$cpu"
+status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
 if [ "$(uname)" == "Linux" ]; then
     s=$(sensors)
 
@@ -29,7 +29,8 @@ if [ "$(uname)" == "Linux" ]; then
     cputemp_num=$(echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+')
     cputemp_color=$(tmux_temp_color $cputemp_num)
     status_line1="$status_line1 #[$cpu_legend_color]CPU-Temp:#[default] #[fg=green]$cputemp_color#[default]C"
-    status_line1="$status_line1 #[$cpu_legend_color]CPU-Fan:#[default] #[fg=green]$cpufan#[default] |"
+    status_line1="$status_line1 #[$cpu_legend_color]CPU-Fan:#[default] #[fg=green]$cpufan#[default]"
+    status_line1="$status_line1 #[bg=colour104,fg=colour000]|#[default]"
 
     # GPU stats
     stats=$(linux_nvidia)
@@ -38,7 +39,7 @@ if [ "$(uname)" == "Linux" ]; then
 
     # gpu_mem=$(echo $stats | awk '{print $9 $10 $11}')     # simple and no coloring
     gpu_mem_total=$(echo $stats | awk '{print $11}' | sed 's/...$//g')  # TODO: total never changes, memoize this somehow
-    gpu_mem_total_col="#[fg=colour003]$gpu_mem_total#[default]"
+    gpu_mem_total_col="#[fg=colour007]$gpu_mem_total#[default]"
     gpu_mem_used=$(echo $stats | awk '{print $9}' | sed 's/...$//g')
     gpu_mem_usg=$(($gpu_mem_used * 100 / $gpu_mem_total))
     gpu_col=040; [ "$gpu_mem_usg" -gt 50 ] && gpu_col=208; [ "$gpu_mem_usg" -gt 90 ] && gpu_col=196
