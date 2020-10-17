@@ -1,12 +1,15 @@
-MARKDOWN CHEATSHEET:
+# MARKDOWN/JIRA CHEATSHEET:
 -----------------------
+## MARKDOWN REFERENCES
 - https://en.wikipedia.org/wiki/Markdown
 - original md: https://commonmark.org/
+- https://www.markdownguide.org/basic-syntax/
 - github flavored md: https://github.github.com/gfm/
 - https://devhints.io/markdown
 
 # header 1
 ## header 2
+###### header 6
 
 **bold**
 `monospace`
@@ -35,6 +38,13 @@ horizontal rule:
 ![image name](someimage.png "icon")
 ![image name](https://somewhere/someimage.png)
 
+### Code blocks
+```ruby
+def foo
+    puts "hi"
+end
+```
+
 Tables:
 |   |   |   |   |   |
 |---|---|---|---|---|
@@ -42,7 +52,7 @@ Tables:
 |   |   |   |   |   |
 |   |   |   |   |   |
 
-JIRA:
+## JIRA:
 -----------------------
 - https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
