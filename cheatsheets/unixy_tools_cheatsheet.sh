@@ -71,6 +71,7 @@ chown -R newuser dir
 
 # HTOP
 # "/" vim-like search
+# quitting by hitting F10 will remember settings in .htoprc
 htop
 
 # IOTOP - top like temrinal UI, but show io/disk usage by process
