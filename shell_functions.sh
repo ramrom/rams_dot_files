@@ -344,8 +344,8 @@ function chrome_json_summary() {
             local cmd="osascript -e 'tell application \"Google Chrome\" to get URL of tab $j of window $i'"
             local url=$(eval $cmd)
             [ $j -eq $tabcount ] && json="$json\"$url\"" || json="$json\"$url\","
-       done
-       [ $i -eq $wincount ] && json="$json]" || json="$json],"
+        done
+        [ $i -eq $wincount ] && json="$json]" || json="$json],"
     done
     echo "$json]"
 }
