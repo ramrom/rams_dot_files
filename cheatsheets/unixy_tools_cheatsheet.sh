@@ -84,9 +84,10 @@ stress --vm 4       # 4 threads to do lots of memory ops
 stress-ng --cpu 2   # improved version of stress, many more advanced tests
 
 # sysstat (linux pkg with many tools), has great colors
-iostat          # show per device/filesystem disk read write usage real time
+iostat          # show per device/filesystem disk read, with no arg calculated *since* last reboot
+iostat 5        # refresh every 5 seconds forever, calculates average since last reading
+iostat 2 3      # refresh 2 seconds, only sample 3 times
 cifsiostat 1    # show cifs network mount io usage stats
-iostat 5        # refresh every 5 seconds
 mpstat 1        # show cpu usage, by usr/sys/idle
 
 
@@ -97,6 +98,7 @@ free -h   # -h is human readale
 cat /proc/meminfo   # shows detailed memory usage
 
 # vmstat
+vmstat     # just one measurement, will calculate since last reboot
 vmstat 3   # every 3 sec show free/swap/used/total memory usage, cpu performance, i/o
 
 
