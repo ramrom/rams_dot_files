@@ -7,14 +7,31 @@
 - github flavored md: https://github.github.com/gfm/
 - https://devhints.io/markdown
 
+## Paragraphs
+- to create paragraphs seperate lines with one or more blank lines
+- to create line breaks in same paragraph, end line wiht two or more spaces
+
+### Horizontal rule: add 3 or more asterix, underscore, or dash
+---
+-------------------------------
+***
+**************
+___
+-------------------
+
+
 # header 1
 ## header 2
 ###### header 6
 
-**bold**
-`monospace`
-_italic_
-~strikethrough~
+__bold__  
+**bold**  (double asterix is more compatible than double underscore, esp in middle of word)  
+_italic_  
+*italic*  (asterix is more compatible than underscore, esp in middle of word)  
+___boldanditalic___  
+***boldanditalic*** (triple asterix is more compatible than triple underscore, esp in middle of word)  
+`monospace`  
+~strikethrough~  
 
 horizontal rule:
 ---
@@ -23,15 +40,27 @@ horizontal rule:
 * bullet 2
 
 - bullet 1
--- subbullet 1
--- subbullet 2
+    - subbullet 1
+    - subbullet 2
 - bullet 2
 
 1. numbered 1
+    - unor 1
+    - unor 2
 1. numbered 2
+    1. num sub 1
+        1. sub sub 1
+    1. num sub 2
 
 > blockquote
 > blockquote line 2
+
+> blockquote
+> line 2
+>> nested blockquote
+
+
+<foo@foo.com>  - turn email into link
 
 [link name](https://someplace.com)
 
@@ -44,6 +73,8 @@ def foo
     puts "hi"
 end
 ```
+
+\* \_ \{ \) \[ \- \! \| \# \+ \. \` - backslash will escape these characters
 
 Tables:
 |   |   |   |   |   |
