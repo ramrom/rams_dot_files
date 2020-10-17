@@ -85,6 +85,7 @@ stress-ng --cpu 2   # improved version of stress, many more advanced tests
 
 # sysstat (linux pkg with many tools), has great colors
 iostat          # show per device/filesystem disk read write usage real time
+cifsiostat 1    # show cifs network mount io usage stats
 iostat 5        # refresh every 5 seconds
 mpstat 1        # show cpu usage, by usr/sys/idle
 
