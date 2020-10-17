@@ -31,6 +31,7 @@ _italic_
 ___boldanditalic___  
 ***boldanditalic*** (triple asterix is more compatible than triple underscore, esp in middle of word)  
 `monospace`  
+``monospece with `embedded` backticks``
 ~strikethrough~  
 
 horizontal rule:

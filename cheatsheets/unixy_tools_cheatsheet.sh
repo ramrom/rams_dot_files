@@ -69,6 +69,35 @@ lsof
 chown newuser file
 chown -R newuser dir
 
+# HTOP
+# "/" vim-like search
+htop
+
+# IOTOP - top like temrinal UI, but show io/disk usage by process
+sudo iotop -o
+
+# stress (add load on cpu memory or io)
+stress --cpu 2      # 2 threads, do hard cpu problem like square-root function
+stress --io 4       # 4 threads add io activity to system
+stress --vm 4       # 4 threads to do lots of memory ops
+stress-ng --cpu 2   # improved version of stress, many more advanced tests
+
+# sysstat (linux pkg with many tools), has great colors
+iostat          # show per device/filesystem disk read write usage real time
+iostat 5        # refresh every 5 seconds
+mpstat 1        # show cpu usage, by usr/sys/idle
+
+
+# MEMORY
+# free - show memory/swap usage, total/used/free/cached
+free -h   # -h is human readale
+# /proc/meminfo
+cat /proc/meminfo   # shows detailed memory usage
+
+# vmstat
+vmstat 3   # every 3 sec show free/swap/used/total memory usage, cpu performance, i/o
+
+
 ###### NETWORK TOOLS
 # ARP cache
 arp -a   # display the apr cache
@@ -91,10 +120,6 @@ snmpwalk -Os -c foobar -v2c 192.168.1.1 some.oid.path
 sudo bandwhich    # rust terrminal UI tool, nice, by connection, by process and by remote IP
 nettop            # osx terminal UI tool, tree view, by process and each connect in process
 iftop             # monitor a interface, usage by connection, has text bars and number rates
-
-# HTOP
-# "/" vim-like search
-htop
 
 # GNU GPG
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
@@ -165,13 +190,6 @@ cp -l     # make copies but just hard links, gnu/linux has this, osx does not
 # shred  - overwrite data in file or whole device
 sudo shred -v /dev/sdb1
 shred foofile
-
-# MEMORY
-# free - show memory/swap usage, total/used/free/cached
-free -h   # -h is human readale
-# /proc/meminfo
-cat /proc/meminfo   # shows detailed memory usage
-
 
 ###### FILESYSTEMs/STORAGE-DEVICES
 fdisk       # manipulate partitions
