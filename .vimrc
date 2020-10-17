@@ -115,7 +115,7 @@ autocmd FileType * setlocal formatoptions-=o
 set hlsearch  				" highlight search
 "TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
 if has('nvim')
-    hi Search cterm=italic,inverse
+    hi Search cterm=italic,underline,inverse
 else
     hi Search cterm=underline,inverse
 endif

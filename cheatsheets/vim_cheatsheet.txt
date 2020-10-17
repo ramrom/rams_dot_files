@@ -136,6 +136,7 @@ bd 3, closes buffer # 3
 :syntax - spits out current syntax rules
     - use :redir > foofile, :sytnax, :hi, :redir end
     - to record to file
+    - force set syntax highlight to ruby: `set syntax=ruby`
 - `:filter *pattern* let g:`
     - works on `let`, `set`, `map`, `hi` and `fun`
     - **NOT** `syn` or `autocmd` though...

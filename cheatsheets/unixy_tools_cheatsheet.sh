@@ -65,6 +65,10 @@ echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 # LSOF, list file handles, swiss army knife since 'everything is a file' in unixy OSes
 lsof
 
+# CHOWN - change owner of files and dirs
+chown newuser file
+chown -R newuser dir
+
 ###### NETWORK TOOLS
 # ARP cache
 arp -a   # display the apr cache

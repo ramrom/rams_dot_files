@@ -83,6 +83,7 @@ else  # assuming Darwin here
     alias lc='launchctl'
     alias psx='ps -axhf'
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
+    alias watch_istats='watch -n 1 -c istats all'
     alias oc='open -a "Google Chrome"'
     alias ow='open -a Whatsapp'
     alias os='open -a Slack'
