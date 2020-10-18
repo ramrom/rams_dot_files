@@ -1,6 +1,6 @@
 # JAVA
 
-## Java runtimes
+## JAVA RUNTIME
 `/usr/libexec/java_home -V`
     - see all jvm version installed
 - set JAVA_HOME env var to a specific jvm
