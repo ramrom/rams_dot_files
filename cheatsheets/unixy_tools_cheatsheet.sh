@@ -62,12 +62,10 @@ tail -f foofile  # spit out last lines and continue to print them as new ones ar
 echo "3.1 * 4.5" | bc       # = 13.9
 echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
-# LSOF, list file handles, swiss army knife since 'everything is a file' in unixy OSes
-lsof
-
-# CHOWN - change owner of files and dirs
-chown newuser file
-chown -R newuser dir
+# GNU GPG
+gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
+gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
+gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
 
 # HTOP
 # "/" vim-like search
@@ -76,12 +74,6 @@ htop
 
 # IOTOP - top like temrinal UI, but show io/disk usage by process
 sudo iotop -o
-
-# stress (add load on cpu memory or io)
-stress --cpu 2      # 2 threads, do hard cpu problem like square-root function
-stress --io 4       # 4 threads add io activity to system
-stress --vm 4       # 4 threads to do lots of memory ops
-stress-ng --cpu 2   # improved version of stress, many more advanced tests
 
 # sysstat (linux pkg with many tools), has great colors
 iostat          # show per device/filesystem disk read, with no arg calculated *since* last reboot
@@ -100,6 +92,12 @@ cat /proc/meminfo   # shows detailed memory usage
 # vmstat
 vmstat     # just one measurement, will calculate since last reboot
 vmstat 3   # every 3 sec show free/swap/used/total memory usage, cpu performance, i/o
+
+# stress (add load on cpu memory or io)
+stress --cpu 2      # 2 threads, do hard cpu problem like square-root function
+stress --io 4       # 4 threads add io activity to system
+stress --vm 4       # 4 threads to do lots of memory ops
+stress-ng --cpu 2   # improved version of stress, many more advanced tests
 
 
 ###### NETWORK TOOLS
@@ -125,18 +123,8 @@ sudo bandwhich    # rust terrminal UI tool, nice, by connection, by process and 
 nettop            # osx terminal UI tool, tree view, by process and each connect in process
 iftop             # monitor a interface, usage by connection, has text bars and number rates
 
-# GNU GPG
-gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
-gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
-gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
-
-# signals
-1 -  sighup    # hangup
-2 -  sigint    # interrupt, what ctrl-c usually sends
-3 -  sigquit   # exit, and dump core, what ctrl-\ usually does
-9 -  sigkill   # exit without cleanup
-24 - sigtstp   # suspend,what ctrl-z usually does
-
+# LSOF, list file handles, swiss army knife since 'everything is a file' in unixy OSes
+lsof
 
 # SUDO
 sudo ls             # run ls command as superuser(root)
@@ -148,6 +136,13 @@ su foouser          # login as foouser
 kill            # send signal to process, by default sigterm
 pgrep foo       # search for processes with "foo" in command and return PIDs
 killall -3 foo  # send sigquit to all proceses with foo in the name, default is sigterm
+
+# signals
+1 -  sighup    # hangup
+2 -  sigint    # interrupt, what ctrl-c usually sends
+3 -  sigquit   # exit, and dump core, what ctrl-\ usually does
+9 -  sigkill   # exit without cleanup
+24 - sigtstp   # suspend,what ctrl-z usually does
 
 # RSYNC
 rsync /src /dest  # basic copy/sync over files from one dir to another
@@ -187,6 +182,9 @@ mediainfo foo.mp4
 # list all files recursively in dir and their disk usage
 du -a /foo
 
+# CHOWN - change owner of files and dirs
+chown newuser file
+chown -R newuser dir
 
 # CP
 cp -l     # make copies but just hard links, gnu/linux has this, osx does not
