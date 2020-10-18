@@ -49,6 +49,11 @@ z - undo last action
 YOUTUBE:
 - j/l - back/forward 10 sec
 - k - play/pause
+- t - toggle theater mode
+- f - toggle fullscreen
+- m - toggle mute
+- c - toggle closed caption
+- up/down arrow (while video is active element) - up/down volume by 5%
 
 
 CALENDER:
