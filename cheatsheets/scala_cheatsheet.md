@@ -1,24 +1,31 @@
-###################### SCALA #########################
+# SCALA
 - string interpolation:
-    - case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")  # prints `this is Foo(3)`
+    - prints `this is Foo(3)`
+        ```scala
+        case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
+        ```
     - toString method is called if fooObject isnt a String
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
 - https://docs.scala-lang.org/cheatsheets/index.html
 - carter recomendation: scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - run command and redirect to file
+    ```scala
     import sys.process._
     import java.io.File
     ("ls -al" #> new File("files.txt")).!
+    ```
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
 
-json:
-val a: String = """ {"a":1,"b":[1,2,"c"]} """
-val j: JsValue = Json.parse(a)
-println(a == j.toString)  // should print true
+### json
+    ```scala
+    val a: String = """ {"a":1,"b":[1,2,"c"]} """
+    val j: JsValue = Json.parse(a)
+    println(a == j.toString)  // should print true
+    ```
 
 file reading
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
@@ -29,27 +36,26 @@ PlaySpecification/spec2, to skip test:
     - skipped("some reason")
     - append .pendingUntilFixed("message about the issue")
 
-ENUMERATION:
+## ENUMERATION:
 - play 2.5 json doesnt supports scala enumerators
 - can use enumeratum
 
-MACWIRE/DEPENDENCY-INJECT:
+## MACWIRE/DEPENDENCY-INJECT:
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
 - macwire happens pre-compile, guice i think happens runtime
-- from doug roper:
-    For DI, I care about:
-    1. Late binding, e.g. At the last moment, I can override ANY component in the graph WITHOUT refactoring my wirings. (Yes: Guice, cake, registry. No: macwire modules)
-    2. Nearly as fast as `new` (Yes: macwire modules, cake. No: Guice)
-    3. Multibinding (Yes: Guice, macwire modules sorta. No: cake)
-    Also other things, but those are the big ones that differ in those approaches. (edited)
+    - desired qualities:
+    > 1. Late binding, e.g. At the last moment, I can override ANY component in the graph WITHOUT refactoring my wirings. (Yes: Guice, cake, registry. No: macwire modules)
+    > 2. Nearly as fast as `new` (Yes: macwire modules, cake. No: Guice)
+    > 3. Multibinding (Yes: Guice, macwire modules sorta. No: cake)
+    > Also other things, but those are the big ones that differ in those approaches. (edited)
 - portkey uses @module annotation above class declarations, it must make classes vals' available in scope
 
-SCALATEST:
+## SCALATEST:
 - https://www.scalatest.org/user_guide/using_the_runner#filtering
 - using with sbt: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 
 
-AUTOMATION TESTING:
+## AUTOMATION TESTING:
 - https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
 - private method testing, supported by ScalaTest
@@ -57,7 +63,7 @@ AUTOMATION TESTING:
     - val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess)
     - val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2...)
 
-REST ASSURED:
+## REST ASSURED:
 - ENVIRONMENT sets env
 - INCLUDE, EXCLUDE env vars specify tags
 
@@ -67,10 +73,12 @@ REST ASSURED:
 
 PLAY JSON:
 - parse a json string into play AST JsValue
-Json.parse("""{"id":1,"name":"dude"}""")
+    ```scala
+    Json.parse("""{"id":1,"name":"dude"}""")
+    ```
 
 
-AMMONITE:
+## AMMONITE:
 ----------------------------------------
 - https://ammonite.io/
 - block input:
@@ -89,7 +97,7 @@ AMMONITE:
     - amm --watch --predef foo.sc
 
 
-SBT:
+## SBT:
 ----------------------------------------
 - get timings of sbt tasks:
     - time sbt -Dsbt.task.timings=true clean update test
@@ -102,6 +110,6 @@ SBT:
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
 
 
-AKKA:
+## AKKA:
 ----------------------------------------
 - mark waks: akka streams main goal is to implement backpressure
