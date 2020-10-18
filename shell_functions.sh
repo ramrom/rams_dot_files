@@ -471,7 +471,11 @@ function tmux_main_status() {
 }
 
 function tmux_default_winlist() {
-    echo "#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
+    # local pre="#[fg=colour052]<#[default]#[fg=colour124]<#[default]#[fg=colour207]<#[default] "
+    # local post=" #[fg=colour207]>#[default]#[fg=colour124]>#[default]#[fg=colour052]>#[default]"
+    local pre="#[fg=colour106]<#[default]#[fg=colour148]<#[default]#[fg=colour190]<#[default] "
+    local post=" #[fg=colour190]>#[default]#[fg=colour148]>#[default]#[fg=colour106]>#[default]"
+    echo "$pre#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
         #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},
         #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}},
         #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},
@@ -481,7 +485,7 @@ function tmux_default_winlist() {
         #{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},#{window-status-last-style},}
         #{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}},#{window-status-bell-style},
         #{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}},
-        #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist]"
+        #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist]$post"
     # need #[nolist] at the end here to let next items align
 }
 
