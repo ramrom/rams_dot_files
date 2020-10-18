@@ -50,12 +50,15 @@ PlaySpecification/spec2, to skip test:
     > Also other things, but those are the big ones that differ in those approaches. (edited)
 - portkey uses @module annotation above class declarations, it must make classes vals' available in scope
 
-## SCALATEST:
+## SCALATEST
 - https://www.scalatest.org/user_guide/using_the_runner#filtering
 - using with sbt: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
+- example with sbt
+    `sbt 'project foo' 'testOnly *partString* -- -l excludeFlag'`
+    `sbt 'project foo' 'testOnly *partString* -- -l "excludeFlag1 excludeFlag2" -- -n includeFlag'`
 
 
-## AUTOMATION TESTING:
+## AUTOMATION TESTING
 - https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
 - private method testing, supported by ScalaTest
@@ -63,7 +66,7 @@ PlaySpecification/spec2, to skip test:
     - val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess)
     - val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2...)
 
-## REST ASSURED:
+## REST ASSURED
 - ENVIRONMENT sets env
 - INCLUDE, EXCLUDE env vars specify tags
 
@@ -78,7 +81,7 @@ PLAY JSON:
     ```
 
 
-## AMMONITE:
+## AMMONITE
 ----------------------------------------
 - https://ammonite.io/
 - block input:
@@ -97,7 +100,7 @@ PLAY JSON:
     - amm --watch --predef foo.sc
 
 
-## SBT:
+## SBT
 ----------------------------------------
 - get timings of sbt tasks:
     - time sbt -Dsbt.task.timings=true clean update test
@@ -110,6 +113,6 @@ PLAY JSON:
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
 
 
-## AKKA:
-----------------------------------------
+## AKKA
+---------------------------------------
 - mark waks: akka streams main goal is to implement backpressure
