@@ -1,46 +1,56 @@
 # GIT:
-- good reference: https://git-scm.com/
-    - basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+## RERFERNCES
+- https://git-scm.com/
+- basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
 
-git rm -rf --cached foo bar - keep on disk but rm from git
-git show-ref --tags     - tags with it's commit
-git show-ref --tags -d  - above + what commit tag points to
-git remote prune foo    - remove outdated references in remote
-git branch -m OLD_B NEW_B  - rename branch
+```sh
+git rm -rf --cached foo bar # keep on disk but rm from git
+git show-ref --tags         # tags with it's commit
+git show-ref --tags -d      # above + what commit tag points to
+git remote prune foo        # remove outdated references in remote
+git branch -m OLD_B NEW_B   # rename branch
+```
 
-# assuming master branch is local branch, this will overwrite local
-git reset --hard origin/master
+- assuming master branch is local branch, this will overwrite local
+    `git reset --hard origin/master`
 
-git branch --merged relativebranch
-    - show branches with commits merged into relativebranch
+- show branches with commits merged into relativebranch
     - NOTE: authn squash commits a branch to new commit before merge, so commit number is diff
-git branch --no-merged relativebranch
-    - shows opposite
+    `git branch --merged relativebranch`
+- shows opposite
+    `git branch --no-merged relativebranch`
 
-git branch | egrep -v "^\*|master" | xargs git branch -D
-    - delete all branches not master or current
+- delete all branches not master or current
+    `git branch | egrep -v "^\*|master" | xargs git branch -D`
 
+create branch and push:
+```sh
 git co -b foobranch
 git push --set-upstream remote foobranch
+```
 
+push/tracking:
+```sh
 git branch --set-upstream-to=origin/foobranch foobranch
-git push -u remote local_branch - push branch to remote
-git push -u remote              - push/track current branch to remote
+git push -u remote local_branch # push branch to remote
+git push -u remote              # push/track current branch to remote
+```
 
-git merge-base b1 b2 b3 - find most recent common ancestor commit of n branches
-git show-branch b1 b2 b3 - show sidebyside columar what commits exist in each branch
+```sh
+git merge-base b1 b2 b3     # find most recent common ancestor commit of n branches
+git show-branch b1 b2 b3    #  show sidebyside columar what commits exist in each branch
 git commit --amend --author="Author Name <email@address.com>"
+```
 
-# SSH auth
-# can use GIT_SSH to specify a script that can run a custom ssh commmand
-    # this ssh command could do something like use a different config file or a different identity file
-# git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
+## SSH auth
+- can use GIT_SSH to specify a script that can run a custom ssh commmand
+    - this ssh command could do something like use a different config file or a different identity file
+- git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
 - if you use ssh-agent, and load multiple keys, it will only try the first key, so only load the single proper key
 
-# GITHUB AUTH
-- TFA:
+## GITHUB AUTH
+- TFA(two factor auth):
     - browser login requires the TFA
     - local cli, on a push/write to public repo or anything on private repo
         - git@ url repos: ssh keys dont require TFA
         - https:// url repos: can use personal api token as password
-
