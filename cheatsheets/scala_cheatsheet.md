@@ -55,9 +55,11 @@ PlaySpecification/spec2, to skip test:
 - using with sbt: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - example with sbt
     `sbt 'project foo' 'testOnly *partString* -- -l excludeFlag'`
-    `sbt 'project foo' 'testOnly * -- -l excludeFlag'`
-        - * wildcard says test all filenames, but exclude tagged with `excludeFlag`
+    `sbt 'project foo' 'testOnly -- -l excludeFlag'`
+        - exclude tagged with `excludeFlag`
     `sbt 'project foo' 'testOnly *partString* -- -l "excludeFlag1 excludeFlag2" -- -n includeFlag'`
+        - with these 2 exclude flags, this is logical OR, so if test has one of the tags or both, it's excluded
+    `sbt 'project foo' 'testOnly -- -z "some partial string in desc"'`
         - with these 2 exclude flags, this is logical OR, so if test has one of the tags or both, it's excluded
 
 
