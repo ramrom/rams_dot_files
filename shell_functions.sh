@@ -472,10 +472,11 @@ function tmux_main_status() {
 }
 
 function tmux_default_winlist() {
-    # local pre="#[fg=colour052]<#[default]#[fg=colour124]<#[default]#[fg=colour207]<#[default] "
-    # local post=" #[fg=colour207]>#[default]#[fg=colour124]>#[default]#[fg=colour052]>#[default]"
-    local pre="#[fg=colour106]<#[default]#[fg=colour148]<#[default]#[fg=colour190]<#[default] "
-    local post=" #[fg=colour190]>#[default]#[fg=colour148]>#[default]#[fg=colour106]>#[default]"
+    # local out=052; local mid=124; local inr=207;  # magentas
+    # local out=106; local mid=148; local inr=190;   # yellow-greens
+    local out=227; local mid=210; local inr=197;    # yellow-org-red
+    local pre="#[fg=colour${out}]<#[default]#[fg=colour${mid}]<#[default]#[fg=colour${inr}]<#[default] "
+    local post=" #[fg=colour${inr}]>#[default]#[fg=colour${mid}]>#[default]#[fg=colour${out}]>#[default]"
     echo "$pre#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
         #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},
         #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}},
