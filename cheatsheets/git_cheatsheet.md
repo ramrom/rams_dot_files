@@ -1,4 +1,4 @@
-GIT:
+# GIT:
 - good reference: https://git-scm.com/
     - basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
 

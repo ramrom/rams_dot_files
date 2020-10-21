@@ -72,3 +72,4 @@
   cfg   = config --global --list
   cfs   = config --system --list
   alias = config --get-regexp ^alias\\.
+	slog = log --abbrev-commit --color=auto --decorate=short --pretty=oneline --graph --branches=* --remotes=* --tags=*
