@@ -373,6 +373,7 @@ exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call ShowMyLeaderMap()<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>ca :vsplit ~/tmp/scratch.md<cr>
+noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
 noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
