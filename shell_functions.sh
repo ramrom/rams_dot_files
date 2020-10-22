@@ -475,6 +475,7 @@ function tmux_default_winlist() {
     # local out=052; local mid=124; local inr=207;  # magentas
     # local out=106; local mid=148; local inr=190;   # yellow-greens
     local out=227; local mid=210; local inr=197;    # yellow-org-red
+    local out=021; local mid=093; local inr=201;    # blue-violet-magenta
     local pre="#[fg=colour${out}]<#[default]#[fg=colour${mid}]<#[default]#[fg=colour${inr}]<#[default] "
     local post=" #[fg=colour${inr}]>#[default]#[fg=colour${mid}]>#[default]#[fg=colour${out}]>#[default]"
     echo "$pre#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
