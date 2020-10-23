@@ -232,6 +232,7 @@ sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
 inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 stat - get metadata on a file
 lsblk - show block level devices
+fdiks - show partitions and block devices, sizes, sectors
 /etc/fstab - file systems mounted at boot
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 dconf  - like gsettings?
