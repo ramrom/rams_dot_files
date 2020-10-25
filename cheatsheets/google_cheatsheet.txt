@@ -31,6 +31,10 @@ CHROMEBOOK:
     - open file explorer, hit 3 dot icon on top right -> "add new service" -> samba share
     - url is like "\\192.168.1.111\somefolder"
 
+MEETS:
+cmd + d - toggle mute
+cmd + e - toggle camera
+
 GMAIL:
 - (goto settings and turn on keyboard shortcuts)
 - see https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DDesktop&hl=en

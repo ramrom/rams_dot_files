@@ -235,7 +235,11 @@ function dubydircolor() {
 # colorize every 3rd line lighter background (assuming black background) to help readability
 function colr_row() {
     while read line; do
-      bg=237 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
+        if [ -z "$bold" ]; then
+            bg=237 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
+        else
+            inv=1 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
+        fi
     done
 }
 
@@ -247,9 +251,10 @@ function ansi256() {
     local maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
     local maybeund="";          [ -n "$und" ] && maybeund="\033[4m"
     local maybeit="";           [ -n "$it" ] && maybeit="\033[3m"
+    local maybeinverse="";      [ -n "$inv" ] && maybeinverse="\033[7m"
     local lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
     local lfg=007;              [ -n "$fg" ] && lfg=$(ansi8_name $fg)
-    echo -e "${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
+    echo -e "${maybeinverse}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
 }
 
 function print_ansi256() {
@@ -474,8 +479,8 @@ function tmux_main_status() {
 function tmux_default_winlist() {
     # local out=052; local mid=124; local inr=207;  # magentas
     # local out=106; local mid=148; local inr=190;   # yellow-greens
+    # local out=021; local mid=093; local inr=201;    # blue-violet-magenta
     local out=227; local mid=210; local inr=197;    # yellow-org-red
-    local out=021; local mid=093; local inr=201;    # blue-violet-magenta
     local pre="#[fg=colour${out}]<#[default]#[fg=colour${mid}]<#[default]#[fg=colour${inr}]<#[default] "
     local post=" #[fg=colour${inr}]>#[default]#[fg=colour${mid}]>#[default]#[fg=colour${out}]>#[default]"
     echo "$pre#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
