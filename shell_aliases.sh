@@ -121,7 +121,7 @@ alias rgs="rg -tscala -g '!it/' -g '!test/'"
 alias f="fzf"
 alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
 alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
-alias fe="export | fzf"
+alias fv="export | fzf"
 alias fs="saf | fzf"
 alias fsn="safn | fzf"
 # TODO: sourcing aliases works, but calling the alias after fails
@@ -135,7 +135,7 @@ alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
 #POSTGRES
-alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/12.2_1/bin/psql'
+alias lpsql='PAGER=$(psql_pager) /usr/local/Cellar/libpq/13.0_1/bin/psql'
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
 #alias psqlvim='PAGER=~/vimpager.sh psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"

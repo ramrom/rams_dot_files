@@ -2,34 +2,32 @@
 -------------------------------------------
 
 ## BREW
+--------------------
 Terminology:
 - see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
 - bottle: pre-compiled code, just installs
 - cask: installs a program exactly as if it were a native osx appliation install
 - tap: a repository of formula
 
-brew deps --tree httpie  # show deps of httpie in tree output
-
-# show all formula that need this formula
-brew uses httpie
-brew uses --installed httpie # only formula installed that need this formula
-
-# all brew formulas not depended by other brew formulas
-brew leaves
-
-# for each brew leaf formula: show flat list of deps for that formula
-brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"
-
-# removing packages deps of a uninstalled FORMULA that isn't a dep on something else
-# from https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies)
-`brew rm $(join <(brew leaves) <(brew deps FORMULA))`
-
-# upgrade one formula
-brew upgrade fooformula
-
+- show deps of httpie in tree output
+    - `brew deps --tree httpie`
+- show all formula that need this formula
+    - `brew uses httpie`
+- only formula installed that need this formula
+    - `brew uses --installed httpie`
+- all brew formulas not depended by other brew formulas
+    `brew leaves`
+- for each brew leaf formula: show flat list of deps for that formula
+    `brew leaves | xargs brew deps --installed --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"`
+- removing packages deps of a uninstalled FORMULA that isn't a dep on something else
+    - from https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies)
+    - `brew rm $(join <(brew leaves) <(brew deps FORMULA))`
+- upgrade one formula
+    `brew upgrade fooformula`
 
 
 ## CLI:
+----------------
 - ref: https://www.mitchchn.me/2014/os-x-terminal/
 say - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
@@ -44,35 +42,59 @@ pbpaste - cli way to paste from clipboard
     - pbpaste | grep foo
 mdls    - get metadata on a file
 sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
-- CLICOLOR_FORCE=1 ls -l | less
-    - force color to pipe output, be default ls wont colorize
 - vm_stat - show some raw memory usage
 - nettop - like top but for tcp/udp sockets only and their bandwidth usage!
 skhd
     - `brew services` to see if it's running
     - `skhd -r` to reload config file with shortcuts
+- force color to pipe output, be default ls wont colorize
+    - `CLICOLOR_FORCE=1 ls -l | less`
 
 
-BROWSER(CHROME/FIREFOX verified):
-cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab
-cmd + forward/back-arrow  - back and forth web page history
-cmd + [/]               - back/forward page history
-cmd + up/down-arrow     - scroll up/down web page
-cmd + shift [/]         - back/forward tabs in window
-cmd + `                 - cycle through windows
-cmd + L                 - select url bar
-spacebar                - scroll down
-spacebar + shift        - scroll up
-tab/shift+tab           - goto next/prev field in browsertab+page
 
-Whatsapp native:
-cmd + shift + [/]       - up/down conversations/groups
-page up/down            - scroll up/down in the convo
+## KEYBOARD SHORTCUTS:
+-----------------------------------
+> command + tab  - switch between apps
+> command + space - spotlight search
+> command + H - goto home screen
+> command + N - compose new email in mail app
 
-PREVIEW:
-option + downarray      - next page/item
-downarrow               - scroll down
+> command + c copy
+> command + v paste
+> command + x cut
+> command + a select all
+> command + z undo
+> command + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
 
+### BROWSER(CHROME/FIREFOX verified):
+> cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab
+> cmd + forward/back-arrow  - back and forth web page history
+> cmd + [/]               - back/forward page history
+> cmd + up/down-arrow     - scroll up/down web page
+> cmd + shift [/]         - back/forward tabs in window
+> cmd + `                 - cycle through windows
+> cmd + L                 - select url bar
+> spacebar                - scroll down
+> spacebar + shift        - scroll up
+> tab/shift+tab           - goto next/prev field in browsertab+page
+> cmd + option + hover over scale image in display in sys prefs   - show the resolution
+
+### WHATSAPP NATIVE:
+> cmd + shift + [/]       - up/down conversations/groups
+> page up/down            - scroll up/down in the convo
+
+### PREVIEW:
+> option + downarray      - next page/item
+> downarrow               - scroll down
+
+### SAFARI:
+> command + T - open new tab in safari
+> command + W - close tab in safari
+> command + R - refresh tab in safari
+> command + . - stop loading tab in safari
+> command + rightarrow - go to future page in safari history
+> command + leftarrow - go to previow page in safari history
+> up/down arrow  - scroll up and down in safari
 
 ## FILESYSTEMS:
 ----------------------------
@@ -89,28 +111,6 @@ downarrow               - scroll down
 - mount afp share in osx
     mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
 
-
-## KEYBOARD SHORTCUTS:
-command + tab  - switch between apps
-command + space - spotlight search
-command + H - goto home screen
-command + N - compose new email in mail app
-
-command + c copy
-command + v paste
-command + x cut
-command + a select all
-command + z undo
-command + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
-
-safari:
-command + T - open new tab in safari
-command + W - close tab in safari
-command + R - refresh tab in safari
-command + . - stop loading tab in safari
-command + rightarrow - go to future page in safari history
-command + leftarrow - go to previow page in safari history
-up/down arrow  - scroll up and down in safari
 
 ## OTHER:
 - osx memory system, what is wired/active/inactive/free:
@@ -141,7 +141,7 @@ take screenshot:
 - microsoft word ctrl-h doesnt work, it opens a find and replace
 - ~/Library/LaunchAgents - user dir of plist files for starting processes at user login
 
-GUI Components:
+## GUI Components:
 menu bar                - top screen bar with apple menu on left, app menus, status menu and date/user on right
 notification center     - side bar (by default) with widgets for weather and stocks and notifs and so on
 dock                    - bottom (by default) panel with app shortcuts

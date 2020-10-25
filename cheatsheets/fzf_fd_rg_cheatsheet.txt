@@ -1,4 +1,4 @@
-RG:
+## RG:
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
 rg -uuu      - gets close to rgrep
@@ -7,8 +7,10 @@ rg --type-list      - list filetype defs
 rg -tgo -tsh -Tjs   - search go and sh types, not javascript
 rg --json       - print results in json!
 rg -g '**/*foo*/**' pattern  - would search in file /bar/befooyar/dude/wut
+- -o to to only return what matched, and -r to replace what was matched with capture groups or whatever
+    echo "foo-bar baz" | rg -o ".*-(b..).*$" -r '$1'     - will return "bar"
 
-FZF:
+## FZF:
 fzf --preview 'bat --style=numbers --color=always {} | head -500'              - preview with bat
 fzf --height 40   - only take 40% of screen
 vim -o `fzf -m`   - open vim windows for all fzf matches
@@ -26,7 +28,7 @@ search:
     foo | bar   (fuzzy, foo or bar)
     foo bar     (fuzzy, foo and bar)
 
-FD:
+## FD:
 fd -p        - match on full path (default file/dir name)
 fd --type f  - close to find, old match on file types
 fd -t f -d 1 -H "foo$" -x ls -al   - find all files in current dir, including hidden, that end in "foo" and run ls -al on them
