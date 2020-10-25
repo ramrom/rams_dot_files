@@ -15,8 +15,8 @@ fzf --preview 'bat --style=numbers --color=always {} | head -500'              -
 fzf --height 40   - only take 40% of screen
 vim -o `fzf -m`   - open vim windows for all fzf matches
 fzf | xargs bat   - invoke bat on result
-fzf -e   - exact match
-fzf -m   - multi select
+fzf -e   - exact match searching only
+fzf -m   - enable multi select (+m means disable multi select)
 fzf -1   - if 1 match select it
 search:
     foo         (fuzzy foo)
