@@ -39,7 +39,7 @@ git push -u remote              # push/track current branch to remote
 ```sh
 git merge-base b1 b2 b3     # find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3    #  show sidebyside columar what commits exist in each branch
-git commit --amend --author="Author Name <email@address.com>"
+git commit --amend --author="Joe Shmoe <email@address.com>"
 ```
 
 ## SSH auth
