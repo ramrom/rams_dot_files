@@ -1,32 +1,47 @@
 ## RG:
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
-rg -uuu      - gets close to rgrep
-             - u:nogitingore, uu:hidden, uuu:binary
-rg --type-list      - list filetype defs
-rg -tgo -tsh -Tjs   - search go and sh types, not javascript
-rg --json       - print results in json!
-rg -g '**/*foo*/**' pattern  - would search in file /bar/befooyar/dude/wut
+
+- gets close to rgrep: `rg -uuu`
+    - u:nogitingore, uu:hidden, uuu:binary
+- list filetype defs
+    `rg --type-list`
+- search go and sh types, not javascript
+    `rg -tgo -tsh -Tjs`
+- print results in json!
+    `rg --json`
+- would search in file /bar/befooyar/dude/wut
+    - `rg -g '**/*foo*/**' pattern`
 - -o to to only return what matched, and -r to replace what was matched with capture groups or whatever
-    echo "foo-bar baz" | rg -o ".*-(b..).*$" -r '$1'     - will return "bar"
+    `echo "foo-bar baz" | rg -o ".*-(b..).*$" -r '$1'`
+        - will return "bar"
 
 ## FZF:
-fzf --preview 'bat --style=numbers --color=always {} | head -500'              - preview with bat
-fzf --height 40   - only take 40% of screen
-vim -o `fzf -m`   - open vim windows for all fzf matches
-fzf | xargs bat   - invoke bat on result
-fzf -e   - exact match searching only
-fzf -m   - enable multi select (+m means disable multi select)
-fzf -1   - if 1 match select it
+ - preview with bat
+    - `fzf --preview 'bat --style=numbers --color=always {} | head -500'`
+- only take 40% of screen
+    - `fzf --height 40`
+- open vim windows for all fzf matches
+    ```sh
+    vim -o `fzf -m`
+    ```
+- invoke bat on result
+    - `fzf | xargs bat`
+- exact match searching only
+    `fzf -e`
+- enable multi select (+m means disable multi select)
+    `fzf -m`
+- if 1 match select it
+    - `fzf -1`
 search:
-    foo         (fuzzy foo)
-    !foo        (exact, not foo)
-    'foo        (exact match foo)
-    ^foo        (exact prefix, foo at beg of line)
-    foo$        (eact suffix, foo at end of line)
-    'foo\ bar   (exact match with space "foo bar")
-    foo | bar   (fuzzy, foo or bar)
-    foo bar     (fuzzy, foo and bar)
+    > foo         (fuzzy foo)
+    > !foo        (exact, not foo)
+    > 'foo        (exact match foo)
+    > ^foo        (exact prefix, foo at beg of line)
+    > foo$        (eact suffix, foo at end of line)
+    > 'foo\ bar   (exact match with space "foo bar")
+    > foo | bar   (fuzzy, foo or bar)
+    > foo bar     (fuzzy, foo and bar)
 
 ## FD:
 fd -p        - match on full path (default file/dir name)
