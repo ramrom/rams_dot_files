@@ -34,3 +34,6 @@ create with params: `POST https://foojenkins.org/job/someJob/buildWithParameters
 
 this works too, _i think_, (HTTPie example here):
 - `http POST --form https://foojenkins.org/job/someJob/build json='{"parameter":[{"name":"a","value":"1"},{"name":"b","value":"2"}]}'`
+
+## CLI
+- https://www.jenkins.io/doc/book/managing/cli/

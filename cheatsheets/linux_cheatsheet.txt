@@ -168,6 +168,10 @@ apt search --names-only *something*
 - snapd runs to update (like ~ 4/day default) snap packages; https://snapcraft.io/docs/keeping-snaps-up-to-date
 snap list
     - list all snap packages installed
+snap refresh
+    - updgrade snap packages
+snap refresh --list
+    - just show what snaps can be upgraded
 
 
 ## GRAPHICAL SYSTEMS:
