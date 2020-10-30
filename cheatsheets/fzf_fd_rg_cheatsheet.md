@@ -47,6 +47,8 @@ search:
     > 'foo\ bar   (exact match with space "foo bar")
     > foo | bar   (fuzzy, foo or bar)
     > foo bar     (fuzzy, foo and bar)
+- interpret ansi as well, (slower performace)
+    `fzf --ansi`
 
 ## FD:
 fd -p        - match on full path (default file/dir name)

@@ -38,6 +38,7 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-i
        --bind 'ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-n:preview-page-down,ctrl-p:preview-page-up'"
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_CTRL_T_COMMAND="$fdname"
+# TODO: option-c doesnt do anything in osx
 export FZF_ALT_C_COMMAND="$fdname --type d"
 unset fdname
 
