@@ -119,6 +119,15 @@ function yts_query() { http https://yts.mx/ajax/search query=="$1"; }
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
+function fo() {
+  out=$(fzf --query="$1" +m --exit-0 --expect=ctrl-o,ctrl-e)
+  key=$(echo "$out" | head -1)
+  file=$(echo "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
 # fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
 # NOTE: zsh give "bad math expression" on first for loop, bash works; when i rebooted it works, maybe shell opt?
 # TODO: should i use arrays?, maybe just a string with IFS
@@ -135,15 +144,16 @@ function fmv() {
 }
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
+# TODO: preview window fails
 function rgf() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
     # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
     rg "$RG_FILTER" --files-with-matches --no-messages "$1" "$rgdir" | fzf --preview \
-        "rg \"$RG_FILTER\" --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
+        "rg --ignore-case --pretty --context 10 '$1' {}"
+        # "rg \"$RG_FILTER\" --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
         # "rg -tscala -g '!it/' -g '!test/' --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
-        # "rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
 #TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
