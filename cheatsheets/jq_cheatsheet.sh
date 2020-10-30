@@ -17,9 +17,13 @@ echo '{"a":"z"}' | jq '.a'    # prints `"z"`
 echo '{"a":"z"}' | jq -r '.a'    # prints `z`
 
 # jq regex on a field
+# this will output `{ "id":"foo", "val": 3 } { "id":"fo", "val": "hi" }`
 regex=fo
-echo '[ { "id":"foo" }, { "id":"fo" }, { "id":"bar" } ]' | jq --arg RGX $regex 'keys | select(. | test($RGX))'
-# this will output `{ "id":"foo" } { "id":"fo" }`
+echo '[ { "id":"foo", "val": 3 }, { "id":"fo", "val": "hi" }, { "id":"bar", "valz": "hey" } ]' | \
+    jq --arg RGX $regex '.[] | select(.id | test($RGX))'
+#  to select just the first item, wrap it in an array and index, output:`{ "id":"foo", "val": 3 }`
+echo '[ { "id":"foo", "val": 3 }, { "id":"fo", "val": "hi" }, { "id":"bar", "valz": "hey" } ]' | \
+    jq --arg RGX $regex '[.[] | select(.id | test($RGX))][0]'
 
 # force color with -C and no color with -M, e.g. jq will remove color when stdout is pipe or redir to file
 echo '{"a":"z"}' | jq -C . > foo

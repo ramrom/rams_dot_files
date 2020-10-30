@@ -15,6 +15,11 @@
 - -o to to only return what matched, and -r to replace what was matched with capture groups or whatever
     `echo "foo-bar baz" | rg -o ".*-(b..).*$" -r '$1'`
         - will return "bar"
+- use `-g` globs to search specific files and dirs
+    `rg -g 'foo/bar/**' -g '!*bar*' -g 'yar/xy*'`
+        - match all files in foo/bar and recurce, and filenames starting with xy in folder yar
+        - but exclude any file/folder with bar in it.
+        - order matter, for multiple matches, later globs take precedence
 
 ## FZF:
  - preview with bat
