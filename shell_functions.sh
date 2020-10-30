@@ -120,11 +120,11 @@ function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
 function fo() {
-  out=$(fzf --query="$1" +m --exit-0 --expect=ctrl-o,ctrl-e)
+  out=$(fzf --query="$1" +m --exit-0 --header='ctrl-e -> vim, ctrl-o -> "open"' --expect=ctrl-o,ctrl-e)
   key=$(echo "$out" | head -1)
   file=$(echo "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+    [ "$key" = ctrl-o ] && open "$file" || eval "${EDITOR:-vin} "$file""
   fi
 }
 
