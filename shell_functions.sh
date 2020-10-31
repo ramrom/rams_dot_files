@@ -102,13 +102,6 @@ function yts_query() { http https://yts.mx/ajax/search query=="$1"; }
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
-# fuzzy search aliases and functions, with previews for some sources
-# TODO: when safn replacement includes scripts, preview those too
-function ffsn() {
-    : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_aliases.sh"}"
-    safn | fzf --preview "$fzf_safn_preview_sources; which {} | bat --color=always -l sh"
-}
-
 # introspect if command is alias or function or script
 function print_type() {
     local type="function"
@@ -135,6 +128,14 @@ function fmv() {
     echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
 }
 
+# fuzzy search aliases and functions, with previews for some sources
+# TODO: when safn replacement includes scripts, preview those too
+function ffsn() {
+    : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_aliases.sh"}"
+    safn | fzf --preview "$fzf_safn_preview_sources; which {} | bat --color=always -l sh" \
+        --preview-window=:wrap --preview-window right:70%
+}
+
 # TODO: reload of `ps -ef` fails but `ps` works
 function fk() {
   FZF_DEFAULT_COMMAND='ps -ef' \
@@ -143,14 +144,16 @@ function fk() {
       --height=50% --layout=reverse
 }
 
-# TODO: bat preview doesnt line wrap, maybe fzf not setting LINES COL correctly
 function ff() {
   local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
   local fzf_def="$FZF_DEFAULT_COMMAND"
   [ "$1" = "h" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
-  out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf --query="$1" +m --exit-0 \
-      --header='ctrl-e -> vim, ctrl-o -> "open", ctrl-u -> cd' \
-      --expect=ctrl-o,ctrl-e,ctrl-u --preview 'bat --style=numbers --color=always {} | head -500')
+  out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
+      --header='ctrl-e->vim, ctrl-o->open, ctrl-u->cd, ctrl-y->pbcopy' \
+      --bind 'ctrl-y:execute-silent(echo {} | pbcopy)' \
+      --expect='ctrl-o,ctrl-e,ctrl-u' \
+      --preview 'bat --style=numbers --color=always {} | head -500' \
+      --preview-window=:wrap)
   key=$(echo "$out" | head -1)
   file=$(echo "$out" | tail -1)
   if [ -n "$file" ]; then
@@ -162,10 +165,15 @@ function ff() {
   fi
 }
 
-ffgt() {  # ff(fuzzy)g(git)t(tag)
+function ffgt() {  # ff(fuzzy)g(git)t(tag)
   git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
   git tag --sort -version:refname | fzf --multi --preview-window right:80% \
              --preview 'git show --color=always {} | head -'$LINES
+}
+
+function ffgl() {
+    git log --color=always --oneline | \
+    fzf --ansi --multi --preview 'git show --color=always {+1}' --preview-window=:wrap
 }
 
 # TODO: add fzf --expect and optionally edit file if expect given
