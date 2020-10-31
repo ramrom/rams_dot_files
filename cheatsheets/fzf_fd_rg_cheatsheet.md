@@ -22,6 +22,7 @@
         - order matter, for multiple matches, later globs take precedence
 
 ## FZF:
+- https://github.com/junegunn/fzf, main README has good docs
  - preview with bat
     - `fzf --preview 'bat --style=numbers --color=always {} | head -500'`
 - only take 40% of screen
@@ -49,6 +50,18 @@ search:
     > foo bar     (fuzzy, foo and bar)
 - interpret ansi as well, (slower performace)
     `fzf --ansi`
+- `**` autocompletion (can change this trigger sequence)
+    - `cd **<TAB>`  - fzf on dirs from current dir
+    - `kill <TAB>` or `kill **<TAB>`   - will fzf over process list
+    - `ssh **<TAB>`    - will fzf over ssh history of IPs and hostnames
+    - `unset **<TAB>`, `export **<TAB>`, `unalias **<TAB>` - over aliases/env vars
+- `<ctrl-r>`
+    - at cmd line, fzf over command history, relavent sorted, hit `ctrl-r` again to chrono order
+- `foo some string bar <ctrl-t>`
+    - at cmd line, fzf over files/dir and selection text inserted after `foo some string bar`
+- `<alt-c>`  (option is alt in osx)
+    - at cmd line, fzf over dirs and cd to selection
+
 
 ## FD:
 fd -p        - match on full path (default file/dir name)

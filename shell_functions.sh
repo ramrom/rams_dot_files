@@ -120,7 +120,8 @@ function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
 function fo() {
-  out=$(fzf --query="$1" +m --exit-0 --header='ctrl-e -> vim, ctrl-o -> "open"' --expect=ctrl-o,ctrl-e)
+  out=$(fzf --query="$1" +m --exit-0 --header='ctrl-e -> vim, ctrl-o -> "open"' --expect=ctrl-o,ctrl-e \
+    --preview 'bat --style=numbers --color=always {} | head -500')
   key=$(echo "$out" | head -1)
   file=$(echo "$out" | tail -1)
   if [ -n "$file" ]; then
@@ -145,6 +146,7 @@ function fmv() {
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 # TODO: preview window fails
+# TODO: add fzf --expect and optionally edit file if expect given
 function rgf() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
