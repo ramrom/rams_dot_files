@@ -20,6 +20,11 @@ setopt # query all set shell options in ZSH
 bind -P     # bash print out all key bindinds, for sh too
 bindkey     # for zsh
 
+# bind ^g to run foo function
+function foofunc() { echo hi; }
+zle -N foofunc
+bindkey '^g' foofunc
+
 # NOTE: these clobber ctrl-n, ctrl-p (for cmd history), ctrl-r (history fuzzy search)
 bindkey -v  # zsh vi mode
 set -o vi   # bash vi mode

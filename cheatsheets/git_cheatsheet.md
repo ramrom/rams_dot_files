@@ -29,6 +29,9 @@ git co -b foobranch
 git push --set-upstream remote foobranch
 ```
 
+- show tags in a proper sorted order
+    - `git tag --sort -version:refname`
+
 push/tracking:
 ```sh
 git branch --set-upstream-to=origin/foobranch foobranch
