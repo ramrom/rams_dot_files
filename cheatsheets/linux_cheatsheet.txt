@@ -14,6 +14,10 @@ sudo shutdown -k (kick everyone off and login disabled, no halting)
 sudo shutdown -r now (reboot now)
 
 lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
+xdg-open    - like osx "open", will open file with default application for that file type
+xclip       - like osx pbpaste/bcopy, needs a DISPLAY set
+    - `xclip -selection clipboard`    - copy to clipboard
+    - `xclip -selection clipboard -o` - paste from clipboard
 
 ## USER STUFF
 ---------------------------------------
