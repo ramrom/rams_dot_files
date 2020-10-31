@@ -33,6 +33,7 @@ alias clt='clear && tmux clear-history'
 # alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
+alias bm='batman'
 alias tmr='transmission-remote'
 
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
@@ -64,6 +65,9 @@ else
 fi
 
 if [ "$(uname)" = "Linux" ]; then
+    alias open='xdg-open'
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
     alias smd='systemctl'
     alias watch_top_cpu="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
     alias psx='ps auxhf'
