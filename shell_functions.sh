@@ -206,18 +206,18 @@ function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
 function rgfst() { RG_FILTER="-tscala" rgf $1; }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
-function findgrepp() { find . -type f -regex $1 -exec grep $2; }
+function findgrepp() { find . -type f -regex $1 -exec grep $2 ; }
+# last component of pathname, pattern not regex, e.g. ("*go")
+function findgrep() { find . -type f -name $1 -exec grep $2 ; }
 
 # needs psx alias
 function psxg() { psx | grep $1 | grep -v grep; }
 
-# last component of pathname, pattern not regex, e.g. ("*go")
-function findgrep() { find . -type f -name $1 -exec grep $2; }
-
 # go docs with syntax highlighting!
 function batgod() { go doc $@ | bat -l go; }
 
-function batsh() {
+alias bw='batwhich'
+function batwhich() {
     local definition_cmd=which
     [ $(detect_shell) = "bash" ] && definition_cmd=type
     $definition_cmd $@ | bat -l sh
