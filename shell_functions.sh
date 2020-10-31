@@ -150,7 +150,7 @@ function ff() {
   [ "$1" = "h" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
   out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
       --header='ctrl-e->vim, ctrl-o->open, ctrl-u->cd, ctrl-y->pbcopy' \
-      --bind 'ctrl-y:execute-silent(echo {} | pbcopy)' \
+      --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
       --expect='ctrl-o,ctrl-e,ctrl-u' \
       --preview 'bat --style=numbers --color=always {} | head -500' \
       --preview-window=:wrap)
@@ -172,8 +172,11 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
 }
 
 function ffgl() {
-    git log --color=always --oneline | \
-    fzf --ansi --multi --preview 'git show --color=always {+1}' --preview-window=:wrap
+    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+    [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
+    local ht="100%"; [ -n "$half" ] && ht="50%"
+    git log --color=always --oneline $1 | fzf --ansi --multi --height=$ht \
+        --preview 'git show --color=always {+1}' --preview-window=:wrap
 }
 
 # TODO: add fzf --expect and optionally edit file if expect given
@@ -710,7 +713,10 @@ function gitfetchresetbranch() {
 # delete branches that are already merged into another branch, master by default, delete locally and in remote
 function gitclean() {
     local masterb=${1:-master}
+
+    # FIXME: this line is creating a branch named "--merged"
     git branch –-merged $masterb | grep -v $masterb | cut -d/ -f2- | xargs -n 1 git push –delete origin
+
     git branch –-merged $masterb | grep -v $masterb | xargs -n 1 git branch -d
 }
 
