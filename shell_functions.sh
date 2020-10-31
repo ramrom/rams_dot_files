@@ -119,6 +119,22 @@ function print_type() {
 }
 
 ############# FZF ##############################
+
+# fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
+# NOTE: zsh give "bad math expression" on first for loop, bash works; when i rebooted it works, maybe shell opt?
+# TODO: should i use arrays?, maybe just a string with IFS
+function fmv() {
+    local IFS=$'\n'
+    local files=($(fzf))
+    echo "$(tput setaf 2)FILES TO BE MOVED:$(tput sgr0)"
+    for i in ${files[@]}; do echo "    $(tput setaf 3)$i"; done
+    local dest=$(fd --type d | fzf --no-multi)
+    [ -z "$dest" ] && return 1
+    local mvcmd="mv"; git rev-parse --git-dir > /dev/null 2>&1 && mvcmd="git mv"
+    for i in ${files[@]}; do eval "$mvcmd $i $dest"; done
+    echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
+}
+
 # TODO: reload of `ps -ef` fails but `ps` works
 function fk() {
   FZF_DEFAULT_COMMAND='ps -ef' \
@@ -127,13 +143,22 @@ function fk() {
       --height=50% --layout=reverse
 }
 
-function fo() {
-  out=$(fzf --query="$1" +m --exit-0 --header='ctrl-e -> vim, ctrl-o -> "open"' --expect=ctrl-o,ctrl-e \
-    --preview 'bat --style=numbers --color=always {} | head -500')
+# TODO: bat preview doesnt line wrap, maybe fzf not setting LINES COL correctly
+function ff() {
+  local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
+  local fzf_def="$FZF_DEFAULT_COMMAND"
+  [ "$1" = "h" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
+  out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf --query="$1" +m --exit-0 \
+      --header='ctrl-e -> vim, ctrl-o -> "open", ctrl-u -> cd' \
+      --expect=ctrl-o,ctrl-e,ctrl-u --preview 'bat --style=numbers --color=always {} | head -500')
   key=$(echo "$out" | head -1)
   file=$(echo "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || eval "${EDITOR:-vin} "$file""
+    case "$key" in
+        "ctrl-o") open "$file" ;;
+        "ctrl-u") cd "$(dirname "$file")" ;;
+        *) eval "${EDITOR:-vin} "$file"" ;;
+    esac
   fi
 }
 
@@ -152,21 +177,6 @@ function frg() {
         fzf --bind "change:reload:$RG_PREFIX {q} || true" \
         --ansi --phony --query "$INITIAL_QUERY" \
         --height=50% --layout=reverse
-}
-
-# fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
-# NOTE: zsh give "bad math expression" on first for loop, bash works; when i rebooted it works, maybe shell opt?
-# TODO: should i use arrays?, maybe just a string with IFS
-function fmv() {
-    local IFS=$'\n'
-    local files=($(fzf))
-    echo "$(tput setaf 2)FILES TO BE MOVED:$(tput sgr0)"
-    for i in ${files[@]}; do echo "    $(tput setaf 3)$i"; done
-    local dest=$(fd --type d | fzf --no-multi)
-    [ -z "$dest" ] && return 1
-    local mvcmd="mv"; git rev-parse --git-dir > /dev/null 2>&1 && mvcmd="git mv"
-    for i in ${files[@]}; do eval "$mvcmd $i $dest"; done
-    echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
 }
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
