@@ -319,12 +319,12 @@ command foo             # will ignore any aliases or functions named foo, and ru
 # -v option can let us test if command exists
 # exit 1  not found, exit 0 found, prints info
 # zsh, osx /bin/sh, bash
-command -v foo  # zsh/bash/osx-bourne/ubuntu-borne: prints name if func/builtin/keyword, path if bin/file, short alias def
+command -v foo  # zsh/bash/osx-bourne/ubuntu-dash: prints name if func/builtin/keyword, path if bin/file, short alias def
 command -V foo  # prints more info: is it alias, shell func, builtin or bin/script file
                 # zsh prints it's source path where it's defined, bash prints the definition itself
 
 # TYPE is shell builtin, made for bourne shell, but not in POSIX standard
-# ubuntu /bin/sh is limited, osx /bin/sh is good
+# ubuntu dash is limited, osx /bin/sh is good
 type foo        # prints "type" (alias/function/file(bin)/builtin/keyword) and def of alias/func, path of file
 type -t foo     # prints just alias/function/file/builtin, nothing (exit code 1) if not found
                     # bash supports it, osx /bin/sh supports it

@@ -119,6 +119,30 @@ function yts_query() { http https://yts.mx/ajax/search query=="$1"; }
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
+# fuzzy search aliases and functions, with previews for some sources
+# TODO: when safn replacement includes scripts, preview those too
+function ffsn() {
+    : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_aliases.sh"}"
+    safn | fzf --preview "$fzf_safn_preview_sources; which {} | bat --color=always -l sh"
+}
+
+# introspect if command is alias or function or script
+function print_type() {
+    local type="function"
+    command -v "$1" > /dev/null || type=undefined
+    command -v "$1" | grep "^\/" > /dev/null && type=script
+    command -v "$1" | grep "^alias " > /dev/null && type=alias
+    echo $type
+}
+
+# TODO: reload of `ps -ef` fails but `ps` works
+function fk() {
+  FZF_DEFAULT_COMMAND='ps -ef' \
+  fzf --bind 'ctrl-r:reload($FZF_DEFAULT_COMMAND)' \
+      --header 'Press CTRL-R to reload' --header-lines=1 \
+      --height=50% --layout=reverse
+}
+
 function fo() {
   out=$(fzf --query="$1" +m --exit-0 --header='ctrl-e -> vim, ctrl-o -> "open"' --expect=ctrl-o,ctrl-e \
     --preview 'bat --style=numbers --color=always {} | head -500')
@@ -127,6 +151,23 @@ function fo() {
   if [ -n "$file" ]; then
     [ "$key" = ctrl-o ] && open "$file" || eval "${EDITOR:-vin} "$file""
   fi
+}
+
+ffgt() {  # ff(fuzzy)g(git)t(tag)
+  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+  git tag --sort -version:refname | fzf --multi --preview-window right:80% \
+             --preview 'git show --color=always {} | head -'$LINES
+}
+
+# TODO: add fzf --expect and optionally edit file if expect given
+# TODO: add preview for more context
+function frg() {
+    INITIAL_QUERY=""
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+        fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+        --ansi --phony --query "$INITIAL_QUERY" \
+        --height=50% --layout=reverse
 }
 
 # fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
