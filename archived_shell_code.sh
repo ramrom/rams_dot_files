@@ -1,40 +1,32 @@
-function kyle_get_prod_dump() {
-#!/usr/bin/env zsh
-  appname=$1
-  if [[ $appname != "identity" && $appname != "portfolio" ]]; then
-    echo "Usage: $0 {identity,portfolio}"
-    exit 1
-  fi
+# POSTGRES
+# get a proddump
+path=(/usr/local/opt/postgresql-9.1/bin $path)
+timestamp=$(date '+%Y-%m-%d__%H:%M:%S')
+filename="${appname}-snapshot-${timestamp}.pgdump"
 
-  path=(/usr/local/opt/postgresql-9.1/bin $path)
-  timestamp=$(date '+%Y-%m-%d__%H:%M:%S')
-  filename="${appname}-snapshot-${timestamp}.pgdump"
+pg_dump --verbose -Fc -U foouser -h proddb-${appname}.foobar.com \
+--exclude-schema pgq_ext \
+--exclude-schema londiste \
+--exclude-schema pgq_node \
+${appname}_prod_nc > foodump
 
-  pg_dump --verbose -Fc -U smittapalli -h proddb-${appname}.netcredit.com \
-  --exclude-schema pgq_ext \
-  --exclude-schema londiste \
-  --exclude-schema pgq_node \
-  --exclude-schema identity_reporting \
-  --exclude-schema _identity_reporting \
-  --exclude-schema portfolio_reporting \
-  --exclude-schema _portfolio_reporting \
-  ${appname}_prod_nc > ~/netcredit/dbs/${filename}
-}
+# load a prod dump
+psql -c "drop database foo" -d postgres
+psql -c "create database foo" -d postgres
+pg_restore --jobs=4 -d foo foopgdump
 
-function get_prod_dump_old() {
-  pushd .
-  cd ~/netcredit/dbs
-  pg_dump -U smittapalli -h proddb-${1}.netcredit.com ${1}_prod_nc --exclude-schema=pgq_node --exclude-schema=londiste --exclude-schema=pgq_ext > ${1}_prod_snapshot_`date +%m_%d_%Y`.sql
-  popd > /dev/null
-}
 
-function load_prod_dump() {
-  psql -c "drop database ${1}_prod_snapshot_`date +%m_%d_%Y`" -d postgres
-  psql -c "create database ${1}_prod_snapshot_`date +%m_%d_%Y`" -d postgres
-  pg_restore --jobs=4 -d ${1}_prod_snapshot_`date +%m_%d_%Y` ${1}_prod_snapshot_`date +%m_%d_%Y`.pgdump
-}
+# LESS
+## make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# Aliases
+if [ -f ~/.lessfilter ]; then
+    export LESS='-R'
+    export LESSOPEN='|~/.lessfilter %s'
+fi
+
+
+# ALIASES
 alias pgstart="sudo /etc/init.d/postgresql start"
 alias pgstop="sudo /etc/init.d/postgresql stop"
 alias pgstopnow="sudo /etc/init.d/postgresql stop"
@@ -52,18 +44,20 @@ if [ `uname` = "Darwin" ]; then
   fi
 fi
 
-# Ruby
+# RUBY
 alias be="bundle exec"
 alias ber="bundle exec rspec"
 alias bi="bundle install"
 
-# Memcached, Redis
+
+# MEMCACHED, REDIS
 alias memcachestop='sudo /etc/init.d/memcached stop'
 alias memcachestart='sudo /etc/init.d/memcached start'
 alias memcacherestart='sudo /etc/init.d/memcached restart'
 
 alias startredis='/usr/local/bin/redis-server'
 
-# Logs
+
+# LOGS
 alias tailpuma='cd ~/Library/Logs && tail -f puma-dev.log'
 alias pumastatus='http -v localhost/status Host:puma-dev'

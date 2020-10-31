@@ -95,6 +95,7 @@ else  # assuming Darwin here
     alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
     alias gl="cd ~/Google\ Drive/Lists"
     alias gr="cd ~/Google\ Drive/Rally"
+    alias sbw='sudo bandwhich'
     alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
     alias brew_leaf_deps="brew leaves | xargs brew deps --installed --for-each | \
         sed \"s/^.*:/$(tput setaf 4)&$(tput sgr0)/\""

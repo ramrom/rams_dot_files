@@ -46,8 +46,8 @@ function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
 
+# NOTE: this completion code the most time to load, relatively speaking (say 1sec)
 # enable programmable completion for git
-# NOTE: this completion code the most time to load, relatively speaking (say 1/2sec)
 git_completion_file=~/.zsh/git-completion.bash
 if [ -f "$git_completion_file" ]; then
     zstyle ':completion:*:*:git:*' script $git_completion_file
@@ -60,16 +60,7 @@ unset git_completion_file
 
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh
-
-load_or_err ~/.fzf.zsh
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
-if [ -f ~/.lessfilter ]; then
-    export LESS='-R'
-    export LESSOPEN='|~/.lessfilter %s'
-fi
+load_or_err ~/.fzf.zsh   # "**" autocomletion and alt-c/ctrl-r/ctrl-t
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
