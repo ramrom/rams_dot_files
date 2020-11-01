@@ -171,6 +171,16 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
              --preview 'git show --color=always {} | head -'$LINES
 }
 
+function ffgb() {
+  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+  local ht="100%"; [ -n "$half" ] && ht="50%"
+
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+  fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES  |
+  sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
+}
+
 # $1 - optional file to git log on, otherwise while repo commit history
 # FIXME: if i multiselect, pbcopy only has one copy
 function ffgl() {
