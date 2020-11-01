@@ -171,12 +171,25 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
              --preview 'git show --color=always {} | head -'$LINES
 }
 
+# $1 - optional file to git log on, otherwise while repo commit history
 function ffgl() {
-    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-    [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
-    local ht="100%"; [ -n "$half" ] && ht="50%"
-    git log --color=always --oneline $1 | fzf --ansi --multi --height=$ht \
-        --preview 'git show --color=always {+1}' --preview-window=:wrap
+  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+  [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
+  local ht="100%"; [ -n "$half" ] && ht="50%"
+
+  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $1 |
+  fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+    --header 'Press CTRL-S to toggle sort' --preview-window=:wrap \
+    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
+  grep -o "[a-f0-9]\{7,\}"
+}
+
+function ffgs() {
+  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+  git -c color.status=always status --short |
+  fzf --height 50% --border -m --ansi --nth 2..,.. \
+    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
+  cut -c4- | sed 's/.* -> //'
 }
 
 # TODO: add fzf --expect and optionally edit file if expect given
