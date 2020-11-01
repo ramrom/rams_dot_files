@@ -1,4 +1,4 @@
-TMUX:
+# TMUX:
 - `prefix + ?` - show the current key bindings
 - in copymode
     - space starts selection(or reset it), enter to end/copy it

@@ -78,6 +78,9 @@ source fooscript    # run script in current shell, zsh, bash works too
 . fooscript         # bash cononical way to source, doesnt work in zsh
 . ./fooscript       # force execute, executes even if file perm doesnt have execute, works in bash and zsh
 
+# FC, edit last command in editor and execute, also list old commands
+fc
+
 # bash/posix/zsh: delete a function or a variable
 unset foo
 
