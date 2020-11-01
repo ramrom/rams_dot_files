@@ -270,9 +270,9 @@ function ffch() {
 
 # fzf on chrome bookmarks
 function ffcb() {
-     bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+    bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
 
-     jq_script='
+    jq_script='
         def ancestors: while(. | length >= 2; del(.[-1,-2]));
         . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
 
