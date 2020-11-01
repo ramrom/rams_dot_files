@@ -248,7 +248,7 @@ function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
 function rgfst() { RG_FILTER="-tscala" rgf $1; }
 
 # fzf on google history
-function fch() {
+function ffch() {
   local cols sep google_history open
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
@@ -269,7 +269,7 @@ function fch() {
 }
 
 # fzf on chrome bookmarks
-function fcb() {
+function ffcb() {
      bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
 
      jq_script='
@@ -281,6 +281,10 @@ function fcb() {
         | fzf --ansi \
         | cut -d$'\t' -f2 \
         | xargs open
+}
+
+function fapt() {
+    apt list | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
