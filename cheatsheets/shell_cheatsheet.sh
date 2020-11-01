@@ -66,6 +66,9 @@ bindkey '^N' down-history
 bindkey '^r' history-incremental-search-backward
 export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
 
+# ZSH autocomplete
+/usr/share/zsh/5.3/functions # osx dir of autocompletions (zsh ver 5.7.1 for catalina)
+
 ### EXECUTION ENVIRONENT
 # non-interactive shells, like when running a shell script
     # aliases are not expanded
