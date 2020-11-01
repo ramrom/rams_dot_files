@@ -172,6 +172,7 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
 }
 
 # $1 - optional file to git log on, otherwise while repo commit history
+# FIXME: if i multiselect, pbcopy only has one copy
 function ffgl() {
   git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
   [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
@@ -179,6 +180,7 @@ function ffgl() {
 
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $1 |
   fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+    --bind 'ctrl-y:execute-silent(grep -o "[a-f0-9]\{7,\}" <<< {} | pbcopy)+abort' \
     --header 'Press CTRL-S to toggle sort' --preview-window=:wrap \
     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
   grep -o "[a-f0-9]\{7,\}"
