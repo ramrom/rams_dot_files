@@ -72,7 +72,7 @@ gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
 # quitting by hitting F10 will remember settings in .htoprc
 htop
 
-# IOTOP - top like temrinal UI, but show io/disk usage by process
+# IOTOP - top like temrinal UI, but show io/disk usage by process (on osx and linux)
 sudo iotop -o
 
 # sysstat (linux pkg with many tools), has great colors
