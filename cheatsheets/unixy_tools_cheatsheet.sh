@@ -41,6 +41,9 @@ wc -l   # count # of lines
 # sort - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line
 
+# uniq - remove identical value **adjacent** lines, use sort first if u want to remove non adjacent dups
+echo "foo\nfoo\n\bar" | uniq        # will print one foo and then bar
+
 # XARGS - read lines from stdin and execute a command on each line
 echo "foo bar baz" | xargs -t echo    # -t prints what the command being run is for every iteration, good for debugging
 echo "foo bar baz" | xargs -t -n 1 echo  # -n specifies max number of args to take for each iteration
