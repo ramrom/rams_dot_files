@@ -145,63 +145,63 @@ function fk() {
 }
 
 function ff() {
-  local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
-  local fzf_def="$FZF_DEFAULT_COMMAND"
-  [ "$1" = "h" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
-  out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
-      --header='ctrl-e->vim, ctrl-o->open, ctrl-u->cd, ctrl-y->pbcopy' \
-      --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
-      --expect='ctrl-o,ctrl-e,ctrl-u' \
-      --preview 'bat --style=numbers --color=always {} | head -500' \
-      --preview-window=:wrap)
-  key=$(echo "$out" | head -1)
-  file=$(echo "$out" | tail -1)
-  if [ -n "$file" ]; then
-    case "$key" in
-        "ctrl-o") open "$file" ;;
-        "ctrl-u") cd "$(dirname "$file")" ;;
-        *) eval "${EDITOR:-vin} "$file"" ;;
-    esac
-  fi
+    local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
+    local fzf_def="$FZF_DEFAULT_COMMAND"
+    [ "$1" = "h" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
+    out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
+        --header='ctrl-e->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
+        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
+        --expect='ctrl-o,ctrl-e,ctrl-space' \
+        --preview 'bat --style=numbers --color=always {} | head -500' \
+        --preview-window=:wrap)
+    key=$(echo "$out" | head -1)
+    file=$(echo "$out" | tail -1)
+    if [ -n "$file" ]; then
+        case "$key" in
+            "ctrl-o") open "$file" ;;
+            "ctrl-space") cd "$(dirname "$file")" ;;
+            *) eval "${EDITOR:-vin} "$file"" ;;
+        esac
+    fi
 }
 
 function ffgt() {  # ff(fuzzy)g(git)t(tag)
-  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-  git tag --sort -version:refname | fzf --multi --preview-window right:80% \
-             --preview 'git show --color=always {} | head -'$LINES
+    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+    git tag --sort -version:refname | fzf --multi --preview-window right:80% \
+        --preview 'git show --color=always {} | head -'$LINES
 }
 
 function ffgb() {
-  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-  local ht="100%"; [ -n "$half" ] && ht="50%"
+    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+    local ht="100%"; [ -n "$half" ] && ht="50%"
 
-  git branch -a --color=always | grep -v '/HEAD\s' | sort |
-  fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
-    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES  |
-  sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
+    git branch -a --color=always | grep -v '/HEAD\s' | sort |
+    fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
+        --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES  |
+    sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
 }
 
 # $1 - optional file to git log on, otherwise while repo commit history
 # FIXME: if i multiselect, pbcopy only has one copy
 function ffgl() {
-  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-  [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
-  local ht="100%"; [ -n "$half" ] && ht="50%"
+    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+    [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
+    local ht="100%"; [ -n "$half" ] && ht="50%"
 
-  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $1 |
-  fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-    --bind 'ctrl-y:execute-silent(grep -o "[a-f0-9]\{7,\}" <<< {} | pbcopy)+abort' \
-    --header 'Press CTRL-S to toggle sort' --preview-window=:wrap \
-    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
-  grep -o "[a-f0-9]\{7,\}"
+    git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $1 |
+    fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+        --bind 'ctrl-y:execute-silent(grep -o "[a-f0-9]\{7,\}" <<< {} | pbcopy)+abort' \
+        --header 'ctrl-s->toggle sort,ctrl-y->pbcopy' --preview-window=:wrap \
+        --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
+    grep -o "[a-f0-9]\{7,\}"
 }
 
 function ffgs() {
-  git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-  git -c color.status=always status --short |
-  fzf --height 50% --border -m --ansi --nth 2..,.. \
-    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
-  cut -c4- | sed 's/.* -> //'
+    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
+    git -c color.status=always status --short |
+    fzf --height 50% --border -m --ansi --nth 2..,.. \
+        --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
+    cut -c4- | sed 's/.* -> //'
 }
 
 # TODO: add fzf --expect and optionally edit file if expect given
@@ -216,17 +216,27 @@ function frg() {
 }
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
-# TODO: preview window fails
+# NOTE: -e needed in case of empty RG_FITLER string, rg thinks empty string is pattern query
 # TODO: add fzf --expect and optionally edit file if expect given
 function rgf() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
     # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
-    rg "$RG_FILTER" --files-with-matches --no-messages "$1" "$rgdir" | fzf --preview \
-        "rg --ignore-case --pretty --context 10 '$1' {}"
-        # "rg \"$RG_FILTER\" --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
+    local out=$(rg "$RG_FILTER" --files-with-matches --no-messages -e "$1" "$rgdir" |
+        fzf --preview "rg \"$RG_FILTER\" --ignore-case --pretty --context 10 -e '$1' {}" \
+        --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
+        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space')
+        # fzf --preview "rg --ignore-case --pretty --context 10 -e '$1' {}"
         # "rg -tscala -g '!it/' -g '!test/' --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
+    key=$(echo "$out" | head -1)
+    file=$(echo "$out" | tail -1)
+    if [ -n "$file" ]; then
+        case "$key" in
+            "ctrl-space") cd "$(dirname "$file")" ;;
+            *) eval "${EDITOR:-vin} "$file"" ;;
+        esac
+    fi
 }
 
 #TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
