@@ -160,9 +160,10 @@ function ff() {
         case "$key" in
             "ctrl-o") open "$file" ;;
             "ctrl-space") cd "$(dirname "$file")" ;;
-            *) eval "${EDITOR:-vin} "$file"" ;;
+            "ctrl-e") eval "${EDITOR:-vin} "$file"" ;;
         esac
     fi
+    echo "$file"
 }
 
 function ffgt() {  # ff(fuzzy)g(git)t(tag)
@@ -223,19 +224,20 @@ function rgf() {
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
     # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
-    local out=$(rg "$RG_FILTER" --files-with-matches --no-messages -e "$1" "$rgdir" |
-        fzf --preview "rg \"$RG_FILTER\" --ignore-case --pretty --context 10 -e '$1' {}" \
+    local out=$(rg $RG_FILTER --files-with-matches --no-messages -e "$1" "$rgdir" |
+        fzf --preview "rg $RG_FILTER --ignore-case --pretty --context 10 -e '$1' {}" \
         --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space')
         # fzf --preview "rg --ignore-case --pretty --context 10 -e '$1' {}"
         # "rg -tscala -g '!it/' -g '!test/' --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
     key=$(echo "$out" | head -1)
-    file=$(echo "$out" | tail -1)
-    if [ -n "$file" ]; then
-        case "$key" in
-            "ctrl-space") cd "$(dirname "$file")" ;;
-            *) eval "${EDITOR:-vin} "$file"" ;;
-        esac
+    file=$(echo "$out" | tail -n+2)
+    if [ -n "$file" -a $(echo "$file" | wc -l) -eq 1 -a "$key" = "ctrl-space" ]; then
+        cd "$(dirname "$file")"
+    elif [ -n "$file" -a "$key" = "ctrl-e" ]; then
+        eval "${EDITOR:-vin} -p "$file""
+    else
+        echo "$file"
     fi
 }
 
