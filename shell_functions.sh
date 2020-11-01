@@ -172,6 +172,7 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
         --preview 'git show --color=always {} | head -'$LINES
 }
 
+# TODO: add binding to checkout a branch
 function ffgb() {
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     local ht="100%"; [ -n "$half" ] && ht="50%"
@@ -184,6 +185,7 @@ function ffgb() {
 
 # $1 - optional file to git log on, otherwise while repo commit history
 # FIXME: if i multiselect, pbcopy only has one copy
+# TODO: add binding to checkout a commit
 function ffgl() {
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
@@ -244,6 +246,42 @@ function rgf() {
 #TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
 function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
 function rgfst() { RG_FILTER="-tscala" rgf $1; }
+
+# fzf on google history
+function fch() {
+  local cols sep google_history open
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+
+  if [ "$(uname)" = "Darwin" ]; then
+    google_history="$HOME/Library/Application Support/Google/Chrome/Default/History"
+    open=open
+  else
+    google_history="$HOME/.config/google-chrome/Default/History"
+    open=xdg-open
+  fi
+  cp -f "$google_history" /tmp/h
+  sqlite3 -separator $sep /tmp/h \
+    "select substr(title, 1, $cols), url
+     from urls order by last_visit_time desc" |
+  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+}
+
+# fzf on chrome bookmarks
+function fcb() {
+     bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+
+     jq_script='
+        def ancestors: while(. | length >= 2; del(.[-1,-2]));
+        . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
+
+    jq -r "$jq_script" < "$bookmarks_path" \
+        | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
+        | fzf --ansi \
+        | cut -d$'\t' -f2 \
+        | xargs open
+}
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
 function findgrepp() { find . -type f -regex $1 -exec grep $2 ; }
@@ -761,7 +799,7 @@ function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 # TODO: WIP
 function git_ctag_update() {
-    [ ! -f tags ]  && ctag_create && return 0 || return 1
+    [ ! -f tags ] && { ctag_create && return 0 || return 1; }
     if [ -d .git ]; then
         local commit=$(git rev-parse HEAD)
         if [ -f ctag_git_ver ]; then
