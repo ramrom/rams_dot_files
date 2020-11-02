@@ -81,6 +81,10 @@ source fooscript    # run script in current shell, zsh, bash works too
 # FC, edit last command in editor and execute, also list old commands
 fc
 
+# r, builtin in zsh, basiscally replays the last command in history
+ls
+r   # will execute `ls`
+
 # bash/posix/zsh: delete a function or a variable
 unset foo
 

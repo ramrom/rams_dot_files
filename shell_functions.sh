@@ -191,7 +191,7 @@ function ffgl() {
     [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
     local ht="100%"; [ -n "$half" ] && ht="50%"
 
-    git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $1 |
+    git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $@ |
     fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
         --bind 'ctrl-y:execute-silent(grep -o "[a-f0-9]\{7,\}" <<< {} | pbcopy)+abort' \
         --header 'ctrl-s->toggle sort,ctrl-y->pbcopy' --preview-window=:wrap \
