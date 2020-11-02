@@ -23,6 +23,8 @@ if [ $(uname) = "Linux" ]; then
     export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 fi
 
+export FCEDIT=vim
+
 # Linux bin name for fd is fdfind
 fdname="fd"
 [ $(uname) = "Linux" ] && fdname="fdfind"
