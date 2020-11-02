@@ -79,6 +79,7 @@ source fooscript    # run script in current shell, zsh, bash works too
 . ./fooscript       # force execute, executes even if file perm doesnt have execute, works in bash and zsh
 
 # FC, edit last command in editor and execute, also list old commands
+# change default editor with FCEDIT env var
 fc
 
 # r, builtin in zsh, basiscally replays the last command in history
