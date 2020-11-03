@@ -59,7 +59,7 @@ echo "foo bar baz" | xargs -I _ sh -c 'echo before; echo "_"; echo after' # sh t
 # HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
 tail foofile  # last 10 lines
-tail -n+3 foofile # get all lines starting from line 2 and on
+tail -n+3 foofile # get all lines starting from line 3 and on
 tail -f foofile  # spit out last lines and continue to print them as new ones are written
 
 # BC - float point math
