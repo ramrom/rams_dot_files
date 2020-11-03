@@ -131,8 +131,9 @@ function fmv() {
 # fuzzy search aliases and functions, with previews for some sources
 # TODO: when safn replacement includes scripts, preview those too
 function ffsn() {
+    local defcmd=type; [ "$(uname)" = "Darwin" ] && defcmd=which
     : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_aliases.sh"}"
-    safn | fzf --preview "$fzf_safn_preview_sources; which {} | bat --color=always -l sh" \
+    safn | fzf --preview "$fzf_safn_preview_sources; $defcmd {} | bat --color=always -l sh" \
         --preview-window=:wrap --preview-window right:70%
 }
 
