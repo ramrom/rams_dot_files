@@ -51,7 +51,11 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
 - git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
 - if you use ssh-agent, and load multiple keys, it will only try the first key, so only load the single proper key
 
-## GITHUB AUTH
+
+## GITHUB
+- wiki: https://help.github.com/en/github/building-a-strong-community/adding-or-editing-wiki-pages
+
+### AUTH
 - TFA(two factor auth):
     - browser login requires the TFA
     - local cli, on a push/write to public repo or anything on private repo
