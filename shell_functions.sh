@@ -97,7 +97,10 @@ function find_mult_hardlink() {
     fi
 }
 
-function yts_query() { http https://yts.mx/ajax/search query=="$1"; }
+function yts_query() {
+    http -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
+    jq . /tmp/yts_query
+}
 
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
@@ -802,22 +805,22 @@ function gitclean() {
 
 function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
-# TODO: WIP
 function git_ctag_update() {
+    local commit=$(git rev-parse HEAD) || { echo $(ansi256 "pwd: $(pwd), NOT a git repo!") && return 1; }
+    [ ! -d .git ] && { echo $(ansi256 "NOT at base of git repo!") && return 1; }
     [ ! -f tags ] && { ctag_create && return 0 || return 1; }
-    if [ -d .git ]; then
-        local commit=$(git rev-parse HEAD)
-        if [ -f ctag_git_ver ]; then
-            if [ "$(cat ctag_git_ver)" != "$commit" ]; then
-                echo ${commit} > ctag_git_ver
-                ctag_create
-            fi
+    if [ -f ctag_git_ver -a -f tags ]; then
+        if [ "$(cat ctag_git_ver)" = "$commit" ]; then
+            [ -n "$verbose" ] && echo $(fg=yellow ansi256 "commit $commit matches, ctags not updated")
         else
-            echo ${commit} > ctag_git_ver
+            [ -n "$verbose" ] && echo $(fg=yellow ansi256 "commit $commit DOES NOT match, ctags created")
             ctag_create
+            echo ${commit} > ctag_git_ver
         fi
     else
+        [ -n "$verbose" ] && echo $(fg=yellow ansi256 "no tags file or ctag_git_ver file, creating ctags")
         ctag_create
+        echo ${commit} > ctag_git_ver
     fi
 }
 
