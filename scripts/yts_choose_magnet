@@ -1,10 +1,11 @@
 #!/bin/bash
 command -v http > /dev/null || { echo "http bin(HTTPie) doesnt exist!" && exit 1; }
 
-resfile=res
+resfile=/tmp/yts_movie_links
+search_result_file=/tmp/yts_query
 printf "\nEnter Query: "; read resultsinput
-http --download --output movie_results https://yts.mx/ajax/search query=="$resultsinput"
-movie_choices=$(jq -r '.data[].title' movie_results)
+http --download --output $search_result_file https://yts.mx/ajax/search query=="$resultsinput"
+movie_choices=$(jq -r '.data[].title' $search_result_file)
 echo ""
 
 IFS=$'\r\n'
@@ -15,7 +16,7 @@ do
     break;
 done
 
-movie_link=$(jq -r --arg INDX $index '.data[($INDX | tonumber) - 1].url' movie_results)
+movie_link=$(jq -r --arg INDX $index '.data[($INDX | tonumber) - 1].url' $search_result_file)
 
 http --download --output $resfile "$movie_link"
 
@@ -36,4 +37,5 @@ magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed 
 echo $magnet
 
 
+unset search_result_file
 unset resfile
