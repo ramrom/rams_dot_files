@@ -288,7 +288,8 @@ function ffcb() {
 }
 
 function fapt() {
-    apt list | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
+    local opts="--installed"; [ "$1" = "s" ] && unset opts
+    apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
