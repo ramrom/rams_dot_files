@@ -6,6 +6,9 @@
     # zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
         # order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
 
+# bash shell expansion order (for zsh too i think)
+# https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
+
 # Bash (and AFAIK zsh)
     # good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 set -e # exit script/shell if any command returns with non-zero
