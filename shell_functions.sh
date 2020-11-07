@@ -213,7 +213,7 @@ function ffgs() {
 
 # TODO: add fzf --expect and optionally edit file if expect given
 # TODO: add preview for more context
-function frg() {
+function frgp() {  # frg p(phony)
     INITIAL_QUERY=""
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
     FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
@@ -225,13 +225,13 @@ function frg() {
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 # NOTE: -e needed in case of empty RG_FITLER string, rg thinks empty string is pattern query
 # TODO: add fzf --expect and optionally edit file if expect given
-function rgf() {
+function frg() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
     # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
     local out=$(rg $RG_FILTER --files-with-matches --no-messages -e "$1" "$rgdir" |
-        fzf --preview "rg $RG_FILTER --ignore-case --pretty --context 10 -e '$1' {}" \
+        fzf --exit-0 --preview "rg $RG_FILTER --pretty --context 10 -e '$1' {}" \
         --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space')
         # fzf --preview "rg --ignore-case --pretty --context 10 -e '$1' {}"
@@ -806,19 +806,20 @@ function gitclean() {
 function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 function git_ctag_update() {
-    local commit=$(git rev-parse HEAD) || { echo $(ansi256 "pwd: $(pwd), NOT a git repo!") && return 1; }
-    [ ! -d .git ] && { echo $(ansi256 "NOT at base of git repo!") && return 1; }
-    [ ! -f tags ] && { ctag_create && return 0 || return 1; }
+    local commit=$(git rev-parse HEAD) || { echo $(fg=red ansi256 "pwd: $(pwd), NOT a git repo!") && return 1; }
+    [ ! -d .git ] && { echo $(fg=red ansi256 "NOT at base of git repo!") && return 1; }
+
+    local create_msg=$(fg=yellow ansi256 "writing ctag file")
     if [ -f ctag_git_ver -a -f tags ]; then
         if [ "$(cat ctag_git_ver)" = "$commit" ]; then
             [ -n "$verbose" ] && echo $(fg=yellow ansi256 "commit $commit matches, ctags not updated")
         else
-            [ -n "$verbose" ] && echo $(fg=yellow ansi256 "commit $commit DOES NOT match, ctags created")
+            [ -n "$verbose" ] && echo $(fg=red ansi256 "commit $commit DOES NOT match, ")"$create_msg"
             ctag_create
             echo ${commit} > ctag_git_ver
         fi
     else
-        [ -n "$verbose" ] && echo $(fg=yellow ansi256 "no tags file or ctag_git_ver file, creating ctags")
+        [ -n "$verbose" ] && echo $(fg=red ansi256 "NO tags or ctag_git_ver file, ")"$create_msg"
         ctag_create
         echo ${commit} > ctag_git_ver
     fi
