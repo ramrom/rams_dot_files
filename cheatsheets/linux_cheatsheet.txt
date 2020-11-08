@@ -164,6 +164,9 @@ apt-cache search --names-only .*foo.*
 apt search --names-only *something*
     - same
 
+### UNATTENDED-UPGRADE (update/upgrade security fixes)
+sudo unattended-upgrade
+
 ## SNAP:
 -----------------
 - snap invented by ubuntu, more rapid/flexible package system than .deb/apt
