@@ -8,6 +8,7 @@
 
 # bash shell expansion order (for zsh too i think)
 # https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
+# korn shell but insightful: https://docstore.mik.ua/orelly/unix/ksh/ch07_03.htm
 
 # Bash (and AFAIK zsh)
     # good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
