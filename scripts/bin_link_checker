@@ -5,7 +5,7 @@
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 
-cmds_defined ansi256 || exit 1
+cmds_defined readlink ansi256 || exit 1
 
 binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin
@@ -13,16 +13,19 @@ sourcedir=~/rams_dot_files/scripts
 [ ! -f "$binlinksfile" ] && echo "file $binlinksfile NOT found!" && exit 1
 
 while read binname; do
+    symlink="${bindir}/${binname}"
+    linktarget=$(readlink "$symlink")
+    expectedlinktarget="${sourcedir}/${binname}"
     [ -n "$verbose" ] && echo "Checking: "$(fg=yellow ansi256 "$binname")
-    if [ -L "$bindir/$binname" ]; then
-        if [ ! -f "$bindir/$binname" ]; then
-            echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink broken")
-        fi
-    else
-        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 " is not a symlink in ${bindir}")
-    fi
-
-    if [ ! -x "${sourcedir}/${binname}" ]; then
+    if [ ! -L "${symlink}" ]; then
+        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink doesnt exist in ${bindir}")
+    elif [ ! -f "${symlink}" ]; then
+        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink pointing to nonexistent file")
+    elif [ "${linktarget}" != "${expectedlinktarget}" ]; then
+        echo $(fg=red bld=1 ansi256 "${binname}")\
+            $(fg=red ansi256 "points to ${linktarget}, should point to ${expectedlinktarget}")
+    elif [ ! -x "${sourcedir}/${binname}" ]; then
         echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 " is not an executable in ${sourcedir}")
     fi
+
 done<"$binlinksfile"

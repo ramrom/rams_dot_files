@@ -57,6 +57,7 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
+# FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
 function print_alias_funcs_scripts() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
@@ -146,6 +147,7 @@ function fmv() {
     echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
 }
 
+# FIXME: aliases fail to preview in ubuntu/bash
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
