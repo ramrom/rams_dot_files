@@ -38,8 +38,8 @@ alias tmr='transmission-remote'
 
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
 alias rf='source ~/rams_dot_files/shell_functions.sh'
-alias saf='search_alias_funcs_scripts'
-alias safn='aliasname=1 funcname=1 search_alias_funcs_scripts'
+alias paf='print_alias_funcs_scripts'
+alias pafn='aliasname=1 funcname=1 print_alias_funcs_scripts'
 
 # backup and mount
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
