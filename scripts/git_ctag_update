@@ -1,6 +1,11 @@
 #!/bin/sh
 
+# TODO: need to make ctag_create a script
+
+# TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 source ~/rams_dot_files/shell_functions.sh
+
+cmds_defined ansi256 ctag_create || exit 1
 
 commit=$(git rev-parse HEAD 2>&1) || { echo $(fg=red ansi256 "pwd: $(pwd), NOT a git repo!") && exit 1; }
 [ ! -d .git ] && { echo $(fg=red ansi256 "NOT at base of git repo!") && exit 1; }

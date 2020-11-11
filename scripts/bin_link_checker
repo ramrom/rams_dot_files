@@ -3,6 +3,8 @@
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 
+cmds_defined ansi256 || exit 1
+
 binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin
 sourcedir=~/rams_dot_files/scripts
