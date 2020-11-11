@@ -163,7 +163,8 @@ function fk() {
 function ff() {
     local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
     local fzf_def="$FZF_DEFAULT_COMMAND"
-    [ "$1" = "h" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
+    [ "$1" = "h" -o "$1" = ~ ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
+    [ "$1" = "/" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' /"
     out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
         --header='ctrl-e->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
