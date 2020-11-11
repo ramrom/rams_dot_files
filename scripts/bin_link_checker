@@ -21,11 +21,11 @@ while read binname; do
         echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink doesnt exist in ${bindir}")
     elif [ ! -f "${symlink}" ]; then
         echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink pointing to nonexistent file")
+    elif [ ! -x "${symlink}" ]; then
+        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink pointing to nonexecutable file")
     elif [ "${linktarget}" != "${expectedlinktarget}" ]; then
         echo $(fg=red bld=1 ansi256 "${binname}")\
             $(fg=red ansi256 "points to ${linktarget}, should point to ${expectedlinktarget}")
-    elif [ ! -x "${sourcedir}/${binname}" ]; then
-        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 " is not an executable in ${sourcedir}")
     fi
 
 done<"$binlinksfile"
