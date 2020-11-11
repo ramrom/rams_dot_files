@@ -222,6 +222,11 @@ do
     i=$((i + 1))
 done
 
+# read lines from file
+while read p; do
+  echo "$p"
+done <foofile.txt
+
 # case statements
 case "$FOO" in
 partialstring*|someother*)
