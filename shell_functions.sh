@@ -116,13 +116,14 @@ function print_type() {
     echo $type
 }
 
-function preview_thing() {
+alias bw='batwhich'
+function batwhich() {
     local type=$(print_type "$1")
     case "$type" in
         function|alias)
             local defcmd=type; [ "$(uname)" = "Darwin" ] && defcmd=which
             $defcmd "$1" | bat --color=always -l sh ;;
-        script) bat --color=always "$1" ;;
+        script) bat --color=always "$(which "$1")" ;;
         *) echo "UNKNOWN!!!!!" ;;
     esac
 }
@@ -147,7 +148,7 @@ function fmv() {
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
-    safn | fzf --preview "$fzf_safn_preview_sources; preview_thing {}" \
+    safn | fzf --preview "$fzf_safn_preview_sources; batwhich {}" \
         --preview-window=:wrap --preview-window right:70%
 }
 
@@ -324,13 +325,6 @@ function psxg() { psx | grep $1 | grep -v grep; }
 
 # go docs with syntax highlighting!
 function batgod() { go doc $@ | bat -l go; }
-
-alias bw='batwhich'
-function batwhich() {
-    local definition_cmd=which
-    [ $(detect_shell) = "bash" ] && definition_cmd=type
-    $definition_cmd $@ | bat -l sh
-}
 
 # e.g. "Some Title (2000) [1080p] [FOO]"
 function file_rename() {
