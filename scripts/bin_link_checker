@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ~/rams_dot_files/shell_functions.sh
+. ~/rams_dot_files/shell_functions.sh
 
 binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin
@@ -8,8 +8,8 @@ sourcedir=~/rams_dot_files/scripts
 [ ! -f "$binlinksfile" ] && echo "file $binlinksfile NOT found!" && exit 1
 
 while read binname; do
-    echo $binname
+    [ -n "$verbose" ] && echo "Checking: "$(fg=yellow ansi256 "$binname")
     if [ ! -f "$bindir/$binname" -o ! -x "${sourcedir}/${binname}" ]; then
-        echo $(fg=red ansi256 "${binname} not linked in ${bindir} or no executable in ${sourcedir}")
+        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 " not linked in ${bindir} or no executable in ${sourcedir}")
     fi
 done<"$binlinksfile"
