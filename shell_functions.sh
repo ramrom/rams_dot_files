@@ -61,13 +61,13 @@ function search_alias_funcs_scripts() {
     if [ $(detect_shell) = "zsh" ]; then
         local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
         local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
-        local scripts=$(fd . ~/bin)
+        local scripts=$(cd ~/bin; fd)
         { eval $alias_cmd; eval $func_cmd; echo "$scripts"; } | grep "$1"
     else # Assuming BASH
         # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
         local alias_cmd="alias | cut -c 7-"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1 | cut -c 7-'
-        local scripts=$(fd . ~/bin)
+        local scripts=$(cd ~/bin; fd)
         { eval $alias_cmd; eval $func_cmd; echo "$scripts"; } | grep "$1"
     fi
 }
