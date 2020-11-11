@@ -149,7 +149,7 @@ function fmv() {
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
-    print_alias_funcs_scripts | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
+    pafn | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
         --preview-window=:wrap --preview-window right:70%
 }
 
