@@ -1,5 +1,6 @@
 # shell functions
 #TODO: get method 2/3 or all of them working
+#FIXME; ubuntu dash wont have either defined
 function detect_shell() {
     # METHOD 1:
     if [ -n "$BASH_VERSION" ]; then
@@ -111,7 +112,7 @@ function viln() { vin -p $(cat $1); }
 function print_type() {
     local type="function"
     command -v "$1" > /dev/null || type=undefined
-    command -v "$1" | grep "^\/" > /dev/null && type=script
+    command -v "$1" | grep "^\/" > /dev/null && type=file
     command -v "$1" | grep "^alias " > /dev/null && type=alias
     echo $type
 }
@@ -121,9 +122,9 @@ function batwhich() {
     local type=$(print_type "$1")
     case "$type" in
         function|alias)
-            local defcmd=type; [ "$(uname)" = "Darwin" ] && defcmd=which
+            local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd=which
             $defcmd "$1" | bat --color=always -l sh ;;
-        script) bat --color=always "$(which "$1")" ;;
+        file) bat --color=always "$(which "$1")" ;;
         *) echo "UNKNOWN!!!!!" ;;
     esac
 }
