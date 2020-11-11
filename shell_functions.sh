@@ -57,7 +57,7 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
-function search_alias_funcs_scripts() {
+function print_alias_funcs_scripts() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
         local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
@@ -148,8 +148,8 @@ function fmv() {
 
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
-    : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
-    safn | fzf --preview "$fzf_safn_preview_sources; batwhich {}" \
+    : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
+    print_alias_funcs_scripts | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
         --preview-window=:wrap --preview-window right:70%
 }
 
