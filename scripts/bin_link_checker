@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: check if symlink is valid
+
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 
@@ -12,8 +14,15 @@ sourcedir=~/rams_dot_files/scripts
 
 while read binname; do
     [ -n "$verbose" ] && echo "Checking: "$(fg=yellow ansi256 "$binname")
-    if [ ! -f "$bindir/$binname" -o ! -x "${sourcedir}/${binname}" ]; then
-        echo $(fg=red bld=1 ansi256 "${binname}")\
-            $(fg=red ansi256 " not linked in ${bindir} or no executable in ${sourcedir}")
+    if [ -L "$bindir/$binname" ]; then
+        if [ ! -f "$bindir/$binname" ]; then
+            echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink broken")
+        fi
+    else
+        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 " is not a symlink in ${bindir}")
+    fi
+
+    if [ ! -x "${sourcedir}/${binname}" ]; then
+        echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 " is not an executable in ${sourcedir}")
     fi
 done<"$binlinksfile"
