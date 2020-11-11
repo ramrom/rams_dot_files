@@ -3,6 +3,9 @@
 # to get keys of a object:
 echo "[1, 2, {"a":1,"b":2} ]" | jq '.[2] | keys'    # will output [ "a", "b" ]
 
+# quote keyname if it has special characters
+echo '{"a.b/c d#f": 1}' | jq '."a.b/c d#f "'   # will output 1
+
 # lenth of array:
 echo "[1, 2, 222] " | jq '. | length'    # will output 3
 

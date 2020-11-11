@@ -56,17 +56,19 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
-function search_alias_func() {
+function search_alias_funcs_scripts() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
         local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
         local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
-        { eval $alias_cmd; eval $func_cmd; } | grep "$1"
+        local scripts=$(fd . ~/bin)
+        { eval $alias_cmd; eval $func_cmd; echo "$scripts"; } | grep "$1"
     else # Assuming BASH
         # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
         local alias_cmd="alias | cut -c 7-"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1 | cut -c 7-'
-        { eval $alias_cmd; eval $func_cmd; } | grep "$1"
+        local scripts=$(fd . ~/bin)
+        { eval $alias_cmd; eval $func_cmd; echo "$scripts"; } | grep "$1"
     fi
 }
 
@@ -114,6 +116,17 @@ function print_type() {
     echo $type
 }
 
+function preview_thing() {
+    local type=$(print_type "$1")
+    case "$type" in
+        function|alias)
+            local defcmd=type; [ "$(uname)" = "Darwin" ] && defcmd=which
+            $defcmd "$1" | bat --color=always -l sh ;;
+        script) bat --color=always "$1" ;;
+        *) echo "UNKNOWN!!!!!" ;;
+    esac
+}
+
 ############# FZF ##############################
 
 # fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
@@ -132,11 +145,9 @@ function fmv() {
 }
 
 # fuzzy search aliases and functions, with previews for some sources
-# TODO: when safn replacement includes scripts, preview those too
 function ffsn() {
-    local defcmd=type; [ "$(uname)" = "Darwin" ] && defcmd=which
     : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_aliases.sh"}"
-    safn | fzf --preview "$fzf_safn_preview_sources; $defcmd {} | bat --color=always -l sh" \
+    safn | fzf --preview "$fzf_safn_preview_sources; preview_thing {}" \
         --preview-window=:wrap --preview-window right:70%
 }
 
@@ -229,13 +240,24 @@ function frg() {
     [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
     local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
     local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
-    # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
-    local out=$(rg $RG_FILTER --files-with-matches --no-messages -e "$1" "$rgdir" |
-        fzf --exit-0 --preview "rg $RG_FILTER --pretty --context 10 -e '$1' {}" \
+
+    local prev="rg $RG_FILTER --pretty --context 10 -e '$1' {}"
+    local cmd="rg $RG_FILTER --files-with-matches --no-messages -e "$1" $rgdir |
+        fzf --exit-0 --preview "eval $prev" \
         --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
-        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space')
+        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space'"
+    local out=$(eval "$cmd")
+
+
+    # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
+    # local out=$(rg $RG_FILTER --files-with-matches --no-messages -e "$1" $rgdir |
+    #     fzf --exit-0 --preview "rg $RG_FILTER --pretty --context 10 -e '$1' {}" \
+    #     --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
+    #     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space')
         # fzf --preview "rg --ignore-case --pretty --context 10 -e '$1' {}"
         # "rg -tscala -g '!it/' -g '!test/' --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
+
+
     key=$(echo "$out" | head -1)
     file=$(echo "$out" | tail -n+2)
     if [ -n "$file" -a $(echo "$file" | wc -l) -eq 1 -a "$key" = "ctrl-space" ]; then
