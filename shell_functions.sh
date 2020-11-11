@@ -145,8 +145,8 @@ function fmv() {
 }
 
 # fuzzy search aliases and functions, with previews for some sources
-function ffsn() {
-    : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_aliases.sh"}"
+function fsn() {
+    : "${fzf_safn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
     safn | fzf --preview "$fzf_safn_preview_sources; preview_thing {}" \
         --preview-window=:wrap --preview-window right:70%
 }
@@ -664,7 +664,8 @@ function tmux_default_winlist() {
 alias tms='tmux_status'
 function tmux_status() {
     local ver=$(tmux_version)
-    [ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && return 1
+    [ $(echo "$ver < 2.9" | bc) -eq 1 ] && \
+        echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && return 1
     [ "$1" = "off" ] && tmux_status_reset
     if [ "$1" = "on" ]; then
         tmux set status-interval 5
