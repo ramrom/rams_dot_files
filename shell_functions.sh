@@ -156,6 +156,7 @@ function fmv() {
 }
 
 # FIXME: aliases fail to preview in ubuntu/bash
+    # fzf --preview "alias foo='echo hi'; foo"  ---- FAILS, WHY????
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
