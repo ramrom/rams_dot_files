@@ -63,6 +63,13 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
+function linkbin() {
+    local fullpathcmd="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpathcmd="whence -c"
+    eval "$fullpathcmd" "$1" > /dev/null || { echo "$1 invalid file"; return 1; }
+    local fullpath=$(eval $fullpathcmd "$1")
+    ln -s "$fullpath" ~/bin/$(basename "$1")
+}
+
 # FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
 # TODO: figure out how to print all hashed executables like zsh in bash
 function print_alias_funcs_scripts() {
@@ -119,9 +126,10 @@ function viln() { vin -p $(cat $1); }
 # introspect if command is alias or function or script
 function print_type() {
     local type="function"
-    command -v "$1" > /dev/null || type=undefined
-    command -v "$1" | grep "^\/" > /dev/null && type=file
+    [ -x "$1" ] && type=executable
+    command -v "$1" | grep "^\/" > /dev/null && type=executable
     command -v "$1" | grep "^alias " > /dev/null && type=alias
+    command -v "$1" > /dev/null || type=undefined
     echo $type
 }
 
@@ -132,7 +140,7 @@ function batwhich() {
         function|alias)
             local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd="whence -f"
             eval $defcmd "$1" | bat --color=always -l sh ;;
-        file)
+        executable)
             local fullpath="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpath="whence -c"
             bat --color=always "$(eval $fullpath "$1")" ;;
         *) echo "print_type returned $type for "$1", unhandled by $0!" ;;

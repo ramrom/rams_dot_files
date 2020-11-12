@@ -1,2 +1,2 @@
-git_ctag_update
-bin_link_checker
+git-ctag-update
+bin-link-checker
