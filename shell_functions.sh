@@ -64,8 +64,9 @@ function debug_vars() {
 }
 
 function linkbin() {
-    local fullpathcmd="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpathcmd="whence -c"
-    eval "$fullpathcmd" "$1" > /dev/null || { echo "$1 invalid file"; return 1; }
+    # local fullpathcmd="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpathcmd="whence -c"
+    local fullpathcmd=realpath
+    command -v "$1" > /dev/null || { echo "$1 invalid file"; return 1; }
     local fullpath=$(eval $fullpathcmd "$1")
     ln -s "$fullpath" ~/bin/$(basename "$1")
 }
