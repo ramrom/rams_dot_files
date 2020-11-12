@@ -363,8 +363,10 @@ which foo
 which -a foo     # return all paths of bins matching foo in PATH
 
 # ZSH - rebuild hash table cache of commands/bins in PATH
+hash    # print all hashed commands
+hash -m "*foo*" # print only commands with foo somewhere in it
 rehash
-hash -rf
+hash -r     # empty the hash table, adding -f will make it rebuild immediately
 
 # VARIABLE INTROSPECTION
 # see https://stackoverflow.com/questions/307503/whats-a-concise-way-to-check-that-environment-variables-are-set-in-a-unix-shell
