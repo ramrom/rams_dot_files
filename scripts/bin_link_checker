@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: check if symlink is valid
-
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 

@@ -351,6 +351,12 @@ type -t foo     # prints just alias/function/file/builtin, nothing (exit code 1)
                     # zsh and ubuntu /bin/sh does NOT support -t
 type -a foo     # dislay all info, including all hits. if foo was alias and 2 bins, would show all 3 in precedent order
 
+# WHENCE - this is zsh builtin idiom
+# whence -f is equivalent to type in bash, will print func definition
+whence -f foofunc
+# whence -c will print full path to bin, like which
+whence -c foobin
+
 # WHICH is bin, will return path of bin, exit non-zero otherwise
 # zsh will say if it's built-in/keyword/alias/bin/(prints out func def), bash only shows bins, other types return error
 which foo
