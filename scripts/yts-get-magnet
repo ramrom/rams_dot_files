@@ -1,5 +1,9 @@
 #!/bin/bash
-command -v http > /dev/null || { echo "http bin(HTTPie) doesnt exist!" && exit 1; }
+# TODO: try to make this sh script
+
+source ~/rams_dot_files/shell_functions.sh
+
+caller=$0 cmds_defined http || exit 1
 
 resfile=/tmp/yts_movie_links
 search_result_file=/tmp/yts_query
