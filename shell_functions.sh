@@ -18,8 +18,9 @@ function detect_shell() {
 
 # return 0 if all are defined, spit out error with exit 1 if one is not
 function cmds_defined() {
+    lcaller=""; [ -n "$caller" ] && lcaller="caller: $caller -- "
     for cmd in "$@"; do
-        command -v $cmd > /dev/null || { echo >&2 "$cmd not defined!" && return 1; }
+        command -v $cmd > /dev/null || { echo >&2 "${lcaller}${cmd} not defined!" && return 1; }
     done
 }
 
@@ -128,7 +129,7 @@ function batwhich() {
         file)
             local fullpath="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpath="whence -c"
             bat --color=always "$(eval $fullpath "$1")" ;;
-        *) echo "print_type returned $type for "$1", unhandled by batwhich!" ;;
+        *) echo "print_type returned $type for "$1", unhandled by $0!" ;;
     esac
 }
 

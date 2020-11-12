@@ -3,7 +3,7 @@
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 
-cmds_defined readlink ansi256 || exit 1
+caller=$0 cmds_defined readlink ansi256 || exit 1
 
 binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin
