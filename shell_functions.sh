@@ -25,13 +25,15 @@ function cmds_defined() {
 }
 
 function require_vars() {
+    caller_msg=""; [ -n "$caller" ] && caller_msg="caller: $caller -- "
     local vars_required=0
     for arg in "$@"; do
         local var_value=$(eval "echo \$${arg}")
 
         if [ -z "$var_value" ]; then
             vars_required=1
-            [ -z "$quiet" ] && echo "RLY-ERROR: Variable "$(fg=yellow ansi256 "$arg")" is required!"
+            [ -z "$quiet" ] && \
+                echo "${caller_msg}RLY-ERROR: Variable "$(fg=yellow ansi256 "$arg")" is required!" >&2
         fi
     done
     [ "$vars_required" = "1" ] && return 1
