@@ -1,5 +1,5 @@
 # SKHDRC
 
-f15 : ~/bin/spotify_decrease_volume.scpt
-f16 : ~/bin/spotify_increase_volume.scpt
-f19 : ~/bin/spotify_toggle_play.scpt
+f15 : ~/bin/spotify-decrease-volume.scpt
+f16 : ~/bin/spotify-increase-volume.scpt
+f19 : ~/bin/spotify-toggle-play.scpt
