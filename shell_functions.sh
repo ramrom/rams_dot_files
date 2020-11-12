@@ -19,7 +19,7 @@ function detect_shell() {
 # return 0 if all are defined, spit out error with exit 1 if one is not
 function cmds_defined() {
     for cmd in "$@"; do
-        command -v $cmd > /dev/null || { echo "$cmd not defined!" && return 1; }
+        command -v $cmd > /dev/null || { echo >&2 "$cmd not defined!" && return 1; }
     done
 }
 
@@ -123,10 +123,10 @@ function batwhich() {
     local type=$(print_type "$1")
     case "$type" in
         function|alias)
-            local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd=which
-            $defcmd "$1" | bat --color=always -l sh ;;
-        file) bat --color=always "$(which "$1")" ;;
-        *) echo "UNKNOWN!!!!!" ;;
+            local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd="whence -f"
+            eval $defcmd "$1" | bat --color=always -l sh ;;
+        file) bat --color=always "$(whence -c "$1")" ;;
+        *) echo "print_type returned $type for "$1", unhandled by batwhich!" ;;
     esac
 }
 
