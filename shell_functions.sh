@@ -126,10 +126,11 @@ function viln() { vin -p $(cat $1); }
 # introspect if command is alias or function or script
 function print_type() {
     local type="function"
-    [ -x "$1" ] && type=executable
     command -v "$1" | grep "^\/" > /dev/null && type=executable
     command -v "$1" | grep "^alias " > /dev/null && type=alias
     command -v "$1" > /dev/null || type=undefined
+    # handle special case when executable is in current dir, command -v wont work
+    [ -x "$1" ] && type=executable
     echo $type
 }
 
