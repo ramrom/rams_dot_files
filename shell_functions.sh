@@ -91,7 +91,8 @@ function print_alias_funcs_scripts() {
 
 function list_funcs() {
     if [ $(detect_shell) = "zsh" ]; then
-        # "-l" newlines, "o" orders, "k" keynames (so func names only), "functions" is a associative array in zsh of funcs
+        # "-l" newlines, "o" orders, "k" keynames (so func names only),
+        # "functions" is a associative array in zsh of funcs
         print -l ${(ok)functions}
     else  # Assumes BASH
         typeset -F
@@ -104,21 +105,6 @@ function rrc() {
     else  # Assumes BASH
         source ~/.bash_profile && source ~/.bashrc
     fi
-}
-
-function find_mult_hardlink() {
-    # using find(linux):       find . -links +1 -type f -name '*' -printf '%i %p\n' | sort
-    [ -d "$1" ] || { echo "$1 not a directory!" && return 1; }
-    if [ "$(uname)" = "Darwin" ]; then
-        fd . -t f "$1" -x sh -c 'num=$(stat -f %l "{}"); (( "$num" > 1 )) && stat -f "%i %N" "{}" ' | sort -V
-    else
-        fd . -t f "$1" -x bash -c 'num=$(stat -c %h "{}"); (( "$num" > 1 )) && stat -c "%i %n" "{}" ' | sort -V
-    fi
-}
-
-function yts_query() {
-    http -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
-    jq . /tmp/yts_query
 }
 
 function vil() { vi -p $(cat $1); }
@@ -388,6 +374,21 @@ function file_rename_all() {
             echo $rename
         fi
     done
+}
+
+function find_mult_hardlink() {
+    # using find(linux):       find . -links +1 -type f -name '*' -printf '%i %p\n' | sort
+    [ -d "$1" ] || { echo "$1 not a directory!" && return 1; }
+    if [ "$(uname)" = "Darwin" ]; then
+        fd . -t f "$1" -x sh -c 'num=$(stat -f %l "{}"); (( "$num" > 1 )) && stat -f "%i %N" "{}" ' | sort -V
+    else
+        fd . -t f "$1" -x bash -c 'num=$(stat -c %h "{}"); (( "$num" > 1 )) && stat -c "%i %n" "{}" ' | sort -V
+    fi
+}
+
+function yts_query() {
+    http -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
+    jq . /tmp/yts_query
 }
 
 function display_notif() {
