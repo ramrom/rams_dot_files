@@ -1,5 +1,5 @@
-ctag-git-update
 bin-link-checker
+ctag-git-update
 spotify-decrease-volume.scpt
 spotify-increase-volume.scpt
 spotify-toggle-play.scpt
