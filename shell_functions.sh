@@ -125,7 +125,9 @@ function batwhich() {
         function|alias)
             local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd="whence -f"
             eval $defcmd "$1" | bat --color=always -l sh ;;
-        file) bat --color=always "$(whence -c "$1")" ;;
+        file)
+            local fullpath="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpath="whence -c"
+            bat --color=always "$(eval $fullpath "$1")" ;;
         *) echo "print_type returned $type for "$1", unhandled by batwhich!" ;;
     esac
 }
