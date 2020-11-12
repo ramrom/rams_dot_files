@@ -64,13 +64,14 @@ function debug_vars() {
 }
 
 # FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
+# TODO: figure out how to print all hashed executables like zsh in bash
 function print_alias_funcs_scripts() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
         local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
         local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
-        local scripts=$(cd ~/bin; fd)
-        { eval $alias_cmd; eval $func_cmd; echo "$scripts"; } | grep "$1"
+        local executables=$(hash | cut -d= -f1)
+        { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
     else # Assuming BASH
         # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
