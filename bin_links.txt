@@ -1,5 +1,6 @@
 bin-link-checker
 ctag-git-update
+yts-get-magnet
 spotify-decrease-volume.scpt
 spotify-increase-volume.scpt
 spotify-toggle-play.scpt
