@@ -1,4 +1,4 @@
-git-ctag-update
+ctag-git-update
 bin-link-checker
 spotify-decrease-volume.scpt
 spotify-increase-volume.scpt
