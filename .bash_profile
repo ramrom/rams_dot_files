@@ -19,11 +19,11 @@ function parse_git_branch() {
 
 function set_ps1_hostname() {
     # [ -z "${PS1_HOSTNAME}" ] && PS1_HOSTNAME="$(tput setaf 3)$(tput bold)\h"
-    [ -z "${BASH_PS1_HOSTNAME}" ] && BASH_PS1_HOSTNAME="$(bld=1 fg=003 ansi256 "\h")"
+    [ -z "${BASH_PS1_HOSTNAME}" ] && BASH_PS1_HOSTNAME="$(bld=1 fg=003 ansicolor "\h")"
     echo $BASH_PS1_HOSTNAME
 }
 
-function ansi256() {
+function ansicolor() {
     local maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
     local lfg=007;              [ -n "$fg" ] && lfg=$fg
     echo -e "${maybebld}\033[48;5;016;38;5;${lfg}m${1}\033[0m"
@@ -44,14 +44,14 @@ function build_my_prompt() {
   #    PS1="${PS1}${red}˟${exit_code}${reset} "    # Add green for success
   #fi
 
-  PS1="${PS1}$(fg=003 ansi256 "\u")"                # 3 - yellow, user
-  PS1="${PS1}$(bld=1 ansi256 "@")"
+  PS1="${PS1}$(fg=003 ansicolor "\u")"                # 3 - yellow, user
+  PS1="${PS1}$(bld=1 ansicolor "@")"
   PS1="${PS1}${ps1_hostname} "                      # hostname with color from env
-  PS1="${PS1}$(bld=1 fg=004 ansi256 "(")"           # 4 - blue
-  PS1="${PS1}$(fg=006 ansi256 "\w")"                # 6 -cyan, working dir
-  PS1="${PS1}$(bld=1 fg=004 ansi256 ") <")"
-  PS1="${PS1}$(fg=005 ansi256 "${git_branch}")"     # 5 - magenta, git branch
-  PS1="${PS1}$(bld=1 fg=004 ansi256 ">")"
+  PS1="${PS1}$(bld=1 fg=004 ansicolor "(")"           # 4 - blue
+  PS1="${PS1}$(fg=006 ansicolor "\w")"                # 6 -cyan, working dir
+  PS1="${PS1}$(bld=1 fg=004 ansicolor ") <")"
+  PS1="${PS1}$(fg=005 ansicolor "${git_branch}")"     # 5 - magenta, git branch
+  PS1="${PS1}$(bld=1 fg=004 ansicolor ">")"
 
   PS1="${PS1}\n$ "
 }
