@@ -63,14 +63,6 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
-function binlink() {
-    # local fullpathcmd="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpathcmd="whence -c"
-    local fullpathcmd=realpath
-    command -v "$1" > /dev/null || { echo "$1 invalid file"; return 1; }
-    local fullpath=$(eval $fullpathcmd "$1")
-    ln -s "$fullpath" ~/bin/$(basename "$1")
-}
-
 # FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
 # TODO: figure out how to print all hashed executables like zsh in bash
 function print_alias_funcs_scripts() {
@@ -107,9 +99,6 @@ function rrc() {
     fi
 }
 
-function vil() { vi -p $(cat $1); }
-function viln() { vin -p $(cat $1); }
-
 # introspect if command is alias or function or script
 function print_type() {
     local type="function"
@@ -134,6 +123,17 @@ function batwhich() {
         *) echo "print_type returned $type for "$1", unhandled by $0!" ;;
     esac
 }
+
+function binlink() {
+    # local fullpathcmd="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpathcmd="whence -c"
+    local fullpathcmd=realpath
+    command -v "$1" > /dev/null || { echo "$1 invalid file"; return 1; }
+    local fullpath=$(eval $fullpathcmd "$1")
+    ln -s "$fullpath" ~/bin/$(basename "$1")
+}
+
+function vil() { vi -p $(cat $1); }
+function viln() { vin -p $(cat $1); }
 
 ############# FZF ##############################
 
