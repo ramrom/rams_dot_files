@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # TODO: try to make this sh script
 
 source ~/rams_dot_files/shell_functions.sh
