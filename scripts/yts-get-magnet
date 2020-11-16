@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # TODO: try to make this sh script
 
-source ~/rams_dot_files/shell_functions.sh
+. ~/rams_dot_files/shell_functions.sh
 
 caller=$0 cmds_defined http || exit 1
 
