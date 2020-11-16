@@ -26,15 +26,16 @@ http --download --output $resfile "$movie_link"
 
 choices=$(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -r '$1' $resfile)
 PS3="select a magnet link: "
-select name in "${choices[@]}";
+select name in ${choices};
 # select name in $choices;
 do
     index=($REPLY)
     break;
 done
 
+num_magnets=$(echo "$choices" | wc -l)
 echo "$index" | grep -v "^\d$" > /dev/null && echo "input, $index, is not a single digit!" && exit 1
-[ "$index" -gt "${#choices[@]}" ] && echo "choice value $index, is out of range!" && exit 1
+[ "$index" -gt "$num_magnets" ] && echo "choice value $index, is out of range!" && exit 1
 
 # this get the magnet links themsvles, no color or line numbers
 magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed -n "${index}p")
