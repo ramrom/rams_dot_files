@@ -440,28 +440,6 @@ function ansi256() {
     echo -e "${maybeinverse}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
 }
 
-function print_ansi256() {
-    iter=16
-    while [ $iter -lt 52 ]
-    do
-        second=$[$iter+36]; third=$[$second+36]; four=$[$third+36]
-        five=$[$four+36];   six=$[$five+36];     seven=$[$six+36]
-
-        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
-
-        echo -en "\033[38;5;${iter}m█ ";        printf "%03d" $iter
-        echo -en "   \033[38;5;${second}m█ ";   printf "%03d" $second
-        echo -en "   \033[38;5;${third}m█ ";    printf "%03d" $third
-        echo -en "   \033[38;5;${four}m█ ";     printf "%03d" $four
-        echo -en "   \033[38;5;${five}m█ ";     printf "%03d" $five
-        echo -en "   \033[38;5;${six}m█ ";      printf "%03d" $six
-        echo -en "   \033[38;5;${seven}m█ ";    printf "%03d" $seven
-
-        iter=$[$iter+1]
-        printf '\r\n'
-    done
-}
-
 function ansi8_name() {
     case "$1" in
         red) echo 1 ;; brightred) echo 9 ;;

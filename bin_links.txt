@@ -3,6 +3,7 @@ ctag-git-update
 yts-get-magnet
 psql-pager
 chrome-json-summary
+print-ansi256
 spotify-decrease-volume.scpt
 spotify-increase-volume.scpt
 spotify-toggle-play.scpt
