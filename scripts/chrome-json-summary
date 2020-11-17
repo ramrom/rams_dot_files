@@ -1,0 +1,21 @@
+#!/bin/sh
+
+[ ! "$(uname)" = "Darwin" ] && \
+    echo "RLY-ERROR: chrome_json_summary needs applescript, only Darwin os" >&2 && return 1
+wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
+[ "$wincount" -eq 0 ] && echo "zero windows!" && return
+
+json="["
+for (( i=1; i<=$wincount; i++)); do
+    json="$json""["
+    cmd="osascript -e 'tell application \"Google Chrome\" to get number of tabs in window $i'"
+    tabcount=$(eval $cmd)
+    for (( j=1; j<=$tabcount; j++)); do
+        #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
+        cmd="osascript -e 'tell application \"Google Chrome\" to get URL of tab $j of window $i'"
+        url=$(eval $cmd)
+        [ $j -eq $tabcount ] && json="$json\"$url\"" || json="$json\"$url\","
+    done
+    [ $i -eq $wincount ] && json="$json]" || json="$json],"
+done
+echo "$json]"
