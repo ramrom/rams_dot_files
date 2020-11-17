@@ -1,10 +1,11 @@
 #!/bin/sh
 
 # TODO: not really working
+
 #YELLOW=$(echo -e '\033[1;33m')
 #LIGHT_CYAN=$(echo -e '\033[1;36m')
-GREEN=$(echo -e '\033[0;32m')
-NOCOLOR=$(echo -e '\033[0m')
+GREEN=$(echo '\033[0;32m')
+NOCOLOR=$(echo '\033[0m')
 echo "sed \"s/^\(([0-9]\+ [rows]\+)\)/$GREEN\1$NOCOLOR/;s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;s/|/$GREEN|$NOCOLOR/g;s/^\([-+]\+\)/$GREEN\1$NOCOLOR/\" 2>/dev/null"
 
 #PAGER="sed \"s/\([[:space:]]\+[0-9.\-]\+\)$/${LIGHT_CYAN}\1$NOCOLOR/;"
