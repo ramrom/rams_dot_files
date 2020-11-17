@@ -19,7 +19,7 @@ tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
 # foo=$(tmux_render_timer_bar eggs)
 cpu_legend_color="fg=colour242"
-cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime_loadave) "uptimeload")
+cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime-loadave) "uptimeload")
 status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
 if [ "$(uname)" == "Linux" ]; then
     s=$(sensors)
