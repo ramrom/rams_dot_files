@@ -1,6 +1,11 @@
 # JENKINS
 A CI/CD open source tool
 
+## Build Definitions
+- https://stackoverflow.com/questions/50398334/what-is-the-relationship-between-environment-and-parameters-in-jenkinsfile-param
+    - Jenkinsfile behaviour with environment variables, global variables, build parameters
+
+
 ## API
 main reference: https://wiki.jenkins.io/display/JENKINS/Remote+access+API
 
