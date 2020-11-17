@@ -4,6 +4,7 @@
 
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 source ~/rams_dot_files/shell_functions.sh
+# source ~/rams_dot_files/shell_core_tools.sh
 
 caller=$0 cmds_defined ansi256 ctag_create || exit 1
 
