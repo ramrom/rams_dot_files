@@ -517,27 +517,6 @@ function del_chrome_cookies() {
     sqlite3 "$chrome_cookie_db" "DELETE FROM cookies WHERE host_key LIKE \"%$1%\";"
 }
 
-function chrome_json_summary() {
-    [ ! "$(uname)" = "Darwin" ] && >&2 echo "RLY-ERROR: chrome_json_summary needs applescript, only Darwin os" && return 1
-    local wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
-    [ "$wincount" -eq 0 ] && echo "zero windows!" && return
-
-    local json="["
-    for (( i=1; i<=$wincount; i++)); do
-        json="$json""["
-        local cmd="osascript -e 'tell application \"Google Chrome\" to get number of tabs in window $i'"
-        local tabcount=$(eval $cmd)
-        for (( j=1; j<=$tabcount; j++)); do
-            #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
-            local cmd="osascript -e 'tell application \"Google Chrome\" to get URL of tab $j of window $i'"
-            local url=$(eval $cmd)
-            [ $j -eq $tabcount ] && json="$json\"$url\"" || json="$json\"$url\","
-        done
-        [ $i -eq $wincount ] && json="$json]" || json="$json],"
-    done
-    echo "$json]"
-}
-
 #open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
 #open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
 function chrome_json_restore() {
@@ -553,7 +532,7 @@ function chrome_json_restore() {
     done
 }
 
-function chrome_save_state() { echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json; }
+function chrome_save_state() { echo $(chrome-json-summary) > ~/Documents/chrome_tabs_backup.json; }
 function chrome_restore() { chrome_json_restore $(cat ~/Documents/chrome_tabs_backup.json); }
 
 
