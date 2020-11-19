@@ -58,6 +58,7 @@ else
 fi
 unset git_completion_file
 
+# load_or_err ~/rams_dot_files/shell_core_tools.sh
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh
 load_or_err ~/.fzf.zsh   # "**" autocompletion and alt-c/ctrl-r/ctrl-t

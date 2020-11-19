@@ -5,6 +5,7 @@ psql-pager
 chrome-json-summary
 uptime-loadave
 print-ansi256
+file-rename
 spotify-decrease-volume.scpt
 spotify-increase-volume.scpt
 spotify-toggle-play.scpt

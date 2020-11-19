@@ -3,8 +3,8 @@
 # TODO: need to make ctag_create a script
 
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
-source ~/rams_dot_files/shell_functions.sh
-# source ~/rams_dot_files/shell_core_tools.sh
+. ~/rams_dot_files/shell_functions.sh
+# . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
 caller=$0 cmds_defined ansi256 ctag_create || exit 1
 
