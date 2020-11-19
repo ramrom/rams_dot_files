@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: allow source links to be in dirs other than scripts/
+
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 
