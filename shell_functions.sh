@@ -744,6 +744,15 @@ function gitfetchresetbranch() {
     git reset --hard origin/$curbranch
 }
 
+function gitrebasemaster() {
+    local curbranch=$(getbranchname); [ "$curbranch" = "master" ] && echo "on master" && return 1
+    git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
+    git checkout master
+    git pull
+    git checkout $curbranch
+    git rebase master
+}
+
 # delete branches that are already merged into another branch, master by default, delete locally and in remote
 function gitclean() {
     local masterb=${1:-master}
