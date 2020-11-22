@@ -7,7 +7,8 @@
     - toString method is called if fooObject isnt a String
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
 - https://docs.scala-lang.org/cheatsheets/index.html
-- carter recomendation: scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
+- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
+- scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
 - run command and redirect to file
     ```scala
     import sys.process._
@@ -15,17 +16,10 @@
     ("ls -al" #> new File("files.txt")).!
     ```
 
-import scala.concurrent.ExecutionContext.Implicits.global
+- import scala.concurrent.ExecutionContext.Implicits.global
 
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
-
-### json
-    ```scala
-    val a: String = """ {"a":1,"b":[1,2,"c"]} """
-    val j: JsValue = Json.parse(a)
-    println(a == j.toString)  // should print true
-    ```
 
 file reading
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
@@ -67,23 +61,41 @@ PlaySpecification/spec2, to skip test:
 - https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
 - private method testing, supported by ScalaTest
-    - org.scalatest.PrivateMethodTester._
-    - val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess)
-    - val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2...)
+    ```scala
+    import org.scalatest.PrivateMethodTester._
+    val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess')
+    val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2)
+    ```
 
 ## REST ASSURED
 - ENVIRONMENT sets env
 - INCLUDE, EXCLUDE env vars specify tags
 
-******* PLAY FRAMEWORK **************************
+## PLAY FRAMEWORK
+------------------------------
 - docs: https://www.playframework.com/documentation
-- per mike r. - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
+- precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 
-PLAY JSON:
-- parse a json string into play AST JsValue
+### PLAY JSON
+- https://www.playframework.com/documentation/2.8.x/ScalaJson
+- parse json string -> play AST JsValue -> json string
     ```scala
-    Json.parse("""{"id":1,"name":"dude"}""")
+    val a: String = """ {"a":1,"b":[1,2,"c"]} """
+    val j: JsValue = Json.parse(a)
+    (j \ "b" \ 2).get  // returns JsString("c")
+    println(a == j.toString)  // should print true
     ```
+- pretty print: `Json.prettyPrint(someJsValue)`
+
+- scala native object -> play JsValue
+    - `Json.toJson(foocaseclassinstance)`
+        - uses play default conversions
+    - can define your own implicit `Write[foocaseclassinstance]`
+- play JsValue -> scala object
+    - `Json.parse("[1,2,3]").as[Seq[Int]]`
+        - throws `JsResultException` if it fails
+    - `Json.parse("[1,2,3]").validate[Seq[Int]]`
+        - `validate` returns `JsSuccess` or `JsError`
 
 
 ## AMMONITE
@@ -120,4 +132,4 @@ PLAY JSON:
 
 ## AKKA
 ---------------------------------------
-- mark waks: akka streams main goal is to implement backpressure
+- one of akka streams main goals is to implement backpressure
