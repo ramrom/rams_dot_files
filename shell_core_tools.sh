@@ -41,17 +41,20 @@ function require_vars() {
 function debug_vars() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
+    if [ -n "$caller" ]; then
+        echo $(fg=cyan ansi256 "Calling func/script: ")$(fg=cyan bld=1 ansi256 "$caller") >&2
+    fi
     for arg in "$@"; do
         local var_value=$(eval "echo \$${arg}")
 
+        # local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
+        local msg=$(tput setaf 1)
         if [ -z "$var_value" ]; then
-            local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
             local msg2=$(fg=brightred ansi256 " is undefined or null!")"${spacing}"
-            printf "$msg$msg2"
+            printf "$msg$msg2" >&2
         else
-            local msg=$(und=1 ansi256 "DEBUG:")" Variable $(fg=yellow ansi256 $arg)"
             local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
-            printf "$msg$msg2"
+            printf "$msg$msg2" >&2
         fi
     done
     [ -n "$tab" ] && echo
