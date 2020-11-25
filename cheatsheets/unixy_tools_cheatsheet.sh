@@ -1,4 +1,4 @@
-# 'Nix general tooling type stuff
+# 'NIX general tooling type stuff
 
 # FIND: find files recursive starting with current dir
 find . -type f -name "*pattern*"
