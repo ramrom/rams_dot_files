@@ -12,7 +12,6 @@ alias lal='ls -al'
 alias lahl='ls -hal'
 alias lail='ls -hail'
 alias lrt='ls -lrt'
-alias ch_date='sudo date --set 1998-11-02'
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
@@ -27,7 +26,6 @@ alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exc
 alias lsoftcplisten='lsof -nP -iTCP -sTCP:LISTEN'
 # didnt work for FUSE filemount dir.., but `lsof | grep foodir` found it
 alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG files
-alias netcatlisten9001='nc -l 127.0.0.1 9001' #listen on 9001
 alias tmxhor='tmux select-layout even-horizontal'
 alias clt='clear && tmux clear-history'
 # alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'

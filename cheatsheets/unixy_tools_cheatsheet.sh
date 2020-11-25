@@ -35,6 +35,13 @@ echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens l
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
 echo "foobar" | sed 's/..$//'  # remove last 2 chars, so output is "foob"
 
+# date
+sudo date --set 1998-11-02  # change date
+date +%s       # print unix time in number of seconds (since 1970)
+
+# netcat
+nc -l 127.0.0.1 9001     #listen on 9001
+
 # wc - word count
 wc -l   # count # of lines
 
