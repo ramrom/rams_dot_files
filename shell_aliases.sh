@@ -12,27 +12,26 @@ alias lal='ls -al'
 alias lahl='ls -hal'
 alias lail='ls -hail'
 alias lrt='ls -lrt'
-alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
 alias tp='cd ~/tmp'
 alias dubydir='du -sh * 2>/dev/null'  # throw away errors, permission failure messages
+alias lsoftcplisten='lsof -nP -iTCP -sTCP:LISTEN'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works
-alias httpv='http -v'
-alias httpcn='httpv http://api.icndb.com/jokes/random'
-alias weather='http --print=b wttr.in'
-alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
-alias lsoftcplisten='lsof -nP -iTCP -sTCP:LISTEN'
-# didnt work for FUSE filemount dir.., but `lsof | grep foodir` found it
 alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG files
+alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
+# didnt work for FUSE filemount dir.., but `lsof | grep foodir` found it
 alias tmxhor='tmux select-layout even-horizontal'
 alias clt='clear && tmux clear-history'
-# alias exit='echo $(tput setaf 1)use ctrl-d!!!!$(tput sgr0)'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
 alias bm='batman'
 alias tmr='transmission-remote'
+alias httpv='http -v'
+alias httpcn='httpv http://api.icndb.com/jokes/random'
+alias weather='http --print=b wttr.in'
+alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
 alias rf='source ~/rams_dot_files/shell_functions.sh'
