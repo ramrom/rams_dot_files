@@ -1,5 +1,8 @@
 # OSX CHEATSHEET
 -------------------------------------------
+- cmd + option + hover over scale image in display in sys prefs   - show the resolution
+- option + click on "scaled" radio buttton in display will bring up granular resolutions supported
+    - https://apple.stackexchange.com/questions/194101/what-are-the-effective-scaling-modes-on-osx-with-a-4k-display-is-an-effective-r
 
 ## BREW
 --------------------
@@ -77,7 +80,6 @@ skhd
 > spacebar                - scroll down
 > spacebar + shift        - scroll up
 > tab/shift+tab           - goto next/prev field in browsertab+page
-> cmd + option + hover over scale image in display in sys prefs   - show the resolution
 
 ### WHATSAPP NATIVE:
 > cmd + shift + [/]       - up/down conversations/groups
