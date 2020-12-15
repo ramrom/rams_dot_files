@@ -153,6 +153,7 @@ VARIABLE="${VARIABLE:=DEFAULT_VALUE}"
 # these are not env vars, and not exported to child processes
 LINES   # horizontal size of viewport
 COLUMNS # vertical size of viewport
+RANDOM  # contains a different random number every time u access it
 
 echo $$ # print PID of current shell process
 echo $? # print exit code of last command
