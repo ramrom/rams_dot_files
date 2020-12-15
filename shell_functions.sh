@@ -24,6 +24,11 @@ function cmds_defined() {
     done
 }
 
+# TODO: write me
+function parse_args() {
+    echo "write me"
+}
+
 function require_vars() {
     caller_msg=""; [ -n "$caller" ] && caller_msg="caller: $caller -- "
     local vars_required=0
@@ -285,6 +290,7 @@ function rgfst() { RG_FILTER="-tscala" rgf $1; }
 
 # fzf on google history
 function ffch() {
+    local maybesort="--no-sort"; [ -n "$sort" ] && maybesort=""
     local cols sep google_history open
     cols=$(( COLUMNS / 3 ))
     sep='{::}'
@@ -301,7 +307,7 @@ function ffch() {
         "select substr(title, 1, $cols), url
          from urls order by last_visit_time desc" |
     awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-    fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+    fzf $maybesort --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
 
 # fzf on chrome bookmarks
