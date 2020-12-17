@@ -160,7 +160,7 @@ endif
 " autoread alone doesn't really work, triggers on external commands
     " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
     " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-function RamAutoRead()
+function BetterAutoRead()
     "au FocusGained,BufEnter * :silent! !
     set autoread
 
@@ -171,7 +171,7 @@ function RamAutoRead()
       \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 endfunction
 
-if empty($VIM_NO_AUTOREAD) | call RamAutoRead() | endif
+if empty($VIM_NO_AUTOREAD) | call BetterAutoRead() | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
