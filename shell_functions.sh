@@ -26,7 +26,20 @@ function cmds_defined() {
 
 # TODO: write me
 function parse_args() {
-    echo "write me"
+    while [ $# -gt 0 ] ; do
+      echo $2
+      shift
+    done
+    # ```bash
+    # while [ $# -gt 0 ] ; do
+    #   case $1 in
+    #     --client) CLIENT="$2" ;;
+    #     --partner) PARTNER="$2" ;;
+    #     --policy-number) POLICY_NUMBER="$2" ;;
+    #   esac
+    #   shift
+    # done
+    # ```
 }
 
 function require_vars() {
@@ -65,6 +78,15 @@ function debug_vars() {
         fi
     done
     [ -n "$tab" ] && echo
+}
+
+# given port number return if grep of if ssh is listening on it
+# polipo used to create HTTP proxy to a SOCKS proxy (scab does this, and authn e2e tests too)
+function find_listening_ports() {
+    local process_type=ssh; [ -n "$polipo" ] && process_type=polipo
+    ports="$(lsof -nP -iTCP -sTCP:LISTEN)"
+    # space occurs after last digit, so match full number (e.g. otherwise 313 matches on 3131)
+    echo "$ports" | grep "$1 " > /dev/null | grep $process_type > /dev/null
 }
 
 # FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
