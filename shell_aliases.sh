@@ -77,7 +77,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias mountdev='mount | grep "/dev"'
     alias vcrypt='veracrypt'
     alias trashsize='du -hs ~/.local/share/Trash'
-    alias sbw='sudo ~/.cargo/bin/bandwhich'
+    alias sbw='sudo ~/.cargo/bin/bandwhich -n' # TODO: see issue 166 to fix dns resolver, for now -n no resolve
     alias tmr='transmission-remote'
     alias tmd='transmission-daemon'
 else  # assuming Darwin here
