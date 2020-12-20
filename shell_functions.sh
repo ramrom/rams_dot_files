@@ -24,24 +24,6 @@ function cmds_defined() {
     done
 }
 
-# TODO: write me
-function parse_args() {
-    while [ $# -gt 0 ] ; do
-      echo $2
-      shift
-    done
-    # ```bash
-    # while [ $# -gt 0 ] ; do
-    #   case $1 in
-    #     --client) CLIENT="$2" ;;
-    #     --partner) PARTNER="$2" ;;
-    #     --policy-number) POLICY_NUMBER="$2" ;;
-    #   esac
-    #   shift
-    # done
-    # ```
-}
-
 function require_vars() {
     caller_msg=""; [ -n "$caller" ] && caller_msg="caller: $caller -- "
     local vars_required=0

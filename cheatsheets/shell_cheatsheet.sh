@@ -163,6 +163,26 @@ echo $? # print exit code of last command
 echo $@
 echo "$@" # usually want this to avoid misparsing args containing spaces/wildcards
 
+# getopt, C bin that follows POSIX guidelines for arg parsing
+getopt
+
+# getopts, shell builtin like getopt, bourne shell got it in 1986. it's POSIX, available in ksh, zsh, and bash as well.
+while getopts 'abc:d:ef' x; do;
+    case $x in
+        a) echo "a" ;;
+        b) echo "b" ;;
+        c) echo $OPTARG ;;
+        d) echo $OPTARG ;;
+        :)   # "optional arguments" (missing option-argument handling)
+        case $OPTARG in
+          (c) exit 1;; # error, according to our syntax
+          (d) :;;      # acceptable but does nothing
+        esac;;
+    esac
+done
+shift "$OPTIND"     # remaining is "$@"
+
+
 # print recent history in bash/zsh
 history
 
@@ -316,6 +336,7 @@ $((3*3)) # 9
 $((3**3)) # 27
 $((3*3+4/10)) # 9
 $((3%2)) # mod, 1
+a=1; $((a++)) # increment a, a=2
 let a="3+3" a+=4 # 10
 
 # for float point math can use bc bin or awk
