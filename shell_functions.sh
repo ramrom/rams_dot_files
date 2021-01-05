@@ -143,6 +143,14 @@ function binlink() {
 function vil() { vi -p $(cat $1); }
 function viln() { vin -p $(cat $1); }
 
+function fdisk_find() {
+    [ -z "$1" ] && echo "arg for diskname needed!" && return 1
+    [ $(uname) = "Linux" ] || { echo "only works on linux" && return 1; }
+    local disks=$(sudo fdisk -l)
+    local device=$(echo "$disks" | grep -B1 "$1" | grep -v "$1")
+    echo $device | awk '{print $2}' | sed 's/.$//'
+}
+
 ############# FZF ##############################
 
 # fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
