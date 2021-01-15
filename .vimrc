@@ -44,7 +44,7 @@ elseif empty($VIM_NOPLUG)
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
     Plug 'majutsushi/tagbar'
 
-    if has('nvim')
+    if has('nvim-0.4.0')  " jan2021, coc warns it should have 0.4.0 at least to work well
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         "TODO: can enable coc by filetype
         " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
