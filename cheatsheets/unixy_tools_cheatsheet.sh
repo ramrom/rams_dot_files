@@ -199,6 +199,7 @@ chown -R newuser dir
 
 # CP
 cp -l     # make copies but just hard links, gnu/linux has this, osx does not
+cp -rl dirA dirB # recursively copy all of dir a to b, but just hard links, gnu/linux supports this, not osx
 
 # shred  - overwrite data in file or whole device
 sudo shred -v /dev/sdb1
@@ -213,6 +214,9 @@ parted # show phsyical partitions available, some detailed info. doesnt exist on
 mount  # alone shows info about mounts
 df      # will show block devices and where they are mounted
 cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount dir, mode, etc
+
+lsblk -f /dev/sda1  #  show info on block type devices
+
 # NETWORK FILESYSTEM PROTOCOLS:
     # afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
     # osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
@@ -237,7 +241,11 @@ sudo mount -t nfs 192.168.1.1:/fullpath/to/folder destfolder/
 # mount ntfs in linux
 sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 destfolder/
 # NOTE!!!:
-    # samba share ver 3, nounix set, serverino set, serverino seems to largely support hard links
-    # hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
-    # Also when i rsync they are diff inode # files on destination
-    # in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this behavious doesnt happen
+#   samba share ver 3, nounix set, serverino set, serverino seems to sorta support hard links
+#   hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
+#   Also when i rsync they are diff inode # files on destination
+#
+#   in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this behavious doesnt happen
+#   samba 2/3 dont support hard links:
+#       - https://unix.stackexchange.com/questions/403509/how-to-enable-unix-file-permissions-on-samba-share-with-smb-2-0
+#       - https://en.wikipedia.org/wiki/Server_Message_Block
