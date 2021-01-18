@@ -6,9 +6,11 @@
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/
 - plex google home integration
     - doesnt exist, for home-assistant, try plex-assistant: https://github.com/maykar/plex_assistant
+- `.avi` file gave _“This server is not powerful enough to convert video"_
+    - see https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
+    - plex web gave error, but plex iphone12 app works fine
 
 ## LIBRARY
 - naming tv shows: https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/
 - naming movies:
     - folder names support using uderscores and dashes for movie names
-
