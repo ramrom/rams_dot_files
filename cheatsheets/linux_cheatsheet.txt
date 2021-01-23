@@ -8,6 +8,7 @@
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
 - dash is used as /bin/sh b/c it's much faster than bash, so boots are faster
     - it doesnt have command completion, or ctrl-r search, or command history search, as this would make the shell slow
+- cron: task scheduler, great site: https://crontab.guru/
 
 sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
@@ -21,6 +22,7 @@ xclip       - like osx pbpaste/bcopy, needs a DISPLAY set
 
 ## USER STUFF
 ---------------------------------------
+su - foouser               - login as foouser
 sudo useradd foouser        - create new user with home dir
 sudo passwd foouser         - change users password, seems to bypass strength rules
 sudo useradd foouser foogroup    - add existing user to new group

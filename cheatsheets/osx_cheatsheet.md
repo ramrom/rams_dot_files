@@ -112,6 +112,7 @@ skhd
     mount -t smbfs smb://someuser:somepass@192.168.1.1111/folder destfolder/
 - mount afp share in osx
     mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
+- Finder mount, CMD+k -> someuser@192.168.1.1/folder
 
 
 ## OTHER:
