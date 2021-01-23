@@ -9,6 +9,10 @@
 - `.avi` file gave _“This server is not powerful enough to convert video"_
     - see https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
     - plex web gave error, but plex iphone12 app works fine
+- limits of DLNA servers(standard from 2003): https://www.makeuseof.com/tag/dlna-still-used/
+    - doesnt support modern mkv or avi containers, FLAC audio, some DLNA server will transcode to one it supports
+- stopping a stream, _should_ be able to do it in dashboard but might be issue:
+    - https://forums.plex.tv/t/stop-playback-not-present-on-now-playing/366739
 
 ## LIBRARY
 - naming tv shows: https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/

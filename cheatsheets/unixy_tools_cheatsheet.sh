@@ -156,6 +156,8 @@ killall -3 foo  # send sigquit to all proceses with foo in the name, default is 
 24 - sigtstp   # suspend,what ctrl-z usually does
 
 # RSYNC
+    # rsync can ssh to backup: https://www.howtogeek.com/135533/how-to-use-rsync-to-backup-your-data-on-linux/
+## USAGE EXAMPLES
 rsync /src /dest  # basic copy/sync over files from one dir to another
 rsync -a /src /dest  # -a (archive), preserves permissions, symlinks, and ownership, usually want this
 rsync -r /src /dest  # -r is recurse into directories

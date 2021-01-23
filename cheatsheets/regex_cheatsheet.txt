@@ -3,7 +3,7 @@
 - https://www.regular-expressions.info/posix.html
 - https://remram44.github.io/regex-cheatsheet/regex.html
     - has POSIX ERE, BRE, Perl, vim, python
-- test regexes: https://regex101.com/r/4SJ7z9/6
+- test regexes: https://regex101.com/
 
 Linux/GNU:
 use grep -P for PCRE (perl) style regexes
