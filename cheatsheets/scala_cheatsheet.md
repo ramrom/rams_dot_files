@@ -117,6 +117,11 @@ PlaySpecification/spec2, to skip test:
     - amm --watch --predef foo.sc
 
 
+## SLICK
+-------------------------
+- print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
+
+
 ## SBT
 ----------------------------------------
 - get timings of sbt tasks:
