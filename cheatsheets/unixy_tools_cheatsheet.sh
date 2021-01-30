@@ -211,6 +211,9 @@ shred foofile
 fdisk       # manipulate partitions
 fdisk -l   # linux show all dev devices and storage device info
 
+# show UUIDs of partitions on system (desirable for mounting in fstab)
+sudo blkid
+
 parted # show phsyical partitions available, some detailed info. doesnt exist on osx
         # has interactive menu
 mount  # alone shows info about mounts

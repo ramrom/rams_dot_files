@@ -18,3 +18,7 @@
 - naming tv shows: https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/
 - naming movies:
     - folder names support using uderscores and dashes for movie names
+
+## SHARING
+- can share a library with a plex user by username or email
+- can create smart playlists and share just the playlist

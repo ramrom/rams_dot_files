@@ -63,6 +63,7 @@ YOUTUBE:
 - m - toggle mute
 - c - toggle closed caption
 - up/down arrow (while video is active element) - up/down volume by 5%
+- add timestamp to a video link: append `&t=1m30s`
 
 
 CALENDER:

@@ -98,6 +98,11 @@ skhd
 > command + leftarrow - go to previow page in safari history
 > up/down arrow  - scroll up and down in safari
 
+## IPHONE
+--------------------------
+- iphone12: hold volume up and right button to see power off slider
+- iphone12: press volume up and right button to take screenshot
+
 ## FILESYSTEMS:
 ----------------------------
 - ISO filesystems can be mounted through disk utitlity application
