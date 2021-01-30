@@ -10,3 +10,8 @@
 ## SOFTWARE
 - `Download Station` - torrent client
 - `Drive Server` - private cloud drive
+
+## SHARING
+- quickconnect: https://www.synology.com/en-uk/knowledgebase/DSM/help/DSM/Tutorial/cloud_set_up_quickconnect
+- filestation: right click share file: https://www.synology.com/en-us/knowledgebase/DSM/help/FileStation/sharing
+- videostation - can create playlists that are publicly shared (with validity periods)
