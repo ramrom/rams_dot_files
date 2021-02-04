@@ -73,6 +73,9 @@ tail -f foofile  # spit out last lines and continue to print them as new ones ar
 echo "3.1 * 4.5" | bc       # = 13.9
 echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
+# strings - print out text strings in a binary file or any file
+strings somebin
+
 # GNU GPG
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
 gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
