@@ -25,8 +25,9 @@ Terminology:
 - removing packages deps of a uninstalled FORMULA that isn't a dep on something else
     - from https://stackoverflow.com/questions/7323261/uninstall-remove-a-homebrew-package-including-all-its-dependencies)
     - `brew rm $(join <(brew leaves) <(brew deps FORMULA))`
-- upgrade one formula
-    `brew upgrade fooformula`
+- upgrade all formulas
+    `brew upgrade`
+    - NOTE: brew does seem to support upgrading just one formula
 
 
 ## CLI:
