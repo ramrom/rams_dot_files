@@ -11,27 +11,14 @@ function parse_git_branch() {
 setopt prompt_subst
 
 function set_ps1_hostname() {
-    [ -z "${ZSH_PS1_HOSTNAME}" ] && ZSH_PS1_HOSTNAME="$(tput setaf 3)$(tput bold)%m"
+    [ -z "${ZSH_PS1_HOSTNAME}" ] && ZSH_PS1_HOSTNAME="${bold}${yellow}%m"
     echo $ZSH_PS1_HOSTNAME
 }
 
+# NOTE: previously i used echo -e ansi codes for colors and resets, the resets escape codes in particular
+# caused immediate previous lines in the shell history to be deleted every time i toggled tmux pane zooming
 function build_my_prompt() {
     # local exit_code=$? # store current exit code
-
-    local bold=$(echo -e "\033[1m")
-    local reset=$(echo -e "\033[0m")
-    local yellow=$(echo -e "\033[0;33m")
-    local boldblue=$(echo -e "\033[1;34m")
-    local magenta=$(echo -e "\033[0;35m")
-    local cyan=$(echo -e "\033[0;36m")
-
-    PROMPT=''
-    # # TODO: display icon if last command succeeded or failed
-    # if [[ $exit_code -eq 0 ]]; then
-    #     PROMPT="${PROMPT}${green}√${reset} "      # Add green for success
-    # else
-    #     PROMPT="${PROMPT}${red}˟${exit_code}${reset} "    # Add green for success
-    # fi
 
     PROMPT="${PROMPT}${yellow}%n"
     PROMPT="${PROMPT}${reset}${bold}@"
@@ -42,7 +29,8 @@ function build_my_prompt() {
     PROMPT="${PROMPT} <${reset}${magenta}"'$(parse_git_branch)'
     PROMPT="${PROMPT}${boldblue}>${reset}"
 
-    echo "${PROMPT}"$'\n'"$ "
+    echo '%F{yellow}%n%F{015}@$(set_ps1_hostname) %F{12}(%F{cyan}%~%F{12}) <%F{magenta}$(parse_git_branch)%F{12}>%f'$'\n''$ '
 }
 
 PROMPT=$(build_my_prompt)
+# PROMPT="%n %m %~"$'\n'"$ "

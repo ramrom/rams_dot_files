@@ -18,6 +18,12 @@
     import java.io.File
     ("ls -al" #> new File("files.txt")).!
     ```
+- TIME/DATE: use java times and date, it is now better than jodatime
+
+
+### PATTERN MATCHING
+- `case entries @ _ :: _ :: (_: List[_]) => {`
+    - more than one record
 
 - import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -78,6 +84,9 @@ PlaySpecification/spec2, to skip test:
 ------------------------------
 - docs: https://www.playframework.com/documentation
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
+
+## JSON PARSIN
+- weePickle: https://github.com/rallyhealth/weePickle
 
 ### PLAY JSON
 - https://www.playframework.com/documentation/2.8.x/ScalaJson
