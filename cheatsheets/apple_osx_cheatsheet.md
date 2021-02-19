@@ -62,6 +62,7 @@ skhd
 > command + space - spotlight search
 > command + H - goto home screen
 > command + N - compose new email in mail app
+> command + ctrl + q  - lock the screen
 
 > command + c copy
 > command + v paste
