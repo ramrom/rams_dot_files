@@ -17,20 +17,5 @@ function set_ps1_hostname() {
 
 # NOTE: previously i used echo -e ansi codes for colors and resets, the resets escape codes in particular
 # caused immediate previous lines in the shell history to be deleted every time i toggled tmux pane zooming
-function build_my_prompt() {
-    # local exit_code=$? # store current exit code
-
-    PROMPT="${PROMPT}${yellow}%n"
-    PROMPT="${PROMPT}${reset}${bold}@"
-    PROMPT="${PROMPT}${reset}"'$(set_ps1_hostname)'" "
-    PROMPT="${PROMPT}${boldblue}("
-    PROMPT="${PROMPT}${reset}${cyan}%~"
-    PROMPT="${PROMPT}${boldblue})"
-    PROMPT="${PROMPT} <${reset}${magenta}"'$(parse_git_branch)'
-    PROMPT="${PROMPT}${boldblue}>${reset}"
-
-    echo '%F{yellow}%n%F{015}@$(set_ps1_hostname) %F{12}(%F{cyan}%~%F{12}) <%F{magenta}$(parse_git_branch)%F{12}>%f'$'\n''$ '
-}
-
-PROMPT=$(build_my_prompt)
+PROMPT='%F{yellow}%n%F{015}@$(set_ps1_hostname) %F{12}(%F{cyan}%~%F{12}) <%F{magenta}$(parse_git_branch)%F{12}>%f'$'\n''$ '
 # PROMPT="%n %m %~"$'\n'"$ "
