@@ -91,6 +91,8 @@ sudo iotop -o
 
 # sysstat (linux pkg with many tools), has great colors
 iostat          # show per device/filesystem disk read, with no arg calculated *since* last reboot
+iostat -m       # display in megabytes
+iostat sda sdb  # only display stats for certain devices
 iostat 5        # refresh every 5 seconds forever, calculates average since last reading
 iostat 2 3      # refresh 2 seconds, only sample 3 times
 cifsiostat 1    # show cifs network mount io usage stats

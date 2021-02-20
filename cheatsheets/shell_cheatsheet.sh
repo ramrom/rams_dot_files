@@ -476,6 +476,8 @@ mv foo\ \(bar\)\ \[baz\] foobarbaz
 
 
 ### RANDOM
+r # zsh(from ksh) will run the last command in history, bash doesn't have this
+
 # sudo -S option reads password from stdin
 echo somepassword | sudo -S ls
 
