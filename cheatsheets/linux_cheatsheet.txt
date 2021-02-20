@@ -219,6 +219,8 @@ loopdevices
 - regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
 - if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
 
+tmpfs - ram drives, for temporary and fast storage of data in RAM
+
 drive naming convention:
 - fd - SATA, sd - SCSI/SATA, hd - IDE
 - fda - first SATA drive, hdb - 2nd IDE drive
@@ -230,6 +232,12 @@ drive naming convention:
     - /export   - data shared over the network mount
     - /mnt      - temporary mount point
     - /media    - removable devices like usb (so not internal HDD)
+
+special devices:
+/dev/null   - write output to this device to throw it away
+/dev/zero   - obtain null characters from this device
+    - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
+/dev/random - generate pseduorandom numbers from this device
 
 
 ## GRAPHICS/WINE

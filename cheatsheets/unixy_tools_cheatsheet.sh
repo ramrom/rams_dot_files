@@ -222,6 +222,9 @@ sudo blkid
 parted # show phsyical partitions available, some detailed info. doesnt exist on osx
         # has interactive menu
 mount  # alone shows info about mounts
+mount -t tmpfs tmpfs /somedir -o size=1024M  # create tmpfs(ram drive) 1024mb size
+    # when you unmount data is deleted b/c ram drive is temporary storage
+
 df      # will show block devices and where they are mounted
 cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount dir, mode, etc
 
