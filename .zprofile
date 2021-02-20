@@ -17,5 +17,6 @@ function set_ps1_hostname() {
 
 # NOTE: previously i used echo -e ansi codes for colors and resets, the resets escape codes in particular
 # caused immediate previous lines in the shell history to be deleted every time i toggled tmux pane zooming
+# They ALSO caused ctrl-r fzf to delete the last line in the history as well
 PROMPT='(%(?.√.?%?))%F{yellow}%n%F{015}@$(set_ps1_hostname) %F{12}(%F{cyan}%~%F{12}) <%F{magenta}$(parse_git_branch)%F{12}>%f'$'\n''$ '
 # PROMPT="%n %m %~"$'\n'"$ "

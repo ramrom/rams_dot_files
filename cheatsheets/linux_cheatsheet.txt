@@ -257,7 +257,10 @@ gsettings  - gnome settings tool
 notify-send - pops up notification
 `lsusb -D /dev/bus/usb/002/004`
     - get detailed info about a specific usb device
-bluetoothctl - good cli bluetooth tool, see device list, paired, unpaired, connect/disconnect
+bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
+    - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
+    - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device
+    - `bluetoothctl` alone will start a interactive cli console session
 pacmd - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
