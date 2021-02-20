@@ -12,6 +12,11 @@ setopt auto_cd
 # use IFS word splitting
 setopt sh_word_split
 
+# set fc(command history editor) to vim
+export FCEDIT=vim
+
+export EDITOR=vim
+
 # Colorize
 if [ `uname` = "Darwin" ]; then
     # tree uses this per man docs

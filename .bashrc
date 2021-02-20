@@ -23,7 +23,10 @@ if [ $(uname) = "Linux" ]; then
     export PS_FORMAT='pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args'
 fi
 
+# set fc(command history editor) to vim
 export FCEDIT=vim
+
+export EDITOR=vim
 
 # Linux bin name for fd is fdfind
 fdname="fd"
