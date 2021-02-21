@@ -228,7 +228,17 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 - lutris, lets you play windows only games (including steam installs) and has wine configurations configured
 - dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
 
-
+## SOUND
+--------------
+- ALSA: is base sound stack for all linux distro
+- pluseaudio: builds on top of ALSA, can do things like mix many sound streams together
+amixer - cli for ALSA
+    amixer sset Master 5%+
+pulsemixer - volume manager with pulseaudio
+    - can see input and output devices and processes using each and modify volume on each
+    pulsemixer --toggle-mute
+    pulsemixer --mute
+    pulsemixer --change-volume +5
 
 ## DEVICES AND FILE SYSTEMS:
 ------------------------------------------------

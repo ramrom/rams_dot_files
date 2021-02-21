@@ -12,6 +12,8 @@ Terminology:
 - cask: installs a program exactly as if it were a native osx appliation install
 - tap: a repository of formula
 
+- stop brew from auto update:
+    `HOMEBREW_NO_AUTO_UPDATE=1 brew install somepackage`
 - show deps of httpie in tree output
     - `brew deps --tree httpie`
 - show all formula that need this formula
