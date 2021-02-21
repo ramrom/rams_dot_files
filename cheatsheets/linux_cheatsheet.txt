@@ -188,6 +188,16 @@ snap refresh --list
 -----------------------------
 - definitions: display server / display manager / window manager / desktop envrionment
     - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
+- Display servers and display managers
+    - X Windowing System - core system for drawing bitmaps, X11 is latest version since 1987
+    - Wayland, new (also FOSS) protocol b/w display server and clients, (often includes C implementations), to replace X
+        - Weston is a reference implementation
+        - good doc on architectures: https://wayland.freedesktop.org/architecture.html
+- desktop environments - GNOME, KDE, XFCE
+- Windows managers:
+    - compiz
+    - mutter(GNOME 3 uses it), particularly GNOMEShell is a plugin for mutter
+    - metalicity(GNOME 2 uses it)
 xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
     - xrandr --output DP-0 --mode 2560x1440
@@ -211,6 +221,13 @@ xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
     xdotool windowsize 123 800 600
     xdotool windowmove 123 0 1080
 nvidia-smi - show nvidia card mem usage, gpu temp, X processes
+
+### WINE-GRAPHICS
+- protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
+- steam play, lets you play windows only games in linux steam, uses protonDB
+- lutris, lets you play windows only games (including steam installs) and has wine configurations configured
+- dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
+
 
 
 ## DEVICES AND FILE SYSTEMS:
@@ -239,13 +256,6 @@ special devices:
     - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
 /dev/random - generate pseduorandom numbers from this device
 
-
-## GRAPHICS/WINE
----------------------------------
-- protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
-- steam play, lets you play windows only games in linux steam, uses protonDB
-- lutris, lets you play windows only games (including steam installs) and has wine configurations configured
-- dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
 
 
 ## OTHER LINUX/UBUNTU TOOLS:
