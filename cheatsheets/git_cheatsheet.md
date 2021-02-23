@@ -54,6 +54,7 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
 
 ## GITHUB
 - wiki: https://help.github.com/en/github/building-a-strong-community/adding-or-editing-wiki-pages
+    - you can clone the wiki locally and commit and push
 
 ### AUTH
 - TFA(two factor auth):

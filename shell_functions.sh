@@ -297,8 +297,8 @@ function frg() {
 }
 
 #TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
-function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" rgf $1; }
-function rgfst() { RG_FILTER="-tscala" rgf $1; }
+function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" frg $1; }
+function rgfst() { RG_FILTER="-tscala" frg $1; }
 
 # fzf on google history
 function ffch() {
