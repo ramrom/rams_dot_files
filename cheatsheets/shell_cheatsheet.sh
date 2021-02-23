@@ -61,6 +61,7 @@ set -o vi   # bash vi mode
 # LINE EDITING MODE
 set -o vi    # set zsh to use vi mode, emacs is default
 # zsh, if vi mode is used, will need to bindkey some nice line editing keys that are missing
+bindkey  # alone will print out all keybindings
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^B' backward-char
@@ -85,6 +86,7 @@ source fooscript    # run script in current shell, zsh, bash works too
 # FC, edit last command in editor and execute, also list old commands
 # change default editor with FCEDIT env var
 fc
+# to cancel execution(when in vi) type :cq in command mode (quit with error)
 
 # r, builtin in zsh, basiscally replays the last command in history
 ls

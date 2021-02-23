@@ -7,6 +7,9 @@ function parse_git_branch() {
     fi
 }
 
+# feb2021: tmux is losing some keybidings, ctrl - a/e/f/b/n/p stop working, manually setting it fixes it
+set -o emacs
+
 # needed to make git/hostname function for cmd substitution in prompt
 setopt prompt_subst
 

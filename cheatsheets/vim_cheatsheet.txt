@@ -110,6 +110,7 @@ HELP:
 :h sometopic | only   - help in single window
 :h normal-index  - normal default mappings
 :h insert-index  - insert default mappings
+:h ex-cmd-index  - command and ex mode
 
 OPTIONS:
 :set lazyredraw - for macros dont redraw screen, faster replay
