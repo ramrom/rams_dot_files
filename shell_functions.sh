@@ -260,6 +260,13 @@ function frgp() {  # frg p(phony)
         --height=50% --layout=reverse
 }
 
+function fgh() {
+    local opts=""
+    [ $1 = "a" ] && opts="--state all --limit 300"
+    local pr=$(gh pr list $opts | fzf --ansi +m | awk '{print $1}')
+    gh pr diff $pr
+}
+
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 # NOTE: -e needed in case of empty RG_FITLER string, rg thinks empty string is pattern query
 # TODO: add fzf --expect and optionally edit file if expect given
