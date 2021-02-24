@@ -819,6 +819,8 @@ function parse_comma_delim_error() {
     ruby -e "$str"
 }
 
+function weather() { http --print=b wttr.in/$1; }
+
 function f_findfilesbysize() { sudo find "$1" -type f -size +"$2" | xargs du -sh; }
 
 function tabname { printf "\e]1;$1\a"; }
