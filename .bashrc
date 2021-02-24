@@ -32,7 +32,7 @@ export EDITOR=vim
 fdname="fd"
 [ $(uname) = "Linux" ] && fdname="fdfind"
 
-export FZF_DEFAULT_COMMAND="$fdname --type f --hidden --exclude .git"
+export FZF_DEFAULT_COMMAND="$fdname --follow --type f --hidden --exclude .git"
 export FZF_DEFAULT_OPTS="--no-mouse --height 50% --reverse --multi --inline-info \
        --bind 'ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-n:preview-page-down,ctrl-p:preview-page-up'"
 export FZF_COMPLETION_TRIGGER='**'
