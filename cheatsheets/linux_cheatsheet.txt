@@ -166,6 +166,8 @@ apt-cache search --names-only .*foo.*
     - searches regex in package name only
 apt search --names-only *something*
     - same
+sudo dpkg --remove --force-remove-reinstreq --dry-run somepackage
+    - remove pkg, if you see "current status 'half-installed'" error
 
 ### UNATTENDED-UPGRADE (update/upgrade security fixes)
 sudo unattended-upgrade
