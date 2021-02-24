@@ -30,7 +30,6 @@ alias bm='batman'
 alias tmr='transmission-remote'
 alias httpv='http -v'
 alias httpcn='httpv http://api.icndb.com/jokes/random'
-alias weather='http --print=b wttr.in'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'
@@ -67,6 +66,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
     alias smd='systemctl'
+    alias bt='bluetoothctl'
     alias watch_top_cpu="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
     alias psx='ps auxhf'
     alias psxfull='ps auxhfww'
