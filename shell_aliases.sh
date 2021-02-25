@@ -99,7 +99,7 @@ else  # assuming Darwin here
     alias gr="cd ~/Google\ Drive/Rally"
     alias sbw='sudo bandwhich'
     alias vcrypt='/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt --text'
-    alias fbrew="brew search | fzf -m --preview 'brew info {}'"
+    alias fbrew="brew formulae | fzf -m --preview 'brew info {}'"
     alias brew_leaf_deps="brew leaves | xargs brew deps --installed --for-each | \
         sed \"s/^.*:/$(tput setaf 4)&$(tput sgr0)/\""
 fi

@@ -263,7 +263,10 @@ function frgp() {  # frg p(phony)
 function fgh() {  # fuzzy github(cli)
     local opts=""
     [ $1 = "a" ] && opts="--state all --limit 300"
-    local pr=$(gh pr list $opts | fzf --ansi +m | awk '{print $1}')
+    # local pr=$(gh pr list $opts | fzf --ansi +m | awk '{print $1}')
+    local pr=$(gh pr list $opts |
+        fzf --ansi +m --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}' |
+        awk '{print $1}')
     gh pr diff $pr
 }
 
