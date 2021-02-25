@@ -260,7 +260,7 @@ function frgp() {  # frg p(phony)
         --height=50% --layout=reverse
 }
 
-function fgh() {
+function fgh() {  # fuzzy github(cli)
     local opts=""
     [ $1 = "a" ] && opts="--state all --limit 300"
     local pr=$(gh pr list $opts | fzf --ansi +m | awk '{print $1}')
@@ -344,9 +344,19 @@ function ffcb() {
         | xargs open
 }
 
-function fapt() {
+function fapt() {  # fuzzy apt
     local opts="--installed"; [ "$1" = "s" ] && unset opts
     apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
+}
+
+function fbt() {  # fuzzy bluetooth
+    local action=${1:-c}
+    local dev=$(bluetoothctl devices)
+    local select=$(echo "$dev" | fzf +m | awk '{print $2}')
+    case "$action" in
+        c) bluetoothctl connect "$select" ;;
+        i) bluetoothctl info "$select" ;;
+    esac
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
