@@ -48,6 +48,10 @@ nc -l 127.0.0.1 9001     #listen on 9001
 # wc - word count
 wc -l   # count # of lines
 
+# lf - "list files", TUI file explorer in golang (like ranger)
+    # docs: https://pkg.go.dev/github.com/gokcehan/lf
+lf
+
 # pandoc -universal doc converter
     # https://pandoc.org/MANUAL.html#general-options
 pandoc foo.md -o foo.docx   # convert markdown to docx
