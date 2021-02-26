@@ -27,6 +27,7 @@ fi
 export FCEDIT=vim
 
 export EDITOR=vim
+export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
 # Linux bin name for fd is fdfind
 fdname="fd"
