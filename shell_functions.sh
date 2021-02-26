@@ -403,10 +403,15 @@ function yts_query() {
 }
 
 function display_notif() {
+    [ -z "$1" ] && echo "no message given!" && return 1
     if [ $(uname) = "Darwin" ]; then
-        osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
+        # osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
+        local script="display notification \"$1\""
+        [ -n "$2" ] && script=$script" with title \"$2\""
+        osascript -e "$script"
     else  # really for ubuntu
-        notify-send -i face-wink "a title" "hi!"
+        local title=${$2:-notitle}
+        notify-send -i face-wink "$title" "$1"
     fi
 }
 
