@@ -186,10 +186,14 @@ function fk() {
 }
 
 function ff() {
-    local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
     local fzf_def="$FZF_DEFAULT_COMMAND"
-    [ "$1" = "h" -o "$1" = ~ ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
-    [ "$1" = "/" ] && fzf_def="$fdname --type f --hidden --exclude .git '.*' /"
+    local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
+    if [ "$1" = "h" ]; then
+        fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
+    elif [ -n "$1" ]; then
+        [ ! -d "$1" ] && echo "$1 not a dir!" && return 1
+        fzf_def="$fdname --type f --hidden --exclude .git '.*' $1"
+    fi
     out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
         --header='ctrl-e->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
