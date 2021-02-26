@@ -1,6 +1,7 @@
 # LF Cheatsheet
 - "list files", TUI file explorer in golang (like ranger)
 - docs: https://pkg.go.dev/github.com/gokcehan/lf
+- lfrc example: https://github.com/gokcehan/lf/blob/master/etc/lfrc.example
 
 ## BINDINGS
 - unix                     windows
