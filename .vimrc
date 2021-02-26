@@ -101,7 +101,7 @@ set wrap                        " wrap lines longer than width to next line
 set linebreak                   " avoid wrapping line in middle of a word
 set scrolloff=1                 " always show at least one line above or below the cursor
 set showcmd                     " show commands i'm process of typing in status bar
-set number					    " line numbers
+set number                      " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
@@ -112,14 +112,14 @@ set formatoptions+=j            " Delete comment character when joining commente
 autocmd FileType * setlocal formatoptions-=o
 
 "Searching
-set hlsearch  				" highlight search
+set hlsearch                    " highlight search
 "TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
 if has('nvim')
     hi Search cterm=italic,underline,inverse
 else
     hi Search cterm=underline,inverse
 endif
-set incsearch				" searching as you type (before hitting enter)
+set incsearch               " searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
 
@@ -130,7 +130,7 @@ set foldmethod=indent
 set nofoldenable            " dont fold everything when opening buffers
 
 """ Default Status Line
-set ls=2					" line status, two lines for status and command
+set ls=2                    " line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
 "show tabs and trailing spaces with special cars

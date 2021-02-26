@@ -48,6 +48,11 @@ nc -l 127.0.0.1 9001     #listen on 9001
 # wc - word count
 wc -l   # count # of lines
 
+# pandoc -universal doc converter
+    # https://pandoc.org/MANUAL.html#general-options
+pandoc foo.md -o foo.docx   # convert markdown to docx
+pandoc foo.md -o foo.odt   # convert markdown to opendocument
+
 # sort - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line
 
