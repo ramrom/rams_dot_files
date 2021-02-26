@@ -357,7 +357,7 @@ function fapt() {  # fuzzy apt
 }
 
 function fbt() {  # fuzzy bluetooth
-    local action=${1:-c}
+    local action=${1:-i}
     local dev=$(bluetoothctl devices)
     local select=$(echo "$dev" | fzf +m | awk '{print $2}')
     case "$action" in
@@ -411,10 +411,11 @@ function display_notif() {
     if [ $(uname) = "Darwin" ]; then
         # osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
         local script="display notification \"$1\""
-        [ -n "$2" ] && script=$script" with title \"$2\""
+        local title=${2:-notification}
+        script=$script" with title \"$title\""
         osascript -e "$script"
     else  # really for ubuntu
-        local title=${$2:-notitle}
+        local title=${2:-notitle}
         notify-send -i face-wink "$title" "$1"
     fi
 }
