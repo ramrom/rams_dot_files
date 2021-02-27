@@ -220,6 +220,15 @@ cp -rl dirA dirB # recursively copy all of dir a to b, but just hard links, gnu/
 sudo shred -v /dev/sdb1
 shred foofile
 
+# SSHFS
+    # sshfs uses SSH and SFTP(ftp over ssh) to remote mount a filesystem
+sshfs user@host:/dir/path localdir/
+sshfs -o sshfs_debug user@host:/dir/path localdir/  # get debugging info
+# two hop ssh for sshfs using local forwarding
+ssh -f userB@systemB -L 2222:systemC:22 -N
+sshfs -p 2222 userC@localhost:/remote/path/ /mnt/localpath/
+
+
 ###### FILESYSTEMs/STORAGE-DEVICES
 fdisk       # manipulate partitions
 fdisk -l   # linux show all dev devices and storage device info
