@@ -1,4 +1,5 @@
 # shell functions
+
 #TODO: get method 2/3 or all of them working
 #FIXME; ubuntu dash wont have either defined
 function detect_shell() {
@@ -851,6 +852,18 @@ function ryamltojson() {
 function parse_comma_delim_error() {
     local str="File.write(\"${1}\", File.read(\"${1}\").split(',').join(\"\\n\"))"
     ruby -e "$str"
+}
+
+###### OTHER ###############
+
+# TODO: use next time ubuntu seemingly loses delay when i plug keyboard back in
+function gsettings_set_keyboard() {
+    [ "$(uname)" != "Linux" ] && echo "not linux" && return 1
+    # gsettings set org.gnome.desktop.peripherals.keyboard repeat true
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 217
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+    # gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state true
+    # gsettings set org.gnome.desktop.peripherals.keyboard numlock-state false
 }
 
 function weather() { http --print=b wttr.in/$1; }
