@@ -185,6 +185,10 @@ function fk() {
       --height=50% --layout=reverse
 }
 
+function fcd() {
+    cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
+}
+
 function ff() {
     local fzf_def="$FZF_DEFAULT_COMMAND"
     local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
