@@ -18,6 +18,7 @@
     - plex web gave error, but plex iphone12 app works fine
 - limits of DLNA servers(standard from 2003): https://www.makeuseof.com/tag/dlna-still-used/
     - doesnt support modern mkv or avi containers, FLAC audio, some DLNA server will transcode to one it supports
+- 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
 
 ## LIBRARY
 - naming tv shows: https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/
