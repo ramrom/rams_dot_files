@@ -1,6 +1,19 @@
 # TECH STANDARDS AND INFO
 ------------------------------------
 
+## CODECs
+- VP9, royalty-free, invented by google, succeeds VP8
+    - used by google in youtube
+    - competes with HEVC/H.265
+- AV1, royalty-free and open, to succeed VP9, designed by alliance for open  media
+- VP8, open and royalty-free
+- HEVC(H.265), designed by MPEG-H, succeeds AVC
+    - uses integer DCT and DST with 4x4 up to 32x32 blocks
+    - maybe 25-50% better compression than H.264 (same quality)
+    - supports 8K
+- AVC(H.264, aka MPEG-4 part 10)
+    - uses integer DCT 4x4 and 8x8 blocks
+
 ## CABLES
 - displayport max lenghts
     - https://www.reddit.com/r/Monitors/comments/989lm2/maximum_cable_length_for_displayport/
