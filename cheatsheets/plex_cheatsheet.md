@@ -6,19 +6,36 @@
     - doesnt exist, for home-assistant, try plex-assistant: https://github.com/maykar/plex_assistant
 - stopping a stream, _should_ be able to do it in dashboard but might be issue:
     - https://forums.plex.tv/t/stop-playback-not-present-on-now-playing/366739
+- web player requires widevine DRM, needed for playpack in webplayer (netflix/prime/spotify also use widevine)
 
 
-## MEDIA TYPE SUPPORT:
+## MEDIA TYPE SUPPORT/PLAYBACK:
+- DirectStream vs DirectPlay
+    - https://support.plex.tv/articles/200250387-streaming-media-direct-play-and-direct-stream/
+- PLAYBACK TESTING (DS218j):
+    - no transcoding, tested 5 simulatenous HD streams (mix of webplayer and vlc local) no problem, low cpu usage
+    - 2 transcodes of sub 1080p movies barely kept up, once in a while one paused to buffer, 100%cpu on server
 - media support for plex player: https://support.plex.tv/articles/203810286-what-media-formats-are-supported/
-- video playback limit on iphone, maybe get plexpass
+    - web player generally supports most codecs
+    - `.avi` file gave _“This server is not powerful enough to convert video"_
+        - https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
+            > AVI file container with XviD video inside it, that cannot be played natively by the Plex Web App.
+        - plex web gave error, but plex iphone12 app works fine
+- direct video playback limit on iphone app, get plexpass
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/
-- `.avi` file gave _“This server is not powerful enough to convert video"_
-    - see https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
-        > AVI file container with XviD video inside it, that cannot be played natively by the Plex Web App.
-    - plex web gave error, but plex iphone12 app works fine
+- 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
+    - 4k movie: iOS play to chromecast on 1080p tv will transcode
+- plexDLNA
+    - dashboard will show "DLNA generic"
+    - Roku WILL TRANSCODE most things
+        - _SIDENOTE_ synologyDLNA to roku didnt transcode same movies (tested a 4k movie too)
+    - chromecast vlc (1080p tv and chromecast), basically never transcodes (4k movie tested)
+    - local vlc (on osx and ubuntu), basically never transcodes (4k movie tested)
 - limits of DLNA servers(standard from 2003): https://www.makeuseof.com/tag/dlna-still-used/
     - doesnt support modern mkv or avi containers, FLAC audio, some DLNA server will transcode to one it supports
-- 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
+- "automatically adjust quality" will transcode
+    - https://support.plex.tv/articles/115007570148-automatically-adjust-quality-when-streaming/
+
 
 ## LIBRARY
 - naming tv shows: https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/

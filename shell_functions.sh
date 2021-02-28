@@ -186,6 +186,7 @@ function fk() {
       --height=50% --layout=reverse
 }
 
+# like cd **, but with tree preview
 function fcd() {
     cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
 }

@@ -6,12 +6,17 @@
      - storage pool can have multi-volume support, this is not default
 - compatibility site: https://www.synology.com/en-us/compatibility
     - 218j can take hdds up to 16TB (all depends on models)
+- TESTING NOTE: cifs mount, play 3 movies, no problems
+- TIP: in web DSM can right click a file and download it to local machine
 
 ## SOFTWARE
 - `Download Station` - torrent client
 - `Drive Server` - private cloud drive
+- `Media Server` - basically a DLNA server
 
 ## SHARING
 - quickconnect: https://www.synology.com/en-uk/knowledgebase/DSM/help/DSM/Tutorial/cloud_set_up_quickconnect
 - filestation: right click share file: https://www.synology.com/en-us/knowledgebase/DSM/help/FileStation/sharing
+    - excerpt: can create 1000 share links, add validity periods, add a password
+    - see all share links: file-station->tools->share-link-managers
 - videostation - can create playlists that are publicly shared (with validity periods)
