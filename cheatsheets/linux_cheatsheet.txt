@@ -104,7 +104,7 @@ loginctl
 service script-name start/stop/restart
 service --status-all
 
-desktop shortcuts:
+gnonme desktop shortcuts:
 -------------------------------------------
 - see https://help.ubuntu.com/community/KeyboardShortcuts
 
@@ -115,6 +115,8 @@ alt+ctr+l, super+l  - lock screen
 super+tab, alt+tab  - switch between running apps
 super+left/right-arrow - snap to left or right half of desktop
 super+up/down-arrow - full screen, original
+super + page-up/page-down - go forward/back workspaces
+super + shift + page-up/page-down - move active window to next/previous workspace
 super+m - toggle notif tray
 alt+f2  - run command
 ctrl+alt arrow - move between desktops
