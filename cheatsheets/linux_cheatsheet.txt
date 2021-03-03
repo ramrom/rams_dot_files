@@ -110,7 +110,7 @@ gnonme desktop shortcuts:
 
 super - usually the "windows" key on keyboards
 super+l - lock screen
-alt+ctr+t, super+t  - open terminal
+alt+ctr+t - open terminal
 alt+ctr+l, super+l  - lock screen
 super+tab, alt+tab  - switch between running apps
 super+left/right-arrow - snap to left or right half of desktop
@@ -118,6 +118,8 @@ super+up/down-arrow - full screen, original
 super + page-up/page-down - go forward/back workspaces
 super + shift + page-up/page-down - move active window to next/previous workspace
 super+m - toggle notif tray
+shift + ctr + c - copy
+shift + ctr + v - paste
 alt+f2  - run command
 ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout

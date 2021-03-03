@@ -1,8 +1,5 @@
 https://devhints.io/  (great reference for all types for developers)
 
-JIRA:
-   - bring up search menu
-
 VIM:
 TIP: once a buffer autoreloads, you can still undo
 ctrl-f - command mode, edit as if in normal mode
