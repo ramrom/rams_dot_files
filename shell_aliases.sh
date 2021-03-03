@@ -126,7 +126,7 @@ alias f="fzf"
 alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
 alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
 alias fv="export | fzf"
-alias fs="saf | fzf"
+alias fs="print_alias_funcs_scripts | fzf"
 # TODO: sourcing aliases works, but calling the alias after fails
 # alias fsp='safn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; source ~/rams_dot_files/shell_functions.sh; \
 alias fsp='safn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; ssf; \
