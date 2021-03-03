@@ -175,6 +175,7 @@ function fmv() {
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
     pafn | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
+        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
         --preview-window=:wrap --preview-window right:70%
 }
 
