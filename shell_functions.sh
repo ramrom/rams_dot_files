@@ -175,6 +175,7 @@ function fmv() {
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
     pafn | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
+        --header='ctrl-y->pbcopy' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
         --preview-window=:wrap --preview-window right:70%
 }
@@ -272,13 +273,22 @@ function frgp() {  # frg p(phony)
 }
 
 function fgh() {  # fuzzy github(cli)
-    local opts=""
-    [ $1 = "a" ] && opts="--state all --limit 300"
-    # local pr=$(gh pr list $opts | fzf --ansi +m | awk '{print $1}')
-    local pr=$(gh pr list $opts |
-        fzf --ansi +m --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}' |
-        awk '{print $1}')
-    gh pr diff $pr
+    local opts="";
+    [ "$1" = "a" ] && opts="--state all --limit 300"
+    local out=$(gh pr list $opts |
+        fzf --ansi +m \
+            --expect='ctrl-o' \
+            --header 'ctrl-o->open-in-web' \
+            --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}')
+    key=$(echo "$out" | head -1)
+    pr=$(echo "$out" | tail -1)
+    if [ -n "$pr" ]; then
+        local prnum=$(echo "$pr" | awk '{print $1}')
+        case "$key" in
+            "ctrl-o") gh pr view --web $prnum ;;
+            *) gh pr diff $prnum ;;
+        esac
+    fi
 }
 
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
