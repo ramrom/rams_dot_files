@@ -6,6 +6,9 @@
     # zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
         # order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
 
+# DASH (ubuntu 16 and newer use it, it's faster than bash)
+# read https://wiki.ubuntu.com/DashAsBinSh
+
 # bash shell expansion order (for zsh too i think)
 # https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
 # korn shell but insightful: https://docstore.mik.ua/orelly/unix/ksh/ch07_03.htm
