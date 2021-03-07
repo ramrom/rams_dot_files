@@ -2,12 +2,25 @@
 
 . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
-[ -z "$1" ] && echo "first arg needed for filename" && exit 1
-require_vars file_type || exit 1
 caller=$0 cmds_defined rg || exit 1
 
+usage () { echo "Usage: [ -h(help) ] [ -v(verbose) ] [ -f FILE_TYPE ] FILENAME"; }
+
+while getopts 'hvf:' x; do
+    case $x in
+        v) VERBOSE=1 ;;
+        h) usage && exit 1 ;;
+        f) FILE_TYPE="$OPTARG" ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+[ -z "$1" ] && echo "first arg needed for FILENAME" && usage && exit 1
+require_vars FILE_TYPE || exit 1
+
 # e.g. "Some Title (2000) [1080p] [FOO]"
-function file_rename() {
+file_rename () {
     local f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
     local charsbeforefirstparen=$(echo "$f" | rg -o  '([^\(].*)\(.*$' -r '$1' --color never)
     local charsafterfirstparen=$(echo "$f" | rg -o  '[^\(].*(\(.*$)' -r '$1' --color never)
@@ -19,7 +32,7 @@ function file_rename() {
 }
 
 # e.g. "Some.Title.2000.1080p.[FOO].mp4"
-function file_rename2() {
+file_rename2 () {
     local charsbeforeyear=$(echo "$1" | rg -o '(.*)\.\d{4}\..*' -r '$1' --color never)
     local charsafteryear=$(echo "$1" | rg -o '.*(\.\d{4}\..*)' -r '$1' --color never)
 
