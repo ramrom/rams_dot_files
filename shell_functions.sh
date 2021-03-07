@@ -193,6 +193,7 @@ function fcd() {
     cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
 }
 
+function weather() { http --print=b wttr.in/$1; }
 function ff() {
     local fzf_def="$FZF_DEFAULT_COMMAND"
     local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
@@ -235,6 +236,12 @@ function ffgb() {
     fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
         --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES  |
     sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
+}
+
+function ffgset() {
+    [ ! "$(uname)" = "Linux" ] && { echo "gnome is for linux" && return 1; }
+    local schema=$(gsettings list-schemas | fzf +m)
+    gsettings list-recursively "$schema"
 }
 
 # $1 - optional file to git log on, otherwise while repo commit history
@@ -878,7 +885,6 @@ function gsettings_set_keyboard() {
     # gsettings set org.gnome.desktop.peripherals.keyboard numlock-state false
 }
 
-function weather() { http --print=b wttr.in/$1; }
 
 function f_findfilesbysize() { sudo find "$1" -type f -size +"$2" | xargs du -sh; }
 

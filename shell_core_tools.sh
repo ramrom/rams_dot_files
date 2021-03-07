@@ -1,3 +1,4 @@
+#!/bin/sh
 # CORE SHELL TOOLS
 
 # return 0 if all are defined, spit out error with exit 1 if one is not
