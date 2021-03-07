@@ -25,4 +25,6 @@ maybeit="";           [ -n "$it" ] && maybeit="\033[3m"
 maybeinverse="";      [ -n "$inv" ] && maybeinverse="\033[7m"
 lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
 lfg=007;              [ -n "$fg" ] && lfg=$(ansi8_name $fg)
-echo -e "${maybeinverse}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
+
+# zsh, osx /bin/sh, dash always expand escape sequences, bash does not and needs -e option
+echo "${maybeinverse}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
