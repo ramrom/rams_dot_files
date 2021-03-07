@@ -55,6 +55,7 @@ skhd
     - `skhd -r` to reload config file with shortcuts
 - force color to pipe output, be default ls wont colorize
     - `CLICOLOR_FORCE=1 ls -l | less`
+lp - print from command line
 
 
 

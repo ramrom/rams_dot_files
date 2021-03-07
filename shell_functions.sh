@@ -285,7 +285,7 @@ function fgh() {  # fuzzy github(cli)
     local out=$(gh pr list $opts |
         fzf --ansi +m \
             --expect='ctrl-o' \
-            --header 'ctrl-o->open-in-web' \
+            --header 'ctrl-o->open-in-web, enter->git-diff' \
             --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}')
     key=$(echo "$out" | head -1)
     pr=$(echo "$out" | tail -1)

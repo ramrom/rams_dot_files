@@ -27,6 +27,8 @@ g,   - jump back to newer edit point
 :read ~/foo     - insert contents of file foo
 :read !jq . foo - can take stdout of shell cmd
 :iunmap jk - unmap jk insert mapping
+:earlier 10min - time travel!, go back to buffer state 10 minutes ago
+    :later 1hr - go forward 1 hour
 
 FZF:
 Rg            - ripgrep dynamic fuzzy search with bat preview!
