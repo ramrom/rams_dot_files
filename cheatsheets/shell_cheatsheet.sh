@@ -172,20 +172,16 @@ echo "$@" # usually want this to avoid misparsing args containing spaces/wildcar
 getopt
 
 # getopts, shell builtin like getopt, bourne shell got it in 1986. it's POSIX, available in ksh, zsh, and bash as well.
-while getopts 'abc:d:ef' x; do;
+while getopts 'abc:d:ef' x; do
     case $x in
         a) echo "a" ;;
         b) echo "b" ;;
-        c) echo $OPTARG ;;
-        d) echo $OPTARG ;;
-        :)   # "optional arguments" (missing option-argument handling)
-        case $OPTARG in
-          (c) exit 1;; # error, according to our syntax
-          (d) :;;      # acceptable but does nothing
-        esac;;
+        c) echo "c given $OPTARG" ;;
+        d) echo "d given $OPTARG" ;;
+        *) echo "not an opt" && exit 1 ;;
     esac
 done
-shift "$OPTIND"     # remaining is "$@"
+shift $(($OPTIND - 1))     # remaining is "$@"
 
 
 # print recent history in bash/zsh
