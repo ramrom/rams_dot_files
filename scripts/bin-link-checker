@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: allow source links to be in dirs other than scripts/
-
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 . ~/rams_dot_files/shell_functions.sh
 
@@ -9,13 +7,14 @@ caller=$0 cmds_defined readlink ansi256 || exit 1
 
 binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin
-sourcedir=~/rams_dot_files/scripts
 [ ! -f "$binlinksfile" ] && echo "file $binlinksfile NOT found!" && exit 1
 
-while read binname; do
-    symlink="${bindir}/${binname}"
+while read entry; do
+    binlinkname=$(echo "$entry" | awk '{print $1}')
+    expectedlinktarget=$(echo "$entry" | awk '{print $2}')
+    eval expectedlinktarget=$expectedlinktarget  # will expand "~"
+    symlink="${bindir}/${binlinkname}"
     linktarget=$(readlink "$symlink")
-    expectedlinktarget="${sourcedir}/${binname}"
     [ -n "$verbose" ] && echo "Checking: "$(fg=yellow ansi256 "$binname")
     if [ ! -L "${symlink}" ]; then
         echo $(fg=red bld=1 ansi256 "${binname}")$(fg=red ansi256 ": symlink doesnt exist in ${bindir}")
