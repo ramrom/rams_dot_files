@@ -4,8 +4,6 @@
 . ~/rams_dot_files/shell_core_tools.sh
 
 caller=$0 cmds_defined readlink ansi256 || exit 1
-a=1; b=2
-caller=haha debug_vars a b
 
 binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin

@@ -10,7 +10,8 @@ detect_shell () {
     elif [ -n "$ZSH_VERSION" ]; then
         echo "zsh"
     else
-        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && return 1
+        txt="NOT BASH OR ZSH!"; msg="\033[38;5;1m${txt}\033[0m"
+        echo "$msg" && return 1
     fi
     # METHOD 2: use ps
         # LINUX: $(ps -p $$ -o cmd=)
@@ -51,14 +52,13 @@ debug_vars () {
     for arg in "$@"; do
         local var_value=$(eval "echo \$${arg}")
 
-        # local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
-        local msg=$(tput setaf 1)
+        msg="\033[38;5;1m${arg}\033[0m"
         if [ -z "$var_value" ]; then
-            local msg2=$(fg=brightred ansi256 " is undefined or null!")"${spacing}"
+            txt=" is undefined or null!"; msg2="\033[38;5;9m${txt}\033[0m""${spacing}"
             printf "$msg$msg2" >&2
         else
-            local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
-            printf "$msg$msg2" >&2
+            msg2=" = ""\033[38;5;10m${var_value}\033[0m""${spacing}"
+            printf "${msg}${msg2}" >&2
         fi
     done
     [ -n "$tab" ] && echo
