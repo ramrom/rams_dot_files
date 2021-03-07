@@ -383,16 +383,16 @@ function fbt() {  # fuzzy bluetooth
     local prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
     local out=$(bluetoothctl devices | fzf +m \
         --preview "$prev_cmd" \
-        --header='ctrl-r->reload devices, ctrl-o->connect, ctrl-w->disconnect, enter->info' \
+        --header='ctrl-r->reload devices, ctrl-o->connect, ctrl-i->disconnect, enter->info' \
         --bind 'ctrl-r:reload(bluetoothctl devices)' \
-        --expect='ctrl-o')
+        --expect='ctrl-o,ctrl-i')
     local key=$(echo "$out" | head -1)
     local selection=$(echo "$out" | tail -1)
     if [ -n "$selection" ]; then
         local device=$(echo "$selection" | awk '{print $2}')
         case "$key" in
             "ctrl-o") bluetoothctl connect "$device" ;;
-            "ctrl-w") bluetoothctl disconnect "$device" ;;
+            "ctrl-i") bluetoothctl disconnect "$device" ;;
             *) bluetoothctl info "$device" ;;
         esac
     fi
