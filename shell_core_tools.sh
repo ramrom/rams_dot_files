@@ -21,7 +21,15 @@ detect_shell () {
 
 cmds_defined () {
     for cmd in "$@"; do
-        command -v $cmd > /dev/null || { echo "$cmd not defined!" && return 1; }
+        if ! command -v $cmd > /dev/null; then
+            if [ -n "$caller" ]; then
+                txt="Calling func/script: "; txt="\033[38;5;5m${txt}\033[0m" #cyan
+                txt2="\033[1m\033[38;5;5m${caller}\033[0m" #boldcyan
+                echo "${txt}${txt2}" >&2
+            fi
+            txt="\033[1m\033[38;5;1m${cmd}\033[0m"  # bold red
+            echo "$txt not defined!" && return 1
+        fi
     done
 }
 
