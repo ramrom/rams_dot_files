@@ -3,7 +3,7 @@
 
 # return 0 if all are defined, spit out error with exit 1 if one is not
 #TODO: get method 2/3 or all of them working
-function detect_shell() {
+detect_shell () {
     # METHOD 1:
     if [ -n "$BASH_VERSION" ]; then
         echo "bash"
@@ -18,13 +18,13 @@ function detect_shell() {
     # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
-function cmds_defined() {
+cmds_defined () {
     for cmd in "$@"; do
         command -v $cmd > /dev/null || { echo "$cmd not defined!" && return 1; }
     done
 }
 
-function require_vars() {
+require_vars () {
     local vars_required=0
     for arg in "$@"; do
         local var_value=$(eval "echo \$${arg}")
@@ -39,7 +39,7 @@ function require_vars() {
 }
 
 # TODO: /bin/sh in osx does not like the printf's
-function debug_vars() {
+debug_vars () {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
     if [ -n "$caller" ]; then
