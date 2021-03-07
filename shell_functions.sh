@@ -819,26 +819,6 @@ function gitclean() {
 
 function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
-function git_ctag_update() {
-    local commit=$(git rev-parse HEAD) || { echo $(fg=red ansi256 "pwd: $(pwd), NOT a git repo!") && return 1; }
-    [ ! -d .git ] && { echo $(fg=red ansi256 "NOT at base of git repo!") && return 1; }
-
-    local create_msg=$(fg=yellow ansi256 "writing ctag file")
-    if [ -f ctag_git_ver -a -f tags ]; then
-        if [ "$(cat ctag_git_ver)" = "$commit" ]; then
-            [ -n "$verbose" ] && echo $(fg=yellow ansi256 "commit $commit matches, ctags not updated")
-        else
-            [ -n "$verbose" ] && echo $(fg=red ansi256 "commit $commit DOES NOT match, ")"$create_msg"
-            ctag_create
-            echo ${commit} > ctag_git_ver
-        fi
-    else
-        [ -n "$verbose" ] && echo $(fg=red ansi256 "NO tags or ctag_git_ver file, ")"$create_msg"
-        ctag_create
-        echo ${commit} > ctag_git_ver
-    fi
-}
-
 #####  DB  ############
 function terminate_db_connections() {
     psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres
