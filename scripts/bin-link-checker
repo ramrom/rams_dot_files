@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ~/rams_dot_files/shell_core_tools.sh
+. ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
 caller=$0 cmds_defined readlink ansi256 || exit 1
 
