@@ -4,13 +4,13 @@
 
 caller=$0 cmds_defined rg || exit 1
 
-usage () { echo "Usage: [ -h(help) ] [ -v(verbose) ] [ -f FILE_TYPE ] FILENAME"; }
+usage () { echo "Usage: [ -h(help) ] [ -v(verbose) ] [ -t FILE_TYPE ] FILENAME"; }
 
-while getopts 'hvf:' x; do
+while getopts 'hvt:' x; do
     case $x in
         v) VERBOSE=1 ;;
         h) usage && exit 1 ;;
-        f) FILE_TYPE="$OPTARG" ;;
+        t) FILE_TYPE="$OPTARG" ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -45,7 +45,7 @@ file_rename2 () {
     echo $charsbeforeyear$charsafteryear
 }
 
-case "$file_type" in
-    a) file_rename $1 ;;
-    b) file_rename2 $1 ;;
+case "$FILE_TYPE" in
+    a) file_rename "$1" ;;
+    b) file_rename2 "$1" ;;
 esac
