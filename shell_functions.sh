@@ -193,7 +193,6 @@ function fcd() {
     cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
 }
 
-function weather() { http --print=b wttr.in/$1; }
 function ff() {
     local fzf_def="$FZF_DEFAULT_COMMAND"
     local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
@@ -381,13 +380,21 @@ function fapt() {  # fuzzy apt
 }
 
 function fbt() {  # fuzzy bluetooth
-    local action=${1:-i}
-    local dev=$(bluetoothctl devices)
-    local select=$(echo "$dev" | fzf +m | awk '{print $2}')
-    case "$action" in
-        c) bluetoothctl connect "$select" ;;
-        i) bluetoothctl info "$select" ;;
-    esac
+    local prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
+    local out=$(bluetoothctl devices | fzf +m \
+        --preview "$prev_cmd" \
+        --header='ctrl-o->connect, ctrl-w->disconnect, enter->info' \
+        --expect='ctrl-o')
+    local key=$(echo "$out" | head -1)
+    local selection=$(echo "$out" | tail -1)
+    if [ -n "$selection" ]; then
+        local device=$(echo "$selection" | awk '{print $2}')
+        case "$key" in
+            "ctrl-o") bluetoothctl connect "$device" ;;
+            "ctrl-w") bluetoothctl disconnect "$device" ;;
+            *) bluetoothctl info "$device" ;;
+        esac
+    fi
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
@@ -874,6 +881,8 @@ function parse_comma_delim_error() {
 }
 
 ###### OTHER ###############
+
+function weather() { http --print=b wttr.in/$1; }
 
 # TODO: use next time ubuntu seemingly loses delay when i plug keyboard back in
 function gsettings_set_keyboard() {
