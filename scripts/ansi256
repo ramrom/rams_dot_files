@@ -3,7 +3,7 @@
 # pass noreset=1 and empty/no string to format external string
 # TODO: validate fg and bg values, after ansi8 translation values must be numbers 1-250
 
-function ansi8_name() {
+ansi8_name () {
     case "$1" in
         red) echo 1 ;; brightred) echo 9 ;;
         green) echo 2 ;; brightgreen) echo 10 ;;
