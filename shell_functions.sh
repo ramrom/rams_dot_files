@@ -479,33 +479,6 @@ function colr_row() {
     done
 }
 
-# pass noreset=1 and empty/no string to format external string
-# TODO: validate fg and bg values, after ansi8 translation values must be numbers 1-250
-# function ansi256() {
-#     local maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
-#     local maybestrike="";       [ -n "$strike" ] && maybestrike="\033[9m"
-#     local maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
-#     local maybeund="";          [ -n "$und" ] && maybeund="\033[4m"
-#     local maybeit="";           [ -n "$it" ] && maybeit="\033[3m"
-#     local maybeinverse="";      [ -n "$inv" ] && maybeinverse="\033[7m"
-#     local lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
-#     local lfg=007;              [ -n "$fg" ] && lfg=$(ansi8_name $fg)
-#     echo -e "${maybeinverse}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
-# }
-
-# function ansi8_name() {
-#     case "$1" in
-#         red) echo 1 ;; brightred) echo 9 ;;
-#         green) echo 2 ;; brightgreen) echo 10 ;;
-#         yellow) echo 3 ;; brightyellow) echo 11 ;;
-#         blue) echo 4 ;; brightblue) echo 12 ;;
-#         magenta) echo 5 ;; brightmagenta) echo 13 ;;
-#         cyan) echo 6 ;; brightcyan) echo 14 ;;
-#         white) echo 7 ;; brightwhite) echo 15 ;;
-#         black) echo 8 ;; brightblack) echo 16 ;;   # should really call it dark black, it's 100% black
-#         *) echo $1 ;;
-#     esac
-# }
 #############################################################################
 
 # https://n0tablog.wordpress.com/2009/02/09/controlling-vlc-via-rc-remote-control-interface-using-a-unix-domain-socket-and-no-programming/
