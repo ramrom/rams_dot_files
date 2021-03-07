@@ -241,7 +241,9 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 amixer - cli for ALSA
     amixer sset Master 5%+
 pulsemixer - volume manager with pulseaudio
+    - https://github.com/GeorgeFilipkin/pulsemixer
     - can see input and output devices and processes using each and modify volume on each
+        - can move a source(process outputting audio) to another sink(output device) or kill or mute in TUI
     pulsemixer --toggle-mute
     pulsemixer --mute
     pulsemixer --change-volume +5
