@@ -1,5 +1,6 @@
 # shell functions
 
+# TODO: dash doesnt like something in shell_function.sh (nov11 2020)
 #TODO: get method 2/3 or all of them working
 #FIXME; ubuntu dash wont have either defined
 function detect_shell() {
