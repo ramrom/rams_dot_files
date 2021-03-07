@@ -31,7 +31,8 @@ require_vars () {
 
         if [ -z "$var_value" ]; then
             vars_required=1
-            [ -z "$quiet" ] && echo "RLY-ERROR: Variable "$(fg=yellow ansi256 "$arg")" is required!"
+            output="\033[38;5;3m${arg}\033[0m"
+            [ -z "$quiet" ] && echo "RLY-ERROR: Variable "$output" is required!"
         fi
     done
     [ "$vars_required" = "1" ] && return 1
@@ -43,7 +44,9 @@ debug_vars () {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
     if [ -n "$caller" ]; then
-        echo $(fg=cyan ansi256 "Calling func/script: ")$(fg=cyan bld=1 ansi256 "$caller") >&2
+        txt="Calling func/script: "; txt="\033[38;5;6m${txt}\033[0m"
+        txt2="\033[1m\033[38;5;6m${caller}\033[0m"
+        echo "${txt}${txt2}" >&2
     fi
     for arg in "$@"; do
         local var_value=$(eval "echo \$${arg}")
