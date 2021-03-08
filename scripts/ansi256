@@ -17,6 +17,7 @@ ansi8_name () {
     esac
 }
 
+# TODO: remove callers that use these vars with using optargs
 maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
 maybestrike="";       [ -n "$strike" ] && maybestrike="\033[9m"
 maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
