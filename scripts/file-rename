@@ -22,12 +22,25 @@ require_vars FILE_TYPE || exit 1
 # e.g. "Some Title (2000) [1080p] [FOO]"
 file_rename () {
     local f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
+    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: space->dash dot->und: ")"${f}"
+
     local charsbeforefirstparen=$(echo "$f" | rg -o  '([^\(].*)\(.*$' -r '$1' --color never)
+    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: get part 1 (chars b4 first paren): ")"${charsbeforefirstparen}"
+
     local charsafterfirstparen=$(echo "$f" | rg -o  '[^\(].*(\(.*$)' -r '$1' --color never)
+    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: get part 2 (chars after first paren): ")"${charsafterfirstparen}"
+
     local a=$(echo $charsbeforefirstparen | sed 's/-/_/g')
+    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: part 1, dash->und: ")"${a}"
+
+    # TODO: why do i need this?
     local a=$(echo $a | sed 's/.$/-/')
+    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: part 1, rep last dot with dash: ")"${a}"
+
     # local b=$(echo $charsafterfirstparen | sed 's/[()\[]//g')  # sed fails literal \] in [] char class
     local b=$(echo $charsafterfirstparen | tr -d "()[]")
+    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: part 2, remove parens brackets: ")"${b}"
+
     echo $a$b
 }
 
