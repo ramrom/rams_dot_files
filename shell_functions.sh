@@ -244,22 +244,6 @@ function ffgset() {
     gsettings list-recursively "$schema"
 }
 
-# $1 - optional file to git log on, otherwise while repo commit history
-# FIXME: if i multiselect, pbcopy only has one copy
-# TODO: add binding to checkout a commit
-function ffgl() {
-    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-    [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
-    local ht="100%"; [ -n "$half" ] && ht="50%"
-
-    git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $@ |
-    fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-        --bind 'ctrl-y:execute-silent(grep -o "[a-f0-9]\{7,\}" <<< {} | pbcopy)+abort' \
-        --header 'ctrl-s->toggle sort,ctrl-y->pbcopy' --preview-window=:wrap \
-        --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
-    grep -o "[a-f0-9]\{7,\}"
-}
-
 function ffgs() {
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     git -c color.status=always status --short |
