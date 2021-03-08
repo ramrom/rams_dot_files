@@ -86,8 +86,8 @@ function print_alias_funcs_scripts() {
         # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
         local alias_cmd="alias | cut -c 7-"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1 | cut -c 7-'
-        local scripts=$(cd ~/bin; fd)
-        { eval $alias_cmd; eval $func_cmd; echo "$scripts"; } | grep "$1"
+        local executables=$(compgen -c)
+        { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
     fi
 }
 
