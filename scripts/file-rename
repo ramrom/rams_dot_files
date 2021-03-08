@@ -39,7 +39,7 @@ file_rename2 () {
     charsbeforeyear=$(echo $charsbeforeyear | sed 's/\./_/g')
 
     charsafteryear=$(echo $charsafteryear | sed -E 's/(\[.*)\.(.*\])/\1_\2/g')  # handle [FOO.BAR]
-    charsafteryear=$(echo $charsafteryear | tr -d "()[]")
+    charsafteryear=$(echo $charsafteryear | tr -d "()[]")               # remove parens and square brackets
     charsafteryear=$(echo $charsafteryear | sed 's/\./-/g')            # replace all dots with dash
     charsafteryear=$(echo $charsafteryear | sed -E 's/-(.{3})$/\.\1/') # except keep last file extention dot
     echo $charsbeforeyear$charsafteryear
