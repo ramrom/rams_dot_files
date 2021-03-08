@@ -74,7 +74,7 @@ function find_listening_ports() {
 }
 
 # FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
-# TODO: figure out how to print all hashed executables like zsh in bash
+# bash, print_type says aliases are undefined
 function print_alias_funcs_scripts() {
     # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
     if [ $(detect_shell) = "zsh" ]; then
