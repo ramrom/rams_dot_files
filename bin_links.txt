@@ -7,7 +7,7 @@ uptime-loadave                  ~/rams_dot_files/scripts/uptime-loadave
 print-ansi256                   ~/rams_dot_files/scripts/print-ansi256
 ansi256                         ~/rams_dot_files/scripts/ansi256
 file-rename                     ~/rams_dot_files/scripts/file-rename
-spotify-decrease-volume.scpt    ~/rams_dot_files/scripts/spotify-decrease-volume
-spotify-increase-volume.scpt    ~/rams_dot_files/scripts/spotify-increase-volume
-spotify-toggle-play.scpt        ~/rams_dot_files/scripts/spotify-toggle-play
+spotify-decrease-volume         ~/rams_dot_files/scripts/spotify-decrease-volume
+spotify-increase-volume         ~/rams_dot_files/scripts/spotify-increase-volume
+spotify-toggle-play             ~/rams_dot_files/scripts/spotify-toggle-play
 ffgl                            ~/rams_dot_files/scripts/ffgl
