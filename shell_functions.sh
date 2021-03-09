@@ -317,21 +317,6 @@ function ffch() {
     fzf $maybesort --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
 
-# fzf on chrome bookmarks
-function ffcb() {
-    bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
-
-    jq_script='
-        def ancestors: while(. | length >= 2; del(.[-1,-2]));
-        . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
-
-    jq -r "$jq_script" < "$bookmarks_path" \
-        | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
-        | fzf --ansi \
-        | cut -d$'\t' -f2 \
-        | xargs open
-}
-
 function fapt() {  # fuzzy apt
     local opts="--installed"; [ "$1" = "s" ] && unset opts
     apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
