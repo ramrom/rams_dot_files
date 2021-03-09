@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#FIXME: the descriptive name of the history item doesnt appear on the left, i just see the hyperlink
-
 cols=$(( $(tput cols) / 3 ))
 sep='{::}'
 
