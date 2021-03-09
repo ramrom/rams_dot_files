@@ -2,9 +2,9 @@
 
 . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
-caller=$0 cmds_defined tmux_version tmux_main_status || exit 1
+caller=$0 cmds_defined tmux-version tmux_main_status || exit 1
 
-local ver=$(tmux_version)
+ver=$(tmux-version)
 [ $(echo "$ver < 2.9" | bc) -eq 1 ] && \
     echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && exit 1
 [ "$1" = "off" ] && tmux_status_reset
