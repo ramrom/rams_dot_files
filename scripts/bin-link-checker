@@ -14,16 +14,16 @@ while read entry; do
     eval expectedlinktarget=$expectedlinktarget  # will expand "~"
     symlink="${bindir}/${binlinkname}"
     linktarget=$(readlink "$symlink")
-    [ -n "$verbose" ] && echo "Checking: "$(fg=yellow ansi256 "$binlinkname")
+    [ -n "$verbose" ] && echo "Checking: "$(ansi256 -f yellow "$binlinkname")
     if [ ! -L "${symlink}" ]; then
-        echo $(fg=red bld=1 ansi256 "${binlinkname}")$(fg=red ansi256 ": symlink doesnt exist in ${bindir}")
+        echo $(ansi256 -e -f red "${binlinkname}")$(ansi256 -f red ": symlink doesnt exist in ${bindir}")
     elif [ ! -f "${symlink}" ]; then
-        echo $(fg=red bld=1 ansi256 "${binlinkname}")$(fg=red ansi256 ": symlink pointing to nonexistent file")
+        echo $(ansi256 -e -f red "${binlinkname}")$(ansi256 -f red ": symlink pointing to nonexistent file")
     elif [ ! -x "${symlink}" ]; then
-        echo $(fg=red bld=1 ansi256 "${binlinkname}")$(fg=red ansi256 ": symlink pointing to nonexecutable file")
+        echo $(ansi256 -f red -e "${binlinkname}")$(ansi256 -f red ": symlink pointing to nonexecutable file")
     elif [ "${linktarget}" != "${expectedlinktarget}" ]; then
-        echo $(fg=red bld=1 ansi256 "${binlinkname}")\
-            $(fg=red ansi256 "points to ${linktarget}, should point to ${expectedlinktarget}")
+        echo $(ansi256 -f red -e "${binlinkname}")\
+            $(ansi256 -f red "points to ${linktarget}, should point to ${expectedlinktarget}")
     fi
 
 done<"$binlinksfile"
