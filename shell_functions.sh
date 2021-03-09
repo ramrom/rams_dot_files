@@ -175,7 +175,7 @@ function fmv() {
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
-    pafn | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
+    print_alias_funcs_scripts | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
         --header='ctrl-y->pbcopy' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
         --preview-window=:wrap --preview-window right:70%
@@ -539,7 +539,7 @@ function tmux_main_status() {
     local cmd="tmux"
     [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
-    eval "$cmd set status-format[0] \"#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"\
+    eval "$cmd set status-format[0] \"#(~/rams_dot_files/tmux-status-bar 2>&1)"\
     "#[align=left]$left #[align=centre]$(tmux_default_winlist) #[align=right]$right\""
     #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
 }
