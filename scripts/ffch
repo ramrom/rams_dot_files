@@ -2,8 +2,7 @@
 
 #FIXME: the descriptive name of the history item doesnt appear on the left, i just see the hyperlink
 
-maybesort="--no-sort"; [ -n "$sort" ] && maybesort=""
-cols=$(( COLUMNS / 3 ))
+cols=$(( $(tput cols) / 3 ))
 sep='{::}'
 
 if [ "$(uname)" = "Darwin" ]; then
@@ -18,4 +17,7 @@ sqlite3 -separator $sep /tmp/h \
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
 awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-fzf $maybesort --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+fzf --no-sort --ansi --multi \
+    --header='ctrl-o -> sort' \
+    --bind 'ctrl-o:toggle-sort' | \
+    sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null

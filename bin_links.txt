@@ -15,4 +15,5 @@ ffgl                            ~/rams_dot_files/scripts/ffgl
 fgh                             ~/rams_dot_files/scripts/fgh
 fbt                             ~/rams_dot_files/scripts/fbt
 ffcb                            ~/rams_dot_files/scripts/ffcb
+ffch                            ~/rams_dot_files/scripts/ffch
 ff                              ~/rams_dot_files/scripts/ff
