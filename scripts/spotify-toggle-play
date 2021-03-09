@@ -1,0 +1,8 @@
+#!/bin/sh
+
+[ ! "$(uname)" = "Darwin" ] && echo "$(tput setaf 1) Only works in OSX" && exit 1
+
+osascript -e 'using terms from application "Spotify"' \
+                -e 'if player state of application "Spotify" is paused then' \
+                    -e 'tell application "Spotify" to play' -e 'else' -e 'tell application "Spotify" to pause' \
+          -e 'end if' -e 'end using terms from'

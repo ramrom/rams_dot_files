@@ -204,9 +204,9 @@ function ff() {
         fzf_def="$fdname --type f --hidden --exclude .git '.*' $1"
     fi
     out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
-        --header='ctrl-e->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
+        --header='ctrl-u->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
-        --expect='ctrl-o,ctrl-e,ctrl-space' \
+        --expect='ctrl-o,ctrl-u,ctrl-space' \
         --preview 'bat --style=numbers --color=always {} | head -500' \
         --preview-window=:wrap)
     key=$(echo "$out" | head -1)
@@ -215,7 +215,7 @@ function ff() {
         case "$key" in
             "ctrl-o") open "$file" ;;
             "ctrl-space") cd "$(dirname "$file")" ;;
-            "ctrl-e") eval "${EDITOR:-vin} "$file"" ;;
+            "ctrl-u") eval "${EDITOR:-vin} "$file"" ;;
         esac
     fi
     echo "$file"
