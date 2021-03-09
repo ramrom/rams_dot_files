@@ -3,7 +3,7 @@
 # pass noreset=1 and empty/no string to format external string
 # TODO: validate fg and bg values, after ansi8 translation values must be numbers 1-250
 
-ansi8_name () {
+ansi16_name () {
     case "$1" in
         red) echo 1 ;; brightred) echo 9 ;;
         green) echo 2 ;; brightgreen) echo 10 ;;
@@ -24,15 +24,15 @@ maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
 maybeund="";          [ -n "$und" ] && maybeund="\033[4m"
 maybeit="";           [ -n "$it" ] && maybeit="\033[3m"
 maybeinverse="";      [ -n "$inv" ] && maybeinverse="\033[7m"
-lbg=016;              [ -n "$bg" ] && lbg=$(ansi8_name $bg)
-lfg=007;              [ -n "$fg" ] && lfg=$(ansi8_name $fg)
+lbg=016;              [ -n "$bg" ] && lbg=$(ansi16_name $bg)
+lfg=007;              [ -n "$fg" ] && lfg=$(ansi16_name $fg)
 
 usage () { echo "Usage: [ -h(help) ] [ -f FOREGROUND_COLOR ] [ -b BACKGROUND_COLOR ] [ -i(italics) ] [ -u(underline) ] [ -s(strikethrough) ] [ -r(no reset) ] [ -e(bold) ] [ -n(inverse) ]"; }
 
 while getopts 'f:b:heiusnr' x; do
     case $x in
-        f) lfg=$(ansi8_name "$OPTARG") ;;
-        b) lbg=$(ansi8_name "$OPTARG") ;;
+        f) lfg=$(ansi16_name "$OPTARG") ;;
+        b) lbg=$(ansi16_name "$OPTARG") ;;
         h) usage && exit 1 ;;
         i) maybeit="\033[3m" ;;
         e) maybebld="\033[1m" ;;
