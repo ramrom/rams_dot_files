@@ -507,12 +507,6 @@ function linux_nvidia() {
 #############                  TMUX                   ##########################
 ################################################################################
 
-function tmux_version() {
-    #  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
-    # 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-    tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p"
-}
-
 # set first line of tmux status for multi-line mode
 function tmux_main_status() {
     local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
@@ -567,7 +561,7 @@ function tmux_default_winlist() {
 
 alias tms='tmux_status'
 function tmux_status() {
-    local ver=$(tmux_version)
+    local ver=$(tmux-version)
     [ $(echo "$ver < 2.9" | bc) -eq 1 ] && \
         echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && return 1
     [ "$1" = "off" ] && tmux_status_reset
