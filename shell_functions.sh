@@ -73,6 +73,24 @@ function find_listening_ports() {
     echo "$ports" | grep "$1 " > /dev/null | grep $process_type > /dev/null
 }
 
+# FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
+# bash, print_type says aliases are undefined
+function print_alias_funcs_scripts() {
+    # calling $(list_funcs) in cmd substitution removes new lines, and IFS= trick gives me "cmd too long" error
+    if [ $(detect_shell) = "zsh" ]; then
+        local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
+        local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
+        local executables=$(hash | cut -d= -f1)
+        { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
+    else # Assuming BASH
+        # NOTE: set prints much more than defined functions, like env vars
+        local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
+        local alias_cmd="alias | cut -c 7-"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1 | cut -c 7-'
+        local executables=$(compgen -c)
+        { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
+    fi
+}
+
 function rrc() {
     if [ $(detect_shell) = "zsh" ]; then
         source ~/.zprofile && source ~/.zshrc
@@ -147,7 +165,7 @@ function fmv() {
 # fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
-    aliasname=1 funcname=1 print-alias-funcs-scripts | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
+    aliasname=1 funcname=1 print_alias_funcs_scripts | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
         --header='ctrl-y->pbcopy' \
         --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
         --preview-window=:wrap --preview-window right:70%
