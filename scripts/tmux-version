@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#  https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+# 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p"
