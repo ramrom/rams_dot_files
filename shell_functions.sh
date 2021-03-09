@@ -35,7 +35,7 @@ function require_vars() {
         if [ -z "$var_value" ]; then
             vars_required=1
             [ -z "$quiet" ] && \
-                echo "${caller_msg}RLY-ERROR: Variable "$(fg=yellow ansi256 "$arg")" is required!" >&2
+                echo "${caller_msg}RLY-ERROR: Variable "$(ansi256 -f yellow "$arg")" is required!" >&2
         fi
     done
     [ "$vars_required" = "1" ] && return 1
@@ -47,17 +47,17 @@ function debug_vars() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
     if [ -n "$caller" ]; then
-        echo $(fg=cyan ansi256 "Calling func/script: ")$(fg=cyan bld=1 ansi256 "$caller") >&2
+        echo $(ansi256 -f cyan "Calling func/script: ")$(ansi256 -f cyan -e "$caller") >&2
     fi
     for arg in "$@"; do
         local var_value=$(eval "echo \$${arg}")
 
-        local msg=$(und=1 ansi256 "DEBUG:")" Variable "$(fg=yellow ansi256 "$arg")
+        local msg=$(ansi256 -u "DEBUG:")" Variable "$(ansi256 -f yellow "$arg")
         if [ -z "$var_value" ]; then
-            local msg2=$(fg=brightred ansi256 " is undefined or null!")"${spacing}"
+            local msg2=$(ansi256 -f brightred " is undefined or null!")"${spacing}"
             printf "$msg$msg2" >&2
         else
-            local msg2=" = "$(fg=brightgreen ansi256 $var_value)"${spacing}"
+            local msg2=" = "$(ansi256 -f brightgreen $var_value)"${spacing}"
             printf "$msg$msg2" >&2
         fi
     done
@@ -332,10 +332,10 @@ function dubydircolor() {
     while read line; do
         local size=$(echo "$line" | awk '{print $1}' | grep --colour=never -o ".$")
         case "$size" in
-            B) echo "$(fg=8 ansi256 "$line")" ;;
-            K) echo "$(fg=28 ansi256 "$line")" ;;
-            M) echo "$(fg=208 ansi256 "$line")" ;;
-            G) echo "$(bg=1 fg=3 ansi256 "$line")" ;;
+            B) echo "$(ansi256 -f 8 "$line")" ;;
+            K) echo "$(ansi256 -f 28 "$line")" ;;
+            M) echo "$(ansi256 -f 208 "$line")" ;;
+            G) echo "$(ansi256 -f 3 -b 1 "$line")" ;;
         esac
     done
 }
@@ -345,9 +345,9 @@ function dubydircolor() {
 function colr_row() {
     while read line; do
         if [ -z "$bold" ]; then
-            bg=237 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
+            ansi256 -b 237 "$line"; read line; echo "$line"; read line; echo "$line"
         else
-            inv=1 ansi256 "$line"; read line; echo "$line"; read line; echo "$line"
+            ansi256 -n "$line"; read line; echo "$line"; read line; echo "$line"
         fi
     done
 }
