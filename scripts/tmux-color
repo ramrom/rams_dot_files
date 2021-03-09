@@ -1,0 +1,21 @@
+#!/bin/sh
+
+[ -z "$1" ] && echo "1st arg for element to color needed" && exit 1
+
+case "$1" in
+    temp)
+        [ $1 -gt 80 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
+        [ $1 -gt 65 ] && echo "#[fg=colour198]$1#[default]" && return 0
+        [ $1 -gt 55 ] && echo "#[fg=colour208]$1#[default]" && return 0
+        [ $1 -gt 45 ] && echo "#[fg=colour190]$1#[default]" && return 0
+        echo "#[fg=colour083]$1#[default]" ;;
+    percent-usage)
+        [ -z "$skip_verify" ] && { verify_percent $1 "$2" || return 1; }
+
+        [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]%%" && return 0
+        [ $1 -gt 80 ] && echo "#[fg=colour198] $1#[default]%%" && return 0
+        [ $1 -gt 40 ] && echo "#[fg=colour208] $1#[default]%%" && return 0
+        [ $1 -gt 10 ] && echo "#[fg=colour190] $1#[default]%%" && return 0
+        echo "#[fg=colour083] $1#[default]%%" ;;
+    *) echo "$1 is not an option" && exit 1 ;;
+esac
