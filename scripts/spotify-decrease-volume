@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ ! "$(uname)" = "Darwin" ] && echo "$(tput setaf 1) Only works in OSX" && exit 1
+
+osascript -e 'tell application "Spotify"' -e 'set sound volume to (sound volume - 10)' -e 'end tell'
