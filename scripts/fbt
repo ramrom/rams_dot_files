@@ -1,0 +1,18 @@
+#!/bin/sh
+
+prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
+out=$(bluetoothctl devices | fzf +m \
+    --preview "$prev_cmd" \
+    --header='ctrl-r->reload devices, ctrl-o->connect, ctrl-i->disconnect, enter->info' \
+    --bind 'ctrl-r:reload(bluetoothctl devices)' \
+    --expect='ctrl-o,ctrl-i')
+key=$(echo "$out" | head -1)
+selection=$(echo "$out" | tail -1)
+if [ -n "$selection" ]; then
+    local device=$(echo "$selection" | awk '{print $2}')
+    case "$key" in
+        "ctrl-o") bluetoothctl connect "$device" ;;
+        "ctrl-i") bluetoothctl disconnect "$device" ;;
+        *) bluetoothctl info "$device" ;;
+    esac
+fi
