@@ -226,25 +226,6 @@ function frgp() {  # frg p(phony)
         --height=50% --layout=reverse
 }
 
-function fgh() {  # fuzzy github(cli)
-    local opts="";
-    [ "$1" = "a" ] && opts="--state all --limit 300"
-    local out=$(gh pr list $opts |
-        fzf --ansi +m \
-            --expect='ctrl-o' \
-            --header 'ctrl-o->open-in-web, enter->git-diff' \
-            --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}')
-    key=$(echo "$out" | head -1)
-    pr=$(echo "$out" | tail -1)
-    if [ -n "$pr" ]; then
-        local prnum=$(echo "$pr" | awk '{print $1}')
-        case "$key" in
-            "ctrl-o") gh pr view --web $prnum ;;
-            *) gh pr diff $prnum ;;
-        esac
-    fi
-}
-
 # ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
 # NOTE: -e needed in case of empty RG_FITLER string, rg thinks empty string is pattern query
 # TODO: add fzf --expect and optionally edit file if expect given

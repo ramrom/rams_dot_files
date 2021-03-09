@@ -1,0 +1,18 @@
+#!/bin/sh
+
+opts="";
+[ "$1" = "a" ] && opts="--state all --limit 300"
+out=$(gh pr list $opts |
+    fzf --ansi +m \
+        --expect='ctrl-o' \
+        --header 'ctrl-o->open-in-web, enter->git-diff' \
+        --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}')
+key=$(echo "$out" | head -1)
+pr=$(echo "$out" | tail -1)
+if [ -n "$pr" ]; then
+    local prnum=$(echo "$pr" | awk '{print $1}')
+    case "$key" in
+        "ctrl-o") gh pr view --web $prnum ;;
+        *) gh pr diff $prnum ;;
+    esac
+fi
