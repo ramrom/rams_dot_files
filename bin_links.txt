@@ -1,5 +1,4 @@
 bin-link-checker                ~/rams_dot_files/scripts/bin-link-checker
-print-alias-funcs-scripts       ~/rams_dot_files/scripts/print-alias-funcs-scripts
 ctag-git-update                 ~/rams_dot_files/scripts/ctag-git-update
 yts-get-magnet                  ~/rams_dot_files/scripts/yts-get-magnet
 psql-pager                      ~/rams_dot_files/scripts/psql-pager
