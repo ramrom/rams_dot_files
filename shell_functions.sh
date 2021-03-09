@@ -194,33 +194,6 @@ function fcd() {
     cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
 }
 
-function ff() {
-    local fzf_def="$FZF_DEFAULT_COMMAND"
-    local fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
-    if [ "$1" = "h" ]; then
-        fzf_def="$fdname --type f --hidden --exclude .git '.*' ~"
-    elif [ -n "$1" ]; then
-        [ ! -d "$1" ] && echo "$1 not a dir!" && return 1
-        fzf_def="$fdname --type f --hidden --exclude .git '.*' $1"
-    fi
-    out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 \
-        --header='ctrl-u->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
-        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
-        --expect='ctrl-o,ctrl-u,ctrl-space' \
-        --preview 'bat --style=numbers --color=always {} | head -500' \
-        --preview-window=:wrap)
-    key=$(echo "$out" | head -1)
-    file=$(echo "$out" | tail -1)
-    if [ -n "$file" ]; then
-        case "$key" in
-            "ctrl-o") open "$file" ;;
-            "ctrl-space") cd "$(dirname "$file")" ;;
-            "ctrl-u") eval "${EDITOR:-vin} "$file"" ;;
-        esac
-    fi
-    echo "$file"
-}
-
 function ffgt() {  # ff(fuzzy)g(git)t(tag)
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     git tag --sort -version:refname | fzf --multi --preview-window right:80% \
