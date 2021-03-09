@@ -266,28 +266,6 @@ function frg() {
 function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" frg $1; }
 function rgfst() { RG_FILTER="-tscala" frg $1; }
 
-# fzf on google history
-function ffch() {
-    local maybesort="--no-sort"; [ -n "$sort" ] && maybesort=""
-    local cols sep google_history open
-    cols=$(( COLUMNS / 3 ))
-    sep='{::}'
-
-    if [ "$(uname)" = "Darwin" ]; then
-        google_history="$HOME/Library/Application Support/Google/Chrome/Default/History"
-        open=open
-    else
-        google_history="$HOME/.config/google-chrome/Default/History"
-        open=xdg-open
-    fi
-    cp -f "$google_history" /tmp/h
-    sqlite3 -separator $sep /tmp/h \
-        "select substr(title, 1, $cols), url
-         from urls order by last_visit_time desc" |
-    awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-    fzf $maybesort --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
-}
-
 function fapt() {  # fuzzy apt
     local opts="--installed"; [ "$1" = "s" ] && unset opts
     apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
