@@ -15,7 +15,15 @@ sqlite3 -separator $sep /tmp/h \
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
 awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-fzf --no-sort --ansi --multi \
-    --header='ctrl-o -> sort' \
-    --bind 'ctrl-o:toggle-sort' | \
-    sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+out=$(fzf --no-sort --ansi --multi \
+    --header='ctrl-u -> open, ctrl-o -> sort' \
+    --expect='ctrl-u' \
+    --bind 'ctrl-o:toggle-sort')
+key=$(echo "$out" | head -1)
+histlink=$(echo "$out" | tail -1)
+if [ -n "$histlink" ]; then
+    case "$key" in
+        "ctrl-u") echo "$histlink" | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null ;;
+    esac
+fi
+echo "$histlink"
