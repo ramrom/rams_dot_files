@@ -1,4 +1,5 @@
 bin-link-checker                ~/rams_dot_files/scripts/bin-link-checker
+apt-rdepends-tree               ~/rams_dot_files/scripts/apt-rdepends-tree
 ctag-git-update                 ~/rams_dot_files/scripts/ctag-git-update
 yts-get-magnet                  ~/rams_dot_files/scripts/yts-get-magnet
 psql-pager                      ~/rams_dot_files/scripts/psql-pager
