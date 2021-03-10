@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ ! "$(uname)" = "Darwin" ] && echo "RLY-ERROR: chrome_json_summary needs applescript, only Darwin os" >&2 && exit 1
+[ ! "$(uname)" = "Darwin" ] && echo "RLY-ERROR: chrome-json-summary needs applescript, only Darwin os" >&2 && exit 1
 
 wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
 [ "$wincount" -eq 0 ] && echo "zero windows!" && return

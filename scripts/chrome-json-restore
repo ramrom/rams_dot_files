@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+[ ! "$(uname)" = "Darwin" ] && echo "RLY-ERROR: chrome-json-restore needs applescript, only Darwin os" >&2 && exit 1
+
+#open -a "Google Chrome" http://stackoverflow.com http://wikipedia.org  # opening urls in chrome
+#open in new chrome window, see: https://apple.stackexchange.com/questions/305901/open-a-new-browser-window-from-terminal
+
+json="$(cat $1)"
+wincount=$(echo "$json" | jq '. | length')
+for (( i=0; i<$wincount; i++)); do
+    tabcount=$(echo $json | jq --arg WINNUM $i '.[($WINNUM | tonumber)] | length')
+    cmd="open -na \"Google Chrome\" --args --new-window"
+    #cmd="$cmd $(echo $1 | jq -r --arg WINNUM $i '.[($WINNUM | tonumber)] | join(" ")')" # "&" chars cause bg job
+    for (( j=0; j<$tabcount; j++)); do
+        cmd="$cmd $(echo $json | jq --arg WINNUM $i --arg TABNUM $j '.[($WINNUM | tonumber)][($TABNUM | tonumber)]')"
+    done
+    eval $cmd
+done
