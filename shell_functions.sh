@@ -334,10 +334,10 @@ function dubydircolor() {
     while read line; do
         local size=$(echo "$line" | awk '{print $1}' | grep --colour=never -o ".$")
         case "$size" in
-            B) echo "$(ansi256 -f 8 "$line")" ;;
-            K) echo "$(ansi256 -f 28 "$line")" ;;
-            M) echo "$(ansi256 -f 208 "$line")" ;;
-            G) echo "$(ansi256 -f 3 -b 1 "$line")" ;;
+            B) ansi256 -f 8 "$line" ;;
+            K) ansi256 -f 28 "$line" ;;
+            M) ansi256 -f 208 "$line" ;;
+            G) ansi256 -f 3 -b 1 "$line" ;;
         esac
     done
 }

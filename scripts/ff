@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# FF - Fzf on files in a dir with file prev and open or edit or cd to or add to clipboard
+
 fzf_def="$FZF_DEFAULT_COMMAND"
 fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
 if [ "$1" = "h" ]; then

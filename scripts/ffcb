@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# FFCB (Fzf Chrome Bookmarks)
+
 [ ! "$(uname)" = "Darwin" ] && echo "$(tput setaf 1) Only works in OSX" && exit 1
 
 bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks

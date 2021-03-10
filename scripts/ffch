@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# FFCH (Fzf Chrome History)
+
 cols=$(( $(tput cols) / 3 ))
 sep='{::}'
 
