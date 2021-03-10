@@ -15,7 +15,6 @@ alias lrt='ls -lrt'
 alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
 alias tp='cd ~/tmp'
-alias dubydir='du -sh * 2>/dev/null'  # throw away errors, permission failure messages
 alias lsoftcplisten='lsof -nP -iTCP -sTCP:LISTEN'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works
@@ -94,6 +93,7 @@ else  # assuming Darwin here
     alias ote='open -a TextEdit'
     alias osp='open -a Spotify'
     alias odisc='open -a Discord'
+    alias dubydir='du -sh * 2>/dev/null'  # throw away errors, permission failure messages
     alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
     alias gl="cd ~/Google\ Drive/Lists"
     alias gr="cd ~/Google\ Drive/Rally"
