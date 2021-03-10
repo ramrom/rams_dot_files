@@ -11,7 +11,7 @@ out=$(bluetoothctl devices | fzf +m \
 key=$(echo "$out" | head -1)
 selection=$(echo "$out" | tail -1)
 if [ -n "$selection" ]; then
-    local device=$(echo "$selection" | awk '{print $2}')
+    device=$(echo "$selection" | awk '{print $2}')
     case "$key" in
         "ctrl-o") bluetoothctl connect "$device" ;;
         "ctrl-i") bluetoothctl disconnect "$device" ;;
