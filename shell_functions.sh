@@ -470,29 +470,8 @@ function tmux_main_status() {
     [ $(detect_shell) = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
     eval "$cmd set status-format[0] \"#(~/rams_dot_files/tmux-status-bar 2>&1)"\
-    "#[align=left]$left #[align=centre]$(tmux_default_winlist) #[align=right]$right\""
+    "#[align=left]$left #[align=centre]$(tmux-default-winlist) #[align=right]$right\""
     #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
-}
-
-function tmux_default_winlist() {
-    # local out=052; local mid=124; local inr=207;  # magentas
-    # local out=106; local mid=148; local inr=190;   # yellow-greens
-    # local out=021; local mid=093; local inr=201;    # blue-violet-magenta
-    local out=227; local mid=210; local inr=197;    # yellow-org-red
-    local pre="#[fg=colour${out}]<#[default]#[fg=colour${mid}]<#[default]#[fg=colour${inr}]<#[default] "
-    local post=" #[fg=colour${inr}]>#[default]#[fg=colour${mid}]>#[default]#[fg=colour${out}]>#[default]"
-    echo "$pre#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
-        #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},
-        #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}},
-        #{window-status-bell-style},#{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},
-        #{!=:#{window-status-activity-style},default}},
-        #{window-status-activity-style},}}]#{T:window-status-format}#[norange default]#{?window_end_flag,,#{window-status-separator}},#[range=window|#{window_index} list=focus
-        #{?#{!=:#{window-status-current-style},default},#{window-status-current-style},#{window-status-style}}
-        #{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},#{window-status-last-style},}
-        #{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}},#{window-status-bell-style},
-        #{?#{&&:#{||:#{window_activity_flag},#{window_silence_flag}},#{!=:#{window-status-activity-style},default}},
-        #{window-status-activity-style},}}]#{T:window-status-current-format}#[norange list=on default]#{?window_end_flag,,#{window-status-separator}}}#[nolist]$post"
-    # need #[nolist] at the end here to let next items align
 }
 
 alias tms='tmux_status'
