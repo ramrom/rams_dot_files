@@ -185,6 +185,9 @@ function ToggleFoldMethod()
     if &foldmethod == "indent" | set foldmethod=syntax | else | set foldmethod=indent | endif
 endfunction
 
+" if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
+autocmd VimResized * wincmd =
+
 " let &colorcolumn=join(range(81,999),",")  "highlight columns >80
 highlight ColorColumn ctermbg=235
 
