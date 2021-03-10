@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# FFGL (Fzf Git Log)
+
 # $1 - optional file to git log on, otherwise while repo commit history
 # FIXME: if i multiselect, pbcopy only has one copy
 # TODO: add binding to checkout a commit
