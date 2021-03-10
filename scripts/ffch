@@ -10,12 +10,13 @@ else
     google_history="$HOME/.config/google-chrome/Default/History"
     open=xdg-open
 fi
+
 cp -f "$google_history" /tmp/h
-sqlite3 -separator $sep /tmp/h \
+out=$(sqlite3 -separator $sep /tmp/h \
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
 awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-out=$(fzf --no-sort --ansi --multi \
+fzf --no-sort --ansi --multi \
     --header='ctrl-u -> open, ctrl-o -> sort' \
     --expect='ctrl-u' \
     --bind 'ctrl-o:toggle-sort')
