@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# local out=052; local mid=124; local inr=207;  # magentas
-# local out=106; local mid=148; local inr=190;   # yellow-greens
-# local out=021; local mid=093; local inr=201;    # blue-violet-magenta
+#  out=052;  mid=124;  inr=207;  # magentas
+#  out=106;  mid=148;  inr=190;   # yellow-greens
+#  out=021;  mid=093;  inr=201;    # blue-violet-magenta
 out=227; mid=210; inr=197;    # yellow-org-red
 pre="#[fg=colour${out}]<#[default]#[fg=colour${mid}]<#[default]#[fg=colour${inr}]<#[default] "
 post=" #[fg=colour${inr}]>#[default]#[fg=colour${mid}]>#[default]#[fg=colour${out}]>#[default]"
