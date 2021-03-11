@@ -21,33 +21,36 @@ require_vars FILE_TYPE || exit 1
 
 # e.g. "Some Title (2000) [1080p] [FOO]"
 file_rename () {
-     f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
-    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: space->dash dot->und: ")"${f}"
+    f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename: space->dash dot->und: ")"${f}"
 
-     charsbeforefirstparen=$(echo "$f" | rg -o  '([^\(].*)\(.*$' -r '$1' --color never)
-    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: get part 1 (chars b4 first paren): ")"${charsbeforefirstparen}"
+    charsbeforefirstparen=$(echo "$f" | rg -o  '([^\(].*)\(.*$' -r '$1' --color never)
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename: get part 1 (chars b4 first paren): ")"${charsbeforefirstparen}"
 
-     charsafterfirstparen=$(echo "$f" | rg -o  '[^\(].*(\(.*$)' -r '$1' --color never)
-    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: get part 2 (chars after first paren): ")"${charsafterfirstparen}"
+    charsafterfirstparen=$(echo "$f" | rg -o  '[^\(].*(\(.*$)' -r '$1' --color never)
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename: get part 2 (chars after first paren): ")"${charsafterfirstparen}"
 
-     a=$(echo $charsbeforefirstparen | sed 's/-/_/g')
-    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: part 1, dash->und: ")"${a}"
+    a=$(echo $charsbeforefirstparen | sed 's/-/_/g')
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename: part 1, dash->und: ")"${a}"
 
     # TODO: why do i need this?
-     a=$(echo $a | sed 's/.$/-/')
-    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: part 1, rep last dot with dash: ")"${a}"
+    a=$(echo $a | sed 's/.$/-/')
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename: part 1, rep last dot with dash: ")"${a}"
 
     #  b=$(echo $charsafterfirstparen | sed 's/[()\[]//g')  # sed fails literal \] in [] char class
-     b=$(echo $charsafterfirstparen | tr -d "()[]")
-    [ -n "$VERBOSE" ] && echo $(ansi256 -f red "rename: part 2, remove parens brackets: ")"${b}"
+    b=$(echo $charsafterfirstparen | tr -d "()[]")
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename: part 2, remove parens brackets: ")"${b}"
 
     echo $a$b
 }
 
-# e.g. "Some.Title.2000.1080p.[FOO].mp4"
+# e.g. "Some.Title.2000.1080p.[FOO].mp4" -> "Some_Title-2000-1080p-[FOO].mp4"
 file_rename2 () {
-     charsbeforeyear=$(echo "$1" | rg -o '(.*)\.\d{4}\..*' -r '$1' --color never)
-     charsafteryear=$(echo "$1" | rg -o '.*(\.\d{4}\..*)' -r '$1' --color never)
+    charsbeforeyear=$(echo "$1" | rg -o '(.*)\.\d{4}\..*' -r '$1' --color never)
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename2: get part 1 (chars b4 year): ")"${charsbeforeyear}"
+
+    charsafteryear=$(echo "$1" | rg -o '.*(\.\d{4}\..*)' -r '$1' --color never)
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename2: get part 1 (chars after year): ")"${charsafteryear}"
 
     charsbeforeyear=$(echo $charsbeforeyear | sed 's/\./_/g')
 
@@ -58,7 +61,16 @@ file_rename2 () {
     echo $charsbeforeyear$charsafteryear
 }
 
+# e.g. "Some.Title.2000.1080p.[FOO].mp4" -> "Some_Title-2000.mp4"
+file_rename3 () {
+    out="$(file_rename2 "$1")"
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename3: starting string ")"${out}"
+    echo "$out" | sed -r 's/^(.*[0-9]{4})-.*(\.mp4)/\1\2/'
+}
+
 case "$FILE_TYPE" in
     a) file_rename "$1" ;;
     b) file_rename2 "$1" ;;
+    c) file_rename3 "$1" ;;
+    *) echo "$FILE_TYPE is invalid option!" && exit 1 ;;
 esac
