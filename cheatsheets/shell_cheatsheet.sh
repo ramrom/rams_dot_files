@@ -118,7 +118,7 @@ function foo-bar() {
 # bash/zsh and bsd/gnu sh support local scoped variables in a function
 # - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
 local foo=1   # only hold value in scope of current function and called function, once func finishes local var is removed
-              # if a called function also decluares a `local foo=3`, then it and it's downstream func calls will use 3
+              # if a called function also declares a `local foo=3`, then it and it's downstream func calls will use 3
 foo=1         # shell variable, so persists even when function exits
 
 export FOO=1  # environment variable, subshells inhert these variables
