@@ -10,6 +10,7 @@ print-ansi256                   ~/rams_dot_files/scripts/print-ansi256
 ansi256                         ~/rams_dot_files/scripts/ansi256
 file-rename                     ~/rams_dot_files/scripts/file-rename
 tmux-version                    ~/rams_dot_files/scripts/tmux-version
+tmux-status                     ~/rams_dot_files/scripts/tmux-status
 tmux-default-winlist            ~/rams_dot_files/scripts/tmux-default-winlist
 spotify-decrease-volume         ~/rams_dot_files/scripts/spotify-decrease-volume
 spotify-increase-volume         ~/rams_dot_files/scripts/spotify-increase-volume
