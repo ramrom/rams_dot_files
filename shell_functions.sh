@@ -410,6 +410,7 @@ function sensor_data() {
 
     local s=$(sensors)
     echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' # | grep --color=never -Eoi '[0-9]+.[0-9]+'
+    # echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+'
     echo "$s" | grep -E "CPU Fan"
 }
 
@@ -426,115 +427,9 @@ function cpu_util() {
     ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
 }
 
-# expects raw input from `sensors` command
-function linux_cpu_temp() {
-    sensor_data=$1
-    cputemp=$(echo "$sensor_data" | grep -E "CPU Temperature" | awk '{print $3;}')
-    echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+'
-}
-
-# NOTE: hyperfine says nvidia-smi takes ~40ms, so refresh less frequent
-function linux_nvidia() {
-    cmds_defined nvidia-smi || return 1
-    nvid=$(nvidia-smi)
-    echo "$nvid" | sed -n '10p'   # the 10th line has most of the info we want
-}
 ################################################################################
 #############                  TMUX                   ##########################
 ################################################################################
-
-function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
-
-# assuming celcius
-function tmux_temp_color() {
-    [ $1 -gt 80 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]" && return 0
-    [ $1 -gt 65 ] && echo "#[fg=colour198]$1#[default]" && return 0
-    [ $1 -gt 55 ] && echo "#[fg=colour208]$1#[default]" && return 0
-    [ $1 -gt 45 ] && echo "#[fg=colour190]$1#[default]" && return 0
-    echo "#[fg=colour083]$1#[default]"
-}
-
-function tmux_percent_usage_color() {
-    [ -z "$skip_verify" ] && { verify_percent $1 "$2" || return 1; }
-
-    [ $1 -gt 95 ] && echo "#[bg=colour124,fg=colour231] $1 #[default]%%" && return 0
-    [ $1 -gt 80 ] && echo "#[fg=colour198] $1#[default]%%" && return 0
-    [ $1 -gt 40 ] && echo "#[fg=colour208] $1#[default]%%" && return 0
-    [ $1 -gt 10 ] && echo "#[fg=colour190] $1#[default]%%" && return 0
-    echo "#[fg=colour083] $1#[default]%%"
-}
-
-function verify_percent() {
-    if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
-        echo "$(tput setaf 1) val: $2: must be a positive integer!" && return 1
-    fi
-    [ $1 -lt 0 -o $1 -gt 100 ] && echo "$(tput setaf 1)val $2: must be between 0 and 100!" && return 1
-    return 0
-}
-
-function local_bar_width() {
-    #determine bar width, default to 100% of column width of viewport
-    local percentage_of_window=100
-    if [ -n "$1" ]; then
-        verify_percent $1 "window width percentage" || return 1
-        percentage_of_window=$1
-    fi
-    echo "$(tput cols) * $percentage_of_window / 100" | bc
-}
-
-# ubuntu and osx uptime have diff format ofcourse
-# $1 - timer name, $2 - percent (e.g. 50), $3 - bar width in chars
-function tmux_render_progress_bar() {
-    verify_percent $2 "task percentage done" || return 1
-    local text="$2%% $1"  # arg 1 is descriptive name like "egg timer"
-    local text_size=${#text}; local bar_width=$3
-    if [ $text_size -gt $bar_width ]; then
-        echo "#[fg=brightyellow,bg=red]error: $1 > $bar_width chars!" && return 1
-    fi
-
-    local num_white_space=$(($bar_width - $text_size))
-    for (( i=1; i<=$num_white_space; i++ )); do
-        text+=" "
-    done
-
-    local col=21; [ -n "$color" ] && col=$color
-
-    local completed_width=$(($bar_width * $2 / 100 ))
-    text="${text:0:$completed_width}#[bg=colour237]${text:$completed_width:${#text}}"
-    text="#[fg=brightwhite,bg=colour$col]$text"
-
-    # for (( i=1; i<=$uncompleted_width; i++ )); do
-    #     printf "-"
-    # done
-    echo "$text#[default]"
-}
-
-function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
-function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
-
-# NOTE: default tmux status script shell is sh(3.2)
-# TODO: diff format for secs and percent maybe?
-function tmux_render_timer_bar() {
-    local start=$(tmux show -v @$1-start)
-    [ -z $start ] && echo "#[fg=brightred]$1 timer not found!" && return 1
-
-    local now=$(date +%s)
-    local duration=$(tmux show -v @$1-duration)
-    local elapsed=$(( $now - $start ))
-    local percent_done=$(( $elapsed * 100 / $duration ))
-    # echo $percent_done
-
-    if [ $percent_done -gt 100 ]; then
-        local excess=$(( $elapsed - $duration ))
-        local progbar=$(tmux_render_progress_bar \
-            "⏰ $1 timer (${duration}s) - #[bg=red,underscore]!COMPLETED!#[bg=$color,nounderscore] ${excess}s ago" 100 100)
-    else
-        local progbar=$(tmux_render_progress_bar "⏰ $1 timer (${duration}s)" $percent_done 100)
-    fi
-
-    # NOTE: quotes needed to preserve spaces, otherwise sh/bash will interpret as args and compress
-    echo "$progbar"
-}
 
 function tmuxclrhist {
     tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
