@@ -225,6 +225,7 @@ fi
 # bash
 for run in {1..10}; do echo "hello"; done
 
+# bourne shell doesnt support for loops, use the while loop
 for (( i=1; i<=3; i++)); do
     echo $i
 done

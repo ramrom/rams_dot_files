@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # setopt NO_NOMATCH  #needed if this was zsh
 
@@ -42,7 +42,7 @@ linux_nvidia () {
 cpu_legend_color="fg=colour242"
 cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime-loadave) "uptimeload")
 status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
-if [ "$(uname)" == "Linux" ]; then
+if [ "$(uname)" = "Linux" ]; then
     s=$(sensors)
 
     #### CPU Stats
@@ -116,7 +116,7 @@ tmux set status-format[1] "$status_line1"
 counter=$(tmux show -v @status-bar-interval-counter)
 tmux set -q @status-bar-interval-counter $(( ($counter + 1) % 2520 ))
 
-function local_bar_width() {
+local_bar_width () {
     #determine bar width, default to 100% of column width of viewport
     local percentage_of_window=100
     if [ -n "$1" ]; then
@@ -128,7 +128,7 @@ function local_bar_width() {
 
 # ubuntu and osx uptime have diff format ofcourse
 # $1 - timer name, $2 - percent (e.g. 50), $3 - bar width in chars
-function tmux_render_progress_bar() {
+tmux_render_progress_bar () {
     verify_percent $2 "task percentage done" || return 1
     local text="$2%% $1"  # arg 1 is descriptive name like "egg timer"
     local text_size=${#text}; local bar_width=$3
@@ -137,25 +137,26 @@ function tmux_render_progress_bar() {
     fi
 
     local num_white_space=$(($bar_width - $text_size))
-    for (( i=1; i<=$num_white_space; i++ )); do
-        text+=" "
-    done
+    i=1; while [ "$i" -le "$num_white_space" ]; do
+        text+=" ";
+    i=$(( $i + 1 )); done
 
     local col=21; [ -n "$color" ] && col=$color
 
     local completed_width=$(($bar_width * $2 / 100 ))
     text="${text:0:$completed_width}#[bg=colour237]${text:$completed_width:${#text}}"
     text="#[fg=brightwhite,bg=colour$col]$text"
+    local uncompleted_width=$(($bar_width - $completed_width))
 
-    # for (( i=1; i<=$uncompleted_width; i++ )); do
-    #     printf "-"
-    # done
+    i=1; while [ "$i" -le "$uncompleted_width" ]; do
+        printf "-"
+    i=$(( $i + 1 )); done
     echo "$text#[default]"
 }
 
 # NOTE: default tmux status script shell is sh(3.2)
 # TODO: diff format for secs and percent maybe?
-function tmux_render_timer_bar() {
+tmux_render_timer_bar () {
     local start=$(tmux show -v @$1-start)
     [ -z $start ] && echo "#[fg=brightred]$1 timer not found!" && return 1
 
