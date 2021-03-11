@@ -443,7 +443,7 @@ function linux_nvidia() {
 #############                  TMUX                   ##########################
 ################################################################################
 
-alias tms='tmux_status'
+alias tms='tmux-status'
 function tmux_status_set_num_cpu() { tmux set -q "@tmux-status-num-cpu" $(sysctl -n hw.ncpu); }
 
 # assuming celcius
