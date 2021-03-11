@@ -56,3 +56,12 @@ if [ "$1" = "on" ]; then
     tmux set status 2
     tmux_main_status        # set first line, which runs the master script
 fi
+
+
+
+
+######################## WIP #############################3
+
+# add a timer and progress bar to status
+function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
+function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
