@@ -10,7 +10,7 @@ out=$(gh pr list $opts |
 key=$(echo "$out" | head -1)
 pr=$(echo "$out" | tail -1)
 if [ -n "$pr" ]; then
-    local prnum=$(echo "$pr" | awk '{print $1}')
+    prnum=$(echo "$pr" | awk '{print $1}')
     case "$key" in
         "ctrl-o") gh pr view --web $prnum ;;
         *) gh pr diff $prnum ;;
