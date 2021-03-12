@@ -6,7 +6,7 @@
 
 . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
-caller=$0 cmds_defined tmux-version tmux-default-winlist || exit 1
+caller=$0 cmds_defined tmux-version tmux-default-winlist tmux-status-render || exit 1
 
 # set first line of tmux status for multi-line mode
 tmux_main_status () {
@@ -34,7 +34,8 @@ tmux_main_status () {
     local cmd="tmux"
     [ "$(detect_shell)" = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
-    eval "$cmd set status-format[0] \"#(~/rams_dot_files/scripts/tmux-status-render 2>&1)"\
+    # eval "$cmd set status-format[0] \"#(~/rams_dot_files/scripts/tmux-status-render 2>&1)"\
+    eval "$cmd set status-format[0] \"#(tmux-status-render 2>&1)"\
     "#[align=left]$left #[align=centre]$(tmux-default-winlist) #[align=right]$right\""
     #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
 }
