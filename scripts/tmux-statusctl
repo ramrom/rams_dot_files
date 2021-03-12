@@ -30,14 +30,11 @@ tmux_main_status () {
         right="#[align=right]  ${tmux_host_datetime}"
     fi
 
-    # "#(~/rams_dot_files/tmux_status_bar.sh 2>&1)"
     local cmd="tmux"
     [ "$(detect_shell)" = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
-    # eval "$cmd set status-format[0] \"#(~/rams_dot_files/scripts/tmux-status-render 2>&1)"\
     eval "$cmd set status-format[0] \"#(tmux-status-render 2>&1)"\
     "#[align=left]$left #[align=centre]$(tmux-default-winlist) #[align=right]$right\""
-    #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
 }
 
 tmux_status_reset () {
