@@ -34,7 +34,7 @@ tmux_main_status () {
     local cmd="tmux"
     [ "$(detect_shell)" = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
-    eval "$cmd set status-format[0] \"#(~/rams_dot_files/tmux-status-bar 2>&1)"\
+    eval "$cmd set status-format[0] \"#(~/rams_dot_files/scripts/tmux-status-render 2>&1)"\
     "#[align=left]$left #[align=centre]$(tmux-default-winlist) #[align=right]$right\""
     #eval "$cmd set status-format[1] \"#(source ~/rams_dot_files/shell_functions.sh; tmux_test_data)\""
 }
@@ -63,5 +63,5 @@ fi
 ######################## WIP #############################3
 
 # add a timer and progress bar to status
-function tmux_delete_timer() { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
-function tmux_create_timer() { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
+tmux_delete_timer () { tmux set -u "@$1-start"; tmux set -u "@$1-duration"; }
+tmux_create_timer () { tmux set -q "@$1-start" $(date +%s); tmux set -q "@$1-duration" $2; }
