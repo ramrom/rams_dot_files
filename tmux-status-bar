@@ -2,9 +2,7 @@
 
 # setopt NO_NOMATCH  #needed if this was zsh
 
-. ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
-
-caller=$0 cmds_defined nvidia-smi || exit 1
+# . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
 # assuming celcius
 tmux_temp_color () {
@@ -70,30 +68,34 @@ if [ "$(uname)" = "Linux" ]; then
 
 
     #### GPU Stats
-    stats=$(linux_nvidia)
-    gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
-    gputemp_color=$(tmux_temp_color $gpu_temp)
+    if cmds_defined nvidia-smi; then
+        stats=$(linux_nvidia)
+        gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
+        gputemp_color=$(tmux_temp_color $gpu_temp)
 
-    # gpu_mem=$(echo $stats | awk '{print $9 $10 $11}')     # simple and no coloring
-    gpu_mem_total=$(echo $stats | awk '{print $11}' | sed 's/...$//g')  # TODO: total never changes, memoize this somehow
-    gpu_mem_total_col="#[fg=colour007]$gpu_mem_total#[default]"
-    gpu_mem_used=$(echo $stats | awk '{print $9}' | sed 's/...$//g')
-    gpu_mem_usg=$(($gpu_mem_used * 100 / $gpu_mem_total))
-    gpu_col=040; [ "$gpu_mem_usg" -gt 50 ] && gpu_col=208; [ "$gpu_mem_usg" -gt 90 ] && gpu_col=196
-    gpu_mem_used_col="#[fg=colour$gpu_col]$gpu_mem_used#[default]"
-    gpu_mem="$gpu_mem_used_col / $gpu_mem_total_col"
+        # gpu_mem=$(echo $stats | awk '{print $9 $10 $11}')     # simple and no coloring
+        gpu_mem_total=$(echo $stats | awk '{print $11}' | sed 's/...$//g')  # TODO: total never changes, memoize this somehow
+        gpu_mem_total_col="#[fg=colour007]$gpu_mem_total#[default]"
+        gpu_mem_used=$(echo $stats | awk '{print $9}' | sed 's/...$//g')
+        gpu_mem_usg=$(($gpu_mem_used * 100 / $gpu_mem_total))
+        gpu_col=040; [ "$gpu_mem_usg" -gt 50 ] && gpu_col=208; [ "$gpu_mem_usg" -gt 90 ] && gpu_col=196
+        gpu_mem_used_col="#[fg=colour$gpu_col]$gpu_mem_used#[default]"
+        gpu_mem="$gpu_mem_used_col / $gpu_mem_total_col"
 
-    gpu_fan=$(echo $stats | awk '{print $2}' | sed 's/.$//g')
-    gpu_fan_color=$(tmux_percent_usage_color $gpu_fan "gpu fan")
+        gpu_fan=$(echo $stats | awk '{print $2}' | sed 's/.$//g')
+        gpu_fan_color=$(tmux_percent_usage_color $gpu_fan "gpu fan")
 
-    gpu_util=$(echo $stats | awk '{print $13}' | sed 's/.$//')
-    gpu_util_color=$(tmux_percent_usage_color $gpu_util "gpu util")
+        gpu_util=$(echo $stats | awk '{print $13}' | sed 's/.$//')
+        gpu_util_color=$(tmux_percent_usage_color $gpu_util "gpu util")
 
-    gpu_legend_color="fg=colour058"
-    status_line1="$status_line1 #[$gpu_legend_color]GPU-Temp:#[default] #[fg=green]$gputemp_color#[default]C"
-    status_line1="$status_line1 #[$gpu_legend_color]GPU-Util:#[default]$gpu_util_color"
-    status_line1="$status_line1 #[$gpu_legend_color]GPU-Mem(MiB):#[default] $gpu_mem"
-    status_line1="$status_line1 #[$gpu_legend_color]GPU-Fan:#[default]$gpu_fan_color"
+        gpu_legend_color="fg=colour058"
+        status_line1="$status_line1 #[$gpu_legend_color]GPU-Temp:#[default] #[fg=green]$gputemp_color#[default]C"
+        status_line1="$status_line1 #[$gpu_legend_color]GPU-Util:#[default]$gpu_util_color"
+        status_line1="$status_line1 #[$gpu_legend_color]GPU-Mem(MiB):#[default] $gpu_mem"
+        status_line1="$status_line1 #[$gpu_legend_color]GPU-Fan:#[default]$gpu_fan_color"
+    else
+        status_line1="$status_line1 (nvidia-smi not found)"
+    fi
 fi
 tmux set status-format[1] "$status_line1"
 
