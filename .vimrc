@@ -61,6 +61,7 @@ elseif empty($VIM_NOPLUG)
     "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
     "TODO: indentLine displays `"` chars `|` or disspapear in json files...
     Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+
     " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 
     if !empty($VIM_DEVICONS)
@@ -415,6 +416,11 @@ endif
 
 "vim 8.2 thinks .sc is markdown...
 autocmd BufNewFile,BufRead *.sc set filetype=scala
+
+" plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
+" TODO: mar2021, not working
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
 
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
 "let g:airline_theme='luna'
