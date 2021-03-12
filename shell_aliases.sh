@@ -22,7 +22,7 @@ alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG 
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 # didnt work for FUSE filemount dir.., but `lsof | grep foodir` found it
 alias tmxhor='tmux select-layout even-horizontal'
-alias tms='tmux-status'
+alias tms='tmux-statusctl'
 alias clt='clear && tmux clear-history'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
