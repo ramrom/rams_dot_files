@@ -68,7 +68,7 @@ if [ "$(uname)" = "Linux" ]; then
 
 
     #### GPU Stats
-    if cmds_defined nvidia-smi; then
+    if command -v nvidia-smi; then
         stats=$(linux_nvidia)
         gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
         gputemp_color=$(tmux_temp_color $gpu_temp)
@@ -94,7 +94,7 @@ if [ "$(uname)" = "Linux" ]; then
         status_line1="$status_line1 #[$gpu_legend_color]GPU-Mem(MiB):#[default] $gpu_mem"
         status_line1="$status_line1 #[$gpu_legend_color]GPU-Fan:#[default]$gpu_fan_color"
     else
-        status_line1="$status_line1 (nvidia-smi not found)"
+        status_line1="$status_line1 #[fg=red](nvidia-smi not found)#[default]"
     fi
 fi
 tmux set status-format[1] "$status_line1"
