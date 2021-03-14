@@ -76,6 +76,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
     alias dfl='df -khT | grep -v loop | grep -v tmpfs' # grep out loop and tmpfs in ubuntu
     alias mountdev='mount | grep "/dev"'
+    alias blkidnoloop='sudo blkid | grep -v loop'
     alias vcrypt='veracrypt'
     alias trashsize='du -hs ~/.local/share/Trash'
     alias sbw='sudo ~/.cargo/bin/bandwhich -n' # TODO: see issue 166 to fix dns resolver, for now -n no resolve
