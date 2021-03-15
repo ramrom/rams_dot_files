@@ -25,6 +25,7 @@
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/
 - 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
     - 4k movie: iOS play to chromecast on 1080p tv will transcode
+- hardware acceleration support: https://support.plex.tv/articles/115002178853-using-hardware-accelerated-streaming/
 - plexDLNA
     - dashboard will show "DLNA generic"
     - Roku WILL TRANSCODE most things

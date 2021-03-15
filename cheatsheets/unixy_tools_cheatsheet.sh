@@ -149,6 +149,7 @@ iftop             # monitor a interface, usage by connection, has text bars and 
 
 # LSOF, list file handles, swiss army knife since 'everything is a file' in unixy OSes
 lsof
+lsof | grep /path/to/mount   # find out wnat processes are accessing a mount, useful for umounting
 
 # SUDO
 sudo ls             # run ls command as superuser(root)
