@@ -172,7 +172,8 @@ killall -3 foo  # send sigquit to all proceses with foo in the name, default is 
     # rsync can ssh to backup: https://www.howtogeek.com/135533/how-to-use-rsync-to-backup-your-data-on-linux/
 ## USAGE EXAMPLES
 rsync /src /dest  # basic copy/sync over files from one dir to another
-rsync -a /src /dest  # -a (archive), preserves permissions, symlinks, and ownership, usually want this
+rsync -a /src /dest  # -a (archive rlptgoD): (D)preserve devices and special
+    # (r)ecurse dirs, (l)copy symlinks, (p)preseve perms, (t)preserve modtime,(g)prserve group,(o)preserve owner
 rsync -r /src /dest  # -r is recurse into directories
 rsync -z /src /dest  # -z compress changes during transfer (nice for slow network connection)
 rsync -H /src /dest  # -H (hardlinks), will preserve hard links, otherwise same hardlinks will be treated as sepearte files
