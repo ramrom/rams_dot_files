@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# while getopts 'ad:' x; do
+#     case $x in
+#         a) echo "a" ;;
+#         d) echo "d given $OPTARG" ;;
+#         *) echo "not an opt" && exit 1 ;;
+#     esac
+# done
+# shift $(($OPTIND - 1))     # remaining is "$@"
+
+fdname="fd"; [ `uname` = "Linux" ] && fdname="fdfind"
+
+prev_cmd='ls -hal --color=always {} | awk '\''{$1=$2=$3=$4=""; print $0}'\'' | tail -n+4; echo; jq -C . {}/metadata.json'
+out=$($fdname --type d | fzf +m --exit-0 \
+    --header 'ctrl-i->vim' \
+    --expect 'ctrl-i' \
+    --preview "$prev_cmd")
+key=$(echo "$out" | head -1)
+moviedir=$(echo "$out" | tail -1)
+
+if [ -n "$moviedir" ]; then
+    case "$key" in
+        "ctrl-o") open "$file" ;;
+        "ctrl-i") eval "${EDITOR:-vin} $moviedir/metadata.json" ;;
+    esac
+fi
+echo "$file"
