@@ -172,6 +172,7 @@ echo "$@" # usually want this to avoid misparsing args containing spaces/wildcar
 getopt
 
 # getopts, shell builtin like getopt, bourne shell got it in 1986. it's POSIX, available in ksh, zsh, and bash as well.
+OPTIND=1  # if getopts is invoked in a shell function, this variable needs to be reset
 while getopts 'abc:d:ef' x; do
     case $x in
         a) echo "a" ;;
