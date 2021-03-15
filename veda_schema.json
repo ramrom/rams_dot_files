@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "multimedia metadata schema: movies, tv shows",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "original_name": { "type": "string" },
+        "tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": ["4k"]
+            }
+        },
+        "issues": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": ["subtitle-missing", "subtitle-offsync", "plex-transcode", "plex-subtitle"]
+            }
+        }
+    }
+}
