@@ -1,0 +1,46 @@
+#!/usr/bin/ruby
+
+require 'json'
+require 'json_schemer'
+
+class String
+  def red;            "\e[31m#{self}\e[0m" end
+end
+
+class AccValidator
+  attr_reader :filename
+  def initialize(filename)
+    @filename = filename
+  end
+
+  def validate
+    j = readparsefile
+    if !j[1].nil?
+      puts j[1]
+    else
+      schema = JSON.parse(File.read('veda_schema.json'))
+
+      schemer = JSONSchemer.schema(schema)
+      r = schemer.validate(j[0]).to_a
+      #require 'pry'; binding.pry
+      puts "schemer validation: #{r}"
+    end
+  end
+
+  def readparsefile
+    puts "parsing #{@filename}"
+    f = File.read @filename
+    j = JSON.parse f
+    [j, nil]
+  rescue Errno::ENOENT => ef  # raised if file doesnt exist
+    [ef, "**ERROR**: failed to find file".red]
+  rescue JSON::ParserError => ep # raise when JSON format is invalid
+    [ep, "**ERROR**: failed to parse json".red]
+  end
+end
+
+if ARGV[0].nil?
+  puts "arg for filename needed"
+else
+  AccValidator.new(ARGV[0]).validate
+end
