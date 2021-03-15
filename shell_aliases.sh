@@ -38,7 +38,8 @@ alias paf='print_alias_funcs_scripts'
 alias pafn='aliasname=1 funcname=1 print_alias_funcs_scripts'
 
 # backup and mount
-alias rsyncl='rsync -Hharv --progress --delete'  # preserve hardlinks, recursive, archive, verbose'
+alias rsyncl='rsync -Hhav --progress --delete'  # preserve hardlinks, archive, verbose, human-readable
+alias rsync_smb='rsync -Hhvrl -goD --progress --delete' # p(perms) and t(modtime) preserves fail to rsync to smbv1
 alias smbcl='smbclient //192.168.1.1/Backups -U admin'
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
 
