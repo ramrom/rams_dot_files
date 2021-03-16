@@ -2,6 +2,7 @@
 ## RERFERNCES
 - https://git-scm.com/
 - basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+- git lfs: https://git-lfs.github.com/, nice if u want to version large files
 
 ```sh
 git rm -rf --cached foo bar # keep on disk but rm from git

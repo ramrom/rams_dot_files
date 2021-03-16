@@ -3,6 +3,7 @@
 - lsb_release -a        - show distro name and version
 - cat /etc/issue        - show distro and version
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
+- `ldd /some/executable` - see all .so (shared objects, dynamically linked libraries) dependency files of an executable
 - ctr + alt + FnX - switch to tty x
 - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
