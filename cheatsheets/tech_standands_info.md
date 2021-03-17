@@ -19,6 +19,11 @@
     - https://www.reddit.com/r/Monitors/comments/989lm2/maximum_cable_length_for_displayport/
         - don't exceed 10 feet, pretty much the limit
 
+## BASE64
+- 64 safe ASCII chars
+- standard one is `A-Z` `a-z` `0-9` `+` `/`
+- url safe one replaces `+` and `/` with `_` and `-`
+
 ## LEAGUE:
 - north america server: 104.160.131.3
 - ctrl f in league for ping

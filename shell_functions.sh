@@ -227,46 +227,6 @@ function frgp() {  # frg p(phony)
         --height=50% --layout=reverse
 }
 
-# ripgrep and fzf+preview, preserving rg match color in preview (by using rg for preview too)
-# NOTE: -e needed in case of empty RG_FITLER string, rg thinks empty string is pattern query
-# TODO: add fzf --expect and optionally edit file if expect given
-function frg() {
-    [ ! "$#" -gt 0 ] && echo "Need a string to search for!" && return 1
-    local rgdir=$RG_DIR; [ -z $rgdir ] && rgdir="."
-    local rgheight=$RG_H; [ -z $rgheight ] && rgheight="50"
-
-    local prev="rg $RG_FILTER --pretty --context 10 -e '$1' {}"
-    local cmd="rg $RG_FILTER --files-with-matches --no-messages -e "$1" $rgdir |
-        fzf --exit-0 --preview "eval $prev" \
-        --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
-        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space'"
-    local out=$(eval "$cmd")
-
-
-    # rg -tscala -g '!it/' -g '!test/' --files-with-matches --no-messages "$1" | fzf --preview \
-    # local out=$(rg $RG_FILTER --files-with-matches --no-messages -e "$1" $rgdir |
-    #     fzf --exit-0 --preview "rg $RG_FILTER --pretty --context 10 -e '$1' {}" \
-    #     --height ${rgheight}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd' \
-    #     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space')
-        # fzf --preview "rg --ignore-case --pretty --context 10 -e '$1' {}"
-        # "rg -tscala -g '!it/' -g '!test/' --ignore-case --pretty --context 10 '$1' {}" --height ${rgheight}%
-
-
-    key=$(echo "$out" | head -1)
-    file=$(echo "$out" | tail -n+2)
-    if [ -n "$file" -a $(echo "$file" | wc -l) -eq 1 -a "$key" = "ctrl-space" ]; then
-        cd "$(dirname "$file")"
-    elif [ -n "$file" -a "$key" = "ctrl-e" ]; then
-        eval "${EDITOR:-vin} -p "$file""
-    else
-        echo "$file"
-    fi
-}
-
-#TODO: fix, "unrecognized file type: scala -g '!it/' -g '!test/'", rgfst works fine
-function rgfs() { RG_FILTER="-tscala -g '!it/' -g '!test/'" frg $1; }
-function rgfst() { RG_FILTER="-tscala" frg $1; }
-
 function fapt() {  # fuzzy apt
     local opts="--installed"; [ "$1" = "s" ] && unset opts
     apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
