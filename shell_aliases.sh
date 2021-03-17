@@ -125,6 +125,8 @@ alias fdh1='fd -H -d 1'
 alias grep='grep --colour=always'
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/'"
+alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
+alias frgst='frg -f "-tscala"'
 alias f="fzf"
 alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
 alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
