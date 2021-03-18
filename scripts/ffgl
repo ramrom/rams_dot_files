@@ -6,11 +6,23 @@
 # FIXME: if i multiselect, pbcopy only has one copy
 # TODO: add binding to checkout a commit
 
+usage () { echo "Usage: ffgl [ -h(help) ] [ -s(short preview) ]"; }
+
+while getopts 'hs' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        s) SHORT_PREVIEW=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
 git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
 [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
 ht="100%"; [ -n "$half" ] && ht="50%"
 
-preview_cmd='grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'"$(tput lines)"
+preview_cmd='grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always'
+[ -n "$SHORT_PREVIEW" ] && preview_cmd="$preview_cmd | head -$(tput lines)"
 
 git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $@ |
 fzf --height $ht --border --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
