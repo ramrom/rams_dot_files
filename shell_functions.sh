@@ -216,9 +216,10 @@ function ffgs() {
     cut -c4- | sed 's/.* -> //'
 }
 
+# fzf query is the rg pattern to filter on, this is what the Rg comamnd in vim#fzf plugin does
 # TODO: add fzf --expect and optionally edit file if expect given
 # TODO: add preview for more context
-function frgp() {  # frg p(phony)
+function frgd() {  # frg p(phony)
     INITIAL_QUERY=""
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
     FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \

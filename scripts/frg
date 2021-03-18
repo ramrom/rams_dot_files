@@ -4,13 +4,13 @@
     # NOTE: -e needed in case of empty RG_FITLER string, rg thinks empty string is pattern query
 
 # TODO: fix ctrl-space
-usage () { echo "Usage: frg [ -h(help) ] [ -v(verbose) ] [ -t FILE_TYPE ] FILENAME"; }
+usage () { echo "Usage: frg [ -h(help) ] [ -v(verbose) ] [ -f RG_FILTER ] [ -j FZF_HEIGHT ] [ -d RG_DIR ] PATTERN"; }
 
 while getopts 'vhj:f:d:' x; do
     case $x in
         v) VERBOSE=1 ;;
         h) usage && exit 1 ;;
-        j) RG_HEIGHT="$OPTARG" ;;
+        j) FZF_HEIGHT="$OPTARG" ;;
         f) RG_FILTER="$OPTARG" ;;
         d) RG_DIR="$OPTARG" ;;
         *) usage && exit 1 ;;
@@ -20,13 +20,13 @@ shift $(($OPTIND - 1))
 
 [ -z "$1" ] && echo "Need a string to search for!" && exit 1
 
-RG_DIR=${RG_DIR:=.}
-RG_HEIGHT=${RG_HEIGHT:=50}
+RG_DIR=${FZF_DIR:=.}
+FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 PREV_CMD="rg --pretty --context 10 -e '\$1' {}"
 CMD="rg ${RG_FILTER} --files-with-matches --no-messages -e \"$1\" \"${RG_DIR}\""
 CMD="$CMD | fzf +m --exit-0 --preview \"${PREV_CMD}\""
-CMD="$CMD --height ${RG_HEIGHT}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd'"
+CMD="$CMD --height ${FZF_HEIGHT}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd'"
 CMD="$CMD --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space'"
 OUT=$(eval "$CMD")
 
