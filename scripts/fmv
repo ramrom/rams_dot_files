@@ -3,6 +3,7 @@
 # fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
 
 # TODO: should i use arrays?, maybe just a string with IFS
+# TODO: fix for linux dash
 
 IFS=$'\n'
 files=($(fzf))
