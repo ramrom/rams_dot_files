@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # https://n0tablog.wordpress.com/2009/02/09/controlling-vlc-via-rc-remote-control-interface-using-a-unix-domain-socket-and-no-programming/
+
 # seek 100" - goto 100sec after start, "get_time" - current position in seconds since start
 # "volume 250" - 250 is 100%, "volume" - return current volume, "volup 10"/"voldown 10" - up/down volume 10 steps
 # "info" - codecs/frame-rate/resolution, "stats" - some metrics on data encoded/decoded

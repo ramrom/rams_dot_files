@@ -145,21 +145,6 @@ function fdisk_find() {
 
 ############# FZF ##############################
 
-# fuzzy move many files to dest dir, handles spaces in paths and git moves, tested with zsh and bash
-# NOTE: zsh give "bad math expression" on first for loop, bash works; when i rebooted it works, maybe shell opt?
-# TODO: should i use arrays?, maybe just a string with IFS
-function fmv() {
-    local IFS=$'\n'
-    local files=($(fzf))
-    echo "$(tput setaf 2)FILES TO BE MOVED:$(tput sgr0)"
-    for i in ${files[@]}; do echo "    $(tput setaf 3)$i"; done
-    local dest=$(fd --type d | fzf --no-multi)
-    [ -z "$dest" ] && return 1
-    local mvcmd="mv"; git rev-parse --git-dir > /dev/null 2>&1 && mvcmd="git mv"
-    for i in ${files[@]}; do eval "$mvcmd $i $dest"; done
-    echo "$(tput setaf 2)FILES MOVED TO DIR: $(tput setaf 6)$dest$(tput sgr0)"
-}
-
 # FIXME: aliases fail to preview in ubuntu/bash
     # fzf --preview "alias foo='echo hi'; foo"  ---- FAILS, WHY????
 # fuzzy search aliases and functions, with previews for some sources
