@@ -16,6 +16,7 @@ tmux-default-winlist            ~/rams_dot_files/scripts/tmux-default-winlist
 spotify-decrease-volume         ~/rams_dot_files/scripts/spotify-decrease-volume
 spotify-increase-volume         ~/rams_dot_files/scripts/spotify-increase-volume
 spotify-toggle-play             ~/rams_dot_files/scripts/spotify-toggle-play
+fveda                           ~/rams_dot_files/scripts/fveda
 ffgl                            ~/rams_dot_files/scripts/ffgl
 fgh                             ~/rams_dot_files/scripts/fgh
 fbt                             ~/rams_dot_files/scripts/fbt
@@ -23,3 +24,4 @@ frg                             ~/rams_dot_files/scripts/frg
 ffcb                            ~/rams_dot_files/scripts/ffcb
 ffch                            ~/rams_dot_files/scripts/ffch
 ff                              ~/rams_dot_files/scripts/ff
+fmv                             ~/rams_dot_files/scripts/fmv
