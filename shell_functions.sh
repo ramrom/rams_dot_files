@@ -245,16 +245,6 @@ function file_rename_all() {
     done
 }
 
-function find_mult_hardlink() {
-    # using find(linux):       find . -links +1 -type f -name '*' -printf '%i %p\n' | sort
-    [ -d "$1" ] || { echo "$1 not a directory!" && return 1; }
-    if [ "$(uname)" = "Darwin" ]; then
-        fd . -t f "$1" -x sh -c 'num=$(stat -f %l "{}"); (( "$num" > 1 )) && stat -f "%i %N" "{}" ' | sort -V
-    else
-        fd . -t f "$1" -x bash -c 'num=$(stat -c %h "{}"); (( "$num" > 1 )) && stat -c "%i %n" "{}" ' | sort -V
-    fi
-}
-
 function yts_query() {
     http -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
     jq . /tmp/yts_query
