@@ -264,21 +264,6 @@ function display_notif() {
     fi
 }
 
-# filter for dubydir, color by order of magnitude (Byte/Kibibyte/Mibibyte/Gibibyte)
-# TODO: du buffers, doing $(stdbuf -o 0 -e 0 du -sh * | grep) still buffers :(
-function dubydircolor() {
-    dubydir | \
-    while read line; do
-        local size=$(echo "$line" | awk '{print $1}' | grep --colour=never -o ".$")
-        case "$size" in
-            B) ansi256 -f 8 "$line" ;;
-            K) ansi256 -f 28 "$line" ;;
-            M) ansi256 -f 208 "$line" ;;
-            G) ansi256 -f 3 -b 1 "$line" ;;
-        esac
-    done
-}
-
 ####################### ANSI COLORS ###################
 # colorize every 3rd line lighter background (assuming black background) to help readability
 function colr_row() {
