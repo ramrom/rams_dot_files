@@ -2,7 +2,7 @@
 
 # Clear history in tmux panes
 
-usage () { echo "Usage: frg [ -h(help) ] [ -a(all panes) ]"; }
+usage () { echo "Usage: tmux-clear-hist [ -h(help) ] [ -a(all panes) ]"; }
 
 while getopts 'ha' x; do
     case $x in

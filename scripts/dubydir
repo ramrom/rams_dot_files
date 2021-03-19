@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Print the total disk usage of folder content for each folder in the current folder
+
+usage () { echo "Usage: dubydir [ -h(help) ] [ -c(color) ]"; }
+
+while getopts 'hc' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        c) USE_COLOR=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+diskusebydir () {
+    if [ "$(uname)" = "Linux" ]; then
+        du -sh .[!.]* * 2>/dev/null
+    else
+        du -sh * 2>/dev/null  # throw away errors, permission failure messages
+    fi
+}
+
+# filter for dubydir, color by order of magnitude (Byte/Kibibyte/Mibibyte/Gibibyte)
+# TODO: du buffers, doing $(stdbuf -o 0 -e 0 du -sh * | grep) still buffers :(
+if [ -z "$USE_COLOR" ]; then
+    diskusebydir
+else
+    diskusebydir | \
+    while read line; do
+        size=$(echo "$line" | awk '{print $1}' | grep --colour=never -o ".$")
+        case "$size" in
+            B) ansi256 -f 8 "$line" ;;
+            K) ansi256 -f 28 "$line" ;;
+            M) ansi256 -f 208 "$line" ;;
+            G) ansi256 -f 3 -b 1 "$line" ;;
+        esac
+    done
+fi

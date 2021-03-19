@@ -74,7 +74,6 @@ if [ "$(uname)" = "Linux" ]; then
     alias netstatip='sudo netstat -lpnut'
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
     alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
-    alias dubydir='du -sh .[!.]* * 2>/dev/null'  # throw away errors, permission failure messages
     alias dfl='df -khT | grep -v loop | grep -v tmpfs' # grep out loop and tmpfs in ubuntu
     alias mountdev='mount | grep "/dev"'
     alias blkidnoloop='sudo blkid | grep -v loop'
@@ -96,7 +95,6 @@ else  # assuming Darwin here
     alias ote='open -a TextEdit'
     alias osp='open -a Spotify'
     alias odisc='open -a Discord'
-    alias dubydir='du -sh * 2>/dev/null'  # throw away errors, permission failure messages
     alias iorealtime='iostat -w 1'      #show ext stats, device util, every 1 second'
     alias gl="cd ~/Google\ Drive/Lists"
     alias gr="cd ~/Google\ Drive/Rally"
