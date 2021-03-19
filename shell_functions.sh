@@ -355,16 +355,6 @@ function cpu_util() {
 #############                  TMUX                   ##########################
 ################################################################################
 
-function tmuxclrhist {
-    tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
-        | xargs -I PANE sh -c 'tmux send-keys -t PANE "clear" C-m; tmux clear-history -t PANE'
-}
-
-function tmuxclrallhist {
-    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
-        | xargs -I PANE tmux clear-history -t PANE
-}
-
 # TODO: WIP, want to print each pane and it's background jobs
 function tmux_pane_bg_jobs() {
     cat /dev/null > /tmp/tmux_pane_bg_jobs

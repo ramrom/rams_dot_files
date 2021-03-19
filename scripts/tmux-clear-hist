@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Clear history in tmux panes
+
+usage () { echo "Usage: frg [ -h(help) ] [ -a(all panes) ]"; }
+
+while getopts 'ha' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        a) ALL_PANES=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+if [ -n "$ALL_PANES" ]; then
+    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" \
+       | xargs -I PANE tmux clear-history -t PANE
+else
+    tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index}" \
+       | xargs -I PANE tmux clear-history -t PANE
+fi
