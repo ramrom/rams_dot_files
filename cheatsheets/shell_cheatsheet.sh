@@ -224,6 +224,17 @@ fi
 
 ###### LOOPS
 # bash
+
+# the "/" only matches dirs, so iterate through all dirs in current dir
+for d in */; do
+    echo "$d"
+done
+
+# iterate through all files in curent dir, for bourne it does all files/dirs
+for d in *; do
+    echo "$d"
+done
+
 for run in {1..10}; do echo "hello"; done
 
 # bourne shell doesnt support for loops, use the while loop
