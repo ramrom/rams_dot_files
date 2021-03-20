@@ -34,7 +34,7 @@ do
 done
 
 num_magnets=$(echo "$choices" | wc -l)
-echo "$index" | grep -v "^\d$" > /dev/null && echo "input, $index, is not a single digit!" && exit 1
+echo "$index" | grep -v "^[[:digit:]]$" > /dev/null && echo "input, $index, is not a single digit!" && exit 1
 [ "$index" -gt "$num_magnets" ] && echo "choice value $index, is out of range!" && exit 1
 
 # this get the magnet links themsvles, no color or line numbers
