@@ -1,8 +1,20 @@
 #!/bin/sh
 
-opts="";
-[ "$1" = "a" ] && opts="--state all --limit 300"
-out=$(gh pr list $opts |
+# FGH - Fzf on github pulls in the current repo
+
+usage () { echo "Usage: fgh [ -h(help) ] [ -a(last 300 pulls) ]"; }
+
+while getopts 'ha' x; do
+    ALL_OPT=""
+    case $x in
+        h) usage && exit 1 ;;
+        a) ALL_OPT="--state all --limit 300" ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+out=$(gh pr list $ALL_OPT |
     fzf --ansi +m \
         --expect='ctrl-o' \
         --header 'ctrl-o->open-in-web, enter->git-diff' \
