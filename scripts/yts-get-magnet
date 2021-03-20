@@ -40,7 +40,3 @@ echo "$index" | grep -v "^\d$" > /dev/null && echo "input, $index, is not a sing
 # this get the magnet links themsvles, no color or line numbers
 magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed -n "${index}p")
 echo $magnet
-
-
-unset search_result_file
-unset resfile
