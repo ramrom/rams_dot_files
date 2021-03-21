@@ -16,15 +16,15 @@ use grep -E, this apparently has things like \d, apple confusing shit...
 Character classes
 .	Any character, except newline
 \d	Digit           - PCRE
-[[:digit:]] Digit   - PCRE, ERE
+[[:digit:]] Digit   - PCRE, ERE, BRE
 \D	Not digit        - PCRE
-[^[:digit:]] Digit   - PCRE, ERE
+[^[:digit:]] Digit   - PCRE, ERE, BRE
 \w	Word
 \W	Not word
 \s	Whitespace               - PCRE
-[[:space:]] Whitespace       - PCRE, ERE
+[[:space:]] Whitespace       - PCRE, ERE, BRE
 \S	Not whitespace           - PCRE
-[^[:space:]] Not Whitespace  - PCRE, ERE
+[^[:space:]] Not Whitespace  - PCRE, ERE, BRE
 [abc]	Any of a, b, or c
 [a-e]	Characters between a and e
 [1-9]	Digit between 1 and 9
