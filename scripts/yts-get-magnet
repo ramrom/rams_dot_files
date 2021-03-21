@@ -27,7 +27,6 @@ http --download --output $resfile "$movie_link"
 choices=$(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -r '$1' $resfile)
 PS3="select a magnet link: "
 select name in ${choices};
-# select name in $choices;
 do
     index=($REPLY)
     break;
