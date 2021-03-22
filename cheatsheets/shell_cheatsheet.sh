@@ -165,8 +165,10 @@ echo $? # print exit code of last command
 
 # splat argument that expands to all command-line arguments seperated by spaces
 # note: $0 is not passed in $@
-echo $@
+# https://wiki.bash-hackers.org/scripting/posparams
+echo $@   # is an array
 echo "$@" # usually want this to avoid misparsing args containing spaces/wildcards
+echo $*   # is a single string
 
 # getopt, C bin that follows POSIX guidelines for arg parsing
 getopt
