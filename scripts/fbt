@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: implement ctrl-r reload
+
 [ ! "$(uname)" = "Linux" ] && echo "$(tput setaf 1) Only works in Linux" && exit 1
 
 prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
