@@ -102,6 +102,7 @@ loginctl
 ## SYSV (OLD INIT SYSTEM)
 - uses pidfile in /var/run
 - script that generally defines bin,conf/pidfile, defines start/stop/reload/status functions for ur bin
+- uses the /usr/sbin/service script, e.g. `service start foo`
 
 service script-name start/stop/restart
 service --status-all
