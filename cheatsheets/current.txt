@@ -1,5 +1,10 @@
 https://devhints.io/  (great reference for all types for developers)
 
+TMUX:
+prefix + S  - swap windows
+prefix + y  - swap panes
+prefix + D  - disconnect clients
+
 VIM:
 TIP: once a buffer autoreloads, you can still undo
 ctrl-f - command mode, edit as if in normal mode

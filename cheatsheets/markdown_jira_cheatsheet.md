@@ -1,6 +1,8 @@
 # MARKDOWN/JIRA CHEATSHEET:
 -----------------------
+
 ## MARKDOWN REFERENCES
+----------------------------------------
 - https://en.wikipedia.org/wiki/Markdown
 - original md: https://commonmark.org/
 - https://www.markdownguide.org/basic-syntax/
@@ -64,6 +66,9 @@ horizontal rule:
 <foo@foo.com>  - turn email into link
 
 [link name](https://someplace.com)
+
+## Foo Header
+[foo header link sub space with dash lower case](#foo-header)
 
 ![image name](someimage.png "icon")
 ![image name](https://somewhere/someimage.png)
