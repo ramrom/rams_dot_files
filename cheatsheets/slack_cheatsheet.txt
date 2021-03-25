@@ -10,7 +10,7 @@ SLACK:
 - page up/down - scroll up and down convo
 - press "up" arrow to edit last message
 
-- syntax highlighted code snippets, click paperclip icon on left side of input text bar
+- syntax highlighted code snippets, click lightning icon on left side of input text bar
 - *foo*<ctrl-z> - to use literal * in this case
 - ¯\_(ツ)_/¯
     - our slack also has /shrug plugin
