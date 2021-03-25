@@ -140,17 +140,25 @@ space/space-shift - scroll up/down page
 
 ## APT:
 ------------------------------------------
-apt-rdepends pkg    - shows decent one level dep tree of pkg
-                      (only 1 level tho)
-apt-rdepends -r pkg  - show reverse deps
-    - apt rdepends pkg
+### DEPENDENCIES
+apt depends pkg
+    - find direct deps of pkg
+apt rdepends pkg
+    - find reverse deps, other packages that depend on give package
 apt rdepends --installed pkg
     - find packages dependent on pkg that are installed on the system
+apt-rdepends pkg
+    - show dependencies AND RECURSE to depth-first-search on deps of deps
+apt-rdepends -r pkg
+    - show reverse deps, AND RECURSE
+
+apt-cache rdepends pkg
+    - basically same as apt rdepends pkg, slightly diff info
+apt-cache depends pkg
+    - basically same as apt depends pkg, slightly diff info
 apt-cache showpkg pkg - shows deps and reverse deps,
             shows versions, also shows SHAs and more info
-apt-cache rdepends pkg  -r(reverse), show other packages
-                        dependent on it i think
-apt-cache depends pkg  - show raw dep info of package pkg
+
 
 apt list --installed - show installed packages
 apt list --upgradable - show upgradable packages
@@ -161,20 +169,22 @@ apt-get check  - check for broken deps
 sudo apt-get autoremove pkg - remove a package and it's dependencies
 sudo update-alternatives --config foopkg - select alt
 
-sudo apt --dry-run autoremove
-    - autoremove remove uneeded pkgs
-    - dry-run just shows what it would remove
-
+### SEARCH
 apt-cache search .*realregex$
     - search locally cached package info only
 apt search *something*
-
 apt-cache search --names-only .*foo.*
     - searches regex in package name only
 apt search --names-only *something*
     - same
+
+sudo apt --dry-run autoremove
+    - autoremove remove uneeded pkgs
+    - dry-run just shows what it would remove
+
 sudo dpkg --remove --force-remove-reinstreq somepackage
     - remove pkg, if you see "current status 'half-installed'" error
+
 
 ### UNATTENDED-UPGRADE (update/upgrade security fixes)
 sudo unattended-upgrade
