@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# [ $(uname) = "Linux" ] || { echo "only works on linux" && exit 1; }
+
+SCRIPTNAME=$(echo $0 | grep -E -o "/[^/]*$")
+usage () {
+    echo "USAGE: $SCRIPTNAME -chrome-cli [ -h(help) ] COMMAND\n"
+    local KEYS="COMMANDS:\nk: pause/play\nf: toggle fullscreen\nm: toggle mute\nj/l: back/fwd 10sec"
+    echo "$KEYS"
+}
+
+while getopts 'h' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+[ -z "$1" ] && echo "arg for command needed!" && exit 1
+
+if [ "$1" = "k" -o "$1" = "f" -o "$1" = "m" -o "$1" = "j" -o "$1" = "l" ]; then
+    xdotool key --clearmodifiers $1
+else
+    echo "$1 not a valid command!"
+fi
