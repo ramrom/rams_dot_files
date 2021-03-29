@@ -4,7 +4,7 @@
 
 SCRIPTNAME=$(echo $0 | grep -E -o "/[^/]*$")
 usage () {
-    echo "USAGE: $SCRIPTNAME -chrome-cli [ -h(help) ] COMMAND\n"
+    echo "USAGE: $SCRIPTNAME [ -h(help) ] COMMAND\n"
     local KEYS="COMMANDS:\nk: pause/play\nf: toggle fullscreen\nm: toggle mute\nj/l: back/fwd 10sec"
     echo "$KEYS"
 }
