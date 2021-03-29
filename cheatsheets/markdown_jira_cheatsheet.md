@@ -4,10 +4,12 @@
 ## MARKDOWN REFERENCES
 ----------------------------------------
 - https://en.wikipedia.org/wiki/Markdown
+- very original spec: https://daringfireball.net/projects/markdown
 - original md: https://commonmark.org/
 - https://www.markdownguide.org/basic-syntax/
 - github flavored md: https://github.github.com/gfm/
 - https://devhints.io/markdown
+- hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown
 
 ## Paragraphs
 - to create paragraphs seperate lines with one or more blank lines
@@ -67,6 +69,10 @@ horizontal rule:
 
 [link name](https://someplace.com)
 
+[ref style link][someid]
+
+[someid]: https://www.foo.com "optional title, ref style links can be declared anywhere in doc"
+
 ## Foo Header
 [foo header link sub space with dash lower case](#foo-header)
 
@@ -88,6 +94,8 @@ Tables:
 |   |   |   |   |   |
 |   |   |   |   |   |
 |   |   |   |   |   |
+
+
 
 ## JIRA:
 -----------------------
