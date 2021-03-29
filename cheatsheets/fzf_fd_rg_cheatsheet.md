@@ -68,3 +68,7 @@ fd -p        - match on full path (default file/dir name)
 fd --type f  - close to find, old match on file types
 fd -t f -d 1 -H "foo$" -x ls -al   - find all files in current dir, including hidden, that end in "foo" and run ls -al on them
 fd . somedir/ -x sh -c 'printf "something"; echo {}; echo "hi"'            - use sh trick here to run complex commands
+
+
+## BAT
+- default color scheme is "Monokai Extended Bright"
