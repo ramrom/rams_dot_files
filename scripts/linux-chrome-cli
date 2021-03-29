@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# [ $(uname) = "Linux" ] || { echo "only works on linux" && exit 1; }
+[ $(uname) = "Linux" ] || { echo "only works on linux" && exit 1; }
 
 SCRIPTNAME=$(echo $0 | grep -E -o "/[^/]*$")
 usage () {
