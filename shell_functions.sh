@@ -435,14 +435,3 @@ function fullpath() {
         ARGV.each { |path| puts File.expand_path path }         unless ARGV.empty?
     ' "$@"
 }
-
-# NOTE: can do PlugSnapshot in vim also
-function vim_plug_ver() {
-    pushd ~/.vim/plugged > /dev/null
-    for dir in */; do
-         pushd $dir > /dev/null
-         echo "${dir}: $(git rev-parse HEAD)"
-         popd > /dev/null
-     done
-     popd > /dev/null
-}
