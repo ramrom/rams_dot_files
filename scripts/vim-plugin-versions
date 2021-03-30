@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# NOTE: can do PlugSnapshot in vim also
+cd ~/.vim/plugged > /dev/null
+for dir in */; do
+    pushd $dir > /dev/null
+    echo "${dir}: $(git rev-parse HEAD)"
+    popd > /dev/null
+done
