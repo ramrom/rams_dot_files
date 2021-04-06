@@ -325,7 +325,14 @@ retroarch -
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
 transmission - great torrent program
-    - https://wiki.archlinux.org/index.php/transmission
+    - SETUP:
+        - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/
+        - https://wiki.archlinux.org/index.php/transmission
+    - DIRS:
+        - `/usr/share/transmission/web` -> web assets
+        - `/var/lib/transmission-daemon/.config/transmission-daemon` -> settings.json
+    - editing `settings.json`: https://github.com/transmission/transmission/wiki/Editing-Configuration-Files
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
+    - NOTE: `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
 
