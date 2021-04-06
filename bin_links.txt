@@ -3,6 +3,7 @@ vim-plugin-versions             ~/rams_dot_files/scripts/vim-plugin-versions
 apt-rdepends-tree               ~/rams_dot_files/scripts/apt-rdepends-tree
 ctag-git-update                 ~/rams_dot_files/scripts/ctag-git-update
 yts-get-magnet                  ~/rams_dot_files/scripts/yts-get-magnet
+tremc                           ~/repos/tremc/tremc
 psql-pager                      ~/rams_dot_files/scripts/psql-pager
 dubydir                         ~/rams_dot_files/scripts/dubydir
 chrome-json-summary             ~/rams_dot_files/scripts/chrome-json-summary
