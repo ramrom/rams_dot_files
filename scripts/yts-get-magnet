@@ -39,4 +39,6 @@ echo "$index" | grep -v "^[[:digit:]]$" > /dev/null && echo "input, $index, is n
 
 # this get the magnet links themsvles, no color or line numbers
 magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed -n "${index}p")
+echo $magnet | sed 's/amp;//g' | pbcopy
+echo "UNMODIFIED MAGNET LINK:"
 echo $magnet
