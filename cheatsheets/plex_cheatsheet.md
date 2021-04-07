@@ -24,7 +24,9 @@
 - direct video playback limit on iphone app, get plexpass
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/
 - 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
-    - 4k movie: iOS play to chromecast on 1080p tv will transcode
+    - 4k movie: iOS play to 1080p chromecast -> transcodes (no surprise here)
+    - 4k movie: iOS play to 4k-tv/4k-chromecast -> transcodes
+    - webplayer(chrome linux/mbp) transcodes video and audio
 - hardware acceleration support: https://support.plex.tv/articles/115002178853-using-hardware-accelerated-streaming/
 - plexDLNA
     - dashboard will show "DLNA generic"
@@ -43,6 +45,7 @@
 - naming movies:
     - folder names support using uderscores and dashes for movie names
     - accents,special chars,spaces: https://forums.plex.tv/t/accents-and-punctuation-in-file-names/127524
+    - names with `&` and `'` get indexed fine
 
 ## SHARING
 - can create tags and collections(special tags?) to organize: https://support.plex.tv/articles/201273953-collections/
