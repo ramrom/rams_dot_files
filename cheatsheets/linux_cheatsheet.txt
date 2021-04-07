@@ -18,6 +18,7 @@ sudo shutdown -r now (reboot now)
 
 lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
 xdg-open    - like osx "open", will open file with default application for that file type
+xdg-mime query default text/html    - query the default x app to open a given mimetype
 xclip       - like osx pbpaste/bcopy, needs a DISPLAY set
     - `xclip -selection clipboard`    - copy to clipboard
     - `xclip -selection clipboard -o` - paste from clipboard
@@ -331,6 +332,9 @@ transmission - great torrent program
     - DIRS:
         - `/usr/share/transmission/web` -> web assets
         - `/var/lib/transmission-daemon/.config/transmission-daemon` -> settings.json
+    - CMDs:
+        - start a magnet torrent: `transmission-remote -a "magnet:?xt...."`
+            - adding double quote the magnet link
     - editing `settings.json`: https://github.com/transmission/transmission/wiki/Editing-Configuration-Files
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
