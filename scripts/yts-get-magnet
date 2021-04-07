@@ -39,6 +39,23 @@ echo "$index" | grep -v "^[[:digit:]]$" > /dev/null && echo "input, $index, is n
 
 # this get the magnet links themsvles, no color or line numbers
 magnet=$(rg -N --color never -o 'href="(magnet[^"]*)"' -r '$1' "$resfile" | sed -n "${index}p")
-echo $magnet | sed 's/amp;//g' | pbcopy
+
+magnetclean=$(echo "$magnet" | sed 's/amp;//g')
+if [ "$(uname)" = "Linux" ]; then
+    echo $magnetclean | xclip -selection clipboard
+else
+    echo $magnetclean | pbcopy
+fi
+
 echo "UNMODIFIED MAGNET LINK:"
 echo $magnet
+echo ""
+
+while true; do
+    read -p "enqueue in transmission? (Yn)" yn
+    case $yn in
+        # [Yy]* ) transmission-remote -a "$magnetclean"; break;;
+        [Nn]* ) exit;;
+        * ) transmission-remote -a "$magnetclean"; break;;
+    esac
+done
