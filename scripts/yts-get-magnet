@@ -47,7 +47,7 @@ else
     echo $magnetclean | pbcopy
 fi
 
-echo "UNMODIFIED MAGNET LINK:"
+echo -e "\nUNMODIFIED MAGNET LINK:"
 echo $magnet
 echo ""
 
