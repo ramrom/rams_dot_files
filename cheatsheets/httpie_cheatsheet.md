@@ -1,6 +1,12 @@
 # HTTPIE
 - https://httpie.io/docs
 
+## USAGE
+raw json fields:
+    ```bash
+    http POST https://api.foo.com field:='["a",2]'
+    ```
+
 ## code snippet of extracting status code
 ```sh
 function httpie_all() {

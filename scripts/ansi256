@@ -3,7 +3,7 @@
 # print a string with all the ansi 256 goodness (bold, underline, italics, strikethrough, 256 colors for fore and background)
 
 # pass noreset=1 and empty/no string to format external string
-# TODO: validate fg and bg values, after ansi8 translation values must be numbers 1-250
+# TODO: validate fg and bg values, after ansi16_name translation, values must be numbers 1-250
 
 ansi16_name () {
     case "$1" in
