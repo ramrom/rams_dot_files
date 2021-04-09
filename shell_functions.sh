@@ -366,6 +366,15 @@ function tmux_run_in_pane() {
 }
 
 ######### GIT ####################
+function gdd() {
+    opts='-c core.pager="delta --dark"'
+    if [ -n "$1" ]; then
+        opts="$opts"' -c delta.features="side-by-side line-numbers decorations"'
+    fi
+    cmd="git $opts diff"
+    eval $cmd
+}
+
 function gitfetchresetbranch() {
     local curbranch=$(getbranchname)
     git fetch -a || { echo "failed to fetch from remotes!" && return 1; }
