@@ -58,6 +58,8 @@
   au= add -u
   cm = commit -m
   b = branch
+  d = diff
+  dw = diff --color-words
   bvv = branch -vv
 
   # automatically checkout a GitHub PR as a local branch
@@ -83,4 +85,4 @@
   cfg   = config --global --list
   cfs   = config --system --list
   alias = config --get-regexp ^alias\\.
-	slog = log --abbrev-commit --color=auto --decorate=short --pretty=oneline --graph --branches=* --remotes=* --tags=*
+  slog = log --abbrev-commit --color=auto --decorate=short --pretty=oneline --graph --branches=* --remotes=* --tags=*
