@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# FZF over systemd running units and do things to it
+
+usage () { echo "Usage: fsysmd [ -h(help) ]"; }
+
+while getopts 'h' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+preview_cmd='systemctl status $(echo {} | awk '\''{print $1}'\'')'
+out=$(systemctl | fzf +m --header-lines=1 \
+    --header='ctrl-i->restart, ctrl-o->journalctl-follow, ctrl-space->status, ctrl-y->stop' \
+    --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-y' \
+    --preview "$preview_cmd")
+
+key=$(echo "$out" | head -1)
+unitline=$(echo "$out" | tail -1)
+if [ -n "$unitline" ]; then
+    unit=$(echo "$unitline" | awk '{print $1}')
+    case "$key" in
+        "ctrl-o") journalctl -f -u "$unit" ;;
+        "ctrl-space") systemctl status "$unit" ;;
+        "ctrl-i") sudo systemctl restart "$unit" ;;
+        "ctrl-y") sudo systemctl stop "$unit" ;;
+    esac
+fi
+echo "$unit"
