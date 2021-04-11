@@ -336,6 +336,8 @@ transmission - great torrent program
         - start a magnet torrent: `transmission-remote -a "magnet:?xt...."`
             - adding double quote the magnet link
     - editing `settings.json`: https://github.com/transmission/transmission/wiki/Editing-Configuration-Files
+        - `alt-speed` settings are "turtle mode", limited speed settings
+            - NOTE: if you hit the turtle icon in the web GUI it will activate turtle mode but settings.json wont show
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
     - NOTE: `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
