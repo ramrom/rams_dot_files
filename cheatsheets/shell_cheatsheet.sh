@@ -228,6 +228,7 @@ fi
 # bash
 
 # the "/" only matches dirs, so iterate through all dirs in current dir
+# WARNING: if dir is empty then this iterates through one item, the literal "*/"
 for d in */; do
     echo "$d"
 done
