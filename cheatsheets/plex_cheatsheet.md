@@ -42,6 +42,7 @@
 
 ## LIBRARY
 - naming tv shows: https://support.plex.tv/articles/naming-and-organizing-your-tv-show-files/
+- external subtitle files: https://support.plex.tv/articles/200471133-adding-local-subtitles-to-your-media/
 - naming movies:
     - folder names support using uderscores and dashes for movie names
     - accents,special chars,spaces: https://forums.plex.tv/t/accents-and-punctuation-in-file-names/127524
