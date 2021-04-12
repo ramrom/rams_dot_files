@@ -20,10 +20,12 @@ shift $(($OPTIND - 1))
 require_vars FILE_TYPE || exit 1
 
 # e.g. "Some Title (2000) [1080p] [FOO]" -> "Some_Title-2000-1080p-FOO"
-# TODO: handle file extentions, ".xxx", preserve it if it exists
 file_rename_space () {
     f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space: space->dash dot->und: ")"${f}"
+
+    f=$(echo "$f" | sed -E 's/_(mkv|avi|mp4|srt)$/\.\1/') # except keep last file extention dot
+    [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space: keep dot of file extension: ")"${f}"
 
     charsbeforefirstparen=$(echo "$f" | rg -o  '([^\(].*)\(.*$' -r '$1' --color never)
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space: get part 1 (chars b4 first paren): ")"${charsbeforefirstparen}"
@@ -34,7 +36,6 @@ file_rename_space () {
     a=$(echo $charsbeforefirstparen | sed 's/-/_/g')
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space: part 1, dash->und: ")"${a}"
 
-    # TODO: why do i need this?
     a=$(echo $a | sed 's/.$/-/')
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space: part 1, rep last dot with dash: ")"${a}"
 
@@ -49,7 +50,11 @@ file_rename_space () {
 file_rename_space_short () {
     out="$(file_rename_space "$1")"
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space_short: starting string ")"${out}"
-    echo "$out" | rg -o '^(.*-\d{4})-.*(\.mp4)?' -r '$1$2'
+    if echo "$out" | grep -E "\.(mp4|srt|avi|mkv)$" > /dev/null; then
+        echo "$out" | rg -o '^(.*-\d{4})-.*((\.(mp4|srt|avi|mkv))$)' -r '$1$2'
+    else
+        echo "$out" | rg -o '^(.*-\d{4})-' -r '$1'
+    fi
 }
 
 # e.g. "Some.Title.2000.1080p.[FOO].mp4" -> "Some_Title-2000-1080p-[FOO].mp4"
@@ -74,7 +79,7 @@ file_rename_dot () {
 file_rename_dot_short () {
     out="$(file_rename_dot "$1")"
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename3: starting string ")"${out}"
-    echo "$out" | rg -o '^(.*-\d{4})-.*(\.mp4)' -r '$1$2'
+    echo "$out" | rg -o '^(.*-\d{4})-.*(\.(mp4|mkv|avi|srt))$' -r '$1$2'
 }
 
 case "$FILE_TYPE" in
