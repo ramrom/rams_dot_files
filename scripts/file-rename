@@ -20,6 +20,7 @@ shift $(($OPTIND - 1))
 require_vars FILE_TYPE || exit 1
 
 # e.g. "Some Title (2000) [1080p] [FOO]" -> "Some_Title-2000-1080p-FOO"
+# e.g. "Some Title (2000) [1080p] [FOO].mp4" -> "Some_Title-2000-1080p-FOO.mp4"
 file_rename_space () {
     f=$(echo "$1" | sed 's/ /-/g' | sed 's/\./_/g')
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space: space->dash dot->und: ")"${f}"
@@ -47,13 +48,22 @@ file_rename_space () {
 }
 
 # e.g. "Some Title (2000) [1080p] [FOO]" -> "Some_Title-2000"
+# e.g. "Some Title (2000) [1080p] [FOO].mp4" -> "Some_Title-2000.mp4"
 file_rename_space_short () {
     out="$(file_rename_space "$1")"
     [ -n "$VERBOSE" ] && >&2 echo $(ansi256 -f red "rename_space_short: starting string ")"${out}"
     if echo "$out" | grep -E "\.(mp4|srt|avi|mkv)$" > /dev/null; then
+        >&2 echo "rename_space_short: detected file extension"
         echo "$out" | rg -o '^(.*-\d{4})-.*((\.(mp4|srt|avi|mkv))$)' -r '$1$2'
     else
-        echo "$out" | rg -o '^(.*-\d{4})-' -r '$1'
+        >&2 echo "rename_space_short: no file extension"
+        if echo "$out" | grep -E '^.*-[[:digit:]]{4}-' > /dev/null; then
+            >&2 echo "rename_space_short: stuff after year"
+            echo "$out" | rg -o '^(.*-\d{4})-' -r '$1'
+        else
+            >&2 echo "rename_space_short: no stuff after year"
+            echo "$out" | rg -o '^(.*-\d{4})' -r '$1'
+        fi
     fi
 }
 
