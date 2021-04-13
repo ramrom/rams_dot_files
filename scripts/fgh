@@ -2,19 +2,22 @@
 
 # FGH - Fzf on github pulls in the current repo
 
-usage () { echo "Usage: fgh [ -h(help) ] [ -a(last 300 pulls) ]"; }
+usage () { echo "Usage: fgh [ -h(help) ] [ -c CUSTOM_GH_FILTERS ] [ -a AUTHOR ] [ -s(all states) ]"; }
 
-while getopts 'ha' x; do
-    ALL_OPT=""
+GH_FILTERS="--limit 300"
+
+while getopts 'hc:a:s' x; do
     case $x in
         h) usage && exit 1 ;;
-        a) ALL_OPT="--state all --limit 300" ;;
+        c) GH_FILTERS="$OPTARG" ;;
+        a) GH_FILTERS="$GH_FILTERS --author $OPTARG" ;;
+        s) GH_FILTERS="$GH_FILTERS --state all" ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
-out=$(gh pr list $ALL_OPT |
+out=$(gh pr list $GH_FILTERS |
     fzf --ansi +m \
         --expect='ctrl-o' \
         --header 'ctrl-o->open-in-web, enter->git-diff' \
