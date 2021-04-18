@@ -1,10 +1,23 @@
 #!/bin/sh
 
-case "$1" in
-    *.tar*) tar tf "$1";;
-    *.zip) unzip -l "$1";;
-    *.rar) unrar l "$1";;
-    *.7z) 7z l "$1";;
-    *.pdf) pdftotext "$1" -;;
+# case "$1" in
+#     *.tar*) tar tf "$1";;
+#     *.zip) unzip -l "$1";;
+#     *.rar) unrar l "$1";;
+#     *.7z) 7z l "$1";;
+#     *.pdf) pdftotext "$1" -;;
+#     *) bat --color=always "$1";;
+# esac
+
+# for Linux use mediainfo, otherwise assume Darwin
+mmcmd="mdls"; [ "$(uname)" = "Linux" ] && mmcmd="mediainfo"
+
+mimetype=$(file --mime-type -b "$1")
+
+case "$mimetype" in
+    video/*|audio/*) $mmcmd "$1";;
+    # audio/*) mediainfo "$1";;
+    application/json) jq -C . "$1";;
+    text/*) bat --color=always "$1";;
     *) bat --color=always "$1";;
 esac

@@ -16,6 +16,7 @@
     - no transcoding, tested 5 simulatenous HD streams (mix of webplayer and vlc local) no problem, low cpu usage
     - 2 transcodes of sub 1080p movies barely kept up, once in a while one paused to buffer, 100%cpu on server
 - media support for plex player: https://support.plex.tv/articles/203810286-what-media-formats-are-supported/
+    - apr2021: H265 supportd in safari web and plex desktop app, chrome doesnt support H265
     - web player generally supports most codecs
     - `.avi` file gave _“This server is not powerful enough to convert video"_
         - https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
