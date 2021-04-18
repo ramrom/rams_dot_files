@@ -14,6 +14,9 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
+## SUBTITLES
+- srt offset adjustment website: http://www.subsedit.com/simple
+
 ## CABLES
 - displayport max lenghts
     - https://www.reddit.com/r/Monitors/comments/989lm2/maximum_cable_length_for_displayport/
