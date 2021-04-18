@@ -18,9 +18,9 @@ case "$mimetype" in
     video/*|audio/*) $mmcmd "$1";;
     # audio/*) mediainfo "$1";;
     application/json) jq -C . "$1";;
-    application/zip) unzip -l . "$1";;  # NOTE: -l only in Linux
-    application/x-rar) unrar l . "$1";;
-    application/*7z*) 7z l . "$1";;
+    application/zip) unzip -l "$1";;  # NOTE: -l only in Linux
+    application/x-rar) unrar l "$1";;
+    application/*7z*) 7z l "$1";;
     text/*) bat --color=always "$1";;
     *) bat --color=always "$1";;
 esac
