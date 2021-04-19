@@ -21,6 +21,8 @@ case "$mimetype" in
     application/json) jq -C . "$1";;
     application/zip) unzip -l "$1";;  # NOTE: -l only in Linux
     application/x-rar) unrar l "$1";;
+    application/vnd.debian*) dpkg-deb -I "$1";;  # NOTE: dpkg-deb linux only
+    application/x-iso9660-image) isoinfo -d -i "$1";; #NOTE: isoinfo linux only
     application/*7z*) 7z l "$1";;
     text/*) bat --color=always "$1";;
     *) bat --color=always "$1";;
