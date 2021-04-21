@@ -8,6 +8,7 @@ set info size         # show size next to item
 set period 1          # refresh every 1 sec for dir updates
 set hidden off        # show hidden files
 set number on         # show number of items index in dir
+set drawbox           # draw borders around columns
 
 # set preview
 set previewer ~/rams_dot_files/pv.sh
@@ -28,7 +29,6 @@ map r push :rename<space>
 # cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 # define a custom 'delete' command
-# TODO: not working, i hit yes, it hangs for a bit and doesnt delete
 cmd delete ${{
     set -f
     printf "$fx\n"

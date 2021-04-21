@@ -85,6 +85,7 @@ export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will m
 source fooscript    # run script in current shell, zsh, bash works too
 . fooscript         # bash cononical way to source, doesnt work in zsh
 . ./fooscript       # force execute, executes even if file perm doesnt have execute, works in bash and zsh
+\foo                # execute foo ignoring any aliases called foo
 
 # FC, edit last command in editor and execute, also list old commands
 # change default editor with FCEDIT env var
