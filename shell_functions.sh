@@ -218,8 +218,6 @@ function fapt() {  # fuzzy apt
     apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
 }
 
-function fsmd() { systemctl | fzf; }
-
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
 function findgrepp() { find . -type f -regex $1 -exec grep $2 ; }
 # last component of pathname, pattern not regex, e.g. ("*go")
