@@ -24,6 +24,7 @@ elif [ -n "$1" ]; then
     fzf_def="$FDNAME --type f --hidden --exclude .git '.*' $1"
 fi
 
+# TODO: ctrl-space to cd wont work now that this is a script, shell func yea b/c same shell process
 out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 --height "$FZF_HEIGHT"% \
     --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \

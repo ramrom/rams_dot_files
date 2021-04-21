@@ -17,7 +17,6 @@ mimetype=$(file --mime-type -b "$1")
 case "$mimetype" in
     video/*|audio/*|image/*) $mmcmd "$1";;
     # image/*) chafa "$1";;  # cool but only sometimes works and slow
-    # audio/*) mediainfo "$1";;
     application/json) jq -C . "$1";;
     application/zip) unzip -l "$1";;  # NOTE: -l only in Linux
     application/x-rar) unrar l "$1";;

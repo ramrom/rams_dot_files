@@ -14,6 +14,9 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
+## HTTP
+- http2: https://developers.google.com/web/fundamentals/performance/http2
+
 ## SUBTITLES
 - srt offset adjustment website: http://www.subsedit.com/simple
 
