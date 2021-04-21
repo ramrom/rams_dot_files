@@ -12,7 +12,7 @@
 # for Linux use mediainfo, otherwise assume Darwin
 mmcmd="mdls"; [ "$(uname)" = "Linux" ] && mmcmd="mediainfo"
 
-mimetype=$(file --mime-type --brief --dereferenc "$1")
+mimetype=$(file --mime-type --brief --dereference "$1")
 
 case "$mimetype" in
     video/*|audio/*|image/*) $mmcmd "$1";;
