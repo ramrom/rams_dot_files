@@ -4,6 +4,13 @@
 - lfrc example: https://github.com/gokcehan/lf/blob/master/etc/lfrc.example
 
 ## BINDINGS
+- u         unmark all
+- <space>   toggle mark
+- c         clear cut/yank selections
+- y         yank
+- d         cut
+- p         paste
+- r         rename file
 - unix                     windows
 - cmd open &$OPENER "$f"   cmd open &%OPENER% %f%
 - map e $$EDITOR "$f"      map e $%EDITOR% %f%
@@ -17,6 +24,7 @@
 - map zs set info size
 - map zt set info time
 - map za set info size:time
+
 - map sn :set sortby natural; set info
 - map ss :set sortby size; set info size
 - map st :set sortby time; set info time
