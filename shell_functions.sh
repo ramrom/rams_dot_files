@@ -18,12 +18,6 @@ function detect_shell() {
     # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
-function ff() {
-    local result=$(~/bin/ff)
-    [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
-    echo $result
-}
-
 # return 0 if all are defined, spit out error with exit 1 if one is not
 function cmds_defined() {
     caller_msg=""; [ -n "$caller" ] && caller_msg="caller: $caller -- "
@@ -128,6 +122,13 @@ function batwhich() {
             bat --color=always "$(eval $fullpath "$1")" ;;
         *) echo "print_type returned $type for "$1", unhandled by $0!" ;;
     esac
+}
+
+# function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
+function ff() {
+    local result=$(~/bin/ff)
+    [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
+    echo $result
 }
 
 function binlink() {
