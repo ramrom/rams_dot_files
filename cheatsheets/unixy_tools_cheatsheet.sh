@@ -18,6 +18,8 @@ printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
 
 #awk - multi purpose tool
 echo "foo bar baz" | awk '{print $2}'  # will print bar
+awk '{$1=""; print $0}' somefile        # print all but the first field/column
+awk '{$1=$2=""; print $0}' somefile        # print all but the first and second field/column
 awk '/blah/{getline; print}' logfile   # print the next line after the line that matches patter "blah"
 
 # cut - select data in each line by byte/char position or delimiter char

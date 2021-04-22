@@ -36,8 +36,8 @@ file=$(echo "$out" | tail -1)
 if [ -n "$file" ]; then
     case "$key" in
         "ctrl-o") open "$file" ;;
-        "ctrl-space") cd "$(dirname "$file")" ;;
+        "ctrl-space") echo "cd $(dirname "$file")" ;;
         "ctrl-i") eval "${EDITOR:-vin} "$file"" ;;
+        *) echo "$file" ;;
     esac
 fi
-echo "$file"

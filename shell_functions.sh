@@ -18,6 +18,12 @@ function detect_shell() {
     # METHOD 3: echo $SHELL (when i start bourne(sh) from a zsh in osx, it's still zsh
 }
 
+function ff() {
+    local result=$(~/bin/ff)
+    [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
+    echo $result
+}
+
 # return 0 if all are defined, spit out error with exit 1 if one is not
 function cmds_defined() {
     caller_msg=""; [ -n "$caller" ] && caller_msg="caller: $caller -- "
