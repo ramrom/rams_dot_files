@@ -222,7 +222,8 @@ function frgd() {  # frg p(phony)
 
 function fapt() {  # fuzzy apt
     local opts="--installed"; [ "$1" = "s" ] && unset opts
-    apt list $opts | tail -n+2 | f --preview 'apt show $(awk "{print  $1}" <<< {} | cut -d "," -f1)'
+    apt list $opts | tail -n+2 |
+        fzf --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); apt show $pkg; echo; apt depends $pkg'
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
