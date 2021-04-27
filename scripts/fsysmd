@@ -12,7 +12,8 @@ while getopts 'h' x; do
 done
 shift $(($OPTIND - 1))
 
-preview_cmd='SYSTEMD_COLORS=1 systemctl status $(echo {} | awk '\''{print $1}'\'')'
+# preview_cmd='SYSTEMD_COLORS=1 systemctl status $(echo {} | awk '\''{print $1}'\'')'
+preview_cmd='unit=$(echo {} | awk '\''{print $1}'\''); SYSTEMD_COLORS=1 systemctl status $unit; echo; SYSTEMD_COLORS=1 systemctl list-dependencies $unit'
 out=$(systemctl | fzf +m --nth=1 --header-lines=1 \
     --header='ctrl-i->restart, ctrl-o->journalctl-follow, ctrl-space->status, ctrl-y->stop' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-y' \
