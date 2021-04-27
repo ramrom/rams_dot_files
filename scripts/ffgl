@@ -21,7 +21,7 @@ git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
 [ -n "$1" -a ! -f "$1" ] && echo "file $1 doesnt exist" && return 1
 ht="100%"; [ -n "$half" ] && ht="50%"
 
-preview_cmd='grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always'
+preview_cmd='cmt=$(grep -o "[a-f0-9]\{7,\}" <<< {}); git show --color=always $cmt '"$@"
 [ -n "$SHORT_PREVIEW" ] && preview_cmd="$preview_cmd | head -$(tput lines)"
 
 git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always $@ |
