@@ -75,8 +75,6 @@ map O $mimeopen --ask $f
 
 # map <c-f> $lf -remote "send $id select '$(fzf)'"
 # map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf)"
-# map gh
-# map g top
 map D delete
 # map C copyto
 map M moveto

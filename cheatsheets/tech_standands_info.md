@@ -44,3 +44,5 @@
 - it's fully FOSS, can self host a server, has a cli, can do mobile/desktop for free (unlike lastpass)
 - autofill https://bitwarden.com/help/article/auto-fill-browser/
     - cmd+shift+L for autofill
+- excluded domains: browser ext -> settings -> excluded domains
+    - list of domains/sites where banner to prompt to save creds wont appear
