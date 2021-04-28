@@ -194,12 +194,6 @@ function ffgb() {
     sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
 }
 
-function ffgset() {
-    [ ! "$(uname)" = "Linux" ] && { echo "gnome is for linux" && return 1; }
-    local schema=$(gsettings list-schemas | fzf +m)
-    gsettings list-recursively "$schema"
-}
-
 function ffgs() {
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     git -c color.status=always status --short |
@@ -218,6 +212,12 @@ function frgd() {  # frg p(phony)
         fzf --bind "change:reload:$RG_PREFIX {q} || true" \
         --ansi --phony --query "$INITIAL_QUERY" \
         --height=50% --layout=reverse
+}
+
+function ffgset() {
+    [ ! "$(uname)" = "Linux" ] && { echo "gnome is for linux" && return 1; }
+    local schema=$(gsettings list-schemas | fzf +m)
+    gsettings list-recursively "$schema"
 }
 
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
