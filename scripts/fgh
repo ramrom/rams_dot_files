@@ -19,8 +19,8 @@ shift $(($OPTIND - 1))
 
 out=$(gh pr list $GH_FILTERS |
     fzf --ansi +m \
-        --expect='ctrl-o' \
-        --header 'ctrl-o->open-in-web, enter->git-diff' \
+        --expect='ctrl-o,ctrl-i' \
+        --header 'ctrl-o->open-in-web, enter->git-diff, ctrl-i->checkout' \
         --preview 'echo "CHECKS:"; gh pr checks {1}; echo ""; echo ""; echo "VIEW:"; gh pr view {1}')
 key=$(echo "$out" | head -1)
 pr=$(echo "$out" | tail -1)
@@ -28,6 +28,7 @@ if [ -n "$pr" ]; then
     prnum=$(echo "$pr" | awk '{print $1}')
     case "$key" in
         "ctrl-o") gh pr view --web $prnum ;;
+        "ctrl-i") gh pr checkout $prnum ;;
         *) gh pr diff $prnum ;;
     esac
 fi
