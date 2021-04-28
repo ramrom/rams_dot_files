@@ -1,0 +1,5 @@
+#!/bin/sh
+
+opts="--installed"; [ "$1" = "s" ] && unset opts
+apt list $opts | tail -n+2 |
+    fzf --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); apt show $pkg; echo; apt depends $pkg'
