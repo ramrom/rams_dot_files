@@ -220,12 +220,6 @@ function frgd() {  # frg p(phony)
         --height=50% --layout=reverse
 }
 
-function fapt() {  # fuzzy apt
-    local opts="--installed"; [ "$1" = "s" ] && unset opts
-    apt list $opts | tail -n+2 |
-        fzf --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); apt show $pkg; echo; apt depends $pkg'
-}
-
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
 function findgrepp() { find . -type f -regex $1 -exec grep $2 ; }
 # last component of pathname, pattern not regex, e.g. ("*go")
