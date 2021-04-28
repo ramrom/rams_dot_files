@@ -1,5 +1,8 @@
 # SKHDRC
 
+f13 : ~/bin/vort-volume down
+f14 : ~/bin/vort-volume up
+f18 : ~/bin/vort-volume
 f15 : ~/bin/spotify-decrease-volume
 f16 : ~/bin/spotify-increase-volume
 f19 : ~/bin/spotify-toggle-play
