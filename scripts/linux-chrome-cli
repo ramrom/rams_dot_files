@@ -19,7 +19,7 @@ shift $(($OPTIND - 1))
 
 [ -z "$1" ] && echo "arg for command needed!" && exit 1
 
-if [ "$1" = "k" -o "$1" = "f" -o "$1" = "m" -o "$1" = "j" -o "$1" = "l" ]; then
+if [ "$1" = "k" -o "$1" = "f" -o "$1" = "m" -o "$1" = "j" -o "$1" = "l" -o "space" ]; then
     xdotool key --clearmodifiers $1
 else
     echo "$1 not a valid command!"
