@@ -58,6 +58,7 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
     - you can clone the wiki locally and commit and push
 - render markdown to html, github sytle
     - https://docs.github.com/en/rest/reference/markdown
+    - supported languages in code blocks: https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 
 ### AUTH
 - TFA(two factor auth):

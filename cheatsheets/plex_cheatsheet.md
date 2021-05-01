@@ -27,9 +27,11 @@
 - direct video playback limit on iphone app, get plexpass
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/
 - 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
+    - 4k movie: iOS app -> **NO** transcode
+    - 4k movie: safari browser -> **NO** transcode
     - 4k movie: iOS play to 1080p chromecast -> transcodes (no surprise here)
     - 4k movie: iOS play to 4k-tv/4k-chromecast -> transcodes
-    - webplayer(chrome linux/mbp) transcodes video and audio
+    - webplayer(chrome linux/mbp) -> transcodes video and audio
 - hardware acceleration support: https://support.plex.tv/articles/115002178853-using-hardware-accelerated-streaming/
 - plexDLNA
     - dashboard will show "DLNA generic"
@@ -56,3 +58,4 @@
     - to restrict tags for certain users on shares, need plex pass
 - can share a library with a plex user by username or email
 - can create smart playlists and share just the playlist
+- can deauthorize(logout) individual devices: https://support.plex.tv/articles/115007577087-devices/

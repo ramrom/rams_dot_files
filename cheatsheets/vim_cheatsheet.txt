@@ -72,6 +72,16 @@ P - jump to tree root
 K/J - jmp to first/last child node of current node's parent
 C - make selected dir node the new root node
 
+Other Plugins:
+- Tabular
+    - :Tabularize /|
+        - autodetect lines above and below and align on `|` char
+    - :'<,'>Tabularize /|
+        - visually selected area will align by `|` char
+        - can accept any regex, not just simpe chars like `|`
+    - :'<,'>Tabularize /:\zs
+        - \z is lookforward, align by the space char after the `:` char
+
 
 - ga -> show char encoding
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
@@ -328,13 +338,15 @@ D - delete (cut) to the end of the line
 d$ - delete (cut) to the end of the line
 x - delete (cut) character
 
-MARKING TEXT (visual mode):
+VISUAL MODE:
 v - start visual mode, mark lines, then do a command (like y-yank)
 V - start linewise visual mode
 o - move to other end of marked area
 Ctrl + v - start visual block mode
 O - move to other corner of block
 Esc - exit visual mode
+vi} - visual select inner text of "{}" block
+ctrl-va] - visual block select all text of "[]" block
 
 TEXT OBJECTS:
 <number><operator/command><number><text object>

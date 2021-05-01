@@ -21,7 +21,7 @@
 ***
 **************
 ___
--------------------
+__________________________
 
 
 # header 1
@@ -37,9 +37,6 @@ ___boldanditalic___
 `monospace`  
 ``monospece with `embedded` backticks``
 ~~strikethrough~~  
-
-horizontal rule:
----
 
 * bullet 1
 * bullet 2
