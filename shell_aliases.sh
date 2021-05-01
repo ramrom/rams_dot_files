@@ -46,6 +46,7 @@ alias smbcl='smbclient //192.168.1.1/Backups -U admin'
 alias osxfusentfs='sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/rambackupfourtb -olocal -oallow_other'
 
 alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
+alias kn='k9s'   # k9s is a TUI for kubernetes
 
 # neat trick, running aliases as sudo fails as root doesnt have them defined
 # bash only looks for first word to alias expand, but if word is alias, it expands subsequent words

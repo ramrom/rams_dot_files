@@ -38,6 +38,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'plasticboy/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
+    " TODO: checkout https://github.com/iamcco/markdown-preview.nvim instead
     Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
     let g:instant_markdown_autostart = 0
 
@@ -417,10 +418,15 @@ endif
 "vim 8.2 thinks .sc is markdown...
 autocmd BufNewFile,BufRead *.sc set filetype=scala
 
+"""""""""""""""""""vim-markdown"""""""""""""""""""""""""""
 " plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
-" TODO: mar2021, not working
 let g:vim_markdown_follow_anchor = 1
-let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_edit_url_in = 'tab'
+" let g:vim_markdown_anchorexpr = "-v:anchor-"  " customize the way to parse an anchor link
+" let g:vim_markdown_anchorexpr = " "  " customize the way to parse an anchor link
+
 
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
 "let g:airline_theme='luna'
