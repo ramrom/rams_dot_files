@@ -32,13 +32,11 @@ elseif empty($VIM_NOPLUG)
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
 
-    " TODO: check out junegunn vim-easy-align instead of tabular
     Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
     "NOTE: header highlighting fails, open issue in repo
     Plug 'plasticboy/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
-    " TODO: checkout https://github.com/iamcco/markdown-preview.nvim instead
     Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
     let g:instant_markdown_autostart = 0
 
@@ -409,6 +407,11 @@ let g:netrw_liststyle = 3
 
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" TODO: get strikethrough for neovim in markdown/html
+    " default html.vim files use underline unless: `if v:version > 800 || v:version == 800 && has("patch1038")`
+    " 0.4.4_2 return 800 for `v:version`, false for the patch
+" highlight htmlStrike term=strikethrough cterm=strikethrough gui=strikethrough
 
 "vim73 thinks *.md is modula2, markdown files also have this extension
 if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd

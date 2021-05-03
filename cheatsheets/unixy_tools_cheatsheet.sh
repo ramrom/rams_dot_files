@@ -28,6 +28,7 @@ echo "foo; bar - baz" | cut -c 5-           # remove first 4 chars of each line
 
 # TR - translate chars, find and replace on specific chars
 echo "2.1.1" | tr . -           # translate '.' to '-', output "2-1-1"
+echo "2,1,1" | tr , \|           # translate ',' to '|'
 echo "2.03" | tr -d .           # -d to delete, this will print 203
 echo foo:bar:baz | tr : \\n     # split on ":" delimiter, replace ":" with newline
 
