@@ -427,8 +427,7 @@ let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_edit_url_in = 'tab'
-" let g:vim_markdown_anchorexpr = "-v:anchor-"  " customize the way to parse an anchor link
-" let g:vim_markdown_anchorexpr = " "  " customize the way to parse an anchor link
+let g:vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"  " customize the way to parse an anchor link
 
 
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
