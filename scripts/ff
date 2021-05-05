@@ -20,14 +20,30 @@ fzf_def="$FZF_DEFAULT_COMMAND"
 if [ "$1" = "h" ]; then
     fzf_def="$FDNAME --type f --hidden --exclude .git '.*' ~"
 elif [ -n "$1" ]; then
-    [ ! -d "$1" ] && echo "$1 not a dir!" && return 1
+    [ ! -d "$1" ] && echo "$1 not a dir!" && exit 1
     fzf_def="$FDNAME --type f --hidden --exclude .git '.*' $1"
 fi
 
+generate_github_link() {
+    remote=$(git remote)
+    [ -z "$remote" ] && echo "ERROR: git remote fails for file $1" && return 1
+    url=$(git config remote.$remote.url)
+    [ -z "$url" ] && echo "ERROR: git config fails for remote $remote" && return 1
+    if echo "$url" | grep "^git@" > /dev/null; then
+        # NOTE: this assumes a filepath or git remote base url doesnt have ":" elsewhere
+        url=$(echo "$url" | sed 's/:/\//')
+        url=$(echo "$url" | sed 's/^git@/https:\/\//')
+    fi
+    url=$(echo "$url" | sed 's/\.git$//')  # remote the trailing ".git" extension
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    [ -z "$branch" ] && echo "ERROR: git branch failed" && return 1
+    echo "$url/blob/$branch/$1"
+}
+
 out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 --height "$FZF_HEIGHT"% \
-    --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy' \
+    --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-e->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
-    --expect='ctrl-o,ctrl-i,ctrl-space' \
+    --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-e' \
     --preview 'bat --style=numbers --color=always {} | head -500' \
     --preview-window=:wrap)
 key=$(echo "$out" | head -1)
@@ -37,6 +53,10 @@ if [ -n "$file" ]; then
         "ctrl-o") open "$file" ;;
         "ctrl-space") echo "cd $(dirname "$file")" ;;
         "ctrl-i") eval "${EDITOR:-vin} "$file"" ;;
+        "ctrl-e")
+            [ -n "$1" ] && echo "ERROR: opening in github requires same dir to detect remote/branch" && exit 1
+            generate_github_link "$file" > /dev/null || exit 1
+            open "$(generate_github_link "$file")" ;;
         *) echo "$file" ;;
     esac
 fi
