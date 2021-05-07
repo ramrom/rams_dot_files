@@ -128,6 +128,12 @@ PlaySpecification/spec2, to skip test:
     - amm -w foo.sc
 - predef: open REPL to see results, inspect values, ca be combined with watch
     - amm --watch --predef foo.sc
+- can shebang scala source code script with ammonite
+    ```scala
+    #!/usr/local/bin/amm
+    val a = "hi there"
+    println(a)
+    ```
 
 
 ## SLICK

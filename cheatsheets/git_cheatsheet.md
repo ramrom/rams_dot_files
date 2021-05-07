@@ -54,6 +54,12 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
 
 
 ## GITHUB
+- keyboard shortcuts: https://docs.github.com/en/github/getting-started-with-github/keyboard-shortcuts
+    - s or /  ->  focus search bar
+    - g + i -> go to issues tab
+    - g + p -> go to pullrequest tab
+    - g + w -> go to wiki tab
+    - i  -> toggle showing comments in pull request diff
 - wiki: https://help.github.com/en/github/building-a-strong-community/adding-or-editing-wiki-pages
     - you can clone the wiki locally and commit and push
 - render markdown to html, github sytle
