@@ -124,7 +124,7 @@ alias gbranchclean='git branch --merged master | egrep -v "^\*|master" | xargs -
 alias fdh1='fd -H -d 1'
 alias grep='grep --colour=always'
 alias rgst='rg -tscala'
-alias rgs="rg -tscala -g '!it/' -g '!test/'"
+alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 alias f="fzf"
