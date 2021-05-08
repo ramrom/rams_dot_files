@@ -9,7 +9,11 @@
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true
 - https://kubernetes.io/docs/
 - workload types: deployments(identity-less),statefulset(unique pods, persistent storage),daemonset(manages nodes)
+- pods have many containers, but typical setup is one container per pod
+- each pod gets an IP
 - node: contains many pods, can be a virtual machine or physical machine
+- ingress rules describe routing and load balancing
+    - needs an ingress controller, can use AWS, GCE, or nginx
 - containers in a pod share storage volumes and networking
     - each pod has a unique IP, containers in a prod share the IP address and network ports
         - containers in a pod can talk to each other using `localhost`
