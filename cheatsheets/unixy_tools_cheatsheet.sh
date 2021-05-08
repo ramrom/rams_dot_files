@@ -49,6 +49,12 @@ date '+%Y-%m-%d'  # e.g. "2021-04-24"
 # netcat
 nc -l 127.0.0.1 9001     #listen on 9001
 
+# curl
+curl -X POST -H "Content-Type: application/json" -d '{"foo": 3, "bar": 1}' https://foo.com/yar/bar
+curl -v --http1.1 -X POST -F 'name=foo' https://foo.com  # -v for verbose, --http.1.1 to force http1.1
+curl -X POST -d 'name=foo' https://foo.com  # -d forces Content-Type to be application/x-www-form-urlencoded
+# removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
+
 # wc - word count
 wc -l   # count # of lines
 
@@ -93,6 +99,10 @@ strings somebin
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
 gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
 gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
+
+
+# PS
+ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes
 
 # HTOP
 # "/" vim-like search
