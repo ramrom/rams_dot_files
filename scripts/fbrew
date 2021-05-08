@@ -1,0 +1,7 @@
+#!/bin/sh
+
+prev_cmd='brew info {}; echo;'
+prev_cmd="$prev_cmd"'echo "---- DEPS: -----"; brew deps --tree {}; echo;'
+prev_cmd="$prev_cmd"'echo "---- USES: -----"; brew uses --installed {}'
+
+brew formulae | fzf -m --preview "$prev_cmd"

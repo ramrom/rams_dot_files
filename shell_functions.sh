@@ -1,8 +1,8 @@
 # shell functions
 
 # TODO: dash doesnt like something in shell_function.sh (nov11 2020)
-#TODO: get method 2/3 or all of them working
-#FIXME; ubuntu dash wont have either defined
+# TODO: get method 2/3 or all of them working
+# FIXME; ubuntu dash wont have either defined
 function detect_shell() {
     # METHOD 1:
     if [ -n "$BASH_VERSION" ]; then
@@ -230,20 +230,6 @@ function psxg() { psx | grep $1 | grep -v grep; }
 
 # go docs with syntax highlighting!
 function batgod() { go doc $@ | bat -l go; }
-
-function file_rename_all() {
-    for f in *; do
-        local rename=$(file_rename $f)
-        if [ -z "$rename" ]; then
-            echo "ERROR: file $f, has no parentheses"
-        elif [ -n "$forreal" ]; then
-            # echo $f
-            echo "mv $f $rename"
-        else
-            echo $rename
-        fi
-    done
-}
 
 function yts_query() {
     http -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
