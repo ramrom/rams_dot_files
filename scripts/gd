@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# gd - a wrapper for git-delta
+
+usage () { echo "Usage: gd [ -h(help) ] [ -s(split view) ]"; }
+
+while getopts 'hs' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        s) SPLIT_VIEW=1;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+opts='-c core.pager="delta --dark"'
+if [ -n "$SPLIT_VIEW" ]; then
+    opts="$opts"' -c delta.features="side-by-side line-numbers decorations"'
+fi
+
+if [ -z "$@" ]; then
+    cmd=diff
+else
+    cmd="$@"
+fi
+
+full_cmd="git $opts $cmd"
+eval $full_cmd
