@@ -2,7 +2,18 @@
 - scala-lang cheatsheet: https://docs.scala-lang.org/cheatsheets/index.html
 - tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
--
+
+## SCALA 3
+- scala 2 compiler is probably the most infamous piece of bad scala code, pure spaghetti
+- DOTTY
+    - http://dotty.epfl.ch/docs/
+    - new compiler based on DOT calculus that Martin and others formalized over 8 years
+        - DOT calculus is a formal mathematical description of the scala language
+    - used for scala 3
+- scala 2.13.5 and scala 3 is completely compatible with each other
+- scala 2 source -> JVM .class file, scala 3 source -> TASTy files
+    - TAST (typed abstract syntax tree), a data structure that describes you scala code
+
 - string interpolation:
     - prints `this is Foo(3)`
         ```scala

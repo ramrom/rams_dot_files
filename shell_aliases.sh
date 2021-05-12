@@ -140,6 +140,10 @@ alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
+# JAVA/SDKMAN
+alias sdk11='sdk use java 11.0.11.j9-adpt'
+alias sdkeight='sdk use java 8.0.292.j9-adpt'
+
 #POSTGRES
 alias lpsql='PAGER=$(psql-pager) /usr/local/opt/libpq/bin/psql'
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
