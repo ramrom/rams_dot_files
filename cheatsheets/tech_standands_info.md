@@ -30,6 +30,9 @@
 - standard one is `A-Z` `a-z` `0-9` `+` `/`
 - url safe one replaces `+` and `/` with `_` and `-`
 
+## PLANTUML
+- https://plantuml.com/sequence-diagram
+
 ## LEAGUE:
 - north america server: 104.160.131.3
 - ctrl f in league for ping
