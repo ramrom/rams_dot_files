@@ -11,6 +11,7 @@ SLACK:
 - press "up" arrow to edit last message
 
 - syntax highlighted code snippets, click lightning icon on left side of input text bar
+    - cmd + shift + enter  - will bring up the snippet creator window
 - *foo*<ctrl-z> - to use literal * in this case
 - ¯\_(ツ)_/¯
     - our slack also has /shrug plugin
