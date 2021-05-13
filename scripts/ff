@@ -2,12 +2,13 @@
 
 # FF - Fzf on files in a dir with file prev and open or edit or cd to or add to clipboard
 
-usage () { echo "Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ]"; }
+usage () { echo "Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ] [ -w FUNC_WRAP ] "; }
 
-while getopts 'hj:' x; do
+while getopts 'hwj:' x; do
     case $x in
         h) usage && exit 1 ;;
         j) FZF_HEIGHT="$OPTARG" ;;
+        w) FUNC_WRAP=1 ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -55,8 +56,13 @@ file=$(echo "$out" | tail -1)
 if [ -n "$file" ]; then
     case "$key" in
         "ctrl-o") open "$file" ;;
-        "ctrl-space") echo "cd $(dirname "$file")" ;;
-        "ctrl-i") eval "${EDITOR:-vin} "$file"" ;;
+        "ctrl-space")
+            [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
+            echo "cd $(dirname "$file")" ;;
+        "ctrl-i")
+            cmd="${EDITOR:-vin} $file"
+            [ -z "$FUNC_WRAP" ] && eval "$cmd" && exit
+            echo "$cmd" ;;
         "ctrl-s")
             [ -n "$1" ] && echo "ERROR: opening in github requires same dir to detect remote/branch" && exit 1
             generate_github_link "$file" > /dev/null || exit 1

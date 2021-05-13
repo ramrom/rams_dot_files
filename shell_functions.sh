@@ -126,8 +126,9 @@ function batwhich() {
 
 # function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
 function ff() {
-    local result=$(~/bin/ff "$@")
+    local result=$(~/bin/ff -w "$@")
     [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
+    echo "$result" | grep '^vi' > /dev/null && eval "$result" && return
     echo $result
 }
 
