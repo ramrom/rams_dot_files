@@ -71,9 +71,7 @@ elseif empty($VIM_NOPLUG)
         let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
     endif
 
-    "TODO: find one of these that's better than ir_black
-    " grubbox, dracula, molokai, jellybean are decent, maybe abstract
-    Plug 'rafi/awesome-vim-colorschemes'
+    Plug 'joshdick/onedark.vim'
 
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
@@ -83,9 +81,19 @@ elseif empty($VIM_NOPLUG)
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
 "syntax on                  "syntax highlighting
 set t_Co=256
-colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
+
+try  " to support loading vim without plugins
+    let g:onedark_termcolors=256
+    let g:onedark_terminal_italics=1
+    colorscheme onedark
+     highlight Normal ctermbg=000
+        " highlight NonText ctermbg=000
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
+endtry
 
 " TODO: find better timeout length
 " set timeoutlen=1000          " default is 1000ms
@@ -113,6 +121,7 @@ autocmd FileType * setlocal formatoptions-=o
 
 "Searching
 set hlsearch                    " highlight search
+hi clear Search                 " schemes like onedark set this rule, clear it
 "TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
 if has('nvim')
     hi Search cterm=italic,underline,inverse
