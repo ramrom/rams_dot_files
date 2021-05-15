@@ -89,8 +89,9 @@ try  " to support loading vim without plugins
     let g:onedark_termcolors=256
     let g:onedark_terminal_italics=1
     colorscheme onedark
-     highlight Normal ctermbg=000
-        " highlight NonText ctermbg=000
+    highlight Normal ctermbg=000
+    hi clear Search                 " schemes like onedark set this rule, clear it
+    " highlight NonText ctermbg=000
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
 endtry
@@ -121,7 +122,6 @@ autocmd FileType * setlocal formatoptions-=o
 
 "Searching
 set hlsearch                    " highlight search
-hi clear Search                 " schemes like onedark set this rule, clear it
 "TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
 if has('nvim')
     hi Search cterm=italic,underline,inverse
@@ -440,7 +440,6 @@ let g:vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"  " customize 
 
 
 """""""""""""""""Airline"""""""""""""""""""""""""""""""""""
-"let g:airline_theme='luna'
 let g:airline_theme='bubblegum'
 "let g:airline_solarized_bg='dark'
 "let g:airline_powerline_fonts = 1 " TODO: this needs instal https://github.com/powerline/fonts

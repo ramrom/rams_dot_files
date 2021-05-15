@@ -33,6 +33,12 @@
 ## PLANTUML
 - https://plantuml.com/sequence-diagram
 
+## OpenApi / Swagger
+- https://editor.swagger.io/
+
+## Compilation
+- `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
+
 ## LEAGUE:
 - north america server: 104.160.131.3
 - ctrl f in league for ping
