@@ -33,6 +33,10 @@
 - TIME/DATE: use java times and date, it is now better than jodatime
 
 
+### RANDOM
+- sleep for 1 second: `Thread.sleep(1000)`
+
+
 ### PATTERN MATCHING
 - `case entries @ _ :: _ :: (_: List[_]) => {`
     - more than one record
@@ -42,7 +46,7 @@
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
 
-file reading
+### FILE READ
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
     - should close file too: val a = Source.fromFile("example.txt"), a.close
@@ -97,7 +101,7 @@ PlaySpecification/spec2, to skip test:
 - docs: https://www.playframework.com/documentation
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 
-## JSON PARSIN
+## JSON PARSING
 - weePickle: https://github.com/rallyhealth/weePickle
 
 ### PLAY JSON
