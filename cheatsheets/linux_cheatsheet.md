@@ -1,6 +1,11 @@
-# UBUNTU/DEBIAN/GNOME:
+# LINUX STUFF
+--------------------------
+
+# UBUNTU/DEBIAN:
 -----------------------------------------
 - lsb_release -a        - show distro name and version
+    - LTS releases every 2 years, support for 5 years
+    - regular releases every year, support for 9 months
 - cat /etc/issue        - show distro and version
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
 - `ldd /some/executable` - see all .so (shared objects, dynamically linked libraries) dependency files of an executable
@@ -53,21 +58,23 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
     - timer - replacement for cron basically, specify a service unit to run and a schedule for it
     - target - this unit type similar to runlelvel in sysV, so a desired state for the whole system
         - services and other units can be tied to a target, multiple targets can be active simultaneously
-systemctl start/stop/restart/reload foo
+
+### SYSTEMCTL
+- systemctl start/stop/restart/reload foo
     - reload doesnt stop and start the service, often is a HUP signal
-systemctl status
+- systemctl status
     - show full status of systemd with full tree
-systemctl status foo
+- systemctl status foo
     - show status of a unit named foo
-systemctl status foo*
+- systemctl status foo*
     - status of all units that starts with foo
-systemctl cat foo
+- systemctl cat foo
     - get contents of unit file defintion of foo
-systemctl list-dependencies foo
+- systemctl list-dependencies foo
     - print a nice tree of unit dependencies for foo
-systemctl show foo
+- systemctl show foo
     - low levle details of units settings
-systemctl get-default
+- systemctl get-default
     - print the default target for the system
 
 ### JOURNALCTL
@@ -110,8 +117,7 @@ loginctl
 service script-name start/stop/restart
 service --status-all
 
-gnonme desktop shortcuts:
--------------------------------------------
+### GNONME DESKTOP SHORTCUTS
 - see https://help.ubuntu.com/community/KeyboardShortcuts
 
 super - usually the "windows" key on keyboards
@@ -193,7 +199,6 @@ sudo dpkg --remove --force-remove-reinstreq somepackage
 sudo unattended-upgrade
 
 ## SNAP:
------------------
 - snap invented by ubuntu, more rapid/flexible package system than .deb/apt
 - snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
     - snap keeps the old version of the package
@@ -207,7 +212,6 @@ snap refresh --list
 
 
 ## GRAPHICAL SYSTEMS:
------------------------------
 - definitions: display server / display manager / window manager / desktop envrionment
     - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
 - Display servers and display managers
@@ -223,8 +227,8 @@ snap refresh --list
 xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
     - xrandr --output DP-0 --mode 2560x1440
-    - off: `xrandr --output HDMI-0 --off`, on: `xrandr --output HDMI-0 --auto'
-     turn on and be left of other display: `xrandr --output HDMI-0 --auto --left-of DP-0`
+    - off: `xrandr --output HDMI-0 --off`, on: `xrandr --output HDMI-0 --auto`
+    - turn on and be left of other display: `xrandr --output HDMI-0 --auto --left-of DP-0`
 wmctrl - window manager control
     - NEEDS DISPLAY VAR SET
     - display window number/ID in hexadecimal, xdotool display in decimal
