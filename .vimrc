@@ -90,8 +90,8 @@ try  " to support loading vim without plugins
     let g:onedark_terminal_italics=1
     colorscheme onedark
     highlight Normal ctermbg=000
-    hi clear Search                 " schemes like onedark set this rule, clear it
     " highlight NonText ctermbg=000
+    hi clear Search                 " schemes like onedark set this rule, clear it
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
 endtry
