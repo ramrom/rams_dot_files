@@ -1,11 +1,12 @@
+# CURRENT CHEATS
 https://devhints.io/  (great reference for all types for developers)
 
-TMUX:
+## TMUX
 prefix + S  - swap windows
 prefix + y  - swap panes
 prefix + D  - disconnect clients
 
-VIM:
+## VIM
 TIP: once a buffer autoreloads, you can still undo
 ctrl-f - command mode, edit as if in normal mode
 ctrl-w - insert mode and command mode, delete last word
@@ -14,11 +15,9 @@ ctrl-r<i> - insert mode, insert from reg i
 _       - goto first nonblank char on line
 ==      - auto indent current line
 
-
-EMACS
+## EMACS
 c-x c-c to quit
 
-
-HYPERFINE:
+## HYPERFINE:
 hyperfine -i 'uptime | grep foo' 'uptime'
     - yells if non-zero exit code, use -i to ignore, in this case grep didnt find "foo" and returns non-zero
