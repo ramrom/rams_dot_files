@@ -1,9 +1,7 @@
-/******************************
 ## GOLANG:
-*******************************/
 - cgo lets you add c code in go programs: https://golang.org/cmd/cgo/
 
-// print src code for go doc symbol/type/func
+## print src code for go doc symbol/type/func
 go doc -src fmt.Println
 
 # GO MOD
