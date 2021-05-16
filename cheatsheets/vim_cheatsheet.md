@@ -1,7 +1,6 @@
-# VIM:
+# VIM
 ------------------------------
 - great resource: https://devhints.io/vimscript
-
 
 so $VIMRUNTIME/syntax/hitest.vim
 c-x before c-n autocomplete search only in current file
@@ -42,7 +41,7 @@ BCommits    - commit hist for current buffer
 FZF-MRU:
     - does MRU for local sessions, other vim session no affectd
 
-VIM-FUGITIVE:
+### VIM-FUGITIVE:
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
@@ -54,7 +53,7 @@ G log %         - git log <current file>
     `:cfirst` and `:clast`
     :0Glog      - logs only that change current file
 
-NERDTree:
+### NERDTree:
 ?   - toggle quickhelp
 m   - bring up menu to move/rename/delete
 q   - close nerdtree
@@ -72,14 +71,14 @@ P - jump to tree root
 K/J - jmp to first/last child node of current node's parent
 C - make selected dir node the new root node
 
-Other Plugins:
+### Other Plugins:
 - Tabular
     - :Tabularize /|
         - autodetect lines above and below and align on `|` char
-    - :'<,'>Tabularize /|
+    - ` :'<,'>Tabularize /| `
         - visually selected area will align by `|` char
         - can accept any regex, not just simpe chars like `|`
-    - :'<,'>Tabularize /:\zs
+    - ` :'<,'>Tabularize /:\zs `
         - \z is lookforward, align by the space char after the `:` char
 
 
@@ -99,7 +98,7 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 - TIP: once a buffer autoreloads, you can still undo
 
 
-VIM CHEAT SHEET:
+### VIM CHEAT SHEET:
 ------------------------------------
 - :h index.txt basically has comprehensive default mappings
 - good resource on learning vim: http://vimcasts.org/
@@ -127,13 +126,13 @@ HELP:
 OPTIONS:
 :set lazyredraw - for macros dont redraw screen, faster replay
 
-EX MODE:
+## EX MODE:
 Q - in normal mode will go into ex model
 visual -exit ex mode
 vi - short for visual
 
 
-COMMAND MODE:
+## COMMAND MODE:
 C-h - delete last char
 C-w - delete last word
 C-b - goto beg of line
@@ -167,7 +166,7 @@ bd 3, closes buffer # 3
 :e #    - open last opened file
 
 
-INSERT MODE - inserting/appending text:
+## INSERT MODE
 Esc - exit insert mode
 C-[ - exit insert mode (most sysmtes, htting esc is this char)
 C-C - exit insert mode, dont trigger autocommands
@@ -185,7 +184,7 @@ C-P - last match in autocomplete
 C-X - subcommand mode used with autocomplete stuff
 C-G k - move cursor up one
 C-G j - move cursor down one
-C-R<i> - insert from reg i
+C-R i - insert from reg i
 C-L - when insertmode on, go to normal mode
 C-K - enter char with digraph, e.g. ñ or ë
 C-Y - insert char above the cursor
@@ -199,7 +198,7 @@ C-Z - should suspend vim
 C-B - used to toggle revins, now disabled
 
 
-NORMAL MODE:
+## NORMAL MODE:
 i - insert before the cursor
 I - insert at the beginning of the line
 a - insert (append) after the cursor
@@ -228,7 +227,7 @@ C-] - open tag in new buffer
 C-^ - open last editted file
 . - repeat last command
 
-CURSOR MOVEMENT:
+## CURSOR MOVEMENT
 <enter> - move cursor to beginning of next line
 C-h - move cursor left
 C-j - move cursor down
@@ -291,7 +290,7 @@ C-t - go back one in tag stack
 Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
-EDITING:
+## EDITING:
 y - yank (copy) text
 d - delete text
 c - delete text and insert to change
@@ -322,7 +321,7 @@ Ctrl + r - redo
 =ip - autoindent inner paragraph
 == - autoindent current line
 
-Cut and paste:
+## Cut and paste
 yy - yank (copy) a line
 2yy - yank (copy) 2 lines
 yw - yank (copy) the characters of the word from the cursor position
@@ -338,7 +337,7 @@ D - delete (cut) to the end of the line
 d$ - delete (cut) to the end of the line
 x - delete (cut) character
 
-VISUAL MODE:
+## VISUAL MODE:
 v - start visual mode, mark lines, then do a command (like y-yank)
 V - start linewise visual mode
 o - move to other end of marked area
@@ -348,7 +347,7 @@ Esc - exit visual mode
 vi} - visual select inner text of "{}" block
 ctrl-va] - visual block select all text of "[]" block
 
-TEXT OBJECTS:
+## TEXT OBJECTS:
 <number><operator/command><number><text object>
 i = inner, a = all
 aw - word with surrounding whitespace
@@ -361,15 +360,15 @@ aB - block within and including {}
 ib - block within and not including ()
 iB - block within and not including {}
 at - all tag block
-<operator><a/i><"/'/(/)/{/}/[/]>  programming language text objects
+` <operator><a/i><"/'/(/)/{/}/[/]> ` - programming language text objects
 
-MOTION+OBJECTS:
+## MOTION+OBJECTS:
 v3ta - visual select up to the 3rd occurence of a
 d2fn - delete up to 2nd occurence of n
 c2aw - delete 2 full words and insert
 c2w - delete from cursor current word, then next word, then insert
 
-REGISTERS:
+## REGISTERS:
 - Registers stored in ~/.viminfo, loaded on next restart
 - Register 0 contains he value of the last yank command.
 :let @a=foo  - manually set reg a to something
@@ -383,33 +382,33 @@ REGISTERS:
 "*p - paste from sys clipboard
 - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 
-JUMP LIST:
+## JUMP LIST:
 things that add to jump list:
     - normal mode G
     - searching, / and ?, # and *, n and N
     - window size jumps: L M and H
     - text block jumps: ( ) { }
 
-Marks
+## Marks
 :marks - list of marks
 ma - set current position for mark A
 `a - jump to position of mark A
 y`a - yank text to position of mark A
 
-Macros:
+## Macros:
 qa - record macro a
 q - stop recording macro
 @a - run macro a
 @@ - rerun last run macro
 
-Folds:
+## Folds:
 zo (open), zO (open all nested)
 zc (close), zC (close all)
 za (toggle), zA (toggle all)
 zm fold one level, zM - close ALL folds
 zr expand one level, zR - open ALL folds
 
-Exiting/Quitting:
+## Exiting/Quitting:
 :w - write (save) the file, but don't exit
 :w !sudo tee % - write out the current file using sudo
 :wq or :x or ZZ - write (save) and quit
@@ -424,7 +423,7 @@ ZZ - same as :wq
 :-quit :+quit   - quit prev/next win
 
 
-Search and replace:
+## Search and replace:
 /pattern - search for pattern
 ?pattern - search backward for pattern
 \vpattern - 'very magic' pattern: non-alphanumeric characters
@@ -438,21 +437,21 @@ N - repeat search in opposite direction
 [I - show all occurences of word under cursor
 :noh - remove highlighting of search matches
 
-Search in multiple files:
+## Search in multiple files:
 :vimgrep /pattern/ {file} - search for pattern in multiple files
-e.g.:vimgrep /foo/ **/*
+e.g. ` :vimgrep /foo/ **/* `
 :cn - jump to the next match
 :cp - jump to the previous match
 :copen - open a window containing the list of matches
 
-Working with multiple files:
+## Working with multiple files:
 :e file - edit a file in a new buffer
 :bnext or :bn - go to the next buffer
 :bprev or :bp - go to the previous buffer
 :bd - delete a buffer (close a file)
 :ls - list all open buffers
 
-WINDOWS:
+## WINDOWS:
 :sp file - open a file in a new buffer and split window
 :vsp file - open a file in a new buffer and vertically split window
 Ctrl + ws - split window
@@ -471,7 +470,7 @@ ctrl + wT - break window out to new tab
 ctrl + wo - close all windows except current one in tab
 
 
-Tabs:
+## TABS
 :tabnew or :tabnew file - open a file in a new tab
 Ctrl + wT - move the current split window into its own tab
 gt or :tabnext or :tabn - move to the next tab
@@ -483,7 +482,7 @@ gT or :tabprev or :tabp - move to the previous tab
 :tabdo command - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)
 
 
-SPELLING:
+## SPELLING:
 - set spell
 - set spelllang=es - set spell language to spanish
 [s - previous spelling error
