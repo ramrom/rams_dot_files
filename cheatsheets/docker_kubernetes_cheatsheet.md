@@ -19,3 +19,5 @@
         - containers in a pod can talk to each other using `localhost`
         - containers in same pod can use IPC like shared memory
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
+- tailing logs
+    - `kubectl --namespace=foospace logs --follow mypod-fda234`
