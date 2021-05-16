@@ -1,4 +1,4 @@
-SLACK:
+# SLACK
 - shift + enter  - newline without sending message
 - cmd + shift + [/] - next/prev workspace
 - command + /  - bring up keyboard shortcuts
