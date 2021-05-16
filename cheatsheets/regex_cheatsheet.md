@@ -1,4 +1,6 @@
-# GOOD REFERENCES:
+# REGEX
+
+## GOOD REFERENCES
 - https://devhints.io/regexp
 - https://www.regular-expressions.info/posix.html
 - https://remram44.github.io/regex-cheatsheet/regex.html
@@ -13,7 +15,7 @@ OSX:
 use grep -E, this apparently has things like \d, apple confusing shit...
 
 
-Character classes
+## Character classes
 .	Any character, except newline
 \d	Digit           - PCRE
 [[:digit:]] Digit   - PCRE, ERE, BRE
@@ -30,7 +32,7 @@ Character classes
 [1-9]	Digit between 1 and 9
 [^abc]	Any character except a, b or c
 
-Anchors
+## Anchors
 \G	Start of match
 ^	Start of string
 $	End of string
@@ -42,18 +44,18 @@ $	End of string
 ^abc	Start with abc
 abc$	End with abc
 
-Escaped characters
+## Escaped characters
 \. \* \\	Escape special character used by regex
 \t	Tab
 \n	Newline
 \r	Carriage return
 
-Groups
+## Groups
 (abc)	Capture group
 (a|b)	Match a or b
 (?:abc)	Match abc, but don’t capture
 
-Quantifiers
+## Quantifiers
 a*	Match 0 or more
 a+	Match 1 or more
 a?	Match 0 or 1
@@ -62,15 +64,13 @@ a{,3}	Match up to 3
 a{3,}	Match 3 or more
 a{1,3}	Match between 1 and 3
 
-Lookahead & Lookbehind
+## Lookahead & Lookbehind
 a(?=b)	Match a in baby but not in bay
 a(?!b)	Match a in Stan but not in Stab
 (?<=a)b	Match b in crabs but not in cribs
 (?<!a)b	Match b in fib but not in fab
 
-
-
-# Examples
+## Examples
 repeating a character sequence. (gnu grep)
 echo "abba habba looba zzz aza " | grep -P '(a\w+a\s)+'   -> find match
 echo "abba habba looba zzz aza " | grep -P '^(a\w+a\s)+$'   -> does NOT find match, the "zzz " kills it
