@@ -13,6 +13,9 @@ gx    - osx invokes file handler "open",
         opens urls, images, files, videos
         nvim good, vim fails on urls but files/imgs ok
         nvim and vim work fine for all in ubunutu
+gj/gk - go down/up one viewport line
+g0/g$ - go beg/end of viewport line
+gq   - make one big line over multiple viewport lines as seperate lines
 gf   - edit filename undercursor
 gd   - goto variable/fucntion declaration
 gy   - goto type definition
