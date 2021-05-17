@@ -33,7 +33,6 @@ elseif empty($VIM_NOPLUG)
     endif
 
     Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
-    "NOTE: header highlighting fails, open issue in repo
     Plug 'plasticboy/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
@@ -81,11 +80,19 @@ elseif empty($VIM_NOPLUG)
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 "syntax on                  "syntax highlighting
 set t_Co=256
 
 try  " to support loading vim without plugins
+    " TODO: extended to italic/und/bold doesn't work
+    if (has("autocmd"))
+        augroup colorextend
+            autocmd!
+            " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "cterm": "italic" })
+            " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
+            " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
+        augroup END
+    endif
     let g:onedark_termcolors=256
     let g:onedark_terminal_italics=1
     colorscheme onedark
@@ -263,10 +270,10 @@ endfunction
 
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
-"<Leader>a/k/i/u/;/'
+"<Leader>a/k/u/;/'
 "<Leader><Leader>
 "c-m/c-n/c-g/c-s/c-q
-"c-x (opposite of c-a which i clobber for tmux meta)
+"c-x (opposite of c-a, i clobber c-a for tmux meta)
 "c-p (once i get rid of CtrlP plugin)
 "; " semicolon repeats last f/F motions
 "," ; in reverse direction
