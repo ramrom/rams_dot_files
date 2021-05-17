@@ -1,6 +1,8 @@
 # VIM
 ------------------------------
+- good resource on learning vim: http://vimcasts.org/
 - great resource: https://devhints.io/vimscript
+- `:version`  - get version and features compiled
 
 so $VIMRUNTIME/syntax/hitest.vim
 c-x before c-n autocomplete search only in current file
@@ -29,7 +31,9 @@ g,   - jump back to newer edit point
 :earlier 10min - time travel!, go back to buffer state 10 minutes ago
     :later 1hr - go forward 1 hour
 
-FZF:
+## PLUGINS
+
+### FZF
 Rg            - ripgrep dynamic fuzzy search with bat preview!
 Files, ctrl-v - opens in new vert split
 Files, ctrl-x - opens in new horizontal split
@@ -41,7 +45,7 @@ BCommits    - commit hist for current buffer
 FZF-MRU:
     - does MRU for local sessions, other vim session no affectd
 
-### VIM-FUGITIVE:
+### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
@@ -53,7 +57,7 @@ G log %         - git log <current file>
     `:cfirst` and `:clast`
     :0Glog      - logs only that change current file
 
-### NERDTree:
+### NERDTree
 ?   - toggle quickhelp
 m   - bring up menu to move/rename/delete
 q   - close nerdtree
@@ -71,7 +75,7 @@ P - jump to tree root
 K/J - jmp to first/last child node of current node's parent
 C - make selected dir node the new root node
 
-### Other Plugins:
+### Other Plugins
 - Tabular
     - :Tabularize /|
         - autodetect lines above and below and align on `|` char
@@ -98,15 +102,8 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 - TIP: once a buffer autoreloads, you can still undo
 
 
-### VIM CHEAT SHEET:
-------------------------------------
-- :h index.txt basically has comprehensive default mappings
-- good resource on learning vim: http://vimcasts.org/
 
-:version  - get version and features compiled
-:cd <dir> - change vims current working dir
-
-STARTING VIM:
+### STARTING VIM:
 vim -u NONE     - start without running vimrc
 vim foo bar     - foo and bar buffers
 vim -o  foo bar - foo and bar in diff windows
@@ -114,7 +111,9 @@ vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
     - has many level, see `:help vbs`
 
-HELP:
+### HELP:
+:cd <dir> - change vims current working dir
+- :h index.txt basically has comprehensive default mappings
 :help shell<Tab> - tab complete a help topic
 :help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
@@ -123,7 +122,7 @@ HELP:
 :h insert-index  - insert default mappings
 :h ex-cmd-index  - command and ex mode
 
-OPTIONS:
+### OPTIONS:
 :set lazyredraw - for macros dont redraw screen, faster replay
 
 ## EX MODE:
@@ -132,7 +131,9 @@ visual -exit ex mode
 vi - short for visual
 
 
-## COMMAND MODE:
+## COMMAND MODE
+- run two commands in one line with `|`
+    - `:echo "hi" | echo "hi again"`
 C-h - delete last char
 C-w - delete last word
 C-b - goto beg of line
@@ -140,29 +141,29 @@ C-e - goto end of line
 C-f - command-line-window, edit as if in insert/normal
       then can yank old command history
       in insert of cur line, write command and hit enter
+- record command line output to file
+    - `:redir > foofile`, then `:somecommandthatoutputs`, `:anothercommndthatoupts`, then `:redir end`
 bd 3, closes buffer # 3
 :command - spit out all usr defined commands
     - fzf's Command to fuzzy search em!
 :hi  - spit out all highlighting rules
 :hi clear - reset highlighting
 :syntax - spits out current syntax rules
-    - use :redir > foofile, :sytnax, :hi, :redir end
-    - to record to file
     - force set syntax highlight to ruby: `set syntax=ruby`
 - `:filter *pattern* let g:`
     - works on `let`, `set`, `map`, `hi` and `fun`
     - **NOT** `syn` or `autocmd` though...
-- verbose filter *Diff* hi  - all Diff highlight rules and sources
+- `verbose filter *Diff* hi`  - all Diff highlight rules and sources
 :verbose nmap <C-j>  - plugin/custom mapping normal C-j
 :verbose set fo?
     - will show fo(formatoptions)
     - verbose to tell u what last set it
+:scriptnames  - show vim source files loaded
 :args   - show arg list that vim was invoked with
 :help keyword - open help for keyword
 :saveas file - save file as
 :close - close current window
 :new    - open new window and new buffer
-:tabnew foo - open foo in new tab
 :e #    - open last opened file
 
 
