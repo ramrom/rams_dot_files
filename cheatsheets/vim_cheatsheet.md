@@ -92,7 +92,7 @@ CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 
 
-### STARTING VIM:
+### STARTING VIM
 vim -u NONE     - start without running vimrc
 vim foo bar     - foo and bar buffers
 vim -o  foo bar - foo and bar in diff windows
@@ -100,7 +100,7 @@ vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
     - has many level, see `:help vbs`
 
-### HELP:
+### HELP
 :cd <dir> - change vims current working dir
 - :h index.txt basically has comprehensive default mappings
 :help shell<Tab> - tab complete a help topic

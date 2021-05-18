@@ -31,4 +31,5 @@ ffcb                            ~/rams_dot_files/scripts/ffcb
 ffch                            ~/rams_dot_files/scripts/ffch
 ff                              ~/rams_dot_files/scripts/ff
 fmv                             ~/rams_dot_files/scripts/fmv
+fv                              ~/rams_dot_files/scripts/fv
 gd                              ~/rams_dot_files/scripts/gd
