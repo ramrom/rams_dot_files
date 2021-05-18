@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# FV - Fzf on shell variables
+
+usage () { echo "Usage: fv [ -h(help) ]"; }
+
+while getopts 'h' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+out=$(export | fzf +m \
+    --header='ctrl-y->pbcopy_value' \
+    --expect='ctrl-y')
+key=$(echo "$out" | head -1)
+variable=$(echo "$out" | tail -1)
+if [ -n "$variable" ]; then
+    case "$key" in
+        "ctrl-y")
+            echo "$(tput setaf 2)VARIBLE: $(tput sgr0) $variable"
+            echo "$(tput setaf 3)copied to clipboard"
+            # last 2 seds to strip the double quotes surrounding value
+            echo "$variable" | sed 's/^[^=]*=//' | sed 's/^.//' | sed 's/.$//' | pbcopy
+            ;;
+        *) echo "$variable" ;;
+    esac
+fi
