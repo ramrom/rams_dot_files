@@ -271,6 +271,7 @@ endfunction
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
 "<Leader>a/k/u/;/'
+    " a is earmarked for smart script run or test run
 "<Leader><Leader>
 "c-m/c-n/c-g/c-s/c-q
 "c-x (opposite of c-a, i clobber c-a for tmux meta)
@@ -363,13 +364,13 @@ noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
-noremap <leader>l :Lines<CR>
-noremap <leader>L :Lines!<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
 noremap <leader>r :Rg<CR>
 noremap <leader>R :Rg!<CR>
 noremap <leader>i :FZFMru<CR>
+
+noremap <leader>ll :Lines<CR>
 
 noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gvdiffsplit master<cr>
@@ -395,10 +396,10 @@ noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>ca :vsplit ~/tmp/scratch.md<cr>
 noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
-noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.txt<cr>
-noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.txt<cr>
-noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.txt<cr>
-noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.txt<cr>
+noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>
+noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.md<cr>
+noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.md<cr>
+noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
 
 " TODO: i think these maps are seriously useful
 " nnoremap <C-J> a<CR><Esc>k$

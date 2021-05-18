@@ -1,26 +1,12 @@
 # VIM
 ------------------------------
-- good resource on learning vim: http://vimcasts.org/
+- good resource on learning vim: http://vimcasts.org
 - great resource: https://devhints.io/vimscript
 - `:version`  - get version and features compiled
 
 so $VIMRUNTIME/syntax/hitest.vim
 c-x before c-n autocomplete search only in current file
 c-x c-f find file at current path, c-x c-] use tags
-/\C  - force case-sensitive search, /\c opposite
-:g/  - print line # and occurence of each search match
-gx    - osx invokes file handler "open",
-        opens urls, images, files, videos
-        nvim good, vim fails on urls but files/imgs ok
-        nvim and vim work fine for all in ubunutu
-gj/gk - go down/up one viewport line
-g0/g$ - go beg/end of viewport line
-gq   - make one big line over multiple viewport lines as seperate lines
-gf   - edit filename undercursor
-gd   - goto variable/fucntion declaration
-gy   - goto type definition
-g;   - jump back to last edit point
-g,   - jump back to newer edit point
 <c-w>f - goto filename undercursor in new window
 <c-w>gf - in new tab
 100G or 100gg - goes to line 100 like :100<CR> in command
@@ -214,11 +200,9 @@ S - delete line and substitute text (same as cc)
 ea - insert (append) at the end of the word
 K - open man page for word under the cursor
 Q - enter ex mode
-q: - enter command mode insert/edit mode (like C-F in cmd)
-q? - same as q:
-q/ - same as q:
-q/ - see prev searches
-gq - format text over motion
+q: - enter command mode window for history of command mode commands
+q/ - enter command mode window editor for history of searches
+q? -  like q/ but reverse direction like the ? normal command
 C-Z - suspend process
 C-K - enter digraph
 C-L - clear and redraw screen
@@ -230,6 +214,23 @@ C-Q - start block-visual, some terminals stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file
 . - repeat last command
+
+### G commands (normal mode)
+gf   - edit filename undercursor
+gx   - osx invokes file handler "open",
+        opens urls, images, files, videos
+        nvim good, vim fails on urls but files/imgs ok
+        nvim and vim work fine for all in ubunutu
+gj/gk - go down/up one viewport line
+g0/g$ - go beg/end of viewport line
+gq   - make one big line over multiple viewport lines as seperate lines
+gd   - goto variable/fucntion declaration
+gy   - goto type definition
+g;   - jump back to last edit point
+g,   - jump back to newer edit point
+gv   - reselect the last visually selected text
+gi   - go to last cursor position in insert mode
+
 
 ## CURSOR MOVEMENT
 <enter> - move cursor to beginning of next line
@@ -427,7 +428,9 @@ ZZ - same as :wq
 :-quit :+quit   - quit prev/next win
 
 
-## Search and replace:
+## Search and replace
+/\C  - force case-sensitive search, /\c opposite
+:g/  - print line # and occurence of each search match
 /pattern - search for pattern
 ?pattern - search backward for pattern
 \vpattern - 'very magic' pattern: non-alphanumeric characters
@@ -436,8 +439,8 @@ n - repeat search in same direction
 N - repeat search in opposite direction
 :%s/old/new/g - replace all old with new throughout file
 :%s/old/new/gc - replace all old with new throughout file with confirmations
-* to search next occurence of word under cursor
-# will search backward
+- * to search next occurence of word under cursor
+- ? will search backward
 [I - show all occurences of word under cursor
 :noh - remove highlighting of search matches
 
