@@ -280,6 +280,8 @@ Tx - jump to after previous occurence of character x
 { - jump to previous paragraph (or function/block, when editing code)
 ( - back a sentence
 ) - forward a sentence
+[] - backward to prev }
+][ - forward to prev }
 zz - center cursor on screen
 zt - cursor on top of screen
 zb - cursor on bottom screen
