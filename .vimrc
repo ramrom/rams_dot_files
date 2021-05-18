@@ -52,7 +52,7 @@ elseif empty($VIM_NOPLUG)
         endif
         "neovim offers best coc/metals experience
         if !empty($VIM_METALS)
-            Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+            Plug 'scalameta/coc-metals', { 'do': 'yarn install --frozen-lockfile' }
         endif
     endif
 
