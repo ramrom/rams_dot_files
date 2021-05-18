@@ -36,7 +36,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'plasticboy/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
-    Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+    Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
     let g:instant_markdown_autostart = 0
 
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
