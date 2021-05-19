@@ -425,11 +425,6 @@ let g:netrw_liststyle = 3
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" TODO: get strikethrough for neovim in markdown/html
-    " default html.vim files use underline unless: `if v:version > 800 || v:version == 800 && has("patch1038")`
-    " 0.4.4_2 return 800 for `v:version`, false for the patch
-" highlight htmlStrike term=strikethrough cterm=strikethrough gui=strikethrough
-
 "vim73 thinks *.md is modula2, markdown files also have this extension
 if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
     autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -437,6 +432,14 @@ endif
 
 "vim 8.2 thinks .sc is markdown...
 autocmd BufNewFile,BufRead *.sc set filetype=scala
+
+" any file name starting with Jenkinsfile should be groovy
+autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
+
+" TODO: get strikethrough for neovim in markdown/html
+    " default html.vim files use underline unless: `if v:version > 800 || v:version == 800 && has("patch1038")`
+    " 0.4.4_2 return 800 for `v:version`, false for the patch
+" highlight htmlStrike term=strikethrough cterm=strikethrough gui=strikethrough
 
 """""""""""""""""""vim-markdown"""""""""""""""""""""""""""
 " plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
