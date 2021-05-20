@@ -388,6 +388,7 @@ noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
+noremap <leader>gl :set list!<cr>
 
 "cheatsheet maps
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"

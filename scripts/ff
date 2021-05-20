@@ -45,6 +45,8 @@ generate_github_link() {
     echo "$url/blob/$branch/$1"
 }
 
+# TODO: make binding to open in GH without quitting fzf
+    # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
 out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 --height "$FZF_HEIGHT"% \
     --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
