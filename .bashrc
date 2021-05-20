@@ -86,7 +86,7 @@ append_dir_to_path ~/.local/bin
 # set go vars if go bin exists/installed
 if [ $(command -v go) ]; then
     export GOPATH=~/go
-    export GOBIN=${GOBIN}/bin
+    export GOBIN=${GOPATH}/bin
 fi
 
 # set rust PATH if rustup exists/intsalled
