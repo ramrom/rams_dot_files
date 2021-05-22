@@ -13,9 +13,9 @@ setopt auto_cd
 setopt sh_word_split
 
 # set fc(command history editor) to vim
-export FCEDIT=vim
+export FCEDIT=nvim
 
-export EDITOR=vim
+export EDITOR=nvim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
 # Colorize
