@@ -32,7 +32,7 @@ if [ -n "$variable" ]; then
         "ctrl-y")
             echo "$(tput setaf 2)RAW FZF LINE: $(tput sgr0) $variable"
             # last 2 seds to strip the double quotes surrounding value
-            value=$(echo "$variable" | sed 's/^[^=]*=//' | sed 's/^.//' | sed 's/.$//')
+            value=$(echo "$variable" | sed -E 's/^[^=]*=//' | sed -E "s/^[\"']?//" | sed -E "s/[\"']?$//")
             echo "$(tput setaf 2)VALUE: $(tput bold)"$value" $(tput sgr0)copied to clipboard"
             echo "$value" | pbcopy
             ;;
