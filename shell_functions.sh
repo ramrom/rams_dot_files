@@ -128,7 +128,7 @@ function batwhich() {
 function ff() {
     local result=$(~/bin/ff -w "$@")
     [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
-    echo "$result" | grep '^vi' > /dev/null && eval "$result" && return
+    echo "$result" | grep -E '^vi|^nvi' > /dev/null && eval "$result" && return
     echo $result
 }
 
