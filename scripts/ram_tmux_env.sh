@@ -4,14 +4,14 @@
 # vertsize=`tput lines`   # how to obtain height/rows of terminal window/pane
 SESSION_NAME=ram
 DOTFILE=~/rams_dot_files
-GDRIVE=~/"Google Drive"
+CDRIVE=~/"Dropbox"
 
 tmux has-session -t $SESSION_NAME
 [ $? == 0 ] && echo "$(tput setaf 1) $SESSION_NAME session already exists!" && exit 1
 
-tmux new-session -d -s $SESSION_NAME -c "$GDRIVE"
+tmux new-session -d -s $SESSION_NAME -c "$CDRIVE"
 tmux select-pane -T 'admin'
-tmux split-window -h -c "$GDRIVE"
+tmux split-window -h -c "$CDRIVE"
 tmux select-pane -T 'admin'
 
 tmux new-window -t $SESSION_NAME:1 -n 'admin' -c "$DOTFILE"

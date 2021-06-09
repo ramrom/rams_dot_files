@@ -88,7 +88,9 @@ try  " to support loading vim without plugins
     if (has("autocmd"))
         augroup colorextend
             autocmd!
-            " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "cterm": "italic" })
+            autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
+            " autocmd ColorScheme onedark call onedark#extend_highlight("NonText", { "bg": { "cterm": "000" } })
+            " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "cterm": "underline" })
             " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
             " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
         augroup END
@@ -96,8 +98,6 @@ try  " to support loading vim without plugins
     let g:onedark_termcolors=256
     let g:onedark_terminal_italics=1
     colorscheme onedark
-    highlight Normal ctermbg=000
-    " highlight NonText ctermbg=000
     hi clear Search                 " schemes like onedark set this rule, clear it
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
@@ -270,7 +270,7 @@ endfunction
 
 """""""""" MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
-"<Leader>a/k/u/;/'
+"<Leader>a/k/l/w/u/;/'
     " a is earmarked for smart script run or test run
 "<Leader><Leader>
 "c-m/c-n/c-g/c-s/c-q

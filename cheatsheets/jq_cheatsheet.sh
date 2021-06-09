@@ -12,6 +12,9 @@ echo "[1, 2, 222] " | jq '. | length'    # will output 3
 # can do many statements with comma:
 echo '{"a":1,"b":2}' | jq '.a, .b, .' # will output 1, then 2 on next line, then full has on subsequent lines
 
+# flatten a array
+echo '[1,2,[3,[4]]]' | jq 'flatten'  # prints [1,2,3,4]
+
 # using contains method on sting field, need to remove null values first
 jq --arg FOO $somevar 'select(.somefield != null) | select(.somefield | contains($FOO))'
 
