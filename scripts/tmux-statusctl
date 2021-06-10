@@ -13,14 +13,6 @@ tmux_main_status () {
     local left="$(tmux show -gv status-left)"
     local right="$(tmux show -gv status-right)"
 
-    if [ -n "$simple" ]; then
-        local tmux_mouse_mode="#[fg=brightyellow]#[bg=red]#{?mouse,MOUSEON,}#[default]"
-        local tmux_sync_panes="#[fg=brightyellow]#[bg=red]#{?synchronize-panes,SYNCPANEON,}#[default]"
-        local tmux_host_datetime="#[fg=colour${hostname_ansi_color}]#{host} #[fg=brightwhite]%Y-%m-%d #[fg=brightwhite]%H:%M"
-        left="#[fg=cyan]#S ${tmux_mouse_mode} ${tmux_sync_panes}"
-        right="#[align=right]  ${tmux_host_datetime}"
-    fi
-
     local cmd="tmux"
     [ "$(detect_shell)" = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
