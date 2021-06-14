@@ -6,6 +6,8 @@
 - https://remram44.github.io/regex-cheatsheet/regex.html
     - has POSIX ERE, BRE, Perl, vim, python
 - test regexes: https://regex101.com/
+- PCRE search has one term but NOT onother term: https://superuser.com/questions/537619/grep-for-term-and-exclude-another-term
+    - search for `foo` but *NOT* `bar`: `grep -P '(?=^((?!bar).)*$)foo'`
 
 Linux/GNU:
 use grep -P for PCRE (perl) style regexes
