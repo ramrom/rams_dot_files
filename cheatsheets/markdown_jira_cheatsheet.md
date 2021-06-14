@@ -116,6 +116,11 @@ _emphasis_ (italic)
 
 bq. some blocked quote
 
+{quote}
+line 1
+line 2
+{quote}
+
 ---    solid line
 --     smaller solid line
 ----   horizontal ruler
