@@ -14,6 +14,7 @@ fi
 out=$($fdname --type d -d 1 | fzf +m --exit-0 \
     --header 'ctrl-i->vim' \
     --expect 'ctrl-i' \
+    --preview-window=bottom:40% \
     --preview "$prev_cmd")
 key=$(echo "$out" | head -1)
 moviedir=$(echo "$out" | tail -1)
