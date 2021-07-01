@@ -167,6 +167,7 @@ PlaySpecification/spec2, to skip test:
  sbt 'testOnly *SSO* -- -z "foo bar desc"'
    - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
+- to show evictions: `sbt evicted`
 
 
 ## AKKA

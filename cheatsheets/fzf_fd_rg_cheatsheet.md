@@ -20,6 +20,8 @@
         - match all files in foo/bar and recurce, and filenames starting with xy in folder yar
         - but exclude any file/folder with bar in it.
         - order matter, for multiple matches, later globs take precedence
+- search for files with a pattern but not another pattern
+    `rg --files-with-matches 'somepattern' | xargs rg --files-without-match 'notthispattern'`
 
 ## FZF:
 - https://github.com/junegunn/fzf, main README has good docs

@@ -65,8 +65,12 @@ K/J - jmp to first/last child node of current node's parent
 C - make selected dir node the new root node
 
 ### Other Plugins
+- vim-gh-line
+    - blob-view: <leader>gh
+    - blame-view: <leader>gb
+    - repo-view: <leader>go
 - Tabular
-    - :Tabularize /|
+    - `:Tabularize /| `
         - autodetect lines above and below and align on `|` char
     - ` :'<,'>Tabularize /| `
         - visually selected area will align by `|` char
@@ -75,7 +79,7 @@ C - make selected dir node the new root node
         - \z is lookforward, align by the space char after the `:` char
 
 
-- ga -> show char encoding under cursor
+- ga -> show character encoding under cursor
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
 - utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
 CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
