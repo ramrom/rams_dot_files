@@ -14,6 +14,7 @@ elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
+    Plug 'ruanyl/vim-gh-line'
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
@@ -83,22 +84,19 @@ endif
 "syntax on                  "syntax highlighting
 set t_Co=256
 
-try  " to support loading vim without plugins
-    " TODO: extended to italic/und/bold doesn't work
-    if (has("autocmd"))
-        augroup colorextend
-            autocmd!
-            autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
-            " autocmd ColorScheme onedark call onedark#extend_highlight("NonText", { "bg": { "cterm": "000" } })
-            " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "cterm": "underline" })
-            " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
-            " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
-        augroup END
-    endif
+try  " if loading vim without plugins, onedark will fail, default to ir_black
+    augroup colorextend
+        autocmd!
+        autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
+        " autocmd ColorScheme onedark call onedark#extend_highlight("NonText", { "bg": { "cterm": "000" } })
+        " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "cterm": "underline" })
+        " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
+        " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
+    augroup END
     let g:onedark_termcolors=256
     let g:onedark_terminal_italics=1
     colorscheme onedark
-    hi clear Search                 " schemes like onedark set this rule, clear it
+    hi clear Search                 " clear it, as I use a custom search highlight
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
 endtry
@@ -286,10 +284,12 @@ if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
 
-" TODO: probably remove, c-l seems to work well enough
+" OLD ESCAPE replacement
 " much faster than escape, almost never hit jk successively in insert, jj might be good too
 " inoremap jk  <Esc>
-" when vim in insertmode(awful) c-l goes to normal mode from insert
+
+" ESCAPE replacement
+" NOTE: default C-l behaviour: with `insertmode` enabled, it goes to normal mode from insert
 inoremap <C-l>  <Esc>
 
 " TODO: should i keep?, leader-s saves from normal is nuff i thinks. (c-k default map is enter digraph)
@@ -441,6 +441,20 @@ autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
     " default html.vim files use underline unless: `if v:version > 800 || v:version == 800 && has("patch1038")`
     " 0.4.4_2 return 800 for `v:version`, false for the patch
 " highlight htmlStrike term=strikethrough cterm=strikethrough gui=strikethrough
+
+
+"""""""""""""""""" NERDTree""""""""""""""""""""""""""""""""
+" TODO: dont want to open existing tab/window with buffer: https://github.com/preservim/nerdtree/issues/170
+" let NERDTreeCustomOpenArgs = {'file': {'reuse': 'currenttab', 'where': 'p'}, 'dir': {}}
+" let NERDTreeMapCustomOpen = 'o'
+
+"""""""""""""""""" Vim-GH-line""""""""""""""""""""""""""""""""
+let g:gh_line_map_default = 0
+let g:gh_line_blame_map_default = 1
+let g:gh_line_map = '<leader>wh'
+let g:gh_line_blame_map = '<leader>wb'
+let g:gh_repo_map = '<leader>wo'
+let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 
 """""""""""""""""""vim-markdown"""""""""""""""""""""""""""
 " plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)

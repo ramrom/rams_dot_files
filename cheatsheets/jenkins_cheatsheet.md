@@ -42,3 +42,6 @@ this works too, _i think_, (HTTPie example here):
 
 ## CLI
 - https://www.jenkins.io/doc/book/managing/cli/
+
+## Pipeline Language
+- https://www.jenkins.io/doc/book/pipeline/syntax/
