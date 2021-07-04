@@ -13,7 +13,7 @@ torrents="$(transmission-remote -l | tail -n+2 | head -n-1)"
 
 if [ -n "$torrents" ]; then
     if echo "$torrents" | grep -E 'Downloading|Seeding|Up\s\&\sDown' > /dev/null; then
-        echo "#[fg=brightyellow]#[bg=red]ACT_TORRNT#[default]"
+        echo "#[fg=magenta]#[bg=blue]ACT_TORRNT#[default]"
     else
         echo "#[fg=blue]#[bg=colour178]IDLE_TORRNT#[default]"
     fi
