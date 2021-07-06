@@ -158,6 +158,8 @@ PlaySpecification/spec2, to skip test:
 
 ## SBT
 ----------------------------------------
+- `%%` automatically uses scala version, `%` dev must specify
+    - `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
 - get timings of sbt tasks:
     - time sbt -Dsbt.task.timings=true clean update test
 - sbt update resolves and fetches deps

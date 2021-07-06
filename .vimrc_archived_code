@@ -77,3 +77,14 @@ while i<10
   exe 'map g'.i.' :tabn '.i.'<CR>'
   let i+=1
 endwhile
+
+"""""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
+let g:ctrlp_max_files = 20000
+let g:ctrlp_max_height = 20
+let g:ctrlp_dotfiles = 1
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+  \ }
+

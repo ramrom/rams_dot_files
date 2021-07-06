@@ -14,13 +14,12 @@ elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
-    Plug 'ruanyl/vim-gh-line'
+    Plug 'ruanyl/vim-gh-line'       " generate github url links from current file
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
-    Plug 'ctrlpvim/ctrlp.vim'     "generally use fzf and fzf-mru instead
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
@@ -71,7 +70,7 @@ elseif empty($VIM_NOPLUG)
         let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
     endif
 
-    Plug 'joshdick/onedark.vim'
+    Plug 'joshdick/onedark.vim'     " inspired from atom's onedark color theme
 
     "NOTE: will detect .txt files with `***` chars in first line as robot
     Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
@@ -482,16 +481,6 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 
 " for FZF-Mru plugin, prevent fzf from sorting, show by recency
 let g:fzf_mru_no_sort = 1
-
-"""""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
-let g:ctrlp_max_files = 20000
-let g:ctrlp_max_height = 20
-let g:ctrlp_dotfiles = 1
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
 
 """"" RipGrep and FD """""""""""""""""""
 if executable('rg')
