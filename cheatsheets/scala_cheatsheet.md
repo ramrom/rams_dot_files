@@ -80,6 +80,8 @@ PlaySpecification/spec2, to skip test:
         - with these 2 exclude flags, this is logical OR, so if test has one of the tags or both, it's excluded
     `sbt 'project foo' 'testOnly -- -z "some partial string in desc"'`
         - with these 2 exclude flags, this is logical OR, so if test has one of the tags or both, it's excluded
+    `sbt 'show Test/dependencyClasspath'`
+        - show order of which jars are loaded for project `Test`
 
 
 ## AUTOMATION TESTING
