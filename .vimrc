@@ -88,8 +88,10 @@ try  " if loading vim without plugins, onedark will fail, default to ir_black
         autocmd!
         autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
         " autocmd ColorScheme onedark call onedark#extend_highlight("NonText", { "bg": { "cterm": "000" } })
-        " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "cterm": "underline" })
-        " autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
+        " autocmd ColorScheme onedark call onedark#set_highlight("htmlH2", { "cterm": "underline" })
+        " autocmd ColorScheme onedark call onedark#set_highlight("htmlH1", { "cterm": "underline" })
+        autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
+        autocmd ColorScheme onedark call onedark#extend_highlight("htmlH1", { "fg": { "cterm": "196" } })
         " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
     augroup END
     let g:onedark_termcolors=256
