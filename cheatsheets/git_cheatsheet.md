@@ -51,6 +51,7 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
     - this ssh command could do something like use a different config file or a different identity file
 - git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
 - *NOTE* if you use ssh-agent, and load multiple keys, it will only try the first key, so only load the single proper key
+- `ssh-add -l` to list key loaded into ssh-agent
 
 
 ## GITHUB
