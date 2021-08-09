@@ -1,3 +1,6 @@
+# JSON
+- `json validate --schema-file=/home/ramrom/rams_dot_files/veda_schema.json --document-file=metadata.json`
+
 # JQ
 
 # to get keys of a object:
