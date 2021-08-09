@@ -1,8 +1,9 @@
 # JSON
-- `json validate --schema-file=/home/ramrom/rams_dot_files/veda_schema.json --document-file=metadata.json`
+- json-spec python cli validation example:
+    - `json validate --schema-file=/home/ramrom/rams_dot_files/veda_schema.json --document-file=metadata.json`
 
-# JQ
-
+## JQ
+```bash
 # to get keys of a object:
 echo "[1, 2, {"a":1,"b":2} ]" | jq '.[2] | keys'    # will output [ "a", "b" ]
 
@@ -38,3 +39,4 @@ echo '[ { "id":"foo", "val": 3 }, { "id":"fo", "val": "hi" }, { "id":"bar", "val
 echo '{"a":"z"}' | jq -C . > foo
 echo '{"a":"z"}' | jq -c . > foo # -c is compact, so no indents/newlines, but keeps color
 cat foo  # this should have color and indents that jq formatted
+```
