@@ -33,6 +33,15 @@
 - TIME/DATE: use java times and date, it is now better than jodatime
 
 
+### DATA STRUCTURES
+- List
+- remove a item
+    - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
+        - from index 2, remove 1 element with Nil (only Nil works)
+    - `List(11,12,13,14,15).zipWithIndex.filter(_._2 != 2).map(_._1)`
+        - will remove index 2
+    - `val trunced = internalIdList.take(index) ++ internalIdList.drop(index + 1)`
+
 ### RANDOM
 - sleep for 1 second: `Thread.sleep(1000)`
 
@@ -80,8 +89,6 @@ PlaySpecification/spec2, to skip test:
         - with these 2 exclude flags, this is logical OR, so if test has one of the tags or both, it's excluded
     `sbt 'project foo' 'testOnly -- -z "some partial string in desc"'`
         - with these 2 exclude flags, this is logical OR, so if test has one of the tags or both, it's excluded
-    `sbt 'show Test/dependencyClasspath'`
-        - show order of which jars are loaded for project `Test`
 
 
 ## AUTOMATION TESTING
@@ -172,6 +179,8 @@ PlaySpecification/spec2, to skip test:
    - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
 - to show evictions: `sbt evicted`
+ - to show test deps: `sbt 'show Test/dependencyClasspath'`
+    - show order of which jars are loaded for project `Test`
 
 
 ## AKKA
