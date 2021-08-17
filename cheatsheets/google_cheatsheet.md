@@ -2,6 +2,8 @@ GOOGLE:
 -------------------------
 - console.developers.google.com     - configure my apps and whatnot as google developer
 - cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
+- how google knows device is the same/familiar
+    - https://security.stackexchange.com/questions/103976/how-exactly-does-google-account-decide-my-device-or-location-is-familiar
 
 ## DRIVE:
 - see drive usage at https://drive.google.com/drive/u/0/quota

@@ -3,6 +3,17 @@
 - tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
 
+## SCALA 2.11 2.12 2.13
+- 2.12
+    - compiler uses new java 8 VM features
+    - trait compiles to java interface with default methods
+    - methods that take functions can be called in both directions using lambda syntax
+    - **NOT** binary compatible with 2.11, mostly source compatible
+- 2.13
+    - major change to collection types; simpler, more perfromant, safer
+    - java8 is minimum, 2.12 and 2.13 def work on java11
+    - **NOT** binary compatible with 2.12
+
 ## SCALA 3
 - scala 2 compiler is probably the most infamous piece of bad scala code, pure spaghetti
 - DOTTY
@@ -41,10 +52,17 @@
     - `List(11,12,13,14,15).zipWithIndex.filter(_._2 != 2).map(_._1)`
         - will remove index 2
     - `val trunced = internalIdList.take(index) ++ internalIdList.drop(index + 1)`
+- slice an "array" (`Array` or `List` or `String`)
+    - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
+    - `"hi there".slice(2,5)` -> returns `" th"`
+
+
+## CONCURRENCY
+- async with thread pools: `Future { 1 + 1 }`
+- mutex on variables: `synchronize { 1 + 1 }`
 
 ### RANDOM
 - sleep for 1 second: `Thread.sleep(1000)`
-
 
 ### PATTERN MATCHING
 - `case entries @ _ :: _ :: (_: List[_]) => {`
@@ -179,8 +197,9 @@ PlaySpecification/spec2, to skip test:
    - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
 - to show evictions: `sbt evicted`
- - to show test deps: `sbt 'show Test/dependencyClasspath'`
+ - to show test deps classpath: `sbt 'show Test/dependencyClasspath'`
     - show order of which jars are loaded for project `Test`
+- `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
 
 
 ## AKKA
