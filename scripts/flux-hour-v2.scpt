@@ -27,11 +27,13 @@ Elhem Enohpi and Shortflux are not associated with Flux Software LLC
 
 -- Settings --
 
-property mainItem : "Color Effects"
+-- property mainItem : "Color Effects"
+property mainItem : "Disable"
 -- set to "Preferences...", "Color Effects", "Disable", etc.,
 -- make sure to use quote marks.
 
-property subItem : "Movie mode"
+-- property subItem : "Movie mode"
+property subItem : "for an hour"
 -- set to submenu item, if there is one. Use "for this app" with Disable,
 -- to toggle disable for the current application.
 

@@ -14,6 +14,14 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
+## WIFI
+- WiFi 6 to identify devices that support 802.11ax (released 2019)
+- WiFi 5 to identify devices that support 802.11ac (released 2014)
+- WiFi 4 to identify devices that support 802.11n  (released 2009)
+- WiFi 3 to identify devices that support 802.11g (released 2003)
+- WiFi 2 to identify devices that support 802.11a (released 1999)
+- WiFi 1 to identify devices that support 802.11b (released 1999)
+
 ## HTTP
 - http2: https://developers.google.com/web/fundamentals/performance/http2
 
