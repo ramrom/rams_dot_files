@@ -9,16 +9,21 @@ CDRIVE=~/"Dropbox"
 tmux has-session -t $SESSION_NAME
 [ $? == 0 ] && echo "$(tput setaf 1) $SESSION_NAME session already exists!" && exit 1
 
-tmux new-session -d -s $SESSION_NAME -c "$CDRIVE"
+tmux new-session -d -s $SESSION_NAME
+tmux select-pane -T 'admin'
+tmux split-window -h
+tmux select-pane -T 'admin'
+
+tmux new-session -t $SESSION_NAME:1 -c "$CDRIVE"
 tmux select-pane -T 'admin'
 tmux split-window -h -c "$CDRIVE"
 tmux select-pane -T 'admin'
 
-tmux new-window -t $SESSION_NAME:1 -n 'admin' -c "$DOTFILE"
+tmux new-window -t $SESSION_NAME:2 -n 'admin' -c "$DOTFILE"
 tmux split-window -h -c "$DOTFILE"
 tmux select-pane -T 'admin'
 
-tmux new-window -t $SESSION_NAME:2 -n 'admin'
+tmux new-window -t $SESSION_NAME:3 -n 'admin'
 tmux split-window -h
 tmux select-pane -T 'admin'
 
