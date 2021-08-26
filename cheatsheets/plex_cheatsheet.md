@@ -15,23 +15,24 @@
 - PLAYBACK TESTING (DS218j):
     - no transcoding, tested 5 simulatenous HD streams (mix of webplayer and vlc local) no problem, low cpu usage
     - 2 transcodes of sub 1080p movies barely kept up, once in a while one paused to buffer, 100%cpu on server
+- web player generally supports most codecs
 - media support for plex player: https://support.plex.tv/articles/203810286-what-media-formats-are-supported/
-    - apr2021: H265(HEVC) support
-        - DIRECT PLAY/STREAM: ios app, safari desktop web, plex desktop app
-        - TRANSCODE: chromecast 1080p, chrome desktop app
-    - web player generally supports most codecs
-    - `.avi` file gave _“This server is not powerful enough to convert video"_
-        - https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
-            > AVI file container with XviD video inside it, that cannot be played natively by the Plex Web App.
-        - plex web gave error, but plex iphone12 app works fine
 - direct video playback limit on iphone app, get plexpass
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/
-- 4k playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
-    - 4k movie: iOS app -> **NO** transcode
-    - 4k movie: safari browser -> **NO** transcode
-    - 4k movie: iOS play to 1080p chromecast -> transcodes (no surprise here)
-    - 4k movie: iOS play to 4k-tv/4k-chromecast -> transcodes
-    - webplayer(chrome linux/mbp) -> transcodes video and audio
+- `.avi` file gave _“This server is not powerful enough to convert video"_
+    - https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
+        > AVI file container with XviD video inside it, that cannot be played natively by the Plex Web App.
+    - plex web gave error, but plex iphone12 app works fine
+- H265(HEVC) playback - april2021
+    - DIRECT PLAY/STREAM: ios app, safari desktop web, plex desktop app
+    - TRANSCODE: chromecast 1080p, chrome desktop app
+- 4K playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
+    - iOS app -> **NO** transcode
+    - safari browser (osx) -> **NO** transcode
+    - plex desktop app osx -> **NO** transcode
+    - iOS play to 1080p chromecast -> transcodes (no surprise here)
+    - iOS play to 4k-tv/4k-chromecast -> transcodes
+    -  webplayer(chrome linux/mbp) -> transcodes video and audio
 - hardware acceleration support: https://support.plex.tv/articles/115002178853-using-hardware-accelerated-streaming/
 - plexDLNA
     - dashboard will show "DLNA generic"
