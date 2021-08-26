@@ -22,7 +22,9 @@ elseif empty($VIM_NOPLUG)
     Plug 'pbogut/fzf-mru.vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+    if v:version < 8022345          " neovim and vim > 8.2.2345 have native support
+        Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+    endif
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
     "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
