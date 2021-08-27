@@ -271,7 +271,7 @@ cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount 
 
 lsblk -f /dev/sda1  #  show info on block type devices
 
-# NETWORK FILESYSTEM PROTOCOLS:
+# NETWORK FILESYSTEM PROTOCOLS
     # afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
     # osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
     # cifs/smb info: https://linux.die.net/man/8/mount.cifs
