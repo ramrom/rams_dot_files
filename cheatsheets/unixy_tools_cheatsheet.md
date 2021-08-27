@@ -1,5 +1,6 @@
 # 'NIX general tooling type stuff
 
+```sh
 # FIND: find files recursive starting with current dir
 find . -type f -name "*pattern*"
 # find all hard links to /path/foo that exist in /searchdir
@@ -303,3 +304,4 @@ sudo mount -t ntfs -o nls=utf8,umask=0222 /dev/sdb1 destfolder/
 #   samba 2/3 dont support hard links:
 #       - https://unix.stackexchange.com/questions/403509/how-to-enable-unix-file-permissions-on-samba-share-with-smb-2-0
 #       - https://en.wikipedia.org/wiki/Server_Message_Block
+```
