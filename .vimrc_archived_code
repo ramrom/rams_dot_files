@@ -70,6 +70,10 @@ function MyTabLine()
         return s
 endfunction
 
+" OLD ESCAPE replacement
+" much faster than escape, almost never hit jk successively in insert, jj might be good too
+inoremap jk  <Esc>
+
 
 "Quickly switch between up to 9 vimtabs
 let i=0

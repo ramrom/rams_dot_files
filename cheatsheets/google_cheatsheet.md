@@ -33,6 +33,10 @@ foo site:www.site.com   - search a specific site
     - open file explorer, hit 3 dot icon on top right -> "add new service" -> samba share
     - url is like "\\192.168.1.111\somefolder"
 
+## CHROMECAST/GOOGLE-TV
+- install screensaver app and set it to use ambient mode
+    - https://www.reddit.com/r/AndroidTV/comments/k79y4j/google_tv_w_chromecast_ambient_mode/
+
 ## DRIVE
 - google drive linux sync options: https://linuxhint.com/best_google_drive_clients_linux/
 

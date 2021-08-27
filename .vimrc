@@ -108,9 +108,9 @@ endtry
 " TODO: find better timeout length
 " set timeoutlen=1000          " default is 1000ms
 
-set nobackup                                    " no backup files
-set nowritebackup                               " only in case you don't want a backup file while editing
-set noswapfile                                  " no swap files
+set nobackup                    " no backup files
+set nowritebackup               " only in case you don't want a backup file while editing
+set noswapfile                  " no swap files
 
 set splitbelow splitright       " open new windows on bottom for horizontal, right for vertical
 set wildmenu                    " display command line's tab complete options as menu
@@ -123,13 +123,14 @@ set number                      " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
+" set cursorline cursorcolumn                " highlight line and column cursor is on
 
 set formatoptions+=j            " Delete comment character when joining commented lines
 
 " disable autocommenting on o and O in normal
 autocmd FileType * setlocal formatoptions-=o
 
-"Searching
+"SEARCHING
 set hlsearch                    " highlight search
 "TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
 if has('nvim')
@@ -144,14 +145,15 @@ set smartcase               " with ignorecase, search with all lowercase means I
 "TODO: fix, i - included files, kspell dictionary
 " set complete-=i | set complete+=kspell
 
+" FOLDING
 set foldmethod=indent
 set nofoldenable            " dont fold everything when opening buffers
 
-""" Default Status Line
+" DEFAULT STATUS LINE
 set ls=2                    " line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
-"show tabs and trailing spaces with special cars
+"SHOW TABS AND TRAILING SPACES WITH SPECIAL CARS
 set list
 set listchars=tab:»_,trail:·
 if has('nvim')  " highlight dimgrey, vim and neovim use diff group name
@@ -160,21 +162,19 @@ else
     highlight SpecialKey ctermfg=8 guifg=DimGrey
 endif
 
-""" Indent/Tabs
-set autoindent                                  " indent on new line for inner scopes in code
-set shiftwidth=4                                " use 4 spaces for autoindent (cindent)
-set tabstop=4                                   " space 4 columns when reading a <tab> char in file
-set softtabstop=4                               " complicated, see docs
-set expandtab                                   " use spaces when tab is pressed
+""" INDENT/TABS
+set autoindent              " indent on new line for inner scopes in code
+set shiftwidth=4            " use 4 spaces for autoindent (cindent)
+set tabstop=4               " space 4 columns when reading a <tab> char in file
+set softtabstop=4           " complicated, see docs
+set expandtab               " use spaces when tab is pressed
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-" set cursorline cursorcolumn                " highlight line and column cursor is on
-
-"""""""" Reloading buffers changed outside of vim session """""""""""""""""
+"""""""" RELOADING BUFFERS CHANGED OUTSIDE OF VIM SESSION """""""""""""""""
 " autoread alone doesn't really work, triggers on external commands
     " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
     " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
@@ -270,35 +270,6 @@ function ToggleInstantMarkdown()
     endif
 endfunction
 
-"""""""""" MAPPINGS """"""""""""""""""""""""""""""""
-"""TODO: Prime open real estate for normal mode!
-"<Leader>a/k/l/w/u/;/'
-    " a is earmarked for smart script run or test run
-"<Leader><Leader>
-"c-m/c-n/c-g/c-s/c-q
-"c-x (opposite of c-a, i clobber c-a for tmux meta)
-"c-p (once i get rid of CtrlP plugin)
-"; " semicolon repeats last f/F motions
-"," ; in reverse direction
-""" For insert mode: c-s
-
-let mapleader = " "				"set metakey for vim shortcuts
-
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
-
-" OLD ESCAPE replacement
-" much faster than escape, almost never hit jk successively in insert, jj might be good too
-" inoremap jk  <Esc>
-
-" ESCAPE replacement
-" NOTE: default C-l behaviour: with `insertmode` enabled, it goes to normal mode from insert
-inoremap <C-l>  <Esc>
-
-" TODO: should i keep?, leader-s saves from normal is nuff i thinks. (c-k default map is enter digraph)
-inoremap <C-k>  <C-o>:w<cr>
-
 function SaveDefinedSession()
     if exists("g:DefinedSessionName")
         set sessionoptions+=globals  " mksession wont save global vars by default
@@ -332,11 +303,42 @@ function TabBufQuit()
     else | exe ":q" | endif
 endfunction
 
+"""""""""" MAPPINGS """"""""""""""""""""""""""""""""
+"""TODO: Prime open real estate for normal mode!
+    "NORMAL MODE
+        "<Leader>a/k/l/w/u/;/'
+            " a is earmarked for smart script run or test run
+        "<Leader><Leader>
+        "c-m/c-n/c-g/c-s/c-q
+        "c-x (opposite of c-a, i clobber c-a for tmux meta)
+        "c-p (once i get rid of CtrlP plugin)
+        "; " semicolon repeats last f/F motions
+        "," ; in reverse direction
+    " INSERT MODE
+        " c-s
+
+" TODO: i think these maps are probably useful
+" nnoremap <C-J> a<CR><Esc>k$
+" nnoremap <CR> o<Esc>
+
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
+" ESCAPE replacement
+" NOTE: default C-l behaviour: with `insertmode` enabled, it goes to normal mode from insert
+inoremap <C-l>  <Esc>
+
+" TODO: should i keep?, leader-s saves from normal is nuff i thinks. (c-k default map is enter digraph)
+inoremap <C-k>  <C-o>:w<cr>
+
 noremap <leader>f :call TabBufNav("f")<CR>
 noremap <leader>d :call TabBufNav("b")<CR>
 
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
+
+let mapleader = " "
 
 " default mappings: ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
 noremap <C-l> <C-w>l
@@ -406,10 +408,6 @@ noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.md<cr>
 noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.md<cr>
 noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
 
-" TODO: i think these maps are seriously useful
-" nnoremap <C-J> a<CR><Esc>k$
-" nnoremap <CR> o<Esc>
-
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -419,13 +417,6 @@ for i in range(0,9) | exe 'noremap g'.i.' :tabn '.i.'<CR>' | endfor
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
-
-" let netrw file explorer use nerdtree-like expansion on dirs
-let g:netrw_liststyle = 3
-" let g:netrw_winsize = 25
-
-" dont save netrw hist file
-" au VimLeave * if filereadable("~/.vim/.netrwhist") | call delete("~/vim/.netrwhist") | endif
 
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -446,6 +437,13 @@ autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
     " 0.4.4_2 return 800 for `v:version`, false for the patch
 " highlight htmlStrike term=strikethrough cterm=strikethrough gui=strikethrough
 
+"""""""""""" NETRW """""""""""""""""""""
+" let netrw file explorer use nerdtree-like expansion on dirs
+let g:netrw_liststyle = 3
+" let g:netrw_winsize = 25
+
+" dont save netrw hist file
+" au VimLeave * if filereadable("~/.vim/.netrwhist") | call delete("~/vim/.netrwhist") | endif
 
 """""""""""""""""" NERDTree""""""""""""""""""""""""""""""""
 " TODO: dont want to open existing tab/window with buffer: https://github.com/preservim/nerdtree/issues/170
