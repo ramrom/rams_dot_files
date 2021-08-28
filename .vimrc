@@ -321,6 +321,8 @@ endfunction
 " nnoremap <C-J> a<CR><Esc>k$
 " nnoremap <CR> o<Esc>
 
+let mapleader = " "
+
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
@@ -337,8 +339,6 @@ noremap <leader>d :call TabBufNav("b")<CR>
 
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
-
-let mapleader = " "
 
 " default mappings: ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
 noremap <C-l> <C-w>l
