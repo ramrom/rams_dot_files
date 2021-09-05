@@ -44,25 +44,31 @@ foo site:www.site.com   - search a specific site
 cmd + d - toggle mute
 cmd + e - toggle camera
 
-## GMAIL:
-- (goto settings and turn on keyboard shortcuts)
-- see https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DDesktop&hl=en
-c - compose new email
-# - delete
-/ - put cursor on searchbox
-shift-U - mark email unread
-s - toggle star on email
-gn/gp - next/previous page of emails
-up/dow arrow, or j/k    - next/prev email in chain
-space/space-shift   - scroll down/up current email
-o/enter - open email/conversation
-gs - unread
-gd - drafts,
-gi - inbox,
-gt - sent
-f - forward email
-c - compose
-z - undo last action
+## GMAIL
+- QUERY language: https://support.google.com/mail/answer/7190?hl=en
+    - find file in size range: `larger_than:5m smaller_than:8M`
+    - find with label: `label:foo`
+- select all in promotions/social
+    - upper right box -> select all -> should see banner to select all with label (promotion/social)
+### keyboard mappings
+`-` (goto settings and turn on keyboard shortcuts)
+`-` see https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DDesktop&hl=en
+`c` - compose new email
+`#` - delete
+`/` - put cursor on searchbox
+shift+`U` - mark email unread
+`s` - toggle star on email
+`gn`/`gp` - next/previous page of emails
+up/down arrow, or `j`/`k`    - next/prev email in chain
+`space/space-shift`   - scroll down/up current email
+`o`/`enter` - open email/conversation
+`gs` - unread
+`gd` - drafts,
+`gi` - inbox,
+`gt` - sent
+`f` - forward email
+`c` - compose
+`z` - undo last action
 
 ## YOUTUBE:
 - j/l - back/forward 10 sec
