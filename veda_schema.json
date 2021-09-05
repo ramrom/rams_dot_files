@@ -12,7 +12,7 @@
             "uniqueItems": true,
             "items": {
                 "type": "string",
-                "enum": ["4k", "3D"]
+                "enum": ["4k", "3D", "extended-cut"]
             }
         },
         "issues": {

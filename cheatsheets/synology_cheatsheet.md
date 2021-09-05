@@ -9,6 +9,11 @@
 - TESTING NOTE: cifs mount, play 3 movies, no problems
 - TIP: in web DSM can right click a file and download it to local machine
 
+## GUIDES
+- DS218j
+    - user guide: https://global.download.synology.com/download/Document/Software/UserGuide/Firmware/DSM/6.2/enu/Syno_UsersGuide_NAServer_enu.pdf
+    - installation: https://global.download.synology.com/download/Document/Hardware/HIG/DiskStation/18-year/DS218+/enu/Syno_HIG_DS218_Plus_enu.pdf
+
 ## SOFTWARE
 - `Download Station` - torrent client
 - `Drive Server` - private cloud drive
