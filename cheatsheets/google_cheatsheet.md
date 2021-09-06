@@ -5,6 +5,10 @@ GOOGLE:
 - how google knows device is the same/familiar
     - https://security.stackexchange.com/questions/103976/how-exactly-does-google-account-decide-my-device-or-location-is-familiar
 
+## GOOGLE PHOTOS
+- delete from google photos app and it will delete locally (sync)
+    - *BUT* delete locally and it will NOT delete from google photos
+
 ## DRIVE:
 - see drive usage at https://drive.google.com/drive/u/0/quota
 -  gmail/drive/photos breakdown of usage: https://one.google.com/storage
