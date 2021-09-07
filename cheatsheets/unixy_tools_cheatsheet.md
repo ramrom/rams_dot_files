@@ -68,6 +68,10 @@ pandoc foo.md -o foo.odt   # convert markdown to opendocument
 # sort - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line
 
+# shuf - generate random permutation of input lines
+echo "a\nb\nc" | shuf  # will randomly 3 lines of some order of "a", "b", and "c"
+echo "a\nb\nc" | shuf -n 1  # will select the first line in the randmly generated permutation
+
 # uniq - remove identical value **adjacent** lines, use sort first if u want to remove non adjacent dups
 echo "foo\nfoo\n\bar" | uniq        # will print one foo and then bar
 echo "foo\nbar\n\foo" | uniq        # will print foo, then bar, then foo!, b/c the 2nd foo isn't adjacent

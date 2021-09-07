@@ -70,7 +70,7 @@ map x $$f
 map X !$f
 
 # dedicated keys for file opener actions
-map o &mimeopen $f
+map o $mimeopen $f
 map O $mimeopen --ask $f
 
 # map <c-f> $lf -remote "send $id select '$(fzf)'"
