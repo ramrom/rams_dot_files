@@ -254,6 +254,10 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 - lutris, lets you play windows only games (including steam installs) and has wine configurations configured
 - dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
 
+### XSCREENSAVER
+- https://www.jwz.org/xscreensaver/
+- `DISPLAY=:1 xscreensaver-command --select 10` - select the 10th screensaver in program list to run now
+
 ## SOUND
 --------------
 - ALSA: is base sound stack for all linux distro
