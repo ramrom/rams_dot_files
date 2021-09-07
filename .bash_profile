@@ -37,7 +37,7 @@ function build_my_prompt() {
 
   PS1=""
 
-  # display icon if last command succeeded or failed
+  # TODO: display icon if last command succeeded or failed
   #if [[ $exit_code -eq 0 ]]; then
   #    PS1="${PS1}${green}√${reset} "      # Add green for success
   #else
@@ -47,7 +47,9 @@ function build_my_prompt() {
   PS1="${PS1}$(fg=003 ansicolor "\u")"                # 3 - yellow, user
   PS1="${PS1}$(bld=1 ansicolor "@")"
   PS1="${PS1}${ps1_hostname} "                      # hostname with color from env
-  PS1="${PS1}$(bld=1 fg=004 ansicolor "(")"           # 4 - blue
+  PS1="${PS1}$(bld=1 fg=004 ansicolor "[")"         # 4 - blue
+  PS1="${PS1}$(fg=002 ansicolor "$(date '+%Y-%m-%d %H:%M:%S')")"
+  PS1="${PS1}$(bld=1 fg=004 ansicolor "] (")"
   PS1="${PS1}$(fg=006 ansicolor "\w")"                # 6 -cyan, working dir
   PS1="${PS1}$(bld=1 fg=004 ansicolor ") <")"
   PS1="${PS1}$(fg=005 ansicolor "${git_branch}")"     # 5 - magenta, git branch
