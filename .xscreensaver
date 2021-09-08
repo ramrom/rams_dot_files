@@ -1,6 +1,8 @@
 # XScreenSaver Preferences File
 # Written by xscreensaver-demo 5.42 for ramrom on Tue Sep  7 18:51:42 2021.
 # https://www.jwz.org/xscreensaver/
+#
+# SELECTS: flurry, stonerview, surfaces, wormhole, noof, bouboule, binaryring, cubegrid
 
 timeout:	0:01:00
 cycle:		0:01:00
@@ -250,7 +252,7 @@ programs:								      \
 -  GL: 				quasicrystal -root			    \n\
 -  GL: 				unknownpleasures -root			    \n\
 				binaryring -root -ring-radius 167	      \
--				  -particles-number 8950		    \n\
+				  -particles-number 8950		    \n\
 -  GL: 				cityflow -root				    \n\
 -  GL: 				geodesicgears -root			    \n\
 -  GL: 				projectiveplane -root			    \n\
