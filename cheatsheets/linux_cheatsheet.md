@@ -32,7 +32,9 @@ xclip       - like osx pbpaste/bcopy, needs a DISPLAY set
 
 ## USER STUFF
 ---------------------------------------
-su - foouser               - login as foouser
+su - foouser               - login as foouser (need to enter foouser password)
+sudo -u foouser cmd         - run command `cmd` as foouser
+sudo -u foouser bash         - basically login as foouser, since `bash` cmd here starts a shell process
 sudo useradd foouser        - create new user with home dir
 sudo passwd foouser         - change users password, seems to bypass strength rules
 sudo useradd foouser foogroup    - add existing user to new group
@@ -257,6 +259,7 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 ### XSCREENSAVER
 - https://www.jwz.org/xscreensaver/
 - `DISPLAY=:1 xscreensaver-command --select 10` - select the 10th screensaver in program list to run now
+- `.xscreensaver` config file uses `-` at beginning of program name to represent that it's unselected
 
 ## SOUND
 --------------

@@ -106,3 +106,9 @@ esc - return to calender grid from event details
 - voice legacy: in very top left menu, botton item is "legacy google voice"
 - legacy voice lets you screen calls just for certain groups
     - e.g. you can turn off for all contacts group, and screen for anonymous callers
+
+## ANDROID / WEAROS
+- APK (android application package) file defines an app
+- wearOS 3.0 is joint OS that combines google's wearOS and samsung Tizen OS
+    - samsung galaxy 4 will use wearOS 3.0
+    - new OS *NOT* compatible with iphone

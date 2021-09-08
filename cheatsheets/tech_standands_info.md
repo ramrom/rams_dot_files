@@ -63,3 +63,7 @@
     - cmd+shift+L for autofill
 - excluded domains: browser ext -> settings -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
+
+## RANDOM NOTES
+- usb 3.0 cable shouldn't really exceed 10 feet without repeater
+- displayport cable shouldnt exceed 10 feet
