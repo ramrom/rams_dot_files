@@ -4,6 +4,8 @@ GOOGLE:
 - cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
 - how google knows device is the same/familiar
     - https://security.stackexchange.com/questions/103976/how-exactly-does-google-account-decide-my-device-or-location-is-familiar
+- takeout - https://takeout.google.com
+    - download basically *any* google data, including all photos
 
 ## GOOGLE PHOTOS
 - delete from google photos app and it will delete locally (sync)
@@ -38,6 +40,7 @@ foo site:www.site.com   - search a specific site
     - url is like "\\192.168.1.111\somefolder"
 
 ## CHROMECAST/GOOGLE-TV
+- cast or Google Cast (https://en.wikipedia.org/wiki/Google_Cast) is a google propietary protocol created in 2013
 - install screensaver app and set it to use ambient mode
     - https://www.reddit.com/r/AndroidTV/comments/k79y4j/google_tv_w_chromecast_ambient_mode/
 
@@ -107,8 +110,11 @@ esc - return to calender grid from event details
 - legacy voice lets you screen calls just for certain groups
     - e.g. you can turn off for all contacts group, and screen for anonymous callers
 
-## ANDROID / WEAROS
+## ANDROID
+- top swipe bar is called "quick settings"
 - APK (android application package) file defines an app
+
+## WEAROS
 - wearOS 3.0 is joint OS that combines google's wearOS and samsung Tizen OS
     - samsung galaxy 4 will use wearOS 3.0
     - new OS *NOT* compatible with iphone

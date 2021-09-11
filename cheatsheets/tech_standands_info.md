@@ -38,6 +38,9 @@
 - standard one is `A-Z` `a-z` `0-9` `+` `/`
 - url safe one replaces `+` and `/` with `_` and `-`
 
+## FLOATS
+- https://en.wikipedia.org/wiki/IEEE_754-1985
+
 ## PLANTUML
 - https://plantuml.com/sequence-diagram
 
@@ -59,10 +62,19 @@
 
 ## BITWARDEN
 - it's fully FOSS, can self host a server, has a cli, can do mobile/desktop for free (unlike lastpass)
+- premium individual is $10/year, offers 2FA, emergency access, file share/upload
 - autofill https://bitwarden.com/help/article/auto-fill-browser/
     - cmd+shift+L for autofill
 - excluded domains: browser ext -> settings -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
+
+
+## OPTIONS TRADING
+- strike price - the price of the stock for which the option can be exercized at
+    - "in the money" means strike price > current price for put, and current price > strike price for call
+        - opposite for "out of the money"
+- delta - rate of change b/w options price and $1 change in underlying assets price
+- theta (decay) - measure of rate of decline of option due to passoge of time (b/c of getting closer to expiration)
 
 ## RANDOM NOTES
 - usb 3.0 cable shouldn't really exceed 10 feet without repeater
