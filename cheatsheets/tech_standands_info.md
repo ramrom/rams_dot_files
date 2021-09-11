@@ -22,6 +22,22 @@
 - WiFi 2 to identify devices that support 802.11a (released 1999)
 - WiFi 1 to identify devices that support 802.11b (released 1999)
 
+
+## HDMI
+- 1.4 - released 2009
+- 2.0 - released 2013, supports 18Gbps, so one 4k@60hz
+- 2.1 - released 2017, supports 48Gbps(Ultra High Speed cables needed), can do a 10k@120hz
+
+## USB
+- 2.0 - 480Mbps
+- 3.x
+    - 3.0(superspeed) - 5Gbps
+    - 3.1gen1 - 5Gbps, 3.1gen2 - 10Gbps(uses 128b/132b)
+    - using usb-c: 3.2gen1 - 10Gbps, 3.2gen2 - 20Gbps
+- 4.x - suports 40Gbps
+- usbc supports usb 2.0 to 4.0
+- usb a/b supports usb 1.0 to 3.1
+
 ## HTTP
 - http2: https://developers.google.com/web/fundamentals/performance/http2
 
