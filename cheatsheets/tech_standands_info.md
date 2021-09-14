@@ -22,6 +22,21 @@
 - WiFi 2 to identify devices that support 802.11a (released 1999)
 - WiFi 1 to identify devices that support 802.11b (released 1999)
 
+## IoT
+- Matter is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
+    - https://buildwithmatter.com/
+- Wifi (power hungry)
+    - hub-and-spoke only, so must be near a access point
+    - doesnt scale
+- Z-Wave, mesh network, much slower than wifi
+    - https://z-wavealliance.org/
+    - stringent/strict process for certifying a defice conforms to it's standard cmds and security
+        - this makes these more expensive
+    - 900 MHz band (north america)
+- Zigbee, mesh network, much slower then wifi
+    - no certification required, so cheaper
+    - 2.4Ghz band (north america)
+
 
 ## HDMI
 - 1.4 - released 2009
@@ -83,6 +98,14 @@
     - cmd+shift+L for autofill
 - excluded domains: browser ext -> settings -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
+
+## CLOUD DRIVES
+- dropbox
+    - free: limits to 3 devices to sync, no offline file access
+- mega
+    - no device limits, native linux/osx/windows clients, has offline file access for entire folders and all files
+- google drive
+    - offline access for idvidual files (and only gdocs like their spreadsheet and word doc)
 
 
 ## OPTIONS TRADING
