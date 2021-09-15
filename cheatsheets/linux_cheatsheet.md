@@ -260,6 +260,7 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 - https://www.jwz.org/xscreensaver/
 - `DISPLAY=:1 xscreensaver-command --select 10` - select the 10th screensaver in program list to run now
 - `.xscreensaver` config file uses `-` at beginning of program name to represent that it's unselected
+    - mode values: `off` = disabled, `random` = randomly choose, `one` = just the one selected
 
 ## SOUND
 --------------

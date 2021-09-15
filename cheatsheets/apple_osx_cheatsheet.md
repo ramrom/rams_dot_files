@@ -103,10 +103,14 @@ lp - print from command line
 > command + leftarrow - go to previow page in safari history
 > up/down arrow  - scroll up and down in safari
 
-## IPHONE
+## IPHONE / IOS
 --------------------------
 - iphone12: hold volume up and right button to see power off slider
 - iphone12: press volume up and right button to take screenshot
+- fix textastic greyed out markdown files, it's b/c it's Files app wont let me edit those
+- Files app in iOS wont let me edit `.md` file extensions (markdowns)
+    - apple case id 101308658353, https://support.apple.com/kb/HT201232
+    - https://support.apple.com/en-us/HT211808 : 14.1 changelog address Files issue with cloud provider content as unavailable
 
 ## FILESYSTEMS:
 ----------------------------
