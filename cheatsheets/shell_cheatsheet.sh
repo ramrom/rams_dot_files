@@ -215,6 +215,10 @@ tail -f foofile | grep foopattern | grep foo2
 tail -f foofile | grep --line-buffered foopattern | grep foo2
 # in perl inline scripts add `$|++` to line-buffer
 
+# detect if STDOUT is terminal output
+# if fd 1 (STDOUT) is not a terminal, good chance it's a pipe
+[ -t 1 ] && echo "this is a terminal"
+
 # IF else syntax
 if [ "a" = "a" ]; then
     echo "hi"

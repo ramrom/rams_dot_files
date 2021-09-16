@@ -126,7 +126,11 @@ function batwhich() {
 
 function col_print_json() {
     [ -z "$1" ] && echo "arg for filename needed!" && return 1
-    jq  -r '.[] | .[0] + "#" + .[1]' $1 | column -t -s#
+    if [ -t 1 ]; then  # if it's not a terminal, assume a pipe, then dont colorize it
+        jq  -r '.[] | .[0] + "#" + .[1]' $1 | column -t -s# | colr_row
+    else
+        jq  -r '.[] | .[0] + "#" + .[1]' $1 | column -t -s#
+    fi
 }
 
 # function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
