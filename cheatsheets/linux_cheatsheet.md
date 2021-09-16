@@ -11,13 +11,10 @@
 - `ldd /some/executable` - see all .so (shared objects, dynamically linked libraries) dependency files of an executable
 - shared/dynamic libs in linux: https://developer.ibm.com/technologies/linux/tutorials/l-dynamic-libraries/
 - ctr + alt + FnX - switch to tty x
-- gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
 - dash is used as /bin/sh b/c it's much faster than bash, so boots are faster
     - it doesnt have command completion, or ctrl-r search, or command history search, as this would make the shell slow
 - cron: task scheduler, great site: https://crontab.guru/
-- if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
-- GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 
 sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
@@ -250,6 +247,20 @@ xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
     xdotool windowmove 123 0 1080
 nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 
+### GNOME
+- gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
+- if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
+- GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
+- keyboard shortcuts
+    - need full path to executables, apparently no PATH set, so `/usr/bin/foo` and not just `foo`
+- gsettings - cli tool to get and set items in the settings menu
+    - `gsettings list-schemas`, `gsettings list-recursively org.gnome.desktop.wm.keybindings`
+    - can change basically any setting at cli like you could in GNOME settings menu
+    - list all keyboard shortcuts
+        - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys`
+    - list just custom shortcuts
+        - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys custom-keybindings`
+
 ### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
 - steam play, lets you play windows only games in linux steam, uses protonDB
@@ -316,9 +327,6 @@ fdiks - show partitions and block devices, sizes, sectors
 /etc/fstab - file systems mounted at boot
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 dconf  - like gsettings?
-gsettings  - gnome settings tool
-    - `gsettings list-schemas`, `gsettings list-recursively org.gnome.desktop.wm.keybindings`
-    - can change basically any setting at cli like you could in GNOME settings menu
 notify-send - pops up notification
 `lsusb -D /dev/bus/usb/002/004`
     - get detailed info about a specific usb device
