@@ -48,7 +48,7 @@ alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
 alias kn='k9s'   # k9s is a TUI for kubernetes
 
 # neat trick, running aliases as sudo fails as root doesnt have them defined
-# bash only looks for first word to alias expand, but if word is alias, it expands subsequent words
+# bash only looks for the first word to alias expand, so if it's an alias it expands subsequent words
 alias sudo='sudo '
 
 if [ "$TERM" != "dumb" ]; then
@@ -136,9 +136,9 @@ alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
-# JAVA/SDKMAN
-alias sdk11='sdk use java 11.0.11.j9-adpt'
-alias sdkeight='sdk use java 8.0.292.j9-adpt'
+# SDKMAN
+alias java11='sdk use java 11.0.11.j9-adpt'
+alias java8='sdk use java 8.0.292.j9-adpt'
 
 #POSTGRES
 alias lpsql='PAGER=$(psql-pager) /usr/local/opt/libpq/bin/psql'
