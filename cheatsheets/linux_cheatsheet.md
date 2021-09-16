@@ -253,6 +253,7 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 - keyboard shortcuts
     - need full path to executables, apparently no PATH set, so `/usr/bin/foo` and not just `foo`
+        - some apps, like `vlc` and `spotify` work w/o full path, maybe cause they are GUI apps?
 - gsettings - cli tool to get and set items in the settings menu
     - `gsettings list-schemas`, `gsettings list-recursively org.gnome.desktop.wm.keybindings`
     - can change basically any setting at cli like you could in GNOME settings menu
@@ -260,6 +261,8 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
         - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys`
     - list just custom shortcuts
         - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys custom-keybindings`
+    - how to set a custom shortcut from the cli
+        - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
 
 ### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
