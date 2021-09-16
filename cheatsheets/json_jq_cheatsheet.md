@@ -27,6 +27,11 @@ jq --arg FOO $somevar 'select(.somefield != null) | select(.somefield | contains
 echo '{"a":"z"}' | jq '.a'    # prints `"z"`
 echo '{"a":"z"}' | jq -r '.a'    # prints `z`
 
+# @tsv, @csv, @sh
+echo '[[1,2],[3,4]]' | jq . '.[] | @tsv' # print tab seperated values for each array
+echo '[[1,2],[3,4]]' | jq . '.[] | @csv' # print comma seperated values for each array
+echo '[[1,2],[3,4]]' | jq . '.[] | @sh' # print single quoted values seperated by space (good for POSIX tools)
+
 # jq regex on a field
 # this will output `{ "id":"foo", "val": 3 } { "id":"fo", "val": "hi" }`
 regex=fo

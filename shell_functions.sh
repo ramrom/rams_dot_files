@@ -124,6 +124,11 @@ function batwhich() {
     esac
 }
 
+function col_print_json() {
+    [ -z "$1" ] && echo "arg for filename needed!" && return 1
+    jq  -r '.[] | .[0] + "#" + .[1]' $1 | column -t -s#
+}
+
 # function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
 function ff() {
     local result=$(~/bin/ff -w "$@")
