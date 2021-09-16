@@ -136,6 +136,8 @@ PlaySpecification/spec2, to skip test:
 ------------------------------
 - docs: https://www.playframework.com/documentation
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
+- 2.8
+    - supports java 11
 
 ## JSON PARSING
 - weePickle: https://github.com/rallyhealth/weePickle

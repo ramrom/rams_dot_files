@@ -54,7 +54,17 @@
 - usb a/b supports usb 1.0 to 3.1
 
 ## HTTP
-- http2: https://developers.google.com/web/fundamentals/performance/http2
+- http 1.0
+    - every request requires a new TCP handshake and connection
+- http 1.1
+    - supports persistent TCP and pipelining requests
+- http 2: https://developers.google.com/web/fundamentals/performance/http2
+    - started as SPDY protocol by google, released by IETF in 2015
+    - all data sent as binary (1.1 uses plain text)
+    - smallest "packet" is a frame, a message is made up of many frames
+    - frames/messages allow multiplexing of many streams, no HOL blocking
+        - streams can have priorites, with weights
+    - server push - the server can send data without a request
 
 ## SUBTITLES
 - srt offset adjustment website: http://www.subsedit.com/simple
