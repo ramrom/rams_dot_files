@@ -435,6 +435,7 @@ declare -p foo bar
 
 
 ####### CONDITIONALS
+# https://linuxhint.com/bash_operator_examples/
 bash "==" is lexical comparison vs "=" is numerical comparison
 
 # number comparison

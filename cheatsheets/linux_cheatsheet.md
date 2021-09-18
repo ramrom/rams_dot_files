@@ -267,7 +267,7 @@ nvidia-smi - show nvidia card mem usage, gpu temp, X processes
     - list all keyboard shortcuts
         - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys`
     - list just custom shortcuts
-        - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys custom-keybindings`
+        - `gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings`
     - how to set a custom shortcut from the cli
         - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
 

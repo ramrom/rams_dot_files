@@ -1,0 +1,25 @@
+#!/bin/sh
+
+usage () { echo "Usage: $0 [ -h(help) ] [ -v(verbose) ]"; }
+
+while getopts 'hv' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        v) verbose=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+binds=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+binds_cleaned=$(echo $binds | tr -d []\' | tr -d [:space:])
+
+IFS=,
+for i in $binds_cleaned; do
+    [ -n "$verbose" ]  && echo "custom keybinding path: $i"
+    bindpath="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$i"
+    name=$(gsettings get $bindpath name)
+    cmd=$(gsettings get $bindpath command)
+    keybind=$(gsettings get $bindpath binding)
+    echo "NAME: $(ansi256 -f green $name),  COMMAND: $(ansi256 -f red $cmd),  KEYBINDING: $(ansi256 -f magenta $keybind)"
+done
