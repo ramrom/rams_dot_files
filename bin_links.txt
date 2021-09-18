@@ -11,7 +11,7 @@ chrome-json-restore             ~/rams_dot_files/scripts/chrome-json-restore
 find-multi-hardlinks            ~/rams_dot_files/scripts/find-multi-hardlinks
 uptime-loadave                  ~/rams_dot_files/scripts/uptime-loadave
 print-ansi256                   ~/rams_dot_files/scripts/print-ansi256
-print-gnome-custom-keybinding   ~/rams_dot_files/scripts/print-gnome-custom-keybindings
+print-gnome-custom-keybindings  ~/rams_dot_files/scripts/print-gnome-custom-keybindings
 ansi256                         ~/rams_dot_files/scripts/ansi256
 file-rename                     ~/rams_dot_files/scripts/file-rename
 tmux-version                    ~/rams_dot_files/scripts/tmux-version
