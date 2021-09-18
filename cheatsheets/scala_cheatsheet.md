@@ -1,4 +1,5 @@
 # SCALA
+- first compiler was written in Pizza by Martin Odersky, by scala 2.0, compiler rewritten completely in scala
 - scala-lang cheatsheet: https://docs.scala-lang.org/cheatsheets/index.html
 - tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html

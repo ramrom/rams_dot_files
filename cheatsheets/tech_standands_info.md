@@ -74,6 +74,15 @@
     - https://www.reddit.com/r/Monitors/comments/989lm2/maximum_cable_length_for_displayport/
         - don't exceed 10 feet, pretty much the limit
 
+## MONITORS
+- TN (twisted nematic), oldest
+    - fast refresh rates, short response times, high brightness -> good for gaming
+    - bad viewing angles, bad color reproduction
+- IPS (in-plane switcing), newer tech
+    - good color reproduction, good viewing angle
+    - slower response times, lower refresh rates
+- VA
+
 ## BASE64
 - 64 safe ASCII chars
 - standard one is `A-Z` `a-z` `0-9` `+` `/`
