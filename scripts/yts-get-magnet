@@ -9,7 +9,7 @@ resfile=/tmp/yts_movie_links
 search_result_file=/tmp/yts_query
 printf "\nEnter Query: "; read resultsinput
 http --download --output $search_result_file https://yts.mx/ajax/search query=="$resultsinput"
-movie_choices=$(jq -r '.data[].title' $search_result_file)
+movie_choices=$(jq -r '.data[] | (.title + " - " + .year)' $search_result_file)
 echo ""; [ -z "$movie_choices" ] && echo "! NO RESULTS FOUND FOR QUERY !" && exit 1
 echo ""
 
