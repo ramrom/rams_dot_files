@@ -12,14 +12,15 @@ done
 shift $(($OPTIND - 1))
 
 binds=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+[ -n "$verbose" ] && echo "RAW GNOME CUSTOM-KEYBINDGS VALUE: $(ansi256 -f cyan "$binds")"
 binds_cleaned=$(echo $binds | tr -d []\' | tr -d [:space:])
 
 IFS=,
 for i in $binds_cleaned; do
-    [ -n "$verbose" ]  && echo "custom keybinding path: $i"
+    echo "CUSTOM KEYBINDING PATH: $(ansi256 -f yellow $i)"
     bindpath="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$i"
     name=$(gsettings get $bindpath name)
     cmd=$(gsettings get $bindpath command)
     keybind=$(gsettings get $bindpath binding)
-    echo "NAME: $(ansi256 -f green $name),  COMMAND: $(ansi256 -f red $cmd),  KEYBINDING: $(ansi256 -f magenta $keybind)"
+    echo "      NAME: $(ansi256 -f green $name),  COMMAND: $(ansi256 -f red $cmd),  KEYBINDING: $(ansi256 -f magenta $keybind)"
 done
