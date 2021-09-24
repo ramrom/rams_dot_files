@@ -3,6 +3,9 @@
 - cmd + option + hover over scale image in display in sys prefs   - show the resolution
 - option + click on "scaled" radio buttton in display will bring up granular resolutions supported
     - https://apple.stackexchange.com/questions/194101/what-are-the-effective-scaling-modes-on-osx-with-a-4k-display-is-an-effective-r
+- AppleID/icloud security two-factor auth: https://support.apple.com/en-us/HT204915
+    - is required (can't turn it off in https://appleid.apple.com)
+    - looks like the 2nd factor will pop up a 6 digit code in a trusted device, and if none maybe the trusted ph #?
 
 ## BREW
 --------------------

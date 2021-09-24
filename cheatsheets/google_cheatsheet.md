@@ -113,6 +113,10 @@ esc - return to calender grid from event details
 ## ANDROID
 - top swipe bar is called "quick settings"
 - APK (android application package) file defines an app
+- take screenshot: press volume button and power button together
+- google photos: how to get a album(in gallery) to show up in google photos backup&sync folder list
+    - https://forums.androidcentral.com/google-nexus-6/696364-google-photos-device-folders-missing.html
+    - use a file manager(e.g. astro) to move the folder from `DCIM` folder to `Pictures` folder
 
 ## WEAROS
 - wearOS 3.0 is joint OS that combines google's wearOS and samsung Tizen OS
