@@ -240,12 +240,13 @@ wmctrl - window manager control
     - display window number/ID in hexadecimal, xdotool display in decimal
     - wmctrl -l, will list all windows in window manager, wmctrl -d list desktops, wmctrl -m list name of window manager
     - -G option tells geometry info, heightxwidth, and x,y position on desktop
+        - *NOTE* the height and widght are just content area
     - moving a "firefox" named window, `wmctrl -r Firefox -e '0,6,0,1040,708'`
         - can target window by ID with -i `wmctrl -i -r 0x03000003 -t 2`
-    - `wmctrl -s 1`, set active desktop to 1
+    - `wmctrl - 1`, set active desktop to 1
     - `wmctrl -r Psensor -b toggle,fullscreen` , goto fullscreen
     - `wmctrl -r :ACTIVE: -b toggle,shaded` - toggle shade on active window
-    - wmctrl -c , close window gracefull
+    - `wmctrl -c` , close window gracefull
 xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
     - NEEDS DISPLAY VAR SET
     xdotool search --onlyvisible --name firefox  # say firefox is window id 123

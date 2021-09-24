@@ -41,17 +41,19 @@ cpu_legend_color="fg=colour242"
 cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime-loadave) "uptimeload")
 status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
 if [ "$(uname)" = "Linux" ]; then
-    s=$(sensors)
 
-    #### CPU Stats
-    cpufan=$(echo "$s" | grep -E "CPU Fan" | awk '{print $3;}') # | grep --color=never -Eoi '[0-9]+.[0-9]+'
-    cputemp=$(echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}')
-    cputemp_num=$(echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+')
-    cputemp_color=$(tmux_temp_color $cputemp_num)
-    status_line1="$status_line1 #[$cpu_legend_color]CPU-Temp:#[default] #[fg=green]$cputemp_color#[default]C"
-    status_line1="$status_line1 #[$cpu_legend_color]CPU-Fan:#[default] #[fg=green]$cpufan#[default]"
+    #### CPU temp and fan speed
+    if command -v sensors > /dev/null; then
+        sensor_data=$(sensors)
+        cpufan=$(echo "$sensor_data" | grep -E "CPU Fan" | awk '{print $3;}') # | grep --color=never -Eoi '[0-9]+.[0-9]+'
+        cputemp=$(echo "$sensor_data" | grep -E "CPU Temperature" | awk '{print $3;}')
+        cputemp_num=$(echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+')
+        cputemp_color=$(tmux_temp_color $cputemp_num)
+        status_line1="$status_line1 #[$cpu_legend_color]CPU-Temp:#[default] #[fg=green]$cputemp_color#[default]C"
+        status_line1="$status_line1 #[$cpu_legend_color]CPU-Fan:#[default] #[fg=green]$cpufan#[default]"
+    fi
+
     status_line1="$status_line1 #[fg=colour184]|#[default]"
-
 
     ##### System Memory Stats
     sys_mem=$(free -g | sed -n '2p')
