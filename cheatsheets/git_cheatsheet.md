@@ -25,11 +25,11 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
 - delete all branches not master or current
     `git branch | egrep -v "^\*|master" | xargs git branch -D`
 
-create branch and push:
-```sh
-git co -b foobranch
-git push --set-upstream remote foobranch
-```
+- create branch and push to remote with tracking:
+    ```sh
+    git co -b foobranch
+    git push --set-upstream remote foobranch
+    ```
 
 - show tags in a proper sorted order
     - `git tag --sort -version:refname`

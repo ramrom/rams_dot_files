@@ -77,12 +77,13 @@ C - make selected dir node the new root node
         - can accept any regex, not just simpe chars like `|`
     - ` :'<,'>Tabularize /:\zs `
         - \z is lookforward, align by the space char after the `:` char
+- CtrlP
+    - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 
 - ga -> show character encoding under cursor
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
 - utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
-CtrlP: ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 - vi -p foo bar, open file foo and bar in tabs
 - :vsp or :vs filename, open file in vertical split
