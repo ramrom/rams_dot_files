@@ -14,6 +14,7 @@ c-x c-f find file at current path, c-x c-] use tags
 :20,23y a<CR> - without moving cursor into reg a
 :7pu a<CR> - paste reg a under line 7
     -  yank from mark a to cursor: y'a
+:cd <dir> - change vims current working dir
 :read ~/foo     - insert contents of file foo
 :read !jq . foo - can take stdout of shell cmd
 :iunmap jk - unmap jk insert mapping
@@ -106,12 +107,11 @@ vim -V  foo     - verbose output
     - has many level, see `:help vbs`
 
 ### HELP
-:cd <dir> - change vims current working dir
-- :h index.txt basically has comprehensive default mappings
+:h index.txt basically has comprehensive default mappings
 :help shell<Tab> - tab complete a help topic
-:help i_^N, what does ctrl-n do in insert mode
 :helpgrep pattern - find all help docs matchin g`pattern`
 :h sometopic | only   - help in single window
+:help i_^N, what does ctrl-n do in insert mode
 :h normal-index  - normal default mappings
 :h insert-index  - insert default mappings
 :h ex-cmd-index  - command and ex mode
