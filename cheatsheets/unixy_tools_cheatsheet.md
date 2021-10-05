@@ -11,6 +11,9 @@ find /tmp/ -inum 4065089 # find all hard links with a inode #
 # get terminal info
 infocmp
 
+# cp - copy
+cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
+
 # grep (varies widely b/w osx and gnu/linux)
 # grab only the matched text with -o, works on osx and gnu/linux
 echo "foo bar baz" | grep -o "fo." # will only return "foo"

@@ -13,6 +13,8 @@ tmux_temp_color () {
     echo "#[fg=colour083]$1#[default]"
 }
 
+# 1st arg - value, e.g. 30
+# 2nd arg - value type meaningful name, e.g. "foousage"
 tmux_percent_usage_color () {
     [ -z "$skip_verify" ] && { verify_percent $1 "$2" || return 1; }
 
@@ -23,6 +25,8 @@ tmux_percent_usage_color () {
     echo "#[fg=colour083] $1#[default]%%"
 }
 
+# 1st arg - value, e.g. 30
+# 2nd arg - value type meaningful name, e.g. "foousage"
 verify_percent () {
     if [ -z $(echo $1 | grep -E "^[[:digit:]]*$") ]; then
         echo "$(tput setaf 1) val: $2: must be a positive integer!" && return 1
