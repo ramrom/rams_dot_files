@@ -64,6 +64,7 @@ lp - print from command line
 
 ## KEYBOARD SHORTCUTS:
 -----------------------------------
+- full list: https://support.apple.com/en-us/HT201236
 > command + tab  - switch between apps
 > command + space - spotlight search
 > command + H - goto home screen

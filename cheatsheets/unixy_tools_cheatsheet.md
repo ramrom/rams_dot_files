@@ -64,6 +64,7 @@ wc -l   # count # of lines
     # https://pandoc.org/MANUAL.html#general-options
 pandoc foo.md -o foo.docx   # convert markdown to docx
 pandoc foo.md -o foo.odt   # convert markdown to opendocument
+pandoc foo.md --to jira -o output.jira  # explicitly specify output format
 
 # sort - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line

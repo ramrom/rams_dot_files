@@ -303,7 +303,7 @@ function TabBufQuit()
     else | exe ":q" | endif
 endfunction
 
-"""""""""" MAPPINGS """"""""""""""""""""""""""""""""
+"""""""""" CUSTOM MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
     "NORMAL MODE
         "<Leader>a/k/l/w/u/;/'
