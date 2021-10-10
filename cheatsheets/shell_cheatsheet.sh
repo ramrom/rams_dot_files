@@ -251,6 +251,7 @@ for (( i=1; i<=3; i++)); do
 done
 
 # break terminates for loop, so 4th and 5th iteration dont run, continue skips to next iteration so 1st iter skips echo
+# /bin/sh (dash in ubuntu) doesnt support this
 for (( i=0; i<5; i++)); do
     [ $i -eq 3 ] && break
     [ $i -eq 0 ] && continue
@@ -342,14 +343,14 @@ done
 # remove non-ascii chars, tr is bin that works on removing/replacing individual characters
 tr -cd '\11\12\15\40-\176' < file-with-binary-chars > clean-file
 
-#print char '=' 100 times
+#print char '=' 100 times, dash doesnt support this
 printf '=%.0s' {1..100}
 
 # Bash index/slicing on string
 A="foobar"
 S=${A:0:3} # => "foo", so chars from index 0 to 2 (not 3!)
 
-echo ${#S} # prints length of S, so will echo 3
+echo ${#S} # prints length/size of S, so will echo 3
 S=${A:1:${#A}-1}  # will print "fooba", omitted the last char
 
 # POSIX arithmetic expansion (http://mywiki.wooledge.org/ArithmeticExpression)
@@ -424,6 +425,8 @@ echo ${FOO?"not set"}     # will print blank line to stdout
 echo ${FOO:?"var is not set or empty"}    # will print "var is not set or empty" to stderr
 # to prevent globbing and field splitting best practice is to double quote whole expression
 echo "${FOO:?var is not set or empty}"
+
+echo ${#FOO}    # will print size of value in num of characters
 
 # declare shows if variable is exported, it's value
 # zsh will show "typeset" for non-exported, "export" for exported, "no such var" if it doesnt exist
