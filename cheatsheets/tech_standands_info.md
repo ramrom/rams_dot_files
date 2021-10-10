@@ -53,6 +53,17 @@
 - usbc supports usb 2.0 to 4.0
 - usb a/b supports usb 1.0 to 3.1
 
+## HDD
+- LMR - longitudinal magnetic recording
+- CMR(PMR) - perpendicular magnetic recording
+    - 3 times more dense than LMR
+    - magnetization done vertically and horizontally on platters
+    - can achieve much higher than 750GB on 3.5" drive
+- SMR - shingled magnetic recording
+    - writes data overlapping, worse quality than CMR
+    - good for archival storage
+    - easy cache overflow, and slow for frequent writing
+
 ## HTTP
 - http 1.0
     - every request requires a new TCP handshake and connection
