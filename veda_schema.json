@@ -20,7 +20,8 @@
             "uniqueItems": true,
             "items": {
                 "type": "string",
-                "enum": ["subtitle-missing", "subtitle-offsync", "plex-transcode", "plex-subtitle", "title-special-chars"]
+                "enum": ["subtitle-missing", "subtitle-offsync", "plex-transcode", "plex-subtitle", "title-special-chars",
+                    "speech-low-volume" ]
             }
         }
     }

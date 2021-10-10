@@ -334,7 +334,7 @@ inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 stat - get metadata on a file
 lsblk - show block level devices
 mkfs - to format a disk partition
-fdiks - show partitions and block devices, sizes, sectors
+fdisk - show partitions and block devices, sizes, sectors
 /etc/fstab - file systems mounted at boot
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 dconf  - like gsettings?
