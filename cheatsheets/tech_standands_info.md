@@ -82,6 +82,7 @@
     - good color reproduction, good viewing angle
     - slower response times, lower refresh rates
 - VA
+    - oldest standard
 
 ## BASE64
 - 64 safe ASCII chars
