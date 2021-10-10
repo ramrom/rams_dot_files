@@ -1,7 +1,7 @@
 # TECH STANDARDS AND INFO
 ------------------------------------
 
-## CODECs
+## MULTIMEDIA CODECs
 - VP9, royalty-free, invented by google, succeeds VP8
     - used by google in youtube
     - competes with HEVC/H.265

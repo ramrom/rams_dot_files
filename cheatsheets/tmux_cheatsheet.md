@@ -43,3 +43,8 @@ prefix D                               # show client list, and basically detach 
 good resource on condition version checks in tmux conf file:
 - https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
     - it also details the changes, breaking changes, with increasing versions
+
+## Keybindings
+prefix + S  - swap windows
+prefix + y  - swap panes
+prefix + D  - disconnect clients

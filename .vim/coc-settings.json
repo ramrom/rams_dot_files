@@ -1,6 +1,7 @@
 {
     "coc.preferences.messageLevel": "error",
-    "metals.javaHome": "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home",
+    "old.metals.javaHome": "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home",
+    "metals.javaHome": "/Users/sreeram.mittapalli/.sdkman/candidates/java/current",
     "languageserver": {
         "metals": {
             "command": "metals-vim",

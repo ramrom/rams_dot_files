@@ -132,6 +132,8 @@ iostat 2 3      # refresh 2 seconds, only sample 3 times
 cifsiostat 1    # show cifs network mount io usage stats
 mpstat 1        # show cpu usage, by usr/sys/idle
 
+## EMACS
+c-x c-c to quit
 
 # MEMORY
 # free - show memory/swap usage, total/used/free/cached
