@@ -95,6 +95,14 @@
 - VA
     - oldest standard
 
+## COMPILERS
+- LLVM is a platform for creating machine code
+    - developed by the same guy who made Swift (Chris Lattner)
+    - Rust, Swift, Kotlin Native, and objective C use LLVM
+    - LLVM has API that take IR (itermediate representation), then it uses that create binary or JIT
+- objective C uses Clang compiler to create LLVM IR
+- swift uses it's own "swift compiler" to create LLVM IR(bitcode)
+
 ## BASE64
 - 64 safe ASCII chars
 - standard one is `A-Z` `a-z` `0-9` `+` `/`

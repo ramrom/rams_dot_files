@@ -1,0 +1,21 @@
+#!/bin/sh
+
+paired_devices=$(bluetoothctl paired-devices)
+
+# echo "$paired_devices"
+
+IFS="
+"
+# IFS=$'\n'
+for dev in $paired_devices; do
+    printf "$dev"
+    dev_id=$(echo "$dev" | awk '{print $2}')
+    dev_info=$(bluetoothctl info "$dev_id")
+    connected=$(echo "$dev_info" | grep Connected | awk '{print $2}')
+    case "$connected" in
+        yes) color=green ;;
+        no) color=yellow ;;
+        *) color=red ;;
+    esac
+    echo " : Connected: $(ansi256 -f $color $connected)"
+done
