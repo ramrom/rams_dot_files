@@ -143,6 +143,11 @@ ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout
 ctrl+shift+ c/p - copy and paste
 super+shift+NUM  - click the NUM icon in the dash(quick launch)
+- screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
+    - Prnt-Screen - full desktop screenshot
+    - Prnt-Screen + Alt - active window screenshot
+    - Prnt-Screen + shift - area select screenshot
+
 
 browsers(chrome/firefox):
 ctrl-tab    - cycle through tabs
