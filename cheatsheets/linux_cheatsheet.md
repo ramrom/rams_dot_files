@@ -151,6 +151,8 @@ ctrl-b  - bring up bookmarks
 ctrl-t  - new tab
 ctrl-l  - select url bar
 ctrl-r  - reload page
+ctrl-click - open link in new tab
+shift-click - open link in new window
 space/space-shift - scroll up/down page
 
 ## APT:
