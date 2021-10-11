@@ -142,6 +142,7 @@ alt+f2  - run command
 ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout
 ctrl+shift+ c/p - copy and paste
+super+shift+NUM  - click the NUM icon in the dash(quick launch)
 
 browsers(chrome/firefox):
 ctrl-tab    - cycle through tabs
@@ -258,7 +259,9 @@ xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
 nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 
 ### GNOME
-- gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
+- gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
+    - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
+    - dash is side bar with quick launch icons and running apps
 - if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 - keyboard shortcuts
