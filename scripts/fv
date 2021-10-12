@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # FV - Fzf on shell variables
 
 usage () { echo "Usage: fv [ -h(help) ] [ -e(EXPORTed vars only)"; }

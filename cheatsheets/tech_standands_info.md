@@ -77,6 +77,15 @@
         - streams can have priorites, with weights
     - server push - the server can send data without a request
 
+
+## RSS/ATOM
+- RSS(Really Simple Syndication)
+    - XML format
+    - still more widely used than Atom
+    - developed in 1999, but widespread in 2005
+- Atom - developed to improve on RSS's flaws and limits
+
+
 ## SUBTITLES
 - srt offset adjustment website: http://www.subsedit.com/simple
 
