@@ -4,9 +4,12 @@
 
 caller=$0 cmds_defined readlink ansi256 || exit 1
 
-binlinksfile=${blfile:-~/rams_dot_files/bin_links.txt}
+binlinksfile=${BIN_LINKS_FILE:-~/rams_dot_files/bin_links.txt}
 bindir=~/bin
 [ ! -f "$binlinksfile" ] && echo "file $binlinksfile NOT found!" && exit 1
+
+echo "reading bin links from file $(ansi256 -f yellow $binlinksfile)"
+echo ""
 
 while read entry; do
     binlinkname=$(echo "$entry" | awk '{print $1}')
