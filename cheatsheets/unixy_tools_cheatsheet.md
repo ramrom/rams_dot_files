@@ -287,11 +287,12 @@ lsblk -f /dev/sda1  #  show info on block type devices
 - afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
 - osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
 - cifs/smb info: https://linux.die.net/man/8/mount.cifs
-  - supports hardlinks with unix extensions and/or servinfo
-  - osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
+    - `mount` will show the extensions/flags set on the samba share
+    - supports hardlinks with unix extensions and/or servinfo
+    - osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
 - nfs
-  - best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
-  - supports hard links well
+    - best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
+    - supports hard links well
 - NOTE: to see flags/options/attributes on a samba share, just look at `mount` command output
 - OSX samba share -v verbose
 - `-o` with username(or user) does not work
