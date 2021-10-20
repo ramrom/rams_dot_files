@@ -1,5 +1,18 @@
 #!/bin/sh
 
+# bin-link-checker - verify that file defining synlinks to executables exist and are valid
+
+usage () { echo "Usage: bin-link-checker [ -h(help) ] [ -v(verbose) ]"; }
+
+while getopts 'vh' x; do
+    case $x in
+        v)  verbose=1 ;;
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
 . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
 caller=$0 cmds_defined readlink ansi256 || exit 1

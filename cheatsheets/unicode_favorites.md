@@ -6,6 +6,7 @@
 🔋  battery
 💻  laptop
 🖥  desktop computer
+⌨   keyboard
 🔌  electric plug
 🎮  gamepad
 🕹  joystick
