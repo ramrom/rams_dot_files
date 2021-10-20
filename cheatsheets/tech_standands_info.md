@@ -126,6 +126,10 @@
 ## OpenApi / Swagger
 - https://editor.swagger.io/
 
+## Smithy
+- a service and SDK description language created by AWS
+- https://awslabs.github.io/smithy/
+
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
 
