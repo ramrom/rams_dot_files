@@ -44,6 +44,11 @@ linux_nvidia () {
 cpu_legend_color="fg=colour242"
 cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime-loadave) "uptimeload")
 status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
+if [ "$(uname)" = "Darwin" ]; then
+    freq=$(sysctl hw.cpufrequency | awk '{print $2}')
+    freq=$(($freq / 1000000))
+    status_line1="$status_line1  #[$cpu_legend_color]CPU-Freq:#[default] #[fg=yellow]$freq #[default]MHz"
+fi
 if [ "$(uname)" = "Linux" ]; then
 
     #### CPU temp and fan speed
