@@ -48,6 +48,11 @@ if [ "$(uname)" = "Darwin" ]; then
     freq=$(sysctl hw.cpufrequency | awk '{print $2}')
     freq=$(($freq / 1000000))
     status_line1="$status_line1  #[$cpu_legend_color]CPU-Freq:#[default] #[fg=yellow]$freq #[default]MHz"
+elif [ "$(uname)" = "Linux" ]; then
+    totalfreq=$(cat /proc/cpuinfo | grep "cpu MHz" | awk '{print $4}' | tr '\n' "+" | sed 's/.$//')
+    numcpu=$(lscpu | grep "^CPU(s):" | awk '{print $2}')
+    freq=$(echo "($totalfreq)/$numcpu" | bc)
+    status_line1="$status_line1  #[$cpu_legend_color]CPU-Freq:#[default] #[fg=yellow]$freq #[default]MHz"
 fi
 if [ "$(uname)" = "Linux" ]; then
 

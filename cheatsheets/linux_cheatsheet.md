@@ -7,6 +7,10 @@
     - specify rules what on how to identify device, regardless of what port it's plugged into
         - e.g. plug in same device into diff usb ports and see `/dev/foo` and not `/dev/usb0`/`dev/usb1`
 - device drivers are basically part of the kernel (prolly make up 50% of the code or more)
+- cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
+- namespaces - linux kernel feature, isolates sets of processes and resources
+- linus rant on app development in linux - https://www.youtube.com/watch?v=Pzl1B7nB9Kc
+    > If people are using it, it's not a bug, it's a feature - Linus
 
 # UBUNTU/DEBIAN:
 -----------------------------------------

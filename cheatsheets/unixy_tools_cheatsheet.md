@@ -240,6 +240,10 @@ chafa foo.jpg
 # MEDIAINFO     - show mediafile metadata (like mdls for osx)
 mediainfo foo.mp4
 
+# YOUTUBE-DL
+youtube-dl -F https://www.youtube.com/watch?v=dfidfa     # show available formats
+youtube-dl -f 140 https://www.youtube.com/watch?v=dfidfa     # download specific format
+
 # list all files recursively in dir and their disk usage
 du -a /foo
 
@@ -262,9 +266,11 @@ sshfs -o sshfs_debug user@host:/dir/path localdir/  # get debugging info
 # two hop ssh for sshfs using local forwarding
 ssh -f userB@systemB -L 2222:systemC:22 -N
 sshfs -p 2222 userC@localhost:/remote/path/ /mnt/localpath/
+```
 
 
-###### FILESYSTEMs/STORAGE-DEVICES
+## FILESYSTEMs/STORAGE-DEVICES
+```sh
 fdisk       # manipulate partitions
 fdisk -l   # linux show all dev devices and storage device info
 
@@ -282,6 +288,15 @@ cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount 
 
 lsblk -f /dev/sda1  #  show info on block type devices
 ```
+### ZFS
+- created by sun microsystems for solaris
+- supports encryption, compression, and data integrity, and RAID-like setups
+- standard on BSD, super awesome, does basically everything well
+### EXT4
+- backwards compatible with ext3 and ext2
+- only checksums metadata, but not actualy data
+### NTFS
+- windows standard
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)

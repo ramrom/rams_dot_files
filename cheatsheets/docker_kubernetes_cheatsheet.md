@@ -4,6 +4,10 @@
 - https://docs.docker.com/
 - Dockerfile is code that defines how to build a docker image
 - an image is instantiated into a container
+- `sudo docker -d -p 1111:1111 foo/image`
+    - `-d` is detach, wont run in foreground in shell
+    - `-p x:x` is to map internal port to external port
+- `sudo docker exec -it foocontainername /bin/bash`
 
 ## KUBERNETES
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true

@@ -83,7 +83,7 @@ elseif empty($VIM_NOPLUG)
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"syntax on                  "syntax highlighting
+" syntax on                  "syntax highlighting
 set t_Co=256
 
 try  " if loading vim without plugins, onedark will fail, default to ir_black

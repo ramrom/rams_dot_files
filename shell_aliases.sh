@@ -116,6 +116,9 @@ alias gbranchclean='git branch --merged master | egrep -v "^\*|master" | xargs -
 # alias gpsm='git pull --recurse-submodules'
 # alias gsubp='git submodule foreach git pull origin master'
 
+# DOCKER
+alias d='docker'
+alias sd='sudo docker'
 
 # FZF, RG (ripgrep), FD, GREP
 alias fdh1='fd -H -d 1'
