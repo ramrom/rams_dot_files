@@ -45,7 +45,15 @@ elseif empty($VIM_NOPLUG)
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
     Plug 'majutsushi/tagbar'
 
-    if has('nvim-0.4.0')  " jan2021, coc warns it should have 0.4.0 at least to work well
+    "neovim offers better metals and LSP experience in general
+    if has('nvim-0.5.0')
+        "nvim-metals(uses nvim native LSP support with Lua)
+        if !empty($VIM_METALS)
+            Plug 'nvim-lua/plenary.nvim'
+            Plug 'scalameta/nvim-metals'
+        endif
+    " an2021, coc warns it should have 0.4.0 at least to work well
+    elseif has('nvim-0.4.0')
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         "TODO: can enable coc by filetype
         " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
@@ -53,7 +61,6 @@ elseif empty($VIM_NOPLUG)
         if !empty($VIM_BASH)
             Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
         endif
-        "neovim offers best coc/metals experience
         if !empty($VIM_METALS)
             Plug 'scalameta/coc-metals', { 'do': 'yarn install --frozen-lockfile' }
         endif
