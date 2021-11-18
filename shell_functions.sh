@@ -151,8 +151,7 @@ function binlink() {
     ln -s "$fullpath" ~/bin/$(basename "$1")
 }
 
-function vil() { vi -p $(cat $1); }
-function viln() { vin -p $(cat $1); }
+function vil() { vin -p $(cat $1); }
 
 function fdisk_find() {
     [ -z "$1" ] && echo "arg for diskname needed!" && return 1
