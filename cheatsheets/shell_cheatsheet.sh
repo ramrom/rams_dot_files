@@ -218,6 +218,8 @@ tail -f foofile | grep --line-buffered foopattern | grep foo2
 # detect if STDOUT is terminal output
 # if fd 1 (STDOUT) is not a terminal, good chance it's a pipe
 [ -t 1 ] && echo "this is a terminal"
+# use fd 0 for STDIN
+[ -t 0 ] && echo "stdin has stuff"
 
 # IF else syntax
 if [ "a" = "a" ]; then

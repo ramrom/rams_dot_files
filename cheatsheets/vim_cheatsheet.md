@@ -333,7 +333,7 @@ Ctrl + r - redo
 =ip - autoindent inner paragraph
 == - autoindent current line
 
-## Cut and paste
+### CUT AND PASTE
 yy - yank (copy) a line
 2yy - yank (copy) 2 lines
 yw - yank (copy) the characters of the word from the cursor position
@@ -444,6 +444,8 @@ ZZ - same as :wq
     are interpreted as special regex symbols (no escaping needed)
 n - repeat search in same direction
 N - repeat search in opposite direction
+# - reverse search for word under cursor
+* - search for word under cursor
 :%s/old/new/g - replace all old with new throughout file
 :%s/old/new/gc - replace all old with new throughout file with confirmations
 - * to search next occurence of word under cursor
