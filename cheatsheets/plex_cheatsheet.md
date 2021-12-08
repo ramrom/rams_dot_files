@@ -23,9 +23,10 @@
     - https://support.plex.tv/articles/205002628-why-do-i-get-the-this-server-is-not-powerful-enough-to-convert-video-message/
         > AVI file container with XviD video inside it, that cannot be played natively by the Plex Web App.
     - plex web gave error, but plex iphone12 app works fine
-- H265(HEVC) playback - april2021
+- H265(HEVC) playback - dec2021
+    - dec2021: Main 10 version is transcode for chromecast ultra, google tv, android plex, only plex desktop app is no transcode
     - DIRECT PLAY/STREAM: ios app, safari desktop web, plex desktop app
-    - TRANSCODE: chromecast 1080p, chrome desktop app
+    - TRANSCODE: chromecast 1080p, chrome desktop web
 - 4K playback: https://forums.plex.tv/t/info-plex-4k-transcoding-and-you-aka-the-rules-of-4k/378203
     - iOS app -> **NO** transcode
     - safari browser (osx) -> **NO** transcode
