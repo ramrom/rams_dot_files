@@ -1,7 +1,7 @@
 # JSON
 - json spec: https://www.json.org
 - json-spec python cli validation example:
-    - `json validate --schema-file=/home/ramrom/rams_dot_files/veda_schema.json --document-file=metadata.json`
+    - `json validate --schema-file=/foo/bar/some_schema.json --document-file=somefile.json`
 
 ## JQ
 ```bash

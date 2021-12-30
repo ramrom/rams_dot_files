@@ -242,12 +242,12 @@ snap refresh --list
     - compiz
     - mutter(GNOME 3 uses it), particularly GNOMEShell is a plugin for mutter
     - metalicity(GNOME 2 uses it)
-xrandr  - check graphics stuff
+- xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
     - xrandr --output DP-0 --mode 2560x1440
     - off: `xrandr --output HDMI-0 --off`, on: `xrandr --output HDMI-0 --auto`
     - turn on and be left of other display: `xrandr --output HDMI-0 --auto --left-of DP-0`
-wmctrl - window manager control
+- wmctrl - window manager control
     - NEEDS DISPLAY VAR SET
     - display window number/ID in hexadecimal, xdotool display in decimal
     - wmctrl -l, will list all windows in window manager, wmctrl -d list desktops, wmctrl -m list name of window manager
@@ -259,13 +259,13 @@ wmctrl - window manager control
     - `wmctrl -r Psensor -b toggle,fullscreen` , goto fullscreen
     - `wmctrl -r :ACTIVE: -b toggle,shaded` - toggle shade on active window
     - `wmctrl -c` , close window gracefull
-xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
+- xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
     - NEEDS DISPLAY VAR SET
     xdotool search --onlyvisible --name firefox  # say firefox is window id 123
     xdotool getwindowname 123   # should print `firefox`
     xdotool windowsize 123 800 600
     xdotool windowmove 123 0 1080
-nvidia-smi - show nvidia card mem usage, gpu temp, X processes
+- nvidia-smi - show nvidia card mem usage, gpu temp, X processes
 
 ### GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design

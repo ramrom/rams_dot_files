@@ -165,8 +165,8 @@ function fdisk_find() {
 
 # FIXME: aliases fail to preview in ubuntu/bash
     # fzf --preview "alias foo='echo hi'; foo"  ---- FAILS, WHY????
-# fuzzy search aliases and functions, with previews for some sources
 # FIXME: aliases and funcs are double printing in bash
+# fuzzy search aliases and functions, with previews for some sources
 function fsn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
     aliasname=1 funcname=1 print_alias_funcs_scripts | fzf --preview "$fzf_pafn_preview_sources; batwhich {}" \
