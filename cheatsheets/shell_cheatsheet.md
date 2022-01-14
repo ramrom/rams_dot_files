@@ -1,33 +1,39 @@
 # SHELL SCRIPT CHEAT SHEET
-# history of /bin/sh and shells: https://unix.stackexchange.com/questions/145522/what-does-it-mean-to-be-sh-compatible
-# good references: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
-# ZSH:
-    # feature overview: https://github.com/hmml/awesome-zsh
-    # zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
-        # order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
+- history of /bin/sh and shells: https://unix.stackexchange.com/questions/145522/what-does-it-mean-to-be-sh-compatible
+- good references: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
 
-# DASH (ubuntu 16 and newer use it, it's faster than bash)
-# read https://wiki.ubuntu.com/DashAsBinSh
+## ZSH
+- feature overview: https://github.com/hmml/awesome-zsh
+- zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
+- order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
+- OSX - completions are stored in dir(change version): /usr/share/zsh/5.3/functions
 
-# bash shell expansion order (for zsh too i think)
-# https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
-# korn shell but insightful: https://docstore.mik.ua/orelly/unix/ksh/ch07_03.htm
-
-# Bash (and AFAIK zsh)
-    # good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
+# BASH (AND AFAIK ZSH)
+- good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
+- BASH SHELL EXPANSION ORDER (FOR ZSH TOO I THINK)
+    - https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
+```sh
 set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
 echo $- #query all set options on in shell
 setopt # query all set shell options in ZSH
+```
 
-# KEYBINDINGS
-# readline lib used by bash and zsh. lets you choose vi or emacs mode
-# good ref on ZLE (zsh line editor):  ZLE (zsh line editor): http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
+## DASH (ubuntu 16 and newer use it, it's faster than bash)
+- read https://wiki.ubuntu.com/DashAsBinSh
+
+## KORN shell but insightful: https://docstore.mik.ua/orelly/unix/ksh/ch07_03.htm
+
+
+## KEYBINDINGS
+- readline lib used by bash and zsh. lets you choose vi or emacs mode
+- good ref on ZLE (zsh line editor):  ZLE (zsh line editor): http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
+
+```sh
 bind -P     # bash print out all key bindinds, for sh too
 bindkey     # for zsh
-
-# bind ^g to run foo function
+# bind `^g` to run foo function
 function foofunc() { echo hi; }
 zle -N foofunc
 bindkey '^g' foofunc
@@ -35,33 +41,35 @@ bindkey '^g' foofunc
 # NOTE: these clobber ctrl-n, ctrl-p (for cmd history), ctrl-r (history fuzzy search)
 bindkey -v  # zsh vi mode
 set -o vi   # bash vi mode
+```
 
-# command line navigation (zsh and bash defaults)
-# ctrl-s - linux pauses output to screen
-# ctrl-l - clear screen
-# ctrl-k - delete line after cursor (cut to clipboard)
-# ctrl-j / ctrl-m - begin new line, VIM insert mode too!
-# ctrl-a - goto beg of line
-# ctrl-e - goto end of line
-# ctrl-b - go back one space
-# ctrl-f - go forward one space
-# ctrl-u - delete line before cursor (cut to cliboard)
-# ctrl w - delete word before curosr (cut to clipboard)
-# ctrl y - paste what was cut
-# ctrl-h - delete last char, VIM insert mode and command too!
-# ctrl-[ - escape
-# ctrl-i - tab
-# ctrl-p - go back one command in the history
-# ctrl-n - go forward one command in the history
-# ctrl-r - fuzzy search command history
-# ctrl-7 - undo
-# ctrl-8 - backward delete char
+### COMMAND LINE NAVIGATION (ZSH AND BASH DEFAULTS)
+- `ctrl-s` - linux pauses output to screen
+- `ctrl-l` - clear screen
+- `ctrl-k` - delete line after cursor (cut to clipboard)
+- `ctrl-j` / ctrl-m - begin new line, VIM insert mode too!
+- `ctrl-a` - goto beg of line
+- `ctrl-e` - goto end of line
+- `ctrl-b` - go back one space
+- `ctrl-f` - go forward one space
+- `ctrl-u` - delete line before cursor (cut to cliboard)
+- `ctrl w` - delete word before curosr (cut to clipboard)
+- `ctrl y` - paste what was cut
+- `ctrl-h` - delete last char, VIM insert mode and command too!
+- `ctrl-[` - escape
+- `ctrl-i` - tab
+- `ctrl-p` - go back one command in the history
+- `ctrl-n` - go forward one command in the history
+- `ctrl-r` - fuzzy search command history
+- `ctrl-7` - undo
+- `ctrl-8` - backward delete char
 
-# send EOF to stdin, bash/zsh/sh interpret as exit shell
-# if not at 1st char in prompt, delete char in front of it (forward delete)
-# Ctrl-d
+### send EOF to stdin, bash/zsh/sh interpret as exit shell
+- if not at 1st char in prompt, delete char in front of it (forward delete)
+- Ctrl-d
 
-# LINE EDITING MODE
+## LINE EDITING MODE
+```sh
 set -o vi    # set zsh to use vi mode, emacs is default
 # zsh, if vi mode is used, will need to bindkey some nice line editing keys that are missing
 bindkey  # alone will print out all keybindings
@@ -73,21 +81,24 @@ bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^r' history-incremental-search-backward
 export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
-
-# ZSH autocomplete
-/usr/share/zsh/5.3/functions # osx dir of autocompletions (zsh ver 5.7.1 for catalina)
+```
 
 ### EXECUTION ENVIRONENT
-# non-interactive shells, like when running a shell script
-    # aliases are not expanded
-    # bashrc or zshrc are not run
-    # only exported variabled are inherited, regular shell variables are not
-source fooscript    # run script in current shell, zsh, bash works too
-. fooscript         # bash cononical way to source, doesnt work in zsh
-. ./fooscript       # force execute, executes even if file perm doesnt have execute, works in bash and zsh
-\foo                # execute foo ignoring any aliases called foo
+- non-interactive shells, like when running a shell script
+    - aliases are not expanded
+    - bashrc or zshrc are not run
+    - only exported variabled are inherited, regular shell variables are not
+- `source fooscript`
+    - run script in current shell, zsh, bash works too
+- `. fooscript`
+    - bash cononical way to source, doesnt work in zsh
+- `. ./fooscript`
+    - force execute, executes even if file perm doesnt have execute, works in bash and zsh
+- `\foo`
+    - execute foo ignoring any aliases called foo
 
-# FC, edit last command in editor and execute, also list old commands
+### FC, edit last command in editor and execute, also list old commands
+```sh
 # change default editor with FCEDIT env var
 fc
 # to cancel execution(when in vi) type :cq in command mode (quit with error)
@@ -95,29 +106,35 @@ fc
 # r, builtin in zsh, basiscally replays the last command in history
 ls
 r   # will execute `ls`
+```
 
-# bash/posix/zsh: delete a function or a variable
-unset foo
+### bash/posix/zsh: delete a function or a variable
+`unset foo`
 
-# make a variable or function unmodifiable
+### make a variable or function unmodifiable
+```sh
 readonly foo=1
 foo=2  # will error
+```
 
-#print all readonly variables
-readonly
+### print all readonly variables
+`readonly`
 
-# https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
-# hyphens aren't guarenteed to be cross-shell compatible :(
+### hyphens aren't guarenteed to be cross-shell compatible :(
+- https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
+```sh
 function foo-bar() {
     echo "POSIX makes ram sad"
 }
+```
 
-####### VARIABLES #######
-# MAX SIZE
-    # see https://stackoverflow.com/questions/5076283/shell-variable-capacity
-# SCOPES
-# bash/zsh and bsd/gnu sh support local scoped variables in a function
-# - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
+## VARIABLES
+- MAX SIZE see https://stackoverflow.com/questions/5076283/shell-variable-capacity
+- SCOPES
+- bash/zsh and bsd/gnu sh support local scoped variables in a function
+    - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
+
+```sh
 local foo=1   # only hold value in scope of current function and called function, once func finishes local var is removed
               # if a called function also declares a `local foo=3`, then it and it's downstream func calls will use 3
 foo=1         # shell variable, so persists even when function exits
@@ -525,3 +542,4 @@ echo '{"foo":3,"bar":{"yar":"yo"}}' | jp -u bar.yar   # will spit out `yo` , -u 
 func filt() {
     echo '[{"id":"/foo/"},{"id":"bar"}]' | jq -r --arg ENVR "^/$1/" '.[] | select(.id | test($ENVR))'
 }
+```

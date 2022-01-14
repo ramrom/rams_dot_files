@@ -33,9 +33,13 @@
     - stringent/strict process for certifying a defice conforms to it's standard cmds and security
         - this makes these more expensive
     - 900 MHz band (north america)
+    - mesh limit of 232 devices
+    - range of ~100 feet
 - Zigbee, mesh network, much slower then wifi
     - no certification required, so cheaper
     - 2.4Ghz band (north america)
+    - mesh limit of 65000! devices
+    - range of 33-66 feet
 
 
 ## HDMI
