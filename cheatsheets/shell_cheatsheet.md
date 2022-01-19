@@ -8,7 +8,7 @@
 - order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
 - OSX - completions are stored in dir(change version): /usr/share/zsh/5.3/functions
 
-# BASH (AND AFAIK ZSH)
+## BASH (AND AFAIK ZSH)
 - good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 - BASH SHELL EXPANSION ORDER (FOR ZSH TOO I THINK)
     - https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
