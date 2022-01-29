@@ -399,8 +399,12 @@ function terminate_db_connections() {
 
 function ruby_base64_dec() { ruby -e 'require "base64"; puts Base64.decode64(ARGV[0])' "$@"; }
 
-function ryamltojson() {
+function yamltojson() {
     ruby -e 'require "yaml"; require "json"; puts YAML.load_file(ARGV[0]).to_json' "$@"
+}
+
+function csvtojson() {
+    ruby -e 'require "csv"; require "json"; puts CSV.open(ARGV[0], headers: true).map { |x| x.to_h }.to_json' "$@"
 }
 
 function parse_comma_delim_error() {

@@ -46,6 +46,10 @@ echo "foobar" | sed 's/..$//'  # remove last 2 chars, so output is "foob"
 # column
 cat somecsv.csv | column -t -s,  # use comma to delimit columns and print csv file with aligned columns
 
+# XSV - a tool to manipulate csvs
+xsv table somecsv.csv  # pretty print table to stdout
+xsv count somecsv.csv  # print # of rows
+
 # date
 sudo date --set 1998-11-02  # change date
 date +%s       # print unix time in number of seconds (since 1970)

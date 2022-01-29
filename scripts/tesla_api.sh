@@ -14,8 +14,8 @@ while getopts 'he:p:' x; do
 done
 shift $(($OPTIND - 1))
 
-[ -z "$EMAIL" ] && echo $(ansi256 -f red "need email") && echo && usage && exit 1
-[ -z "$PASSWORD" ] && echo $(ansi256 -f red "need password") && echo && usage && exit 1
+[ -z "$EMAIL" ] && echo && echo $(ansi256 -f red "need email") && echo && usage && exit 1
+[ -z "$PASSWORD" ] && echo && echo $(ansi256 -f red "need password") && echo && usage && exit 1
 
 SESSION_FILE=/tmp/tesla.json
 BODY_FILE=/tmp/tesla.form
