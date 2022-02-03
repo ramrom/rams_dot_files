@@ -128,7 +128,7 @@
 - https://plantuml.com/sequence-diagram
 
 ## OpenApi / Swagger
-- https://editor.swagger.io/
+- https://editor.swagger.io/  - good place to validate an openapi yaml file
 
 ## Smithy
 - a service and SDK description language created by AWS
@@ -163,6 +163,39 @@
 - google drive
     - offline access for idvidual files (and only gdocs like their spreadsheet and word doc)
 
+## FILE SYSTEMS
+### ZFS
+- created by sun microsystems for solaris
+- supports encryption, compression, and data integrity, and RAID-like setups
+- standard on BSD, super awesome, does basically everything well
+### EXT4
+- backwards compatible with ext3 and ext2
+- only checksums metadata, but not actualy data
+### NTFS
+- windows standard
+
+## NETWORK FILESYSTEM PROTOCOLS
+- afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
+- osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
+- cifs/smb info: https://linux.die.net/man/8/mount.cifs
+    - `mount` will show the extensions/flags set on the samba share
+    - supports hardlinks with unix extensions and/or servinfo
+    - osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
+### NOTE!!!
+samba share ver 3, nounix set, serverino set, serverino seems to sorta support hard links
+hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
+Also when i rsync they are diff inode # files on destination
+
+in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this behavious doesnt happen
+- samba 2/3 dont support hard links:
+   - https://unix.stackexchange.com/questions/403509/how-to-enable-unix-file-permissions-on-samba-share-with-smb-2-0
+   - https://en.wikipedia.org/wiki/Server_Message_Block
+- nfs
+    - best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
+    - supports hard links well
+- NOTE: to see flags/options/attributes on a samba share, just look at `mount` command output
+- OSX samba share -v verbose
+- `-o` with username(or user) does not work
 
 ## OPTIONS TRADING
 - strike price - the price of the stock for which the option can be exercized at
