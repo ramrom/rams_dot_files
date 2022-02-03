@@ -169,8 +169,11 @@
 - supports encryption, compression, and data integrity, and RAID-like setups
 - standard on BSD, super awesome, does basically everything well
 ### EXT4
+- good article: https://opensource.com/article/18/4/ext4-filesystem
 - backwards compatible with ext3 and ext2
-- only checksums metadata, but not actualy data
+- has 3 journaling modes(like ext3)
+    - journal: writes data and metadata to journal, ordered: writes only metadata to journal, writeback: write metadata but no order, fast
+        - default mode is usually ordered
 ### NTFS
 - windows standard
 

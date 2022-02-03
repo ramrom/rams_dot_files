@@ -43,6 +43,9 @@ echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens l
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
 echo "foobar" | sed 's/..$//'  # remove last 2 chars, so output is "foob"
 
+# base64 - encode and decode base64
+echo "foobar" | base64      # encode from stdin
+
 # column
 cat somecsv.csv | column -t -s,  # use comma to delimit columns and print csv file with aligned columns
 
