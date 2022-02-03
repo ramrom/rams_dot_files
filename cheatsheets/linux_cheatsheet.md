@@ -351,6 +351,7 @@ mkfs - to format a disk partition
 fdisk - show partitions and block devices, sizes, sectors
 /etc/fstab - file systems mounted at boot
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+dmesg - kernel ring buffer, print messages or control it
 dconf  - like gsettings?
 notify-send - pops up notification
 `lsusb -D /dev/bus/usb/002/004`

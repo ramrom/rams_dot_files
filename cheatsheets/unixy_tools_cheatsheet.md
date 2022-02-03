@@ -122,6 +122,7 @@ ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming proce
 # HTOP
 # "/" vim-like search
 # quitting by hitting F10 will remember settings in .htoprc
+# l - list FDs(files) open by process, k - kill process, x - list file locks
 htop
 
 # IOTOP - top like temrinal UI, but show io/disk usage by process (on osx and linux)
