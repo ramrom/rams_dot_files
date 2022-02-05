@@ -48,14 +48,38 @@
 - 2.1 - released 2017, supports 48Gbps(Ultra High Speed cables needed), can do a 10k@120hz
 
 ## USB
+- usb 3.0 cable shouldn't really exceed 10 feet without repeater
+- displayport cable shouldnt exceed 10 feet
+- usbc supports usb 2.0 to 4.0
+- usb a/b supports usb 1.0 to 3.1
 - 2.0 - 480Mbps
 - 3.x
     - 3.0(superspeed) - 5Gbps
     - 3.1gen1 - 5Gbps, 3.1gen2 - 10Gbps(uses 128b/132b)
     - using usb-c: 3.2gen1 - 10Gbps, 3.2gen2 - 20Gbps
 - 4.x - suports 40Gbps
-- usbc supports usb 2.0 to 4.0
-- usb a/b supports usb 1.0 to 3.1
+
+## SATA
+- SATA 1.0: 5 Gb/s, 150 MB/s
+- SATA 2.0: 3 Gb/s, 300 MB/s
+- SATA 3.0: 6 Gb/s, 600 MB/s
+
+## SSD
+- no moving parts, use flash memory or semidconductor memory units to store data
+- HDDs typically mean electromagnetic fields to store data, and moving disks with a head to read/write data
+- TBW - terabytes written - amount of terabytes that can be written to drive before it fails, measure of durability/lifetime
+- data density
+    - SLC - single layer cells - one bit per memory cell
+        - fastest and most durable, less error-prone
+        - expensive per bit of data, used in enterprise
+    - MLC - multi layer cells - 2 bits per memory cell
+    - TLC - triple layer cells - 3 bits per meomry cell
+    - QLC - quad layer cells - 4 bits per memory cell
+    - PLC - penta ayer cells - 5 bits per memory cell
+- interfaces
+    - SATA 3 - up to 600MBs
+    - NVME - often more than 3 times faster than SATA 3
+    - M.2 - interface form factor
 
 ## HDD
 - LMR - longitudinal magnetic recording
@@ -164,10 +188,21 @@
     - offline access for idvidual files (and only gdocs like their spreadsheet and word doc)
 
 ## FILE SYSTEMS
+- storage device vs partition vs volume vs file system
+    - physical storage devices are split into multiple partitions
+        - old MBR(master boot record) is being replaced by GPT(GUID partition table) describe these
+    - a volume is a logical piece of the underlying storage that the OS recognizes and can install a file system on
+        - a partition could hold many volumes
+        - multiple partitions could be presented as a single volume (usually called "logical" volumes)
+            - RAID arrays are seen as logical volumes
 ### ZFS
 - created by sun microsystems for solaris
-- supports encryption, compression, and data integrity, and RAID-like setups
+- supports encryption, compression
+- does use traditional volumes, has storage pool concept for multiple drives, so it supports RAID-like features
 - standard on BSD, super awesome, does basically everything well
+- uses "transactional semantics" for integrity: https://docs.oracle.com/cd/E19120-01/open.solaris/817-2271/6mhupg6hh/index.html
+    - better than journaling
+- has checksums on data and metadata
 ### EXT4
 - good article: https://opensource.com/article/18/4/ext4-filesystem
 - backwards compatible with ext3 and ext2
@@ -206,7 +241,3 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
         - opposite for "out of the money"
 - delta - rate of change b/w options price and $1 change in underlying assets price
 - theta (decay) - measure of rate of decline of option due to passoge of time (b/c of getting closer to expiration)
-
-## RANDOM NOTES
-- usb 3.0 cable shouldn't really exceed 10 feet without repeater
-- displayport cable shouldnt exceed 10 feet
