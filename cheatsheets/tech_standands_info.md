@@ -123,8 +123,10 @@
         - don't exceed 10 feet, pretty much the limit
 
 ## MONITORS
+- low response time results in ghosting
 - TN (twisted nematic), oldest
     - fast refresh rates, short response times, high brightness -> good for gaming
+        - can have response times low as 1ms
     - bad viewing angles, bad color reproduction
 - IPS (in-plane switcing), newer tech
     - good color reproduction, good viewing angle

@@ -1,6 +1,10 @@
 # SAMSUNG CHEATSHEET
 
 ## GALAXY PHONES
+- findmymobile.samsung.com
+    - can erase data on phone (needs power and network obviously)
+    - can "lock" phone, prevents biometrics, samsung pay, show emergency info on screen, prevent power off
+    - can set "extend battery life", minimizes power usage
 
 ## GALAXY WATCH
 - touch screen for a couple sec to change watch face
