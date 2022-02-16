@@ -2,7 +2,7 @@
 
 # FF - Fzf on files in a dir with file prev and open or edit or cd to or add to clipboard
 
-usage () { echo "Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ] [ -w FUNC_WRAP ] "; }
+usage () { echo 'Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ] [ -w FUNC_WRAP ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
 while getopts 'hwj:' x; do
     case $x in
@@ -46,6 +46,7 @@ generate_github_link() {
 
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
+# FIXME: no open command in linux
 out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
     --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \

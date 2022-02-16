@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# FPS - Fzf over ps processes
+
+usage () { echo "Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ] "; }
+
+while getopts 'hj:' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        j) FZF_HEIGHT="$OPTARG" ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+FZF_HEIGHT=${FZF_HEIGHT:=100}
+
+FZF_DEFAULT_COMMAND="ps -hef"
+[ $(uname) == "Linux" ] && FZF_DEFAULT_COMMAND="ps auxhf"
+
+fzf --bind 'ctrl-r:reload($FZF_DEFAULT_COMMAND)' \
+    --header 'Press CTRL-R to reload' --header-lines=1 \
+    --height "$FZF_HEIGHT"% --layout=reverse \
+    --preview '' \
+    --preview-window=:wrap
