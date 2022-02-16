@@ -17,12 +17,11 @@ shift $(($OPTIND - 1))
 FDNAME="fd"; [ `uname` = "Linux" ] && FDNAME="fdfind"
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
-fzf_def="$FZF_DEFAULT_COMMAND"
 if [ "$1" = "h" ]; then
-    fzf_def="$FDNAME --type f --hidden --exclude .git '.*' ~"
+    FZF_DEFAULT_COMMAND="$FDNAME --type f --hidden --exclude .git '.*' ~"
 elif [ -n "$1" ]; then
     [ ! -d "$1" ] && echo "$1 not a dir!" && exit 1
-    fzf_def="$FDNAME --type f --hidden --exclude .git '.*' $1"
+    FZF_DEFAULT_COMMAND="$FDNAME --type f --hidden --exclude .git '.*' $1"
 fi
 
 generate_github_link() {
@@ -47,7 +46,7 @@ generate_github_link() {
 
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
-out=$(FZF_DEFAULT_COMMAND="$fzf_def" fzf +m --exit-0 --height "$FZF_HEIGHT"% \
+out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
     --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \
