@@ -16,9 +16,9 @@ shift $(($OPTIND - 1))
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 FZF_DEFAULT_COMMAND="ps -hef"
-[ $(uname) == "Linux" ] && FZF_DEFAULT_COMMAND="ps auxhf"
+[ $(uname) = "Linux" ] && FZF_DEFAULT_COMMAND="ps auxhf"
 
-fzf --bind 'ctrl-r:reload($FZF_DEFAULT_COMMAND)' \
+fzf --bind "ctrl-r:reload($FZF_DEFAULT_COMMAND)" \
     --header 'Press CTRL-R to reload' --header-lines=1 \
     --height "$FZF_HEIGHT"% --layout=reverse \
     --preview '' \
