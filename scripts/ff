@@ -15,6 +15,7 @@ done
 shift $(($OPTIND - 1))
 
 FDNAME="fd"; [ `uname` = "Linux" ] && FDNAME="fdfind"
+[ $(uname) = "Linux" ] && alias open='xdg-open'
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 if [ "$1" = "h" ]; then
@@ -46,7 +47,6 @@ generate_github_link() {
 
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
-# FIXME: no open command in linux
 out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
     --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \

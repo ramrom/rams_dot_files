@@ -108,18 +108,6 @@ ls
 r   # will execute `ls`
 ```
 
-### bash/posix/zsh: delete a function or a variable
-`unset foo`
-
-### make a variable or function unmodifiable
-```sh
-readonly foo=1
-foo=2  # will error
-```
-
-### print all readonly variables
-`readonly`
-
 ### hyphens aren't guarenteed to be cross-shell compatible :(
 - https://unix.stackexchange.com/questions/168221/are-there-problems-with-hyphens-in-functions-aliases-and-executables
 ```sh
@@ -147,6 +135,15 @@ FOO=1
 BAR=$(echo "$FOO")
 echo $BAR       # will print 1
 
+### bash/posix/zsh: delete a function or a variable
+`unset foo`
+
+### make a variable or function unmodifiable
+readonly foo=1
+foo=2  # will error
+
+### print all readonly variables
+`readonly`
 
 # programatically create env variables
 A=FOO
