@@ -47,12 +47,14 @@ elseif empty($VIM_NOPLUG)
 
     "neovim offers better metals and LSP experience in general
     if has('nvim-0.5.0')
+        Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol
+        Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         "nvim-metals(uses nvim native LSP support with Lua)
         if !empty($VIM_METALS)
             Plug 'nvim-lua/plenary.nvim'
             Plug 'scalameta/nvim-metals'
         endif
-    " an2021, coc warns it should have 0.4.0 at least to work well
+    " jan2021, coc warns it should have 0.4.0 at least to work well
     elseif has('nvim-0.4.0')
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         "TODO: can enable coc by filetype
@@ -384,6 +386,7 @@ noremap <leader>R :Rg!<CR>
 noremap <leader>i :FZFMru<CR>
 
 noremap <leader>ll :Lines<CR>
+noremap <leader>L :Lines<CR>
 
 noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gvdiffsplit master<cr>
@@ -491,6 +494,12 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 
 " for FZF-Mru plugin, prevent fzf from sorting, show by recency
 let g:fzf_mru_no_sort = 1
+
+" default implementation of Rg greps over filename, this will just do contents
+    " see https://github.com/junegunn/fzf.vim/issues/714
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 """"" RipGrep and FD """""""""""""""""""
 if executable('rg')
