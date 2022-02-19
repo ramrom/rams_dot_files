@@ -142,6 +142,10 @@
 - objective C uses Clang compiler to create LLVM IR
 - swift uses it's own "swift compiler" to create LLVM IR(bitcode)
 
+
+## ANSIBLE
+- uses jinja2 (.j2 files) for templating
+
 ## BASE64
 - 64 safe ASCII chars
 - standard one is `A-Z` `a-z` `0-9` `+` `/`
@@ -213,6 +217,10 @@
         - default mode is usually ordered
 ### NTFS
 - windows standard
+
+## XDG
+- https://github.com/adrg/xdg/blob/master/README.md
+- standar for files for apps and configs
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
