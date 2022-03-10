@@ -274,6 +274,11 @@ for (( i=0; i<5; i++)); do
     echo $i
 done
 
+# greater than, less than
+i=0
+[ "$i" -gt 1 ] && print "foo"
+[ "$i" -lt 1 ] && print "foo"
+
 # POSIX/sh
 i=1
 while [ "$i" -ne 10 ]

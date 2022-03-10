@@ -94,7 +94,7 @@ Tables:
 
 
 
-## JIRA:
+## JIRA
 -----------------------
 - https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
@@ -146,6 +146,10 @@ public String getFoo()
 {
     return foo;
 }
+{code}
+
+{code:JSON}
+{ "a": 1, "b": [ 1, 2, true] }
 {code}
 
 {panel:title=My Title|borderStyle=dashed|borderColor=#ccc|titleBGColor=#F7D6C1|bgColor=#FFFFCE}

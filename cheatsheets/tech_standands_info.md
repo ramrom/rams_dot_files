@@ -60,7 +60,7 @@
 - 4.x - suports 40Gbps
 
 ## SATA
-- SATA 1.0: 5 Gb/s, 150 MB/s
+- SATA 1.0: 1.5 Gb/s, 150 MB/s
 - SATA 2.0: 3 Gb/s, 300 MB/s
 - SATA 3.0: 6 Gb/s, 600 MB/s
 
