@@ -205,8 +205,8 @@ PlaySpecification/spec2, to skip test:
 - sbt update resolves and fetches deps
  sbt "test-only some.path.to.test another.path.to.test"
  sbt "testOnly some.path.to.test another.path.to.test"
- integration tests: sbt "it:testOnly some.path.to.test another.path.to.test"
- sbt 'testOnly *SSO* -- -z "foo bar desc"'
+ integration tests: `sbt "it:testOnly some.path.to.test another.path.to.test"`
+- use test description filter `sbt 'testOnly *SSO* -- -z "foo bar desc"'`
    - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
 - to show evictions: `sbt evicted`

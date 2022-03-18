@@ -39,7 +39,7 @@ elseif empty($VIM_NOPLUG)
     Plug 'plasticboy/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
-    Plug 'suan/vim-instant-markdown', { 'for': 'markdown', 'do': 'yarn install' }
+    Plug 'instant-markdown/vim-instant-markdown', { 'for': 'markdown', 'do': 'yarn install' }
     let g:instant_markdown_autostart = 0
 
     " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
@@ -410,7 +410,8 @@ noremap <leader>gl :set list!<cr>
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call ShowMyLeaderMap()<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
-noremap <leader>ca :vsplit ~/tmp/scratch.md<cr>
+noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
+noremap <leader>ca :tabnew ~/tmp/scratch.md<cr>
 noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>
@@ -467,6 +468,10 @@ let g:gh_line_map = '<leader>wh'
 let g:gh_line_blame_map = '<leader>wb'
 let g:gh_repo_map = '<leader>wo'
 let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+
+""""""""""""""""""""vim-instant-mark""""""""""""""""""""""""""""
+let g:instant_markdown_mermaid = 1
+let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
 """""""""""""""""""vim-markdown"""""""""""""""""""""""""""
 " plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
