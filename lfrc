@@ -11,7 +11,7 @@ set number on         # show number of items index in dir
 set drawbox           # draw borders around columns
 
 # set preview
-set previewer ~/rams_dot_files/pv.sh
+set previewer ~/rams_dot_files/lf-previewer.sh
 
 # CMDS/FUNCTIONS
 cmd open ${{
@@ -20,11 +20,6 @@ cmd open ${{
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
-
-
-# define a custom 'rename' command without prompt for overwrite
-cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-map r push :rename<space>
 
 # cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
@@ -70,7 +65,7 @@ map x $$f
 map X !$f
 
 # dedicated keys for file opener actions
-map o $mimeopen $f
+map o &mimeopen $f
 map O $mimeopen --ask $f
 
 # map <c-f> $lf -remote "send $id select '$(fzf)'"
