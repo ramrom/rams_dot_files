@@ -47,14 +47,14 @@ set -o vi   # bash vi mode
 - `ctrl-s` - linux pauses output to screen
 - `ctrl-l` - clear screen
 - `ctrl-k` - delete line after cursor (cut to clipboard)
-- `ctrl-j` / ctrl-m - begin new line, VIM insert mode too!
+- `ctrl-j`,`ctrl-m` - begin new line, VIM insert mode too!
 - `ctrl-a` - goto beg of line
 - `ctrl-e` - goto end of line
 - `ctrl-b` - go back one space
 - `ctrl-f` - go forward one space
 - `ctrl-u` - delete line before cursor (cut to cliboard)
-- `ctrl w` - delete word before curosr (cut to clipboard)
-- `ctrl y` - paste what was cut
+- `ctrl-w` - delete word before cursor (cut to clipboard)
+- `ctrl-y` - paste what was cut
 - `ctrl-h` - delete last char, VIM insert mode and command too!
 - `ctrl-[` - escape
 - `ctrl-i` - tab

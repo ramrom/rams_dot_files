@@ -110,6 +110,17 @@ function print_type() {
     echo $type
 }
 
+# lf that will change to current dir in lf when quitting
+lff () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+
 alias bw='batwhich'
 function batwhich() {
     local type=$(print_type "$1")
