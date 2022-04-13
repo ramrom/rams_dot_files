@@ -68,11 +68,13 @@ set -o vi   # bash vi mode
 - if not at 1st char in prompt, delete char in front of it (forward delete)
 - Ctrl-d
 
-## LINE EDITING MODE
-```sh
+### LINE EDITING MODE
+#### ZSH
+```zsh
 set -o vi    # set zsh to use vi mode, emacs is default
-# zsh, if vi mode is used, will need to bindkey some nice line editing keys that are missing
+
 bindkey  # alone will print out all keybindings
+
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^B' backward-char
@@ -81,6 +83,10 @@ bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^r' history-incremental-search-backward
 export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
+```
+#### BASH
+```bash
+bind -l   # list all keybindings
 ```
 
 ### EXECUTION ENVIRONENT
