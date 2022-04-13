@@ -85,8 +85,11 @@ bindkey '^r' history-incremental-search-backward
 export KEYTIMEOUT=1  # mode change delay, default is 4 (.4 seconds), this will make delay .1 second
 ```
 #### BASH
+- good doc: https://www.computerhope.com/unix/bash/bind.htm
 ```bash
-bind -l   # list all keybindings
+bind -l   # list all bindable built in functions
+
+bind '"\C-k":"foofunc\n"'  # bind ctrl-k to type "foofunc" and hit newline(return), so execute foofunc
 ```
 
 ### EXECUTION ENVIRONENT

@@ -19,7 +19,7 @@ export EDITOR=nvim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
 # set ctrl-o to open neovim
-# bindkey -s '^o' 'vin\n'
+bindkey -s '^o' 'vin\n'
 
 # Colorize
 if [ $(uname) = "Darwin" ]; then
