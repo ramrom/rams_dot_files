@@ -111,7 +111,7 @@ function print_type() {
 }
 
 # shell func wrapper that will change to current dir in lf when quitting
-lf () {
+l () {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
