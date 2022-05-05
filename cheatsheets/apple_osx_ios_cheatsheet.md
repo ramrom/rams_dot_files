@@ -82,6 +82,10 @@ Terminology:
 - cmd + shift + 4           - screenshot area
 - cmd + shift + 4, space    - screenshot window
 
+- cmd + ctrl + space    - bring up emoji menu in text field
+- :<foo>:               - in text field typing `:` then text desc of emoji, then `:` will insert emoji
+                          works in slack and whatsapp, not safari for google voice
+
 ### BROWSER(CHROME/FIREFOX verified):
 - cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab
 - cmd + forward/back-arrow  - back and forth web page history

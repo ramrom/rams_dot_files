@@ -58,6 +58,8 @@ cmd + e - toggle camera
 - select all in promotions/social
     - upper right box -> select all -> should see banner to select all with label (promotion/social)
 ### keyboard mappings
+`?` bring up popup of keyboard shortcuts
+`<backtick>` toggle b/w primary/social/promotion
 `-` (goto settings and turn on keyboard shortcuts)
 `-` see https://support.google.com/mail/answer/6594?co=GENIE.Platform%3DDesktop&hl=en
 `c` - compose new email
