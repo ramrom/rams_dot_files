@@ -430,6 +430,8 @@ for i in range(0,9) | exe 'noremap g'.i.' :tabn '.i.'<CR>' | endfor
 
 " ignore compiled scala/java files, added so CtrlP will ignore these files
 set wildignore+=*/target/*
+" ignore metals LSP files, bloop compiler files
+set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
 
 " for jsonc format, which supports commenting, this will highlight comments
 autocmd FileType json syntax match Comment +\/\/.\+$+

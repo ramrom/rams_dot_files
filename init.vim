@@ -35,8 +35,6 @@ end
 EOF
 endif
 
-" set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
-
 " set shortmess-=F      " Ensure audocmd works for filetype
 " set shortmess+=c      " Avoid showing extra message when using completion
 
