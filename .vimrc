@@ -1,4 +1,5 @@
-"Sreeram's .vimrc
+"""""""""""""  Sreeram's .vimrc """"""""""""""""""""""""""""""""
+
 set nocompatible     " must be iMproved
 
 """""""""" VIM PLUG MANAGEMENT"""""""""""""""""""""""""""""""""""
@@ -46,13 +47,14 @@ elseif empty($VIM_NOPLUG)
     Plug 'majutsushi/tagbar'
 
     "neovim offers better metals and LSP experience in general
-    if has('nvim-0.5.0')
+    if has('nvim-0.7.0')
         Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol
-        Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-        "nvim-metals(uses nvim native LSP support with Lua)
+        Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
         if !empty($VIM_METALS)
-            Plug 'nvim-lua/plenary.nvim'
+            "uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
             Plug 'scalameta/nvim-metals'
+        else
+            Plug 'neovim/nvim-lspconfig'
         endif
     " jan2021, coc warns it should have 0.4.0 at least to work well
     elseif has('nvim-0.4.0')

@@ -21,6 +21,13 @@ c-x c-f find file at current path, c-x c-] use tags
 :earlier 10min - time travel!, go back to buffer state 10 minutes ago
     :later 1hr - go forward 1 hour
 
+## NEOVIM
+- plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins
+- coc.vim - supports vim and neovim, but it's beefy
+- neovim-lsp - built in lsp client, written in lua
+- nvim-metals - full metals plugin that uses nvim's builtin lsp client
+- nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals
+
 ## PLUGINS
 
 ### FZF
