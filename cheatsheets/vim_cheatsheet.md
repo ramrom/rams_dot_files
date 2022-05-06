@@ -24,7 +24,7 @@ c-x c-f find file at current path, c-x c-] use tags
 ## NEOVIM
 - plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins
 - coc.vim - supports vim and neovim, but it's beefy
-- neovim-lsp - built in lsp client, written in lua
+- neovim-lsp - neovim's built in lsp client, written in lua
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals
 
@@ -107,6 +107,7 @@ C - make selected dir node the new root node
 
 ### STARTING VIM
 vim -u NONE     - start without running vimrc
+vim -S sess.vim - load sess.vim session file
 vim foo bar     - foo and bar buffers
 vim -o  foo bar - foo and bar in diff windows
 vim -p  foo bar - foo and bar in diff tabs

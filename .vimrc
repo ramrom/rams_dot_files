@@ -48,7 +48,7 @@ elseif empty($VIM_NOPLUG)
 
     "neovim offers better metals and LSP experience in general
     if has('nvim-0.7.0')
-        Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol
+        Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
         if !empty($VIM_METALS)
             "uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
