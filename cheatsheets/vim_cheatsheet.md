@@ -29,6 +29,7 @@ c-x c-f find file at current path, c-x c-] use tags
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals
 ### LUA CONFIGS
+- vimscript, sourcing lua code: `lua require('some-lua-code')`
 - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
 - o is general settings: `vim.o.background = 'light'`
 - use space as a the leader key: `vim.g.mapleader = ' '`

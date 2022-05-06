@@ -7,32 +7,34 @@ source ~/.vimrc
 
 """" NEOVIM LUA CONFIG
 
+if has('nvim-0.5.0')
 lua << EOF
-if vim.env.VIM_METALS then
-    print("activate metals!")
+    if vim.env.VIM_METALS then
+        print("activate metals!")
 
-    if vim.fn.has('nvim-0.7') == 1 then
-        metals_config = require("metals").bare_config()
+        if vim.fn.has('nvim-0.7') == 1 then
+            metals_config = require("metals").bare_config()
 
-        metals_config.settings = {
-          showImplicitArguments = true,
-          showInferredType = true
-        }
+            metals_config.settings = {
+              showImplicitArguments = true,
+              showInferredType = true
+            }
 
-        metals_config.init_options.statusBarProvider = "on"
+            metals_config.init_options.statusBarProvider = "on"
 
-        metals_config.capabilities = capabilities
+            metals_config.capabilities = capabilities
 
-        vim.cmd([[augroup lsp]])
-        vim.cmd([[autocmd!]])
-        vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-        vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
-        vim.cmd([[augroup end]])
-    else
-        print('ERROR: need neovim >0.7.0 for metals')
+            vim.cmd([[augroup lsp]])
+            vim.cmd([[autocmd!]])
+            vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+            vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
+            vim.cmd([[augroup end]])
+        else
+            print('ERROR: need neovim >0.7.0 for metals')
+        end
     end
-end
 EOF
+endif
 
 " set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
 
