@@ -52,7 +52,7 @@ elseif empty($VIM_NOPLUG)
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
         if !empty($VIM_METALS)
             "uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
-            Plug 'scalameta/nvim-metals'
+            Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
         else
             Plug 'neovim/nvim-lspconfig'
         endif
