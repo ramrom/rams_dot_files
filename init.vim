@@ -30,38 +30,56 @@ if vim.fn.has('nvim-0.7') == 1 then
         vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
         vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
         vim.cmd([[augroup end]])
+
+        vim.opt.shortmess:remove('F')   -- Ensure audocmd works for filetype
+        vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
+
+        -- === Basic Completion Settings ===
+        -- menu = use a popup menu to show possible completions
+        -- menuone = show a menu even if there is only one match
+        -- noinsert = do not insert text for a match until user selects one
+        -- noselect = do not select a match from the menu automatically
+        vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+
+        -- Enable completions as you type.
+        -- let g:completion_enable_auto_popup = 1
+
+        -- for telescope
+        -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
+
+        -- KEYBINDINGS (many from https://github.com/scalameta/nvim-metals/discussions/39)
+        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+        vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+        vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+        vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+        vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+        vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
+        vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+        vim.keymap.set("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+        vim.keymap.set("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
+        vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+        vim.keymap.set("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+        vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+        vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
+        vim.keymap.set("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
+        vim.keymap.set("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
+        vim.keymap.set("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
+        vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
+        vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
+        vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
+        -- pgar keybindings LSP key bindings
+        -- nnoremap <silent> <leader>q   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+        -- nnoremap <silent> <leader>e   <cmd>lua vim.lsp.diagnostic.open_float()<CR>
+
+        -- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
+        vim.keymap.set("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
+        vim.keymap.set("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+        vim.keymap.set("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+        vim.keymap.set("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+        vim.keymap.set("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
+        vim.keymap.set("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
+        vim.keymap.set("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
     end
 end
 EOF
 endif
-
-" set shortmess-=F      " Ensure audocmd works for filetype
-" set shortmess+=c      " Avoid showing extra message when using completion
-
-" pgar keybindings LSP key bindings
-" nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap <silent> gi          <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references()<CR>
-" nnoremap <silent> gds         <cmd>lua vim.lsp.buf.document_symbol()<CR>
-" nnoremap <silent> gws         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-" nnoremap <silent> <leader>D   <cmd>lua vim.lsp.buf.type_definition()<CR>
-" nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
-" nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action()<CR>
-" nnoremap <silent> <leader>q   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-" nnoremap <silent> <leader>e   <cmd>lua vim.lsp.diagnostic.open_float()<CR>
-" nnoremap <silent> [c          <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
-" nnoremap <silent> ]c          <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
-
-" === Basic Completion Settings ===
-" menu = use a popup menu to show possible completions
-" menuone = show a menu even if there is only one match
-" noinsert = do not insert text for a match until user selects one
-" noselect = do not select a match from the menu automatically
-" set completeopt=menu,menuone,noinsert,noselect
-
-" Enable completions as you type.
-" let g:completion_enable_auto_popup = 1
-
-" for telescope
-" nnoremap <leader>fm <cmd>Telescope metals commands<cr>

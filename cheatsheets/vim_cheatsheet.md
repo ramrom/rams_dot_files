@@ -22,6 +22,7 @@ c-x c-f find file at current path, c-x c-] use tags
     :later 1hr - go forward 1 hour
 
 ## NEOVIM
+- nvim-lua-guide: https://github.com/nanotee/nvim-lua-guide
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 - plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins
 - coc.vim - supports vim and neovim, but it's beefy

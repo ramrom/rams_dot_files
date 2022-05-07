@@ -81,14 +81,13 @@ function print_alias_funcs_scripts() {
         local func_cmd="functions"; [ -n "$funcname" ]  && func_cmd='print -l ${(ok)functions}'
         local alias_cmd="alias"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1'
         local executables=$(hash | cut -d= -f1)
-        { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
     else # Assuming BASH
         # NOTE: set prints much more than defined functions, like env vars
         local func_cmd="set"; [ -n "$funcname" ]  && func_cmd="typeset -F | awk '{print \$3;}'"
         local alias_cmd="alias | cut -c 7-"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1 | cut -c 7-'
         local executables=$(compgen -c)
-        { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
     fi
+    { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
 }
 
 function rrc() {
