@@ -47,17 +47,18 @@ elseif empty($VIM_NOPLUG)
     Plug 'majutsushi/tagbar'
 
     "neovim offers better metals and LSP experience in general
-    if has('nvim-0.7.0')
+    if has('nvim-0.6.1')
         Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
-        if !empty($VIM_METALS)
+        if !empty($VIM_METALS) && has('nvim-0.7.0')
             "uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
             Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
         else
-            Plug 'neovim/nvim-lspconfig'
+            Plug 'neovim/nvim-lspconfig' "requires neovim 0.6.1
         endif
     " jan2021, coc warns it should have 0.4.0 at least to work well
-    elseif has('nvim-0.4.0')
+    " may2022: restrict to osx, b/c new coc needs new nodejs which isn't in standard ubunutu 22 LTS
+    elseif has('nvim-0.4.0') && has('macunix')
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
         "TODO: can enable coc by filetype
         " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
