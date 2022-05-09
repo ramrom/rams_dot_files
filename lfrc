@@ -3,12 +3,14 @@ set shell sh
 set shellopts '-eu'   # -e (exit on error), -u (error on unset vars)
 set ifs "\n"          # good seperator for $fs and $fx
 set scrolloff 10      # leave space at top and bottom
-# set icons
+set icons             # show icon before item
+set dircounts         # show # of items in dir
 set info size         # show size next to item
 set period 1          # refresh every 1 sec for dir updates
 set hidden off        # show hidden files
 set number on         # show number of items index in dir
 set drawbox           # draw borders around columns
+set tempmarks 'abcdefghijklmnopqrstuvwxzy' # set all lower case to temporary marks, sorta like vim, upper case are permanent
 
 # set preview
 set previewer ~/rams_dot_files/lf-previewer.sh
@@ -17,11 +19,9 @@ set previewer ~/rams_dot_files/lf-previewer.sh
 cmd open ${{
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
-        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
-
-# cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 # define a custom 'delete' command
 cmd delete ${{
@@ -54,29 +54,23 @@ cmd moveto ${{
 #     notify-send "📋 File(s) copied." "File(s) copies to $dest."
 # }}
 
-cmd setbg "$1"
-cmd bulkrename $vidir
-
-
 # BINDINGS
 
 # execute current file
-map x $$f
-map X !$f
+map x !$f
+map X $$f
 
 # dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
+map o open $f
+# map o $mimeopen --ask $f   #mimeopen is alternative to xdg-open in linux
 
-# map <c-f> $lf -remote "send $id select '$(fzf)'"
-# map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf)"
 map D delete
-# map C copyto
 map M moveto
-# map <c-n> push :mkdir<space>
-# map <c-r> reload
-# map <enter> shell
+# map C copyto
+map a push %mkdir<space>
+map <enter> shell
 
+# RENAME SHORTCUTS
 # map A rename # at the very end
 # map c push A<c-u> # new rename
 # map I push A<c-a> # at the very beginning
@@ -84,7 +78,3 @@ map M moveto
 # map a push A<a-b> # after extention
 # map B bulkrename
 # map b $setbg $f
-
-# map <c-e> down
-# map <c-y> up
-# map V push :!nvim<space>

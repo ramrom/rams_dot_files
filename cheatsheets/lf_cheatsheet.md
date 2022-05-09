@@ -3,14 +3,26 @@
 - docs: https://pkg.go.dev/github.com/gokcehan/lf
 - lfrc example: https://github.com/gokcehan/lf/blob/master/etc/lfrc.example
 
+- type `:` to run a lf command
+- type `!` run shell command and show output and wait
+- type `%` to run a shell command (pipe)
+- type `&` to run a shell command in background
+
 ## BINDINGS
+- w         open interactive $SHELL
+- e         edit item with $EDITOR
+- i         open with $PAGER
+- <space>   toggle mark on item
+- v         invert the marking in current dir
 - u         unmark all
-- <space>   toggle mark
 - c         clear cut/yank selections
 - y         yank
 - d         cut
 - p         paste
 - r         rename file
+- t         tag a file
+- m         create a bookmark
+- '         load a bookmark
 - unix                     windows
 - cmd open &$OPENER "$f"   cmd open &%OPENER% %f%
 - map e $$EDITOR "$f"      map e $%EDITOR% %f%

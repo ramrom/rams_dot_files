@@ -23,12 +23,15 @@ c-x c-f find file at current path, c-x c-] use tags
 
 ## NEOVIM
 - nvim-lua-guide: https://github.com/nanotee/nvim-lua-guide
+- 2019 video on why nvim is awesome by core maintainer: https://www.youtube.com/watch?v=Bt-vmPC_-Ho
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 - plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins
-- coc.vim - supports vim and neovim, but it's beefy
+- coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
 - neovim-lsp - neovim's built in lsp client, written in lua
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
+    - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals
+- nvim-dap - plugin to support debug adapter protocol
 ### LUA CONFIGS
 - vimscript, sourcing lua code: `lua require('some-lua-code')`
 - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
