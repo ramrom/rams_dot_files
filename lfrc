@@ -46,6 +46,31 @@ cmd moveto ${{
     echo "Files moved"
 }}
 
+# taken from https://github.com/gokcehan/lf/wiki/Tips
+cmd bulk-rename ${{
+    old="$(mktemp)"
+    new="$(mktemp)"
+    if [ -n "$fs" ]; then
+        fs="$(basename $fs)"
+    else
+        fs="$(ls)"
+    fi
+    printf '%s\n' "$fs" >"$old"
+    printf '%s\n' "$fs" >"$new"
+    $EDITOR "$new"
+    [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+    paste "$old" "$new" | while IFS= read -r names; do
+        src="$(printf '%s' "$names" | cut -f1)"
+        dst="$(printf '%s' "$names" | cut -f2)"
+        if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+            continue
+        fi
+        mv -- "$src" "$dst"
+    done
+    rm -- "$old" "$new"
+    lf -remote "send $id unselect"
+}}
+
 # cmd copyto ${{
 #     clear; tput cup $(($(tput lines)/3)); tput bold
 #     set -f
@@ -58,6 +83,7 @@ cmd moveto ${{
 # }}
 
 # BINDINGS
+map B bulk-rename
 
 # execute current file
 map x !$f
@@ -80,5 +106,4 @@ map <enter> shell
 # map I push A<c-a> # at the very beginning
 # map i push A<a-b><a-b><a-f> # before extention
 # map a push A<a-b> # after extention
-# map B bulkrename
 # map b $setbg $f
