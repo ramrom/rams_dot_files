@@ -8,7 +8,7 @@ source ~/.vimrc
 """" NEOVIM LUA CONFIG
 if has('nvim-0.5.0')    " older neovim versions dont support vim module and other things
 lua << EOF
-if vim.fn.has('nvim-0.6.1') == 1
+if vim.fn.has('nvim-0.6.1') == 1 then
     if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
         print("activate metals!")
 
