@@ -1,9 +1,11 @@
-# BASIC VARS
+# LFRC
+
+# SETTINGS
 set shell sh
 set shellopts '-eu'   # -e (exit on error), -u (error on unset vars)
 set ifs "\n"          # good seperator for $fs and $fx
 set scrolloff 10      # leave space at top and bottom
-set icons             # show icon before item
+# set icons             # show icon before item
 set dircounts         # show # of items in dir
 set info size         # show size next to item
 set period 1          # refresh every 1 sec for dir updates
@@ -61,15 +63,16 @@ cmd moveto ${{
 map x !$f
 map X $$f
 
-# dedicated keys for file opener actions
-map o open $f
-# map o $mimeopen --ask $f   #mimeopen is alternative to xdg-open in linux
-
 map D delete
 map M moveto
-# map C copyto
 map a push %mkdir<space>
 map <enter> shell
+
+# map C copyto
+
+# dedicated keys for file opener actions
+# map o open $f
+# map o $mimeopen --ask $f   #mimeopen is alternative to xdg-open in linux
 
 # RENAME SHORTCUTS
 # map A rename # at the very end
