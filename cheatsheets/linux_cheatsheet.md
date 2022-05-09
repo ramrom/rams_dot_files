@@ -179,6 +179,10 @@ apt-rdepends pkg
 apt-rdepends -r pkg
     - show reverse deps, AND RECURSE
 
+apt-cache policy
+    - print the apt sources and some details
+apt-cache policy somepackage
+    - show what version of a package each source makes available
 apt-cache rdepends pkg
     - basically same as apt rdepends pkg, slightly diff info
 apt-cache depends pkg

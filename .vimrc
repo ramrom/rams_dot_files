@@ -48,12 +48,13 @@ elseif empty($VIM_NOPLUG)
 
     "neovim offers better metals and LSP experience in general
     if has('nvim-0.6.1')
-        Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
+        Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
         if !empty($VIM_METALS) && has('nvim-0.7.0')
-            "uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
+            "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
             Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
         else
+            Plug 'leoluz/nvim-dap-go'          " needs delve>1.7.0, nvim-dap
             Plug 'neovim/nvim-lspconfig' "requires neovim 0.6.1
         endif
     " jan2021, coc warns it should have 0.4.0 at least to work well
