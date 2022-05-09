@@ -8,6 +8,55 @@ source ~/.vimrc
 """" NEOVIM LUA CONFIG
 if has('nvim-0.5.0')    " older neovim versions dont support vim module and other things
 lua << EOF
+
+-- TREE-SITTER CONFIG -------------------------------
+if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
+    require'nvim-treesitter.configs'.setup {
+      -- A list of parser names, or "all"
+      ensure_installed = { "c", "lua", "rust" },
+
+      -- Install parsers synchronously (only applied to `ensure_installed`)
+      sync_install = false,
+
+      -- List of parsers to ignore installing (for "all")
+      -- ignore_install = { "javascript" },
+
+      highlight = {
+        -- `false` will disable the whole extension
+         enable = true,
+        -- enable = false,
+
+        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+        -- the name of the parser)
+        -- list of language that will be disabled
+        -- disable = { "c", "rust" },
+
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+      },
+      indent = {
+          enable = true
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
+    }
+
+    vim.opt.foldmethod='expr'
+    vim.opt.foldexpr='vim_treesitter#foldexpr()'
+end
+
+--------- LSP CONFIGS -----------------------------
 if vim.fn.has('nvim-0.6.1') == 1 then
     if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
         print("activate metals!")
