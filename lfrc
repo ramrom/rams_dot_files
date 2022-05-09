@@ -36,7 +36,8 @@ cmd moveto ${{
     clear; tput cup $(($(tput lines)/3)); tput bold
     set -f
     clear; echo "Move to where?"
-    dest="$(fd -t d | fzf | sed 's|~|$HOME|' )" &&
+    fdname='fd'; [ $(uname) = "Linux" ] && fdname="fdfind"
+    dest="$(${fdname} -t d | fzf | sed 's|~|$HOME|' )" &&
     for x in $fx; do
         eval mv -iv \"$x\" \"$dest\"
     done &&
