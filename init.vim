@@ -13,13 +13,15 @@ lua << EOF
 if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all"
-      ensure_installed = { "c", "lua", "rust" },
-
-      -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = false,
+      ensure_installed = "all",
+      -- ensure_installed = { "c", "lua", "rust" },
 
       -- List of parsers to ignore installing (for "all")
       -- ignore_install = { "javascript" },
+
+
+      -- Install parsers synchronously (only applied to `ensure_installed`)
+      sync_install = false,
 
       highlight = {
         -- `false` will disable the whole extension
