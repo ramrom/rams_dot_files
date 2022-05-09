@@ -2,8 +2,9 @@
 
 # NOTE: can do PlugSnapshot in vim also
 cd ~/.vim/plugged > /dev/null
+orig=$(pwd)
 for dir in */; do
-    pushd $dir > /dev/null
+    cd ${dir}
     echo "${dir}: $(git rev-parse HEAD)"
-    popd > /dev/null
+    cd ${orig}
 done
