@@ -10,8 +10,8 @@ source ~/.vimrc
 " older neovim versions dont support vim module and other things
 if has('nvim-0.5.0')
 lua << EOF
-if vim.fn.has('nvim-0.7') == 1 then
-    if vim.env.VIM_METALS then
+if vim.fn.has('nvim-0.6.1') == 1 then
+    if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
         print("activate metals!")
 
         metals_config = require("metals").bare_config()
