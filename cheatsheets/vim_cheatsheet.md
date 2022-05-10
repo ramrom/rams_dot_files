@@ -89,6 +89,7 @@ C - make selected dir node the new root node
     - can query AST: smarter syntax highlighting (better than vim's regex), better formatting(e.g. `=`), better folding, etc
     - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
+    - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 
 ### Other Plugins
 - vim-gh-line

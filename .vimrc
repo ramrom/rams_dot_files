@@ -43,8 +43,8 @@ elseif empty($VIM_NOPLUG)
     Plug 'instant-markdown/vim-instant-markdown', { 'for': 'markdown', 'do': 'yarn install' }
     let g:instant_markdown_autostart = 0
 
-    " FIXME: TagbarToggle alway is blank window in scala source files, worked in a python project
-    Plug 'majutsushi/tagbar'
+    " reads ctags file and displays summary (vars/funcs etc) in side window
+    Plug 'preservim/tagbar'
 
     "neovim offers better metals and LSP experience in general
     if has('nvim-0.6.1')

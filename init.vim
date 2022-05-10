@@ -9,7 +9,9 @@ source ~/.vimrc
 if has('nvim-0.5.0')    " older neovim versions dont support vim module and other things
 lua << EOF
 
--- TREE-SITTER CONFIG -------------------------------
+-------------------------------------------------------------------------
+---------------------- TREE-SITTER CONFIG -------------------------------
+-------------------------------------------------------------------------
 if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all"
@@ -54,11 +56,38 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
     }
 
     vim.opt.foldmethod='expr'
-    vim.opt.foldexpr='vim_treesitter#foldexpr()'
+    vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 end
 
---------- LSP CONFIGS -----------------------------
+-------------------------------------------------------------------------
+----------------------- LSP CONFIGS ------------------------------------
+------------------------------------------------------------------------
 if vim.fn.has('nvim-0.6.1') == 1 then
+
+    -------------- DEBUG SETTINGS FOR NVIM-DAP ------------------
+    local dap = require("dap")
+
+    dap.configurations.scala = {
+      {
+        type = "scala",
+        request = "launch",
+        name = "RunOrTest",
+        metals = {
+          runType = "runOrTestFile",
+          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+        },
+      },
+      {
+        type = "scala",
+        request = "launch",
+        name = "Test Target",
+        metals = {
+          runType = "testTarget",
+        },
+      },
+    }
+
+    ------------------- METALS -----------------------------
     if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
         print("activate metals!")
 
@@ -102,32 +131,11 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         -- for telescope
         -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
 
-        -------------- Debug settings for nvim-dap ------------------
-        local dap = require("dap")
-
-        dap.configurations.scala = {
-          {
-            type = "scala",
-            request = "launch",
-            name = "RunOrTest",
-            metals = {
-              runType = "runOrTestFile",
-              --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-            },
-          },
-          {
-            type = "scala",
-            request = "launch",
-            name = "Test Target",
-            metals = {
-              runType = "testTarget",
-            },
-          },
-        }
 
         metals_config.on_attach = function(client, bufnr)
           require("metals").setup_dap()
         end
+    ------------------- NON-METALS -----------------------------
     else  -- for all other language servers, use lspconfig
         util = require "lspconfig/util"
 
@@ -148,7 +156,11 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         }
     end
 
-    -- LSP KEYBINDINGS (many from https://github.com/scalameta/nvim-metals/discussions/39)
+    -------------------------------------------------------------------------
+    ----------- LSP KEYBINDINGS --------------------------------------------
+    -------------------------------------------------------------------------
+    -- (many taken from https://github.com/scalameta/nvim-metals/discussions/39)
+
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
@@ -156,6 +168,8 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+    vim.keymap.set("n", "gtt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+    vim.keymap.set("n", "gtr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
     -- vim.keymap.set("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     -- vim.keymap.set("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
     -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
