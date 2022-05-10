@@ -185,6 +185,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
         vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
         vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
+        -- NOTE: in the tree window hit 'r' to navigate to that item
         vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
         vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
     end
@@ -194,10 +195,10 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
     -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
-    -- vim.keymap.set("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
-    -- vim.keymap.set("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
-    -- vim.keymap.set("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
-    -- vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
+    vim.keymap.set("n", "gwd", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
+    vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
+    vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
+    vim.keymap.set("n", "gwb", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
     vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
     vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
     -- pgar keybindings LSP key bindings

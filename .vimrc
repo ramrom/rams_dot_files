@@ -417,6 +417,7 @@ noremap <leader>gl :set list!<cr>
 "cheatsheet maps
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call ShowMyLeaderMap()<cr>
+noremap <leader>cg :map g<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
 noremap <leader>ca :tabnew ~/tmp/scratch.md<cr>
