@@ -64,28 +64,6 @@ end
 ------------------------------------------------------------------------
 if vim.fn.has('nvim-0.6.1') == 1 then
 
-    -------------- DEBUG SETTINGS FOR NVIM-DAP ------------------
-    local dap = require("dap")
-
-    dap.configurations.scala = {
-      {
-        type = "scala",
-        request = "launch",
-        name = "RunOrTest",
-        metals = {
-          runType = "runOrTestFile",
-          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-        },
-      },
-      {
-        type = "scala",
-        request = "launch",
-        name = "Test Target",
-        metals = {
-          runType = "testTarget",
-        },
-      },
-    }
 
     ------------------- METALS -----------------------------
     if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
@@ -132,9 +110,32 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
 
 
+        ------ METALS DAP ------------------
+        local dap = require("dap")
+        dap.configurations.scala = {
+          {
+            type = "scala",
+            request = "launch",
+            name = "RunOrTest",
+            metals = {
+              runType = "runOrTestFile",
+              --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+            },
+          },
+          {
+            type = "scala",
+            request = "launch",
+            name = "Test Target",
+            metals = {
+              runType = "testTarget",
+            },
+          },
+        }
+
         metals_config.on_attach = function(client, bufnr)
           require("metals").setup_dap()
         end
+
     ------------------- NON-METALS -----------------------------
     else  -- for all other language servers, use lspconfig
         util = require "lspconfig/util"
@@ -154,11 +155,13 @@ if vim.fn.has('nvim-0.6.1') == 1 then
             },
             single_file_support = true
         }
+
+        -- golang DAP
+        -- lua require('dap-go').setup()
     end
 
-    -------------------------------------------------------------------------
+
     ----------- LSP KEYBINDINGS --------------------------------------------
-    -------------------------------------------------------------------------
     -- (many taken from https://github.com/scalameta/nvim-metals/discussions/39)
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
