@@ -84,6 +84,12 @@ P - jump to tree root
 K/J - jmp to first/last child node of current node's parent
 C - make selected dir node the new root node
 
+### Tree-sitter (nvim)
+- parses files by language and creates ASTs
+    - can query AST: smarter syntax highlighting (better than vim's regex), better formatting(e.g. `=`), better folding, etc
+    - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- good article on it https://teknologiumum.com/posts/introductory-to-treesitter
+
 ### Other Plugins
 - vim-gh-line
     - blob-view: <leader>gh
@@ -125,6 +131,11 @@ vim -o  foo bar - foo and bar in diff windows
 vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
     - has many level, see `:help vbs`
+
+### LOGS / MESSAGES
+- `:messages` - in command mode will show list of runtime messages
+- `:echo errmsg` - shows last error message
+- `vim -V9myVim.log` - start vim at debug level 9 and write logs to `myVim.log`
 
 ### HELP
 :h index.txt basically has comprehensive default mappings
@@ -238,7 +249,7 @@ C-S - pause flow ctrl, terminal accepts input, no output
 C-Q - start block-visual, some terminals stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file
-. - repeat last command
+. - repeat last change, doesn't include motions(e.g. h/j/k/l) or commands that dont make changes
 
 ### G commands (normal mode)
 gf   - edit filename undercursor

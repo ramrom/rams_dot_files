@@ -26,7 +26,6 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
       highlight = {
         -- `false` will disable the whole extension
          enable = true,
-        -- enable = false,
 
         -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
         -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
@@ -74,11 +73,17 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
         metals_config.capabilities = capabilities
 
-        vim.cmd([[augroup lsp]])
-        vim.cmd([[autocmd!]])
-        vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-        vim.cmd([[autocmd FileType java,scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
-        vim.cmd([[augroup end]])
+        -- Autocmd that will actually be in charging of starting the whole thing
+        vim.api.nvim_create_autocmd("FileType", {
+            -- NOTE: You may or may not want java included here. You will need it if you
+            -- want basic Java support but it may also conflict if you are using
+            -- something like nvim-jdtls which also works on a java filetype autocmd.
+            pattern = { "scala", "sbt", "java" },
+            callback = function()
+                require("metals").initialize_or_attach(metals_config)
+            end,
+            group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+        })
 
         vim.opt.shortmess:remove('F')   -- Ensure audocmd works for filetype
         vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
@@ -92,11 +97,12 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
         -- Enable completions as you type.
         -- let g:completion_enable_auto_popup = 1
+        -- vim.opt.completion_enable_auto_popup=1
 
         -- for telescope
         -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
 
-        -- Debug settings for nvim-dap
+        -------------- Debug settings for nvim-dap ------------------
         local dap = require("dap")
 
         dap.configurations.scala = {

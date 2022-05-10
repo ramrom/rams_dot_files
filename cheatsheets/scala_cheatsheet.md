@@ -33,6 +33,7 @@
         ```
     - toString method is called if fooObject isnt a String
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
+    - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
 - https://docs.scala-lang.org/cheatsheets/index.html
 - good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
