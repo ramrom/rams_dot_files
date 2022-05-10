@@ -1,0 +1,22 @@
+[flags]
+current_usage = true
+# dot_marker = true
+
+[[row]]
+  [[row.child]]
+  type="net"
+  [[row.child]]
+  type="cpu"
+[[row]]
+    ratio=3
+    [[row.child]]
+      ratio=4
+      type="proc"
+    [[row.child]]
+      ratio=2
+      [[row.child.child]]
+        type="mem"
+      [[row.child.child]]
+        type="temp"
+      [[row.child.child]]
+        type="disk"
