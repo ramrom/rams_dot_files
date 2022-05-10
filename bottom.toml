@@ -1,5 +1,6 @@
 [flags]
 current_usage = true
+default_widget_type = "proc"
 # dot_marker = true
 
 [[row]]
@@ -15,8 +16,11 @@ current_usage = true
     [[row.child]]
       ratio=2
       [[row.child.child]]
+        ratio=3
         type="mem"
       [[row.child.child]]
+        ratio=2
         type="temp"
       [[row.child.child]]
+        ratio=2
         type="disk"
