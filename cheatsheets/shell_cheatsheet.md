@@ -45,6 +45,7 @@ set -o vi   # bash vi mode
 
 ### COMMAND LINE NAVIGATION (ZSH AND BASH DEFAULTS)
 - `ctrl-s` - linux pauses output to screen
+- `ctrl-t` - transpose chars on either side of point
 - `ctrl-l` - clear screen
 - `ctrl-k` - delete line after cursor (cut to clipboard)
 - `ctrl-j`,`ctrl-m` - begin new line, VIM insert mode too!

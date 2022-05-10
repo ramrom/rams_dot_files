@@ -32,12 +32,14 @@ c-x c-f find file at current path, c-x c-] use tags
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals
 - nvim-dap - plugin to support debug adapter protocol
-### LUA CONFIGS
-- vimscript, sourcing lua code: `lua require('some-lua-code')`
-- source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
-- o is general settings: `vim.o.background = 'light'`
-- use space as a the leader key: `vim.g.mapleader = ' '`
-- set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
+### LUA
+- print a val: `:lua =foo.myvar`
+- CONFIG STUFF
+    - vimscript, sourcing lua code: `lua require('some-lua-code')`
+    - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
+    - o is general settings: `vim.o.background = 'light'`
+    - use space as a the leader key: `vim.g.mapleader = ' '`
+    - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
 
 
 ## PLUGINS

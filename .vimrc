@@ -25,8 +25,8 @@ elseif empty($VIM_NOPLUG)
     Plug 'vim-airline/vim-airline-themes'
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
-    if v:version < 8022345          " neovim and vim > 8.2.2345 have native support
-        Plug 'tmux-plugins/vim-tmux-focus-events'  "used to get autoread to work below
+    if !has('nvim') && v:version < 8022345          " neovim and vim > 8.2.2345 have native support
+        Plug 'tmux-plugins/vim-tmux-focus-events'  " used to get autoread to work below
     endif
 
     "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
