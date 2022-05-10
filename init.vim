@@ -70,6 +70,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
         metals_config.settings = {
           showImplicitArguments = true,
+          showImplicitConversionsAndClasses = true,
           showInferredType = true
         }
 
@@ -174,19 +175,24 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+    vim.keymap.set("n", "ggd", "<cmd>MetalsGotoSuperMethod<CR>")
     vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
     if vim.env.VIM_METALS then
-        vim.keymap.set("n", "gtt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
-        vim.keymap.set("n", "gtr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+        vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
+        vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
+        vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
+        vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
+        vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+        vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
     end
-    -- vim.keymap.set("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-    -- vim.keymap.set("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
+    vim.keymap.set("n", "ggc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+    vim.keymap.set("n", "gga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+    vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
+    vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
     -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-    -- vim.keymap.set("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-    -- vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
     -- vim.keymap.set("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
     -- vim.keymap.set("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
