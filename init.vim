@@ -16,11 +16,8 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
     require'nvim-treesitter.configs'.setup {
       -- A list of parser names, or "all"
       ensure_installed = "all",
-      -- ensure_installed = { "c", "lua", "rust" },
 
-      -- List of parsers to ignore installing (for "all")
-      -- ignore_install = { "javascript" },
-
+      -- ignore_install = { "javascript", "rust" }, -- List of parsers to ignore installing (or "all")
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,
@@ -65,7 +62,7 @@ end
 if vim.fn.has('nvim-0.6.1') == 1 then
 
 
-    ------------------- METALS -----------------------------
+    ------------------- SCALA METALS -----------------------------
     if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
         print("activate metals!")
 
@@ -136,11 +133,11 @@ if vim.fn.has('nvim-0.6.1') == 1 then
           require("metals").setup_dap()
         end
 
-    ------------------- NON-METALS -----------------------------
+    ------------------- NON-METALS LSPs -----------------------------
     else  -- for all other language servers, use lspconfig
         util = require "lspconfig/util"
 
-        -- Golang gopls LSP setup
+        ------------ Golang gopls LSP ----------------------
         require'lspconfig'.gopls.setup{
             cmd = {"gopls", "serve"},
             filetypes = {"go", "gomod", "gotmpl" },
@@ -158,11 +155,21 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
         -- golang DAP
         -- lua require('dap-go').setup()
+
+        ------------ BASH/SHELL bashls LSP ----------------------
+        -- https://github.com/mads-hartmann/bash-language-server
+        require'lspconfig'.bashls.setup{
+            cmd = {"bash-language-server", "start"},
+            cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
+            filetypes = { "sh" },
+            root_dir = util.find_git_ancestor,
+            single_file_support = true
+        }
     end
 
 
-    ----------- LSP KEYBINDINGS --------------------------------------------
-    -- (many taken from https://github.com/scalameta/nvim-metals/discussions/39)
+    ----------- COMMON LSP KEYBINDINGS --------------------------------------------
+    -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
@@ -171,8 +178,10 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
-    vim.keymap.set("n", "gtt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
-    vim.keymap.set("n", "gtr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+    if vim.env.VIM_METALS then
+        vim.keymap.set("n", "gtt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+        vim.keymap.set("n", "gtr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+    end
     -- vim.keymap.set("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     -- vim.keymap.set("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
     -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
