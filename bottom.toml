@@ -4,9 +4,9 @@ current_usage = true
 
 [[row]]
   [[row.child]]
-  type="net"
-  [[row.child]]
   type="cpu"
+  [[row.child]]
+  type="net"
 [[row]]
     ratio=3
     [[row.child]]
