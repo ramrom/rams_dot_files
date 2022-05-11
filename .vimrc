@@ -394,6 +394,7 @@ noremap <leader>m :tabm<Space>
 noremap <leader>j :noh<cr>
 
 "fzf and nerdtree maps
+noremap <leader>; :Commands<cr>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>

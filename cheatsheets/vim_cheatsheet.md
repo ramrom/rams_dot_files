@@ -159,7 +159,7 @@ vim -V  foo     - verbose output
 :set lazyredraw - for macros dont redraw screen, faster replay
 
 ## EX MODE:
-Q - in normal mode will go into ex model
+Q - in normal mode will go into ex model, neovim doesnt have it
 visual -exit ex mode
 vi - short for visual
 

@@ -45,9 +45,9 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
         enable = true,
         keymaps = {
           init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+          node_incremental = "gni",
+          scope_incremental = "gns",
+          node_decremental = "gnd",
         },
       },
     }
@@ -165,7 +165,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     else  -- for all other language servers, use lspconfig
         util = require "lspconfig/util"
 
-        ------------ Golang gopls LSP ----------------------
+        ------------ GOLANG gopls LSP ----------------------
         require'lspconfig'.gopls.setup{
             cmd = {"gopls", "serve"},
             filetypes = {"go", "gomod", "gotmpl" },
@@ -200,8 +200,9 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+    -- `tab split` will open in new tab, default is open in current tab
+    vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
+    vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
     vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
@@ -215,11 +216,13 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         -- NOTE: in the tree window hit 'r' to navigate to that item
         vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
         vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+    else
+        vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     end
     vim.keymap.set("n", "gjc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     vim.keymap.set("n", "gja", "<cmd>lua vim.lsp.buf.code_action()<CR>")
     vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
-    vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+    vim.keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.formatting()<CR>")
     -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
     vim.keymap.set("n", "gwd", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
