@@ -48,8 +48,10 @@ elseif empty($VIM_NOPLUG)
 
     "neovim offers better metals and LSP experience in general
     if has('nvim-0.6.1')
+        Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
+
         if has('nvim-0.7.0')
-            Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+            Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}
         endif
 
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins

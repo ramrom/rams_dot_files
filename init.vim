@@ -57,6 +57,33 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
 end
 
 -------------------------------------------------------------------------
+---------------------- NVIM-BFQ CONFIG -------------------------------
+-------------------------------------------------------------------------
+require('bqf').setup({
+    auto_enable = true,
+    auto_resize_height = true, -- highly recommended enable
+    preview = {
+        win_height = 12,
+        win_vheight = 12,
+        delay_syntax = 80,
+        -- border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
+        should_preview_cb = function(bufnr, qwinid)
+            local ret = true
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+            local fsize = vim.fn.getfsize(bufname)
+            if fsize > 100 * 1024 then
+                -- skip file size greater than 100k
+                ret = false
+            elseif bufname:match('^fugitive://') then
+                -- skip fugitive buffer
+                ret = false
+            end
+            return ret
+        end
+    },
+})
+
+-------------------------------------------------------------------------
 ----------------------- LSP CONFIGS ------------------------------------
 ------------------------------------------------------------------------
 if vim.fn.has('nvim-0.6.1') == 1 then
@@ -175,12 +202,12 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-    vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
     vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
     if vim.env.VIM_METALS then
+        vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
         vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
         vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
         vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")

@@ -86,6 +86,11 @@ P - jump to tree root
 K/J - jmp to first/last child node of current node's parent
 C - make selected dir node the new root node
 
+### NVIM-BQF
+- shows preview window of current item in prefix window for nvim
+- `zf` will open a fzf prompt to fuzzy search quickfix items
+    - `ctrl-t` and x/v will open in new tab or vert/hor split
+
 ### Tree-sitter (nvim)
 - parses files by language and creates ASTs
     - can query AST: smarter syntax highlighting (better than vim's regex), better formatting(e.g. `=`), better folding, etc
