@@ -40,8 +40,13 @@ elseif empty($VIM_NOPLUG)
     Plug 'plasticboy/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
-    Plug 'instant-markdown/vim-instant-markdown', { 'for': 'markdown', 'do': 'yarn install' }
-    let g:instant_markdown_autostart = 0
+    if has('nvim') || has('patch-8.1.0')
+        Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+        let g:markdown_preview_plugin_activated = 1
+    else " this plugin is almost as good, it doesnt do puml/flowchart/katex/dot/chart/js-sequence-diagram
+        Plug 'instant-markdown/vim-instant-markdown', { 'for': 'markdown', 'do': 'yarn install' }
+        let g:instant_markdown_autostart = 0
+    endif
 
     " reads ctags file and displays summary (vars/funcs etc) in side window
     Plug 'preservim/tagbar'
@@ -282,10 +287,14 @@ endfunction
 
 let g:instant_markdown_state = 0
 function ToggleInstantMarkdown()
-    if g:instant_markdown_state == 0
-        let g:instant_markdown_state = 1 | exe ':InstantMarkdownPreview' | echo 'instant markdown ON'
+    if g:markdown_preview_plugin_activated == 1
+        exe ':MarkdownPreviewToggle'
     else
-        let g:instant_markdown_state = 0 | exe ':InstantMarkdownStop' | echo 'instant markdown OFF'
+        if g:instant_markdown_state == 0
+            let g:instant_markdown_state = 1 | exe ':InstantMarkdownPreview' | echo 'instant markdown ON'
+        else
+            let g:instant_markdown_state = 0 | exe ':InstantMarkdownStop' | echo 'instant markdown OFF'
+        endif
     endif
 endfunction
 
@@ -482,7 +491,7 @@ let g:gh_line_blame_map = '<leader>wb'
 let g:gh_repo_map = '<leader>wo'
 let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 
-""""""""""""""""""""vim-instant-mark""""""""""""""""""""""""""""
+""""""""""""""""""""vim-instant-markdown""""""""""""""""""""""""""""
 let g:instant_markdown_mermaid = 1
 let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
