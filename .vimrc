@@ -402,7 +402,7 @@ noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
-noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
+" noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
 " noremap <leader>w <C-w>w
 " noremap <leader>W <C-w>W
 
@@ -421,8 +421,9 @@ noremap <leader>h :split<CR><leader>w
 noremap <leader>m :tabm<Space>
 
 "repeat the last command
-"NOTE: maps with the trailing `:` have like a second delay, why?
+" NOTE: whatever i map leader-w to, it has a one sec delay.. why?
 noremap <leader>w :@:<CR>
+
 " turn off highlighting till next search
 noremap <leader>j :noh<cr>
 "poormans zoom, opens buffer in current window in new tab
@@ -431,7 +432,7 @@ noremap <leader>z :tabnew %<CR>
 "fzf and nerdtree maps
 noremap <leader><leader>h :Helptags!<cr>
 noremap <leader>; :Commands<cr>
-noremap <leader>u :History:<cr>
+noremap <leader>r :History:<cr>
 noremap <leader><leader>c :BCommits<cr>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
@@ -439,8 +440,9 @@ noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
-noremap <leader>r :Rg<CR>
-noremap <leader>R :Rg!<CR>
+" whatever i map leader-u to, it has a one sec delay.. why?
+noremap <leader>u :Rg<CR>
+noremap <leader>U :Rg!<CR>
 noremap <leader>i :FZFMru<CR>
 
 noremap <leader>ll :Lines<CR>
