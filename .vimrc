@@ -421,8 +421,7 @@ noremap <leader>h :split<CR><leader>w
 noremap <leader>m :tabm<Space>
 
 "repeat the last command
-" NOTE: whatever i map leader-w to, it has a one sec delay.. why?
-noremap <leader>w :@:<CR>
+noremap <leader><leader>r :@:<CR>
 
 " turn off highlighting till next search
 noremap <leader>j :noh<cr>
@@ -440,9 +439,8 @@ noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
-" whatever i map leader-u to, it has a one sec delay.. why?
-noremap <leader>u :Rg<CR>
-noremap <leader>U :Rg!<CR>
+noremap <leader>k :Rg<CR>
+noremap <leader>K :Rg!<CR>
 noremap <leader>i :FZFMru<CR>
 
 noremap <leader>ll :Lines<CR>
