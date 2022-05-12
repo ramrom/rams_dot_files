@@ -200,9 +200,12 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    -- `tab split` will open in new tab, default is open in current tab
+
+    -- `tab split` will open in new tab, default is open in current tab, no opt for this natively
+    -- see https://github.com/scalameta/nvim-metals/discussions/381
     vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
+
     vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")

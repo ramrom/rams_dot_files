@@ -198,6 +198,7 @@ bd 3, closes buffer # 3
 :close - close current window
 :new    - open new window and new buffer
 :e #    - open last opened file
+:@:     - run the last command run
 
 
 ## INSERT MODE

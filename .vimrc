@@ -147,7 +147,7 @@ set number                      " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
-" set cursorline cursorcolumn                " highlight line and column cursor is on
+set cursorline                  " highlight line and column cursor is on
 
 set formatoptions+=j            " Delete comment character when joining commented lines
 
@@ -334,7 +334,7 @@ endfunction
 """""""""" CUSTOM MAPPINGS """"""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
     "NORMAL MODE
-        "<Leader>a/k/l/w/u/;/'
+        "<Leader>a/k/l'
             " a is earmarked for smart script run or test run
         "<Leader><Leader>
         "c-m/c-n/c-g/c-s/c-q
@@ -379,6 +379,8 @@ noremap <leader>w :echo "USE CTRL-HJKL!"<CR>
 
 noremap <leader>q :call TabBufQuit()<cr>
 noremap <leader>Q :qa<cr>
+noremap <leader><leader>q :qa<cr>
+noremap <leader><leader>Q :qa!<cr>
 noremap <leader>s :w<cr>
 noremap <leader>S :call SaveDefinedSession()<CR>
 noremap <leader>y "+y
@@ -387,14 +389,21 @@ noremap <leader>t :tabnew<CR>
 noremap <leader>e :Explore<CR>
 noremap <leader>v :vsplit<CR><leader>w
 noremap <leader>h :split<CR><leader>w
-"poormans zoom, opens buffer in current window in new tab
-noremap <leader>z :tabnew %<CR>
 noremap <leader>m :tabm<Space>
+
+"repeat the last command
+"NOTE: maps with the trailing `:` have like a second delay, why?
+noremap <leader>w :@:<CR>
 " turn off highlighting till next search
 noremap <leader>j :noh<cr>
+"poormans zoom, opens buffer in current window in new tab
+noremap <leader>z :tabnew %<CR>
 
 "fzf and nerdtree maps
+noremap <leader><leader>h :Helptags!<cr>
 noremap <leader>; :Commands<cr>
+noremap <leader>u :History:<cr>
+noremap <leader><leader>c :BCommits<cr>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>N :NERDTreeFind<CR>
 noremap <leader>o :Files<CR>
@@ -420,15 +429,16 @@ noremap <leader>gS :call ToggleSignifyAll()<cr>
 noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gh :SignifyToggleHighlight<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>
-noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
 noremap <leader>gl :set list!<cr>
+autocmd FileType markdown noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 
 "cheatsheet maps
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cc :call ShowMyLeaderMap()<cr>
+noremap <leader>cm :Maps<cr>
 noremap <leader>cg :map g<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
