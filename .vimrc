@@ -110,6 +110,12 @@ endif
 " syntax on                  "syntax highlighting
 set t_Co=256
 
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
+
 try  " if loading vim without plugins, onedark will fail, default to ir_black
     augroup colorextend
         autocmd!
@@ -154,7 +160,22 @@ set formatoptions+=j            " Delete comment character when joining commente
 " disable autocommenting on o and O in normal
 autocmd FileType * setlocal formatoptions-=o
 
-"SEARCHING
+" for jsonc format, which supports commenting, this will highlight comments
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+"vim73 thinks *.md is modula2, markdown files also have this extension
+if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
+    autocmd BufNewFile,BufRead *.md set filetype=markdown
+endif
+
+"vim 8.2 thinks .sc is markdown...
+autocmd BufNewFile,BufRead *.sc set filetype=scala
+
+" any file name starting with Jenkinsfile should be groovy
+autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
+
+
+"""""""""""""SEARCHING """"""""""""""""""
 set hlsearch                    " highlight search
 "TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
 if has('nvim')
@@ -166,18 +187,26 @@ set incsearch               " searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
 
+
 "TODO: fix, i - included files, kspell dictionary
 " set complete-=i | set complete+=kspell
 
-" FOLDING
+""""""""""""" FOLDING """"""""""""""""""""""""""""""
 set foldmethod=indent
 set nofoldenable            " dont fold everything when opening buffers
 
-" DEFAULT STATUS LINE
+"""""""""""" INDENT/TABS """""""""""""""""""""""
+set autoindent              " indent on new line for inner scopes in code
+set shiftwidth=4            " use 4 spaces for autoindent (cindent)
+set tabstop=4               " space 4 columns when reading a <tab> char in file
+set softtabstop=4           " complicated, see docs
+set expandtab               " use spaces when tab is pressed
+
+"""""""""""" DEFAULT STATUS LINE """""""""""""""""""
 set ls=2                    " line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
-"SHOW TABS AND TRAILING SPACES WITH SPECIAL CARS
+"""""SHOW TABS AND TRAILING SPACES WITH SPECIAL CARS
 set list
 set listchars=tab:»_,trail:·
 if has('nvim')  " highlight dimgrey, vim and neovim use diff group name
@@ -186,17 +215,15 @@ else
     highlight SpecialKey ctermfg=8 guifg=DimGrey
 endif
 
-""" INDENT/TABS
-set autoindent              " indent on new line for inner scopes in code
-set shiftwidth=4            " use 4 spaces for autoindent (cindent)
-set tabstop=4               " space 4 columns when reading a <tab> char in file
-set softtabstop=4           " complicated, see docs
-set expandtab               " use spaces when tab is pressed
+" ignore compiled scala/java files, added so CtrlP will ignore these files
+set wildignore+=*/target/*
+" ignore metals LSP files, bloop compiler files
+set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""" CUSTOM FUNCTION """"""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""" RELOADING BUFFERS CHANGED OUTSIDE OF VIM SESSION """""""""""""""""
 " autoread alone doesn't really work, triggers on external commands
@@ -331,7 +358,9 @@ function TabBufQuit()
     else | exe ":q" | endif
 endfunction
 
-"""""""""" CUSTOM MAPPINGS """"""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""" KEY MAPPINGS """"""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
     "NORMAL MODE
         "<Leader>a/k/l'
@@ -456,25 +485,6 @@ noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 "Quickly switch between up to 9 vimtabs
 for i in range(0,9) | exe 'noremap g'.i.' :tabn '.i.'<CR>' | endfor
 "TODO: maybe try this:  noremap <Leader><Leader>a :tabn 2<CR>
-
-" ignore compiled scala/java files, added so CtrlP will ignore these files
-set wildignore+=*/target/*
-" ignore metals LSP files, bloop compiler files
-set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
-
-" for jsonc format, which supports commenting, this will highlight comments
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-"vim73 thinks *.md is modula2, markdown files also have this extension
-if v:version <= 703   " 7.3 is 703 not 730, vim versioning is wierd
-    autocmd BufNewFile,BufRead *.md set filetype=markdown
-endif
-
-"vim 8.2 thinks .sc is markdown...
-autocmd BufNewFile,BufRead *.sc set filetype=scala
-
-" any file name starting with Jenkinsfile should be groovy
-autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
 
 " TODO: get strikethrough for neovim in markdown/html
     " default html.vim files use underline unless: `if v:version > 800 || v:version == 800 && has("patch1038")`
