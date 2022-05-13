@@ -203,6 +203,7 @@ set softtabstop=4           " complicated, see docs
 set expandtab               " use spaces when tab is pressed
 
 """""""""""" DEFAULT STATUS LINE """""""""""""""""""
+set cmdheight=2             " 2 lines for command
 set ls=2                    " line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
@@ -251,7 +252,13 @@ endfunction
 
 function ToggleFoldMethod()
     "1 ? echo 'indent' : echo 'not indent'  "TODO: wtf vim, basic ternary errors
-    if &foldmethod == "indent" | set foldmethod=syntax | else | set foldmethod=indent | endif
+    if &foldmethod == "indent"
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+    else
+        set foldmethod=indent
+        set foldexpr=
+    endif
 endfunction
 
 " if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows

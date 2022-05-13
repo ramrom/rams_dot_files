@@ -339,7 +339,7 @@ C-u - move back 1/2 a screen
 C-i - go to newer cursor position in jump list
 C-o - go to older cursor position in jump list
 C-t - go back one in tag stack
-Tip Prefix a cursor movement command with a number to repeat it.
+- Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
 ## EDITING:

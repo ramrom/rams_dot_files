@@ -51,9 +51,6 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
         },
       },
     }
-
-    vim.opt.foldmethod='expr'
-    vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 end
 
 -------------------------------------------------------------------------
