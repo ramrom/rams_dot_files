@@ -452,22 +452,27 @@ noremap <leader>i :FZFMru<CR>
 noremap <leader>ll :Lines<CR>
 noremap <leader>L :Lines<CR>
 
+"Git-type stuff
+noremap <leader><leader>g :G<CR>
 noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gvdiffsplit master<cr>
 noremap <leader>g<c-d> :tab Gvdiffsplit HEAD^<cr>
 noremap <leader>gb :BCommits<CR>
 noremap <leader>gB :BCommits!<CR>
+noremap <leader>gc :Commits<CR>
+noremap <leader>gC :Commits!<CR>
+noremap <leader>gS :call ToggleSignifyAll()<cr>
+noremap <leader>gs :SignifyToggle<cr>
+noremap <leader>gh :SignifyToggleHighlight<cr>
+
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
 noremap <leader>gI :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
-noremap <leader>gS :call ToggleSignifyAll()<cr>
-noremap <leader>gs :SignifyToggle<cr>
-noremap <leader>gh :SignifyToggleHighlight<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
-noremap <leader>gc :set ignorecase!<cr>:set ignorecase?<cr>
+noremap <leader>gz :set ignorecase!<cr>:set ignorecase?<cr>
 noremap <leader>gx :set number!<CR>
 noremap <leader>gl :set list!<cr>
 autocmd FileType markdown noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
