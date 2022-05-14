@@ -90,9 +90,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
 
     ------------------- SCALA METALS -----------------------------
-    if vim.env.VIM_METALS and vim.fn.has('nvim-0.7') == 1 then
-        print("activate metals!")
-
+    if vim.fn.has('nvim-0.7') == 1 then
         metals_config = require("metals").bare_config()
 
         metals_config.settings = {
@@ -160,40 +158,39 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         metals_config.on_attach = function(client, bufnr)
           require("metals").setup_dap()
         end
-
-    ------------------- NON-METALS LSPs -----------------------------
-    else  -- for all other language servers, use lspconfig
-        util = require "lspconfig/util"
-
-        ------------ GOLANG gopls LSP ----------------------
-        require'lspconfig'.gopls.setup{
-            cmd = {"gopls", "serve"},
-            filetypes = {"go", "gomod", "gotmpl" },
-            root_dir = util.root_pattern("go.mod", ".git"),
-            settings = {
-              gopls = {
-                analyses = {
-                  unusedparams = true,
-                },
-                staticcheck = true,
-              },
-            },
-            single_file_support = true
-        }
-
-        -- golang DAP
-        -- lua require('dap-go').setup()
-
-        ------------ BASH/SHELL bashls LSP ----------------------
-        -- https://github.com/mads-hartmann/bash-language-server
-        require'lspconfig'.bashls.setup{
-            cmd = {"bash-language-server", "start"},
-            cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
-            filetypes = { "sh" },
-            root_dir = util.find_git_ancestor,
-            single_file_support = true
-        }
     end
+
+    ------------------- LSP-Configs -----------------------------
+    util = require "lspconfig/util"
+
+    ------------ GOLANG gopls LSP ----------------------
+    require'lspconfig'.gopls.setup{
+        cmd = {"gopls", "serve"},
+        filetypes = {"go", "gomod", "gotmpl" },
+        root_dir = util.root_pattern("go.mod", ".git"),
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+        single_file_support = true
+    }
+
+    -- golang DAP
+    -- lua require('dap-go').setup()
+
+    ------------ BASH/SHELL bashls LSP ----------------------
+    -- https://github.com/mads-hartmann/bash-language-server
+    require'lspconfig'.bashls.setup{
+        cmd = {"bash-language-server", "start"},
+        cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
+        filetypes = { "sh" },
+        root_dir = util.find_git_ancestor,
+        single_file_support = true
+    }
 
 
     ----------- COMMON LSP KEYBINDINGS --------------------------------------------
@@ -210,18 +207,21 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
-    if vim.env.VIM_METALS then
-        vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
-        vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
-        vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
-        vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
-        vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
-        -- NOTE: in the tree window hit 'r' to navigate to that item
-        vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
-        vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
-    else
-        vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
-    end
+    vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "scala", "sbt", "java" },
+        callback = function()
+            vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
+            vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
+            vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
+            vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
+            vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
+            -- NOTE: in the tree window hit 'r' to navigate to that item
+            vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+            vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+        end,
+        group = vim.api.nvim_create_augroup("nvim-metals-maps", { clear = true })
+    })
     vim.keymap.set("n", "gjc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     vim.keymap.set("n", "gja", "<cmd>lua vim.lsp.buf.code_action()<CR>")
     vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])

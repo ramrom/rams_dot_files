@@ -56,18 +56,15 @@ elseif empty($VIM_NOPLUG)
         Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
 
         if has('nvim-0.7.0')
-            Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}
+            Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+            "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
+            Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
         endif
 
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
         Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
-        if !empty($VIM_METALS) && has('nvim-0.7.0')
-            "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
-            Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
-        else
-            Plug 'leoluz/nvim-dap-go'          " needs delve>1.7.0, nvim-dap
-            Plug 'neovim/nvim-lspconfig' "requires neovim 0.6.1
-        endif
+        Plug 'leoluz/nvim-dap-go'     "needs delve>1.7.0, nvim-dap
+        Plug 'neovim/nvim-lspconfig'  "requires neovim 0.6.1
     " jan2021, coc warns it should have 0.4.0 at least to work well
     " may2022: restrict to osx, b/c new coc needs new nodejs which isn't in standard ubunutu 22 LTS
     elseif has('nvim-0.4.0') && has('macunix')
@@ -153,7 +150,7 @@ set number                      " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set display+=lastline           " display lastline even if its super long
 " set tw=0                        " set textwidth to unlimited (e.g. vim uses tw=78 for .vim filetype and it's annoying)
-set cursorline                  " highlight line and column cursor is on
+" set cursorline                  " highlight line and column cursor is on
 
 set formatoptions+=j            " Delete comment character when joining commented lines
 

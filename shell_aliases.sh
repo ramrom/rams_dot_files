@@ -1,6 +1,5 @@
 # VIM
 alias vin='nvim'
-alias vinm='VIM_METALS=1 vin'
 alias svi='VIM_NOPLUG=1 vim'    # simple
 alias ssvi='vim -u NONE'        # super simple
 alias vina='VIM_NO_AUTOREAD=1 vi'
@@ -14,6 +13,8 @@ alias lail='ls -hail'
 alias lrt='ls -lrt'
 alias ifschar='printf "%q\n" "$IFS"'
 alias rd='cd ~/rams_dot_files'
+alias docs='cd ~/Documents'
+alias down='cd ~/Downloads'
 alias tp='cd ~/tmp'
 alias lsoftcplisten='lsof -nP -iTCP -sTCP:LISTEN'
 alias lsofudplisten='lsof -nP -iUDP'
