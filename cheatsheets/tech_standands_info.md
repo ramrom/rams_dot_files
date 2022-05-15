@@ -181,9 +181,15 @@
 - it's fully FOSS, can self host a server, has a cli, can do mobile/desktop for free (unlike lastpass)
 - premium individual is $10/year, offers 2FA, emergency access, file share/upload
 - autofill https://bitwarden.com/help/article/auto-fill-browser/
+    - cmd+shift+Y activate extension
     - cmd+shift+L for autofill
+    - cmd+shift+9 generate new password and copy to clipboard
 - excluded domains: browser ext -> settings -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
+
+## XBROWSWERSYNC
+- full FOSS, can self host, works in firefox/chrome/brave/edge
+- `ctrl + space` is shortcut to bring up extension to search bookmarks
 
 ## CLOUD DRIVES
 - dropbox

@@ -37,7 +37,7 @@ elseif empty($VIM_NOPLUG)
     endif
 
     Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
-    Plug 'plasticboy/vim-markdown'
+    Plug 'preservim/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
     if has('nvim') || has('patch-8.1.0')
