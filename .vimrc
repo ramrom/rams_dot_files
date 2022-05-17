@@ -367,7 +367,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
     "NORMAL MODE
-        "<Leader>a/k/l'
+        "<Leader>a/k/l/x'
             " a is earmarked for smart script run or test run
         "<Leader><Leader>
         "c-m/c-n/c-g/c-s/c-q

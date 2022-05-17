@@ -44,10 +44,10 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "gnn",
-                node_incremental = "gni",
-                scope_incremental = "gns",
-                node_decremental = "gnd",
+                init_selection = 'gn',
+                node_incremental = '<TAB>',
+                node_decremental = '<S-TAB>',
+                scope_incremental = '<CR>',
             },
         },
     }
