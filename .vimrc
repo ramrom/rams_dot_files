@@ -200,7 +200,7 @@ set softtabstop=4           " complicated, see docs
 set expandtab               " use spaces when tab is pressed
 
 """""""""""" DEFAULT STATUS LINE """""""""""""""""""
-set cmdheight=2             " 2 lines for command
+" set cmdheight=2             " 2 lines for command
 set ls=2                    " line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 

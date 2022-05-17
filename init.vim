@@ -14,42 +14,42 @@ lua << EOF
 -------------------------------------------------------------------------
 if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
     require'nvim-treesitter.configs'.setup {
-      -- A list of parser names, or "all"
-      ensure_installed = "all",
+        -- A list of parser names, or "all"
+        ensure_installed = "all",
 
-      -- ignore_install = { "javascript", "rust" }, -- List of parsers to ignore installing (or "all")
+        -- ignore_install = { "javascript", "rust" }, -- List of parsers to ignore installing (or "all")
 
-      -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = false,
+        -- Install parsers synchronously (only applied to `ensure_installed`)
+        sync_install = false,
 
-      highlight = {
-        -- `false` will disable the whole extension
-         enable = true,
+        highlight = {
+            -- `false` will disable the whole extension
+             enable = true,
 
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        disable = { "markdown" },
+            -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+            -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+            -- the name of the parser)
+            -- list of language that will be disabled
+            disable = { "markdown" },
 
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-      },
-      indent = {
-          enable = true
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "gnn",
-          node_incremental = "gni",
-          scope_incremental = "gns",
-          node_decremental = "gnd",
+            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+            -- Using this option may slow down your editor, and you may see some duplicate highlights.
+            -- Instead of true it can also be a list of languages
+            additional_vim_regex_highlighting = false,
         },
-      },
+        indent = {
+            enable = true
+        },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "gnn",
+                node_incremental = "gni",
+                scope_incremental = "gns",
+                node_decremental = "gnd",
+            },
+        },
     }
 
     vim.opt.foldmethod='expr'
@@ -141,8 +141,8 @@ if vim.fn.has('nvim-0.6.1') == 1 then
             request = "launch",
             name = "RunOrTest",
             metals = {
-              runType = "runOrTestFile",
-              --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+                runType = "runOrTestFile",
+                --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
             },
           },
           {
@@ -150,13 +150,13 @@ if vim.fn.has('nvim-0.6.1') == 1 then
             request = "launch",
             name = "Test Target",
             metals = {
-              runType = "testTarget",
+                runType = "testTarget",
             },
           },
         }
 
         metals_config.on_attach = function(client, bufnr)
-          require("metals").setup_dap()
+            require("metals").setup_dap()
         end
     end
 
