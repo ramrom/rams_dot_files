@@ -80,9 +80,13 @@ elseif empty($VIM_NOPLUG)
         endif
     endif
 
-    "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
-    "TODO: indentLine displays `"` chars `|` or disspapear in json files...
-    Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+    if has('nvim')
+        Plug 'lukas-reineke/indent-blankline.nvim'
+    else
+        "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
+        "TODO: indentLine displays `"` chars `|` or disspapear in json files...
+        Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+    endif
 
     " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 
@@ -316,6 +320,14 @@ function ToggleSignifyAll()
     endif
 endfunction
 
+function MyIndentLinesToggle()
+    if has('nvim')
+        exe ':IndentBlanklineToggle'
+    else
+        exe ':IndentLinesToggle'
+    endif
+endfunction
+
 let g:instant_markdown_state = 0
 function ToggleInstantMarkdown()
     if g:markdown_preview_plugin_activated == 1
@@ -465,7 +477,7 @@ noremap <leader>gh :SignifyToggleHighlight<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
-noremap <leader>gI :IndentLinesToggle<cr>
+noremap <leader>gI :call MyIndentLinesToggle()<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>

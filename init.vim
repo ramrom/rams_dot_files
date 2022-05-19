@@ -247,5 +247,16 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     --vim.keymap.set("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
     --vim.keymap.set("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
 end
+
+-------------------------------------------------------------------------
+----------------------- INDENT-BLANKLINE ------------------------------------
+------------------------------------------------------------------------
+vim.opt.list = true
+
+require("indent_blankline").setup {
+    show_end_of_line = true,
+}
+
 EOF
+
 endif
