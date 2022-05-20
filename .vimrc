@@ -307,7 +307,8 @@ function RemoveTrailingWhiteSpace()
     execute '%s/\s\+$//e'
 endfunction
 
-"globally disable indentLine by default
+"globally disable indentLine and indent_blankline by default
+let g:indent_blankline_enabled = 0
 let g:indentLine_enabled = 0
 
 "NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers (call SignifyToggle)

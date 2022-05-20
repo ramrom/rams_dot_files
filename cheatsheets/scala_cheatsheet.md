@@ -47,7 +47,7 @@
 
 
 ### DATA STRUCTURES
-- List
+#### LIST/ARRAY
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
@@ -57,6 +57,13 @@
 - slice an "array" (`Array` or `List` or `String`)
     - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
     - `"hi there".slice(2,5)` -> returns `" th"`
+#### MAP/ASSOCIATIVE-ARRAY
+- https://docs.scala-lang.org/overviews/collections-2.13/maps.html
+
+```scala
+val m: Map[String, Int] = Map.empty
+m += ("foo", 1)    // appending an item for mutable Map
+```
 
 
 ## CONCURRENCY
