@@ -23,6 +23,7 @@ c-x c-f find file at current path, c-x c-] use tags
 
 ## NEOVIM
 - nvim-lua-guide: https://github.com/nanotee/nvim-lua-guide
+- sept2020 good video on why lua is great and a great choice for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
 - 2019 video on why nvim is awesome by core maintainer: https://www.youtube.com/watch?v=Bt-vmPC_-Ho
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 - plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins

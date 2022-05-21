@@ -307,10 +307,6 @@ function RemoveTrailingWhiteSpace()
     execute '%s/\s\+$//e'
 endfunction
 
-"globally disable indentLine and indent_blankline by default
-let g:indent_blankline_enabled = 0
-let g:indentLine_enabled = 0
-
 "NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers (call SignifyToggle)
 let g:signify_disable_by_default = 0
 function ToggleSignifyAll()
@@ -536,6 +532,7 @@ let g:gh_repo_map = '<leader>wo'
 let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 
 """"""""""""""""""""vim-instant-markdown""""""""""""""""""""""""""""
+let g:markdown_preview_plugin_activated = 1
 let g:instant_markdown_mermaid = 1
 let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
@@ -593,6 +590,13 @@ endif
 " autocmd VimEnter,Colorscheme * hi IndentGuidesOdd  ctermbg=234
 " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=236
 " " autocmd VimEnter,Colorscheme * hi IndentGuidesEven ctermbg=017
+
+"""""""""""""" IDENTLINE AND INDENT_BLANKLINE """""""""""""""""""""""""""""""
+"globally disable indentLine and indent_blankline by default
+let g:indent_blankline_enabled = 0
+let g:indentLine_enabled = 0
+
+
 
 " load a local vimrc file if it exists
 call SourceIfExists('~/.vimrc.local')
