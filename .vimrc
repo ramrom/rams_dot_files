@@ -489,12 +489,12 @@ noremap <leader>cc :call ShowMyLeaderMap()<cr>
 noremap <leader>cm :Maps<cr>
 noremap <leader>cg :map g<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
+noremap <leader>cl :exe ':Files' $MY_NOTES_DIR<cr>
 noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
 noremap <leader>ca :tabnew ~/tmp/scratch.md<cr>
 noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>
-noremap <leader>cl :vsplit ~/rams_dot_files/cheatsheets/linux_cheatsheet.md<cr>
 noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.md<cr>
 noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
 
