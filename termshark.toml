@@ -1,0 +1,4 @@
+[main]
+    colors = true
+    dark-mode = true
+    theme-256 = "dracula"
