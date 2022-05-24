@@ -1,4 +1,10 @@
+
 [main]
-    colors = true
-    dark-mode = true
-    theme-256 = "dracula"
+  color-tsharks = ["/usr/local/bin/tshark"]
+  dark-mode = true
+  key-mappings = ["<C-d> <PgDn>", "<C-u> <PgUp>"]
+  last-used-tshark = "/usr/local/bin/tshark"
+  packet-colors = true
+  theme-256 = "dracula"
+  theme-truecolor = "dracula"
+  validated-tsharks = ["/usr/local/bin/tshark"]

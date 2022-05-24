@@ -60,9 +60,9 @@ if [ -n "$file" ]; then
         "ctrl-o") open "$file" ;;
         "ctrl-space")
             [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
-            echo "cd $(dirname "$file")" ;;
+            echo "cd '$(dirname "$file")'" ;;
         "ctrl-i")
-            cmd="${EDITOR:-vin} $file"
+            cmd="${EDITOR:-vin} '$file'"
             [ -z "$FUNC_WRAP" ] && eval "$cmd" && exit
             echo "$cmd" ;;
         "ctrl-s")
