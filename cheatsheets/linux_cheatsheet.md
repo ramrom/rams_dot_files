@@ -329,18 +329,24 @@ drive naming convention:
 - fda - first SATA drive, hdb - 2nd IDE drive
 - hdb1 - 1st partition on 2nd IDE drive
 
-- DIR conventions
-    - /         - root filesystem
-    - /home     - user directories
-    - /export   - data shared over the network mount
-    - /mnt      - temporary mount point
-    - /media    - removable devices like usb (so not internal HDD)
+### DIR CONVENTIONS
+- /         - root filesystem
+- /home     - user directories
+- /root     - home dir for root user
+- /dev      - devices themselves
+- /sys      - info on devices, drivers, kernel modules (similar to proc but maybe better)
+- /proc     - psuedo filesystem that shows details on process info and general system info
+- /lib      - shared libraries between different binaries
+- /mnt      - temporary mount point
+- /var      - sys specific variable(changing) files: logs, spool files, web server data files
+- /export   - data shared over the network mount
+- /media    - removable devices like usb (so not internal HDD)
 
-special devices:
-/dev/null   - write output to this device to throw it away
-/dev/zero   - obtain null characters from this device
+### SPECIAL DEVICES
+- /dev/null   - write output to this device to throw it away
+- /dev/zero   - obtain null characters from this device
     - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
-/dev/random - generate pseduorandom numbers from this device
+- /dev/random - generate pseduorandom numbers from this device
 
 
 
