@@ -249,6 +249,9 @@ chafa foo.jpg
 # MEDIAINFO     - show mediafile metadata (like mdls for osx)
 mediainfo foo.mp4
 
+# VERACRYPT
+veracrypt -tc sometruecryptfile  # mount an old truecrypt file
+
 # YOUTUBE-DL
 youtube-dl -F https://www.youtube.com/watch?v=dfidfa     # show available formats
 youtube-dl -f 140 https://www.youtube.com/watch?v=dfidfa     # download specific format
