@@ -1,3 +1,5 @@
+# see https://github.com/universal-ctags/ctags-xparsers/issues/2
+
 --langdef=scala
 --langmap=scala:.scala
 --regex-scala=/\bclass\s+(\w+)/\1/c,classes/
