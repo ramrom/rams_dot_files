@@ -2,7 +2,7 @@
 
 # FPS - Fzf over ps processes
 
-usage () { echo "Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ] "; }
+usage () { echo "Usage: fps [ -h(help) ] [ -j FZF_HEIGHT ] "; }
 
 while getopts 'hj:' x; do
     case $x in
