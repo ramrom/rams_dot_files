@@ -123,13 +123,14 @@ l () {
 alias bw='batwhich'
 function batwhich() {
     local type=$(print_type "$1")
+    BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
     case "$type" in
         function|alias)
             local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd="whence -f"
-            eval $defcmd "$1" | bat --color=always -l sh ;;
+            eval $defcmd "$1" | $BATBIN --color=always -l sh ;;
         executable)
             local fullpath="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpath="whence -c"
-            bat --color=always "$(eval $fullpath "$1")" ;;
+            $BATBIN --color=always "$(eval $fullpath "$1")" ;;
         *) echo "print_type returned $type for "$1", unhandled by $0!" ;;
     esac
 }

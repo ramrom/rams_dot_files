@@ -298,7 +298,10 @@ snap refresh --list
 
 ### XSCREENSAVER
 - https://www.jwz.org/xscreensaver/
-- `DISPLAY=:1 xscreensaver-command --select 10` - select the 10th screensaver in program list to run now
+- https://linux.die.net/man/1/xscreensaver-command - CLI tool
+    - `DISPLAY=:1 xscreensaver-command -select 10` - select the 10th screensaver in program list to run now
+    - `DISPLAY=:1 xscreensaver-command -deactivate` - stop currently running screensaver, `activate` is opposite
+    - `DISPLAY=:1 xscreensaver-command -exit` - stop the screensaver daemon
 - `.xscreensaver` config file uses `-` at beginning of program name to represent that it's unselected
     - mode values: `off` = disabled, `random` = randomly choose, `one` = just the one selected
 

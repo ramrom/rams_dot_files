@@ -14,8 +14,9 @@ while getopts 'hwj:' x; do
 done
 shift $(($OPTIND - 1))
 
-FDNAME="fd"; [ `uname` = "Linux" ] && FDNAME="fdfind"
-[ $(uname) = "Linux" ] && alias open='xdg-open'
+FDNAME="fd"; [ $(uname) = "Linux" ] && FDNAME="fdfind"
+BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
+OPENBIN="open"; [ $(uname) = "Linux" ] && OPENBIN='xdg-open'
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 if [ "$1" = "h" ]; then
@@ -51,13 +52,13 @@ out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
     --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \
-    --preview 'bat --style=numbers --color=always {} | head -500' \
+    --preview "$BATBIN --style=numbers --color=always {} | head -500" \
     --preview-window=:wrap)
 key=$(echo "$out" | head -1)
 file=$(echo "$out" | tail -1)
 if [ -n "$file" ]; then
     case "$key" in
-        "ctrl-o") open "$file" ;;
+        "ctrl-o") $OPENBIN "$file" ;;
         "ctrl-space")
             [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
             echo "cd '$(dirname "$file")'" ;;
@@ -68,7 +69,7 @@ if [ -n "$file" ]; then
         "ctrl-s")
             [ -n "$1" ] && echo "ERROR: opening in github requires same dir to detect remote/branch" && exit 1
             generate_github_link "$file" > /dev/null || exit 1
-            open "$(generate_github_link "$file")" ;;
+            $OPENBIN "$(generate_github_link "$file")" ;;
         *) echo "$file" ;;
     esac
 fi

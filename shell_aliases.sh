@@ -27,7 +27,6 @@ alias tmxhor='tmux select-layout even-horizontal'
 alias tms='tmux-statusctl'
 alias clt='clear && tmux clear-history'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
-alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
 alias bm='batman'
 alias tmr='transmission-remote'
 alias httpv='http -v'
@@ -66,6 +65,8 @@ else
 fi
 
 if [ "$(uname)" = "Linux" ]; then
+    alias bat='batcat'
+    alias batman="MANPAGER=\"sh -c 'col -bx | batcat -l man -p'\" man"
     alias open='xdg-open'
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
@@ -88,6 +89,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias listgnomekeys='gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys'
     alias listcustomgnomekeys='gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings'
 else  # assuming Darwin here
+    alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
     alias lc='launchctl'
     alias psx='ps -hef'
     alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
@@ -129,13 +131,14 @@ alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 alias f="fzf"
-alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
-alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
 alias fs="print_alias_funcs_scripts | fzf"
-# TODO: sourcing aliases works, but calling the alias after fails
-# alias fsp='pafn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; source ~/rams_dot_files/shell_functions.sh; \
-alias fsp='pafn | fzf --preview "source ~/rams_dot_files/shell_aliases.sh; ssf; \
-           which {} | bat --style=numbers --color=always -l bash"'
+if [ "$(uname)" = "Linux" ]; then
+    alias fp="fzf --preview 'batcat --style=numbers --color=always {} | head -500'"
+    alias fph="fzf --preview 'batcat --style=numbers --color=always {} | head -500' --height 100%"
+else
+    alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
+    alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
+fi
 
 # Go
 alias gosr='cd ~/go/src'

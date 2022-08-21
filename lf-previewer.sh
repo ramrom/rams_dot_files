@@ -11,6 +11,7 @@
 
 # for Linux use mediainfo, otherwise assume Darwin
 mmcmd="mdls"; [ "$(uname)" = "Linux" ] && mmcmd="mediainfo"
+BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 
 mimetype=$(file --mime-type --brief --dereference "$1")
 
@@ -23,6 +24,6 @@ case "$mimetype" in
     application/vnd.debian*) dpkg-deb -I "$1";;  # NOTE: dpkg-deb linux only
     application/x-iso9660-image) isoinfo -d -i "$1";; #NOTE: isoinfo linux only
     application/*7z*) 7z l "$1";;
-    text/*) bat --color=always "$1";;
-    *) bat --color=always "$1";;
+    text/*) $BATBIN --color=always "$1";;
+    *) $BATBIN --color=always "$1";;
 esac
