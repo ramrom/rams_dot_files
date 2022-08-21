@@ -22,9 +22,15 @@
 - WiFi 2 to identify devices that support 802.11a (released 1999)
 - WiFi 1 to identify devices that support 802.11b (released 1999)
 
+## BLUETOOTH
+- decent basic vid on bluetooth wireless mechanism: https://www.youtube.com/watch?v=1I1vxu5qIUM
+
 ## IoT
-- Matter is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
+- Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
     - https://buildwithmatter.com/
+- Thread - networking tech that Matter is built on
+    - low-power mesh network like zigbee
+    - any device can be a thread edge router, it is IPv6 based
 - Wifi (power hungry)
     - hub-and-spoke only, so must be near a access point
     - doesnt scale

@@ -85,6 +85,7 @@ Terminology:
 - cmd + ctrl + space    - bring up emoji menu in text field
 - :<foo>:               - in text field typing `:` then text desc of emoji, then `:` will insert emoji
                           works in slack and whatsapp, not safari for google voice
+- fn + E                - from a text box, bring up emoji window
 
 ### BROWSER(CHROME/FIREFOX verified):
 - cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab

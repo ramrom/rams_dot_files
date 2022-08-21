@@ -115,7 +115,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
             group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
         })
 
-        vim.opt.shortmess:remove('F')   -- Ensure audocmd works for filetype
+        vim.opt.shortmess:remove('F')   -- Ensure autocmd works for filetype
         vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
 
         -- === Basic Completion Settings ===

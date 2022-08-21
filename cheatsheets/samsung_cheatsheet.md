@@ -5,6 +5,7 @@
     - can erase data on phone (needs power and network obviously)
     - can "lock" phone, prevents biometrics, samsung pay, show emergency info on screen, prevent power off
     - can set "extend battery life", minimizes power usage
+- screenshot - press volume down and power button at same time
 
 ## GALAXY WATCH
 - touch screen for a couple sec to change watch face
