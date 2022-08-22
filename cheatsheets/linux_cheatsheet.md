@@ -131,7 +131,6 @@ service --status-all
 - see https://help.ubuntu.com/community/KeyboardShortcuts
 
 super - usually the "windows" key on keyboards
-super+l - lock screen
 alt+ctr+t - open terminal
 alt+ctr+l, super+l  - lock screen
 super+tab, alt+tab  - switch between running apps
@@ -357,6 +356,9 @@ drive naming convention:
 ------------------------------------------
 sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
 hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
+    - old and unmaintained, removed from debian and ubuntu22
+smartmontools - query SMART device, e.g. HDDs and SSDs
+    - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
 inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 stat - get metadata on a file
 lsblk - show block level devices
