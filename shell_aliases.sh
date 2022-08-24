@@ -22,7 +22,7 @@ alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works
 alias lsofregfiles='lsof /'     # search from root, will only query DIR and REG files
 alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
-# didnt work for FUSE filemount dir.., but `lsof | grep foodir` found it
+# didn't work for FUSE filemount dir.., but `lsof | grep foodir` found it
 alias tmxhor='tmux select-layout even-horizontal'
 alias tms='tmux-statusctl'
 alias clt='clear && tmux clear-history'
