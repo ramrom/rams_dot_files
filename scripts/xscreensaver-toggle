@@ -1,19 +1,21 @@
 #!/bin/sh
 
 
-usage () { echo 'Usage: xscreensaver-toggle [ -h(help) ]'; }
+usage () { echo 'Usage: xscreensaver-toggle [ -h(help) ] [ -v(verbose) ]'; }
 
-while getopts 'hwj:' x; do
+while getopts 'hv' x; do
     case $x in
         h) usage && exit 1 ;;
+        v) VERBOSE=1 ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
-MODE=$(rg "^mode:\s(.*)$" -or '$1' ~/.xscreensaver)
+MODE=$(rg "^mode:\s\s(.*)$" -or '$1' ~/.xscreensaver)
 
-case $MODE in
+[ -n "$VERBOSE" ] && echo "CURRENT MODE = $MODE"
+case "$MODE" in
     off)
         sed -ri 's/^mode:\s\s(.*)$/mode:  random/g' .xscreensaver ;;
     *)
