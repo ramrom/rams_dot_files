@@ -1,0 +1,22 @@
+#!/bin/sh
+
+
+usage () { echo 'Usage: xscreensaver-toggle [ -h(help) ]'; }
+
+while getopts 'hwj:' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+MODE=$(rg "^mode:\s(.*)$" -or '$1' ~/.xscreensaver)
+
+case $MODE in
+    off)
+        sed -ri 's/^mode:\s\s(.*)$/mode:  random/g' .xscreensaver ;;
+    *)
+        DISPLAY=:1 xscreensaver-command -deactivate
+        sed -ri 's/^mode:\s\s(.*)$/mode:  off/g' .xscreensaver ;;
+esac

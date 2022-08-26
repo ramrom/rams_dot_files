@@ -41,7 +41,8 @@ echo "\u0001 hi" | tr -cd '[:print:]' # strip out nonprintable characters
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
-echo "foobar" | sed 's/..$//'  # remove last 2 chars, so output is "foob"
+echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
+sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
 
 # base64 - encode and decode base64
 echo "foobar" | base64      # encode from stdin
