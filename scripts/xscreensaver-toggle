@@ -18,7 +18,9 @@ MODE=$(rg "^mode:\s\s(.*)$" -or '$1' ~/.xscreensaver)
 case "$MODE" in
     off)
         sed -ri 's/^mode:\s\s(.*)$/mode:  random/g' .xscreensaver ;;
-    *)
+    blank|one|random)
         DISPLAY=:1 xscreensaver-command -deactivate
         sed -ri 's/^mode:\s\s(.*)$/mode:  off/g' .xscreensaver ;;
+    *)
+        echo "GOT MODE = $MODE , either unkown or failed to parse config file" ;;
 esac
