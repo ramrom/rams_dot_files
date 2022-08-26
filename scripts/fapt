@@ -1,16 +1,18 @@
 #!/bin/sh
 
 # APT + FZF
-usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ]'; }
+usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ] [ -f(fzf full screen)'; }
 
-while getopts 'hi' x; do
+FZF_HEIGHT=50
+while getopts 'hif' x; do
     case $x in
         h) usage && exit 1 ;;
         i) opts="--installed" ;;
+        f) FZF_HEIGHT=100 ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
 apt list $opts | tail -n+2 |
-    fzf --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); apt show $pkg; echo; apt depends $pkg'
+    fzf --height "$FZF_HEIGHT"% --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); apt show $pkg; echo; apt depends $pkg'
