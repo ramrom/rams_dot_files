@@ -1,5 +1,16 @@
 #!/bin/sh
 
-opts="--installed"; [ "$1" = "s" ] && unset opts
+# APT + FZF
+usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ]'; }
+
+while getopts 'hi' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        i) opts="--installed" ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
 apt list $opts | tail -n+2 |
     fzf --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); apt show $pkg; echo; apt depends $pkg'
