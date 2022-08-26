@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # APT + FZF
-usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ] [ -f(fzf full screen)'; }
+usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ] [ -f(fzf full screen) ]'; }
 
 FZF_HEIGHT=50
 while getopts 'hif' x; do
