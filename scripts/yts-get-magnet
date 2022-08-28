@@ -3,12 +3,12 @@
 
 . ~/rams_dot_files/shell_core_tools.sh || { echo "could not find shell_core_tools.sh" && exit 1; }
 
-caller=$0 cmds_defined http || exit 1
+caller=$0 cmds_defined xh || exit 1
 
 resfile=/tmp/yts_movie_links
 search_result_file=/tmp/yts_query
 printf "\nEnter Query: "; read resultsinput
-http --download --output $search_result_file https://yts.mx/ajax/search query=="$resultsinput"
+xh --download --output $search_result_file https://yts.mx/ajax/search query=="$resultsinput"
 movie_choices=$(jq -r '.data[] | (.title + " - " + .year)' $search_result_file)
 echo ""; [ -z "$movie_choices" ] && echo "! NO RESULTS FOUND FOR QUERY !" && exit 1
 echo ""
@@ -23,7 +23,7 @@ done
 
 movie_link=$(jq -r --arg INDX $index '.data[($INDX | tonumber) - 1].url' $search_result_file)
 
-http --download --output $resfile "$movie_link"
+xh --download --output $resfile "$movie_link"
 
 choices=$(rg -N --color never -o 'href="magnet.*title="([^"]*)"' -r '$1' $resfile)
 PS3="select a magnet link: "
