@@ -30,7 +30,8 @@ alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line 
 alias bm='batman'
 alias tmr='transmission-remote'
 alias httpv='http -v'
-alias httpcn='httpv http://api.icndb.com/jokes/random'
+alias xhv='xh -v'
+alias xhcn='xhv http://api.icndb.com/jokes/random'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'

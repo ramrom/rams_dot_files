@@ -254,7 +254,7 @@ function psxg() { psx | grep $1 | grep -v grep; }
 function batgod() { go doc $@ | bat -l go; }
 
 function yts_query() {
-    http -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
+    xh -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
     jq . /tmp/yts_query
 }
 
@@ -425,7 +425,7 @@ function parse_comma_delim_error() {
 
 ###### OTHER ###############
 
-function weather() { http --print=b wttr.in/$1; }
+function weather() { xh --print=b https://wttr.in/$1; }
 
 # TODO: use next time ubuntu seemingly loses delay when i plug keyboard back in
 function gsettings_set_keyboard() {
