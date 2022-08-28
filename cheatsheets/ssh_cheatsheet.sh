@@ -51,3 +51,9 @@ $ ssh-keygen -p -f ~/.ssh/id_rsa
 # verify $DISPLAY var has a value on remote host
 ssh -Y foouser@foo.com
 ssh -X foouser@foo.com  # -X is done without X11 authority
+
+# SOCKS PROXY
+# connect to remote server and create a locak SOCKS5 on local port 1234
+# the curl command will use the socks5 proxy to make http request
+ssh -D 1234 foouser@yarserver
+curl -x socks5h://127.0.0.1:1234 https://google.com
