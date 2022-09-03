@@ -30,9 +30,9 @@ if [ -n "$DOCKER_IMAGES" ]; then
     fi
 else
     preview_cmd='cont_id=$(echo {} | awk '\''{print $1}'\''); docker logs -f $cont_id'
-    out=$(docker ps | fzf +m --height "$FZF_HEIGHT" --nth=1 --header-lines=1 \
-        --header='ctrl-y->stop, ctrl-o->restart, ctrl-space->???, ctrl-i->start' \
-        --expect='ctrl-y,ctrl-o,ctrl-space,ctrl-i' \
+    out=$(docker ps --all | fzf +m --height "$FZF_HEIGHT" --nth=1 --header-lines=1 \
+        --header='ctrl-y->stop, ctrl-o->restart, ctrl-space->kill, ctrl-i->start, ctrl-s->remove' \
+        --expect='ctrl-y,ctrl-o,ctrl-space,ctrl-i,ctrl-s' \
         --preview "$preview_cmd")
 
     key=$(echo "$out" | head -1)
@@ -43,6 +43,8 @@ else
             "ctrl-i") docker start "$container" ;;
             "ctrl-y") docker stop "$container" ;;
             "ctrl-o") docker restart "$container" ;;
+            "ctrl-space") docker kill "$container" ;;
+            "ctrl-s") docker rm "$container" ;;
         esac
     fi
 fi
