@@ -2,19 +2,21 @@
 
 # FDOCK - Fzf + docker-cli
 
-usage () { echo 'Usage: fdock [ -h(help) ] [ -i(images) ]'; }
+usage () { echo 'Usage: fdock [ -h(help) ] [ -i(images) ] [ -f(fzf full height) ]'; }
 
-while getopts 'hi' x; do
+FZF_HEIGHT=50
+while getopts 'hif' x; do
     case $x in
         h) usage && exit 1 ;;
         i) DOCKER_IMAGES=1 ;;
+        f) FZF_HEIGHT=100 ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
 if [ -n "$DOCKER_IMAGES" ]; then
-    out=$(docker images -a | fzf +m --nth=1 --header-lines=1 \
+    out=$(docker images -a | fzf +m --height "$FZF_HEIGHT" --nth=1 --header-lines=1 \
         --header='ctrl-i->run' \
         --expect='ctrl-i')
 
@@ -27,8 +29,8 @@ if [ -n "$DOCKER_IMAGES" ]; then
         esac
     fi
 else
-    preview_cmd='cont_id=$(echo {} | awk '\''{print $1}'\''); docker logs $cont_id'
-    out=$(docker ps | fzf +m --nth=1 --header-lines=1 \
+    preview_cmd='cont_id=$(echo {} | awk '\''{print $1}'\''); docker logs -f $cont_id'
+    out=$(docker ps | fzf +m --height "$FZF_HEIGHT" --nth=1 --header-lines=1 \
         --header='ctrl-y->stop, ctrl-o->restart, ctrl-space->???, ctrl-i->start' \
         --expect='ctrl-y,ctrl-o,ctrl-space,ctrl-i' \
         --preview "$preview_cmd")
