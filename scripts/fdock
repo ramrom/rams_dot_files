@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# FDOCK - Fzf + docker-cli
+
+usage () { echo 'Usage: fdock [ -h(help) ] [ -i(images) ]'; }
+
+while getopts 'hi' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        i) DOCKER_IMAGES=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+if [ -n "$DOCKER_IMAGES" ]; then
+    out=$(docker images -a | fzf +m --nth=1 --header-lines=1 \
+        --header='ctrl-i->run' \
+        --expect='ctrl-i')
+
+    key=$(echo "$out" | head -1)
+    imageline=$(echo "$out" | tail -1)
+    if [ -n "$imageline" ]; then
+        image=$(echo "$imageline" | awk '{print $3}')
+        case "$key" in
+            "ctrl-i") docker run -d "$image" ;;
+        esac
+    fi
+else
+    preview_cmd='cont_id=$(echo {} | awk '\''{print $1}'\''); docker logs $cont_id'
+    out=$(docker ps | fzf +m --nth=1 --header-lines=1 \
+        --header='ctrl-y->stop, ctrl-o->restart, ctrl-space->???, ctrl-i->start' \
+        --expect='ctrl-y,ctrl-o,ctrl-space,ctrl-i' \
+        --preview "$preview_cmd")
+
+    key=$(echo "$out" | head -1)
+    containerline=$(echo "$out" | tail -1)
+    if [ -n "$containerline" ]; then
+        container=$(echo "$containerline" | awk '{print $1}')
+        case "$key" in
+            "ctrl-i") docker start "$container" ;;
+            "ctrl-y") docker stop "$container" ;;
+            "ctrl-o") docker restart "$container" ;;
+        esac
+    fi
+fi
