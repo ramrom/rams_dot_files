@@ -360,6 +360,7 @@ hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
 smartmontools - query SMART device, e.g. HDDs and SSDs
     - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
 inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
+lshw - like inxi, display lots of sys info
 stat - get metadata on a file
 lsblk - show block level devices
 mkfs - to format a disk partition

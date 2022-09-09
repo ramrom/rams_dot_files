@@ -15,6 +15,7 @@ elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
     Plug 'tpope/vim-fugitive'        " git-vim synergy
+    Plug 'tpope/vim-surround'
     Plug 'ruanyl/vim-gh-line'       " generate github url links from current file
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'preservim/nerdtree'
