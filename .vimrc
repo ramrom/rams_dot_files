@@ -16,6 +16,7 @@ elseif empty($VIM_NOPLUG)
 
     Plug 'tpope/vim-fugitive'       " git-vim synergy
     Plug 'tpope/vim-surround'       " add/change/remove surrounding formatting to text-objects
+    Plug 'tpope/vim-repeat'         " `.` operator on crack, works with vim-surround
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'ruanyl/vim-gh-line'       " generate github url links from current file
     Plug 'preservim/nerdtree'
@@ -524,7 +525,7 @@ let g:netrw_liststyle = 3
 " let NERDTreeCustomOpenArgs = {'file': {'reuse': 'currenttab', 'where': 'p'}, 'dir': {}}
 " let NERDTreeMapCustomOpen = 'o'
 
-"""""""""""""""""" Vim-GH-line""""""""""""""""""""""""""""""""
+"""""""""""""""""" GH-line (github line)""""""""""""""""""""""""""""""""
 let g:gh_line_map_default = 0
 let g:gh_line_blame_map_default = 1
 let g:gh_line_map = '<leader>wh'
