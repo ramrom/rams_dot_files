@@ -145,6 +145,8 @@ Terminology:
 
 
 ## OTHER:
+- find out power cable watt usage and info: about-this-mac -> system-info -> power
+    - https://discussions.apple.com/thread/8008792
 - options key in osx is same as alt key in other Oses (like windows)
 - function keys go up to f19, not f20-f24
     - f14, f15 are brightness up/down

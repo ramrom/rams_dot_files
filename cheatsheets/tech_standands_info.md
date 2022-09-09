@@ -49,9 +49,16 @@
 
 
 ## HDMI
-- 1.4 - released 2009
-- 2.0 - released 2013, supports 18Gbps, so one 4k@60hz
-- 2.1 - released 2017, supports 48Gbps(Ultra High Speed cables needed), can do a 10k@120hz
+- 50 foot MAX reliable length, really shouldn't ever exceed 25ft
+    - but there are options like optical and wireless hdmi
+- standard does not mandate versions be printed on cables, so only way to know is to test them...
+- standards
+    - 1.0 - supports 5Gbps
+    - 1.1 - supports 5Gbps
+    - 1.3 - supports 10Gbps
+    - 1.4 - released 2009, supports 10Gbps
+    - 2.0 - released 2013, supports 18Gbps, so one 4k@60hz
+    - 2.1 - released 2017, supports 48Gbps(Ultra High Speed cables needed), can do a 10k@120hz
 
 ## USB
 - usb 3.0 cable shouldn't really exceed 10 feet without repeater
