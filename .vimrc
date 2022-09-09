@@ -14,10 +14,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 elseif empty($VIM_NOPLUG)
     call plug#begin('~/.vim/plugged')
 
-    Plug 'tpope/vim-fugitive'        " git-vim synergy
-    Plug 'tpope/vim-surround'
-    Plug 'ruanyl/vim-gh-line'       " generate github url links from current file
+    Plug 'tpope/vim-fugitive'       " git-vim synergy
+    Plug 'tpope/vim-surround'       " add/change/remove surrounding formatting to text-objects
     Plug 'tpope/vim-commentary'     " smart code commenting
+    Plug 'ruanyl/vim-gh-line'       " generate github url links from current file
     Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
     Plug 'junegunn/fzf.vim'
