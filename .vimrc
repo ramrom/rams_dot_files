@@ -20,11 +20,14 @@ elseif empty($VIM_NOPLUG)
     Plug 'tpope/vim-commentary'     " smart code commenting
     Plug 'ruanyl/vim-gh-line'       " generate github url links from current file
     Plug 'preservim/nerdtree'
+
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
+
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
     if !has('nvim') && v:version < 8022345          " neovim and vim > 8.2.2345 have native support
