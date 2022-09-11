@@ -3,6 +3,7 @@
 - scala-lang cheatsheet: https://docs.scala-lang.org/cheatsheets/index.html
 - tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
+- lightbend(formerly typesafe) founded by odersky, jonas boner(created akka), and paul phillips
 
 ## SCALA 2.11 2.12 2.13
 - 2.12
