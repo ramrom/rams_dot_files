@@ -6,6 +6,7 @@
     - can "lock" phone, prevents biometrics, samsung pay, show emergency info on screen, prevent power off
     - can set "extend battery life", minimizes power usage
 - screenshot - press volume down and power button at same time
+- hold down home button -> AI assistant, e.g. google
 
 ## GALAXY WATCH
 - touch screen for a couple sec to change watch face
