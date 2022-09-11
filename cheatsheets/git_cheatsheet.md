@@ -66,6 +66,8 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
 - *NOTE* if you use ssh-agent, and load multiple keys, it will only try the first key, so only load the single proper key
 - `ssh-add -l` to list key loaded into ssh-agent
 ### HTTPS AUTH
+- can specify a seperate credential store with `git -c credential.helper='store --file=/path/to/credfile' pull`
+    - the cred file is plaintext format, each line something like `https://user:pass@example.com`
 - osx keychain with multiple accounts for same host(e.g. github) setup
     - https://stackoverflow.com/questions/24275375/how-can-i-store-keychain-credentials-for-multiple-github-accounts
     - basically set`useHttpPath` to see full url, and url must have username in it
