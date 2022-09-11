@@ -142,9 +142,10 @@
         - can have response times low as 1ms
     - bad viewing angles, bad color reproduction
 - IPS (in-plane switcing), newer tech
-    - good color reproduction, good viewing angle
+    - great color reproduction, good viewing angle
     - slower response times, lower refresh rates
 - VA
+    - good viewing angle, best constract ratio, good color repro, ok refresh rate (better than IPS), ok resonse time
     - oldest standard
 
 ## COMPILERS

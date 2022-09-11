@@ -47,13 +47,20 @@ git show-branch b1 b2 b3    #  show sidebyside columar what commits exist in eac
 git commit --amend --author="Joe Shmoe <email@address.com>"
 ```
 
-## SSH auth
-- can use GIT_SSH to specify a script that can run a custom ssh commmand
+## SSH AUTH
+- can use `GIT_SSH` to specify a script that can run a custom ssh commmand
     - this ssh command could do something like use a different config file or a different identity file
-- git 2.3.0+ supports a GIT_SSH_COMMAND env var to run the custom ssh command
+- git 2.3.0+ supports a `GIT_SSH_COMMAND` env var to run the custom ssh command
+- https://gist.github.com/Jonalogy/54091c98946cfe4f8cdab2bea79430f9
+    - can specify seperate users for same host in `.ssh/config` file for same host(e.g. github)
+        - `Host github.com-user1` and `Host github.com-user2`, and git uses repo url's username to discern
 - *NOTE* if you use ssh-agent, and load multiple keys, it will only try the first key, so only load the single proper key
 - `ssh-add -l` to list key loaded into ssh-agent
 
+## HTTPS AUTH
+- osx keychain with multiple accounts for same host(e.g. github) setup
+    - https://stackoverflow.com/questions/24275375/how-can-i-store-keychain-credentials-for-multiple-github-accounts
+    - basically set`useHttpPath` to see full url, and url must have username in it
 
 ## GITHUB
 - keyboard shortcuts: https://docs.github.com/en/github/getting-started-with-github/keyboard-shortcuts
