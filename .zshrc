@@ -100,5 +100,4 @@ fi
 [ -x ~/.cargo/bin/rustup ] && append_dir_to_path "$HOME/.cargo/bin"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/sreeram.mittapalli/.sdkman"
-[[ -s "/Users/sreeram.mittapalli/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sreeram.mittapalli/.sdkman/bin/sdkman-init.sh"
+[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
