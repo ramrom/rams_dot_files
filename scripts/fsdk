@@ -14,6 +14,7 @@ while getopts 'h' x; do
 done
 shift $(($OPTIND - 1))
 
+# FIXME: sdk is a shell func so it's not available here
 out=$(sdk list java | grep installed |
     fzf --ansi +m \
         --expect='ctrl-i' \
