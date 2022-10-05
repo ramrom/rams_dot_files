@@ -22,6 +22,9 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
 
+        -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
+        ignore_install = { "phpdoc" },
+
         highlight = {
             -- `false` will disable the whole extension
              enable = true,
