@@ -23,6 +23,7 @@ if vim.fn.has('nvim-0.7') == 1 then  -- needs 0.7
         sync_install = false,
 
         -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
+            -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
         ignore_install = { "phpdoc" },
 
         highlight = {
