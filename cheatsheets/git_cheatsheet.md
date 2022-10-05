@@ -4,6 +4,10 @@
 - basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
 - git lfs: https://git-lfs.github.com/, nice if u want to version large files
 
+## CONFIGS
+- `git config --get-all --show-origin credential.helper`
+    - get all values for a config key from system, global, and local; as well as where those files are located as well
+
 ```sh
 git rm -rf --cached foo bar # keep on disk but rm from git
 git show-ref --tags         # tags with it's commit
