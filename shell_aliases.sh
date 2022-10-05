@@ -147,8 +147,8 @@ alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
 # SDKMAN
-alias java11='sdk use java 11.0.11.j9-adpt'
-alias java8='sdk use java 8.0.292.j9-adpt'
+alias java11='sdk use java 11.0.16.1-tem'
+alias java8='sdk use java 8.0.345-zulu'
 
 #POSTGRES
 alias lpsql='PAGER=$(psql-pager) /usr/local/opt/libpq/bin/psql'
