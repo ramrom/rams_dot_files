@@ -1,9 +1,6 @@
 [user]
   name = Sreeram Mittapalli
   email = sreeram.mittapalli@gmail.com
-[github]
-  user = ramrom
-  token = token
 [include]
   path = ~/.gitconfig.local
 [color]
