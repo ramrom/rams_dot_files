@@ -69,6 +69,9 @@ G log %         - git log <current file>
     `:cfirst` and `:clast`
     :0Glog      - logs only that change current file
 
+### VIM-SURROUND
+- https://github.com/tpope/vim-surround
+
 ### NERDTree
 ?   - toggle quickhelp
 m   - bring up menu to move/rename/delete

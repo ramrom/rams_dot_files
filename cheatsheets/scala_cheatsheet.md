@@ -198,6 +198,10 @@ PlaySpecification/spec2, to skip test:
     println(a)
     ```
 
+## CATS
+- cats: https://typelevel.org/cats/datatypes/ior.html
+- catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
+
 
 ## SLICK
 -------------------------

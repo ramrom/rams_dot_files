@@ -46,7 +46,7 @@ cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime-loadave) "uptimeload")
 status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
 if [ "$(uname)" = "Darwin" ]; then
     is_m1_macbook=$(sysctl -n machdep.cpu.brand_string | grep "Apple M1")
-    # TODO: oct2022; figure out how to get freq for m1 macs
+    # TODO: oct2022; figure out how to get freq for m1 macs, see https://developer.apple.com/forums/thread/671792
     if [ -z "${is_m1_macbook}" ]; then
         freq=$(sysctl hw.cpufrequency | awk '{print $2}')
         freq=$(($freq / 1000000))
