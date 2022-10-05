@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# FSDK - Fzf on on sdkman
+
+usage () { echo "Usage: fsdk [ -h(help) ]"; }
+
+GH_FILTERS="--limit 300"
+
+while getopts 'h' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+out=$(sdk list java | grep installed |
+    fzf --ansi +m \
+        --expect='ctrl-i' \
+        --header 'ctrl-i->make-current' \
+key=$(echo "$out" | head -1)
+javaline=$(echo "$out" | tail -1)
+if [ -n "$javaline" ]; then
+    javaversion=$(echo "$javaline" | awk '{print $1}')
+    case "$key" in
+        "ctrl-i") sdk use java ${javaversion} ;;
+        *) echo "$key not handled"
+    esac
+fi
