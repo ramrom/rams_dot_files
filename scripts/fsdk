@@ -17,7 +17,7 @@ shift $(($OPTIND - 1))
 out=$(sdk list java | grep installed |
     fzf --ansi +m \
         --expect='ctrl-i' \
-        --header 'ctrl-i->make-current' \
+        --header 'ctrl-i->make-current')
 key=$(echo "$out" | head -1)
 javaline=$(echo "$out" | tail -1)
 if [ -n "$javaline" ]; then
