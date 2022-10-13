@@ -64,6 +64,9 @@ elseif empty($VIM_NOPLUG)
             Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
             "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
             Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
+
+            "alternative to nerdtree
+            " Plug 'nvim-tree/nvim-tree.lua'
         endif
 
         Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
@@ -147,6 +150,9 @@ endtry
 set nobackup                    " no backup files
 set nowritebackup               " only in case you don't want a backup file while editing
 set noswapfile                  " no swap files
+
+" turn off all mouse support by default
+set mouse=
 
 set splitbelow splitright       " open new windows on bottom for horizontal, right for vertical
 set wildmenu                    " display command line's tab complete options as menu

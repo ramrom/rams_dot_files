@@ -47,8 +47,8 @@
 - TIME/DATE: use java times and date, it is now better than jodatime
 
 
-### DATA STRUCTURES
-#### LIST/ARRAY
+## DATA STRUCTURES
+### LIST/ARRAY
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
@@ -58,7 +58,7 @@
 - slice an "array" (`Array` or `List` or `String`)
     - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
     - `"hi there".slice(2,5)` -> returns `" th"`
-#### MAP/ASSOCIATIVE-ARRAY
+### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
 
 ```scala
@@ -70,9 +70,6 @@ m += ("foo", 1)    // appending an item for mutable Map
 ## CONCURRENCY
 - async with thread pools: `Future { 1 + 1 }`
 - mutex on variables: `synchronize { 1 + 1 }`
-
-### RANDOM
-- sleep for 1 second: `Thread.sleep(1000)`
 
 ### PATTERN MATCHING
 - `case entries @ _ :: _ :: (_: List[_]) => {`
@@ -92,11 +89,11 @@ PlaySpecification/spec2, to skip test:
     - skipped("some reason")
     - append .pendingUntilFixed("message about the issue")
 
-## ENUMERATION:
+## ENUMERATION
 - play 2.5 json doesnt supports scala enumerators
 - can use enumeratum
 
-## MACWIRE/DEPENDENCY-INJECT:
+## MACWIRE/DEPENDENCY-INJECT
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
 - macwire happens pre-compile, guice i think happens runtime
     - desired qualities:
@@ -106,7 +103,17 @@ PlaySpecification/spec2, to skip test:
     > Also other things, but those are the big ones that differ in those approaches. (edited)
 - portkey uses @module annotation above class declarations, it must make classes vals' available in scope
 
-## SCALATEST
+
+## AUTOMATION TESTING
+- https://www.scalatest.org/user_guide/using_scalatest_with_sbt
+- org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
+- private method testing, supported by ScalaTest
+    ```scala
+    import org.scalatest.PrivateMethodTester._
+    val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess')
+    val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2)
+    ```
+### SCALATEST
 - https://www.scalatest.org/user_guide/using_the_runner#filtering
 - using with sbt: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
 - example with sbt
@@ -126,32 +133,16 @@ PlaySpecification/spec2, to skip test:
         ...
     }
     ```
-
-
-## AUTOMATION TESTING
-- https://www.scalatest.org/user_guide/using_scalatest_with_sbt
-- org.mockito.ArgumentCaptor, can capture arguments, can we used in "when" mocks or "verify" method calls
-- private method testing, supported by ScalaTest
-    ```scala
-    import org.scalatest.PrivateMethodTester._
-    val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess')
-    val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2)
-    ```
-
-## REST ASSURED
+### REST ASSURED
 - ENVIRONMENT sets env
 - INCLUDE, EXCLUDE env vars specify tags
 
+
 ## PLAY FRAMEWORK
-------------------------------
 - docs: https://www.playframework.com/documentation
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 - 2.8
     - supports java 11
-
-## JSON PARSING
-- weePickle: https://github.com/rallyhealth/weePickle
-
 ### PLAY JSON
 - https://www.playframework.com/documentation/2.8.x/ScalaJson
 - parse json string -> play AST JsValue -> json string
@@ -173,9 +164,10 @@ PlaySpecification/spec2, to skip test:
     - `Json.parse("[1,2,3]").validate[Seq[Int]]`
         - `validate` returns `JsSuccess` or `JsError`
 
+## JSON PARSING
+- weePickle: https://github.com/rallyhealth/weePickle
 
 ## AMMONITE
-----------------------------------------
 - https://ammonite.io/
 - block input:
     @ { <enter>
@@ -202,14 +194,7 @@ PlaySpecification/spec2, to skip test:
 - cats: https://typelevel.org/cats/datatypes/ior.html
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
 
-
-## SLICK
--------------------------
-- print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
-
-
 ## SBT
-----------------------------------------
 - as of `1.3.0` it uses Coursier to fetch artifacts/dependencies
 - `%%` automatically uses scala version, `%` dev must specify
     - `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
@@ -227,7 +212,11 @@ PlaySpecification/spec2, to skip test:
     - show order of which jars are loaded for project `Test`
 - `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
 
-
 ## AKKA
----------------------------------------
 - one of akka streams main goals is to implement backpressure
+
+## SLICK
+- print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
+
+### RANDOM
+- sleep for 1 second: `Thread.sleep(1000)`

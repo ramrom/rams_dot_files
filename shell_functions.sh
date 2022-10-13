@@ -146,6 +146,19 @@ function print_json_columnize() {
     fi
 }
 
+function run_cmd_timestamp() {
+    local start=$(date +%s)
+    echo; echo $(ansi256 -f red -b green "_-----------------------")" $(date) "\
+        $(ansi256 -f red -b green "_---------------------"); echo
+
+    eval $*
+
+    local end=$(date +%s)
+    local elapsed=$((end - start))
+    echo; echo $(ansi256 -f red -b green "_-----------------------")" Time elapsed: ${elapsed} "\
+        $(ansi256 -f red -b green "_---------------------"); echo
+}
+
 # function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
 function ff() {
     local result=$(~/bin/ff -w "$@")
