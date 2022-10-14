@@ -9,12 +9,17 @@
 
 ## BREW
 --------------------
-Terminology:
+### TERMINOLOGY
 - see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
 - bottle: pre-compiled code, just installs
 - cask: installs a program exactly as if it were a native osx appliation install
 - tap: a repository of formula
 
+### INFO
+- aug2022, base bin dir is `/opt/homebrew/bin`
+
+### USEFUL COMMANDS
+- `brew --prefix` - show base dir
 - stop brew from auto update:
     `HOMEBREW_NO_AUTO_UPDATE=1 brew install somepackage`
 - show deps of httpie in tree output
