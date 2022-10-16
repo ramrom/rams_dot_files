@@ -31,10 +31,10 @@ sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
 sudo shutdown -r now (reboot now)
 
-lsof +f -- /media/usb0   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
-xdg-open    - like osx "open", will open file with default application for that file type
-xdg-mime query default text/html    - query the default x app to open a given mimetype
-xclip       - like osx pbpaste/bcopy, needs a DISPLAY set
+`lsof +f -- /media/usb0`   - assuming usb0 is root of filesystem, shows all proceses with file handles in that system
+`xdg-open`    - like osx "open", will open file with default application for that file type
+`xdg-mime query default text/html`    - query the default x app to open a given mimetype
+`xclip`       - like osx pbpaste/bcopy, needs a DISPLAY set
     - `xclip -selection clipboard`    - copy to clipboard
     - `xclip -selection clipboard -o` - paste from clipboard
 
@@ -141,7 +141,7 @@ super + shift + page-up/page-down - move active window to next/previous workspac
 super+m - toggle notif tray
 shift + ctr + c - copy
 shift + ctr + v - paste
-alt+f2  - run command
+alt+f2  - bring up prompt to run a shell command
 ctrl+alt arrow - move between desktops
 ctrl+alt+delete - logout
 ctrl+shift+ c/p - copy and paste
