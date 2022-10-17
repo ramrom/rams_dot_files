@@ -175,14 +175,14 @@ PlaySpecification/spec2, to skip test:
         z + f
     } <enter>
 - loading external script:
-    - if script in in subfolder foo and named MyScript.sc `import $file.foo.MyScript`
-        - then MyScript.someFunc("arg")
-    - if script is in grandfather dir and named MyScript.sc `import $file.^.^.MyScript`
+    - if script in in subfolder `foo` and named `MyScript.sc` `import $file.foo.MyScript`
+        - then `MyScript.someFunc("arg")`
+    - if script is in grandfather dir and named `MyScript.sc` `import $file.^.^.MyScript`
     - can then `import MyScript._` to grab everything in it
 - watch mode!, will run a script, and rerun if changes occur on it
-    - amm -w foo.sc
+    - `amm -w foo.sc`
 - predef: open REPL to see results, inspect values, ca be combined with watch
-    - amm --watch --predef foo.sc
+    - `amm --watch --predef foo.sc`
 - can shebang scala source code script with ammonite
     ```scala
     #!/usr/local/bin/amm
