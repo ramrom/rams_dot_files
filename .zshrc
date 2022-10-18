@@ -95,8 +95,8 @@ if [ $(command -v go) ]; then
     export GOBIN=${GOPATH}/bin
 fi
 
-# set rust PATH if rustup exists/intsalled
-[ -x ~/.cargo/bin/rustup ] && append_dir_to_path "$HOME/.cargo/bin"
+# set rust PATH if rustc compiler is installed
+rustc > /dev/null 2>&1 && append_dir_to_path "$HOME/.cargo/bin"
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
