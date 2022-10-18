@@ -83,6 +83,8 @@ function append_dir_to_path() {
 append_dir_to_path /usr/local/sbin
 append_dir_to_path ~/bin    # includes user's private bin if it exists and it's not already in PATH
 
+[ "$(uname)" = "Linux" ] && append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local
+
 [ "$(uname)" = "Darwin" ] && append_dir_to_path /opt/homebrew/bin  # aug2022, homebrew bins are here, not /usr/local/bin/
 
 #export DISPLAY='localhost:10.0'
