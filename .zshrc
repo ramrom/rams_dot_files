@@ -12,6 +12,14 @@ setopt auto_cd
 # use IFS word splitting
 setopt sh_word_split
 
+# oct2022: tmux on osx runs path_helper(from /etc/profile) which messus up path entries
+    # see https://superuser.com/questions/544989/does-tmux-sort-the-path-variable
+# this workaround fixes this issue
+if [ "$(uname)" = "Darwin" -a -f /etc/profile ]; then
+    PATH=""
+    source /etc/profile
+fi
+
 # set fc(command history editor) to vim
 export FCEDIT=nvim
 
@@ -76,7 +84,7 @@ load_or_err ~/.fzf.zsh   # "**" autocompletion and alt-c/ctrl-r/ctrl-t
 
 function append_dir_to_path() {
     local dir=$1
-    [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && PATH="$dir":"${PATH}"
+    [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && export PATH="$dir":"${PATH}"
     unset dir
 }
 

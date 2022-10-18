@@ -496,9 +496,9 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 
 # other logical operators
 [ 3 -eq 3 -o 1 -eq 2 ] && echo hi # if 3 = 3 or 1 eq 2, print hi
+[ 3 -eq 3 -a 1 -eq 2 ] && echo hi # if 3 = 3 and 1 eq 2, print hi
 #same logically as above, EXCEPT if first conditions is true, second condition doesnt get run
 [ 3 -eq 3 ] || [ 1 -eq 2 ] && echo hi
--a  # "and"
 &&  # "and" like using "||"
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
