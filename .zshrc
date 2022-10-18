@@ -85,9 +85,6 @@ append_dir_to_path ~/bin    # includes user's private bin if it exists and it's 
 
 [ "$(uname)" = "Darwin" ] && append_dir_to_path /opt/homebrew/bin  # aug2022, homebrew bins are here, not /usr/local/bin/
 
-# execute local settings
-[ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
-
 #export DISPLAY='localhost:10.0'
 
 # set go vars if go bin exists/installed
@@ -98,6 +95,9 @@ fi
 
 # set rust PATH if rustup exists/intsalled
 [ -x ~/.cargo/bin/rustup ] && append_dir_to_path "$HOME/.cargo/bin"
+
+# execute local settings
+[ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
