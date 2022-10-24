@@ -1,4 +1,4 @@
-## RG:
+## RG
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
 
@@ -23,7 +23,7 @@
 - search for files with a pattern but not another pattern
     `rg --files-with-matches 'somepattern' | xargs rg --files-without-match 'notthispattern'`
 
-## FZF:
+## FZF
 - https://github.com/junegunn/fzf, main README has good docs
  - preview with bat
     - `fzf --preview 'bat --style=numbers --color=always {} | head -500'`
@@ -67,7 +67,7 @@ search:
     - at cmd line, fzf over dirs and cd to selection
 
 
-## FD:
+## FD
 fd -p        - match on full path (default file/dir name)
 fd -e pdf    - find all files with extension pdf
 fd --type f  - close to find, old match on file types
