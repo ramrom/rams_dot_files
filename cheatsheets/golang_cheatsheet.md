@@ -1,5 +1,5 @@
 ## GOLANG:
-- https://golang.org/
+- https://go.dev
 - cgo lets you add c code in go programs: https://golang.org/cmd/cgo/
 - supported architectures and OSes: https://golang.org/doc/install/source#environment
 
