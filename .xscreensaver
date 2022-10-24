@@ -1,8 +1,9 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.45 for ramrom on Tue Aug 16 00:09:48 2022.
+# Written by xscreensaver-demo 5.45 for ramrom on Mon Oct 24 12:28:49 2022.
 # https://www.jwz.org/xscreensaver/
 #
-# SELECTS: flurry, stonerview, surfaces, wormhole, noof, bouboule, binaryring, cubegrid
+# SELECTS: flurry, stonerview, surfaces, wormhole, noof, bouboule, binaryring
+#           cubegrid, pipes, xrayswarm
 
 timeout:	0:01:00
 cycle:		0:01:00
@@ -37,7 +38,7 @@ chooseRandomImages: False
 imageDirectory:	
 
 mode:		random
-selected:	221
+selected:	115
 
 textMode:	url
 textLiteral:	XScreenSaver
@@ -84,7 +85,7 @@ programs:								      \
 -				mountain -root				    \n\
 -				munch -root				    \n\
 -				penrose -root				    \n\
-- GL: 				pipes -root				    \n\
+  GL: 				pipes -root				    \n\
 -				rd-bomb -root				    \n\
 - GL: 				rubik -root				    \n\
 -				sierpinski -root			    \n\
@@ -138,7 +139,7 @@ programs:								      \
 -				xmatrix -root				    \n\
 - GL: 				gflux -root				    \n\
 -				nerverot -root				    \n\
--				xrayswarm -root				    \n\
+				xrayswarm -root				    \n\
 -				xspirograph -root			    \n\
 - GL: 				circuit -root				    \n\
 - GL: 				dangerball -root			    \n\

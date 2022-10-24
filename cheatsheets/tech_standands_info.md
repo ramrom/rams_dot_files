@@ -243,9 +243,10 @@
 - standar for files for apps and configs
 
 ## NETWORK FILESYSTEM PROTOCOLS
-- afp (apple filing protocol), nfs (unix designed), smb/cifs(windows designed, supported well by all)
+- SSHFS (uses SFTP over SSH), FTPS - FTP + TLS/SSL
+- AFP (apple filing protocol), NFS (unix designed), SMB/CIFS(windows designed, supported well by all)
 - osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
-- cifs/smb info: https://linux.die.net/man/8/mount.cifs
+- CIFS/SMB info: https://linux.die.net/man/8/mount.cifs
     - `mount` will show the extensions/flags set on the samba share
     - supports hardlinks with unix extensions and/or servinfo
     - osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
