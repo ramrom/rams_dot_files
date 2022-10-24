@@ -6,3 +6,6 @@
 ## MEMORY MANAGEMENT
 - `let` will put data in stack
 - smart pointers put it on the heap
+
+## CARGO
+- `cargo install --list` - print all gobally installed crates
