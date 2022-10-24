@@ -20,6 +20,10 @@ echo "foo bar baz" | grep -o "fo." # will only return "foo"
 # print just the line after a matched line, here would print baz
 printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
 
+#tar
+tar –xvzf documents.tar.gz   # uncompress tar file
+    # -x extract, -v verbose, -z decompress each file, -f filename of tar file
+
 #awk - multi purpose tool
 echo "foo bar baz" | awk '{print $2}'  # will print bar
 awk '{$1=""; print $0}' somefile        # print all but the first field/column
