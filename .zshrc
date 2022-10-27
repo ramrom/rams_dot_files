@@ -63,18 +63,6 @@ function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
 
-# enable programmable completion for git
-# NOTE: this completion code the most time to load, relatively speaking (say 1sec)
-git_completion_file=~/.zsh/git-completion.bash
-if [ -f "$git_completion_file" ]; then
-    zstyle ':completion:*:*:git:*' script $git_completion_file
-    fpath=(~/.zsh $fpath)
-    autoload -Uz compinit && compinit  # e.g. gives `cp -<TAB>` and `kill <TAB>` completion magic
-else
-    echo "$(tput setaf 1) $git_completion_file not found! $(tput sgr0)"
-fi
-unset git_completion_file
-
 # load_or_err ~/rams_dot_files/shell_core_tools.sh
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh

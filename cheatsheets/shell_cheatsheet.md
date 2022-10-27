@@ -6,6 +6,10 @@
 - feature overview: https://github.com/hmml/awesome-zsh
 - zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
 - order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
+### COMPLETIONS
+- official(and confusing): https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Completion-System
+- good doc: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+- even shorter nicer simple doc: https://www.oliverspryn.com/blog/adding-git-completion-to-zsh
 - OSX - completions are stored in dir(change version): /usr/share/zsh/5.3/functions
 
 ## BASH (AND AFAIK ZSH)
