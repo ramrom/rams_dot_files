@@ -1,6 +1,9 @@
 # JAVA
 - https://learnxinyminutes.com/docs/java/
 - `jshell` start REPL env in terminal
+- java is by comp sci def pass-by-value: https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
+    - for objects, variables store values that are references to objects
+        - so reassigned a variable passed into a function with new value, will not change the variable assignment in caller
 
 ## JAVA RUNTIME
 `/usr/libexec/java_home -V`
@@ -25,11 +28,14 @@ String[] stringArray = new String[1];
 
 int[] y = {9000, 1000, 1337};
 String names[] = {"Bob", "John", "Fred", "Juan Pedro"};
+names[2] // returns 1337
 names[1] = "newval"
+names.length // => 4, the num items in the array
 
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
 mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
+mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 
@@ -41,10 +47,12 @@ List<String> mylist = Arrays.asList("a", "b", "c"); // a short way to declare a 
 
 LinkedList<String> ll = new LinkedList<String>();  // linked lists
 
-HashSet<String> hs = new Hashset<String>();  // set, elements must be unique
+// Set interface
+HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
 
+// implementation of Map interface
 HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 ```
@@ -68,6 +76,10 @@ System.out.println("3 > 2 || 2 > 3? " + ((3 > 2) || (2 > 3))); // => true
 
 ### CONTROL STRUCTURES
 ```java
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+
 int a = 3
 switch (a) {
             case 1: System.out.println("it's 1")

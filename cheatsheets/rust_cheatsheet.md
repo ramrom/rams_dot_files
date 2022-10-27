@@ -9,3 +9,9 @@
 
 ## CARGO
 - `cargo install --list` - print all gobally installed crates
+
+## EXAMPLES
+```rust
+let s1 = "foo" // immutable string
+let s2 = String::from("hello");  // type String is mutable
+```
