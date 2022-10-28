@@ -218,25 +218,6 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
         --preview 'git show --color=always {} | head -'$LINES
 }
 
-# TODO: add binding to checkout a branch
-function ffgb() {
-    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-    local ht="100%"; [ -n "$half" ] && ht="50%"
-
-    git branch -a --color=always | grep -v '/HEAD\s' | sort |
-    fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
-        --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES  |
-    sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
-}
-
-function ffgs() {
-    git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-    git -c color.status=always status --short |
-    fzf --height 50% --border -m --ansi --nth 2..,.. \
-        --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
-    cut -c4- | sed 's/.* -> //'
-}
-
 # fzf query is the rg pattern to filter on, this is what the Rg comamnd in vim#fzf plugin does
 # TODO: add fzf --expect and optionally edit file if expect given
 # TODO: add preview for more context
