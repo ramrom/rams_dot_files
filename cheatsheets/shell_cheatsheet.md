@@ -6,10 +6,11 @@
 - feature overview: https://github.com/hmml/awesome-zsh
 - zsh dot files: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
 - order of load: .zshenv → .zprofile → .zshrc → .zlogin → .zlogout
-    - global files loaded before local files
-- linux: global zshrc, zlogin, zlogout, zprofile, zshenv in `/etc/zsh` dir (at least ubuntu22)
-    - this global zshrc calls `compinit`
-- osx: globals located at `/etc/zshrc` `/etc/zprofile` directly
+    - global files loaded before user files
+- global shell files
+    - linux: global zshrc, zlogin, zlogout, zprofile, zshenv in `/etc/zsh` dir (at least ubuntu22)
+        - this global zshrc calls `compinit`
+    - osx: globals located at `/etc/zshrc` `/etc/zprofile` directly
 ### COMPLETIONS
 - official(and confusing): https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Completion-System
 - good doc: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org

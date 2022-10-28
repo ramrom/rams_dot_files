@@ -50,10 +50,12 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 fdname="fd"
 [ `uname` = "Linux" ] && fdname="fdfind"
 
+##### FZF #######
 export FZF_DEFAULT_COMMAND="$fdname --type f --follow --hidden --exclude .git"
 export FZF_DEFAULT_OPTS="--no-mouse --height 50% --reverse --multi --inline-info \
        --bind 'ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-n:preview-page-down,ctrl-p:preview-page-up'"
 export FZF_COMPLETION_TRIGGER='**'
+export FZF_COMPLETION_OPTS='--border --info=inline'
 export FZF_CTRL_T_COMMAND="$fdname"
 # TODO: option-c doesnt do anything in osx
 export FZF_ALT_C_COMMAND="$fdname --type d"
