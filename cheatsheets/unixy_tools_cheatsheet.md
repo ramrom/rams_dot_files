@@ -92,6 +92,10 @@ echo "a\nb\nc" | shuf -n 1  # will select the first line in the randmly generate
 echo "foo\nfoo\n\bar" | uniq        # will print one foo and then bar
 echo "foo\nbar\n\foo" | uniq        # will print foo, then bar, then foo!, b/c the 2nd foo isn't adjacent
 
+# random number generation
+echo $RANDOM    # RANDOM is a special env var that will contain some value from 0 - 32767
+od -An -N1 -i /dev/random  # get a random byte from the special file /dev/random
+
 # XARGS - read lines from stdin and execute a command on each line
 echo "foo bar baz" | xargs -t echo    # -t prints what the command being run is for every iteration, good for debugging
 echo "foo bar baz" | xargs -t -n 1 echo  # -n specifies max number of args to take for each iteration
