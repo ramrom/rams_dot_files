@@ -211,13 +211,17 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+    vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
+    vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
+    vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
     vim.api.nvim_create_autocmd("FileType", {
         pattern = { "scala", "sbt", "java" },
         callback = function()
             vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
             vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
             vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
+            vim.keymap.set("n", "glst", "<cmd>MetalsStartServer<CR>")
             vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
             vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
             -- NOTE: in the tree window hit 'r' to navigate to that item

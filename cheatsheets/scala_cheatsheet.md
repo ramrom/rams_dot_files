@@ -1,5 +1,9 @@
 # SCALA
 - first compiler was written in Pizza by Martin Odersky, by scala 2.0, compiler rewritten completely in scala
+- defined by the scala language specification
+    - main compiler for JVM
+    - Scala.js is a compiler targeted for javascript (node.js or web)
+    - Scala Native uses LLVM to make native binaries
 - scala-lang cheatsheet: https://docs.scala-lang.org/cheatsheets/index.html
 - tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html

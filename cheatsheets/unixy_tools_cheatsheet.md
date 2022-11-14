@@ -63,6 +63,10 @@ sudo date --set 1998-11-02  # change date
 date +%s       # print unix time in number of seconds (since 1970)
 date '+%Y-%m-%d'  # e.g. "2021-04-24"
 
+date +%s%N     # print nanoseconds (%N doesnt work on OSX)
+gdate +%s.%N   # coreutils package on OSX offers gdate, which can give nanoseconds
+date +%s%3N   # nanoseconds with 3 most sig figs
+
 # netcat
 nc -l 127.0.0.1 9001     #listen on 9001
 
