@@ -95,7 +95,11 @@ if [ $(command -v go) ]; then
 fi
 
 # set rust PATH if rustc compiler is installed
-rustc > /dev/null 2>&1 && append_dir_to_path "$HOME/.cargo/bin"
+if [ "$(uname)" = "Linux" ]; then
+    [ -x ~/.cargo/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
+else  # assume osx, brew path in nov2022
+    [ -x /opt/homebrew/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
+fi
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
