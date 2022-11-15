@@ -16,14 +16,7 @@ shift $(($OPTIND - 1))
 if [ -n "$EXPORT_ONLY" ]; then
     cmd="export"
 else
-    # oct2022 FIXME: figure out how to get bash to work, shebanging zsh for now
-    if [ -n "$BASH_VERSION" ]; then
-        cmd="set -o posix; set"  # bash
-    elif [ -n "$ZSH_VERSION" ]; then
-        cmd="typeset"  # zsh
-    else
-        echo "$(tput setaf 1)NOT BASH OR ZSH!$(tput sgr0)" && exit 1
-    fi
+    cmd="typeset"
 fi
 
 vars=$(eval "$cmd")

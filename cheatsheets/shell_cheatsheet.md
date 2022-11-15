@@ -22,6 +22,7 @@
 - BASH SHELL EXPANSION ORDER (FOR ZSH TOO I THINK)
     - https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
 ```sh
+set -o posix; set  # bash: spit out all env var and var values
 set -e # exit script/shell if any command returns with non-zero
 set -x # Print commands and args as they are executed.
 set +x # remove x, bash is backwards
