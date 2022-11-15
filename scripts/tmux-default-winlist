@@ -1,11 +1,13 @@
 #!/bin/sh
 
+# PRE AND POST display the "<<<" and ">>>" before and after winlist
 #  out=052;  mid=124;  inr=207;  # magentas
 #  out=106;  mid=148;  inr=190;   # yellow-greens
 #  out=021;  mid=093;  inr=201;    # blue-violet-magenta
 out=227; mid=210; inr=197;    # yellow-org-red
 pre="#[fg=colour${out}]<#[default]#[fg=colour${mid}]<#[default]#[fg=colour${inr}]<#[default] "
 post=" #[fg=colour${inr}]>#[default]#[fg=colour${mid}]>#[default]#[fg=colour${out}]>#[default]"
+
 echo "$pre#[norange default]#[list=on]#[list=left-marker]<#[list=right-marker]>#[list=on]#{W:#[range=window|#{window_index}
     #{window-status-style}#{?#{&&:#{window_last_flag},#{!=:#{window-status-last-style},default}},
     #{window-status-last-style},}#{?#{&&:#{window_bell_flag},#{!=:#{window-status-bell-style},default}},

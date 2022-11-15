@@ -1,6 +1,11 @@
 # DOCKER/KUBERNETES
 
 ## DOCKER
+- `docker images` - list images
+- `docker ps` - list running containers
+- `docker ps -a` - list containers in all states
+- `docker compose -f some-compose-file.yml run someservice` - native compose in docker cli
+    - https://docs.docker.com/compose/reference/
 - https://docs.docker.com/
 - Dockerfile is code that defines how to build a docker image
 - an image is instantiated into a container

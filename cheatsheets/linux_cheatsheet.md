@@ -2,7 +2,7 @@
 --------------------------
 - udev, as of kernel 2.6, it replaces DevFS(device file system)
     - identify devices based on properties (e.g. vendor ID and device ID) dynamically
-    - runs in userspace, devfs runs in kernelspace
+    - runs in userspace, devFS runs in kernelspace
     - kernel reports events to udev daemon, udev daemon does actions based on configured rules in response
     - specify rules what on how to identify device, regardless of what port it's plugged into
         - e.g. plug in same device into diff usb ports and see `/dev/foo` and not `/dev/usb0`/`dev/usb1`
