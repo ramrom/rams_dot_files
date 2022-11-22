@@ -288,6 +288,8 @@ snap refresh --list
         - `gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings`
     - how to set a custom shortcut from the cli
         - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
+- `Startup Applications` - run commands and programs at startup
+    - will create `.desktop` files in `~/.config/autostart` folder
 
 ### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam

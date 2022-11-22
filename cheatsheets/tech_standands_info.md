@@ -24,6 +24,7 @@
 
 ## BLUETOOTH
 - decent basic vid on bluetooth wireless mechanism: https://www.youtube.com/watch?v=1I1vxu5qIUM
+- how pairing works: https://www.bluetooth.com/blog/bluetooth-pairing-part-1-pairing-feature-exchange/
 
 ## IoT
 - Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)

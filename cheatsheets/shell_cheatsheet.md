@@ -58,6 +58,7 @@ set -o vi   # bash vi mode
 - `ctrl-t` - transpose chars on either side of point
 - `ctrl-l` - clear screen
 - `ctrl-k` - delete line after cursor (cut to clipboard)
+- `ctrl-g` - Leave the history search mode without running a command.
 - `ctrl-j`,`ctrl-m` - begin new line, VIM insert mode too!
 - `ctrl-a` - goto beg of line
 - `ctrl-e` - goto end of line
