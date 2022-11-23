@@ -4,8 +4,9 @@
 - `docker images` - list images
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
-- `docker compose -f some-compose-file.yml run someservice` - native compose in docker cli
+- `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
     - https://docs.docker.com/compose/reference/
+    - `-d` runs without attaching it to the current shell
 - https://docs.docker.com/
 - Dockerfile is code that defines how to build a docker image
 - an image is instantiated into a container

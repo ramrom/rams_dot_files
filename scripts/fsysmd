@@ -2,11 +2,13 @@
 
 # FZF over systemd running units and do things to it
 
-usage () { echo "Usage: fsysmd [ -h(help) ]"; }
+usage () { echo "Usage: fsysmd [ -f(fzf full screen) ] [ -h(help) ]"; }
 
-while getopts 'h' x; do
+FZF_HEIGHT=50
+while getopts 'hf' x; do
     case $x in
         h) usage && exit 1 ;;
+        f) FZF_HEIGHT=100 ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -14,9 +16,11 @@ shift $(($OPTIND - 1))
 
 # preview_cmd='SYSTEMD_COLORS=1 systemctl status $(echo {} | awk '\''{print $1}'\'')'
 preview_cmd='unit=$(echo {} | awk '\''{print $1}'\''); SYSTEMD_COLORS=1 systemctl status $unit; echo; SYSTEMD_COLORS=1 systemctl list-dependencies $unit'
-out=$(systemctl | fzf +m --nth=1 --header-lines=1 \
+preview_cmd_2='unit=$(echo {} | awk '\''{print $1}'\''); SYSTEMD_COLORS=1 systemctl cat $unit'
+out=$(systemctl | fzf --height "$FZF_HEIGHT"%  +m --nth=1 --header-lines=1 \
     --header='ctrl-i->restart, ctrl-o->journalctl-follow, ctrl-space->status, ctrl-y->stop' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-y' \
+    --bind "ctrl-s:preview(${preview_cmd_2})" \
     --preview "$preview_cmd")
 
 key=$(echo "$out" | head -1)
