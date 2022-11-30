@@ -57,6 +57,7 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 - good comment by arch linux init maintainer on why systemd is good:
     - https://www.reddit.com/r/archlinux/comments/4lzxs3/why_did_archlinux_embrace_systemd/
 - supports explicit order with After/Before directives: e.g. if unit2 has `After=unit1.service`, unit1 is up b4 unit2 started
+    - *NOTE* if `unit1` didn't start (e.g. not enabled), then `unit2` would still start, _unless_ `unit2` also had `Require=unit1.service`
     - sysV, a service config has to explicity specify sequence #, systemd the sequence by reading unit file deps/order
 - supports deps with Requires directive: e.g. if unit2 has `Requires=unit1.service`, unit2 will be stopped if unit1 isnt up
 - supports soft dep with Wants directive:
@@ -120,6 +121,7 @@ loginctl
 
 
 ## SYSV (OLD INIT SYSTEM)
+- cheat sheet of sysv command equivalents in systemd: https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
 - uses pidfile in /var/run
 - script that generally defines bin,conf/pidfile, defines start/stop/reload/status functions for ur bin
 - uses the /usr/sbin/service script, e.g. `service start foo`
@@ -334,6 +336,7 @@ drive naming convention:
 - hdb1 - 1st partition on 2nd IDE drive
 
 ### DIR CONVENTIONS
+- see FHS(linux filesystem hierarchy standard): https://www.pathname.com/fhs/
 - /         - root filesystem
 - /home     - user directories
 - /root     - home dir for root user

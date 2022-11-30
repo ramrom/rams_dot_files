@@ -24,6 +24,9 @@ printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
 tar –xvzf documents.tar.gz   # uncompress tar file
     # -x extract, -v verbose, -z decompress each file, -f filename of tar file
 
+#zip
+zip -r outputfile folder1 folder2
+
 #awk - multi purpose tool
 echo "foo bar baz" | awk '{print $2}'  # will print bar
 awk '{$1=""; print $0}' somefile        # print all but the first field/column
