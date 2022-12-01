@@ -1,19 +1,26 @@
 # DOCKER/KUBERNETES
 
 ## DOCKER
-- `docker images` - list images
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
 - `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
     - https://docs.docker.com/compose/reference/
     - `-d` runs without attaching it to the current shell
 - https://docs.docker.com/
-- Dockerfile is code that defines how to build a docker image
-- an image is instantiated into a container
-- `sudo docker -d -p 1111:1111 foo/image`
+- an image is built from the code in a Dockerfile
+    - `docker build MyDockerfile`
+    - `docker images` - list images
+    - `docker create someimage` - create container from image
+    - `docker rmi someimage`  - remove image
+- a container is an instantiation of an image
+    - `docker start somecontainer`, `docker restart somecontainer` - start/restart a container
+    - `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
+    - `docker rm somecontainer` - delete the container
+    - `docker inspect somecontainer` - json desc of configuration
+- `sudo docker run -d -p 1111:1111 foo/image` - create a container and start it
     - `-d` is detach, wont run in foreground in shell
     - `-p x:x` is to map internal port to external port
-- `sudo docker exec -it foocontainername /bin/bash`
+- `sudo docker exec -it foocontainername /bin/bash` - start a bash shell in container
 
 ## KUBERNETES
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true

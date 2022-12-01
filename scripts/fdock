@@ -30,9 +30,11 @@ if [ -n "$DOCKER_IMAGES" ]; then
     fi
 else
     preview_cmd='cont_id=$(echo {} | awk '\''{print $1}'\''); docker logs -f $cont_id'
+    preview_cmd_2='cont_id=$(echo {} | awk '\''{print $1}'\''); docker inspect $cont_id'
     out=$(docker ps --all | fzf +m --height "$FZF_HEIGHT" --nth=2 --header-lines=1 \
-        --header=$"ctrl-y->stop, ctrl-o->restart, ctrl-space->kill, ctrl-i->start, ctrl-s->remove, ctrl-g->shell\n\n" \
-        --expect='ctrl-y,ctrl-o,ctrl-space,ctrl-i,ctrl-s,ctrl-g' \
+        --header=$"ctrl-y->stop, ctrl-o->restart, ctrl-space->kill, ctrl-i->start, ctrl-r->remove, ctrl-g->shell, ctrl-s->preview-config" \
+        --expect='ctrl-y,ctrl-o,ctrl-space,ctrl-i,ctrl-r,ctrl-g' \
+        --bind "ctrl-s:preview(${preview_cmd_2})" \
         --preview "$preview_cmd")
 
     key=$(echo "$out" | head -1)
@@ -44,7 +46,7 @@ else
             "ctrl-y") docker stop "$container" ;;
             "ctrl-o") docker restart "$container" ;;
             "ctrl-space") docker kill "$container" ;;
-            "ctrl-s") docker rm "$container" ;;
+            "ctrl-r") docker rm "$container" ;;
             "ctrl-g") docker exec -it "$container" /bin/bash ;;
         esac
     fi
