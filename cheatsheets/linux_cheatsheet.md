@@ -44,7 +44,8 @@ su - foouser               - login as foouser (need to enter foouser password)
 sudo -u foouser cmd         - run command `cmd` as foouser
 sudo -u foouser bash         - basically login as foouser, since `bash` cmd here starts a shell process
 sudo useradd foouser        - create new user with home dir
-sudo passwd foouser         - change users password, seems to bypass strength rules
+sudo passwd foouser         - change any users password, seems to bypass strength rules
+passwd                      - change your password
 sudo useradd foouser foogroup    - add existing user to new group
 sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
 
@@ -64,11 +65,17 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
     - e.g. if unit2 has `Wants=unit1.service` unit1 started with unit2, if unit1 dies unit2 stays up
 - base type is unit
     - service (processes/daemons), mount (filesystems), device (/dev devices), socket (sockets)
+    - target - this unit type similar to runlelvel in sysV, so a desired state for the whole system
+        - services and other units can be tied to a target, multiple targets can be active simultaneously
     - slice - heirarchical manage a resource of group of processes, using cgroups
     - scope - manage set of sys processes, external processes. dont fork their own. scopes not configured via unit config files
     - timer - replacement for cron basically, specify a service unit to run and a schedule for it
-    - target - this unit type similar to runlelvel in sysV, so a desired state for the whole system
-        - services and other units can be tied to a target, multiple targets can be active simultaneously
+- folders
+    - most system unit files are in `/etc/systemd/system`
+    - user unit files in `/etc/systemd/user` or `$HOME/.config/systemd/user`
+    - `systemctl enable someunitfile` - essentiall symlinks a unit file to appropriate place in `/etc/systemd/system`
+- `systemctl daemon-reload` - reload systemd daemon, do this after editting unit files
+- `systemd analyze` - verify all unit files and measure approximate startup time
 
 ### SYSTEMCTL
 - systemctl start/stop/restart/reload foo
