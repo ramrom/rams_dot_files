@@ -188,13 +188,14 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
     ------------ BASH/SHELL bashls LSP ----------------------
     -- https://github.com/mads-hartmann/bash-language-server
-    require'lspconfig'.bashls.setup{
-        cmd = {"bash-language-server", "start"},
-        cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
-        filetypes = { "sh" },
-        root_dir = util.find_git_ancestor,
-        single_file_support = true
-    }
+
+    -- require'lspconfig'.bashls.setup{
+    --     cmd = {"bash-language-server", "start"},
+    --     cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
+    --     filetypes = { "sh" },
+    --     root_dir = util.find_git_ancestor,
+    --     single_file_support = true
+    -- }
 
 
     ----------- COMMON LSP KEYBINDINGS --------------------------------------------

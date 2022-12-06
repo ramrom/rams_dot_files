@@ -136,18 +136,25 @@
     - https://www.reddit.com/r/Monitors/comments/989lm2/maximum_cable_length_for_displayport/
         - don't exceed 10 feet, pretty much the limit
 
-## MONITORS
+## MONITORS/TV
 - low response time results in ghosting
-- TN (twisted nematic), oldest
-    - fast refresh rates, short response times, high brightness -> good for gaming
-        - can have response times low as 1ms
-    - bad viewing angles, bad color reproduction
-- IPS (in-plane switcing), newer tech
-    - great color reproduction, good viewing angle
-    - slower response times, lower refresh rates
-- VA
-    - good viewing angle, best constract ratio, good color repro, ok refresh rate (better than IPS), ok resonse time
-    - oldest standard
+- TV types
+    - LED - really LED _backlit_ and LCD turns off/on pixels
+    - QLED - LED with quatum dot layer behind LCD that improves color depth and brightness
+    - OLED - organic LED, organic is misleading, each pixel is a seperate LED that turns on/off
+        - great brightness, infinite contrast ratio, super fast response times, good viewing angles, no ghosting
+        - burn in risk especially for static images, max brightness not great
+- LCD types
+    - TN (twisted nematic), oldest
+        - fast refresh rates, short response times, high brightness -> good for gaming
+            - can have response times low as 1ms
+        - bad viewing angles, bad color reproduction
+    - IPS (in-plane switcing), newer tech
+        - great color reproduction, good viewing angle
+        - slower response times, lower refresh rates
+    - VA
+        - good viewing angle, best constract ratio, good color repro, ok refresh rate (better than IPS), ok resonse time
+        - oldest standard
 
 ## COMPILERS
 - LLVM is a platform for creating machine code
