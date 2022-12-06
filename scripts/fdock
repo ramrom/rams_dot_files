@@ -48,6 +48,7 @@ else
             "ctrl-space") docker kill "$container" ;;
             "ctrl-r") docker rm "$container" ;;
             "ctrl-g") docker exec -it "$container" /bin/bash ;;
+            *) echo "$container"
         esac
     fi
 fi

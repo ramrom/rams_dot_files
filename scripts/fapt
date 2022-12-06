@@ -1,14 +1,14 @@
 #!/bin/sh
 
 # APT + FZF
-usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ] [ -f(fzf full screen) ]'; }
+usage () { echo 'Usage: fapt [ -h(help) [ -i(just installed) ] [ -f(fzf half screen) ]'; }
 
-FZF_HEIGHT=50
+FZF_HEIGHT=100
 while getopts 'hif' x; do
     case $x in
         h) usage && exit 1 ;;
         i) opts="--installed" ;;
-        f) FZF_HEIGHT=100 ;;
+        f) FZF_HEIGHT=50 ;;
         *) usage && exit 1 ;;
     esac
 done
