@@ -1,12 +1,14 @@
 #!/bin/sh
 
-# FF - Fzf on files in a dir with file prev and open or edit or cd to or add to clipboard
+# FF - Fzf on files in a dir with file prev
+# actions: open, edit, cd to location, or add to clipboard
 
-usage () { echo 'Usage: ff [ -h(help) ] [ -j FZF_HEIGHT ] [ -w FUNC_WRAP ] BASE_DIR( `~` = home, no arg means cur dir)'; }
+usage () { echo 'Usage: ff [ -h(help) ] [ -i(search-hidden-files) ] [ -j FZF_HEIGHT ] [ -w FUNC_WRAP ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
-while getopts 'hwj:' x; do
+while getopts 'hiwj:' x; do
     case $x in
         h) usage && exit 1 ;;
+        i) HIDDEN_FILES=1 ;;
         j) FZF_HEIGHT="$OPTARG" ;;
         w) FUNC_WRAP=1 ;;
         *) usage && exit 1 ;;
@@ -19,7 +21,7 @@ BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 OPENBIN="open"; [ $(uname) = "Linux" ] && OPENBIN='xdg-open'
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
-if [ "$1" = "h" ]; then
+if [ -n "$HIDDEN_FILES" ]; then
     FZF_DEFAULT_COMMAND="$FDNAME --type f --hidden --exclude .git '.*' ~"
 elif [ -n "$1" ]; then
     [ ! -d "$1" ] && echo "$1 not a dir!" && exit 1
