@@ -173,7 +173,7 @@ ctrl-click - open link in new tab
 shift-click - open link in new window
 space/space-shift - scroll up/down page
 
-## APT:
+## APT
 ------------------------------------------
 ### DEPENDENCIES
 apt depends pkg
@@ -228,7 +228,7 @@ sudo dpkg --remove --force-remove-reinstreq somepackage
 ### UNATTENDED-UPGRADE (update/upgrade security fixes)
 sudo unattended-upgrade
 
-## SNAP:
+## SNAP
 - snap invented by ubuntu, more rapid/flexible package system than .deb/apt
 - snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
     - snap keeps the old version of the package
@@ -254,6 +254,8 @@ snap refresh --list
     - compiz
     - mutter(GNOME 3 uses it), particularly GNOMEShell is a plugin for mutter
     - metalicity(GNOME 2 uses it)
+- DISPLAY env var
+    - `who` will show users logged in and the `FROM` column will show where, if you see just `:1` that's the DISPLAY value of X session
 - xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
     - xrandr --output DP-0 --mode 2560x1440
@@ -262,8 +264,8 @@ snap refresh --list
 - wmctrl - window manager control
     - NEEDS DISPLAY VAR SET
     - display window number/ID in hexadecimal, xdotool display in decimal
-    - wmctrl -l, will list all windows in window manager, wmctrl -d list desktops, wmctrl -m list name of window manager
-    - -G option tells geometry info, heightxwidth, and x,y position on desktop
+    - `wmctrl -l`, will list all windows in window manager, `wmctrl -d` list desktops, `wmctrl -m` list name of window manager
+    - `-G` option tells geometry info, heightxwidth, and x,y position on desktop
         - *NOTE* the height and widght are just content area
     - moving a "firefox" named window, `wmctrl -r Firefox -e '0,6,0,1040,708'`
         - can target window by ID with -i `wmctrl -i -r 0x03000003 -t 2`
@@ -314,6 +316,10 @@ snap refresh --list
     - `DISPLAY=:1 xscreensaver-command -exit` - stop the screensaver daemon
 - `.xscreensaver` config file uses `-` at beginning of program name to represent that it's unselected
     - mode values: `off` = disabled, `random` = randomly choose, `one` = just the one selected
+
+## DBUS
+- `busctl` - cli to introspect the bus
+    - `sudo busctl monitor` - see live bus events
 
 ## SOUND
 --------------
