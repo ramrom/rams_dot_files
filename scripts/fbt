@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# FZF + bluetoothctl
+
 # TODO: implement ctrl-r reload
 
 [ ! "$(uname)" = "Linux" ] && echo "$(tput setaf 1) Only works in Linux" && exit 1
@@ -7,8 +9,9 @@
 prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
 out=$(bluetoothctl devices | fzf +m \
     --preview "$prev_cmd" \
-    --header='ctrl-r->reload devices, ctrl-o->connect, ctrl-i->disconnect, enter->info' \
+    --header='ctrl-r->reload devices, ctrl-space->reload paired-devices, ctrl-o->connect, ctrl-i->disconnect, enter->info' \
     --bind 'ctrl-r:reload(bluetoothctl devices)' \
+    --bind 'ctrl-space:reload(bluetoothctl paired-devices)' \
     --expect='ctrl-o,ctrl-i')
 key=$(echo "$out" | head -1)
 selection=$(echo "$out" | tail -1)
