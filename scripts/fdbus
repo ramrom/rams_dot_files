@@ -13,28 +13,10 @@ done
 shift $(($OPTIND - 1))
 
 preview_cmd='device=$(echo {} | awk '\''{print $1}'\''); busctl status $device; echo; busctl tree $device'
-# preview_cmd_2='unit=$(echo {} | awk '\''{print $1}'\''); SYSTEMD_COLORS=1 systemctl cat $unit'
+preview_cmd_2='device=$(echo {} | awk '\''{print $1}'\''); busctl monitor $device'
 
 out=$(busctl | fzf +m --exit-0 --height 100% --header-lines=1 \
-    --header='ctrl-s->preview-events' \
+    --header='ctrl-s->monitor-events' \
+    --bind "ctrl-s:preview(${preview_cmd_2})" \
     --preview "$preview_cmd" \
     --preview-window=:wrap)
-# key=$(echo "$out" | head -1)
-# file=$(echo "$out" | tail -1)
-# if [ -n "$file" ]; then
-#     case "$key" in
-#         "ctrl-o") $OPENBIN "$file" ;;
-#         "ctrl-space")
-#             [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
-#             echo "cd '$(dirname "$file")'" ;;
-#         "ctrl-i")
-#             cmd="${EDITOR:-vin} '$file'"
-#             [ -z "$FUNC_WRAP" ] && eval "$cmd" && exit
-#             echo "$cmd" ;;
-#         "ctrl-s")
-#             [ -n "$1" ] && echo "ERROR: opening in github requires same dir to detect remote/branch" && exit 1
-#             generate_github_link "$file" > /dev/null || exit 1
-#             $OPENBIN "$(generate_github_link "$file")" ;;
-#         *) echo "$file" ;;
-#     esac
-# fi

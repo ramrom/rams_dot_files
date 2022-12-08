@@ -319,7 +319,8 @@ snap refresh --list
 
 ## DBUS
 - `busctl` - cli to introspect the bus
-    - `sudo busctl monitor` - see live bus events
+    - `sudo busctl monitor org.bluez` - see all live events for bus name `org.bluez`
+    - `busctl introspect org.bluez /org/bluez/hci0`  - show interfaces/methods/properties on object `/org/bluez/hci0`
 
 ## SOUND
 --------------
