@@ -57,3 +57,8 @@ ssh -X foouser@foo.com  # -X is done without X11 authority
 # the curl command will use the socks5 proxy to make http request
 ssh -D 1234 foouser@yarserver
 curl -x socks5h://127.0.0.1:1234 https://google.com
+
+# TCP PROXY
+# create local TCP 8080 to forward to remote port 8080
+# -n (redir stdin from /dev/.null, so run in background), -N(dont execute remote command), -f(go to background b4 cmd execution)
+ssh -f -N -n -L8080:127.0.0.1:8080 someremotehost
