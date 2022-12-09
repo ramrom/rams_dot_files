@@ -14,8 +14,8 @@ while getopts 'h' x; do
 done
 shift $(($OPTIND - 1))
 
-preview_cmd='entity=$(echo {} | awk '\''{print $1}'\''); hass-cli entity list $entity'
-FZF_DEFAULT_COMMAND='hass-cli state list'
+preview_cmd="entity=\$(echo {} | awk '{print \$1}'); hass-cli --server http://127.0.0.2:8123 entity list \$entity"
+FZF_DEFAULT_COMMAND="hass-cli --token $HASS_TOKEN state list"
 
 out=$(fzf +m --height 100% --header-lines=1 \
     --header='' \
