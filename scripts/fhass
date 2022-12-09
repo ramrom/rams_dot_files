@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# FZF + hass-cli
+
+[ -z $HASS_TOKEN ] && echo "HASS_TOKEN is not set!" && exit 1
+
+usage () { echo 'Usage: fhass [ -h(help) ]'; }
+
+while getopts 'h' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+preview_cmd='entity=$(echo {} | awk '\''{print $1}'\''); hass-cli entity list $entity'
+FZF_DEFAULT_COMMAND='hass-cli state list'
+
+out=$(fzf +m --height 100% --header-lines=1 \
+    --header='' \
+    --bind "ctrl-r:reload($FZF_DEFAULT_COMMAND)" \
+    --preview "$preview_cmd")
+
+echo $out

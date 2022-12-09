@@ -9,6 +9,7 @@
 - home assitant core - the main backend brains
 
 ## API
+- REST API docs: https://developers.home-assistant.io/docs/api/rest
 - `curl http://192.168.1.1/api/`
 
 ## CLI
