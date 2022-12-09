@@ -277,6 +277,7 @@ du -a /foo
 
 # CHOWN - change owner of files and dirs
 chown newuser file
+chown newuser:newgroup file
 chown -R newuser dir
 
 # CP

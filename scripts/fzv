@@ -19,10 +19,12 @@ else
     cmd="typeset"
 fi
 
+COPY_CMD="pbcopy"; [ $(uname) = "Linux" ] && COPY_CMD="xclip -selection clipboard"
+
 vars=$(eval "$cmd")
 
 out=$(echo "$vars" | fzf +m \
-    --header='ctrl-y->pbcopy_value' \
+    --header='ctrl-y->clipboard_copy' \
     --expect='ctrl-y')
 key=$(echo "$out" | head -1)
 variable=$(echo "$out" | tail -1)
@@ -33,7 +35,7 @@ if [ -n "$variable" ]; then
             # last 2 seds to strip the double quotes surrounding value
             value=$(echo "$variable" | sed -E 's/^[^=]*=//' | sed -E "s/^[\"']?//" | sed -E "s/[\"']?$//")
             echo "$(tput setaf 2)VALUE: $(tput bold)"$value" $(tput sgr0)copied to clipboard"
-            echo "$value" | pbcopy
+            echo "$value" | eval $COPY_CMD
             ;;
         *) echo "$variable" ;;
     esac

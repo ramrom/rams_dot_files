@@ -1,6 +1,7 @@
 # LINUX STUFF
 --------------------------
 - udev, as of kernel 2.6, it replaces DevFS(device file system)
+    - `udevadm` - cli tool to see events, monitor devices, list attribs
     - identify devices based on properties (e.g. vendor ID and device ID) dynamically
     - runs in userspace, devFS runs in kernelspace
     - kernel reports events to udev daemon, udev daemon does actions based on configured rules in response
@@ -375,7 +376,7 @@ drive naming convention:
 ------------------------------------------
 sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
 hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
-    - old and unmaintained, removed from debian and ubuntu22
+    - *NOTE* dec2022 - old and unmaintained, removed from debian and ubuntu22
 smartmontools - query SMART device, e.g. HDDs and SSDs
     - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
 inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
@@ -386,6 +387,8 @@ mkfs - to format a disk partition
 fdisk - show partitions and block devices, sizes, sectors
 /etc/fstab - file systems mounted at boot
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+udevadm - query info about udev events
+    - `udevadm info -a -n /dev/nvme0` - show info about device
 dmesg - kernel ring buffer, print messages or control it
 dconf  - like gsettings?
 notify-send - pops up notification
@@ -425,4 +428,3 @@ transmission - great torrent program
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
     - NOTE: `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
-
