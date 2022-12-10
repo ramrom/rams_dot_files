@@ -3,10 +3,12 @@
 - https://developers.home-assistant.io/
 
 ## ARCHITECTURE
+- https://developers.home-assistant.io/docs/architecture_index/
 - home assistant OS (formerly HassOS) - linux based OS from [buildroot](https://buildroot.org/), with add-ons
 - home assistant supervisor - program that manages/upgrades home assistant OS and home assistant core
     - add-ons are created in new containers
 - home assitant core - the main backend brains
+- uses a SQLite db, generally located at `config/home-assistant_v2.db`
 
 ## API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest

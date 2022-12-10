@@ -184,6 +184,9 @@ arp -a   # display the apr cache
 nskookup example.com
 nslookup example.com 1.1.1.1 # use dns server 1.1.1.1 to lookup
 
+# NMAP - network scanner
+nmap -sn 1.1.1.*  # scan all 1.1.1.* IP addresses
+
 # DIG - dns lookup, better/newer than nslookup
 dig example.com
 dig @1.1.1.1 example.com # use dns server 1.1.1.1 to lookup
