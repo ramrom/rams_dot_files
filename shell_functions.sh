@@ -297,16 +297,6 @@ function toggle_bulb() {
 }
 
 ############## CHROME #############################################
-function chrome_cookies() {
-    local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
-    sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
-}
-
-function del_chrome_cookies() {
-    local chrome_cookie_db=$HOME/'Library/Application Support/Google/Chrome/Default/Cookies'
-    sqlite3 "$chrome_cookie_db" "DELETE FROM cookies WHERE host_key LIKE \"%$1%\";"
-}
-
 function chrome_save_state() { echo $(chrome-json-summary) > ~/Documents/chrome_tabs_backup.json; }
 function chrome_restore() { chrome-json-restore ~/Documents/chrome_tabs_backup.json; }
 

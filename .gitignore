@@ -2,6 +2,7 @@
 *.swp
 tags
 tmp/*
+MyCurrentVimSession.vim
 
 .netrwhist
 .vim/autoload/

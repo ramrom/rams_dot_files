@@ -1,0 +1,27 @@
+#!/bin/sh
+
+usage () {
+    echo 'Usage: chrome-cookie [ -h(help) ] [ -d(delete) ] PATTERN'
+    echo "      by default will SELECT on PATTERN"
+}
+
+while getopts 'hd' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        d) DELETE=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+if [ "$(uname)" = "Darwin" ]; then
+    chrome_cookie_db=~/'Library/Application Support/Google/Chrome/Default/Cookies'
+else
+    chrome_cookie_db=~/.config/google-chrome/Default/Cookies
+fi
+
+if [ -n "$DELETE" ]; then
+    sqlite3 "$chrome_cookie_db" "DELETE FROM cookies WHERE host_key LIKE \"%$1%\";"
+else
+    sqlite3 "$chrome_cookie_db" "SELECT * FROM cookies WHERE host_key LIKE \"%$1%\";"
+fi
