@@ -29,6 +29,8 @@
 ## IoT
 - Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
     - https://buildwithmatter.com/
+    - collaberation b/w tons of companies including big names apple, google, amazon, samsung
+    - highly based on apple's homekit protocol
 - Thread - networking tech that Matter is built on
     - low-power mesh network like zigbee
     - any device can be a thread edge router, it is IPv6 based
