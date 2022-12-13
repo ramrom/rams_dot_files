@@ -167,7 +167,13 @@
 - swift uses it's own "swift compiler" to create LLVM IR(bitcode)
 
 
-## ANSIBLE
+## DEVOPS
+### TERRAFORM
+- more declarative style of programming, used more for provisioning
+- agentless, all the client needs is ssh server
+### ANSIBLE
+- more procedural style of programming, used more for configuration
+- agentless, all the client needs is ssh server
 - uses jinja2 (.j2 files) for templating
 
 ## BASE64
