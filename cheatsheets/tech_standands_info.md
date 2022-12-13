@@ -250,8 +250,17 @@
 - https://github.com/adrg/xdg/blob/master/README.md
 - standar for files for apps and configs
 
-## NETWORK FILESYSTEM PROTOCOLS
-- SSHFS (uses SFTP over SSH), FTPS - FTP + TLS/SSL
+## NETWORK PROTOCOLS
+### ADDRESS RESOLUTION
+- ARP - address resolution protocol, get layer 2(MAC) address from a given layer 3(IP) address
+- InARP(inverse ARP)/RARP(Reverse ARP) - get layer 3 address from a layer 2 address
+- BOOTP - superseded InARP
+- DHCP - superseded BOOTP
+
+### NETWORK FILESYSTEM PROTOCOLS
+- SSHFS uses SFTP
+- SFTP is FTP over SSH
+- FTPS is FTP + TLS/SSL
 - AFP (apple filing protocol), NFS (unix designed), SMB/CIFS(windows designed, supported well by all)
 - osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
 - CIFS/SMB info: https://linux.die.net/man/8/mount.cifs

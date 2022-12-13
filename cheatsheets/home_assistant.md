@@ -10,6 +10,13 @@
 - home assitant core - the main backend brains
 - uses a SQLite db, generally located at `config/home-assistant_v2.db`
 
+## AUTOMATIONS
+- multiple triggers are OR'd together
+
+## CONFIGURATION
+- https://www.home-assistant.io/docs/configuration/
+- after manually editting it, highly rec'd to validate the configuration file, then restart
+
 ## API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest
 - `curl http://192.168.1.1/api/`
