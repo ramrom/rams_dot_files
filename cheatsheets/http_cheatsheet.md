@@ -1,5 +1,13 @@
-# HTTPIE
+# HTTP
+- good site to test HTTP requests: https://httpbin.org/
+
+## XH
+- https://github.com/ducaale/xh
+- a http client in rust that is near identical in interface to HTTPie
+
+## HTTPIE
 - https://httpie.io/docs
+- written in python, core libs pygments and requests
 
 ## USAGE
 raw json fields:
