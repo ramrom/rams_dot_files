@@ -1,6 +1,7 @@
 # DOCKER/KUBERNETES
 
 ## DOCKER
+### USAGE
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
 - `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
@@ -21,8 +22,14 @@
     - `-d` is detach, wont run in foreground in shell
     - `-p x:x` is to map internal port to external port
 - `sudo docker exec -it foocontainername /bin/bash` - start a bash shell in container
+### UNDERLYING TECH
+- `containerd` is a container runtime developed by Docker
+    - uses linux cgroups to enforce limits CPU and memory
+    - uses linux namespaces to isolate processes, filesystems, network, users(UIDs,GUID), env vars
+
 
 ## KUBERNETES
+- supports many container runtimes including `containerd` and `CRI-O`
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true
 - https://kubernetes.io/docs/
 - workload types: deployments(identity-less),statefulset(unique pods, persistent storage),daemonset(manages nodes)

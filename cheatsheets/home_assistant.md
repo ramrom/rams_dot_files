@@ -25,3 +25,4 @@
 - the official CLI: https://github.com/home-assistant/cli , `ha` bin
     - i think it's only available on the homeassistant OS
 - great 3rd party: https://github.com/home-assistant-ecosystem/home-assistant-cli , `hass-cli` bin
+    - calling a service: `hass-cli service call notify.some_device --arguments message="hi there",title=whatever`

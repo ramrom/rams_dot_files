@@ -189,7 +189,7 @@ nskookup example.com
 nslookup example.com 1.1.1.1 # use dns server 1.1.1.1 to lookup
 
 # NMAP - network scanner
-nmap -sn 1.1.1.*  # scan all 1.1.1.* IP addresses
+nmap -sn 1.1.1.*  # scan all 1.1.1.* IP addresses, and find live hosts
 
 # DIG - dns lookup, better/newer than nslookup
 dig example.com
