@@ -6,7 +6,10 @@ source ~/.vimrc
 
 
 """" NEOVIM LUA CONFIG
-if has('nvim-0.5.0')    " older neovim versions dont support vim module and other things
+
+" older neovim versions dont support vim module and other things
+" and dont configure the plugins is VIM_NOPLUG is set
+if has('nvim-0.5.0') && empty($VIM_NOPLUG)
 lua << EOF
 
 -------------------------------------------------------------------------

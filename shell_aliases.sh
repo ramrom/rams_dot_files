@@ -1,8 +1,8 @@
 # VIM
-alias vin='nvim'
-alias svi='VIM_NOPLUG=1 vim'    # simple
-alias ssvi='vim -u NONE'        # super simple
-alias vina='VIM_NO_AUTOREAD=1 vi'
+alias v='nvim'
+alias svi='VIM_NOPLUG=1 v'    # simple, dont load plugins
+alias ssvi='v -u NONE'        # super simple, dont even load my vimrc
+alias vina='VIM_NO_AUTOREAD=1 v'
 
 alias ..='cd ..'
 alias ll='ls -l'

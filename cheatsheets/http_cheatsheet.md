@@ -8,14 +8,12 @@
 ## HTTPIE
 - https://httpie.io/docs
 - written in python, core libs pygments and requests
-
-## USAGE
+### USAGE
 raw json fields:
     ```bash
     http POST https://api.foo.com field:='["a",2]'
     ```
-
-## code snippet of extracting status code
+### CODE SNIPPET OF EXTRACTING STATUS CODE
 ```sh
 function httpie_all() {
     local url=$1
