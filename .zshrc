@@ -62,6 +62,8 @@ export FZF_CTRL_T_COMMAND="$fdname"
 export FZF_ALT_C_COMMAND="$fdname --type d"
 unset fdname
 
+source ~/repos/fzf-tab/fzf-tab.plugin.zsh
+
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
