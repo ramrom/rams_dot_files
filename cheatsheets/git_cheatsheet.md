@@ -69,6 +69,8 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
         - `Host github.com-user1` and `Host github.com-user2`, and git uses repo url's username to discern
 - *NOTE* if you use ssh-agent, and load multiple keys, it will only try the first key, so only load the single proper key
 - `ssh-add -l` to list key loaded into ssh-agent
+- can configure a repo to use a specific ssh command
+    - `git config core.sshCommand 'ssh -i ~/.ssh/id_rsa_corp'`, keychain can have both keys
 ### HTTPS AUTH
 - can specify a seperate credential store with `git -c credential.helper='store --file=/path/to/credfile' pull`
     - the cred file is plaintext format, each line something like `https://user:pass@example.com`

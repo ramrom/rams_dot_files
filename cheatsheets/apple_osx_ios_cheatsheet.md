@@ -49,7 +49,8 @@
 - screencapture - capture screenshot images
 - mdfind - cli way to find whatever spotlight does
 - open - open a app like u would double click on it
-    - open an app by name: open -a "Slack"
+    - open an app by name: `open -a "Slack"`
+    - open a dir in Finder: `open somedir` or `open .`(cur dir)
 - pbcopy  - cli way to copy to sys clipboard
     - lal | pbcopy   (copy ls long listing to clipboard)
 - pbpaste - cli way to paste from clipboard

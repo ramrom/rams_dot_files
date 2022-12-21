@@ -45,3 +45,7 @@ this works too, _i think_, (HTTPie example here):
 
 ## Pipeline Language
 - https://www.jenkins.io/doc/book/pipeline/syntax/
+
+## Groovy
+- cli linter https://www.npmjs.com/package/npm-groovy-lint
+    - `npm-groovy-lint Jenkinsfile` - shows warning/errors/info

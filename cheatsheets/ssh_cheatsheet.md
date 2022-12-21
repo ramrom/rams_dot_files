@@ -1,5 +1,6 @@
-################### SSH ####################
+# SSH
 
+```sh
 # ssh into host and run single command and set a VAR for the command as well
 ssh foo@host.bar VAR=1 somecommand arg1
 
@@ -43,7 +44,7 @@ AllowUsers foouser@* baruser@192.168.*
 ssh-keygen
 
 # change passphrase on particular private key
-$ ssh-keygen -p -f ~/.ssh/id_rsa
+ssh-keygen -p -f ~/.ssh/id_rsa
 
 # X11 Forwarding
 # server side X11Fowarding must be yes in server config(sshd_config file)
@@ -62,3 +63,4 @@ curl -x socks5h://127.0.0.1:1234 https://google.com
 # create local TCP 8080 to forward to remote port 8080
 # -n (redir stdin from /dev/.null, so run in background), -N(dont execute remote command), -f(go to background b4 cmd execution)
 ssh -f -N -n -L8080:127.0.0.1:8080 someremotehost
+```
