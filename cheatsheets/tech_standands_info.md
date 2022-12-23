@@ -202,7 +202,7 @@
 - ctrl f in league for ping
 - shift + enter  - in game do a /all message
 
-## NATIVEFIER:
+## NATIVEFIER
 - set user agent so google wont yell about untrusted broswer
     - https://github.com/jiahaog/nativefier/issues/831
     - nativefier --user-agent "Mozilla/5.0 (Windows NT 10.0; rv:74.0) Gecko/20100101 Firefox/74.0" --name 'Google Hangouts' 'https://hangouts.google.com'
