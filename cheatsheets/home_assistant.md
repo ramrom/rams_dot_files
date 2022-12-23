@@ -1,6 +1,7 @@
 # HOME ASSISTANT
 - https://www.home-assistant.io/
 - https://developers.home-assistant.io/
+- glossary of terms: https://www.home-assistant.io/docs/glossary/
 
 ## ARCHITECTURE
 - https://developers.home-assistant.io/docs/architecture_index/
@@ -19,6 +20,14 @@
 - for template sensors, after editting configuration.yml, goto developer tools and reload just templates, don't have to restart HASS
     - this should clear deletedt template sensors from configuration.yml
 
+## SPECIAL TYPES
+- templates -> entity whose data is derived from other data
+- REST service - REST service: https://www.home-assistant.io/integrations/rest/ , create sensor for REST API response
+    - not be confused with REST command: https://www.home-assistant.io/integrations/rest_command/
+        - this is a service type that just fires off a HTTP request somewhere (ignores response i suppose)
+    - the inverse is template webhook: https://www.home-assistant.io/docs/automation/trigger/#webhook-trigger
+        - client pushes data to HASS and you can create a entity/sensor from that data
+
 ## API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest
 - `curl http://192.168.1.1/api/`
@@ -29,4 +38,7 @@
 - the official CLI: https://github.com/home-assistant/cli , `ha` bin
     - i think it's only available on the homeassistant OS
 - great 3rd party: https://github.com/home-assistant-ecosystem/home-assistant-cli , `hass-cli` bin
-    - calling a service: `hass-cli service call notify.some_device --arguments message="hi there",title=whatever`
+    - calling a service
+        - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever`
+        - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`
+    - toggle entity: `hass-cli state toggle someentity`

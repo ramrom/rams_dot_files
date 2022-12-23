@@ -4,22 +4,23 @@
 - great resource: https://devhints.io/vimscript
 - `:version`  - get version and features compiled
 
-so $VIMRUNTIME/syntax/hitest.vim
-c-x before c-n autocomplete search only in current file
-c-x c-f find file at current path, c-x c-] use tags
-<c-w>f - goto filename undercursor in new window
-<c-w>gf - in new tab
-100G or 100gg - goes to line 100 like :100<CR> in command
-"120gg3yy -  yank lines 20-23 into reg 1
-:20,23y a<CR> - without moving cursor into reg a
-:7pu a<CR> - paste reg a under line 7
-    -  yank from mark a to cursor: y'a
-:cd <dir> - change vims current working dir
-:read ~/foo     - insert contents of file foo
-:read !jq . foo - can take stdout of shell cmd
-:iunmap jk - unmap jk insert mapping
-:earlier 10min - time travel!, go back to buffer state 10 minutes ago
-    :later 1hr - go forward 1 hour
+- so $VIMRUNTIME/syntax/hitest.vim
+- c-x before c-n autocomplete search only in current file
+- c-x c-f find file at current path, c-x c-] use tags
+- <c-w>f - goto filename undercursor in new window
+- <c-w>gf - in new tab
+- 100G or 100gg - goes to line 100 like :100<CR> in command
+- "120gg3yy -  yank lines 20-23 into reg 1
+- :20,23y a<CR> - without moving cursor into reg a
+- :7pu a<CR> - paste reg a under line 7
+-     -  yank from mark a to cursor: y'a
+- :cd <dir> - change vims current working dir
+- :read ~/foo     - insert contents of file foo
+- :read !jq . foo - can take stdout of shell cmd
+- :iunmap jk - unmap jk insert mapping
+- :earlier 10min - time travel!, go back to buffer state 10 minutes ago
+    - :later 1hr - go forward 1 hour
+- `:set filetype=json` - manually set filetype to json
 
 ## NEOVIM
 - nvim-lua-guide: https://github.com/nanotee/nvim-lua-guide
