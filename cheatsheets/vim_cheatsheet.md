@@ -188,6 +188,7 @@ bd 3, closes buffer # 3
 :hi clear - reset highlighting
 :syntax - spits out current syntax rules
     - force set syntax highlight to ruby: `set syntax=ruby`
+- `:echo $SOME_ENV_VAR` - output value of a environment variable
 - `:filter *pattern* let g:`
     - works on `let`, `set`, `map`, `hi` and `fun`
     - **NOT** `syn` or `autocmd` though...
