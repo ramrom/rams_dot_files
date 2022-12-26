@@ -41,4 +41,6 @@
     - calling a service
         - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever`
         - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`
+        - `service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
     - toggle entity: `hass-cli state toggle someentity`
+    - call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
