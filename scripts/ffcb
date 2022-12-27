@@ -16,6 +16,6 @@ jq_script='
 
 bookmark=$(jq -r "$jq_script" < "$bookmarks_path" \
     | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
-    | fzf --ansi)
+    | fzf --ansi | cut -f 2)
 
-echo "$bookmark" | cut -d$'\t' -f2 | xargs $OPENBIN
+[ -n "$bookmark" ] && $OPENBIN "$bookmark"
