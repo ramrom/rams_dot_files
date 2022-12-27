@@ -44,3 +44,6 @@
         - `service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
     - toggle entity: `hass-cli state toggle someentity`
     - call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
+
+## INTEGRATION
+- speedtest by defaults polls every hour, can configure this in ingrations section
