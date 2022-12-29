@@ -11,6 +11,12 @@ find /tmp/ -inum 4065089 # find all hard links with a inode #
 # get terminal info
 infocmp
 
+# cat - output content of file to stdout
+cat file
+
+# tac - opposite of cat, output file in reverse order of lines to stdout
+tac file
+
 # cp - copy
 cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
 
@@ -269,6 +275,12 @@ file foo   # example output: "foo: ASCII text"
 # MD5 fingerprint
 md5 somefile    # osx bin, spits out md5 fingerprint of file
 md5sum somefile # ubuntu bin, same deal
+
+# watch - run a command periodically
+watch -n 2 -d date  # run `date` every 2 seconds, -d highlight differences
+
+# fswatch - monitor some files and print changes
+fswatch some/dir/ another/dir/ dir/somefile
 
 # CHAFA - view images(jpg, png etc) in ASCII/text in terminal! (ugly but still cool)
 chafa foo.jpg
