@@ -26,6 +26,9 @@
 - `containerd` is a container runtime developed by Docker
     - uses linux cgroups to enforce limits CPU and memory
     - uses linux namespaces to isolate processes, filesystems, network, users(UIDs,GUID), env vars
+### ISSUES
+- symlinks in volumes dont work
+    - https://axell.dev/mounted-docker-volume-contains-symlinks/
 
 
 ## KUBERNETES

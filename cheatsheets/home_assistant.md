@@ -2,6 +2,7 @@
 - https://www.home-assistant.io/
 - https://developers.home-assistant.io/
 - glossary of terms: https://www.home-assistant.io/docs/glossary/
+- [HACS](https://hacs.xyz/) - home assistant community store - download 3rd party plugins on github
 
 ## ARCHITECTURE
 - https://developers.home-assistant.io/docs/architecture_index/
@@ -27,6 +28,7 @@
         - this is a service type that just fires off a HTTP request somewhere (ignores response i suppose)
     - the inverse is template webhook: https://www.home-assistant.io/docs/automation/trigger/#webhook-trigger
         - client pushes data to HASS and you can create a entity/sensor from that data
+- [history stats](https://www.home-assistant.io/integrations/history_stats/) - stats of another sensor, e.g. time period in a state
 
 ## API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest
@@ -47,3 +49,18 @@
 
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
+
+## NVR / CAMERA
+- should really use a NVR like frigate or zoneminder, both need MQTT as mediator
+
+## LOGS
+- log file is `home-assistant.log`
+- example of auth failure log
+    - `2022-12-29 16:18:31.390 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from some-device (1.1.1.1)`
+
+## ISSUES
+- if you rename a device and all it's entities, lovelace errors
+    - lovelace stores entity names, not their IDs
+
+## COMPETITORS
+- [openhab](https://www.openhab.org/) is also a fully fledge FOSS home automation platform

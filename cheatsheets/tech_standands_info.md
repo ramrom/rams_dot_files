@@ -14,6 +14,9 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
+## PROCESSORS
+- TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
+
 ## WIFI
 - WiFi 6 to identify devices that support 802.11ax (released 2019)
 - WiFi 5 to identify devices that support 802.11ac (released 2014)
