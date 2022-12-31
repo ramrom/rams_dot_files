@@ -50,6 +50,10 @@
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
 
+## HTTP
+- https://community.home-assistant.io/t/certificate-authority-and-self-signed-certificate-for-ssl-tls/196970
+    - make sure to use `-nodes` with `openssl`, HASS doesn't support passphrase on cert
+
 ## NVR / CAMERA
 - should really use a NVR like frigate or zoneminder, both need MQTT as mediator
 
