@@ -77,6 +77,8 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
     - `systemctl enable someunitfile` - essentiall symlinks a unit file to appropriate place in `/etc/systemd/system`
 - `systemctl daemon-reload` - reload systemd daemon, do this after editting unit files
 - `systemd analyze` - verify all unit files and measure approximate startup time
+- `systemctl get-default` - get the default target (probably `graphical.target` for regular desktop installs)
+    - `sudo systemctl set-default multi-user.target` - set new target
 
 ### SYSTEMCTL
 - systemctl start/stop/restart/reload foo
@@ -322,6 +324,17 @@ snap refresh --list
 - `busctl` - cli to introspect the bus
     - `sudo busctl monitor org.bluez` - see all live events for bus name `org.bluez`
     - `busctl introspect org.bluez /org/bluez/hci0`  - show interfaces/methods/properties on object `/org/bluez/hci0`
+
+## NETWORK
+- https://en.wikipedia.org/wiki/Netfilter
+    - linux framework for most network related things like NAT and firewall and more
+- `iptables` - userspace bin
+    - `iptables -L` - list all rules as table
+        - `iptables -L --line-numbers` - by line number
+    - `iptables -D INPUT 2` - drop `INPUT` rule 2
+        - `iptables -F INPUT` - flush(drop) all rules in INPUT chain
+        - `iptables -F` - flush all rules
+    - `iptables -S` - list all rules by specification
 
 ## SOUND
 --------------

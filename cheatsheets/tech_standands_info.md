@@ -18,6 +18,8 @@
 - TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
 
 ## WIFI
+- 2.4GHz band - ch1 2412, ch6 2437, ch11 2462
+### STANDARDS
 - WiFi 6 to identify devices that support 802.11ax (released 2019)
 - WiFi 5 to identify devices that support 802.11ac (released 2014)
 - WiFi 4 to identify devices that support 802.11n  (released 2009)
@@ -26,8 +28,19 @@
 - WiFi 1 to identify devices that support 802.11b (released 1999)
 
 ## BLUETOOTH
+- classic and BLE use 2.4Ghz range, 2400-2480
+    - classic 79channels 32 discover channels, BLE 40channels 3discovery channels
+- classic - 3Mbps max rate
+    - use for file transfers, streaming
+- BLE 4.2 -1Mbps max rate, 50-150m range
+    - generally better for IoT sensors, device control
+- bluetooth Mesh - introduced 2017
 - decent basic vid on bluetooth wireless mechanism: https://www.youtube.com/watch?v=1I1vxu5qIUM
 - how pairing works: https://www.bluetooth.com/blog/bluetooth-pairing-part-1-pairing-feature-exchange/
+
+## ZIGBEE
+- mesh style network
+- ch11 - ch26 between 2400Mhz - 2480Mhz
 
 ## IoT
 - Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
