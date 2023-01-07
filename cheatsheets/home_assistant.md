@@ -51,8 +51,11 @@
 - speedtest by defaults polls every hour, can configure this in ingrations section
 
 ## HTTP
+- http configuration: https://www.home-assistant.io/integrations/http/
 - https://community.home-assistant.io/t/certificate-authority-and-self-signed-certificate-for-ssl-tls/196970
     - make sure to use `-nodes` with `openssl`, HASS doesn't support passphrase on cert
+- banned IPs go into file `ip_bans.yaml` in base config dir
+    - remove from file and restart HASS to unban
 
 ## NVR / CAMERA
 - should really use a NVR like frigate or zoneminder, both need MQTT as mediator

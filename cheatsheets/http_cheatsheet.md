@@ -5,6 +5,10 @@
 - https://github.com/ducaale/xh
 - a http client in rust that is near identical in interface to HTTPie
 
+## SSL/TLS
+- generate a self-signed cert
+    - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
+
 ## HTTPIE
 - https://httpie.io/docs
 - written in python, core libs pygments and requests

@@ -39,6 +39,7 @@ zip -r outputfile folder1 folder2
 
 #awk - multi purpose tool
 echo "foo bar baz" | awk '{print $2}'  # will print bar
+echo "foo bar baz" | awk '{print $1"  "$3}'  # will print `foo  baz` , two spaces in between
 awk '{$1=""; print $0}' somefile        # print all but the first field/column
 awk '{$1=$2=""; print $0}' somefile        # print all but the first and second field/column
 awk '/blah/{getline; print}' logfile   # print the next line after the line that matches patter "blah"
@@ -75,6 +76,9 @@ xsv count somecsv.csv  # print # of rows
 sudo date --set 1998-11-02  # change date
 date +%s       # print unix time in number of seconds (since 1970)
 date '+%Y-%m-%d'  # e.g. "2021-04-24"
+date +%s -d"Jan 1, 1980 00:00:01"  # covert ISO time to unix epoch
+date +%s -d"2023-01-06 00:00:01"  # covert ISO time to unix epoch
+date -d @1520000000  # convert unix epoch ISO time
 
 date +%s%N     # print nanoseconds (%N doesnt work on OSX)
 gdate +%s.%N   # coreutils package on OSX offers gdate, which can give nanoseconds

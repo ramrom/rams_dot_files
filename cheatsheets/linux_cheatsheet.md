@@ -387,6 +387,8 @@ mkfs - to format a disk partition
 fdisk - show partitions and block devices, sizes, sectors
 /etc/fstab - file systems mounted at boot
 dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+dkms - cli for dynamic kernel modules
+    - `dkms status` - list all loaded kernel modules and show status
 udevadm - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
 dmesg - kernel ring buffer, print messages or control it
@@ -398,6 +400,8 @@ bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpai
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device
     - `bluetoothctl` alone will start a interactive cli console session
+hciconfig - config bluetooth devices
+    - `hciconfig -a` - print all info of bluetooth controllers
 pacmd - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
