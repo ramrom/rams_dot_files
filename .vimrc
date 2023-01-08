@@ -431,9 +431,8 @@ noremap <C-k> <C-w>k
 " noremap <leader>W <C-w>W
 
 noremap <leader>q :call TabBufQuit()<cr>
-noremap <leader>Q :qa<cr>
+noremap <leader>Q :q!<cr>
 noremap <leader><leader>q :qa<cr>
-noremap <leader><leader>Q :qa!<cr>
 noremap <leader>s :w<cr>
 noremap <leader>S :call SaveDefinedSession()<CR>
 noremap <leader>y "+y
