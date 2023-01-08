@@ -66,7 +66,7 @@ sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
 echo "foobar" | base64      # encode from stdin
 
 # column
-cat somecsv.csv | column -t -s,  # use comma to delimit columns and print csv file with aligned columns
+column -t -s, somecsv  # use comma to delimit columns and print csv file with aligned columns
 
 # XSV - a tool to manipulate csvs
 xsv table somecsv.csv  # pretty print table to stdout
