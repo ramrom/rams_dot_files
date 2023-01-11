@@ -210,6 +210,24 @@
 - a service and SDK description language created by AWS
 - https://awslabs.github.io/smithy/
 
+## LANGUAGES/FRAMEWORKS
+- Dart, new lang by google for front-end development, designed to be closely compatible with javascript
+    - 2022 - chrome natively supports it, other browsers it's transpiled to javascript
+    - 1.x is dynamic typed, 2.x is statically typed
+    - also has compilers for arm or x86 code
+- flutter is a cross-platform framework writtin in Dart for building mobile/client applications
+    - has it's own 2D graphics library called skia, and thus has it's own widget framework
+    - intended for mobile platforms and web but Flutter Desktop aims to take over desktop too
+    - it's design is inspired by react, each widget/component has a render method (that returns a tree of 1+ other widgets)
+    - it has it's own rendering engine, does not use native components, takes over the screen and renders each pixel
+- electron is a cross-platform framework for desktop development
+    - write regular web HTML5/CSS/javascript and chromium browser to render frontend and node.js for backend
+    - can use javascript frameworks like react or vue
+- react is a SPA framework for web browsers
+- react native lets you use your react code to build native mobile apps
+    - uses C++ engine to compile react abstractions like `View` to native components for iOS or android
+    - code runs in javascript engine(e.g. JavaScriptCore or Hermes) and talks to native code via messages over a bridge
+
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
 

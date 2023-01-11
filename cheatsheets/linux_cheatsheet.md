@@ -387,49 +387,49 @@ drive naming convention:
 
 ## OTHER LINUX/UBUNTU TOOLS:
 ------------------------------------------
-sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
-hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
+- sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
+- hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
     - *NOTE* dec2022 - old and unmaintained, removed from debian and ubuntu22
-smartmontools - query SMART device, e.g. HDDs and SSDs
+- smartmontools - query SMART device, e.g. HDDs and SSDs
     - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
-inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
-lshw - like inxi, display lots of sys info
-stat - get metadata on a file
-lsblk - show block level devices
-mkfs - to format a disk partition
-fdisk - show partitions and block devices, sizes, sectors
-/etc/fstab - file systems mounted at boot
-dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
-dkms - cli for dynamic kernel modules
+- inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
+- lshw - like inxi, display lots of sys info
+- stat - get metadata on a file
+- lsblk - show block level devices
+- mkfs - to format a disk partition
+- fdisk - show partitions and block devices, sizes, sectors
+- /etc/fstab - file systems mounted at boot
+- dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+- dkms - cli for dynamic kernel modules
     - `dkms status` - list all loaded kernel modules and show status
-udevadm - query info about udev events
+- udevadm - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
-dmesg - kernel ring buffer, print messages or control it
-dconf  - like gsettings?
-notify-send - pops up notification
-`lsusb -D /dev/bus/usb/002/004`
+- dmesg - kernel ring buffer, print messages or control it
+- dconf  - like gsettings?
+- notify-send - pops up notification
+- `lsusb -D /dev/bus/usb/002/004`
     - get detailed info about a specific usb device
-bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
+- bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device
     - `bluetoothctl` alone will start a interactive cli console session
-hciconfig - config bluetooth devices
+- hciconfig - config bluetooth devices
     - `hciconfig -a` - print all info of bluetooth controllers
-pacmd - pulseaudio cli tool, query sound devices
+- pacmd - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
     - pulseaudio is userland program, can mix many
-Pavucontrol - pulseaudio cli tool, CHECK IT OUT
+- Pavucontrol - pulseaudio cli tool, CHECK IT OUT
     - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
         - https://ubuntuforums.org/showthread.php?t=1810812
-ss  - good way to see socket usage
-pcsx2 -
+- ss  - good way to see socket usage
+- pcsx2 -
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
-retroarch -
+- retroarch -
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
-transmission - great torrent program
+- transmission - great torrent program
     - SETUP:
         - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/
         - https://wiki.archlinux.org/index.php/transmission
@@ -445,3 +445,5 @@ transmission - great torrent program
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
     - NOTE: `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
+- vlc
+    - play media at cli and quit `vlc somefile.mp3 vlc://quit`

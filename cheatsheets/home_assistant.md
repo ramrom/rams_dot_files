@@ -3,6 +3,7 @@
 - https://developers.home-assistant.io/
 - glossary of terms: https://www.home-assistant.io/docs/glossary/
 - [HACS](https://hacs.xyz/) - home assistant community store - download 3rd party plugins on github
+- blog: https://www.home-assistant.io/blog/ , will have release notes
 
 ## ARCHITECTURE
 - https://developers.home-assistant.io/docs/architecture_index/
@@ -39,13 +40,17 @@
 ## CLI
 - the official CLI: https://github.com/home-assistant/cli , `ha` bin
     - i think it's only available on the homeassistant OS
+### HASS-CLI
 - great 3rd party: https://github.com/home-assistant-ecosystem/home-assistant-cli , `hass-cli` bin
-    - calling a service
-        - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever`
-        - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`
-        - `service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
-    - toggle entity: `hass-cli state toggle someentity`
-    - call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
+- `hass-cli config release` - get HASS version
+- calling a service
+    - `hass-cli service call backup.create` - create a backup
+    - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever` - send notif
+    - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
+    - `service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
+        - play a specific track or playlist in spotify
+- toggle entity: `hass-cli state toggle someentity`
+- call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
 
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
