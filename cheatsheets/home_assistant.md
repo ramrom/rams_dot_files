@@ -50,12 +50,21 @@
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
 
+## COMPANION/MOBILE APP
+- tracking limitation on no data
+    - backend sensor will just use the last values, so if mobile app has no data connection, sensor will hold last known value
+        - https://community.home-assistant.io/t/companion-app-not-updating-device-tracker/391752
+    - automations based on location will not be wrong
+
 ## HTTP
 - http configuration: https://www.home-assistant.io/integrations/http/
-- https://community.home-assistant.io/t/certificate-authority-and-self-signed-certificate-for-ssl-tls/196970
-    - make sure to use `-nodes` with `openssl`, HASS doesn't support passphrase on cert
 - banned IPs go into file `ip_bans.yaml` in base config dir
     - remove from file and restart HASS to unban
+
+### TLS
+- https://community.home-assistant.io/t/certificate-authority-and-self-signed-certificate-for-ssl-tls/196970
+    - make sure to use `-nodes` with `openssl`, HASS doesn't support passphrase on cert
+- jan2023 - companion app doesnt support self signed certs, have to add it to android root trust store somehow
 
 ## NVR / CAMERA
 - should really use a NVR like frigate or zoneminder, both need MQTT as mediator

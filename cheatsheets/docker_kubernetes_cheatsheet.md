@@ -27,7 +27,7 @@
     - uses linux cgroups to enforce limits CPU and memory
     - uses linux namespaces to isolate processes, filesystems, network, users(UIDs,GUID), env vars
 ### ISSUES
-- symlinks in volumes dont work
+- symlinks in volumes that point to files in other volumes dont work
     - https://axell.dev/mounted-docker-volume-contains-symlinks/
 
 
