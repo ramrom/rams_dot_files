@@ -8,6 +8,12 @@
 ## SSL/TLS
 - generate a self-signed cert
     - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
+- LetsEncrypt
+    - use their official certbot to do an ACME challenge to prove you own a domain
+    - dns challenge
+        - certbot cmd will give text record to place on your domain record
+        - for duckdns can curl to udpate the dns record with the txt record from letsencrypt dns challenge
+- duckdns - https://www.duckdns.org/spec.jsp
 
 ## HTTPIE
 - https://httpie.io/docs

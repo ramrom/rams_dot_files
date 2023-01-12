@@ -137,6 +137,17 @@
         - streams can have priorites, with weights
     - server push - the server can send data without a request
 
+## WEB SERVERS
+- apache HTTP server - written in c, really old
+    - multiple request concurrency models: threaded, pre-forked, evented/async
+- apache tomcat - written in java, a application server but not full JEE(java enterprise edition)
+- cloudflare
+- IIS - internet information services, by microsoft
+- nginx - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
+- traefik - written in Go, great reverse proxy and load balancer
+    - built in admin gui
+    - can dynamicaly update configs without restart, unlike nginx
+
 
 ## RSS/ATOM
 - RSS(Really Simple Syndication)
@@ -223,7 +234,7 @@
 - electron is a cross-platform framework for desktop development
     - write regular web HTML5/CSS/javascript and chromium browser to render frontend and node.js for backend
     - can use javascript frameworks like react or vue
-- react is a SPA framework for web browsers
+- react is a SPA framework for web browsers, built by facebook
 - react native lets you use your react code to build native mobile apps
     - uses C++ engine to compile react abstractions like `View` to native components for iOS or android
     - code runs in javascript engine(e.g. JavaScriptCore or Hermes) and talks to native code via messages over a bridge

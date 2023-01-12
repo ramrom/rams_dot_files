@@ -7,7 +7,7 @@ lastlog=$(tail -1 home-assistant.log)
 [ -z "$lastlog" ] && echo 0  # handle empty log file scenario
 
 # home-assistant example log line
-    # `2023-01-10 15:26:04.710 WARNING (MainThread) [homeassistant.helpers.entity] Update of media_player.un60f7100 is taking over 10 seconds`
+    # `2023-01-10 15:26:04.710 WARNING (MainThread) [homeassistant.helpers.entity] Update of media_player.foo is taking over 10 seconds`
 timestamp=$(echo $lastlog | awk '{print $1" "$2}')
 
 now=$(date +%s)
