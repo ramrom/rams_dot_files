@@ -61,6 +61,7 @@ echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens l
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
 echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
 sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
+cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
 
 # base64 - encode and decode base64
 echo "foobar" | base64      # encode from stdin

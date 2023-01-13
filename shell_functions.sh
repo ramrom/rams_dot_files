@@ -408,11 +408,6 @@ function csvtojson() {
     ruby -e 'require "csv"; require "json"; puts CSV.open(ARGV[0], headers: true).map { |x| x.to_h }.to_json' "$@"
 }
 
-function parse_comma_delim_error() {
-    local str="File.write(\"${1}\", File.read(\"${1}\").split(',').join(\"\\n\"))"
-    ruby -e "$str"
-}
-
 ###### OTHER ###############
 
 function weather() { xh --print=b https://wttr.in/$1; }

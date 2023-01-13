@@ -44,6 +44,7 @@ foo site:www.site.com   - search a specific site
 - cast or Google Cast (https://en.wikipedia.org/wiki/Google_Cast) is a google propietary protocol created in 2013
 - install screensaver app and set it to use ambient mode
     - https://www.reddit.com/r/AndroidTV/comments/k79y4j/google_tv_w_chromecast_ambient_mode/
+- mirror in android -> google home -> select tv chromecast device -> bottom bar "cast my screen"
 
 ## DRIVE
 - google drive linux sync options: https://linuxhint.com/best_google_drive_clients_linux/

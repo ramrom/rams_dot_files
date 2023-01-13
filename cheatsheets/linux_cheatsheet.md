@@ -415,6 +415,8 @@ drive naming convention:
     - `bluetoothctl` alone will start a interactive cli console session
 - hciconfig - config bluetooth devices
     - `hciconfig -a` - print all info of bluetooth controllers
+    - `hciconfig hci0 down` - turn off bluetooth controller `hci0`
+        - in ubuntu settings the bluetooth toggle button will also turn off (it reads this devices state)
 - pacmd - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
