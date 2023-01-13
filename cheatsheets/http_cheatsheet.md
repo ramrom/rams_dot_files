@@ -6,7 +6,7 @@
 - a http client in rust that is near identical in interface to HTTPie
 
 ## SSL/TLS
-- generate a self-signed cert
+- generate a self-signed cert - https://letsencrypt.org/docs/
     - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
 - LetsEncrypt
     - use their official certbot to do an ACME challenge to prove you own a domain

@@ -1,3 +1,7 @@
+"NOTE: will detect .txt files with `***` chars in first line as robot
+Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
+
+
 "set a custom tab line, each tab prefixed with tab index
 set tabline=%!MyTabLine()  " custom tab pages line\
 function MyTabLine()
