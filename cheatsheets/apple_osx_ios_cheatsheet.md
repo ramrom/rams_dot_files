@@ -6,6 +6,7 @@
 - AppleID/icloud security two-factor auth: https://support.apple.com/en-us/HT204915
     - is required (can't turn it off in https://appleid.apple.com)
     - looks like the 2nd factor will pop up a 6 digit code in a trusted device, and if none maybe the trusted ph #?
+- safari mac: bring up seperate window for dev tools - `cmd` + `shift` + `j`
 
 ## BREW
 --------------------
