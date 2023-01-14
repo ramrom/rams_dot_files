@@ -62,6 +62,7 @@ elseif empty($VIM_NOPLUG)
 
         if has('nvim-0.7.0')
             Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+
             "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
             Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
 
@@ -73,10 +74,13 @@ elseif empty($VIM_NOPLUG)
         Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
         Plug 'leoluz/nvim-dap-go'     "needs delve>1.7.0, nvim-dap
         Plug 'neovim/nvim-lspconfig'  "requires neovim 0.6.1
+
     " jan2021, coc warns it should have 0.4.0 at least to work well
     " may2022: restrict to osx, b/c new coc needs new nodejs which isn't in standard ubunutu 22 LTS
     elseif has('nvim-0.4.0') && has('macunix')
+
         Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
         "TODO: can enable coc by filetype
         " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
 
@@ -101,6 +105,7 @@ elseif empty($VIM_NOPLUG)
     if !empty($VIM_DEVICONS)
         " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
         Plug 'ryanoasis/vim-devicons'
+
         " colored icons, needs devicons
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
