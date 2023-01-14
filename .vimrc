@@ -127,8 +127,8 @@ try  " if loading vim without plugins, onedark will fail, default to ir_black
         autocmd!
         autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
         " autocmd ColorScheme onedark call onedark#extend_highlight("NonText", { "bg": { "cterm": "000" } })
-        " autocmd ColorScheme onedark call onedark#set_highlight("htmlH2", { "cterm": "underline" })
-        " autocmd ColorScheme onedark call onedark#set_highlight("htmlH1", { "cterm": "underline" })
+        autocmd ColorScheme onedark call onedark#set_highlight("htmlH2", { "cterm": "underline" })
+        autocmd ColorScheme onedark call onedark#set_highlight("htmlH1", { "cterm": "underline" })
         autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
         autocmd ColorScheme onedark call onedark#extend_highlight("htmlH1", { "fg": { "cterm": "196" } })
         " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
@@ -497,12 +497,12 @@ noremap <leader>cm :Maps<cr>
 noremap <leader>cg :map g<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>cl :exe ':Files' $MY_NOTES_DIR<cr>
+noremap <leader>cr :exe ':Files' $MY_WORK_DIR<cr>
 noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
 noremap <leader>ca :tabnew ~/tmp/scratch.md<cr>
 noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>
-noremap <leader>cr :vsplit ~/rams_dot_files/cheatsheets/regex_cheatsheet.md<cr>
 noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
 
 " This next line will open a ctag in a new tab
