@@ -61,7 +61,13 @@ elseif empty($VIM_NOPLUG)
         Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
 
         if has('nvim-0.7.0')
-            Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+            " see https://www.reddit.com/r/neovim/comments/107aoqo/problems_running_neovim_using_the_initlua_from/
+            " 0.7.2 breaks with treesitter commit 622baacdc1b22cdfd73bc98c07bb5654a090bcac
+            if has('nvim-0.8.2')
+                Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+            else  " per the reddit thread, this old version of treesitter works
+                Plug 'nvim-treesitter/nvim-treesitter', { 'commit': 'a2d7e78', 'do': ':TSUpdate' }
+            endif
 
             "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
             Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }

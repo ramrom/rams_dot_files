@@ -1,5 +1,4 @@
 # VIM
-------------------------------
 - good resource on learning vim: http://vimcasts.org
 - great resource: https://devhints.io/vimscript
 - `:version`  - get version and features compiled
@@ -45,6 +44,10 @@
 
 
 ## PLUGINS
+
+### VIM-PLUG
+- `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
+    - can specify a commit hash version of a plugin
 
 ### FZF
 Rg            - ripgrep dynamic fuzzy search with bat preview!
