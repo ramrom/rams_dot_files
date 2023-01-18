@@ -9,8 +9,7 @@ My dot files and scripts for Unix-like environments
 
 ### Plugins
 - **FZF**
-- CtrlP _(being phased out in favor of fzf)_
-- coc (conqueror of completion)
+    - fzf-mru (fzf over most recently opened files)
 - one-dark (inspired by atom colorscheme)
 - vim-airline
 - NERDtree
@@ -21,3 +20,10 @@ My dot files and scripts for Unix-like environments
 - vim-tmux-focus-events (to help make autoreload better)
 - vim-gh-line
 - vim-markdown
+- nvim-treesitter (syntax highlighting, folding)
+- LSP
+    - vim and old neovim
+        - coc (conqueror of completion), only used for old vim
+    - modern neovim
+        - native lsp client
+        - nvim-lspconfig

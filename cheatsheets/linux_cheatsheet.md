@@ -1,5 +1,4 @@
 # LINUX STUFF
---------------------------
 - udev, as of kernel 2.6, it replaces DevFS(device file system)
     - `udevadm` - cli tool to see events, monitor devices, list attribs
     - identify devices based on properties (e.g. vendor ID and device ID) dynamically
@@ -14,7 +13,6 @@
     > If people are using it, it's not a bug, it's a feature - Linus
 
 # UBUNTU/DEBIAN:
------------------------------------------
 - lsb_release -a        - show distro name and version
     - LTS releases every 2 years, support for 5 years
     - regular releases every year, support for 9 months
@@ -39,8 +37,13 @@ sudo shutdown -r now (reboot now)
     - `xclip -selection clipboard`    - copy to clipboard
     - `xclip -selection clipboard -o` - paste from clipboard
 
+# RASPBIAN
+- official linux distro(based on debian) for raspberry pi
+- to manually config wifi, edit `/etc/wpa_supplicant/wpa_supplicant.conf`
+    - set SSID name and password
+- `/boot/config.txt` contains lots of high level rapsian configs
+
 ## USER STUFF
----------------------------------------
 su - foouser               - login as foouser (need to enter foouser password)
 sudo -u foouser cmd         - run command `cmd` as foouser
 sudo -u foouser bash         - basically login as foouser, since `bash` cmd here starts a shell process
@@ -52,7 +55,6 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 
 
 ## SYSTEMD
--------------------------------------------
 - great wiki on it: https://wiki.archlinux.org/index.php/Systemd
 - inspired by and basically a ripoff of osx's launchd
 - makes heavy uses of messages and events, using dbus
@@ -79,6 +81,7 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 - `systemd analyze` - verify all unit files and measure approximate startup time
 - `systemctl get-default` - get the default target (probably `graphical.target` for regular desktop installs)
     - `sudo systemctl set-default multi-user.target` - set new target
+- `systemd-analyze critical-chain` - print blocking tree of daemons
 
 ### SYSTEMCTL
 - systemctl start/stop/restart/reload foo
@@ -177,7 +180,6 @@ shift-click - open link in new window
 space/space-shift - scroll up/down page
 
 ## APT
-------------------------------------------
 ### DEPENDENCIES
 apt depends pkg
     - find direct deps of pkg
@@ -244,7 +246,7 @@ snap refresh --list
     - just show what snaps can be upgraded
 
 
-## GRAPHICAL SYSTEMS:
+## GRAPHICAL SYSTEMS
 - definitions: display server / display manager / window manager / desktop envrionment
     - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
 - Display servers and display managers
@@ -337,7 +339,6 @@ snap refresh --list
     - `iptables -S` - list all rules by specification
 
 ## SOUND
---------------
 - ALSA: is base sound stack for all linux distro
 - pluseaudio: builds on top of ALSA, can do things like mix many sound streams together
 amixer - cli for ALSA
@@ -351,7 +352,6 @@ pulsemixer - volume manager with pulseaudio
     pulsemixer --change-volume +5
 
 ## DEVICES AND FILE SYSTEMS:
-------------------------------------------------
 loopdevices
 - regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
 - if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
@@ -385,8 +385,7 @@ drive naming convention:
 
 
 
-## OTHER LINUX/UBUNTU TOOLS:
-------------------------------------------
+## OTHER LINUX/UBUNTU TOOLS
 - sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
 - hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
     - *NOTE* dec2022 - old and unmaintained, removed from debian and ubuntu22
@@ -406,6 +405,8 @@ drive naming convention:
     - `udevadm info -a -n /dev/nvme0` - show info about device
 - dmesg - kernel ring buffer, print messages or control it
 - dconf  - like gsettings?
+- iwlist - get info on wireless(wifi) lan
+    - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - notify-send - pops up notification
 - `lsusb -D /dev/bus/usb/002/004`
     - get detailed info about a specific usb device
@@ -425,7 +426,7 @@ drive naming convention:
     - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
         - https://ubuntuforums.org/showthread.php?t=1810812
 - ss  - good way to see socket usage
-- pcsx2 -
+- pcsx2
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
 - retroarch -
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu

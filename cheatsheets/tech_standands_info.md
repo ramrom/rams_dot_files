@@ -17,6 +17,10 @@
 ## PROCESSORS
 - TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
 
+## ETHERNET
+- https://en.wikipedia.org/wiki/Ethernet_crossover_cable#Automatic_crossover
+    - generally since 1998, no need for straight vs crossover cables, ports autodetect
+
 ## WIFI
 - 2.4GHz band - ch1 2412, ch6 2437, ch11 2462
 ### STANDARDS

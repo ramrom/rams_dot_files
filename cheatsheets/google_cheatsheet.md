@@ -1,5 +1,4 @@
 GOOGLE:
--------------------------
 - console.developers.google.com     - configure my apps and whatnot as google developer
 - cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
 - how google knows device is the same/familiar
@@ -11,11 +10,11 @@ GOOGLE:
 - delete from google photos app and it will delete locally (sync)
     - *BUT* delete locally and it will NOT delete from google photos
 
-## DRIVE:
+## DRIVE
 - see drive usage at https://drive.google.com/drive/u/0/quota
 -  gmail/drive/photos breakdown of usage: https://one.google.com/storage
 
-## GOOGLE SEARCH:
+## GOOGLE SEARCH
 "literal string"
 -excludethis
 foo OR bar              - default spaced words is OR
@@ -23,11 +22,11 @@ foo OR bar              - default spaced words is OR
 foo site:www.site.com   - search a specific site
 - should be a "tools" submenu below search bar that lets you filter by most recent (e.g. last year only)
 
-## CHROME:
+## CHROME
 - command + option + i   - toggle dev tools
     - hit "preserve logs" checkbox to not zero logs between full html refreshes
 - chrome://flags  - see advanced/experimental options
-- accept self signed certificates:
+- accept self signed certificates
     - https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
         - typing "thisisunsafe" worked for chrome 85 on osx!
 - enable chrome to debug very verbose logs to a file:
