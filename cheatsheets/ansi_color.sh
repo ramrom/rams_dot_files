@@ -1,4 +1,6 @@
-# Good reads:
+# ANSI COLOR
+
+# Good reads
 # - https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 # - https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#progress-indicator
 

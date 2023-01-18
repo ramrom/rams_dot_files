@@ -1,4 +1,4 @@
-GOOGLE:
+# GOOGLE
 - console.developers.google.com     - configure my apps and whatnot as google developer
 - cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
 - how google knows device is the same/familiar
@@ -34,7 +34,7 @@ foo site:www.site.com   - search a specific site
     - https://groups.google.com/a/chromium.org/g/chromium-dev/c/VSzBnCgvQgc?pli=1
 - can edit keyboard shortcuts for extensions, goto chrome:://extensions -> keyboard shortcuts(left bar)
 
-## CHROMEBOOK:
+## CHROMEBOOK
 - mounting a samba share, chromebook needs samba ver 2 or higher
     - open file explorer, hit 3 dot icon on top right -> "add new service" -> samba share
     - url is like "\\192.168.1.111\somefolder"
@@ -80,7 +80,7 @@ up/down arrow, or `j`/`k`    - next/prev email in chain
 `c` - compose
 `z` - undo last action
 
-## YOUTUBE:
+## YOUTUBE
 - j/l - back/forward 10 sec
 - k - play/pause
 - t - toggle theater mode
@@ -91,7 +91,7 @@ up/down arrow, or `j`/`k`    - next/prev email in chain
 - add timestamp to a video link: append `&t=1m30s`
 
 
-## CALENDER:
+## CALENDER
 / - put cursor in searchbox
 a - agenda view, shows list of events
 w - week view
@@ -108,7 +108,7 @@ z - undo
 r - refresh
 esc - return to calender grid from event details
 
-## VOICE:
+## VOICE
 - voice legacy: in very top left menu, botton item is "legacy google voice"
 - legacy voice lets you screen calls just for certain groups
     - e.g. you can turn off for all contacts group, and screen for anonymous callers

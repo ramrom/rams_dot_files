@@ -49,6 +49,18 @@ alias be="bundle exec"
 alias ber="bundle exec rspec"
 alias bi="bundle install"
 
+# BASHRC RUBY
+if [ -d ~/.rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+CHRUBY_FILE=/usr/local/share/chruby/chruby.sh
+if [ -f "$CHRUBY_FILE" ]; then
+  source $CHRUBY_FILE
+  source /usr/local/share/chruby/auto.sh
+fi
+
 
 # MEMCACHED, REDIS
 alias memcachestop='sudo /etc/init.d/memcached stop'
