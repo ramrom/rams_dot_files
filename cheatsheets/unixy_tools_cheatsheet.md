@@ -194,6 +194,7 @@ stress-ng --cpu 2   # improved version of stress, many more advanced tests
 ###### NETWORK TOOLS
 # ARP cache
 arp -a   # display the apr cache
+arp -i en1 -a  # display arp cache through specific interface
 
 # NSLOOKUP - dns lookup
 nskookup example.com
@@ -201,6 +202,7 @@ nslookup example.com 1.1.1.1 # use dns server 1.1.1.1 to lookup
 
 # NMAP - network scanner
 nmap -sn 1.1.1.*  # scan all 1.1.1.* IP addresses, and find live hosts
+nmap -e en1 -sn 1.1.1.*  # specify interface en1 to search through
 
 # DIG - dns lookup, better/newer than nslookup
 dig example.com

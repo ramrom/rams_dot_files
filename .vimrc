@@ -98,12 +98,15 @@ elseif empty($VIM_NOPLUG)
         endif
     endif
 
+    " plugins for indentation line guides
     if has('nvim')
         Plug 'lukas-reineke/indent-blankline.nvim'
     else
         "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
         "TODO: indentLine displays `"` chars `|` or disspapear in json files...
-        Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+        if has('conceal')  " requires conceal, jan2023: osx stock vim doesnt have it installed...
+            Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
+        endif
     endif
 
     " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
