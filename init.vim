@@ -12,6 +12,85 @@ source ~/.vimrc
 if has('nvim-0.5.0') && empty($VIM_NOPLUG)
 lua << EOF
 
+-- HELPER METHOD - check is module exists before trying to load it
+-- from https://stackoverflow.com/questions/15429236/how-to-check-if-a-module-exists-in-lua
+local Lua = {}
+function Lua.moduleExists(name)
+    if package.loaded[name] then
+        return true
+    else
+        -- Package.Searchers was renamed from Loaders in lua5.2, have support for both
+        ---@diagnostic disable-next-line: deprecated
+        for _, searcher in ipairs(package.searchers or package.loaders) do
+            local loader = searcher(name)
+            if type(loader) == 'function' then
+                -- luacheck: ignore
+                -- luacheck complains about package.preload being read-only
+                package.preload[name] = loader
+                return true
+            end
+        end
+        return false
+	end
+end
+
+if Lua.moduleExists('lualine') then
+  require('lualine').setup {
+    options = {
+      icons_enabled = false,
+      {'branch', icon = 'ᛘ'},
+      theme = 'onedark',
+      component_separators = { left = '', right = ''},
+      section_separators = { left = '', right = ''},
+      disabled_filetypes = {
+        statusline = {},
+        winbar = {},
+      },
+      ignore_focus = {},
+      always_divide_middle = true,
+      globalstatus = false,
+      refresh = {
+        statusline = 1000,
+        tabline = 1000,
+        winbar = 1000,
+      }
+    },
+    sections = {
+      lualine_a = {'mode'},
+      lualine_b = {'branch', 'diff', 'diagnostics'},
+      lualine_c = {'filename'},
+      lualine_x = {'filetype', 'encoding', 'fileformat'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {'filename'},
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {
+      lualine_a = {'tabs', mode = 0 },
+      -- lualine_a = {'tabs' },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {},
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {}
+  }
+end
+
+if Lua.moduleExists('bufferline') then
+    require("bufferline").setup{}
+end
+
 -------------------------------------------------------------------------
 ---------------------- TREE-SITTER CONFIG -------------------------------
 -------------------------------------------------------------------------

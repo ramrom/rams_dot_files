@@ -25,8 +25,16 @@ elseif empty($VIM_NOPLUG)
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
 
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    if has('nvim-0.5.0')
+        Plug 'nvim-lualine/lualine.nvim'
+        " TODO: see if bufferline offers more airline-like experience for tabline than lualine
+        " if has('nvim-0.8.0')
+        "     Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+        " endif
+    else
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+    endif
 
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
