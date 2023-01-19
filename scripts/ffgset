@@ -7,7 +7,7 @@
 
 usage () { echo 'Usage: ffgset [ -h(help) ] [ -k(search keysbindings) ]'; }
 
-while getopts 'hk:' x; do
+while getopts 'hk' x; do
     case $x in
         h) usage && exit 1 ;;
         k) SEARCH_KEYBINDS=1 ;;
