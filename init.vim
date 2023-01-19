@@ -58,7 +58,7 @@ if Lua.moduleExists('lualine') then
     sections = {
       lualine_a = {'mode'},
       lualine_b = {'branch', 'diff', 'diagnostics'},
-      lualine_c = {'filename'},
+      lualine_c = { { 'filename', file_status = true, path = 1 } },
       lualine_x = {'filetype', 'encoding', 'fileformat'},
       lualine_y = {'progress'},
       lualine_z = {'location'}
@@ -72,15 +72,30 @@ if Lua.moduleExists('lualine') then
       lualine_z = {}
     },
     tabline = {
-      lualine_a = {'tabs', mode = 0 },
-      -- lualine_a = {'tabs' },
+      lualine_a = {
+        {
+          'tabs',
+          mode = 2,
+          max_length = vim.o.columns,
+
+          fmt = function(name, context)
+            -- Show + if buffer is modified in tab
+            local buflist = vim.fn.tabpagebuflist(context.tabnr)
+            local winnr = vim.fn.tabpagewinnr(context.tabnr)
+            local bufnr = buflist[winnr]
+            local mod = vim.fn.getbufvar(bufnr, '&mod')
+
+            return name .. (mod == 1 and ' +' or '')
+          end
+        }
+      },
       lualine_b = {},
       lualine_c = {},
       lualine_x = {},
       lualine_y = {},
-      lualine_z = {}
+      lualine_z = { { 'buffers', show_modified_status = true, mode = 4 } }
     },
-    tabline = {},
+    -- tabline = {},
     winbar = {},
     inactive_winbar = {},
     extensions = {}
