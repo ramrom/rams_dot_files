@@ -579,10 +579,13 @@ let g:airline_theme='bubblegum'
 "let g:airline_solarized_bg='dark'
 "let g:airline_powerline_fonts = 1 " TODO: this needs instal https://github.com/powerline/fonts
 
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1           " enable airline tabline
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
+let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs needed to display the tabline
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
 let g:airline#extensions#tabline#formatter = 'unique_tail'    " 'unique_tail_improved' to show shorted path
-let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 
 """""""""""""""""" FZF """"""""""""""""""
