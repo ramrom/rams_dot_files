@@ -58,6 +58,7 @@ if Lua.moduleExists('lualine') then
     sections = {
       lualine_a = {'mode'},
       lualine_b = {'branch', 'diff', 'diagnostics'},
+      -- lualine_b = { { 'branch', icons_enabled = true, {'branch', icon = 'ᛘ'} }, 'diff', 'diagnostics' },
       lualine_c = { { 'filename', file_status = true, path = 1 } },
       lualine_x = {'filetype', 'encoding', 'fileformat'},
       lualine_y = {'progress'},

@@ -27,10 +27,6 @@ elseif empty($VIM_NOPLUG)
 
     if has('nvim-0.5.0')
         Plug 'nvim-lualine/lualine.nvim'
-        " TODO: see if bufferline offers more airline-like experience for tabline than lualine
-        " if has('nvim-0.8.0')
-        "     Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
-        " endif
     else
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
