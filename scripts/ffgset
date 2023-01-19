@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# FFGset - Fzf over gsettings
+# actions: 1. fzf over keybindings, 2. fzf over settings groups and recursive print them
+
+[ ! "$(uname)" = "Linux" ] && { echo "gsettings is GNOME and is for linux" && return 1; }
+
+usage () { echo 'Usage: ffgset [ -h(help) ] [ -k(search keysbindings) ]'; }
+
+while getopts 'hk:' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        k) SEARCH_KEYBINDS=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+
+if [ -n "$SEARCH_KEYBINDS" ]; then
+    { gsettings list-recursively org.gnome.shell.keybindings; \
+      gsettings list-recursively org.gnome.mutter.wayland.keybindings; \
+      gsettings list-recursively org.gnome.mutter.keybindings; \
+      gsettings list-recursively org.gnome.desktop.wm.keybindings; \
+      gsettings list-recursively org.freedesktop.ibus.general.hotkey; \
+      gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys; \
+    } | fzf --height 100%
+else
+    schema=$(gsettings list-schemas | fzf +m)
+    gsettings list-recursively "$schema"
+fi
+

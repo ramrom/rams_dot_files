@@ -236,12 +236,6 @@ function frgd() {  # frg p(phony)
         --height=50% --layout=reverse
 }
 
-function ffgset() {
-    [ ! "$(uname)" = "Linux" ] && { echo "gnome is for linux" && return 1; }
-    local schema=$(gsettings list-schemas | fzf +m)
-    gsettings list-recursively "$schema"
-}
-
 # actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
 function findgrepp() { find . -type f -regex $1 -exec grep $2 ; }
 # last component of pathname, pattern not regex, e.g. ("*go")

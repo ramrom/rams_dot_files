@@ -1,9 +1,0 @@
-#!/bin/sh
-
-{ gsettings list-recursively org.gnome.shell.keybindings; \
-  gsettings list-recursively org.gnome.mutter.wayland.keybindings; \
-  gsettings list-recursively org.gnome.mutter.keybindings; \
-  gsettings list-recursively org.gnome.desktop.wm.keybindings; \
-  gsettings list-recursively org.freedesktop.ibus.general.hotkey; \
-  gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys; \
-} | fzf --height 100%
