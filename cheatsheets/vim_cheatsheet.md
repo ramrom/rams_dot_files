@@ -168,7 +168,7 @@ vim -V  foo     - verbose output
 
 ## EX MODE:
 Q - in normal mode will go into ex model, neovim doesnt have it
-visual -exit ex mode
+`visual` -exit ex mode
 vi - short for visual
 
 

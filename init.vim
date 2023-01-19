@@ -94,9 +94,18 @@ if Lua.moduleExists('lualine') then
       lualine_c = {},
       lualine_x = {},
       lualine_y = {},
-      lualine_z = { { 'buffers', show_modified_status = true, mode = 4 } }
+      lualine_z = {
+        {
+          'buffers',
+          show_modified_status = true,
+          mode = 4,
+          buffers_color = {
+            inactive = { fg = 'grey', bg = 'black' },
+            active = 'grey',
+            },
+        },
+      },
     },
-    -- tabline = {},
     winbar = {},
     inactive_winbar = {},
     extensions = {}
