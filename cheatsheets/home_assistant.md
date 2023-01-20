@@ -44,6 +44,7 @@
 - great 3rd party: https://github.com/home-assistant-ecosystem/home-assistant-cli , `hass-cli` bin
 - `hass-cli config release` - get HASS version
 - calling a service
+    - `hass-cli service call system_log.clear` - clear logs
     - `hass-cli service call backup.create` - create a backup
     - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever` - send notif
     - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
@@ -54,6 +55,12 @@
 
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
+- command line integrations
+    - [shell command](https://www.home-assistant.io/integrations/shell_command/)
+        - just run a plain shell command
+    - [command line](https://www.home-assistant.io/integrations/command_line/) - binary sensor
+    - [command line sensor](https://www.home-assistant.io/integrations/sensor.command_line/) - sensor with some value
+    - [command line switch](https://www.home-assistant.io/integrations/switch.command_line/) - a toggle switch
 
 ## COMPANION/MOBILE APP
 - tracking limitation on no data
@@ -61,7 +68,7 @@
         - https://community.home-assistant.io/t/companion-app-not-updating-device-tracker/391752
     - automations based on location will not be wrong
 
-## HTTP
+## HTTP / AUTH
 - http configuration: https://www.home-assistant.io/integrations/http/
 - banned IPs go into file `ip_bans.yaml` in base config dir
     - remove from file and restart HASS to unban
@@ -78,10 +85,25 @@
 - log file is `home-assistant.log`
 - example of auth failure log
     - `2022-12-29 16:18:31.390 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from some-device (1.1.1.1)`
+- there a _2_ integrations
+    - [system_log](https://www.home-assistant.io/integrations/system_log/)
+        - set max entries of logs to store
+        - services: clear logs, write a log
+        - defines an event `system_log_event` for all logs, so you can write automations
+    - [logger](https://www.home-assistant.io/integrations/logger/)
+        - set global log level and fine grained log level for specific components, services to change log level
 
 ## ISSUES
 - if you rename a device and all it's entities, lovelace errors
     - lovelace stores entity names, not their IDs
+- open client sessions will try to keep connecting, e.g. switching server from https to http caused an persisted 400 errors in logs
+    - error log: `aiohttp.http_exceptions.BadStatusLine: 400, message="Bad status line 'Invalid method encountered'"`
+    - exactly as https://github.com/home-assistant/core/issues/73885 , user commented he found the culprit device retrying https
+- reverse proxy needs to pass upgrade headers for client(web or mobile) auth to work
+    - https://community.home-assistant.io/t/home-assistant-community-add-on-nginx-proxy-manager/111830/536
+        - from https://community.home-assistant.io/t/unable-to-connect-to-home-assistant-via-nginx-reverse-proxy/382937/9
+    - https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+        - be default nginx sets `Connection` to `close` and HASS probably needs to `upgrade` for websockets
 
 ## COMPETITORS
 - [openhab](https://www.openhab.org/) is also a fully fledge FOSS home automation platform

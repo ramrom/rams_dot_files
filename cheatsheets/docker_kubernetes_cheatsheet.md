@@ -54,3 +54,5 @@
 
 ## COMPOSE
 - `docker compose pull` - will get latest versions of images
+- `priveleged_mode: true` - exposes a _lot_ , including every `/dev/` in the host
+- `network_mode: host` - copies host networking, `ifconfig` in container shows the exact same interfaces as on the host

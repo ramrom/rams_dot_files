@@ -14,10 +14,6 @@
         - streams can have priorites, with weights
     - server push - the server can send data without a request
 
-## XH
-- https://github.com/ducaale/xh
-- a http client in rust that is near identical in interface to HTTPie
-
 ## SSL/TLS
 - generate a self-signed cert - https://letsencrypt.org/docs/
     - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
@@ -27,6 +23,23 @@
         - certbot cmd will give text record to place on your domain record
         - for duckdns can curl to udpate the dns record with the txt record from letsencrypt dns challenge
 - duckdns - https://www.duckdns.org/spec.jsp
+
+## WEB SERVERS
+- apache HTTP server - written in c, really old
+    - multiple request concurrency models: threaded, pre-forked, evented/async
+- apache tomcat - written in java, a application server but not full JEE(java enterprise edition)
+- cloudflare
+- IIS - internet information services, by microsoft
+- nginx - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
+    - `site-available` and `sites-enabled` are 2 folders
+        - design is to define all site with conf files in `sites-avaialble` and symlink to `sites-enabled` for ones to be active
+        - jan2023 - per internet this pattern is deprecated, now just create `your-site.conf` in the `/etc/nginx/conf.d` folder
+    - `sudo nginx -t` - verify if nginx conf files are ok
+    - nginx will by default remove blank headers and modify `Host` and `Connection` headers
+        - https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+- traefik - written in Go, great reverse proxy and load balancer
+    - built in admin gui
+    - can dynamicaly update configs without restart, unlike nginx
 
 ## HTTPIE
 - https://httpie.io/docs
@@ -55,16 +68,7 @@ function httpie_all() {
 }
 ```
 
-## WEB SERVERS
-- apache HTTP server - written in c, really old
-    - multiple request concurrency models: threaded, pre-forked, evented/async
-- apache tomcat - written in java, a application server but not full JEE(java enterprise edition)
-- cloudflare
-- IIS - internet information services, by microsoft
-- nginx - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
-    - `site-available` and `sites-enabled` are 2 folders
-        - design is to define all site with conf files in `sites-avaialble` and symlink to `sites-enabled` for ones to be active
-        - jan2023 - per internet this pattern is deprecated, now just create `your-site.conf` in the `/etc/nginx/conf.d` folder
-- traefik - written in Go, great reverse proxy and load balancer
-    - built in admin gui
-    - can dynamicaly update configs without restart, unlike nginx
+## XH
+- https://github.com/ducaale/xh
+- a http client in rust that is near identical in interface to HTTPie
+
