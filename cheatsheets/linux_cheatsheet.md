@@ -323,6 +323,8 @@ snap refresh --list
     - mode values: `off` = disabled, `random` = randomly choose, `one` = just the one selected
 
 ## DBUS
+- message bus standard that is used for IPC
+- good short desc of it's function: https://www.cardinalpeak.com/blog/using-dbus-in-embedded-linux
 - `busctl` - cli to introspect the bus
     - `sudo busctl monitor org.bluez` - see all live events for bus name `org.bluez`
     - `busctl introspect org.bluez /org/bluez/hci0`  - show interfaces/methods/properties on object `/org/bluez/hci0`

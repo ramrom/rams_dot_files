@@ -1,5 +1,4 @@
 # TECH STANDARDS AND INFO
-------------------------------------
 
 ## MULTIMEDIA CODECs
 - VP9, royalty-free, invented by google, succeeds VP8
@@ -148,6 +147,9 @@
 - cloudflare
 - IIS - internet information services, by microsoft
 - nginx - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
+    - `site-available` and `sites-enabled` are 2 folders
+        - design is to define all site with conf files in `sites-avaialble` and symlink to `sites-enabled` for ones to be active
+        - jan2023 - per internet this pattern is deprecated, now just create `your-site.conf` in the `/etc/nginx/conf.d` folder
 - traefik - written in Go, great reverse proxy and load balancer
     - built in admin gui
     - can dynamicaly update configs without restart, unlike nginx
@@ -246,7 +248,10 @@
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
 
-## LEAGUE:
+## GRAPHICS
+- DLSS (deep learning super sampling) - using AI to interpolate frames and thus more cheaply increase frame rates
+
+## LEAGUE
 - north america server: 104.160.131.3
 - ctrl f in league for ping
 - shift + enter  - in game do a /all message

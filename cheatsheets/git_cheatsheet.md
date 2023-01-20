@@ -41,6 +41,10 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
 - show tags in a proper sorted order
     - `git tag --sort -version:refname`
 
+- get tags from remote
+    - `git ls-remote https://someremote.url`
+    - `git ls-remote --tags https://someremote.url`
+
 push/tracking:
 ```sh
 git branch --set-upstream-to=origin/foobranch foobranch

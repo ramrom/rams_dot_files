@@ -81,7 +81,6 @@ function append_dir_to_path() {
     unset dir
 }
 
-append_dir_to_path /usr/local/sbin
 append_dir_to_path ~/bin    # includes user's private bin if it exists and it's not already in PATH
 
 [ "$(uname)" = "Linux" ] && append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local
