@@ -1,6 +1,19 @@
 # HTTP
 - good site to test HTTP requests: https://httpbin.org/
 
+## STANDARDS
+- http 1.0
+    - every request requires a new TCP handshake and connection
+- http 1.1
+    - supports persistent TCP and pipelining requests
+- http 2: https://developers.google.com/web/fundamentals/performance/http2
+    - started as SPDY protocol by google, released by IETF in 2015
+    - all data sent as binary (1.1 uses plain text)
+    - smallest "packet" is a frame, a message is made up of many frames
+    - frames/messages allow multiplexing of many streams, no HOL blocking
+        - streams can have priorites, with weights
+    - server push - the server can send data without a request
+
 ## XH
 - https://github.com/ducaale/xh
 - a http client in rust that is near identical in interface to HTTPie
@@ -41,3 +54,17 @@ function httpie_all() {
     jq . $body_file || echo $(fg=brightred ansi256 "$body_file NOT VALID JSON") && cat $body_file
 }
 ```
+
+## WEB SERVERS
+- apache HTTP server - written in c, really old
+    - multiple request concurrency models: threaded, pre-forked, evented/async
+- apache tomcat - written in java, a application server but not full JEE(java enterprise edition)
+- cloudflare
+- IIS - internet information services, by microsoft
+- nginx - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
+    - `site-available` and `sites-enabled` are 2 folders
+        - design is to define all site with conf files in `sites-avaialble` and symlink to `sites-enabled` for ones to be active
+        - jan2023 - per internet this pattern is deprecated, now just create `your-site.conf` in the `/etc/nginx/conf.d` folder
+- traefik - written in Go, great reverse proxy and load balancer
+    - built in admin gui
+    - can dynamicaly update configs without restart, unlike nginx
