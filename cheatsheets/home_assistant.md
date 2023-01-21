@@ -89,7 +89,7 @@
     - [system_log](https://www.home-assistant.io/integrations/system_log/)
         - set max entries of logs to store
         - services: clear logs, write a log
-        - defines an event `system_log_event` for all logs, so you can write automations
+        - defines an event `system_log_event` for warning and error logs, so you can write automations
     - [logger](https://www.home-assistant.io/integrations/logger/)
         - set global log level and fine grained log level for specific components, services to change log level
 
