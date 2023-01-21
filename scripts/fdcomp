@@ -1,0 +1,28 @@
+#!/bin/sh
+
+
+# FDCOMP - Fzf over docker compose files in a dir and run one
+
+usage () { echo 'Usage: fdcomp [ -h(help) ]'; }
+
+while getopts 'h' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+out=$(fdfind -t f .*compose.*\.yml | fzf +m --height 100% \
+    --header='ctrl-i->up-detatched, ctrl-e->edit' \
+    --preview 'batcat --color always {}' \
+    --expect='ctrl-i,ctrl-e')
+
+key=$(echo "$out" | head -1)
+composefile=$(echo "$out" | tail -1)
+if [ -n "$composefile" ]; then
+    case "$key" in
+        "ctrl-i") docker compose -f "$composefile" up -d ;;
+        "ctrl-e") $EDITOR "$composefile" ;;
+    esac
+fi

@@ -62,6 +62,7 @@ export FZF_CTRL_T_COMMAND="$fdname"
 export FZF_ALT_C_COMMAND="$fdname --type d"
 unset fdname
 
+# fzf over command history, hijacks ctrl-r
 source ~/repos/fzf-tab/fzf-tab.plugin.zsh
 
 function load_or_err() {

@@ -25,6 +25,8 @@
     - `-d` is detach, wont run in foreground in shell
     - `-p x:x` is to map internal port to external port
 - `sudo docker exec -it foocontainername /bin/bash` - start a bash shell in container
+- `docker volume -qf dangling=true` - find dangling volumes
+    - `docker volume rm $(docker volume ls -qf dangling=true)` - remove them
 ### UNDERLYING TECH
 - `containerd` is a container runtime developed by Docker
     - uses linux cgroups to enforce limits CPU and memory
