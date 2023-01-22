@@ -289,6 +289,7 @@ snap refresh --list
 ### GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
     - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
+        - appindicators mean icons in this panel of running apps with their status, can click with dropdown menus
     - dash is side bar with quick launch icons and running apps
 - if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps

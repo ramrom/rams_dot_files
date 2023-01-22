@@ -13,6 +13,10 @@
 - home assitant core - the main backend brains
 - uses a SQLite db, generally located at `config/home-assistant_v2.db`
 
+## JINJA2
+- https://www.home-assistant.io/docs/configuration/templating/
+- referencing a variable: `{{ states('sensor.mysensor') }}`
+
 ## AUTOMATIONS
 - multiple triggers are OR'd together
 
@@ -30,6 +34,17 @@
     - the inverse is template webhook: https://www.home-assistant.io/docs/automation/trigger/#webhook-trigger
         - client pushes data to HASS and you can create a entity/sensor from that data
 - [history stats](https://www.home-assistant.io/integrations/history_stats/) - stats of another sensor, e.g. time period in a state
+
+## LOVELACE UI
+- can add custom panels - https://www.home-assistant.io/integrations/panel_custom/
+    - https://www.reddit.com/r/homeassistant/comments/10hc3vb/psa_adding_automations_to_the_left_panel
+        - modifying the left sidebar in lovelace with buttons for going to automations or devices
+- dashboards are stored in `.storage` in json format
+- has keyboard shortcuts: https://www.home-assistant.io/docs/tools/quick-bar/
+    - _NOTE_ make sure middle main panel is active (not side panel or top panel)
+    - `e` -> popup to select an entity
+    - `c` -> popup to run a command (navigate to a page or run some various actions)
+    - `my` -> create `my` link
 
 ## API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest
@@ -92,6 +107,10 @@
         - defines an event `system_log_event` for warning and error logs, so you can write automations
     - [logger](https://www.home-assistant.io/integrations/logger/)
         - set global log level and fine grained log level for specific components, services to change log level
+
+## BACKUPS
+- they store _all_ files in the config dir, so any custom new files you create
+- base backup is not gzipped tar so `tar -xvf backup.tar`, then the enbedded tar file with the actual backup data is gzipped
 
 ## ISSUES
 - if you rename a device and all it's entities, lovelace errors
