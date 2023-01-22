@@ -271,6 +271,20 @@ rsync -vh --checksum /src /dest       # use checksum algorithm instead of file-s
 
 rsync -hvar --progress /src /dest  # freuent options
 
+# RCLONE - rsync for cloud drives
+    # written in Go - https://rclone.org/
+    # ver 1.58+ supports bisync for 2-way, older ver only has one-way sync
+rclone listremotes --long  # print all remote names and type to stdout
+rclone ls some-remote:/somedir  # list objects in remote dir somedir
+rclone copy /path/to/file some-remote:/remote/dir   # copy file to remote dir
+rclone copy --ignore-existing /path/to/file some-remote:/remote/dir
+    # if same file name exists dont overwrite
+rclone copyto /path/to/file some-remote:/remote/path/newfilename  # rename file at dest
+rclone move /path/to/file some-remote:/remote/dir/   # copy to remote, delete locally
+rclone mount some-remote:/remote/dir/ /local/dir  # one-way mount remote dir
+    # jan2023 - deleting file from remote(gdrive) did not sync to local mount
+
+
 # STAT - show metadata info of file, last access, modify time, change time, etc.
 stat foo
 stat -x foo   # osx only: extended info, on osx version, linux version does this by default

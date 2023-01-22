@@ -56,6 +56,8 @@ cmd + e - toggle camera
 - QUERY language: https://support.google.com/mail/answer/7190?hl=en
     - find file in size range: `larger_than:5m smaller_than:8M`
     - find with label: `label:foo`
+    - find unread + primary: `label:unread category:primary`
+    - find 3day new not social: `newer_than:2d -category:social`
 - select all in promotions/social
     - upper right box -> select all -> should see banner to select all with label (promotion/social)
 ### keyboard mappings

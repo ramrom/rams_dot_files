@@ -307,6 +307,11 @@ snap refresh --list
         - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
 - `Startup Applications` - run commands and programs at startup
     - will create `.desktop` files in `~/.config/autostart` folder
+- copy + paste
+    - press mouse wheel button to copy text and to paste text
+    - `ctrl + c/v` work but not when involving terminal
+    - `shift + ctrl + c/v` when coping from terminal or pasting to terminal
+        - due to quirk of my setup(emacs keys?) press `ctrl`, then `shift`, then `c/v`
 
 ### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
