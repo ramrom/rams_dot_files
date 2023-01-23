@@ -452,7 +452,7 @@ which -a foo     # return all paths of bins matching foo in PATH
 # ZSH - rebuild hash table cache of commands/bins in PATH
 hash    # print all hashed commands
 hash -m "*foo*" # print only commands with foo somewhere in it
-rehash
+rehash   # rebuild hash table, if a new bin is added in PATH, wont be seen in current hash table, so rehash would find it
 hash -r     # empty the hash table, adding -f will make it rebuild immediately
 
 # VARIABLE INTROSPECTION

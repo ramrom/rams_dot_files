@@ -220,12 +220,27 @@
 - react native lets you use your react code to build native mobile apps
     - uses C++ engine to compile react abstractions like `View` to native components for iOS or android
     - code runs in javascript engine(e.g. JavaScriptCore or Hermes) and talks to native code via messages over a bridge
+- AI / Machine-learning
+    - TensorFlow
+    - PyTorch
 
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
 
 ## GRAPHICS
 - DLSS (deep learning super sampling) - using AI to interpolate frames and thus more cheaply increase frame rates
+- APIs
+    - Metals - apple API
+    - Vulkan - open source platform independent generic API for 3D graphics and computing, managed by Khronos Group
+        - originally based on AMD's Mantle API
+        - designed to utelize multi core better and CPUs better (vs OpenGL or old directx)
+        - lower level API, similar to metals and directX 12
+        - higher performance than OpenGL and Direct3D 11
+    - OpenGL - older 2D/3D open-source platform independent graphics API
+        - started in 1992, Khronos group inherited in 2006
+        - doesnt support ray tracing or video decoding
+        - really being succeeded by vulkan
+    - DirectX - microsoft APIs for graphics and more
 
 ## LEAGUE
 - north america server: 104.160.131.3

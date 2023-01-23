@@ -6,6 +6,10 @@
 - takeout - https://takeout.google.com
     - download basically *any* google data, including all photos
 
+## OAUTH
+- https://developers.google.com/identity/protocols/oauth2
+    - jan2023, refresh tokens unused for 6 months expire
+
 ## GOOGLE PHOTOS
 - delete from google photos app and it will delete locally (sync)
     - *BUT* delete locally and it will NOT delete from google photos

@@ -16,6 +16,9 @@
 ## JINJA2
 - https://www.home-assistant.io/docs/configuration/templating/
 - referencing a variable: `{{ states('sensor.mysensor') }}`
+- covert a input datetime to diff string format:
+    - `time: "{{ (state_attr('input_datetime.adatetimeentity', 'timestamp') - 1800) | timestamp_custom('%H:%M:%S', true) }}"`
+        - the 2nd arg for boolean to `timestamp_custom` will use current timezone if true
 
 ## AUTOMATIONS
 - multiple triggers are OR'd together
@@ -111,6 +114,11 @@
 ## BACKUPS
 - they store _all_ files in the config dir, so any custom new files you create
 - base backup is not gzipped tar so `tar -xvf backup.tar`, then the enbedded tar file with the actual backup data is gzipped
+
+## DATA
+- https://www.home-assistant.io/integrations/recorder/
+- default retention for data is 10 days, can change this
+- can add additional databases like influxDB in addition to the base recorder
 
 ## ISSUES
 - if you rename a device and all it's entities, lovelace errors
