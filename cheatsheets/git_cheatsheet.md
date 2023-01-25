@@ -50,6 +50,7 @@ push/tracking:
 git branch --set-upstream-to=origin/foobranch foobranch
 git push -u remote local_branch # push branch to remote
 git push -u remote              # push/track current branch to remote
+git push --force remote local_branch  # force push, overwriting remote branch
 ```
 
 ```sh

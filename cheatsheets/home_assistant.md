@@ -13,7 +13,8 @@
 - home assitant core - the main backend brains
 - uses a SQLite db, generally located at `config/home-assistant_v2.db`
 
-## JINJA2
+## TEMPLATING
+- home assistant uses python code with libs and jinja templates to render things
 - https://www.home-assistant.io/docs/configuration/templating/
 - referencing a variable: `{{ states('sensor.mysensor') }}`
 - covert a input datetime to diff string format:
@@ -22,6 +23,10 @@
 
 ## AUTOMATIONS
 - multiple triggers are OR'd together
+
+## NOTIFICATION
+- `notify.notify` is generic and will call the first compatible device in the list
+    - best to call `notify.some_specific_device`
 
 ## CONFIGURATION
 - https://www.home-assistant.io/docs/configuration/
@@ -106,10 +111,16 @@
 - there a _2_ integrations
     - [system_log](https://www.home-assistant.io/integrations/system_log/)
         - set max entries of logs to store
-        - services: clear logs, write a log
+        - define 2 services
+            - write a log
+            - clear logs (`system_log.clear`), *NOTE* this clear logs in server memory, not from the file `home-assistant.log`
+                - could create a shell cmd entity that `truncate home-assistant.log --size 0` to clear the file
         - defines an event `system_log_event` for warning and error logs, so you can write automations
     - [logger](https://www.home-assistant.io/integrations/logger/)
         - set global log level and fine grained log level for specific components, services to change log level
+- log namespaces:
+    - `homeassistant.components.http` - for all http stuff, including sub namespaces like `ban`
+    - `homeassistant.components.http.ban` - for just failed logins, bans, resetting ban counter for a good login, etc.
 
 ## BACKUPS
 - they store _all_ files in the config dir, so any custom new files you create
