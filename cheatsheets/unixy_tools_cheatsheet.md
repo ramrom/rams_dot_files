@@ -295,6 +295,10 @@ rclone copyto /path/to/file some-remote:/remote/path/newfilename  # rename file 
 rclone move /path/to/file some-remote:/remote/dir/   # copy to remote, delete locally
 rclone mount some-remote:/remote/dir/ /local/dir  # one-way mount remote dir
     # jan2023 - deleting file from remote(gdrive) did not sync to local mount
+rclone purge remote:path    # delete path and all contents, including dirs, cant use filters
+rclone delete --min-size 100M remote:path    # delete files with filters, dirs are not removed
+                                            # filter here only delete if > 100MB
+rclone --dry-run delete remote:path    # delete, but see what would be delted
 
 
 # STAT - show metadata info of file, last access, modify time, change time, etc.
