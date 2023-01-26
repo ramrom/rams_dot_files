@@ -64,7 +64,7 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
-# given port number return if grep of if ssh is listening on it
+# given port number return if ssh(or polipo) is listening on it
 # polipo used to create HTTP proxy to a SOCKS proxy (scab does this, and authn e2e tests too)
 function find_listening_ports() {
     local process_type=ssh; [ -n "$polipo" ] && process_type=polipo
@@ -107,17 +107,6 @@ function print_type() {
     # handle special case when executable is in current dir, command -v wont work
     [ -x "$1" ] && type=executable
     echo $type
-}
-
-# shell func wrapper that will change to current dir in lf when quitting
-l () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
 }
 
 alias bw='batwhich'
@@ -163,6 +152,17 @@ function run_cmd_timestamp() {
     local elapsed=$((end - start))
     echo; echo $(ansi256 -f red -b green "_-----------------------")" Time elapsed: ${elapsed} "\
         $(ansi256 -f red -b green "_---------------------"); echo
+}
+
+# shell func wrapper that will change to current dir in lf when quitting
+l () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
 }
 
 # function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
