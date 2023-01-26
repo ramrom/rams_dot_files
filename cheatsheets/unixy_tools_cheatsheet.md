@@ -17,6 +17,12 @@ cat file
 # tac - opposite of cat, output file in reverse order of lines to stdout
 tac file
 
+# touch - create an empty file
+touch foofile
+
+# truncate - shrink or extend file size
+truncate --size 1 foofile  # only keep the first byte of file, truncate rest
+
 # cp - copy
 cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
 
@@ -62,6 +68,12 @@ printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if li
 echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
 sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
 cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
+
+# goaccess - log file analyzer
+goaccess logfile.log  # interactive TUI
+goaccess logfile.log  -o report.html # generate a pretty html webpage report
+goaccess --log-format=COMBINED logfile.log # specify logformat
+    # nginx/apache logs are COMBINED format by default
 
 # base64 - encode and decode base64
 echo "foobar" | base64      # encode from stdin

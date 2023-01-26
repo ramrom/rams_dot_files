@@ -12,14 +12,25 @@
     - add-ons are created in new containers
 - home assitant core - the main backend brains
 - uses a SQLite db, generally located at `config/home-assistant_v2.db`
+- state object: https://www.home-assistant.io/docs/configuration/state_object/
+    - sensors will have a main "attribute" `state` and auxilary "attributes" listed in `attributes`
+    - `last_changed` and `last_updated` (subtle differences) will store last time state "changed"
 
 ## TEMPLATING
-- home assistant uses python code with libs and jinja templates to render things
+- home assistant uses python code and jinja templates and some libs to render things
 - https://www.home-assistant.io/docs/configuration/templating/
 - referencing a variable: `{{ states('sensor.mysensor') }}`
 - covert a input datetime to diff string format:
     - `time: "{{ (state_attr('input_datetime.adatetimeentity', 'timestamp') - 1800) | timestamp_custom('%H:%M:%S', true) }}"`
         - the 2nd arg for boolean to `timestamp_custom` will use current timezone if true
+- loop over a sensor attributes and print the attribute value
+    ```python
+    {% for attr in states.sensor.some_sensor.attributes %}
+    {% if not attr=='icon' and not attr=='friendly_name' and not attr=='unit_of_measurement' %}
+       show: {{ attr }}, episode: {{ states.sensor.some_sensor.attributes[attr] }}
+    {% endif %}
+    {% endfor %}
+    ```
 
 ## AUTOMATIONS
 - multiple triggers are OR'd together
@@ -54,7 +65,7 @@
     - `c` -> popup to run a command (navigate to a page or run some various actions)
     - `my` -> create `my` link
 
-## API
+## REST API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest
 - `curl http://192.168.1.1/api/`
 - calling a webhook
@@ -95,7 +106,6 @@
 - http configuration: https://www.home-assistant.io/integrations/http/
 - banned IPs go into file `ip_bans.yaml` in base config dir
     - remove from file and restart HASS to unban
-
 ### TLS
 - https://community.home-assistant.io/t/certificate-authority-and-self-signed-certificate-for-ssl-tls/196970
     - make sure to use `-nodes` with `openssl`, HASS doesn't support passphrase on cert

@@ -3,7 +3,7 @@
 # FF - Fzf on files in a dir with file prev
 # actions: open, edit, cd to location, or add to clipboard
 
-usage () { echo 'Usage: ff [ -h(help) ] [ -i(search-hidden-files) ] [ -j FZF_HEIGHT ] [ -w FUNC_WRAP ] BASE_DIR( `~` = home, no arg means cur dir)'; }
+usage () { echo 'Usage: ff [ -h(help) ] [ -i(search-hidden-files) ] [ -j FZF_HEIGHT ] [ -w(FUNC_WRAP) ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
 while getopts 'hiwj:' x; do
     case $x in
