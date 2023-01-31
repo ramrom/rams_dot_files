@@ -5,30 +5,30 @@
 # error log format:     `2023/01/25 15:37:07`
 # access log format:    `45.93.16.27 - - [25/Jan/2023:19:04:51 -0600]`
 
-usage () { echo 'Usage: nginx-log-count [ -h(help) ] [ -v(verbose) ] [ -e(error log) ]'; }
+usage () { echo 'Usage: nginx-log-count [ -h(help) ] [ -v(verbose) ] [ -a(access log) ]'; }
 
 interval=300  # default to 5minutes
-LOG_TYPE=access
-log_file=/var/log/nginx/access.log
+LOG_TYPE=error
+log_file=/var/log/nginx/error.log
 
-while getopts 'hev' x; do
+while getopts 'hav' x; do
     case $x in
         h) usage && exit 1 ;;
         v) VERBOSE=1 ;;
-        e) LOG_TYPE="error" ;;
+        a) LOG_TYPE="access" ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
-[ "$LOG_TYPE" = "error" ] && log_file="/var/log/nginx/error.log"
+[ "$LOG_TYPE" = "access" ] && log_file="/var/log/nginx/access.log"
 
 num_lines=$(cat $log_file | wc -l)
 [ -n "$VERBOSE" ] && echo "num lines in log file:  ${num_lines}"
 
-month=$(date '+%b')
-day=$(date '+%d')
-hour=$(date '+%H')  # 24 hour format
+# month=$(date '+%b')
+# day=$(date '+%d')
+# hour=$(date '+%H')  # 24 hour format
 
 if [ "$LOG_TYPE" = "error" ]; then
     latest_log_dt=$(tail -1 ${log_file} | awk '{print $1" "$2}')

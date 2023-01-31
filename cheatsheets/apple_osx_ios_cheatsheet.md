@@ -1,5 +1,4 @@
 # OSX CHEATSHEET
--------------------------------------------
 - cmd + option + hover over scale image in display in sys prefs   - show the resolution
 - option + click on "scaled" radio buttton in display will bring up granular resolutions supported
     - https://apple.stackexchange.com/questions/194101/what-are-the-effective-scaling-modes-on-osx-with-a-4k-display-is-an-effective-r
@@ -9,7 +8,6 @@
 - safari mac: bring up seperate window for dev tools - `cmd` + `shift` + `j`
 
 ## BREW
---------------------
 ### TERMINOLOGY
 - see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
 - bottle: pre-compiled code, just installs
@@ -42,7 +40,6 @@
 
 
 ## CLI:
-----------------
 - ref: https://www.mitchchn.me/2014/os-x-terminal/
 - say - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
@@ -70,7 +67,6 @@
 
 
 ## KEYBOARD SHORTCUTS:
------------------------------------
 - full list: https://support.apple.com/en-us/HT201236
 - command + tab  - switch between apps
 - command + space - spotlight search
@@ -126,7 +122,6 @@
 - up/down arrow  - scroll up and down
 
 ## IPHONE / IOS
---------------------------
 - iphone12: hold volume up and right button to see power off slider
 - iphone12: press volume up and right button to take screenshot
 - fix textastic greyed out markdown files, it's b/c it's Files app wont let me edit those
@@ -135,7 +130,6 @@
     - https://support.apple.com/en-us/HT211808 : 14.1 changelog address Files issue with cloud provider content as unavailable
 
 ## FILESYSTEMS:
-----------------------------
 - ISO filesystems can be mounted through disk utitlity application
 - MacFUSE defunct, used to be only way to mount NTFS
 - MacFUSE replaced by OSXFuse (FUSE = Filesystem in USErland)

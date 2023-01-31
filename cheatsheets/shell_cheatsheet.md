@@ -513,7 +513,7 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 &&  # "and" like using "||"
 [ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
-true || echo foo && echo bar   # this will print dude
+true || echo foo && echo bar   # this will print bar
 true || { echo foo && echo bar; }   # this wont print anything, braces make the two staements one
 
 

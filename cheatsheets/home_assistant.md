@@ -82,13 +82,16 @@
     - `hass-cli service call backup.create` - create a backup
     - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever` - send notif
     - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
-    - `service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
+    - `hass-cli service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
         - play a specific track or playlist in spotify
+    - `hass-cli service call media_player.media_play_pause --arguments entity_id=media_player.living_room_tv` - toggle play on a media player entity
 - toggle entity: `hass-cli state toggle someentity`
 - call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
 
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
+- spotify
+    - creds in `.storage/application_credentials`
 - command line integrations
     - [shell command](https://www.home-assistant.io/integrations/shell_command/)
         - just run a plain shell command

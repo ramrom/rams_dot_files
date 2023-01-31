@@ -24,7 +24,7 @@
     - certbot cmd will give text record to place on your domain record
     - for duckdns can curl to udpate the dns record with the txt record from letsencrypt dns challenge
 ### LetsEncrypt CERTBOT
-- https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
+- https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal - certbot install for ubuntu + nginx setup
     - for duckdns, used this 3rd party plugin: https://github.com/infinityofspace/certbot_dns_duckdns
 - revoking a cert with certbot - https://letsencrypt.org/docs/revoking/
 - dont use `--staging`, maybe `--dry-run` better per docs, after creating staging have to use `--force-renew` to create prod certs
@@ -34,6 +34,7 @@
 - `sudo certbot renew --dry-run` - test renewal (dry-run only works on renew cmd)
 - `sudo certbot show_account` - show ACME account info (url with acc# and email)
 - `sudo certbot certificates` - list certs and expirations
+- `certbot plugins` - show plugins installed
 
 ## WEB SERVERS
 - apache HTTP server - written in c, really old
@@ -49,6 +50,8 @@
 - `sudo nginx -t` - verify if nginx conf files are ok
 - nginx will by default remove blank headers and modify `Host` and `Connection` headers
     - https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+- `stub_status` gives basic info (active connections, # reading/writing/waiting)
+    - http://nginx.org/en/docs/http/ngx_http_stub_status_module.html
 - make sure to set a default server that denies
     - https://stackoverflow.com/questions/56538783/how-to-force-exact-match-of-subdomains-with-nginx
         - otherwise if no server matches, it will select the first server to route to
