@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/zsh
+# NOTE: need zsh just for the `fzf --header=$'line1\nline2'` to read the `\n` as a new line, dash in linux doesnt support it
 
 # FF - Fzf on files in a dir with file prev
 # actions: open, edit, cd to location, or add to clipboard
@@ -51,7 +52,7 @@ generate_github_link() {
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
 out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
-    --header='ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy, ctrl-s->open-in-github' \
+    --header=$'ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy\nctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \
     --preview "$BATBIN --style=numbers --color=always {} | head -500" \

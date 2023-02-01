@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/zsh
+# NOTE: need zsh just for the `fzf --header=$'line1\nline2'` to read the `\n` as a new line, dash in linux doesnt support it
 
 # FZF + bluetoothctl
 
@@ -9,7 +10,7 @@
 prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
 out=$(bluetoothctl devices | fzf +m --height 90% \
     --preview "$prev_cmd" \
-    --header='ctrl-r->reload devices, ctrl-space->reload paired-devices, ctrl-o->connect, ctrl-i->disconnect, enter->info' \
+    --header=$'ctrl-r->reload devices, ctrl-space->reload paired-devices\nctrl-o->connect, ctrl-i->disconnect, enter->info' \
     --bind 'ctrl-r:reload(bluetoothctl devices)' \
     --bind 'ctrl-space:reload(bluetoothctl paired-devices)' \
     --expect='ctrl-o,ctrl-i')
