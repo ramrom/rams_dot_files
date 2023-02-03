@@ -11,6 +11,14 @@
 - namespaces - linux kernel feature, isolates sets of processes and resources
 - linus rant on app development in linux - https://www.youtube.com/watch?v=Pzl1B7nB9Kc
     > If people are using it, it's not a bug, it's a feature - Linus
+- file ownership
+    - kernel only understand numeric UID and GID
+    - when `ls -l` shows names, it's b/c it's mapping UID and GID to names in `/etc/passwd`
+- `/etc/passwd` and `/etc/shadow`
+    - `passwd` used to contain passwords, this is deprecated, security issue as u could dictionary attack it
+        - file remains b/c programs like `ls` still use it
+        - still contains UID, full name, home dir, default shell
+    - `shadow` contains hashed passwords and other management fields, is readable only by root
 
 # UBUNTU/DEBIAN:
 - lsb_release -a        - show distro name and version
@@ -50,7 +58,7 @@ sudo -u foouser bash         - basically login as foouser, since `bash` cmd here
 sudo useradd foouser        - create new user with home dir
 sudo passwd foouser         - change any users password, seems to bypass strength rules
 passwd                      - change your password
-sudo useradd foouser foogroup    - add existing user to new group
+sudo usermod -a -G foogroup foouser  - add foouser to group foogroup
 sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
 
 

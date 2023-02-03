@@ -8,7 +8,7 @@
 [ ! "$(uname)" = "Linux" ] && echo "$(tput setaf 1) Only works in Linux" && exit 1
 
 prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
-out=$(bluetoothctl devices | fzf +m --height 90% \
+out=$(bluetoothctl devices | fzf +m --height 100% \
     --preview "$prev_cmd" \
     --header=$'ctrl-r->reload devices, ctrl-space->reload paired-devices\nctrl-o->connect, ctrl-i->disconnect, enter->info' \
     --bind 'ctrl-r:reload(bluetoothctl devices)' \

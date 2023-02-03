@@ -64,6 +64,7 @@
     - `e` -> popup to select an entity
     - `c` -> popup to run a command (navigate to a page or run some various actions)
     - `my` -> create `my` link
+- feb2023 - `input_number` entity will show a movable slider if in `entities` card, not single `entity` card
 
 ## REST API
 - REST API docs: https://developers.home-assistant.io/docs/api/rest

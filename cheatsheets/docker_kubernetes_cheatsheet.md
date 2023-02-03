@@ -1,6 +1,9 @@
 # DOCKER/KUBERNETES
 
 ## DOCKER
+- good article on UID/GID user mapping
+    - https://www.fullstaq.com/knowledge-hub/blogs/docker-and-the-host-filesystem-owner-matching-problem
+- `--security-opt no-new-privileges` prevents things like a regular user sudo'ing as root in the container
 ### USAGE
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
@@ -56,5 +59,10 @@
 
 ## COMPOSE
 - `docker compose pull` - will get latest versions of images
-- `priveleged_mode: true` - exposes a _lot_ , including every `/dev/` in the host
+- `priveleged_mode: true` - exposes a _lot_
+    - can see every `/dev/` in the host, `fdisk -l` shows all host devices
+    - good read https://learn.snyk.io/lessons/container-runs-in-privileged-mode/kubernetes/
+        - container runtime does a lot shield container from host, this mode disables/bypasses most of these checks
+        - so a root user in container has essentially root privs on host system
+        - one legit use case for running nested docker, docker in a docker
 - `network_mode: host` - copies host networking, `ifconfig` in container shows the exact same interfaces as on the host
