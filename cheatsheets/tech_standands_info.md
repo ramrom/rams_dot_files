@@ -42,8 +42,12 @@
 - how pairing works: https://www.bluetooth.com/blog/bluetooth-pairing-part-1-pairing-feature-exchange/
 
 ## ZIGBEE
-- mesh style network
+- based on IEEE 802.15.4 standard
+- supports star and tree network topologies as well as generic mesh
+    - in star coordinator must be central node, mesh and tree allow router nodes to extend reach
 - ch11 - ch26 between 2400Mhz - 2480Mhz
+- LQI (Link Quality Indicator) - quality of data packets received
+- RSS (Recieved Signal Strength) - quality of signal strength
 
 ## IoT
 - Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)

@@ -3,7 +3,6 @@
 ## DOCKER
 - good article on UID/GID user mapping
     - https://www.fullstaq.com/knowledge-hub/blogs/docker-and-the-host-filesystem-owner-matching-problem
-- `--security-opt no-new-privileges` prevents things like a regular user sudo'ing as root in the container
 ### USAGE
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
@@ -59,6 +58,7 @@
 
 ## COMPOSE
 - `docker compose pull` - will get latest versions of images
+- `--security-opt no-new-privileges` prevents things like a regular user sudo'ing as root in the container
 - `priveleged_mode: true` - exposes a _lot_
     - can see every `/dev/` in the host, `fdisk -l` shows all host devices
     - good read https://learn.snyk.io/lessons/container-runs-in-privileged-mode/kubernetes/

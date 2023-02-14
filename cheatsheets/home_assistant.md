@@ -53,6 +53,7 @@
     - the inverse is template webhook: https://www.home-assistant.io/docs/automation/trigger/#webhook-trigger
         - client pushes data to HASS and you can create a entity/sensor from that data
 - [history stats](https://www.home-assistant.io/integrations/history_stats/) - stats of another sensor, e.g. time period in a state
+- entities of name `_identity` are for identifying a device (like will blink or something), many devices dont support it
 
 ## LOVELACE UI
 - can add custom panels - https://www.home-assistant.io/integrations/panel_custom/
@@ -99,6 +100,8 @@
     - [command line](https://www.home-assistant.io/integrations/command_line/) - binary sensor
     - [command line sensor](https://www.home-assistant.io/integrations/sensor.command_line/) - sensor with some value
     - [command line switch](https://www.home-assistant.io/integrations/switch.command_line/) - a toggle switch
+- twilio sms -> configured in `configuration.yml` and will add a notify service
+    - must specify a target phone number (that in twilio API is approved), example ph format: `12223334444`
 
 ## COMPANION/MOBILE APP
 - tracking limitation on no data

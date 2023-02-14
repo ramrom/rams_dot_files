@@ -1,0 +1,26 @@
+#!/bin/sh
+
+[ -z "$SONARR_TOKEN" ] && echo "SONARR_TOKEN not set!" && exit 1
+[ -z "$SONARR_SERVER" ] && echo "SONARR_SERVER not set!" && exit 1
+
+usage () { echo "Usage: sonarr-episodes [ -h(help) ] [ -v(verbose) ] "; }
+
+VERBOSITY="-b"
+while getopts 'hv' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        v) VERBOSITY="-v" ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+START_DATE=$(date +'%m-%d-%y')
+START_DATE=$(date --date "-7 days" +'%m-%d-%y')
+END_DATE=$(date --date "+14 days" +'%m-%d-%y')
+OUTPUT_FILE=/tmp/sonarr_response
+
+xh $VERBOSITY --download -o $OUTPUT_FILE ${SONARR_SERVER}/api/v3/calendar \
+    X-Api-Key:${SONARR_TOKEN} start=="$START_DATE" end_date=="$END_DATE"
+
+jq . $OUTPUT_FILE
