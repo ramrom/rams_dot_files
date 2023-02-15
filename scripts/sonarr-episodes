@@ -5,7 +5,7 @@
 
 usage () { echo "Usage: sonarr-episodes [ -h(help) ] [ -v(verbose) ] "; }
 
-VERBOSITY="-b"
+VERBOSITY="-q"
 while getopts 'hv' x; do
     case $x in
         h) usage && exit 1 ;;
@@ -17,10 +17,16 @@ shift $(($OPTIND - 1))
 
 # START_DATE=$(date +'%m-%d-%y')
 START_DATE=$(date --date "-7 days" +'%m-%d-%y')
-END_DATE=$(date --date "+14 days" +'%m-%d-%y')
+END_DATE=$(date --date "+21 days" +'%m-%d-%y')
 OUTPUT_FILE=/tmp/sonarr_response
 
 xh $VERBOSITY --download -o $OUTPUT_FILE ${SONARR_SERVER}/api/v3/calendar \
     X-Api-Key:${SONARR_TOKEN} start=="$START_DATE" end_date=="$END_DATE"
+
+NUM_EPISODES=$(jq '. | length' $OUTPUT_FILE)
+
+echo ""
+echo "start date: $START_DATE, end date: $END_DATE"
+echo ""
 
 jq '.[] | "seriesId: " + (.seriesId | tostring) + ", airdate: " + .airDate + ", title: " + .title' $OUTPUT_FILE
