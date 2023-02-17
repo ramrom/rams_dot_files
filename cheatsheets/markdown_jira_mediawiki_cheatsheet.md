@@ -1,8 +1,6 @@
 # MARKDOWN/JIRA CHEATSHEET:
------------------------
 
 ## MARKDOWN REFERENCES
-----------------------------------------
 - https://en.wikipedia.org/wiki/Markdown
 - very original spec: https://daringfireball.net/projects/markdown
 - original md: https://commonmark.org/
@@ -93,9 +91,18 @@ Tables:
 |   |   |   |   |   |
 
 
+## MEDIAWIKI
+- https://www.mediawiki.org/wiki/Help%3aFormatting
+- `''italic''` - italic
+- `'''bold'''` - bold
+- `''''bold + italic''''` - bold + italic
+- headers/levels
+    - `== Level 2 ==` to `====== Level 6 ======` , level 2 biggest, 6 renders smallest
+
+
+
 
 ## JIRA
------------------------
 - https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
 .  - bring up search menu
