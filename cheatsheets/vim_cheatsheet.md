@@ -411,6 +411,7 @@ ctrl-va] - visual block select all text of "[]" block
 ## TEXT OBJECTS:
 <number><operator/command><number><text object>
 i = inner, a = all
+word - a word, sentence - ends in punctation `./?/!`, paragraph - ends in newline
 aw - word with surrounding whitespace
 iw - word without surrounding whitespace
 as - sentence

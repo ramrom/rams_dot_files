@@ -152,7 +152,10 @@ try  " if loading vim without plugins, onedark will fail, default to ir_black
         " autocmd ColorScheme onedark call onedark#extend_highlight("markdownHeadingDelimiter", { "fg": { "cterm": "111" } })
     augroup END
     let g:onedark_termcolors=256
-    let g:onedark_terminal_italics=1
+    "TODO: italics works in neovim, brew vim8.2, osx default vim9 doesnt
+    if has('nvim')
+        let g:onedark_terminal_italics=1
+    endif
     colorscheme onedark
     hi clear Search                 " clear it, as I use a custom search highlight
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -204,7 +207,7 @@ autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
 
 """""""""""""SEARCHING """"""""""""""""""
 set hlsearch                    " highlight search
-"TODO: italics works in neovim, brew vim8.2 and osx-sys vim8.1 dont
+"TODO: italics works in neovim, brew vim8.2, osx default vim9 doesnt
 if has('nvim')
     hi Search cterm=italic,underline,inverse
 else
