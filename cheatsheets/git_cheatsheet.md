@@ -96,6 +96,8 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
 - wiki: https://help.github.com/en/github/building-a-strong-community/adding-or-editing-wiki-pages
     - you can clone the wiki locally and commit and push
 - render markdown to html, github sytle
-    - https://docs.github.com/en/rest/reference/markdown
+    - github GUI rendering: https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files
+        - https://github.com/github/markup
+    - API to render HTML from markdown: https://docs.github.com/en/rest/reference/markdown
     - supported languages in code blocks: https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 - render mermaid code in markdown code block: https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/

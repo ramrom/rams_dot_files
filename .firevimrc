@@ -1,0 +1,69 @@
+if has('nvim-0.6.1')
+    " neovim in any browser edit window!
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
+let g:firenvim_config = {
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'neovim',
+            \ 'content': 'text',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'never',
+        \ },
+    \ }
+\ }
+
+au BufEnter github.com_*.txt set filetype=markdown
+au BufEnter json.parser.online.fr_*.txt set filetype=json
+
+set number                      " line numbers
+set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
+set laststatus=0
+set linebreak                   " avoid wrapping line in middle of a word
+set wrap                        " wrap lines longer than width to next line
+set foldmethod=indent
+set nofoldenable            " dont fold everything when opening buffers
+
+set autoindent              " indent on new line for inner scopes in code
+set shiftwidth=4            " use 4 spaces for autoindent (cindent)
+set tabstop=4               " space 4 columns when reading a <tab> char in file
+set softtabstop=4           " complicated, see docs
+set expandtab               " use spaces when tab is pressed
+
+set listchars=tab:»_,trail:·
+
+function TabBufQuit()
+    if !exists('*gettabinfo') | execute ":q" | return | endif   " vim 7.4(and earlier) dont have `gettabinfo`
+    let tinfo=gettabinfo()
+    if len(tinfo) == 1 && len(tinfo[0]['windows']) == 1
+        if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
+    else | exe ":q" | endif
+endfunction
+function RemoveTrailingWhiteSpace()
+    execute '%s/\s\+$//e'
+endfunction
+
+" MAPPINGS
+let mapleader = " "
+
+inoremap <C-l>  <Esc>
+noremap <leader>s :w<cr>
+noremap <leader>q :call TabBufQuit()<cr>
+noremap <leader>Q :q!<cr>
+noremap <leader><leader>q :qa<cr>
+noremap <leader>j :noh<cr>
+
+noremap <leader>; :Commands<cr>
+noremap <leader>r :History:<cr>
+
+noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
