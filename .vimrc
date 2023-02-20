@@ -106,6 +106,8 @@ elseif empty($VIM_NOPLUG)
     if has('nvim')
         Plug 'lukas-reineke/indent-blankline.nvim'
     else
+        " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
+
         "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
         "TODO: indentLine displays `"` chars `|` or disspapear in json files...
         if has('conceal')  " requires conceal, jan2023: osx stock vim doesnt have it installed...
@@ -113,7 +115,9 @@ elseif empty($VIM_NOPLUG)
         endif
     endif
 
-    " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
+    if has('nvim-0.6.0')
+        Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    endif
 
     if !empty($VIM_DEVICONS)
         " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
