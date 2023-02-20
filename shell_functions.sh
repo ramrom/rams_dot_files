@@ -154,13 +154,6 @@ function run_cmd_timestamp() {
         $(ansi256 -f red -b green "_---------------------"); echo
 }
 
-# from https://serverfault.com/questions/661978/displaying-a-remote-ssl-certificate-details-using-cli-tools
-function print_tls_info() {
-    [ -z "$1" ] && echo "need first arg for hostname" && return 1
-    echo | openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null | \
-        openssl x509 -inform pem -noout -text
-}
-
 # shell func wrapper that will change to current dir in lf when quitting
 l () {
     tmp="$(mktemp)"
