@@ -1,6 +1,10 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/.vimrc
+
+if exists('g:started_by_firenvim')
+  source ~/rams_dot_files/.firevimrc
+else
+    source ~/.vimrc
 
 " lua require('neovim-config')
 
@@ -373,5 +377,6 @@ require("indent_blankline").setup {
 }
 
 EOF
+endif
 
 endif
