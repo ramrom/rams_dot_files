@@ -5,7 +5,7 @@
 # SELECTS: flurry, stonerview, surfaces, wormhole, noof, bouboule, binaryring
 #           cubegrid, pipes, xrayswarm
 
-timeout:	0:01:00
+timeout:	0:05:00
 cycle:		0:01:00
 lock:		True
 lockTimeout:	1:00:00
