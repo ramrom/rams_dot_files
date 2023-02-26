@@ -29,6 +29,12 @@ let g:firenvim_config = {
 au BufEnter github.com_*.txt set filetype=markdown
 au BufEnter json.parser.online.fr_*.txt set filetype=json
 
+
+""""""""" CORE SETTINGS """"""""""""""
+
+set splitbelow splitright       " open new windows on bottom for horizontal, right for vertical
+set wildmenu                    " display command line's tab complete options as menu
+set wildmode=longest,list,full  " complete longest common, list all matches, complete till next full match
 set number                      " line numbers
 set backspace=indent,eol,start  " backspace like most wordprocessors in insert mode
 set laststatus=0
@@ -45,6 +51,12 @@ set expandtab               " use spaces when tab is pressed
 
 set listchars=tab:»_,trail:·
 
+
+""""" FUNCTIONS """""""""""""""
+function RemoveTrailingWhiteSpace()
+    execute '%s/\s\+$//e'
+endfunction
+
 function TabBufQuit()
     if !exists('*gettabinfo') | execute ":q" | return | endif   " vim 7.4(and earlier) dont have `gettabinfo`
     let tinfo=gettabinfo()
@@ -52,21 +64,48 @@ function TabBufQuit()
         if len(getbufinfo({'buflisted':1})) == 1 | exe ":q" | else | exe ":bd" | endif
     else | exe ":q" | endif
 endfunction
-function RemoveTrailingWhiteSpace()
-    execute '%s/\s\+$//e'
+
+" if there is one tab, move forward/back buffer, otherwise forward/back tabs
+function TabBufNav(direction)
+    if !exists('*gettabinfo')  " vim 7.4(and earlier) dont have `gettabinfo`
+        if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
+        return
+    endif
+    if len(gettabinfo()) == 1
+        if (a:direction == "f") | execute ":bn!" | else |  execute ":bp!" | endif
+    else
+        if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
+    endif
 endfunction
 
-" MAPPINGS
+
+""""""""""""" MAPPINGS """""""""""""""""""""""""""""
 let mapleader = " "
 
 inoremap <C-l>  <Esc>
+
+" Move between tabs(or buffers if one tab)
+noremap <leader>f :call TabBufNav("f")<CR>
+noremap <leader>d :call TabBufNav("b")<CR>
+
+" Move between windows
+" default mappings: ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+
 noremap <leader>s :w<cr>
 noremap <leader>q :call TabBufQuit()<cr>
 noremap <leader>Q :q!<cr>
 noremap <leader><leader>q :qa<cr>
 noremap <leader>j :noh<cr>
+nnoremap <leader>e :call firenvim#focus_page()<CR>
 
+noremap <leader>cm :Maps<cr>
 noremap <leader>; :Commands<cr>
 noremap <leader>r :History:<cr>
+noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
+noremap <leader>cV :tabnew ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
 
 noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>

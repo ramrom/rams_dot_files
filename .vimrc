@@ -529,6 +529,7 @@ noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>
 noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
+noremap <leader>cV :tabnew ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
