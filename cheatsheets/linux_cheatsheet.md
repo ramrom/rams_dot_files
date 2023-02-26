@@ -79,7 +79,9 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
     - target - this unit type similar to runlelvel in sysV, so a desired state for the whole system
         - services and other units can be tied to a target, multiple targets can be active simultaneously
     - slice - heirarchical manage a resource of group of processes, using cgroups
-    - scope - manage set of sys processes, external processes. dont fork their own. scopes not configured via unit config files
+        - can group other slices or scopes or services
+    - scope - manage set of processes that are external. i.e. not started by systemd, i.e. no unit config files
+        - systemd creates them using the systemd dbus API
     - timer - replacement for cron basically, specify a service unit to run and a schedule for it
 - with GNOME systemd will kill any daemon processes started in the gnome session(slice), e.g. tmux(feb2023 ubunut22), with a log out
     - https://unix.stackexchange.com/questions/583283/how-to-prevent-processes-from-being-killed-when-i-log-out-of-gnome
@@ -262,6 +264,7 @@ snap refresh --list
 - definitions: display server / display manager / window manager / desktop envrionment
     - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
 - Display servers and display managers
+    - `XDG_SESSION_TYPE` env var will generally tell u if it's tty or wayland or x11
     - X Windowing System - core system for drawing bitmaps, X11 is latest version since 1987
     - Wayland, new (also FOSS) protocol b/w display server and clients, (often includes C implementations), to replace X
         - Weston is a reference implementation
