@@ -81,6 +81,8 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
     - slice - heirarchical manage a resource of group of processes, using cgroups
     - scope - manage set of sys processes, external processes. dont fork their own. scopes not configured via unit config files
     - timer - replacement for cron basically, specify a service unit to run and a schedule for it
+- with GNOME systemd will kill any daemon processes started in the gnome session(slice), e.g. tmux(feb2023 ubunut22), with a log out
+    - https://unix.stackexchange.com/questions/583283/how-to-prevent-processes-from-being-killed-when-i-log-out-of-gnome
 - folders
     - most system unit files are in `/etc/systemd/system`
     - user unit files in `/etc/systemd/user` or `$HOME/.config/systemd/user`
