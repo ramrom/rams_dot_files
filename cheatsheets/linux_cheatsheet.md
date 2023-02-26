@@ -253,6 +253,8 @@ snap refresh
 snap refresh --list
     - just show what snaps can be upgraded
 
+## FLATPAK
+- similar to snap but supported as main app packager by most linux distros other than ubuntu
 
 ## GRAPHICAL SYSTEMS
 - definitions: display server / display manager / window manager / desktop envrionment

@@ -3,6 +3,9 @@ if has('nvim-0.6.1')
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'       " add/change/remove surrounding formatting to text-objects
+Plug 'tpope/vim-repeat'         " `.` operator on crack, works with vim-surround
+Plug 'tpope/vim-commentary'     " smart code commenting
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " NOTE/FIXME: vim 7.4 doesnt like this syntax
 Plug 'junegunn/fzf.vim'
