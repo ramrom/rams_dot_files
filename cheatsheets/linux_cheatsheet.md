@@ -333,6 +333,8 @@ snap refresh --list
 
 ### XSCREENSAVER
 - https://www.jwz.org/xscreensaver/
+- it's in the name, designed for X, but compatible with wayland through XWayland compatibility lib
+    - it works well on ubuntu22 GNOME/wayland
 - https://linux.die.net/man/1/xscreensaver-command - CLI tool
     - `DISPLAY=:1 xscreensaver-command -select 10` - select the 10th screensaver in program list to run now
     - `DISPLAY=:1 xscreensaver-command -deactivate` - stop currently running screensaver, `activate` is opposite
