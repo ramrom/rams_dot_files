@@ -104,6 +104,8 @@
     - must specify a target phone number (that in twilio API is approved), example ph format: `12223334444`
 
 ## COMPANION/MOBILE APP
+- troubleshooting doc: https://companion.home-assistant.io/docs/troubleshooting/faqs/
+    - of note, self-signed certs prolly lead to blank page, and in android workaround is to add cert to trusted store
 - tracking limitation on no data
     - backend sensor will just use the last values, so if mobile app has no data connection, sensor will hold last known value
         - https://community.home-assistant.io/t/companion-app-not-updating-device-tracker/391752

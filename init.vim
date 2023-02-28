@@ -336,6 +336,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
     vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
+
     vim.api.nvim_create_autocmd("FileType", {
         pattern = { "scala", "sbt", "java" },
         callback = function()

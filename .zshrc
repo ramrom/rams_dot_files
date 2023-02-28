@@ -62,9 +62,6 @@ export FZF_CTRL_T_COMMAND="$fdname"
 export FZF_ALT_C_COMMAND="$fdname --type d"
 unset fdname
 
-# fzf over command history, hijacks ctrl-r
-source ~/repos/fzf-tab/fzf-tab.plugin.zsh
-
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi
 }
@@ -73,6 +70,9 @@ function load_or_err() {
 load_or_err ~/rams_dot_files/shell_aliases.sh
 load_or_err ~/rams_dot_files/shell_functions.sh
 load_or_err ~/.fzf.zsh   # "**" autocompletion and alt-c/ctrl-r/ctrl-t
+
+# fzf over command history, hijacks ctrl-r
+load_or_err ~/repos/fzf-tab/fzf-tab.plugin.zsh
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
