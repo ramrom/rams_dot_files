@@ -405,6 +405,8 @@ function TabBufQuit()
 endfunction
 
 function ClearLspLog()
+    "TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
+    " also metals on osx is diff path
     exe ':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log'
 endfunction
 
