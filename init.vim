@@ -296,6 +296,15 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     -- golang DAP
     -- lua require('dap-go').setup()
 
+    ------------- Kotlin-------------------------------------
+    -- https://github.com/fwcd/kotlin-language-server
+
+    require'lspconfig'.kotlin_language_server.setup{
+        cmd = { "kotlin-language-server" },
+        filetypes = { "kotlin", "kt" },
+        root_dir = util.root_pattern("settings.gradle")
+    }
+
     ------------ BASH/SHELL bashls LSP ----------------------
     -- https://github.com/mads-hartmann/bash-language-server
 
@@ -323,6 +332,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
     vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
     vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
+    vim.keymap.set("n", "glc", "<cmd>call ClearLspLog()<CR>")
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
     vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")

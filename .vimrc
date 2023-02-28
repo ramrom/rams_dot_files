@@ -404,6 +404,10 @@ function TabBufQuit()
     else | exe ":q" | endif
 endfunction
 
+function ClearLspLog()
+    exe ':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log'
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""" KEY MAPPINGS """"""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""

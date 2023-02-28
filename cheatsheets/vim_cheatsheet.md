@@ -541,7 +541,7 @@ ctrl + wo - close all windows except current one in tab
 Ctrl + wT - move the current split window into its own tab
 gt or :tabnext or :tabn - move to the next tab
 gT or :tabprev or :tabp - move to the previous tab
-#gt - move to tab number #
+`#gt` - move to tab number #
 :tabmove # - move current tab to the #th position (indexed from 0)
 :tabclose or :tabc - close the current tab and all its windows
 :tabonly or :tabo - close all tabs except for the current one
@@ -561,7 +561,6 @@ zw - add to wrong word list
 zuw - remove from wrong word list
 
 
-SCRIPTING:
------------------------------
+## SCRIPTING
 - checking existence of variable
     if exists('g:some_global_var') | echo "hi" | endif
