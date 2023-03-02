@@ -2,9 +2,9 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
 if exists('g:started_by_firenvim')
-  source ~/rams_dot_files/.firevimrc
+source ~/rams_dot_files/.firevimrc
 else
-    source ~/.vimrc
+source ~/.vimrc
 
 " lua require('neovim-config')
 

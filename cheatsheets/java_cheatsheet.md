@@ -94,6 +94,11 @@ switch (a) {
 String bar = (3 < 10) ? "A" : "B";
 ```
 
+## BUILD TOOLS
+- Ant
+- Maven
+- Gradle - newest and honeslty best, written in groovey
+
 ## HSITORY
 - java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),
 - java8, mar2014, LTS(till 2025) - lamba functions

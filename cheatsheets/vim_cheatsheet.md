@@ -140,6 +140,7 @@ C - make selected dir node the new root node
 
 
 ### STARTING VIM
+vim -u somevimrc - specify a vimrc file (otherwise ~/.vimrc)
 vim -u NONE     - start without running vimrc
 vim -S sess.vim - load sess.vim session file
 vim foo bar     - foo and bar buffers
