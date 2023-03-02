@@ -45,7 +45,7 @@ elseif empty($VIM_NOPLUG)
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
 
-    Plug 'godlygeek/tabular'        " plasticboy/vim-markdown uses this to format tables
+    Plug 'godlygeek/tabular'        " preservim/vim-markdown uses this to format tables
     Plug 'preservim/vim-markdown'
 
     " real-time render markdown in browser window as you edit the source
@@ -408,6 +408,7 @@ function ClearLspLog()
     "TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
     " also metals on osx is diff path
     exe ':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log'
+    exe ':SilentRedraw cat /dev/null > .metals/metals.log'
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""

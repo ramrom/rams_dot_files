@@ -20,3 +20,6 @@
     import pdb
     pdb.set_trace()
     ```
+
+## GREAT LIBS
+- https://github.com/Textualize/rich - add rich text ANSI colors and formats to text

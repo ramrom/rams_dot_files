@@ -164,10 +164,10 @@ vim -V  foo     - verbose output
 :h insert-index  - insert default mappings
 :h ex-cmd-index  - command and ex mode
 
-### OPTIONS:
+### OPTIONS
 :set lazyredraw - for macros dont redraw screen, faster replay
 
-## EX MODE:
+## EX MODE
 Q - in normal mode will go into ex model, neovim doesnt have it
 `visual` -exit ex mode
 vi - short for visual
@@ -243,7 +243,7 @@ C-Z - should suspend vim
 C-B - used to toggle revins, now disabled
 
 
-## NORMAL MODE:
+## NORMAL MODE
 i - insert before the cursor
 I - insert at the beginning of the line
 a - insert (append) after the cursor
@@ -305,7 +305,7 @@ L - move to bottom of screen
 30% - go to line that is 30% from the top
 w - jump forwards to the start of a word
 W - jump forwards to the start of a word
-    (words can contain punctuation)
+    (words can contain punctuatio)
 e - jump forwards to the end of a word
 E - jump forwards to the end of a word
     (words can contain punctuation)
@@ -352,7 +352,7 @@ C-t - go back one in tag stack
 - Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
 
-## EDITING:
+## EDITING
 y - yank (copy) text
 d - delete text
 c - delete text and insert to change
@@ -425,13 +425,13 @@ iB - block within and not including {}
 at - all tag block
 ` <operator><a/i><"/'/(/)/{/}/[/]> ` - programming language text objects
 
-## MOTION+OBJECTS:
+## MOTION+OBJECTS
 v3ta - visual select up to the 3rd occurence of a
 d2fn - delete up to 2nd occurence of n
 c2aw - delete 2 full words and insert
 c2w - delete from cursor current word, then next word, then insert
 
-## REGISTERS:
+## REGISTERS
 - Registers stored in ~/.viminfo, loaded on next restart
 - Register 0 contains he value of the last yank command.
 :let @a=foo  - manually set reg a to something
@@ -445,26 +445,26 @@ c2w - delete from cursor current word, then next word, then insert
 "*p - paste from sys clipboard
 - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 
-## JUMP LIST:
+## JUMP LIST
 things that add to jump list:
     - normal mode G
     - searching, / and ?, # and *, n and N
     - window size jumps: L M and H
     - text block jumps: ( ) { }
 
-## Marks
+## MARKS
 :marks - list of marks
 ma - set current position for mark A
 `a - jump to position of mark A
 y`a - yank text to position of mark A
 
-## Macros:
+## MACROS
 qa - record macro a
 q - stop recording macro
 @a - run macro a
 @@ - rerun last run macro
 
-## Folds:
+## FOLDS
 zo (open), zO (open all nested)
 zc (close), zC (close all)
 za (toggle), zA (toggle all)
@@ -495,7 +495,7 @@ ZZ - same as :wq
     are interpreted as special regex symbols (no escaping needed)
 n - repeat search in same direction
 N - repeat search in opposite direction
-# - reverse search for word under cursor
+`#` - reverse search for word under cursor
 * - search for word under cursor
 :%s/old/new/g - replace all old with new throughout file
 :%s/old/new/gc - replace all old with new throughout file with confirmations
@@ -518,7 +518,7 @@ e.g. ` :vimgrep /foo/ **/* `
 :bd - delete a buffer (close a file)
 :ls - list all open buffers
 
-## WINDOWS:
+## WINDOWS
 :sp file - open a file in a new buffer and split window
 :vsp file - open a file in a new buffer and vertically split window
 Ctrl + ws - split window
@@ -549,7 +549,7 @@ gT or :tabprev or :tabp - move to the previous tab
 :tabdo command - run the command on all tabs (e.g. :tabdo q - closes all opened tabs)
 
 
-## SPELLING:
+## SPELLING
 - set spell
 - set spelllang=es - set spell language to spanish
 [s - previous spelling error
