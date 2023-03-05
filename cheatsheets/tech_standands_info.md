@@ -278,6 +278,15 @@
 - google drive
     - offline access for idvidual files (and only gdocs like their spreadsheet and word doc)
 
+## BOOTING
+- BIOS - basic input output system, firmware used to boostrap into a full OS, IBM PCs started with this
+- UEFI - Unified Extensible Firmware Interface, a new firmware architecture to replaces BIOS
+    - specifications written by the UEFI Forum
+    - BIOS limitations: 16-bit real mode, only 1MB adressable space, only assembly language, no network support, and lots more
+- firmware - low level code that controls hardware, for PCs first loaded and bootstraps main OS
+    - for embedded systems is probably main layer of code
+    - stored in non-volotile memory like flash memory or EEPROM
+
 ## FILE SYSTEMS
 - storage device vs partition vs volume vs file system
     - physical storage devices are split into multiple partitions

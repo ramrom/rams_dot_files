@@ -1,4 +1,4 @@
-# LINUX STUFF
+# LINUX
 - udev, as of kernel 2.6, it replaces DevFS(device file system)
     - `udevadm` - cli tool to see events, monitor devices, list attribs
     - identify devices based on properties (e.g. vendor ID and device ID) dynamically
@@ -20,7 +20,18 @@
         - still contains UID, full name, home dir, default shell
     - `shadow` contains hashed passwords and other management fields, is readable only by root
 
-# UBUNTU/DEBIAN:
+## GNU
+- started by richard stallman in 1984
+- gaol is to make free open source software, believes selling propietary software is immoral
+- big projects
+    - GIMP - Gnu image processing/editor
+    - GNOME - a graphical desktop environment
+        - KDE came first, but some devs didnt like that Qt wasnt totally free, so started GNOME
+            - Qt is owned by trolltech, an oslo company, and offers it for free if u build free software
+    - gcc/g++ - GNU compiler/toolchain for c/c++
+    - Hurd - a OS, never took off as linux dominated
+
+## UBUNTU/DEBIAN
 - lsb_release -a        - show distro name and version
     - LTS releases every 2 years, support for 5 years
     - regular releases every year, support for 9 months
@@ -45,7 +56,7 @@ sudo shutdown -r now (reboot now)
     - `xclip -selection clipboard`    - copy to clipboard
     - `xclip -selection clipboard -o` - paste from clipboard
 
-# RASPBIAN
+## RASPBIAN
 - official linux distro(based on debian) for raspberry pi
 - to manually config wifi, edit `/etc/wpa_supplicant/wpa_supplicant.conf`
     - set SSID name and password
