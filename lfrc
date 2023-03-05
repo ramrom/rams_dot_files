@@ -5,7 +5,7 @@ set shell sh
 set shellopts '-eu'   # -e (exit on error), -u (error on unset vars)
 set ifs "\n"          # good seperator for $fs and $fx
 set scrolloff 10      # leave space at top and bottom
-# set icons             # show icon before item
+set icons             # show icon before item
 set dircounts         # show # of items in dir
 set info size         # show size next to item
 set period 1          # refresh every 1 sec for dir updates

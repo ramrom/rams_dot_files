@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# FROM man page, 5 args passed in
+    # (1) current file name, (2) width, (3) height, (4) horizontal position, and (5) vertical position
+
 # case "$1" in
 #     *.tar*) tar tf "$1";;
 #     *.zip) unzip -l "$1";;
@@ -10,13 +13,13 @@
 # esac
 
 # for Linux use mediainfo, otherwise assume Darwin
-mmcmd="mdls"; [ "$(uname)" = "Linux" ] && mmcmd="mediainfo"
+MMBIN="mdls"; [ "$(uname)" = "Linux" ] && MMBIN="mediainfo"
 BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 
 mimetype=$(file --mime-type --brief --dereference "$1")
 
 case "$mimetype" in
-    video/*|audio/*|image/*) $mmcmd "$1";;
+    video/*|audio/*|image/*) $MMBIN "$1";;
     # image/*) chafa "$1";;  # cool but only sometimes works and slow
     application/json) jq -C . "$1";;
     application/zip) unzip -l "$1";;  # NOTE: -l only in Linux
