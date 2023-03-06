@@ -317,6 +317,10 @@
 - standar for files for apps and configs
 
 ## NETWORK PROTOCOLS
+### LAYER 7
+- WebDAV - HTTP based protocol for data manipulation
+- CalDAV - based on WebDAV for sharing and syncing calander data
+    - uses iCalander format for the data
 ### ADDRESS RESOLUTION
 - ARP - address resolution protocol, get layer 2(MAC) address from a given layer 3(IP) address
 - InARP(inverse ARP)/RARP(Reverse ARP) - get layer 3 address from a layer 2 address

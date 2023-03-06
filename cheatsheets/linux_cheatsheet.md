@@ -435,12 +435,13 @@ drive naming convention:
 - fdisk - show partitions and block devices, sizes, sectors
 - /etc/fstab - file systems mounted at boot
 - dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+- efibootmgr - UEFI boot manager, list boot devices and order, change order, delete boot option
 - dkms - cli for dynamic kernel modules
     - `dkms status` - list all loaded kernel modules and show status
 - udevadm - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
 - dmesg - kernel ring buffer, print messages or control it
-- dconf  - like gsettings?
+- dconf  - sorta related to gsettings, configure database for settings
 - iwlist - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - notify-send - pops up notification

@@ -98,6 +98,12 @@ date +%s%N     # print nanoseconds (%N doesnt work on OSX)
 gdate +%s.%N   # coreutils package on OSX offers gdate, which can give nanoseconds
 date +%s%3N   # nanoseconds with 3 most sig figs
 
+# timedatectl - controle system time and date, not on OSX
+timedatectl show    # show properties of systemd-timedated
+timedatectl status  # show current time settings
+timedatectl list-timeszones
+timedatectl set-ntp on   # enable NTP
+
 # netcat
 nc -l 127.0.0.1 9001     #listen on 9001
 
