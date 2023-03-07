@@ -115,6 +115,7 @@ elseif empty($VIM_NOPLUG)
         endif
     endif
 
+    " vim inside any web browser text box!
     if has('nvim-0.6.0')
         Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
     endif
@@ -524,7 +525,8 @@ autocmd FileType markdown noremap <leader>gg :w<CR>:SilentRedraw git add . && gi
 
 "cheatsheet maps
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
-noremap <leader>cc :call ShowMyLeaderMap()<cr>
+noremap <leader>cC :call ShowMyLeaderMap()<cr>
+noremap <leader>cc :Maps!<cr> 'space 
 noremap <leader>cm :Maps<cr>
 noremap <leader>cg :map g<cr>
 noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
