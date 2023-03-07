@@ -57,6 +57,16 @@ HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, has
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 ```
 
+### CLASSES
+### INTERFACE
+- cannot implement any methods
+- a class can implement many interfaces, multiple inheritence
+- can not have non-final and non-static variables
+### ABSTRACT CLASS
+- can implement methods
+- no multiple inheritence
+- can have final and non-final variables, static and non-static variables
+
 ### IO
 ```java
 Scanner scanner = new Scanner(System.in);

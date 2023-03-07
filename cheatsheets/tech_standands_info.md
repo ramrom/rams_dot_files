@@ -279,10 +279,13 @@
     - offline access for idvidual files (and only gdocs like their spreadsheet and word doc)
 
 ## BOOTING
-- BIOS - basic input output system, firmware used to boostrap into a full OS, IBM PCs started with this
+- BIOS - basic input output system, firmware used to boostrap into a full OS, IBM PCs started with this in 1980
 - UEFI - Unified Extensible Firmware Interface, a new firmware architecture to replaces BIOS
     - specifications written by the UEFI Forum
-    - BIOS limitations: 16-bit real mode, only 1MB adressable space, only assembly language, no network support, and lots more
+    - uses GPT partition scheme and supports greater drive sizes natively
+    - other BIOS limitations: 16-bit real mode, only 1MB adressable space, only assembly language, no network support, and lots more
+    - also offers security with secure boot
+    - microsoft drove adoption in 2010 b/c in win8 they wanted secure boot
 - firmware - low level code that controls hardware, for PCs first loaded and bootstraps main OS
     - for embedded systems is probably main layer of code
     - stored in non-volotile memory like flash memory or EEPROM
@@ -359,3 +362,22 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
         - opposite for "out of the money"
 - delta - rate of change b/w options price and $1 change in underlying assets price
 - theta (decay) - measure of rate of decline of option due to passoge of time (b/c of getting closer to expiration)
+
+## CREDIT CARDS
+- magnetic stripes stores data in plaintext, including FN, LN, acc #, expiration date, security code, same data every transaction
+- new EMVs (embedded chips) in cards, started in 2015, generate and exchange one time unique code for each transaction
+    - EMV -> stands for europay, mastercard, visa (the 3 major networks)
+- NFC - also "contactless" like EMV
+    - NFC and EMV both use RF protocol, ISO 14443 B
+
+## AUTHENTICATION
+- Oauth - invented in 2006 out of twitter OpenID standard
+    - oauth 1.0 came out in 2007, by google engineer
+    - 2.0 came out in 2013, not backwards compatible with 1.0
+- OpenID Connect(OIDC) - built on top of oauth 2.0, includes identity stuff, has an IdP
+    - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
+- WebAuthN
+    - backwards compatible and successor to FIDO U2F(universal 2nd factor)
+    - any hardware/software that implements CTAP(client to authenticator protocol) can be used
+        - so an authneticator can be pure software (using trusted execution env of cpu)
+    - doesnt no require password
