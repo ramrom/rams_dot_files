@@ -134,6 +134,9 @@ journalctl -u foo.service
     - same as above, if unit is not service type need to type fully, e.g. foo.socket
 journalctl -u foo -b
     - show logs since last boot
+journalctl -b -1 -e
+    - show logs of boot before current (e.g. -2 would from 2 boots ago)
+    - -e means jump to end of pager
 journalctl --list-boots
     - show list of times system was booted up
 journalctl -f -u foounit

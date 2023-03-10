@@ -9,7 +9,8 @@
 - `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
     - https://docs.docker.com/compose/reference/
     - `-d` runs without attaching it to the current shell
-- `docker compose -f some-compose-file.yml pull` - pull the latest image
+- `docker compose -f some-compose-file.yml pull` - pull the latest images
+- `docker compose -f some-compose-file.yml pull fooserv` - pull only `fooserv`
 - `docker compose -f some-compose-file.yml down --rmi all`
     - `down` stop containers, `--rmi all` removes all images specified in compose
 - https://docs.docker.com/
