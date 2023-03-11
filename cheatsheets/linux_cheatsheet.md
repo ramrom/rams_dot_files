@@ -110,7 +110,7 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 - systemctl start/stop/restart/reload foo
     - reload doesnt stop and start the service, often is a HUP signal
 - systemctl status
-    - show full status of systemd with full tree
+    - show full status of systemd with helpful tree structure
 - systemctl status foo
     - show status of a unit named foo
 - systemctl status foo*

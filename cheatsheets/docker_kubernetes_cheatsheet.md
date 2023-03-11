@@ -6,13 +6,6 @@
 ### USAGE
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
-- `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
-    - https://docs.docker.com/compose/reference/
-    - `-d` runs without attaching it to the current shell
-- `docker compose -f some-compose-file.yml pull` - pull the latest images
-- `docker compose -f some-compose-file.yml pull fooserv` - pull only `fooserv`
-- `docker compose -f some-compose-file.yml down --rmi all`
-    - `down` stop containers, `--rmi all` removes all images specified in compose
 - https://docs.docker.com/
 - an image is built from the code in a Dockerfile
     - `docker build MyDockerfile`
@@ -59,6 +52,13 @@
 
 ## COMPOSE
 - `docker compose pull` - will get latest versions of images
+- `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
+    - https://docs.docker.com/compose/reference/
+    - `-d` runs without attaching it to the current shell
+- `docker compose -f some-compose-file.yml pull` - pull the latest images
+- `docker compose -f some-compose-file.yml pull fooserv` - pull only `fooserv`
+- `docker compose -f some-compose-file.yml down --rmi all`
+    - `down` stop containers, `--rmi all` removes all images specified in compose
 - `--security-opt no-new-privileges` prevents things like a regular user sudo'ing as root in the container
 - `priveleged_mode: true` - exposes a _lot_
     - can see every `/dev/` in the host, `fdisk -l` shows all host devices
