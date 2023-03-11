@@ -1,0 +1,48 @@
+#!/bin/sh
+
+[ -z "$SONARR_TOKEN" ] && echo "SONARR_TOKEN not set!" && exit 1
+[ -z "$SONARR_SERVER" ] && echo "SONARR_SERVER not set!" && exit 1
+
+usage () { echo "Usage: sonarr [ -h(help) ] [ -b(backup to cloud) ] [ -v(verbose) ] "; }
+
+VERBOSITY="-q"
+while getopts 'bhv' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        b) BACKUP=1 ;;
+        v) VERBOSITY="-v" ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+if [ -z "$BACKUP" ]; then
+
+    # START_DATE=$(date +'%m-%d-%y')
+    START_DATE=$(date --date "-7 days" +'%m-%d-%y')
+    END_DATE=$(date --date "+21 days" +'%m-%d-%y')
+    OUTPUT_FILE=/tmp/sonarr_response
+
+    xh $VERBOSITY --download -o $OUTPUT_FILE ${SONARR_SERVER}/api/v3/calendar \
+        X-Api-Key:${SONARR_TOKEN} start=="$START_DATE" end_date=="$END_DATE"
+
+    echo ""
+    echo "start date: $START_DATE, end date: $END_DATE"
+    echo ""
+
+    NUM_EPISODES=$(jq '. | length' $OUTPUT_FILE)
+
+    i=0
+    while [ "$i" -lt $NUM_EPISODES ]
+    do
+        SERIES_ID=$(jq ".[$i].seriesId" $OUTPUT_FILE)
+        [ "$VERBOSITY" != "-q" ] && echo "seriesId: $SERIES_ID"
+        SERIES_NAME=$(xh ${SONARR_SERVER}/api/v3/series/$SERIES_ID X-Api-Key:${SONARR_TOKEN} | jq .title)
+        EPISODE_NAME=$(jq ".[$i].title" $OUTPUT_FILE)
+        AIR_DATE=$(jq ".[$i].airDate" $OUTPUT_FILE)
+        echo "Series Name: $SERIES_NAME,  EPISODE NAME: $EPISODE_NAME, AIR_DATE: $AIR_DATE"
+        i=$((i + 1))
+    done
+else
+    xh -v ${SONARR_SERVER}/api/v3/system/backup X-Api-Key:${SONARR_TOKEN}
+fi
