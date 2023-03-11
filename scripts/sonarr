@@ -3,20 +3,20 @@
 [ -z "$SONARR_TOKEN" ] && echo "SONARR_TOKEN not set!" && exit 1
 [ -z "$SONARR_SERVER" ] && echo "SONARR_SERVER not set!" && exit 1
 
-usage () { echo "Usage: sonarr [ -h(help) ] [ -b(backup to cloud) ] [ -v(verbose) ] "; }
+usage () { echo "Usage: sonarr [ -h(help) ] [ -l(list shows) [ -v(verbose) ] "; }
 
 VERBOSITY="-q"
-while getopts 'bhv' x; do
+while getopts 'lhv' x; do
     case $x in
         h) usage && exit 1 ;;
-        b) BACKUP=1 ;;
+        l) LIST_SHOWS=1 ;;
         v) VERBOSITY="-v" ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
-if [ -z "$BACKUP" ]; then
+if [ -z "$LIST_SHOWS" ]; then
 
     # START_DATE=$(date +'%m-%d-%y')
     START_DATE=$(date --date "-7 days" +'%m-%d-%y')
@@ -44,5 +44,5 @@ if [ -z "$BACKUP" ]; then
         i=$((i + 1))
     done
 else
-    xh -v ${SONARR_SERVER}/api/v3/system/backup X-Api-Key:${SONARR_TOKEN}
+    xh ${SONARR_SERVER}/api/v3/series X-Api-Key:${SONARR_TOKEN} | jq '.[] | .title'
 fi
