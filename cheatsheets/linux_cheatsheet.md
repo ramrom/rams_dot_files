@@ -341,6 +341,9 @@ snap refresh --list
     - `ctrl + c/v` work but not when involving terminal
     - `shift + ctrl + c/v` when coping from terminal or pasting to terminal
         - due to quirk of my setup(emacs keys?) press `ctrl`, then `shift`, then `c/v`
+- common Tools
+    - nautilus is the file explorer
+    - ubuntu22 - uses RDP for gnome remote desktop
 
 ### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam

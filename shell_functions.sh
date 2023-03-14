@@ -138,7 +138,7 @@ function print_json_columnize() {
 # use for json formatted file
 function print_bitwarden_columize() {
     [ -z "$1" ] && echo "need arg for filename" && return 1
-    jq '.items | .[] | .name + "," + .login.username + "," + .login.password' $1 | column -t -s,
+    jq -r '.items | .[] | .name + "," + .login.username + "," + .login.password' $1 | column -t -s,
 }
 
 function run_cmd_timestamp() {

@@ -179,6 +179,13 @@
 - objective C uses Clang compiler to create LLVM IR
 - swift uses it's own "swift compiler" to create LLVM IR(bitcode)
 
+## API ARCHITECTURES
+- SOAP - Simple Object Access Protocol
+     - web services using XML based messaging protocol, usually over HTTP
+- REST - REpresentational State Transfer
+     - roy fielding created it in his dissertation to replace SOAP as model for WWW and used HTTP as reference implementation
+- RPC - Remote Procedure Call
+
 
 ## DEVOPS
 ### TERRAFORM
