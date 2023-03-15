@@ -178,6 +178,16 @@
     - LLVM has API that take IR (itermediate representation), then it uses that create binary or JIT
 - objective C uses Clang compiler to create LLVM IR
 - swift uses it's own "swift compiler" to create LLVM IR(bitcode)
+- linking
+    - dynamic -> an executable loads the library at _run_ time
+        - shared object, `.so`, files are dynamically linked libs
+        - used often in linux, if 2 executables run and use same lib, the lib is loaded once in memory and shared by executables
+    - static -> the library is included in the executable at _compile_ time
+        - `.a` files (`ar` archive files of object files) are static linked libs
+- c++ compilers
+    1. preprocessor - process directives like `#includes` and `#define` (expanding macros)
+    2. compiling - c++ code -> assembly code -> machine code, each source file essentially becoming an object file
+    3. linking - links object files together to one executable, undefined symbols are resolved to correct addresses
 
 ## API ARCHITECTURES
 - SOAP - Simple Object Access Protocol
