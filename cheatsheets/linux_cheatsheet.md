@@ -264,15 +264,19 @@ sudo unattended-upgrade
 - snap isolates packages. each package has a filesystem mounted from a virtual loop device for it
     - snap keeps the old version of the package
 - snapd runs to update (like ~ 4/day default) snap packages; https://snapcraft.io/docs/keeping-snaps-up-to-date
-snap list
-    - list all snap packages installed
-snap refresh
-    - updgrade snap packages
-snap refresh --list
-    - just show what snaps can be upgraded
+- snapstore is propietary and owned by canonical and only place to get snaps
+- mar2023 - looks like snaps are generally slower thank flatpak or appimage for many apps, definitely graphical apps
+- commands
+    - `snap list`
+        - list all snap packages installed
+    - `snap refresh`
+        - updgrade snap packages
+    - `snap refresh --list`
+        - just show what snaps can be upgraded
 
 ## FLATPAK
 - similar to snap but supported as main app packager by most linux distros other than ubuntu
+- many flatpak stores to choose from
 
 ## GRAPHICAL SYSTEMS
 - definitions: display server / display manager / window manager / desktop envrionment
