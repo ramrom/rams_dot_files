@@ -9,3 +9,5 @@
 - `groovy -version` - get version
 - `groovysh` -> REPL
 - `groovyc` -> compiler
+- cli linter https://www.npmjs.com/package/npm-groovy-lint , nice for Jenkinsfiles
+    - `npm-groovy-lint Jenkinsfile` - shows warning/errors/info
