@@ -46,6 +46,10 @@ ssh-keygen
 # change passphrase on particular private key
 ssh-keygen -p -f ~/.ssh/id_rsa
 
+# removing a host key for a known host
+# NOTE: use when a trusted domain changes thier key and you trust the key change isn't a MITM hack
+ssh-keygen -f "/home/foouser/.ssh/known_hosts" -R "somedomain.com"
+
 # X11 Forwarding
 # server side X11Fowarding must be yes in server config(sshd_config file)
 # for OSX, make sure XQuartz is installed and working, if ssh'ing from osx to be used as display server
