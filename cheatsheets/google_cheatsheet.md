@@ -37,6 +37,7 @@ foo site:www.site.com   - search a specific site
     - https://www.chromium.org/for-testers/providing-network-details
     - https://groups.google.com/a/chromium.org/g/chromium-dev/c/VSzBnCgvQgc?pli=1
 - can edit keyboard shortcuts for extensions, goto chrome:://extensions -> keyboard shortcuts(left bar)
+- OSX bookmarks are stored in `~/Library/Application Support/Google/Chrome/Default/Bookmarks` file, it's json
 
 ## CHROMEBOOK
 - mounting a samba share, chromebook needs samba ver 2 or higher

@@ -15,6 +15,11 @@
     - server push - the server can send data without a request
 
 ## SSL/TLS
+- certificate data is formatted according to X.509 standard: https://en.wikipedia.org/wiki/X.509
+- root CA certs can last 20 years or more
+    - the root CA cert is self-signed and inherently trusted
+    - most OSes come pre-installed with root CA certs, get new root certs with OS udpates
+- CAs do get hacked, DigiNotar was hacked and went bankrupt, so was Comodo
 - generate a self-signed cert - https://letsencrypt.org/docs/
     - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
 - duckdns - https://www.duckdns.org/spec.jsp

@@ -1,4 +1,4 @@
-# BUILD DEPENDECY TOOLS CHEATSHEET
+# BUILD DEPENDENCY TOOLS CHEATSHEET
 
 ## MAKE
 - oldest build tool, was used for java but really focused on c/c++ ecosystem
@@ -21,9 +21,8 @@
 - way more sophisticated than ant, this is a full framework that supports plugins
 
 ## GRADLE
-- newest and honeslty best, itself written in groovey
+- newest and honeslty best, itself written in groovy
 - built it's own dependency management to replace ivy
 - instead of XML supports either Kotlin or Groovy code for the DSL
     - `build.gradle` for groovy, `build.gradle.kts` for kotlin
 - building blocks are `tasks`, versus ant's `targets` and mavens `phases`
-
