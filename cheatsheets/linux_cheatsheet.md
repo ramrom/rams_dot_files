@@ -465,6 +465,7 @@ drive naming convention:
     - `hciconfig -a` - print all info of bluetooth controllers
     - `hciconfig hci0 down` - turn off bluetooth controller `hci0`
         - in ubuntu settings the bluetooth toggle button will also turn off (it reads this devices state)
+- jstest-gtk - decent util to test and configure gamepad/game-controllers
 - pacmd - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
