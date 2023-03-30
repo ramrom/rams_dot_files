@@ -167,7 +167,19 @@ strings somebin
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
 gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
 gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
+gpg --full-generate-key  # gen new key, with FN/LN/email, default folder to store is /home/user/.gnupg/
+gpg --list-keys # list all keys
 
+# gen new key, set blank passphrase, bypass pinentry daemon
+# ubuntu22 cli, passphrase uses ncurses and daemon, which cant launch, get error: `gpg: agent_genkey failed: Operation cancelled` error
+gpg --full-generate-key --passphrase '' --pinentry-mode loopback
+
+gpg --export-secret-keys --armor --output backupfile.asc johndoe@example.com # create backup of keys to a file, --armor pretty prints
+gpg --export --armor --output pubkeys.asc johndoe@example.com # create file of pubkeys
+
+# PASS
+pass init ABCDEF12  # create new pass db in default location(/home/user/.password-store) with gpg id ABCDEF12(is last 8hex of pub key)
+pass insert foo # create a password key called `foo`, will be prompted to enter password
 
 # PS
 ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes
@@ -306,6 +318,11 @@ rclone purge remote:path    # delete path and all contents, including dirs, cant
 rclone delete --min-size 100M remote:path    # delete files with filters, dirs are not removed
                                             # filter here only delete if > 100MB
 rclone --dry-run delete remote:path    # delete, but see what would be delted
+RCLONE_CONFIG_PASS=foo rclone config   # if config is password protected can pass in password with env var
+RCLONE_PASSWORD_COMMAND=/path/to/script rclone config # specify a command/script to run that outputs password to stdout
+# store password in memory: https://forum.rclone.org/t/methods-to-store-config-password-in-memory/21610
+rclone --config="/path/to/config" listremotes # specify a config file to use
+
 
 
 # STAT - show metadata info of file, last access, modify time, change time, etc.
