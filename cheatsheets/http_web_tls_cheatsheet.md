@@ -22,6 +22,8 @@
 - CAs do get hacked, DigiNotar was hacked and went bankrupt, so was Comodo
 - generate a self-signed cert - https://letsencrypt.org/docs/
     - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
+- get cert from website in PEM format and parse details and print to screen
+    - `echo | openssl s_client -showcerts -servername gnupg.org -connect gnupg.org:443 2>/dev/null | openssl x509 -inform pem -noout -text`
 - duckdns - https://www.duckdns.org/spec.jsp
 ### LetsEncrypt
 - use their official certbot to do an ACME challenge to prove you own a domain
