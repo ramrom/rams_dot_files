@@ -4,6 +4,7 @@
 - basics of git plumbing, objects/trees/blobs/sha: https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
 - git lfs: https://git-lfs.github.com/, nice if u want to version large files
 
+
 ## CONFIGS
 - basic heirarchy: system(machine/host level) -> global(user level: `~/.gitconfig`) -> local(repo `./.git/config`)
     - dec2022 - osx system config at `/Library/Developer/CommandLineTools/usr/share/git-core/gitconfig`
@@ -45,7 +46,7 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
     - `git ls-remote https://someremote.url`
     - `git ls-remote --tags https://someremote.url`
 
-push/tracking:
+### PUSH/TRACKING
 ```sh
 git branch --set-upstream-to=origin/foobranch foobranch
 git push -u remote local_branch # push branch to remote
@@ -53,11 +54,14 @@ git push -u remote              # push/track current branch to remote
 git push --force remote local_branch  # force push, overwriting remote branch
 ```
 
+### OTHER
 ```sh
 git merge-base b1 b2 b3     # find most recent common ancestor commit of n branches
 git show-branch b1 b2 b3    #  show sidebyside columar what commits exist in each branch
 git commit --amend --author="Joe Shmoe <email@address.com>"
 ```
+- editing past commit metadata like author and email
+    - https://www.codeconcisely.com/posts/change-author-data-for-all-existing-commits/
 
 ## AUTH
 - TFA(two factor auth)
