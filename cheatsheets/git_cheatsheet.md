@@ -17,6 +17,7 @@ git rm -rf --cached foo bar # keep on disk but rm from git
 git show-ref --tags         # tags with it's commit
 git show-ref --tags -d      # above + what commit tag points to
 git remote prune foo        # remove outdated references in remote
+git push origin --delete somebranch # delete branch on remote
 git branch -m OLD_B NEW_B   # rename branch
 git rebase -i HEAD~3        # interactive rebase over last 3 commits
 ```

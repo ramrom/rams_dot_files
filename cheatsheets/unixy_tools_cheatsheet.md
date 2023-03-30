@@ -167,9 +167,9 @@ strings somebin
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
 gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
 gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
-gpg --full-generate-key  # gen new key, with FN/LN/email, default folder to store is /home/user/.gnupg/
 gpg --list-keys # list all keys
 
+gpg --full-generate-key  # gen new key, with FN/LN/email, default folder to store is /home/user/.gnupg/
 # gen new key, set blank passphrase, bypass pinentry daemon
 # ubuntu22 cli, passphrase uses ncurses and daemon, which cant launch, get error: `gpg: agent_genkey failed: Operation cancelled` error
 gpg --full-generate-key --passphrase '' --pinentry-mode loopback
