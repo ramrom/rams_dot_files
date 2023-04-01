@@ -59,7 +59,7 @@ echo "2.1.1" | tr . -              # translate '.' to '-', output "2-1-1"
 echo "2,1,1" | tr , \|             # translate ',' to '|'
 echo "2.03" | tr -d .              # -d to delete, this will print 203
 echo foo:bar:baz | tr : \\n        # split on ":" delimiter, replace ":" with newline
-echo "\u0001 hi" | tr -cd '[:print:]' # strip out nonprintable characters
+echo "\u0001 hi" | tr -cd '[:print:]' # strip out nonprintable characters, -c is complement(opposite of)
 
 # sed - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
@@ -80,10 +80,16 @@ echo "foobar" | base64      # encode from stdin
 
 # column
 column -t -s, somecsv  # use comma to delimit columns and print csv file with aligned columns
+awk -F',' '{print $2","$4}' some.csv | column -t -s  # only print column 4,2 with aligned columns
 
 # XSV - a tool to manipulate csvs
 xsv table somecsv.csv  # pretty print table to stdout
 xsv count somecsv.csv  # print # of rows
+
+# tput - terminal settings and capabilities
+tput cols     # number of columns in terminal window
+tput rows     # number of rows in terminal window
+tput setaf 1  # outpt ansi code for red foreground color
 
 # date
 sudo date --set 1998-11-02  # change date
@@ -114,7 +120,9 @@ curl -X POST -d 'name=foo' https://foo.com  # -d forces Content-Type to be appli
 # removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
 
 # wc - word count
-wc -l   # count # of lines
+wc -l somefile   # count # of lines in file
+wc -c somefile   # count # of chars in file
+cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
 
 # pandoc -universal doc converter
     # https://pandoc.org/MANUAL.html#general-options
