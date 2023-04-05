@@ -179,7 +179,8 @@ gpg --list-keys # list all keys
 
 gpg --full-generate-key  # gen new key, with FN/LN/email, default folder to store is /home/user/.gnupg/
 # gen new key, set blank passphrase, bypass pinentry daemon
-# ubuntu22 cli, passphrase uses ncurses and daemon, which cant launch, get error: `gpg: agent_genkey failed: Operation cancelled` error
+# ssh session, passphrase uses ncurses or gnome pinetry, cant launch, get error: `gpg: agent_genkey failed: Operation cancelled` error
+# see https://superuser.com/questions/520980/how-to-force-gpg-to-use-console-mode-pinentry-to-prompt-for-passwords
 gpg --full-generate-key --passphrase '' --pinentry-mode loopback
 
 gpg --export-secret-keys --armor --output backupfile.asc johndoe@example.com # create backup of keys to a file, --armor pretty prints
