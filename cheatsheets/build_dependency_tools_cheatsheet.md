@@ -42,3 +42,17 @@
 
 ## NVM
 - node version manager, install/manage/switch between different node versions
+
+## SDKMAN
+- manage/install/switch between different java/scala/kotlin installs
+- https://sdkman.io/usage#use
+
+## CHEATS
+- `sdk current`
+    - show current versions of all candidates
+- `sdk current java`
+    - show current version of java
+- `sdk use java foo-11`
+    - use foo-11 version for just current shell
+- `sdk list java`
+    - see all java versions available to install, which are installed, and which one is currently used
