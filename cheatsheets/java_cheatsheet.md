@@ -20,6 +20,10 @@
     - https://stackoverflow.com/questions/19339670/java-two-jars-in-project-with-same-class/19340327
     - https://www.geeksforgeeks.org/classloader-in-java/
 
+## BUILD TOOLS
+- uses ant, maven, gradle
+- see [build systems](build_dependency_tools_cheatsheet.md)
+
 ## EXAMPLES
 ### DATA STRUCTURES
 ```java

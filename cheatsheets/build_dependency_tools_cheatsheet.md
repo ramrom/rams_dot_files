@@ -26,3 +26,19 @@
 - instead of XML supports either Kotlin or Groovy code for the DSL
     - `build.gradle` for groovy, `build.gradle.kts` for kotlin
 - building blocks are `tasks`, versus ant's `targets` and mavens `phases`
+
+## NPM
+- node package manager
+- official docs: https://npmjs.org/doc/
+- uninstalling: https://docs.npmjs.com/misc/removing-npm.html
+- list globally installed package
+    `npm list -g`
+- list packages installed in most local project, dir of install location is first line
+    `npm list`
+- list top level packages and their most direct dependency
+    `npm list --depth=1`
+- remove extranous packages
+    `npm prune`
+
+## NVM
+- node version manager, install/manage/switch between different node versions
