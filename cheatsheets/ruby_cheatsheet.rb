@@ -1,3 +1,6 @@
+# RUBY
+
+```ruby
 # puts
 STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout
 
@@ -58,3 +61,4 @@ class String
   def blink;          "\e[5m#{self}\e[25m" end
   def reverse_color;  "\e[7m#{self}\e[27m" end
 end
+```
