@@ -42,6 +42,7 @@
 - `sudo certbot show_account` - show ACME account info (url with acc# and email)
 - `sudo certbot certificates` - list certs and expirations
 - `certbot plugins` - show plugins installed
+- logs on ubuntu: `/var/log/letsencrypt/letsencrypt.log`
 
 ## WEB SERVERS
 - apache HTTP server - written in c, really old

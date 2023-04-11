@@ -327,6 +327,7 @@ sudo unattended-upgrade
 - if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 - keyboard shortcuts
+    - https://wiki.gnome.org/Design/OS/KeyboardShortcuts
     - need full path to executables, apparently no PATH set, so `/usr/bin/foo` and not just `foo`
         - some apps, like `vlc` and `spotify` work w/o full path, maybe cause they are GUI apps?
 - gsettings - cli tool to get and set items in the settings menu
@@ -476,7 +477,7 @@ drive naming convention:
 - ss  - good way to see socket usage
 - pcsx2
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
-- retroarch -
+- retroarch
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
