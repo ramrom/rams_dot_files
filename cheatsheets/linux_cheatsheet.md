@@ -82,7 +82,7 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 - supports explicit order with After/Before directives: e.g. if unit2 has `After=unit1.service`, unit1 is up b4 unit2 started
     - *NOTE* if `unit1` didn't start (e.g. not enabled), then `unit2` would still start, _unless_ `unit2` also had `Require=unit1.service`
     - sysV, a service config has to explicity specify sequence #, systemd the sequence by reading unit file deps/order
-- supports deps with Requires directive: e.g. if unit2 has `Requires=unit1.service`, unit2 will be stopped if unit1 isnt up
+- supports hard deps with Requires directive: e.g. if unit2 has `Requires=unit1.service`, unit2 will be stopped if unit1 isnt up
 - supports soft dep with Wants directive:
     - e.g. if unit2 has `Wants=unit1.service` unit1 started with unit2, if unit1 dies unit2 stays up
 - base type is unit

@@ -3,24 +3,6 @@
 - great resource: https://devhints.io/vimscript
 - `:version`  - get version and features compiled
 
-- so $VIMRUNTIME/syntax/hitest.vim
-- c-x before c-n autocomplete search only in current file
-- c-x c-f find file at current path, c-x c-] use tags
-- <c-w>f - goto filename undercursor in new window
-- <c-w>gf - in new tab
-- 100G or 100gg - goes to line 100 like :100<CR> in command
-- "120gg3yy -  yank lines 20-23 into reg 1
-- :20,23y a<CR> - without moving cursor into reg a
-- :7pu a<CR> - paste reg a under line 7
--     -  yank from mark a to cursor: y'a
-- :cd <dir> - change vims current working dir
-- :read ~/foo     - insert contents of file foo
-- :read !jq . foo - can take stdout of shell cmd
-- :iunmap jk - unmap jk insert mapping
-- :earlier 10min - time travel!, go back to buffer state 10 minutes ago
-    - :later 1hr - go forward 1 hour
-- `:set filetype=json` - manually set filetype to json
-
 ## NEOVIM
 - nvim-lua-guide: https://github.com/nanotee/nvim-lua-guide
 - sept2020 good video on why lua is great and a great choice for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
@@ -29,10 +11,11 @@
 - plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins
 - coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
 - neovim-lsp - neovim's built in lsp client, written in lua
+- nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
-- nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals
 - nvim-dap - plugin to support debug adapter protocol
+- good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
 ### LUA
 - print a val: `:lua =foo.myvar`
 - CONFIG STUFF
@@ -149,6 +132,27 @@ vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
     - has many level, see `:help vbs`
 
+### MISC COMMANDS AND INFO
+- so $VIMRUNTIME/syntax/hitest.vim
+- c-x before c-n autocomplete search only in current file
+- c-x c-f find file at current path, c-x c-] use tags
+- <c-w>f - goto filename undercursor in new window
+- <c-w>gf - in new tab
+- 100G or 100gg - goes to line 100 like :100<CR> in command
+- "120gg3yy -  yank lines 20-23 into reg 1
+- :20,23y a<CR> - without moving cursor into reg a
+- :7pu a<CR> - paste reg a under line 7
+-     -  yank from mark a to cursor: y'a
+- :cd <dir> - change vims current working dir
+- :read ~/foo     - insert contents of file foo
+- :read !jq . foo - can take stdout of shell cmd
+- :iunmap jk - unmap jk insert mapping
+- :earlier 10min - time travel!, go back to buffer state 10 minutes ago
+    - :later 1hr - go forward 1 hour
+- `:set filetype=json` - manually set filetype to json
+:set lazyredraw - for macros dont redraw screen, faster replay
+
+
 ### LOGS / MESSAGES
 - `:messages` - in command mode will show list of runtime messages
 - `:echo errmsg` - shows last error message
@@ -163,9 +167,6 @@ vim -V  foo     - verbose output
 :h normal-index  - normal default mappings
 :h insert-index  - insert default mappings
 :h ex-cmd-index  - command and ex mode
-
-### OPTIONS
-:set lazyredraw - for macros dont redraw screen, faster replay
 
 ## EX MODE
 Q - in normal mode will go into ex model, neovim doesnt have it
@@ -270,7 +271,7 @@ C-] - open tag in new buffer
 C-^ - open last editted file
 . - repeat last change, doesn't include motions(e.g. h/j/k/l) or commands that dont make changes
 
-### G commands (normal mode)
+### G COMMANDS (NORMAL MODE)
 gf   - edit filename undercursor
 gx   - osx invokes file handler "open",
         opens urls, images, files, videos
