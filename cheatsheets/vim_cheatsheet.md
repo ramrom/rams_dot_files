@@ -106,22 +106,6 @@ C - make selected dir node the new root node
     - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 
-- ga -> show character encoding under cursor
-- insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
-- utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
-
-- vi -p foo bar, open file foo and bar in tabs
-- :vsp or :vs filename, open file in vertical split
-- :sp filename, horizontal split
-
-:mkview foo  - vimscript that saves view(tab) state
-:source foo  - load a view
-
-- NEAT: visual select, then :sort to sort alphabetically
-- TIP: once a buffer autoreloads, you can still undo
-
-
-
 ### STARTING VIM
 vim -u somevimrc - specify a vimrc file (otherwise ~/.vimrc)
 vim -u NONE     - start without running vimrc
@@ -131,6 +115,7 @@ vim -o  foo bar - foo and bar in diff windows
 vim -p  foo bar - foo and bar in diff tabs
 vim -V  foo     - verbose output
     - has many level, see `:help vbs`
+
 
 ### MISC COMMANDS AND INFO
 - so $VIMRUNTIME/syntax/hitest.vim
@@ -147,10 +132,20 @@ vim -V  foo     - verbose output
 - :read ~/foo     - insert contents of file foo
 - :read !jq . foo - can take stdout of shell cmd
 - :iunmap jk - unmap jk insert mapping
-- :earlier 10min - time travel!, go back to buffer state 10 minutes ago
-    - :later 1hr - go forward 1 hour
+- `:earlier 10min` - time travel!, go back to buffer state 10 minutes ago
+    - `:later 1hr` - go forward 1 hour
 - `:set filetype=json` - manually set filetype to json
-:set lazyredraw - for macros dont redraw screen, faster replay
+- `:set lazyredraw` - for macros dont redraw screen, faster replay
+- `ga` -> show character encoding under cursor
+- insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
+- utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
+- vi -p foo bar, open file foo and bar in tabs
+- :vsp or :vs filename, open file in vertical split
+- :sp filename, horizontal split
+- :mkview foo  - vimscript that saves view(tab) state
+- :source foo  - load a view
+- NEAT: visual select, then `:sort` to sort alphabetically
+- TIP: once a buffer autoreloads, you can still undo
 
 
 ### LOGS / MESSAGES

@@ -1,6 +1,7 @@
 # DOCKER/KUBERNETES
 
 ## DOCKER
+- created around 2012, used LXC and runtime at first, then libcontainer(written in golang) later
 - good article on UID/GID user mapping
     - https://www.fullstaq.com/knowledge-hub/blogs/docker-and-the-host-filesystem-owner-matching-problem
 ### USAGE
@@ -33,6 +34,8 @@
 
 
 ## KUBERNETES
+- designed by google in 2014, written in golang, opensource(apache 2.0 liscense), maintained by cloud native compute foundation
+    - based off google [borg](https://research.google/pubs/pub43438/)
 - supports many container runtimes including `containerd` and `CRI-O`
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true
 - https://kubernetes.io/docs/
@@ -49,6 +52,9 @@
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
 - tailing logs
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
+
+## HELM
+- package manager and configuration for kubernetes
 
 ## COMPOSE
 - `docker compose pull` - will get latest versions of images
