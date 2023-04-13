@@ -30,6 +30,14 @@
     - `build.gradle` for groovy, `build.gradle.kts` for kotlin
 - building blocks are `tasks`, versus ant's `targets` and mavens `phases`
 
+## BAZEL
+- built by google and open-sourced, for java projects
+- cares a lot about correctness and reliability and performance
+
+## MILL
+- for for java/scala projects
+- open source built by lihaoyi, written in scala
+
 ## NPM
 - package manager for javascript
 - started as managing node.js modules, but works for front-end with browserify or webback

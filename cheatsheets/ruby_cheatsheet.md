@@ -1,5 +1,8 @@
 # RUBY
 
+## GEM
+- `gem install --user-install somegem` - install as user (root is default)
+
 ```ruby
 # puts
 STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout

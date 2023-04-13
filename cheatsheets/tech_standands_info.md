@@ -224,6 +224,13 @@
 - a service and SDK description language created by AWS
 - https://awslabs.github.io/smithy/
 
+## LOG FRAMEWORKS
+- ELK stack - Elasticache, Logstache, Kibana
+    - all developed and maintained by Elastic, all open-source
+    - Logstache(aggregation+processing) -> Elasticahe(db for indexing/storing) -> Kibana(front-end for visualization/human-analysis)
+- splunk is commercial solution that does all 3
+    - bills/pricing revenue mainly from indexing volume
+
 ## LANGUAGES/FRAMEWORKS
 - Dart, new lang by google for front-end development, designed to be closely compatible with javascript
     - 2022 - chrome natively supports it, other browsers it's transpiled to javascript

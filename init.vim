@@ -222,7 +222,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
             -- NOTE: You may or may not want java included here. You will need it if you
             -- want basic Java support but it may also conflict if you are using
             -- something like nvim-jdtls which also works on a java filetype autocmd.
-            pattern = { "scala", "sbt", "java" },
+            pattern = { "scala", "sbt" },
             callback = function()
                 require("metals").initialize_or_attach(metals_config)
             end,
@@ -296,6 +296,10 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     -- golang DAP
     -- lua require('dap-go').setup()
 
+    ------------- Java -------------------------------------
+
+    -- INSERT HELPER
+
     ------------- Kotlin-------------------------------------
     -- https://github.com/fwcd/kotlin-language-server
 
@@ -338,7 +342,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
 
     vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "scala", "sbt", "java" },
+        pattern = { "scala", "sbt" },
         callback = function()
             vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
             vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
