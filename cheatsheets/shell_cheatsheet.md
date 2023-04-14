@@ -418,8 +418,6 @@ $(( 10 % 3 ))  # returns 1, % is mod operator
 # printf for may newlines
 printf "${A}\n\n"
 
-"[" (the test command) is bash built-in and POSIX compatible, "[[" is bash specific
-
 ####### INTROSPECTION
 # COMMAND is shell built-in, this is POSIX standard
 command foo             # will ignore any aliases or functions named foo, and run only bins/files
@@ -480,6 +478,11 @@ declare -p foo bar
 
 
 ####### CONDITIONALS
+
+# the test command is bash built-in and POSIX compatible
+[ ... ]  # POSIX COMPATIBLE
+[[ ... ]] # bash specific
+
 # https://linuxhint.com/bash_operator_examples/
 bash "==" is lexical comparison vs "=" is numerical comparison
 
@@ -515,6 +518,12 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 
 true || echo foo && echo bar   # this will print bar
 true || { echo foo && echo bar; }   # this wont print anything, braces make the two staements one
+
+# if staetment really looks at the return value, 0 exit code -> "true", non-zero -> "false"
+# below grep finds a match and returns zero and "is true" is echo'd
+if echo "hi" | grep h; then
+    echo "is true"
+fi
 
 
 # USER INPUT (from keyboard really)

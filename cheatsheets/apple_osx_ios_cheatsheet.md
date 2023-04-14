@@ -37,6 +37,8 @@
 - upgrade all formulas
     `brew upgrade`
     - NOTE: brew does seem to support upgrading just one formula
+- `brew services` -> list services
+- `brew services start redis` -> start a service
 
 
 ## CLI:

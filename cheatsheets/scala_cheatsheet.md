@@ -1,4 +1,6 @@
 # SCALA
+- main docs: https://www.scala-lang.org/
+    - source code repo: https://github.com/scala/docs.scala-lang.git
 - first compiler was written in Pizza by Martin Odersky, by scala 2.0, compiler rewritten completely in scala
 - defined by the scala language specification
     - main compiler for JVM
