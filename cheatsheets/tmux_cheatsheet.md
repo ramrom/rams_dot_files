@@ -1,4 +1,4 @@
-# TMUX:
+# TMUX
 - `prefix + ?` - show the current key bindings
 - in copymode
     - space starts selection(or reset it), enter to end/copy it
@@ -19,6 +19,7 @@
 - tmux list-keys
     - show keybindings, 3.1 and above, "?" does not show all keybindings...
 - 2 methods to multi-key bindings: https://stackoverflow.com/questions/25294283/bindings-with-key-sequences
+- change to a preset layout: `tmux select-layout even-horizontal`
 
 ## running shell command on a tmux hook
 - tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'
