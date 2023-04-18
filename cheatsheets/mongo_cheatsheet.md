@@ -1,3 +1,6 @@
+# MONGO CHEATSHEET
+
+```javascript
 //load external file
 load('external_file.js')
 
@@ -79,3 +82,4 @@ db.fooCollection.deleteOne({field1: "foo"})  //delete only first record that mat
 
 // SH/ELIG queries
 db.ssoVendorConfig.find().select({_id:0,vendorId:1,ssoPartnerName:1,ssoType:1}).ugly()
+```
