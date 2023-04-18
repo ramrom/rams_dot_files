@@ -13,6 +13,11 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
+## PHONE NUMBERS
+- E.164 is the international telephone numbering plan that ensures each device on the PSTN has globally unique number.
+    - format is `+` + (country code) + (number in country, for US 10digit area-code+ph#)
+- https://www.twilio.com/docs/glossary/what-e164
+
 ## PROCESSORS
 - TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
 

@@ -55,6 +55,15 @@
 
 ## HELM
 - package manager and configuration for kubernetes
+    - package kubernetes YAML files and distribute them publicly or privately
+    - Helm repositories used to store helm charts
+- helm chart -> a bundle of YAML files
+- has a CLI, can search for packages e.g. `helm search <keyword>`
+- also supports templating
+    - templates use variables that pull values from a Values YAML file
+- helm v2.0 has server-client arch, server(Tiller) and client(helm CLI)
+    - used for release management
+    - stores chart histories and executions
 
 ## COMPOSE
 - `docker compose pull` - will get latest versions of images

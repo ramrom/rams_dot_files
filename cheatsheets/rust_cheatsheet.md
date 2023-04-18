@@ -18,6 +18,7 @@
 - `rustup update` - update/upgrade `rustc` (and `cargo`, docs, other tools)
 
 ## CARGO
+- many modules make up a crate, many crates make up a package
 - `cargo install --list` - print all gobally installed crates
 - `cargo install --version 0.3.10 someprogram` - install version x of program
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program
