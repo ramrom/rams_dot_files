@@ -1,5 +1,6 @@
-# ANSI COLOR
+# ANSI COLOR CHEATSHEET
 
+```sh
 # Good reads
 # - https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 # - https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#progress-indicator
@@ -156,4 +157,4 @@ function perl_log_color() {
         ' -- -foo="$A" -baz=bam
     #tail -f $1 | perl -pe 's/window/BLUBBER/g'
 }
-
+```
