@@ -9,7 +9,7 @@
 - web player requires widevine DRM, needed for playpack in webplayer (netflix/prime/spotify also use widevine)
 
 
-## MEDIA TYPE SUPPORT/PLAYBACK:
+## MEDIA TYPE SUPPORT/PLAYBACK
 - DirectStream vs DirectPlay
     - https://support.plex.tv/articles/200250387-streaming-media-direct-play-and-direct-stream/
 - PLAYBACK TESTING (DS218j):
@@ -62,3 +62,7 @@
 - can share a library with a plex user by username or email
 - can create smart playlists and share just the playlist
 - can deauthorize(logout) individual devices: https://support.plex.tv/articles/115007577087-devices/
+
+## OTHER
+- plex docker - logs in `Library/Application Support/Plex Media Server/Logs`
+    - in web, hit `console` on left panel to see logs

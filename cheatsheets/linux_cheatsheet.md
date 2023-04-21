@@ -206,6 +206,7 @@ shift-click - open link in new window
 space/space-shift - scroll up/down page
 
 ## APT
+- see history in `/var/log/apt/history.log`
 ### DEPENDENCIES
 apt depends pkg
     - find direct deps of pkg

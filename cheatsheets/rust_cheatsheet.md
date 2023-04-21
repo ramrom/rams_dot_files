@@ -28,3 +28,7 @@
 let s1 = "foo" // immutable string
 let s2 = String::from("hello");  // type String is mutable
 ```
+
+## GRAMMER
+- in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
+    - in rust the `.` operator works on pointers or direct struct/object, pointers are automatically dereferenced
