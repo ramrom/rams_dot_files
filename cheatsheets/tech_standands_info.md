@@ -120,10 +120,16 @@
     - TLC - triple layer cells - 3 bits per meomry cell
     - QLC - quad layer cells - 4 bits per memory cell
     - PLC - penta ayer cells - 5 bits per memory cell
-- interfaces
-    - SATA 3 - up to 600MBs
-    - NVME - often more than 3 times faster than SATA 3
-    - M.2 - interface form factor
+
+## COMPUTER BUS INTERFACES
+- PATA - parallel ATA(advanced technology attachment)
+    - designed for magnetic spinning hard disk drives
+- SATA(serial ATA) - successor to PATA
+    - SATA 1 - 150 MB/s max, 2 - 300 MB/s max, 3 - 600 MB/s max
+- NVME - often more than 3 times faster than SATA 3
+    - uses PCIe, which can be order of magnitude faster than SATA
+    - NVME devices usually use M.2 physical interface, but other like 2.5" U.2 or PCIe card slot are also used
+- M.2 - interface form factor
 
 ## HDD
 - LMR - longitudinal magnetic recording
@@ -407,6 +413,7 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
 - OpenID Connect(OIDC) - built on top of oauth 2.0, includes identity stuff, has an IdP
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
 - WebAuthN
+    - good site - https://webauthn.io/
     - backwards compatible and successor to FIDO U2F(universal 2nd factor)
     - any hardware/software that implements CTAP(client to authenticator protocol) can be used
         - so an authneticator can be pure software (using trusted execution env of cpu)
