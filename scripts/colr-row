@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# colorize every 3rd line lighter background (assuming black background) to help readability
+
+usage () { echo "Usage: colr-row [ -h(help) ] [ -b(bold) ] "; }
+
+while getopts 'hb' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        b) BOLD=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+
+while read line; do
+    if [ -n "$BOLD" ]; then
+        ansi256 -b 237 "$line"; read line; echo "$line"; read line; echo "$line"
+    else
+        ansi256 -n "$line"; read line; echo "$line"; read line; echo "$line"
+    fi
+done
