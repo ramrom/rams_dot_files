@@ -1,0 +1,113 @@
+#!/bin/sh
+
+usage () {
+    echo 'Usage: spotify-api [ -h(help) ] [ -v(verbose) ] [ -a(auth) ] [ -d(download all playlists and tracks) ]'
+    echo '                   [ -m(manual) ] [ -g(test) ]'
+}
+
+[ -z "$SPOTIFY_TOKEN_FILE" ] && { echo "SPOTIFY_TOKEN_FILE variable not set" && exit 1; }
+[ -z "$SPOTIFY_USERNAME" ] && { echo "SPOTIFY_USERNAME variable not set" && exit 1; }
+
+ACTION=NONE
+
+while getopts 'hvadmg' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        v) VERBOSE=1 ;;
+        a) ACTION=AUTH ;;
+        d) ACTION=DOWNLOAD_ALL;;
+        m) ACTION=MANUAL ;;
+        g) ACTION=TEST ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+[ "$ACTION" = "NONE" ] && { echo "no action selected" && exit 1; }
+
+if [ "$ACTION" != "AUTH" ]; then
+    [ ! -f "$SPOTIFY_TOKEN_FILE" ] && { echo "token file $SPOTIFY_TOKEN_FILE not found" && exit 1; }
+    TOKEN=$(jq -r .access_token "$SPOTIFY_TOKEN_FILE")
+fi
+
+get_tracks() {
+    xh -v -d -o tracks.json https://api.spotify.com/v1/playlists/$1 -A bearer -a ${TOKEN}
+    jq '.tracks.items[] | "NAME: " + .track.name' tracks.json   # print track name
+}
+
+# Perform code authorization flow
+# INSPIRED FROM https://gist.github.com/camwhite/7432d4b56cb17cc312059c2ad30471e2
+auth() {
+    CRED_FILE=~/.secret_sauce/creds/spotify_api.json
+    CLIENT_ID=$(jq -r .cli.client_id "$CRED_FILE")
+    CLIENT_SECRET=$(jq -r .cli.client_secret "$CRED_FILE")
+
+    [ -z "$CLIENT_ID" ] && { echo "CLIENT_ID blank, cred file: $CRED_FILE" && exit 1; }
+    [ -z "$CLIENT_SECRET" ] && { echo "CLIENT_SECRET blank, cred file: $CRED_FILE" && exit 1; }
+    [ -z "$DISPLAY" ] && { echo "DISPLAY needs to be set" && exit 1; }
+
+    PORT=8888
+
+    REDIRECT_URI=http%3A%2F%2Flocalhost%3A${PORT}%2Fcallback
+
+    AUTH_ENDPOINT=https://accounts.spotify.com/authorize/?response_type=code\&client_id=$CLIENT_ID\&redirect_uri=$REDIRECT_URI
+
+    # Set scopes
+    SCOPES="playlist-read-private user-read-private user-library-read user-read-recently-played"
+    if [ -n "$SCOPES" ]; then
+      ENCODED_SCOPES=$(echo $SCOPES| tr ' ' '%' | sed s/%/%20/g)
+      # If scopes exists, then append them to auth_endpoint
+      AUTH_ENDPOINT=$AUTH_ENDPOINT\&scope=$ENCODED_SCOPES
+    fi
+
+    [ -n "$verbose" ] && echo "AUTH ENDPOINT:\n$AUTH_ENDPOINT"
+    open $AUTH_ENDPOINT
+    echo
+
+    # Now the user gets redirected to our endpoint
+    # Grab token and close browser window
+    RESPONSE=$(echo "HTTP/1.1 200 OK\nAccess-Control-Allow-Origin:*\nContent-Length:65\n\n<html><script>open(location, '_self').close();</script></html>\n" | nc -l -C $PORT)
+
+    [ -n "$verbose" ] && echo && echo "AUTHORIZATION ENDPOINT RESPONSE:\n$RESPONSE" && echo
+
+    CODE=$(echo "$RESPONSE" | grep GET | cut -d' ' -f 2 | cut -d'=' -f 2)
+    [ -n "$verbose" ] && echo && echo "AUTHORIZATION CODE:\n$CODE" && echo
+
+    XH_REDIRECT_URI=http://localhost:8888/callback
+    xh -f -v -d -o $SPOTIFY_TOKEN_FILE POST https://accounts.spotify.com/api/token -a ${CLIENT_ID}:${CLIENT_SECRET} \
+        grant_type==authorization_code code==${CODE} redirect_uri==${XH_REDIRECT_URI}
+}
+
+
+case "$ACTION" in
+    AUTH)
+        auth ;;
+    MANUAL)
+        xh -v -d -o manual.json https://api.spotify.com/v1/$1 -A bearer -a ${TOKEN}
+        jq . manual.json ;;
+    TEST)
+        PLAYLIST_ID=07kMcOCdg1jHBRuRrS2EVd
+        xh -v -d -o tracks.json https://api.spotify.com/v1/playlists/${PLAYLIST_ID} -A bearer -a ${TOKEN}
+        jq -r '.[] | .name + ";" + .description' playlists.json | column -s\; -t | bold=1 colr_row ;;
+    DOWNLOAD_ALL)
+        DIR_NAME="spotify_playlists-$(date '+%b-%d-%Y')"
+        mkdir $DIR_NAME
+        cd $DIR_NAME
+        xh -v -d -o playlists1.json https://api.spotify.com/v1/users/$SPOTIFY_USERNAME/playlists -A bearer -a ${TOKEN} limit==50
+        xh -v -d -o playlists2.json https://api.spotify.com/v1/users/$SPOTIFY_USERNAME/playlists -A bearer -a ${TOKEN} limit==50 offset==50
+        jq --argjson p1 "$(jq .items playlists1.json)" --argjson p2 "$(jq .items playlists2.json)" -n '$p1 + $p2' > playlists.json
+        rm playlists1.json playlists2.json
+        echo; echo "downloaded to: $(pwd)/playlists.json"
+
+        NUM_PLAYLISTS=$(jq 'length' playlists.json)
+        [ -n "$VERBOSE"] && echo "NUM PLAYLISTS: $NUM_PLAYLISTS"
+        i=0
+        while [ "$i" -lt "$NUM_PLAYLISTS" ]; do
+            PLAYLIST_ID=$(jq -r --arg IDX $i '.[ $IDX | tonumber ].id' playlists.json)
+            [ -n "$VERBOSE"] && echo "PLAYLIST_ID: $PLAYLIST_ID"
+            xh -v -d -o "playlist-$PLAYLIST_ID.json" https://api.spotify.com/v1/playlists/${PLAYLIST_ID} -A bearer -a ${TOKEN}
+            i=$((i + 1))
+        done
+        ;;
+    *) echo "$ACTION not a valid option" && exit 1
+esac
