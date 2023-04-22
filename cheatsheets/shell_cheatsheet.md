@@ -282,8 +282,13 @@ done
 
 for run in {1..10}; do echo "hello"; done
 
-# bourne shell doesnt support for loops, use the while loop
+# bourne shell doesnt support for loops like this, generally use the while loop
 for (( i=1; i<=3; i++)); do
+    echo $i
+done
+
+# this is POSIX compliant and works in borne shell
+for i in $(seq 1 3); do
     echo $i
 done
 

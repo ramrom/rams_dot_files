@@ -80,8 +80,7 @@ auth() {
 
 
 case "$ACTION" in
-    AUTH)
-        auth ;;
+    AUTH) auth ;;
     MANUAL)
         xh -v -d -o manual.json https://api.spotify.com/v1/$1 -A bearer -a ${TOKEN}
         jq . manual.json ;;
@@ -93,8 +92,9 @@ case "$ACTION" in
         DIR_NAME="spotify_playlists-$(date '+%b-%d-%Y')"
         mkdir $DIR_NAME
         cd $DIR_NAME
-        xh -v -d -o playlists1.json https://api.spotify.com/v1/users/$SPOTIFY_USERNAME/playlists -A bearer -a ${TOKEN} limit==50
-        xh -v -d -o playlists2.json https://api.spotify.com/v1/users/$SPOTIFY_USERNAME/playlists -A bearer -a ${TOKEN} limit==50 offset==50
+        xh -v -d -o playlists1.json https://api.spotify.com/v1/users/${SPOTIFY_USERNAME}/playlists -A bearer -a ${TOKEN} limit==50
+        xh -v -d -o playlists2.json https://api.spotify.com/v1/users/${SPOTIFY_USERNAME}/playlists \
+            -A bearer -a ${TOKEN} limit==50 offset==50
         jq --argjson p1 "$(jq .items playlists1.json)" --argjson p2 "$(jq .items playlists2.json)" -n '$p1 + $p2' > playlists.json
         rm playlists1.json playlists2.json
         echo; echo "downloaded to: $(pwd)/playlists.json"
