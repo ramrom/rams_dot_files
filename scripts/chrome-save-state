@@ -36,6 +36,8 @@ chrome_json_summary() {
     echo "$json]"
 }
 
+# NOTE: restore should only be used by chrome isnt set to remember state or if it crashed and failed to remember state.
+#       otherwise duplicate tabs and windows will be opened
 restore () {
     json="$(cat $1)"
     wincount=$(echo "$json" | jq '. | length')
