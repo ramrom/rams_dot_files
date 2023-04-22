@@ -519,7 +519,7 @@ noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
 noremap <leader>gz :set ignorecase!<cr>:set ignorecase?<cr>
-noremap <leader>gx :set number!<CR>
+noremap <leader>gn :set number!<CR>
 noremap <leader>gl :set list!<cr>
 autocmd FileType markdown noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 

@@ -124,17 +124,6 @@ function batwhich() {
     esac
 }
 
-# take a json array of 2-item arrays and column align print it, use '#' as delimiter
-# NOTE: using `#` char to delimit fields in jq for column, so assuming no `#` in json values
-function print_json_columnize() {
-    [ -z "$1" ] && echo "arg for filename needed!" && return 1
-    if [ -t 1 ]; then  # if it's not a terminal, assume a pipe, then dont colorize it
-        jq  -r '.[] | .[0] + "#" + .[1]' $1 | column -t -s# | colr-row
-    else
-        jq  -r '.[] | .[0] + "#" + .[1]' $1 | column -t -s#
-    fi
-}
-
 # use for json formatted file
 function print_bitwarden_columize() {
     [ -z "$1" ] && echo "need arg for filename" && return 1
