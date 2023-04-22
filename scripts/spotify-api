@@ -38,12 +38,12 @@ get_tracks() {
 # Perform code authorization flow
 # INSPIRED FROM https://gist.github.com/camwhite/7432d4b56cb17cc312059c2ad30471e2
 auth() {
-    CRED_FILE=~/.secret_sauce/creds/spotify_api.json
+    [ -z "$SPOTIFY_CRED_FILE" ] && { echo "SPOTIFY_CRED_FILE variable not set" && exit 1; }
     CLIENT_ID=$(jq -r .cli.client_id "$CRED_FILE")
     CLIENT_SECRET=$(jq -r .cli.client_secret "$CRED_FILE")
 
-    [ -z "$CLIENT_ID" ] && { echo "CLIENT_ID blank, cred file: $CRED_FILE" && exit 1; }
-    [ -z "$CLIENT_SECRET" ] && { echo "CLIENT_SECRET blank, cred file: $CRED_FILE" && exit 1; }
+    [ -z "$CLIENT_ID" ] && { echo "CLIENT_ID blank, cred file: $SPOTIFY_CRED_FILE" && exit 1; }
+    [ -z "$CLIENT_SECRET" ] && { echo "CLIENT_SECRET blank, cred file: $SPOTIFY_CRED_FILE" && exit 1; }
     [ -z "$DISPLAY" ] && { echo "DISPLAY needs to be set" && exit 1; }
 
     PORT=8888
