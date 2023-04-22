@@ -6,7 +6,7 @@ usage () { echo "Usage: chrome-save-state [ -h(help) ] [ -s(summary only) ] [ -r
 
 ACTION=SAVE_STATE
 
-while getopts 'hsr:' x; do
+while getopts 'hsr' x; do
     case $x in
         h) usage && exit 1 ;;
         s) ACTION=SUMMARY_ONLY ;;
