@@ -302,7 +302,7 @@ i=0
 
 # POSIX/sh
 i=1
-while [ "$i" -ne 10 ]
+while [ "$i" -lt 10 ]
 do
     echo "$i"
     i=$((i + 1))
