@@ -2,12 +2,12 @@
 
 # colorize every 3rd line lighter background (assuming black background) to help readability
 
-usage () { echo "Usage: colr-row [ -h(help) ] [ -b(bold) ] "; }
+usage () { echo "Usage: colr-row [ -h(help) ] [ -b(bright) ] "; }
 
 while getopts 'hb' x; do
     case $x in
         h) usage && exit 1 ;;
-        b) BOLD=1 ;;
+        b) BRIGHT=1 ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -17,7 +17,7 @@ shift $(($OPTIND - 1))
 NUM_COLS=$(tput cols)
 
 while read line; do
-    if [ -n "$BOLD" ]; then
+    if [ -z "$BRIGHT" ]; then
         ansi256 -b 237 "$line"; read line; echo "$line"; read line; echo "$line"
     else
         ansi256 -n "$line"; read line; echo "$line"; read line; echo "$line"

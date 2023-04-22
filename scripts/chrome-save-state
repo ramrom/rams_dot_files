@@ -1,13 +1,16 @@
-#!/bin/sh
+#!/bin/zsh
 
 [ ! "$(uname)" = "Darwin" ] && echo "RLY-ERROR: chrome-json-summary needs applescript, only Darwin os" >&2 && exit 1
 
-usage () { echo "Usage: chrome-save-state [ -h(help) ] [ -s(summary only) ] "; }
+usage () { echo "Usage: chrome-save-state [ -h(help) ] [ -s(summary only) ] [ -r(restore) ] "; }
 
-while getopts 'hs' x; do
+ACTION=SAVE_STATE
+
+while getopts 'hsr:' x; do
     case $x in
         h) usage && exit 1 ;;
-        s) SUMMARY_ONLY=1 ;;
+        s) ACTION=SUMMARY_ONLY ;;
+        r) ACTION=RESTORE ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -33,8 +36,26 @@ chrome_json_summary() {
     echo "$json]"
 }
 
-if [ -z "$SUMMARY_ONLY" ]; then
-    echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json
-else
-    chrome_json_summary
-fi
+restore () {
+    json="$(cat $1)"
+    wincount=$(echo "$json" | jq '. | length')
+    for (( i=0; i<$wincount; i++)); do
+        tabcount=$(echo $json | jq --arg WINNUM $i '.[($WINNUM | tonumber)] | length')
+        cmd="open -na \"Google Chrome\" --args --new-window"
+        #cmd="$cmd $(echo $1 | jq -r --arg WINNUM $i '.[($WINNUM | tonumber)] | join(" ")')" # "&" chars cause bg job
+        for (( j=0; j<$tabcount; j++)); do
+            cmd="$cmd $(echo $json | jq --arg WINNUM $i --arg TABNUM $j '.[($WINNUM | tonumber)][($TABNUM | tonumber)]')"
+        done
+        eval $cmd
+    done
+}
+
+case $ACTION in
+    SAVE_STATE) echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json ;;
+    SUMMARY_ONLY) chrome_json_summary ;;
+    RESTORE)
+        [ -z "$RESTORE_FILE" ] && RESTORE_FILE=~/Documents/chrome_tabs_backup.json
+        restore "$RESTORE_FILE"
+        ;;
+    *) echo "$ACTION not a valid option" && exit 1 ;;
+esac

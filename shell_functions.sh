@@ -274,11 +274,6 @@ function toggle_bulb() {
         ' $1
 }
 
-############## CHROME #############################################
-function chrome_save_state() { echo $(chrome-json-summary) > ~/Documents/chrome_tabs_backup.json; }
-function chrome_restore() { chrome-json-restore ~/Documents/chrome_tabs_backup.json; }
-
-
 #####################  SYSTEM DATA/HEALTH ####################################################
 
 # TODO: finish this
