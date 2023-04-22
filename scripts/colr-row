@@ -1,13 +1,15 @@
-#!/bin/sh
+#!/bin/zsh
+# NOTE: using zsh instead of sh(really dash in ubuntu), printf of n chars fails (spaces or other chars), printf only prints 1 char
 
 # colorize every 3rd line lighter background (assuming black background) to help readability
 
-usage () { echo "Usage: colr-row [ -h(help) ] [ -b(bright) ] "; }
+usage () { echo "Usage: colr-row [ -h(help) ] [ -v(verbose) ] [ -b(bright) ] "; }
 
-while getopts 'hb' x; do
+while getopts 'hbv' x; do
     case $x in
         h) usage && exit 1 ;;
         b) BRIGHT=1 ;;
+        v) VERBOSE=1 ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -15,11 +17,28 @@ shift $(($OPTIND - 1))
 
 # TODO: add space padding to each line based on terminal column # so colorized line extends fully
 NUM_COLS=$(tput cols)
+[ -n "$VERBOSE" ] && echo "COLUMN WIDTH: $NUM_COLS" && echo
+
+# FIXME: the printf doesnt work, always 1 char long, how to create a shell string of blank single spaces
+padding() {
+    LINE_SIZE=$1
+    # echo "LINE SIZE: $LINE_SIZE"
+
+    REMAINDER=$(($LINE_SIZE % $NUM_COLS))
+    PADDING=$(($NUM_COLS - $REMAINDER))
+    # echo "PADDING: $PADDING"
+    printf ' %.0s' {1..$PADDING}
+}
 
 while read line; do
     if [ -z "$BRIGHT" ]; then
-        ansi256 -b 237 "$line"; read line; echo "$line"; read line; echo "$line"
+        size=$(echo "$line" | wc -c)
+        pad="$(padding $size)"
+        ansi256 -b 237 "$line$pad"
     else
-        ansi256 -n "$line"; read line; echo "$line"; read line; echo "$line"
+        size=$(echo "$line" | wc -c)
+        pad="$(padding $size)"
+        ansi256 -n "$line$pad"
     fi
+    read line; echo "$line"; read line; echo "$line"
 done
