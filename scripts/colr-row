@@ -1,6 +1,4 @@
-#!/bin/zsh
-
-# NOTE: using zsh instead of sh(really dash in ubuntu), printf of n chars fails (spaces or other chars), printf only prints 1 char
+#!/bin/sh
 
 # colorize every 3rd line lighter background (assuming black background) to help readability
 
@@ -26,12 +24,14 @@ padding() {
     REMAINDER=$(($LINE_SIZE % $NUM_COLS))
     PADDING=$(($NUM_COLS - $REMAINDER))
     # echo "PADDING: $PADDING"
-    printf ' %.0s' {1..$PADDING}
+    for i in $(seq 1 $PADDING); do
+        printf ' %.0s'
+    done
+    # printf ' %.0s' {1..$PADDING}  # doesnt work with ubuntu sh(dash), {x..y} syntax not supported
 }
 
 # read command by default removes leading and trailing spaces, set IFS to preserve them
-IFS=
-while read line; do
+while IFS= read line; do
     if [ -z "$BRIGHT" ]; then
         size=$(echo "$line" | wc -c)
         pad="$(padding $size)"
@@ -41,5 +41,5 @@ while read line; do
         pad="$(padding $size)"
         ansi256 -n "$line$pad"
     fi
-    read line; echo "$line"; read line; echo "$line"
+    IFS= read line; echo "$line"; IFS= read line; echo "$line"
 done
