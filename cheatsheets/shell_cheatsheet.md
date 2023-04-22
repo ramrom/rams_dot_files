@@ -506,6 +506,7 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 -w  # is file writable
 -x  # is file executable
 -r  # is file readable
+-t  # output is a terminal(std-out)
 [ ~/foo -nt ~/bar ] && echo hi  # if foo is newer than bar, print hi
 
 # other logical operators

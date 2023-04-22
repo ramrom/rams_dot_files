@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 # NOTE: using zsh instead of sh(really dash in ubuntu), printf of n chars fails (spaces or other chars), printf only prints 1 char
 
 # colorize every 3rd line lighter background (assuming black background) to help readability
@@ -15,11 +16,9 @@ while getopts 'hbv' x; do
 done
 shift $(($OPTIND - 1))
 
-# TODO: add space padding to each line based on terminal column # so colorized line extends fully
 NUM_COLS=$(tput cols)
 [ -n "$VERBOSE" ] && echo "COLUMN WIDTH: $NUM_COLS" && echo
 
-# FIXME: the printf doesnt work, always 1 char long, how to create a shell string of blank single spaces
 padding() {
     LINE_SIZE=$1
     # echo "LINE SIZE: $LINE_SIZE"
@@ -30,6 +29,8 @@ padding() {
     printf ' %.0s' {1..$PADDING}
 }
 
+# read command by default removes leading and trailing spaces, set IFS to preserve them
+IFS=
 while read line; do
     if [ -z "$BRIGHT" ]; then
         size=$(echo "$line" | wc -c)
