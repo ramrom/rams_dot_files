@@ -13,7 +13,7 @@ while getopts 'hs' x; do
 done
 shift $(($OPTIND - 1))
 
-chrome-json-summary() {
+chrome_json_summary() {
     wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
     [ "$wincount" -eq 0 ] && echo "zero windows!" && return
 
@@ -34,5 +34,7 @@ chrome-json-summary() {
 }
 
 if [ -z "$SUMMARY_ONLY" ]; then
-    echo $(chrome-json-summary) > ~/Documents/chrome_tabs_backup.json
+    echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json
+else
+    chrome_json_summary
 fi
