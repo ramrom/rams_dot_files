@@ -13,6 +13,8 @@ while getopts 'hb' x; do
 done
 shift $(($OPTIND - 1))
 
+# TODO: add space padding to each line based on terminal column # so colorized line extends fully
+NUM_COLS=$(tput cols)
 
 while read line; do
     if [ -n "$BOLD" ]; then
