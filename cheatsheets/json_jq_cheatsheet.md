@@ -34,6 +34,9 @@ jq --arg NUM $somenum '.[ NUM | tonumber ]'  # arg vars are strings, need to con
 echo '{"a":"z"}' | jq '.a'    # prints `"z"`
 echo '{"a":"z"}' | jq -r '.a'    # prints `z`
 
+# replace a value with a new value in a file
+jq '.path.somekey |= "newvalue"' file > new-file
+
 # @tsv, @csv, @sh
 echo '[[1,2],[3,4]]' | jq '.[] | @tsv' # print tab seperated values for each array
 echo '[[1,2],[3,4]]' | jq '.[] | @csv' # print comma seperated values for each array

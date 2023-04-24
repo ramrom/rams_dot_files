@@ -1,9 +1,10 @@
 #!/bin/sh
 
 # TODO: should while loop to get all playlists instead of 2 iters, this assume < 100 playlists
+# TODO: combine multiple track files for one playlist into one file
 
 usage () {
-    echo 'Usage: spotify-api [ -h(help) ] [ -v(verbose) ] [ -a(auth) ] [ -d(download all playlists and tracks) ]'
+    echo 'Usage: spotify-api [ -h(help) ] [ -v(verbose) ] [ -a(auth) ] [ -r(refresh) ] [ -d(download all playlists and tracks) ]'
     echo '                   [ -m(manual) ] [ -g(test) ]'
 }
 
@@ -12,11 +13,12 @@ usage () {
 
 ACTION=NONE
 
-while getopts 'hvadmg' x; do
+while getopts 'hvardmg' x; do
     case $x in
         h) usage && exit 1 ;;
         v) VERBOSE=1 ;;
         a) ACTION=AUTH ;;
+        r) ACTION=REFRESH ;;
         d) ACTION=DOWNLOAD_ALL;;
         m) ACTION=MANUAL ;;
         g) ACTION=TEST ;;
@@ -91,9 +93,27 @@ auth() {
         grant_type==authorization_code code==${CODE} redirect_uri==${XH_REDIRECT_URI}
 }
 
+refresh() {
+    [ -z "$SPOTIFY_CRED_FILE" ] && { echo "SPOTIFY_CRED_FILE variable not set" && exit 1; }
+    CLIENT_ID=$(jq -r .cli.client_id "$SPOTIFY_CRED_FILE")
+    CLIENT_SECRET=$(jq -r .cli.client_secret "$SPOTIFY_CRED_FILE")
+
+    [ -z "$CLIENT_ID" ] && { echo "CLIENT_ID blank, cred file: $SPOTIFY_CRED_FILE" && exit 1; }
+    [ -z "$CLIENT_SECRET" ] && { echo "CLIENT_SECRET blank, cred file: $SPOTIFY_CRED_FILE" && exit 1; }
+
+    REFRESHED_TOKEN_FILE=/tmp/spotify_refreshed_token.json; rm "$REFRESHED_TOKEN_FILE"
+    REFRESH_TOKEN=$(jq -r .refresh_token "$SPOTIFY_TOKEN_FILE")
+    xh -f -v -d -o $REFRESHED_TOKEN_FILE POST https://accounts.spotify.com/api/token -a ${CLIENT_ID}:${CLIENT_SECRET} \
+        grant_type==refresh_token client_id==${CLIENT_ID} refresh_token==${REFRESH_TOKEN}
+    NEW_ACCESS_TOKEN=$(jq -r .access_token $REFRESHED_TOKEN_FILE)
+    jq -r --arg TOK "$NEW_ACCESS_TOKEN" '.access_token |= $TOK' "$SPOTIFY_TOKEN_FILE" > /tmp/new_spotify_token_file
+    mv /tmp/new_spotify_token_file $SPOTIFY_TOKEN_FILE
+}
+
 
 case "$ACTION" in
     AUTH) auth ;;
+    REFRESH) refresh ;;
     MANUAL)
         xh -v -d -o manual.json https://api.spotify.com/v1/$1 -A bearer -a ${TOKEN}
         jq . manual.json ;;
