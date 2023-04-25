@@ -13,7 +13,7 @@ usage () {
 
 ACTION=NONE
 
-while getopts 'hvardmg' x; do
+while getopts 'hvardmgt' x; do
     case $x in
         h) usage && exit 1 ;;
         v) VERBOSE=1 ;;
@@ -22,6 +22,7 @@ while getopts 'hvardmg' x; do
         d) ACTION=DOWNLOAD_ALL;;
         m) ACTION=MANUAL ;;
         g) ACTION=TEST ;;
+        t) ACTION=TRACKS ;;
         *) usage && exit 1 ;;
     esac
 done
@@ -114,6 +115,11 @@ refresh() {
 case "$ACTION" in
     AUTH) auth ;;
     REFRESH) refresh ;;
+    TRACKS)
+        # jq '.tracks.items[].track.atrists[].name' # all the arist names of a track
+        preview_cmd="printf 'PLAYLIST NAME: '; jq '.name' {}; echo; jq '.tracks.items[].track.name' {}"
+        ls -a | tail -n+3 | fzf --preview "$preview_cmd"
+        ;;
     MANUAL)
         xh -v -d -o manual.json https://api.spotify.com/v1/$1 -A bearer -a ${TOKEN}
         jq . manual.json ;;
