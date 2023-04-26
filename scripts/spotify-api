@@ -5,7 +5,7 @@
 
 usage () {
     echo 'Usage: spotify-api [ -h(help) ] [ -v(verbose) ] [ -a(auth) ] [ -r(refresh) ] [ -d(download all playlists and tracks) ]'
-    echo '                   [ -m(manual) ] [ -g(test) ]'
+    echo '                   [ -m(manual) ] [ -g(test) ] [ -t(fzf tracks) ] '
 }
 
 [ -z "$SPOTIFY_TOKEN_FILE" ] && { echo "SPOTIFY_TOKEN_FILE variable not set" && exit 1; }
@@ -118,7 +118,7 @@ case "$ACTION" in
     TRACKS)
         # jq '.tracks.items[].track.atrists[].name' # all the arist names of a track
         preview_cmd="printf 'PLAYLIST NAME: '; jq '.name' {}; echo; jq '.tracks.items[].track.name' {}"
-        ls -a | tail -n+3 | fzf --preview "$preview_cmd"
+        ls -a | tail -n+3 | fzf --height 100% --preview "$preview_cmd"
         ;;
     MANUAL)
         xh -v -d -o manual.json https://api.spotify.com/v1/$1 -A bearer -a ${TOKEN}
@@ -126,7 +126,6 @@ case "$ACTION" in
     TEST)
         PLAYLIST_ID=07kMcOCdg1jHBRuRrS2EVd
         get_all_tracks $PLAYLIST_ID
-        # xh -v -d -o tracks.json https://api.spotify.com/v1/playlists/${PLAYLIST_ID} -A bearer -a ${TOKEN}
         # jq -r '.[] | .name + ";" + .description' playlists.json | column -s\; -t | bold=1 colr_row ;;
         ;;
     DOWNLOAD_ALL)
