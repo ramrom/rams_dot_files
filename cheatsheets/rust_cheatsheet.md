@@ -2,6 +2,7 @@
 - https://www.rust-lang.org/
     - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
     - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
+    - technical referece: https://doc.rust-lang.org/reference/introduction.html
 - playground: https://play.rust-lang.org/
 - https://crates.io/ is a central default registry for tools/programs in rust
 - source files use `.rs` extension

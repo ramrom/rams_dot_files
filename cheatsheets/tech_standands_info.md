@@ -263,6 +263,9 @@
     - TensorFlow
     - PyTorch
 
+## LSP
+- language servers - https://langserver.org/
+
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
 
@@ -414,6 +417,8 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
 - WebAuthN
     - good site - https://webauthn.io/
+    - attestation - https://medium.com/webauthnworks/webauthn-fido2-demystifying-attestation-and-mds-efc3b3cb3651
+    - great b/c it's highly phishing resistant
     - backwards compatible and successor to FIDO U2F(universal 2nd factor)
     - any hardware/software that implements CTAP(client to authenticator protocol) can be used
         - so an authneticator can be pure software (using trusted execution env of cpu)
