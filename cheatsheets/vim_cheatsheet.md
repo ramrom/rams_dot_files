@@ -2,6 +2,9 @@
 - good resource on learning vim: http://vimcasts.org
 - great resource: https://devhints.io/vimscript
 - `:version`  - get version and features compiled
+- Vim9.0 introduces new scripting language
+    - 10x to 100x performance improvement, commands compiled into fast executable instructions
+    - *NOT* totally backwards compatible
 
 ## NEOVIM
 - nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide

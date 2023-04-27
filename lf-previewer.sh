@@ -12,7 +12,7 @@
 #     *) bat --color=always "$1";;
 # esac
 
-# for Linux use mediainfo, otherwise assume Darwin
+# if not Linux assume Darwin
 MMBIN="mdls"; [ "$(uname)" = "Linux" ] && MMBIN="mediainfo"
 BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 

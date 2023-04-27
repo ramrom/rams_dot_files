@@ -30,8 +30,9 @@
         - DOT calculus is a formal mathematical description of the scala language
     - used for scala 3
 - scala 2.13.5 and scala 3 is completely compatible with each other
-- scala 2 source -> JVM .class file, scala 3 source -> TASTy files
+- scala 2 source -> JVM .class file; scala 3 source -> TASTy files -> JVM .class file
     - TAST (typed abstract syntax tree), a data structure that describes you scala code
+    - class files lose a lot of gramattic/semantic information about scala, but TASTy preserves it
 
 - string interpolation:
     - prints `this is Foo(3)`
