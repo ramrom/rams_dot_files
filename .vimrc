@@ -512,7 +512,7 @@ noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gh :SignifyToggleHighlight<cr>
 
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
-noremap <leader>ga :call RemoveTrailingWhiteSpace()<CR>
+noremap <leader>gT :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
 noremap <leader>gI :call MyIndentLinesToggle()<cr>
 noremap <leader>go :call CycleColorCol()<cr>

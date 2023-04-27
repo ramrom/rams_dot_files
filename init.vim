@@ -274,6 +274,33 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         end
     end
 
+    ---------------- RUST ---------------------------
+    local on_attach = function(client)
+        require'completion'.on_attach(client)
+    end
+
+    require'lspconfig'.rust_analyzer.setup({
+        on_attach=on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = {
+                        group = "module",
+                    },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = {
+                        enable = true,
+                    },
+                },
+                procMacro = {
+                    enable = true
+                },
+            }
+        }
+    })
+
     ------------------- LSP-Configs -----------------------------
     util = require "lspconfig/util"
 
@@ -357,7 +384,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         group = vim.api.nvim_create_augroup("nvim-metals-maps", { clear = true })
     })
     vim.keymap.set("n", "gjc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-    vim.keymap.set("n", "gja", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+    vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
     vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
     vim.keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.formatting()<CR>")
     -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
