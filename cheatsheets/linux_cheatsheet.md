@@ -168,42 +168,6 @@ loginctl
 service script-name start/stop/restart
 service --status-all
 
-### GNONME DESKTOP SHORTCUTS
-- see https://help.ubuntu.com/community/KeyboardShortcuts
-
-super - usually the "windows" key on keyboards
-alt+ctr+t - open terminal
-alt+ctr+l, super+l  - lock screen
-super+tab, alt+tab  - switch between running apps
-super+left/right-arrow - snap to left or right half of desktop
-super+up/down-arrow - full screen, original
-super + page-up/page-down - go forward/back workspaces
-super + shift + page-up/page-down - move active window to next/previous workspace
-super+m - toggle notif tray
-shift + ctr + c - copy
-shift + ctr + v - paste
-alt+f2  - bring up prompt to run a shell command
-ctrl+alt arrow - move between desktops
-ctrl+alt+delete - logout
-ctrl+shift+ c/p - copy and paste
-super+shift+NUM  - click the NUM icon in the dash(quick launch)
-- screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
-    - Prnt-Screen - full desktop screenshot
-    - Prnt-Screen + Alt - active window screenshot
-    - Prnt-Screen + shift - area select screenshot
-
-
-browsers(chrome/firefox):
-ctrl-tab    - cycle through tabs
-ctrl-w  - close
-ctrl-h  - open history
-ctrl-b  - bring up bookmarks
-ctrl-t  - new tab
-ctrl-l  - select url bar
-ctrl-r  - reload page
-ctrl-click - open link in new tab
-shift-click - open link in new window
-space/space-shift - scroll up/down page
 
 ## APT
 - see history in `/var/log/apt/history.log`
@@ -350,6 +314,40 @@ sudo unattended-upgrade
 - common Tools
     - nautilus is the file explorer
     - ubuntu22 - uses RDP for gnome remote desktop
+
+### GNONME DESKTOP SHORTCUTS
+- see https://help.ubuntu.com/community/KeyboardShortcuts
+- super - usually the "windows" key on keyboards
+- alt+ctr+t - open terminal
+- alt+ctr+l, super+l  - lock screen
+- super+tab, alt+tab  - switch between running apps
+- super+left/right-arrow - snap to left or right half of desktop
+- super+up/down-arrow - full screen, original
+- super + page-up/page-down - go forward/back workspaces
+- super + shift + page-up/page-down - move active window to next/previous workspace
+- super+m - toggle notif tray
+- shift + ctr + c - copy
+- shift + ctr + v - paste
+- alt+f2  - bring up prompt to run a shell command
+- ctrl+alt arrow - move between desktops
+- ctrl+alt+delete - logout
+- ctrl+shift+ c/p - copy and paste
+- super+shift+NUM  - click the NUM icon in the dash(quick launch)
+- screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
+    - Prnt-Screen - full desktop screenshot
+    - Prnt-Screen + Alt - active window screenshot
+    - Prnt-Screen + shift - area select screenshot
+#### BROWSERS(CHROME/FIREFOX)
+- ctrl-tab    - cycle through tabs
+- ctrl-w  - close
+- ctrl-h  - open history
+- ctrl-b  - bring up bookmarks
+- ctrl-t  - new tab
+- ctrl-l  - select url bar
+- ctrl-r  - reload page
+- ctrl-click - open link in new tab
+- shift-click - open link in new window
+- space/space-shift - scroll up/down page
 
 ### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam

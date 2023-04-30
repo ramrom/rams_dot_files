@@ -1,5 +1,5 @@
 # TMUX
-- `prefix + ?` - show the current key bindings
+- good cheatsheet: https://tmuxcheatsheet.com/
 - in copymode
     - space starts selection(or reset it), enter to end/copy it
     - esc cancels selection, still in copy mode
@@ -46,6 +46,8 @@ good resource on condition version checks in tmux conf file:
     - it also details the changes, breaking changes, with increasing versions
 
 ## Keybindings
+prefix + ?  - show the current key bindings
 prefix + S  - swap windows
 prefix + y  - swap panes
 prefix + D  - disconnect clients
+prefix + ! - promote current active pane to become a window

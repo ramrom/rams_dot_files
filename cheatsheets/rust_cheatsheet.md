@@ -9,6 +9,8 @@
 - created by mozilla teams with a main goal of correctness/reliability/speed
     - driven by massive tech debt of fixing bugs and issue
 - by many measures it's as fast as C
+    - oftentimes compiles to identical assembly as C
+- zig and carbon aim to be a better C, but rust doesnt try to be like C
 
 # REPL
 - https://github.com/google/evcxr
@@ -21,6 +23,7 @@
 - `rustc somerustsourcefile.rs` -> successful compile will generate a executable bin file
 - compile targets: https://doc.rust-lang.org/rustc/platform-support.html
     - can compile to asm.js, but WASM support is waaaay better/faster and every browser basically supports WASM
+- compiler explorer: https://rust.godbolt.org , will show compiled assembly code!
 
 ## CARGO
 - native package manager
@@ -44,6 +47,10 @@
 - smart anaul memory management unsing ownership/borrow/lifetime mechanic, no runtime garbage collector
 - `let` will put data in stack
 - smart pointers put it on the heap
+
+## REFERENCES/OWNERSHIP
+- why aren't multiple mutable references allowed in a single threaded context
+    - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
 
 ## TYPE SYSTEM
 - `enum` in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers

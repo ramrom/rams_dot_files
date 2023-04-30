@@ -418,15 +418,16 @@ endfunction
 """TODO: Prime open real estate for normal mode!
     "NORMAL MODE
         "<Leader>a/w/k/l/x'
-            " a is earmarked for smart script run or test run
-        "<Leader><Leader>
+            "a is earmarked for smart script run or test run
+        "<Leader><Leader>    (except for h/g/q)
         "c-m/c-n/c-g/c-s/c-q
         "c-x (opposite of c-a, i clobber c-a for tmux meta)
-        "c-p (once i get rid of CtrlP plugin)
+        "c-p
+        "c-space
         "; " semicolon repeats last f/F motions
         "," ; in reverse direction
     " INSERT MODE
-        " c-s
+        " c-s, c-space
 
 " TODO: i think these maps are probably useful
 " nnoremap <C-J> a<CR><Esc>k$

@@ -15,6 +15,7 @@
 - coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
 - neovim-lsp - neovim's built in lsp client, written in lua
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
+    - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-dap - plugin to support debug adapter protocol

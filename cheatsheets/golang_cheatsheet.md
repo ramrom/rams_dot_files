@@ -2,6 +2,9 @@
 - https://go.dev
 - cgo lets you add c code in go programs: https://golang.org/cmd/cgo/
 - supported architectures and OSes: https://golang.org/doc/install/source#environment
+- ken thomson, robert pike, Robert Griesemer invented it to fix everything they hated about c++
+    - they all had to agree on features they liked
+    - golang is object-oriented _but_ has not classes, you can be object-oriented without classes
 
 ## GOOD LIBS
 - solid big decimal package: https://github.com/shopspring/decimal
