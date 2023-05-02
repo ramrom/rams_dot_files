@@ -185,10 +185,18 @@
 ## COMPILERS
 - LLVM is a platform for creating machine code
     - developed by the same guy who made Swift (Chris Lattner)
-    - Rust, Swift, Kotlin Native, and objective C use LLVM
-    - LLVM has API that take IR (itermediate representation), then it uses that create binary or JIT
+    - langauges that use it: Rust, Swift, Kotlin Native, objective C, Julia
+    - LLVM has API that take IR (itermediate representation), then it uses that create binary(machine code) or JIT for every arch/OS
 - objective C uses Clang compiler to create LLVM IR
 - swift uses it's own "swift compiler" to create LLVM IR(bitcode)
+- steps
+    - Lexer, idenitfy tokens in text: keywords/operators/variables/etc
+    - Parser - build an AST
+    - Semantic Analysis - see if AST follows language rules
+    - IR code generation for target machine
+    - IR optimization
+    - generate machine code
+    - linking with symbols table
 - linking
     - dynamic -> an executable loads the library at _run_ time
         - shared object, `.so`, files are dynamically linked libs

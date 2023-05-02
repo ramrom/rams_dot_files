@@ -11,8 +11,10 @@
 - by many measures it's as fast as C
     - oftentimes compiles to identical assembly as C
 - zig and carbon aim to be a better C, but rust doesnt try to be like C
+- pre 1.0 rust at one point had a GC and threading runtime
+- good for kernel code, kernels don't/can't raise exceptions, generally return magical values in pointers that callers check
 
-# REPL
+## REPL
 - https://github.com/google/evcxr
 - https://docs.rs/papyrus/latest/papyrus/
 
@@ -31,6 +33,8 @@
     - here we do the borrow-checking, optimization, and code gen
     - has no nested-expressions, all types are fully explicit
 - THIR - Typed High-Level Intermediate Representation
+- FFI(foreign function interface) - has C-compatible calling conventions
+    - can generally take rust object files and use with C, and C can also use rust code
 
 ## CARGO
 - native package manager
@@ -64,21 +68,36 @@
 ## COLLECTIONS
 ### STRINGS
 - `String` and `&str` are UTF-8
-- `String` is a heap-allocated `Drop` type, it's mutable/growable
-    - it's really a wrapper around a `Vec` of bytes
+- string literals (preallocated text) - declared in code like `let s = "string lit"`
+    - are refered to with string slices (also immutable reference) `&str`
+    - they are stored in a special read-only memory of executable
+- `String`
+    - is a heap-allocated `Drop` type, it's mutable/growable
+    - it's really a wrapper around a `Vec<u8>` of bytes
+    - indexing/iterating
+        - you cant index (`s[1]`) because it's confusing/ambiguous, for UTF8 is it byte value? scala value? grapheme cluster value?
+        - can slice the bytes, `s[0..4]`, but if bytes fall outside of char boundary it will panic
+        - can specify byte or char with iterator
+            - `for c in "Зд".chars() { println!("{c}"); }`
+            - `for b in "Зд".bytes() { println!("{b}"); }`
+            - grapheme clusters are harder, so no stdlib func provided, but crates do exist
     - initalizing
         - `let s = String::new()`
         - `let s = String::from("literal string")` or `let s = "literal string".to_string`
     - mutating
         - appending a string slice - `s.push_str("append")`
         - append a single char - `s.push('f')`
-        - concat: `s = String::from("hi"); s2 = String::from("there"); s3 = s + &s2`
-            - `s` is moved here to `s3`, `s` cant be used after
-            - `+` operator is defined as `fn add(self, s: &str) -> String {`
-- literal strings are refered to with string slices (also immutable reference) `&str`
+        - concat
+            - `s = String::from("hi"); s2 = String::from("there"); s3 = s + &s2`
+                - `s` is moved here to `s3`, `s` cant be used after
+                - `+` operator is defined as `fn add(self, s: &str) -> String {`
+                - `s3` takes ownership over `s`, and copy of `s2` gets appended to `s3`
+            - `s1 = String::from("tic"); s2 = String::from("tac"); s3 = String::from("toe"); s = format!("{s1}-{s2}-{s3}")`
+                - `format!` is more succinct for concat of many strings
+                - doesnt take ownership of any of the params
 ### ARRAYS
 - static and cannot change size
-- function argument type annotation of `[T]`
+- function argument type annotation: unsized `[T]`, sized `[T, 3]`
 - indexing starts at zero, e.g. `a[0]` is first element
 - stored in contiguous sections of memory on the stack
     - if array is too large, at runtime will get stack overflow
@@ -101,6 +120,32 @@
 - mutable type signature `&mut [T]`
 - `let a = [1 ,2, 3, 4]; let s = &a` - `s` is a reference and immutable borrow here, `&a` is slice containing all of `a`
     - `let s = &a[0..2]` - borrow just first and second of `a`, ending index is non-inclusive
+### HASHMAP
+- `HashMap<K, V>` associative arrays, heap allocated
+    - `K`, `V` are generic types, key and value must be one type (homogenous)
+    - no macros to build them
+- need to `use`
+    ```rust
+    `use std::collections::HashMap;`
+
+     // for Copy types like i32, it's copied, for Drop/owned traits like String, HashMap will take ownership
+     // if key or value is ref type &T, hashmap needs to live shorter than all the referees
+     let mut scores = HashMap::new();
+     scores.insert(String::from("Blue"), 10);
+     scores.insert(String::from("Yellow"), 50);
+
+     // iterate over key/vals
+     for (key, value) in &scores {  println!("{key}: {value}"); }
+
+     // will overwrite the old value of 10
+     scores.insert(String::from("Blue"), 25);
+
+     // entry returns Entry enum that indicates if it might exist, here with or_insert we insert if it doesn't exist
+     scores.entry(String::from("Yellow")).or_insert(50);
+     scores.entry(String::from("Blue")).or_insert(50);
+     ```
+- `get` method that returns `Option<V>`, `None` if key not found
+
 
 ## FUNCTIONS
 - rust doesnt formally have variadic args but an argument can be a slice, which is effectively the same
@@ -115,6 +160,39 @@
 
 ## TYPE SYSTEM
 - `enum` in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers
+- `Option<T>` - generic enum which can be `Some<T>` or `None`
+    - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
+- `Sized` - trait, known size at compile time, doesnt change size
+- `Copy` - trait, value is always copied, (kind of opposite of `Drop` types)
+    - e.g. `i32`, `bool`, references themselves like `&T` and `&mut T`
+- `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
+- Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
+- trait objects are fat pointers with both the object pointer and the vtable of methods
+    - compiles to single function that does a dispatch at runtime based on the object concrete type
+- rust does not really support downcasting (can't `match` on a trait object's implementor types)
+    - traits objects can't be downcast back to the original type with casting or coersion
+    - the `Any` trait can do this, it's type-safe downcasting on trait objects
+    - one idomatic way is to use `enums` variants in place of the trait implementors
+- generic with trait bound and trait objects are very similar
+    ```rust
+    trait Trait {}
+    fn foo<T: Trait>(arg: T) { }
+
+    // trait object: impl Trait in argument position
+    fn foo(arg: impl Trait) { }
+    ```
+    - generic with trait bound will have a concrete type at compiletime due to monomorphization
+    - trait objects contain concrete type only known at run time
+    - big use case for trait objects is a array/vector/collection of heterogenous concrete types, can't do that with a generic trait
+- no exception handling, `Result<T, E>` is commonly used to return errors as values
+    - `unwrap` - panic if `Err`, `expect('failure!')` - panic if `Err` with message
+    - `unwrap_or_else(|err| ...)` - error handler func if `Err`
+    - propogate errors to caller with `?` operator
+- DST - dynamically sized types - https://doc.rust-lang.org/nomicon/exotic-sizes.html
+    - types can only exist behind a fat/wide pointer
+    - trait objects `dyn MyTrait` -> pointer has pointer to data and vtable
+    - slices(`[T]`), `str`
+    - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
 
 ## CONCURRENCY
 - rust only implements native threads
@@ -126,6 +204,13 @@
     - very similar to javascript promises or scala future
 - channels (std lib)
     - support one receiver and multiple senders
+- two major categories: `Sync` and `Send`
+    - `Sync` allows many references to same value
+        - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
+    - `Send` safe to transfer ownership to different thread
+- sync wait group (like golang WaitGroup)
+    - std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
+    - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
 
 ## TESTING
 - `assert( 1 == 2, "one equals 2")` - 1st arg must return `bool`, will panic with message in 2nd arg if `false`
