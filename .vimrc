@@ -276,7 +276,8 @@ function BetterAutoRead()
       \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 endfunction
 
-if empty($VIM_NO_AUTOREAD) | call BetterAutoRead() | endif
+set autoread
+" if empty($VIM_NO_AUTOREAD) | call BetterAutoRead() | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
