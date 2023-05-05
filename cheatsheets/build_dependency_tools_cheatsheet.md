@@ -38,6 +38,25 @@
 - for for java/scala projects
 - open source built by lihaoyi, written in scala
 
+## SBT
+- the main tool used in scala projects
+- as of `1.3.0` it uses Coursier to fetch artifacts/dependencies
+- `%%` automatically uses scala version, `%` dev must specify
+    - `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
+- get timings of sbt tasks:
+    - time sbt -Dsbt.task.timings=true clean update test
+- sbt update resolves and fetches deps
+ sbt "test-only some.path.to.test another.path.to.test"
+ sbt "testOnly some.path.to.test another.path.to.test"
+ integration tests: `sbt "it:testOnly some.path.to.test another.path.to.test"`
+- use test description filter `sbt 'testOnly *SSO* -- -z "foo bar desc"'`
+   - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
+- possible to define diff scala versions for subprojects, but has limits, can work around limits though
+- to show evictions: `sbt evicted`
+ - to show test deps classpath: `sbt 'show Test/dependencyClasspath'`
+    - show order of which jars are loaded for project `Test`
+- `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
+
 ## NPM
 - package manager for javascript
 - started as managing node.js modules, but works for front-end with browserify or webback

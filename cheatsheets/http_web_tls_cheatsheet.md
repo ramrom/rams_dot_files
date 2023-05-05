@@ -13,6 +13,9 @@
     - frames/messages allow multiplexing of many streams, no HOL blocking
         - streams can have priorites, with weights
     - server push - the server can send data without a request
+- chunked vs multi-part: chunked is transfer encoding, multi-part is content type
+    - each chunk is preceded by it's size, transmission ends with zero sized chunk, not supported in HTTP2
+    - multi-part type can use chunked encoding
 
 ## SSL/TLS
 - certificate data is formatted according to X.509 standard: https://en.wikipedia.org/wiki/X.509

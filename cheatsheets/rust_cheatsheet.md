@@ -35,10 +35,14 @@
 - THIR - Typed High-Level Intermediate Representation
 - FFI(foreign function interface) - has C-compatible calling conventions
     - can generally take rust object files and use with C, and C can also use rust code
+- BORROW CHECKER
+    - validates lifetimes - a borrower cant outlive what it borrows
 
 ## CARGO
 - native package manager
 - a package consists of many crates and is defined by a `Cargo.toml` file
+- package versions of a crate cant be deleted, they can be yanked
+    - this means lock files with yanked versions can still be used, but new projects cannot use this version
 ### CRATE
     - compiling a source file, rust considers that a crate
     - composed of a tree of modules
@@ -49,8 +53,7 @@
 - `cargo install --list` - print all gobally installed crates
 - `cargo install --version 0.3.10 someprogram` - install version x of program
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program
-- package versions of a crate cant be deleted, they can be yanked
-    - this means lock files with yanked versions can still be used, but new projects cannot use this version
+- `cargo tree` - print dependency tree
 
 ## GRAMMER
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
@@ -168,17 +171,17 @@
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 - trait objects are fat pointers with both the object pointer and the vtable of methods
+    - for trait `Trait`, `Box<dyn Trait>` is a trait object
     - compiles to single function that does a dispatch at runtime based on the object concrete type
 - rust does not really support downcasting (can't `match` on a trait object's implementor types)
     - traits objects can't be downcast back to the original type with casting or coersion
     - the `Any` trait can do this, it's type-safe downcasting on trait objects
     - one idomatic way is to use `enums` variants in place of the trait implementors
-- generic with trait bound and trait objects are very similar
+- for `trait Trait {}`, a param that takes `impl Trait` is basically syntax sugar for generic trait `<T: Trait>`
     ```rust
     trait Trait {}
     fn foo<T: Trait>(arg: T) { }
 
-    // trait object: impl Trait in argument position
     fn foo(arg: impl Trait) { }
     ```
     - generic with trait bound will have a concrete type at compiletime due to monomorphization
@@ -190,9 +193,10 @@
     - propogate errors to caller with `?` operator
 - DST - dynamically sized types - https://doc.rust-lang.org/nomicon/exotic-sizes.html
     - types can only exist behind a fat/wide pointer
-    - trait objects `dyn MyTrait` -> pointer has pointer to data and vtable
-    - slices(`[T]`), `str`
-    - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
+    - main cases of DST
+        - trait objects `dyn MyTrait` -> pointer has pointer to data and vtable
+        - slices(`[T]`), `str`
+        - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
 
 ## CONCURRENCY
 - rust only implements native threads

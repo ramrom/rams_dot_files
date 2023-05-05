@@ -206,6 +206,7 @@
 - c++ compilers
     1. preprocessor - process directives like `#includes` and `#define` (expanding macros)
     2. compiling - c++ code -> assembly code -> machine code, each source file essentially becoming an object file
+        - c++ templates are handled at compile time, so are more semantic than macros
     3. linking - links object files together to one executable, undefined symbols are resolved to correct addresses
 
 ## API ARCHITECTURES

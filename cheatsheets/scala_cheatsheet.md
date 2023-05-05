@@ -100,6 +100,10 @@ PlaySpecification/spec2, to skip test:
 - play 2.5 json doesnt supports scala enumerators
 - can use enumeratum
 
+## IMPLICITS
+- coder doesnt need to explicilty pass in an arg/type that is implicit, the compiler will find it within scope
+- scala 3 overhauled implicits
+
 ## MACWIRE/DEPENDENCY-INJECT
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
 - macwire happens pre-compile, guice i think happens runtime
@@ -201,23 +205,9 @@ PlaySpecification/spec2, to skip test:
 - cats: https://typelevel.org/cats/datatypes/ior.html
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
 
-## SBT
-- as of `1.3.0` it uses Coursier to fetch artifacts/dependencies
-- `%%` automatically uses scala version, `%` dev must specify
-    - `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
-- get timings of sbt tasks:
-    - time sbt -Dsbt.task.timings=true clean update test
-- sbt update resolves and fetches deps
- sbt "test-only some.path.to.test another.path.to.test"
- sbt "testOnly some.path.to.test another.path.to.test"
- integration tests: `sbt "it:testOnly some.path.to.test another.path.to.test"`
-- use test description filter `sbt 'testOnly *SSO* -- -z "foo bar desc"'`
-   - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
-- possible to define diff scala versions for subprojects, but has limits, can work around limits though
-- to show evictions: `sbt evicted`
- - to show test deps classpath: `sbt 'show Test/dependencyClasspath'`
-    - show order of which jars are loaded for project `Test`
-- `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
+## BUILD TOOLS
+- sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
+- mill, see [build tools](build_dependency_tools_cheatsheet.md#mill)
 
 ## AKKA
 - one of akka streams main goals is to implement backpressure
