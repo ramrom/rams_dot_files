@@ -32,6 +32,8 @@ elseif empty($VIM_NOPLUG)
         Plug 'vim-airline/vim-airline-themes'
     endif
 
+    Plug 'joshdick/onedark.vim'     " inspired from atom's onedark color theme
+
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
     if !has('nvim') && v:version < 8022345          " neovim and vim > 8.2.2345 have native support
@@ -128,8 +130,6 @@ elseif empty($VIM_NOPLUG)
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
     endif
-
-    Plug 'joshdick/onedark.vim'     " inspired from atom's onedark color theme
 
     "NOTE: plug#end automatically runs filetype plugin indent on and syntax enable
     call plug#end()
@@ -251,8 +251,6 @@ else
     highlight SpecialKey ctermfg=8 guifg=DimGrey
 endif
 
-" ignore compiled scala/java files, added so CtrlP will ignore these files
-set wildignore+=*/target/*
 " ignore metals LSP files, bloop compiler files
 set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
 
@@ -386,12 +384,12 @@ endfunction
 
 " if there is one tab, move forward/back buffer, otherwise forward/back tabs
 function TabBufNav(direction)
-    if !exists('*gettabinfo')  " vim 7.4(and earlier) dont have `gettabinfo`
-        if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
-        return
-    endif
-    if len(gettabinfo()) == 1
-        if (a:direction == "f") | execute ":bn!" | else |  execute ":bp!" | endif
+    if exists('*gettabinfo')  " vim 7.4(and earlier) dont have `gettabinfo`
+        if len(gettabinfo()) == 1
+            if (a:direction == "f") | execute ":bn!" | else |  execute ":bp!" | endif
+        else
+            if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
+        endif
     else
         if (a:direction == "f") | execute ":tabn" | else |  execute ":tabprevious" | endif
     endif
@@ -516,7 +514,7 @@ noremap <leader>gh :SignifyToggleHighlight<cr>
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gT :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
-noremap <leader>gI :call MyIndentLinesToggle()<cr>
+noremap <leader>gi :call MyIndentLinesToggle()<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
