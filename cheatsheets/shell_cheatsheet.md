@@ -54,7 +54,13 @@ set -o vi   # bash vi mode
 ```
 
 ### COMMAND LINE NAVIGATION (ZSH AND BASH DEFAULTS)
+- `ctrl-c` - send current process SIGINT
+- `ctrl-z` - suspend/stop process to background
+- `ctrl-d` - sends EOF or del char
+    - for EOF, most shells like bash/zsh will basically run the `exit` command
+    - if not at 1st char in prompt, delete char in front of it (forward delete)
 - `ctrl-s` - linux pauses output to screen
+- `ctrl-q` - Release terminal output (after being paused)
 - `ctrl-t` - transpose chars on either side of point
 - `ctrl-l` - clear screen
 - `ctrl-k` - delete line after cursor (cut to clipboard)
@@ -67,18 +73,16 @@ set -o vi   # bash vi mode
 - `ctrl-u` - delete line before cursor (cut to cliboard)
 - `ctrl-w` - delete word before cursor (cut to clipboard)
 - `ctrl-y` - paste what was cut
+- `ctrl-v` - display version info about bash
+- `ctrl-x` - ??? (sometimes cut)
 - `ctrl-h` - delete last char, VIM insert mode and command too!
-- `ctrl-[` - escape
 - `ctrl-i` - tab
 - `ctrl-p` - go back one command in the history
 - `ctrl-n` - go forward one command in the history
 - `ctrl-r` - fuzzy search command history
+- `ctrl-[` - escape
 - `ctrl-7` - undo
 - `ctrl-8` - backward delete char
-
-### send EOF to stdin, bash/zsh/sh interpret as exit shell
-- if not at 1st char in prompt, delete char in front of it (forward delete)
-- Ctrl-d
 
 ### LINE EDITING MODE
 #### ZSH
@@ -118,13 +122,17 @@ bind '"\C-k":"foofunc\n"'  # bind ctrl-k to type "foofunc" and hit newline(retur
 - `\foo`
     - execute foo ignoring any aliases called foo
 
-### FC, edit last command in editor and execute, also list old commands
+### FC
+- edit last command in editor and execute, also list old commands
 ```sh
 # change default editor with FCEDIT env var
 fc
 # to cancel execution(when in vi) type :cq in command mode (quit with error)
+```
 
-# r, builtin in zsh, basiscally replays the last command in history
+### R
+- builtin in zsh, basiscally replays the last command in history
+```sh
 ls
 r   # will execute `ls`
 ```

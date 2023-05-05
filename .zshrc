@@ -27,6 +27,7 @@ export EDITOR=nvim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
 # set ctrl-o to open neovim
+# TODO: Open keys to use: ctrl-g, ctrl-s, ctrl-q
 bindkey -s '^o' 'v\n'
 
 # Colorize
