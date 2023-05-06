@@ -7,21 +7,22 @@
 - zig and carbon aim to be a better C, but rust doesnt try to be like C
 - pre 1.0 rust at one point had a GC and threading runtime
 - good for kernel code, kernels don't/can't raise exceptions, generally return magical values in pointers that callers check
+- https://crates.io/ is a central default registry for tools/programs in rust
 
-## DOCS
+## LEARNING RESOURCES
+### DOCS
 - https://www.rust-lang.org/
     - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
     - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
     - technical referece: https://doc.rust-lang.org/reference/introduction.html
-- playground: https://play.rust-lang.org/
-- https://crates.io/ is a central default registry for tools/programs in rust
 - `rustup doc` - open local copy of docs in browser
     - `rustup doc --std` to jump straight to std lib
     - `rustup doc --book` to jump straight to "The Rust Programming Language" book
-
-## REPL
+### REPL
 - https://github.com/google/evcxr
 - https://docs.rs/papyrus/latest/papyrus/
+### OTHER
+- playground: https://play.rust-lang.org/
 
 ## COMPILER
 - uses LLVM
