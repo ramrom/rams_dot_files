@@ -176,6 +176,20 @@ end
 ------------------------------------------------------------------------
 if vim.fn.has('nvim-0.6.1') == 1 then
 
+    -- Toggle function to enable and disable LSP diagnostics(virtual text, underline, sign)
+    -- NOTE: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim - decent plugin to do this granularly
+    LSPDiagnosticsEnabled = true
+
+    ToggleLSPdiagnostics = function()
+        LSPDiagnosticsEnabled = not LSPDiagnosticsEnabled
+        if LSPDiagnosticsEnabled then
+            vim.diagnostic.enable()
+            print("LSP diagnostics enabled")
+        else
+            vim.diagnostic.disable()
+            print("LSP diagnostics disabled")
+        end
+    end
 
     ---------------------- NVIM-BFQ CONFIG -------------------------------
     require('bqf').setup({
@@ -393,6 +407,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
     vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
     vim.keymap.set("n", "gwb", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
+    vim.keymap.set("n", "gwt", "<cmd>lua ToggleLSPdiagnostics()<CR>") -- buffer diagnostics only
     vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
     vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
     -- pgar keybindings LSP key bindings

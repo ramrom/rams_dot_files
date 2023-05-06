@@ -21,9 +21,12 @@
 - nvim-dap - plugin to support debug adapter protocol
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
 ### LUA
-- print a val: `:lua =foo.myvar`
+- print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
+- print a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
+- lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
+- call lua function - `:lua somefunc()`
 - CONFIG STUFF
-    - vimscript, sourcing lua code: `lua require('some-lua-code')`
+    - vimscript, sourcing lua code: `:lua require('some-lua-code')`
     - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
     - o is general settings: `vim.o.background = 'light'`
     - use space as a the leader key: `vim.g.mapleader = ' '`
