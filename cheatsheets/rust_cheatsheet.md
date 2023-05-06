@@ -54,10 +54,31 @@
 - `cargo install --version 0.3.10 someprogram` - install version x of program
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program
 - `cargo tree` - print dependency tree
+- `cargo build -v` - show exactly what commands it's running
 
 ## GRAMMER
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
     - in rust the `.` operator works on pointers or direct struct/object, pointers are automatically dereferenced
+### LOOPS
+- for loops
+    ```rust
+        let foo = vec![1,2];
+
+        for i in foo { println!("{i}"); }  // passes ownership, foo becomes invalid
+
+        for i in foo.iter() { println!("{i}"); } // explicitly calling iter passes ref, &T
+        for i in &foo { println!("{i}"); } // same as foo.iter()
+
+        for i in foo.iter_mut() { println!("{i}"); } // passes &mut T
+        for i in &mut foo { println!("{i}"); } // same as iter_mut
+
+        foo.iter().map{ |x| println!("{x}") } // iterators are lazy, maps just returns another iterator with the closure
+        foo.iter().map{ |x| println!("{x}") }.filter{ |x| x > 1 } // iterator adapters are useful for chained
+        foo.iter().map{ |x| println!("{x}") }.filter{ |x| x > 1 }.collect() // collect will execute iterator and return collection
+                                                                            // only one collection gets created here, not 2!
+        foo.iter().for_each{ |x| println!("{x}") }  // for each side effects, executing on the iterator
+    ```
+- `Iterator`s that return `Iterator`s are adapters, main examples: `map`, `filter`, `take`
 
 ## MEMORY MANAGEMENT
 - smart anaul memory management unsing ownership/borrow/lifetime mechanic, no runtime garbage collector
@@ -151,7 +172,7 @@
 
 
 ## FUNCTIONS
-- rust doesnt formally have variadic args but an argument can be a slice, which is effectively the same
+- no variadic args but an argument can be a slice, which is effectively the same
 - no default values for arguments (some peeps like to use `Option<T>` and pass in `None` as a pattern to trigger default)
     - can use `Default` trait https://doc.rust-lang.org/std/default/trait.Default.html (can use `[#define]` attrib too)
     - can use struct update syntax with the default
@@ -241,11 +262,15 @@ let s2 = String::from("hello");  // type String is mutable
 
 ## LIBS/FRAMEWORKS/APPS
 - [tokio](https://tokio.rs) - awesome async framework
-- [rocket](https://rocket.rs/) - prolly best rust backend web framework
+- [serde](https://serde.rs/) - awesome serial/deserialization framework
+- [actix](https://actix.rs/) - popular web framework
+- [axum](https://github.com/tokio-rs/axum) - popular web framework
+- [rocket](https://rocket.rs/) - most popular rust backend web framework
 - [yew](https://yew.rs) - /awesome front end framework (compiles to webassembly)
     - similar to react architecture, has the conecpt of components
     - generally faster than react!
     - uses a `html!` macro to generate valid html at rust compile time!
 - [tauri](https://tauri.app/) - build native apps for desktop and mobile
+- [clap](https://docs.rs/clap/latest/clap/) - awesome CLI parser lib
 - pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)
 

@@ -162,5 +162,5 @@
     - https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
         - be default nginx sets `Connection` to `close` and HASS probably needs to `upgrade` for websockets
 
-## COMPETITORS
+## SIMILAR TECH
 - [openhab](https://www.openhab.org/) is also a fully fledge FOSS home automation platform
