@@ -25,29 +25,34 @@
 - playground: https://play.rust-lang.org/
 
 ## COMPILER
-- uses LLVM
-- `rustc` is compiler bin
-- `rustup` - bin to install toolchain and com
-- `rustup update` - update/upgrade `rustc` (and `cargo`, docs, other tools)
+- `rustc` uses LLVM
 - `rustc somerustsourcefile.rs` -> successful compile will generate a executable bin file
+    - use `cargo build` instead, which handles everything else including getting deps
 - compile targets: https://doc.rust-lang.org/rustc/platform-support.html
     - can compile to asm.js, but WASM support is waaaay better/faster and every browser basically supports WASM
 - compiler explorer: https://rust.godbolt.org , will show compiled assembly code!
 - HIR - High level Intermedidate Representation
     - AST created after parsing, macro expansion, and name resolution
+    - THIR - Typed High-Level Intermediate Representation
 - MIR - Mid level Intermediate Representation, compiled from HIR
     - here we do the borrow-checking, optimization, and code gen
     - has no nested-expressions, all types are fully explicit
-- THIR - Typed High-Level Intermediate Representation
+- LLVM IR - the lower level representation that LLVM sees
 - FFI(foreign function interface) - has C-compatible calling conventions
     - can generally take rust object files and use with C, and C can also use rust code
 - BORROW CHECKER
     - validates lifetimes - a borrower cant outlive what it borrows
 
 ## BUILD TOOLS
-- `cargo` is main dependency manager
 - `rustup` installs and manages toolchain
+    - `rustup update` - update/upgrade `rustc` (and `cargo`, docs, other tools)
     - `rustup show` - show rustc ver, rustup home dir, host arch
+- `rustc` is compiler bin
+- [cargo](#CARGO) is main dependency manager
+- `rustfmt` - formatter, invoked by `cargo fmt`
+    - `cargo fmt` - apply formatting rules to source files
+    - `cargo fmt --all -- --check`  - print diff of format changes to shell
+- `rust-analyzer` - Rust LSP
 
 ## CARGO
 - native package manager
