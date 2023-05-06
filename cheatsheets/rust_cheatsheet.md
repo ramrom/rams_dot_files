@@ -45,17 +45,20 @@
 
 ## BUILD TOOLS
 - `rustup` installs and manages toolchain
-    - `rustup update` - update/upgrade `rustc` (and `cargo`, docs, other tools)
+    - `rustup update` - update/upgrade `rustc`, `cargo` and other tools including docs, clippy
     - `rustup show` - show rustc ver, rustup home dir, host arch
 - `rustc` is compiler bin
-- [cargo](#CARGO) is main dependency manager
+- [cargo](#CARGO) is main dependency manager and build tool(fetch deps, compile/build, run, test, bench, lint)
 - `rustfmt` - formatter, invoked by `cargo fmt`
+    - docs on rules: https://rust-lang.github.io/rustfmt/
     - `cargo fmt` - apply formatting rules to source files
-    - `cargo fmt --all -- --check`  - print diff of format changes to shell
+    - `cargo fmt --file=/path/to/file` - format just one file
+    - `cargo fmt --check`  - print diff of format changes to shell
 - `rust-analyzer` - Rust LSP
 
 ## CARGO
 - native package manager
+- `~/.cargo` dir contains source code for crates, bins, cached artifacts, and more
 - a package consists of many crates and is defined by a `Cargo.toml` file
 - package versions of a crate cant be deleted, they can be yanked
     - this means lock files with yanked versions can still be used, but new projects cannot use this version
