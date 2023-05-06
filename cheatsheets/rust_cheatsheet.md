@@ -1,10 +1,4 @@
 # RUST
-- https://www.rust-lang.org/
-    - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
-    - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
-    - technical referece: https://doc.rust-lang.org/reference/introduction.html
-- playground: https://play.rust-lang.org/
-- https://crates.io/ is a central default registry for tools/programs in rust
 - source files use `.rs` extension
 - created by mozilla teams with a main goal of correctness/reliability/speed
     - driven by massive tech debt of fixing bugs and issue
@@ -14,11 +8,22 @@
 - pre 1.0 rust at one point had a GC and threading runtime
 - good for kernel code, kernels don't/can't raise exceptions, generally return magical values in pointers that callers check
 
+## DOCS
+- https://www.rust-lang.org/
+    - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
+    - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
+    - technical referece: https://doc.rust-lang.org/reference/introduction.html
+- playground: https://play.rust-lang.org/
+- https://crates.io/ is a central default registry for tools/programs in rust
+- `rustup doc` - open local copy of docs in browser
+    - `rustup doc --std` to jump straight to std lib
+    - `rustup doc --book` to jump straight to "The Rust Programming Language" book
+
 ## REPL
 - https://github.com/google/evcxr
 - https://docs.rs/papyrus/latest/papyrus/
 
-## COMPILER/BUILD TOOL
+## COMPILER
 - uses LLVM
 - `rustc` is compiler bin
 - `rustup` - bin to install toolchain and com
@@ -37,6 +42,11 @@
     - can generally take rust object files and use with C, and C can also use rust code
 - BORROW CHECKER
     - validates lifetimes - a borrower cant outlive what it borrows
+
+## BUILD TOOLS
+- `cargo` is main dependency manager
+- `rustup` installs and manages toolchain
+    - `rustup show` - show rustc ver, rustup home dir, host arch
 
 ## CARGO
 - native package manager
@@ -60,6 +70,10 @@
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
     - in rust the `.` operator works on pointers or direct struct/object, pointers are automatically dereferenced
 ### LOOPS
+- `loop { ... }` - infinite loop
+    - use `break` conditions internally to terminate
+    - use `continue` to skip to next iteration
+- `while bool_expre { ... }` - while loops
 - for loops
     ```rust
         let foo = vec![1,2];
@@ -72,13 +86,15 @@
         for i in foo.iter_mut() { println!("{i}"); } // passes &mut T
         for i in &mut foo { println!("{i}"); } // same as iter_mut
 
-        foo.iter().map{ |x| println!("{x}") } // iterators are lazy, maps just returns another iterator with the closure
-        foo.iter().map{ |x| println!("{x}") }.filter{ |x| x > 1 } // iterator adapters are useful for chained
-        foo.iter().map{ |x| println!("{x}") }.filter{ |x| x > 1 }.collect() // collect will execute iterator and return collection
+        foo.iter().map( |x| println!("{x}") ) // iterators are lazy, maps just returns another iterator with the closure
+        foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ) // iterator adapters are useful for chained
+        foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ).collect() // collect will execute iterator and return collection
                                                                             // only one collection gets created here, not 2!
-        foo.iter().for_each{ |x| println!("{x}") }  // for each side effects, executing on the iterator
+        foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
+        foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
     ```
 - `Iterator`s that return `Iterator`s are adapters, main examples: `map`, `filter`, `take`
+
 
 ## MEMORY MANAGEMENT
 - smart anaul memory management unsing ownership/borrow/lifetime mechanic, no runtime garbage collector
@@ -181,6 +197,12 @@
     - discussion to add it - https://internals.rust-lang.org/t/pre-rfc-named-arguments/16413
 - no function overloading
     - apr2023 - there is a `overloadable` crate in nightl build - https://docs.rs/overloadable/latest/overloadable/
+- closures are anonymous functions that can capture their environment
+    ```rust
+    let closure_annotated = |i: i32| -> i32 { i + outer_var };    // with annotations
+    let closure_inferred  = |i     |          i + outer_var  ;    // inferrerd types
+    let one = || 1;         // closure takes zero args, single line expressions dont need curly braces
+    ```
 
 ## TYPE SYSTEM
 - `enum` in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers
@@ -191,9 +213,17 @@
     - e.g. `i32`, `bool`, references themselves like `&T` and `&mut T`
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
+### TRAITS
+- blanket implementations - can implement a trait if a type conditionally implements another trait (using generics)
+    - `impl<T: Display> ToString for T { // --snip-- }`  - from stdlib, this implements `ToString` if `T` implements `Display`
+- auto traits - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
+    - e.g. Structs, enums, unions and tuples implement the trait if all of their fields do.
+    - Function item types and function pointers automatically implement the trait.
+    - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
 - trait objects are fat pointers with both the object pointer and the vtable of methods
     - for trait `Trait`, `Box<dyn Trait>` is a trait object
     - compiles to single function that does a dispatch at runtime based on the object concrete type
+### OTHER
 - rust does not really support downcasting (can't `match` on a trait object's implementor types)
     - traits objects can't be downcast back to the original type with casting or coersion
     - the `Any` trait can do this, it's type-safe downcasting on trait objects
@@ -265,6 +295,9 @@ let s2 = String::from("hello");  // type String is mutable
 - [serde](https://serde.rs/) - awesome serial/deserialization framework
 - [actix](https://actix.rs/) - popular web framework
 - [axum](https://github.com/tokio-rs/axum) - popular web framework
+- [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
+- [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
+    - http cli tool `xh` uses reqwest
 - [rocket](https://rocket.rs/) - most popular rust backend web framework
 - [yew](https://yew.rs) - /awesome front end framework (compiles to webassembly)
     - similar to react architecture, has the conecpt of components

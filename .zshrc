@@ -98,12 +98,15 @@ if [ $(command -v go) ]; then
     export GOBIN=${GOPATH}/bin
 fi
 
-# set rust PATH if rustc compiler is installed
-if [ "$(uname)" = "Linux" ]; then
-    [ -x ~/.cargo/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
-else  # assume osx, brew path in nov2022
-    [ -x /opt/homebrew/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
-fi
+### RUST
+# set rust PATH if rustc compiler is installed via https://www.rust-lang.org/tools/install
+[ -x ~/.cargo/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
+
+# below line is for a brew install
+# [ -x /opt/homebrew/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
+
+# added zsh completions for rust (cargo and rustup) here
+fpath+=~/.zfunc
 
 # execute local settings
 [ -x ~/.local_shell_settings ] && . ~/.local_shell_settings
