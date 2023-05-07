@@ -1,8 +1,25 @@
 "NOTE: will detect .txt files with `***` chars in first line as robot
 Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
 
+"""""""" RELOADING BUFFERS CHANGED OUTSIDE OF VIM SESSION """""""""""""""""
+" autoread alone doesn't really work, triggers on external commands
+    " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+    " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+function BetterAutoRead()
+    "au FocusGained,BufEnter * :silent! !
+    set autoread
 
-"set a custom tab line, each tab prefixed with tab index
+    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+
+    " Notification after file change (https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread)
+    autocmd FileChangedShellPost *
+      \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+endfunction
+
+if empty($VIM_NO_AUTOREAD) | call BetterAutoRead() | endif
+
+
+""""""""""""""""""" "set a custom tab line, each tab prefixed with tab index
 set tabline=%!MyTabLine()  " custom tab pages line\
 function MyTabLine()
         let s = '' " complete tabline goes here
@@ -96,3 +113,5 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
 
+" ignore compiled scala/java files, added so CtrlP will ignore these files
+set wildignore+=*/target/*

@@ -177,6 +177,7 @@ set noswapfile                  " no swap files
 " turn off all mouse support by default
 set mouse=
 
+set autoread                    " reload file's buffer if file was changed externally
 set splitbelow splitright       " open new windows on bottom for horizontal, right for vertical
 set wildmenu                    " display command line's tab complete options as menu
 set wildmode=longest,list,full  " complete longest common, list all matches, complete till next full match
@@ -259,23 +260,6 @@ set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
 """"""""""""""""" CUSTOM FUNCTION """"""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""" RELOADING BUFFERS CHANGED OUTSIDE OF VIM SESSION """""""""""""""""
-" autoread alone doesn't really work, triggers on external commands
-    " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-    " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-function BetterAutoRead()
-    "au FocusGained,BufEnter * :silent! !
-    set autoread
-
-    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-
-    " Notification after file change (https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread)
-    autocmd FileChangedShellPost *
-      \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-endfunction
-
-set autoread
-" if empty($VIM_NO_AUTOREAD) | call BetterAutoRead() | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'

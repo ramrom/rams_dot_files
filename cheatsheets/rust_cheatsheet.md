@@ -114,7 +114,14 @@
 - why aren't multiple mutable references allowed in a single threaded context
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
 
+## LIBS
+- `std` relies on OS primitives
+- `core` relies on nothing
+- `alloc` requires on a memory allocator
+    - most collections in this crate, except hashmap which relies on random data, so its in `std`
+
 ## COLLECTIONS
+- https://doc.rust-lang.org/std/collections/index.html
 ### STRINGS
 - `String` and `&str` are UTF-8
 - string literals (preallocated text) - declared in code like `let s = "string lit"`
@@ -161,6 +168,8 @@
     - generally vector struct on stack, and data in heap
 - are mutable heap allocated arrays: `let a = vec![1 2]`
 - stored in a contiguous section of memory
+- initialize `Vec::with_capacity(n)`, for large n, instead of `new`, if you know u will push tons of items
+    - this avoids a lot of copies and allocations
 ### SLICES
 - like arrays but size not known at compile time
 - 2 word object: 1st word is pointer to data, 2nd word is length of slice
