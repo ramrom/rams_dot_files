@@ -227,9 +227,10 @@
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
-- `Copy` - trait, value is always copied, (kind of opposite of `Drop` types)
+- `Copy` - trait, value is always copied, they are copied instead of moved on new assignment
     - e.g. `i32`, `bool`, references themselves like `&T` and `&mut T`
-- `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
+    - cannot be implemented on a `Drop` type
+- `Drop` - trait for types that drop/free when they go out of scope, so need ownership tracking
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 ### TRAITS
 - blanket implementations - can implement a trait if a type conditionally implements another trait (using generics)
@@ -238,6 +239,7 @@
     - e.g. Structs, enums, unions and tuples implement the trait if all of their fields do.
     - Function item types and function pointers automatically implement the trait.
     - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
+    - `Send`, `Sync`, `Unpin`, `UnwindSafe` are all autotraits
 - trait objects are fat pointers with both the object pointer and the vtable of methods
     - for trait `Trait`, `Box<dyn Trait>` is a trait object
     - compiles to single function that does a dispatch at runtime based on the object concrete type
@@ -246,7 +248,7 @@
     - traits objects can't be downcast back to the original type with casting or coersion
     - the `Any` trait can do this, it's type-safe downcasting on trait objects
     - one idomatic way is to use `enums` variants in place of the trait implementors
-- for `trait Trait {}`, a param that takes `impl Trait` is basically syntax sugar for generic trait `<T: Trait>`
+- for `trait Trait {}`, a param of type `impl Trait` is basically syntax sugar for generic trait `<T: Trait>`
     ```rust
     trait Trait {}
     fn foo<T: Trait>(arg: T) { }
