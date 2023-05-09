@@ -17,6 +17,7 @@ go doc -src fmt.Println
 ## RUNTIME SCHEDULING
 - https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
 - goroutines pre-empted only at safe points, at function calls
+    - many of these are inserted before/after function calls by compiler
 - GC generally done by concurrently running dedicated goroutines
 
 # GO MOD

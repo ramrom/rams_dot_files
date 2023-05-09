@@ -4,6 +4,7 @@
     - driven by massive tech debt of fixing bugs and issue
 - by many measures it's as fast as C
     - oftentimes compiles to identical assembly as C
+    - smart memory management unsing ownership/borrow/lifetime mechanic, no runtime garbage collector
 - zig and carbon aim to be a better C, but rust doesnt try to be like C
 - pre 1.0 rust at one point had a GC and threading runtime
 - good for kernel code, kernels don't/can't raise exceptions, generally return magical values in pointers that callers check
@@ -93,6 +94,7 @@
     - use `break` conditions internally to terminate
     - use `continue` to skip to next iteration
 - `while bool_expre { ... }` - while loops
+- `for_iter` can yield any of `T`, `&T` or `&mut T`, use `iter` or `iter_mut` for explicit refs
 - for loops
     ```rust
         let foo = vec![1,2];
@@ -106,23 +108,37 @@
         for i in &mut foo { println!("{i}"); } // same as iter_mut
 
         foo.iter().map( |x| println!("{x}") ) // iterators are lazy, maps just returns another iterator with the closure
-        foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ) // iterator adapters are useful for chained
+        foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ) // iterator adapters are useful for chaining
         foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ).collect() // collect will execute iterator and return collection
-                                                                            // only one collection gets created here, not 2!
+                                                                            // adapters are efficient, no intermediate collection is made!
         foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
         foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
     ```
 - `Iterator`s that return `Iterator`s are adapters, main examples: `map`, `filter`, `take`
 
-
-## MEMORY MANAGEMENT
-- smart anaul memory management unsing ownership/borrow/lifetime mechanic, no runtime garbage collector
-- `let` will put data in stack
-- smart pointers put it on the heap
-
 ## REFERENCES/OWNERSHIP
+- references are a "pointer" to data, and in rust they also mean borrowing the data from an owner
+- 2 main rules of references
+    - a owner can lend out one mutable reference
+    - a owner can lend out multiple immutable references
+    - can _not_ lend out a mutable reference and an immutable reference
 - why aren't multiple mutable references allowed in a single threaded context
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
+- `Box` - pointer to heap allocated data, single ownership and thus can mutate contents
+    - implements `Send`, so can tx ownership to a different thread
+- `Rc` - reference counter heap allocated data, multiple ownership and contents read only
+    - doesn not implement `Send`
+### LIFETIMES
+- references are tracked by lifetimes and lifetime annotatinos are needed in cases in order to help the compiler/borrow-checker
+- a parameters with an annotation has a input lifetimes, a return values have output lifetime
+- output lifetimes cant outlive input lifetimes, that's a dangling pointer/reference
+- `'static` lifetime means reference lives for the entire duration of program
+- lifetime elision rules are cases where lifetime annotations are not needed because the compiler can infer them correctly
+    - 3 main rules to determine if no lifetime annotations are needed on func/method
+        - multiple inputs each get a different lifetime parametes
+        - if only one input then the output gets the same lifetime
+        - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
+
 
 ## LIBS
 - `std` relies on OS primitives
@@ -180,6 +196,12 @@
 - stored in a contiguous section of memory
 - initialize `Vec::with_capacity(n)`, for large n, instead of `new`, if you know u will push tons of items
     - this avoids a lot of copies and allocations
+- it implements `Debug`, but not `Display`, and can be printed with `let v = vec![1, 2]; println!("{v:?}");`
+- `VecDeque` - basically a ring buffer that uses a beginning and end pointer
+    - good for queues and stacks, esp queue, u can append to beginning without having to move all items in array
+    - overhead: gotta check if at end of allocation and wrap when indexing
+    - disadvantage: cant turn into slice (no `DeRef` into slice), slices needs to be contiguous memory
+    - disadvantage: cpu's do memory readahead optimizations for things like loops, and they dont know the ring buffer's termination
 ### SLICES
 - like arrays but size not known at compile time
 - 2 word object: 1st word is pointer to data, 2nd word is length of slice

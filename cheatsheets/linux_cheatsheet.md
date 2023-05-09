@@ -19,6 +19,8 @@
         - file remains b/c programs like `ls` still use it
         - still contains UID, full name, home dir, default shell
     - `shadow` contains hashed passwords and other management fields, is readable only by root
+- swap partition - using a filesystem generally on a HD as storage for data on RAM, usually when RAM is full
+- ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
 
 ## GNU
 - started by richard stallman in 1984
