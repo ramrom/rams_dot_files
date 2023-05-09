@@ -140,6 +140,7 @@ endif
 set t_Co=256
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
+    " may2023 - vim needs this, neovim seems to work without it
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
@@ -258,8 +259,6 @@ set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""" CUSTOM FUNCTION """"""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'

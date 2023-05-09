@@ -3,6 +3,7 @@
 tags
 tmp/*
 MyCurrentVimSession.vim
+.DS_Store
 
 .netrwhist
 .vim/autoload/

@@ -1,4 +1,4 @@
-## GOLANG:
+## GOLANG
 - https://go.dev
 - cgo lets you add c code in go programs: https://golang.org/cmd/cgo/
 - supported architectures and OSes: https://golang.org/doc/install/source#environment
@@ -13,6 +13,11 @@
 
 ## print src code for go doc symbol/type/func
 go doc -src fmt.Println
+
+## RUNTIME SCHEDULING
+- https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
+- goroutines pre-empted only at safe points, at function calls
+- GC generally done by concurrently running dedicated goroutines
 
 # GO MOD
 - module is collection of packages

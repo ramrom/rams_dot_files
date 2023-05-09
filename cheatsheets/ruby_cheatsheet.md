@@ -3,6 +3,17 @@
 ## GEM
 - `gem install --user-install somegem` - install as user (root is default)
 
+## HIGHER ORDER FUNCTIONS
+- lambda
+    - will error if exact number of args are not given
+    - return statement will return control to calling function
+- proc
+    - very similar to lambda
+    - if proc takes N args, and called with N-1, last arg will be `nil`, if called with N+1, last arg is ignored
+    - return statement will return from proc and calling function
+- code blocks
+    - an anonymous function that can be invoked from within another function
+
 ```ruby
 # puts
 STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout

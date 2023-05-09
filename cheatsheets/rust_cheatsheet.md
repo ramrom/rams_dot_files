@@ -15,6 +15,7 @@
     - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
     - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
     - technical referece: https://doc.rust-lang.org/reference/introduction.html
+- rust in Y minutes: https://learnxinyminutes.com/docs/rust/
 - `rustup doc` - open local copy of docs in browser
     - `rustup doc --std` to jump straight to std lib
     - `rustup doc --book` to jump straight to "The Rust Programming Language" book
@@ -74,6 +75,15 @@
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program
 - `cargo tree` - print dependency tree
 - `cargo build -v` - show exactly what commands it's running
+- `cargo build --manifest-path /path/to/Cargo.toml` - specify `Cargo.toml` file in another location
+- using a create in a project
+    ```rust
+    extern crate old_http;  // rust 2015
+    use old_http::SomeType;
+
+
+    use old_http::SomeType;  // rust 2018 and 2021
+    ```
 
 ## GRAMMER
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
@@ -227,10 +237,13 @@
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
-- `Copy` - trait, value is always copied, they are copied instead of moved on new assignment
-    - e.g. `i32`, `bool`, references themselves like `&T` and `&mut T`
-    - cannot be implemented on a `Drop` type
-- `Drop` - trait for types that drop/free when they go out of scope, so need ownership tracking
+- `Copy` - trait, value is always copied(memcpy, so direct bit by bit copy)
+    - cannot be implemented on `Drop` types
+    - these itmes are generally simple and allocated on the stack
+    - they copy on new variable assignments vs tx of ownership `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
+    - e.g. `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
+        - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
+- `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 ### TRAITS
 - blanket implementations - can implement a trait if a type conditionally implements another trait (using generics)
@@ -313,12 +326,12 @@ let s2 = String::from("hello");  // type String is mutable
 ## LIBS/FRAMEWORKS/APPS
 - [tokio](https://tokio.rs) - awesome async framework
 - [serde](https://serde.rs/) - awesome serial/deserialization framework
-- [actix](https://actix.rs/) - popular web framework
-- [axum](https://github.com/tokio-rs/axum) - popular web framework
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
-- [rocket](https://rocket.rs/) - most popular rust backend web framework
+- [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async
+- [actix](https://actix.rs/) - popular web framework, uses actor model
+- [axum](https://github.com/tokio-rs/axum) - popular web framework
 - [yew](https://yew.rs) - /awesome front end framework (compiles to webassembly)
     - similar to react architecture, has the conecpt of components
     - generally faster than react!
@@ -326,4 +339,5 @@ let s2 = String::from("hello");  // type String is mutable
 - [tauri](https://tauri.app/) - build native apps for desktop and mobile
 - [clap](https://docs.rs/clap/latest/clap/) - awesome CLI parser lib
 - pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)
+- [vaultwarden](https://github.com/dani-garcia/vaultwarden) - bitwarden server written in rust!
 
