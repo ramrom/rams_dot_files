@@ -148,6 +148,7 @@
 
 ## COLLECTIONS
 - https://doc.rust-lang.org/std/collections/index.html
+- may2023 - good vid on collecitons - https://www.youtube.com/watch?v=EF3Z4jdD1EQ&list=WL&ab_channel=JonGjengset
 ### STRINGS
 - `String` and `&str` are UTF-8
 - string literals (preallocated text) - declared in code like `let s = "string lit"`
@@ -235,6 +236,10 @@
      scores.entry(String::from("Blue")).or_insert(50);
      ```
 - `get` method that returns `Option<V>`, `None` if key not found
+- - `BTreeMap` uses a binary tree and keys are ordered (`HashMap` they are not)
+### SETS
+- `BTreeSet` and `HashSet` use `HashMap` and `BtreeMap`
+    - since maps keys are unique, that is leveraged for sets, the values of the maps are moot/unit-structs
 
 
 ## FUNCTIONS

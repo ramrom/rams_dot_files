@@ -51,7 +51,6 @@
     import java.io.File
     ("ls -al" #> new File("files.txt")).!
     ```
-- TIME/DATE: use java times and date, it is now better than jodatime
 
 
 ## DATA STRUCTURES
@@ -73,17 +72,19 @@ val m: Map[String, Int] = Map.empty
 m += ("foo", 1)    // appending an item for mutable Map
 ```
 
-
 ## CONCURRENCY
-- async with thread pools: `Future { 1 + 1 }`
+- Futures
+    - async with execution contexts: `Future { 1 + 1 }`
+        - `import scala.concurrent.ExecutionContext.Implicits.global`
+    - an execution context is a abstraction that include a thread pool
 - mutex on variables: `synchronize { 1 + 1 }`
 
 ### PATTERN MATCHING
 - `case entries @ _ :: _ :: (_: List[_]) => {`
     - more than one record
 
-- import scala.concurrent.ExecutionContext.Implicits.global
-
+### DATE/TIME
+- TIME/DATE: use java times and date, it is now better than jodatime
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
 
@@ -92,10 +93,6 @@ m += ("foo", 1)    // appending an item for mutable Map
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
     - should close file too: val a = Source.fromFile("example.txt"), a.close
 
-PlaySpecification/spec2, to skip test:
-    - skipped("some reason")
-    - append .pendingUntilFixed("message about the issue")
-
 ## ENUMERATION
 - play 2.5 json doesnt supports scala enumerators
 - can use enumeratum
@@ -103,6 +100,10 @@ PlaySpecification/spec2, to skip test:
 ## IMPLICITS
 - coder doesnt need to explicilty pass in an arg/type that is implicit, the compiler will find it within scope
 - scala 3 overhauled implicits
+
+## BUILD TOOLS
+- sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
+- mill, see [build tools](build_dependency_tools_cheatsheet.md#mill)
 
 ## MACWIRE/DEPENDENCY-INJECT
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
@@ -124,6 +125,9 @@ PlaySpecification/spec2, to skip test:
     val someMethodRef = PrivateMethod[SomeReturnType]('nameOfPrivateMethodToAccess')
     val result = someObjectToTest invokePrivate someMethodRef(arg1, arg2)
     ```
+- PlaySpecification/spec2, to skip test
+    - `skipped("some reason")`
+    - `append .pendingUntilFixed("message about the issue")`
 ### SCALATEST
 - https://www.scalatest.org/user_guide/using_the_runner#filtering
 - using with sbt: https://www.scalatest.org/user_guide/using_scalatest_with_sbt
@@ -154,6 +158,10 @@ PlaySpecification/spec2, to skip test:
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 - 2.8
     - supports java 11
+
+
+## JSON PARSING
+- weePickle: https://github.com/rallyhealth/weePickle
 ### PLAY JSON
 - https://www.playframework.com/documentation/2.8.x/ScalaJson
 - parse json string -> play AST JsValue -> json string
@@ -175,8 +183,6 @@ PlaySpecification/spec2, to skip test:
     - `Json.parse("[1,2,3]").validate[Seq[Int]]`
         - `validate` returns `JsSuccess` or `JsError`
 
-## JSON PARSING
-- weePickle: https://github.com/rallyhealth/weePickle
 
 ## AMMONITE
 - https://ammonite.io/
@@ -204,10 +210,6 @@ PlaySpecification/spec2, to skip test:
 ## CATS
 - cats: https://typelevel.org/cats/datatypes/ior.html
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
-
-## BUILD TOOLS
-- sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
-- mill, see [build tools](build_dependency_tools_cheatsheet.md#mill)
 
 ## AKKA
 - one of akka streams main goals is to implement backpressure

@@ -56,6 +56,7 @@ FZF-MRU:
 Gedit HEAD~3:%  - git show HEAD~3:<current file>
 G               - git status
     s - stage, u - unstage, = - toggle diff of file
+    ]c - move to next file and expand diff
 G diff          - git diff
 G blame         - sidepane with git blame
 G log %         - git log <current file>
