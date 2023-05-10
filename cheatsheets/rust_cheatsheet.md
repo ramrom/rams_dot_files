@@ -215,6 +215,12 @@
 - `HashMap<K, V>` associative arrays, heap allocated
     - `K`, `V` are generic types, key and value must be one type (homogenous)
     - no macros to build them
+    - backed by a vector with buckets and linear probing
+    - linear probing: for insert, if bucket is taken compute hash with occupying key + insertion key, goto that bucket, repeat till vacancy
+    - `new` will probably create a 64-128 sized initial array
+    - std lib hashing functions is fast but not fastest, it uses a slower cryptographic hash function, a tradeoff for security
+        - e.g. webserver that hashes user data, malicious user could DoS by choosing keys that fully collide, making hash very slow
+        - cryptographic hash will also use a random seed (`RandomState`)
 - need to `use`
     ```rust
     `use std::collections::HashMap;`
