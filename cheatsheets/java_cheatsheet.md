@@ -62,6 +62,7 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 ```
 
 ### CLASSES
+- static and member variables not initialized have a `null` value
 ### INTERFACE
 - cannot implement any methods
 - a class can implement many interfaces, multiple inheritence

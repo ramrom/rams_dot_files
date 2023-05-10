@@ -274,7 +274,7 @@
 - `Sized` - trait, known size at compile time, doesnt change size
 - `Copy` - trait, value is always copied(memcpy, so direct bit by bit copy)
     - cannot be implemented on `Drop` types
-    - these itmes are generally simple and allocated on the stack
+    - these itmes are generally simple, have a known size, and allocated on the stack
     - they copy on new variable assignments vs tx of ownership `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
     - e.g. `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
         - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
