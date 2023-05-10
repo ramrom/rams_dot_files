@@ -221,6 +221,8 @@
     - std lib hashing functions is fast but not fastest, it uses a slower cryptographic hash function, a tradeoff for security
         - e.g. webserver that hashes user data, malicious user could DoS by choosing keys that fully collide, making hash very slow
         - cryptographic hash will also use a random seed (`RandomState`)
+    - when map gets full, a new backing array is created, and more than mem copy b/c hash func output will be different due to modulus
+        - thus it's more work than a straight memcopy, key/values will have to be reinserted
 - need to `use`
     ```rust
     `use std::collections::HashMap;`
@@ -279,6 +281,10 @@
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 ### TRAITS
+- follows orphan rule
+    - cannot implement _external_ traits on _external_ types
+    - **can** implment _internal_ trait on _external_ type and _external_ trait on _internal_ type
+    - without rule, 2 crates could implement same trait on same type, this is a conflict and rust wouldnt know which to pick
 - blanket implementations - can implement a trait if a type conditionally implements another trait (using generics)
     - `impl<T: Display> ToString for T { // --snip-- }`  - from stdlib, this implements `ToString` if `T` implements `Display`
 - auto traits - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
@@ -357,6 +363,7 @@ let s2 = String::from("hello");  // type String is mutable
 ```
 
 ## LIBS/FRAMEWORKS/APPS
+- [rayon](https://docs.rs/rayon/latest/rayon/) - lib for making sequential computations parralel (e.g. parrallel iterators)
 - [tokio](https://tokio.rs) - awesome async framework
 - [serde](https://serde.rs/) - awesome serial/deserialization framework
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio

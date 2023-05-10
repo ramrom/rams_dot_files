@@ -53,7 +53,7 @@
     ```
 
 
-## DATA STRUCTURES
+## COLLECTIONS
 ### LIST/ARRAY
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
@@ -66,6 +66,11 @@
     - `"hi there".slice(2,5)` -> returns `" th"`
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
+### STREAMS
+- like collection but lazily evaluated so can be optimized when chaining them together
+- regular collections that u might chain with things like `map` and `filter` will eagerly create intermediate data structures
+- deprecated in 2.13.0 in favor of LazyList
+
 
 ```scala
 val m: Map[String, Int] = Map.empty
@@ -80,6 +85,7 @@ m += ("foo", 1)    // appending an item for mutable Map
 - mutex on variables: `synchronize { 1 + 1 }`
 
 ### PATTERN MATCHING
+- matching must be exhaustive
 - `case entries @ _ :: _ :: (_: List[_]) => {`
     - more than one record
 
