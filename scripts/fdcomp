@@ -1,4 +1,5 @@
 #!/bin/sh
+# FIXME may'23: if zsh shell, the fdfind below doesn find any files
 
 
 # FDCOMP - Fzf over docker compose files in a dir and run one
@@ -14,15 +15,17 @@ done
 shift $(($OPTIND - 1))
 
 out=$(fdfind -t f .*compose.*\.yml | fzf +m --height 100% \
-    --header='ctrl-i->up-detatched, ctrl-e->edit' \
+    --header=$'ctrl-i->up-detatched, ctrl-e->edit\nctrl-o->pull-image, ctrl-s->down+rmi' \
     --preview 'batcat --color always {}' \
-    --expect='ctrl-i,ctrl-e')
+    --expect='ctrl-i,ctrl-e,ctrl-s,ctrl-o')
 
 key=$(echo "$out" | head -1)
 composefile=$(echo "$out" | tail -1)
 if [ -n "$composefile" ]; then
     case "$key" in
         "ctrl-i") docker compose -f "$composefile" up -d ;;
+        "ctrl-s") docker compose -f "$composefile" down --rmi all ;;
+        "ctrl-o") docker compose -f "$composefile" pull ;;
         "ctrl-e") $EDITOR "$composefile" ;;
     esac
 fi
