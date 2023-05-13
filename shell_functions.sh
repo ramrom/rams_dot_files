@@ -156,10 +156,11 @@ l () {
 
 # function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
 function ff() {
+    # source ~/bin/ff -w "$@"
     local result=$(~/bin/ff -w "$@")
     [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
     echo "$result" | grep -E '^vi|^nvi' > /dev/null && eval "$result" && return
-    echo $result
+    echo "$result"
 }
 
 function binlink() {
