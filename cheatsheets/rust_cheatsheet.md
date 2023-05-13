@@ -7,6 +7,9 @@
     - smart memory management unsing ownership/borrow/lifetime mechanic, no runtime garbage collector
 - zig and carbon aim to be a better C, but rust doesnt try to be like C
 - pre 1.0 rust at one point had a GC and threading runtime
+- major editions: 2015, 2018, 2021
+    - https://doc.rust-lang.org/edition-guide/editions/
+    - all editions use the same internal representation
 - good for kernel code, kernels don't/can't raise exceptions, generally return magical values in pointers that callers check
 - https://crates.io/ is a central default registry for tools/programs in rust
 
@@ -148,7 +151,8 @@
 
 ## COLLECTIONS
 - https://doc.rust-lang.org/std/collections/index.html
-- may2023 - good vid on collecitons - https://www.youtube.com/watch?v=EF3Z4jdD1EQ&list=WL&ab_channel=JonGjengset
+- may2023 - good vid on collections - https://www.youtube.com/watch?v=EF3Z4jdD1EQ&list=WL&ab_channel=JonGjengset
+    - many collections need to use unsafe code(raw pointers) in order to be feasible/performant, borrow checker couldnt reason about it well
 ### STRINGS
 - `String` and `&str` are UTF-8
 - string literals (preallocated text) - declared in code like `let s = "string lit"`
@@ -217,6 +221,9 @@
     - no macros to build them
     - backed by a vector with buckets and linear probing
     - linear probing: for insert, if bucket is taken compute hash with occupying key + insertion key, goto that bucket, repeat till vacancy
+        - newest imp uses `hashbrown::hash_map` create (google invented hash, swisstable, uses quadratic probing and SIMD, very fast)
+            - hashbrown doesnt require random num generation for `Hasher`, so can be used in more places (embedded systems, kernels)
+            - saturation is around 60-70%, when it hits this level it allocates more mem for more buckets
     - `new` will probably create a 64-128 sized initial array
     - std lib hashing functions is fast but not fastest, it uses a slower cryptographic hash function, a tradeoff for security
         - e.g. webserver that hashes user data, malicious user could DoS by choosing keys that fully collide, making hash very slow
@@ -244,10 +251,14 @@
      scores.entry(String::from("Blue")).or_insert(50);
      ```
 - `get` method that returns `Option<V>`, `None` if key not found
-- - `BTreeMap` uses a binary tree and keys are ordered (`HashMap` they are not)
+- - `BTreeMap` uses a B-Tree and keys are ordered (`HashMap` they are not)
+    - in std lib size of B is 6
 ### SETS
 - `BTreeSet` and `HashSet` use `HashMap` and `BtreeMap`
     - since maps keys are unique, that is leveraged for sets, the values of the maps are moot/unit-structs
+### BINARY HEAP
+- `BinaryHeap` - backed by vector, inserts(push) very fast, pop always extracts highest value item
+    - use for priority queues, need to order jobs by priority and process them by priority
 
 
 ## FUNCTIONS

@@ -512,7 +512,7 @@ noremap <leader>cC :call ShowMyLeaderMap()<cr>
 noremap <leader>cc :Maps!<cr> 'space 
 noremap <leader>cm :Maps<cr>
 noremap <leader>cg :map g<cr>
-noremap <leader>cd :Files ~/rams_dot_files/cheatsheets/<cr>
+noremap <leader><leader>c :Files ~/rams_dot_files/cheatsheets/<cr>
 noremap <leader>cl :exe ':Files' $MY_NOTES_DIR<cr>
 noremap <leader>cr :exe ':Files' $MY_WORK_DIR<cr>
 noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>

@@ -63,6 +63,7 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 
 ### CLASSES
 - static and member variables not initialized have a `null` value
+- `Object` is root of the class heirarchy, all objects are a decendent of `Object`
 ### INTERFACE
 - cannot implement any methods
 - a class can implement many interfaces, multiple inheritence
@@ -71,6 +72,13 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 - can implement methods
 - no multiple inheritence
 - can have final and non-final variables, static and non-static variables
+### RECORD
+- immutable
+- data struct that has a setter/getter, constructor, `equals` method, `hashCode` method, `toString` method
+
+### INTROSPECTION
+- `(object) instanceof (type)` - test if object is instance of type, or subtype of type, or implements an interface
+    - e.g. if `Dog` is subclass of `Animal`; `Dog foo = new Dog(); assertTrue(foo instanceof Animal)`
 
 ### IO
 ```java
@@ -108,10 +116,16 @@ switch (a) {
 //trinary
 String bar = (3 < 10) ? "A" : "B";
 ```
+- java 14 has switch expressions (vs the switch statement above)
+    - no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
+    - dont have to be exhaustive
 
-## HSITORY
+
+## HISTORY
 - java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),
 - java8, mar2014, LTS(till 2025) - lamba functions
 - java11, sept2018, LTS - TLS, http client, epsilon garbage collector
+- java14
+    - introduced `record`, aka scala case class
 - java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
 - java17, sept2021, LTS - better pattern matching

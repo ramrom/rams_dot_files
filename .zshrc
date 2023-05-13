@@ -6,6 +6,9 @@ setopt histignoredups
 # turn off zsh globbing, particularly `[]` (brackets)
 setopt NO_NOMATCH
 
+# `ls /foo/bar<C-w>` only kills 'bar'
+autoload -U select-word-style
+
 # autochange dirs: no need to type `cd` before dir
 setopt auto_cd
 
@@ -48,20 +51,20 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 # export FD_OPTIONS="--follow"
 
 # Linux bin name for fd is fdfind
-fdname="fd"
-[ `uname` = "Linux" ] && fdname="fdfind"
+FD_BIN="fd"
+[ `uname` = "Linux" ] && FD_BIN="fdfind"
 
 ##### FZF #######
-export FZF_DEFAULT_COMMAND="$fdname --type f --follow --hidden --exclude .git"
+export FZF_DEFAULT_COMMAND="$FD_BIN--type f --follow --hidden --exclude .git"
 export FZF_DEFAULT_OPTS="--no-mouse --height 50% --reverse --multi --inline-info \
        --bind 'ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-n:preview-page-down,ctrl-p:preview-page-up'"
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_COMPLETION_OPTS='--border --info=inline'
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_T_COMMAND="$fdname"
+export FZF_CTRL_T_COMMAND="$FD_BIN"
 # TODO: option-c doesnt do anything in osx
-export FZF_ALT_C_COMMAND="$fdname --type d"
-unset fdname
+export FZF_ALT_C_COMMAND="$FD_BIN--type d"
+unset FD_BIN
 
 function load_or_err() {
     if [ -f "$1" ]; then . $1; else echo "$(tput setaf 1)$1 not found$(tput sgr0)"; fi

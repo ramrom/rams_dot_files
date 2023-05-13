@@ -252,6 +252,7 @@
     - bills/pricing revenue mainly from indexing volume
 
 ## LANGUAGES/FRAMEWORKS
+- WASM - web assembly, supported my most browsers, it's a compile target supported by rust, python, kotlin, and many more
 - Dart, new lang by google for front-end development, designed to be closely compatible with javascript
     - 2022 - chrome natively supports it, other browsers it's transpiled to javascript
     - 1.x is dynamic typed, 2.x is statically typed
@@ -419,6 +420,7 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
 
 ## AUTHENTICATION
 - Oauth - invented in 2006 out of twitter OpenID standard
+    - https://oauth.net/
     - oauth 1.0 came out in 2007, by google engineer
     - 2.0 came out in 2013, not backwards compatible with 1.0
     - martin fowler ruby scripting to do oauth 2.0 with google: https://martinfowler.com/articles/command-line-google.html
