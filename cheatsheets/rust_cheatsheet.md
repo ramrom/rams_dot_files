@@ -350,8 +350,14 @@
     - std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
     - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
 
+## ANNOTATION
+- `derive` - tells rust to automatically generate a trait implementation for a type
+- `cfg` - means set a configuration
+
 ## TESTING
 - annotate `mod` with `#[cfg(test)]` and test func with `#[test]`
+    - convention is to create a `tests` mod in each file just for tests
+    - `#[cfg(test)]` tells cargo to only build this mod on `cargo test`
 - `assert( 1 == 2, "one equals 2")` - 1st arg must return `bool`, will panic with message in 2nd arg if `false`
     - `assert( 1 == 2, "one equals {}", 2)` - can also take 3 args
 - `assert_eq!(1, 1)` - panics unless args are equal
@@ -359,6 +365,12 @@
     - left and right of `assert_eq` and `assert_ne` must implement `PartialEq` and `Display`
 - if `panic` is expected annotate the test func with `#[test]` and `#[should_panic]`
     - can test specific panic message with `#[should_panic(expected = "some expected message in panic statement")]`
+- `cargo test` by default runs tests in parrallel, make sure tests wont cause race conditions with each other
+    - can run serially with `cargo test --test-threads=1`
+    - add `#[ignore]` annotation to test to ignore, then can run only ignored with `cargo test -- --ignored`
+    - `cargo test foo` - will run all tests with `foo` in the function name
+- can test private funcs in rust
+- integration tests live in another top level directory `tests`, they test only public API of ur lib
 
 ## MACROS
 - like macros in other langs, it's metaprogramming, rust code that expands to more rust code
