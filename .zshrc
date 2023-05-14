@@ -55,7 +55,7 @@ FD_BIN="fd"
 [ `uname` = "Linux" ] && FD_BIN="fdfind"
 
 ##### FZF #######
-export FZF_DEFAULT_COMMAND="$FD_BIN--type f --follow --hidden --exclude .git"
+export FZF_DEFAULT_COMMAND="$FD_BIN --type f --follow --hidden --exclude .git"
 export FZF_DEFAULT_OPTS="--no-mouse --height 50% --reverse --multi --inline-info \
        --bind 'ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-n:preview-page-down,ctrl-p:preview-page-up'"
 export FZF_COMPLETION_TRIGGER='**'
