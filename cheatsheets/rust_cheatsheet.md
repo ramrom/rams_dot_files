@@ -351,8 +351,14 @@
     - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
 
 ## TESTING
+- annotate `mod` with `#[cfg(test)]` and test func with `#[test]`
 - `assert( 1 == 2, "one equals 2")` - 1st arg must return `bool`, will panic with message in 2nd arg if `false`
+    - `assert( 1 == 2, "one equals {}", 2)` - can also take 3 args
 - `assert_eq!(1, 1)` - panics unless args are equal
+- `assert_ne!(1, 1)` - assert not equal
+    - left and right of `assert_eq` and `assert_ne` must implement `PartialEq` and `Display`
+- if `panic` is expected annotate the test func with `#[test]` and `#[should_panic]`
+    - can test specific panic message with `#[should_panic(expected = "some expected message in panic statement")]`
 
 ## MACROS
 - like macros in other langs, it's metaprogramming, rust code that expands to more rust code
