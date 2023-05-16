@@ -168,9 +168,6 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme ram_ir_black    "modified ir_black with red/green vimdiff colors
 endtry
 
-" TODO: find better timeout length
-" set timeoutlen=1000          " default is 1000ms
-
 set nobackup                    " no backup files
 set nowritebackup               " only in case you don't want a backup file while editing
 set noswapfile                  " no swap files

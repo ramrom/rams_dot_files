@@ -54,32 +54,34 @@ set -o vi   # bash vi mode
 ```
 
 ### COMMAND LINE NAVIGATION (ZSH AND BASH DEFAULTS)
-- `ctrl-c` - send current process SIGINT
-- `ctrl-z` - suspend/stop process to background
+- `ctrl-q` - Release terminal output (after being paused)
+- `ctrl-w` - delete word before cursor (cut to clipboard)
+- `ctrl-e` - goto end of line
+- `ctrl-r` - fuzzy search command history
+- `ctrl-t` - transpose chars on either side of point
+- `ctrl-y` - paste what was cut
+- `ctrl-u` - delete line before cursor (cut to cliboard)
+- `ctrl-i` - tab
+- `ctrl-o` - ???
+- `ctrl-p` - go back one command in the history
+- `ctrl-a` - goto beg of line
+- `ctrl-s` - linux pauses output to screen
 - `ctrl-d` - sends EOF or del char
     - for EOF, most shells like bash/zsh will basically run the `exit` command
     - if not at 1st char in prompt, delete char in front of it (forward delete)
-- `ctrl-s` - linux pauses output to screen
-- `ctrl-q` - Release terminal output (after being paused)
-- `ctrl-t` - transpose chars on either side of point
-- `ctrl-l` - clear screen
-- `ctrl-k` - delete line after cursor (cut to clipboard)
-- `ctrl-g` - Leave the history search mode without running a command.
-- `ctrl-j`,`ctrl-m` - begin new line, VIM insert mode too!
-- `ctrl-a` - goto beg of line
-- `ctrl-e` - goto end of line
-- `ctrl-b` - go back one space
 - `ctrl-f` - go forward one space
-- `ctrl-u` - delete line before cursor (cut to cliboard)
-- `ctrl-w` - delete word before cursor (cut to clipboard)
-- `ctrl-y` - paste what was cut
-- `ctrl-v` - display version info about bash
-- `ctrl-x` - ??? (sometimes cut)
+- `ctrl-g` - Leave the history search mode without running a command.
 - `ctrl-h` - delete last char, VIM insert mode and command too!
-- `ctrl-i` - tab
-- `ctrl-p` - go back one command in the history
+- `ctrl-j` - begin new line, VIM insert mode too!
+- `ctrl-k` - delete line after cursor (cut to clipboard)
+- `ctrl-l` - clear screen
+- `ctrl-z` - suspend/stop process to background
+- `ctrl-x` - ??? (sometimes cut)
+- `ctrl-c` - send current process SIGINT
+- `ctrl-v` - display version info about bash
+- `ctrl-b` - go back one space
 - `ctrl-n` - go forward one command in the history
-- `ctrl-r` - fuzzy search command history
+- `ctrl-m` - begin new line, VIM insert mode too!
 - `ctrl-[` - escape
 - `ctrl-7` - undo
 - `ctrl-8` - backward delete char

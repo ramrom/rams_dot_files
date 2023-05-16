@@ -1,5 +1,6 @@
 # TMUX
 - good cheatsheet: https://tmuxcheatsheet.com/
+- good list of plugins/tech around it: https://github.com/rothgar/awesome-tmux
 - in copymode
     - space starts selection(or reset it), enter to end/copy it
     - esc cancels selection, still in copy mode

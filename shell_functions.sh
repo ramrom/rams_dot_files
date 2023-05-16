@@ -65,7 +65,7 @@ function debug_vars() {
 }
 
 # given port number return if ssh(or polipo) is listening on it
-# polipo used to create HTTP proxy to a SOCKS proxy (scab does this, and authn e2e tests too)
+# polipo used to create HTTP proxy to a SOCKS proxy
 function find_listening_ports() {
     local process_type=ssh; [ -n "$polipo" ] && process_type=polipo
     ports="$(lsof -nP -iTCP -sTCP:LISTEN)"

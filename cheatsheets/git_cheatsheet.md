@@ -26,10 +26,12 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
     `git reset --hard origin/master`
 
 - show branches with commits merged into relativebranch
-    - NOTE: authn squash commits a branch to new commit before merge, so commit number is diff
-    `git branch --merged relativebranch`
+    - NOTE: squash commiting changes commit hashes
+    - `git branch --merged relativebranch`
 - shows opposite
-    `git branch --no-merged relativebranch`
+    - `git branch --no-merged relativebranch`
+- grep branches
+    - `git branch --all --list *somepattern*`
 
 - delete all branches not master or current
     `git branch | egrep -v "^\*|master" | xargs git branch -D`
