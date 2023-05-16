@@ -117,7 +117,10 @@
         foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
         foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
     ```
-- `Iterator`s that return `Iterator`s are adapters, main examples: `map`, `filter`, `take`
+- adapters - `Iterator`s that return `Iterator`s, main examples: `map`, `filter`, `enumerate`, `take`, `zip`, `flatten`
+- consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
+- unrolling - means to flatten a loop, compiler does this optimization often if it's a small number of known iterations
+    - e.g. `for i in (1..5) { ... }`
 
 ## REFERENCES/OWNERSHIP
 - references are a "pointer" to data, and in rust they also mean borrowing the data from an owner
@@ -125,10 +128,16 @@
     - a owner can lend out one mutable reference
     - a owner can lend out multiple immutable references
     - can _not_ lend out a mutable reference and an immutable reference
+- Dereference coersion - convert a type that implements `DeRef` into a reference when passed in as func param
+    - e.g. `String` implements `DeRef` and `deref` method produces `&str` so a `&String` can be passed into a arg of type `&str`
+    - multiple nested `DeRef` types be called, e.g. `Box<String>>` passed into arg taking `&str`
+        - `Box<String>` derefs to `String`, `String` derefs to string slice `&String`, `&String` derefs to `&str`
 - why aren't multiple mutable references allowed in a single threaded context
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
-- `Box` - pointer to heap allocated data, single ownership and thus can mutate contents
+- `Box` - pointer to heap allocated data, single ownership and can mutate contents
+    - implements `DeRef` so can be used as reference
     - implements `Send`, so can tx ownership to a different thread
+    - can create recursive types using Box: e.g. `enum E { Nil, Cons(i32, Box<E>) }`, or `struct S { a: i32, b: Option<Box<S>> }`
 - `Rc` - reference counter heap allocated data, multiple ownership and contents read only
     - doesn not implement `Send`
 ### LIFETIMES
@@ -182,6 +191,7 @@
             - `s1 = String::from("tic"); s2 = String::from("tac"); s3 = String::from("toe"); s = format!("{s1}-{s2}-{s3}")`
                 - `format!` is more succinct for concat of many strings
                 - doesnt take ownership of any of the params
+- `eprintln!` is macro to print to stderr
 ### ARRAYS
 - static and cannot change size
 - function argument type annotation: unsized `[T]`, sized `[T, 3]`
@@ -283,6 +293,7 @@
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
+     - for enums compiler uses size of largest variant
 - `Copy` - trait, value is always copied(memcpy, so direct bit by bit copy)
     - cannot be implemented on `Drop` types
     - these itmes are generally simple, have a known size, and allocated on the stack
@@ -350,9 +361,14 @@
     - std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
     - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
 
+## CASTING
+- `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
+- `From` and `Into` are main traits to convert, complex types like `Vec` and `String` support this
+
 ## ANNOTATION
 - `derive` - tells rust to automatically generate a trait implementation for a type
 - `cfg` - means set a configuration
+    - example configs: `test`
 
 ## TESTING
 - annotate `mod` with `#[cfg(test)]` and test func with `#[test]`
@@ -369,6 +385,7 @@
     - can run serially with `cargo test --test-threads=1`
     - add `#[ignore]` annotation to test to ignore, then can run only ignored with `cargo test -- --ignored`
     - `cargo test foo` - will run all tests with `foo` in the function name
+    - `cargo test --test foofile` - run just tests in a file named `foofile`
 - can test private funcs in rust
 - integration tests live in another top level directory `tests`, they test only public API of ur lib
 
