@@ -191,6 +191,13 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         end
     end
 
+    -- hooks if LSP client is running
+    vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(args)
+            vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
+        end,
+    })
+
     ---------------------- NVIM-BFQ CONFIG -------------------------------
     require('bqf').setup({
         auto_enable = true,

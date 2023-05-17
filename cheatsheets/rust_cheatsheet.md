@@ -47,6 +47,8 @@
     - can generally take rust object files and use with C, and C can also use rust code
 - BORROW CHECKER
     - validates lifetimes - a borrower cant outlive what it borrows
+- prelude - https://doc.rust-lang.org/std/prelude/index.html#
+    - set of things that rust automatically imports (`use`s) into every program
 
 ## BUILD TOOLS
 - `rustup` installs and manages toolchain
@@ -134,12 +136,20 @@
         - `Box<String>` derefs to `String`, `String` derefs to string slice `&String`, `&String` derefs to `&str`
 - why aren't multiple mutable references allowed in a single threaded context
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
-- `Box` - pointer to heap allocated data, single ownership and can mutate contents
-    - implements `DeRef` so can be used as reference
+- `Box<T>` - pointer to heap allocated data, single ownership and can mutate contents
+    - implements `DeRef` and `DeRefMut` so can be used as reference, mutable too
     - implements `Send`, so can tx ownership to a different thread
     - can create recursive types using Box: e.g. `enum E { Nil, Cons(i32, Box<E>) }`, or `struct S { a: i32, b: Option<Box<S>> }`
-- `Rc` - reference counter heap allocated data, multiple ownership and contents read only
+- `Rc<T>` - reference counter heap allocated data, multiple ownership, tracks # of references, and cleans up when count is zero
+    - it is only used for single-threaded scenarios
+    - it's immutable for same reason as borrow rules allowing one mutable reference, prevent data races/inconsistencies
+    - you could use references, but that requires specifying lifetimes and might mean tons of data lives for long unneccessary times
+    - implements `DeRef` but not `DeRefMut`, so can't mutate it's contents, read only
     - doesn not implement `Send`
+    - usage `let a = Rc::new(1); let b = Rc::clone(&a)`
+        - can also do `let b = a.clone()` but not idiomatic, `Rc::clone` wont deep-copy
+        - get count `Rc::strong_count(&a)`
+- `RefCell<T>` - interior mutability that's checked at runtime
 ### LIFETIMES
 - references are tracked by lifetimes and lifetime annotatinos are needed in cases in order to help the compiler/borrow-checker
 - a parameters with an annotation has a input lifetimes, a return values have output lifetime
@@ -301,6 +311,10 @@
     - e.g. `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
         - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
+    - compiler will essentially insert the `drop` on a `Drop` type at the end of it's scope
+    - trait has one method `drop` that you can't call explicitly on a `Drop` type
+        - otherwise compiler cant gaurantee memory safety, double drops or dangling pointers
+    - for manualy drop you can call `std::mem::drop`, e.g. `drop(somevar)`
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 ### TRAITS
 - follows orphan rule

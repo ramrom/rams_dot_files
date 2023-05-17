@@ -21,6 +21,8 @@
 - nvim-dap - plugin to support debug adapter protocol
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
 ### LUA
+- `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
+- `:lua =vim.opt.smarttab` similar to `:set smarttab?`
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
@@ -172,9 +174,12 @@ vim -V  foo     - verbose output
 :h ex-cmd-index  - command and ex mode
 
 ## EX MODE
-Q - in normal mode will go into ex model, neovim doesnt have it
-`visual` -exit ex mode
-vi - short for visual
+- to enter Ex mode
+    - vim - `Q` in normal
+    - neovim - `gQ` in normal
+- exiting
+    `visual` - exit ex mode
+    `vi` - short for visual
 
 
 ## COMMAND MODE
