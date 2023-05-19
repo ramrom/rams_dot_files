@@ -303,6 +303,12 @@
     ```
 
 ## TYPE SYSTEM
+- contants, `const` keyword - cannot be mutable, type must be annotated, can declare in global scope
+    - can use constant expressions, but not expression that evaluate at runtime
+    - naming convention is to use upper snake case
+    - `const MY_CONST: i32 = 1; const CONST_EXP: i32 = 10 * 10 * 3600;`
+- static, similar to `const` but can be mutated, lives in a static memory space, have static lifetime (so forever)
+    - type must have `Sync` to be shared for multi-threaded access
 - `enum` in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
