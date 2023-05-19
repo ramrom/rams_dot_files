@@ -81,6 +81,7 @@ load_or_err ~/repos/fzf-tab/fzf-tab.plugin.zsh
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 
+# if dir exists and isn't already in PATH, then append it
 function append_dir_to_path() {
     local dir=$1
     [ -d "$dir" ] && echo "$PATH" | grep -v "$dir:\|$dir$" > /dev/null && export PATH="$dir":"${PATH}"
@@ -88,6 +89,8 @@ function append_dir_to_path() {
 }
 
 append_dir_to_path ~/bin    # includes user's private bin if it exists and it's not already in PATH
+
+append_dir_to_path ~/node_modules/.bin  # local install of npm bins
 
 [ "$(uname)" = "Linux" ] && append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local
 

@@ -110,7 +110,7 @@ bind -l   # list all bindable built in functions
 bind '"\C-k":"foofunc\n"'  # bind ctrl-k to type "foofunc" and hit newline(return), so execute foofunc
 ```
 
-### EXECUTION ENVIRONENT
+### EXECUTION ENVIRONMENT
 - non-interactive shells, like when running a shell script
     - aliases are not expanded
     - bashrc or zshrc are not run
@@ -522,6 +522,7 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 -x  # is file executable
 -r  # is file readable
 -t  # output is a terminal(std-out)
+-s  # file exists and is non-empty
 [ ~/foo -nt ~/bar ] && echo hi  # if foo is newer than bar, print hi
 
 # other logical operators
