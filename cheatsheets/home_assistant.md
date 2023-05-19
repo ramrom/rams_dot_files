@@ -45,6 +45,7 @@
 - for template sensors, after editting configuration.yml, goto developer tools and reload just templates, don't have to restart HASS
     - this should clear deletedt template sensors from configuration.yml
 - `.storage/core.config_entries` has metadata (including entry_id) for integrations
+    - `jq '.data.entries[] | .domain + "-----------" + .entry_id' core.config_entries` - print all friendly names and entry ids
 
 ## SPECIAL TYPES
 - templates -> entity whose data is derived from other data

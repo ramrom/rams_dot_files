@@ -63,10 +63,17 @@
 - default location of modules in project is `node_modules` folder
 - official docs: https://npmjs.org/doc/
 - uninstalling: https://docs.npmjs.com/misc/removing-npm.html
-- list globally installed package
-    `npm list -g`
-- list packages installed in most local project, dir of install location is first line
-    `npm list`
+- `~/.npm` dir caches modules already downloaded
+- `package.json` - specification file for a projects module dependencies
+- `.npmrc` - configuration for how npm behaves
+- bins are located in `node_modules/.bin` dir
+- global vs local
+    - a local/regular install will be scoped to current dir and all sub dirs, current dir will have `node_modules` folder
+        - run `npm root` to find the current dir's root `node_modules` dir
+    - `-g` for global, this is a system wide install
+- list installed packages - `npm list`
+    - dir of install location is first line
+    - list globally installed package: `npm list -g`
 - list top level packages and their most direct dependency
     `npm list --depth=1`
 - remove extranous packages
