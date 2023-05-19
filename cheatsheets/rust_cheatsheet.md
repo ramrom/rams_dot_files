@@ -120,7 +120,7 @@
         foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
     ```
 - adapters - `Iterator`s that return `Iterator`s, main examples: `map`, `filter`, `enumerate`, `take`, `zip`, `flatten`
-- consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
+- consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `reduce`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
 - unrolling - means to flatten a loop, compiler does this optimization often if it's a small number of known iterations
     - e.g. `for i in (1..5) { ... }`
 
@@ -150,6 +150,10 @@
         - can also do `let b = a.clone()` but not idiomatic, `Rc::clone` wont deep-copy
         - get count `Rc::strong_count(&a)`
 - `RefCell<T>` - interior mutability that's checked at runtime
+    - single ownership like `Box<T>`, except borrowing rules enforced at runtime, and will panic if borrow rules violated
+    - `let r = RefCell::new(1); *r.borrow_mut() = 2`
+    - `let r = RefCell::new(1); let r1 = r.borrow_mut(); let r2 = r.borrow_mut(); *r1 = 2; *r2 = 3`
+        - will panic in runtime!, no comile time error
 ### LIFETIMES
 - references are tracked by lifetimes and lifetime annotatinos are needed in cases in order to help the compiler/borrow-checker
 - a parameters with an annotation has a input lifetimes, a return values have output lifetime

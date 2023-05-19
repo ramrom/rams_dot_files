@@ -257,6 +257,8 @@
     - 2022 - chrome natively supports it, other browsers it's transpiled to javascript
     - 1.x is dynamic typed, 2.x is statically typed
     - also has compilers for arm or x86 code
+    - uses a garbage collector
+        - WasmGC(wasm + GC) will theoretically support Dart
 - flutter is a cross-platform framework writtin in Dart for building mobile/client applications
     - has it's own 2D graphics library called skia, and thus has it's own widget framework
     - intended for mobile platforms and web but Flutter Desktop aims to take over desktop too
