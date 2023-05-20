@@ -2,9 +2,9 @@
 - good resource on learning vim: http://vimcasts.org
 - great resource: https://devhints.io/vimscript
 - `:version`  - get version and features compiled
-- Vim9.0 introduces new scripting language
+- Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
-    - *NOT* totally backwards compatible
+    - *NOT* totally backwards compatible with old VimL
 
 ## NEOVIM
 - nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
@@ -20,6 +20,13 @@
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-dap - plugin to support debug adapter protocol
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
+### VERSION HISTORY
+- started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
+- 0.2 - added support for Lua
+- 0.4 - Lua standad modules, particularly `vim` module introduced
+    - `vim.loop` wraps the Lua binding(https://github.com/luvit/luv) for C libuv(big async IO lib)
+- 0.5 - introduced built in LSP client (lua written ofcourse)
+    - added `init.lua` (versus old `init.vim`) for configuring editor
 ### LUA
 - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
 - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
