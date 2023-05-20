@@ -68,6 +68,8 @@ elseif empty($VIM_NOPLUG)
     if has('nvim-0.6.1')
         Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
 
+        Plug 'j-hui/fidget.nvim'  " nvim-lsp progress support
+
         Plug 'hrsh7th/nvim-cmp'         " autocomplete for LSPs
         Plug 'hrsh7th/cmp-nvim-lsp'     " LSP source for nvim-cmp
         Plug 'hrsh7th/cmp-buffer'       " buffer word completion

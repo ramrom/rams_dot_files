@@ -295,6 +295,9 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         },
     })
 
+    --------------------- fidget (LSP progress) ------------------
+    require"fidget".setup{}
+
 
     ------------------- SCALA METALS -----------------------------
     if vim.fn.has('nvim-0.7') == 1 then
@@ -374,6 +377,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
     require'lspconfig'.rust_analyzer.setup({
         on_attach=on_attach,
+        -- autostart = false,   -- dont automatically start
         settings = {
             ["rust-analyzer"] = {
                 imports = {
