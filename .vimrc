@@ -66,6 +66,8 @@ elseif empty($VIM_NOPLUG)
     if has('nvim-0.6.1')
         Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
 
+        Plug 'hrsh7th/nvim-cmp'     " autocomplete for LSPs
+
         if has('nvim-0.7.0')
             " see https://www.reddit.com/r/neovim/comments/107aoqo/problems_running_neovim_using_the_initlua_from/
             " 0.7.2 breaks with treesitter commit 622baacdc1b22cdfd73bc98c07bb5654a090bcac
