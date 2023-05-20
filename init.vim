@@ -38,83 +38,101 @@ function Lua.moduleExists(name)
 	end
 end
 
-if Lua.moduleExists('lualine') then
-  require('lualine').setup {
-    options = {
-      icons_enabled = false,
-      {'branch', icon = 'ᛘ'},
-      theme = 'onedark',
-      component_separators = { left = '', right = ''},
-      section_separators = { left = '', right = ''},
-      disabled_filetypes = {
-        statusline = {},
-        winbar = {},
-      },
-      ignore_focus = {},
-      always_divide_middle = true,
-      globalstatus = false,
-      refresh = {
-        statusline = 1000,
-        tabline = 1000,
-        winbar = 1000,
-      }
-    },
-    sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'branch', 'diff', 'diagnostics'},
-      -- lualine_b = { { 'branch', icons_enabled = true, {'branch', icon = 'ᛘ'} }, 'diff', 'diagnostics' },
-      lualine_c = { { 'filename', file_status = true, path = 1 } },
-      lualine_x = {'filetype', 'encoding', 'fileformat'},
-      lualine_y = {'progress'},
-      lualine_z = {'location'}
-    },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {'filename'},
-      lualine_x = {'location'},
-      lualine_y = {},
-      lualine_z = {}
-    },
-    tabline = {
-      lualine_a = {
-        {
-          'tabs',
-          mode = 2,
-          max_length = vim.o.columns,
 
-          fmt = function(name, context)
-            -- Show + if buffer is modified in tab
-            local buflist = vim.fn.tabpagebuflist(context.tabnr)
-            local winnr = vim.fn.tabpagewinnr(context.tabnr)
-            local bufnr = buflist[winnr]
-            local mod = vim.fn.getbufvar(bufnr, '&mod')
-
-            return name .. (mod == 1 and ' +' or '')
-          end
-        }
-      },
-      lualine_b = {},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {
-        {
-          'buffers',
-          show_modified_status = true,
-          mode = 4,
-          buffers_color = {
-            inactive = { fg = 'grey', bg = 'black' },
-            active = 'grey',
-            },
+if Lua.moduleExists('gitsigns') then
+    require('gitsigns').setup{
+        signs = {
+            add          = { text = '+' },
+            change       = { text = '!' },
+            delete       = { text = '_' },
+            topdelete    = { text = '‾' },
+            changedelete = { text = '~' },
+            untracked    = { text = '┆' },
         },
-      },
-    },
-    winbar = {},
-    inactive_winbar = {},
-    extensions = {}
-  }
+        linehl = false,
+        numhl = false,
+        word_diff = true,
+    }
 end
+
+
+if Lua.moduleExists('lualine') then
+    require('lualine').setup {
+        options = {
+            icons_enabled = false,
+            {'branch', icon = 'ᛘ'},
+            theme = 'onedark',
+            component_separators = { left = '', right = ''},
+            section_separators = { left = '', right = ''},
+            disabled_filetypes = {
+                statusline = {},
+                winbar = {},
+            },
+            ignore_focus = {},
+            always_divide_middle = true,
+            globalstatus = false,
+            refresh = {
+                statusline = 1000,
+                tabline = 1000,
+                winbar = 1000,
+            }
+        },
+        sections = {
+            lualine_a = {'mode'},
+            lualine_b = {'branch', 'diff', 'diagnostics'},
+            -- lualine_b = { { 'branch', icons_enabled = true, {'branch', icon = 'ᛘ'} }, 'diff', 'diagnostics' },
+            lualine_c = { { 'filename', file_status = true, path = 1 } },
+            lualine_x = {'filetype', 'encoding', 'fileformat'},
+            lualine_y = {'progress'},
+            lualine_z = {'location'}
+        },
+        inactive_sections = {
+            lualine_a = {},
+            lualine_b = {},
+            lualine_c = {'filename'},
+            lualine_x = {'location'},
+            lualine_y = {},
+            lualine_z = {}
+        },
+        tabline = {
+            lualine_a = {
+                {
+                    'tabs',
+                    mode = 2,
+                    max_length = vim.o.columns,
+
+                    fmt = function(name, context)
+                        -- Show + if buffer is modified in tab
+                        local buflist = vim.fn.tabpagebuflist(context.tabnr)
+                        local winnr = vim.fn.tabpagewinnr(context.tabnr)
+                        local bufnr = buflist[winnr]
+                        local mod = vim.fn.getbufvar(bufnr, '&mod')
+
+                        return name .. (mod == 1 and ' +' or '')
+                    end
+                }
+            },
+            lualine_b = {},
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = {
+                {
+                        'buffers',
+                        show_modified_status = true,
+                        mode = 4,
+                        buffers_color = {
+                            inactive = { fg = 'grey', bg = 'black' },
+                            active = 'grey',
+                        },
+                        },
+                },
+        },
+        winbar = {},
+        inactive_winbar = {},
+        extensions = {}
+    }
+    end
 
 if Lua.moduleExists('bufferline') then
     require("bufferline").setup{}
@@ -197,6 +215,50 @@ if vim.fn.has('nvim-0.6.1') == 1 then
             vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
         end,
     })
+
+    ------------------ NVIM-CMP AUTOCOMPLETEL -----------------------------
+    local cmp = require 'cmp'
+    cmp.setup {
+      completion = { autocomplete = false, },   -- dont show autocomplete menu be default
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+        -- C-b (back) C-f (forward) for snippet placeholder navigation.
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+      }),
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+      },
+    }
 
     ---------------------- NVIM-BFQ CONFIG -------------------------------
     require('bqf').setup({

@@ -447,7 +447,9 @@ let s2 = String::from("hello");  // type String is mutable
     - generally faster than react!
     - uses a `html!` macro to generate valid html at rust compile time!
 - [tauri](https://tauri.app/) - build native apps for desktop and mobile
-- [clap](https://docs.rs/clap/latest/clap/) - awesome CLI parser lib
+- CLI
+    - [clap](https://docs.rs/clap/latest/clap/) - awesome CLI argument parser lib
+    - [colored](https://lib.rs/crates/colored) - good ANSI terminal color lib for strings
 - pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)
 - [vaultwarden](https://github.com/dani-garcia/vaultwarden) - bitwarden server written in rust!
 

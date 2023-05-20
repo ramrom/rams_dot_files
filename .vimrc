@@ -41,7 +41,9 @@ elseif empty($VIM_NOPLUG)
     endif
 
     "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
-    if has('nvim') || has('patch-8.0.902')
+    if has('nvim')
+        Plug 'lewis6991/gitsigns.nvim'
+    elseif has('patch-8.0.902')
         Plug 'mhinz/vim-signify'
     else
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
@@ -66,7 +68,10 @@ elseif empty($VIM_NOPLUG)
     if has('nvim-0.6.1')
         Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
 
-        Plug 'hrsh7th/nvim-cmp'     " autocomplete for LSPs
+        Plug 'hrsh7th/nvim-cmp'         " autocomplete for LSPs
+        Plug 'hrsh7th/cmp-nvim-lsp'     " LSP source for nvim-cmp
+        " Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
+        " Plug 'L3MON4D3/LuaSnip'         " Snippets plugin
 
         if has('nvim-0.7.0')
             " see https://www.reddit.com/r/neovim/comments/107aoqo/problems_running_neovim_using_the_initlua_from/
@@ -322,13 +327,25 @@ function RemoveTrailingWhiteSpace()
     execute '%s/\s\+$//e'
 endfunction
 
-"NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers (call SignifyToggle)
-let g:signify_disable_by_default = 0
-function ToggleSignifyAll()
-    if g:signify_disable_by_default == 1
-        exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
-    else
-        exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
+"NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers (call ToggleGitSignsAll)
+let g:gitsign_plugin_disable_by_default = 0
+function ToggleGitSignsAll()
+    if has('nvim')
+        exe ':Gitsigns toggle_signs'
+    else " assume vim and vim-signify
+        if g:gitsign_plugin_disable_by_default == 1
+            exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
+        else
+            exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
+        endif
+    endif
+endfunction
+
+function ToggleGitSignsHighlight()
+    if has('nvim')
+        exe ':Gitsigns toggle_linehl'
+    else " assume vim and vim-signify
+        exe ':SignifyToggleHighlight'
     endif
 endfunction
 
@@ -489,9 +506,9 @@ noremap <leader>gb :BCommits<CR>
 noremap <leader>gB :BCommits!<CR>
 noremap <leader>gc :Commits<CR>
 noremap <leader>gC :Commits!<CR>
-noremap <leader>gS :call ToggleSignifyAll()<cr>
+noremap <leader>gS :call ToggleGitSignsAll()<cr>
 noremap <leader>gs :SignifyToggle<cr>
-noremap <leader>gh :SignifyToggleHighlight<cr>
+noremap <leader>gh :call ToggleGitSignsHighlight()<cr>
 
 noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gT :call RemoveTrailingWhiteSpace()<CR>
