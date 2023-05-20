@@ -345,6 +345,7 @@ endfunction
 function ToggleGitSignsHighlight()
     if has('nvim')
         exe ':Gitsigns toggle_linehl'
+        exe ':Gitsigns toggle_word_diff'
     else " assume vim and vim-signify
         exe ':SignifyToggleHighlight'
     endif
