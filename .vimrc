@@ -40,12 +40,13 @@ elseif empty($VIM_NOPLUG)
         Plug 'tmux-plugins/vim-tmux-focus-events'  " used to get autoread to work below
     endif
 
-    "sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
-    if has('nvim')
+    " gitsigns is lua, far more supported
+    if has('nvim-0.8')
         Plug 'lewis6991/gitsigns.nvim'
-    elseif has('patch-8.0.902')
+    "signify - sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
+    elseif has('patch-8.0.902') || has('nvim')
         Plug 'mhinz/vim-signify'
-    else
+    else  " vim < 8 needs legacy branch
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
 
@@ -345,7 +346,7 @@ function ToggleGitSignsAll()
 endfunction
 
 function ToggleGitSignsHighlight()
-    if has('nvim')
+    if has('nvim-0.8')
         exe ':Gitsigns toggle_linehl'
         exe ':Gitsigns toggle_word_diff'
     else " assume vim and vim-signify

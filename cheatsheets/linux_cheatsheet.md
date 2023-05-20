@@ -178,12 +178,13 @@ apt depends pkg
     - find direct deps of pkg
 apt rdepends pkg
     - find reverse deps, other packages that depend on give package
-apt rdepends --installed pkg
-    - find packages dependent on pkg that are installed on the system
+    - apt rdepends --installed pkg
+        - find packages dependent on pkg that are installed on the system
 apt-rdepends pkg
-    - show dependencies AND RECURSE to depth-first-search on deps of deps
+    - r here is "recursive"
+    - show dependencies with depth-first-search on deps of deps
 apt-rdepends -r pkg
-    - show reverse deps, AND RECURSE
+    - show reverse deps and recursive depth-first search
 
 apt-cache policy
     - print the apt sources and some details
