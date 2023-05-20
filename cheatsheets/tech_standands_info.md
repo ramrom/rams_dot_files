@@ -275,6 +275,22 @@
     - TensorFlow
     - PyTorch
 
+## GARBAGE COLLECTION
+- reference counting
+    - maintain a count of variables referencing each object
+    - when reference is nil or goes out of scope, decrement count. inc count for a new reference
+    - when count goes to zero, call object destructor
+    - one big challenge is cyclic references, usually use a strong and weak reference count to detect these
+    - consistence peformance, no major pauses like tracing, but overall overhead is prolly larger
+    - need an atomic ref counter for a shared object in a multi-threaded env
+- tracing
+    - store list of global/root objects, and locals from main func
+    - trace all other objects reachable from them
+    - does not have cyclical reference issue, as a cyclical reference b/w say A <--> B can still be detected by root object unreachability
+    - mark and sweep
+        - go through all allocated objects, if it's not reachable deallocate it
+    - pauses, especially stop-the-world pauses causes latency/jitter
+
 ## LSP
 - language servers - https://langserver.org/
 

@@ -210,12 +210,14 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     end
 
     -- hooks if LSP client is running
-    vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function(args)
-            ActivateAutoComplete()
-            vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
-        end,
-    })
+    if vim.fn.has('nvim-0.8') == 1 then   -- LspAttach only available in 0.8
+        vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(args)
+                ActivateAutoComplete()
+                vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
+            end,
+        })
+    end
 
     ------------------ NVIM-CMP AUTOCOMPLETEL -----------------------------
     ActivateAutoComplete = function()
@@ -416,7 +418,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
     ------------- Java -------------------------------------
 
-    -- INSERT HELPER
+    -- TODO: prolly use jdtls
 
     ------------- Kotlin-------------------------------------
     -- https://github.com/fwcd/kotlin-language-server

@@ -94,6 +94,7 @@
 ## GRAMMER
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
     - in rust the `.` operator works on pointers or direct struct/object, pointers are automatically dereferenced
+- if a expression is followed by semicolon `;`, then it'll discard the result and become a statement
 ### LOOPS
 - `loop { ... }` - infinite loop
     - use `break` conditions internally to terminate
@@ -295,12 +296,25 @@
     - discussion to add it - https://internals.rust-lang.org/t/pre-rfc-named-arguments/16413
 - no function overloading
     - apr2023 - there is a `overloadable` crate in nightl build - https://docs.rs/overloadable/latest/overloadable/
-- closures are anonymous functions that can capture their environment
-    ```rust
-    let closure_annotated = |i: i32| -> i32 { i + outer_var };    // with annotations
-    let closure_inferred  = |i     |          i + outer_var  ;    // inferrerd types
-    let one = || 1;         // closure takes zero args, single line expressions dont need curly braces
-    ```
+- fully supports higher-order/first-class functions
+    - `fn twice(f: fn(T) -> (), i: T) -> () { f(i); f(i); }`
+### CLOSURES
+- are anonymous functions that can capture their environment
+- compiler auto-implments each closure into 3 traits
+    - `FnOnce`- can only be run once, basically if ownership is transfered, aka moved out of it's environment
+        - all closures can be called at least once so they all implement this
+    - `FnMut` - will mutate captured values, dont move them
+        - e.g. trait `Iterator`'s method `map` takes a `FnMut` closure, b/c a closure is called many times on a collection
+    - `Fn` - will only read captured values, dont move them, or dont even capture values from env
+- if a closure implements `Fn` it will also implement `FnMut` and `FnOnce`, if closure implements `FtMut` it also does `FnOnce`
+- so a function that takes a `Fn` closure as an argument, compiler would error if a `FnOnce` or `FnMut` closure was passed in
+- a named function also implements all these three as well
+     - e.g. an `Option<Vec<T>>` could call `unwrap_or_else(Vec::new)`
+```rust
+let closure_annotated = |i: i32| -> i32 { i + outer_var };    // with annotations
+let closure_inferred  = |i     |          i + outer_var  ;    // inferrerd types
+let one = || 1;         // closure takes zero args, single line expressions dont need curly braces
+```
 
 ## TYPE SYSTEM
 - contants, `const` keyword - cannot be mutable, type must be annotated, can declare in global scope

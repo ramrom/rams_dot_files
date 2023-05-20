@@ -21,12 +21,27 @@
 - nvim-dap - plugin to support debug adapter protocol
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
 ### VERSION HISTORY
+ https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
-- 0.2 - added support for Lua
-- 0.4 - Lua standad modules, particularly `vim` module introduced
+- 0.2 - added support for Lua 5.1
+    - mostly b/c LuaJIT only supports 5.1, LuaJIT much faster than standard Lua compiler
+    - externalize UI: tabline, popupmenu
+- 0.4
+    - Lua standad modules, full scripting engine as replacement for VimL
+        - particularly `vim` module introduced
     - `vim.loop` wraps the Lua binding(https://github.com/luvit/luv) for C libuv(big async IO lib)
-- 0.5 - introduced built in LSP client (lua written ofcourse)
+    - externalize UI: multigrid, floating windows, messages
+- 0.5
+    - introduced built in LSP client (lua written ofcourse)
+        - doesnt have an autocompletion engine
     - added `init.lua` (versus old `init.vim`) for configuring editor
+    - experimental tree-sitter integration
+- 0.6 - unified diagnostics API
+- 0.7 - treeistter integration, global statusline, TUI: extended keys(ctrl-i vs tab, shift modifier)
+- 0.8 - LSP improvements (v3.16 spec coverage, LspAttach)
+    - treesitter API: use queries to define spellcheck regions
+    - clickable statusline
+- 0.9 - TUI and remote UI
 ### LUA
 - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
 - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
@@ -99,10 +114,16 @@ C - make selected dir node the new root node
 - `zf` will open a fzf prompt to fuzzy search quickfix items
     - `ctrl-t` and x/v will open in new tab or vert/hor split
 
-### Tree-sitter (nvim)
-- parses files by language and creates ASTs
-    - can query AST: smarter syntax highlighting (better than vim's regex), better formatting(e.g. `=`), better folding, etc
+### Tree-sitter
+- a general semantic file parser, available to neovim as a plugin
+- intended to be better than the regex-based systems that IDEs (including vim) use
+- language parsers files by language and creates ASTs
+    - can query AST to do things like:
+        - smarter syntax highlighting (better than vim's regex)
+        - better formatting(e.g. `=`)
+        - better folding
     - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- AST of a file buffer is constantly parsed as changes are made
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 
