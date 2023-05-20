@@ -44,7 +44,7 @@ if Lua.moduleExists('gitsigns') then
         signs = {
             add          = { text = '+' },
             change       = { text = '!' },
-            delete       = { text = '_' },
+            delete       = { text = '_', show_count = true },
             topdelete    = { text = '‾' },
             changedelete = { text = '~' },
             untracked    = { text = '┆' },
