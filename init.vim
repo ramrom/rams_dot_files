@@ -367,6 +367,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
 
         metals_config.on_attach = function(client, bufnr)
             require("metals").setup_dap()
+            SetMetalsKeymaps()
         end
     end
 
@@ -465,21 +466,19 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
     vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
 
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "scala", "sbt" },
-        callback = function()
-            vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
-            vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
-            vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
-            vim.keymap.set("n", "glst", "<cmd>MetalsStartServer<CR>")
-            vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
-            vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
-            -- NOTE: in the tree window hit 'r' to navigate to that item
-            vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
-            vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
-        end,
-        group = vim.api.nvim_create_augroup("nvim-metals-maps", { clear = true })
-    })
+    -- this is called on_attach in the metals lsp config section
+    SetMetalsKeymaps = function()
+        vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
+        vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
+        vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
+        vim.keymap.set("n", "glst", "<cmd>MetalsStartServer<CR>")
+        vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
+        vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
+        -- NOTE: in the tree window hit 'r' to navigate to that item
+        vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+        vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+    end
+
     vim.keymap.set("n", "gjc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
     vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])

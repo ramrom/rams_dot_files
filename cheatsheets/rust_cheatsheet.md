@@ -49,6 +49,8 @@
     - validates lifetimes - a borrower cant outlive what it borrows
 - prelude - https://doc.rust-lang.org/std/prelude/index.html#
     - set of things that rust automatically imports (`use`s) into every program
+### LINKING
+- can produce dynamically or statically linked libraries
 
 ## BUILD TOOLS
 - `rustup` installs and manages toolchain

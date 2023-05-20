@@ -293,6 +293,12 @@
 
 ## LSP
 - language servers - https://langserver.org/
+    - introduced in 2016 for microsoft VSC, then made an open standard
+- uses JSON RPC for message passing b/w client and server
+- BSP (build server protocol) - abstracts the build tool, complementary to LSP
+    - LSP server can be a _client_ to build server using BSP to talk to it
+    - e.g. bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
+- DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
 
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
