@@ -51,7 +51,7 @@ if Lua.moduleExists('gitsigns') then
         },
         linehl = false,
         numhl = false,
-        word_diff = true,
+        word_diff = false,
     }
 end
 
@@ -118,14 +118,14 @@ if Lua.moduleExists('lualine') then
             lualine_y = {},
             lualine_z = {
                 {
-                        'buffers',
-                        show_modified_status = true,
-                        mode = 4,
-                        buffers_color = {
-                            inactive = { fg = 'grey', bg = 'black' },
-                            active = 'grey',
-                        },
-                        },
+                    'buffers',
+                    show_modified_status = true,
+                    mode = 4,
+                    buffers_color = {
+                        inactive = { fg = 'grey', bg = 'black' },
+                        active = 'grey',
+                    },
+                    },
                 },
         },
         winbar = {},
@@ -212,53 +212,63 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     -- hooks if LSP client is running
     vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
+            ActivateAutoComplete()
             vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
         end,
     })
 
     ------------------ NVIM-CMP AUTOCOMPLETEL -----------------------------
-    local cmp = require 'cmp'
-    cmp.setup {
-      completion = { autocomplete = false, },   -- dont show autocomplete menu be default
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
-        -- C-b (back) C-f (forward) for snippet placeholder navigation.
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-      }),
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-      },
-    }
+    ActivateAutoComplete = function()
+        if Lua.moduleExists('cmp') then
+            local cmp = require 'cmp'
+            cmp.setup {
+                completion = { autocomplete = false, },   -- dont show autocomplete menu be default
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+                    ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+                    -- C-b (back) C-f (forward) for snippet placeholder navigation.
+                    ['<C-e>'] = cmp.mapping.abort(),
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<CR>'] = cmp.mapping.confirm {
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true,
+                    },
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                    -- ['<C-n>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    -- ['<C-p>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                }),
+                sources = {
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
+                    { name = 'cmp_buffer' },
+                },
+            }
+        end
+    end
+
+    ActivateAutoComplete()
 
     ---------------------- NVIM-BFQ CONFIG -------------------------------
     require('bqf').setup({
