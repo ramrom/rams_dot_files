@@ -126,6 +126,11 @@
 - consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `reduce`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
 - unrolling - means to flatten a loop, compiler does this optimization often if it's a small number of known iterations
     - e.g. `for i in (1..5) { ... }`
+### VISIBLITY/SCOPE
+- all things are private by default and can be made public with `pub` keyword
+    - public items can be used by anything in the crate
+    - a struct/enum can be marked public, but fields are still private unless fields are declared public
+- private items are only visible in the current module and decendant modules
 
 ## REFERENCES/OWNERSHIP
 - references are a "pointer" to data, and in rust they also mean borrowing the data from an owner
@@ -138,6 +143,7 @@
     - multiple nested `DeRef` types be called, e.g. `Box<String>>` passed into arg taking `&str`
         - `Box<String>` derefs to `String`, `String` derefs to string slice `&String`, `&String` derefs to `&str`
 - why aren't multiple mutable references allowed in a single threaded context
+    - https://manishearth.github.io/blog/2015/05/17/the-problem-with-shared-mutability/
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
 - `Box<T>` - pointer to heap allocated data, single ownership and can mutate contents
     - implements `DeRef` and `DeRefMut` so can be used as reference, mutable too
@@ -152,6 +158,9 @@
     - usage `let a = Rc::new(1); let b = Rc::clone(&a)`
         - can also do `let b = a.clone()` but not idiomatic, `Rc::clone` wont deep-copy
         - get count `Rc::strong_count(&a)`
+    - danger is mixing `Rc` and `RefCell` to create circular references that leak memory
+    - can create weak references, `Weak<T>` with `Rc::downgrade`, weak refs dont increment "strong" count, inc the "weak" count
+        - weak ref might point to nothing, so test it with `upgrade` method which returns `<Option<Rc<T>>`, `None` if it was dropped
 - `RefCell<T>` - interior mutability that's checked at runtime
     - single ownership like `Box<T>`, except borrowing rules enforced at runtime, and will panic if borrow rules violated
     - `let r = RefCell::new(1); *r.borrow_mut() = 2`
@@ -167,6 +176,18 @@
         - multiple inputs each get a different lifetime parametes
         - if only one input then the output gets the same lifetime
         - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
+### UNSAFE
+- raw pointers - can create in safe areas
+    - can have any number of immutable and mutable pointers at same time
+    - raw means they can be null, point to invalid mem locations, no automatic cleanup
+    - can only dereference raw pointers in unsafe blocks
+    - `let address = 0x012345usize; let r = address as *const i32;` - random mem location, cast it to raw pointer
+    - usage scenarios: 1. interface with C code, 2. some safe abstractions that borrow checker can't understand
+- unsafe functions
+    - must delcare function unsafe, and can only invoke unsafe function in unsafe block
+- extern functions
+    - FFI(foreign function interface) to interact with non-rust code
+- static variables that are mutable - unsafe in a multi-threaded scenario
 
 
 ## LIBS
@@ -300,6 +321,9 @@
     - apr2023 - there is a `overloadable` crate in nightl build - https://docs.rs/overloadable/latest/overloadable/
 - fully supports higher-order/first-class functions
     - `fn twice(f: fn(T) -> (), i: T) -> () { f(i); f(i); }`
+- `fn` is type, a function pointer, that refers to named fuctions, `Fn` is trait for closures
+    - e.g. `fn f1(i: i32) -> i32 { i }; fn twice(f: fn(i32) -> i32) -> i32 { f(); f() }`
+    - `fn` pointers all implement `Fn`, `FnMut`, and `FnOnce`, so can pass `fn` to something expecting a closure
 ### CLOSURES
 - are anonymous functions that can capture their environment
 - compiler auto-implments each closure into 3 traits
@@ -317,6 +341,7 @@ let closure_annotated = |i: i32| -> i32 { i + outer_var };    // with annotation
 let closure_inferred  = |i     |          i + outer_var  ;    // inferrerd types
 let one = || 1;         // closure takes zero args, single line expressions dont need curly braces
 ```
+- dont have concrete type that are returnable, can use dyn Box, e.g. `Box<dyn Fn(i32) -> i32>`
 
 ## TYPE SYSTEM
 - contants, `const` keyword - cannot be mutable, type must be annotated, can declare in global scope
@@ -330,6 +355,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
      - for enums compiler uses size of largest variant
+     - it's automatically implemented for types whos size is known at compile time
 - `Copy` - trait, value is always copied(memcpy, so direct bit by bit copy)
     - cannot be implemented on `Drop` types
     - these itmes are generally simple, have a known size, and allocated on the stack
@@ -342,11 +368,13 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - otherwise compiler cant gaurantee memory safety, double drops or dangling pointers
     - for manualy drop you can call `std::mem::drop`, e.g. `drop(somevar)`
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
+- associated function - belongs to the type itself, doesn't need `self`, the `new` method convention is a common use case of this
 ### TRAITS
 - follows orphan rule
     - cannot implement _external_ traits on _external_ types
     - **can** implment _internal_ trait on _external_ type and _external_ trait on _internal_ type
     - without rule, 2 crates could implement same trait on same type, this is a conflict and rust wouldnt know which to pick
+    - newtype pattern can get around orphan rule, by creating a new type in a tuple struct
 - blanket implementations - can implement a trait if a type conditionally implements another trait (using generics)
     - `impl<T: Display> ToString for T { // --snip-- }`  - from stdlib, this implements `ToString` if `T` implements `Display`
 - auto traits - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
@@ -357,7 +385,19 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - trait objects are fat pointers with both the object pointer and the vtable of methods
     - for trait `Trait`, `Box<dyn Trait>` is a trait object
     - compiles to single function that does a dispatch at runtime based on the object concrete type
+- associated type - a placeholder type that must be defined by the implementing struct/enum
+    - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
+    - why not generic trait? - can implement the trait many times (per generic param)
+        - with associated type we can only implement trait one time
+- supertraits - defining a trait to depend on implementor implementing another trait
+    - `trait Trait: SuperTrait { ... }` - implementor must implement `SuperTrait` here before implementing `Trait`
+    - concept is similar to trait bounds on generics
+- fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
+    - types direct implementation takes precedence
 ### OTHER
+- type alias - synonymous to another type
+    - one use case: syntax sugar convenient for long/verbose types
+        - e.g. `Box<dyn Fn() + Send + 'static>` aliased as `type Thunk = Box<dyn Fn() + Send + 'static>`
 - rust does not really support downcasting (can't `match` on a trait object's implementor types)
     - traits objects can't be downcast back to the original type with casting or coersion
     - the `Any` trait can do this, it's type-safe downcasting on trait objects
@@ -384,19 +424,32 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
 
 ## CONCURRENCY
-- rust only implements native threads
+- rust itself(lang/runtime) only implements native threads
+    - `let handle = thread::spawn( ... )` method to create new thread, takes a closure arg
+        - `handle` is type `JoinHandle`, can call join `handle.join()`, which blocks to wait for completion
+        - compiler is conservative, and captured vars in the closure are borrowed, not moved by default
+        - use `move` to transfer ownership, `thread::spawn(move ...)`
+    - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
     - no green thread system (e.g. goroutines in golang)
-    - the tried green threads in rust 1.0, but runtime was becoming bloated
+        - the tried green threads in rust 1.0, but runtime was becoming bloated
     - rust intention is to stay a low level systems language with minimal runtime
     - https://stackoverflow.com/questions/29428318/why-did-rust-remove-the-green-threading-model-whats-the-disadvantage#29430403
 - futures - https://docs.rs/futures/latest/futures/
     - very similar to javascript promises or scala future
-- channels (std lib)
-    - support one receiver and multiple senders
-- two major categories: `Sync` and `Send`
-    - `Sync` allows many references to same value
+- channels (std lib) - one way thread safe "pipes"
+    - multiple producers single consumer (mpsc), `let (tx, rx) = mpsc::channel()`
+        - `let val = String::from("hi"); tx.send(val).unwrap()`
+            - send returns `Result<T, E>`, will error if reciever dropped
+            - sending a val transfers ownership, the receiver will take ownership
+        - `let r = rx.recv().unwrap()` - get error if transmitter dropped, otherwise blocks until it gets a value
+        - use `try_recv` for non-blocking, returns `Result<T, E>` immediately
+        - `let tx2 = tx.clone()` - create a second producer
+    - channel closed if receiving or sending side is dropped
+- `Sync` and `Send` are built into rust, (most of the rest is in std lib)
+    - `Sync` trait, these types allows many references to same value in different threads
+        - type `T` is `Sync` if immutable ref `&T` is `Send`
         - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
-    - `Send` safe to transfer ownership to different thread
+    - `Send` trait, these types are safe to transfer ownership to different thread
 - sync wait group (like golang WaitGroup)
     - std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
     - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html

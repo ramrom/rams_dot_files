@@ -32,6 +32,7 @@
 
 ## BAZEL
 - built by google and open-sourced, for java projects
+- does a lot of caching
 - cares a lot about correctness and reliability and performance
 
 ## MILL
@@ -78,6 +79,14 @@
     `npm list --depth=1`
 - remove extranous packages
     `npm prune`
+
+## FRONT END TOOLING
+- babel - javascript traspiler
+- terser - javascript minifier
+- webpack - bundles many js files into one, written in javascript
+- vite - bundler like webpack, generally faster
+- browserify - javascript bundler
+- turbopack - bundler like webpack, written in rust, orders of magnitudes faster, developed by devs on Next.js
 
 ## YARN
 - package manager for javascript
