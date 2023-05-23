@@ -2,6 +2,12 @@
 - devhits: https://devhints.io/lua
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"
+- Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM
+- LuaJIT uses JIT compiler that generates machine code directly
+    - JIT still compiles to byte code before being interpreted by Lua VM
+    - LuaJIT interpreter records runtime stats when executing byte code, loops and function calls are tracked
+        - when threshold exceeded, JIT compiler triggers, and converts that to machine code using it's IR(intermediate representation)
+- LuaJIT only supports Lua 5.1
 
 ## FEATURES
 - has "metamechanisms" to build complex language features: tables, closures, coroutines
@@ -15,6 +21,8 @@
 - there is no exception handling/throwing, i.e. the try/catch stuff
     - a big reason is C doesnt support this
     - use `pcall` func that takes a func and args, calls that func and returns `true` is success or `false`,`err_msg` if failure
+- all variables are global by default (placed in a table named `_G`)
+    - declare local vars with `local v = 'hi'`
 
 ## COROUTINE
 - is fundamental type, a preemtable thread

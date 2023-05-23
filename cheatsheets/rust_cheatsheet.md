@@ -425,34 +425,43 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 
 ## CONCURRENCY
 - rust itself(lang/runtime) only implements native threads
-    - `let handle = thread::spawn( ... )` method to create new thread, takes a closure arg
-        - `handle` is type `JoinHandle`, can call join `handle.join()`, which blocks to wait for completion
-        - compiler is conservative, and captured vars in the closure are borrowed, not moved by default
-        - use `move` to transfer ownership, `thread::spawn(move ...)`
-    - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
-    - no green thread system (e.g. goroutines in golang)
-        - the tried green threads in rust 1.0, but runtime was becoming bloated
-    - rust intention is to stay a low level systems language with minimal runtime
-    - https://stackoverflow.com/questions/29428318/why-did-rust-remove-the-green-threading-model-whats-the-disadvantage#29430403
-- futures - https://docs.rs/futures/latest/futures/
-    - very similar to javascript promises or scala future
-- channels (std lib) - one way thread safe "pipes"
-    - multiple producers single consumer (mpsc), `let (tx, rx) = mpsc::channel()`
-        - `let val = String::from("hi"); tx.send(val).unwrap()`
-            - send returns `Result<T, E>`, will error if reciever dropped
-            - sending a val transfers ownership, the receiver will take ownership
-        - `let r = rx.recv().unwrap()` - get error if transmitter dropped, otherwise blocks until it gets a value
-        - use `try_recv` for non-blocking, returns `Result<T, E>` immediately
-        - `let tx2 = tx.clone()` - create a second producer
-    - channel closed if receiving or sending side is dropped
+- no green thread system (e.g. goroutines in golang)
+    - the tried green threads in rust 1.0, but runtime was becoming bloated
+- rust intention is to stay a low level systems language with minimal runtime
+- https://stackoverflow.com/questions/29428318/why-did-rust-remove-the-green-threading-model-whats-the-disadvantage#29430403
+### THREADS - STD LIB
+- `let handle = thread::spawn( ... )` method to create new thread, takes a closure arg
+    - `handle` is type `JoinHandle`, can call join `handle.join()`, which blocks to wait for completion
+    - compiler is conservative, and captured vars in the closure are borrowed, not moved by default
+    - use `move` to transfer ownership, `thread::spawn(move ...)`
+- `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
+### FUTURES/ASYNC
+- https://docs.rs/futures/latest/futures/
+- `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
+- similar to javascript promises or scala future
+- run many concurrent tasks on a small number of OS threads
+- futures
+    - are inert - the make progress only when polled
+    - zero cost - can use them without heap allocation or dynamic dispatch
+### CHANNELS
+- in std lib - one way thread safe "pipes"
+- multiple producers single consumer (mpsc), `let (tx, rx) = mpsc::channel()`
+    - `let val = String::from("hi"); tx.send(val).unwrap()`
+        - send returns `Result<T, E>`, will error if reciever dropped
+        - sending a val transfers ownership, the receiver will take ownership
+    - `let r = rx.recv().unwrap()` - get error if transmitter dropped, otherwise blocks until it gets a value
+    - use `try_recv` for non-blocking, returns `Result<T, E>` immediately
+    - `let tx2 = tx.clone()` - create a second producer
+- channel closed if receiving or sending side is dropped
 - `Sync` and `Send` are built into rust, (most of the rest is in std lib)
     - `Sync` trait, these types allows many references to same value in different threads
         - type `T` is `Sync` if immutable ref `&T` is `Send`
         - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
     - `Send` trait, these types are safe to transfer ownership to different thread
-- sync wait group (like golang WaitGroup)
-    - std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
-    - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
+#### SYNC WAIT GROUP
+- like golang WaitGroup
+- std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
+- crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
 
 ## CASTING
 - `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types

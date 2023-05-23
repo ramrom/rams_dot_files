@@ -61,6 +61,8 @@ HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, has
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 ```
 
+## TYPE SYSTEM
+- `final` keyword means it can't be changed (synonymous to `val` in scala)
 ### CLASSES
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
@@ -76,7 +78,7 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 - immutable
 - data struct that has a setter/getter, constructor, `equals` method, `hashCode` method, `toString` method
 
-### INTROSPECTION
+## INTROSPECTION
 - `(object) instanceof (type)` - test if object is instance of type, or subtype of type, or implements an interface
     - e.g. if `Dog` is subclass of `Animal`; `Dog foo = new Dog(); assertTrue(foo instanceof Animal)`
 
