@@ -82,6 +82,9 @@ m += ("foo", 1)    // appending an item for mutable Map
     - async with execution contexts: `Future { 1 + 1 }`
         - `import scala.concurrent.ExecutionContext.Implicits.global`
     - an execution context is a abstraction that include a thread pool
+    - `map` and `flatMap` chain futures together in a linear sequence, each async runs when the previous one finishes
+    - `Future.sequence()` takes a `List[Future]` and produces a `Future[List]`
+        - all run in parralel, if any one of the futures fails then the output future fails
 - mutex on variables: `synchronize { 1 + 1 }`
 
 ### PATTERN MATCHING
@@ -213,9 +216,12 @@ m += ("foo", 1)    // appending an item for mutable Map
     println(a)
     ```
 
-## CATS
+## MAJOR LIBS
 - cats: https://typelevel.org/cats/datatypes/ior.html
+    - lots of useful FP types
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
+    - `IO` type and "non-effecting" types
+ fs2 - streaming and concurrency
 
 ## AKKA
 - one of akka streams main goals is to implement backpressure

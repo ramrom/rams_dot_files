@@ -230,6 +230,7 @@
                 - `format!` is more succinct for concat of many strings
                 - doesnt take ownership of any of the params
 - `eprintln!` is macro to print to stderr
+- `print!` - same as `println!` but no new line
 ### ARRAYS
 - static and cannot change size
 - function argument type annotation: unsized `[T]`, sized `[T, 3]`
@@ -324,6 +325,8 @@
 - `fn` is type, a function pointer, that refers to named fuctions, `Fn` is trait for closures
     - e.g. `fn f1(i: i32) -> i32 { i }; fn twice(f: fn(i32) -> i32) -> i32 { f(); f() }`
     - `fn` pointers all implement `Fn`, `FnMut`, and `FnOnce`, so can pass `fn` to something expecting a closure
+        - can also pass a closure that doesn't capture it's environment into a `fn`
+        - can vary based on ABI, e.g. `extern` type, e.g. external C function: `extern "C" fn()`
 ### CLOSURES
 - are anonymous functions that can capture their environment
 - compiler auto-implments each closure into 3 traits
@@ -439,6 +442,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - https://docs.rs/futures/latest/futures/
 - `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
 - similar to javascript promises or scala future
+    - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
 - run many concurrent tasks on a small number of OS threads
 - futures
     - are inert - the make progress only when polled

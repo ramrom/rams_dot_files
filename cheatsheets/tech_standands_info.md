@@ -225,6 +225,15 @@
 - more procedural style of programming, used more for configuration
 - agentless, all the client needs is ssh server
 - uses jinja2 (.j2 files) for templating
+### DEPLOYMENT STRATEGIES
+- rolling deployments - incremental deploy in same env
+    - take down and upgrade each service instance at a time
+ - blue-green deploy - uses 2 different "environments" (e.g. 2 diff k8 clusters)
+    - deploy new version of services on green, can internally test green while ingress still serving to blue
+        - when ready switch traffic to green
+ - canary deploy
+    - dont have a entirely seperate env (like another k8 cluster), but use spare nodes in the same cluster
+    - cutover a small percentage of live traffic at a time (versus 100% in blue-green)
 
 ## BASE64
 - 64 safe ASCII chars

@@ -61,6 +61,12 @@ HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, has
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 ```
 
+## GC/ALLOCATION
+- generally all variables store on the heap
+    - primitives (ints, bools, etc) will go on the stack
+    - fixed sized plain arrays also go on the heap
+    - basically all objects go on the heap
+
 ## TYPE SYSTEM
 - `final` keyword means it can't be changed (synonymous to `val` in scala)
 ### CLASSES
