@@ -221,7 +221,7 @@ m += ("foo", 1)    // appending an item for mutable Map
     - lots of useful FP types
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
     - `IO` type and "non-effecting" types
- fs2 - streaming and concurrency
+ fs2 - streaming and concurrency, build on cats-effects and cats
 
 ## AKKA
 - one of akka streams main goals is to implement backpressure

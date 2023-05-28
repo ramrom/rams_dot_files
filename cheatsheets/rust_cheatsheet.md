@@ -405,7 +405,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - traits objects can't be downcast back to the original type with casting or coersion
     - the `Any` trait can do this, it's type-safe downcasting on trait objects
     - one idomatic way is to use `enums` variants in place of the trait implementors
-- for `trait Trait {}`, a param of type `impl Trait` is basically syntax sugar for generic trait `<T: Trait>`
+- for `trait Trait {}`, a param of type `impl Trait` is basically syntax sugar for generic with trait bound `<T: Trait>`
     ```rust
     trait Trait {}
     fn foo<T: Trait>(arg: T) { }
@@ -440,7 +440,23 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
 ### FUTURES/ASYNC
 - https://docs.rs/futures/latest/futures/
+    - cooperative multitasking, tasks, `Futures` yield at points to let others run
+        - versus bare threads, which are preemtive, OS is responsible stop/schedule them, bare threads dont have "yield" points
+    - Futures run on some executor, there are many types, single-threaded, multi-threaded, etc.
+    - calling blocking operations like read from a regular file or network socket might block, need to use async versions of those
+        - e.g. tokio has async version of all these IO operations
 - `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
+    - `async fn() -> T { ... }` is basically `fn() -> Future<T> { async { ... } }`
+- `Future`
+    - `future::ready(1)` -> completed future, similar to scala `Future.complete(1)`
+    - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
+        - async traits are hard b/c Futures don't have a know size
+            - futures contain a "state machine" of future's data, and that makes their size unkown
+        - tokio spawn gives future to executor to schedule
+- `select!`, sortasimilar to golang `select`, it runs many futures concurrently
+    - the first future that completes will execute it's cases' code, and `select!` block finishes without waiting for other futures
+    - `default` -> case runs if no futures are ready
+    - `complete` -> if all futures are completed, this runs
 - similar to javascript promises or scala future
     - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
 - run many concurrent tasks on a small number of OS threads
@@ -473,6 +489,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 
 ## ANNOTATION
 - `derive` - tells rust to automatically generate a trait implementation for a type
+- `#![allow(dead_code)]` - top level, ignore warnings about unused funcs/vars/code
 - `cfg` - means set a configuration
     - example configs: `test`
 
@@ -517,6 +534,9 @@ let s2 = String::from("hello");  // type String is mutable
 ## LIBS/FRAMEWORKS/APPS
 - [rayon](https://docs.rs/rayon/latest/rayon/) - lib for making sequential computations parralel (e.g. parrallel iterators)
 - [tokio](https://tokio.rs) - awesome async framework
+    - core of it is it provides an executor/runtime for rust Futures to run on
+    - has async version of tons of stuff, e.g. file handling, tcp/udp streams, channels, mutexes, timeouts, sleeps etc.
+        - tokio mutex - yields instead of blocks if lock cant be aquired, however more expensive than std mutex
 - [serde](https://serde.rs/) - awesome serial/deserialization framework
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
