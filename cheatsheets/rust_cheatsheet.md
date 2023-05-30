@@ -532,18 +532,21 @@ let s2 = String::from("hello");  // type String is mutable
 ```
 
 ## LIBS/FRAMEWORKS/APPS
-- [rayon](https://docs.rs/rayon/latest/rayon/) - lib for making sequential computations parralel (e.g. parrallel iterators)
-- [tokio](https://tokio.rs) - awesome async framework
+- [mio](https://github.com/tokio-rs/mio) - low level lib for OS non-blocking IO API
+    - basically rust's version of libuv, which offers abstractions of big IO APIs like epoll, kqueue, iocp
+- [tokio](https://tokio.rs) - awesome async framework, built on mio
     - core of it is it provides an executor/runtime for rust Futures to run on
     - has async version of tons of stuff, e.g. file handling, tcp/udp streams, channels, mutexes, timeouts, sleeps etc.
         - tokio mutex - yields instead of blocks if lock cant be aquired, however more expensive than std mutex
-- [serde](https://serde.rs/) - awesome serial/deserialization framework
+- [async-std](https://github.com/async-rs/async-std) - async version of std lib, similar to tokio
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
-- [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async
+- [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/tokio
 - [actix](https://actix.rs/) - popular web framework, uses actor model
 - [axum](https://github.com/tokio-rs/axum) - popular web framework
+- [serde](https://serde.rs/) - awesome serial/deserialization framework
+- [rayon](https://docs.rs/rayon/latest/rayon/) - lib for making sequential computations parralel (e.g. parrallel iterators)
 - [yew](https://yew.rs) - /awesome front end framework (compiles to webassembly)
     - similar to react architecture, has the conecpt of components
     - generally faster than react!

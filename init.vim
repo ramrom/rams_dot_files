@@ -372,12 +372,12 @@ if vim.fn.has('nvim-0.6.1') == 1 then
     end
 
     ---------------- RUST ---------------------------
-    local on_attach = function(client)
-        require'completion'.on_attach(client)
+    local rust_on_attach = function(client)
+        require'completion'.rust_on_attach(client)
     end
 
     require'lspconfig'.rust_analyzer.setup({
-        on_attach=on_attach,
+        on_attach=rust_on_attach,
         -- autostart = false,   -- dont automatically start
         settings = {
             ["rust-analyzer"] = {

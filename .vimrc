@@ -74,6 +74,7 @@ elseif empty($VIM_NOPLUG)
         Plug 'hrsh7th/nvim-cmp'         " autocomplete for LSPs
         Plug 'hrsh7th/cmp-nvim-lsp'     " LSP source for nvim-cmp
         Plug 'hrsh7th/cmp-buffer'       " buffer word completion
+        Plug 'hrsh7th/cmp-path'         " filesystem path completion
         " Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
         " Plug 'L3MON4D3/LuaSnip'         " Snippets plugin
 

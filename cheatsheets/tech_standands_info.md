@@ -277,12 +277,18 @@
     - write regular web HTML5/CSS/javascript and chromium browser to render frontend and node.js for backend
     - can use javascript frameworks like react or vue
 - react is a SPA framework for web browsers, built by facebook
+    - uses 2 virtual DOM, changes to DOM are applied to virtual DOM
+        - reconciliation - old and new virtual DOM are diffed, only changed parts are applied to real DOM
 - react native lets you use your react code to build native mobile apps
     - uses C++ engine to compile react abstractions like `View` to native components for iOS or android
     - code runs in javascript engine(e.g. JavaScriptCore or Hermes) and talks to native code via messages over a bridge
 - AI / Machine-learning
     - TensorFlow
     - PyTorch
+- event/IO libs
+    - libuv - C async lib, uses epoll/kqueue/IOCP, event ports, used by Node.js
+    - libevent - C async lib, similar to libuv, uses callbacks on IO events
+        - memcached, tmux, chrome, transmission use it
 
 ## GARBAGE COLLECTION
 - reference counting
