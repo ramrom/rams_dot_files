@@ -21,13 +21,26 @@ require("lazy").setup({
     'tpope/vim-commentary', { 'tpope/vim-commentary' },
     'tpope/vim-surround', { 'tpope/vim-surround' },
     'tpope/vim-repeat', { 'tpope/vim-repeat' },
+    'ruanyl/vim-gh-line', { 'ruanyl/vim-gh-line' },  -- generate github url links from current file
     'junegunn/fzf', { 'junegunn/fzf', run = ":call fzf#install()" },
     'junegunn/fzf.vim', { 'junegunn/fzf.vim' },
+    'pbogut/fzf-mru.vim', { 'pbogut/fzf-mru.vim' },  -- fzf.vim is missing a most recently used file search
     'nvim-lualine/lualine.nvim', { 'nvim-lualine/lualine.nvim' },
     'lewis6991/gitsigns.nvim', { 'lewis6991/gitsigns.nvim' },
     'joshdick/onedark.vim', { 'joshdick/onedark.vim' },
     'preservim/vim-markdown', { 'preservim/vim-markdown' },
-    'nvim-treesitter/nvim-treesitter', { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+    'nvim-treesitter/nvim-treesitter',
+        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+    'nvim-lua/plenary.nvim', { 'nvim-lua/plenary.nvim' },
+    'mfussenegger/nvim-dap', { 'mfussenegger/nvim-dap' },
+    'neovim/nvim-lspconfig', { 'neovim/nvim-lspconfig' },
+    'lukas-reineke/indent-blankline.nvim', { 'lukas-reineke/indent-blankline.nvim' },
+    'glacambre/firenvim',
+        cond = not not vim.g.started_by_firenvim,
+        build = function()
+            require("lazy").load({ plugins = "firenvim", wait = true })
+            vim.fn["firenvim#install"](0)
+        end,
 })
 
 --------------------------------------------------------------------------------------------------------
@@ -296,5 +309,8 @@ require'nvim-treesitter.configs'.setup {
 
 vim.opt.foldmethod='expr'
 vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+
+---- indent blankline
+vim.g.indent_blankline_enabled=0
 
 end
