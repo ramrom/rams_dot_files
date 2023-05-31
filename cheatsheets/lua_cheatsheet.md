@@ -30,6 +30,7 @@
 - can do suspend and resume exection
 
 ## TABLE
+- first item starts at index _1_, not _0_
 - (associative arrays) are fundamental mechanism
 - can make class/OOP type stuff
 - can use it to make arrays, sets, lists, records
@@ -38,6 +39,7 @@
     - the `:` operator helps a lot
     - `setmetatable` is a function build into the language
         - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
+- create table and insert - `t={} table.insert(t,"item1") table.insert(t,{})`
 
 ## METHODS AND SYNTAX
 - `pcall` lua method catches errors
