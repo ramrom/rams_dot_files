@@ -1,10 +1,12 @@
 -- NEOVIM CONFIG
 
 -- ISSUES
-    -- fzf is not loading, dont see commands
     -- cant get leader y/p to copy/paste to + buffer
+    -- get listchars opt working
 
--------- PLUGINS -------------------
+--------------------------------------------------------------------------------------------------------
+-------------------------------- PLUGINS --------------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 -- print(lazypath)
 if not vim.loop.fs_stat(lazypath) then
@@ -19,10 +21,13 @@ require("lazy").setup({
     'tpope/vim-commentary', { 'tpope/vim-commentary' },
     'tpope/vim-surround', { 'tpope/vim-surround' },
     'tpope/vim-repeat', { 'tpope/vim-repeat' },
-    'junegunn/fzf', { 'junegunn/fzf', run = ":call fzf#install()"  },
+    'junegunn/fzf', { 'junegunn/fzf', run = ":call fzf#install()" },
+    'junegunn/fzf.vim', { 'junegunn/fzf.vim' },
     'nvim-lualine/lualine.nvim', { 'nvim-lualine/lualine.nvim' },
     'lewis6991/gitsigns.nvim', { 'lewis6991/gitsigns.nvim' },
     'joshdick/onedark.vim', { 'joshdick/onedark.vim' },
+    'preservim/vim-markdown', { 'preservim/vim-markdown' },
+    'nvim-treesitter/nvim-treesitter', { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 })
 
 --------------------------------------------------------------------------------------------------------
@@ -80,10 +85,12 @@ vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p
 
 --- TRAILING SPACES
 vim.opt.list = true
-vim.opt.listchars={tab = '_', trail = '.'}
+-- vim.opt.listchars={tab = '_', trail = '.'}
 
 
-------- FUNCS -----------------
+--------------------------------------------------------------------------------------------------------
+-------------------------------- FUNCTIONS --------------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
 -- if there is one tab, move forward buffer, otherwise forward tabs
 TabBufNavForward = function()
     local tabinfo = vim.fn.gettabinfo()
@@ -125,7 +132,10 @@ function Lua.moduleExists(name)
         return false
     end
 end
-------- MAPS -----------------------
+
+--------------------------------------------------------------------------------------------------------
+-------------------------------- MAPS --------------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
 vim.g.mapleader = " "
 
 vim.keymap.set("i", "<C-l>", "<Esc>")
@@ -141,8 +151,25 @@ vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
 vim.keymap.set("n", "<leader>y", "\"+y")
 -- vim.keymap.set("n", "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>p", [["+p]])
+vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
------------ PLUGIN CONFIG ------------------------------
+vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
+vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>')
+vim.keymap.set('n', '<leader>n', '<cmd>:NERDTreeToggle<CR>')
+vim.keymap.set('n', '<leader>N', '<cmd>:NERDTreeFind<CR>')
+vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
+vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
+vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
+vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
+vim.keymap.set('n', '<leader>k', '<cmd>:Rg<CR>')
+vim.keymap.set('n', '<leader>K', '<cmd>:Rg!<CR>')
+vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
+
+vim.keymap.set('n', '<leader>ll', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>L', '<cmd>:Lines<CR>')
+--------------------------------------------------------------------------------------------------------
+-------------------------------- PLUGIN CONFIG ----------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
 if vim.fn.has('nvim-0.8.0') == 1 then
 
 if Lua.moduleExists('lualine') then
@@ -222,5 +249,52 @@ if Lua.moduleExists('lualine') then
         extensions = {}
     }
 end
+
+---------------------- TREE-SITTER CONFIG -------------------------------
+require'nvim-treesitter.configs'.setup {
+    -- A list of parser names, or "all"
+    ensure_installed = "all",
+
+    -- ignore_install = { "javascript", "rust" }, -- List of parsers to ignore installing (or "all")
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
+        -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
+    ignore_install = { "phpdoc" },
+
+    highlight = {
+        -- `false` will disable the whole extension
+         enable = true,
+
+        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+        -- the name of the parser)
+        -- list of language that will be disabled
+        disable = { "markdown" },
+
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = false,
+    },
+    indent = {
+        enable = true
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = 'gn',
+            node_incremental = '<TAB>',
+            node_decremental = '<S-TAB>',
+            scope_incremental = '<CR>',
+        },
+    },
+}
+
+vim.opt.foldmethod='expr'
+vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 
 end
