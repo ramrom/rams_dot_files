@@ -295,7 +295,7 @@ if vim.fn.has('nvim-0.6.1') == 1 then
         },
     })
 
-    --------------------- fidget (LSP progress) ------------------
+    --------------------- fidget (LSP progress info) ------------------
     require"fidget".setup{}
 
 

@@ -291,8 +291,21 @@
         - memcached, tmux, chrome, transmission use it
 
 ## GRAPHICS FRAMEWORK/ENGINES
-- id
-- unreal
+- cryengine - by crytech
+    - implementors: far cry
+- id Tech - C++ codebase by id software
+    - john carmack left in 2013, Tiago Sousa(came from crytech) took over
+    - id Tech 5
+        - implementors: Rage
+    - id Tech 6 released 2015?, supports vulkan and openGL
+        - implementors: Doom 2016
+    - id Tech 7 released 2018?, supports only vulkan, ray tracing, no "main thread" (all "jobs")
+        - implementors: Doom Eternal
+- unreal - C++ codebase by epic games
+    - 5.0 - major goal to make game content/assets easy to create
+        - nanite - import photographic source into game
+        - lumen - full real-time global illumination, no manual lightmap creation for a scene
+        - Niagara - fluid/particle dynamics, Chaos - physics engine
 
 ## GARBAGE COLLECTION
 - reference counting
