@@ -30,8 +30,26 @@ require("lazy").setup({
 vim.g.onedark_termcolors=256
 vim.g.onedark_terminal_italics=1
 vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
-vim.cmd('colorscheme onedark')
-vim.cmd('hi clear Search')
+vim.cmd.colorscheme('onedark')
+vim.cmd.highlight({'clear','Search'})
+
+------- FUNCS -----------------
+TabBufNavForward = function()
+    local tabinfo = vim.fn.gettabinfo()
+    if #tabinfo == 1 then vim.cmd(':bn!') else vim.cmd(':tabn') end
+end
+
+TabBufNavBackward = function()
+    local tabinfo = vim.fn.gettabinfo()
+    if #tabinfo == 1 then vim.cmd(':bp!') else vim.cmd(':tabprevious') end
+end
 
 ------- MAPS -----------------------
 vim.g.mapleader = " "
+
+vim.keymap.set("i", "<C-l>", "<Esc>")
+vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>")
+vim.keymap.set("n", "<leader>f", TabBufNavForward)
+vim.keymap.set("n", "<leader>d", TabBufNavBackward)
+vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
+vim.keymap.set("n", "<leader>z", function() print("hi") end)

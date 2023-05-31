@@ -38,3 +38,8 @@
     - the `:` operator helps a lot
     - `setmetatable` is a function build into the language
         - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
+
+## METHODS AND SYNTAX
+- `pcall` lua method catches errors
+    - `local ok, _ = pcall(vim.cmd, 'boguscmd')`, `ok` is bool, `false` if error was raised
+- `[[ some multi line text ]]` - use double brackets for multi-line string literals
