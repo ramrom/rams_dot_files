@@ -290,6 +290,10 @@
     - libevent - C async lib, similar to libuv, uses callbacks on IO events
         - memcached, tmux, chrome, transmission use it
 
+## GRAPHICS FRAMEWORK/ENGINES
+- id
+- unreal
+
 ## GARBAGE COLLECTION
 - reference counting
     - maintain a count of variables referencing each object
@@ -416,6 +420,9 @@
 - InARP(inverse ARP)/RARP(Reverse ARP) - get layer 3 address from a layer 2 address
 - BOOTP - superseded InARP
 - DHCP - superseded BOOTP
+### DNS
+- A record - hostname -> IP address, CNAME - hostname -> hostname
+- if client DNS requests returns CNAME, it continues to make requests until it gets an A name
 
 ### NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP
