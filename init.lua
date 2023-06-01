@@ -113,7 +113,17 @@ vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p
 vim.opt.list = true
 vim.opt.listchars = {tab = '»_', trail = '.'}
 
+-- for jsonc format, which supports commenting, this will highlight comments
+-- #FIXME may'23: not working, code in .vimrc not working either
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'json', callback = function() vim.cmd.syntax([[match Comment +\/\/.\+$+]]) end
+})
 
+-- any file name starting with Jenkinsfile should be groovy
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, { pattern = 'Jenkinsfile*', command = 'set filetype=groovy' })
+
+-- disable autocommenting on o and O in normal
+vim.api.nvim_create_autocmd('FileType', { pattern = '*', command ='setlocal formatoptions-=o' })
 --------------------------------------------------------------------------------------------------------
 -------------------------------- FUNCTIONS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -174,7 +184,7 @@ vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>")
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
-vim.keymap.set("n", "<leader>z", function() print("hi") end)
+vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
 vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
 vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
@@ -186,22 +196,37 @@ vim.keymap.set("n", "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
+vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>')
-vim.keymap.set('n', '<leader>n', '<cmd>:NERDTreeToggle<CR>')
-vim.keymap.set('n', '<leader>N', '<cmd>:NERDTreeFind<CR>')
 vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
 vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
 vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
-vim.keymap.set('n', '<leader>k', '<cmd>:Rg<CR>')
-vim.keymap.set('n', '<leader>K', '<cmd>:Rg!<CR>')
+vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
+vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
 vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
+
+vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
 
-vim.keymap.set('n', '<leader>ll', '<cmd>:Lines<CR>')
-vim.keymap.set('n', '<leader>L', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
+
+vim.keymap.set('n', '<leader>cc', [[:Maps!<cr> space ]])
+vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
+vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
+vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
+vim.keymap.set('n', '<leader>cl', '<cmd>:Files $MY_NOTES_DIR<cr>')
+vim.keymap.set('n', '<leader>cw', '<cmd>:Files $MY_WORK_DIR<cr>')
+vim.keymap.set('n', '<leader>cA', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
+
+vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
+vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
+
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
