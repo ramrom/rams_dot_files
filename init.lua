@@ -17,24 +17,37 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    'tpope/vim-fugitive', { 'tpope/vim-fugitive' },
-    'tpope/vim-commentary', { 'tpope/vim-commentary' },
-    'tpope/vim-surround', { 'tpope/vim-surround' },
-    'tpope/vim-repeat', { 'tpope/vim-repeat' },
-    'ruanyl/vim-gh-line', { 'ruanyl/vim-gh-line' },  -- generate github url links from current file
-    'junegunn/fzf', { 'junegunn/fzf', run = ":call fzf#install()" },
-    'junegunn/fzf.vim', { 'junegunn/fzf.vim' },
-    'pbogut/fzf-mru.vim', { 'pbogut/fzf-mru.vim' },  -- fzf.vim is missing a most recently used file search
-    'nvim-lualine/lualine.nvim', { 'nvim-lualine/lualine.nvim' },
-    'lewis6991/gitsigns.nvim', { 'lewis6991/gitsigns.nvim' },
-    'joshdick/onedark.vim', { 'joshdick/onedark.vim' },
-    'preservim/vim-markdown', { 'preservim/vim-markdown' },
-    'nvim-treesitter/nvim-treesitter',
-        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
-    'nvim-lua/plenary.nvim', { 'nvim-lua/plenary.nvim' },
-    'mfussenegger/nvim-dap', { 'mfussenegger/nvim-dap' },
-    'neovim/nvim-lspconfig', { 'neovim/nvim-lspconfig' },
-    'lukas-reineke/indent-blankline.nvim', { 'lukas-reineke/indent-blankline.nvim' },
+    'tpope/vim-fugitive',
+    { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
+    -- 'nvim-tree/nvim-web-devicons', { 'nvim-tree/nvim-web-devicons' },
+    'tpope/vim-commentary',
+    'tpope/vim-surround',
+    'tpope/vim-repeat',
+    'ruanyl/vim-gh-line',       -- generate github url links from current file
+    { 'junegunn/fzf', run = ":call fzf#install()" },
+    'junegunn/fzf.vim',
+    'pbogut/fzf-mru.vim',       -- fzf.vim is missing a most recently used file search
+    'nvim-lualine/lualine.nvim',
+    'chrisbra/unicode.vim',     -- unicode helper
+    'lewis6991/gitsigns.nvim',
+    { 'joshdick/onedark.vim', priority = 1000 },
+    'godlygeek/tabular',
+    'preservim/vim-markdown',
+    -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { 'nvim-treesitter/nvim-treesitter',
+        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+    'nvim-lua/plenary.nvim',
+    { 'scalameta/nvim-metals',
+        ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
+    'mfussenegger/nvim-dap',
+    'neovim/nvim-lspconfig',
+    { 'kevinhwang91/nvim-bqf', ft = 'qf' },
+    'j-hui/fidget.nvim',
+    'hrsh7th/nvim-cmp',
+    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } },
+    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
+    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
+    'lukas-reineke/indent-blankline.nvim',
     'glacambre/firenvim',
         cond = not not vim.g.started_by_firenvim,
         build = function()
@@ -98,12 +111,17 @@ vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p
 
 --- TRAILING SPACES
 vim.opt.list = true
--- vim.opt.listchars={tab = '_', trail = '.'}
+vim.opt.listchars = {tab = '»_', trail = '.'}
 
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- FUNCTIONS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
+-- vim.api.nvim_create_user_command(
+--     'SilentRedraw',
+--     vim.execute(':silent !'.<q-args> | execute ':redraw!')
+-- )
+
 -- if there is one tab, move forward buffer, otherwise forward tabs
 TabBufNavForward = function()
     local tabinfo = vim.fn.gettabinfo()
@@ -157,9 +175,10 @@ vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
 vim.keymap.set("n", "<leader>z", function() print("hi") end)
-vim.keymap.set("n", "<leader>q", TabBufQuit)
+vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
 vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
 vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
+vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
 vim.keymap.set("n", "<leader>y", "\"+y")
 -- vim.keymap.set("n", "<leader>y", [["+y]])
@@ -177,6 +196,9 @@ vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
 vim.keymap.set('n', '<leader>k', '<cmd>:Rg<CR>')
 vim.keymap.set('n', '<leader>K', '<cmd>:Rg!<CR>')
 vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
+
+vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
 
 vim.keymap.set('n', '<leader>ll', '<cmd>:Lines<CR>')
 vim.keymap.set('n', '<leader>L', '<cmd>:Lines<CR>')
@@ -309,6 +331,7 @@ require'nvim-treesitter.configs'.setup {
 
 vim.opt.foldmethod='expr'
 vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+
 
 ---- indent blankline
 vim.g.indent_blankline_enabled=0

@@ -5,6 +5,8 @@
 - Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
     - *NOT* totally backwards compatible with old VimL
+- SHaDa - SHared Data file - remember things b/w sessions
+    - command line hist, search string hist, marks, global vars, buffer list, non-empty registers, and more
 
 ## NEOVIM
 - nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
@@ -60,6 +62,9 @@
 
 ## PLUGINS
 
+### NVIM LAZY
+- pure lua plugin manager, bit faster than packer
+
 ### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
@@ -92,7 +97,7 @@ G log %         - git log <current file>
 ### VIM-SURROUND
 - https://github.com/tpope/vim-surround
 
-### NERDTree
+### NERDTREE
 ?   - toggle quickhelp
 m   - bring up menu to move/rename/delete
 q   - close nerdtree
@@ -115,7 +120,7 @@ C - make selected dir node the new root node
 - `zf` will open a fzf prompt to fuzzy search quickfix items
     - `ctrl-t` and x/v will open in new tab or vert/hor split
 
-### Tree-sitter
+### TREE-SITTER
 - a general semantic file parser, available to neovim as a plugin
 - intended to be better than the regex-based systems that IDEs (including vim) use
 - language parsers files by language and creates ASTs
@@ -128,21 +133,20 @@ C - make selected dir node the new root node
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 
-### Other Plugins
-- vim-gh-line
-    - blob-view: <leader>gh
-    - blame-view: <leader>gb
-    - repo-view: <leader>go
-- Tabular
-    - `:Tabularize /| `
-        - autodetect lines above and below and align on `|` char
-    - ` :'<,'>Tabularize /| `
-        - visually selected area will align by `|` char
-        - can accept any regex, not just simpe chars like `|`
-    - ` :'<,'>Tabularize /:\zs `
-        - \z is lookforward, align by the space char after the `:` char
-- CtrlP
-    - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
+### VIM-GH-LINE
+- blob-view: <leader>gh
+- blame-view: <leader>gb
+- repo-view: <leader>go
+### TABULAR
+- `:Tabularize /| `
+    - autodetect lines above and below and align on `|` char
+- ` :'<,'>Tabularize /| `
+    - visually selected area will align by `|` char
+    - can accept any regex, not just simpe chars like `|`
+- ` :'<,'>Tabularize /:\zs `
+    - \z is lookforward, align by the space char after the `:` char
+### CTRLP
+- ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 
 ### STARTING VIM
