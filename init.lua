@@ -4,6 +4,8 @@
     -- cant get leader y/p to copy/paste to + buffer
     -- get listchars opt working
     -- cyclecolorcol func
+    -- make command! for fzf Rg, which removes matches on the filenames
+    -- GH-line not working
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGINS --------------------------------------------------------------
@@ -119,7 +121,11 @@ vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p
 vim.opt.list = true
 vim.opt.listchars = {tab = '»_', trail = '.'}
 
+-- use ripgrep for default vi grep
 vim.opt.grepprg='rg --vimgrep --follow'
+
+-- layout of files and dir in netrw file explorer
+vim.g.netrw_liststyle = 3
 
 -- for jsonc format, which supports commenting, this will highlight comments
 -- #FIXME may'23: not working, code in .vimrc not working either
@@ -132,6 +138,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, { pattern = 'Jenkinsfil
 
 -- disable autocommenting on o and O in normal
 vim.api.nvim_create_autocmd('FileType', { pattern = '*', command ='setlocal formatoptions-=o' })
+
 --------------------------------------------------------------------------------------------------------
 -------------------------------- FUNCTIONS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -193,22 +200,27 @@ end
 ----------------------------------- -------------------------------------------------------------------
 vim.g.mapleader = " "
 
------- WINDOW RESIZE AND MOVE
+------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
 vim.keymap.set("n", "<Right>", ":vertical resize -1<CR>", default_opts)
 vim.keymap.set("n", "<Up>", ":resize -1<CR>", default_opts)
 vim.keymap.set("n", "<Down>", ":resize +1<CR>", default_opts)
-
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<CR><leader>w")
+vim.keymap.set("n", "<leader>h", "<cmd>:split<CR><leader>w")
+vim.keymap.set("n", "<leader>m", ":tabm<Space>")
+
 
 vim.keymap.set("i", "<C-l>", "<Esc>")
-vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>")
+vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
+vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
+vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
 vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
@@ -225,7 +237,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
-vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>')
+vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
 vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
 vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
@@ -260,8 +272,32 @@ vim.keymap.set('n', '<leader>go', CycleColorColumn)
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
-if vim.fn.has('nvim-0.8.0') == 1 then
 
+--------------------------------- FZF -------------------------------------------------------
+-- command! -bang -nargs=* Rg
+--   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+--   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
+----------------------------- FZF MRU --------------------------------------------------
+vim.g.fzf_mru_no_sort = 1
+
+----------------------------- VIM-MARKDOWN --------------------------------------------------
+-- plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
+vim.g.vim_markdown_follow_anchor = 1
+vim.g.vim_markdown_strikethrough = 1
+vim.g.vim_markdown_new_list_item_indent = 0
+vim.g.vim_markdown_edit_url_in = 'tab'
+vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
+
+----------------------------- GH-line(github line) --------------------------------------------------
+vim.g.gh_line_map_default = 0
+vim.g.gh_line_blame_map_default = 1
+vim.g.gh_line_map = '<leader>wh'
+vim.g.gh_line_blame_map = '<leader>wb'
+vim.g.gh_repo_map = '<leader>wo'
+vim.g.gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+
+--------------------------------- LUALINE -------------------------------------------------------
 if Lua.moduleExists('lualine') then
     require('lualine').setup {
         options = {
@@ -388,7 +424,7 @@ vim.opt.foldmethod='expr'
 vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 
 
--------- indent blankline -------------
+------------------------- indent blankline -----------------------------------------------
 vim.g.indent_blankline_enabled=0
 --require("indent_blankline").setup {
 --    show_end_of_line = true,
@@ -489,4 +525,228 @@ ActivateAutoComplete = function()
     end
 end
 
+require('bqf').setup({
+    auto_enable = true,
+    auto_resize_height = true, -- highly recommended enable
+    preview = {
+        win_height = 12,
+        win_vheight = 12,
+        delay_syntax = 80,
+        -- border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
+        should_preview_cb = function(bufnr, qwinid)
+            local ret = true
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+            local fsize = vim.fn.getfsize(bufname)
+            if fsize > 100 * 1024 then
+                -- skip file size greater than 100k
+                ret = false
+            elseif bufname:match('^fugitive://') then
+                -- skip fugitive buffer
+                ret = false
+            end
+            return ret
+        end
+    },
+})
+
+require"fidget".setup{}
+
+------------------- SCALA METALS -----------------------------
+metals_config = require("metals").bare_config()
+
+metals_config.settings = {
+  showImplicitArguments = true,
+  showImplicitConversionsAndClasses = true,
+  showInferredType = true
+}
+
+metals_config.init_options.statusBarProvider = "on"
+
+metals_config.capabilities = capabilities
+
+-- Autocmd that will actually be in charging of starting the whole thing
+vim.api.nvim_create_autocmd("FileType", {
+    -- NOTE: You may or may not want java included here. You will need it if you
+    -- want basic Java support but it may also conflict if you are using
+    -- something like nvim-jdtls which also works on a java filetype autocmd.
+    pattern = { "scala", "sbt" },
+    callback = function()
+        require("metals").initialize_or_attach(metals_config)
+    end,
+    group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+})
+
+vim.opt.shortmess:remove('F')   -- Ensure autocmd works for filetype
+vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
+
+-- === Basic Completion Settings ===
+-- menu = use a popup menu to show possible completions
+-- menuone = show a menu even if there is only one match
+-- noinsert = do not insert text for a match until user selects one
+-- noselect = do not select a match from the menu automatically
+vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+
+-- Enable completions as you type.
+-- let g:completion_enable_auto_popup = 1
+-- vim.opt.completion_enable_auto_popup=1
+
+-- for telescope
+-- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
+
+
+------ METALS DAP ------------------
+local dap = require("dap")
+dap.configurations.scala = {
+  {
+    type = "scala",
+    request = "launch",
+    name = "RunOrTest",
+    metals = {
+        runType = "runOrTestFile",
+        --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+    },
+  },
+  {
+    type = "scala",
+    request = "launch",
+    name = "Test Target",
+    metals = {
+        runType = "testTarget",
+    },
+  },
+}
+
+metals_config.on_attach = function(client, bufnr)
+    require("metals").setup_dap()
+    SetMetalsKeymaps()
 end
+
+---------------- RUST ---------------------------
+local rust_on_attach = function(client)
+    require'completion'.rust_on_attach(client)
+end
+
+require'lspconfig'.rust_analyzer.setup({
+    on_attach=rust_on_attach,
+    -- autostart = false,   -- dont automatically start
+    settings = {
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
+
+------------------- LSP-Configs -----------------------------
+util = require "lspconfig/util"
+
+------------ GOLANG gopls LSP ----------------------
+require'lspconfig'.gopls.setup{
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod", "gotmpl" },
+    root_dir = util.root_pattern("go.mod", ".git"),
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+    single_file_support = true
+}
+
+-- golang DAP
+-- lua require('dap-go').setup()
+
+------------- Kotlin-------------------------------------
+-- https://github.com/fwcd/kotlin-language-server
+
+require'lspconfig'.kotlin_language_server.setup{
+    cmd = { "kotlin-language-server" },
+    filetypes = { "kotlin", "kt" },
+    root_dir = util.root_pattern("settings.gradle")
+}
+
+------------ BASH/SHELL bashls LSP ----------------------
+-- https://github.com/mads-hartmann/bash-language-server
+
+-- require'lspconfig'.bashls.setup{
+--     cmd = {"bash-language-server", "start"},
+--     cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
+--     filetypes = { "sh" },
+--     root_dir = util.find_git_ancestor,
+--     single_file_support = true
+-- }
+
+
+----------- COMMON LSP KEYBINDINGS --------------------------------------------
+-- many taken from https://github.com/scalameta/nvim-metals/discussions/39
+
+vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+
+-- `tab split` will open in new tab, default is open in current tab, no opt for this natively
+-- see https://github.com/scalameta/nvim-metals/discussions/381
+vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
+vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
+
+vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
+vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
+vim.keymap.set("n", "glc", "<cmd>call ClearLspLog()<CR>")
+vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
+vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
+vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
+
+-- this is called on_attach in the metals lsp config section
+SetMetalsKeymaps = function()
+    vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
+    vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
+    vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
+    vim.keymap.set("n", "glst", "<cmd>MetalsStartServer<CR>")
+    vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
+    vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
+    -- NOTE: in the tree window hit 'r' to navigate to that item
+    vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+    vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+end
+
+vim.keymap.set("n", "gjc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
+vim.keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+-- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+-- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
+vim.keymap.set("n", "gwd", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
+vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
+vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
+vim.keymap.set("n", "gwb", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
+vim.keymap.set("n", "gwt", "<cmd>lua ToggleLSPdiagnostics()<CR>") -- buffer diagnostics only
+vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
+vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
+-- pgar keybindings LSP key bindings
+-- nnoremap <silent> <leader>q   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+-- nnoremap <silent> <leader>e   <cmd>lua vim.lsp.diagnostic.open_float()<CR>
+
+-- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
+--vim.keymap.set("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
+--vim.keymap.set("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+--vim.keymap.set("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+--vim.keymap.set("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+--vim.keymap.set("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
+--vim.keymap.set("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
+--vim.keymap.set("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
