@@ -22,7 +22,7 @@ require("lazy").setup({
     'nvim-lualine/lualine.nvim',
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     -- 'nvim-tree/nvim-web-devicons',
-    { 'joshdick/onedark.vim', priority = 1000 },
+    { 'joshdick/onedark.vim', init = LoadOneDarkConfig, lazy=false, priority = 1000 },
     -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter',
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
@@ -46,24 +46,26 @@ require("lazy").setup({
     'preservim/vim-markdown',
 
     ----- LSP STUFF
+    'neovim/nvim-lspconfig',
     { 'scalameta/nvim-metals',
         ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
-    'mfussenegger/nvim-dap',
-    'neovim/nvim-lspconfig',
     { 'kevinhwang91/nvim-bqf', ft = 'qf' },
-    'j-hui/fidget.nvim',
+    { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
     'hrsh7th/nvim-cmp',
-    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } },
+    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } },  -- LSP completions
     { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
     { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
-    'lukas-reineke/indent-blankline.nvim',
+    'mfussenegger/nvim-dap',
+    -- 'leoluz/nvim-dap-go',
+
     'glacambre/firenvim',
-        cond = not not vim.g.started_by_firenvim,
+        cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })
             vim.fn["firenvim#install"](0)
         end,
 
+    'lukas-reineke/indent-blankline.nvim',
     'chrisbra/unicode.vim',     -- unicode helper
     'godlygeek/tabular',
 })
@@ -78,11 +80,14 @@ vim.opt.swapfile = false               -- no swap files
 vim.opt.mouse=null                     -- turn off all mouse support by default
 
 ----- COLOR -----
-vim.g.onedark_termcolors=256
-vim.g.onedark_terminal_italics=1
-vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
-vim.cmd.colorscheme('onedark')
-vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
+OneDarkConfig = function()
+    vim.g.onedark_termcolors=256
+    vim.g.onedark_terminal_italics=1
+    vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
+    vim.cmd.colorscheme('onedark')
+    vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
+end
+OneDarkConfig()
 
 --- MAIN
 vim.opt.autoread = true                         -- reload file's buffer if file was changed externally
@@ -310,6 +315,7 @@ vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
 vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
 vim.keymap.set('n', '<leader>cl', '<cmd>:Files $MY_NOTES_DIR<cr>')
 vim.keymap.set('n', '<leader>cw', '<cmd>:Files $MY_WORK_DIR<cr>')
+vim.keymap.set('n', '<leader>cj', '<cmd>:tabnew $MY_WORK_TODO<cr>')
 vim.keymap.set('n', '<leader>cA', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
@@ -445,22 +451,14 @@ end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 require'nvim-treesitter.configs'.setup {
-    -- A list of parser names, or "all"
-    ensure_installed = "all",
-
-    -- ignore_install = { "javascript", "rust" }, -- List of parsers to ignore installing (or "all")
-
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
+    ensure_installed = "all",   -- A list of parser names, or "all"
+    sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
     -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
         -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
     ignore_install = { "phpdoc" },
-
     highlight = {
-        -- `false` will disable the whole extension
-         enable = true,
-
+         enable = true,     -- `false` will disable the whole extension
         -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
         -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
         -- the name of the parser)
@@ -473,9 +471,7 @@ require'nvim-treesitter.configs'.setup {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
-    indent = {
-        enable = true
-    },
+    indent = { enable = true },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -616,7 +612,6 @@ require('bqf').setup({
     },
 })
 
-require"fidget".setup{}
 
 ------------------- SCALA METALS -----------------------------
 metals_config = require("metals").bare_config()
@@ -630,6 +625,7 @@ metals_config.settings = {
 metals_config.init_options.statusBarProvider = "on"
 
 metals_config.capabilities = capabilities
+-- metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Autocmd that will actually be in charging of starting the whole thing
 vim.api.nvim_create_autocmd("FileType", {
@@ -762,17 +758,17 @@ require'lspconfig'.kotlin_language_server.setup{
 ----------- COMMON LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 
-vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 
 -- `tab split` will open in new tab, default is open in current tab, no opt for this natively
 -- see https://github.com/scalameta/nvim-metals/discussions/381
 vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
 vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
 
-vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-vim.keymap.set("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-vim.keymap.set("n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol)
+vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol)
 vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
 vim.keymap.set("n", "glc", "<cmd>call ClearLspLog()<CR>")
 vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
@@ -792,17 +788,17 @@ SetMetalsKeymaps = function()
     vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
 end
 
-vim.keymap.set("n", "gjc", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-vim.keymap.set("n", "gs", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
-vim.keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+vim.keymap.set("n", "gjc", vim.lsp.codelens.run)
+vim.keymap.set("n", "ga", vim.lsp.buf.code_action)
+vim.keymap.set("n", "gs", vim.lsp.buf.signature_help)
+vim.keymap.set("n", "gy", vim.lsp.buf.formatting)
 -- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
-vim.keymap.set("n", "gwd", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
+vim.keymap.set("n", "gwd", vim.diagnostic.setqflist) -- all workspace diagnostics
 vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
 vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
-vim.keymap.set("n", "gwb", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
-vim.keymap.set("n", "gwt", "<cmd>lua ToggleLSPdiagnostics()<CR>") -- buffer diagnostics only
+vim.keymap.set("n", "gwb", vim.diagnostic.setloclist) -- buffer diagnostics only
+vim.keymap.set("n", "gwt", ToggleLSPdiagnostics) -- buffer diagnostics only
 vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
 vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
 -- pgar keybindings LSP key bindings

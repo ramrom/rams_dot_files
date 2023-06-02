@@ -31,17 +31,26 @@
 
 ## TABLE
 - first item starts at index _1_, not _0_
-- (associative arrays) are fundamental mechanism
-- can make class/OOP type stuff
-- can use it to make arrays, sets, lists, records
+- only data structure, an object, used for **everything**
+    - it's sorta fundamentally a associative arrays
+    - can use it to make arrays, sets, lists, records, queues, etc
+    - can contain a mix of many field=value and values
+        - e.g. `a = { 1, f1 = 3, { "foo", 3 }, f2 = function() print("hi") end, 2, "val", function() print("a") end, z = {1, "a"} }`
+    - value can be any type: number/string/bool/function or another table, field can number/string
 - can make modules
 - can simulate OOP style
     - the `:` operator helps a lot
     - `setmetatable` is a function build into the language
         - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
 - create table and insert - `t={} table.insert(t,"item1") table.insert(t,{})`
+- dottable field name, `a={ f1 = 1, f2 = 2}; a["f1"] = 3; a.f1 = 2`
+- to delete a table field assign `nil` to it
 
 ## METHODS AND SYNTAX
 - `pcall` lua method catches errors
     - `local ok, _ = pcall(vim.cmd, 'boguscmd')`, `ok` is bool, `false` if error was raised
 - `[[ some multi line text ]]` - use double brackets for multi-line string literals
+- introspect type - `a=1; print(type(a))` -> prints string `number`
+- variadic args - `function foo(...) print(...) end`, `...` means variable number of args
+    - all arguments are collected into a table, accessible as hidden param named `arg`
+- global variables evaluate to `nil` if not initialized
