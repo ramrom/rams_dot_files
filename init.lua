@@ -19,27 +19,31 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    'tpope/vim-fugitive',
+    'nvim-lualine/lualine.nvim',
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     -- 'nvim-tree/nvim-web-devicons',
-    'tpope/vim-commentary',
-    'tpope/vim-surround',
-    'tpope/vim-repeat',
-    'ruanyl/vim-gh-line',       -- generate github url links from current file
-    { 'junegunn/fzf', run = ":call fzf#install()" },
-    'junegunn/fzf.vim',
-    'pbogut/fzf-mru.vim',       -- fzf.vim is missing a most recently used file search
-    'nvim-lualine/lualine.nvim',
-    'chrisbra/unicode.vim',     -- unicode helper
-    'lewis6991/gitsigns.nvim',
     { 'joshdick/onedark.vim', priority = 1000 },
-    'godlygeek/tabular',
-    { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
-    'preservim/vim-markdown',
     -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter',
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
     'nvim-lua/plenary.nvim',
+    'tpope/vim-commentary',
+    'tpope/vim-surround',
+    'tpope/vim-repeat',
+
+    --- GIT
+    'tpope/vim-fugitive',
+    'ruanyl/vim-gh-line',       -- generate github url links from current file
+    'lewis6991/gitsigns.nvim',
+
+    --- fuzzy find
+    { 'junegunn/fzf', run = ":call fzf#install()" },
+    'junegunn/fzf.vim',
+    'pbogut/fzf-mru.vim',       -- fzf.vim is missing a most recently used file search
+
+    -- MARKDOWN
+    { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
+    'preservim/vim-markdown',
 
     ----- LSP STUFF
     { 'scalameta/nvim-metals',
@@ -59,6 +63,9 @@ require("lazy").setup({
             require("lazy").load({ plugins = "firenvim", wait = true })
             vim.fn["firenvim#install"](0)
         end,
+
+    'chrisbra/unicode.vim',     -- unicode helper
+    'godlygeek/tabular',
 })
 
 --------------------------------------------------------------------------------------------------------
