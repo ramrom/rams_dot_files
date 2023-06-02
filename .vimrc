@@ -52,6 +52,7 @@ elseif empty($VIM_NOPLUG)
 
     Plug 'godlygeek/tabular'        " preservim/vim-markdown uses this to format tables
     Plug 'preservim/vim-markdown'
+    " let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim']
 
     " real-time render markdown in browser window as you edit the source
     if has('nvim') || has('patch-8.1.0')
@@ -161,8 +162,8 @@ endif
 try  " if loading vim without plugins, onedark will fail, default to ir_black
     augroup colorextend
         autocmd!
-        autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
         " autocmd ColorScheme onedark call onedark#extend_highlight("NonText", { "bg": { "cterm": "000" } })
+        autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })
         autocmd ColorScheme onedark call onedark#set_highlight("htmlH2", { "cterm": "underline" })
         autocmd ColorScheme onedark call onedark#set_highlight("htmlH1", { "cterm": "underline" })
         autocmd ColorScheme onedark call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })
@@ -421,9 +422,9 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """TODO: Prime open real estate for normal mode!
     "NORMAL MODE
-        "<Leader>a/w/k/l/x'
+        "<Leader>a/w/l/x'
             "a is earmarked for smart script run or test run
-        "<Leader><Leader>    (except for h/g/q)
+        "<Leader><Leader>    (all except for h/g/q)
         "c-m/c-n/c-g/c-s/c-q
         "c-x (opposite of c-a, i clobber c-a for tmux meta)
         "c-p
@@ -496,8 +497,8 @@ noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
-noremap <leader>k :Rg<CR>
-noremap <leader>K :Rg!<CR>
+noremap <leader>x :Rg<CR>
+noremap <leader>X :Rg!<CR>
 noremap <leader>i :FZFMru<CR>
 
 noremap <leader>ll :Lines<CR>
@@ -539,6 +540,7 @@ noremap <leader>cl :exe ':Files' $MY_NOTES_DIR<cr>
 noremap <leader>cr :exe ':Files' $MY_WORK_DIR<cr>
 noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
 noremap <leader>ca :tabnew ~/tmp/scratch.md<cr>
+noremap <leader>cj :tabnew $MY_WORK_TODO<cr>
 noremap <leader>co :Files ~<cr>
 noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
 noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>

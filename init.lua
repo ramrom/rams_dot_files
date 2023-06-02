@@ -2,9 +2,9 @@
 
 -- ISSUES
     -- cant get leader y/p to copy/paste to + buffer
-    -- get listchars opt working
-    -- make command! for fzf Rg, which removes matches on the filenames
+    -- get listchars opt working, i think it mostly works
     -- GH-line not working
+
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGINS --------------------------------------------------------------
@@ -52,7 +52,7 @@ require("lazy").setup({
     { 'kevinhwang91/nvim-bqf', ft = 'qf' },
     { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
     'hrsh7th/nvim-cmp',
-    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } },  -- LSP completions
+    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } }, -- LSP completions
     { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
     { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
     'mfussenegger/nvim-dap',
@@ -213,6 +213,20 @@ ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_word_diff')
 end
 
+ClearLspLog = function()
+    -- TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
+    -- also metals on osx is diff path
+    vim.cmd(':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log')
+    vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
+end
+
+vim.api.nvim_create_user_command(
+    'SilentRedraw',
+    [[execute ':silent !'.<q-args> | execute ':redraw!' ]],
+    {bang = true, nargs = "*" }
+)
+
+-- lazy.vim, if enabled = true module exists, and if cond = false it's not loaded and requiring will fail
 local Lua = {}
 function Lua.moduleExists(name)
     if package.loaded[name] then
@@ -322,6 +336,7 @@ vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
 
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
+vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
 vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
 vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>')
 vim.keymap.set('n', '<leader>go', CycleColorColumn)
@@ -330,10 +345,33 @@ vim.keymap.set('n', '<leader>go', CycleColorColumn)
 -------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
 
+
 --------------------------------- FZF -------------------------------------------------------
--- command! -bang -nargs=* Rg
---   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
---   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
+-- default implementation of Rg greps over filename, this will just do contents
+    -- see https://github.com/junegunn/fzf.vim/issues/714
+vim.api.nvim_create_user_command( 'Rg',
+    [[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0) ]],
+      { bang = true, nargs = '*' }
+)
+
+-- TODO: above ugly, try to get below to work
+    -- https://www.reddit.com/r/neovim/comments/105zsco/help_with_converting_a_vimscript_command_to_lua/
+
+-- local function vim_grep(qargs, bang)
+--   local query = '""'
+--   if qargs ~= nil then
+--     query = vim.fn.shellescape(qargs)
+--   end
+
+--   local sh = 'rg --column --line-number --no-heading --color=always --smart-case -- ' .. query
+--   vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'right:50%', 'ctrl-/'), bang)
+-- end
+
+-- vim.api.nvim_create_user_command('Rg',
+--     function(arg) vim_grep(arg.qargs, arg.bang) end,
+--     { bang = true, nargs = '*' }
+-- )
 
 ----------------------------- FZF MRU --------------------------------------------------
 vim.g.fzf_mru_no_sort = 1
@@ -370,6 +408,7 @@ if Lua.moduleExists('gitsigns') then
         word_diff = false,
     }
 end
+
 --------------------------------- LUALINE -------------------------------------------------------
 if Lua.moduleExists('lualine') then
     require('lualine').setup {
@@ -534,6 +573,7 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         ActivateAutoComplete()
+        SetLSPKeymaps()
         vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
     end,
 })
@@ -629,9 +669,6 @@ metals_config.capabilities = capabilities
 
 -- Autocmd that will actually be in charging of starting the whole thing
 vim.api.nvim_create_autocmd("FileType", {
-    -- NOTE: You may or may not want java included here. You will need it if you
-    -- want basic Java support but it may also conflict if you are using
-    -- something like nvim-jdtls which also works on a java filetype autocmd.
     pattern = { "scala", "sbt" },
     callback = function()
         require("metals").initialize_or_attach(metals_config)
@@ -649,15 +686,11 @@ vim.opt.shortmess:append('c')   -- Avoid showing extra message when using comple
 -- noselect = do not select a match from the menu automatically
 vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
--- Enable completions as you type.
--- let g:completion_enable_auto_popup = 1
--- vim.opt.completion_enable_auto_popup=1
-
 -- for telescope
 -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
 
 
------- METALS DAP ------------------
+------------------------ DAP ------------------
 local dap = require("dap")
 dap.configurations.scala = {
   {
@@ -665,8 +698,8 @@ dap.configurations.scala = {
     request = "launch",
     name = "RunOrTest",
     metals = {
-        runType = "runOrTestFile",
         --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+        runType = "runOrTestFile",
     },
   },
   {
@@ -712,14 +745,11 @@ require'lspconfig'.rust_analyzer.setup({
     }
 })
 
-------------------- LSP-Configs -----------------------------
-util = require "lspconfig/util"
-
 ------------ GOLANG gopls LSP ----------------------
 require'lspconfig'.gopls.setup{
     cmd = {"gopls", "serve"},
     filetypes = {"go", "gomod", "gotmpl" },
-    root_dir = util.root_pattern("go.mod", ".git"),
+    root_dir = require("lspconfig/util").root_pattern("go.mod", ".git"),
     settings = {
       gopls = {
         analyses = {
@@ -740,7 +770,7 @@ require'lspconfig'.gopls.setup{
 require'lspconfig'.kotlin_language_server.setup{
     cmd = { "kotlin-language-server" },
     filetypes = { "kotlin", "kt" },
-    root_dir = util.root_pattern("settings.gradle")
+    root_dir = require("lspconfig/util").root_pattern("settings.gradle")
 }
 
 ------------ BASH/SHELL bashls LSP ----------------------
@@ -757,25 +787,50 @@ require'lspconfig'.kotlin_language_server.setup{
 
 ----------- COMMON LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
+SetLSPKeymaps = function()
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+    -- `tab split` will open in new tab, default is open in current tab, no opt for this natively
+        -- see https://github.com/scalameta/nvim-metals/discussions/381
+    vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
+    vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
 
--- `tab split` will open in new tab, default is open in current tab, no opt for this natively
--- see https://github.com/scalameta/nvim-metals/discussions/381
-vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
-vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references)
+    vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol)
+    vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol)
+    vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
+    vim.keymap.set("n", "glc", ClearLspLog)
+    vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
+    vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
+    vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
 
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "gr", vim.lsp.buf.references)
-vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol)
-vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol)
-vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
-vim.keymap.set("n", "glc", "<cmd>call ClearLspLog()<CR>")
-vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
-vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
-vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
+    vim.keymap.set("n", "gjc", vim.lsp.codelens.run)
+    vim.keymap.set("n", "ga", vim.lsp.buf.code_action)
+    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help)
+    vim.keymap.set("n", "gy", vim.lsp.buf.formatting)
+    vim.keymap.set("n", "gR", vim.lsp.buf.rename)
+    vim.keymap.set("n", "gwd", vim.diagnostic.setqflist) -- all workspace diagnostics
+    vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
+    vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
+    vim.keymap.set("n", "gwb", vim.diagnostic.setloclist) -- buffer diagnostics only
+    vim.keymap.set("n", "gwt", ToggleLSPdiagnostics) -- buffer diagnostics only
+    vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
+    vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
+    -- pgar keybindings LSP key bindings
+    -- nnoremap <silent> <leader>q   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+    -- nnoremap <silent> <leader>e   <cmd>lua vim.lsp.diagnostic.open_float()<CR>
 
--- this is called on_attach in the metals lsp config section
+    -- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
+    --vim.keymap.set("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
+    --vim.keymap.set("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+    --vim.keymap.set("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+    --vim.keymap.set("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+    --vim.keymap.set("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
+    --vim.keymap.set("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
+    --vim.keymap.set("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
+end
+
 SetMetalsKeymaps = function()
     vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
     vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
@@ -786,30 +841,5 @@ SetMetalsKeymaps = function()
     -- NOTE: in the tree window hit 'r' to navigate to that item
     vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
     vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+    -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
 end
-
-vim.keymap.set("n", "gjc", vim.lsp.codelens.run)
-vim.keymap.set("n", "ga", vim.lsp.buf.code_action)
-vim.keymap.set("n", "gs", vim.lsp.buf.signature_help)
-vim.keymap.set("n", "gy", vim.lsp.buf.formatting)
--- vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
--- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
-vim.keymap.set("n", "gwd", vim.diagnostic.setqflist) -- all workspace diagnostics
-vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
-vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
-vim.keymap.set("n", "gwb", vim.diagnostic.setloclist) -- buffer diagnostics only
-vim.keymap.set("n", "gwt", ToggleLSPdiagnostics) -- buffer diagnostics only
-vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
-vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
--- pgar keybindings LSP key bindings
--- nnoremap <silent> <leader>q   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
--- nnoremap <silent> <leader>e   <cmd>lua vim.lsp.diagnostic.open_float()<CR>
-
--- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
---vim.keymap.set("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
---vim.keymap.set("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
---vim.keymap.set("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
---vim.keymap.set("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
---vim.keymap.set("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
---vim.keymap.set("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
---vim.keymap.set("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
