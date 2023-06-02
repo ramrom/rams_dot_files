@@ -3,7 +3,6 @@
 -- ISSUES
     -- cant get leader y/p to copy/paste to + buffer
     -- get listchars opt working
-    -- cyclecolorcol func
     -- make command! for fzf Rg, which removes matches on the filenames
     -- GH-line not working
 
@@ -169,10 +168,11 @@ TabBufQuit = function()
     end
 end
 
+-- cycle between line 80, 120, and no colorcolumn
 CycleColorColumn = function()
-    if vim.opt.colorcolumn == "121" then vim.opt.colorcolumn = "81"
-    elseif vim.opt.colorcolumn == '81' then vim.opt.colorcolumn = ''
-    else vim.opt.colorcolumn = '121' end
+    if vim.o.colorcolumn == "121" then vim.o.colorcolumn = "81"
+    elseif vim.o.colorcolumn == '81' then vim.o.colorcolumn = ''
+    else vim.o.colorcolumn = '121' end
 end
 
 SaveDefinedSession = function()
@@ -186,16 +186,20 @@ SaveDefinedSession = function()
     end
 end
 
--- function SaveDefinedSession()
---     if exists("g:DefinedSessionName")
---         set sessionoptions+=globals  " mksession wont save global vars by default
---         exe ":mksession!" g:DefinedSessionName
---         echo "Saved session: ".g:DefinedSessionName
---     else
---         exe ":mksession! ./MyCurrentVimSession.vim"
---         echo "NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim"
---     endif
--- endfunction
+ToggleFoldMethod = function()
+    if vim.o.foldmethod == "indent" then
+        vim.o.foldmethod="expr"
+        vim.o.foldexpr="nvim_treesitter#foldexpr()"
+    else
+        vim.o.foldmethod="indent"
+        vim.o.foldexpr=""
+    end
+end
+
+ToggleGitSignsHighlight = function()
+    vim.cmd(':Gitsigns toggle_linehl')
+    vim.cmd(':Gitsigns toggle_word_diff')
+end
 
 local Lua = {}
 function Lua.moduleExists(name)
@@ -257,12 +261,14 @@ vim.keymap.set("i", "<C-l>", "<Esc>")
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
+
+---- COPY/PASTE to clipboard
 vim.keymap.set("n", "<leader>y", "\"+y")
 -- vim.keymap.set("n", "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
----- FZF STUFF
+--------- FZF STUFF
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
@@ -273,13 +279,23 @@ vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
 vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
 vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
 vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
+vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
 
+--------- GIT STUFF
+vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>')
+vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
+vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
+vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
+vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
+vim.keymap.set('n', '<leader>gc', '<cmd>:Commits<CR>')
+vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
+vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
+vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
-
-vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
-vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
 
 vim.keymap.set('n', '<leader>cc', [[:Maps!<cr> space ]])
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
@@ -294,6 +310,7 @@ vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>')
 vim.keymap.set('n', '<leader>go', CycleColorColumn)
 
 --------------------------------------------------------------------------------------------------------
@@ -324,6 +341,22 @@ vim.g.gh_line_blame_map = '<leader>wb'
 vim.g.gh_repo_map = '<leader>wo'
 vim.g.gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 
+---------------------------------- GIT SIGNS ----------------------------------------------
+if Lua.moduleExists('gitsigns') then
+    require('gitsigns').setup{
+        signs = {
+            add          = { text = '+' },
+            change       = { text = '!' },
+            delete       = { text = '_', show_count = true },
+            topdelete    = { text = '‾' },
+            changedelete = { text = '~' },
+            untracked    = { text = '┆' },
+        },
+        linehl = false,
+        numhl = false,
+        word_diff = false,
+    }
+end
 --------------------------------- LUALINE -------------------------------------------------------
 if Lua.moduleExists('lualine') then
     require('lualine').setup {
