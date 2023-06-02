@@ -3,6 +3,7 @@
 -- ISSUES
     -- cant get leader y/p to copy/paste to + buffer
     -- get listchars opt working
+    -- cyclecolorcol func
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGINS --------------------------------------------------------------
@@ -19,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     'tpope/vim-fugitive',
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
-    -- 'nvim-tree/nvim-web-devicons', { 'nvim-tree/nvim-web-devicons' },
+    -- 'nvim-tree/nvim-web-devicons',
     'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-repeat',
@@ -32,11 +33,14 @@ require("lazy").setup({
     'lewis6991/gitsigns.nvim',
     { 'joshdick/onedark.vim', priority = 1000 },
     'godlygeek/tabular',
+    { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
     'preservim/vim-markdown',
     -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter',
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
     'nvim-lua/plenary.nvim',
+
+    ----- LSP STUFF
     { 'scalameta/nvim-metals',
         ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
     'mfussenegger/nvim-dap',
@@ -70,8 +74,9 @@ vim.g.onedark_termcolors=256
 vim.g.onedark_terminal_italics=1
 vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
 vim.cmd.colorscheme('onedark')
-vim.cmd.highlight({'clear','Search'})
+vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
 
+--- MAIN
 vim.opt.autoread = true                         -- reload file's buffer if file was changed externally
 vim.opt.splitbelow = true                       -- open new windows on bottom for horizontal, right for vertical
 vim.opt.splitright = true                       -- open new windows on bottom for horizontal, right for vertical
@@ -82,6 +87,7 @@ vim.opt.linebreak = true                        -- avoid wrapping line in middle
 vim.opt.scrolloff = 1                           -- always show at least one line above or below the cursor
 vim.opt.showcmd = true                          -- show commands i'm process of typing in status bar
 vim.opt.number = true                           -- line numbers
+vim.opt.updatetime = 1000                       -- default is 4000, used for CursorHold autocmds, swap file writing
 vim.opt.backspace= {'indent' ,'eol', 'start'}   -- backspace like most wordprocessors in insert mode
 vim.opt.display:append('lastline')              -- display lastline even if its super long
 vim.opt.formatoptions:append('j')               -- Delete comment character when joining commented lines
@@ -112,6 +118,8 @@ vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p
 --- TRAILING SPACES
 vim.opt.list = true
 vim.opt.listchars = {tab = '»_', trail = '.'}
+
+vim.opt.grepprg='rg --vimgrep --follow'
 
 -- for jsonc format, which supports commenting, this will highlight comments
 -- #FIXME may'23: not working, code in .vimrc not working either
@@ -154,6 +162,12 @@ TabBufQuit = function()
     end
 end
 
+CycleColorColumn = function()
+    if vim.opt.colorcolumn == "121" then vim.opt.colorcolumn = "81"
+    elseif vim.opt.colorcolumn == '81' then vim.opt.colorcolumn = ''
+    else vim.opt.colorcolumn = '121' end
+end
+
 local Lua = {}
 function Lua.moduleExists(name)
     if package.loaded[name] then
@@ -179,6 +193,18 @@ end
 ----------------------------------- -------------------------------------------------------------------
 vim.g.mapleader = " "
 
+------ WINDOW RESIZE AND MOVE
+local default_opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
+vim.keymap.set("n", "<Right>", ":vertical resize -1<CR>", default_opts)
+vim.keymap.set("n", "<Up>", ":resize -1<CR>", default_opts)
+vim.keymap.set("n", "<Down>", ":resize +1<CR>", default_opts)
+
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+
 vim.keymap.set("i", "<C-l>", "<Esc>")
 vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>")
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
@@ -190,6 +216,8 @@ vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
 vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
+vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
+vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
 vim.keymap.set("n", "<leader>y", "\"+y")
 -- vim.keymap.set("n", "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>p", [["+p]])
@@ -225,7 +253,9 @@ vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
 
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
+vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>go', CycleColorColumn)
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGIN CONFIG ----------------------------------------------------------
@@ -358,7 +388,105 @@ vim.opt.foldmethod='expr'
 vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 
 
----- indent blankline
+-------- indent blankline -------------
 vim.g.indent_blankline_enabled=0
+--require("indent_blankline").setup {
+--    show_end_of_line = true,
+--    show_current_context = true,
+--    show_current_context_start = true,
+
+--    -- show_end_of_line = true,
+--    -- char = "",
+--    -- char_highlight_list = {
+--    --     "IndentBlanklineIndent1",
+--    --     "IndentBlanklineIndent2",
+--    -- },
+--    -- space_char_highlight_list = {
+--    --     "IndentBlanklineIndent1",
+--    --     "IndentBlanklineIndent2",
+--    -- },
+--    show_trailing_blankline_indent = false,
+--    --char_highlight_list = {
+--    --    "IndentBlanklineIndent1",
+--    --    "IndentBlanklineIndent2",
+--    --    "IndentBlanklineIndent3",
+--    --    "IndentBlanklineIndent4",
+--    --    "IndentBlanklineIndent5",
+--    --    "IndentBlanklineIndent6",
+--    --},
+--}
+
+--------------------------------------------------------------------------------------------------------
+-------------------------------- LSP CONFIG ----------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
+LSPDiagnosticsEnabled = true
+
+ToggleLSPdiagnostics = function()
+    LSPDiagnosticsEnabled = not LSPDiagnosticsEnabled
+    if LSPDiagnosticsEnabled then
+        vim.diagnostic.enable()
+        print("LSP diagnostics enabled")
+    else
+        vim.diagnostic.disable()
+        print("LSP diagnostics disabled")
+    end
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        ActivateAutoComplete()
+        vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
+    end,
+})
+
+ActivateAutoComplete = function()
+    if Lua.moduleExists('cmp') then
+        local cmp = require 'cmp'
+        cmp.setup {
+            completion = { autocomplete = false, },   -- dont show autocomplete menu be default
+            snippet = {
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+                ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+                -- C-b (back) C-f (forward) for snippet placeholder navigation.
+                ['<C-e>'] = cmp.mapping.abort(),
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<CR>'] = cmp.mapping.confirm {
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = true,
+                },
+                -- ['<Tab>'] = cmp.mapping(function(fallback)
+                -- ['<C-n>'] = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_next_item()
+                --     elseif luasnip.expand_or_jumpable() then
+                --         luasnip.expand_or_jump()
+                --     else
+                --         fallback()
+                --     end
+                -- end, { 'i', 's' }),
+                -- -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+                -- ['<C-p>'] = cmp.mapping(function(fallback)
+                --     if cmp.visible() then
+                --         cmp.select_prev_item()
+                --     elseif luasnip.jumpable(-1) then
+                --         luasnip.jump(-1)
+                --     else
+                --         fallback()
+                --     end
+                -- end, { 'i', 's' }),
+            }),
+            sources = {
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+                { name = 'cmp_buffer' },
+            },
+        }
+    end
+end
 
 end
