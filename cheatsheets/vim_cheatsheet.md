@@ -45,12 +45,16 @@
     - clickable statusline
 - 0.9 - TUI and remote UI
 ### LUA
-- `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
-- `:lua =vim.opt.smarttab` similar to `:set smarttab?`
+- `set`
+    - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
+    - `vim.o` is more direct variable access
+    - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
+    - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
-- lua call vimscript function - `vim.fn.printf('hi from %s', 'dude'))`
+- lua call vimscript function - `vim.fn` is a table of vim functions
+    - `vim.fn.printf('hi from %s', 'dude'))`
 - call lua function - `:lua somefunc()`
 - CONFIG STUFF
     - vimscript, sourcing lua code: `:lua require('some-lua-code')`

@@ -175,6 +175,28 @@ CycleColorColumn = function()
     else vim.opt.colorcolumn = '121' end
 end
 
+SaveDefinedSession = function()
+    if vim.fn.exists(vim.g.DefinedSessionName) == 0 then
+        vim.opt.sessionoptions:append('globals')    -- mksession wont save global vars by default
+        vim.cmd(":mksession! " .. vim.g.DefinedSessionName)
+        print("Saved session: ",vim.g.DefinedSessionName)
+    else
+        vim.cmd(":mksession! ./MyCurrentVimSession.vim")
+        print("NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim")
+    end
+end
+
+-- function SaveDefinedSession()
+--     if exists("g:DefinedSessionName")
+--         set sessionoptions+=globals  " mksession wont save global vars by default
+--         exe ":mksession!" g:DefinedSessionName
+--         echo "Saved session: ".g:DefinedSessionName
+--     else
+--         exe ":mksession! ./MyCurrentVimSession.vim"
+--         echo "NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim"
+--     endif
+-- endfunction
+
 local Lua = {}
 function Lua.moduleExists(name)
     if package.loaded[name] then
@@ -210,31 +232,37 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<CR><leader>w")
-vim.keymap.set("n", "<leader>h", "<cmd>:split<CR><leader>w")
-vim.keymap.set("n", "<leader>m", ":tabm<Space>")
+vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
+vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
 
-
-vim.keymap.set("i", "<C-l>", "<Esc>")
-vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
-vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
+------ TAB MOVE/NAV/CREATE
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
-vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
+vim.keymap.set("n", "<leader>m", ":tabm<Space>")
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
 vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
+vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
+
+---- SMART QUITTING
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
 vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
 vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
+
+------ SMART WRITING
+vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
+vim.keymap.set('n', "<leader>S", SaveDefinedSession)
+
+vim.keymap.set("i", "<C-l>", "<Esc>")
+vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
+vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
-vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
-vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
 vim.keymap.set("n", "<leader>y", "\"+y")
 -- vim.keymap.set("n", "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
+---- FZF STUFF
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
@@ -246,7 +274,6 @@ vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
 vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
 vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
 
-vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
