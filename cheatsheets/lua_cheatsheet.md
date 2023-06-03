@@ -1,5 +1,7 @@
 # LUA
 - devhits: https://devhints.io/lua
+- home page - https://www.lua.org/home.html
+- programming in lua is great guide - https://www.lua.org/pil/
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"
 - Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM
@@ -39,7 +41,10 @@
     - value can be any type: number/string/bool/function or another table, field can number/string
 - can make modules
 - can simulate OOP style
-    - the `:` operator helps a lot
+    - define a function that takes a receiver. `a = { var = 0 }; function a.inc(self, num) self.var = self.var + num end`
+        - can call `a.inc(self, 3)`
+        - the `:` operator makes it more OOP, can call without `self`, so `a:inc(3)`
+            - can also declare method with `:` to omit `self` -> `function a:inc(num) self.var = self.var + num end`
     - `setmetatable` is a function build into the language
         - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
 - create table and insert - `t={} table.insert(t,"item1") table.insert(t,{})`

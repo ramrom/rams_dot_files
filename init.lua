@@ -131,6 +131,7 @@ vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p
 --- TRAILING SPACES
 vim.opt.list = true
 vim.opt.listchars = {tab = '»_', trail = '.'}
+vim.cmd.highlight('WhiteSpace', 'ctermfg=8 guifg=DimGrey')
 
 -- use ripgrep for default vi grep
 vim.opt.grepprg='rg --vimgrep --follow'
@@ -340,13 +341,25 @@ vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc
 vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
 vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>')
 vim.keymap.set('n', '<leader>go', CycleColorColumn)
+vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
---------------------------------------------------------------------------------------------------------
--------------------------------- PLUGIN CONFIG ----------------------------------------------------------
------------------------------------ -------------------------------------------------------------------
+vim.api.nvim_create_autocmd(
+    "Filetype",
+    { pattern = 'markdown',
+      callback = function()
+        vim.keymap.set('n', '<leader>gg', [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]])
+      end,
+})
+
+-- Quickly switch between up to 9 vimtabs
+for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
+
+----------------------------------------------------------------------------------------------------------
+---------------------------------- PLUGIN CONFIG ----------------------------------------------------------
+------------------------------------- -------------------------------------------------------------------
 
 
---------------------------------- FZF -------------------------------------------------------
+----------------------------------- FZF -------------------------------------------------------
 
 -- default implementation of Rg greps over filename, this will just do contents
     -- see https://github.com/junegunn/fzf.vim/issues/714

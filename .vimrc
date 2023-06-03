@@ -501,7 +501,7 @@ noremap <leader>x :Rg<CR>
 noremap <leader>X :Rg!<CR>
 noremap <leader>i :FZFMru<CR>
 
-noremap <leader>ll :Lines<CR>
+noremap <leader>l :Lines<CR>
 noremap <leader>L :Lines<CR>
 
 "Git-type stuff
