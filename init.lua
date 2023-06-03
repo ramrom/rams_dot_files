@@ -830,7 +830,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
-    -- 'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
     { 'joshdick/onedark.vim', init = LoadOneDarkConfig, lazy=false, priority = 1000 },
     -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
@@ -878,17 +878,3 @@ require("lazy").setup({
     'chrisbra/unicode.vim',     -- unicode helper
     'godlygeek/tabular',
 })
-
--- LoadIndentBlankLine()
--- LoadBQF()
--- LoadTreeSitter()
--- LoadLuaLine()
--- LoadGitSigns()
--- LoadOneDarkConfig()
--- LoadVimMarkdown()
--- LoadGHLine()
--- LoadFzfMRU()
--- LoadFZF()
--- LoadScalaMetals()
--- LoadDAP()
--- LoadLSPConfig()
