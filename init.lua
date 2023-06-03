@@ -1,8 +1,6 @@
 -- NEOVIM CONFIG
 
 -- ISSUES
-    -- cant get leader y/p to copy/paste to + buffer
-    -- get listchars opt working, i think it mostly works
     -- GH-line not working
 
 
@@ -290,9 +288,8 @@ vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" 
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
 
 ---- COPY/PASTE to clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
--- vim.keymap.set("n", "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>p", [["+p]])
+vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
+vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 --------- FZF STUFF

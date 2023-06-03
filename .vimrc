@@ -424,7 +424,7 @@ endfunction
     "NORMAL MODE
         "<Leader>a/w/l/x'
             "a is earmarked for smart script run or test run
-        "<Leader><Leader>    (all except for h/g/q)
+        "<Leader><Leader>    (all except for h/g/q/r)
         "c-m/c-n/c-g/c-s/c-q
         "c-x (opposite of c-a, i clobber c-a for tmux meta)
         "c-p
