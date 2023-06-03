@@ -25,26 +25,19 @@ elseif empty($VIM_NOPLUG)
     Plug 'junegunn/fzf.vim'
     Plug 'pbogut/fzf-mru.vim'
 
-    if has('nvim-0.5.0')
-        Plug 'nvim-lualine/lualine.nvim'
-    else
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-    endif
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
     Plug 'joshdick/onedark.vim'     " inspired from atom's onedark color theme
 
     Plug 'chrisbra/unicode.vim'     " unicode helper
 
-    if !has('nvim') && v:version < 8022345          " neovim and vim > 8.2.2345 have native support
+    if v:version < 8022345          " neovim and vim > 8.2.2345 have native support
         Plug 'tmux-plugins/vim-tmux-focus-events'  " used to get autoread to work below
     endif
 
-    " gitsigns is lua, far more supported
-    if has('nvim-0.8')
-        Plug 'lewis6991/gitsigns.nvim'
     "signify - sign col shows revision ctrl changed lines, internet says faster/better than gitgutter
-    elseif has('patch-8.0.902') || has('nvim')
+    if has('patch-8.0.902')
         Plug 'mhinz/vim-signify'
     else  " vim < 8 needs legacy branch
         Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
@@ -55,7 +48,7 @@ elseif empty($VIM_NOPLUG)
     " let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim']
 
     " real-time render markdown in browser window as you edit the source
-    if has('nvim') || has('patch-8.1.0')
+    if has('patch-8.1.0')
         Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
         let g:markdown_preview_plugin_activated = 1
     else " this plugin is almost as good, it doesnt do puml/flowchart/katex/dot/chart/js-sequence-diagram
@@ -66,57 +59,12 @@ elseif empty($VIM_NOPLUG)
     " reads ctags file and displays summary (vars/funcs etc) in side window
     Plug 'preservim/tagbar'
 
-    "neovim offers better metals and LSP experience in general
-    if has('nvim-0.6.1')
-        Plug 'kevinhwang91/nvim-bqf', { 'ft': 'qf' }  "neovim's prefix window will show another preview window
+    " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
 
-        Plug 'j-hui/fidget.nvim'  " nvim-lsp progress support
-
-        Plug 'hrsh7th/nvim-cmp'         " autocomplete for LSPs
-        Plug 'hrsh7th/cmp-nvim-lsp'     " LSP source for nvim-cmp
-        Plug 'hrsh7th/cmp-buffer'       " buffer word completion
-        Plug 'hrsh7th/cmp-path'         " filesystem path completion
-        " Plug 'saadparwaiz1/cmp_luasnip' " Snippets source for nvim-cmp
-        " Plug 'L3MON4D3/LuaSnip'         " Snippets plugin
-
-        if has('nvim-0.7.0')
-            " see https://www.reddit.com/r/neovim/comments/107aoqo/problems_running_neovim_using_the_initlua_from/
-            " 0.7.2 breaks with treesitter commit 622baacdc1b22cdfd73bc98c07bb5654a090bcac
-            if has('nvim-0.8.0')
-                Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-            else  " per the reddit thread, this old version of treesitter works
-                Plug 'nvim-treesitter/nvim-treesitter', { 'commit': 'a2d7e78', 'do': ':TSUpdate' }
-            endif
-
-            "nvim-metals uses built in lsp-client, needs neovim 0.7.0, plenary.vim, coursier
-            Plug 'scalameta/nvim-metals', { 'for': ['scala', 'sbt'] }
-
-            "alternative to nerdtree
-            " Plug 'nvim-tree/nvim-tree.lua'
-        endif
-
-        Plug 'nvim-lua/plenary.nvim'  "core lua libraries needed by other neovim plugins
-        Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
-        Plug 'leoluz/nvim-dap-go'     "needs delve>1.7.0, nvim-dap
-        Plug 'neovim/nvim-lspconfig'  "requires neovim 0.6.1
-    endif
-
-    " plugins for indentation line guides
-    if has('nvim')
-        Plug 'lukas-reineke/indent-blankline.nvim'
-    else
-        " Plug 'nathanaelkane/vim-indent-guides'  " alternates odd/even line colors, indentLine doesnt
-
-        "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
-        "TODO: indentLine displays `"` chars `|` or disspapear in json files...
-        if has('conceal')  " requires conceal, jan2023: osx stock vim doesnt have it installed...
-            Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
-        endif
-    endif
-
-    " vim inside any web browser text box!
-    if has('nvim-0.6.0')
-        Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    "NOTE:  osx brew vim 8.2 (with conceal) very slow to load, neovim much faster
+    "TODO: indentLine displays `"` chars `|` or disspapear in json files...
+    if has('conceal')  " requires conceal, jan2023: osx stock vim doesnt have it installed...
+        Plug 'Yggdroot/indentLine'    " visual guides to indentations for readability
     endif
 
     "NOTE: plug#end automatically runs filetype plugin indent on and syntax enable
@@ -147,9 +95,6 @@ try  " if loading vim without plugins, onedark will fail, default to ir_black
     augroup END
     let g:onedark_termcolors=256
     "TODO: italics works in neovim, brew vim8.2, osx default vim9 doesnt
-    if has('nvim')
-        let g:onedark_terminal_italics=1
-    endif
     colorscheme onedark
     hi clear Search                 " clear it, as I use a custom search highlight
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -200,11 +145,7 @@ autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
 """""""""""""SEARCHING """"""""""""""""""
 set hlsearch                    " highlight search
 "TODO: italics works in neovim, brew vim8.2, osx default vim9 doesnt
-if has('nvim')
-    hi Search cterm=italic,underline,inverse
-else
-    hi Search cterm=underline,inverse
-endif
+hi Search cterm=underline,inverse
 set incsearch               " searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
@@ -233,11 +174,7 @@ set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 " TODO: add feature to toggle listchar display
 set list
 set listchars=tab:»_,trail:·
-if has('nvim')  " highlight dimgrey, vim and neovim use diff group name
-    highlight WhiteSpace ctermfg=8 guifg=DimGrey
-else
-    highlight SpecialKey ctermfg=8 guifg=DimGrey
-endif
+highlight SpecialKey ctermfg=8 guifg=DimGrey
 
 " ignore metals LSP files, bloop compiler files
 set wildignore+=*/.metals/*,*/.bloop/*,*/.bsp/*
@@ -251,17 +188,6 @@ command! -nargs=1 SilentRedraw execute ':silent !'.<q-args> | execute ':redraw!'
 
 function! SourceIfExists(file)
   if filereadable(expand(a:file)) | exe 'source' a:file | echo 'source found and loaded' | endif
-endfunction
-
-function ToggleFoldMethod()
-    "1 ? echo 'indent' : echo 'not indent'  "TODO: wtf vim, basic ternary errors
-    if &foldmethod == "indent"
-        set foldmethod=expr
-        set foldexpr=nvim_treesitter#foldexpr()
-    else
-        set foldmethod=indent
-        set foldexpr=
-    endif
 endfunction
 
 " if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
@@ -290,31 +216,10 @@ endfunction
 "NOTE!: SignifyDisableAll still requires you to toggle/disable individual buffers (call ToggleGitSignsAll)
 let g:gitsign_plugin_disable_by_default = 0
 function ToggleGitSignsAll()
-    if has('nvim')
-        exe ':Gitsigns toggle_signs'
-    else " assume vim and vim-signify
-        if g:gitsign_plugin_disable_by_default == 1
-            exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
-        else
-            exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
-        endif
-    endif
-endfunction
-
-function ToggleGitSignsHighlight()
-    if has('nvim-0.8')
-        exe ':Gitsigns toggle_linehl'
-        exe ':Gitsigns toggle_word_diff'
-    else " assume vim and vim-signify
-        exe ':SignifyToggleHighlight'
-    endif
-endfunction
-
-function MyIndentLinesToggle()
-    if has('nvim')
-        exe ':IndentBlanklineToggle'
+    if g:gitsign_plugin_disable_by_default == 1
+        exe ':SignifyEnableAll' | echo 'Signify ENABLE all'
     else
-        exe ':IndentLinesToggle'
+        exe ':SignifyDisableAll' | echo 'Signify DISABLE all'
     endif
 endfunction
 
@@ -364,13 +269,6 @@ function TabBufQuit()
     else | exe ":q" | endif
 endfunction
 
-function ClearLspLog()
-    "TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
-    " also metals on osx is diff path
-    exe ':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log'
-    exe ':SilentRedraw cat /dev/null > .metals/metals.log'
-endfunction
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""" KEY MAPPINGS """"""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -393,10 +291,6 @@ endfunction
 " nnoremap <CR> o<Esc>
 
 let mapleader = " "
-
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
 
 " ESCAPE replacement
 " NOTE: default C-l behaviour: with `insertmode` enabled, it goes to normal mode from insert
@@ -469,12 +363,11 @@ noremap <leader>gc :Commits<CR>
 noremap <leader>gC :Commits!<CR>
 noremap <leader>gS :call ToggleGitSignsAll()<cr>
 noremap <leader>gs :SignifyToggle<cr>
-noremap <leader>gh :call ToggleGitSignsHighlight()<cr>
+noremap <leader>gh :SignifyToggleHighlight<cr>
 
-noremap <leader>gf :call ToggleFoldMethod()<cr>:set foldmethod?<cr>
 noremap <leader>gT :call RemoveTrailingWhiteSpace()<CR>
 noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
-noremap <leader>gi :call MyIndentLinesToggle()<cr>
+noremap <leader>gi :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>
 noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
@@ -578,13 +471,6 @@ command! -bang -nargs=* Rg
 """"" RipGrep and FD """""""""""""""""""
 if executable('rg')
     set grepprg=rg\ --color=never
-    let g:ctrlp_use_caching = 0
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-endif
-
-" if fd installed prefer that over rg
-if executable('fd')
-    let g:ctrlp_user_command = 'fd --hidden --exclude .git'
 endif
 
 """"""""""""""" VIM-INDENT-GUIDES PLUGIN"""""""""""""""""""""""""""""""""""""""""
