@@ -1,7 +1,6 @@
 -- NEOVIM CONFIG
 
 -- ISSUES
-    -- GH-line not working
     -- firenvim lua not working in chrome
 
 if not not vim.g.started_by_firenvim then
@@ -84,10 +83,11 @@ vim.api.nvim_create_autocmd('FileType', { pattern = '*', command ='setlocal form
 --------------------------------------------------------------------------------------------------------
 -------------------------------- FUNCTIONS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
--- vim.api.nvim_create_user_command(
---     'SilentRedraw',
---     vim.execute(':silent !'.<q-args> | execute ':redraw!')
--- )
+vim.api.nvim_create_user_command(
+    'SilentRedraw',
+    [[execute ':silent !'.<q-args> | execute ':redraw!' ]],
+    {bang = true, nargs = "*" }
+)
 
 -- if there is one tab, move forward buffer, otherwise forward tabs
 TabBufNavForward = function()
@@ -150,12 +150,6 @@ ClearLspLog = function()
     vim.cmd(':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log')
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
-
-vim.api.nvim_create_user_command(
-    'SilentRedraw',
-    [[execute ':silent !'.<q-args> | execute ':redraw!' ]],
-    {bang = true, nargs = "*" }
-)
 
 -- lazy.vim, if enabled = true module exists, and if cond = false it's not loaded and requiring will fail
 local Lua = {}
@@ -340,14 +334,12 @@ LoadVimMarkdown = function()
     vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
 end
 
------------------------------ GH-line(github line) --------------------------------------------------
-LoadGHLine = function()
-    vim.g.gh_line_map_default = 0
-    vim.g.gh_line_blame_map_default = 1
-    vim.g.gh_line_map = '<leader>wh'
-    vim.g.gh_line_blame_map = '<leader>wb'
-    vim.g.gh_repo_map = '<leader>wo'
-    vim.g.gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+----------------------------- Rhubarb --------------------------------------------------
+LoadRhubarb = function()
+    vim.keymap.set('n', '<leader>wc', '<cmd>:GBrowse!<CR>')
+    vim.keymap.set('v', '<leader>wc', [[:'<,'>GBrowse!<CR>]])
+    vim.keymap.set('n', '<leader>wo', '<cmd>:GBrowse<CR>')
+    vim.keymap.set('v', '<leader>wo', [[:'<,'>GBrowse<CR>]])
 end
 
 ---------------------------------- GIT SIGNS ----------------------------------------------
@@ -827,7 +819,7 @@ require("lazy").setup({
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     'nvim-tree/nvim-web-devicons',
-    { 'joshdick/onedark.vim', init = LoadOneDarkConfig, lazy=false, priority = 1000 },
+    { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
     -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
@@ -838,7 +830,8 @@ require("lazy").setup({
 
     --- GIT
     'tpope/vim-fugitive',
-    { 'ruanyl/vim-gh-line', config = LoadGHLine },       -- generate github url links from current file
+    { 'tpope/vim-rhubarb', -- GBrowse handler for github, open gh link in browser or copy to clipboard
+            config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
     { 'lewis6991/gitsigns.nvim', config = LoadGitSigns },
 
     --- fuzzy find

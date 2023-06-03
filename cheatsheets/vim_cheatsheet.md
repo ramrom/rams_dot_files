@@ -12,8 +12,12 @@
 - nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
 - sept2020 good video on why lua is great and a great choice for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
 - 2019 video on why nvim is awesome by core maintainer: https://www.youtube.com/watch?v=Bt-vmPC_-Ho
+    - famous quote that inspired neovim from vim core dev
+        > Q: How can the community ensure that the Vim project succeeds for the foreseeable future?
+        > Keep me alive.            -  Bram Moolenaar
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
-- plenary.nvim - a set of lua libs (uses coroutines via libuv) used by other neovim plugins
+- plenary.nvim - core set of neovim lua libs
+    - provides an async framework, it uses lua coroutines and libuv for async IO
 - coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
 - neovim-lsp - neovim's built in lsp client, written in lua
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
@@ -154,14 +158,15 @@ C - make selected dir node the new root node
 
 
 ### STARTING VIM
-vim -u somevimrc - specify a vimrc file (otherwise ~/.vimrc)
-vim -u NONE     - start without running vimrc
-vim -S sess.vim - load sess.vim session file
-vim foo bar     - foo and bar buffers
-vim -o  foo bar - foo and bar in diff windows
-vim -p  foo bar - foo and bar in diff tabs
-vim -V  foo     - verbose output
+- vim -u somevimrc - specify a vimrc file (otherwise ~/.vimrc)
+- vim -u NONE     - start without running vimrc
+- vim -S sess.vim - load sess.vim session file
+- vim foo bar     - foo and bar buffers
+- vim -o  foo bar - foo and bar in diff windows
+- vim -p  foo bar - foo and bar in diff tabs
+- vim -V  foo     - verbose output
     - has many level, see `:help vbs`
+- `:scriptnames` shows all scripts that were run, including plugin's scripts
 
 
 ### VIMSCRIPT

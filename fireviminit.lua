@@ -16,7 +16,6 @@ require("lazy").setup({
     { 'junegunn/fzf.vim' },
 
     'glacambre/firenvim',
-        cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })
             vim.fn["firenvim#install"](0)
@@ -32,7 +31,8 @@ vim.g.firenvim_config = {
             content  = "text",
             priority = 0,
             selector = "textarea",
-            takeover = "always"
+            -- takeover = "always"
+            takeover = "never"
         }
     }
 }
