@@ -103,6 +103,27 @@ while i<10
   let i+=1
 endwhile
 
+function ToggleDisplayTrailSpaces(showmsg)
+    " from https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
+    if !exists('#MyTrailSpaces#BufWinEnter')
+        highlight ExtraWhitespace ctermbg=red guibg=red
+        syntax match ExtraWhitespace /\s\+$/
+        augroup MyTrailSpaces
+            autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+            autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+            autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+            autocmd BufWinLeave * call clearmatches()
+        augroup END
+        if (a:showmsg == "t") | echo "ToggleDisplayTrailSpaces ENABLED" | endif
+    else
+        hi clear ExtraWhitespace
+        autocmd! MyTrailSpaces
+        if (a:showmsg == "t") | echo "ToggleDisplayTrailSpaces DISABLED" | endif
+    endif
+endfunction
+
+call ToggleDisplayTrailSpaces('f')
+
 """""""""""""""""""CTRLP Fuzzyfinder"""""""""""""""""""""""
 let g:ctrlp_max_files = 20000
 let g:ctrlp_max_height = 20

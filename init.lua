@@ -2,6 +2,11 @@
 
 -- ISSUES
     -- GH-line not working
+    -- firenvim lua not working in chrome
+
+if not not vim.g.started_by_firenvim then
+    require('fireviminit')
+else
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- SETTINGS --------------------------------------------------------------
@@ -50,6 +55,8 @@ vim.opt.expandtab = true        -- use spaces when tab is pressed
 vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
 
+-- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
+vim.api.nvim_create_autocmd('VimResized', { pattern='*', command = 'wincmd ='})
 
 --- TRAILING SPACES
 vim.opt.list = true
@@ -738,17 +745,6 @@ LoadKotlinLSP = function()
     }
 end
 
------------- BASH/SHELL bashls LSP ----------------------
--- https://github.com/mads-hartmann/bash-language-server
-
--- require'lspconfig'.bashls.setup{
---     cmd = {"bash-language-server", "start"},
---     cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
---     filetypes = { "sh" },
---     root_dir = util.find_git_ancestor,
---     single_file_support = true
--- }
-
 LoadLSPConfig = function()
     LoadRustLSP()
     LoadGolangLSP()
@@ -878,3 +874,4 @@ require("lazy").setup({
     'chrisbra/unicode.vim',     -- unicode helper
     'godlygeek/tabular',
 })
+end

@@ -3,6 +3,9 @@
 ------------------------------------------------------------------------------
 
 ---------------------------- PLUGINS --------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup({
     'tpope/vim-commentary',
     'tpope/vim-surround',
@@ -21,6 +24,23 @@ require("lazy").setup({
 })
 
 ------------------------- SETTINGS ---------------------------------
+vim.g.firenvim_config = {
+    globalSettings = { alt = "all" },
+    localSettings = {
+        [".*"] = {
+            cmdline  = "neovim",
+            content  = "text",
+            priority = 0,
+            selector = "textarea",
+            takeover = "always"
+        }
+    }
+}
+
+vim.api.nvim_create_autocmd('BufEnter', { pattern = 'github.com_*.txt', command = 'set filetype=markdown' })
+vim.api.nvim_create_autocmd('BufEnter', { pattern = 'json.parser.online.fr._*.txt', command = 'set filetype=json' })
+
+-------- GENERAL
 vim.opt.splitbelow = true                       -- open new windows on bottom for horizontal, right for vertical
 vim.opt.splitright = true                       -- open new windows on bottom for horizontal, right for vertical
 vim.opt.wildmenu = true                         -- display command line's tab complete options as menu

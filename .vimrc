@@ -99,22 +99,6 @@ elseif empty($VIM_NOPLUG)
         Plug 'mfussenegger/nvim-dap'  "DebugAdapterProtocol, requires neovim 0.6.0
         Plug 'leoluz/nvim-dap-go'     "needs delve>1.7.0, nvim-dap
         Plug 'neovim/nvim-lspconfig'  "requires neovim 0.6.1
-
-    " jan2021, coc warns it should have 0.4.0 at least to work well
-    " may2022: restrict to osx, b/c new coc needs new nodejs which isn't in standard ubunutu 22 LTS
-    elseif has('nvim-0.4.0') && has('macunix')
-
-        Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
-        "TODO: can enable coc by filetype
-        " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install', 'for': ['json', 'lua', 'vim', ]}
-
-        if !empty($VIM_BASH)
-            Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-        endif
-        if !empty($VIM_METALS)
-            Plug 'scalameta/coc-metals', { 'do': 'yarn install --frozen-lockfile' }
-        endif
     endif
 
     " plugins for indentation line guides
@@ -133,15 +117,6 @@ elseif empty($VIM_NOPLUG)
     " vim inside any web browser text box!
     if has('nvim-0.6.0')
         Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    endif
-
-    if !empty($VIM_DEVICONS)
-        " prereq: osx brew cask install https://github.com/ryanoasis/nerd-fonts#patched-fonts
-        Plug 'ryanoasis/vim-devicons'
-
-        " colored icons, needs devicons
-        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-        let g:NERDTreeLimitedSyntax = 1   " helps a little with lag issues
     endif
 
     "NOTE: plug#end automatically runs filetype plugin indent on and syntax enable
@@ -255,6 +230,7 @@ set ls=2                    " line status, two lines for status and command
 set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\
 
 """""SHOW TABS AND TRAILING SPACES WITH SPECIAL CARS
+" TODO: add feature to toggle listchar display
 set list
 set listchars=tab:»_,trail:·
 if has('nvim')  " highlight dimgrey, vim and neovim use diff group name
@@ -304,28 +280,6 @@ function CycleColorCol()
         set colorcolumn=121
     endif
 endfunction
-
-" TODO: remove this as listchars display trailing spaces, or update to toggle listchar display
-function ToggleDisplayTrailSpaces(showmsg)
-    " from https://vi.stackexchange.com/questions/4120/how-to-enable-disable-an-augroup-on-the-fly
-    if !exists('#MyTrailSpaces#BufWinEnter')
-        highlight ExtraWhitespace ctermbg=red guibg=red
-        syntax match ExtraWhitespace /\s\+$/
-        augroup MyTrailSpaces
-            autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-            autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-            autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-            autocmd BufWinLeave * call clearmatches()
-        augroup END
-        if (a:showmsg == "t") | echo "ToggleDisplayTrailSpaces ENABLED" | endif
-    else
-        hi clear ExtraWhitespace
-        autocmd! MyTrailSpaces
-        if (a:showmsg == "t") | echo "ToggleDisplayTrailSpaces DISABLED" | endif
-    endif
-endfunction
-
-call ToggleDisplayTrailSpaces('f')
 
 " delete all trailing white space
 " NOTE: to make it automatic: autocmd BufWritePre * %s/\s\+$//e
