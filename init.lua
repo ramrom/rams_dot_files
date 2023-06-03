@@ -3,71 +3,6 @@
 -- ISSUES
     -- GH-line not working
 
-
---------------------------------------------------------------------------------------------------------
--------------------------------- PLUGINS --------------------------------------------------------------
------------------------------------ -------------------------------------------------------------------
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- print(lazypath)
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
-    lazypath, })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-    'nvim-lualine/lualine.nvim',
-    { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
-    -- 'nvim-tree/nvim-web-devicons',
-    { 'joshdick/onedark.vim', init = LoadOneDarkConfig, lazy=false, priority = 1000 },
-    -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    { 'nvim-treesitter/nvim-treesitter',
-        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
-    'nvim-lua/plenary.nvim',
-    'tpope/vim-commentary',
-    'tpope/vim-surround',
-    'tpope/vim-repeat',
-
-    --- GIT
-    'tpope/vim-fugitive',
-    'ruanyl/vim-gh-line',       -- generate github url links from current file
-    'lewis6991/gitsigns.nvim',
-
-    --- fuzzy find
-    { 'junegunn/fzf', run = ":call fzf#install()" },
-    'junegunn/fzf.vim',
-    'pbogut/fzf-mru.vim',       -- fzf.vim is missing a most recently used file search
-
-    -- MARKDOWN
-    { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
-    'preservim/vim-markdown',
-
-    ----- LSP STUFF
-    'neovim/nvim-lspconfig',
-    { 'scalameta/nvim-metals',
-        ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
-    { 'kevinhwang91/nvim-bqf', ft = 'qf' },
-    { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
-    'hrsh7th/nvim-cmp',
-    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } }, -- LSP completions
-    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
-    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
-    'mfussenegger/nvim-dap',
-    -- 'leoluz/nvim-dap-go',
-
-    'glacambre/firenvim',
-        cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
-        build = function()
-            require("lazy").load({ plugins = "firenvim", wait = true })
-            vim.fn["firenvim#install"](0)
-        end,
-
-    'lukas-reineke/indent-blankline.nvim',
-    'chrisbra/unicode.vim',     -- unicode helper
-    'godlygeek/tabular',
-})
-
 --------------------------------------------------------------------------------------------------------
 -------------------------------- SETTINGS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -76,16 +11,6 @@ vim.opt.writebackup = false            -- only in case you don't want a backup f
 vim.opt.swapfile = false               -- no swap files
 
 vim.opt.mouse=null                     -- turn off all mouse support by default
-
------ COLOR -----
-OneDarkConfig = function()
-    vim.g.onedark_termcolors=256
-    vim.g.onedark_terminal_italics=1
-    vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
-    vim.cmd.colorscheme('onedark')
-    vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
-end
-OneDarkConfig()
 
 --- MAIN
 vim.opt.autoread = true                         -- reload file's buffer if file was changed externally
@@ -355,15 +280,25 @@ for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 ---------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ------------------------------------- -------------------------------------------------------------------
 
+----- ONE DARK COLORSCHEME -----
+LoadOneDarkConfig = function()
+    vim.g.onedark_termcolors=256
+    vim.g.onedark_terminal_italics=1
+    vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
+    vim.cmd.colorscheme('onedark')
+    vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
+end
+
 
 ----------------------------------- FZF -------------------------------------------------------
-
--- default implementation of Rg greps over filename, this will just do contents
-    -- see https://github.com/junegunn/fzf.vim/issues/714
-vim.api.nvim_create_user_command( 'Rg',
-    [[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0) ]],
-      { bang = true, nargs = '*' }
-)
+LoadFZF = function()
+    -- default implementation of Rg greps over filename, this will just do contents
+        -- see https://github.com/junegunn/fzf.vim/issues/714
+    vim.api.nvim_create_user_command( 'Rg',
+        [[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0) ]],
+          { bang = true, nargs = '*' }
+    )
+end
 
 -- TODO: above ugly, try to get below to work
     -- https://www.reddit.com/r/neovim/comments/105zsco/help_with_converting_a_vimscript_command_to_lua/
@@ -384,26 +319,32 @@ vim.api.nvim_create_user_command( 'Rg',
 -- )
 
 ----------------------------- FZF MRU --------------------------------------------------
-vim.g.fzf_mru_no_sort = 1
+LoadFzfMRU = function()
+    vim.g.fzf_mru_no_sort = 1
+end
 
 ----------------------------- VIM-MARKDOWN --------------------------------------------------
--- plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
-vim.g.vim_markdown_follow_anchor = 1
-vim.g.vim_markdown_strikethrough = 1
-vim.g.vim_markdown_new_list_item_indent = 0
-vim.g.vim_markdown_edit_url_in = 'tab'
-vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
+LoadVimMarkdown = function()
+    -- plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
+    vim.g.vim_markdown_follow_anchor = 1
+    vim.g.vim_markdown_strikethrough = 1
+    vim.g.vim_markdown_new_list_item_indent = 0
+    vim.g.vim_markdown_edit_url_in = 'tab'
+    vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
+end
 
 ----------------------------- GH-line(github line) --------------------------------------------------
-vim.g.gh_line_map_default = 0
-vim.g.gh_line_blame_map_default = 1
-vim.g.gh_line_map = '<leader>wh'
-vim.g.gh_line_blame_map = '<leader>wb'
-vim.g.gh_repo_map = '<leader>wo'
-vim.g.gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+LoadGHLine = function()
+    vim.g.gh_line_map_default = 0
+    vim.g.gh_line_blame_map_default = 1
+    vim.g.gh_line_map = '<leader>wh'
+    vim.g.gh_line_blame_map = '<leader>wb'
+    vim.g.gh_repo_map = '<leader>wo'
+    vim.g.gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+end
 
 ---------------------------------- GIT SIGNS ----------------------------------------------
-if Lua.moduleExists('gitsigns') then
+LoadGitSigns = function()
     require('gitsigns').setup{
         signs = {
             add          = { text = '+' },
@@ -420,7 +361,7 @@ if Lua.moduleExists('gitsigns') then
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
-if Lua.moduleExists('lualine') then
+LoadLuaLine = function()
     require('lualine').setup {
         options = {
             icons_enabled = false,
@@ -499,70 +440,73 @@ if Lua.moduleExists('lualine') then
 end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",   -- A list of parser names, or "all"
-    sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
+LoadTreeSitter = function()
+    require'nvim-treesitter.configs'.setup {
+        ensure_installed = "all",   -- A list of parser names, or "all"
+        sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
-    -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
-        -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
-    ignore_install = { "phpdoc" },
-    highlight = {
-         enable = true,     -- `false` will disable the whole extension
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        disable = { "markdown" },
+        -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
+            -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
+        ignore_install = { "phpdoc" },
+        highlight = {
+             enable = true,     -- `false` will disable the whole extension
+            -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+            -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+            -- the name of the parser)
+            -- list of language that will be disabled
+            disable = { "markdown" },
 
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-    },
-    indent = { enable = true },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = 'gn',
-            node_incremental = '<TAB>',
-            node_decremental = '<S-TAB>',
-            scope_incremental = '<CR>',
+            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+            -- Using this option may slow down your editor, and you may see some duplicate highlights.
+            -- Instead of true it can also be a list of languages
+            additional_vim_regex_highlighting = false,
         },
-    },
-}
+        indent = { enable = true },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = 'gn',
+                node_incremental = '<TAB>',
+                node_decremental = '<S-TAB>',
+                scope_incremental = '<CR>',
+            },
+        },
+    }
 
-vim.opt.foldmethod='expr'
-vim.opt.foldexpr='nvim_treesitter#foldexpr()'
-
+    vim.opt.foldmethod='expr'
+    vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+end
 
 ------------------------- indent blankline -----------------------------------------------
-vim.g.indent_blankline_enabled=0
---require("indent_blankline").setup {
---    show_end_of_line = true,
---    show_current_context = true,
---    show_current_context_start = true,
+LoadIndentBlankLine = function()
+   require("indent_blankline").setup {
+       show_end_of_line = true,
+       show_current_context = true,
+       show_current_context_start = true,
 
---    -- show_end_of_line = true,
---    -- char = "",
---    -- char_highlight_list = {
---    --     "IndentBlanklineIndent1",
---    --     "IndentBlanklineIndent2",
---    -- },
---    -- space_char_highlight_list = {
---    --     "IndentBlanklineIndent1",
---    --     "IndentBlanklineIndent2",
---    -- },
---    show_trailing_blankline_indent = false,
---    --char_highlight_list = {
---    --    "IndentBlanklineIndent1",
---    --    "IndentBlanklineIndent2",
---    --    "IndentBlanklineIndent3",
---    --    "IndentBlanklineIndent4",
---    --    "IndentBlanklineIndent5",
---    --    "IndentBlanklineIndent6",
---    --},
---}
+       -- show_end_of_line = true,
+       -- char = "",
+       -- char_highlight_list = {
+       --     "IndentBlanklineIndent1",
+       --     "IndentBlanklineIndent2",
+       -- },
+       -- space_char_highlight_list = {
+       --     "IndentBlanklineIndent1",
+       --     "IndentBlanklineIndent2",
+       -- },
+       show_trailing_blankline_indent = false,
+       --char_highlight_list = {
+       --    "IndentBlanklineIndent1",
+       --    "IndentBlanklineIndent2",
+       --    "IndentBlanklineIndent3",
+       --    "IndentBlanklineIndent4",
+       --    "IndentBlanklineIndent5",
+       --    "IndentBlanklineIndent6",
+       --},
+    }
+    vim.g.indent_blankline_enabled=0
+end
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- LSP CONFIG ----------------------------------------------------------
@@ -638,150 +582,161 @@ ActivateAutoComplete = function()
     end
 end
 
-require('bqf').setup({
-    auto_enable = true,
-    auto_resize_height = true, -- highly recommended enable
-    preview = {
-        win_height = 12,
-        win_vheight = 12,
-        delay_syntax = 80,
-        -- border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
-        should_preview_cb = function(bufnr, qwinid)
-            local ret = true
-            local bufname = vim.api.nvim_buf_get_name(bufnr)
-            local fsize = vim.fn.getfsize(bufname)
-            if fsize > 100 * 1024 then
-                -- skip file size greater than 100k
-                ret = false
-            elseif bufname:match('^fugitive://') then
-                -- skip fugitive buffer
-                ret = false
+---------------- BFQ ---------------------------------------
+LoadBQF = function()
+    require('bqf').setup({
+        auto_enable = true,
+        auto_resize_height = true, -- highly recommended enable
+        preview = {
+            win_height = 12,
+            win_vheight = 12,
+            delay_syntax = 80,
+            -- border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
+            should_preview_cb = function(bufnr, qwinid)
+                local ret = true
+                local bufname = vim.api.nvim_buf_get_name(bufnr)
+                local fsize = vim.fn.getfsize(bufname)
+                if fsize > 100 * 1024 then
+                    -- skip file size greater than 100k
+                    ret = false
+                elseif bufname:match('^fugitive://') then
+                    -- skip fugitive buffer
+                    ret = false
+                end
+                return ret
             end
-            return ret
-        end
-    },
-})
-
+        },
+    })
+end
 
 ------------------- SCALA METALS -----------------------------
-metals_config = require("metals").bare_config()
+LoadScalaMetals = function()
+    metals_config = require("metals").bare_config()
 
-metals_config.settings = {
-  showImplicitArguments = true,
-  showImplicitConversionsAndClasses = true,
-  showInferredType = true
-}
+    metals_config.settings = {
+      showImplicitArguments = true,
+      showImplicitConversionsAndClasses = true,
+      showInferredType = true
+    }
 
-metals_config.init_options.statusBarProvider = "on"
+    metals_config.init_options.statusBarProvider = "on"
 
-metals_config.capabilities = capabilities
--- metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+    metals_config.capabilities = capabilities
+    -- metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Autocmd that will actually be in charging of starting the whole thing
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "scala", "sbt" },
-    callback = function()
-        require("metals").initialize_or_attach(metals_config)
-    end,
-    group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-})
+    -- Autocmd that will actually be in charging of starting the whole thing
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "scala", "sbt" },
+        callback = function()
+            require("metals").initialize_or_attach(metals_config)
+        end,
+        group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+    })
 
-vim.opt.shortmess:remove('F')   -- Ensure autocmd works for filetype
-vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
+    vim.opt.shortmess:remove('F')   -- Ensure autocmd works for filetype
+    vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
 
--- === Basic Completion Settings ===
--- menu = use a popup menu to show possible completions
--- menuone = show a menu even if there is only one match
--- noinsert = do not insert text for a match until user selects one
--- noselect = do not select a match from the menu automatically
-vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+    -- === Basic Completion Settings ===
+    -- menu = use a popup menu to show possible completions
+    -- menuone = show a menu even if there is only one match
+    -- noinsert = do not insert text for a match until user selects one
+    -- noselect = do not select a match from the menu automatically
+    vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
--- for telescope
--- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
+    -- for telescope
+    -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
 
+    metals_config.on_attach = function(client, bufnr)
+        require("metals").setup_dap()
+        SetMetalsKeymaps()
+    end
+end
 
 ------------------------ DAP ------------------
-local dap = require("dap")
-dap.configurations.scala = {
-  {
-    type = "scala",
-    request = "launch",
-    name = "RunOrTest",
-    metals = {
-        --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-        runType = "runOrTestFile",
-    },
-  },
-  {
-    type = "scala",
-    request = "launch",
-    name = "Test Target",
-    metals = {
-        runType = "testTarget",
-    },
-  },
-}
-
-metals_config.on_attach = function(client, bufnr)
-    require("metals").setup_dap()
-    SetMetalsKeymaps()
+LoadDAP = function()
+    local dap = require("dap")
+    dap.configurations.scala = {
+      {
+        type = "scala",
+        request = "launch",
+        name = "RunOrTest",
+        metals = {
+            --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+            runType = "runOrTestFile",
+        },
+      },
+      {
+        type = "scala",
+        request = "launch",
+        name = "Test Target",
+        metals = {
+            runType = "testTarget",
+        },
+      },
+    }
 end
 
 ---------------- RUST ---------------------------
-local rust_on_attach = function(client)
-    require'completion'.rust_on_attach(client)
+LoadRustLSP = function()
+    local rust_on_attach = function(client)
+        require'completion'.rust_on_attach(client)
+    end
+
+    require'lspconfig'.rust_analyzer.setup({
+        on_attach=rust_on_attach,
+        -- autostart = false,   -- dont automatically start
+        settings = {
+            ["rust-analyzer"] = {
+                imports = {
+                    granularity = {
+                        group = "module",
+                    },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = {
+                        enable = true,
+                    },
+                },
+                procMacro = {
+                    enable = true
+                },
+            }
+        }
+    })
 end
 
-require'lspconfig'.rust_analyzer.setup({
-    on_attach=rust_on_attach,
-    -- autostart = false,   -- dont automatically start
-    settings = {
-        ["rust-analyzer"] = {
-            imports = {
-                granularity = {
-                    group = "module",
-                },
-                prefix = "self",
-            },
-            cargo = {
-                buildScripts = {
-                    enable = true,
-                },
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    }
-})
-
 ------------ GOLANG gopls LSP ----------------------
-require'lspconfig'.gopls.setup{
-    cmd = {"gopls", "serve"},
-    filetypes = {"go", "gomod", "gotmpl" },
-    root_dir = require("lspconfig/util").root_pattern("go.mod", ".git"),
-    settings = {
-      gopls = {
-        analyses = {
-          unusedparams = true,
+LoadGolangLSP = function()
+    require'lspconfig'.gopls.setup{
+        cmd = {"gopls", "serve"},
+        filetypes = {"go", "gomod", "gotmpl" },
+        root_dir = require("lspconfig/util").root_pattern("go.mod", ".git"),
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
         },
-        staticcheck = true,
-      },
-    },
-    single_file_support = true
-}
+        single_file_support = true
+    }
 
--- golang DAP
--- lua require('dap-go').setup()
+    -- golang DAP
+    -- lua require('dap-go').setup()
+end
 
 ------------- Kotlin-------------------------------------
 -- https://github.com/fwcd/kotlin-language-server
 
-require'lspconfig'.kotlin_language_server.setup{
-    cmd = { "kotlin-language-server" },
-    filetypes = { "kotlin", "kt" },
-    root_dir = require("lspconfig/util").root_pattern("settings.gradle")
-}
+LoadKotlinLSP = function()
+    require'lspconfig'.kotlin_language_server.setup{
+        cmd = { "kotlin-language-server" },
+        filetypes = { "kotlin", "kt" },
+        root_dir = require("lspconfig/util").root_pattern("settings.gradle")
+    }
+end
 
 ------------ BASH/SHELL bashls LSP ----------------------
 -- https://github.com/mads-hartmann/bash-language-server
@@ -794,8 +749,14 @@ require'lspconfig'.kotlin_language_server.setup{
 --     single_file_support = true
 -- }
 
+LoadLSPConfig = function()
+    LoadRustLSP()
+    LoadGolangLSP()
+    LoadKotlinLSP()
+end
 
------------ COMMON LSP KEYBINDINGS --------------------------------------------
+
+----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 SetLSPKeymaps = function()
     vim.keymap.set('n', 'K', vim.lsp.buf.hover)
@@ -853,3 +814,81 @@ SetMetalsKeymaps = function()
     vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
 end
+
+--------------------------------------------------------------------------------------------------------
+-------------------------------- PLUGINS --------------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- print(lazypath)
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
+    lazypath, })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+    { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
+    { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
+    -- 'nvim-tree/nvim-web-devicons',
+    { 'joshdick/onedark.vim', init = LoadOneDarkConfig, lazy=false, priority = 1000 },
+    -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
+        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+    'nvim-lua/plenary.nvim',
+    'tpope/vim-commentary',
+    'tpope/vim-surround',
+    'tpope/vim-repeat',
+
+    --- GIT
+    'tpope/vim-fugitive',
+    { 'ruanyl/vim-gh-line', config = LoadGHLine },       -- generate github url links from current file
+    { 'lewis6991/gitsigns.nvim', config = LoadGitSigns },
+
+    --- fuzzy find
+    { 'junegunn/fzf', run = ":call fzf#install()" },
+    { 'junegunn/fzf.vim', config = LoadFZF },
+    { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
+
+    -- MARKDOWN
+    { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
+    { 'preservim/vim-markdown', config = LoadVimMarkdown },
+
+    ----- LSP STUFF
+    { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
+    { 'scalameta/nvim-metals',
+        config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
+    { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
+    { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
+    'hrsh7th/nvim-cmp',
+    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } }, -- LSP completions
+    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
+    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
+    { 'mfussenegger/nvim-dap', config = LoadDAP },
+    -- 'leoluz/nvim-dap-go',
+
+    'glacambre/firenvim',
+        cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
+        build = function()
+            require("lazy").load({ plugins = "firenvim", wait = true })
+            vim.fn["firenvim#install"](0)
+        end,
+
+    { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine },
+    'chrisbra/unicode.vim',     -- unicode helper
+    'godlygeek/tabular',
+})
+
+-- LoadIndentBlankLine()
+-- LoadBQF()
+-- LoadTreeSitter()
+-- LoadLuaLine()
+-- LoadGitSigns()
+-- LoadOneDarkConfig()
+-- LoadVimMarkdown()
+-- LoadGHLine()
+-- LoadFzfMRU()
+-- LoadFZF()
+-- LoadScalaMetals()
+-- LoadDAP()
+-- LoadLSPConfig()
