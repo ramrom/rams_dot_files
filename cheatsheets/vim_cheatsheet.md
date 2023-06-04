@@ -157,16 +157,18 @@ C - make selected dir node the new root node
 - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 
-### STARTING VIM
-- vim -u somevimrc - specify a vimrc file (otherwise ~/.vimrc)
-- vim -u NONE     - start without running vimrc
-- vim -S sess.vim - load sess.vim session file
-- vim foo bar     - foo and bar buffers
-- vim -o  foo bar - foo and bar in diff windows
-- vim -p  foo bar - foo and bar in diff tabs
-- vim -V  foo     - verbose output
+### VIM STARTING AND DIAGNOSTICS
+- `vim -u somevimrc` - specify a vimrc file (otherwise ~/.vimrc)
+- `vim -u NONE`     - start without running vimrc
+- `vim -S sess.vim` - load sess.vim session file
+- `vim foo bar`     - foo and bar buffers
+- `vim -o  foo bar` - foo and bar in diff windows
+- `vim -p  foo bar` - foo and bar in diff tabs
+- `vim -V  foo`     - verbose output
     - has many level, see `:help vbs`
 - `:scriptnames` shows all scripts that were run, including plugin's scripts
+- `vim --startuptime outputfile` - record startup time and record to file
+- `:checkhealth` - neovim only, report on errors/warnings for all modules
 
 
 ### VIMSCRIPT

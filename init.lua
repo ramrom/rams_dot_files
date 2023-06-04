@@ -1,7 +1,6 @@
--- NEOVIM CONFIG
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NEOVIM CONFIG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
--- ISSUES
-    -- firenvim lua not working in chrome
+-- ISSUE: firenvim lua not working in chrome
 
 if not not vim.g.started_by_firenvim then
     require('fireviminit')
@@ -258,6 +257,7 @@ vim.keymap.set('n', '<leader>cA', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
 
+vim.keymap.set("n", "<C-Space>", ":Lazy<CR>")
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
@@ -281,11 +281,41 @@ for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 ---------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ------------------------------------- -------------------------------------------------------------------
 
------ ONE DARK COLORSCHEME -----
+---------- NAVARASU ONE DARK COLORSCHEME -------------
+-------- TODO: get full dark background to work
+-------- TODO: treesitter markdown mostly works, H1/2/3/4/5/6 dont have diff colors
+local LoadNavarasuOneDarkConfig = function()
+    require('onedark').setup { style = 'darker' }
+    vim.cmd('highlight Normal ctermbg=000')
+    vim.cmd('highlight NonText ctermbg=000')
+    require('onedark').load()
+end
+
+----- JOSH DICK ONE DARK COLORSCHEME -----
 LoadOneDarkConfig = function()
     vim.g.onedark_termcolors=256
     vim.g.onedark_terminal_italics=1
-    vim.cmd('autocmd ColorScheme onedark call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })')
+
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })' })
+
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH1", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH2", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH1", { "fg": { "cterm": "196" } })'})
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH2", { "fg": { "cterm": "196" } })'})
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH2", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH1", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })'})
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH1", { "fg": { "cterm": "196" } })'})
+
     vim.cmd.colorscheme('onedark')
     vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
 end
@@ -448,11 +478,10 @@ LoadTreeSitter = function()
             -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
         ignore_install = { "phpdoc" },
         highlight = {
-             enable = true,     -- `false` will disable the whole extension
+            enable = true,     -- `false` will disable the whole extension
             -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
             -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
             -- the name of the parser)
-            -- list of language that will be disabled
             disable = { "markdown" },
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -505,6 +534,22 @@ LoadIndentBlankLine = function()
        --},
     }
     vim.g.indent_blankline_enabled=0
+end
+
+LoadFireNvim = function()
+    vim.g.firenvim_config = {
+        globalSettings = { alt = "all" },
+        localSettings = {
+            [".*"] = {
+                cmdline  = "neovim",
+                content  = "text",
+                priority = 0,
+                selector = "textarea",
+                -- takeover = "always"
+                takeover = "never"
+            }
+        }
+    }
 end
 
 --------------------------------------------------------------------------------------------------------
@@ -815,12 +860,13 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 require("lazy").setup({
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     'nvim-tree/nvim-web-devicons',
+    -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
     { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
-    -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
     'nvim-lua/plenary.nvim',
@@ -835,12 +881,12 @@ require("lazy").setup({
     { 'lewis6991/gitsigns.nvim', config = LoadGitSigns },
 
     --- fuzzy find
-    { 'junegunn/fzf', run = ":call fzf#install()" },
+    { 'junegunn/fzf', build = ":call fzf#install()" },
     { 'junegunn/fzf.vim', config = LoadFZF },
     { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
 
     -- MARKDOWN
-    { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
+    { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
     { 'preservim/vim-markdown', config = LoadVimMarkdown },
 
     ----- LSP STUFF
@@ -858,6 +904,7 @@ require("lazy").setup({
 
     'glacambre/firenvim',
         cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
+        config = LoadFireNvim,
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })
             vim.fn["firenvim#install"](0)
@@ -867,4 +914,5 @@ require("lazy").setup({
     'chrisbra/unicode.vim',     -- unicode helper
     'godlygeek/tabular',
 })
-end
+
+end     -- matched to if for firenvim loading
