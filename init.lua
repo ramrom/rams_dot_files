@@ -33,7 +33,6 @@ vim.opt.formatoptions:append('j')               -- Delete comment character when
 
 ---- SERACHING
 vim.opt.hlsearch = true                         -- highlight search
-vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
 vim.opt.incsearch = true               -- searching as you type (before hitting enter)
 vim.opt.ignorecase = true              -- case-insensitive searches
 vim.opt.smartcase = true               -- with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
@@ -291,6 +290,20 @@ local LoadNavarasuOneDarkConfig = function()
     require('onedark').load()
 end
 
+---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
+-------- TODO: get custom search highlighting to work
+local LoadOneDarkProConfig = function()
+    vim.cmd("colorscheme onedark_dark")
+    -- vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
+    -- vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
+  require("onedarkpro").setup({
+      highlights = {
+        Search = { fg = "#00000F", style = "underline" },
+        Comment = { fg = "#0F0000", style = "bold" },
+      }
+    })
+end
+
 ----- JOSH DICK ONE DARK COLORSCHEME -----
 LoadOneDarkConfig = function()
     vim.g.onedark_termcolors=256
@@ -318,6 +331,7 @@ LoadOneDarkConfig = function()
 
     vim.cmd.colorscheme('onedark')
     vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
+    vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
 end
 
 
@@ -570,13 +584,12 @@ end
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
-        ActivateAutoComplete()
         SetLSPKeymaps()
         vim.opt.signcolumn="yes:2" -- static 2 columns, at least one for signify and one for lsp diags
     end,
 })
 
-ActivateAutoComplete = function()
+LoadAutoComplete = function()
     if Lua.moduleExists('cmp') then
         local cmp = require 'cmp'
         cmp.setup {
@@ -619,8 +632,9 @@ ActivateAutoComplete = function()
             }),
             sources = {
                 { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-                { name = 'cmp_buffer' },
+                { name = 'buffer' },
+                { name = 'path' },
+                -- { name = 'luasnip' },
             },
         }
     end
@@ -812,7 +826,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gjc", vim.lsp.codelens.run)
     vim.keymap.set("n", "ga", vim.lsp.buf.code_action)
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help)
-    vim.keymap.set("n", "gy", vim.lsp.buf.formatting)
+    vim.keymap.set("n", "gy", vim.lsp.buf.format)
     vim.keymap.set("n", "gR", vim.lsp.buf.rename)
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist) -- all workspace diagnostics
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
@@ -866,6 +880,7 @@ require("lazy").setup({
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     'nvim-tree/nvim-web-devicons',
     -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
+    -- { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
     { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
@@ -895,7 +910,7 @@ require("lazy").setup({
         config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
     { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
     { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
-    'hrsh7th/nvim-cmp',
+    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete },
     { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } }, -- LSP completions
     { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
     { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },

@@ -137,7 +137,9 @@ C - make selected dir node the new root node
         - better formatting(e.g. `=`)
         - better folding
     - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- pre neovim 0.8.0 treesitter highlight groups all prefixed with `TS`, e.g. `TSBoolean`, later depercated
 - AST of a file buffer is constantly parsed as changes are made
+- good article - https://thevaluable.dev/tree-sitter-neovim-overview/
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 
