@@ -366,7 +366,6 @@ noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gh :SignifyToggleHighlight<cr>
 
 noremap <leader>gT :call RemoveTrailingWhiteSpace()<CR>
-noremap <leader>gt :call ToggleDisplayTrailSpaces('t')<cr>
 noremap <leader>gi :IndentLinesToggle<cr>
 noremap <leader>go :call CycleColorCol()<cr>
 noremap <leader>gm :call ToggleInstantMarkdown()<cr>

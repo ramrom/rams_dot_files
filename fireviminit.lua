@@ -31,14 +31,13 @@ vim.g.firenvim_config = {
             content  = "text",
             priority = 0,
             selector = "textarea",
-            -- takeover = "always"
             takeover = "never"
         }
     }
 }
 
 vim.api.nvim_create_autocmd('BufEnter', { pattern = 'github.com_*.txt', command = 'set filetype=markdown' })
-vim.api.nvim_create_autocmd('BufEnter', { pattern = 'json.parser.online.fr._*.txt', command = 'set filetype=json' })
+vim.api.nvim_create_autocmd('BufEnter', { pattern = 'json.parser.online.fr_*.txt', command = 'set filetype=json' })
 
 -------- GENERAL
 vim.opt.splitbelow = true                       -- open new windows on bottom for horizontal, right for vertical
@@ -103,6 +102,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
+vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
 
 ---- SMART QUITTING
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
