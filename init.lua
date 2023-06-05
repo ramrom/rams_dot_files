@@ -866,7 +866,6 @@ end
 -------------------------------- PLUGINS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- print(lazypath)
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
@@ -917,6 +916,7 @@ require("lazy").setup({
     { 'mfussenegger/nvim-dap', config = LoadDAP },
     -- 'leoluz/nvim-dap-go',
 
+    -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     'glacambre/firenvim',
         cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
         config = LoadFireNvim,

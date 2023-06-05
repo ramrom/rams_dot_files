@@ -1,6 +1,6 @@
 # VIM
 alias v='nvim'
-alias vv='nvim -u ~/rams_dot_files/init.lua'
+alias vf='nvim -u ~/rams_dot_files/firenvim.lua'
 alias sv='VIM_NOPLUG=1 v'    # simple, dont load plugins
 alias ssv='v -u NONE'        # super simple, dont even load my vimrc
 alias vs='[ -f MyCurrentVimSession.vim ] && v -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!"'
