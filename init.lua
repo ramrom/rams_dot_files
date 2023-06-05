@@ -3,7 +3,7 @@
 -- ISSUE: firenvim lua not working in chrome
 
 if not not vim.g.started_by_firenvim then
-    require('fireviminit')
+    require('firenvim')
 else
 
 --------------------------------------------------------------------------------------------------------
@@ -292,6 +292,7 @@ end
 
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
 -------- TODO: get custom search highlighting to work
+-------- TODO: treesitter markdown, headers are ugly green, is that normal
 local LoadOneDarkProConfig = function()
     vim.cmd("colorscheme onedark_dark")
     -- vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
@@ -835,18 +836,17 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gwt", ToggleLSPdiagnostics) -- buffer diagnostics only
     vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
     vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
-    -- pgar keybindings LSP key bindings
-    -- nnoremap <silent> <leader>q   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-    -- nnoremap <silent> <leader>e   <cmd>lua vim.lsp.diagnostic.open_float()<CR>
+    vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+    vim.keymap.set('n', 'gz', ' <cmd>lua vim.lsp.diagnostic.open_float()<CR>')
 
-    -- Example mappings for usage with nvim-dap. If you don't use that, you can skip these
-    --vim.keymap.set("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
-    --vim.keymap.set("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
-    --vim.keymap.set("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
-    --vim.keymap.set("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
-    --vim.keymap.set("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
-    --vim.keymap.set("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
-    --vim.keymap.set("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
+    ---- DAP mappings
+    vim.keymap.set("n", "<leader>wc", [[<cmd>lua require"dap".continue()<CR>]])
+    vim.keymap.set("n", "<leader>wr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+    vim.keymap.set("n", "<leader>wK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+    vim.keymap.set("n", "<leader>wt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+    vim.keymap.set("n", "<leader>wso", [[<cmd>lua require"dap".step_over()<CR>]])
+    vim.keymap.set("n", "<leader>wsi", [[<cmd>lua require"dap".step_into()<CR>]])
+    vim.keymap.set("n", "<leader>wl", [[<cmd>lua require"dap".run_last()<CR>]])
 end
 
 SetMetalsKeymaps = function()
