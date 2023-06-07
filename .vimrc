@@ -144,15 +144,11 @@ autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
 
 """""""""""""SEARCHING """"""""""""""""""
 set hlsearch                    " highlight search
-"TODO: italics works in neovim, brew vim8.2, osx default vim9 doesnt
+" italics works in neovim, brew vim8.2, osx default vim9 doesnt
 hi Search cterm=underline,inverse
 set incsearch               " searching as you type (before hitting enter)
 set ignorecase              " case-insensitive searches
 set smartcase               " with ignorecase, search with all lowercase means INsensitive, any uppercase means sensitive
-
-
-"TODO: fix, i - included files, kspell dictionary
-" set complete-=i | set complete+=kspell
 
 """"""""""""" FOLDING """"""""""""""""""""""""""""""
 set foldmethod=indent

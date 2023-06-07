@@ -3,6 +3,7 @@
 -- ISSUE: firenvim lua not working in chrome
 
 if not not vim.g.started_by_firenvim then
+-- if not vim.g.started_by_firenvim then
     require('firenvim')
 else
 
@@ -149,6 +150,19 @@ ClearLspLog = function()
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
 
+DisplayDiagVirtualText = true
+
+ToggleLSPDiagnosticsVirtualText = function()
+    DisplayDiagVirtualText = not DisplayDiagVirtualText
+    if DisplayDiagVirtualText then
+        vim.diagnostic.config({ virtual_text = true, })
+        print("enabling diagnostic virtual text")
+    else
+        vim.diagnostic.config({ virtual_text = false, })
+        print("disabling diagnostic virtual text")
+    end
+end
+
 -- lazy.vim, if enabled = true module exists, and if cond = false it's not loaded and requiring will fail
 local Lua = {}
 function Lua.moduleExists(name)
@@ -174,6 +188,23 @@ end
 -------------------------------- MAPS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
 vim.g.mapleader = " "
+
+--- TODO: Prime open real estate for normal mode!
+    -- NORMAL MODE
+        -- <Leader>a/w/l/x'
+            -- a is earmarked for smart script run or test run
+        -- <Leader><Leader>    (all except for h/g/q/r)
+        -- c-m/c-n/c-g/c-s/c-q
+        -- c-x (opposite of c-a, i clobber c-a for tmux meta)
+        -- c-p
+        -- c-space
+        -- ; " semicolon repeats last f/F motions
+        -- ," ; in reverse direction
+    -- INSERT MODE
+        -- c-s, c-space
+-- TODO: i think these maps are probably useful
+-- nnoremap <C-J> a<CR><Esc>k$
+-- nnoremap <CR> o<Esc>
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
@@ -405,6 +436,14 @@ LoadGitSigns = function()
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
+MyCustomLuaLineFlags = function() 
+    if not DisplayDiagVirtualText then
+        return [[ VTXTOFF ]]
+    else
+        return ""
+    end
+end
+
 LoadLuaLine = function()
     require('lualine').setup {
         options = {
@@ -427,10 +466,10 @@ LoadLuaLine = function()
             }
         },
         sections = {
-            lualine_a = {'mode'},
+            lualine_a = {'mode' },
             lualine_b = {'branch', 'diff', 'diagnostics'},
             -- lualine_b = { { 'branch', icons_enabled = true, {'branch', icon = 'ᛘ'} }, 'diff', 'diagnostics' },
-            lualine_c = { { 'filename', file_status = true, path = 1 } },
+            lualine_c = { { 'filename', file_status = true, path = 1 }, MyCustomLuaLineFlags },
             lualine_x = {'filetype', 'encoding', 'fileformat'},
             lualine_y = {'progress'},
             lualine_z = {'location'}
@@ -560,8 +599,8 @@ LoadFireNvim = function()
                 content  = "text",
                 priority = 0,
                 selector = "textarea",
-                -- takeover = "always"
-                takeover = "never"
+                takeover = "always"
+                -- takeover = "never"
             }
         }
     }
@@ -570,19 +609,6 @@ end
 --------------------------------------------------------------------------------------------------------
 -------------------------------- LSP CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
-LSPDiagnosticsEnabled = true
-
-ToggleLSPdiagnostics = function()
-    LSPDiagnosticsEnabled = not LSPDiagnosticsEnabled
-    if LSPDiagnosticsEnabled then
-        vim.diagnostic.enable()
-        print("LSP diagnostics enabled")
-    else
-        vim.diagnostic.disable()
-        print("LSP diagnostics disabled")
-    end
-end
-
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         SetLSPKeymaps()
@@ -833,7 +859,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
     vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
     vim.keymap.set("n", "gwb", vim.diagnostic.setloclist) -- buffer diagnostics only
-    vim.keymap.set("n", "gwt", ToggleLSPdiagnostics) -- buffer diagnostics only
+    vim.keymap.set("n", "gwt", ToggleLSPDiagnosticsVirtualText)
     vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
     vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
     vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
@@ -878,15 +904,17 @@ require("lazy").setup({
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     'nvim-tree/nvim-web-devicons',
-    -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
-    -- { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
-    { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
     'nvim-lua/plenary.nvim',
     'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-repeat',
+
+    --- COLORSCHEMES
+    -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
+    -- { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
+    { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
 
     --- GIT
     'tpope/vim-fugitive',

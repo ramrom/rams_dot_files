@@ -464,6 +464,8 @@ drive naming convention:
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device
     - `bluetoothctl` alone will start a interactive cli console session
+- https://askubuntu.com/questions/557906/problem-starting-jack-server-jack-server-is-not-running-or-cannot-be-started
+- `pulseaudio` - `pulseaudio --kill` and `pulseaudio --start` to restart
 - hciconfig - config bluetooth devices
     - `hciconfig -a` - print all info of bluetooth controllers
     - `hciconfig hci0 down` - turn off bluetooth controller `hci0`
