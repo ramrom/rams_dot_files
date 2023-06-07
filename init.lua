@@ -469,7 +469,10 @@ LoadLuaLine = function()
             lualine_a = {'mode' },
             lualine_b = {'branch', 'diff', 'diagnostics'},
             -- lualine_b = { { 'branch', icons_enabled = true, {'branch', icon = 'ᛘ'} }, 'diff', 'diagnostics' },
-            lualine_c = { { 'filename', file_status = true, path = 1 }, MyCustomLuaLineFlags },
+            lualine_c = { 
+                { 'filename', file_status = true, path = 1 }, 
+                { MyCustomLuaLineFlags, color = { fg = 001, bg = 022 } } 
+            },
             lualine_x = {'filetype', 'encoding', 'fileformat'},
             lualine_y = {'progress'},
             lualine_z = {'location'}
