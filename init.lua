@@ -436,13 +436,55 @@ LoadGitSigns = function()
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
+vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
+    callback = function(args)
+        local tabinfo = vim.fn.gettabinfo()
+        if #tabinfo == 1 then 
+            local config = require('lualine').get_config()
+            config.tabline.lualine_a = { LuaLineBufferConfig }
+            config.tabline.lualine_z = { }
+            require('lualine').setup(config)
+        else 
+            local config = require('lualine').get_config()
+            config.tabline.lualine_a = { LuaLineTabConfig }
+            config.tabline.lualine_z = { LuaLineBufferConfig }
+            require('lualine').setup(config)
+        end
+    end,
+})
+
 MyCustomLuaLineFlags = function() 
-    if not DisplayDiagVirtualText then
-        return [[ VTXTOFF ]]
-    else
-        return ""
-    end
+    if not DisplayDiagVirtualText then return [[ VTXTOFF ]] else return "" end
 end
+
+LuaLineTabConfig = 
+    {
+        'tabs',
+        mode = 2,
+        use_mode_colors = true,
+        max_length = vim.o.columns,
+
+        fmt = function(name, context)
+            -- Show + if buffer is modified in tab
+            local buflist = vim.fn.tabpagebuflist(context.tabnr)
+            local winnr = vim.fn.tabpagewinnr(context.tabnr)
+            local bufnr = buflist[winnr]
+            local mod = vim.fn.getbufvar(bufnr, '&mod')
+
+            return name .. (mod == 1 and ' +' or '')
+        end
+    }
+
+LuaLineBufferConfig = 
+    {
+        'buffers',
+        show_modified_status = true,
+        mode = 4,
+        buffers_color = {
+            inactive = { fg = 'grey', bg = 'black' },
+            active = 'grey',
+        },
+    }
 
 LoadLuaLine = function()
     require('lualine').setup {
@@ -486,39 +528,12 @@ LoadLuaLine = function()
             lualine_z = {}
         },
         tabline = {
-            lualine_a = {
-                {
-                    'tabs',
-                    mode = 2,
-                    use_mode_colors = true,
-                    max_length = vim.o.columns / 3,
-
-                    fmt = function(name, context)
-                        -- Show + if buffer is modified in tab
-                        local buflist = vim.fn.tabpagebuflist(context.tabnr)
-                        local winnr = vim.fn.tabpagewinnr(context.tabnr)
-                        local bufnr = buflist[winnr]
-                        local mod = vim.fn.getbufvar(bufnr, '&mod')
-
-                        return name .. (mod == 1 and ' +' or '')
-                    end
-                }
-            },
+            lualine_a = { LuaLineTabConfig },
             lualine_b = {},
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = {
-                {
-                    'buffers',
-                    show_modified_status = true,
-                    mode = 4,
-                    buffers_color = {
-                        inactive = { fg = 'grey', bg = 'black' },
-                        active = 'grey',
-                    },
-                },
-            },
+            lualine_z = { LuaLineBufferConfig },
         },
         winbar = {},
         inactive_winbar = {},

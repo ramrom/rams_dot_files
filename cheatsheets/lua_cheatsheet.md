@@ -59,3 +59,4 @@
 - variadic args - `function foo(...) print(...) end`, `...` means variable number of args
     - all arguments are collected into a table, accessible as hidden param named `arg`
 - global variables evaluate to `nil` if not initialized
+- if function has single argument and it's a literal string or table, then no parens are needed
