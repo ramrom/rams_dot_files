@@ -928,30 +928,36 @@ require("lazy").setup({
         config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
     { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
     { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
-    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete },
-    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' } }, -- LSP completions
-    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' } },
-    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' } },
+    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy' },
+    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
+    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },
+    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },
     { 'mfussenegger/nvim-dap', config = LoadDAP },
     -- 'leoluz/nvim-dap-go',
 
     -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-    'glacambre/firenvim',
+    { 'glacambre/firenvim',
         -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
         config = LoadFireNvim,
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })
             vim.fn["firenvim#install"](0)
-        end,
-
-    { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine },
+        end 
+    },
+    { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
     { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
     { 'godlygeek/tabular', event = "VeryLazy" },
     { "folke/which-key.nvim",
       event = "VeryLazy",
       init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
       opts = { }
-    }
+    },
+    { "folke/noice.nvim", event = "VeryLazy", opts = { },
+        dependencies = {
+            "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "rcarriga/nvim-notify", -- optional notification view, noice will default to mini otherwise
+        } 
+    },
 })
 
 end     -- matched to if for firenvim loading
