@@ -445,11 +445,13 @@ vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
             config.tabline.lualine_a = { LuaLineBufferComponentConfig}
             config.tabline.lualine_z = { }
             require('lualine').setup(config)
+            -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
         else 
             local config = require('lualine').get_config()
             config.tabline.lualine_a = { LuaLineTabComponentConfig }
             config.tabline.lualine_z = { LuaLineBufferComponentConfig }
             require('lualine').setup(config)
+            -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
         end
     end,
 })
@@ -582,30 +584,11 @@ end
 
 ------------------------- indent blankline -----------------------------------------------
 LoadIndentBlankLine = function()
-   require("indent_blankline").setup {
-       show_end_of_line = true,
-       show_current_context = true,
-       show_current_context_start = true,
-
-       -- show_end_of_line = true,
-       -- char = "",
-       -- char_highlight_list = {
-       --     "IndentBlanklineIndent1",
-       --     "IndentBlanklineIndent2",
-       -- },
-       -- space_char_highlight_list = {
-       --     "IndentBlanklineIndent1",
-       --     "IndentBlanklineIndent2",
-       -- },
-       show_trailing_blankline_indent = false,
-       --char_highlight_list = {
-       --    "IndentBlanklineIndent1",
-       --    "IndentBlanklineIndent2",
-       --    "IndentBlanklineIndent3",
-       --    "IndentBlanklineIndent4",
-       --    "IndentBlanklineIndent5",
-       --    "IndentBlanklineIndent6",
-       --},
+    require("indent_blankline").setup {
+        show_end_of_line = true,
+        show_current_context = true,
+        show_current_context_start = true,
+        show_trailing_blankline_indent = false,
     }
     vim.g.indent_blankline_enabled=0
 end
