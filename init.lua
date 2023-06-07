@@ -436,18 +436,19 @@ LoadGitSigns = function()
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
+-- TODO: it runs fast but could make faster by using previous state, if going from 2->1 or 1->2 tabs _then_ require and change config
 vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
     callback = function(args)
         local tabinfo = vim.fn.gettabinfo()
         if #tabinfo == 1 then 
             local config = require('lualine').get_config()
-            config.tabline.lualine_a = { LuaLineBufferConfig }
+            config.tabline.lualine_a = { LuaLineBufferComponentConfig}
             config.tabline.lualine_z = { }
             require('lualine').setup(config)
         else 
             local config = require('lualine').get_config()
-            config.tabline.lualine_a = { LuaLineTabConfig }
-            config.tabline.lualine_z = { LuaLineBufferConfig }
+            config.tabline.lualine_a = { LuaLineTabComponentConfig }
+            config.tabline.lualine_z = { LuaLineBufferComponentConfig }
             require('lualine').setup(config)
         end
     end,
@@ -457,7 +458,7 @@ MyCustomLuaLineFlags = function()
     if not DisplayDiagVirtualText then return [[ VTXTOFF ]] else return "" end
 end
 
-LuaLineTabConfig = 
+LuaLineTabComponentConfig = 
     {
         'tabs',
         mode = 2,
@@ -475,7 +476,7 @@ LuaLineTabConfig =
         end
     }
 
-LuaLineBufferConfig = 
+LuaLineBufferComponentConfig = 
     {
         'buffers',
         show_modified_status = true,
@@ -528,12 +529,12 @@ LoadLuaLine = function()
             lualine_z = {}
         },
         tabline = {
-            lualine_a = { LuaLineTabConfig },
+            lualine_a = { LuaLineTabComponentConfig },
             lualine_b = {},
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = { LuaLineBufferConfig },
+            lualine_z = { LuaLineBufferComponentConfig },
         },
         winbar = {},
         inactive_winbar = {},
