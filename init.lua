@@ -523,19 +523,11 @@ LoadLuaLine = function()
             lualine_z = {'location'}
         },
         inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
             lualine_c = {'filename'},
             lualine_x = {'location'},
-            lualine_y = {},
-            lualine_z = {}
         },
         tabline = {
             lualine_a = { LuaLineTabComponentConfig },
-            lualine_b = {},
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = {},
             lualine_z = { LuaLineBufferComponentConfig },
         },
         winbar = {},
@@ -555,9 +547,8 @@ LoadTreeSitter = function()
         ignore_install = { "phpdoc" },
         highlight = {
             enable = true,     -- `false` will disable the whole extension
-            -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-            -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-            -- the name of the parser)
+            -- NOTE: names of the parsers and not the filetype. (for example if you want to
+            -- disable highlighting for the `tex` filetype, you need to include `latex`, this is the name of the parser)
             disable = { "markdown" },
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -620,6 +611,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 LoadAutoComplete = function()
+    -- === Basic Completion Settings ===
+    vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+
     local cmp = require 'cmp'
     cmp.setup {
         completion = { autocomplete = false, },   -- dont show autocomplete menu be default
@@ -648,7 +642,7 @@ LoadAutoComplete = function()
             --         fallback()
             --     end
             -- end, { 'i', 's' }),
-            -- -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+            -- ['<S-Tab>'] = cmp.mapping(function(fallback)
             -- ['<C-p>'] = cmp.mapping(function(fallback)
             --     if cmp.visible() then
             --         cmp.select_prev_item()
@@ -721,13 +715,6 @@ LoadScalaMetals = function()
 
     vim.opt.shortmess:remove('F')   -- Ensure autocmd works for filetype
     vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
-
-    -- === Basic Completion Settings ===
-    -- menu = use a popup menu to show possible completions
-    -- menuone = show a menu even if there is only one match
-    -- noinsert = do not insert text for a match until user selects one
-    -- noselect = do not select a match from the menu automatically
-    vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
     -- for telescope
     -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
@@ -947,7 +934,7 @@ require("lazy").setup({
 
     -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     'glacambre/firenvim',
-        cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
+        -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
         config = LoadFireNvim,
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })

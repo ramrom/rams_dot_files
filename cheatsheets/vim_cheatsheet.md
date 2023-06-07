@@ -67,7 +67,6 @@
     - use space as a the leader key: `vim.g.mapleader = ' '`
     - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
 
-
 ## PLUGINS
 
 ### NVIM LAZY
@@ -173,9 +172,11 @@ C - make selected dir node the new root node
 - `:checkhealth` - neovim only, report on errors/warnings for all modules
 
 
-### VIMSCRIPT
+### VIMSCRIPT / VimL
 - commands -> can only accept string arguments, no return value, used for UI, invoke: `:SomeCommand`
 - functions -> can accept any type arg and return a value, to invoke `:call somefunc(var1,var2)`
+- checking existence of variable
+    if exists('g:some_global_var') | echo "hi" | endif
 
 
 ### MISC COMMANDS AND INFO
@@ -622,6 +623,3 @@ zw - add to wrong word list
 zuw - remove from wrong word list
 
 
-## SCRIPTING
-- checking existence of variable
-    if exists('g:some_global_var') | echo "hi" | endif
