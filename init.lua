@@ -255,6 +255,7 @@ vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
 vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
+vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
 vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
 vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
@@ -265,7 +266,7 @@ vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
 vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
 
 --------- GIT STUFF
-vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>')
+vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
 vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
 vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
 vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
@@ -279,24 +280,23 @@ vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
 
-vim.keymap.set('n', '<leader>cc', [[:Maps!<cr> space ]])
+vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
 vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
 vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
-vim.keymap.set('n', '<leader>cl', '<cmd>:Files $MY_NOTES_DIR<cr>')
+vim.keymap.set('n', '<leader>cn', '<cmd>:Files $MY_NOTES_DIR<cr>')
 vim.keymap.set('n', '<leader>cw', '<cmd>:Files $MY_WORK_DIR<cr>')
-vim.keymap.set('n', '<leader>cj', '<cmd>:tabnew $MY_WORK_TODO<cr>')
+vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew $MY_WORK_TODO<cr>')
 vim.keymap.set('n', '<leader>cA', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
-vim.keymap.set('n', '<leader>co', '<cmd>:Files ~<cr>')
 
 vim.keymap.set("n", "<C-Space>", ":Lazy<CR>")
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
 vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
-vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>')
-vim.keymap.set('n', '<leader>go', CycleColorColumn)
+vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
+vim.keymap.set('n', '<leader>go', CycleColorColumn, { desc = "cycle color column" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
 vim.api.nvim_create_autocmd(
@@ -914,7 +914,7 @@ require("lazy").setup({
             config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
     { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
-    --- fuzzy find
+    --- FUZZY FIND
     { 'junegunn/fzf', build = ":call fzf#install()" },
     { 'junegunn/fzf.vim', config = LoadFZF },
     { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
