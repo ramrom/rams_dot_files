@@ -49,6 +49,9 @@ vim.opt.tabstop=4               -- space 4 columns when reading a <tab> char in 
 vim.opt.softtabstop=4           -- complicated, see docs
 vim.opt.expandtab = true        -- use spaces when tab is pressed
 
+-- Default auto completion settings
+vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+
 --- DEFAULT STATUS LINE
 vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
@@ -436,20 +439,24 @@ LoadGitSigns = function()
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
+LuaTabLineTabIndicator = function() return "tabs" end
+LuaTabLineBufferIndicator = function() return "buffers" end
+
 -- TODO: it runs fast but could make faster by using previous state, if going from 2->1 or 1->2 tabs _then_ require and change config
 vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
     callback = function(args)
         local tabinfo = vim.fn.gettabinfo()
         if #tabinfo == 1 then 
             local config = require('lualine').get_config()
-            config.tabline.lualine_a = { LuaLineBufferComponentConfig}
+            config.tabline.lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
+            -- config.tabline.lualine_a = { LuaLineBufferComponentConfig }
             config.tabline.lualine_z = { }
             require('lualine').setup(config)
             -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
         else 
             local config = require('lualine').get_config()
-            config.tabline.lualine_a = { LuaLineTabComponentConfig }
-            config.tabline.lualine_z = { LuaLineBufferComponentConfig }
+            config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
+            config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
             require('lualine').setup(config)
             -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
         end
@@ -478,15 +485,14 @@ LuaLineTabComponentConfig =
         end
     }
 
-LuaLineBufferComponentConfig = 
+LuaLineBufferComponentConfig = { 'buffers', show_modified_status = true, mode = 4 }
+
+LuaLineBufferDimComponentConfig = 
     {
         'buffers',
         show_modified_status = true,
         mode = 4,
-        buffers_color = {
-            inactive = { fg = 'grey', bg = 'black' },
-            active = 'grey',
-        },
+        buffers_color = { inactive = { fg = 'grey', bg = 'black' }, active = 'grey', },
     }
 
 LoadLuaLine = function()
@@ -527,8 +533,7 @@ LoadLuaLine = function()
             lualine_x = {'location'},
         },
         tabline = {
-            lualine_a = { LuaLineTabComponentConfig },
-            lualine_z = { LuaLineBufferComponentConfig },
+            lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
         },
         winbar = {},
         inactive_winbar = {},
@@ -584,6 +589,8 @@ LoadIndentBlankLine = function()
     vim.g.indent_blankline_enabled=0
 end
 
+
+--------------- FireNvim config --------------------------------------------------------------
 LoadFireNvim = function()
     vim.g.firenvim_config = {
         globalSettings = { alt = "all" },
@@ -611,9 +618,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 LoadAutoComplete = function()
-    -- === Basic Completion Settings ===
-    vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
-
     local cmp = require 'cmp'
     cmp.setup {
         completion = { autocomplete = false, },   -- dont show autocomplete menu be default
