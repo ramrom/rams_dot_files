@@ -487,7 +487,8 @@ LoadLuaLine = function()
                 {
                     'tabs',
                     mode = 2,
-                    max_length = vim.o.columns,
+                    use_mode_colors = true,
+                    max_length = vim.o.columns / 3,
 
                     fmt = function(name, context)
                         -- Show + if buffer is modified in tab
@@ -513,8 +514,8 @@ LoadLuaLine = function()
                         inactive = { fg = 'grey', bg = 'black' },
                         active = 'grey',
                     },
-                    },
                 },
+            },
         },
         winbar = {},
         inactive_winbar = {},
@@ -617,54 +618,52 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 LoadAutoComplete = function()
-    if Lua.moduleExists('cmp') then
-        local cmp = require 'cmp'
-        cmp.setup {
-            completion = { autocomplete = false, },   -- dont show autocomplete menu be default
-            snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
+    local cmp = require 'cmp'
+    cmp.setup {
+        completion = { autocomplete = false, },   -- dont show autocomplete menu be default
+        snippet = {
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+            end,
+        },
+        mapping = cmp.mapping.preset.insert({
+            ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+            ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+            -- C-b (back) C-f (forward) for snippet placeholder navigation.
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<CR>'] = cmp.mapping.confirm {
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
             },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-                ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
-                -- C-b (back) C-f (forward) for snippet placeholder navigation.
-                ['<C-e>'] = cmp.mapping.abort(),
-                ['<C-Space>'] = cmp.mapping.complete(),
-                ['<CR>'] = cmp.mapping.confirm {
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = true,
-                },
-                -- ['<Tab>'] = cmp.mapping(function(fallback)
-                -- ['<C-n>'] = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.select_next_item()
-                --     elseif luasnip.expand_or_jumpable() then
-                --         luasnip.expand_or_jump()
-                --     else
-                --         fallback()
-                --     end
-                -- end, { 'i', 's' }),
-                -- -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-                -- ['<C-p>'] = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.select_prev_item()
-                --     elseif luasnip.jumpable(-1) then
-                --         luasnip.jump(-1)
-                --     else
-                --         fallback()
-                --     end
-                -- end, { 'i', 's' }),
-            }),
-            sources = {
-                { name = 'nvim_lsp' },
-                { name = 'buffer' },
-                { name = 'path' },
-                -- { name = 'luasnip' },
-            },
-        }
-    end
+            -- ['<Tab>'] = cmp.mapping(function(fallback)
+            -- ['<C-n>'] = cmp.mapping(function(fallback)
+            --     if cmp.visible() then
+            --         cmp.select_next_item()
+            --     elseif luasnip.expand_or_jumpable() then
+            --         luasnip.expand_or_jump()
+            --     else
+            --         fallback()
+            --     end
+            -- end, { 'i', 's' }),
+            -- -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+            -- ['<C-p>'] = cmp.mapping(function(fallback)
+            --     if cmp.visible() then
+            --         cmp.select_prev_item()
+            --     elseif luasnip.jumpable(-1) then
+            --         luasnip.jump(-1)
+            --     else
+            --         fallback()
+            --     end
+            -- end, { 'i', 's' }),
+        }),
+        sources = {
+            { name = 'nvim_lsp' },
+            { name = 'buffer' },
+            { name = 'path' },
+            -- { name = 'luasnip' },
+        },
+    }
 end
 
 ---------------- BFQ ---------------------------------------
