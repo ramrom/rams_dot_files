@@ -49,7 +49,7 @@ vim.opt.tabstop=4               -- space 4 columns when reading a <tab> char in 
 vim.opt.softtabstop=4           -- complicated, see docs
 vim.opt.expandtab = true        -- use spaces when tab is pressed
 
--- Default auto completion settings
+-- AUTO COMPLETION
 vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
 --- DEFAULT STATUS LINE
@@ -912,7 +912,7 @@ require("lazy").setup({
     'tpope/vim-fugitive',
     { 'tpope/vim-rhubarb', -- GBrowse handler for github, open gh link in browser or copy to clipboard
             config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
-    { 'lewis6991/gitsigns.nvim', config = LoadGitSigns },
+    { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
     --- fuzzy find
     { 'junegunn/fzf', build = ":call fzf#install()" },
@@ -946,8 +946,13 @@ require("lazy").setup({
         end,
 
     { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine },
-    'chrisbra/unicode.vim',     -- unicode helper
-    'godlygeek/tabular',
+    { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
+    { 'godlygeek/tabular', event = "VeryLazy" },
+    { "folke/which-key.nvim",
+      event = "VeryLazy",
+      init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
+      opts = { }
+    }
 })
 
 end     -- matched to if for firenvim loading

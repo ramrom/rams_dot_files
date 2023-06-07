@@ -103,6 +103,11 @@ G log %         - git log <current file>
 
 ### VIM-SURROUND
 - https://github.com/tpope/vim-surround
+- `cs"'` - change surround `"` to `'`
+- for txt `[blah]` -> `cs[<yar>]` - change surround `[` to `<yar>`/`</yar>` 
+- for txt `<foo>bar</foo>` -> `cst"` - change surround tag(`<foo>` here) to `"`
+- `ds[` - delete surround `[`
+- `ysiw[` - select inner word and surround with `[`
 
 ### NERDTREE
 ?   - toggle quickhelp
