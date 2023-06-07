@@ -223,8 +223,8 @@ vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
 vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
 
 ------ TAB MOVE/NAV/CREATE
-vim.keymap.set("n", "<leader>f", TabBufNavForward)
-vim.keymap.set("n", "<leader>d", TabBufNavBackward)
+vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
+vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
 vim.keymap.set("n", "<leader>m", ":tabm<Space>")
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
 vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
@@ -238,7 +238,7 @@ vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 ------ SMART WRITING
 vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
-vim.keymap.set('n', "<leader>S", SaveDefinedSession)
+vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
 
 vim.keymap.set("i", "<C-l>", "<Esc>")
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
@@ -442,7 +442,6 @@ end
 LuaTabLineTabIndicator = function() return "tabs" end
 LuaTabLineBufferIndicator = function() return "buffers" end
 
--- TODO: it runs fast but could make faster by using previous state, if going from 2->1 or 1->2 tabs _then_ require and change config
 vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
     callback = function(args)
         local tabinfo = vim.fn.gettabinfo()
@@ -453,7 +452,7 @@ vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
             config.tabline.lualine_z = { }
             require('lualine').setup(config)
             -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
-        else 
+        elseif #tabinfo == 2 then
             local config = require('lualine').get_config()
             config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
             config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
