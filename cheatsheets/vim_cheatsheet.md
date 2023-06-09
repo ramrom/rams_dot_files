@@ -175,6 +175,7 @@ C - make selected dir node the new root node
 - `:scriptnames` shows all scripts that were run, including plugin's scripts
 - `vim --startuptime outputfile` - record startup time and record to file
 - `:checkhealth` - neovim only, report on errors/warnings for all modules
+- `:messages` - see history of messages (usually shown in command window)
 
 
 ### VIMSCRIPT / VimL
@@ -403,6 +404,7 @@ Tx - jump to after previous occurence of character x
 ) - forward a sentence
 [] - backward to prev }
 ][ - forward to prev }
+]m / [m - next/prev method
 zz - center cursor on screen
 zt - cursor on top of screen
 zb - cursor on bottom screen

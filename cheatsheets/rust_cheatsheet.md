@@ -18,7 +18,7 @@
 - https://www.rust-lang.org/
     - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
     - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
-    - technical referece: https://doc.rust-lang.org/reference/introduction.html
+    - technical reference: https://doc.rust-lang.org/reference/introduction.html
 - rust in Y minutes: https://learnxinyminutes.com/docs/rust/
 - `rustup doc` - open local copy of docs in browser
     - `rustup doc --std` to jump straight to std lib
@@ -51,6 +51,10 @@
     - set of things that rust automatically imports (`use`s) into every program
 ### LINKING
 - can produce dynamically or statically linked libraries
+- generics on dynamic libs
+    - AST of generic functions is stored in the metadata of a library
+    - when you compile against it you get a copy of that AST and monomorphize your own copies when you need it.
+    - so it's not really dynamic
 
 ## BUILD TOOLS
 - `rustup` installs and manages toolchain
@@ -358,8 +362,8 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
      - for enums compiler uses size of largest variant
-     - it's automatically implemented for types whos size is known at compile time
-- `Copy` - trait, value is always copied(memcpy, so direct bit by bit copy)
+     - it's automatically implemented for types whos size is known at compile time, very few types are not `Sized`
+- `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)
     - cannot be implemented on `Drop` types
     - these itmes are generally simple, have a known size, and allocated on the stack
     - they copy on new variable assignments vs tx of ownership `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
@@ -385,9 +389,15 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - Function item types and function pointers automatically implement the trait.
     - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
     - `Send`, `Sync`, `Unpin`, `UnwindSafe` are all autotraits
-- trait objects are fat pointers with both the object pointer and the vtable of methods
+- TRAIT OBJECT - a wrapping type that contains anything that implements the trait
+    - generally use a fat/smart pointer and the vtable of methods
     - for trait `Trait`, `Box<dyn Trait>` is a trait object
+        - even a ref, `&dyn Trait` is a trait object
     - compiles to single function that does a dispatch at runtime based on the object concrete type
+    - cannot create trait object for more than one trait directly: `&(dyn Trait1 + Trait2)`
+        - the way to achieve this is using a supertrait: `pub trait Trait1and2: Trait1 + Trait2 {}`, then `&dyn Trait1and2`
+        - compiler _could_ create a combined vtable of both traits, or fat pointers get fatter for each vtable, but supertrait works
+    - assoicated type traits wont work unless u specify a default `&dyn Trait1<assType = SomeType>`
 - associated type - a placeholder type that must be defined by the implementing struct/enum
     - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
     - why not generic trait? - can implement the trait many times (per generic param)
@@ -403,7 +413,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - e.g. `Box<dyn Fn() + Send + 'static>` aliased as `type Thunk = Box<dyn Fn() + Send + 'static>`
 - rust does not really support downcasting (can't `match` on a trait object's implementor types)
     - traits objects can't be downcast back to the original type with casting or coersion
-    - the `Any` trait can do this, it's type-safe downcasting on trait objects
+    - the `Any` trait with `unsafe` code can do this, it's downcasting on trait objects
     - one idomatic way is to use `enums` variants in place of the trait implementors
 - for `trait Trait {}`, a param of type `impl Trait` is basically syntax sugar for generic with trait bound `<T: Trait>`
     ```rust
@@ -422,9 +432,10 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - DST - dynamically sized types - https://doc.rust-lang.org/nomicon/exotic-sizes.html
     - types can only exist behind a fat/wide pointer
     - main cases of DST
-        - trait objects `dyn MyTrait` -> pointer has pointer to data and vtable
+        - trait objects `dyn MyTrait` -> pointer has pointer to data and pointer to vtable
         - slices(`[T]`), `str`
         - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
+    - vtable - each vtable for a type generally built at compile time
 
 ## CONCURRENCY
 - rust itself(lang/runtime) only implements native threads
