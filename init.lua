@@ -840,34 +840,36 @@ end
 ----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 SetLSPKeymaps = function()
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+
+    -- Lsp configuration commands
+    vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
+    vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
+    vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
+    vim.keymap.set("n", "gls", "<cmd>LspStop<CR>")
+    vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
+    vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
+    vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
+
+    -- actions
+    vim.keymap.set("n", "gh", vim.lsp.codelens.run, { desc = "codelens run" })
+    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "code action" })
+    vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "format"})
+    vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "rename"})
 
     -- `tab split` will open in new tab, default is open in current tab, no opt for this natively
         -- see https://github.com/scalameta/nvim-metals/discussions/381
     vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
-
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "implementation" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "references" })
     vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol, { desc = "document symbol" })
     vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, { desc = "workspace symbol" })
-    vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
-    vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
-    vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
-    vim.keymap.set("n", "glsp", "<cmd>LspStop<CR>")
-    vim.keymap.set("n", "glst", "<cmd>LspStart<CR>")
-
-    vim.keymap.set("n", "gjc", vim.lsp.codelens.run, { desc = "codelens run" })
-    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "code action" })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
-    vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "format"})
-    vim.keymap.set("n", "gh", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
-    vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "rename"})
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist, { desc = "setqflist" }) -- all workspace diagnostics
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
     vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
     vim.keymap.set("n", "gwb", vim.diagnostic.setloclist, { desc = "set loc list" }) -- buffer diagnostics only
-    vim.keymap.set("n", "gwt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
     vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
     vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
     vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
