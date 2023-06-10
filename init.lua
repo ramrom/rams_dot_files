@@ -52,7 +52,7 @@ vim.opt.expandtab = true        -- use spaces when tab is pressed
 -- AUTO COMPLETION
 vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
---- DEFAULT STATUS LINE
+--- STATUS LINE
 vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
 
@@ -65,7 +65,7 @@ vim.opt.listchars = {tab = '»_', trail = '.'}
 vim.cmd.highlight('WhiteSpace', 'ctermfg=8 guifg=DimGrey')
 
 -- use ripgrep for default vi grep
-vim.opt.grepprg='rg --vimgrep --follow'
+if vim.fn.executable('rg') == 1 then vim.opt.grepprg='rg --vimgrep --follow' end
 
 -- layout of files and dir in netrw file explorer
 vim.g.netrw_liststyle = 3
@@ -164,6 +164,21 @@ ToggleLSPDiagnosticsVirtualText = function()
         vim.diagnostic.config({ virtual_text = false, })
         print("disabling diagnostic virtual text")
     end
+end
+
+AutoAutoCompleteEnabled = true
+
+-- https://www.reddit.com/r/neovim/comments/rh0ohq/nvimcmp_temporarily_disable_autocompletion/
+function ToggleAutoAutoComplete()
+    local cmp = require('cmp')
+    if AutoAutoCompleteEnabled then
+        cmp.setup({ completion = { autocomplete = { require('cmp.types').cmp.TriggerEvent.TextChanged } } })
+        print('Autocomplete always display ON')
+    else
+        cmp.setup({ completion = { autocomplete = false } })
+        print('Autocomplete always display OFF')
+    end
+    AutoAutoCompleteEnabled = not AutoAutoCompleteEnabled
 end
 
 -- lazy.vim, if enabled = true module exists, and if cond = false it's not loaded and requiring will fail
@@ -527,7 +542,7 @@ LoadLuaLine = function()
             lualine_y = {'progress'},
             lualine_z = {'location'}
         },
-        inactive_sections = {
+        inactive_sections = {   -- inactive section means inactive windows
             lualine_c = {'filename'},
             lualine_x = {'location'},
         },
@@ -550,7 +565,7 @@ LoadTreeSitter = function()
             -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
         ignore_install = { "phpdoc" },
         highlight = {
-            enable = true,     -- `false` will disable the whole extension
+            enable = true,     -- `false` will isable the whole extension
             -- NOTE: names of the parsers and not the filetype. (for example if you want to
             -- disable highlighting for the `tex` filetype, you need to include `latex`, this is the name of the parser)
             disable = { "markdown" },
@@ -616,6 +631,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+
 LoadAutoComplete = function()
     local cmp = require 'cmp'
     cmp.setup {
@@ -660,7 +676,7 @@ LoadAutoComplete = function()
             { name = 'nvim_lsp' },
             { name = 'buffer' },
             { name = 'path' },
-            -- { name = 'luasnip' },
+            { name = 'luasnip' },
         },
     }
 end
@@ -845,6 +861,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "code action" })
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
     vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "format"})
+    vim.keymap.set("n", "gh", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
     vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "rename"})
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist, { desc = "setqflist" }) -- all workspace diagnostics
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
@@ -892,12 +909,12 @@ vim.opt.rtp:prepend(lazypath)
 
 
 require("lazy").setup({
+    'nvim-lua/plenary.nvim',
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
     { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
     'nvim-tree/nvim-web-devicons',
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
-    'nvim-lua/plenary.nvim',
     'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-repeat',
@@ -926,14 +943,17 @@ require("lazy").setup({
     { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
     { 'scalameta/nvim-metals',
         config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
-    { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-    { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
-    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy' },
-    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
-    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },
-    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },
     { 'mfussenegger/nvim-dap', config = LoadDAP },
     -- 'leoluz/nvim-dap-go',
+    { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
+    { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
+
+    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy' },
+    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
+    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
+    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
 
     -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     { 'glacambre/firenvim',
@@ -945,8 +965,6 @@ require("lazy").setup({
         end 
     },
     { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
-    { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
-    { 'godlygeek/tabular', event = "VeryLazy" },
     { "folke/which-key.nvim",
       event = "VeryLazy",
       init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
@@ -958,6 +976,8 @@ require("lazy").setup({
             "rcarriga/nvim-notify", -- optional notification view, noice will default to mini otherwise
         } 
     },
+    { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
+    { 'godlygeek/tabular', event = "VeryLazy" },
 })
 
 end     -- matched to if for firenvim loading
