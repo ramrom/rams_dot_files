@@ -146,10 +146,12 @@ ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_word_diff')
 end
 
-ClearLspLog = function()
-    -- TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
+-- TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
     -- also metals on osx is diff path
-    vim.cmd(':SilentRedraw cat /dev/null > ~/.local/state/nvim/lsp.log')
+    -- try to use https://neovim.io/doc/user/lsp.html#lsp-log - vim.lsp.log.get_filename(), cant find the log module in vim.lsp
+ClearLspLog = function()
+    local logpath = vim.lsp.get_log_path()
+    vim.cmd(':SilentRedraw cat /dev/null > ' .. logpath)
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
 
@@ -224,6 +226,11 @@ vim.g.mapleader = " "
 -- nnoremap <C-J> a<CR><Esc>k$
 -- nnoremap <CR> o<Esc>
 
+vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
+vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
+vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
+vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
+
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
@@ -254,11 +261,6 @@ vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
 vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
-
-vim.keymap.set("i", "<C-l>", "<Esc>")
-vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
-vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
-vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
 
 ---- COPY/PASTE to clipboard
 vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
@@ -841,7 +843,7 @@ end
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 SetLSPKeymaps = function()
 
-    -- Lsp configuration commands
+    -- LSP CONFIGURATION COMMANDS
     vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
@@ -850,12 +852,13 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
-    -- actions
+    -- ACTIONS
     vim.keymap.set("n", "gh", vim.lsp.codelens.run, { desc = "codelens run" })
     vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "code action" })
     vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "format"})
     vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "rename"})
 
+    -- ANALYSIS COMMANDS
     -- `tab split` will open in new tab, default is open in current tab, no opt for this natively
         -- see https://github.com/scalameta/nvim-metals/discussions/381
     vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
@@ -875,7 +878,7 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
     vim.keymap.set('n', 'gz', ' <cmd>lua vim.lsp.diagnostic.open_float()<CR>')
 
-    ---- DAP mappings
+    ---- DAP COMMANDS
     vim.keymap.set("n", "<leader>wc", [[<cmd>lua require"dap".continue()<CR>]])
     vim.keymap.set("n", "<leader>wr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
     vim.keymap.set("n", "<leader>wK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
