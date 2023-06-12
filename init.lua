@@ -1,6 +1,7 @@
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NEOVIM CONFIG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 -- ISSUE: firenvim lua not working in chrome
+    -- june11-23 - 0.9.0 fails to start in linux and osx (extension says neovim died), linux 0.7.2 works
 
 if not not vim.g.started_by_firenvim then
 -- if not vim.g.started_by_firenvim then
@@ -146,9 +147,8 @@ ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_word_diff')
 end
 
--- TODO: this hardcoded path is for OSX, on ubuntu it's diff path, find programatic way to find location
-    -- also metals on osx is diff path
-    -- try to use https://neovim.io/doc/user/lsp.html#lsp-log - vim.lsp.log.get_filename(), cant find the log module in vim.lsp
+-- NOTE jun'23, v0.9.1: https://neovim.io/doc/user/lsp.html#lsp-log has vim.lsp.log.get_filename(), but this method doesnt exist
+-- NOTE jun'23: still see logs in vim LspLog tab even if metal.log file(verified with cat) is cleared...
 ClearLspLog = function()
     local logpath = vim.lsp.get_log_path()
     vim.cmd(':SilentRedraw cat /dev/null > ' .. logpath)
