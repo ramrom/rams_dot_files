@@ -1,6 +1,5 @@
-if has('nvim-0.6.1')
-    " neovim in any browser edit window!
-endif
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'       " add/change/remove surrounding formatting to text-objects
@@ -21,7 +20,7 @@ let g:firenvim_config = {
             \ 'content': 'text',
             \ 'priority': 0,
             \ 'selector': 'textarea',
-            \ 'takeover': 'never',
+            \ 'takeover': 'always',
         \ },
     \ }
 \ }
