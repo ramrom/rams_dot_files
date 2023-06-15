@@ -3,6 +3,7 @@
 -- ISSUE: firenvim lua not working in chrome
     -- june11-23 - 0.9.0 fails to start in linux and osx (extension says neovim died), linux 0.7.2 works
 
+-- TODO: get this working, if i directly link firenvim.lua to init.lua, it works, but this doesnt
 if not not vim.g.started_by_firenvim then
 -- if not vim.g.started_by_firenvim then
     require('firenvim')
@@ -296,6 +297,7 @@ vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
+-- vim.keymap.set('n', '<C-e>', api.tree.,        opts('Up'))
 
 vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
@@ -555,6 +557,11 @@ LoadLuaLine = function()
         inactive_winbar = {},
         extensions = {}
     }
+end
+
+---------------------- NVIM-TREE CONFIG -------------------------------
+LoadNvimTree = function()
+    require("nvim-tree").setup() 
 end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
@@ -916,7 +923,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     'nvim-lua/plenary.nvim',
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
-    { 'nvim-tree/nvim-tree.lua', config = function() require("nvim-tree").setup() end },
+    { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree },
     'nvim-tree/nvim-web-devicons',
     { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },

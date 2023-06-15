@@ -52,6 +52,16 @@
     ("ls -al" #> new File("files.txt")).!
     ```
 
+## TYPE SYSTEM
+- generics are a compile time check, and suffer from type erasure during runtime on the JVM
+    ```scala
+    val l1 = List(1, 2, 3)
+    assert(l1.isInstanceOf[List[Int]], "l1 is a List[Int]")        // returns true, expected
+    assert(l1.isInstanceOf[List[String]], "l1 is a List[String]")  // returns true!
+
+    val seq : Seq[Int] = Seq(1,2,3) // compiler validates generics at compile time
+    val seq : Seq = Seq(1,2,3)   // this is what JVM runtime actually has, generic type info is erased
+    ```
 
 ## COLLECTIONS
 ### LIST/ARRAY
@@ -222,11 +232,9 @@ m += ("foo", 1)    // appending an item for mutable Map
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
     - `IO` type and "non-effecting" types
  fs2 - streaming and concurrency, build on cats-effects and cats
-
-## AKKA
+### AKKA
 - one of akka streams main goals is to implement backpressure
-
-## SLICK
+### SLICK
 - print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
 
 ### RANDOM

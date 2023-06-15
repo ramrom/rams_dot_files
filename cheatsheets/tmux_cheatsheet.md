@@ -18,7 +18,8 @@
     - `tmux list-buffers` will show content of buffers
 - tmux info - get detailed info about terminal capabilities
 - tmux list-keys
-    - show keybindings, 3.1 and above, "?" does not show all keybindings...
+    - show keybindings
+    - NOTE: 3.1 and above, "?" does not show all keybindings...
 - 2 methods to multi-key bindings: https://stackoverflow.com/questions/25294283/bindings-with-key-sequences
 - change to a preset layout: `tmux select-layout even-horizontal`
 

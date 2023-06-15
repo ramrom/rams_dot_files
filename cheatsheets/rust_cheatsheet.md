@@ -17,7 +17,7 @@
 ### DOCS
 - https://www.rust-lang.org/
     - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
-    - walkthrough of concepts: https://doc.rust-lang.org/stable/book/title-page.html
+    - the rust book (walkthrough of core concepts): https://doc.rust-lang.org/stable/book/title-page.html
     - technical reference: https://doc.rust-lang.org/reference/introduction.html
 - rust in Y minutes: https://learnxinyminutes.com/docs/rust/
 - `rustup doc` - open local copy of docs in browser
@@ -465,10 +465,18 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - `async fn() -> T { ... }` is basically `fn() -> Future<T> { async { ... } }`
 - `Future`
     - `future::ready(1)` -> completed future, similar to scala `Future.complete(1)`
+    - futures contain a "state machine", each state being a chunk of work seperated by an await
+        - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points
+            - they can't be on the stack, b/c awaits are like returns
     - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
         - async traits are hard b/c Futures don't have a know size
-            - futures contain a "state machine" of future's data, and that makes their size unkown
+            - future can have all sorts of data and that makes their size unkown
         - tokio spawn gives future to executor to schedule
+    - if a `Future` holds non-`Send` data then it cant be moved to another worker thread in executor
+    - stacktraces - trace will show origin upon the thread it's executing on, this might be different than thread that spawned it
+    - rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context
+    - std lib `Mutex` will block thread if it cant aquire lock, deadlock risk here, so best to use when critical section is short
+        - otherwise use async mutex like tokio mutex, which dont block thread, but async mutex have higher overhead
 - `select!`, sortasimilar to golang `select`, it runs many futures concurrently
     - the first future that completes will execute it's cases' code, and `select!` block finishes without waiting for other futures
     - `default` -> case runs if no futures are ready
