@@ -132,6 +132,14 @@ C - make selected dir node the new root node
 - `zf` will open a fzf prompt to fuzzy search quickfix items
     - `ctrl-t` and x/v will open in new tab or vert/hor split
 
+### NVIM-TREE
+- `g?` - to list commands
+- `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
+- `o` - open with window picker, if multiple windows open, select a labeled (e.g. "A" "B" "C" for 3windows) window
+- `O` - open no window picker, in the main window
+- `q` - close (help menu, or nvim tree sidebar)
+- `f`/`F` - filter / clear filer
+
 ### TREE-SITTER
 - a general semantic file parser, available to neovim as a plugin
 - intended to be better than the regex-based systems that IDEs (including vim) use
