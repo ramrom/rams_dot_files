@@ -295,6 +295,7 @@ vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
 vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
+---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
 -- vim.keymap.set('n', '<C-e>', api.tree.,        opts('Up'))
@@ -557,6 +558,17 @@ LoadLuaLine = function()
         inactive_winbar = {},
         extensions = {}
     }
+end
+
+---------------------- WHICH-KEY CONFIG -------------------------------
+LoadWhichKey = function()
+    local wk = require("which-key")
+    -- descriptions for prefix keys in popup menu
+    wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
+    wk.register( { g = { name = "git stuff" } }, { prefix = "<leader>" } )
+    wk.register( { w = { name = "github links" } }, { prefix = "<leader>" } )
+    wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
+    wk.register( { w = { name = "diagnostics" } }, { prefix = "g" } )
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
@@ -980,6 +992,7 @@ require("lazy").setup({
     { "folke/which-key.nvim",
       event = "VeryLazy",
       init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
+      config = LoadWhichKey,
       opts = { }
     },
     { "folke/noice.nvim", event = "VeryLazy", opts = { },

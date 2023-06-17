@@ -19,6 +19,10 @@
     - most peeps say the first jar in the classpath will get loaded
     - https://stackoverflow.com/questions/19339670/java-two-jars-in-project-with-same-class/19340327
     - https://www.geeksforgeeks.org/classloader-in-java/
+### JVM FLAGS
+- `XMX` - max memory heap size program can occupy
+- `XMS` - size of initial heap memory when program starts
+- `XSS` - stack size of each thread
 
 ## BUILD TOOLS
 - uses ant, maven, gradle
