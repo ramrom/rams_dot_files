@@ -654,6 +654,10 @@ LoadFireNvim = function()
     }
 end
 
+LoadLuaSnip = function()
+    require("luasnip.loaders.from_vscode").lazy_load()
+end
+
 --------------------------------------------------------------------------------------------------------
 -------------------------------- LSP CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -671,7 +675,7 @@ LoadAutoComplete = function()
         completion = { autocomplete = false, },   -- dont show autocomplete menu be default
         snippet = {
             expand = function(args)
-                luasnip.lsp_expand(args.body)
+                require('luasnip').lsp_expand(args.body)
             end,
         },
         mapping = cmp.mapping.preset.insert({
@@ -984,12 +988,15 @@ require("lazy").setup({
     { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
     { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
 
-    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy' },
+    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy', },
     { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
     { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
     { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
+
+    -- SNIPPETS
+    { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, dependencies = { "rafamadriz/friendly-snippets" }, event = 'VeryLazy' },
+    { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },  -- be able to add luasnip as completion source for nvim-cmp
+    { "rafamadriz/friendly-snippets" },     -- actual snippet library
 
     -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     { 'glacambre/firenvim',
