@@ -671,6 +671,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 LoadAutoComplete = function()
     local cmp = require 'cmp'
+
     cmp.setup {
         completion = { autocomplete = false, },   -- dont show autocomplete menu be default
         snippet = {
@@ -714,6 +715,18 @@ LoadAutoComplete = function()
             { name = 'buffer' },
             { name = 'path' },
             { name = 'luasnip' },
+        },
+        formatting = {
+            format = require('lspkind').cmp_format({
+                mode = "symbol_text",
+                menu = ({
+                    buffer = "[Buffer]",
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[LuaSnip]",
+                    nvim_lua = "[Lua]",
+                    latex_symbols = "[Latex]",
+                })
+            }),
         },
     }
 end
@@ -988,10 +1001,12 @@ require("lazy").setup({
     { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
     { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
 
+    -- AUTOCOMPLETE
     { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy', },
     { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
     { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
     { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
+    { 'onsails/lspkind.nvim' },     -- show formatting info in menu, icons and more source info
 
     -- SNIPPETS
     { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, dependencies = { "rafamadriz/friendly-snippets" }, event = 'VeryLazy' },
