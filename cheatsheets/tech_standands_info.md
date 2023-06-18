@@ -83,6 +83,7 @@
 - 50 foot MAX reliable length, really shouldn't ever exceed 25ft
     - but there are options like optical and wireless hdmi
 - standard does not mandate versions be printed on cables, so only way to know is to test them...
+- CEC (consumer electronics control) - protcol to control HDMI devices
 - standards
     - 1.0 - supports 5Gbps
     - 1.1 - supports 5Gbps
@@ -96,12 +97,18 @@
 - displayport cable shouldnt exceed 10 feet
 - usbc supports usb 2.0 to 4.0
 - usb a/b supports usb 1.0 to 3.1
-- 2.0 - 480Mbps
+- 2.0 - 480Mbps, can deliver 2.5watts power, has 4 wires
 - 3.x
+    - adds 5 more wires, still backwards compatible with usb2
     - 3.0(superspeed) - 5Gbps
     - 3.1gen1 - 5Gbps, 3.1gen2 - 10Gbps(uses 128b/132b)
     - using usb-c: 3.2gen1 - 10Gbps, 3.2gen2 - 20Gbps
 - 4.x - suports 40Gbps
+
+## FIBER OPTICS
+- single-mode - small diameter, generally b/w 8-10micrometers
+- TOSLINK - used generally for digital audio, uses plastic optical fiber, very cheap, can be 100x thicker than single-mode
+    - generally half-duplex, toshiba did have a full-duplex
 
 ## SATA
 - SATA 1.0: 1.5 Gb/s, 150 MB/s

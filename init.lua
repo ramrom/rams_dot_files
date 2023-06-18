@@ -625,7 +625,7 @@ LoadTreeSitter = function()
     vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 end
 
-------------------------- indent blankline -----------------------------------------------
+------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
     require("indent_blankline").setup {
         show_end_of_line = true,
@@ -637,7 +637,7 @@ LoadIndentBlankLine = function()
 end
 
 
---------------- FireNvim config --------------------------------------------------------------
+--------------- FIRENVIM CONFIG --------------------------------------------------------------
 LoadFireNvim = function()
     vim.g.firenvim_config = {
         globalSettings = { alt = "all" },
@@ -654,6 +654,7 @@ LoadFireNvim = function()
     }
 end
 
+------------------------------- LUASNIP -----------------------------------------------------------
 LoadLuaSnip = function()
     require("luasnip.loaders.from_vscode").lazy_load()
 end
@@ -669,6 +670,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 
+-------------------------------- NVIM-CMP -------------------------------------------
 LoadAutoComplete = function()
     local cmp = require 'cmp'
 
@@ -689,26 +691,6 @@ LoadAutoComplete = function()
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = true,
             },
-            -- ['<Tab>'] = cmp.mapping(function(fallback)
-            -- ['<C-n>'] = cmp.mapping(function(fallback)
-            --     if cmp.visible() then
-            --         cmp.select_next_item()
-            --     elseif luasnip.expand_or_jumpable() then
-            --         luasnip.expand_or_jump()
-            --     else
-            --         fallback()
-            --     end
-            -- end, { 'i', 's' }),
-            -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-            -- ['<C-p>'] = cmp.mapping(function(fallback)
-            --     if cmp.visible() then
-            --         cmp.select_prev_item()
-            --     elseif luasnip.jumpable(-1) then
-            --         luasnip.jump(-1)
-            --     else
-            --         fallback()
-            --     end
-            -- end, { 'i', 's' }),
         }),
         sources = {
             { name = 'nvim_lsp' },
@@ -1011,7 +993,7 @@ require("lazy").setup({
     -- SNIPPETS
     { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, dependencies = { "rafamadriz/friendly-snippets" }, event = 'VeryLazy' },
     { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },  -- be able to add luasnip as completion source for nvim-cmp
-    { "rafamadriz/friendly-snippets" },     -- actual snippet library
+    { "rafamadriz/friendly-snippets", event = 'VeryLazy' },     -- actual snippet library
 
     -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     { 'glacambre/firenvim',
