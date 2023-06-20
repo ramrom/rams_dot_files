@@ -472,7 +472,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points
             - they can't be on the stack, b/c awaits are like returns
         - compiler generally creates a structs/enum definitions for each future and it's child futures
-            - this allows for one big allocation of known size
+            - this call tree of cobbled futures allows for one big allocation of known size
         - a task is root level structure that a future belongs to
             - a executor will place a task on the run queue to be polled when a child future is awoken
     - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset

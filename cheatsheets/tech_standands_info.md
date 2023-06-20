@@ -494,6 +494,7 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - martin fowler ruby scripting to do oauth 2.0 with google: https://martinfowler.com/articles/command-line-google.html
 - OpenID Connect(OIDC) - built on top of oauth 2.0, includes identity stuff, has an IdP
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
+- TOTP - time based one time password
 - passwordless auth - umbrella term for any tech that doesnt requires entering a password or knowledge based secret
 - Passkey 
     - a passwordless auth type, digital cred stored in OS or browser(2022 chrome supports it), can also live in a physical device

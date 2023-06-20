@@ -10,7 +10,8 @@
 
 ## NEOVIM
 - nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
-- sept2020 good video on why lua is great and a great choice for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
+- sept2020 good video on why lua is good for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
+    - by core nvim maintainer [TJ Devries](https://www.google.com/search?q=tj+devries)
 - 2019 video on why nvim is awesome by core maintainer: https://www.youtube.com/watch?v=Bt-vmPC_-Ho
     - famous quote that inspired neovim from vim core dev
         > Q: How can the community ensure that the Vim project succeeds for the foreseeable future?
@@ -178,6 +179,7 @@ C - make selected dir node the new root node
 - `vim -u NONE`     - start without running vimrc
 - `vim -S sess.vim` - load sess.vim session file
 - `vim foo bar`     - foo and bar buffers
+- `vim -e`          - start in Ex mode
 - `vim -o  foo bar` - foo and bar in diff windows
 - `vim -p  foo bar` - foo and bar in diff tabs
 - `vim -V  foo`     - verbose output
@@ -253,13 +255,15 @@ C - make selected dir node the new root node
 ## COMMAND MODE
 - run two commands in one line with `|`
     - `:echo "hi" | echo "hi again"`
+- Command-line window
+    - command-line-window, edit as if in insert/normal
+      then can yank old command history
+      in insert of cur line, write command and hit enter
 C-h - delete last char
 C-w - delete last word
 C-b - goto beg of line
 C-e - goto end of line
-C-f - command-line-window, edit as if in insert/normal
-      then can yank old command history
-      in insert of cur line, write command and hit enter
+C-f - enter command line window for command history (also `q:` from normal mode)
 - record command line output to file
     - `:redir > foofile`, then `:somecommandthatoutputs`, `:anothercommndthatoupts`, then `:redir end`
 bd 3, closes buffer # 3
@@ -304,6 +308,9 @@ C-O - execute command return to insert mode
 C-N - next match in autocomplete
 C-P - last match in autocomplete
 C-X - subcommand mode used with autocomplete stuff
+    - C-x C-l - autocomplete menu on existing lines
+    - C-x C-k - dictionary word completion
+    - C-x C-f - file name completion
 C-G k - move cursor up one
 C-G j - move cursor down one
 C-R i - insert from reg i

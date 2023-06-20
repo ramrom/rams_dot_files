@@ -23,3 +23,5 @@
 
 ## GREAT LIBS
 - https://github.com/Textualize/rich - add rich text ANSI colors and formats to text
+- [NumPy](https://numpy.org/) - extremely popular math lib used by everyone in data science for ML
+- [Pandas](https://pandas.pydata.org/) - data analysis and manipulation tool, particularly time series and numerical tables
