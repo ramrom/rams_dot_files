@@ -132,6 +132,16 @@ String bar = (3 < 10) ? "A" : "B";
     - no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
     - dont have to be exhaustive
 
+## MAJOR LIBS/FRAMEWORKS
+### NETTY
+- async non-blocking event-driven network-centric framework, does HTTP and other protocols
+    - uses the reactor pattern
+    - uses java NIO channels - non-blocking IO
+### NIO
+- new input/output - collection of java APIs for heavy IO ops
+### REACTIVE STREAMS
+- really a standard for async stream processing, also supports non-blocking backpressure
+- akka streams, spring framework v5, play framework, kafka, cassandra, elasticsearch all use it
 
 ## HISTORY
 - java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),

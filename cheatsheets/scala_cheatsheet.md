@@ -173,6 +173,8 @@ m += ("foo", 1)    // appending an item for mutable Map
 
 
 ## PLAY FRAMEWORK
+- supports async
+    - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
 - docs: https://www.playframework.com/documentation
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 - 2.8
@@ -226,7 +228,7 @@ m += ("foo", 1)    // appending an item for mutable Map
     println(a)
     ```
 
-## MAJOR LIBS
+## OTHER MAJOR LIBS
 - cats: https://typelevel.org/cats/datatypes/ior.html
     - lots of useful FP types
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io

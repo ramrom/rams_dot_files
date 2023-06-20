@@ -463,15 +463,22 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - e.g. tokio has async version of all these IO operations
 - `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
     - `async fn() -> T { ... }` is basically `fn() -> Future<T> { async { ... } }`
+    - executor runs Futures to completion, will "poll" future to make progress
+    - future has a "wake" func to let executor know when it's ready to be polled
 - `Future`
     - `future::ready(1)` -> completed future, similar to scala `Future.complete(1)`
-    - futures contain a "state machine", each state being a chunk of work seperated by an await
+    - Internal representation
+        - futures contain a "state machine", each state being a chunk of work seperated by an await
         - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points
             - they can't be on the stack, b/c awaits are like returns
+        - compiler generally creates a structs/enum definitions for each future and it's child futures
+            - this allows for one big allocation of known size
+        - a task is root level structure that a future belongs to
+            - a executor will place a task on the run queue to be polled when a child future is awoken
     - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
         - async traits are hard b/c Futures don't have a know size
             - future can have all sorts of data and that makes their size unkown
-        - tokio spawn gives future to executor to schedule
+        - tokio `spawn` gives future to executor to schedule
     - if a `Future` holds non-`Send` data then it cant be moved to another worker thread in executor
     - stacktraces - trace will show origin upon the thread it's executing on, this might be different than thread that spawned it
     - rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context

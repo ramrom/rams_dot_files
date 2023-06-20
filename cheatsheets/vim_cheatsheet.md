@@ -139,6 +139,8 @@ C - make selected dir node the new root node
 - `O` - open no window picker, in the main window
 - `q` - close (help menu, or nvim tree sidebar)
 - `f`/`F` - filter / clear filer
+- `E` - expand all
+- `W` - collapse
 
 ### TREE-SITTER
 - a general semantic file parser, available to neovim as a plugin

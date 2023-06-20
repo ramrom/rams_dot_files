@@ -494,11 +494,17 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - martin fowler ruby scripting to do oauth 2.0 with google: https://martinfowler.com/articles/command-line-google.html
 - OpenID Connect(OIDC) - built on top of oauth 2.0, includes identity stuff, has an IdP
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
+- passwordless auth - umbrella term for any tech that doesnt requires entering a password or knowledge based secret
+- Passkey 
+    - a passwordless auth type, digital cred stored in OS or browser(2022 chrome supports it), can also live in a physical device
+    - by 2023 many password managers support it, like dashlane and nordpass, soon bitwarden
+    - often the passkey store is secured behind a biometric key
 - WebAuthN
     - good site - https://webauthn.io/
     - attestation - https://medium.com/webauthnworks/webauthn-fido2-demystifying-attestation-and-mds-efc3b3cb3651
-    - great b/c it's highly phishing resistant
-    - backwards compatible and successor to FIDO U2F(universal 2nd factor)
+    - doesnt no require password (is a passwordless auth type)
+    - uses public key cryptography under the hood
     - any hardware/software that implements CTAP(client to authenticator protocol) can be used
         - so an authneticator can be pure software (using trusted execution env of cpu)
-    - doesnt no require password
+    - great b/c it's highly phishing resistant
+    - backwards compatible and successor to FIDO U2F(universal 2nd factor)
