@@ -162,6 +162,7 @@ C - make selected dir node the new root node
 - blob-view: <leader>gh
 - blame-view: <leader>gb
 - repo-view: <leader>go
+
 ### TABULAR
 - `:Tabularize /| `
     - autodetect lines above and below and align on `|` char
@@ -170,11 +171,11 @@ C - make selected dir node the new root node
     - can accept any regex, not just simpe chars like `|`
 - ` :'<,'>Tabularize /:\zs `
     - \z is lookforward, align by the space char after the `:` char
+
 ### CTRLP
 - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
-
-### VIM STARTING AND DIAGNOSTICS
+## VIM STARTING AND DIAGNOSTICS
 - `vim -u somevimrc` - specify a vimrc file (otherwise ~/.vimrc)
 - `vim -u NONE`     - start without running vimrc
 - `vim -S sess.vim` - load sess.vim session file

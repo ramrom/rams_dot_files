@@ -1084,7 +1084,7 @@ if not vim.env.VIM_NOPLUG then
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim",
             event = "VeryLazy",
-            init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
+            init = function() vim.o.timeout = true vim.o.timeoutlen = 600 end,
             config = LoadWhichKey,
             opts = { }
         },

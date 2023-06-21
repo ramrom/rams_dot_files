@@ -18,6 +18,7 @@ go doc -src fmt.Println
 - https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
 - goroutines pre-empted only at safe points, at function calls
     - many of these are inserted before/after function calls by compiler
+    - yield points are injected in parts of code to allow runtime to pre-empt to ensure fair scheduling
 - GC generally done by concurrently running dedicated goroutines
 
 # GO MOD
