@@ -160,6 +160,22 @@ ClearLspLog = function()
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
 
+CycleNvimTreeSortBy = function()
+    if NvimTreeConfig.sort_by == 'name' then
+        NvimTreeConfig.sort_by = 'extension'
+        print("nvim-tree: sorting by extension")
+    elseif NvimTreeConfig.sort_by == 'extension' then
+        NvimTreeConfig.sort_by = 'modification_time'
+        print("nvim-tree: sorting by modification time")
+    else
+        NvimTreeConfig.sort_by = 'name'
+        print("nvim-tree: sorting by name")
+    end
+
+    require('nvim-tree').setup(NvimTreeConfig)
+    vim.cmd 'NvimTreeFindFileToggle'
+end
+
 NvimTreeDynamicWidthEnabled = true
 
 ToggleNvimTreeDynamicWidth = function()
@@ -892,7 +908,8 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 ---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
-vim.keymap.set('n', '<leader>gt', ToggleNvimTreeDynamicWidth, { desc = 'toggle dynamic window size to static' })
+vim.keymap.set('n', '<leader>gt', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
+vim.keymap.set('n', '<leader>gu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
 
 vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
