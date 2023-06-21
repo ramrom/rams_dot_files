@@ -911,6 +911,7 @@ vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
 vim.keymap.set('n', '<leader>gt', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
 vim.keymap.set('n', '<leader>gu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
 
+---------- CHEATS + NOTES
 vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
 vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
@@ -921,7 +922,8 @@ vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 
-vim.keymap.set("n", "<C-Space>", ":Lazy<CR>")
+vim.keymap.set("n", "<leader>gj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
+vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
