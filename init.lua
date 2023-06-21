@@ -310,7 +310,7 @@ vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
 vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
--- SMARTER INDENT
+-- FASTER INDENT
 vim.keymap.set('n', '<C-n>', '>>')
 vim.keymap.set('n', '<C-p>', '<<')
 vim.keymap.set('v', '<C-n>', '<S->>gv')
@@ -319,7 +319,6 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 ---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
--- vim.keymap.set('n', '<C-e>', api.tree.,        opts('Up'))
 
 vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
