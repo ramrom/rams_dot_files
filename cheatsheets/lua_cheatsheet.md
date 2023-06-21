@@ -60,3 +60,21 @@
     - all arguments are collected into a table, accessible as hidden param named `arg`
 - global variables evaluate to `nil` if not initialized
 - if function has single argument and it's a literal string or table, then no parens are needed
+
+## HELPFUL CODE
+- deep query a table, handling nils
+    ```lua
+    -- t = {a = {b = {c = 5}}}
+    -- lookup(t, 'a', 'x', 'b') -- Returns nil
+    -- lookup(t, 'a', 'b', 'c') -- Returns 5
+
+    function lookup(t, ...)
+        for _, k in ipairs{...} do
+            t = t[k]
+            if not t then
+                return nil
+            end
+        end
+        return t
+    end
+    ```

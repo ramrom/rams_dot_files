@@ -16,6 +16,10 @@ vim.opt.backup = false                 -- no backup files
 vim.opt.writebackup = false            -- only in case you don't want a backup file while editing
 vim.opt.swapfile = false               -- no swap files
 
+-- per nvim-tree docs, it's highly reccomended to disable netrw
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
 vim.opt.mouse=null                     -- turn off all mouse support by default
 
 --- MAIN
@@ -184,7 +188,20 @@ function ToggleAutoAutoComplete()
     AutoAutoCompleteEnabled = not AutoAutoCompleteEnabled
 end
 
--- lazy.vim, if enabled = true module exists, and if cond = false it's not loaded and requiring will fail
+-- e.g. LazyPluginExists('lualine.nvim')
+LazyPluginExists = function(name)
+    return require("lazy.core.config").plugins[name] ~= nil
+end
+
+LazyPluginLoaded = function(name)
+    if not LazyPluginExists(name) then return false end
+    return require("lazy.core.config").plugins[name]._.loaded ~= nil
+end
+
+-- NOTE: lazy.vim, if enabled = true module exists, and if cond = false it's not loaded
+    -- need to set lazy's config for plugins cond to true before you can require it
+-- NOTE: vimscript plugins wont have a lua module (aka no `require` invocation), e.g. fzf.vim
+-- usage: Lua.moduleExists('lualine')
 local Lua = {}
 function Lua.moduleExists(name)
     if package.loaded[name] then
@@ -215,10 +232,8 @@ vim.g.mapleader = " "
         -- <Leader>a/w/l/x'
             -- a is earmarked for smart script run or test run
         -- <Leader><Leader>    (all except for h/g/q/r)
-        -- c-m/c-n/c-g/c-s/c-q
+        -- c-m/c-g/c-s/c-q
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
-        -- c-p
-        -- c-space
         -- ; " semicolon repeats last f/F motions
         -- ," ; in reverse direction
     -- INSERT MODE
@@ -294,6 +309,12 @@ vim.keymap.set('n', '<leader>gc', '<cmd>:Commits<CR>')
 vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
 vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
+
+-- SMARTER INDENT
+vim.keymap.set('n', '<C-n>', '>>')
+vim.keymap.set('n', '<C-p>', '<<')
+vim.keymap.set('v', '<C-n>', '<S->>gv')
+vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
 ---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
@@ -435,10 +456,10 @@ end
 
 ----------------------------- Rhubarb --------------------------------------------------
 LoadRhubarb = function()
-    vim.keymap.set('n', '<leader>wc', '<cmd>:GBrowse!<CR>')
-    vim.keymap.set('v', '<leader>wc', [[:'<,'>GBrowse!<CR>]])
-    vim.keymap.set('n', '<leader>wo', '<cmd>:GBrowse<CR>')
-    vim.keymap.set('v', '<leader>wo', [[:'<,'>GBrowse<CR>]])
+    vim.keymap.set('n', '<leader>wc', '<cmd>:GBrowse!<CR>', { desc = 'copy to clipboard' })
+    vim.keymap.set('v', '<leader>wc', [[:'<,'>GBrowse!<CR>]], { desc = 'copy to clipboard' })
+    vim.keymap.set('n', '<leader>wo', '<cmd>:GBrowse<CR>', { desc = 'open in browser' })
+    vim.keymap.set('v', '<leader>wo', [[:'<,'>GBrowse<CR>]], { desc = 'open in browser'})
 end
 
 ---------------------------------- GIT SIGNS ----------------------------------------------
@@ -459,32 +480,12 @@ LoadGitSigns = function()
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
-LuaTabLineTabIndicator = function() return "tabs" end
-LuaTabLineBufferIndicator = function() return "buffers" end
-
-vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
-    callback = function(args)
-        local tabinfo = vim.fn.gettabinfo()
-        if #tabinfo == 1 then 
-            local config = require('lualine').get_config()
-            config.tabline.lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
-            -- config.tabline.lualine_a = { LuaLineBufferComponentConfig }
-            config.tabline.lualine_z = { }
-            require('lualine').setup(config)
-            -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
-        elseif #tabinfo == 2 then
-            local config = require('lualine').get_config()
-            config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
-            config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
-            require('lualine').setup(config)
-            -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
-        end
-    end,
-})
-
 MyCustomLuaLineFlags = function() 
     if not DisplayDiagVirtualText then return [[ VTXTOFF ]] else return "" end
 end
+
+LuaTabLineTabIndicator = function() return "tabs" end
+LuaTabLineBufferIndicator = function() return "buffers" end
 
 LuaLineTabComponentConfig = 
     {
@@ -513,6 +514,28 @@ LuaLineBufferDimComponentConfig =
         mode = 4,
         buffers_color = { inactive = { fg = 'grey', bg = 'black' }, active = 'grey', },
     }
+
+SetupLuaLineTabLine = function()
+    vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
+        callback = function(args)
+            local tabinfo = vim.fn.gettabinfo()
+            if #tabinfo == 1 then 
+                local config = require('lualine').get_config()
+                config.tabline.lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
+                -- config.tabline.lualine_a = { LuaLineBufferComponentConfig }
+                config.tabline.lualine_z = { }
+                require('lualine').setup(config)
+                -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
+            elseif #tabinfo == 2 then
+                local config = require('lualine').get_config()
+                config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
+                config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
+                require('lualine').setup(config)
+                -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
+            end
+        end,
+    })
+end
 
 LoadLuaLine = function()
     require('lualine').setup {
@@ -558,14 +581,17 @@ LoadLuaLine = function()
         inactive_winbar = {},
         extensions = {}
     }
+
+    SetupLuaLineTabLine()
 end
 
 ---------------------- WHICH-KEY CONFIG -------------------------------
 LoadWhichKey = function()
     local wk = require("which-key")
     -- descriptions for prefix keys in popup menu
+    wk.register( { g = { name = "LSP + more" } })
     wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
-    wk.register( { g = { name = "git stuff" } }, { prefix = "<leader>" } )
+    wk.register( { g = { name = "git stuff + more" } }, { prefix = "<leader>" } )
     wk.register( { w = { name = "github links" } }, { prefix = "<leader>" } )
     wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
     wk.register( { w = { name = "diagnostics" } }, { prefix = "g" } )
@@ -585,8 +611,14 @@ LoadNvimTree = function()
         vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
     end
 
-    require("nvim-tree").setup( { on_attach = on_attach, } )
+    require("nvim-tree").setup { 
+        on_attach = on_attach,
+        -- sort_by = 'extension',
+        view = { width = { min = 10, max = 40, padding = 1 } },
+        renderer = { full_name = true } -- if highlighted item's full path is longer than nvim window width, render into next window
+    }
 end
+
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
@@ -625,6 +657,12 @@ LoadTreeSitter = function()
     vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 end
 
+------------------------- NOICE -----------------------------------------------
+LoadNoice = function()
+    require('noice').setup {
+        -- cmdline = { enabled = true, view = 'cmdline_popup' }
+    }
+end
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
     require("indent_blankline").setup {
@@ -692,12 +730,17 @@ LoadAutoComplete = function()
                 select = true,
             },
         }),
+        window = {
+            -- completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
+        },
         sources = {
             { name = 'nvim_lsp' },
             { name = 'buffer' },
             { name = 'path' },
             { name = 'luasnip' },
         },
+
         formatting = {
             format = require('lspkind').cmp_format({
                 mode = "symbol_text",
@@ -942,83 +985,88 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+if not vim.env.VIM_NOPLUG then
+    require("lazy").setup({
+        'nvim-lua/plenary.nvim',
+        { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
+        { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
+        'nvim-tree/nvim-web-devicons',
+        { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
+            build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+        'tpope/vim-commentary',
+        'tpope/vim-surround',
+        'tpope/vim-repeat',
 
-require("lazy").setup({
-    'nvim-lua/plenary.nvim',
-    { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
-    { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree },
-    'nvim-tree/nvim-web-devicons',
-    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
-        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
-    'tpope/vim-commentary',
-    'tpope/vim-surround',
-    'tpope/vim-repeat',
+        --- COLORSCHEMES
+        -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
+        -- { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
+        { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
 
-    --- COLORSCHEMES
-    -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
-    -- { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
-    { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
+        --- GIT
+        { 'tpope/vim-fugitive', event = 'VeryLazy' },
+        { 'tpope/vim-rhubarb', -- GBrowse handler for github, open gh link in browser or copy to clipboard
+                config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
+        { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
-    --- GIT
-    'tpope/vim-fugitive',
-    { 'tpope/vim-rhubarb', -- GBrowse handler for github, open gh link in browser or copy to clipboard
-            config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
-    { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
+        --- FUZZY FIND
+        { 'junegunn/fzf', build = ":call fzf#install()" },
+        { 'junegunn/fzf.vim', config = LoadFZF },
+        { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
 
-    --- FUZZY FIND
-    { 'junegunn/fzf', build = ":call fzf#install()" },
-    { 'junegunn/fzf.vim', config = LoadFZF },
-    { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
+        -- MARKDOWN
+        { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
+        { 'preservim/vim-markdown', config = LoadVimMarkdown },
 
-    -- MARKDOWN
-    { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
-    { 'preservim/vim-markdown', config = LoadVimMarkdown },
+        ----- LSP STUFF
+        { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
+        { 'scalameta/nvim-metals',
+            config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
+        { 'mfussenegger/nvim-dap', config = LoadDAP },
+        -- 'leoluz/nvim-dap-go',
+        { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
+        { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
 
-    ----- LSP STUFF
-    { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
-    { 'scalameta/nvim-metals',
-        config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
-    { 'mfussenegger/nvim-dap', config = LoadDAP },
-    -- 'leoluz/nvim-dap-go',
-    { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-    { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
+        -- AUTOCOMPLETE
+        { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy', },
+        { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
+        { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
+        { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
+        { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
 
-    -- AUTOCOMPLETE
-    { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy', },
-    { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
-    { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
-    { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
-    { 'onsails/lspkind.nvim' },     -- show formatting info in menu, icons and more source info
+        -- SNIPPETS
+        { 'L3MON4D3/LuaSnip', 
+                config = LoadLuaSnip, event = 'VeryLazy' },
+                dependencies = { "rafamadriz/friendly-snippets" },  -- sometimes snippets dont load, this forces dep
+        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },  -- be able to add luasnip as completion source for nvim-cmp
+        { "rafamadriz/friendly-snippets", event = 'VeryLazy' },     -- actual snippet library
 
-    -- SNIPPETS
-    { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, dependencies = { "rafamadriz/friendly-snippets" }, event = 'VeryLazy' },
-    { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },  -- be able to add luasnip as completion source for nvim-cmp
-    { "rafamadriz/friendly-snippets", event = 'VeryLazy' },     -- actual snippet library
-
-    -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-    { 'glacambre/firenvim',
-        -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
-        config = LoadFireNvim,
-        build = function()
-            require("lazy").load({ plugins = "firenvim", wait = true })
-            vim.fn["firenvim#install"](0)
-        end 
-    },
-    { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
-    { "folke/which-key.nvim",
-      event = "VeryLazy",
-      init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
-      config = LoadWhichKey,
-      opts = { }
-    },
-    { "folke/noice.nvim", event = "VeryLazy", opts = { },
-        dependencies = {
-            "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "rcarriga/nvim-notify", -- optional notification view, noice will default to mini otherwise
-        } 
-    },
-    { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
-    { 'godlygeek/tabular', event = "VeryLazy" },
-})
+        -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+        { 'glacambre/firenvim',
+            -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
+            config = LoadFireNvim,
+            build = function()
+                require("lazy").load({ plugins = "firenvim", wait = true })
+                vim.fn["firenvim#install"](0)
+            end 
+        },
+        { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
+        { "folke/which-key.nvim",
+            event = "VeryLazy",
+            init = function() vim.o.timeout = true vim.o.timeoutlen = 1000 end,
+            config = LoadWhichKey,
+            opts = { }
+        },
+        { "folke/noice.nvim", event = "VeryLazy", opts = { },
+            config = LoadNoice,
+            cond = not vim.env.NO_NOICE,
+            dependencies = {
+                "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+                "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
+            } 
+        },
+        { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
+        { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
+    })
+end
 
 end     -- matched to if for firenvim loading
