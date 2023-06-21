@@ -160,6 +160,21 @@ ClearLspLog = function()
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
 
+NvimTreeDynamicWidthEnabled = true
+
+ToggleNvimTreeDynamicWidth = function()
+    if NvimTreeDynamicWidthEnabled then
+        NvimTreeConfig.view = { width = { min = 30, max = 30, padding = 1 } }
+    else
+        NvimTreeConfig.view = { width = { min = 10, max = 50, padding = 1 } }
+    end
+
+    NvimTreeDynamicWidthEnabled = not NvimTreeDynamicWidthEnabled
+    require('nvim-tree').setup(NvimTreeConfig)
+    vim.cmd 'NvimTreeFindFileToggle'
+end
+
+
 DisplayDiagVirtualText = true
 
 ToggleLSPDiagnosticsVirtualText = function()
@@ -221,134 +236,6 @@ function Lua.moduleExists(name)
         return false
     end
 end
-
---------------------------------------------------------------------------------------------------------
--------------------------------- MAPS --------------------------------------------------------------
------------------------------------ -------------------------------------------------------------------
-vim.g.mapleader = " "
-
---- TODO: Prime open real estate for normal mode!
-    -- NORMAL MODE
-        -- <Leader>a/w/l/x'
-            -- a is earmarked for smart script run or test run
-        -- <Leader><Leader>    (all except for h/g/q/r)
-        -- c-m/c-g/c-s/c-q
-        -- c-x (opposite of c-a, i clobber c-a for tmux meta)
-        -- ; " semicolon repeats last f/F motions
-        -- ," ; in reverse direction
-    -- INSERT MODE
-        -- c-s, c-space
--- TODO: i think these maps are probably useful
--- nnoremap <C-J> a<CR><Esc>k$
--- nnoremap <CR> o<Esc>
-
-vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
-vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
-vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
-vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
-
------- WINDOW RESIZE/MOVE/CREATE
-local default_opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
-vim.keymap.set("n", "<Right>", ":vertical resize -1<CR>", default_opts)
-vim.keymap.set("n", "<Up>", ":resize -1<CR>", default_opts)
-vim.keymap.set("n", "<Down>", ":resize +1<CR>", default_opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
-vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
-
------- TAB MOVE/NAV/CREATE
-vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
-vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
-vim.keymap.set("n", "<leader>m", ":tabm<Space>")
-vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
-vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
-vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
-
----- SMART QUITTING
-vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
-vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
-vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
-
------- SMART WRITING
-vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
-vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
-vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
-
----- COPY/PASTE to clipboard
-vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
-vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
-vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
-
---------- FZF STUFF
-vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
-vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
-vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
-vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
-vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
-vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
-vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
-vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
-vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
-vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
-vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
-vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
-vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
-
---------- GIT STUFF
-vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
-vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
-vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
-vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
-vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
-vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
-vim.keymap.set('n', '<leader>gc', '<cmd>:Commits<CR>')
-vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
-vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
-vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
-
--- FASTER INDENT
-vim.keymap.set('n', '<C-n>', '>>')
-vim.keymap.set('n', '<C-p>', '<<')
-vim.keymap.set('v', '<C-n>', '<S->>gv')
-vim.keymap.set('v', '<C-p>', '<S-<>gv')
-
----------- NVIM TREE
-vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
-vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
-
-vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
-vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
-vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
-vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
-vim.keymap.set('n', '<leader>cn', '<cmd>:Files $MY_NOTES_DIR<cr>')
-vim.keymap.set('n', '<leader>cw', '<cmd>:Files $MY_WORK_DIR<cr>')
-vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
-vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
-vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
-
-vim.keymap.set("n", "<C-Space>", ":Lazy<CR>")
-vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
-vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
-vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
-vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
-vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
-vim.keymap.set('n', '<leader>go', CycleColorColumn, { desc = "cycle color column" } )
-vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
-
-vim.api.nvim_create_autocmd(
-    "Filetype",
-    { pattern = 'markdown',
-      callback = function()
-        vim.keymap.set('n', '<leader>gg', [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]])
-      end,
-})
-
--- Quickly switch between up to 9 vimtabs
-for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 
 ----------------------------------------------------------------------------------------------------------
 ---------------------------------- PLUGIN CONFIG ----------------------------------------------------------
@@ -597,27 +484,25 @@ LoadWhichKey = function()
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
-LoadNvimTree = function()
-    local function on_attach(bufnr)
-        local api = require('nvim-tree.api')
+NvimTreeConfig = 
+    { 
+        on_attach = function(bufnr)
+            local api = require('nvim-tree.api')
 
-        local function opts(desc)
-            return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
+            local function opts(desc)
+                return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+            end
 
-        api.config.mappings.default_on_attach(bufnr)
+            api.config.mappings.default_on_attach(bufnr)
 
-        vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
-    end
-
-    require("nvim-tree").setup { 
-        on_attach = on_attach,
+            vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
+        end,
         -- sort_by = 'extension',
         view = { width = { min = 10, max = 40, padding = 1 } },
         renderer = { full_name = true } -- if highlighted item's full path is longer than nvim window width, render into next window
     }
-end
 
+LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
@@ -909,6 +794,135 @@ LoadLSPConfig = function()
     LoadGolangLSP()
     LoadKotlinLSP()
 end
+
+--------------------------------------------------------------------------------------------------------
+-------------------------------- MAPS --------------------------------------------------------------
+----------------------------------- -------------------------------------------------------------------
+vim.g.mapleader = " "
+
+--- TODO: Prime open real estate for normal mode!
+    -- NORMAL MODE
+        -- <Leader>a/w/l/x'
+            -- a is earmarked for smart script run or test run
+        -- <Leader><Leader>    (all except for h/g/q/r)
+        -- c-m/c-g/c-s/c-q
+        -- c-x (opposite of c-a, i clobber c-a for tmux meta)
+        -- ; " semicolon repeats last f/F motions
+        -- ," ; in reverse direction
+    -- INSERT MODE
+        -- c-s, c-space
+-- TODO: i think these maps are probably useful
+-- nnoremap <C-J> a<CR><Esc>k$
+-- nnoremap <CR> o<Esc>
+
+vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
+vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
+vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
+vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
+
+------ WINDOW RESIZE/MOVE/CREATE
+local default_opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
+vim.keymap.set("n", "<Right>", ":vertical resize -1<CR>", default_opts)
+vim.keymap.set("n", "<Up>", ":resize -1<CR>", default_opts)
+vim.keymap.set("n", "<Down>", ":resize +1<CR>", default_opts)
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
+vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
+
+------ TAB MOVE/NAV/CREATE
+vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
+vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
+vim.keymap.set("n", "<leader>m", ":tabm<Space>")
+vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
+vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
+vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
+
+---- SMART QUITTING
+vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
+vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
+vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
+
+------ SMART WRITING
+vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
+vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
+vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
+
+---- COPY/PASTE to clipboard
+vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
+vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
+vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
+
+--------- FZF STUFF
+vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
+vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
+vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
+vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
+vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
+vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
+vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
+vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
+vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
+vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
+vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
+vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
+
+--------- GIT STUFF
+vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
+vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
+vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
+vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
+vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
+vim.keymap.set('n', '<leader>gc', '<cmd>:Commits<CR>')
+vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
+vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
+vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
+
+--------- FASTER INDENT
+vim.keymap.set('n', '<C-n>', '>>')
+vim.keymap.set('n', '<C-p>', '<<')
+vim.keymap.set('v', '<C-n>', '<S->>gv')
+vim.keymap.set('v', '<C-p>', '<S-<>gv')
+
+---------- NVIM TREE
+vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
+vim.keymap.set('n', '<leader>gt', ToggleNvimTreeDynamicWidth, { desc = 'toggle dynamic window size to static' })
+
+vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
+vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
+vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
+vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
+vim.keymap.set('n', '<leader>cn', '<cmd>:Files $MY_NOTES_DIR<cr>')
+vim.keymap.set('n', '<leader>cw', '<cmd>:Files $MY_WORK_DIR<cr>')
+vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
+vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
+
+vim.keymap.set("n", "<C-Space>", ":Lazy<CR>")
+vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
+vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
+vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
+vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
+vim.keymap.set('n', '<leader>go', CycleColorColumn, { desc = "cycle color column" } )
+vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
+
+vim.api.nvim_create_autocmd(
+    "Filetype",
+    { pattern = 'markdown',
+      callback = function()
+        vim.keymap.set('n', '<leader>gg', [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]])
+      end,
+})
+
+-- Quickly switch between up to 9 vimtabs
+for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 
 
 ----------- LSP KEYBINDINGS --------------------------------------------

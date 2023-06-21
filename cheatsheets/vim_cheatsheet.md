@@ -311,6 +311,7 @@ C-X - subcommand mode used with autocomplete stuff
     - C-x C-l - autocomplete menu on existing lines
     - C-x C-k - dictionary word completion
     - C-x C-f - file name completion
+    - C-x C-] - tag completion
 C-G k - move cursor up one
 C-G j - move cursor down one
 C-R i - insert from reg i
