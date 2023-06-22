@@ -171,7 +171,7 @@
     - `let r = RefCell::new(1); let r1 = r.borrow_mut(); let r2 = r.borrow_mut(); *r1 = 2; *r2 = 3`
         - will panic in runtime!, no comile time error
 ### LIFETIMES
-- references are tracked by lifetimes and lifetime annotatinos are needed in cases in order to help the compiler/borrow-checker
+- references are tracked by lifetimes and lifetime annotations are needed in cases in order to help the compiler/borrow-checker
 - a parameters with an annotation has a input lifetimes, a return values have output lifetime
 - output lifetimes cant outlive input lifetimes, that's a dangling pointer/reference
 - `'static` lifetime means reference lives for the entire duration of program
@@ -370,6 +370,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - e.g. `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
         - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
+    - deallocating at end of scope is similar to RAII(resource aquisition is initialization), used in c++
     - compiler will essentially insert the `drop` on a `Drop` type at the end of it's scope
     - trait has one method `drop` that you can't call explicitly on a `Drop` type
         - otherwise compiler cant gaurantee memory safety, double drops or dangling pointers

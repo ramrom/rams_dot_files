@@ -1,6 +1,7 @@
 # LUA
 - devhits: https://devhints.io/lua
 - home page - https://www.lua.org/home.html
+- 5.3 ref guide: https://www.lua.org/manual/5.3/
 - programming in lua is great guide - https://www.lua.org/pil/
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"

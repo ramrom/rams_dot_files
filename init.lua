@@ -1,11 +1,8 @@
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NEOVIM CONFIG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
--- ISSUE: firenvim lua not working in chrome
-    -- june11-23 - 0.9.0 fails to start in linux and osx (extension says neovim died), linux 0.7.2 works
-
 -- TODO: get this working, if i directly link firenvim.lua to init.lua, it works, but this doesnt
 if not not vim.g.started_by_firenvim then
--- if not vim.g.started_by_firenvim then
+-- if true then
     require('firenvim')
 else
 
@@ -219,13 +216,16 @@ function ToggleAutoAutoComplete()
     AutoAutoCompleteEnabled = not AutoAutoCompleteEnabled
 end
 
--- e.g. LazyPluginExists('lualine.nvim')
-LazyPluginExists = function(name)
-    return require("lazy.core.config").plugins[name] ~= nil
+-- "Enabled" here means enabled = true and cond = true
+-- e.g. LazyPluginEnabled('lualine.nvim')
+LazyPluginEnabled = function(name)
+    local l = require('lazy.core.config')
+    if l.plugins[name] == nil then return false end  -- if enabled = false, plugin entry here wont be defined
+    if l.plugins[name].cond == false then return false else return true end
 end
 
 LazyPluginLoaded = function(name)
-    if not LazyPluginExists(name) then return false end
+    if not LazyPluginEnabled(name) then return false end
     return require("lazy.core.config").plugins[name]._.loaded ~= nil
 end
 
@@ -553,6 +553,15 @@ LoadTreeSitter = function()
         },
     }
 
+    -- june'23 treesitter doesnt support groovy
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'groovy', 
+        callback = function() 
+            vim.opt_local.foldmethod="indent"
+            vim.opt_local.foldexpr=""
+        end
+    })
+
     vim.opt.foldmethod='expr'
     vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 end
@@ -585,8 +594,8 @@ LoadFireNvim = function()
                 content  = "text",
                 priority = 0,
                 selector = "textarea",
-                takeover = "always"
-                -- takeover = "never"
+                -- takeover = "always"
+                takeover = "never"
             }
         }
     }
@@ -743,7 +752,21 @@ LoadDAP = function()
     }
 end
 
----------------- RUST ---------------------------
+---------------- RUST LSP ---------------------------
+LoadRustTools = function()
+    require('rust-tools').setup({
+      server = {
+        on_attach = function(_, bufnr)
+          -- FIXME: these keymaps dont get set....
+          -- Hover actions
+          vim.keymap.set("n", "<leader>ab", rt.hover_actions.hover_actions, { buffer = bufnr })
+          -- Code action groups
+          vim.keymap.set("n", "<Leader>aa", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end,
+      },
+    })
+end
+
 LoadRustLSP = function()
     local rust_on_attach = function(client)
         require'completion'.rust_on_attach(client)
@@ -806,7 +829,10 @@ LoadKotlinLSP = function()
 end
 
 LoadLSPConfig = function()
-    LoadRustLSP()
+    if not LazyPluginEnabled('rust-tools.nvim') then 
+        print("lazy.vim: rust tools disabled, loading lsp-config for rust support")
+        LoadRustLSP() 
+    end
     LoadGolangLSP()
     LoadKotlinLSP()
 end
@@ -1056,7 +1082,10 @@ if not vim.env.VIM_NOPLUG then
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        { 'j-hui/fidget.nvim', config = function() require"fidget".setup{} end },
+        { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
+        { 'simrat39/rust-tools.nvim',
+                config = LoadRustTools,
+                dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
 
         -- AUTOCOMPLETE
         { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy', },

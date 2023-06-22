@@ -189,6 +189,7 @@ C - make selected dir node the new root node
 - `vim --startuptime outputfile` - record startup time and record to file
 - `:checkhealth` - neovim only, report on errors/warnings for all modules
 - `:messages` - see history of messages (usually shown in command window)
+    - `:messages clear` will clear messages
 
 
 ### VIMSCRIPT / VimL
