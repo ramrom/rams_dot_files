@@ -190,6 +190,8 @@ C - make selected dir node the new root node
 - `:checkhealth` - neovim only, report on errors/warnings for all modules
 - `:messages` - see history of messages (usually shown in command window)
     - `:messages clear` will clear messages
+- `:functions` - print list of defined functions
+- `:command` - print list of defined commands
 
 
 ### VIMSCRIPT / VimL

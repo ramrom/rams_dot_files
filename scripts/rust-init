@@ -1,0 +1,8 @@
+#!/bin/sh
+
+[ -z $1 ] && echo "need arg for script name" && exit 1
+
+mkdir $1
+cd $1
+cargo init
+nvim src/main.rs

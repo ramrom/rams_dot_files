@@ -1084,6 +1084,7 @@ if not vim.env.VIM_NOPLUG then
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
         { 'simrat39/rust-tools.nvim',
+                -- cond = false,
                 config = LoadRustTools,
                 dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
 

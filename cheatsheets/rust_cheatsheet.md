@@ -449,6 +449,11 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - the tried green threads in rust 1.0, but runtime was becoming bloated
 - rust intention is to stay a low level systems language with minimal runtime
 - https://stackoverflow.com/questions/29428318/why-did-rust-remove-the-green-threading-model-whats-the-disadvantage#29430403
+- `Sync` and `Send` are built into rust, (most of the rest is in std lib)
+    - `Sync` trait, these types allows many references to same value in different threads
+        - type `T` is `Sync` if immutable ref `&T` is `Send`
+        - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
+    - `Send` trait, these types are safe to transfer ownership to different thread
 ### THREADS - STD LIB
 - `let handle = thread::spawn( ... )` method to create new thread, takes a closure arg
     - `handle` is type `JoinHandle`, can call join `handle.join()`, which blocks to wait for completion
@@ -456,45 +461,43 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - use `move` to transfer ownership, `thread::spawn(move ...)`
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
 ### FUTURES/ASYNC
+- run many concurrent tasks on a small number of OS threads
+- are inert - the make progress only when polled
+- zero cost - can use them without heap allocation or dynamic dispatch
+- `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
+    - `async fn() -> T { ... }` is basically `fn() -> Future<T> { async { ... } }`
+    - executor runs Futures to completion, will "poll" future to make progress
+        - tokio `spawn` gives future to executor to schedule
+    - future has a "wake" callback func to let executor know when it's ready to be polled
+- jon gjengset good vid - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
 - https://docs.rs/futures/latest/futures/
     - cooperative multitasking, tasks, `Futures` yield at points to let others run
         - versus bare threads, which are preemtive, OS is responsible stop/schedule them, bare threads dont have "yield" points
     - Futures run on some executor, there are many types, single-threaded, multi-threaded, etc.
     - calling blocking operations like read from a regular file or network socket might block, need to use async versions of those
         - e.g. tokio has async version of all these IO operations
-- `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
-    - `async fn() -> T { ... }` is basically `fn() -> Future<T> { async { ... } }`
-    - executor runs Futures to completion, will "poll" future to make progress
-    - future has a "wake" func to let executor know when it's ready to be polled
-- `Future`
-    - `future::ready(1)` -> completed future, similar to scala `Future.complete(1)`
-    - Internal representation
-        - futures contain a "state machine", each state being a chunk of work seperated by an await
-        - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points
-            - they can't be on the stack, b/c awaits are like returns
-        - compiler generally creates a structs/enum definitions for each future and it's child futures
-            - this call tree of cobbled futures allows for one big allocation of known size
-        - a task is root level structure that a future belongs to
-            - a executor will place a task on the run queue to be polled when a child future is awoken
-    - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
-        - async traits are hard b/c Futures don't have a know size
-            - future can have all sorts of data and that makes their size unkown
-        - tokio `spawn` gives future to executor to schedule
-    - if a `Future` holds non-`Send` data then it cant be moved to another worker thread in executor
-    - stacktraces - trace will show origin upon the thread it's executing on, this might be different than thread that spawned it
-    - rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context
-    - std lib `Mutex` will block thread if it cant aquire lock, deadlock risk here, so best to use when critical section is short
-        - otherwise use async mutex like tokio mutex, which dont block thread, but async mutex have higher overhead
+- Futures are similar to javascript promises or scala future
+    - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
+- rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context
+- **FUTURE** internal representation
+    - futures contain a "state machine", each state being a chunk of work seperated by an await
+    - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points
+        - they can't be on the stack, b/c awaits are like returns
+    - compiler generally creates a structs/enum definitions for each future and it's child futures
+        - this call tree of cobbled futures allows for one big allocation of known size
+    - a task is root level structure that a future belongs to
+        - a executor will place a task on the run queue to be polled when a child future is awoken
+- async traits are hard b/c Futures don't have a know size
+    - future can have all sorts of data and that makes their size unkown
+- if a `Future` holds non-`Send` data then it cant be moved to another worker thread in executor
+- stacktraces - trace will show origin upon the thread it's executing on, this might be different than thread that spawned it
+- std lib `Mutex` will block thread if it cant aquire lock, deadlock risk here, so best to use when critical section is short
+    - otherwise use async mutex like tokio mutex, which dont block thread, but async mutex have higher overhead
 - `select!`, sortasimilar to golang `select`, it runs many futures concurrently
     - the first future that completes will execute it's cases' code, and `select!` block finishes without waiting for other futures
     - `default` -> case runs if no futures are ready
     - `complete` -> if all futures are completed, this runs
-- similar to javascript promises or scala future
-    - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
-- run many concurrent tasks on a small number of OS threads
-- futures
-    - are inert - the make progress only when polled
-    - zero cost - can use them without heap allocation or dynamic dispatch
+- `future::ready(1)` -> completed future, similar to scala `Future.complete(1)`
 ### CHANNELS
 - in std lib - one way thread safe "pipes"
 - multiple producers single consumer (mpsc), `let (tx, rx) = mpsc::channel()`
@@ -505,11 +508,6 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - use `try_recv` for non-blocking, returns `Result<T, E>` immediately
     - `let tx2 = tx.clone()` - create a second producer
 - channel closed if receiving or sending side is dropped
-- `Sync` and `Send` are built into rust, (most of the rest is in std lib)
-    - `Sync` trait, these types allows many references to same value in different threads
-        - type `T` is `Sync` if immutable ref `&T` is `Send`
-        - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
-    - `Send` trait, these types are safe to transfer ownership to different thread
 #### SYNC WAIT GROUP
 - like golang WaitGroup
 - std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
@@ -578,6 +576,10 @@ let s2 = String::from("hello");  // type String is mutable
 - [actix](https://actix.rs/) - popular web framework, uses actor model
 - [axum](https://github.com/tokio-rs/axum) - popular web framework
 - [serde](https://serde.rs/) - awesome serial/deserialization framework
+    - `Serializer`/`Deserializer` traits define how parse data into/out-of the serde data model
+        - deserialization uses the visitor pattern, centered around the `Visitor` trait
+    - `Serialize`/`Deserialize` traits defined on struct to convert from/into any serde data model
+        - `Serialize` muse use methods on `Serializer` (same for `Deserialize` and `Deserializer`)
 - [rayon](https://docs.rs/rayon/latest/rayon/) - lib for making sequential computations parralel (e.g. parrallel iterators)
 - [yew](https://yew.rs) - /awesome front end framework (compiles to webassembly)
     - similar to react architecture, has the conecpt of components
