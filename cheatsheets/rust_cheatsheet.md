@@ -486,6 +486,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - calling blocking operations like read from a regular file or network socket might block, need to use async versions of those
         - e.g. tokio has async version of all these IO operations
 - Futures are similar to javascript promises or scala future
+    - scala futures are eager, cant be cancelled, use a callback style (like javascript promises) with `map`/`flatMap`
     - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
 - rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context
 - **FUTURE** internal representation

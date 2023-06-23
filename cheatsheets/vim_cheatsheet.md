@@ -7,6 +7,7 @@
     - *NOT* totally backwards compatible with old VimL
 - SHaDa - SHared Data file - remember things b/w sessions
     - command line hist, search string hist, marks, global vars, buffer list, non-empty registers, and more
+- vim codebase is basically single-threaded and sychronous, core vim code can only run in main loop
 
 ## NEOVIM
 - nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
@@ -17,16 +18,11 @@
         > Q: How can the community ensure that the Vim project succeeds for the foreseeable future?
         > Keep me alive.            -  Bram Moolenaar
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
-- plenary.nvim - core set of neovim lua libs
-    - provides an async framework, it uses lua coroutines and libuv for async IO
-- coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
-- neovim-lsp - neovim's built in lsp client, written in lua
-- nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
-    - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-- nvim-metals - full metals plugin that uses nvim's builtin lsp client
-    - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
-- nvim-dap - plugin to support debug adapter protocol
-- good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
+- `vim.cmd` or `vim.api` can't be done async
+    - see https://www.reddit.com/r/neovim/comments/13kgl3f/how_can_i_run_a_vimcmd_asynchronously/
+    - this is b/c these are wrappers around core vim code that inherently is synchronous on the main thread
+    - if you tried to run this in `vim.loop`, it won't work (or in `plenary.job` which wraps libuv)
+        - errors like `vimL function must not be called in a lua loop callback`
 ### VERSION HISTORY
  https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
@@ -69,6 +65,22 @@
     - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
 
 ## PLUGINS
+- good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
+
+### PLENARY.NVIM 
+- core set of neovim lua libs
+- provides an async framework, it uses lua coroutines and libuv for async IO
+- `plenary.job` lets you run shell command in async job
+    - `sync()` to block main thread, or `start()` for async/background
+
+### LSP
+- coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
+- neovim-lsp - neovim's built in lsp client, written in lua
+- nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
+    - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+- nvim-metals - full metals plugin that uses nvim's builtin lsp client
+    - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
+- nvim-dap - plugin to support debug adapter protocol
 
 ### NVIM LAZY
 - pure lua plugin manager, bit faster than packer
@@ -175,7 +187,7 @@ C - make selected dir node the new root node
 ### CTRLP
 - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
-## VIM STARTING AND DIAGNOSTICS
+## STARTING VIM
 - `vim -u somevimrc` - specify a vimrc file (otherwise ~/.vimrc)
 - `vim -u NONE`     - start without running vimrc
 - `vim -S sess.vim` - load sess.vim session file
@@ -185,15 +197,38 @@ C - make selected dir node the new root node
 - `vim -p  foo bar` - foo and bar in diff tabs
 - `vim -V  foo`     - verbose output
     - has many level, see `:help vbs`
-- `:scriptnames` shows all scripts that were run, including plugin's scripts
 - `vim --startuptime outputfile` - record startup time and record to file
+- `vim -V9myVim.log` - start vim at debug level 9 and write logs to `myVim.log`
+- :args   - show arg list that vim was invoked with
+
+## DIAGNOSTICS / INTROSPECT / DEFINITIONS
+- `:scriptnames` shows all scripts that were run, including plugin's scripts
 - `:checkhealth` - neovim only, report on errors/warnings for all modules
-- `:messages` - see history of messages (usually shown in command window)
-    - `:messages clear` will clear messages
 - `:functions` - print list of defined functions
 - `:command` - print list of defined commands
 - `:Notifications` - neovim, print `notify` notifications (slightly different form messages)
     - e.g. `vim.notify('a notif')` will print a notification
+- :hi  - spit out all highlighting rules
+- :hi clear - reset highlighting
+- :syntax - spits out current syntax rules
+    - force set syntax highlight to ruby: `set syntax=ruby`
+- `:echo $SOME_ENV_VAR` - output value of a environment variable
+- `:filter *pattern* let g:`
+    - works on `let`, `set`, `map`, `hi` and `fun`
+    - **NOT** `syn` or `autocmd` though...
+- `verbose filter *Diff* hi`  - all Diff highlight rules and sources
+- `:verbose nmap <C-j>`  - plugin/custom mapping normal C-j
+- `:verbose set fo?`
+    - will show fo(formatoptions)
+    - verbose to tell u what last set it
+- `:autocmd` - print all autocmd definitions
+    - `:autocmd BufEnter` - print just `BufEnter` autocmds
+### LOGS / MESSAGES
+- `:messages` - see history of runtime messages (usually shown in command window)
+    - `:messages clear` will clear messages
+    - fzf's Command to fuzzy search em!
+- `:echo errmsg` - shows last error message
+
 
 
 ### VIMSCRIPT / VimL
@@ -203,12 +238,9 @@ C - make selected dir node the new root node
     if exists('g:some_global_var') | echo "hi" | endif
 
 
+/Users/smittap6/.vimrc
 ### MISC COMMANDS AND INFO
 - so $VIMRUNTIME/syntax/hitest.vim
-- c-x before c-n autocomplete search only in current file
-- c-x c-f find file at current path, c-x c-] use tags
-- <c-w>f - goto filename undercursor in new window
-- <c-w>gf - in new tab
 - 100G or 100gg - goes to line 100 like :100<CR> in command
 - "120gg3yy -  yank lines 20-23 into reg 1
 - :20,23y a<CR> - without moving cursor into reg a
@@ -225,7 +257,6 @@ C - make selected dir node the new root node
 - `ga` -> show character encoding under cursor
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
 - utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
-- vi -p foo bar, open file foo and bar in tabs
 - :vsp or :vs filename, open file in vertical split
 - :sp filename, horizontal split
 - :mkview foo  - vimscript that saves view(tab) state
@@ -234,12 +265,8 @@ C - make selected dir node the new root node
 - TIP: once a buffer autoreloads, you can still undo
 
 
-### LOGS / MESSAGES
-- `:messages` - in command mode will show list of runtime messages
-- `:echo errmsg` - shows last error message
-- `vim -V9myVim.log` - start vim at debug level 9 and write logs to `myVim.log`
-
-### HELP
+## HELP
+:help keyword - open help for keyword
 :h index.txt basically has comprehensive default mappings
 :help shell<Tab> - tab complete a help topic
 :helpgrep pattern - find all help docs matchin g`pattern`
@@ -270,39 +297,23 @@ C - make selected dir node the new root node
     - `:echo "hi" | echo "hi again"`
 - Command-line window
     - command-line-window, edit as if in insert/normal
+        - from normal mode: `q:` - edit command history, `q/` - edit search history, `q?` - serach history reverse
       then can yank old command history
       in insert of cur line, write command and hit enter
-C-h - delete last char
-C-w - delete last word
-C-b - goto beg of line
-C-e - goto end of line
-C-f - enter command line window for command history (also `q:` from normal mode)
+- Keymaps
+    - C-h - delete last char
+    - C-w - delete last word
+    - C-b - goto beg of line
+    - C-e - goto end of line
+    - C-f - enter command line window for command history (also `q:` from normal mode)
 - record command line output to file
     - `:redir > foofile`, then `:somecommandthatoutputs`, `:anothercommndthatoupts`, then `:redir end`
-bd 3, closes buffer # 3
-:command - spit out all usr defined commands
-    - fzf's Command to fuzzy search em!
-:hi  - spit out all highlighting rules
-:hi clear - reset highlighting
-:syntax - spits out current syntax rules
-    - force set syntax highlight to ruby: `set syntax=ruby`
-- `:echo $SOME_ENV_VAR` - output value of a environment variable
-- `:filter *pattern* let g:`
-    - works on `let`, `set`, `map`, `hi` and `fun`
-    - **NOT** `syn` or `autocmd` though...
-- `verbose filter *Diff* hi`  - all Diff highlight rules and sources
-:verbose nmap <C-j>  - plugin/custom mapping normal C-j
-:verbose set fo?
-    - will show fo(formatoptions)
-    - verbose to tell u what last set it
-:scriptnames  - show vim source files loaded
-:args   - show arg list that vim was invoked with
-:help keyword - open help for keyword
-:saveas file - save file as
-:close - close current window
-:new    - open new window and new buffer
-:e #    - open last opened file
-:@:     - run the last command run
+- bd 3, closes buffer # 3
+- :saveas file - save file as
+- :close - close current window
+- :new    - open new window and new buffer
+- :e #    - open last opened file
+- :@:     - run the last command run
 
 
 ## INSERT MODE
@@ -367,6 +378,8 @@ C-Q - start block-visual, some terminals stty start signal
 C-] - open tag in new buffer
 C-^ - open last editted file
 . - repeat last change, doesn't include motions(e.g. h/j/k/l) or commands that dont make changes
+- <c-w>f - goto filename undercursor in new window
+- <c-w>gf - in new tab
 
 ### G COMMANDS (NORMAL MODE)
 gf   - edit filename undercursor

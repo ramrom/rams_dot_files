@@ -61,6 +61,19 @@
     - all arguments are collected into a table, accessible as hidden param named `arg`
 - global variables evaluate to `nil` if not initialized
 - if function has single argument and it's a literal string or table, then no parens are needed
+- iterate through array-like tables, use `ipairs`, i is index: `for i,v in ipairs(t) do body end`
+- iterate through record-like tables, use `pairs`: `for k,v in pairs(t) do body end`
+- pretty print a table
+    - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
+- tables 
+    ```lua
+    a = {}              - {}
+    table.insert(a,1)  -- {1}
+    table.insert(a,3)  -- {1, 3}
+    a["k"] = 4         -- {1, 3, "k": 4 }
+    a[10] = {1,2}     -- {1, 3, "k": 4, 10: {1,2} }
+    a(2)            -- returns 3
+    ```
 
 ## HELPFUL CODE
 - deep query a table, handling nils
