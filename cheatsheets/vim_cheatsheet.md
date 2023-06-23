@@ -171,6 +171,7 @@ C - make selected dir node the new root node
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 
 ### VIM-GH-LINE
+- *NOTE* vim-rhubarb also supports this functionality
 - blob-view: <leader>gh
 - blame-view: <leader>gb
 - repo-view: <leader>go
@@ -200,6 +201,8 @@ C - make selected dir node the new root node
 - `vim --startuptime outputfile` - record startup time and record to file
 - `vim -V9myVim.log` - start vim at debug level 9 and write logs to `myVim.log`
 - :args   - show arg list that vim was invoked with
+- neovim supports https://neovim.io/doc/user/editorconfig.html .editorconfig files
+    - disable with `vim.g.editorconfig = false` in init file
 
 ## DIAGNOSTICS / INTROSPECT / DEFINITIONS
 - `:scriptnames` shows all scripts that were run, including plugin's scripts
@@ -263,6 +266,7 @@ C - make selected dir node the new root node
 - :source foo  - load a view
 - NEAT: visual select, then `:sort` to sort alphabetically
 - TIP: once a buffer autoreloads, you can still undo
+- `input` function can take user input and store in var
 
 
 ## HELP

@@ -67,6 +67,9 @@ vim.opt.list = true
 vim.opt.listchars = {tab = '»_', trail = '.'}
 vim.cmd.highlight('WhiteSpace', 'ctermfg=8 guifg=DimGrey')
 
+-- disable editorconfig file support (https://neovim.io/doc/user/editorconfig.html)
+vim.g.editorconfig = false
+
 -- use ripgrep for default vi grep
 if vim.fn.executable('rg') == 1 then vim.opt.grepprg='rg --vimgrep --follow' end
 
@@ -254,15 +257,53 @@ function Lua.moduleExists(name)
 end
 
 RunAction = function(arg)
-    if arg == 1 then
+    if arg == "a" then
         -- vim.cmd(':! ls')
         -- vim.cmd(':silent ! whoami')
-        local out = vim.api.nvim_exec2(':!ls', { output = true })
-        print(vim.inspect(out.output))
+        -- local out = vim.api.nvim_exec2(':!ls', { output = true })
+        -- print(vim.inspect(out.output))
+
+        -- h = vim.loop.spawn('touch', { args = { 'foo' } })
+        h = vim.loop.spawn('tmux', { args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' } })
+    elseif arg == "b" then
+        if vim.bo.filetype == "rust" then
+            vim.cmd(':VtrSendCommandToRunner! cargo build')
+        end
     else
-        -- local out = vim.api.nvim_exec2(':!tmux split-window && echo hi', { output = true })
-        local out = vim.api.nvim_exec2(':!sleep 5 && touch bar &', { output = true })
-        print(vim.inspect(out.output))
+        local Job = require'plenary.job'
+
+        vim.loop.spawn('tmux', { args = { 'display-panes' } })
+        local pane_selection = vim.fn.input("Pane Number: ")
+
+        local panes = {}
+        Job:new({
+            command = 'tmux',
+            args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' },
+            -- cwd = '/usr/bin',
+            env = { PATH = vim.env.PATH },
+            on_exit = function(j, return_val)
+                if return_val ~= 0 then
+                    print("failure: tmux list-panes return_val not zero!")
+                end
+                -- vim.cmd(':echo "hi"')  -- will fail, vim.cmd cant be run in lua loop callback
+                panes = j:result()
+            end,
+        }):sync()       -- do start() for async
+
+        local pane_name
+        for _, i in ipairs(panes) do
+            local r = vim.fn.split(i,",")
+            if pane_selection == r[1] then
+                pane_name = r[2]
+            end
+        end
+        if pane_name == nil then
+            print("pane number " .. pane_selection .. " not found!")
+        else
+            -- let g:VtrCreatedRunnerPaneName="p1"  -- specify pane name for runner pane
+            print("VtrCreatedRunnerPaneName set to: " .. pane_name)
+            vim.g.VtrCreatedRunnerPaneName = pane_name
+        end
     end
 end
 
@@ -874,8 +915,9 @@ vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
-vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction(1)<cr>")
-vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction(2)<cr>")
+vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>")
+vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('b')<cr>")
+vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
@@ -1141,6 +1183,7 @@ if not vim.env.VIM_NOPLUG then
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
             } 
         },
+        'christoomey/vim-tmux-runner',
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     })
