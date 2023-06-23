@@ -106,12 +106,11 @@
     - use `break` conditions internally to terminate
     - use `continue` to skip to next iteration
 - `while bool_expre { ... }` - while loops
-- `for_iter` can yield any of `T`, `&T` or `&mut T`, use `iter` or `iter_mut` for explicit refs
 - for loops
     ```rust
         let foo = vec![1,2];
 
-        for i in foo { println!("{i}"); }  // passes ownership, foo becomes invalid
+        for i in foo { println!("{i}"); }  // passes ownership, same as i.into_iter() foo becomes invalid
 
         for i in foo.iter() { println!("{i}"); } // explicitly calling iter passes ref, &T
         for i in &foo { println!("{i}"); } // same as foo.iter()
@@ -121,8 +120,12 @@
 
         foo.iter().map( |x| println!("{x}") ) // iterators are lazy, maps just returns another iterator with the closure
         foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ) // iterator adapters are useful for chaining
-        foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ).collect() // collect will execute iterator and return collection
-                                                                            // adapters are efficient, no intermediate collection is made!
+        foo.iter().map( |x| println!("{x}") )
+            .filter( |x| x > 1 ).collect() // collect will execute iterator and return collection
+                                           // adapters are efficient, no intermediate collection is made!
+
+        vec!["foo","bar"].into_iter().map(String::from) // shorthand map syntax if one arg, compiler infers params
+
         foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
         foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
     ```
@@ -199,12 +202,18 @@
 - `core` relies on nothing
 - `alloc` requires on a memory allocator
     - most collections in this crate, except hashmap which relies on random data, so its in `std`
+### FILE IO
+- read a file to var - `let contents = std::fs::read_to_string(file_path).unwrap()`
+- incremental read - `let f = File::open(file_path)?; let reader = BufReader::new(f); for line in reader.lines() { ... }`
 
 ## COLLECTIONS
 - https://doc.rust-lang.org/std/collections/index.html
 - may2023 - good vid on collections - https://www.youtube.com/watch?v=EF3Z4jdD1EQ&list=WL&ab_channel=JonGjengset
     - many collections need to use unsafe code(raw pointers) in order to be feasible/performant, borrow checker couldnt reason about it well
 ### STRINGS
+- use double quote `"` for strings, single quotes `'` for chars
+- raw string literal (escapes arent processed) - `r#"foo \n bar"#`
+- `s = "\x52\x75"` - `\x` escape for hex code byte value
 - `String` and `&str` are UTF-8
 - string literals (preallocated text) - declared in code like `let s = "string lit"`
     - are refered to with string slices (also immutable reference) `&str`
@@ -519,6 +528,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 
 ## ANNOTATION
 - `derive` - tells rust to automatically generate a trait implementation for a type
+- `inline` - annotation inlines function
 - `#![allow(dead_code)]` - top level, ignore warnings about unused funcs/vars/code
 - `cfg` - means set a configuration
     - example configs: `test`

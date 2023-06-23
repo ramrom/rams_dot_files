@@ -253,6 +253,10 @@ function Lua.moduleExists(name)
     end
 end
 
+RunAction = function(arg)
+    vim.cmd('echo "hi"')
+end
+
 ----------------------------------------------------------------------------------------------------------
 ---------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ------------------------------------- -------------------------------------------------------------------
@@ -861,6 +865,7 @@ vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
+vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction(1)<cr>")
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
@@ -994,12 +999,12 @@ SetLSPKeymaps = function()
         -- see https://github.com/scalameta/nvim-metals/discussions/381
     vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "implementation" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "references" })
     vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol, { desc = "document symbol" })
     vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, { desc = "workspace symbol" })
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist, { desc = "setqflist" }) -- all workspace diagnostics
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
     vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
@@ -1084,7 +1089,7 @@ if not vim.env.VIM_NOPLUG then
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
         { 'simrat39/rust-tools.nvim',
-                -- cond = false,
+                cond = false,
                 config = LoadRustTools,
                 dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
 
