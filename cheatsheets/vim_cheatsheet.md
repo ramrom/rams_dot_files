@@ -192,6 +192,8 @@ C - make selected dir node the new root node
     - `:messages clear` will clear messages
 - `:functions` - print list of defined functions
 - `:command` - print list of defined commands
+- `:Notifications` - neovim, print `notify` notifications (slightly different form messages)
+    - e.g. `vim.notify('a notif')` will print a notification
 
 
 ### VIMSCRIPT / VimL
@@ -257,6 +259,13 @@ C - make selected dir node the new root node
 
 
 ## COMMAND MODE
+- running shell commands
+    - *NOTE* basically all these are synchronous and will block the vim session until done
+    - `:!` - run a shell command, e.g. `:!echo hi`
+    - `:silent !` run shell cmd silently, e.g. `:silent ! ls`
+- run a command silently
+    - `:silent!` - run shell command, suppress normal messgs (stdout-like), e.g. `:silent! ls`
+    - `:silent!!` - run shell command, suppress all messgs (stdout + stderr), e.g. `:silent!! ls`
 - run two commands in one line with `|`
     - `:echo "hi" | echo "hi again"`
 - Command-line window

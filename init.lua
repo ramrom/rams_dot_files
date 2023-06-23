@@ -254,7 +254,16 @@ function Lua.moduleExists(name)
 end
 
 RunAction = function(arg)
-    vim.cmd('echo "hi"')
+    if arg == 1 then
+        -- vim.cmd(':! ls')
+        -- vim.cmd(':silent ! whoami')
+        local out = vim.api.nvim_exec2(':!ls', { output = true })
+        print(vim.inspect(out.output))
+    else
+        -- local out = vim.api.nvim_exec2(':!tmux split-window && echo hi', { output = true })
+        local out = vim.api.nvim_exec2(':!sleep 5 && touch bar &', { output = true })
+        print(vim.inspect(out.output))
+    end
 end
 
 ----------------------------------------------------------------------------------------------------------
@@ -866,6 +875,7 @@ vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction(1)<cr>")
+vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction(2)<cr>")
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
