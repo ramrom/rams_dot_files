@@ -52,7 +52,7 @@
     - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
     - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
-- print a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
+- print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
 - lua call vimscript function - `vim.fn` is a table of vim functions
     - `vim.fn.printf('hi from %s', 'dude'))`
@@ -63,6 +63,7 @@
     - o is general settings: `vim.o.background = 'light'`
     - use space as a the leader key: `vim.g.mapleader = ' '`
     - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
+- libuv run a shell command - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
@@ -302,14 +303,14 @@ C - make selected dir node the new root node
 - Command-line window
     - command-line-window, edit as if in insert/normal
         - from normal mode: `q:` - edit command history, `q/` - edit search history, `q?` - serach history reverse
-      then can yank old command history
-      in insert of cur line, write command and hit enter
+        - from command mode: `ctrl-f` edit command history
+    - then can yank/edit/run old command history, edit and hit enter on command
 - Keymaps
     - C-h - delete last char
     - C-w - delete last word
     - C-b - goto beg of line
     - C-e - goto end of line
-    - C-f - enter command line window for command history (also `q:` from normal mode)
+    - C-f - enter command line window
 - record command line output to file
     - `:redir > foofile`, then `:somecommandthatoutputs`, `:anothercommndthatoupts`, then `:redir end`
 - bd 3, closes buffer # 3

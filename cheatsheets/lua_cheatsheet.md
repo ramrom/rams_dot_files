@@ -31,6 +31,19 @@
 - is fundamental type, a preemtable thread
 - lua comes with a coroutine library
 - can do suspend and resume exection
+- examples
+    ```lua
+    c = coroutine.create(function() print('hi') end); 
+    print(c) -- thread: 0x8071d98
+    print(coroutine.status(c))  -- suspended
+    coroutine.resume(c)  -- prints hi
+    print(coroutine.status(c))  -- dead
+
+    c2 = coroutine.create(function() print('hi'); coroutine.yield(); print('hi again') end); 
+    coroutine.resume(c2)  -- prints hi
+    coroutine.resume(c2)  -- prints hi again
+    print(coroutine.status(c2))  -- dead
+    ```
 
 ## TABLE
 - first item starts at index _1_, not _0_

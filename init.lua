@@ -258,25 +258,21 @@ end
 
 RunAction = function(arg)
     if arg == "a" then
-        -- vim.cmd(':! ls')
-        -- vim.cmd(':silent ! whoami')
-        -- local out = vim.api.nvim_exec2(':!ls', { output = true })
-        -- print(vim.inspect(out.output))
-
-        -- h = vim.loop.spawn('touch', { args = { 'foo' } })
-        h = vim.loop.spawn('tmux', { args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' } })
+        vim.loop.spawn('tmux', { args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' } })
     elseif arg == "b" then
         if vim.bo.filetype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo build')
         end
     else
-        local Job = require'plenary.job'
-
+        -- display pane index in tmux window
         vim.loop.spawn('tmux', { args = { 'display-panes' } })
+
+        -- prompt input for pane index
         local pane_selection = vim.fn.input("Pane Number: ")
 
+        -- retrieve pane list of pane indexes and titles
         local panes = {}
-        Job:new({
+        require('plenary.job'):new({
             command = 'tmux',
             args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' },
             -- cwd = '/usr/bin',
@@ -290,6 +286,7 @@ RunAction = function(arg)
             end,
         }):sync()       -- do start() for async
 
+        -- find pane title matching user seletected pane index
         local pane_name
         for _, i in ipairs(panes) do
             local r = vim.fn.split(i,",")
@@ -297,6 +294,8 @@ RunAction = function(arg)
                 pane_name = r[2]
             end
         end
+
+        -- error if pane index not found, otherwise set tmux runner var to pane title
         if pane_name == nil then
             print("pane number " .. pane_selection .. " not found!")
         else
