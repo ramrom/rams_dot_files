@@ -409,10 +409,10 @@ end
 
 ----------------------------- Rhubarb --------------------------------------------------
 LoadRhubarb = function()
-    vim.keymap.set('n', '<leader>wc', '<cmd>:GBrowse!<CR>', { desc = 'copy to clipboard' })
-    vim.keymap.set('v', '<leader>wc', [[:'<,'>GBrowse!<CR>]], { desc = 'copy to clipboard' })
-    vim.keymap.set('n', '<leader>wo', '<cmd>:GBrowse<CR>', { desc = 'open in browser' })
-    vim.keymap.set('v', '<leader>wo', [[:'<,'>GBrowse<CR>]], { desc = 'open in browser'})
+    vim.keymap.set('n', '<leader>gc', '<cmd>:GBrowse!<CR>', { desc = 'copy gh repo to clipboard' })
+    vim.keymap.set('v', '<leader>gc', [[:'<,'>GBrowse!<CR>]], { desc = 'copy gh repo to clipboard' })
+    vim.keymap.set('n', '<leader>go', '<cmd>:GBrowse<CR>', { desc = 'open gh repo file in browser' })
+    vim.keymap.set('v', '<leader>go', [[:'<,'>GBrowse<CR>]], { desc = 'open gh repo file in browser'})
 end
 
 ---------------------------------- GIT SIGNS ----------------------------------------------
@@ -541,14 +541,18 @@ end
 ---------------------- WHICH-KEY CONFIG -------------------------------
 LoadWhichKey = function()
     local wk = require("which-key")
-    -- descriptions for prefix keys in popup menu
+
+    -- prefix keys descs in popup menu for LSP related things
     wk.register( { g = { name = "LSP + more" } })
-    wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
-    wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
-    wk.register( { g = { name = "git stuff + more" } }, { prefix = "<leader>" } )
-    wk.register( { w = { name = "github links" } }, { prefix = "<leader>" } )
     wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
     wk.register( { w = { name = "diagnostics" } }, { prefix = "g" } )
+    wk.register( { l = { name = "DAP stuff" } }, { prefix = "<leader>" } )
+
+    -- other things
+    wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
+    wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
+    wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
+    wk.register( { w = { name = "misc" } }, { prefix = "<leader>" } )
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
@@ -910,7 +914,7 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
-vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
+vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>", { desc = "smart run" })
 vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('b')<cr>", { desc = "set tmux pane runner" })
 -- vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
@@ -963,8 +967,8 @@ vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
 vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
 vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
 vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
-vim.keymap.set('n', '<leader>l', '<cmd>:Lines<CR>')
-vim.keymap.set('n', '<leader>L', '<cmd>:Lines!<CR>')
+vim.keymap.set('n', '<leader>e', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>E', '<cmd>:Lines!<CR>')
 
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
@@ -973,8 +977,8 @@ vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "d
 vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
 vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
 vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
-vim.keymap.set('n', '<leader>gc', '<cmd>:Commits<CR>')
-vim.keymap.set('n', '<leader>gC', '<cmd>:Commits!<CR>')
+vim.keymap.set('n', '<leader>gm', '<cmd>:Commits<CR>')
+vim.keymap.set('n', '<leader>gM', '<cmd>:Commits!<CR>')
 vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
@@ -987,8 +991,8 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 ---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
-vim.keymap.set('n', '<leader>gt', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
-vim.keymap.set('n', '<leader>gu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
+vim.keymap.set('n', '<leader>wt', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
+vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
 
 ---------- CHEATS + NOTES
 vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
@@ -1002,15 +1006,16 @@ vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 
 -------------- OTHER
-vim.keymap.set("n", "<leader>gj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
-vim.keymap.set("n", "<leader>gk", "<cmd>:messages clear<CR>", { desc = "clear messages" })
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
-vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
-vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
-vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
-vim.keymap.set('n', '<leader>gn', '<cmd>:set number!<cr>')
-vim.keymap.set('n', '<leader>gf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
-vim.keymap.set('n', '<leader>go', CycleColorColumn, { desc = "cycle color column" } )
+vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
+vim.keymap.set("n", "<leader>wk", "<cmd>:messages clear<CR>", { desc = "clear messages" })
+vim.keymap.set('n', '<leader>wi', '<cmd>:IndentBlanklineToggle<cr>')
+vim.keymap.set('n', '<leader>wm', '<cmd>:messages<cr>')
+vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')
+vim.keymap.set('n', '<leader>wT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
+vim.keymap.set('n', '<leader>wn', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>wf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
+vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
 vim.api.nvim_create_autocmd(
@@ -1066,13 +1071,13 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', 'gz', ' <cmd>lua vim.lsp.diagnostic.open_float()<CR>')
 
     ---- DAP COMMANDS
-    vim.keymap.set("n", "<leader>wc", [[<cmd>lua require"dap".continue()<CR>]])
-    vim.keymap.set("n", "<leader>wr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
-    vim.keymap.set("n", "<leader>wK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
-    vim.keymap.set("n", "<leader>wt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
-    vim.keymap.set("n", "<leader>wso", [[<cmd>lua require"dap".step_over()<CR>]])
-    vim.keymap.set("n", "<leader>wsi", [[<cmd>lua require"dap".step_into()<CR>]])
-    vim.keymap.set("n", "<leader>wl", [[<cmd>lua require"dap".run_last()<CR>]])
+    vim.keymap.set("n", "<leader>lc", [[<cmd>lua require"dap".continue()<CR>]])
+    vim.keymap.set("n", "<leader>lr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+    vim.keymap.set("n", "<leader>lK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+    vim.keymap.set("n", "<leader>lt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+    vim.keymap.set("n", "<leader>lso", [[<cmd>lua require"dap".step_over()<CR>]])
+    vim.keymap.set("n", "<leader>lsi", [[<cmd>lua require"dap".step_into()<CR>]])
+    vim.keymap.set("n", "<leader>ll", [[<cmd>lua require"dap".run_last()<CR>]])
 end
 
 SetMetalsKeymaps = function()
