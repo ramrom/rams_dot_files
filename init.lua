@@ -1001,6 +1001,7 @@ vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 
+-------------- OTHER
 vim.keymap.set("n", "<leader>gj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
 vim.keymap.set("n", "<leader>gk", "<cmd>:messages clear<CR>", { desc = "clear messages" })
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
@@ -1016,7 +1017,8 @@ vim.api.nvim_create_autocmd(
     "Filetype",
     { pattern = 'markdown',
       callback = function()
-        vim.keymap.set('n', '<leader>gg', [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]])
+        vim.keymap.set('n', '<leader>gg', 
+            [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]], { buffer = true })
       end,
 })
 
