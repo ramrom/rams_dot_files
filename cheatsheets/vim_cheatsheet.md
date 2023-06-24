@@ -282,6 +282,7 @@ C - make selected dir node the new root node
 :h ex-cmd-index  - command and ex mode
 
 ## EX MODE
+- a shitty REPL - run commands and see the output
 - to enter Ex mode
     - vim - `Q` in normal
     - neovim - `gQ` in normal

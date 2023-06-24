@@ -258,12 +258,10 @@ end
 
 RunAction = function(arg)
     if arg == "a" then
-        vim.loop.spawn('tmux', { args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' } })
-    elseif arg == "b" then
         if vim.bo.filetype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo build')
         end
-    else
+    elseif arg == "b" then
         -- display pane index in tmux window
         vim.loop.spawn('tmux', { args = { 'display-panes' } })
 
@@ -545,6 +543,7 @@ LoadWhichKey = function()
     local wk = require("which-key")
     -- descriptions for prefix keys in popup menu
     wk.register( { g = { name = "LSP + more" } })
+    wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
     wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
     wk.register( { g = { name = "git stuff + more" } }, { prefix = "<leader>" } )
     wk.register( { w = { name = "github links" } }, { prefix = "<leader>" } )
@@ -897,8 +896,6 @@ vim.g.mapleader = " "
 
 --- TODO: Prime open real estate for normal mode!
     -- NORMAL MODE
-        -- <Leader>a/w/l/x'
-            -- a is earmarked for smart script run or test run
         -- <Leader><Leader>    (all except for h/g/q/r)
         -- c-m/c-g/c-s/c-q
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
@@ -914,9 +911,9 @@ vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader>e", "<cmd>:Explore<CR>")
-vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>")
-vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('b')<cr>")
-vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
+vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>", { desc = "smart run" })
+vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('b')<cr>", { desc = "set tmux pane runner" })
+-- vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
@@ -1005,6 +1002,7 @@ vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 
 vim.keymap.set("n", "<leader>gj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
+vim.keymap.set("n", "<leader>gk", "<cmd>:messages clear<CR>", { desc = "clear messages" })
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 vim.keymap.set('n', '<leader>gi', '<cmd>:IndentBlanklineToggle<cr>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:MarkdownPreviewToggle<cr>')
