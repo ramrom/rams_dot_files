@@ -256,50 +256,52 @@ function Lua.moduleExists(name)
     end
 end
 
+SelectTmuxRunnerPane = function()
+    -- display pane index in tmux window
+    vim.loop.spawn('tmux', { args = { 'display-panes' } })
+
+    -- prompt input for pane index
+    local pane_selection = vim.fn.input("Pane Number: ")
+
+    -- retrieve pane list of pane indexes and titles
+    local panes = {}
+    require('plenary.job'):new({
+        command = 'tmux',
+        args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' },
+        -- cwd = '/usr/bin',
+        env = { PATH = vim.env.PATH },
+        on_exit = function(j, return_val)
+            if return_val ~= 0 then
+                print("failure: tmux list-panes return_val not zero!")
+            end
+            -- vim.cmd(':echo "hi"')  -- will fail, vim.cmd cant be run in lua loop callback
+            panes = j:result()
+        end,
+    }):sync()       -- do start() for async
+
+    -- find pane title matching user seletected pane index
+    local pane_name
+    for _, i in ipairs(panes) do
+        local r = vim.fn.split(i,",")
+        if pane_selection == r[1] then
+            pane_name = r[2]
+        end
+    end
+
+    -- error if pane index not found, otherwise set tmux runner var to pane title
+    if pane_name == nil then
+        print("pane number " .. pane_selection .. " not found!")
+    else
+        -- let g:VtrCreatedRunnerPaneName="p1"  -- specify pane name for runner pane
+        print("VtrCreatedRunnerPaneName set to: " .. pane_name)
+        vim.g.VtrCreatedRunnerPaneName = pane_name
+    end
+end
+
 RunAction = function(arg)
     if arg == "a" then
         if vim.bo.filetype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo build')
-        end
-    elseif arg == "b" then
-        -- display pane index in tmux window
-        vim.loop.spawn('tmux', { args = { 'display-panes' } })
-
-        -- prompt input for pane index
-        local pane_selection = vim.fn.input("Pane Number: ")
-
-        -- retrieve pane list of pane indexes and titles
-        local panes = {}
-        require('plenary.job'):new({
-            command = 'tmux',
-            args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' },
-            -- cwd = '/usr/bin',
-            env = { PATH = vim.env.PATH },
-            on_exit = function(j, return_val)
-                if return_val ~= 0 then
-                    print("failure: tmux list-panes return_val not zero!")
-                end
-                -- vim.cmd(':echo "hi"')  -- will fail, vim.cmd cant be run in lua loop callback
-                panes = j:result()
-            end,
-        }):sync()       -- do start() for async
-
-        -- find pane title matching user seletected pane index
-        local pane_name
-        for _, i in ipairs(panes) do
-            local r = vim.fn.split(i,",")
-            if pane_selection == r[1] then
-                pane_name = r[2]
-            end
-        end
-
-        -- error if pane index not found, otherwise set tmux runner var to pane title
-        if pane_name == nil then
-            print("pane number " .. pane_selection .. " not found!")
-        else
-            -- let g:VtrCreatedRunnerPaneName="p1"  -- specify pane name for runner pane
-            print("VtrCreatedRunnerPaneName set to: " .. pane_name)
-            vim.g.VtrCreatedRunnerPaneName = pane_name
         end
     end
 end
@@ -919,7 +921,7 @@ vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
 
 -- SMART RUN ACTIONS
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>", { desc = "smart run" })
-vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('b')<cr>", { desc = "set tmux pane runner" })
+vim.keymap.set("n", "<leader>ab", SelectTmuxRunnerPane, { desc = "set tmux pane runner" })
 -- vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
 
 ------ WINDOW RESIZE/MOVE/CREATE
