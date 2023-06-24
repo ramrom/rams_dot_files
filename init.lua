@@ -913,8 +913,11 @@ vim.g.mapleader = " "
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
+vim.keymap.set('n', '<leader><leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
+
+-- SMART RUN ACTIONS
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>", { desc = "smart run" })
 vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('b')<cr>", { desc = "set tmux pane runner" })
 -- vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
@@ -959,7 +962,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
-vim.keymap.set('n', '<leader><leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
 vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')

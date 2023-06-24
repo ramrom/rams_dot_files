@@ -20,6 +20,7 @@ require("lazy").setup({
     { 'junegunn/fzf', run = ":call fzf#install()" },
     { 'junegunn/fzf.vim' },
 
+    -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     'glacambre/firenvim',
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })
