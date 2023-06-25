@@ -76,6 +76,11 @@ if vim.fn.executable('rg') == 1 then vim.opt.grepprg='rg --vimgrep --follow' end
 -- layout of files and dir in netrw file explorer
 vim.g.netrw_liststyle = 3
 
+-- highlight lines yanked
+vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*', 
+    callback = function() vim.highlight.on_yank {higroup="IncSearch", on_visual=false, timeout=150} end
+})
+
 -- for jsonc format, which supports commenting, this will highlight comments
 -- #FIXME may'23: not working, code in .vimrc not working either
 vim.api.nvim_create_autocmd('FileType', {
@@ -258,7 +263,7 @@ end
 
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window
-    vim.loop.spawn('tmux', { args = { 'display-panes' } })
+    vim.fn.system({'tmux', 'display-panes' })
 
     -- prompt input for pane index
     local pane_selection = vim.fn.input("Pane Number: ")
@@ -269,7 +274,7 @@ SelectTmuxRunnerPane = function()
         command = 'tmux',
         args = { 'list-panes', '-F', '#{pane_index},#{pane_title}' },
         -- cwd = '/usr/bin',
-        env = { PATH = vim.env.PATH },
+        -- env = { PATH = vim.env.PATH },
         on_exit = function(j, return_val)
             if return_val ~= 0 then
                 print("failure: tmux list-panes return_val not zero!")
@@ -324,7 +329,7 @@ end
 -------- TODO: get custom search highlighting to work
 -------- TODO: treesitter markdown, headers are ugly green, is that normal
 local LoadOneDarkProConfig = function()
-    vim.cmd("colorscheme onedark_dark")
+    vim.cmd.colorscheme("onedark_dark")
     -- vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
     -- vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
   require("onedarkpro").setup({
@@ -915,7 +920,7 @@ vim.g.mapleader = " "
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
-vim.keymap.set('n', '<leader><leader>r', 'q:', { desc = "command line history editor" })
+vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
 
@@ -963,7 +968,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 --------- FZF STUFF
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
-vim.keymap.set('n', '<leader>r', '<cmd>:History:<cr>', { desc = "command history" })
+vim.keymap.set('n', '<leader><leader>r', '<cmd>:History:<cr>', { desc = "command history" })
 vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
 vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
@@ -1192,6 +1197,40 @@ if not vim.env.VIM_NOPLUG then
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
             } 
+        },
+        {
+            "folke/flash.nvim",
+            event = "VeryLazy",
+            enabled = false,
+            --- @type Flash.Config
+            opts = {},
+            keys = {
+                {
+                    "s",
+                    mode = { "n", "x", "o" },
+                    function()
+                        -- default options: exact mode, multi window, all directions, with a backdrop
+                        require("flash").jump()
+                    end,
+                    desc = "Flash",
+                },
+                {
+                    "S",
+                    mode = { "n", "o", "x" },
+                    function()
+                        require("flash").treesitter()
+                    end,
+                    desc = "Flash Treesitter",
+                },
+                {
+                    "r",
+                    mode = "o",
+                    function()
+                        require("flash").remote()
+                    end,
+                    desc = "Remote Flash",
+                },
+            },
         },
         'christoomey/vim-tmux-runner',
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
