@@ -480,7 +480,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - future has a "wake" callback func to let executor know when it's ready to be polled
 - jon gjengset good vid - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
 - https://docs.rs/futures/latest/futures/
-    - cooperative multitasking, tasks, `Futures` yield at points to let others run
+    - cooperative multitasking, tasks, `Futures` (await points) yield at points to let others run
         - versus bare threads, which are preemtive, OS is responsible stop/schedule them, bare threads dont have "yield" points
     - Futures run on some executor, there are many types, single-threaded, multi-threaded, etc.
     - calling blocking operations like read from a regular file or network socket might block, need to use async versions of those

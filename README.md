@@ -2,11 +2,15 @@
 
 My dot files and scripts for Unix-like environments
 
+## NEOVIM
+- Lazy.nvim for plugin management
+
 ## Vim
+- june2023 - *deprecated* vim, all in on neovim, definitely not worth maintaining both
+    - .vimrc around for the rare case I might use vim
 - Vim Plug for plugin manager
 - neovim for better integration with coc and scala metals
     - init.vim just loads my vimrc, to maintain vim parity
-
 ### Plugins
 - **FZF**
     - fzf-mru (fzf over most recently opened files)
@@ -27,3 +31,10 @@ My dot files and scripts for Unix-like environments
     - modern neovim
         - native lsp client
         - nvim-lspconfig
+
+## CORE TOOLS
+- TMUX
+- rg
+- fzf
+- fd
+- bat

@@ -28,9 +28,10 @@
     - declare local vars with `local v = 'hi'`
 
 ## COROUTINE
-- is fundamental type, a preemtable thread
-- lua comes with a coroutine library
-- can do suspend and resume exection
+- is fundamental type, a cooperatively scheduled conncurent primitive
+- api is exposed throgh `coroutine` table
+- programmer sets yield points to yield control, programmer has to resume exection
+- each coroutine has it's own stack and local vars
 - examples
     ```lua
     c = coroutine.create(function() print('hi') end); 

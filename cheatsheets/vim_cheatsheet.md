@@ -1,7 +1,6 @@
 # VIM
 - good resource on learning vim: http://vimcasts.org
-- great resource: https://devhints.io/vimscript
-- `:version`  - get version and features compiled
+- official neovim docs: https://neovim.io/doc/
 - Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
     - *NOT* totally backwards compatible with old VimL
@@ -46,16 +45,20 @@
     - clickable statusline
 - 0.9 - TUI and remote UI
 ### LUA
-- `set`
+- vim settings
     - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
     - `vim.o` is more direct variable access
     - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
     - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
+- `vim.cmd` - run an Ex command, doesnt output
+- `vim.api.nvim_exec2` - run vimscript, can capture output
+- `vim.fn` - table exposes regular vimL functions
+    - e.g. `vim.fn.printf('hi from %s', 'dude'))`
+- `vim.lsp` - LSP stuff
+- `vim.loop` - neovim eventloop using libuv
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
-- lua call vimscript function - `vim.fn` is a table of vim functions
-    - `vim.fn.printf('hi from %s', 'dude'))`
 - call lua function - `:lua somefunc()`
 - CONFIG STUFF
     - vimscript, sourcing lua code: `:lua require('some-lua-code')`
@@ -63,7 +66,8 @@
     - o is general settings: `vim.o.background = 'light'`
     - use space as a the leader key: `vim.g.mapleader = ' '`
     - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
-- libuv run a shell command - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
+- async libuv shell command - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
+- sync regular shell command - `vim.fn.system({'ls', '-a', '-l'})`
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
@@ -83,10 +87,12 @@
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-dap - plugin to support debug adapter protocol
 
-### NVIM LAZY
-- pure lua plugin manager, bit faster than packer
-
-### VIM-PLUG
+### PLUGIN MANAGERS
+#### PACKER
+- pure lua plugin manager
+#### NVIM LAZY
+- pure lua plugin manager, newer and a bit faster than packer
+#### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
 
@@ -206,6 +212,7 @@ C - make selected dir node the new root node
     - disable with `vim.g.editorconfig = false` in init file
 
 ## DIAGNOSTICS / INTROSPECT / DEFINITIONS
+- `:version`  - get version and features compiled
 - `:scriptnames` shows all scripts that were run, including plugin's scripts
 - `:checkhealth` - neovim only, report on errors/warnings for all modules
 - `:functions` - print list of defined functions
@@ -236,6 +243,7 @@ C - make selected dir node the new root node
 
 
 ### VIMSCRIPT / VimL
+- nice cheatsheet: https://devhints.io/vimscript
 - commands -> can only accept string arguments, no return value, used for UI, invoke: `:SomeCommand`
 - functions -> can accept any type arg and return a value, to invoke `:call somefunc(var1,var2)`
 - checking existence of variable

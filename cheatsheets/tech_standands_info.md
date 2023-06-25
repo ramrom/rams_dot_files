@@ -293,7 +293,8 @@
     - TensorFlow
     - PyTorch
 - event/IO libs
-    - libuv - C async lib, uses epoll/kqueue/IOCP, event ports, used by Node.js
+    - libuv - C async lib, uses epoll/kqueue/IOCP, event ports
+        - used by Node.js, neovim
     - libevent - C async lib, similar to libuv, uses callbacks on IO events
         - memcached, tmux, chrome, transmission use it
 
