@@ -85,6 +85,7 @@
 - `cargo install --list` - print all gobally installed crates
 - `cargo install --version 0.3.10 someprogram` - install version x of program
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program
+- `cargo add tokio --features rt` - add `tokio` as dep to toml with feature `rt`
 - `cargo tree` - print dependency tree
 - `cargo build -v` - show exactly what commands it's running
 - `cargo build --manifest-path /path/to/Cargo.toml` - specify `Cargo.toml` file in another location
@@ -579,6 +580,12 @@ let s2 = String::from("hello");  // type String is mutable
     - core of it is it provides an executor/runtime for rust Futures to run on
     - has async version of tons of stuff, e.g. file handling, tcp/udp streams, channels, mutexes, timeouts, sleeps etc.
         - tokio mutex - yields instead of blocks if lock cant be aquired, however more expensive than std mutex
+    - `let t = tokio::runtime::Runtime.new().unwrap()` - create a runtime
+        - `t.spawn(async { ... })` - pass future to a tokio runtime/executor
+    - `let t = Builder::new_multi_thread().worker_threads(4).thread_stack_size(10 * 1024).build().unwrap()` - build manually
+    - `let future_handle = tokio:::spawn(async { ... })` - pass future to tokio runtime/executor in current thread context
+        - *NOTE* future is polled in executor even if you dont await the handle
+    - `tokio::task::spawn_blocking(|| { ... })` - run blocking closure on special threads on runtime for blocking
 - [async-std](https://github.com/async-rs/async-std) - async version of std lib, similar to tokio
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio

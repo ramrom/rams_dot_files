@@ -284,22 +284,15 @@ SelectTmuxRunnerPane = function()
         end,
     }):sync()       -- do start() for async
 
-    -- find pane title matching user seletected pane index
-    local pane_name
-    for _, i in ipairs(panes) do
-        local r = vim.fn.split(i,",")
-        if pane_selection == r[1] then
-            pane_name = r[2]
-        end
-    end
+    pane_selection = tonumber(pane_selection) -- user input is always string
 
-    -- error if pane index not found, otherwise set tmux runner var to pane title
-    if pane_name == nil then
-        print("pane number " .. pane_selection .. " not found!")
-    else
-        -- let g:VtrCreatedRunnerPaneName="p1"  -- specify pane name for runner pane
+    if pane_selection ~= ni and pane_selection < #panes then  -- nil if convert to number failed
+        local pane_name = 'vtr-run-pane' .. pane_selection
+        vim.fn.system({ 'tmux', 'select-pane', '-t', pane_selection, '-T', pane_name })
         print("VtrCreatedRunnerPaneName set to: " .. pane_name)
         vim.g.VtrCreatedRunnerPaneName = pane_name
+    else
+        print("pane number " .. pane_selection .. " not found!")
     end
 end
 
