@@ -578,10 +578,12 @@ let s2 = String::from("hello");  // type String is mutable
     - basically rust's version of libuv, which offers abstractions of big IO APIs like epoll, kqueue, iocp
 - [tokio](https://tokio.rs) - awesome async framework, built on mio
     - core of it is it provides an executor/runtime for rust Futures to run on
+    - main component of runtime: I/O event loop, task scheduler, timer
     - has async version of tons of stuff, e.g. file handling, tcp/udp streams, channels, mutexes, timeouts, sleeps etc.
         - tokio mutex - yields instead of blocks if lock cant be aquired, however more expensive than std mutex
     - `let t = tokio::runtime::Runtime.new().unwrap()` - create a runtime
         - `t.spawn(async { ... })` - pass future to a tokio runtime/executor
+        - `let handle = tokio::runtime::Handle::current();` - get current runtimes handle
     - `let t = Builder::new_multi_thread().worker_threads(4).thread_stack_size(10 * 1024).build().unwrap()` - build manually
     - `let future_handle = tokio:::spawn(async { ... })` - pass future to tokio runtime/executor in current thread context
         - *NOTE* future is polled in executor even if you dont await the handle

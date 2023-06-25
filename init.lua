@@ -297,9 +297,13 @@ SelectTmuxRunnerPane = function()
 end
 
 RunAction = function(arg)
-    if arg == "a" then
+    if arg == "exe" then
         if vim.bo.filetype == "rust" then
-            vim.cmd(':VtrSendCommandToRunner! cargo build')
+            vim.cmd(':VtrSendCommandToRunner! cargo run')
+        end
+    elseif arg == 'test' then
+        if vim.bo.filetype == "rust" then
+            vim.cmd(':VtrSendCommandToRunner! cargo test')
         end
     end
 end
@@ -918,9 +922,9 @@ vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" 
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
 
 -- SMART RUN ACTIONS
-vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('a')<cr>", { desc = "smart run" })
+vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('exe')<cr>", { desc = "execute program" })
 vim.keymap.set("n", "<leader>ab", SelectTmuxRunnerPane, { desc = "set tmux pane runner" })
--- vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('c')<cr>")
+vim.keymap.set("n", "<leader>ac", "<cmd>:lua RunAction('test')<cr>", { desc = "run tests" })
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
