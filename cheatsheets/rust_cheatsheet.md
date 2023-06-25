@@ -500,9 +500,11 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - this call tree of cobbled futures allows for one big allocation of known size
     - a task is root level structure that a future belongs to
         - a executor will place a task on the run queue to be polled when a child future is awoken
+- recursion is an issue b/c this statemachine like struct would refer to itself, causing the infinite size type issue
+    - can get around this with indirection like `Box` or `BoxFuture`
 - async traits are hard b/c Futures don't have a know size
     - future can have all sorts of data and that makes their size unkown
-- if a `Future` holds non-`Send` data then it cant be moved to another worker thread in executor
+- if a `Future` holds non-`Send` data(e.g. `Rc`) then it cant be moved to another worker thread in executor
 - stacktraces - trace will show origin upon the thread it's executing on, this might be different than thread that spawned it
 - std lib `Mutex` will block thread if it cant aquire lock, deadlock risk here, so best to use when critical section is short
     - otherwise use async mutex like tokio mutex, which dont block thread, but async mutex have higher overhead
@@ -593,6 +595,7 @@ let s2 = String::from("hello");  // type String is mutable
     - `let future_handle = tokio:::spawn(async { ... })` - pass future to tokio runtime/executor in current thread context
         - *NOTE* future is polled in executor even if you dont await the handle
     - `tokio::task::spawn_blocking(|| { ... })` - run blocking closure on special threads on runtime for blocking
+    - graceful shutdown - pass a mpsc sender to all tasks, when all senders dropped, all tasks are done, can shutdown
 - [async-std](https://github.com/async-rs/async-std) - async version of std lib, similar to tokio
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
