@@ -211,6 +211,21 @@ C - make selected dir node the new root node
 - neovim supports https://neovim.io/doc/user/editorconfig.html .editorconfig files
     - disable with `vim.g.editorconfig = false` in init file
 
+## EXITING / QUITTING / WRITING
+- :w - write (save) the file, but don't exit
+- :w !sudo tee % - write out the current file using sudo
+- :wq or :x or ZZ - write (save) and quit
+- :q - quit (fails if there are unsaved changes)
+- :q! or ZQ - quit and throw away unsaved changes
+- :wqa - write (save) and quit on all tabs
+- ZZ - same as :wq
+- :tabc - tabclose, close tab with all windows in it
+- :tabonly - close all other tabs
+- :1quit - quit win 1
+- :9quit quit win 9
+- :-quit :+quit   - quit prev/next win
+
+
 ## DIAGNOSTICS / INTROSPECT / DEFINITIONS
 - `:version`  - get version and features compiled
 - `:scriptnames` shows all scripts that were run, including plugin's scripts
@@ -249,8 +264,6 @@ C - make selected dir node the new root node
 - checking existence of variable
     if exists('g:some_global_var') | echo "hi" | endif
 
-
-/Users/smittap6/.vimrc
 ### MISC COMMANDS AND INFO
 - so $VIMRUNTIME/syntax/hitest.vim
 - 100G or 100gg - goes to line 100 like :100<CR> in command
@@ -394,25 +407,7 @@ C-^ - open last editted file
 . - repeat last change, doesn't include motions(e.g. h/j/k/l) or commands that dont make changes
 - <c-w>f - goto filename undercursor in new window
 - <c-w>gf - in new tab
-
-### G COMMANDS (NORMAL MODE)
-gf   - edit filename undercursor
-gx   - osx invokes file handler "open",
-        opens urls, images, files, videos
-        nvim good, vim fails on urls but files/imgs ok
-        nvim and vim work fine for all in ubunutu
-gj/gk - go down/up one viewport line
-g0/g$ - go beg/end of viewport line
-gq   - make one big line over multiple viewport lines as seperate lines
-gd   - goto variable/fucntion declaration
-gy   - goto type definition
-g;   - jump back to last edit point
-g,   - jump back to newer edit point
-gv   - reselect the last visually selected text
-gi   - go to last cursor position in insert mode
-
-
-## CURSOR MOVEMENT
+### MOTIONS
 <enter> - move cursor to beginning of next line
 C-h - move cursor left
 C-j - move cursor down
@@ -477,38 +472,51 @@ C-o - go to older cursor position in jump list
 C-t - go back one in tag stack
 - Tip Prefix a cursor movement command with a number to repeat it.
     For example, 4j moves down 4 lines.
-
-## EDITING
-y - yank (copy) text
-d - delete text
-c - delete text and insert to change
-~ - switch case
-r - replace a single character
-R - enter replace mode to repeatedly replace the character under the cursor
-J - join line below to the current one with one space in between
-gJ - join line below to the current one without space in between
-gu - make selected text lower case
-guu - make current line lower case
-gU - make selected text upper case
-gUU - make current line upper case
-gwip - reflow paragraph
-cc - change (replace) entire line
-C - change (replace) to the end of the line
-c$ - change (replace) to the end of the line
-ciw - change (replace) entire word
-vab - visual select all block
-cw - change (replace) to the end of the word
-& - repeat last substitution
-xp - transpose two letters (delete and paste)
-u - undo
-U - undo all latest changes on one line
-Ctrl + r - redo
-> - shift text right
-< - shift text left
-= - autoindent selected text
-=ip - autoindent inner paragraph
-== - autoindent current line
-
+### G COMMANDS (NORMAL MODE)
+gf   - edit filename undercursor
+gx   - osx invokes file handler "open",
+        opens urls, images, files, videos
+        nvim good, vim fails on urls but files/imgs ok
+        nvim and vim work fine for all in ubunutu
+gj/gk - go down/up one viewport line
+g0/g$ - go beg/end of viewport line
+gq   - make one big line over multiple viewport lines as seperate lines
+gd   - goto variable/fucntion declaration
+gy   - goto type definition
+g;   - jump back to last edit point
+g,   - jump back to newer edit point
+gv   - reselect the last visually selected text
+gi   - go to last cursor position in insert mode
+### EDITING
+- y - yank (copy) text
+- d - delete text
+- c - delete text and insert to change
+- ~ - switch case
+- r - replace a single character
+- R - enter replace mode to repeatedly replace the character under the cursor
+- J - join line below to the current one with one space in between
+- gJ - join line below to the current one without space in between
+- gu - make selected text lower case
+- guu - make current line lower case
+- gU - make selected text upper case
+- gUU - make current line upper case
+- gwip - reflow paragraph
+- cc - change (replace) entire line
+- C - change (replace) to the end of the line
+- c$ - change (replace) to the end of the line
+- ciw - change (replace) entire word
+- vab - visual select all block
+- cw - change (replace) to the end of the word
+- & - repeat last substitution
+- xp - transpose two letters (delete and paste)
+- u - undo
+- U - undo all latest changes on one line
+- Ctrl + r - redo
+- `>` - shift text right
+- `<` - shift text left
+- = - autoindent selected text
+- =ip - autoindent inner paragraph
+- == - autoindent current line
 ### CUT AND PASTE
 yy - yank (copy) a line
 2yy - yank (copy) 2 lines
@@ -525,18 +533,8 @@ D - delete (cut) to the end of the line
 d$ - delete (cut) to the end of the line
 x - delete (cut) character
 
-## VISUAL MODE:
-v - start visual mode, mark lines, then do a command (like y-yank)
-V - start linewise visual mode
-o - move to other end of marked area
-Ctrl + v - start visual block mode
-O - move to other corner of block
-Esc - exit visual mode
-vi} - visual select inner text of "{}" block
-ctrl-va] - visual block select all text of "[]" block
-
-## TEXT OBJECTS:
-<number><operator/command><number><text object>
+## TEXT OBJECTS
+- general pattern: <number><operator/command><number><text object>
 i = inner, a = all
 word - a word, sentence - ends in punctation `./?/!`, paragraph - ends in newline
 aw - word with surrounding whitespace
@@ -550,12 +548,21 @@ ib - block within and not including ()
 iB - block within and not including {}
 at - all tag block
 ` <operator><a/i><"/'/(/)/{/}/[/]> ` - programming language text objects
-
-## MOTION+OBJECTS
+### ACTION + OBJECTS
 v3ta - visual select up to the 3rd occurence of a
 d2fn - delete up to 2nd occurence of n
 c2aw - delete 2 full words and insert
 c2w - delete from cursor current word, then next word, then insert
+
+## VISUAL MODE
+v - start visual mode, mark lines, then do a command (like y-yank)
+V - start linewise visual mode
+o - move to other end of marked area
+Ctrl + v - start visual block mode
+O - move to other corner of block
+Esc - exit visual mode
+vi} - visual select inner text of "{}" block
+ctrl-va] - visual block select all text of "[]" block
 
 ## REGISTERS
 - Registers stored in ~/.viminfo, loaded on next restart
@@ -597,22 +604,7 @@ za (toggle), zA (toggle all)
 zm fold one level, zM - close ALL folds
 zr expand one level, zR - open ALL folds
 
-## Exiting/Quitting:
-:w - write (save) the file, but don't exit
-:w !sudo tee % - write out the current file using sudo
-:wq or :x or ZZ - write (save) and quit
-:q - quit (fails if there are unsaved changes)
-:q! or ZQ - quit and throw away unsaved changes
-:wqa - write (save) and quit on all tabs
-ZZ - same as :wq
-:tabc - tabclose, close tab with all windows in it
-:tabonly - close all other tabs
-:1quit - quit win 1
-:9quit quit win 9
-:-quit :+quit   - quit prev/next win
-
-
-## Search and replace
+## SEARCH AND REPLACE
 /\C  - force case-sensitive search, /\c opposite
 :g/  - print line # and occurence of each search match
 /pattern - search for pattern

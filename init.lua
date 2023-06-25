@@ -261,6 +261,7 @@ function Lua.moduleExists(name)
     end
 end
 
+-- FIXME: june25-23 doesn't really work
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window
     vim.fn.system({'tmux', 'display-panes' })

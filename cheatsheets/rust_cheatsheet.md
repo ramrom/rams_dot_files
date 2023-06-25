@@ -464,9 +464,11 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - type `T` is `Sync` if immutable ref `&T` is `Send`
         - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
     - `Send` trait, these types are safe to transfer ownership to different thread
+- good tokio issue on structured concurrency: https://github.com/tokio-rs/tokio/issues/1879 (also see "goto is bad" blog)
 ### THREADS - STD LIB
 - `let handle = thread::spawn( ... )` method to create new thread, takes a closure arg
     - `handle` is type `JoinHandle`, can call join `handle.join()`, which blocks to wait for completion
+    - if a handle is dropped, it _detaches_ and drops only the handle "reference", the associated thread still runs
     - compiler is conservative, and captured vars in the closure are borrowed, not moved by default
     - use `move` to transfer ownership, `thread::spawn(move ...)`
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
@@ -521,8 +523,11 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - channel closed if receiving or sending side is dropped
 #### SYNC WAIT GROUP
 - like golang WaitGroup
-- std lib also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
+- std lib and tokio also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
 - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
+### SEMAPHORES
+- issue limited "permits" to do things, can limit concurrency level
+- tokio has sempahores
 
 ## CASTING
 - `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
