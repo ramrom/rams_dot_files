@@ -331,18 +331,22 @@ local LoadNavarasuOneDarkConfig = function()
 end
 
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
--------- TODO: get custom search highlighting to work
 -------- TODO: treesitter markdown, headers are ugly green, is that normal
 local LoadOneDarkProConfig = function()
-    vim.cmd.colorscheme("onedark_dark")
-    -- vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
-    -- vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
-  require("onedarkpro").setup({
-      highlights = {
-        Search = { fg = "#00000F", style = "underline" },
-        Comment = { fg = "#0F0000", style = "bold" },
-      }
+    require("onedarkpro").setup({
+        highlights = {
+            -- vim-markdown uses html*, not markdown*
+            htmlH1 = { fg = "#FF0000", underline = true },
+            htmlH3 = { fg = "#ef596f" }, htmlH4 = { fg = "#ef596f" }, htmlH5 = { fg = "#ef596f" }, htmlH6 = { fg = "#ef596f" },
+            htmlLink = { fg = '#61afef', underline = true },
+            -- markdownH1 = { fg = "#FF0000", underline = true },
+            -- markdownH3 = { fg = "#ef596f" }, markdownH4 = { fg = "#ef596f" },
+            -- markdownH5 = { fg = "#ef596f" }, markdownH6 = { fg = "#ef596f" },
+            -- markdownLinkText = { fg = '#61afef', underline = true },
+            Search = { underline = true, italic = true, reverse = true },
+        }
     })
+    vim.cmd.colorscheme("onedark_dark")
 end
 
 ----- JOSH DICK ONE DARK COLORSCHEME -----
@@ -898,6 +902,7 @@ LoadGolangLSP = function()
     -- lua require('dap-go').setup()
 end
 
+-------------- JAVA JDTLS ---------------------------
 LoadJDTLSServer = function()
     local config = {
         cmd = { '/opt/homebrew/bin/jdtls' },
@@ -921,7 +926,7 @@ LoadJDTLSServer = function()
     }
     require('jdtls').start_or_attach(config)
 end
-------------- Kotlin-------------------------------------
+------------- KOTLIN-------------------------------------
 -- https://github.com/fwcd/kotlin-language-server
 
 LoadKotlinLSP = function()
@@ -1243,7 +1248,7 @@ if not vim.env.VIM_NOPLUG then
         {
             "folke/flash.nvim",
             event = "VeryLazy",
-            enabled = false,
+            -- enabled = false,
             --- @type Flash.Config
             opts = {},
             keys = {
