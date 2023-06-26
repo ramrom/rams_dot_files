@@ -603,9 +603,6 @@ LoadTreeSitter = function()
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
-        -- oct2022: M1 macs have known issue for phpdoc: https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
-            -- see also https://www.reddit.com/r/neovim/comments/u3hj8p/treesitter_cant_install_phpdoc_on_m1_mac/
-        ignore_install = { "phpdoc" },
         highlight = {
             enable = true,     -- `false` will isable the whole extension
             -- NOTE: names of the parsers and not the filetype. (for example if you want to
