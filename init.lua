@@ -902,6 +902,22 @@ LoadJDTLSServer = function()
     local config = {
         cmd = { '/opt/homebrew/bin/jdtls' },
         root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+        settings = {
+            java = {
+                configuration = {
+                    runtimes = {
+                        {
+                            name = "JavaSE-11",
+                            path = "/opt/homebrew/opt/openjdk@11",
+                        },
+                        {
+                            name = "JavaSE-17",
+                            path = "/opt/homebrew/opt/openjdk@17",
+                        },
+                    }
+                }
+            }
+        }
     }
     require('jdtls').start_or_attach(config)
 end
