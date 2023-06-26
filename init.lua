@@ -1192,13 +1192,13 @@ if not vim.env.VIM_NOPLUG then
 
         ----- LSP STUFF
         { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
-        { 'scalameta/nvim-metals',
-            config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
         { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer },
+        { 'scalameta/nvim-metals',
+            config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
         { 'simrat39/rust-tools.nvim', config = LoadRustTools,
             cond = false,
             dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
