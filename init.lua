@@ -1,7 +1,10 @@
+-------------------------------------------------------------------------------------------------------
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NEOVIM CONFIG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+-------------------------------------------------------------------------------------------------------
 
 -- TODO: get this working, if i directly link firenvim.lua to init.lua, it works, but this doesnt
 if not not vim.g.started_by_firenvim then
+-- if not vim.g.started_by_firenvim then
 -- if true then
     require('firenvim')
 else
@@ -225,7 +228,8 @@ function ToggleAutoAutoComplete()
 end
 
 -- "Enabled" here means enabled = true and cond = true
--- e.g. LazyPluginEnabled('lualine.nvim')
+-- usage: name of plugin that lazy UI shows
+    -- e.g.: LazyPluginEnabled('lualine.nvim') or could be LazyPluginENabled('fzf') ...
 LazyPluginEnabled = function(name)
     local l = require('lazy.core.config')
     if l.plugins[name] == nil then return false end  -- if enabled = false, plugin entry here wont be defined
@@ -240,9 +244,8 @@ end
 -- NOTE: lazy.vim, if enabled = true module exists, and if cond = false it's not loaded
     -- need to set lazy's config for plugins cond to true before you can require it
 -- NOTE: vimscript plugins wont have a lua module (aka no `require` invocation), e.g. fzf.vim
--- usage: Lua.moduleExists('lualine')
-local Lua = {}
-function Lua.moduleExists(name)
+-- usage: e.g. Lua.moduleExists('lualine')  , generally without the extension
+function moduleExists(name)
     if package.loaded[name] then
         return true
     else
@@ -261,7 +264,7 @@ function Lua.moduleExists(name)
     end
 end
 
--- FIXME: june25-23 doesn't really work
+-- FIXME: june25-23 doesn't really work, dont really need it tho, vtr plugin is pretty smart
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window
     vim.fn.system({'tmux', 'display-panes' })
@@ -343,6 +346,7 @@ local LoadOneDarkProConfig = function()
 end
 
 ----- JOSH DICK ONE DARK COLORSCHEME -----
+---- ISSUE: doesnt support highlight groups for noice notifs
 LoadOneDarkConfig = function()
     vim.g.onedark_termcolors=256
     vim.g.onedark_terminal_italics=1
@@ -587,6 +591,10 @@ LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
+    -- only disable markdown if vim-markdown plugin is enabled
+    local mark_disabled = {}
+    if LazyPluginEnabled('vim-markdown') then mark_disabled = { "markdown" } end
+
     require'nvim-treesitter.configs'.setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -598,7 +606,8 @@ LoadTreeSitter = function()
             enable = true,     -- `false` will isable the whole extension
             -- NOTE: names of the parsers and not the filetype. (for example if you want to
             -- disable highlighting for the `tex` filetype, you need to include `latex`, this is the name of the parser)
-            disable = { "markdown" },
+            disable = mark_disabled,
+            -- disable = { "markdown" },
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
             -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -634,7 +643,14 @@ end
 ------------------------- NOICE -----------------------------------------------
 LoadNoice = function()
     require('noice').setup {
-        -- cmdline = { enabled = true, view = 'cmdline_popup' }
+        -- cmdline = { enabled = false, view = 'cmdline_popup' },
+        views = { split = { enter = true } },
+        presets = {
+            bottom_search = false, -- use a classic bottom cmdline for search
+            command_palette = true, -- position the cmdline and popupmenu together
+            long_message_to_split = true, -- long messages will be sent to a split
+            lsp_doc_border = true, -- add a border to hover docs and signature help
+        },
     }
 end
 ------------------------- INDENT BLANKLINE -----------------------------------------------
@@ -705,7 +721,7 @@ LoadAutoComplete = function()
             },
         }),
         window = {
-            -- completion = cmp.config.window.bordered(),
+            completion = cmp.config.window.bordered(),
             documentation = cmp.config.window.bordered(),
         },
         sources = {
@@ -950,6 +966,7 @@ vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate fo
 vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
 vim.keymap.set("n", "<leader>m", ":tabm<Space>")
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
+vim.keymap.set("n", "<leader>T", "<C-w>T")
 vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
 vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
 
@@ -1132,8 +1149,8 @@ if not vim.env.VIM_NOPLUG then
 
         --- COLORSCHEMES
         -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
-        -- { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
-        { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
+        { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
+        -- { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
 
         --- GIT
         { 'tpope/vim-fugitive', event = 'VeryLazy' },
@@ -1148,7 +1165,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- MARKDOWN
         { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
-        { 'preservim/vim-markdown', config = LoadVimMarkdown },
+        { 'preservim/vim-markdown', enabled = not vim.env.NOMARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
         { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
@@ -1158,24 +1175,22 @@ if not vim.env.VIM_NOPLUG then
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
-        { 'simrat39/rust-tools.nvim',
-                cond = false,
-                config = LoadRustTools,
-                dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
+        { 'simrat39/rust-tools.nvim', config = LoadRustTools,
+            cond = false,
+            dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
 
         -- AUTOCOMPLETE
-        { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy', },
+        { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy',
+            dependencies = { 'L3MON4D3/LuaSnip' } },
         { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
         { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
         { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
         { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
 
         -- SNIPPETS
-        { 'L3MON4D3/LuaSnip', 
-                config = LoadLuaSnip, event = 'VeryLazy' },
-                dependencies = { "rafamadriz/friendly-snippets" },  -- sometimes snippets dont load, this forces dep
-        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },  -- be able to add luasnip as completion source for nvim-cmp
-        { "rafamadriz/friendly-snippets", event = 'VeryLazy' },     -- actual snippet library
+        { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },
+        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
+        { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
 
         -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
         { 'glacambre/firenvim',

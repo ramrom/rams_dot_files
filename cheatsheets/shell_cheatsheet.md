@@ -54,6 +54,7 @@ set -o vi   # bash vi mode
 ```
 
 ### COMMAND LINE NAVIGATION (ZSH AND BASH DEFAULTS)
+- basically from https://en.wikipedia.org/wiki/GNU_Readline#Emacs_keyboard_shortcuts
 - `ctrl-q` - Release terminal output (after being paused)
 - `ctrl-w` - delete word before cursor (cut to clipboard)
 - `ctrl-e` - goto end of line

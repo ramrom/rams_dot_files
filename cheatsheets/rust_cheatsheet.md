@@ -400,7 +400,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - Function item types and function pointers automatically implement the trait.
     - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
     - `Send`, `Sync`, `Unpin`, `UnwindSafe` are all autotraits
-- TRAIT OBJECT - a wrapping type that contains anything that implements the trait
+- **TRAIT OBJECT** - a wrapping type that contains anything that implements the trait
     - generally use a fat/smart pointer and the vtable of methods
     - for trait `Trait`, `Box<dyn Trait>` is a trait object
         - even a ref, `&dyn Trait` is a trait object
@@ -481,6 +481,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - executor runs Futures to completion, will "poll" future to make progress
         - tokio `spawn` gives future to executor to schedule
     - future has a "wake" callback func to let executor know when it's ready to be polled
+- async-book - https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html
 - jon gjengset good vid - https://www.youtube.com/watch?v=ThjvMReOXYM&t=7819s&ab_channel=JonGjengset
 - https://docs.rs/futures/latest/futures/
     - cooperative multitasking, tasks, `Futures` (await points) yield at points to let others run
@@ -492,6 +493,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - scala futures are eager, cant be cancelled, use a callback style (like javascript promises) with `map`/`flatMap`
     - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
 - rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context
+- - `Pin` types prevent data from being moved unless type implements `UnPin`
 - **FUTURE** internal representation
     - futures contain a "state machine", each state being a chunk of work seperated by an await
     - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points

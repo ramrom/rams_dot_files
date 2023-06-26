@@ -17,6 +17,8 @@
         > Q: How can the community ensure that the Vim project succeeds for the foreseeable future?
         > Keep me alive.            -  Bram Moolenaar
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
+- good discussion on async/await and more sugar on concurrency in lua
+    - https://github.com/neovim/neovim/issues/19624
 - `vim.cmd` or `vim.api` can't be done async
     - see https://www.reddit.com/r/neovim/comments/13kgl3f/how_can_i_run_a_vimcmd_asynchronously/
     - this is b/c these are wrappers around core vim code that inherently is synchronous on the main thread
@@ -234,9 +236,9 @@ C - make selected dir node the new root node
 - `:command` - print list of defined commands
 - `:Notifications` - neovim, print `notify` notifications (slightly different form messages)
     - e.g. `vim.notify('a notif')` will print a notification
-- :hi  - spit out all highlighting rules
-- :hi clear - reset highlighting
-- :syntax - spits out current syntax rules
+- `:hi`  - spit out all highlighting rules
+- `:hi clear` - reset highlighting
+- `:syntax` - spits out current syntax rules
     - force set syntax highlight to ruby: `set syntax=ruby`
 - `:echo $SOME_ENV_VAR` - output value of a environment variable
 - `:filter *pattern* let g:`
