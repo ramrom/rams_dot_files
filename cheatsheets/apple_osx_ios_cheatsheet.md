@@ -24,7 +24,7 @@
 - show deps of httpie in tree output
     - `brew deps --tree httpie`
 - show all formula that need this formula
-    - `brew uses httpie`
+    - `brew uses --eval-all httpie`
 - only formula installed that need this formula
     - `brew uses --installed httpie`
 - all brew formulas not depended by other brew formulas

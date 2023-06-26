@@ -396,7 +396,6 @@ Q - enter ex mode
 q: - enter command mode window for history of command mode commands
 q/ - enter command mode window editor for history of searches
 q? -  like q/ but reverse direction like the ? normal command
-C-Z - suspend process
 C-K - enter digraph
 C-L - clear and redraw screen
 C-A - add [count] to # of alpha char at or after cursor
@@ -404,6 +403,9 @@ C-X - sub [count] to # of alpha char at or after cursor
 C-G - print file, line location, file status
 C-S - pause flow ctrl, terminal accepts input, no output
 C-Q - start block-visual, some terminals stty start signal
+C-V - enter block visual
+C-W - prefix for various things including window resize and movement
+C-Z - suspend process
 C-] - open tag in new buffer
 C-^ - open last editted file
 . - repeat last change, doesn't include motions(e.g. h/j/k/l) or commands that dont make changes
@@ -448,7 +450,8 @@ G - go to the last line of the document
 5G - go to line 5
 fx - jump to next occurrence of character x
 3fx - jump to 3rd occurence of char x
-tx - jump to before next occurrence of character x
+tx - jump to one char before next occurrence of character x
+3tx - jump to one char b4 3rd occuurence of char x
 Fx - jump to previous occurence of character x
 Tx - jump to after previous occurence of character x
 ; - repeat previous f, t, F or T movement
@@ -559,8 +562,8 @@ c2w - delete from cursor current word, then next word, then insert
 ## VISUAL MODE
 v - start visual mode, mark lines, then do a command (like y-yank)
 V - start linewise visual mode
+C-v - start block visual
 o - move to other end of marked area
-Ctrl + v - start visual block mode
 O - move to other corner of block
 Esc - exit visual mode
 vi} - visual select inner text of "{}" block

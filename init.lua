@@ -898,6 +898,13 @@ LoadGolangLSP = function()
     -- lua require('dap-go').setup()
 end
 
+LoadJDTLSServer = function()
+    local config = {
+        cmd = { '/opt/homebrew/bin/jdtls' },
+        root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+    }
+    require('jdtls').start_or_attach(config)
+end
 ------------- Kotlin-------------------------------------
 -- https://github.com/fwcd/kotlin-language-server
 
@@ -1175,6 +1182,7 @@ if not vim.env.VIM_NOPLUG then
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
+        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer },
         { 'simrat39/rust-tools.nvim', config = LoadRustTools,
             cond = false,
             dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
