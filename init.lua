@@ -409,6 +409,32 @@ end
 --     { bang = true, nargs = '*' }
 -- )
 
+----------------------------- FZF LUA --------------------------------------------------
+LoadFzfLua = function()
+    require'fzf-lua'.setup {
+        -- NOTE: bat previewer doesnt support toggle-preview-cw and cww (rotations)
+        winopts = { preview = { default = "bat" } },
+        keymap = {
+            -- NOTE: f3, f4 get disabled, but ctrl-a/ctrl-e dont....
+            fzf = {
+                -- ["ctrl-n"]    = "preview-page-down",  -- unneeded, does fzflua load my FZF_DEFAULT_OPTS?
+                -- ["ctrl-p"]    = "preview-page-up",    -- same
+                ["ctrl-d"]    = "half-page-down",
+                ["ctrl-u"]    = "half-page-up",
+                ["f3"]        = "toggle-preview-wrap",
+                ["f4"]        = "toggle-preview",
+            },
+            -- NOTE: c-w based movement for windows in tab disabled when fzflua term window is open anyway
+            builtin = {
+                ["<c-w><c-w>"]        = "toggle-help",
+                ["<f1>"]              = "toggle-help",
+                ["<c-w><c-f>"]        = "toggle-fullscreen",
+                ["<f2>"]              = "toggle-fullscreen",
+            }
+        }
+    }
+end
+
 ----------------------------- FZF MRU --------------------------------------------------
 LoadFzfMRU = function()
     vim.g.fzf_mru_no_sort = 1
@@ -1187,6 +1213,7 @@ if not vim.env.VIM_NOPLUG then
         { 'junegunn/fzf', build = ":call fzf#install()" },
         { 'junegunn/fzf.vim', config = LoadFZF },
         { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
+        { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
         -- MARKDOWN
         { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },

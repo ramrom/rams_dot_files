@@ -358,6 +358,13 @@
         - really being succeeded by vulkan
     - DirectX - microsoft APIs for graphics and more
 
+## GAME CONSOLES
+- Xbox 
+    - gen 1 - xbox, gen 2 - xbox 360, 
+    - gen 3 - xbox One, backwards compabile with xbox original and 360
+    - gen 4 - xbox series X/S - fully backward compatible with xbox One (and xbox 360 and original xbox)
+- ps5 (gen 5) - backward compatible with most ps4 games
+
 ## LEAGUE
 - north america server: 104.160.131.3
 - ctrl f in league for ping

@@ -217,7 +217,7 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
 # fzf query is the rg pattern to filter on, this is what the Rg comamnd in vim#fzf plugin does
 # TODO: add fzf --expect and optionally edit file if expect given
 # TODO: add preview for more context
-function frgd() {  # frg p(phony)
+function frgl() {  # frg (live)
     INITIAL_QUERY=""
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
     FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \

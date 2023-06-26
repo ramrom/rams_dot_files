@@ -1,6 +1,7 @@
 # VIM
 - good resource on learning vim: http://vimcasts.org
 - official neovim docs: https://neovim.io/doc/
+- awesome cheatsheet: https://github.com/ibhagwan/vim-cheatsheet
 - Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
     - *NOT* totally backwards compatible with old VimL
@@ -132,22 +133,24 @@ G log %         - git log <current file>
 - `ysiw[` - select inner word and surround with `[`
 
 ### NERDTREE
-?   - toggle quickhelp
-m   - bring up menu to move/rename/delete
-q   - close nerdtree
-A   - toggle zooming the nerdtree window
-r/R - refresh dir/refresh tree root
-I   - toggle showing hidden files
-F   - toggle showing file nodes
-NERDTreeFind - no args, show file for buf in tree
-go - open file but stay in nerdtree
-i/gi - open in new split/new split stay cursor
-s/gs - open in new/ vert split
-x - close current dir
-p - jump to parent node of selected node
-P - jump to tree root
-K/J - jmp to first/last child node of current node's parent
-C - make selected dir node the new root node
+```vim
+?             " toggle quickhelp
+m             " bring up menu to move/rename/delete
+q             " close nerdtree
+A             " toggle zooming the nerdtree window
+r R           " refresh dir/refresh tree root
+I             " toggle showing hidden files
+F             " toggle showing file nodes
+NERDTreeFind  " no args, show file for buf in tree
+go            " open file but stay in nerdtree
+i gi          " open in new split/new split stay cursor
+s gs          " open in new/ vert split
+x             " close current dir
+p             " jump to parent node of selected node
+P             " jump to tree root
+K J           " jmp to first/last child node of current node's parent
+C             " make selected dir node the new root node
+```
 
 ### NVIM-BQF
 - shows preview window of current item in prefix window for nvim
