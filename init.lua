@@ -435,11 +435,6 @@ LoadFzfLua = function()
     }
 end
 
------------------------------ FZF MRU --------------------------------------------------
-LoadFzfMRU = function()
-    vim.g.fzf_mru_no_sort = 1
-end
-
 ----------------------------- VIM-MARKDOWN --------------------------------------------------
 LoadVimMarkdown = function()
     -- plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
@@ -1017,7 +1012,7 @@ vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate fo
 vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
 vim.keymap.set("n", "<leader>m", ":tabm<Space>")
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
-vim.keymap.set("n", "<leader>T", "<C-w>T")
+vim.keymap.set("n", "<leader><leader>t", "<C-w>T")
 vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
 vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
 
@@ -1047,7 +1042,7 @@ vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
 vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
 vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
 vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
-vim.keymap.set('n', '<leader>i', '<cmd>:FZFMru<CR>')
+vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
 vim.keymap.set('n', '<leader>e', '<cmd>:Lines<CR>')
 vim.keymap.set('n', '<leader>E', '<cmd>:Lines!<CR>')
 
@@ -1212,7 +1207,6 @@ if not vim.env.VIM_NOPLUG then
         --- FUZZY FIND
         { 'junegunn/fzf', build = ":call fzf#install()" },
         { 'junegunn/fzf.vim', config = LoadFZF },
-        { 'pbogut/fzf-mru.vim', config = LoadFzfMRU },       -- fzf.vim is missing a most recently used file search
         { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
         -- MARKDOWN
