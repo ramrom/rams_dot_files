@@ -651,7 +651,7 @@ LoadTreeSitter = function()
         },
     }
 
-    -- june'23 treesitter doesnt support groovy
+    -- june'23 treesitter supports groovy, but wont fold on Jenkinsfiles
     vim.api.nvim_create_autocmd('FileType', {
         pattern = 'groovy', 
         callback = function() 
@@ -676,6 +676,19 @@ LoadNoice = function()
             lsp_doc_border = true, -- add a border to hover docs and signature help
         },
     }
+
+    -- can scroll in lsp hover doc
+    vim.keymap.set({"n", "i", "s"}, "<c-d>", function()
+        if not require("noice.lsp").scroll(4) then
+            return "<c-d>"
+        end
+    end, { silent = true, expr = true })
+
+    vim.keymap.set({"n", "i", "s"}, "<c-u>", function()
+        if not require("noice.lsp").scroll(-4) then
+            return "<c-u>"
+        end
+    end, { silent = true, expr = true })
 end
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
