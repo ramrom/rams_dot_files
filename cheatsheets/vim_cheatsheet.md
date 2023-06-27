@@ -89,6 +89,10 @@
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-dap - plugin to support debug adapter protocol
+- nvim-cmp - autocompletion plugin, lua
+    - comparators are advanced and need docs - https://github.com/hrsh7th/nvim-cmp/issues/883
+        - offset comparator choose matches closer to beg of word
+        - exact match comparator chooses exact matches (e.g. `word` matches `word` more than `wording`)
 
 ### PLUGIN MANAGERS
 #### PACKER

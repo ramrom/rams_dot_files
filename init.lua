@@ -636,9 +636,7 @@ LoadTreeSitter = function()
             -- disable = { "markdown" },
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languages
+            -- additional_vim_regex_highlighting = { "markdown" },
             additional_vim_regex_highlighting = false,
         },
         indent = { enable = true },
@@ -755,6 +753,33 @@ LoadAutoComplete = function()
             { name = 'buffer' },
             { name = 'path' },
             { name = 'luasnip' },
+        },
+
+        -- see https://www.reddit.com/r/neovim/comments/14k7pbc/what_is_the_nvimcmp_comparatorsorting_you_are/
+        sorting = {
+            comparators = {
+                cmp.config.compare.offset,
+                cmp.config.compare.exact,
+                cmp.config.compare.score,
+
+                -- from https://github.com/lukas-reineke/cmp-under-comparator
+                function(entry1, entry2)
+                    local _, entry1_under = entry1.completion_item.label:find "^_+"
+                    local _, entry2_under = entry2.completion_item.label:find "^_+"
+                    entry1_under = entry1_under or 0
+                    entry2_under = entry2_under or 0
+                    if entry1_under > entry2_under then
+                        return false
+                    elseif entry1_under < entry2_under then
+                        return true
+                    end
+                end,
+
+                cmp.config.compare.kind,
+                cmp.config.compare.sort_text,
+                cmp.config.compare.length,
+                cmp.config.compare.order,
+            },
         },
 
         formatting = {
@@ -976,7 +1001,7 @@ vim.g.mapleader = " "
 --- TODO: Prime open real estate for normal mode!
     -- NORMAL MODE
         -- <Leader><Leader>    (all except for h/g/q/r)
-        -- c-m/c-g/c-s/c-q
+        -- c-m, c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
         -- ; " semicolon repeats last f/F motions
         -- ," ; in reverse direction
@@ -1044,8 +1069,8 @@ vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf file
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
 vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
 vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
-vim.keymap.set('n', '<leader>x', '<cmd>:Rg<CR>')
-vim.keymap.set('n', '<leader>X', '<cmd>:Rg!<CR>')
+vim.keymap.set('n', '<leader>x', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf live grep" })
+vim.keymap.set('n', '<leader>X', '<cmd>:RG!<CR>')
 vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
 vim.keymap.set('n', '<leader>e', '<cmd>:Lines<CR>')
 vim.keymap.set('n', '<leader>E', '<cmd>:Lines!<CR>')
@@ -1059,7 +1084,8 @@ vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
 vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:Commits<CR>')
 vim.keymap.set('n', '<leader>gM', '<cmd>:Commits!<CR>')
-vim.keymap.set('n', '<leader>gs', '<cmd>:Gitsigns toggle_signs<cr>')
+vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf live grep" })
+vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
 --------- FASTER INDENT
