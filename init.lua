@@ -1061,6 +1061,7 @@ vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 --------- FZF STUFF
+vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader><leader>r', '<cmd>:History:<cr>', { desc = "command history" })
@@ -1152,7 +1153,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
     -- ACTIONS
-    vim.keymap.set("n", "gh", vim.lsp.codelens.run, { desc = "codelens run" })
+    vim.keymap.set("n", "gH", vim.lsp.codelens.run, { desc = "codelens run" })
     vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "code action" })
     vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "format"})
     vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "rename"})
@@ -1177,14 +1178,24 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
     vim.keymap.set('n', 'gz', ' <cmd>lua vim.lsp.diagnostic.open_float()<CR>')
 
+    -- FZF SEARCH
+    vim.keymap.set('n', '<leader>lr', "<cmd>lua require('fzf-lua').lsp_references()<CR>", { desc = "refs" })
+    vim.keymap.set('n', '<leader>li', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>", { desc = "implementations" })
+    vim.keymap.set('n', '<leader>le', "<cmd>lua require('fzf-lua').lsp_declarations()<CR>", { desc = "declarations" })
+    vim.keymap.set('n', '<leader>lf', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>", { desc = "defs" })
+    vim.keymap.set('n', '<leader>ld', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>", { desc = "typedefs" })
+    vim.keymap.set('n', '<leader>ll', "<cmd>lua require('fzf-lua').lsp_finder()<CR>", { desc = "all lsp finder" })
+    vim.keymap.set('n', '<leader>lw', "<cmd>lua require('fzf-lua').lsp_workspace_symbols()<CR>", { desc = "workspace symbols" })
+    vim.keymap.set('n', '<leader>ls', "<cmd>lua require('fzf-lua').lsp_document_symbols()<CR>", { desc = "doc symbols" })
+
     ---- DAP COMMANDS
-    vim.keymap.set("n", "<leader>lc", [[<cmd>lua require"dap".continue()<CR>]])
-    vim.keymap.set("n", "<leader>lr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
-    vim.keymap.set("n", "<leader>lK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
-    vim.keymap.set("n", "<leader>lt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
-    vim.keymap.set("n", "<leader>lso", [[<cmd>lua require"dap".step_over()<CR>]])
-    vim.keymap.set("n", "<leader>lsi", [[<cmd>lua require"dap".step_into()<CR>]])
-    vim.keymap.set("n", "<leader>ll", [[<cmd>lua require"dap".run_last()<CR>]])
+    vim.keymap.set("n", "gkc", [[<cmd>lua require"dap".continue()<CR>]])
+    vim.keymap.set("n", "gkr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+    vim.keymap.set("n", "gkK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+    vim.keymap.set("n", "gkt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+    vim.keymap.set("n", "gkso", [[<cmd>lua require"dap".step_over()<CR>]])
+    vim.keymap.set("n", "gksi", [[<cmd>lua require"dap".step_into()<CR>]])
+    vim.keymap.set("n", "gkl", [[<cmd>lua require"dap".run_last()<CR>]])
 end
 
 SetMetalsKeymaps = function()
