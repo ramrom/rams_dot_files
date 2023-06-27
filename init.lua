@@ -1176,7 +1176,7 @@ SetLSPKeymaps = function()
         -- see https://github.com/scalameta/nvim-metals/discussions/381
     vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover)  -- hitting key again will enter hover buffer
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "implementation" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "references" })
