@@ -414,6 +414,7 @@ LoadFzfLua = function()
     require'fzf-lua'.setup {
         -- NOTE: bat previewer doesnt support toggle-preview-cw and cww (rotations)
         winopts = { preview = { default = "bat" } },
+        previewers = { bat = { cmd = vim.loop.os_uname().sysname == "Darwin" and "bat" or "batcat" } },
         keymap = {
             -- NOTE: f3, f4 get disabled, but ctrl-a/ctrl-e dont....
             fzf = {
@@ -430,6 +431,8 @@ LoadFzfLua = function()
                 ["<f1>"]              = "toggle-help",
                 ["<c-w><c-f>"]        = "toggle-fullscreen",
                 ["<f2>"]              = "toggle-fullscreen",
+                ["<F5>"]              = "toggle-preview-ccw",
+                ["<F6>"]              = "toggle-preview-cw",
             }
         }
     }
