@@ -32,7 +32,6 @@ alias clt='clear && tmux clear-history'
 alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 alias bm='batman'
 alias tmr='transmission-remote'
-alias httpv='http -v'
 alias xhv='xh -v'
 alias xhcn='xhv https://api.chucknorris.io/jokes/random'
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'

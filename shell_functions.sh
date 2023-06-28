@@ -195,14 +195,6 @@ function fsn() {
         --preview-window=:wrap --preview-window right:70%
 }
 
-# TODO: reload of `ps -ef` fails but `ps` works
-function fk() {
-  FZF_DEFAULT_COMMAND='ps -ef' \
-  fzf --bind 'ctrl-r:reload($FZF_DEFAULT_COMMAND)' \
-      --header 'Press CTRL-R to reload' --header-lines=1 \
-      --height=50% --layout=reverse
-}
-
 # like cd **, but with tree preview
 function fcd() {
     cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
@@ -241,6 +233,9 @@ function yts_query() {
     xh -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
     jq . /tmp/yts_query
 }
+
+# uses https://github.com/chubin/cheat.sh
+function cheat() { curl cht.sh/$1/$2 }
 
 function display_notif() {
     [ -z "$1" ] && echo "no message given!" && return 1
