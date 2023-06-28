@@ -64,6 +64,8 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
+function pppath() { local IFS=":"; for p in $PATH; do; echo $p; done }
+
 # given port number return if ssh(or polipo) is listening on it
 # polipo used to create HTTP proxy to a SOCKS proxy
 function find_listening_ports() {
@@ -233,9 +235,6 @@ function yts_query() {
     xh -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
     jq . /tmp/yts_query
 }
-
-# uses https://github.com/chubin/cheat.sh
-function cheat() { curl cht.sh/$1/$2 }
 
 function display_notif() {
     [ -z "$1" ] && echo "no message given!" && return 1

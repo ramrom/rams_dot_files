@@ -18,7 +18,7 @@ FZF_HEIGHT=${FZF_HEIGHT:=100}
 FZF_DEFAULT_COMMAND="ps -hef"
 [ $(uname) = "Linux" ] && FZF_DEFAULT_COMMAND="ps auxhf"
 
-# TODO: /proc/x only works on Linux, fix for OSX
+# TODO: /proc/x only works on Linux, find another solution for OSX
 prev_cmd='ls -l /proc/$(echo {} | awk '\''{print $2}'\'')/fd'
 
 fzf --bind "ctrl-r:reload($FZF_DEFAULT_COMMAND)" \

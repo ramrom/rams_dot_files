@@ -21,6 +21,9 @@
     - `shadow` contains hashed passwords and other management fields, is readable only by root
 - swap partition - using a filesystem generally on a HD as storage for data on RAM, usually when RAM is full
 - ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
+- cron: task scheduler, great site: https://crontab.guru/
+- procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
+    - most unix-like OSes support it, notably OSX doesn't
 
 ## GNU
 - started by richard stallman in 1984
@@ -45,7 +48,6 @@
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
 - dash is used as /bin/sh b/c it's much faster than bash, so boots are faster
     - it doesnt have command completion, or ctrl-r search, or command history search, as this would make the shell slow
-- cron: task scheduler, great site: https://crontab.guru/
 
 sudo shutdown -h now (halt now)
 sudo shutdown -k (kick everyone off and login disabled, no halting)
