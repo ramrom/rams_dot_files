@@ -690,6 +690,48 @@ LoadNoice = function()
         end
     end, { silent = true, expr = true })
 end
+
+------------------------- FLASH -----------------------------------------------
+FlashKeyDefinitions =
+    {
+        {
+            "s",
+            mode = { "n", "x", "o" },
+            -- match only beg of words
+            function()
+                require("flash").jump({
+                  search = {
+                    mode = function(str)
+                      return "\\<" .. str
+                    end,
+                  },
+                })
+            end,
+            desc = "Flash",
+        },
+        -- visual select fast based on treesitter objects
+        -- FIXME: can remote , then flash treesitter combo
+            -- but "y""s" sequence conflicts with vim-surround
+        {
+            "S",
+            mode = { "n", "o", "x" },
+            function()
+                require("flash").treesitter()
+            end,
+            desc = "Flash Treesitter",
+        },
+        -- remote key, do an op and return to original cursor location
+        -- e.g. `yrfa$` - yank remote letter f, (say sel 'a'), to end of line
+        {
+            "r",
+            mode = "o",
+            function()
+                require("flash").remote()
+            end,
+            desc = "Remote Flash",
+        },
+    }
+
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
     require("indent_blankline").setup {
@@ -1320,36 +1362,10 @@ if not vim.env.VIM_NOPLUG then
         {
             "folke/flash.nvim",
             event = "VeryLazy",
+            keys = FlashKeyDefinitions,
             -- enabled = false,
             --- @type Flash.Config
             opts = {},
-            keys = {
-                {
-                    "s",
-                    mode = { "n", "x", "o" },
-                    function()
-                        -- default options: exact mode, multi window, all directions, with a backdrop
-                        require("flash").jump()
-                    end,
-                    desc = "Flash",
-                },
-                {
-                    "S",
-                    mode = { "n", "o", "x" },
-                    function()
-                        require("flash").treesitter()
-                    end,
-                    desc = "Flash Treesitter",
-                },
-                {
-                    "r",
-                    mode = "o",
-                    function()
-                        require("flash").remote()
-                    end,
-                    desc = "Remote Flash",
-                },
-            },
         },
         'christoomey/vim-tmux-runner',
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
