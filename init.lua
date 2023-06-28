@@ -1064,7 +1064,7 @@ vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('exe')<cr>", { desc = "execute program" })
 vim.keymap.set("n", "<leader>ar", SelectTmuxRunnerPane, { desc = "set tmux pane runner" })
 vim.keymap.set("n", "<leader>at", "<cmd>:lua RunAction('test')<cr>", { desc = "run tests" })
-vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('test')<cr>", { desc = "build/compile program" })
+vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('build')<cr>", { desc = "build/compile program" })
 
 ------ WINDOW RESIZE/MOVE/CREATE
 local default_opts = { noremap = true, silent = true }
@@ -1128,7 +1128,7 @@ vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
 vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
 vim.keymap.set('n', '<leader>gm', '<cmd>:Commits<CR>')
 vim.keymap.set('n', '<leader>gM', '<cmd>:Commits!<CR>')
-vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf live grep" })
+vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 
@@ -1317,7 +1317,6 @@ if not vim.env.VIM_NOPLUG then
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        { 'j-hui/fidget.nvim', tag = 'legacy', config = function() require"fidget".setup{} end },
         { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer },
         { 'scalameta/nvim-metals',
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },

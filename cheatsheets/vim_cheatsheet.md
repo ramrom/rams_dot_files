@@ -93,6 +93,7 @@
     - comparators are advanced and need docs - https://github.com/hrsh7th/nvim-cmp/issues/883
         - offset comparator choose matches closer to beg of word
         - exact match comparator chooses exact matches (e.g. `word` matches `word` more than `wording`)
+- fidget.nvim - show LSP progress in bottom right, noice.nvim does this too and honestly better
 
 ### PLUGIN MANAGERS
 #### PACKER
