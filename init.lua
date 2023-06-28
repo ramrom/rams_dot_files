@@ -677,18 +677,6 @@ LoadNoice = function()
         },
     }
 
-    -- can scroll in lsp hover doc
-    vim.keymap.set({"n", "i", "s"}, "<c-d>", function()
-        if not require("noice.lsp").scroll(4) then
-            return "<c-d>"
-        end
-    end, { silent = true, expr = true })
-
-    vim.keymap.set({"n", "i", "s"}, "<c-u>", function()
-        if not require("noice.lsp").scroll(-4) then
-            return "<c-u>"
-        end
-    end, { silent = true, expr = true })
 end
 
 ------------------------- FLASH -----------------------------------------------
@@ -1232,6 +1220,21 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
     vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
     vim.keymap.set('n', 'gz', ' <cmd>lua vim.lsp.diagnostic.open_float()<CR>')
+
+    if LazyPluginEnabled('noice.nvim') then
+        -- can scroll in lsp hover doc
+        vim.keymap.set({"n", "i", "s"}, "<c-d>", function()
+            if not require("noice.lsp").scroll(4) then
+                return "<c-d>"
+            end
+        end, { silent = true, expr = true })
+
+        vim.keymap.set({"n", "i", "s"}, "<c-u>", function()
+            if not require("noice.lsp").scroll(-4) then
+                return "<c-u>"
+            end
+        end, { silent = true, expr = true })
+    end
 
     -- FZF SEARCH
     vim.keymap.set('n', '<leader>lr', "<cmd>lua require('fzf-lua').lsp_references()<CR>", { desc = "refs" })
