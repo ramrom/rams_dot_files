@@ -1114,11 +1114,12 @@ vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf file
 vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
 vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
 vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
-vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf live grep" })
-vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>", { desc = "fzf grep word" })
-vim.keymap.set('n', '<leader>ew', "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", { desc = "fzf grep cWORD" })
-vim.keymap.set('n', '<leader>ex', '<cmd>:RG!<CR>')
-vim.keymap.set('n', '<leader>el', '<cmd>:Lines<CR>')
+vim.keymap.set('n', '<leader>ef', "<cmd>lua require('fzf-lua').grep()<CR>", { desc = "fzf grep (rg query, then fzf results)" })
+vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf-lua live grep" })
+vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>", { desc = "fzf cursor grep word" })
+vim.keymap.set('n', '<leader>ew', "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", { desc = "fzf cursor grep cWORD" })
+vim.keymap.set('n', '<leader>ex', '<cmd>:RG!<CR>', { desc = "fzf.vim RG! (live grep)" })
+vim.keymap.set('n', '<leader>eo', '<cmd>:BLines!<CR>')
 vim.keymap.set('n', '<leader>ei', '<cmd>:Lines!<CR>')
 
 --------- GIT STUFF
