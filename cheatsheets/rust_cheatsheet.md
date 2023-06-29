@@ -16,9 +16,9 @@
 ## LEARNING RESOURCES
 ### DOCS
 - https://www.rust-lang.org/
-    - quick ref: https://doc.rust-lang.org/rust-by-example/index.html
-    - the rust book (walkthrough of core concepts): https://doc.rust-lang.org/stable/book/title-page.html
-    - technical reference: https://doc.rust-lang.org/reference/introduction.html
+- quick ref: https://doc.rust-lang.org/rust-by-example/index.html
+- the rust book (walkthrough of core concepts): https://doc.rust-lang.org/stable/book/title-page.html
+- technical reference: https://doc.rust-lang.org/reference/introduction.html
 - rust in Y minutes: https://learnxinyminutes.com/docs/rust/
 - `rustup doc` - open local copy of docs in browser
     - `rustup doc --std` to jump straight to std lib
@@ -371,6 +371,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
+     - data put on stack _must_ be `Sized`, un-`Sized` have to go on the heap
      - for enums compiler uses size of largest variant
      - it's automatically implemented for types whos size is known at compile time, very few types are not `Sized`
 - `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)

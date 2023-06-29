@@ -6,6 +6,11 @@
     - they all had to agree on features they liked
     - golang is object-oriented _but_ has not classes, you can be object-oriented without classes
 
+## GC
+- compiler performs escape analysis: determine if data goes on heap or stack
+    - if data is used outside of scope (e.g. data is returned) it needs to be on the heap
+    - other cases are if data is really big, it'll be on the heap
+
 ## GOOD LIBS
 - solid big decimal package: https://github.com/shopspring/decimal
     - uses stdlib's big.Int

@@ -718,6 +718,15 @@ FlashKeyDefinitions =
             end,
             desc = "Remote Flash",
         },
+        -- TODO: what does the map really do? it doesnt seem to toggle...
+        {
+            "<leader>ww",
+            mode = { "n" },     -- README says "c" mode...
+            function()
+                require("flash").toggle()
+            end,
+            desc = "Toggle Flash Search",
+        },
     }
 
 ------------------------- INDENT BLANKLINE -----------------------------------------------
@@ -1043,6 +1052,7 @@ vim.g.mapleader = " "
 
 --- TODO: Prime open real estate for normal mode!
     -- NORMAL MODE
+        -- <leader>,
         -- <Leader><Leader>    (all except for h/g/q/r)
         -- c-m, c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
@@ -1103,17 +1113,19 @@ vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
 vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
---------- FZF STUFF
+--------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
 vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
 vim.keymap.set('n', '<leader><leader>r', '<cmd>:History:<cr>', { desc = "command history" })
+vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
+vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
+------ FZF FILES
 vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
 vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
 vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
 vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
-vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
-vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
+------ FZF GREP
 vim.keymap.set('n', '<leader>ef', "<cmd>lua require('fzf-lua').grep()<CR>", { desc = "fzf grep (rg query, then fzf results)" })
 vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf-lua live grep" })
 vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>", { desc = "fzf cursor grep word" })
