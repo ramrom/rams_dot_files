@@ -18,6 +18,7 @@
     - in langs like java a GC does this for you
 ### DYNAMIC
 - `malloc` - dynamic request (stored on the heap) contiguous amount of memory
+    - under the hood these call `mmap` and `mmunmap` system calls that manipulate virtual memory
     - null returned if cant allocate
     - void pointer if success (and should cast to typed pointer)
 - `calloc` - like malloc, initializes memory to zero value
@@ -36,6 +37,29 @@
             - `struct myStruct *struct1 = malloc(sizeof(struct myStruct)); struct1->number = 500;`
         - stack
             - `struct myStruct struct1; struct1.number = 1;`
+
+## DATA STRUCTURES
+- arrays - `int *myarr` is essentially equivalent to `int myarr[]`
+    - under the hood passing around `a[]` is really just passing `*a`
+    - array syntax does have some type checking
+        ```c
+        struct S;
+        void foo(struct S *a); // OK
+        void bar(struct S a[]); // ERROR
+        ```
+    - multi-dimensional arrays
+        ```c
+        int abc[2][2] = { { 1, 2 }, { 3, 4 } }  /* Valid declaration, preferred*/
+        int abc[2][2] = {1, 2, 3 ,4 }  /* Valid declaration*/
+        int abc[][2] = {1, 2, 3 ,4 }  /* Valid declaration*/ 
+        int abc[][] = {1, 2, 3 ,4 }   /* Invalid declaration – you must specify second dimension*/
+        int abc[2][] = {1, 2, 3 ,4 } /* Invalid because of the same reason  mentioned above*/
+        ```
+
+## IO
+- print int - `int v = 1; printf("%i\n",v);`
+- print string - `char *s = "hi"; printf("%s\n",s);`
+
 ## LIBS
 - `stdlib` 
     - memory allocation (`malloc`/`alloc`/`realloc`/`free`)

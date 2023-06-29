@@ -304,6 +304,8 @@ RunAction = function(arg)
     if arg == "exe" then
         if vim.bo.filetype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo run')
+        elseif vim.bo.filetype == 'c' then
+            vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%") .. ' && ./a.out')
         end
     elseif arg == 'test' then
         if vim.bo.filetype == "rust" then
@@ -312,6 +314,9 @@ RunAction = function(arg)
     elseif arg == 'build' then
         if vim.bo.filetype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo build')
+        elseif vim.bo.filetype == 'c' then
+            -- vim.fn.expand("%"))
+            vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%"))
         end
     end
 end
