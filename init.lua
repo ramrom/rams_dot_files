@@ -594,6 +594,7 @@ LoadWhichKey = function()
     wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
     wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
     wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
+    wk.register( { e = { name = "fzf grepping" } }, { prefix = "<leader>" } )
     wk.register( { w = { name = "misc" } }, { prefix = "<leader>" } )
 end
 
@@ -1225,7 +1226,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "implementation" })
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "references" })
-    vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol, { desc = "document symbol" })
+    vim.keymap.set("n", "gwr", vim.lsp.buf.document_symbol, { desc = "document symbol" })
     vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, { desc = "workspace symbol" })
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist, { desc = "setqflist" }) -- all workspace diagnostics
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
