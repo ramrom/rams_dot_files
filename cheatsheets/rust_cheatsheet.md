@@ -109,6 +109,8 @@
 - `while bool_expre { ... }` - while loops
 - for loops
     ```rust
+        for a in (1..10) { println!("{i}"); };  // create a range and iterate over it
+
         let foo = vec![1,2];
 
         for i in foo { println!("{i}"); }  // passes ownership, same as i.into_iter() foo becomes invalid

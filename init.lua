@@ -600,7 +600,7 @@ LoadWhichKey = function()
     wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
     wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
     wk.register( { e = { name = "fzf grepping" } }, { prefix = "<leader>" } )
-    wk.register( { w = { name = "misc" } }, { prefix = "<leader>" } )
+    wk.register( { w = { name = "misc config" } }, { prefix = "<leader>" } )
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
@@ -1059,11 +1059,11 @@ vim.g.mapleader = " "
 --- TODO: Prime open real estate for normal mode!
     -- NORMAL MODE
         -- <leader>,
-        -- <Leader><Leader>    (all except for h/g/q/r)
+        -- <Leader><Leader>  (most open)
         -- c-m, c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
-        -- ; " semicolon repeats last f/F motions
-        -- ," ; in reverse direction
+        -- ;  - semicolon repeats last f/F motions
+        -- ,  - in reverse direction
     -- INSERT MODE
         -- c-s, c-space
 -- TODO: i think these maps are probably useful
@@ -1325,7 +1325,7 @@ if not vim.env.VIM_NOPLUG then
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
         --- FUZZY FIND
-        { 'junegunn/fzf', build = ":call fzf#install()" },
+        { "junegunn/fzf", build = "./install --bin" },
         { 'junegunn/fzf.vim', config = LoadFZF },
         { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
@@ -1382,15 +1382,9 @@ if not vim.env.VIM_NOPLUG then
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
             } 
         },
-        {
-            "folke/flash.nvim",
-            event = "VeryLazy",
-            keys = FlashKeyDefinitions,
-            -- enabled = false,
-            --- @type Flash.Config
-            opts = {},
-        },
+        { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = {}, },
         'christoomey/vim-tmux-runner',
+
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     })

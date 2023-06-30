@@ -1,4 +1,6 @@
 # C
+- linux torvalds on good C code with removing a node in linked list
+    - https://github.com/mkirchner/linked-list-good-taste
 
 ## MEMORY
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
@@ -37,6 +39,8 @@
             - `struct myStruct *struct1 = malloc(sizeof(struct myStruct)); struct1->number = 500;`
         - stack
             - `struct myStruct struct1; struct1.number = 1;`
+- general stack size is platform dependent but like 2MB - 8MB
+    - e.g. 2022 mbp `int foo[2000000]` was ok, but `int foo[2100000]` segfaulted
 
 ## DATA STRUCTURES
 - arrays - `int *myarr` is essentially equivalent to `int myarr[]`

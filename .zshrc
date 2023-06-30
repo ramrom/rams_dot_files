@@ -95,6 +95,7 @@ append_dir_to_path ~/node_modules/.bin  # local install of npm bins
 [ "$(uname)" = "Linux" ] && append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local
 
 [ "$(uname)" = "Darwin" ] && append_dir_to_path /opt/homebrew/bin  # aug2022, homebrew bins are here, not /usr/local/bin/
+[ "$(uname)" = "Darwin" ] && append_dir_to_path /opt/homebrew/sbin
 
 #export DISPLAY='localhost:10.0'
 
