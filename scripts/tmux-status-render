@@ -35,12 +35,6 @@ verify_percent () {
     return 0
 }
 
-# NOTE: hyperfine says nvidia-smi takes ~40ms, so refresh less frequent
-linux_nvidia () {
-    nvid=$(nvidia-smi)
-    echo "$nvid" | sed -n '10p'   # the 10th line has most of the info we want
-}
-
 cpu_legend_color="fg=colour242"
 cpu=$(skip_verify=1 tmux_percent_usage_color $(uptime-loadave) "uptimeload")
 status_line1="#[$cpu_legend_color]Uptime-1min:#[default]$cpu"
@@ -91,30 +85,38 @@ if [ "$(uname)" = "Linux" ]; then
 
     #### GPU Stats
     if command -v nvidia-smi > /dev/null; then
-        stats=$(linux_nvidia)
-        gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
-        gputemp_color=$(tmux_temp_color $gpu_temp)
 
-        # gpu_mem=$(echo $stats | awk '{print $9 $10 $11}')     # simple and no coloring
-        gpu_mem_total=$(echo $stats | awk '{print $11}' | sed 's/...$//g')  # TODO: total never changes, memoize this somehow
-        gpu_mem_total_col="#[fg=colour007]$gpu_mem_total#[default]"
-        gpu_mem_used=$(echo $stats | awk '{print $9}' | sed 's/...$//g')
-        gpu_mem_usg=$(($gpu_mem_used * 100 / $gpu_mem_total))
-        gpu_col=040; [ "$gpu_mem_usg" -gt 50 ] && gpu_col=208; [ "$gpu_mem_usg" -gt 90 ] && gpu_col=196
-        gpu_mem_used_col="#[fg=colour$gpu_col]$gpu_mem_used#[default]"
-        gpu_mem="$gpu_mem_used_col / $gpu_mem_total_col"
+        # NOTE: hyperfine says nvidia-smi takes ~40ms, so refresh less frequent
+        nvid=$(nvidia-smi)
+        if echo "$nvid" | grep "has failed because" > /dev/null; then
+            status_line1="$status_line1 #[fg=red](nvidia-smi failure: $nvid)#[default]"
+        else
+            stats=$(echo "$nvid" | sed -n '10p')   # the 10th line has most of the info we want
 
-        gpu_fan=$(echo $stats | awk '{print $2}' | sed 's/.$//g')
-        gpu_fan_color=$(tmux_percent_usage_color $gpu_fan "gpu fan")
+            gpu_temp=$(echo $stats | awk '{print $3}' | sed 's/.$//')
+            gputemp_color=$(tmux_temp_color $gpu_temp)
 
-        gpu_util=$(echo $stats | awk '{print $13}' | sed 's/.$//')
-        gpu_util_color=$(tmux_percent_usage_color $gpu_util "gpu util")
+            # gpu_mem=$(echo $stats | awk '{print $9 $10 $11}')     # simple and no coloring
+            gpu_mem_total=$(echo $stats | awk '{print $11}' | sed 's/...$//g')  # TODO: total never changes, memoize this somehow
+            gpu_mem_total_col="#[fg=colour007]$gpu_mem_total#[default]"
+            gpu_mem_used=$(echo $stats | awk '{print $9}' | sed 's/...$//g')
+            gpu_mem_usg=$(($gpu_mem_used * 100 / $gpu_mem_total))
+            gpu_col=040; [ "$gpu_mem_usg" -gt 50 ] && gpu_col=208; [ "$gpu_mem_usg" -gt 90 ] && gpu_col=196
+            gpu_mem_used_col="#[fg=colour$gpu_col]$gpu_mem_used#[default]"
+            gpu_mem="$gpu_mem_used_col / $gpu_mem_total_col"
 
-        gpu_legend_color="fg=colour058"
-        status_line1="$status_line1 #[$gpu_legend_color]GPU-Temp:#[default] #[fg=green]$gputemp_color#[default]C"
-        status_line1="$status_line1 #[$gpu_legend_color]GPU-Util:#[default]$gpu_util_color"
-        status_line1="$status_line1 #[$gpu_legend_color]GPU-Mem(MiB):#[default] $gpu_mem"
-        status_line1="$status_line1 #[$gpu_legend_color]GPU-Fan:#[default]$gpu_fan_color"
+            gpu_fan=$(echo $stats | awk '{print $2}' | sed 's/.$//g')
+            gpu_fan_color=$(tmux_percent_usage_color $gpu_fan "gpu fan")
+
+            gpu_util=$(echo $stats | awk '{print $13}' | sed 's/.$//')
+            gpu_util_color=$(tmux_percent_usage_color $gpu_util "gpu util")
+
+            gpu_legend_color="fg=colour058"
+            status_line1="$status_line1 #[$gpu_legend_color]GPU-Temp:#[default] #[fg=green]$gputemp_color#[default]C"
+            status_line1="$status_line1 #[$gpu_legend_color]GPU-Util:#[default]$gpu_util_color"
+            status_line1="$status_line1 #[$gpu_legend_color]GPU-Mem(MiB):#[default] $gpu_mem"
+            status_line1="$status_line1 #[$gpu_legend_color]GPU-Fan:#[default]$gpu_fan_color"
+        fi
     else
         status_line1="$status_line1 #[fg=red](nvidia-smi not found)#[default]"
     fi
