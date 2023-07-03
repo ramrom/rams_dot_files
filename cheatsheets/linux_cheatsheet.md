@@ -288,6 +288,8 @@ sudo unattended-upgrade
     xdotool windowsize 123 800 600
     xdotool windowmove 123 0 1080
 - nvidia-smi - show nvidia card mem usage, gpu temp, X processes
+- nvidia-xconfig - show nvidia config
+    - `nvidia-xconfig --query-gpu-info` - get basic gpu info
 
 ### GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
@@ -444,6 +446,7 @@ drive naming convention:
     - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
 - inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 - lshw - like inxi, display lots of sys info
+    - `sudo lshw -C display` - show only info about display/GPU
 - stat - get metadata on a file
 - lsblk - show block level devices
 - mkfs - to format a disk partition

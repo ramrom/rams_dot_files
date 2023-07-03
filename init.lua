@@ -725,10 +725,9 @@ FlashKeyDefinitions =
             end,
             desc = "Remote Flash",
         },
-        -- TODO: what does the map really do? it doesnt seem to toggle...
         {
-            "<leader>ww",
-            mode = { "n" },     -- README says "c" mode...
+            "<c-s>",            -- toggle off this flash search in search mode
+            mode = { "c" },     -- search `/` or `?` falls under command mode
             function()
                 require("flash").toggle()
             end,
