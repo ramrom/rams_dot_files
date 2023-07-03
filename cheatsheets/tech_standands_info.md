@@ -21,6 +21,13 @@
 ## PROCESSORS
 - TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
 
+## PROCESS SIGNALS
+- most official definition - https://pubs.opengroup.org/onlinepubs/009695399/basedefs/signal.h.html
+- SIGKILL - `kill -9`, forceful terminate without any cleanup
+- SIGINT - `ctrl-c` - interrupt what you are doing, i.e. cancel current action, sometimes terminate the program
+- SIGTERM - terminate the process, let process cleanup
+- SIGQUIT - same as SIGTERM but also core dump
+
 ## ETHERNET
 - https://en.wikipedia.org/wiki/Ethernet_crossover_cable#Automatic_crossover
     - generally since 1998, no need for straight vs crossover cables, ports autodetect

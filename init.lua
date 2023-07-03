@@ -592,8 +592,9 @@ LoadWhichKey = function()
     -- prefix keys descs in popup menu for LSP related things
     wk.register( { g = { name = "LSP + more" } })
     wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
-    wk.register( { w = { name = "diagnostics" } }, { prefix = "g" } )
-    wk.register( { l = { name = "DAP stuff" } }, { prefix = "<leader>" } )
+    wk.register( { w = { name = "LSP diagnostics" } }, { prefix = "g" } )
+    wk.register( { k = { name = "DAP stuff" } }, { prefix = "g" } )
+    wk.register( { l = { name = "LSP fzf search" } }, { prefix = "<leader>" } )
 
     -- other things
     wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
@@ -1217,10 +1218,10 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
     -- ACTIONS
-    vim.keymap.set("n", "gH", vim.lsp.codelens.run, { desc = "codelens run" })
-    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "code action" })
-    vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "format"})
-    vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "rename"})
+    vim.keymap.set("n", "gH", vim.lsp.codelens.run, { desc = "lsp codelens run" })
+    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "lsp code action" }) -- TODO: clobbers get ascii value of char
+    vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "lsp format"})
+    vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "lsp rename"})
 
     -- ANALYSIS COMMANDS
     -- `tab split` will open in new tab, default is open in current tab, no opt for this natively
@@ -1228,11 +1229,11 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>")
     vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>")
     vim.keymap.set('n', 'K', vim.lsp.buf.hover)  -- hitting key again will enter hover buffer
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "signature help" })
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "implementation" })
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "references" })
-    vim.keymap.set("n", "gwr", vim.lsp.buf.document_symbol, { desc = "document symbol" })
-    vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, { desc = "workspace symbol" })
+    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "lsp signature help" })
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {desc = "lsp implementation" })
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "lsp references" })
+    vim.keymap.set("n", "gwr", vim.lsp.buf.document_symbol, { desc = "lsp document symbol" })
+    vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, { desc = "lsp workspace symbol" })
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist, { desc = "setqflist" }) -- all workspace diagnostics
     vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
     vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings

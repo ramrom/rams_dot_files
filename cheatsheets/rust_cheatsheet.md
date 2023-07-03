@@ -89,6 +89,7 @@
 - `cargo tree` - print dependency tree
 - `cargo build -v` - show exactly what commands it's running
 - `cargo build --manifest-path /path/to/Cargo.toml` - specify `Cargo.toml` file in another location
+- `cargo doc --open` - open a crates built docs in browser
 - using a create in a project
     ```rust
     extern crate old_http;  // rust 2015
@@ -590,9 +591,11 @@ let s2 = String::from("hello");  // type String is mutable
     - basically rust's version of libuv, which offers abstractions of big IO APIs like epoll, kqueue, iocp
 - [tokio](https://tokio.rs) - awesome async framework, built on mio
     - core of it is it provides an executor/runtime for rust Futures to run on
-    - main component of runtime: I/O event loop, task scheduler, timer
+    - main component of runtime: I/O event loop (reactor), task scheduler/runner (executor), timer
     - has async version of tons of stuff, e.g. file handling, tcp/udp streams, channels, mutexes, timeouts, sleeps etc.
         - tokio mutex - yields instead of blocks if lock cant be aquired, however more expensive than std mutex
+    - `#[tokio:main]` just creates a `tokio::runtime::Runtime` and `block_on` top level Future (`async fn main{ ... }`)
+        - see https://docs.rs/tokio/latest/tokio/attr.main.html
     - `let t = tokio::runtime::Runtime.new().unwrap()` - create a runtime
         - `t.spawn(async { ... })` - pass future to a tokio runtime/executor
         - `let handle = tokio::runtime::Handle::current();` - get current runtimes handle
