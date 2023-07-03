@@ -25,6 +25,8 @@
     - this is b/c these are wrappers around core vim code that inherently is synchronous on the main thread
     - if you tried to run this in `vim.loop`, it won't work (or in `plenary.job` which wraps libuv)
         - errors like `vimL function must not be called in a lua loop callback`
+- for keymaps, mode definitions https://neovim.io/doc/user/map.html#map-overview
+    - `i` insert, `n` normal, `v` visual+select, `x` visual, `o` operator pending, `c` command-line, `t` terminal, `s` select
 ### VERSION HISTORY
  https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
@@ -290,6 +292,7 @@ C             " make selected dir node the new root node
 - `:set filetype=json` - manually set filetype to json
 - `:set lazyredraw` - for macros dont redraw screen, faster replay
 - `ga` -> show character encoding under cursor
+    - can also call `:ascii` or `:as` at command line
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
 - utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
 - :vsp or :vs filename, open file in vertical split
@@ -576,6 +579,12 @@ O - move to other corner of block
 Esc - exit visual mode
 vi} - visual select inner text of "{}" block
 ctrl-va] - visual block select all text of "[]" block
+
+## SELECT MODE
+- similar to visual mode, designed to be like regular GUI editors
+- `gh` - select
+- `gH` - select line
+- `g<ctrl-h>` - select block
 
 ## REGISTERS
 - Registers stored in ~/.viminfo, loaded on next restart

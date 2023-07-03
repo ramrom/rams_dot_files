@@ -2,6 +2,11 @@
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NEOVIM CONFIG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 -------------------------------------------------------------------------------------------------------
 
+--- TODO:
+-- remap gH, gH enters select mode (which dont really care about)
+-- rempa ga, it clobbers get ascii value of char
+-- leader-k doesnt do %
+
 -- TODO: get this working, if i directly link firenvim.lua to init.lua, it works, but this doesnt
 if not not vim.g.started_by_firenvim then
 -- if not vim.g.started_by_firenvim then
@@ -687,6 +692,13 @@ LoadNoice = function()
 end
 
 ------------------------- FLASH -----------------------------------------------
+FlashOpts = 
+    {
+        modes = {
+            search = { enabled = false }   -- dont add flash keys for regular search
+        }
+    }
+
 FlashKeyDefinitions =
     {
         {
@@ -1071,7 +1083,7 @@ vim.g.mapleader = " "
 -- nnoremap <CR> o<Esc>
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
-vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" })
+vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only (){}, not if/else/end
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
@@ -1217,7 +1229,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
     -- ACTIONS
-    vim.keymap.set("n", "gH", vim.lsp.codelens.run, { desc = "lsp codelens run" })
+    vim.keymap.set("n", "gH", vim.lsp.codelens.run, { desc = "lsp codelens run" }) -- TODO: gH enters select mode
     vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "lsp code action" }) -- TODO: clobbers get ascii value of char
     vim.keymap.set("n", "gy", vim.lsp.buf.format, { desc = "lsp format"})
     vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "lsp rename"})
@@ -1382,7 +1394,7 @@ if not vim.env.VIM_NOPLUG then
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
             } 
         },
-        { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = {}, },
+        { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = FlashOpts, },
         'christoomey/vim-tmux-runner',
 
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
