@@ -306,23 +306,38 @@ SelectTmuxRunnerPane = function()
 end
 
 RunAction = function(arg)
+    curftype = vim.bo.filetype
     if arg == "exe" then
-        if vim.bo.filetype == "rust" then
+        if curftype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo run')
-        elseif vim.bo.filetype == 'c' then
+        elseif curftype == 'go' then
+            vim.cmd(":VtrSendCommandToRunner! go run ".. vim.fn.expand("%"))
+        elseif curftype == 'c' then
             vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%") .. ' && ./a.out')
+        else
+            print("filetype " .. curftype .. " undefined for execute action")
         end
     elseif arg == 'test' then
-        if vim.bo.filetype == "rust" then
+        if curftype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo test')
+        elseif curftype == 'go' then
+            vim.cmd(":VtrSendCommandToRunner! go test ".. vim.fn.expand("%"))
+        else
+            print("filetype " .. curftype .. " undefined for test action")
         end
     elseif arg == 'build' then
         if vim.bo.filetype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo build')
+        elseif curftype == 'go' then
+            vim.cmd(":VtrSendCommandToRunner! go build ".. vim.fn.expand("%"))
         elseif vim.bo.filetype == 'c' then
             -- vim.fn.expand("%"))
             vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%"))
+        else
+            print("filetype " .. curftype .. " undefined for build action")
         end
+    else
+        print("undefined action: " .. arg)
     end
 end
 
