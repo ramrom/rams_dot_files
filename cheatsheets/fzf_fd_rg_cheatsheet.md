@@ -13,8 +13,8 @@
 - would search in file /bar/befooyar/dude/wut
     - `rg -g '**/*foo*/**' pattern`
 - -o to to only return what matched, and -r to replace what was matched with capture groups or whatever
-    `echo "foo-bar baz" | rg -o ".*-(b..).*$" -r '$1'`
-        - will return "bar"
+    `echo "foo-bar baz" | rg -o ".*-(b..).*$" -r 'yar'`
+        - will return "yar"
 - use `-g` globs to search specific files and dirs
     `rg -g 'foo/bar/**' -g '!*bar*' -g 'yar/xy*'`
         - match all files in foo/bar and recurce, and filenames starting with xy in folder yar

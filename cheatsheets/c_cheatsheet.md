@@ -2,6 +2,13 @@
 - linux torvalds on good C code with removing a node in linked list
     - https://github.com/mkirchner/linked-list-good-taste
 
+## HISTORY
+- C99 - released 1999
+    - IEEE 754 floating point support, `float` single precision (IEEE 32bit), `double` (64bit), `long double` (IEEE extended precision)
+- C11 - releases 2011, replaced C99
+    - multi-thread support - create/manage, mutexes, thread-specific storage, atomics
+    - better unicode support
+
 ## MEMORY
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
 ### MAJOR TYPES
