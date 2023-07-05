@@ -7,13 +7,6 @@
 -- rempa ga, it clobbers get ascii value of char
 -- leader-k doesnt do %
 
--- TODO: get this working, if i directly link firenvim.lua to init.lua, it works, but this doesnt
-if not not vim.g.started_by_firenvim then
--- if not vim.g.started_by_firenvim then
--- if true then
-    require('firenvim')
-else
-
 --------------------------------------------------------------------------------------------------------
 -------------------------------- SETTINGS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -326,12 +319,11 @@ RunAction = function(arg)
             print("filetype " .. curftype .. " undefined for test action")
         end
     elseif arg == 'build' then
-        if vim.bo.filetype == "rust" then
+        if curftype == "rust" then
             vim.cmd(':VtrSendCommandToRunner! cargo build')
         elseif curftype == 'go' then
             vim.cmd(":VtrSendCommandToRunner! go build ".. vim.fn.expand("%"))
-        elseif vim.bo.filetype == 'c' then
-            -- vim.fn.expand("%"))
+        elseif curftype == 'c' then
             vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%"))
         else
             print("filetype " .. curftype .. " undefined for build action")
@@ -773,24 +765,6 @@ LoadIndentBlankLine = function()
     vim.g.indent_blankline_enabled=0
 end
 
-
---------------- FIRENVIM CONFIG --------------------------------------------------------------
-LoadFireNvim = function()
-    vim.g.firenvim_config = {
-        globalSettings = { alt = "all" },
-        localSettings = {
-            [".*"] = {
-                cmdline  = "neovim",
-                content  = "text",
-                priority = 0,
-                selector = "textarea",
-                -- takeover = "always"
-                takeover = "never"
-            }
-        }
-    }
-end
-
 ------------------------------- LUASNIP -----------------------------------------------------------
 LoadLuaSnip = function()
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -1035,6 +1009,7 @@ LoadGolangLSP = function()
 end
 
 -------------- JAVA JDTLS ---------------------------
+-- jdtls lang server is a java17 app itself, make sure JAVA_HOME of shell is set to java17
 LoadJDTLSServer = function()
     local config = {
         cmd = { '/opt/homebrew/bin/jdtls' },
@@ -1385,15 +1360,6 @@ if not vim.env.VIM_NOPLUG then
         { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
         { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
 
-        -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-        { 'glacambre/firenvim',
-            -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
-            config = LoadFireNvim,
-            build = function()
-                require("lazy").load({ plugins = "firenvim", wait = true })
-                vim.fn["firenvim#install"](0)
-            end 
-        },
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim",
             event = "VeryLazy",
@@ -1416,5 +1382,3 @@ if not vim.env.VIM_NOPLUG then
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     })
 end
-
-end     -- matched to if for firenvim loading

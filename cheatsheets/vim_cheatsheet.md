@@ -131,6 +131,19 @@ G log %         - git log <current file>
     `:cfirst` and `:clast`
     :0Glog      - logs only that change current file
 
+### FIRENVIM
+- INSTALLATION - SEPERATE INIT.LUA FILE
+    - create `~/.config/firenvim/init.lua` and symlink it to dedicated firenvim `init.lua` file
+    - export `NVIM_APPNAME=firenvim`
+    - launch nvim, config file should install firenvim with `irenvim#install()`
+        - when this run it's configures the binstub `~/.config/firenvim/firenvim`
+- `~/.local/share/firenvim/firenvim` binstub
+    - defines reading `NVIM_APPNAME`
+    - launches nvim in headless mode, sets `g:started_by_firenvim`
+- INSTALLATION - SHARED INIT.LUA FILE
+    - use global var that gets set if firenvim was activated in browser 
+    - e.g. `if not not vim.g.started_by_firenvim then ... end`
+
 ### VIM-SURROUND
 - https://github.com/tpope/vim-surround
 - `cs"'` - change surround `"` to `'`
@@ -222,6 +235,8 @@ C             " make selected dir node the new root node
 - :args   - show arg list that vim was invoked with
 - neovim supports https://neovim.io/doc/user/editorconfig.html .editorconfig files
     - disable with `vim.g.editorconfig = false` in init file
+- neovim will also read `NVIM_APPNAME` for relative dir to look for init file
+    - `NVIM_APPNAME=foo` -> look for init in `$XDG_CONFIG/foo/` dir (versus `$XDG_CONFIG/nvim/`)
 
 ## EXITING / QUITTING / WRITING
 - :w - write (save) the file, but don't exit

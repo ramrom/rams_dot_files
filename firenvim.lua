@@ -3,6 +3,7 @@
 ------------------------------------------------------------------------------
 
 ---------------------------- PLUGINS --------------------------------------
+print("firevim start")
 local lazypath = vim.fn.stdpath("data") .. "/firelazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -10,6 +11,22 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath, })
 end
 vim.opt.rtp:prepend(lazypath)
+
+LoadFireNvim = function()
+    vim.g.firenvim_config = {
+        globalSettings = { alt = "all" },
+        localSettings = {
+            [".*"] = {
+                cmdline  = "neovim",
+                content  = "text",
+                priority = 0,
+                selector = "textarea",
+                -- takeover = "always"
+                takeover = "never"
+            }
+        }
+    }
+end
 
 require("lazy").setup({
     'tpope/vim-commentary',
@@ -20,12 +37,15 @@ require("lazy").setup({
     { 'junegunn/fzf', run = ":call fzf#install()" },
     { 'junegunn/fzf.vim' },
 
-    -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-    'glacambre/firenvim',
+    -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+    { 'glacambre/firenvim',
+        -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
+        config = LoadFireNvim,
         build = function()
             require("lazy").load({ plugins = "firenvim", wait = true })
             vim.fn["firenvim#install"](0)
-        end,
+        end 
+    },
 },
 {
     -- seperate install location to keep sync for firenvim diff from regular neovim
@@ -34,18 +54,6 @@ require("lazy").setup({
 })
 
 ------------------------- SETTINGS ---------------------------------
-vim.g.firenvim_config = {
-    globalSettings = { alt = "all" },
-    localSettings = {
-        [".*"] = {
-            cmdline  = "neovim",
-            content  = "text",
-            priority = 0,
-            selector = "textarea",
-            takeover = "never"
-        }
-    }
-}
 
 vim.api.nvim_create_autocmd('BufEnter', { pattern = 'github.com_*.txt', command = 'set filetype=markdown' })
 vim.api.nvim_create_autocmd('BufEnter', { pattern = 'json.parser.online.fr_*.txt', command = 'set filetype=json' })
@@ -124,6 +132,7 @@ vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
 
+vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
 vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')

@@ -1,6 +1,6 @@
 # VIM
 alias v='nvim'
-alias vf='nvim -u ~/rams_dot_files/firenvim.lua'
+alias vf='NVIM_APPNAME=firenvim nvim'
 alias vn='VIM_NOPLUG=1 v'    # simple, dont load plugins
 alias vnn='v -u NONE'        # super simple, dont even load my vimrc
 alias ve='NO_NOICE=1 v -e'   # start in Ex mode, disable noice as it interferes

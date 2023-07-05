@@ -103,6 +103,7 @@
 
 ## SDKMAN
 - manage/install/switch between different java/scala/kotlin installs
+- generally installs the languages in `~/.sdkman/candidates/` dir
 - https://sdkman.io/usage#use
 ### COMMANDS
 - `sdk current`

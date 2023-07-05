@@ -1,7 +1,7 @@
 # PYTHON CHEATSHEET
 
 ## DEPENDENCY MANAGEMENT
-- it sucks: https://xkcd.com/1987/
+- it **sucks**: https://xkcd.com/1987/
 - `pipenv` is successor to `virtualenv` and does more, uses `Pipfile` and `Pipfile.lock`
 - `pip` uses requirements.txt
     - u can specify packages and pin versions you want
@@ -11,6 +11,9 @@
     - this replaces the `requirements.txt` mechanism
     - `Pipfile` lets u specify ranges of versions
 - `virtualenv` installs packages locally vs global system dirs
+    - https://virtualenv.pypa.io/en/latest/
+    - `virtualenv venv` - create a new virtual env
+        - creates a `venv` dir that stores all tools/metadata for env
 
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
