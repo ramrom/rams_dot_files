@@ -133,8 +133,9 @@ G log %         - git log <current file>
 
 ### FIRENVIM
 - INSTALLATION - SEPERATE INIT.LUA FILE
-    - create `~/.config/firenvim/init.lua` and symlink it to dedicated firenvim `init.lua` file
-    - export `NVIM_APPNAME=firenvim`
+    - create `~/.config/myfirenvimdir/init.lua` and symlink it to dedicated firenvim `init.lua` file
+    - export `NVIM_APPNAME=myfirenvimdir`
+    - lazy will install plugins in `~/.local/share/myfirenvimdir/lazy` dir
     - launch nvim, config file should install firenvim with `irenvim#install()`
         - when this run it's configures the binstub `~/.config/firenvim/firenvim`
 - `~/.local/share/firenvim/firenvim` binstub
