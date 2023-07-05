@@ -12,6 +12,42 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
+local LoadOneDarkProConfig = function()
+    require("onedarkpro").setup()
+    vim.cmd.colorscheme("onedark_dark")
+end
+
+---------------------- TREE-SITTER CONFIG -------------------------------
+LoadTreeSitter = function()
+    require'nvim-treesitter.configs'.setup {
+        ensure_installed = "all",   -- A list of parser names, or "all"
+        sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
+
+        highlight = {
+            enable = true,     -- `false` will isable the whole extension
+
+            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+            -- additional_vim_regex_highlighting = { "markdown" },
+            additional_vim_regex_highlighting = false,
+        },
+        indent = { enable = true },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = 'gn',
+                node_incremental = '<TAB>',
+                node_decremental = '<S-TAB>',
+                scope_incremental = '<CR>',
+            },
+        },
+    }
+
+    vim.opt.foldmethod='expr'
+    vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+end
+
+---------------------- FIRENVIM CONFIG -------------------------------
 LoadFireNvim = function()
     vim.g.firenvim_config = {
         globalSettings = { alt = "all" },
@@ -29,6 +65,9 @@ LoadFireNvim = function()
 end
 
 require("lazy").setup({
+    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
+        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+    { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
     'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-repeat',
