@@ -2,6 +2,8 @@
 ----------- FIRENVIM SETTINGS -----------------------------------------------
 ------------------------------------------------------------------------------
 
+-- firenvim binstub - $HOME/.local/share/firenvim/firenvim
+
 ---------------------------- PLUGINS --------------------------------------
 print("firevim start")
 local lazypath = vim.fn.stdpath("data") .. "/firelazy/lazy.nvim"

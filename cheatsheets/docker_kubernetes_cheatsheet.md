@@ -52,6 +52,12 @@
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
 - tailing logs
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
+- HPA - horizontal pod autoscaler
+    - rules for min pods, max pods
+    - `kubectl get hpa --all-namespaces` - get hpa status on all pods
+- `deployments`
+    - main rules: ingress routing, vertical scaling, env vars, etc
+    - dont include HPA
 
 ## HELM
 - package manager and configuration for kubernetes
