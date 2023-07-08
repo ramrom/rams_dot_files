@@ -81,6 +81,9 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
     " ".isBlank() // returns true, Blank tests for non-whitespace
     " ".isEmpty() // returns false
     "".isEmpty() // returns true, Empty tests for zero length string
+
+    // CHARs
+    char c = 'a'    // literal chars use single quotes
 ```
 ### CONVERSIONS
 ```java

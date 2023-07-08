@@ -226,7 +226,7 @@
     - is a heap-allocated `Drop` type, it's mutable/growable
     - it's really a wrapper around a `Vec<u8>` of bytes
     - indexing/iterating
-        - you cant index (`s[1]`) because it's confusing/ambiguous, for UTF8 is it byte value? scala value? grapheme cluster value?
+        - you cant index (`s[1]`) because it's confusing/ambiguous, for UTF8 is it byte value? scalar value? grapheme cluster value?
         - can slice the bytes, `s[0..4]`, but if bytes fall outside of char boundary it will panic
         - can specify byte or char with iterator
             - `for c in "Зд".chars() { println!("{c}"); }`
