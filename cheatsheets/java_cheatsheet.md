@@ -28,8 +28,7 @@
 - uses ant, maven, gradle
 - see [build systems](build_dependency_tools_cheatsheet.md)
 
-## EXAMPLES
-### DATA STRUCTURES
+## DATA STRUCTURES
 ```java
 int[] intArray = new int[10];
 String[] stringArray = new String[1];
@@ -85,67 +84,69 @@ ha.put("foo", a);
 ```
 ### STRINGS
 ```java
-    "  trim a str  ".trim()   // returns "trim a str"
-    "uPPer Case".toUpperCase()   // returns "UPPER CASE"
-    "uPPer Case".toLowerCase()   // returns "upper case"
+"  trim a str  ".trim()   // returns "trim a str"
+"uPPer Case".toUpperCase()   // returns "UPPER CASE"
+"uPPer Case".toLowerCase()   // returns "upper case"
 
-    "hello world".split(" ")   // return type String[], { "hello", "world" }
+"hello world".split(" ")   // return type String[], { "hello", "world" }
 
-    "hello world".charAt(2)    // index string, reuturns "l"
-    "get a substring".substring(2,7)  // returns "t a s", from begIndex to (endIndex - 1)
+"hello world".charAt(2)    // index string, reuturns "l"
+"get a substring".substring(2,7)  // returns "t a s", from begIndex to (endIndex - 1)
 
-    "hi there".contains("hi") // returns true
-    "hi there".isBlank() // returns false
+"hi there".contains("hi") // returns true
+"hi there".isBlank() // returns false
 
-    " ".isBlank() // returns true, Blank tests for non-whitespace
-    " ".isEmpty() // returns false
-    "".isEmpty() // returns true, Empty tests for zero length string
+" ".isBlank() // returns true, Blank tests for non-whitespace
+" ".isEmpty() // returns false
+"".isEmpty() // returns true, Empty tests for zero length string
 
-    "ab".repeat(3)  // String "ababab"
+"ab".repeat(3)  // String "ababab"
 
-    // CHARs
-    char c = 'a'    // literal chars use single quotes
-    Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
-    Character.isDigit('a')  //false
-    Character.isDigit('1')  //true
-    'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
+// CHARs
+char c = 'a'    // literal chars use single quotes
+Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
+Character.isDigit('a')  //false
+Character.isDigit('1')  //true
+'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
 
-    List<Character> c = new ArrayList<>()
-    char[] c = "hi there".toCharArray()
+List<Character> c = new ArrayList<>()
+char[] c = "hi there".toCharArray()
 
-    String first = "hi"; Float second = 1.1f; Integer third = 342;
-    String result = String.format("String %s in %s with some %s examples.", first, second, third);
-    System.out.println("the formatted string: " + result)
+String first = "hi"; Float second = 1.1f; Integer third = 342;
+String result = String.format("String %s in %s with some %s examples.", first, second, third);
+System.out.println("the formatted string: " + result)
 
-    StringBuilder sb = new StringBuilder();     // fast builder for appending
-    ab.append("foo");
+StringBuilder sb = new StringBuilder();     // fast builder for appending
+ab.append("foo");
 ```
-### CONVERSIONS
+
+## CONVERSIONS
 ```java
-   int a = Integer.parseInt("3");    // String -> int
-   int a = Integer.parseInt("foo");  // will raise NumberFormatException 
+int a = Integer.parseInt("3");    // String -> int
+int a = Integer.parseInt("foo");  // will raise NumberFormatException 
 
-   float f = Float.parseFloat("25.1");    // String -> Float
-   String s = Float.toString(25.0f);      // Float -> String
-   String s = Character.toString('a')   //  char -> String, 'a' to "a"
+float f = Float.parseFloat("25.1");    // String -> Float
+String s = Float.toString(25.0f);      // Float -> String
+String s = Character.toString('a')   //  char -> String, 'a' to "a"
 
-   char[] c = "hi there".toCharArray();
+char[] c = "hi there".toCharArray();
 
-   int a = Integer.toString(3);     // int -> String
+int a = Integer.toString(3);     // int -> String
 
-   int a = (int)1.6         // cast float to int, a rounded down to 1
-   int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each other
+int a = (int)1.6         // cast float to int, a rounded down to 1
+int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each other
 ```
-### MATH
-```java
-    Math.max(1,2)   // returns 2
-    Math.min(1,2)   // returns 1
-    Math.abs(-1)   // returns 1
-    Math.abs(-1.1)   // returns 1.1
-    Math.max(1.1f, 2)   // can mix floats with ints, returns 2
 
-    Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
-    int randomNum = (int)(Math.random() * 101);  // 0 to 100
+## MATH
+```java
+Math.max(1,2)   // returns 2
+Math.min(1,2)   // returns 1
+Math.abs(-1)   // returns 1
+Math.abs(-1.1)   // returns 1.1
+Math.max(1.1f, 2)   // can mix floats with ints, returns 2
+
+Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
+int randomNum = (int)(Math.random() * 101);  // 0 to 100
 ```
 
 ## GC/ALLOCATION
@@ -180,7 +181,7 @@ ha.put("foo", a);
     boolean b = c.isInstance(3)     // false
 ```
 
-### IO
+## IO
 ```java
 Scanner scanner = new Scanner(System.in);
 String name = scanner.next();  // read string input
@@ -197,7 +198,7 @@ System.out.println("11%3 = "+(11 % 3)); // => 2 , modulo
 System.out.println("3 > 2 || 2 > 3? " + ((3 > 2) || (2 > 3))); // => true
 ```
 
-### CONTROL STRUCTURES
+## CONTROL STRUCTURES
 ```java
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
