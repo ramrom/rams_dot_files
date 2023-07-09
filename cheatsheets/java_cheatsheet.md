@@ -75,6 +75,18 @@ m.remove("foo");    // returns null if it doesnt exit, the value of the key if k
 m.size();           // return number of items
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 
+// stacks
+Stack<Integer> s = new Stack<>();
+s.push(1);  // [ 1 ]
+s.push(3);  // [1, 3]
+s.size() // returns 2
+s.pop();  // returns 3, s -> [1]
+s.peek(); // see next stack item without removing, returns 1 here
+s.empty();  // returns false
+s.pop(); // return 1
+s.pop(); // raises EmptyStackException sinc it's empty
+
+
 // compound types
 HashMap<String, ArrayList<Integer>> ha = new HashMap<String, ArrayList<Integer>>();
 HashMap<String, ArrayList<Integer>> ha = new HashMap<>();   // works too
@@ -161,10 +173,12 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
 ### INTERFACE
+- cannot be instantiated
 - cannot implement any methods
 - a class can implement many interfaces, multiple inheritence
 - can not have non-final and non-static variables
 ### ABSTRACT CLASS
+- cannot be instantiated
 - can implement methods
 - no multiple inheritence
 - can have final and non-final variables, static and non-static variables
