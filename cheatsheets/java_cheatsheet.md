@@ -84,6 +84,14 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 
     // CHARs
     char c = 'a'    // literal chars use single quotes
+    Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
+
+    List<Character> c = new ArrayList<>()
+    char[] c = "hi there".toCharArray()
+
+    String first = "hi"; Float second = 1.1f; Integer third = 342;
+    String result = String.format("String %s in %s with some %s examples.", first, second, third);
+    System.out.println("the formatted string: " + result)
 ```
 ### CONVERSIONS
 ```java
@@ -164,6 +172,10 @@ System.out.println("3 > 2 || 2 > 3? " + ((3 > 2) || (2 > 3))); // => true
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
 }
+
+if (true && true) { System.out.println("hi"); }
+else if (false || false) { System.out.println("elseif"); }
+else  System.out.println("else"); }
 
 int a = 3
 switch (a) {
