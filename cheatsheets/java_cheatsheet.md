@@ -35,11 +35,17 @@ int[] intArray = new int[10];
 String[] stringArray = new String[1];
 
 int[] y = {9000, 1000, 1337};
+return new int[] { 1,2};            // creating a literal array to return in function
 String names[] = {"Bob", "John", "Fred", "Juan Pedro"};
 names[2] // returns 1337
 names[1] = "newval"
 names.length // => 4, the num items in the array
 
+//2d array
+int[][] tdarray = new int[10][20];
+int[][] tdarray = { {1, 3}, {4, 5} };
+
+// ArrayList can dynamically change size
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
 mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
@@ -59,10 +65,23 @@ LinkedList<String> ll = new LinkedList<String>();  // linked lists
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
+hs.contains("c") // false
+hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
 
 // implementation of Map interface
 HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
+m.put("foo", 3);
+m.get("boo");       // returns null if it doesnt exist
+m.remove("foo");    // returns null if it doesnt exit, the value of the key if key does exist
+m.size();           // return number of items
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
+
+// compound types
+HashMap<String, ArrayList<Integer>> ha = new HashMap<String, ArrayList<Integer>>();
+HashMap<String, ArrayList<Integer>> ha = new HashMap<>();   // works too
+ArrayList<Integer> a = new ArrayList<>();
+a.add(3);
+ha.put("foo", a);
 ```
 ### STRINGS
 ```java
@@ -82,9 +101,14 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
     " ".isEmpty() // returns false
     "".isEmpty() // returns true, Empty tests for zero length string
 
+    "ab".repeat(3)  // String "ababab"
+
     // CHARs
     char c = 'a'    // literal chars use single quotes
     Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
+    Character.isDigit('a')  //false
+    Character.isDigit('1')  //true
+    'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
 
     List<Character> c = new ArrayList<>()
     char[] c = "hi there".toCharArray()
@@ -92,6 +116,9 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
     String first = "hi"; Float second = 1.1f; Integer third = 342;
     String result = String.format("String %s in %s with some %s examples.", first, second, third);
     System.out.println("the formatted string: " + result)
+
+    StringBuilder sb = new StringBuilder();     // fast builder for appending
+    ab.append("foo");
 ```
 ### CONVERSIONS
 ```java
@@ -100,6 +127,9 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 
    float f = Float.parseFloat("25.1");    // String -> Float
    String s = Float.toString(25.0f);      // Float -> String
+   String s = Character.toString('a')   //  char -> String, 'a' to "a"
+
+   char[] c = "hi there".toCharArray();
 
    int a = Integer.toString(3);     // int -> String
 
@@ -171,6 +201,10 @@ System.out.println("3 > 2 || 2 > 3? " + ((3 > 2) || (2 > 3))); // => true
 ```java
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
+}
+
+while (i < 10 && x != 3) {
+    i++;
 }
 
 if (true && true) { System.out.println("hi"); }
