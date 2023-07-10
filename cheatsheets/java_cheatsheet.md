@@ -129,13 +129,15 @@ String result = String.format("String %s in %s with some %s examples.", first, s
 System.out.println("the formatted string: " + result)
 
 StringBuilder sb = new StringBuilder();     // fast builder for appending
-ab.append("foo");
+ab.append("foo");   // efficiently append
+ab.reverse();       // reverse order of chars
+ab.toString();      // covert to a string when done
 ```
 
 ## CONVERSIONS
 ```java
 int a = Integer.parseInt("3");    // String -> int
-int a = Integer.parseInt("foo");  // will raise NumberFormatException 
+int a = Integer.parseInt("foo");  // will raise NumberFormatException, also for int too big
 
 float f = Float.parseFloat("25.1");    // String -> Float
 String s = Float.toString(25.0f);      // Float -> String
@@ -161,6 +163,10 @@ Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
 int randomNum = (int)(Math.random() * 101);  // 0 to 100
 ```
 
+## FUNCTIONAL PROGRAMMING
+- java17 has `Optional<T>`
+- has lambda expressions
+
 ## GC/ALLOCATION
 - generally all variables store on the heap
     - primitives (ints, bools, etc) will go on the stack
@@ -185,6 +191,10 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 ### RECORD
 - immutable
 - data struct that has a setter/getter, constructor, `equals` method, `hashCode` method, `toString` method
+### INFERENCE
+- java10 introduces some local var inference: 
+    - `var a = 3; var b = "hi"`, compiler will inference these `var`s
+    - `var f = new HashMapString, Integer>();`
 
 ## INTROSPECTION
 - `(object) instanceof (type)` - test if object is instance of type, or subtype of type, or implements an interface
@@ -238,6 +248,12 @@ switch (a) {
 
 //trinary
 String bar = (3 < 10) ? "A" : "B";
+
+//try catch
+try { ... } 
+catch (SomeException e) { .. }
+catch (AnotherException e) { .. }
+finally { .. }  // finally is always exected
 ```
 - java 14 has switch expressions (vs the switch statement above)
     - no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
