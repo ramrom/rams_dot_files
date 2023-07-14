@@ -298,6 +298,7 @@ sudo unattended-upgrade
     - dash is side bar with quick launch icons and running apps
 - if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
+- extensions management in browser: https://extensions.gnome.org/
 - keyboard shortcuts
     - https://wiki.gnome.org/Design/OS/KeyboardShortcuts
     - need full path to executables, apparently no PATH set, so `/usr/bin/foo` and not just `foo`
