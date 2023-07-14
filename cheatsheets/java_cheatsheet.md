@@ -38,7 +38,8 @@ return new int[] { 1,2};            // creating a literal array to return in fun
 String names[] = {"Bob", "John", "Fred", "Juan Pedro"};
 names[2] // returns 1337
 names[1] = "newval"
-names.length // => 4, the num items in the array
+names[10000]    // raises java.lang.ArrayIndexOutOfBoundsException
+names.length    // => 4, the num items in the array
 
 //2d array
 int[][] tdarray = new int[10][20];
@@ -226,6 +227,8 @@ System.out.println("3 > 2 || 2 > 3? " + ((3 > 2) || (2 > 3))); // => true
 ```java
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
+    if (true) { continue; }     // continue will skip iteration
+    if (true) { break; }     // break will terminate the loop in scope
 }
 
 while (i < 10 && x != 3) {

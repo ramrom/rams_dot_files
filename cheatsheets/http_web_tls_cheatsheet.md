@@ -75,6 +75,9 @@
 - can use tools like `dig` to get info on dns records
     - there will be a `TXT` section to show text record
 
+## CURL
+- `curl --insecure https://foo.com`  - skip cert TLS verification
+
 ## HTTPIE
 - https://httpie.io/docs
 - written in python, core libs pygments and requests
@@ -105,4 +108,5 @@ function httpie_all() {
 ## XH
 - https://github.com/ducaale/xh
 - a http client in rust that is near identical in interface to HTTPie
+- `xh --verify no https://foo.com` - dont verify TLS cert
 

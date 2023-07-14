@@ -398,34 +398,6 @@ LoadOneDarkConfig = function()
 end
 
 
------------------------------------ FZF -------------------------------------------------------
-LoadFZF = function()
-    -- default implementation of Rg greps over filename, this will just do contents
-        -- see https://github.com/junegunn/fzf.vim/issues/714
-    vim.api.nvim_create_user_command( 'Rg',
-        [[command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0) ]],
-          { bang = true, nargs = '*' }
-    )
-end
-
--- TODO: above ugly, try to get below to work
-    -- https://www.reddit.com/r/neovim/comments/105zsco/help_with_converting_a_vimscript_command_to_lua/
-
--- local function vim_grep(qargs, bang)
---   local query = '""'
---   if qargs ~= nil then
---     query = vim.fn.shellescape(qargs)
---   end
-
---   local sh = 'rg --column --line-number --no-heading --color=always --smart-case -- ' .. query
---   vim.call('fzf#vim#grep', sh, 1, vim.call('fzf#vim#with_preview', 'right:50%', 'ctrl-/'), bang)
--- end
-
--- vim.api.nvim_create_user_command('Rg',
---     function(arg) vim_grep(arg.qargs, arg.bang) end,
---     { bang = true, nargs = '*' }
--- )
-
 ----------------------------- FZF LUA --------------------------------------------------
 LoadFzfLua = function()
     require'fzf-lua'.setup {
@@ -1044,6 +1016,8 @@ LoadKotlinLSP = function()
     }
 end
 
+-----------BUILTIN LSPCONFIGS ---------------------
+
 LoadLSPConfig = function()
     if not LazyPluginEnabled('rust-tools.nvim') then 
         print("lazy.vim: rust tools disabled, loading lsp-config for rust support")
@@ -1123,34 +1097,29 @@ vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
-vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
-vim.keymap.set('n', '<leader><leader>h', '<cmd>:Helptags!<cr>')
-vim.keymap.set('n', '<leader><leader>r', '<cmd>:History:<cr>', { desc = "command history" })
-vim.keymap.set('n', '<leader>b', '<cmd>:Buffers<CR>')
-vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
+vim.keymap.set('n', '<leader>;', "<cmd>lua require('fzf-lua').commands()<CR>", { desc = "fzf vim commands" })
+vim.keymap.set('n', '<leader><leader>h', "<cmd>lua require('fzf-lua').help_tags()<CR>", { desc = "fzf help tags" })
+vim.keymap.set('n', '<leader><leader>r', "<cmd>lua require('fzf-lua').command_history()<CR>", { desc = "fzf command history" })
+vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "fzf buffers" })
 ------ FZF FILES
-vim.keymap.set('n', '<leader>o', '<cmd>:Files<CR>')
-vim.keymap.set('n', '<leader>O', '<cmd>:Files!<CR>')
-vim.keymap.set('n', '<leader><leader>o', '<cmd>:Files ~<CR>', { desc = 'fzf files on home dir (~)' })
+vim.keymap.set('n', '<leader>o', "<cmd>lua require('fzf-lua').files()<CR>", { desc = "fzf files" })
+vim.keymap.set('n', '<leader><leader>o', "<cmd>lua require('fzf-lua').files({cwd='~/'})<CR>", { desc = "fzf files" })
 vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
 ------ FZF GREP
 vim.keymap.set('n', '<leader>ef', "<cmd>lua require('fzf-lua').grep()<CR>", { desc = "fzf grep (rg query, then fzf results)" })
 vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf-lua live grep" })
 vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>", { desc = "fzf cursor grep word" })
 vim.keymap.set('n', '<leader>ew', "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", { desc = "fzf cursor grep cWORD" })
-vim.keymap.set('n', '<leader>ex', '<cmd>:RG!<CR>', { desc = "fzf.vim RG! (live grep)" })
-vim.keymap.set('n', '<leader>eo', '<cmd>:BLines!<CR>')
-vim.keymap.set('n', '<leader>ei', '<cmd>:Lines!<CR>')
+vim.keymap.set('n', '<leader>eo', "<cmd>lua require('fzf-lua').blines()<CR>", { desc = "fzf current buffer lines" })
+vim.keymap.set('n', '<leader>ei', "<cmd>lua require('fzf-lua').lines()<CR>", { desc = "fzf all buffer lines" })
 
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
 vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
 vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
 vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
-vim.keymap.set('n', '<leader>gb', '<cmd>:BCommits<CR>')
-vim.keymap.set('n', '<leader>gB', '<cmd>:BCommits!<CR>')
-vim.keymap.set('n', '<leader>gm', '<cmd>:Commits<CR>')
-vim.keymap.set('n', '<leader>gM', '<cmd>:Commits!<CR>')
+vim.keymap.set('n', '<leader>gm', "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "fzf git commits" })
+vim.keymap.set('n', '<leader>gb', "<cmd>lua require('fzf-lua').git_bcommits()<CR>", { desc = "fzf buffer git commits" })
 vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
@@ -1168,12 +1137,11 @@ vim.keymap.set('n', '<leader>wt', ToggleNvimTreeDynamicWidth, { desc = 'toggle n
 vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
 
 ---------- CHEATS + NOTES
-vim.keymap.set('n', '<leader>cl', [[:Maps!<cr> space ]])
-vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
+vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
 vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
-vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
-vim.keymap.set('n', '<leader>cn', '<cmd>:Files $MY_NOTES_DIR<cr>')
-vim.keymap.set('n', '<leader>cw', '<cmd>:Files $MY_WORK_DIR<cr>')
+vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", { desc = "fzf files" })
+vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf files" })
+vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf files" })
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
@@ -1327,8 +1295,6 @@ if not vim.env.VIM_NOPLUG then
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
         --- FUZZY FIND
-        { "junegunn/fzf", build = "./install --bin" },
-        { 'junegunn/fzf.vim', config = LoadFZF },
         { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
         -- MARKDOWN
