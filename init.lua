@@ -147,9 +147,11 @@ ToggleFoldMethod = function()
     if vim.o.foldmethod == "indent" then
         vim.o.foldmethod="expr"
         vim.o.foldexpr="nvim_treesitter#foldexpr()"
+        print("fold method: treesitter expression")
     else
         vim.o.foldmethod="indent"
         vim.o.foldexpr=""
+        print("fold method: indent")
     end
 end
 
@@ -1103,11 +1105,11 @@ vim.keymap.set('n', '<leader><leader>r', "<cmd>lua require('fzf-lua').command_hi
 vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "fzf buffers" })
 ------ FZF FILES
 vim.keymap.set('n', '<leader>o', "<cmd>lua require('fzf-lua').files()<CR>", { desc = "fzf files" })
-vim.keymap.set('n', '<leader><leader>o', "<cmd>lua require('fzf-lua').files({cwd='~/'})<CR>", { desc = "fzf files" })
+vim.keymap.set('n', '<leader><leader>o', "<cmd>lua require('fzf-lua').files({cwd='~/'})<CR>", { desc = "fzf files homedir" })
 vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
 ------ FZF GREP
 vim.keymap.set('n', '<leader>ef', "<cmd>lua require('fzf-lua').grep()<CR>", { desc = "fzf grep (rg query, then fzf results)" })
-vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf-lua live grep" })
+vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf live grep" })
 vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>", { desc = "fzf cursor grep word" })
 vim.keymap.set('n', '<leader>ew', "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", { desc = "fzf cursor grep cWORD" })
 vim.keymap.set('n', '<leader>eo', "<cmd>lua require('fzf-lua').blines()<CR>", { desc = "fzf current buffer lines" })
@@ -1156,7 +1158,7 @@ vim.keymap.set('n', '<leader>wn', '<cmd>:Noice<cr>')
 vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>wT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
 vim.keymap.set('n', '<leader>ws', '<cmd>:set number!<cr>')
-vim.keymap.set('n', '<leader>wf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
+vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
 vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 

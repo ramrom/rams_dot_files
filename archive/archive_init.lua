@@ -33,6 +33,8 @@ end
 -- )
 
 ---- MAPS
+vim.keymap.set('n', '<leader>wf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
+
 vim.keymap.set('n', '<leader>:', '<cmd>:Commands!<cr>')
 vim.keymap.set('n', '<leader>B', '<cmd>:Buffers!<CR>')
 vim.keymap.set('n', '<leader><leader>H', '<cmd>:Helptags!<cr>')
