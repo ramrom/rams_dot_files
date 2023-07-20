@@ -53,6 +53,9 @@ mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 
+mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies existing list
+mylist.equals(anotherlist); // compare 2 arraylists, values and order
+
 // variables can be of interface types, and thus contain any value that implements that type
 List<String> mylist = new ArrayList<String>();
 
@@ -67,6 +70,8 @@ hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
 hs.contains("c") // false
 hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
+
+new ArrayList<String>(hs); // can create a ArrayList from the HashSet
 
 // implementation of Map interface
 HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
@@ -149,6 +154,7 @@ char[] c = "hi there".toCharArray();
 int a = Integer.toString(3);     // int -> String
 
 int a = (int)1.6         // cast float to int, a rounded down to 1
+int a = (long)11         // cast int to long, long is 64bit
 int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each other
 ```
 
@@ -179,6 +185,16 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 ### CLASSES
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
+- Generic classes
+    ```java
+    public class Box<T> {
+        // T stands for "Type"
+        private T t;
+
+        public void set(T t) { this.t = t; }
+        public T get() { return t; }
+    }
+    ```
 ### INTERFACE
 - cannot be instantiated
 - cannot implement any methods

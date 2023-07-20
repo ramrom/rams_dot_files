@@ -456,10 +456,13 @@
 - BOOTP - superseded InARP
 - DHCP - superseded BOOTP
 ### DNS (Domain Name System)
-- A record - hostname -> IP address, CNAME - hostname -> hostname
+- A record - hostname -> IP address
     - can have many IPs for failover, if main/default IP fails, the next IPs are used round robin
+- CNAME - hostname -> hostname, alias a domain to another
+    - if client DNS requests returns CNAME, it continues to make requests until it gets an A name
 - AAAA record - needed for IPv6
-- if client DNS requests returns CNAME, it continues to make requests until it gets an A name
+- MX record - name for email server for a domain
+- TXT record - contains textual data
 
 ### NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP

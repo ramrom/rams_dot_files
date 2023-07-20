@@ -61,7 +61,8 @@ vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
 
 -- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
-vim.api.nvim_create_autocmd('VimResized', { pattern='*', command = 'wincmd ='})
+vim.api.nvim_create_autocmd('VimResized', 
+    { pattern='*', command = 'wincmd =', desc = 'force window resize when vim resizes'})
 
 --- TRAILING SPACES
 vim.opt.list = true
@@ -588,6 +589,7 @@ LoadWhichKey = function()
     wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
     wk.register( { e = { name = "fzf grepping" } }, { prefix = "<leader>" } )
     wk.register( { w = { name = "misc config" } }, { prefix = "<leader>" } )
+    wk.register( { u = { name = "unicode" } }, { prefix = "<leader>" } )
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------

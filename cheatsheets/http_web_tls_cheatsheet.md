@@ -47,6 +47,19 @@
 - `certbot plugins` - show plugins installed
 - logs on ubuntu: `/var/log/letsencrypt/letsencrypt.log`
 
+## CERTS
+- `.csr` - certificate signing request, for submission to cert authorities
+    - format is PKCS10, https://www.rfc-editor.org/rfc/rfc2986
+- `.pem` - container format defined in https://www.rfc-editor.org/rfc/rfc1422
+    - usually includes public cert
+    - but can include entire chain: public keys, private keys, root certs
+    - can also encode a .csr, PKCS10 can be translated to PEM format
+    - apache installs in `/etc/ssl/certs`
+- `.key` - PEM formatted file just containing private key
+    - apache installs in `/etc/ssl/private`
+- `.cert`, `.cer`, `.crt` - PEM formatted file, diff ext, recognized by windows explorer as cert
+    - the whole signed certificate
+
 ## WEB SERVERS
 - apache HTTP server - written in c, really old
     - multiple request concurrency models: threaded, pre-forked, evented/async

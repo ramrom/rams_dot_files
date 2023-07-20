@@ -14,7 +14,6 @@
     - https://virtualenv.pypa.io/en/latest/
     - `virtualenv venv` - create a new virtual env
         - creates a `venv` dir that stores all tools/metadata for env
-
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
 
