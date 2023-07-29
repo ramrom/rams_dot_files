@@ -1144,8 +1144,8 @@ vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree
 vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
 vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
 vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", { desc = "fzf files" })
-vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf files" })
-vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf files" })
+vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf notes files" })
+vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf work files" })
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
@@ -1278,7 +1278,7 @@ vim.opt.rtp:prepend(lazypath)
 if not vim.env.VIM_NOPLUG then
     require("lazy").setup({
         'nvim-lua/plenary.nvim',
-        { 'nvim-lualine/lualine.nvim', config = LoadLuaLine },
+        { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
         { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
         'nvim-tree/nvim-web-devicons',
         { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,

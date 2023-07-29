@@ -6,6 +6,9 @@
     - they all had to agree on features they liked
     - golang is object-oriented _but_ has not classes, you can be object-oriented without classes
 
+## HISTORY
+- 1.18 added generics
+
 ## GC
 - compiler performs escape analysis: determine if data goes on heap or stack
     - if data is used outside of scope (e.g. data is returned) it needs to be on the heap

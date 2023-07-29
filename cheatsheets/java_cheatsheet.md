@@ -187,10 +187,8 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
 - Generic classes
     ```java
-    public class Box<T> {
-        // T stands for "Type"
+    public class Box<T> {       // example generic class
         private T t;
-
         public void set(T t) { this.t = t; }
         public T get() { return t; }
     }
