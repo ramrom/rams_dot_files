@@ -1055,6 +1055,7 @@ vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
+vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 -- SMART RUN ACTIONS
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('exe')<cr>", { desc = "execute program" })
@@ -1097,7 +1098,6 @@ vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined sess
 ---- COPY/PASTE to clipboard
 vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
 vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
-vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
 
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })

@@ -295,13 +295,32 @@ inoremap <C-l>  <Esc>
 " TODO: should i keep?, leader-s saves from normal is nuff i thinks. (c-k default map is enter digraph)
 inoremap <C-k>  <C-o>:w<cr>
 
+"repeat the last command
+noremap <leader>. :@:<CR>
+
+noremap <leader><leader>e :Explore<CR>
+
+" turn off highlighting till next search
+noremap <leader>j :noh<cr>
+
+" command line history editor
+noremap <leader><leader>r q:
+
+
+" TAB MOVE/NAV/CREATE
 noremap <leader>f :call TabBufNav("f")<CR>
 noremap <leader>d :call TabBufNav("b")<CR>
-
+noremap <leader>t :tabnew<CR>
+noremap <leader>m :tabm<Space>
+"poormans zoom, opens buffer in current window in new tab
+noremap <leader>z :tabnew %<CR>
 "gb easier to type than gT
 noremap gb :tabprevious<CR>
 
+" WINDOW MOVE/CREATE
 " default mappings: ctrl-l refreshes screen, ctrl-h backspace, ctrl-j down one line, ctrl-k digraph
+noremap <leader>v :vsplit<CR><leader>w
+noremap <leader>h :split<CR><leader>w
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
@@ -310,45 +329,39 @@ noremap <C-k> <C-w>k
 " noremap <leader>w <C-w>w
 " noremap <leader>W <C-w>W
 
-noremap <leader>q :call TabBufQuit()<cr>
-noremap <leader>Q :q!<cr>
-noremap <leader><leader>q :qa<cr>
+" SMART SAVE
 noremap <leader>s :w<cr>
 noremap <leader>S :call SaveDefinedSession()<CR>
+
+" COPY/PASTE CLIPBOARD
 noremap <leader>y "+y
 noremap <leader>p "+p
-noremap <leader>t :tabnew<CR>
-noremap <leader>e :Explore<CR>
-noremap <leader>v :vsplit<CR><leader>w
-noremap <leader>h :split<CR><leader>w
-noremap <leader>m :tabm<Space>
 
-"repeat the last command
-noremap <leader><leader>r :@:<CR>
+" SMART QUIT
+noremap <leader><leader>q :qa<cr>
+noremap <leader>q :call TabBufQuit()<cr>
+noremap <leader>Q :q!<cr>
 
-" turn off highlighting till next search
-noremap <leader>j :noh<cr>
-"poormans zoom, opens buffer in current window in new tab
-noremap <leader>z :tabnew %<CR>
-
-"fzf and nerdtree maps
+"FZF
 noremap <leader><leader>h :Helptags!<cr>
 noremap <leader>; :Commands<cr>
-noremap <leader>r :History:<cr>
-noremap <leader>n :NERDTreeToggle<CR>
-noremap <leader>N :NERDTreeFind<CR>
+noremap <leader><leader>r :History:<cr>
+noremap <leader>i :FZFMru<CR>
 noremap <leader>o :Files<CR>
 noremap <leader>O :Files!<CR>
+noremap <leader><leader>o :Files ~<cr>
 noremap <leader>b :Buffers<CR>
 noremap <leader>B :Buffers!<CR>
-noremap <leader>x :Rg<CR>
-noremap <leader>X :Rg!<CR>
-noremap <leader>i :FZFMru<CR>
+noremap <leader>el :Rg<CR>
+noremap <leader>eL :Rg!<CR>
+noremap <leader>ei :Lines<CR>
+noremap <leader>eo :BLines<CR>
 
-noremap <leader>l :Lines<CR>
-noremap <leader>L :Lines<CR>
+" NERDTree
+noremap <leader>n :NERDTreeToggle<CR>
+noremap <leader>N :NERDTreeFind<CR>
 
-"Git-type stuff
+" GIT-TYPE STUFF
 noremap <leader><leader>g :G<CR>
 noremap <leader>gd :tab Gvdiffsplit<cr>
 noremap <leader>gD :tab Gvdiffsplit master<cr>
@@ -361,33 +374,30 @@ noremap <leader>gS :call ToggleGitSignsAll()<cr>
 noremap <leader>gs :SignifyToggle<cr>
 noremap <leader>gh :SignifyToggleHighlight<cr>
 
-noremap <leader>gT :call RemoveTrailingWhiteSpace()<CR>
-noremap <leader>gi :IndentLinesToggle<cr>
-noremap <leader>go :call CycleColorCol()<cr>
-noremap <leader>gm :call ToggleInstantMarkdown()<cr>
-noremap <leader>gu :setlocal spell! spelllang=en_us<cr>
-noremap <leader>gz :set ignorecase!<cr>:set ignorecase?<cr>
-noremap <leader>gn :set number!<CR>
-noremap <leader>gl :set list!<cr>
-autocmd FileType markdown noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
-
-"cheatsheet maps
+"CHEATSHEET AND NOTES
 exe ":function! ShowMyLeaderMap() \n :map <leader> \n endfunction"
 noremap <leader>cC :call ShowMyLeaderMap()<cr>
-noremap <leader>cc :Maps!<cr> 'space 
+noremap <leader>cM :Maps!<cr> 'space 
 noremap <leader>cm :Maps<cr>
 noremap <leader>cg :map g<cr>
 noremap <leader><leader>c :Files ~/rams_dot_files/cheatsheets/<cr>
-noremap <leader>cl :exe ':Files' $MY_NOTES_DIR<cr>
-noremap <leader>cr :exe ':Files' $MY_WORK_DIR<cr>
-noremap <leader>cA :vsplit ~/tmp/scratch.md<cr>
-noremap <leader>ca :tabnew ~/tmp/scratch.md<cr>
-noremap <leader>cj :tabnew $MY_WORK_TODO<cr>
-noremap <leader>co :Files ~<cr>
-noremap <leader>cs :vsplit ~/rams_dot_files/cheatsheets/shell_cheatsheet.sh<cr>
-noremap <leader>cf :vsplit ~/rams_dot_files/cheatsheets/current.md<cr>
-noremap <leader>cv :vsplit ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
-noremap <leader>cV :tabnew ~/rams_dot_files/cheatsheets/vim_cheatsheet.md<cr>
+noremap <leader>cn :exe ':Files' $MY_NOTES_DIR<cr>
+noremap <leader>cw :exe ':Files' $MY_WORK_DIR<cr>
+noremap <leader>ca :tabnew $MY_WORK_TODO<cr>
+noremap <leader>cS :vsplit ~/tmp/scratch.md<cr>
+noremap <leader>cs :tabnew ~/tmp/scratch.md<cr>
+
+" OTHER
+noremap <leader>wT :call RemoveTrailingWhiteSpace()<CR>
+noremap <leader>wi :IndentLinesToggle<cr>
+noremap <leader>wo :call CycleColorCol()<cr>
+noremap <leader>wM :call ToggleInstantMarkdown()<cr>
+noremap <leader>wm :messages<cr>
+noremap <leader>wu :setlocal spell! spelllang=en_us<cr>
+noremap <leader>wz :set ignorecase!<cr>:set ignorecase?<cr>
+noremap <leader>ws :set number!<CR>
+noremap <leader>wl :set list!<cr>
+autocmd FileType markdown noremap <leader>gg :w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>
 
 " This next line will open a ctag in a new tab
 noremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>

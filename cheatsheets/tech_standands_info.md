@@ -61,7 +61,7 @@
 - LQI (Link Quality Indicator) - quality of data packets received
 - RSS (Recieved Signal Strength) - quality of signal strength
 
-## IoT
+## IOT
 - Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
     - https://buildwithmatter.com/
     - collaberation b/w tons of companies including big names apple, google, amazon, samsung
@@ -84,6 +84,9 @@
     - 2.4Ghz band (north america)
     - mesh limit of 65000! devices
     - range of 33-66 feet
+- ONVIF - Open Network Video Interface Forum
+    - create global open standards for IP-based security, particularly for video cameras
+    - ONVIF.PTZ specifies Pan/Tilt/Zoom functions
 
 
 ## HDMI
