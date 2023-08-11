@@ -61,10 +61,21 @@ sudo shutdown -r now (reboot now)
     - `xclip -selection clipboard -o` - paste from clipboard
 
 ## RASPBIAN
+- `rpi-imager` deb package
+    - `DISPLAY=:1 rpi-imager` - launch imager
 - official linux distro(based on debian) for raspberry pi
 - to manually config wifi, edit `/etc/wpa_supplicant/wpa_supplicant.conf`
     - set SSID name and password
 - `/boot/config.txt` contains lots of high level rapsian configs
+- gpu temp celcius - `sudo vcgencmd measure_temp`
+- cpu temp celcius - `cat /sys/class/thermal/thermal_zone0/temp`, divide this number by 1000
+### RETROPI
+- location of config files
+    - gamepads - https://retropie.org.uk/forum/topic/24965/location-of-joystick-configuration-files
+- home page - https://retropie.org.uk/
+- from cli `emulationstation` to start retropi GUI menu
+    - configured keyboard as controller but it crashed right after
+
 
 ## USER STUFF
 su - foouser               - login as foouser (need to enter foouser password)
