@@ -29,7 +29,7 @@ export FCEDIT=vim
 export EDITOR=vim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
-bind '"\C-o":"vin\n"'
+bind '"\C-o":"v\n"'
 
 # Linux bin name for fd is fdfind
 fdname="fd"
