@@ -34,6 +34,7 @@
 
 
 ## KUBERNETES
+- means "helmsman" or "pilot" in ancient greek
 - designed by google in 2014, written in golang, opensource(apache 2.0 liscense), maintained by cloud native compute foundation
     - based off google [borg](https://research.google/pubs/pub43438/)
 - supports many container runtimes including `containerd` and `CRI-O`

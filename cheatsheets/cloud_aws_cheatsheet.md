@@ -5,6 +5,7 @@
     - VPC cannot span many regions, can peer two VPCs from two regions together, but address range of each cannot overlap
 - a aws account comes with a default VPC
 - can share VPCs between multiple accounts
+- SSM - systems mananger agents - https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
 
 ## LOAD BALANCERS
 - ALB - application load balancer
