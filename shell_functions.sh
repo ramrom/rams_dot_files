@@ -64,7 +64,12 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
-function pppath() { local IFS=":"; for p in $PATH; do; echo $p; done }
+function pppath() { 
+    local IFS=":"; 
+    for p in $PATH; do
+        echo $p
+    done 
+}
 
 # given port number return if ssh(or polipo) is listening on it
 # polipo used to create HTTP proxy to a SOCKS proxy
