@@ -117,10 +117,13 @@ TabBufNavBackward = function()
 end
 
 -- close tabs and windows if more than one of either, otherwise closes buffers until one left and then quit vim
+-- NOTE: aug'23 - for one tab, the #tabinfo[1]['windows'] returns more than one window id, when there is only one window...
+    -- removed it and just use buffer num, with only one tab `:bd` will close a window properly
 TabBufQuit = function()
     local tabinfo = vim.fn.gettabinfo()
-    if #tabinfo == 1 and #tabinfo[1]['windows'] == 1 then
-        if #vim.fn.getbufinfo({buflisted = 1}) == 1 then vim.cmd(':q') else vim.cmd(':bd') end
+    if #tabinfo == 1 then
+        local bufnum = #vim.fn.getbufinfo({buflisted = 1})
+        if bufnum == 1 then vim.cmd(':q') else vim.cmd(':bd') end
     else
         vim.cmd(':q')
     end
@@ -502,26 +505,26 @@ LuaLineBufferDimComponentConfig =
         buffers_color = { inactive = { fg = 'grey', bg = 'black' }, active = 'grey', },
     }
 
+UpdateLuaLineTabLine = function(args)
+    local tabinfo = vim.fn.gettabinfo()
+    -- print("number of tabs: " .. #tabinfo)
+    if #tabinfo == 1 then 
+        local config = require('lualine').get_config()
+        config.tabline.lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
+        -- config.tabline.lualine_a = { LuaLineBufferComponentConfig }
+        config.tabline.lualine_z = { }
+        require('lualine').setup(config)
+        -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
+    elseif #tabinfo == 2 then
+        local config = require('lualine').get_config()
+        config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
+        config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
+        require('lualine').setup(config)
+        -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
+    end
+end
+
 SetupLuaLineTabLine = function()
-    vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
-        callback = function(args)
-            local tabinfo = vim.fn.gettabinfo()
-            if #tabinfo == 1 then 
-                local config = require('lualine').get_config()
-                config.tabline.lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
-                -- config.tabline.lualine_a = { LuaLineBufferComponentConfig }
-                config.tabline.lualine_z = { }
-                require('lualine').setup(config)
-                -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
-            elseif #tabinfo == 2 then
-                local config = require('lualine').get_config()
-                config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
-                config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
-                require('lualine').setup(config)
-                -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
-            end
-        end,
-    })
 end
 
 LoadLuaLine = function()
@@ -569,7 +572,8 @@ LoadLuaLine = function()
         extensions = {}
     }
 
-    SetupLuaLineTabLine()
+    -- update tabline when tabs are created or closed
+    vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, { callback = UpdateLuaLineTabLine, })
 end
 
 ---------------------- WHICH-KEY CONFIG -------------------------------
