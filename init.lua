@@ -515,16 +515,14 @@ UpdateLuaLineTabLine = function(args)
         config.tabline.lualine_z = { }
         require('lualine').setup(config)
         -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } }) -- doesnt work
-    elseif #tabinfo == 2 then
+    -- if number of tabs is 3, then closing goes to 2, open to 4, no need to do a costly update (same logic if num tabs > 3)
+    elseif #tabinfo == 2 or (#tabinfo > 2 and args == true) then
         local config = require('lualine').get_config()
         config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
         config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
         require('lualine').setup(config)
         -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
     end
-end
-
-SetupLuaLineTabLine = function()
 end
 
 LoadLuaLine = function()
@@ -1164,6 +1162,7 @@ vim.keymap.set('n', '<leader>wn', '<cmd>:Noice<cr>')
 vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>wT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
 vim.keymap.set('n', '<leader>ws', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>wl', '<cmd>:lua UpdateLuaLineTabLine(true)<cr>')
 vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
 vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
