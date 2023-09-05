@@ -41,7 +41,7 @@
 - `brew services start redis` -> start a service
 
 
-## CLI:
+## CLI
 - ref: https://www.mitchchn.me/2014/os-x-terminal/
 - say - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
@@ -68,7 +68,7 @@
 
 
 
-## KEYBOARD SHORTCUTS:
+## KEYBOARD SHORTCUTS
 - full list: https://support.apple.com/en-us/HT201236
 - command + tab  - switch between apps
 - command + space - spotlight search
@@ -92,7 +92,7 @@
                           works in slack and whatsapp, not safari for google voice
 - fn + E                - from a text box, bring up emoji window
 
-### BROWSER(CHROME/FIREFOX verified):
+### BROWSER(CHROME/FIREFOX verified)
 - cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab
 - cmd + forward/back-arrow  - back and forth web page history
 - cmd + [/]               - back/forward page history
@@ -104,7 +104,7 @@
 - spacebar + shift        - scroll up
 - tab/shift+tab           - goto next/prev field in browsertab+page
 
-### WHATSAPP NATIVE:
+### WHATSAPP NATIVE
 - cmd + shift + [/]       - up/down conversations/groups
 - page up/down            - scroll up/down in the convo
 
@@ -131,14 +131,17 @@
     - apple case id 101308658353, https://support.apple.com/kb/HT201232
     - https://support.apple.com/en-us/HT211808 : 14.1 changelog address Files issue with cloud provider content as unavailable
 
-## FILESYSTEMS:
+## FILESYSTEMS
 - ISO filesystems can be mounted through disk utitlity application
 - MacFUSE defunct, used to be only way to mount NTFS
 - MacFUSE replaced by OSXFuse (FUSE = Filesystem in USErland)
     - with Fuse-ext2, can mount a ext2/3/4 filesystem
-- NTFS:
-    - ntfs-3g is free cli util to mount NTFS partitions for read/write
-    - best paid option is probably Paragon
+- NTFS
+    - natively has read only support
+    - write support
+        - https://osxdaily.com/2013/10/02/enable-ntfs-write-support-mac-os-x/
+        - ntfs-3g is free cli util to mount NTFS partitions for read/write
+        - best paid option is probably Paragon
 - mount samba share in osx
     mount -t smbfs //someuser@192.168.1.1/folder destfolder/
     mount -t smbfs smb://someuser:somepass@192.168.1.1111/folder destfolder/

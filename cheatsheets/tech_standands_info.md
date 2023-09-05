@@ -35,12 +35,17 @@
 ## WIFI
 - 2.4GHz band - ch1 2412, ch6 2437, ch11 2462
 ### STANDARDS
+- WiFi 6E, e = extended, supports 6Ghz band
 - WiFi 6 to identify devices that support 802.11ax (released 2019)
 - WiFi 5 to identify devices that support 802.11ac (released 2014)
 - WiFi 4 to identify devices that support 802.11n  (released 2009)
 - WiFi 3 to identify devices that support 802.11g (released 2003)
 - WiFi 2 to identify devices that support 802.11a (released 1999)
 - WiFi 1 to identify devices that support 802.11b (released 1999)
+### MESH
+- all nodes part of the same SSID
+    - many wifi extenders use a seperate SSID for each extender
+- wireless backhaul - each node in mesh uses a dedicated backhaul channel to talk to each other
 
 ## BLUETOOTH
 - classic and BLE use 2.4Ghz range, 2400-2480

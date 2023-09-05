@@ -8,7 +8,7 @@
 ## CONFIGS
 - basic heirarchy: system(machine/host level) -> global(user level: `~/.gitconfig`) -> local(repo `./.git/config`)
     - dec2022 - osx system config at `/Library/Developer/CommandLineTools/usr/share/git-core/gitconfig`
-        - `git config --system list` thinks it's `/etc/gitconfig`
+        - `git config --system --list` thinks it's `/etc/gitconfig`
 - `git config --get-all --show-origin credential.helper`
     - get all values for a config key from system, global, and local; as well as where those files are located as well
 

@@ -6,6 +6,8 @@
 - a aws account comes with a default VPC
 - can share VPCs between multiple accounts
 - SSM - systems mananger agents - https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
+- cloudfront - CDN
+- AWS WAF - web access firewall (firewall, bot detection, other rules)
 
 ## LOAD BALANCERS
 - ALB - application load balancer

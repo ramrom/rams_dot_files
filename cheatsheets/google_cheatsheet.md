@@ -5,6 +5,7 @@
     - https://security.stackexchange.com/questions/103976/how-exactly-does-google-account-decide-my-device-or-location-is-familiar
 - takeout - https://takeout.google.com
     - download basically *any* google data, including all photos
+- example to search google cache for slashdot: http://webcache.googleusercontent.com/search?q=cache:http://www.slashdot.org
 
 ## OAUTH
 - https://developers.google.com/identity/protocols/oauth2
@@ -98,6 +99,8 @@ up/down arrow, or `j`/`k`    - next/prev email in chain
 - up/down arrow (while video is active element) - up/down volume by 5%
 - add timestamp to a video link: append `&t=1m30s`
 
+## SPREADSHEET
+- full func list: https://support.google.com/docs/table/25273?hl=en&page=table.cs&tab=1240291&visit_id=638291857469023287-758844995&rd=1
 
 ## CALENDER
 / - put cursor in searchbox
