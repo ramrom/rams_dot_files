@@ -4,7 +4,7 @@
 
 --- TODO:
 -- remap gH, gH enters select mode (which dont really care about)
--- rempa ga, it clobbers get ascii value of char
+-- remap ga, it clobbers get ascii value of char
 -- leader-k doesnt do %
 
 --------------------------------------------------------------------------------------------------------

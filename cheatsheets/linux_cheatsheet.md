@@ -75,6 +75,8 @@ sudo shutdown -r now (reboot now)
 - home page - https://retropie.org.uk/
 - from cli `emulationstation` to start retropi GUI menu
     - configured keyboard as controller but it crashed right after
+- dirs/files
+    - `~/RetroPie/roms/` - roms locations
 
 
 ## USER STUFF

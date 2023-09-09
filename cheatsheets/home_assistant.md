@@ -104,6 +104,8 @@
     - [command line switch](https://www.home-assistant.io/integrations/switch.command_line/) - a toggle switch
 - twilio sms -> configured in `configuration.yml` and will add a notify service
     - must specify a target phone number (that in twilio API is approved), example ph format: `12223334444`
+- aug'23 - camera support: any ONVIF camera, amcrest
+    - other good brands: hikvision, reolink, dahua, anran (generally all support RTSP and ONVIF)
 
 ## COMPANION/MOBILE APP
 - troubleshooting doc: https://companion.home-assistant.io/docs/troubleshooting/faqs/
