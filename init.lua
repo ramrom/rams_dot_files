@@ -164,6 +164,15 @@ ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_word_diff')
 end
 
+ToggleIndentBlankLine = function()
+    if IndentBlankLineEnabled then
+        require("ibl").update { enabled = false }
+    else
+        require("ibl").update { enabled = true }
+    end
+    IndentBlankLineEnabled = not IndentBlankLineEnabled
+end
+
 -- NOTE jun'23, v0.9.1: https://neovim.io/doc/user/lsp.html#lsp-log has vim.lsp.log.get_filename(), but this method doesnt exist
 -- NOTE jun'23: still see logs in vim LspLog tab even if metal.log file(verified with cat) is cleared...
 ClearLspLog = function()
@@ -739,13 +748,14 @@ FlashKeyDefinitions =
 
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
+    IndentBlankLineEnabled = false
     require("ibl").setup {
         show_end_of_line = true,
         show_current_context = true,
         show_current_context_start = true,
         show_trailing_blankline_indent = false,
+        enabled = IndentBlankLineEnabled,
     }
-    vim.g.indent_blankline_enabled=0
 end
 
 ------------------------------- LUASNIP -----------------------------------------------------------
@@ -1161,7 +1171,7 @@ vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
 vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
-vim.keymap.set('n', '<leader>wi', '<cmd>:IndentBlanklineToggle<cr>')
+vim.keymap.set('n', '<leader>wi', '<cmd>:lua ToggleIndentBlankLine()<cr>')
 vim.keymap.set('n', '<leader>wm', '<cmd>:messages<cr>')
 vim.keymap.set('n', '<leader>wn', '<cmd>:Noice<cr>')
 vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')

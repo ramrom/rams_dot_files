@@ -329,7 +329,8 @@
         - implementors: Doom Eternal
 - unreal - C++ codebase by epic games
     - 5.0 - major goal to make game content/assets easy to create
-        - nanite - import photographic source into game
+        - nanite - no LOD(level of detail) limitation, high polygon count with dynamic detail
+            - import photographic source into game
         - lumen - full real-time global illumination, no manual lightmap creation for a scene
         - Niagara - fluid/particle dynamics, Chaos - physics engine
 
