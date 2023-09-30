@@ -518,12 +518,17 @@ UpdateLuaLineTabLine = function(args)
     -- if number of tabs is 3, then closing goes to 2, open to 4, no need to do a costly update (same logic if num tabs > 3)
     elseif #tabinfo == 2 or (#tabinfo > 2 and args == true) then
         local config = require('lualine').get_config()
+        LuaLineTabComponentConfig['max_length'] = vim.o.columns -- update incase vim size changed
         config.tabline.lualine_a = { { LuaTabLineTabIndicator, color = { fg = 099, bg = 016 } } , LuaLineTabComponentConfig }
         config.tabline.lualine_z = { LuaLineBufferDimComponentConfig }
         require('lualine').setup(config)
         -- require('lualine').refresh({ scope = 'tabpage', place = { 'tabline' } })  -- doesnt work
     end
 end
+
+-- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
+vim.api.nvim_create_autocmd('VimResized', { pattern='*', callback = function() UpdateLuaLineTabLine(true) end, 
+      desc = 'force lualine udpate when vim resizes'})
 
 LoadLuaLine = function()
     require('lualine').setup {
@@ -734,7 +739,7 @@ FlashKeyDefinitions =
 
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
-    require("indent_blankline").setup {
+    require("ibl").setup {
         show_end_of_line = true,
         show_current_context = true,
         show_current_context_start = true,
@@ -840,7 +845,7 @@ LoadBQF = function()
         auto_enable = true,
         auto_resize_height = true, -- highly recommended enable
         preview = {
-            win_height = 12,
+            win_height = 24,
             win_vheight = 12,
             delay_syntax = 80,
             -- border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
