@@ -9,8 +9,8 @@ set icons             # show icon before item
 set dircounts         # show # of items in dir
 set info size         # show size next to item
 set period 1          # refresh every 1 sec for dir updates
-set hidden off        # show hidden files
-set number on         # show number of items index in dir
+set hidden true       # show hidden files
+set number true       # show number of items index in dir
 set drawbox           # draw borders around columns
 set tempmarks 'abcdefghijklmnopqrstuvwxzy' # set all lower case to temporary marks, sorta like vim, upper case are permanent
 
