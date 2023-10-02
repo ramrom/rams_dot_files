@@ -623,8 +623,9 @@ NvimTreeConfig =
             vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
         end,
         -- sort_by = 'extension',
-        view = { width = { min = 10, max = 40, padding = 1 } },
-        renderer = { full_name = true } -- if highlighted item's full path is longer than nvim window width, render into next window
+        renderer = { full_name = true }, -- if highlighted item's full path is longer than nvim window width, render into next window
+        -- FIXME: set'23 - nvim-tree warns that padding settings is unkonwn option, looks correct per help page...
+        view = { width = { min = 10, max = 40, padding = 1 }, },
     }
 
 LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
