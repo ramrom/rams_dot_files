@@ -2,8 +2,10 @@
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
 
-- gets close to rgrep: `rg -uuu`
-    - u:nogitingore, uu:hidden, uuu:binary
+- ignoring files to search
+    - search hidden: `rg --hidden`
+    - u:`--no-ingore`, uu:`--no-ignore --hidden`, uuu:`--no-ignore --hidden --binary`
+    - `rg -uuu` gets close to rgrep
 - list filetype defs
     `rg --type-list`
 - search go and sh types, not javascript

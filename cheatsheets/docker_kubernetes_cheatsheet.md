@@ -24,6 +24,8 @@
 - `sudo docker exec -it foocontainername /bin/bash` - start a bash shell in container
 - `docker volume -qf dangling=true` - find dangling volumes
     - `docker volume rm $(docker volume ls -qf dangling=true)` - remove them
+- `docker login foo.com` - login to a docker registry
+    - `~/.docker/config.json` will show list of sessions for registries
 ### UNDERLYING TECH
 - `containerd` is a container runtime developed by Docker
     - uses linux cgroups to enforce limits CPU and memory
