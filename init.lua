@@ -751,11 +751,7 @@ FlashKeyDefinitions =
 LoadIndentBlankLine = function()
     IndentBlankLineEnabled = false
     require("ibl").setup {
-        -- FIXME: oct2-23 new ibl version doesnt like these options, do i need to find equivalents in new vers?
-        -- show_end_of_line = true,
-        -- show_current_context = true,
-        -- show_current_context_start = true,
-        -- show_trailing_blankline_indent = false,
+        whitespace = { remove_blankline_trail = false },
         enabled = IndentBlankLineEnabled,
     }
 end
