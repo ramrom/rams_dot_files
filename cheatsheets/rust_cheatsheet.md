@@ -609,8 +609,8 @@ let s2 = String::from("hello");  // type String is mutable
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
 - [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/tokio
-- [actix](https://actix.rs/) - popular web framework, uses actor model
-- [axum](https://github.com/tokio-rs/axum) - popular web framework
+- [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await
+- [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower, uses async/await
 - [serde](https://serde.rs/) - awesome serial/deserialization framework
     - `Serializer`/`Deserializer` traits define how parse data into/out-of the serde data model
         - deserialization uses the visitor pattern, centered around the `Visitor` trait
