@@ -96,6 +96,7 @@ append_dir_to_path ~/node_modules/.bin  # local install of npm bins
 
 [ "$(uname)" = "Darwin" ] && append_dir_to_path /opt/homebrew/bin  # aug2022, homebrew bins are here, not /usr/local/bin/
 [ "$(uname)" = "Darwin" ] && append_dir_to_path /opt/homebrew/sbin
+[ "$(uname)" = "Darwin" ] && append_dir_to_path ~/.docker/bin # oct2023, docker cli bins are here
 
 #export DISPLAY='localhost:10.0'
 

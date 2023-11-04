@@ -5,7 +5,9 @@
 - http 1.0
     - every request requires a new TCP handshake and connection
 - http 1.1
-    - supports persistent TCP and pipelining requests
+    - supports persistent TCP (dont need to open a new TCP connection for every request)
+    - supports pipelining requests (can send request 2 before waiting for response of request 1)
+        - many browsers stopped supporting it, b/c many proxies did not implement pipelining correctly
 - http 2: https://developers.google.com/web/fundamentals/performance/http2
     - started as SPDY protocol by google, released by IETF in 2015
     - all data sent as binary (1.1 uses plain text)
@@ -13,6 +15,14 @@
     - frames/messages allow multiplexing of many streams, no HOL blocking
         - streams can have priorites, with weights
     - server push - the server can send data without a request
+    - has HPACK header compression
+- http 3
+    - released as IETF standard in 2023
+    - uses QUIC, runs on top of UDP
+        - QUIC major advantage for mobile traffic, which have many network handoffs, TCP tends to die on network handoffs
+        - QUIC embeds TLS inside it, offer more security with more data encrypted
+        - QUIC can support multiple streams at transport layer, all HTTP2 streams would be blocked if TCP connect was blocked
+        - http3 was invented in order to use QUIC, QUIC wasnt compatible with HTTP2
 - chunked vs multi-part: chunked is transfer encoding, multi-part is content type
     - each chunk is preceded by it's size, transmission ends with zero sized chunk, not supported in HTTP2
     - multi-part type can use chunked encoding
@@ -90,6 +100,14 @@
 
 ## CURL
 - `curl --insecure https://foo.com`  - skip cert TLS verification
+- `curl -X POST -H "Content-Type: application/json" -d '{"foo": 3, "bar": 1}' https://foo.com/yar/bar`
+- `curl -v --http1.1 -X POST -F 'name=foo' https://foo.com`  
+    - `-v` for verbose, `--http.1.1` to force http1.1
+- `curl -X POST -d 'name=foo' https://foo.com` 
+    - `-d` forces Content-Type to be `application/x-www-form-urlencoded`
+- removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
+- `curl --header 'HOST: foo.com' bar.com`  
+    - curl will resolve bar.com _but_ still set host header to `foo.com`
 
 ## HTTPIE
 - https://httpie.io/docs

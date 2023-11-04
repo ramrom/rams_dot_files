@@ -1,5 +1,8 @@
 # 'NIX general tooling type stuff
 
+## CURL
+- SEE [http cheatsheet](http_web_tls_cheatsheet.md)
+
 ```sh
 # FIND: find files recursive starting with current dir
 find . -type f -name "*pattern*"
@@ -113,12 +116,6 @@ timedatectl set-ntp on   # enable NTP
 # netcat
 nc -l 127.0.0.1 9001     #listen on 9001
 
-# curl
-curl -X POST -H "Content-Type: application/json" -d '{"foo": 3, "bar": 1}' https://foo.com/yar/bar
-curl -v --http1.1 -X POST -F 'name=foo' https://foo.com  # -v for verbose, --http.1.1 to force http1.1
-curl -X POST -d 'name=foo' https://foo.com  # -d forces Content-Type to be application/x-www-form-urlencoded
-# removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
-
 # wc - word count
 wc -l somefile   # count # of lines in file
 wc -c somefile   # count # of chars in file
@@ -160,6 +157,7 @@ echo "foo bar baz" | xargs -I _ sh -c 'echo before; echo "_"; echo after' # sh t
 # HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
 head -n-2 foofile  # print all except the last 2 lines
+echo "foobar" | head -c 2  # grab first 2 chars of input, prints "fo"
 tail foofile  # last 10 lines
 tail -n+3 foofile # get all lines starting from line 3 and on
 tail -f foofile  # spit out last lines and continue to print them as new ones are written
