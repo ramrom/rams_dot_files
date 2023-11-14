@@ -679,7 +679,6 @@ end
 ------------------------- NOICE -----------------------------------------------
 LoadNoice = function()
     require('noice').setup {
-        -- cmdline = { enabled = false, view = 'cmdline_popup' },
         views = { split = { enter = true } },
         presets = {
             bottom_search = false, -- use a classic bottom cmdline for search
@@ -687,8 +686,14 @@ LoadNoice = function()
             long_message_to_split = true, -- long messages will be sent to a split
             lsp_doc_border = true, -- add a border to hover docs and signature help
         },
+        routes = {
+          {
+            filter = { event = "msg_show", find = "B written" },
+            view = "mini",
+                -- mini view will hide after short time, cmdline persists forever...
+          },
+        },
     }
-
 end
 
 ------------------------- FLASH -----------------------------------------------
@@ -1203,7 +1208,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "gls", "<cmd>LspStop<CR>")
     vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
-    vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
+    vim.keymap.set("n", "glT", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
     -- ACTIONS

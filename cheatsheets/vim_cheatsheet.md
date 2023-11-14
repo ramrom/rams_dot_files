@@ -138,7 +138,7 @@ G log %         - git log <current file>
     - lazy will install plugins in `~/.local/share/myfirenvimdir/lazy` dir
     - launch nvim, config file should install firenvim with `firenvim#install()`
         - when this run it's configures the binstub `~/.local/share/firenvim/firenvim`
-- `~/.local/share/firenvim/firenvim` binstub
+- `~/.local/share/firenvim/firenvim` - binstub that is called when firenvim plugin in browser activates
     - defines reading `NVIM_APPNAME`
     - launches nvim in headless mode, sets `g:started_by_firenvim`
 - INSTALLATION - SHARED INIT.LUA FILE
