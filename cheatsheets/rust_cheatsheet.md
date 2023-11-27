@@ -142,6 +142,11 @@
     - public items can be used by anything in the crate
     - a struct/enum can be marked public, but fields are still private unless fields are declared public
 - private items are only visible in the current module and decendant modules
+- no exception handling, `Result<T, E>` is commonly used to return errors as values
+    - `unwrap` - panic if `Err`, `expect('failure!')` - panic if `Err` with message
+    - `unwrap_or_else(|err| ...)` - error handler func if `Err`
+    - propogate errors to caller with `?` operator
+
 
 ## REFERENCES/OWNERSHIP
 - references are a "pointer" to data, and in rust they also mean borrowing the data from an owner
@@ -422,8 +427,8 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
     - why not generic trait? - can implement the trait many times (per generic param)
         - with associated type we can only implement trait one time
-- supertraits - defining a trait to depend on implementor implementing another trait
-    - `trait Trait: SuperTrait { ... }` - implementor must implement `SuperTrait` here before implementing `Trait`
+- supertraits - defining a trait to depend on implementee implementing another trait
+    - `trait SuperTrait: Trait { ... }` - implementor must implement `Trait` here before implementing `SuperTrait`
     - concept is similar to trait bounds on generics
 - fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
     - types direct implementation takes precedence
@@ -445,10 +450,6 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - generic with trait bound will have a concrete type at compiletime due to monomorphization
     - trait objects contain concrete type only known at run time
     - big use case for trait objects is a array/vector/collection of heterogenous concrete types, can't do that with a generic trait
-- no exception handling, `Result<T, E>` is commonly used to return errors as values
-    - `unwrap` - panic if `Err`, `expect('failure!')` - panic if `Err` with message
-    - `unwrap_or_else(|err| ...)` - error handler func if `Err`
-    - propogate errors to caller with `?` operator
 - DST - dynamically sized types - https://doc.rust-lang.org/nomicon/exotic-sizes.html
     - types can only exist behind a fat/wide pointer
     - main cases of DST
