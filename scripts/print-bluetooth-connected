@@ -8,7 +8,7 @@ print_n_space() {
     done
 }
 
-paired_devices=$(bluetoothctl paired-devices)
+paired_devices=$(bluetoothctl devices Paired)
 
 # echo "$paired_devices"
 
