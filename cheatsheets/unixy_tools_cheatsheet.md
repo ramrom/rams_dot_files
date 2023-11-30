@@ -278,6 +278,7 @@ killall -3 foo  # send sigquit to all proceses with foo in the name, default is 
 2 -  sigint    # interrupt, what ctrl-c usually sends
 3 -  sigquit   # exit, and dump core, what ctrl-\ usually does
 9 -  sigkill   # exit without cleanup
+15 - sigterm   # exit,with cleanup
 24 - sigtstp   # suspend,what ctrl-z usually does
 
 # RSYNC
