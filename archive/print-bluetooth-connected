@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# dec1-23 - DEPRECATED
+# can just do `bluetoothctl devices Connected` now
+
 print_n_space() {
     i=0
     while [ "$i" -le $1 ]; do
