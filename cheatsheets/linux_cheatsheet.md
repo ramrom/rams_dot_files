@@ -1,19 +1,8 @@
 # LINUX
-- udev, as of kernel 2.6, it replaces DevFS(device file system)
-    - `udevadm` - cli tool to see events, monitor devices, list attribs
-    - identify devices based on properties (e.g. vendor ID and device ID) dynamically
-    - runs in userspace, devFS runs in kernelspace
-    - kernel reports events to udev daemon, udev daemon does actions based on configured rules in response
-    - specify rules what on how to identify device, regardless of what port it's plugged into
-        - e.g. plug in same device into diff usb ports and see `/dev/foo` and not `/dev/usb0`/`dev/usb1`
-- device drivers are basically part of the kernel (prolly make up 50% of the code or more)
 - cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
 - namespaces - linux kernel feature, isolates sets of processes and resources
 - linus rant on app development in linux - https://www.youtube.com/watch?v=Pzl1B7nB9Kc
     > If people are using it, it's not a bug, it's a feature - Linus
-- file ownership
-    - kernel only understand numeric UID and GID
-    - when `ls -l` shows names, it's b/c it's mapping UID and GID to names in `/etc/passwd`
 - `/etc/passwd` and `/etc/shadow`
     - `passwd` used to contain passwords, this is deprecated, security issue as u could dictionary attack it
         - file remains b/c programs like `ls` still use it
@@ -24,6 +13,7 @@
 - cron: task scheduler, great site: https://crontab.guru/
 - procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
     - most unix-like OSes support it, notably OSX doesn't
+
 
 ## GNU
 - started by richard stallman in 1984
@@ -211,36 +201,32 @@ apt-cache depends pkg
     - basically same as apt depends pkg, slightly diff info
 apt-cache showpkg pkg - shows deps and reverse deps,
             shows versions, also shows SHAs and more info
-
-
-apt list --installed - show installed packages
-apt list --upgradable - show upgradable packages
-sudo apt-get install packageName --no-upgrade  - install new pkg and dont upgrade dependend packages
-sudo apt-get purge vsftpd  - remove package and config files
-apt-get changelog pkg - see changelog
-apt-get check  - check for broken deps
-sudo apt-get autoremove pkg - remove a package and it's dependencies
-sudo update-alternatives --config foopkg - select alt
-
-### SEARCH
-apt-cache search .*realregex$
+### OTHER COMMANDS
+- apt list --installed - show installed packages
+- apt list --upgradable - show upgradable packages
+- sudo apt-get install packageName --no-upgrade  - install new pkg and dont upgrade dependend packages
+- sudo apt-get purge vsftpd  - remove package and config files
+- apt-get changelog pkg - see changelog
+- apt-get check  - check for broken deps
+- sudo apt-get autoremove pkg - remove a package and it's dependencies
+- sudo update-alternatives --config foopkg - select alt
+### SEARCHING
+- apt-cache search .*realregex$
     - search locally cached package info only
-apt search *something*
-apt-cache search --names-only .*foo.*
+- apt search *something*
+- apt-cache search --names-only .*foo.*
     - searches regex in package name only
-apt search --names-only *something*
+- apt search --names-only *something*
     - same
-
-sudo apt --dry-run autoremove
+- sudo apt --dry-run autoremove
     - autoremove remove uneeded pkgs
     - dry-run just shows what it would remove
-
-sudo dpkg --remove --force-remove-reinstreq somepackage
+- sudo dpkg --remove --force-remove-reinstreq somepackage
     - remove pkg, if you see "current status 'half-installed'" error
 
 
 ### UNATTENDED-UPGRADE (update/upgrade security fixes)
-sudo unattended-upgrade
+- `sudo unattended-upgrade`
 
 ## SNAP
 - snap invented by ubuntu, more rapid/flexible package system than .deb/apt
@@ -418,18 +404,35 @@ pulsemixer - volume manager with pulseaudio
     pulsemixer --mute
     pulsemixer --change-volume +5
 
-## DEVICES AND FILE SYSTEMS:
-loopdevices
-- regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
+## DEVICES
+- device drivers are basically part of the kernel (prolly make up 50% of the code or more)
+- `hidraw` - raw data access to HID(human interface device)s - https://docs.kernel.org/hid/hidraw.html
+- `udev`, as of kernel 2.6, it replaces DevFS(device file system)
+    - `udevadm` - cli tool to see events, monitor devices, list attribs
+    - identify devices based on properties (e.g. vendor ID and device ID) dynamically
+    - runs in userspace, devFS runs in kernelspace
+    - kernel reports events to udev daemon, udev daemon does actions based on configured rules in response
+    - specify rules what on how to identify device, regardless of what port it's plugged into
+        - e.g. plug in same device into diff usb ports and see `/dev/foo` and not `/dev/usb0`/`dev/usb1`
+- loop devices
+    - regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
 - if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
+- tmpfs - ram drives, for temporary and fast storage of data in RAM
+- drive naming convention
+    - fd - SATA, sd - SCSI/SATA, hd - IDE
+    - fda - first SATA drive, hdb - 2nd IDE drive
+    - hdb1 - 1st partition on 2nd IDE drive
+### SPECIAL DEVICES
+- /dev/null   - write output to this device to throw it away
+- /dev/zero   - obtain null characters from this device
+    - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
+- /dev/random - generate pseduorandom numbers from this device
 
-tmpfs - ram drives, for temporary and fast storage of data in RAM
 
-drive naming convention:
-- fd - SATA, sd - SCSI/SATA, hd - IDE
-- fda - first SATA drive, hdb - 2nd IDE drive
-- hdb1 - 1st partition on 2nd IDE drive
-
+## FILE SYSTEMS
+- file ownership
+    - kernel only understand numeric UID and GID
+    - when `ls -l` shows names, it's b/c it's mapping UID and GID to names in `/etc/passwd`
 ### DIR CONVENTIONS
 - see FHS(linux filesystem hierarchy standard): https://www.pathname.com/fhs/
 - /         - root filesystem
@@ -443,12 +446,6 @@ drive naming convention:
 - /var      - sys specific variable(changing) files: logs, spool files, web server data files
 - /export   - data shared over the network mount
 - /media    - removable devices like usb (so not internal HDD)
-
-### SPECIAL DEVICES
-- /dev/null   - write output to this device to throw it away
-- /dev/zero   - obtain null characters from this device
-    - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
-- /dev/random - generate pseduorandom numbers from this device
 
 
 
