@@ -1,18 +1,22 @@
-#!/bin/zsh
-# NOTE: need zsh just for the `fzf --header=$'line1\nline2'` to read the `\n` as a new line, dash in linux doesnt support it
+#!/bin/sh
 
 # FZF + bluetoothctl
 
-# TODO: implement ctrl-r reload
-
 [ ! "$(uname)" = "Linux" ] && echo "$(tput setaf 1) Only works in Linux" && exit 1
+
+header="ctrl-r->reload devices,
+ctrl-space->reload paired-devices,
+ctrl-s->reload connected devices,
+ctrl-o->connect, ctrl-i->disconnect,
+enter->info"
 
 prev_cmd='bluetoothctl info $(awk '\''{print $2}'\'' <<< {})'
 out=$(bluetoothctl devices | fzf +m --height 100% \
     --preview "$prev_cmd" \
-    --header=$'ctrl-r->reload devices, ctrl-space->reload paired-devices\nctrl-o->connect, ctrl-i->disconnect, enter->info' \
+    --header="$header" \
     --bind 'ctrl-r:reload(bluetoothctl devices)' \
     --bind 'ctrl-space:reload(bluetoothctl devices Paired)' \
+    --bind 'ctrl-s:reload(bluetoothctl devices Connected)' \
     --expect='ctrl-o,ctrl-i')
 key=$(echo "$out" | head -1)
 selection=$(echo "$out" | tail -1)
