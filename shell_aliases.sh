@@ -89,8 +89,8 @@ if [ "$(uname)" = "Linux" ]; then
     alias sbw='sudo ~/.cargo/bin/bandwhich -n' # TODO: see issue 166 to fix dns resolver, for now -n no resolve
     alias tmr='transmission-remote'
     alias tmd='transmission-daemon'
-    alias listgnomekeys='gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys'
-    alias listcustomgnomekeys='gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings'
+    alias printgnomekeys='gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys'
+    alias printbluetoothconnected='bluetoothctl devices Connected'
 else  # assuming Darwin here
     alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
     alias lc='launchctl'

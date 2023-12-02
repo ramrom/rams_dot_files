@@ -1,6 +1,4 @@
-#!/bin/sh
-# FIXME may'23: if zsh shell, the fdfind below doesn find any files
-
+#!/bin/zsh
 
 # FDCOMP - Fzf over docker compose files in a dir and run one
 
@@ -14,7 +12,11 @@ while getopts 'h' x; do
 done
 shift $(($OPTIND - 1))
 
-out=$(fdfind -t f .*compose.*\.yml | fzf +m --height 100% \
+header='ctrl-i->up-detatched, ctrl-e->edit
+ctrl-o->pull-image, ctrl-s->down+rmi'
+
+# NOTE: fdfind needs quotes here or 0 matches, in regular zshell it works w/o quotes
+out=$(fdfind -t f "compose.*\.yml" | fzf +m --height 100% \
     --header=$'ctrl-i->up-detatched, ctrl-e->edit\nctrl-o->pull-image, ctrl-s->down+rmi' \
     --preview 'batcat --color always {}' \
     --expect='ctrl-i,ctrl-e,ctrl-s,ctrl-o')
