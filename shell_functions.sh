@@ -73,7 +73,8 @@ function pppath() {
 
 # given port number return if ssh(or polipo) is listening on it
 # polipo used to create HTTP proxy to a SOCKS proxy
-function find_listening_ports() {
+function print_ssh_listening_ports() {
+    [ -z "$1" ] && echo "need 1st arg for port number" && return 1
     local process_type=ssh; [ -n "$polipo" ] && process_type=polipo
     ports="$(lsof -nP -iTCP -sTCP:LISTEN)"
     # space occurs after last digit, so match full number (e.g. otherwise 313 matches on 3131)

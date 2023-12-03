@@ -406,6 +406,7 @@ pulsemixer - volume manager with pulseaudio
 
 ## DEVICES
 - device drivers are basically part of the kernel (prolly make up 50% of the code or more)
+    - old hardware support does get removed but conservatively, e.g. kernel3.8 removed i386 intel support
 - `hidraw` - raw data access to HID(human interface device)s - https://docs.kernel.org/hid/hidraw.html
 - `udev`, as of kernel 2.6, it replaces DevFS(device file system)
     - `udevadm` - cli tool to see events, monitor devices, list attribs
