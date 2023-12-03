@@ -1,19 +1,26 @@
-# don't put duplicate lines in the history.
-setopt histignoredups
+# ZSHRC
 
+#### HISTORY #######
+setopt histignoredups    # don't put duplicate lines in the history.
+setopt histreduceblanks  # remove superfluous blanks before recording entry
+# setopt incappendhistory  # appends to histfile immediately, not on shell exit
+setopt histignorespace   # dont record entry starting with space
+HISTFILE=~/.zsh_history
+HISTSIZE=1000           # number of entries to keep in memory
+SAVEHIST=$HISTSIZE      # number of entries to write to history file
+
+
+# NOTE: Open ctrl keys for use: ctrl-g, ctrl-s, ctrl-q
 # TODO: similar to .bashrc do i need PS1 check for the remote connection non-interactive case?
 
-# turn off zsh globbing, particularly `[]` (brackets)
-setopt NO_NOMATCH
+setopt NO_NOMATCH       # turn off zsh globbing, particularly `[]` (brackets)
 
 # `ls /foo/bar<C-w>` only kills 'bar'
 autoload -U select-word-style
 
-# autochange dirs: no need to type `cd` before dir
-setopt auto_cd
+setopt auto_cd          # autochange dirs: no need to type `cd` before dir
 
-# use IFS word splitting
-setopt sh_word_split
+setopt sh_word_split    # use IFS word splitting
 
 # oct2022: tmux on osx runs path_helper(from /etc/profile) which messus up path entries
     # see https://superuser.com/questions/544989/does-tmux-sort-the-path-variable
@@ -23,15 +30,12 @@ if [ "$(uname)" = "Darwin" -a -f /etc/profile ]; then
     source /etc/profile
 fi
 
-# set fc(command history editor) to vim
-export FCEDIT=nvim
+export FCEDIT=nvim      # set fc(command history editor) to vim
 
 export EDITOR=nvim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
-# set ctrl-o to open neovim
-# TODO: Open keys to use: ctrl-g, ctrl-s, ctrl-q
-bindkey -s '^o' 'v\n'
+bindkey -s '^o' 'v\n'   # set ctrl-o to open neovim
 
 # Colorize
 if [ $(uname) = "Darwin" ]; then
