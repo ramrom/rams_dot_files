@@ -94,6 +94,7 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
     - basically set`useHttpPath` to see full url, and url must have username in it
 
 ## GITHUB
+- tag diff: in gh UI goto tags, https://github.com/myorg/myrepo/releases/tag/mytag , then left side hit `compare`
 - keyboard shortcuts: https://docs.github.com/en/github/getting-started-with-github/keyboard-shortcuts
     - s or /  ->  focus search bar
     - g + i -> go to issues tab

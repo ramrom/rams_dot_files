@@ -53,7 +53,7 @@ ssh-keygen -f "/home/foouser/.ssh/known_hosts" -R "somedomain.com"
 # X11 Forwarding
 # server side X11Fowarding must be yes in server config(sshd_config file)
 # for OSX, make sure XQuartz is installed and working, if ssh'ing from osx to be used as display server
-# verify $DISPLAY var has a value on remote host
+# verify $DISPLAY var has a value on remote host, then can launch graphical binaries like `google-chrome`
 ssh -Y foouser@foo.com
 ssh -X foouser@foo.com  # -X is done without X11 authority
 

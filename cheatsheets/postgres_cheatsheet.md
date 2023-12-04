@@ -1,4 +1,5 @@
 # POSTGRES
+- also see [datastore](datastore_cheatsheet.md)
 
 ## PSQL
 - `\?` output help menu
@@ -30,7 +31,15 @@
             - rollback/re-try if it changed
             - often used when application can't have a persistent db connection to explicit/pessimistic lock
 
+## QUERY TIPS
+- counting num records in db table
+    - `select count(1) from footable;` - for big table, slow but accurate
+    - https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
+        - `SELECT reltuples AS estimate FROM pg_class where relname = 'mytable';` - fast but somewhat innaccurate
+        - `SELECT reltuples::bigint AS estimate FROM pg_class WHERE  oid = 'myschema.mytable'::regclass;` - better
+
 ## SPECIAL TABLES
 - https://www.postgresql.org/docs/current/monitoring-stats.html
     - `pg_stat_activity` a view that shows queries running per process
 - `pg_locks` a view that shows locks owned by various processes and transactions
+- `pg_stat_progress_create_index` - show status of index creation
