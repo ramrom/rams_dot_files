@@ -149,7 +149,7 @@ alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
 # SDKMAN
-alias java18zulu='sdk use java 18.0.1.fx-zulu'
+alias java17zulu='sdk use java 17.0.9.fx-zulu'
 alias java17='sdk use java 17.0.6-tem'
 alias java11='sdk use java 11.0.16.1-tem'
 alias java8='sdk use java 8.0.345-zulu'

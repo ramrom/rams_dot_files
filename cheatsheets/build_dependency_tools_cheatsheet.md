@@ -106,6 +106,7 @@
 - generally installs the languages in `~/.sdkman/candidates/` dir
 - https://sdkman.io/usage#use
 ### COMMANDS
+- `sdk install java 17.0.6-tem` - install a java version
 - `sdk current`
     - show current versions of all candidates
 - `sdk current java`
@@ -114,4 +115,4 @@
     - use foo-11 version for just current shell
 - `sdk list java`
     - see all java versions available to install, which are installed, and which one is currently used
-- `sdk install java 17.0.6-tem` - install a java version
+- `sdk default java 17.0.6-tem` - set default java version for all shells
