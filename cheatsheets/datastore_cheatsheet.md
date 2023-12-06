@@ -22,3 +22,9 @@
 
 ## GRAPH
 - Neo4j - most established and well known
+
+## SQLLITE
+- `.quit` - exit the sql client
+- `.tables` - list tables
+- `.schema footable` - get a table's description
+- `.mode line` - display each records column in seperate line

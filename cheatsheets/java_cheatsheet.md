@@ -102,6 +102,7 @@ ha.put("foo", a);
 ```
 ### STRINGS
 ```java
+"hi there".length()     // length of string
 "  trim a str  ".trim()   // returns "trim a str"
 "uPPer Case".toUpperCase()   // returns "UPPER CASE"
 "uPPer Case".toLowerCase()   // returns "upper case"
@@ -160,6 +161,8 @@ int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each
 
 ## MATH
 ```java
+int i = 3;
+int j = i / 2;  // j = 1
 Math.max(1,2)   // returns 2
 Math.min(1,2)   // returns 1
 Math.abs(-1)   // returns 1

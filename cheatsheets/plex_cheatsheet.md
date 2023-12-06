@@ -55,6 +55,8 @@
     - folder names support using uderscores and dashes for movie names
     - accents,special chars,spaces: https://forums.plex.tv/t/accents-and-punctuation-in-file-names/127524
     - names with `&` and `'` get indexed fine
+- database files are sqllite
+- backup data: https://support.plex.tv/articles/201539237-backing-up-plex-media-server-data/
 
 ## SHARING
 - can create tags and collections(special tags?) to organize: https://support.plex.tv/articles/201273953-collections/

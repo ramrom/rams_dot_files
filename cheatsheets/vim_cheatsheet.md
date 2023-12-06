@@ -132,6 +132,7 @@ G log %         - git log <current file>
     :0Glog      - logs only that change current file
 
 ### FIRENVIM
+- https://github.com/glacambre/firenvim
 - INSTALLATION - SEPERATE INIT.LUA FILE
     - create `~/.config/myfirenvimdir/init.lua` and symlink it to dedicated firenvim `init.lua` file
     - export `NVIM_APPNAME=myfirenvimdir`
