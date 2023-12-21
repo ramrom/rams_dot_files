@@ -23,6 +23,11 @@
 - `XMX` - max memory heap size program can occupy
 - `XMS` - size of initial heap memory when program starts
 - `XSS` - stack size of each thread
+- jar types
+    - skinny - only the app code you wrote
+    - thin - app code you wrote plus app dependencies
+    - hollow - inverse of thin, bits needed to run your app (i.e. the JRE)
+    - fat - thin + hollow
 
 ## BUILD TOOLS
 - uses ant, maven, gradle

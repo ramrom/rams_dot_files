@@ -1,28 +1,27 @@
 # SCALA
 - main docs: https://www.scala-lang.org/
     - source code repo: https://github.com/scala/docs.scala-lang.git
+- barebone cheatsheet - https://docs.scala-lang.org/cheatsheets/index.html
+- tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - first compiler was written in Pizza by Martin Odersky, by scala 2.0, compiler rewritten completely in scala
 - defined by the scala language specification
     - main compiler for JVM
     - Scala.js is a compiler targeted for javascript (node.js or web)
     - Scala Native uses LLVM to make native binaries
-- scala-lang cheatsheet: https://docs.scala-lang.org/cheatsheets/index.html
-- tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
 - lightbend(formerly typesafe) founded by odersky, jonas boner(created akka), and paul phillips
 
-## SCALA 2.11 2.12 2.13
-- 2.12
-    - compiler uses new java 8 VM features
-    - trait compiles to java interface with default methods
-    - methods that take functions can be called in both directions using lambda syntax
-    - **NOT** binary compatible with 2.11, mostly source compatible
-- 2.13
-    - major change to collection types; simpler, more perfromant, safer
-    - java8 is minimum, 2.12 and 2.13 def work on java11
-    - **NOT** binary compatible with 2.12
-
-## SCALA 3
+## SCALA VERSIONS
+### 2.12
+- compiler uses new java 8 VM features
+- trait compiles to java interface with default methods
+- methods that take functions can be called in both directions using lambda syntax
+- **NOT** binary compatible with 2.11, mostly source compatible
+### 2.13
+- major change to collection types; simpler, more perfromant, safer
+- java8 is minimum, 2.12 and 2.13 def work on java11
+- **NOT** binary compatible with 2.12
+### 3
 - scala 2 compiler is probably the most infamous piece of bad scala code, pure spaghetti
 - DOTTY
     - http://dotty.epfl.ch/docs/
@@ -33,26 +32,13 @@
 - scala 2 source -> JVM .class file; scala 3 source -> TASTy files -> JVM .class file
     - TAST (typed abstract syntax tree), a data structure that describes you scala code
     - class files lose a lot of gramattic/semantic information about scala, but TASTy preserves it
+- has propery `enum` enumation type
+- introduces union type and intersection type
 
-- string interpolation:
-    - prints `this is Foo(3)`
-        ```scala
-        case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
-        ```
-    - toString method is called if fooObject isnt a String
-- nice typeclass definition: https://scalac.io/typeclasses-in-scala/
-    - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
-- https://docs.scala-lang.org/cheatsheets/index.html
-- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
-- scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
-- run command and redirect to file
-    ```scala
-    import sys.process._
-    import java.io.File
-    ("ls -al" #> new File("files.txt")).!
-    ```
 
 ## TYPE SYSTEM
+- Trait - cant be instantiated directly, a class can implement many traits
+- Abstract class - cant be instantiated, class can implement only one abstract class
 - generics are a compile time check, and suffer from type erasure during runtime on the JVM
     ```scala
     val l1 = List(1, 2, 3)
@@ -64,6 +50,7 @@
     ```
 
 ## COLLECTIONS
+- scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
 ### LIST/ARRAY
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
@@ -134,6 +121,22 @@ m += ("foo", 1)    // appending an item for mutable Map
     > Also other things, but those are the big ones that differ in those approaches. (edited)
 - portkey uses @module annotation above class declarations, it must make classes vals' available in scope
 
+## RANDOM
+- string interpolation:
+    - prints `this is Foo(3)`
+        ```scala
+        case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
+        ```
+    - toString method is called if fooObject isnt a String
+- nice typeclass definition: https://scalac.io/typeclasses-in-scala/
+    - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
+- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
+- run command and redirect to file
+    ```scala
+    import sys.process._
+    import java.io.File
+    ("ls -al" #> new File("files.txt")).!
+    ```
 
 ## AUTOMATION TESTING
 - https://www.scalatest.org/user_guide/using_scalatest_with_sbt
@@ -179,7 +182,6 @@ m += ("foo", 1)    // appending an item for mutable Map
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 - 2.8
     - supports java 11
-
 
 ## JSON PARSING
 - weePickle: https://github.com/rallyhealth/weePickle
@@ -228,12 +230,15 @@ m += ("foo", 1)    // appending an item for mutable Map
     println(a)
     ```
 
-## OTHER MAJOR LIBS
+## OTHER MAJOR LIBS/FRAMEWORKS
+- [http4s](https://http4s.org/) - minimal highly FP web framework
+    - compiles to Scala.js and Scala Native, uses fs2
+- fs2 - streaming library
 - cats: https://typelevel.org/cats/datatypes/ior.html
     - lots of useful FP types
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
     - `IO` type and "non-effecting" types
- fs2 - streaming and concurrency, build on cats-effects and cats
+- fs2 - streaming and concurrency, build on cats-effects and cats
 ### AKKA
 - one of akka streams main goals is to implement backpressure
 ### SLICK
