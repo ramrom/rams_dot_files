@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# fzf over upower devices
+
+prev_cmd='upower -i {}'
+
+upower -e | fzf --height 100% --layout=reverse \
+    --preview "$prev_cmd" \

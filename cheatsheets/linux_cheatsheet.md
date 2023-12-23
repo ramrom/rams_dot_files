@@ -79,6 +79,12 @@ passwd                      - change your password
 sudo usermod -a -G foogroup foouser  - add foouser to group foogroup
 sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
 
+## PERMISSIONS
+- group `input` - user has full control over all devices in `/dev/input`
+- group `dialout` - user can admin serial ports and modems
+- group `docker` - can admin the docker daemon
+- group `bluetooth` - can admin bluetooth stack
+
 
 ## SYSTEMD
 - great wiki on it: https://wiki.archlinux.org/index.php/Systemd
@@ -468,6 +474,8 @@ pulsemixer - volume manager with pulseaudio
 - efibootmgr - UEFI boot manager, list boot devices and order, change order, delete boot option
 - dkms - cli for dynamic kernel modules
     - `dkms status` - list all loaded kernel modules and show status
+- lsmod - show status of kernel modules
+- modprobe - add/remove modules from linux kernel
 - udevadm - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
 - dmesg - kernel ring buffer, print messages or control it
