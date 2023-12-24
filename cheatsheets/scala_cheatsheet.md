@@ -39,6 +39,12 @@
 ## TYPE SYSTEM
 - Trait - cant be instantiated directly, a class can implement many traits
 - Abstract class - cant be instantiated, class can implement only one abstract class
+- nice typeclass definition: https://scalac.io/typeclasses-in-scala/
+    - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
+- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
+- integer types - `Short` (16bit), `Int` (32bit?), `Long` (64bit?)
+    - `Long` instantiation - `1000000000000000000L` or `100000: Long`
+- `Any` - all objects implement this, `Nothing` - opposite of `Any`, no object implements this
 - generics are a compile time check, and suffer from type erasure during runtime on the JVM
     ```scala
     val l1 = List(1, 2, 3)
@@ -128,9 +134,6 @@ m += ("foo", 1)    // appending an item for mutable Map
         case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
         ```
     - toString method is called if fooObject isnt a String
-- nice typeclass definition: https://scalac.io/typeclasses-in-scala/
-    - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
-- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - run command and redirect to file
     ```scala
     import sys.process._
