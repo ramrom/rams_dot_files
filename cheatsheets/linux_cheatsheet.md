@@ -483,8 +483,9 @@ pulsemixer - volume manager with pulseaudio
 - iwlist - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - notify-send - pops up notification
-- `lsusb -D /dev/bus/usb/002/004`
+- lsusb - `lsusb -D /dev/bus/usb/002/004`
     - get detailed info about a specific usb device
+- upower - sys util, get power/battery info and stats about devices
 - bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device

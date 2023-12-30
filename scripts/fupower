@@ -5,4 +5,5 @@
 prev_cmd='upower -i {}'
 
 upower -e | fzf --height 100% --layout=reverse \
+    --preview-window=bottom:60% \
     --preview "$prev_cmd" \
