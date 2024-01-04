@@ -203,6 +203,11 @@
     - VA
         - good viewing angle, best constract ratio, good color repro, ok refresh rate (better than IPS), ok resonse time
         - oldest standard
+- E-ink - uses charged particles moving through viscous fluid b/w two electrodes
+    - requires very little power, last frame persists even with no power
+    - very slow, max refresh rates like 15hz
+    - each pixel is only black or white, so has to dither pixels to get greys
+    - good for e-books
 
 ## COMPILERS
 - LLVM is a platform for creating machine code

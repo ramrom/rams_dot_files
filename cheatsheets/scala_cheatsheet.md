@@ -54,6 +54,17 @@
     val seq : Seq[Int] = Seq(1,2,3) // compiler validates generics at compile time
     val seq : Seq = Seq(1,2,3)   // this is what JVM runtime actually has, generic type info is erased
     ```
+### COMPANION OBJECT
+- defining `apply` method lets you instantiate companion class without `new` keyword
+    - `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
+- companion class and object can access each others private members
+### CASE CLASS
+- e.g. `case class Foo(i: Int, s: String)`
+- constructor params are `val`s by default
+- get a default `apply` and `unapply` automatically defined
+    - pattern matching needs `unapply` defined if you want to match on fields
+- get `toString` and `equal` methods auto-implemented
+
 
 ## COLLECTIONS
 - scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
@@ -69,16 +80,33 @@
     - `"hi there".slice(2,5)` -> returns `" th"`
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
+- appending
+    ```scala
+    val m: Map[String, Int] = Map.empty
+    m += ("foo", 1)    // appending an item for mutable Map
+    ```
 ### STREAMS
 - like collection but lazily evaluated so can be optimized when chaining them together
 - regular collections that u might chain with things like `map` and `filter` will eagerly create intermediate data structures
 - deprecated in 2.13.0 in favor of LazyList
 
+## STRINGS
+- prints `this is Foo(3)`
+    ```scala
+    case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
+    ```
+- toString method is called if fooObject isnt a String
 
-```scala
-val m: Map[String, Int] = Map.empty
-m += ("foo", 1)    // appending an item for mutable Map
-```
+## MONADS
+### Either
+- `flatMap` and `map` are right-biased, mapping on left val returns same val
+    - `Right(1).map { x => x + 1 }   # returns Right(2)`
+    - `val a: Either[Int, Int] = Left(1).map { x => x + 1 }   # returns Left(1)`
+### Option
+- `flatMap`/`map` operate on `Some` and pass on `None`
+- `foo.getOrElse(2)` - if `foo` is `Some(1)` returns `1`, if `None` returns `2`
+### EitherT
+- type from cats
 
 ## CONCURRENCY
 - Futures
@@ -100,6 +128,13 @@ m += ("foo", 1)    // appending an item for mutable Map
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
 
+## FILE
+- run command and redirect to file
+    ```scala
+    import sys.process._
+    import java.io.File
+    ("ls -al" #> new File("files.txt")).!
+    ```
 ### FILE READ
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
@@ -125,21 +160,8 @@ m += ("foo", 1)    // appending an item for mutable Map
     > 2. Nearly as fast as `new` (Yes: macwire modules, cake. No: Guice)
     > 3. Multibinding (Yes: Guice, macwire modules sorta. No: cake)
     > Also other things, but those are the big ones that differ in those approaches. (edited)
-- portkey uses @module annotation above class declarations, it must make classes vals' available in scope
+- `@module` annotation above class declarations make classes vals' available in scope
 
-## RANDOM
-- string interpolation:
-    - prints `this is Foo(3)`
-        ```scala
-        case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
-        ```
-    - toString method is called if fooObject isnt a String
-- run command and redirect to file
-    ```scala
-    import sys.process._
-    import java.io.File
-    ("ls -al" #> new File("files.txt")).!
-    ```
 
 ## AUTOMATION TESTING
 - https://www.scalatest.org/user_guide/using_scalatest_with_sbt
