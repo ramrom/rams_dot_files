@@ -941,20 +941,6 @@ LoadDAP = function()
 end
 
 ---------------- RUST LSP ---------------------------
-LoadRustTools = function()
-    require('rust-tools').setup({
-      server = {
-        on_attach = function(_, bufnr)
-          -- FIXME: these keymaps dont get set....
-          -- Hover actions
-          vim.keymap.set("n", "<leader>ab", rt.hover_actions.hover_actions, { buffer = bufnr })
-          -- Code action groups
-          vim.keymap.set("n", "<Leader>aa", rt.code_action_group.code_action_group, { buffer = bufnr })
-        end,
-      },
-    })
-end
-
 LoadRustLSP = function()
     local rust_on_attach = function(client)
         require'completion'.rust_on_attach(client)
@@ -1044,10 +1030,7 @@ end
 -----------BUILTIN LSPCONFIGS ---------------------
 
 LoadLSPConfig = function()
-    if not LazyPluginEnabled('rust-tools.nvim') then 
-        print("lazy.vim: rust tools disabled, loading lsp-config for rust support")
-        LoadRustLSP() 
-    end
+    LoadRustLSP() 
     LoadGolangLSP()
     LoadKotlinLSP()
 end
@@ -1337,9 +1320,6 @@ if not vim.env.VIM_NOPLUG then
         { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer },
         { 'scalameta/nvim-metals',
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
-        { 'simrat39/rust-tools.nvim', config = LoadRustTools,
-            cond = false,
-            dependencies = { 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap', 'neovim/nvim-lspconfig' } },
 
         -- AUTOCOMPLETE
         { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy',
