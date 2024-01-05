@@ -190,6 +190,9 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 
 ## TYPE SYSTEM
 - `final` keyword means it can't be changed (synonymous to `val` in scala)
+- `java.lang.Object` is root class of Java class hierarchy, every class is descendant of this class
+    - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
+    - a class defined with no superclass automatically extends `Object`
 ### CLASSES
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`

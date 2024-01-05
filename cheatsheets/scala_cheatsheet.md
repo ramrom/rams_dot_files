@@ -8,7 +8,6 @@
     - main compiler for JVM
     - Scala.js is a compiler targeted for javascript (node.js or web)
     - Scala Native uses LLVM to make native binaries
-- martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
 - lightbend(formerly typesafe) founded by odersky, jonas boner(created akka), and paul phillips
 
 ## SCALA VERSIONS
@@ -37,11 +36,14 @@
 
 
 ## TYPE SYSTEM
-- Trait - cant be instantiated directly, a class can implement many traits
-- Abstract class - cant be instantiated, class can implement only one abstract class
+- Trait - cant be instantiated directly
+    - a class can implement MANY traits
+    - can NOT specify a constructor parameter
+- Abstract class - cant be instantiated
+    - class can implement only ONE abstract class
+    - can specify a constructor parameter
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
-- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - integer types - `Short` (16bit), `Int` (32bit?), `Long` (64bit?)
     - `Long` instantiation - `1000000000000000000L` or `100000: Long`
 - `Any` - all objects implement this, `Nothing` - opposite of `Any`, no object implements this
@@ -54,6 +56,19 @@
     val seq : Seq[Int] = Seq(1,2,3) // compiler validates generics at compile time
     val seq : Seq = Seq(1,2,3)   // this is what JVM runtime actually has, generic type info is erased
     ```
+### CLASSES
+- multiple inheritence, diamond problem -> scala serializes the tree
+    - order matters, so last trait that implements same method will get defined
+### IMPLICITS
+- good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
+- implicit conversion: automatically convert a type to another type if a implicit converter func exists in scope
+    - 
+    ```scala
+    implicit def inttostring(i: Int): String = { s"int is: ${i}" }
+    def printstring(s: String): Unit = { println(s) }
+    printstring("hi")   // prints "hi"
+    printstring(3)   // prints "int is 3", implicitly converted using implicit conversion function
+    ```
 ### COMPANION OBJECT
 - defining `apply` method lets you instantiate companion class without `new` keyword
     - `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
@@ -64,6 +79,9 @@
 - get a default `apply` and `unapply` automatically defined
     - pattern matching needs `unapply` defined if you want to match on fields
 - get `toString` and `equal` methods auto-implemented
+### FUNCTIONS
+- partial application - can pass subset of arguments to function invocation, then pass rest in later
+- call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
 
 
 ## COLLECTIONS
@@ -78,17 +96,33 @@
 - slice an "array" (`Array` or `List` or `String`)
     - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
     - `"hi there".slice(2,5)` -> returns `" th"`
+- `fold` `val l = List(1,2,3); val sum = l.fold(0)((x,y) => x + y)`    -> `sum` will = 6
+    - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
+- `++` concat 2 collections, `::` prepend to list, `:+` append, `+:` prepend
+    - `1 :: List(3)` -> returns `List(1,3)`
+    - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
+- `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`
+- mutable
+    - `ArrayBuffer` -> underlying data struct is array
+    - `ListBuffer` -> underlying data struct is linked list
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
-- appending
+- examples
     ```scala
     val m: Map[String, Int] = Map.empty
-    m += ("foo", 1)    // appending an item for mutable Map
+    val m = Map("a"->1, "b"->2)
+    m + ("foo" -> 3)    // returns a NEW map which also contains ("foo"-> 1)
+    mu += (2->3)    // will raise exception, cant mutate, use mutable Map
+    m.keys   // returns a Set containing keys
+    val mu = scala.collection.mutable.Map(1->2)   // mutable map (will be HashMap)
+    mu + (2->3)   // like immutable man, returns a NEW map which also contains (2->3)
+    mu += (2->3)    // append (2->3) to mu
     ```
 ### STREAMS
 - like collection but lazily evaluated so can be optimized when chaining them together
 - regular collections that u might chain with things like `map` and `filter` will eagerly create intermediate data structures
-- deprecated in 2.13.0 in favor of LazyList
+- deprecated in 2.13.0 in favor of `LazyList`
+- streams/LazyList allow us to represent infinite computations, e.g. a fibonacci sequence, sequence of all natural numbers
 
 ## STRINGS
 - prints `this is Foo(3)`
@@ -96,6 +130,9 @@
     case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
     ```
 - toString method is called if fooObject isnt a String
+- `map` operates on each char in string, `"hi".map(_+"a")` -> returns `ArraySeq("ha", "ia")`
+- `StringBuilder` commonly used for building strings
+    - `val b = new StringBuilder; b += "hi"; b += " there"; b.toString`
 
 ## MONADS
 ### Either
@@ -105,17 +142,34 @@
 ### Option
 - `flatMap`/`map` operate on `Some` and pass on `None`
 - `foo.getOrElse(2)` - if `foo` is `Some(1)` returns `1`, if `None` returns `2`
+- `isDefined` returns `true` if `Some`, `false` if `None`
+- `isEmpty` - opposite of `isDefined`
+### Try
+- returns `Failure` if excpetion thrown, or `Success` if not
+- `import scala.util.Try; Try(1 + 1)`   -> returns `Success(2)`
+- `import scala.util.Try; Try(throw new Exception("foo"))`   -> returns `Failure(exception = java.lang.Exception: foo)`
 ### EitherT
 - type from cats
 
+## FOR COMPREHENSIONS
+- syntax sugar for chaining `flatMap`
+- good martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
+- generator: `for (i <- 1 until 3) yield i` -> returns `Vector(1,2,3)`
+
+## LOOPS
+- `for (i <- 1 until 5) println(i)`  - regular for loop
+- `for (i <- List(1,2,3)) println(i)`  - regular for loop
+
 ## CONCURRENCY
-- Futures
-    - async with execution contexts: `Future { 1 + 1 }`
-        - `import scala.concurrent.ExecutionContext.Implicits.global`
-    - an execution context is a abstraction that include a thread pool
-    - `map` and `flatMap` chain futures together in a linear sequence, each async runs when the previous one finishes
-    - `Future.sequence()` takes a `List[Future]` and produces a `Future[List]`
-        - all run in parralel, if any one of the futures fails then the output future fails
+### FUTURES
+- is a monad
+- async with execution contexts: `Future { 1 + 1 }`
+    - `import scala.concurrent.ExecutionContext.Implicits.global`
+- an execution context is a abstraction that include a thread pool
+- `map` and `flatMap` chain futures together in a linear sequence, each async runs when the previous one finishes
+- `Future.sequence()` takes a `List[Future]` and produces a `Future[List]`
+    - all run in parralel, if any one of the futures fails then the output future fails
+### MUTEX
 - mutex on variables: `synchronize { 1 + 1 }`
 
 ### PATTERN MATCHING

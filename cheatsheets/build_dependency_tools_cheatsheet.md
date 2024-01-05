@@ -41,6 +41,11 @@
 
 ## SBT
 - the main tool used in scala projects
+- files
+    - `build.sbt` -> main project defs
+    - `project/plugins.sbt` -> defines sbt plugins
+    - `project/build.properties` -> sbt version, etc
+    - `project/Dependencies.scala` -> list deps, import in `build.sbt`
 - as of `1.3.0` it uses Coursier to fetch artifacts/dependencies
 - `%%` automatically uses scala version, `%` dev must specify
     - `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
