@@ -887,7 +887,7 @@ LoadScalaMetals = function()
     metals_config.settings = {
       -- jan'24 default metals version was 0.11.x
       --    see https://scalameta.org/metals/docs/editors/vim/  , 1.2.0 supported
-      serverVersion = "1.2.0",   
+      serverVersion = "1.2.0",
       showImplicitArguments = true,
       showImplicitConversionsAndClasses = true,
       showInferredType = true
