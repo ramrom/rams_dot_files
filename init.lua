@@ -885,6 +885,9 @@ LoadScalaMetals = function()
     metals_config = require("metals").bare_config()
 
     metals_config.settings = {
+      -- jan'24 default metals version was 0.11.x
+      --    see https://scalameta.org/metals/docs/editors/vim/  , 1.2.0 supported
+      serverVersion = "1.2.0",   
       showImplicitArguments = true,
       showImplicitConversionsAndClasses = true,
       showInferredType = true
@@ -1313,12 +1316,13 @@ if not vim.env.VIM_NOPLUG then
         { 'preservim/vim-markdown', enabled = not vim.env.NOMARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
-        { 'neovim/nvim-lspconfig', config = LoadLSPConfig },
+        { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer },
         { 'scalameta/nvim-metals',
+            cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
         -- AUTOCOMPLETE

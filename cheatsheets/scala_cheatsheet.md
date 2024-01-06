@@ -43,6 +43,7 @@
     - class can implement only ONE abstract class
     - can specify a constructor parameter
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
+    - be able to define a trait contract for some types without modifying those types directly
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
 - integer types - `Short` (16bit), `Int` (32bit?), `Long` (64bit?)
     - `Long` instantiation - `1000000000000000000L` or `100000: Long`
@@ -86,7 +87,12 @@
 
 ## COLLECTIONS
 - scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
+### TUPLES
+- `val t = ("a","b","c")`
+- access fields: `t._1` (returns `a`), `t._4` (errors, field 4 doesnt exist)
 ### LIST/ARRAY
+- `List` is immutable, underlying is linked-list, so indexing is slow
+- `Vector` is immutable, indexing is fast
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
@@ -112,11 +118,12 @@
     val m: Map[String, Int] = Map.empty
     val m = Map("a"->1, "b"->2)
     m + ("foo" -> 3)    // returns a NEW map which also contains ("foo"-> 1)
-    mu += (2->3)    // will raise exception, cant mutate, use mutable Map
+    m += (2->3)    // will raise exception, cant mutate, use mutable Map
     m.keys   // returns a Set containing keys
     val mu = scala.collection.mutable.Map(1->2)   // mutable map (will be HashMap)
     mu + (2->3)   // like immutable man, returns a NEW map which also contains (2->3)
     mu += (2->3)    // append (2->3) to mu
+    mu -= 2    // remove key/val with key=2 from mu
     ```
 ### STREAMS
 - like collection but lazily evaluated so can be optimized when chaining them together
