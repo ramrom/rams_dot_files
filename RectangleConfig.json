@@ -49,6 +49,12 @@
     "disabledApps" : {
 
     },
+    "doubleClickTitleBar" : {
+      "int" : 0
+    },
+    "doubleClickTitleBarRestore" : {
+      "int" : 0
+    },
     "dragFromStage" : {
       "int" : 0
     },
@@ -78,6 +84,9 @@
     },
     "hideMenubarIcon" : {
       "bool" : false
+    },
+    "ignoreDragSnapToo" : {
+      "int" : 0
     },
     "ignoredSnapAreas" : {
       "int" : 0
@@ -181,6 +190,9 @@
     "SUEnableAutomaticChecks" : {
       "bool" : true
     },
+    "systemWideMouseDown" : {
+      "int" : 0
+    },
     "todo" : {
       "int" : 0
     },
@@ -280,5 +292,5 @@
       "modifierFlags" : 1441792
     }
   },
-  "version" : "75"
+  "version" : "80"
 }
