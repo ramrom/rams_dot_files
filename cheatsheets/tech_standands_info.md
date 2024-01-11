@@ -112,6 +112,7 @@
 - displayport cable shouldnt exceed 10 feet
 - usbc supports usb 2.0 to 4.0
 - usb a/b supports usb 1.0 to 3.1
+    - a/b can support 2A @ 5V power, most cables are 28gauge, which can only handle .5A
 - 2.0 - 480Mbps, can deliver 2.5watts power, has 4 wires
 - 3.x
     - adds 5 more wires, still backwards compatible with usb2

@@ -4,13 +4,13 @@
 # FF - Fzf on files in a dir with file prev
 # actions: open, edit, cd to location, or add to clipboard
 
-usage() { echo 'Usage: ff [ -h(help) ] [ -i(search-hidden-files) ] [ -j FZF_HEIGHT ] [ -d(directories only) ]';
+usage() { echo 'Usage: ff [ -h(help) ] [ -i(ignore-hidden-files) ] [ -j FZF_HEIGHT ] [ -d(directories only) ]';
           echo '          [ -w(FUNC_WRAP) ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
 while getopts 'hidwj:' x; do
     case $x in
         h) usage && exit 1 ;;
-        i) HIDDEN_FILES=1 ;;
+        i) NO_HIDDEN_FILES=1 ;;
         d) DIRS_ONLY=1 ;;
         j) FZF_HEIGHT="$OPTARG" ;;
         w) FUNC_WRAP=1 ;;
@@ -27,7 +27,7 @@ FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 FZF_DEFAULT_COMMAND="$FDNAME --exclude .git"
 
-HIDDEN_OPT=""; [ -n "$HIDDEN_FILES" ] && HIDDEN_OPT=" --hidden"
+HIDDEN_OPT=" --hidden"; [ -n "$NO_HIDDEN_FILES" ] && HIDDEN_OPT=""
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND$HIDDEN_OPT"
 
 FILE_OPT=" --type f"; [ -n "$DIRS_ONLY" ] && FILE_OPT=" --type d"

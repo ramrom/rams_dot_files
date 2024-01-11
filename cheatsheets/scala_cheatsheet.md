@@ -93,6 +93,7 @@
 ### LIST/ARRAY
 - `List` is immutable, underlying is linked-list, so indexing is slow
 - `Vector` is immutable, indexing is fast
+- `l.last` - return last item in collection
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
@@ -111,15 +112,17 @@
 - mutable
     - `ArrayBuffer` -> underlying data struct is array
     - `ListBuffer` -> underlying data struct is linked list
+        - to append: `l.append(1)` or `l += 1`
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
 - examples
     ```scala
     val m: Map[String, Int] = Map.empty
     val m = Map("a"->1, "b"->2)
-    m + ("foo" -> 3)    // returns a NEW map which also contains ("foo"-> 1)
-    m += (2->3)    // will raise exception, cant mutate, use mutable Map
-    m.keys   // returns a Set containing keys
+    m + ("foo" -> 3)        // returns a NEW map which also contains ("foo"-> 1)
+    m += (2->3)             // will raise exception, cant mutate, use mutable Map
+    m.keys                  // returns a Set containing keys
+    m.getOrElse("z",10)     // since "z" key doesnt exist, the default 10 is returned
     val mu = scala.collection.mutable.Map(1->2)   // mutable map (will be HashMap)
     mu + (2->3)   // like immutable man, returns a NEW map which also contains (2->3)
     mu += (2->3)    // append (2->3) to mu
@@ -138,6 +141,9 @@
     ```
 - toString method is called if fooObject isnt a String
 - `map` operates on each char in string, `"hi".map(_+"a")` -> returns `ArraySeq("ha", "ia")`
+- multi-line string with `"""` - e.g. `val s: String = """ i can add literal " double quote """`
+- escape with `\` - `val s: String = "escaped with \" \\ new line \n woo"`
+- findandreplace: ` "foo bar baz".replaceAll("ba","zz")` -> outputs `"foo zzr zzz"`
 - `StringBuilder` commonly used for building strings
     - `val b = new StringBuilder; b += "hi"; b += " there"; b.toString`
 
@@ -155,6 +161,8 @@
 - returns `Failure` if excpetion thrown, or `Success` if not
 - `import scala.util.Try; Try(1 + 1)`   -> returns `Success(2)`
 - `import scala.util.Try; Try(throw new Exception("foo"))`   -> returns `Failure(exception = java.lang.Exception: foo)`
+    - `Try { 1 + 1 } match { case Success(s) => println("worked"); case Failure(ex) => println(ex) }` - success
+    - `Try { throw new Error() } match { case Success(s) => println("worked"); case Failure(ex) => println(ex) }` - failure
 ### EitherT
 - type from cats
 
@@ -185,11 +193,14 @@
     - more than one record
 
 ### DATE/TIME
+- `System.nanoTime` - get JVMs nano time count
+- `System.currentTimeMillis` - get JVMs millisecond time count
 - TIME/DATE: use java times and date, it is now better than jodatime
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
 
-## FILE
+## IO
+### FILE
 - run command and redirect to file
     ```scala
     import sys.process._
@@ -200,6 +211,13 @@
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
 - import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
     - should close file too: val a = Source.fromFile("example.txt"), a.close
+### ENVIRONMENT VARS
+- using java `System`: 
+    - `System.getenv()` -> return `Map[String,String]` of env-var/value
+    - `System.getenv("SHELL")` -> get value of a var, will be `null` if var doesnt exist
+- using `scala.util.Properties`
+    - `scala.util.Properties.envOrElse("PWD", "undefined")` -> get value of var `PWD` or default to value `undefined`
+    - `scala.util.Properties.envOrNone("PWD")` -> return `Option` instead, `None` if env var doesnt exist
 
 ## ENUMERATION
 - play 2.5 json doesnt supports scala enumerators
@@ -293,6 +311,25 @@
         - `validate` returns `JsSuccess` or `JsError`
 
 
+## SCRIPTING
+- create a runnable program
+    ```scala
+    // create Hello.scala with:
+    @main def hello = println("Hello, world")
+
+    // or implement App trait to make class executable
+    class MyProgram extends App {
+        println("hello world")
+    }
+    ```
+- then can run script like so
+    ```sh
+    $ scala Hello.scala
+    Hello, world
+    ```
+- exit a program: `System.exit(1)` - exit with code 1
+
+
 ## AMMONITE
 - https://ammonite.io/
 - block input:
@@ -300,6 +337,11 @@
         x + y...
         z + f
     } <enter>
+- imports
+    ```scala
+    @ import $ivy.`com.lihaoyi::upickle:3.1.3` // import scala ivy dep (use `::`)
+    @ import $ivy.`com.google.guava:guava:18.0`  // import java ivy dep, (use `:`)
+    ```
 - loading external script:
     - if script in in subfolder `foo` and named `MyScript.sc` `import $file.foo.MyScript`
         - then `MyScript.someFunc("arg")`
@@ -325,6 +367,9 @@
 - catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
     - `IO` type and "non-effecting" types
 - fs2 - streaming and concurrency, build on cats-effects and cats
+- great http lib (inspired by python requests) - https://github.com/com-lihaoyi/requests-scala
+- upickle - https://com-lihaoyi.github.io/upickle/
+     - parse json text - `val s:String = """{"a":1}"""; ujson.read(s)`
 ### AKKA
 - one of akka streams main goals is to implement backpressure
 ### SLICK
