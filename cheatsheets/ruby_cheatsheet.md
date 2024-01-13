@@ -1,5 +1,12 @@
 # RUBY
 
+## SCRIPTING
+```sh
+ruby -e 'puts "hi"'   # execute ruby code
+ruby -e 'puts ARGV[0]' foo   # read inputs, will print "foo"
+ruby -e 'puts ARGV[0].to_i + ARGV[1].to_i' 1 2    # read inputs, which are always strings, prints "3"
+```
+
 ## GEM
 - `gem install --user-install somegem` - install as user (root is default)
 

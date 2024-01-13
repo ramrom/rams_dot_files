@@ -1,5 +1,10 @@
 # PYTHON CHEATSHEET
 
+## SCRIPTING
+```sh
+python -c 'print("hi")'  # prints "hi"
+```
+
 ## DEPENDENCY MANAGEMENT
 - it **sucks**: https://xkcd.com/1987/
 - `pipenv` is successor to `virtualenv` and does more, uses `Pipfile` and `Pipfile.lock`
@@ -17,7 +22,8 @@
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
 
-# breakpoints:
+## DEBUGGING
+- breakpoints
     ```python
     import pdb
     pdb.set_trace()
