@@ -94,6 +94,9 @@
 - `List` is immutable, underlying is linked-list, so indexing is slow
 - `Vector` is immutable, indexing is fast
 - `l.last` - return last item in collection
+- multidimensional
+    - `val v = Array.ofDim(2,2)[Int]; v(0) = Array(1,1); v(0)(1)`
+    - `val v = collection.mutable.ArrayBuffer.fill(3,3)(1)`
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
