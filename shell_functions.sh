@@ -95,7 +95,10 @@ function print_alias_funcs_scripts() {
         local alias_cmd="alias | cut -c 7-"; [ -n "$aliasname" ]  && alias_cmd='alias | cut -d= -f1 | cut -c 7-'
         local executables=$(compgen -c)
     fi
-    { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
+
+    eval $alias_cmd; 
+    eval $func_cmd; 
+    echo "$executables";
 }
 
 function rrc() {
