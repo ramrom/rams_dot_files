@@ -127,7 +127,7 @@ function batwhich() {
             eval $defcmd "$1" | $BATBIN --color=always -l sh ;;
         executable)
             local fullpath="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpath="whence -c"
-            $BATBIN --color=always "$(eval $fullpath "$1")" ;;
+            $BATBIN --paging=never --color=always "$(eval $fullpath "$1")" ;;
         *) echo "print_type returned $type for "$1", unhandled by $0!" ;;
     esac
 }
@@ -147,7 +147,7 @@ function run_cmd_timestamp() {
 
     local end=$(date +%s)
     local elapsed=$((end - start))
-    echo; echo $(ansi256 -f red -b green "_-----------------------")" Time elapsed: ${elapsed} "\
+    echo; echo $(ansi256 -f red -b green "_-----------------------")" Seconds elapsed: ${elapsed} "\
         $(ansi256 -f red -b green "_---------------------"); echo
 }
 
