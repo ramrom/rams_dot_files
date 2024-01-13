@@ -1,6 +1,18 @@
 "NOTE: will detect .txt files with `***` chars in first line as robot
 Plug 'mfukar/robotframework-vim'    "more recent, i think forked from costallet user
 
+"""""""" jan'24 OLD LUA SAVE DEFINED SESSION """""""""""""""""
+SaveDefinedSession = function()
+    if vim.fn.exists(vim.g.DefinedSessionName) == 0 then
+        vim.opt.sessionoptions:append('globals')    -- mksession wont save global vars by default
+        vim.cmd(":mksession! " .. vim.g.DefinedSessionName)
+        print("Saved session: ",vim.g.DefinedSessionName)
+    else
+        vim.cmd(":mksession! ./MyCurrentVimSession.vim")
+        print("NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim")
+    end
+end
+
 """""""" RELOADING BUFFERS CHANGED OUTSIDE OF VIM SESSION """""""""""""""""
 " autoread alone doesn't really work, triggers on external commands
     " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044

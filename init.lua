@@ -137,14 +137,13 @@ CycleColorColumn = function()
 end
 
 SaveDefinedSession = function()
-    if vim.fn.exists(vim.g.DefinedSessionName) == 0 then
-        vim.opt.sessionoptions:append('globals')    -- mksession wont save global vars by default
-        vim.cmd(":mksession! " .. vim.g.DefinedSessionName)
-        print("Saved session: ",vim.g.DefinedSessionName)
-    else
-        vim.cmd(":mksession! ./MyCurrentVimSession.vim")
-        print("NO DEFINED SESSION NAME!, Saved to ./MyCurrentVimSession.vim")
+    if vim.fn.exists(vim.g.DefinedSessionName) ~= 0 then
+        vim.g.DefinedSessionName = vim.fn.input("Session Name: ", "MyCurrentVimSession.vim")
     end
+
+    vim.opt.sessionoptions:append('globals')    -- mksession wont save global vars by default
+    vim.cmd(":mksession! " .. vim.g.DefinedSessionName)
+    print("Saved session: ",vim.g.DefinedSessionName)
 end
 
 ToggleFoldMethod = function()
