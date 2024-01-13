@@ -96,9 +96,8 @@ function print_alias_funcs_scripts() {
         local executables=$(compgen -c)
     fi
 
-    eval $alias_cmd; 
-    eval $func_cmd; 
-    echo "$executables";
+    # combine 3 comamands into one so i can grep on all 3
+    { eval $alias_cmd; eval $func_cmd; echo "$executables"; } | grep "$1"
 }
 
 function rrc() {
