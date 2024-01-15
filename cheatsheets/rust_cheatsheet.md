@@ -103,6 +103,9 @@
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
     - in rust the `.` operator works on pointers or direct struct/object, pointers are automatically dereferenced
 - if a expression is followed by semicolon `;`, then it'll discard the result and become a statement
+### CONDITIONALS
+- `if` is an expression
+    - takes blocks of code called "arms" that must evaluate to a `bool`, there is no truthiness like ruby or javascript
 ### LOOPS
 - `loop { ... }` - infinite loop
     - use `break` conditions internally to terminate
@@ -123,9 +126,9 @@
         for i in &mut foo { println!("{i}"); } // same as iter_mut
 
         foo.iter().map( |x| println!("{x}") ) // iterators are lazy, maps just returns another iterator with the closure
-        foo.iter().map( |x| println!("{x}") ).filter( |x| x > 1 ) // iterator adapters are useful for chaining
-        foo.iter().map( |x| println!("{x}") )
-            .filter( |x| x > 1 ).collect() // collect will execute iterator and return collection
+        foo.iter().map( |x| x + 1 ).filter( |&x| x > 1 ) // iterator adapters are useful for chaining
+        foo.iter().map( |x| x + 1 )
+            .filter( |&x| x > 1 ).collect() // collect will execute iterator and return collection
                                            // adapters are efficient, no intermediate collection is made!
 
         vec!["foo","bar"].into_iter().map(String::from) // shorthand map syntax if one arg, compiler infers params
@@ -427,7 +430,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
     - why not generic trait? - can implement the trait many times (per generic param)
         - with associated type we can only implement trait one time
-- supertraits - defining a trait to depend on implementee implementing another trait
+- supertraits - defining a trait to depend on implementor implementing another trait
     - `trait SuperTrait: Trait { ... }` - implementor must implement `Trait` here before implementing `SuperTrait`
     - concept is similar to trait bounds on generics
 - fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
