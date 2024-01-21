@@ -370,24 +370,26 @@
 
 ## GRAPHICS
 - DLSS (deep learning super sampling) - using AI to interpolate frames and thus more cheaply increase frame rates
-- APIs
-    - Metals - apple API
-    - Vulkan - open source platform independent generic API for 3D graphics and computing, managed by Khronos Group
-        - originally based on AMD's Mantle API
-        - designed to utelize multi core better and CPUs better (vs OpenGL or old directx)
-        - lower level API, similar to metals and directX 12
-        - higher performance than OpenGL and Direct3D 11
-    - OpenGL - older 2D/3D open-source platform independent graphics API
-        - started in 1992, Khronos group inherited in 2006
-        - doesnt support ray tracing or video decoding
-        - really being succeeded by vulkan
-    - DirectX - microsoft APIs for graphics and more
+### APIs
+- Metals - apple API
+- Vulkan - open source platform independent generic API for 3D graphics and computing, managed by Khronos Group
+    - originally based on AMD's Mantle API
+    - designed to utilize multi core better and CPUs better (vs OpenGL or old directx)
+    - lower level API, similar to metals and directX 12
+    - higher performance than OpenGL and Direct3D 11
+- OpenGL - older 2D/3D open-source platform independent graphics API
+    - started in 1992, Khronos group inherited in 2006
+    - doesnt support ray tracing or video decoding
+    - really being succeeded by vulkan
+- DirectX - microsoft APIs for graphics and more
 
 ## GAME CONSOLES
-- Xbox 
-    - gen 1 - xbox, gen 2 - xbox 360, 
-    - gen 3 - xbox One, backwards compabile with xbox original and 360
-    - gen 4 - xbox series X/S - fully backward compatible with xbox One (and xbox 360 and original xbox)
+### XBOX 
+- gen 1 - xbox
+- gen 2 - xbox 360
+- gen 3 - xbox One, backwards compabile with xbox original and 360
+- gen 4 - xbox series X/S - fully backward compatible with xbox One (and xbox 360 and original xbox)
+### PS
 - ps5 (gen 5) - backward compatible with most ps4 games
 
 ## LEAGUE
@@ -444,12 +446,26 @@
             - RAID arrays are seen as logical volumes
 ### ZFS
 - created by sun microsystems for solaris
+- performance is great - https://arstechnica.com/gadgets/2020/05/zfs-versus-raid-eight-ironwolf-disks-two-filesystems-one-winner/
 - supports encryption, compression
 - does use traditional volumes, has storage pool concept for multiple drives, so it supports RAID-like features
 - standard on BSD, super awesome, does basically everything well
 - uses "transactional semantics" for integrity: https://docs.oracle.com/cd/E19120-01/open.solaris/817-2271/6mhupg6hh/index.html
     - better than journaling
+    - ZIL - ZFS intent log
 - has checksums on data and metadata
+- STRUCTURE
+    - high level
+        - zpool - highest level in structure, has many vdevs, diff zpools cant share vdevs
+        - vdev - virtual device, consistes of many real devices
+            - most used for plain storage, but special types are CACHE, LOG, SPECIAL
+            - 5 topolgies: RAIDz1, RAIDz2, RAIDz3, single-device, mirror
+        - device - a random-access block device
+            - can be anything with descriptor in `/dev` , (so entire hardware RAID array could be one device in ZFS)
+    - data level
+        - datasets - highest level, analagous to standard mounted filesystem
+        - blocks - all data and metadata stored in blocks
+        - sectors - represents small unit of data writable to physical device
 ### EXT4
 - good article: https://opensource.com/article/18/4/ext4-filesystem
 - backwards compatible with ext3 and ext2

@@ -66,5 +66,6 @@
 - can deauthorize(logout) individual devices: https://support.plex.tv/articles/115007577087-devices/
 
 ## OTHER
+- too see your play history goto discover(leftbar)->activity
 - plex docker - logs in `Library/Application Support/Plex Media Server/Logs`
     - in web, hit `console` on left panel to see logs

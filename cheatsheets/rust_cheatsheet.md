@@ -179,7 +179,7 @@
         - get count `Rc::strong_count(&a)`
     - danger is mixing `Rc` and `RefCell` to create circular references that leak memory
     - can create weak references, `Weak<T>` with `Rc::downgrade`, weak refs dont increment "strong" count, inc the "weak" count
-        - weak ref might point to nothing, so test it with `upgrade` method which returns `<Option<Rc<T>>`, `None` if it was dropped
+        - weak ref might point to nothing, so test it with `upgrade` method which returns `Option<Rc<T>>`, `None` if it was dropped
 - `RefCell<T>` - interior mutability that's checked at runtime
     - single ownership like `Box<T>`, except borrowing rules enforced at runtime, and will panic if borrow rules violated
     - `let r = RefCell::new(1); *r.borrow_mut() = 2`
@@ -387,7 +387,9 @@ let one = || 1;         // closure takes zero args, single line expressions dont
      - it's automatically implemented for types whos size is known at compile time, very few types are not `Sized`
 - `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)
     - cannot be implemented on `Drop` types
-    - these itmes are generally simple, have a known size, and allocated on the stack
+    - generaly a `Copy` type can be duplicated by simply copying it's bits
+    - `Clone` types more complex and general, a `Copy` type can probably easily also implement `Clone`
+    - have a known size, and allocated on the stack, happens implicitly e.g. `x = y`
     - they copy on new variable assignments vs tx of ownership `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
     - e.g. `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
         - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
@@ -435,6 +437,9 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - concept is similar to trait bounds on generics
 - fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
     - types direct implementation takes precedence
+### CASTING
+- `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
+- `From` and `Into` are main traits to convert, complex types like `Vec` and `String` support this
 ### OTHER
 - type alias - synonymous to another type
     - one use case: syntax sugar convenient for long/verbose types
@@ -540,10 +545,6 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 ### SEMAPHORES
 - issue limited "permits" to do things, can limit concurrency level
 - tokio has sempahores
-
-## CASTING
-- `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
-- `From` and `Into` are main traits to convert, complex types like `Vec` and `String` support this
 
 ## ANNOTATION
 - `derive` - tells rust to automatically generate a trait implementation for a type

@@ -170,6 +170,9 @@ echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 # strings - print out text strings in a binary file or any file
 strings somebin
 
+## EMACS
+c-x c-c to quit
+
 # GNU GPG
 gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
 gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
@@ -210,9 +213,6 @@ iostat 2 3      # refresh 2 seconds, only sample 3 times
 cifsiostat 1    # show cifs network mount io usage stats
 mpstat 1        # show cpu usage, by usr/sys/idle
 
-## EMACS
-c-x c-c to quit
-
 # MEMORY
 # free - show memory/swap usage, total/used/free/cached
 free -h   # -h is human readale
@@ -222,6 +222,9 @@ cat /proc/meminfo   # shows detailed memory usage
 # vmstat
 vmstat     # just one measurement, will calculate since last reboot
 vmstat 3   # every 3 sec show free/swap/used/total memory usage, cpu performance, i/o
+
+#fio - flexible io tester
+fio [options] [jobfile]
 
 # stress (add load on cpu memory or io)
 stress --cpu 2      # 2 threads, do hard cpu problem like square-root function

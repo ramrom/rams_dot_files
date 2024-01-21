@@ -70,6 +70,9 @@
     printstring("hi")   // prints "hi"
     printstring(3)   // prints "int is 3", implicitly converted using implicit conversion function
     ```
+- scala 3 implicits are overhauled
+    - `given` keyword to declare implicit, `using` to pass in implicit
+    - `Conversion[A,B]` typeclass introduced to define implicit conversion from A->B
 ### COMPANION OBJECT
 - defining `apply` method lets you instantiate companion class without `new` keyword
     - `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
@@ -317,19 +320,26 @@
 ## SCRIPTING
 - create a runnable program
     ```scala
-    // create Hello.scala with:
+    // scala 3 - create Hello.scala with `@main` annotation
     @main def hello = println("Hello, world")
 
-    // or implement App trait to make class executable
-    class MyProgram extends App {
+    // scala 2 - implement App trait to make class executable
+    class Scala2Program extends App {
         println("hello world")
+
+        // for cli args
+        println(args(0))    // 1st val in args array is name of exe source file
+        println(args(1))    // 1st arg starts at 2nd index of args array
+    }
+
+    // works for scala 2 and 3
+    object Scala2Scala3 {
+      def main(args: Array[String]): Unit = {
+        println("works in scala 2 and 3")
+      }
     }
     ```
-- then can run script like so
-    ```sh
-    $ scala Hello.scala
-    Hello, world
-    ```
+- then can run script like so `scala Hello.scala arg1`
 - exit a program: `System.exit(1)` - exit with code 1
 
 

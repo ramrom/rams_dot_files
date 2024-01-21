@@ -35,6 +35,7 @@
 
 ## DATA STRUCTURES
 ```java
+// regular arrays
 int[] intArray = new int[10];
 String[] stringArray = new String[1];
 
