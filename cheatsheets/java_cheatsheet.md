@@ -70,16 +70,26 @@ List<String> mylist = Arrays.asList("a", "b", "c"); // a short way to declare a 
 
 LinkedList<String> ll = new LinkedList<String>();  // linked lists
 
-// Set interface
+List<Integer> l = List.of(1,2,3);  // java9 has List#of method to quickly create/initialize list
+List<Integer> l = Arrays.asList(1,2,3)  // another fast way to create list
+
+// SET
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
 hs.contains("c") // false
 hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
 
+// pass in collection to initialize a new Set
+Set<Integer> s = new HashSet<>(Arrays.asList(1,2,3))
+Set<Integer> s2 = new HashSet<>(Arrays.asList(1,2,3))
+
+// compare if two sets are identical
+s.equals(s2)  // returns true; 
+
 new ArrayList<String>(hs); // can create a ArrayList from the HashSet
 
-// implementation of Map interface
+// MAP
 HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
 m.put("foo", 3);
 m.get("boo");       // returns null if it doesnt exist
@@ -87,7 +97,7 @@ m.remove("foo");    // returns null if it doesnt exit, the value of the key if k
 m.size();           // return number of items
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 
-// stacks
+// STACKS
 Stack<Integer> s = new Stack<>();
 s.push(1);  // [ 1 ]
 s.push(3);  // [1, 3]
@@ -99,7 +109,7 @@ s.pop(); // return 1
 s.pop(); // raises EmptyStackException sinc it's empty
 
 
-// compound types
+// COMPOUND TYPES
 HashMap<String, ArrayList<Integer>> ha = new HashMap<String, ArrayList<Integer>>();
 HashMap<String, ArrayList<Integer>> ha = new HashMap<>();   // works too
 ArrayList<Integer> a = new ArrayList<>();
@@ -222,6 +232,9 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 - java10 introduces some local var inference: 
     - `var a = 3; var b = "hi"`, compiler will inference these `var`s
     - `var f = new HashMapString, Integer>();`
+### VAR
+- `var` keyword introduced in java10. can declare variable without type, type will be inferred from value
+- `var x = 3`   - inferred `x` is of type `Integer`
 
 ## INTROSPECTION
 - `(object) instanceof (type)` - test if object is instance of type, or subtype of type, or implements an interface

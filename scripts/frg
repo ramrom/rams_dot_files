@@ -37,7 +37,7 @@ if [ -n "$FILE" ]; then
         echo "dir name: $(dirname "$FILE")"
         cd "$(dirname "$FILE")"
     elif [ "$KEY" = "ctrl-e" ]; then
-        eval "${EDITOR:-vin} -p "$FILE""
+        eval "${EDITOR:-vim} -p "$FILE""
     else
         echo "$FILE"
     fi
