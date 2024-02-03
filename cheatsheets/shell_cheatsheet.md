@@ -492,8 +492,7 @@ export bar=1
 declare -p foo bar
 
 
-
-####### CONDITIONALS
+####### CONDITIONALS ################333
 
 # the test command is bash built-in and POSIX compatible
 [ ... ]  # POSIX COMPATIBLE
@@ -531,11 +530,13 @@ gt = greater than, lt = less than, eq = equal, le = less than or equal, ge, ne =
 [ 3 -eq 3 -a 1 -eq 2 ] && echo hi # if 3 = 3 and 1 eq 2, print hi
 #same logically as above, EXCEPT if first conditions is true, second condition doesnt get run
 [ 3 -eq 3 ] || [ 1 -eq 2 ] && echo hi
-&&  # "and" like using "||"
-[ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
 
+# CONDITIONAL CHAINING OF COMMANDS
 true || echo foo && echo bar   # this will print bar
 true || { echo foo && echo bar; }   # this wont print anything, braces make the two staements one
+# `&&` "and" like using "||"
+[ -n $(echo $1 | grep -E "^\d*$") ] && echo hi # if $1's value is all digits then echo hi
+
 
 # if staetment really looks at the return value, 0 exit code -> "true", non-zero -> "false"
 # below grep finds a match and returns zero and "is true" is echo'd
@@ -544,7 +545,7 @@ if echo "hi" | grep h; then
 fi
 
 
-# USER INPUT (from keyboard really)
+########### USER INPUT (from keyboard really)
 echo ""; printf "Hit any key: "; read resultsinput   # resultsinptu will have string user entered after hitting enter
 
 # bash select menus, works in zsh too
@@ -558,7 +559,7 @@ do
     break;
 done
 
-# FILES AND DIRS
+##### FILES AND DIRS
 # iterate just through all files in curent dir
 for d in *; do
     echo $d

@@ -126,7 +126,7 @@ function batwhich() {
     case "$type" in
         function|alias)
             local defcmd=type; [ "$(detect_shell)" = "zsh" ] && defcmd="whence -f"
-            eval $defcmd "$1" | $BATBIN --color=always -l sh ;;
+            eval $defcmd "$1" | $BATBIN --paging=never --color=always -l sh ;;
         executable)
             local fullpath="command -v"; [ "$(detect_shell)" = "zsh" ] && fullpath="whence -c"
             $BATBIN --paging=never --color=always "$(eval $fullpath "$1")" ;;

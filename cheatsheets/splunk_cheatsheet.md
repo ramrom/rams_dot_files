@@ -16,3 +16,7 @@
     - `"outside string" [ search "some string" "another string" | table Some_Field ]`
         - so a list of `Some_Field` here (ORed) will be ANDed with `"outside string"`
 - reverse the order by timestamp: `foosearch | reverse`
+- timechart examples - https://docs.splunk.com/Documentation/SCS/current/SearchReference/TimechartCommandExamples
+    - `...| timechart span=1h count` - log count every hour
+    - `...| timechart span=1h count by host` - log count every hour for each host
+    - `... | timechart span=1m avg(CPU) BY host` - average CPU field every minute for each host

@@ -266,10 +266,14 @@
     - dont have a entirely seperate env (like another k8 cluster), but use spare nodes in the same cluster
     - cutover a small percentage of live traffic at a time (versus 100% in blue-green)
 
-## BASE64
+## ENCODING
+### BASE64 
 - 64 safe ASCII chars
 - standard one is `A-Z` `a-z` `0-9` `+` `/`
 - url safe one replaces `+` and `/` with `_` and `-`
+### URL ECODING
+- unreserved characters are `A-Z`, `a-z`, `0-9`, `-`, `_`, `.`, `~`
+- https://en.wikipedia.org/wiki/Percent-encoding
 
 ## FLOATS
 - https://en.wikipedia.org/wiki/IEEE_754-1985

@@ -79,10 +79,22 @@ hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
 hs.contains("c") // false
 hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
+HashSet<String> hsnew = new HashSet<>(hs)  //  create a new set initialized with another set
+
+// iterate over items in set
+var iter = hs.iterator();
+while (iter.hasNext()) {
+    System.out.println(iter.next());
+}
+iter.forEachRemaining(System.out::println); // java8 way to pass a func to apply on each element
+
+hs.stream().map(System.out::println) // using streams
 
 // pass in collection to initialize a new Set
 Set<Integer> s = new HashSet<>(Arrays.asList(1,2,3))
 Set<Integer> s2 = new HashSet<>(Arrays.asList(1,2,3))
+
+List<Integer> l = new ArrayList<>(s)  // can also create a ArrayList from a set
 
 // compare if two sets are identical
 s.equals(s2)  // returns true; 
@@ -151,10 +163,12 @@ String first = "hi"; Float second = 1.1f; Integer third = 342;
 String result = String.format("String %s in %s with some %s examples.", first, second, third);
 System.out.println("the formatted string: " + result)
 
+// StringBuilder not thread-safe, similar class StringBuffer is thread-safe
 StringBuilder sb = new StringBuilder();     // fast builder for appending
-ab.append("foo");   // efficiently append
-ab.reverse();       // reverse order of chars
-ab.toString();      // covert to a string when done
+sb.append("foo");       // efficiently append
+sb.reverse();           // reverse order of chars
+sb.setCharAt(1, "a");   // change character at index
+sb.toString();          // covert to a string when done
 ```
 
 ## CONVERSIONS
@@ -177,6 +191,9 @@ int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each
 
 ## MATH
 ```java
+var a = 1.1F; // F means Float
+var a = 1.2D; // F means Double
+var a = 1.1; // will infer to Double
 int i = 3;
 int j = i / 2;  // j = 1
 Math.max(1,2)   // returns 2

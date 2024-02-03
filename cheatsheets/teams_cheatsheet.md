@@ -1,4 +1,6 @@
 # MICROSOFT TEAMS
+- create webhook for a channel, needs admin access
+    - https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=dotnet
 
 ### KEYBOARD SHORTCUTS
 - https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-microsoft-teams-2e8e2a70-e8d8-4a19-949b-4c36dd5292d2
