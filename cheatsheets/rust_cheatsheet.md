@@ -630,6 +630,7 @@ let s2 = String::from("hello");  // type String is mutable
 - CLI
     - [clap](https://docs.rs/clap/latest/clap/) - awesome CLI argument parser lib
     - [colored](https://lib.rs/crates/colored) - good ANSI terminal color lib for strings
+    - [prettytable-rs](https://lib.rs/crates/prettytable-rs) - pprint tables to terminal
 - pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)
 - [vaultwarden](https://github.com/dani-garcia/vaultwarden) - bitwarden server written in rust!
 
