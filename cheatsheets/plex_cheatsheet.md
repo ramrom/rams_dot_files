@@ -7,6 +7,7 @@
 - stopping a stream, _should_ be able to do it in dashboard but might be issue:
     - https://forums.plex.tv/t/stop-playback-not-present-on-now-playing/366739
 - web player requires widevine DRM, needed for playpack in webplayer (netflix/prime/spotify also use widevine)
+- API - https://plexapi.dev/docs/plex
 
 
 ## MEDIA TYPE SUPPORT/PLAYBACK
@@ -64,6 +65,7 @@
 - can share a library with a plex user by username or email
 - can create smart playlists and share just the playlist
 - can deauthorize(logout) individual devices: https://support.plex.tv/articles/115007577087-devices/
+
 
 ## OTHER
 - too see your play history goto discover(leftbar)->activity

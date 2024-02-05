@@ -345,6 +345,11 @@ stat foo
 stat -x foo   # osx only: extended info, on osx version, linux version does this by default
 stat -t foo   # linux only: one line concise format (useful if u want to script it easier)
 
+# NETSTAT - get network related info
+netstat     # print info about open network sockets
+netstat -r  # print info about kernel routing table
+netstat -i  # show aggregate stats by network interface (e.g. total received and sent bytes)
+
 # FILE - determine file type (osx and ubuntu has it)
 file foo   # example output: "foo: ASCII text"
 

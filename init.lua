@@ -2,7 +2,6 @@
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NEOVIM CONFIG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 -------------------------------------------------------------------------------------------------------
 
---- TODO:
 -- remap gH, gH enters select mode (which dont really care about)
 -- remap ga, it clobbers get ascii value of char
 -- leader-k doesnt do %
@@ -84,7 +83,7 @@ vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*',
 })
 
 -- for jsonc format, which supports commenting, this will highlight comments
--- #FIXME may'23: not working, code in .vimrc not working either
+-- FIXME may'23: not working, code in .vimrc not working either
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'json', callback = function() vim.cmd.syntax([[match Comment +\/\/.\+$+]]) end
 })
