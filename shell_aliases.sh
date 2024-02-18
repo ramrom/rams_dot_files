@@ -49,7 +49,7 @@ alias rf='source ~/rams_dot_files/shell_functions.sh'
 alias paf='print_alias_funcs_scripts'
 alias pafn='aliasname=1 funcname=1 print_alias_funcs_scripts'
 
-# backup and mount
+# BACKUP AND MOUNT
 alias rsyncl='rsync -Hhav --progress --delete'  # preserve hardlinks, archive, verbose, human-readable
 alias rsync_smb='rsync -Hhvrl -goD --progress --delete' # p(perms) and t(modtime) preserves fail to rsync to smbv1
 

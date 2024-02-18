@@ -16,8 +16,8 @@ tmux_main_status () {
     local cmd="tmux"
     [ "$(detect_shell)" = "zsh" ] && cmd="noglob tmux" # for zsh '[]' globbing
 
-    eval "$cmd set status-format[0] \"#(tmux-status-render 2>&1)"\
-    "#[align=left]$left #[align=centre]$(tmux-default-winlist) #[align=right]$right\""
+    eval "${cmd} set status-format[0] \"#(tmux-status-render 2>&1)"\
+    "#[align=left]${left} #[align=centre]$(tmux-default-winlist) #[align=right]${right}\""
 }
 
 tmux_status_reset () {
@@ -29,8 +29,8 @@ tmux_status_reset () {
 }
 
 ver=$(tmux-version)
-[ $(echo "$ver < 2.9" | bc) -eq 1 ] && \
-    echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && exit 1
+[ $(echo "$ver < 2.9" | bc) -eq 1 ] && echo "$(tput setaf 1)multi-line status unsupported in version $ver!" && exit 1
+
 [ "$1" = "off" ] && tmux_status_reset
 if [ "$1" = "on" ]; then
     tmux set status-interval 5
