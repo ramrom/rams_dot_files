@@ -38,6 +38,9 @@ scp /path/to/file someuser@somehost:/some/remote/path/destfilename
 echo "foo bar baz" | grep -o "fo." # will only return "foo"
 # print just the line after a matched line, here would print baz
 printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
+# grep for 2 patterns in same line
+printf "foo bar baz" | grep 'bar' | grep 'foo'      #method1
+printf "foo bar baz" | grep -E 'bar.*foo|foo.*bar'  #method2
 
 #tar
 tar –xvzf documents.tar.gz   # uncompress tar file
@@ -424,6 +427,8 @@ cat /etc/fstab  # fstab controls what gets mounted at boot, can see type, mount 
 
 lsblk -f /dev/sda1  #  show info on block type devices
 
+# ntfs-3g, osx tool to mount ntfs filesystem
+sudo /usr/local/bin/ntfs-3g /dev/disk2s1 /Volumes/myvol -oallow_other
 
 # NETWORK FILE SYSTEM MOUNT
 mount -v -t smbfs //someuser@192.168.1.1/folder destfolder/
