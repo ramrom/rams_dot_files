@@ -4,6 +4,7 @@
     - `json validate --schema-file=/foo/bar/some_schema.json --document-file=somefile.json`
 
 ## JQ
+- jq homepage: https://jqlang.github.io/jq/
 ```bash
 # to get keys of a object:
 echo "[1, 2, {"a":1,"b":2} ]" | jq '.[2] | keys'    # will output [ "a", "b" ]

@@ -2,9 +2,9 @@
 
 ## MARKDOWN REFERENCES
 - https://en.wikipedia.org/wiki/Markdown
+- https://www.markdownguide.org/basic-syntax/
 - very original spec: https://daringfireball.net/projects/markdown
 - original md: https://commonmark.org/
-- https://www.markdownguide.org/basic-syntax/
 - github flavored md: https://github.github.com/gfm/
 - https://devhints.io/markdown
 - hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown

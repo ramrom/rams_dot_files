@@ -106,6 +106,11 @@
     - `List(11,12,13,14,15).zipWithIndex.filter(_._2 != 2).map(_._1)`
         - will remove index 2
     - `val trunced = internalIdList.take(index) ++ internalIdList.drop(index + 1)`
+- foreach over a List of tuple
+    - `List((1,2),(3,5)).foreach { (v: (Int, Int)) => println(s"v._1 and v._2") }`
+        - slightly confusing syntax, need one arg and specify it's a tuple
+    - `List(3,4,5).zipWithIndex.foreach { case (a, b) => println(s"${a} and ${b}") }`
+        - can use pattern match to unapply the tuple to name the fields
 - slice an "array" (`Array` or `List` or `String`)
     - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
     - `"hi there".slice(2,5)` -> returns `" th"`
@@ -197,6 +202,14 @@
 - matching must be exhaustive
 - `case entries @ _ :: _ :: (_: List[_]) => {`
     - more than one record
+- can pattern match in field names, this will print `a or dude`
+    ```
+    (1,"dude") match { 
+        case (2, "z") | (3,"n") => print("1st case")
+        case (1, "a" | "dude") => print("a or dude")
+        case (_, _) => print("catch all")
+    }
+    ```
 
 ### DATE/TIME
 - `System.nanoTime` - get JVMs nano time count

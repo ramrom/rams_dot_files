@@ -48,6 +48,7 @@
 
 ## TABLE
 - first item starts at index _1_, not _0_
+    - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
 - only data structure, an object, used for **everything**
     - it's sorta fundamentally a associative arrays
     - can use it to make arrays, sets, lists, records, queues, etc

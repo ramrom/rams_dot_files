@@ -9,6 +9,9 @@
     - multi-thread support - create/manage, mutexes, thread-specific storage, atomics
     - better unicode support
 
+## COMPILER
+- `restrict` keyword - https://en.wikipedia.org/wiki/Restrict - tell compiler pointer is only "owner", no other pointers to data
+
 ## MEMORY
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
 ### MAJOR TYPES
@@ -50,6 +53,11 @@
     - e.g. 2022 mbp `int foo[2000000]` was ok, but `int foo[2100000]` segfaulted
 
 ## DATA STRUCTURES
+- strings
+    - C String - 1D array of chars terminated by a null
+        - array init: `char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};`
+        - shortcut array init: `char greeting[6] = "hello";`
+        - C lib get length - `strlen(greeting);`
 - arrays - `int *myarr` is essentially equivalent to `int myarr[]`
     - under the hood passing around `a[]` is really just passing `*a`
     - array syntax does have some type checking
@@ -85,5 +93,5 @@
 - `stdlib` 
     - memory allocation (`malloc`/`alloc`/`realloc`/`free`)
     - process control (`exit`, `getenv`, `system`)
-    - conversions (string-to-int e.g. `atoi`)
+    - conversions (ASCII(string)-to-int e.g. `atoi`)
 - `stdio` - `printf`

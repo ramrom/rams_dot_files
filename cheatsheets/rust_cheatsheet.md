@@ -12,6 +12,8 @@
     - all editions use the same internal representation
 - good for kernel code, kernels don't/can't raise exceptions, generally return magical values in pointers that callers check
 - https://crates.io/ is a central default registry for tools/programs in rust
+- discord switch from golang->rust: https://discord.com/blog/why-discord-is-switching-from-go-to-rust
+    - latency spikes due to GC pauses were a big issue
 
 ## LEARNING RESOURCES
 ### DOCS

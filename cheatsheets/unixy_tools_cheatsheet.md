@@ -101,8 +101,11 @@ date '+%Y-%m-%d'  # e.g. "2021-04-24"
 date +%s -d"Jan 1, 1980 00:00:01"  # covert ISO time to unix epoch
 date +%s -d"2023-01-06 00:00:01"  # covert ISO time to unix epoch
 date -d @1520000000  # convert unix epoch ISO time
+    date -r 123439819723 '+%m/%d/%Y:%H:%M:%S' # OSX - prints "08/26/5881:09:48:43"
+    date -r 123439819723 # OSX - prints "Fri Aug 26 09:48:43 CDT 5881"
 date --date "-7 days" +'%m-%d-%y' # if today is feb23-2023, this will print 01-30-23
 date +"%Z %z"  # print time zone
+
 
 date +%s%N     # print nanoseconds (%N doesnt work on OSX)
 gdate +%s.%N   # coreutils package on OSX offers gdate, which can give nanoseconds
