@@ -637,7 +637,7 @@ LoadTreeSitter = function()
     local mark_disabled = {}
     if LazyPluginEnabled('vim-markdown') then mark_disabled = { "markdown" } end
 
-    require'nvim-treesitter.configs'.setup {
+    require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
@@ -688,11 +688,9 @@ LoadNoice = function()
             lsp_doc_border = true, -- add a border to hover docs and signature help
         },
         routes = {
-          {
-            filter = { event = "msg_show", find = "B written" },
-            view = "mini",
+          { filter = { event = "msg_show", find = "Saved session: " }, view = "mini", },
+          { filter = { event = "msg_show", find = "B written" }, view = "mini", },
                 -- mini view will hide after short time, cmdline persists forever...
-          },
         },
     }
 end
@@ -1152,7 +1150,8 @@ vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree
 ---------- CHEATS + NOTES
 vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
 vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
-vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", { desc = "fzf files" })
+vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", 
+    { desc = "fzf cheatsheet files" })
 vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf notes files" })
 vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf work files" })
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')

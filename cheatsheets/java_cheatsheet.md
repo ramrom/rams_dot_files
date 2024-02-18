@@ -258,6 +258,7 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
     - e.g. if `Dog` is subclass of `Animal`; `Dog foo = new Dog(); assertTrue(foo instanceof Animal)`
 ```java
     Class c = Class.forName("java.lang.String")
+    Class c = java.lang.String.class  // 2nd method to get Class of class
     boolean b = c.isInstance("hi")  // true
     boolean b = c.isInstance(3)     // false
 ```
