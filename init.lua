@@ -1312,7 +1312,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- MARKDOWN
         { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
-        { 'preservim/vim-markdown', enabled = not vim.env.NOMARK, config = LoadVimMarkdown },
+        { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig },
