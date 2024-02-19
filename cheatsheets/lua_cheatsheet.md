@@ -83,14 +83,14 @@
 - tables 
     - key/value("associate-array"-like) items dont affect the index order of non-key/value ("array"-like) items
     ```lua
-    a = {}              - {}
+    a = {}              -- {}
     table.insert(a,1)  -- {1}
     table.insert(a,3)  -- {1, 3}
     a["k"] = 4         -- {1, 3, "k": 4 }
     a[10] = {1,2}     -- {1, 3, "k": 4, 10: {1,2} }
-    a(2)            -- returns 3
+    a[2]            -- returns 3
     table.insert(a,"hi")  -- {1, 3, "hi", "k": 4, 10: {1,2} }
-    a(3)            -- returns "hi"
+    a[3]            -- returns "hi"
     ```
 
 ## HELPFUL CODE
