@@ -36,6 +36,9 @@
 
 
 ## TYPE SYSTEM
+- `val` - immutable variable, `var` - mutable variable
+    - *NOTE* the value a `val` contains can mutate
+    - e.g. changing field value works `case class Foo(var x: Int); val v = Foo(1); v.x = 10;`
 - Trait - cant be instantiated directly
     - a class can implement MANY traits
     - can NOT specify a constructor parameter
