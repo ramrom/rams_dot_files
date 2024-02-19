@@ -1182,7 +1182,7 @@ vim.api.nvim_create_autocmd(
       end,
 })
 
--- Quickly switch between up to 9 vimtabs
+-- Quickly switch between vimtab indexes 1 to 9
 for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 
 
