@@ -63,7 +63,7 @@ generate_github_link() {
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
 out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
-    --header=$'ctrl-i->vim, ctrl-o->open, ctrl-space->cd, ctrl-y->pbcopy\nctrl-s->open-in-github' \
+    --header=$'ctrl-i->open, ctrl-o->vim, ctrl-space->cd, ctrl-y->pbcopy\nctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \
     --preview "$BATBIN --style=numbers --color=always {} | head -500" \
@@ -72,13 +72,13 @@ key=$(echo "$out" | head -1)
 file=$(echo "$out" | tail -1)
 if [ -n "$file" ]; then
     case "$key" in
-        "ctrl-o") $OPENBIN "$file" ;;
+        "ctrl-i") $OPENBIN "$file" ;;
         "ctrl-space")
             [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
             directoryname=$(dirname "$file")
             [ -d "$file" ] && directoryname="$file"  # dont get dirname if it's already a dir
             echo "cd $directoryname" ;;
-        "ctrl-i")
+        "ctrl-o")
             cmd="${EDITOR:-vim} '$file'"
             [ -z "$FUNC_WRAP" ] && eval "$cmd" && exit
             echo "$cmd" ;;
