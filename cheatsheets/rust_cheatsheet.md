@@ -84,6 +84,7 @@
     - a binary crate has a `main` functions, library crates don't
     - generally when someone says a crate they mean a library crate
 - a path means a namespace for where things live
+- `cargo new myproject` - create new project (Cargo.toml and main.rs file in dir `myproject`)
 - `cargo install --list` - print all gobally installed crates
 - `cargo install --version 0.3.10 someprogram` - install version x of program
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program

@@ -363,7 +363,7 @@ local LoadNavarasuOneDarkConfig = function()
 end
 
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
--------- TODO: treesitter markdown, headers are ugly green, is that normal
+-------- FIXME: treesitter markdown: hyperlinks no underline, H1/H2 below hilight dont work
 local LoadOneDarkProConfig = function()
     require("onedarkpro").setup({
         highlights = {

@@ -149,17 +149,19 @@
 - streams/LazyList allow us to represent infinite computations, e.g. a fibonacci sequence, sequence of all natural numbers
 
 ## STRINGS
-- prints `this is Foo(3)`
-    ```scala
-    case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
-    ```
 - toString method is called if fooObject isnt a String
+- index returns a `Char` - `val s = "hello"; s(1);` returns `e`
 - `map` operates on each char in string, `"hi".map(_+"a")` -> returns `ArraySeq("ha", "ia")`
 - multi-line string with `"""` - e.g. `val s: String = """ i can add literal " double quote """`
 - escape with `\` - `val s: String = "escaped with \" \\ new line \n woo"`
 - findandreplace: ` "foo bar baz".replaceAll("ba","zz")` -> outputs `"foo zzr zzz"`
 - `StringBuilder` commonly used for building strings
     - `val b = new StringBuilder; b += "hi"; b += " there"; b.toString`
+- get substring(aka slice): `val s = "hello there"; s.substring(2,4)` - returns `String` `ll`
+- prints `this is Foo(3)`
+    ```scala
+    case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
+    ```
 
 ## MONADS
 ### Either

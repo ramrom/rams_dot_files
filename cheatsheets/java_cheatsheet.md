@@ -157,7 +157,7 @@ Character.isDigit('1')  //true
 'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
 
 List<Character> c = new ArrayList<>()
-char[] c = "hi there".toCharArray()
+char[] c = "hi there".toCharArray()  // returns char[] type
 
 String first = "hi"; Float second = 1.1f; Integer third = 342;
 String result = String.format("String %s in %s with some %s examples.", first, second, third);
