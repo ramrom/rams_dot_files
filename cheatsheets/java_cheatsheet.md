@@ -47,7 +47,9 @@ names[1] = "newval"
 names[10000]    // raises java.lang.ArrayIndexOutOfBoundsException
 names.length    // => 4, the num items in the array
 
-//2d array
+//2D ARRAY
+// allocating array initializes depending on type, String,Dobule -> null, boolean -> false, int -> 0
+boolean[][] boolarr = new boolean[1][1];  
 int[][] tdarray = new int[10][20];
 int[][] tdarray = { {1, 3}, {4, 5} };
 
@@ -65,13 +67,16 @@ mylist.equals(anotherlist); // compare 2 arraylists, values and order
 // variables can be of interface types, and thus contain any value that implements that type
 List<String> mylist = new ArrayList<String>();
 
-// caveat: since List is backed by array, we can't change the size, cant add elements to it
-List<String> mylist = Arrays.asList("a", "b", "c"); // a short way to declare a new List
-
+// LinkedList is a doubly linked list
 LinkedList<String> ll = new LinkedList<String>();  // linked lists
 
+// Vector is near identical to ArrayList, excecpt it's thread-safe b/c it's synchronized
+List<String> v = new Vector<String>();
+
+// caveat: these are immutable structures, underlying type List contains is basic array
 List<Integer> l = List.of(1,2,3);  // java9 has List#of method to quickly create/initialize list
 List<Integer> l = Arrays.asList(1,2,3)  // another fast way to create list
+List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
 
 // SET
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
@@ -128,7 +133,8 @@ ArrayList<Integer> a = new ArrayList<>();
 a.add(3);
 ha.put("foo", a);
 ```
-### STRINGS
+
+## STRINGS
 ```java
 "hi there".length()     // length of string
 "  trim a str  ".trim()   // returns "trim a str"
@@ -149,15 +155,8 @@ ha.put("foo", a);
 
 "ab".repeat(3)  // String "ababab"
 
-// CHARs
-char c = 'a'    // literal chars use single quotes
-Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
-Character.isDigit('a')  //false
-Character.isDigit('1')  //true
-'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
-
 List<Character> c = new ArrayList<>()
-char[] c = "hi there".toCharArray()  // returns char[] type
+char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`
 
 String first = "hi"; Float second = 1.1f; Integer third = 342;
 String result = String.format("String %s in %s with some %s examples.", first, second, third);
@@ -170,6 +169,30 @@ sb.reverse();           // reverse order of chars
 sb.setCharAt(1, "a");   // change character at index
 sb.toString();          // covert to a string when done
 ```
+
+## PRIMITIVE TYPES
+- 8 primitive types: Java-byte, short, char, int, long, double, float, boolean
+- `int` - 4 bytes, `short` - 2 bytes, `long` 8 bytes, `byte` - 1 byte
+### CHARACTER
+- `Character` is wrapper for `char`
+- `Character.isDigit('3')`   - returns true
+- 
+    ```java
+    char c = 'a'    // literal chars use single quotes
+    Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
+    Character.isDigit('a')  //false
+    Character.isDigit('1')  //true
+    'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
+    '1' == 49       // return true, 49 is ASCII val for char `1`
+    ```
+### NUMBERS
+- a literal `3` is inferred as `int`, a literal `1.0` is inferred as `double`
+    - use `1L`(long), `1.0F`(float)
+- `var v = 1L`  - `L` means literal type `long`, `1D` - `D` for double, `F` for float
+- `int` vs `Integer` -> `Integer` is class with underlying `int` and adds properties and methods
+    - same for `long`/`Long`, `double`/`Double`, `float`/`Float`
+- get max/min of `Integer`/`Long`/`Short`/`Byte` -> e.g. `Long.MAX_VALUE` , `Integer.MIN_VALUE`
+
 
 ## CONVERSIONS
 ```java
@@ -187,6 +210,9 @@ int a = Integer.toString(3);     // int -> String
 int a = (int)1.6         // cast float to int, a rounded down to 1
 int a = (long)11         // cast int to long, long is 64bit
 int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each other
+
+(char) 49   // returns char '1'
+(int) '1'   // returns int 49
 ```
 
 ## MATH
@@ -201,6 +227,7 @@ Math.min(1,2)   // returns 1
 Math.abs(-1)   // returns 1
 Math.abs(-1.1)   // returns 1.1
 Math.max(1.1f, 2)   // can mix floats with ints, returns 2
+Math.pow(3,4)   // power/exponent, this returns Double 81.0
 
 Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
 int randomNum = (int)(Math.random() * 101);  // 0 to 100
@@ -222,6 +249,8 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
     - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
     - a class defined with no superclass automatically extends `Object`
 ### CLASSES
+- member of can be: default, public, private, protected
+    - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
 - Generic classes
@@ -282,11 +311,17 @@ System.out.println("3 > 2 || 2 > 3? " + ((3 > 2) || (2 > 3))); // => true
 
 ## CONTROL STRUCTURES
 ```java
+// FOR LOOP
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
     if (true) { continue; }     // continue will skip iteration
     if (true) { break; }     // break will terminate the loop in scope
 }
+
+// more complicated statements
+for (int i = 3; i * 2 < 10; i = (i * 10) + 30) { 
+    System.out.println(i); 
+} 
 
 while (i < 10 && x != 3) {
     i++;
@@ -308,7 +343,12 @@ switch (a) {
 
 //trinary
 String bar = (3 < 10) ? "A" : "B";
-
+```
+### EXCEPTIONS
+- to throw method must declare it, e.g. `public int foo(int a) throws Exception { throw new Exception("foo"); }`
+    - the calling function must either try/catch or declare it can throw if unhandled
+- `throw new Exception("foobar")`
+```java
 //try catch
 try { ... } 
 catch (SomeException e) { .. }
@@ -318,6 +358,7 @@ finally { .. }  // finally is always exected
 - java 14 has switch expressions (vs the switch statement above)
     - no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
     - dont have to be exhaustive
+
 
 ## MAJOR LIBS/FRAMEWORKS
 ### NETTY

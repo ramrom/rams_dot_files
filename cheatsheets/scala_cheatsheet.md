@@ -163,6 +163,9 @@
     case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
     ```
 
+## MATH
+- `scala.math.pow(2.1,3.4)` -> 2 to power of 3
+
 ## MONADS
 ### Either
 - `flatMap` and `map` are right-biased, mapping on left val returns same val
