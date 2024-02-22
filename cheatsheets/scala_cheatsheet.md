@@ -124,7 +124,9 @@
     - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
 - `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`
 - mutable
-    - `ArrayBuffer` -> underlying data struct is array
+    - `ArrayBuffer` -> underlying data struct is array, can be resized
+    - `Array` - is mutable like `ArrayBuffer`, NOT resizable
+        - generally backed by JVM basic array, more efficient than `ArrayBuffer`
     - `ListBuffer` -> underlying data struct is linked list
         - to append: `l.append(1)` or `l += 1`
 ### MAP/ASSOCIATIVE-ARRAY

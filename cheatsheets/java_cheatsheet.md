@@ -249,6 +249,18 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
     - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
     - a class defined with no superclass automatically extends `Object`
 ### CLASSES
+- function overload with different constructors 
+   ```java
+    class Foo {
+        int data;
+
+        public Foo(int i) { this.data = i; }
+        public Foo(int i, int y) { this.data = i + y; }
+    }
+
+    Foo f = new Foo(3); 
+    Foo f2 = new Foo(1,2);
+   ```
 - member of can be: default, public, private, protected
     - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
 - static and member variables not initialized have a `null` value
