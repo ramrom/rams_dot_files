@@ -167,6 +167,7 @@
 
 ## MATH
 - `scala.math.pow(2.1,3.4)` -> 2 to power of 3
+- mod: `10 % 3`  -> res: 1
 
 ## MONADS
 ### Either

@@ -15,6 +15,7 @@
 ## MEMORY
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
 ### MAJOR TYPES
+- text - where the program itself is stored
 - static - initialized at program start, released when program ends, global scope generally
     - compile time allocation
 - automatic - initialized at start of block of code, and automatically removed at end
@@ -30,12 +31,19 @@
     - in langs like java a GC does this for you
 ### DYNAMIC
 - `malloc` - dynamic request (stored on the heap) contiguous amount of memory
+    - rought algo:
+        1. search process' assigned memory to find unused block
+            - if satisfactory unused block found, mark it used and return it
+        2. if unused memory to satify allocation cant be found a `sbrk`/`brk` (or `mmap`) syscall is made for more memory
+            - `brk`/`sbrk` in kernel adjust `struct_mm_struct` for process in kernel, so process' data segment is larger
+            - at first no physical memory assigned to this new virutal memory
+        3. when process touches new virtual memory for first time, a fault handler kicks in, trap to kernel to assign physical memory
     - under the hood these call `mmap` and `mmunmap` system calls that manipulate virtual memory
     - null returned if cant allocate
     - void pointer if success (and should cast to typed pointer)
 - `calloc` - like malloc, initializes memory to zero value
 - `realloc` - change existing allocation, increase size, remain contiguous
-- `free` - request to deallocate some memory
+- `free` - request to deallocate some memory, essentially updates the data struct that tracks used/free heap memory
 - heap vs stack example allocs
     - array
         - `int myarray[5]` -> automatic variable, on the stack
@@ -51,6 +59,8 @@
             - `struct myStruct struct1; struct1.number = 1;`
 - general stack size is platform dependent but like 2MB - 8MB
     - e.g. 2022 mbp `int foo[2000000]` was ok, but `int foo[2100000]` segfaulted
+### ALIGNMENT
+- generally the fields in a struct are stored in the same order in memory
 
 ## DATA STRUCTURES
 - strings

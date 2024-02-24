@@ -201,7 +201,7 @@
         - if only one input then the output gets the same lifetime
         - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
 ### UNSAFE
-- raw pointers - can create in safe areas
+- raw pointers - can create in safe areas, start with `*`, (`*` + `mut`/`const` )
     - can have any number of immutable and mutable pointers at same time
     - raw means they can be null, point to invalid mem locations, no automatic cleanup
     - can only dereference raw pointers in unsafe blocks
@@ -262,7 +262,7 @@
 - `eprintln!` is macro to print to stderr
 - `print!` - same as `println!` but no new line
 ### ARRAYS
-- static and cannot change size
+- cannot change size
 - function argument type annotation: unsized `[T]`, sized `[T, 3]`
 - indexing starts at zero, e.g. `a[0]` is first element
 - stored in contiguous sections of memory on the stack
