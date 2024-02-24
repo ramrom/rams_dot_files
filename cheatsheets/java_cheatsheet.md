@@ -34,6 +34,7 @@
 - see [build systems](build_dependency_tools_cheatsheet.md)
 
 ## DATA STRUCTURES
+### ARRAY
 ```java
 // regular arrays
 int[] intArray = new int[10];
@@ -52,7 +53,10 @@ names.length    // => 4, the num items in the array
 boolean[][] boolarr = new boolean[1][1];  
 int[][] tdarray = new int[10][20];
 int[][] tdarray = { {1, 3}, {4, 5} };
-
+```
+### LIST
+```java
+// ArrayList and LinkedList are main implementation of List interface
 // ArrayList can dynamically change size
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
@@ -77,8 +81,10 @@ List<String> v = new Vector<String>();
 List<Integer> l = List.of(1,2,3);  // java9 has List#of method to quickly create/initialize list
 List<Integer> l = Arrays.asList(1,2,3)  // another fast way to create list
 List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
-
-// SET
+```
+### SET
+```java
+// HashSet and TreeSet and main implementations of interface Set
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
@@ -105,16 +111,23 @@ List<Integer> l = new ArrayList<>(s)  // can also create a ArrayList from a set
 s.equals(s2)  // returns true; 
 
 new ArrayList<String>(hs); // can create a ArrayList from the HashSet
-
-// MAP
-HashMap<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
+```
+### MAP
+```java
+// HashMap and TreeMap are main implementations of Map interface
+Map<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
 m.put("foo", 3);
 m.get("boo");       // returns null if it doesnt exist
 m.remove("foo");    // returns null if it doesnt exit, the value of the key if key does exist
 m.size();           // return number of items
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 
-// STACKS
+// can specify initial capacity, default is 16, use if size of dataset is know prehand
+// load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
+HashMap<String, Integer> m = new HashMap<String, Integer>(100); // can pass in initial capacity argument
+```
+### STACKS
+```java
 Stack<Integer> s = new Stack<>();
 s.push(1);  // [ 1 ]
 s.push(3);  // [1, 3]
@@ -124,9 +137,9 @@ s.peek(); // see next stack item without removing, returns 1 here
 s.empty();  // returns false
 s.pop(); // return 1
 s.pop(); // raises EmptyStackException sinc it's empty
-
-
-// COMPOUND TYPES
+```
+### COMPOUND TYPES
+```java
 HashMap<String, ArrayList<Integer>> ha = new HashMap<String, ArrayList<Integer>>();
 HashMap<String, ArrayList<Integer>> ha = new HashMap<>();   // works too
 ArrayList<Integer> a = new ArrayList<>();
