@@ -55,7 +55,7 @@ foo site:www.site.com   - search a specific site
 ## DRIVE
 - google drive linux sync options: https://linuxhint.com/best_google_drive_clients_linux/
 
-## MEETS:
+## MEETS
 cmd + d - toggle mute
 cmd + e - toggle camera
 
