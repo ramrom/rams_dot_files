@@ -148,6 +148,7 @@ alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 alias f="fzf"
 alias ffh='ff ~'
+alias ffd='ff -d ~'
 alias fs="print_alias_funcs_scripts | fzf"
 if [ "$(uname)" = "Linux" ]; then
     alias fp="fzf --preview 'batcat --style=numbers --color=always {} | head -500'"

@@ -1,11 +1,17 @@
 # RUBY
+- https://www.ruby-lang.org/en/
+- https://www.ruby-lang.org/en/news/2020/12/25/ruby-3-0-0-released/
+    - Matz said "3x3" - ruby 3 JIT is 3x faster than ruby 2
 
-## SCRIPTING
-```sh
-ruby -e 'puts "hi"'   # execute ruby code
-ruby -e 'puts ARGV[0]' foo   # read inputs, will print "foo"
-ruby -e 'puts ARGV[0].to_i + ARGV[1].to_i' 1 2    # read inputs, which are always strings, prints "3"
-```
+## DOCS
+- https://www.tutorialspoint.com/ruby/index.htm
+
+## VARIABLES
+- Scope
+    - local(method scope) `var`
+    - instance(object scope) `@var`
+    - class(global within all class instances) `@@var`
+    - global(program) `$var`
 
 ## GEM
 - `gem install --user-install somegem` - install as user (root is default)
@@ -21,6 +27,7 @@ ruby -e 'puts ARGV[0].to_i + ARGV[1].to_i' 1 2    # read inputs, which are alway
 - code blocks
     - an anonymous function that can be invoked from within another function
 
+## INTROSPECTION
 ```ruby
 # puts
 STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout
@@ -47,12 +54,24 @@ ObjectSpace.memsize_of(i)
 
 # Another method, probably better to get an idea of mem size:
 Marshal.dump(a).size
+```
 
+## SCRIPTING
+```sh
+ruby -e 'puts "hi"'   # execute ruby code
+ruby -e 'puts ARGV[0]' foo   # read inputs, will print "foo"
+ruby -e 'puts ARGV[0].to_i + ARGV[1].to_i' 1 2    # read inputs, which are always strings, prints "3"
+```
+
+## FILE HANDLING
+```ruby
 f = File.open 'path/somefile'; 
 require 'json'; j = JSON.parse(f)
 j.each_with_index { |data,i| f= File.open("newfile#{i}",'w'); f.write(data.to_json); f.close }
+```
 
-
+## COLOR
+```ruby
 # add ANSI colors to strings
 #
 # Example Usage: `puts "I'm bold and green and backround red".bold.green.bg_red`

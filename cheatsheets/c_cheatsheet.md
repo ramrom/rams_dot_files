@@ -1,6 +1,7 @@
 # C
 - linux torvalds on good C code with removing a node in linked list
     - https://github.com/mkirchner/linked-list-good-taste
+- nice quick overview - https://www.w3schools.com/c/index.php
 
 ## HISTORY
 - C99 - released 1999

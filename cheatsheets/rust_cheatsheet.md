@@ -75,15 +75,7 @@
 - native package manager
 - `~/.cargo` dir contains source code for crates, bins, cached artifacts, and more
 - a package consists of many crates and is defined by a `Cargo.toml` file
-- package versions of a crate cant be deleted, they can be yanked
-    - this means lock files with yanked versions can still be used, but new projects cannot use this version
-### CRATE
-    - compiling a source file, rust considers that a crate
-    - composed of a tree of modules
-        - modules needed by the source file will be compiled and linked in
-    - a binary crate has a `main` functions, library crates don't
-    - generally when someone says a crate they mean a library crate
-- a path means a namespace for where things live
+### CARGO COMMANDS
 - `cargo new myproject` - create new project (Cargo.toml and main.rs file in dir `myproject`)
 - `cargo install --list` - print all gobally installed crates
 - `cargo install --version 0.3.10 someprogram` - install version x of program
@@ -93,11 +85,20 @@
 - `cargo build -v` - show exactly what commands it's running
 - `cargo build --manifest-path /path/to/Cargo.toml` - specify `Cargo.toml` file in another location
 - `cargo doc --open` - open a crates built docs in browser
-- using a create in a project
+### CRATE
+- package versions of a crate cant be deleted, they can be yanked
+    - this means lock files with yanked versions can still be used, but new projects cannot use this version
+- main crate repository: https://crates.io/
+- compiling a source file, rust considers that a crate
+- composed of a tree of modules
+    - modules needed by the source file will be compiled and linked in
+- a binary crate has a `main` functions, library crates don't
+- generally when someone says a crate they mean a library crate
+- a path means a namespace for where things live
+- using a crate in a project
     ```rust
     extern crate old_http;  // rust 2015
     use old_http::SomeType;
-
 
     use old_http::SomeType;  // rust 2018 and 2021
     ```
@@ -157,6 +158,7 @@
 
 
 ## REFERENCES/OWNERSHIP
+- structs and values in generally are placed on stack by default, general way to heap alloc is pointer wrappers like `Box` or `Rc`
 - references are a "pointer" to data, and in rust they also mean borrowing the data from an owner
 - 2 main rules of references
     - a owner can lend out one mutable reference
