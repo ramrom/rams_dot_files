@@ -128,6 +128,10 @@ wc -l somefile   # count # of lines in file
 wc -c somefile   # count # of chars in file
 cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
 
+# xq - convert xml to json and then use jq queries
+xq . some.sml  # would spit our JSON conversion
+xq .somekey some.xml
+
 # pandoc -universal doc converter
     # https://pandoc.org/MANUAL.html#general-options
 pandoc foo.md -o foo.docx   # convert markdown to docx
