@@ -223,11 +223,13 @@ ToggleLSPDiagnosticsVirtualText = function()
     end
 end
 
-AutoAutoCompleteEnabled = true
+AutoAutoCompleteEnabled = false
 
 -- https://www.reddit.com/r/neovim/comments/rh0ohq/nvimcmp_temporarily_disable_autocompletion/
 function ToggleAutoAutoComplete()
     local cmp = require('cmp')
+    AutoAutoCompleteEnabled = not AutoAutoCompleteEnabled
+
     if AutoAutoCompleteEnabled then
         cmp.setup({ completion = { autocomplete = { require('cmp.types').cmp.TriggerEvent.TextChanged } } })
         print('Autocomplete always display ON')
@@ -235,7 +237,6 @@ function ToggleAutoAutoComplete()
         cmp.setup({ completion = { autocomplete = false } })
         print('Autocomplete always display OFF')
     end
-    AutoAutoCompleteEnabled = not AutoAutoCompleteEnabled
 end
 
 -- "Enabled" here means enabled = true and cond = true
@@ -779,9 +780,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -------------------------------- NVIM-CMP -------------------------------------------
 LoadAutoComplete = function()
     local cmp = require 'cmp'
+    local initial_auto_completion = false;
+
+    if AutoAutoCompleteEnabled then
+        initial_auto_completion =  { require('cmp.types').cmp.TriggerEvent.TextChanged }
+    else
+        initial_auto_completion = false   -- dont show autocomplete menu be default
+    end
 
     cmp.setup {
-        completion = { autocomplete = false, },   -- dont show autocomplete menu be default
+        completion = { autocomplete = initial_auto_completion, },
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
@@ -1196,7 +1204,7 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")
     vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
-    vim.keymap.set("n", "glT", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
+    vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
     -- ACTIONS
@@ -1268,7 +1276,7 @@ SetMetalsKeymaps = function()
     vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
     vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
     -- NOTE: in the tree window hit 'r' to navigate to that item
-    vim.keymap.set("n", "glt", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
+    vim.keymap.set("n", "glT", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
     vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
 end
