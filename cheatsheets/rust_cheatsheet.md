@@ -146,6 +146,9 @@
 - consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `reduce`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
 - unrolling - means to flatten a loop, compiler does this optimization often if it's a small number of known iterations
     - e.g. `for i in (1..5) { ... }`
+### OPERATORS
+- bitwise ops: `&` bitwise AND, `|` bitwise OR, `^` bitwise XOR
+    - only some types support it, e.g. integer types like `i32`, `u32`, etc
 ### VISIBLITY/SCOPE
 - all things are private by default and can be made public with `pub` keyword
     - public items can be used by anything in the crate
@@ -241,7 +244,7 @@
     - is a heap-allocated `Drop` type, it's mutable/growable
     - it's really a wrapper around a `Vec<u8>` of bytes
     - indexing/iterating
-        - you cant index (`s[1]`) because it's confusing/ambiguous, for UTF8 is it byte value? scalar value? grapheme cluster value?
+        - you cant index (`s[1]`) because it's confusing/ambiguous, for UTF8 is it byte value? character value? grapheme cluster value?
         - can slice the bytes, `s[0..4]`, but if bytes fall outside of char boundary it will panic
         - can specify byte or char with iterator
             - `for c in "Зд".chars() { println!("{c}"); }`
@@ -262,6 +265,7 @@
                 - `format!` is more succinct for concat of many strings
                 - doesnt take ownership of any of the params
 - `eprintln!` is macro to print to stderr
+    - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
 - `print!` - same as `println!` but no new line
 ### ARRAYS
 - cannot change size
@@ -275,6 +279,8 @@
 - `let a = [ 1, 2 ]` - declaration
     - example type annotation declaration `let xs: [i32; 5] = [1, 2, 3, 4, 5];`
     -  initialize size 500 array with value zero - `let ys: [i32; 500] = [0; 500];`
+- multi-dimensional arrays, e.g. 2D array 6x4 i32: `let a: [[i32; 4]; 6];`
+    - slices need to specify subarray: `let sliceofa: &[[i32; 4]] = &a;`
 ### VECTORS
 - essential a struct with 3 properties: capacity, length, and pointer to base
     - generally vector struct on stack, and data in heap
@@ -524,7 +530,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - a executor will place a task on the run queue to be polled when a child future is awoken
 - recursion is an issue b/c this statemachine like struct would refer to itself, causing the infinite size type issue
     - can get around this with indirection like `Box` or `BoxFuture`
-- async traits are hard b/c Futures don't have a know size
+- async traits are hard b/c Futures don't have a known size
     - future can have all sorts of data and that makes their size unkown
 - if a `Future` holds non-`Send` data(e.g. `Rc`) then it cant be moved to another worker thread in executor
 - stacktraces - trace will show origin upon the thread it's executing on, this might be different than thread that spawned it
