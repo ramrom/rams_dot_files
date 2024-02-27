@@ -101,6 +101,10 @@
 - print string - `char *s = "hi"; printf("%s\n",s);`
 
 ## LIBS
+- `libc` - core lib - on many archs
+    - API for most syscalls
+    - memory management(`malloc`, `free`,etc)
+    - also io, string, math
 - `stdlib` 
     - memory allocation (`malloc`/`alloc`/`realloc`/`free`)
     - process control (`exit`, `getenv`, `system`)

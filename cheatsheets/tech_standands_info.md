@@ -445,6 +445,10 @@
     - for embedded systems is probably main layer of code
     - stored in non-volotile memory like flash memory or EEPROM
 
+## SYSTEM MEMORY
+- for modern processors, with memory controllers, every process has it's own virtual memory address space
+    - so process A and B can have a mapping for the same virtual address, but physical address obviously cant overlap
+
 ## FILE SYSTEMS
 - storage device vs partition vs volume vs file system
     - physical storage devices are split into multiple partitions

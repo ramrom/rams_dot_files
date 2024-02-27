@@ -52,6 +52,7 @@
     - validates lifetimes - a borrower cant outlive what it borrows
 - prelude - https://doc.rust-lang.org/std/prelude/index.html#
     - set of things that rust automatically imports (`use`s) into every program
+- most version use `libc` for low level stuff like syscalls
 ### LINKING
 - can produce dynamically or statically linked libraries
 - generics on dynamic libs

@@ -5,6 +5,7 @@
 - ken thomson, robert pike, Robert Griesemer invented it to fix everything they hated about c++
     - they all had to agree on features they liked
     - golang is object-oriented _but_ has not classes, you can be object-oriented without classes
+- early version didnt use `libc` much, and implemented their own syscalls in go
 
 ## HISTORY
 - 1.18 added generics
