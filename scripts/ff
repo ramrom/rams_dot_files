@@ -61,7 +61,7 @@ generate_github_link() {
 }
 
 # use tree to preview a dir structure, bat to preview a files contents
-PREVIEW_CMD="if [ -d {} ]; then; tree {}; else $BATBIN --style=numbers --color=always {} | head -500; fi"
+PREVIEW_CMD="if [ -d {} ]; then; tree -C {}; else $BATBIN --style=numbers --color=always {} | head -500; fi"
 
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
