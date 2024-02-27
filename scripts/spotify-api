@@ -77,7 +77,7 @@ auth() {
     fi
 
     [ -n "$verbose" ] && echo "AUTH ENDPOINT:\n$AUTH_ENDPOINT"
-    open $AUTH_ENDPOINT
+    open $AUTH_ENDPOINT             # open the oauth flow endpoint in a browser(hopefully)
     echo
 
     # Now the user gets redirected to our endpoint

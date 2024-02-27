@@ -247,6 +247,11 @@
      - roy fielding created it in his dissertation to replace SOAP as model for WWW and used HTTP as reference implementation
 - RPC - Remote Procedure Call
 
+## DATA FORMATS
+- JSON
+- XML
+- ProtoBufs
+- Capt'n'Proto
 
 ## DEVOPS
 ### TERRAFORM

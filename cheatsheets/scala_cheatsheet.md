@@ -60,6 +60,11 @@
     val seq : Seq[Int] = Seq(1,2,3) // compiler validates generics at compile time
     val seq : Seq = Seq(1,2,3)   // this is what JVM runtime actually has, generic type info is erased
     ```
+- variance - tells us if type constructor is subtype of another type constructor
+    - 3 main variances: invariance, covariance, and contravariance
+    - covariant: given B is subtype of A, then `F[_]]` is covariant if `F[B]` is subtype of `F[A]`, denoted by `F[+T]`
+    - contravariant: inverse of covariant, given B subtype of A, `F[A]` is subtype of `F[B]`, denoted by `F[-T]`
+    - invariant: no gaurantee of subtyping relationship between `F[A]` and `F[B]`
 ### CLASSES
 - multiple inheritence, diamond problem -> scala serializes the tree
     - order matters, so last trait that implements same method will get defined

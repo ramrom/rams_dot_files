@@ -14,6 +14,7 @@
 - https://crates.io/ is a central default registry for tools/programs in rust
 - discord switch from golang->rust: https://discord.com/blog/why-discord-is-switching-from-go-to-rust
     - latency spikes due to GC pauses were a big issue
+- https://matklad.github.io - awesome blog by core maintiner of `rust-analyzer` and tigerbeetle
 
 ## LEARNING RESOURCES
 ### DOCS
@@ -441,6 +442,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
         - you could have diff vtables for diff combinations of types in each crate, but now you have many diff vtable implementations
     - vtable for trait object always implements `drop`(from `Drop`), needed for GC
         - size and alignment of concrete type in vtable (allocator needs this for `drop`)
+- generic traits can specify a default concrete type with `<T = DefaultConcreteType>`
 - associated type - a placeholder type that must be defined by the implementing struct/enum
     - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
     - why not generic trait? - can implement the trait many times (per generic param)
@@ -450,7 +452,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - concept is similar to trait bounds on generics
 - fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
     - types direct implementation takes precedence
-### CASTING
+### CONVERSION/CASTING
 - `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
 - `From` and `Into` are main traits to convert, complex types like `Vec` and `String` support this
 ### OTHER
