@@ -153,8 +153,8 @@ function run_cmd_timestamp() {
         $(ansi256 -f red -b green "_---------------------"); echo
 }
 
-# shell func wrapper that will change to current dir in lf when quitting
-l () {
+# LF shell func wrapper that will change to current dir when quitting
+l() {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
@@ -164,7 +164,7 @@ l () {
     fi
 }
 
-# function wrapper for ff script, if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
+# FF script function wrapper - if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
 function ff() {
     # source ~/bin/ff -w "$@"
     local result=$(~/bin/ff -w "$@")
