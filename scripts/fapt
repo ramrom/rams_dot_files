@@ -17,4 +17,5 @@ done
 shift $(($OPTIND - 1))
 
 apt list $opts | tail -n+2 |
-    fzf --height "$FZF_HEIGHT"% --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); echo $pkg; apt show $pkg; echo; apt depends $pkg'
+    fzf --height "$FZF_HEIGHT"% \
+        --preview 'pkg=$(awk "{print  $1}" <<< {} | cut -d "," -f1); echo $pkg; apt show $pkg; echo; apt depends $pkg'
