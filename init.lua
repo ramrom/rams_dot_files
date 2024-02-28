@@ -1141,9 +1141,7 @@ vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
 vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
--- FIXME: leader-g-<c-d> broken, neovim wont recog <c-d> after, but below map with direct <c-d> works
--- vim.keymap.set('n', '<C-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
-vim.keymap.set('n', '<leader>g<C-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
+vim.keymap.set('n', '<leader>gf', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
 
 --------- FASTER INDENT
 vim.keymap.set('n', '<C-n>', '>>')
