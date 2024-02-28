@@ -1134,14 +1134,16 @@ vim.keymap.set('n', '<leader>ec', "<cmd>lua require('fzf-lua').grep({cwd='~/rams
 
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
-vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
-vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
-vim.keymap.set('n', '<leader>g<c-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
 vim.keymap.set('n', '<leader>gm', "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "fzf git commits" })
 vim.keymap.set('n', '<leader>gb', "<cmd>lua require('fzf-lua').git_bcommits()<CR>", { desc = "fzf buffer git commits" })
 vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
+vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
+-- FIXME: leader-g-<c-d> broken, neovim wont recog <c-d> after, but below map with direct <c-d> works
+-- vim.keymap.set('n', '<C-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
+vim.keymap.set('n', '<leader>g<C-d>', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
 
 --------- FASTER INDENT
 vim.keymap.set('n', '<C-n>', '>>')

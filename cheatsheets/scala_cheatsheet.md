@@ -412,6 +412,9 @@
 - great http lib (inspired by python requests) - https://github.com/com-lihaoyi/requests-scala
 - upickle - https://com-lihaoyi.github.io/upickle/
      - parse json text - `val s:String = """{"a":1}"""; ujson.read(s)`
+- apache kafka 2 is like 20% scala (0.7 was like 50%)
+    - 3.1.0 - `core` (most important module) written in scala
+- apache spark is like 70% scala
 ### AKKA
 - one of akka streams main goals is to implement backpressure
 ### SLICK

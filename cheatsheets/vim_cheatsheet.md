@@ -1,5 +1,6 @@
 # VIM
-- good resource on learning vim: http://vimcasts.org
+- good resource on learning vim - http://vimcasts.org
+    - feb27-24 the above line with `vim:` instead of `vim -` will cause neovim(not vim) to try to read the hyperlink somehow... wtf
 - official neovim docs: https://neovim.io/doc/
 - awesome cheatsheet: https://github.com/ibhagwan/vim-cheatsheet
 - Vim9.0 introduces new version of VimL scripting language
@@ -28,7 +29,7 @@
 - for keymaps, mode definitions https://neovim.io/doc/user/map.html#map-overview
     - `i` insert, `n` normal, `v` visual+select, `x` visual, `o` operator pending, `c` command-line, `t` terminal, `s` select
 ### VERSION HISTORY
- https://neovim.io/roadmap/
+- roadmap: https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
 - 0.2 - added support for Lua 5.1
     - mostly b/c LuaJIT only supports 5.1, LuaJIT much faster than standard Lua compiler
@@ -107,29 +108,29 @@
     - can specify a commit hash version of a plugin
 
 ### FZF
-Rg            - ripgrep dynamic fuzzy search with bat preview!
-Files, ctrl-v - opens in new vert split
-Files, ctrl-x - opens in new horizontal split
-Files, ctrl-t - opens in new tab
-:Files ../    - invoke on parent dir (can specify base path as first arg)
-GFiles!?    - git modified files in full screen
-Lines       - search lines in open buffers
-BCommits    - commit hist for current buffer
-FZF-MRU:
+- Rg            - ripgrep dynamic fuzzy search with bat preview!
+- Files, ctrl-v - opens in new vert split
+- Files, ctrl-x - opens in new horizontal split
+- Files, ctrl-t - opens in new tab
+- :Files ../    - invoke on parent dir (can specify base path as first arg)
+- GFiles!?    - git modified files in full screen
+- Lines       - search lines in open buffers
+- BCommits    - commit hist for current buffer
+- FZF-MRU:
     - does MRU for local sessions, other vim session no affectd
 
 ### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
-Gedit HEAD~3:%  - git show HEAD~3:<current file>
-G               - git status
-    s - stage, u - unstage, = - toggle diff of file
-    ]c - move to next file and expand diff
-G diff          - git diff
-G blame         - sidepane with git blame
-G log %         - git log <current file>
-    `:cnext`, `:cprevious`,
-    `:cfirst` and `:clast`
-    :0Glog      - logs only that change current file
+- Gedit HEAD~3:%  - git show HEAD~3:<current file>
+- G               - git status
+    - s - stage, u - unstage, = - toggle diff of file
+    - ]c - move to next file and expand diff
+- G diff          - git diff
+- G blame         - sidepane with git blame
+- G log %         - git log <current file>
+-     `:cnext`, `:cprevious`,
+-     `:cfirst` and `:clast`
+-     :0Glog      - logs only that change current file
 
 ### FIRENVIM
 - https://github.com/glacambre/firenvim
@@ -322,15 +323,15 @@ C             " make selected dir node the new root node
 
 
 ## HELP
-:help keyword - open help for keyword
-:h index.txt basically has comprehensive default mappings
-:help shell<Tab> - tab complete a help topic
-:helpgrep pattern - find all help docs matchin g`pattern`
-:h sometopic | only   - help in single window
-:help i_^N, what does ctrl-n do in insert mode
-:h normal-index  - normal default mappings
-:h insert-index  - insert default mappings
-:h ex-cmd-index  - command and ex mode
+- :help keyword - open help for keyword
+- :h index.txt basically has comprehensive default mappings
+- :help shell<Tab> - tab complete a help topic
+- :helpgrep pattern - find all help docs matchin g`pattern`
+- :h sometopic | only   - help in single window
+- :help i_^N, what does ctrl-n do in insert mode
+- :h normal-index  - normal default mappings
+- :h insert-index  - insert default mappings
+- :h ex-cmd-index  - command and ex mode
 
 ## EX MODE
 - a shitty REPL - run commands and see the output
@@ -606,15 +607,15 @@ ctrl-va] - visual block select all text of "[]" block
 ## REGISTERS
 - Registers stored in ~/.viminfo, loaded on next restart
 - Register 0 contains he value of the last yank command.
-:let @a=foo  - manually set reg a to something
-:reg - show registers content
-"xy - yank into register x
-"xp - paste contents of register x
-"+y - + reg goes to sys clipboard!
-"*y - in linux * is primary selection
-      contents of what u simply highlighted/selected
-"+p - paste from sys clipboard
-"*p - paste from sys clipboard
+- :let @a=foo  - manually set reg a to something
+- :reg - show registers content
+- "xy - yank into register x
+- "xp - paste contents of register x
+- "+y - + reg goes to sys clipboard!
+- "*y - in linux * is primary selection
+-       contents of what u simply highlighted/selected
+- "+p - paste from sys clipboard
+- "*p - paste from sys clipboard
 - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 
 ## JUMP LIST

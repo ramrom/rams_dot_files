@@ -15,6 +15,7 @@
 - discord switch from golang->rust: https://discord.com/blog/why-discord-is-switching-from-go-to-rust
     - latency spikes due to GC pauses were a big issue
 - https://matklad.github.io - awesome blog by core maintiner of `rust-analyzer` and tigerbeetle
+    - nice zig vs. rust thoughts: https://matklad.github.io/2023/03/26/zig-and-rust.html
 
 ## LEARNING RESOURCES
 ### DOCS
