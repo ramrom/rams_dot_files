@@ -311,7 +311,7 @@
     - no macros to build them
     - backed by a vector with buckets and linear probing
     - linear probing: for insert, if bucket is taken compute hash with occupying key + insertion key, goto that bucket, repeat till vacancy
-        - newest imp uses `hashbrown::hash_map` create (google invented hash, swisstable, uses quadratic probing and SIMD, very fast)
+        - newest imp uses `hashbrown::hash_map` crate (invented by google, called SwissTable, uses quadratic probing and SIMD, very fast)
             - hashbrown doesnt require random num generation for `Hasher`, so can be used in more places (embedded systems, kernels)
             - saturation is around 60-70%, when it hits this level it allocates more mem for more buckets
     - `new` will probably create a 64-128 sized initial array

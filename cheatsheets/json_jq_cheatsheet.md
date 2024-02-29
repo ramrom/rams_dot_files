@@ -1,5 +1,7 @@
 # JSON
 - json spec: https://www.json.org
+- online json formatter: http://json.parser.online.fr/
+- json schema specification: https://json-schema.org/
 - json-spec python cli validation example:
     - `json validate --schema-file=/foo/bar/some_schema.json --document-file=somefile.json`
 
