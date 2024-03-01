@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PROJECT_NAME=my_java_script
+
+mkdir $PROJECT_NAME
+cd $PROJECT_NAME
+
+echo '
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("HELLO WORLD!");
+    }
+}
+' > Main.java
+
+javac *.java
+
+echo "Main-Class: Main" > manifest.txt
+
+jar cfm my-java-script.jar manifest.txt *.class
+
+# Run program with `java -jar my-java-script.jar`
