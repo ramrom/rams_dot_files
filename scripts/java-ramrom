@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# make a simple java project for scripting and be able to run it
+
+usage() { echo 'Usage: java-ramrom [ -h(help) ] [ -r(compile+run) ] [ -p PROJECT_NAME ] '; }
+
+while getopts 'hrp:' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        r) COMPILE_AND_RUN=1 ;;
+        p) PROJECT_NAME="$OPTARG" ;;
+        *) echo && usage && exit 1 ;;
+    esac
+done
+
+
+generate_new_project() {
+    [ -z "$PROJECT_NAME" ] && PROJECT_NAME=my_java_script
+    [ -d "$PROJECT_NAME" ] && echo "$PROJECT_NAME dir exists" && exit 1
+
+    mkdir $PROJECT_NAME
+    cd $PROJECT_NAME
+
+    echo '
+    public class Main {
+        public static void main(String[] args) {
+            System.out.println("HELLO WORLD!");
+        }
+    }
+    ' > Main.java
+
+    javac *.java
+
+    echo "Main-Class: Main" > manifest.txt
+
+    jar cfm my-java-script.jar manifest.txt *.class
+}
+
+compile_and_run() {
+    javac *.java
+    jar cfm my-java-script.jar manifest.txt *.class
+    java -jar my-java-script.jar
+}
+
+if [ -n "$COMPILE_AND_RUN" ]; then
+    compile_and_run
+else
+    generate_new_project
+fi
+
+
