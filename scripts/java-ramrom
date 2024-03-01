@@ -2,12 +2,12 @@
 
 # make a simple java project for scripting and be able to run it
 
-usage() { echo 'Usage: java-ramrom [ -h(help) ] [ -r(compile+run) ] [ -p PROJECT_NAME ] '; }
+usage() { echo 'Usage: java-ramrom [ -h(help) ] [ -c(create project) ] [ -p PROJECT_NAME ] '; }
 
-while getopts 'hrp:' x; do
+while getopts 'hcp:' x; do
     case $x in
         h) usage && exit 1 ;;
-        r) COMPILE_AND_RUN=1 ;;
+        c) CREATE_PROJECT=1 ;;
         p) PROJECT_NAME="$OPTARG" ;;
         *) echo && usage && exit 1 ;;
     esac
@@ -39,10 +39,10 @@ compile_and_run() {
     java -jar my-java-script.jar
 }
 
-if [ -n "$COMPILE_AND_RUN" ]; then
-    compile_and_run
-else
+if [ -n "$CREATE_PROJECT" ]; then
     generate_new_project
+else
+    compile_and_run
 fi
 
 
