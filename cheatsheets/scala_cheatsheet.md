@@ -150,6 +150,10 @@
     mu -= 2    // remove key/val with key=2 from mu
     ```
 ### STREAMS
+- `List(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10)` -> will have 2 more intermediate collections/allocations
+- `Stream(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10).toList`
+    - `Stream` is like an iterator, it's lazy until something consumes it, `toList` here
+    - could pass this into a for e.g. `for ( elem <- Stream(1,2,3) ) println( s"A value is ${elem}" )`
 - like collection but lazily evaluated so can be optimized when chaining them together
 - regular collections that u might chain with things like `map` and `filter` will eagerly create intermediate data structures
 - deprecated in 2.13.0 in favor of `LazyList`
@@ -175,6 +179,11 @@
 - mod: `10 % 3`  -> res: 1
 
 ## MONADS
+- they are monoids in the class of endofunctors, like duh!
+- a type that supports `Unit` and `flatMap` (and often other like `map`)
+- e.g. for `Option`
+    - flatMap -> `def flatMap[B](f: A => Option[B]): Option[B]`
+    - map -> `def map[B](f: A => B): Option[B]`
 ### Either
 - `flatMap` and `map` are right-biased, mapping on left val returns same val
     - `Right(1).map { x => x + 1 }   # returns Right(2)`

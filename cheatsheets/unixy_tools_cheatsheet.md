@@ -10,6 +10,7 @@ find . -type f -name "*pattern*"
 find /searchdir/ -samefile /path/foo
 find /searchdir/ -xdev -samefile /path/foo  # xdev means only search same partiion (deviceid) as what foo is on
 find /tmp/ -inum 4065089 # find all hard links with a inode #
+find /foo/bar/ -type d -d 1  -name "*yar*" # find all dirs, search depth 1, has "yar" in name, in dir/foo/bar/
 
 # get terminal info
 infocmp

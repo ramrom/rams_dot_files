@@ -147,6 +147,23 @@ a.add(3);
 ha.put("foo", a);
 ```
 
+## STREAMS
+- introduced in java8, improved in java9
+- also supports `sort`, `min`, `max`, `distinct`(remove dups), `allMatch`, `anyMatch`, `noneMatch`
+- parllelism (concurrent) via `parralel` e.g. `Stream.of(1,2).parallel().map(i->i+1)`
+- has infinite streams via `generate` and `iterate`
+```java
+Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()) // returns List(2,3,4)
+Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on seperate lines
+
+Stream.of("a","b").forEach(i -> System.out.println(i));
+
+var a = new ArrayList<Integer>(); a.add(1); a.add(2);
+// Collector interface also has toMap, toSet, toArray
+a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
+a.stream().collect(Collectors.toSet()) // returns a set
+```
+
 ## STRINGS
 ```java
 "hi there".length()     // length of string

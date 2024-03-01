@@ -625,7 +625,7 @@ NvimTreeConfig =
         end,
         -- sort_by = 'extension',
         renderer = { full_name = true }, -- if highlighted item's full path is longer than nvim window width, render into next window
-        -- FIXME: set'23 - nvim-tree warns that padding settings is unkonwn option, looks correct per help page...
+        -- FIXME: sept'23 - nvim-tree warns that padding settings is unkonwn option, looks correct per help page...
         view = { width = { min = 10, max = 40, padding = 1 }, },
         filters = { git_ignored = false },   -- show gitignored files
     }

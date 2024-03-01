@@ -13,10 +13,15 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
-## PHONE NUMBERS
+## PHONE STUFF
 - E.164 is the international telephone numbering plan that ensures each device on the PSTN has globally unique number.
     - format is `+` + (country code) + (number in country, for US 10digit area-code+ph#)
 - https://www.twilio.com/docs/glossary/what-e164
+- RCS (Rich Communication Services) - next gen open standard to replace SMS/MMS on android by google
+    - has group chat, rich media messages, real-time typing indicator, read receipts, end-to-end encryption, file share up to 100MB
+    - some iphone supports RCS
+    - google voice as of 2023 doesn't have RCS
+- iMessage - next gen by Apple to replace SMS/MMS
 
 ## PROCESSORS
 - TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
