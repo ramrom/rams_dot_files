@@ -691,6 +691,7 @@ LoadNoice = function()
         routes = {
           { filter = { event = "msg_show", find = "Saved session: " }, view = "mini", },
           { filter = { event = "msg_show", find = "B written" }, view = "mini", },
+          { filter = { event = "msg_show", find = " change; before" }, view = "mini", },
                 -- mini view will hide after short time, cmdline persists forever...
         },
     }

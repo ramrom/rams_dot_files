@@ -25,9 +25,9 @@ generate_new_project() {
 
     echo "" > $FILE_NAME
     echo "public class Main {" >> $FILE_NAME
-    echo "  public static void main(String[] args) {" >> $FILE_NAME
-    echo "      System.out.println(\"HELLO WORLD!\");" >> $FILE_NAME
-    echo "  }" >> $FILE_NAME
+    echo "    public static void main(String[] args) {" >> $FILE_NAME
+    echo "        System.out.println(\"HELLO WORLD!\");" >> $FILE_NAME
+    echo "    }" >> $FILE_NAME
     echo "}" >> $FILE_NAME
 
     echo "Main-Class: Main" > manifest.txt
