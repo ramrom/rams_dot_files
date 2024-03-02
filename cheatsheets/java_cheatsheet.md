@@ -159,9 +159,16 @@ Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on s
 Stream.of("a","b").forEach(i -> System.out.println(i));
 
 var a = new ArrayList<Integer>(); a.add(1); a.add(2);
-// Collector interface also has toMap, toSet, toArray
+// Collector interface also has toMap, toSet
 a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
 a.stream().collect(Collectors.toSet()) // returns a set
+
+// create collection of objects from array data
+var s = Stream.of(new int[][] { {1,2}, {2,3}, {3,4} });
+class Foo { int data1; int data2; Foo(int i, int j) { this.data1 = i; this.data2 = j } };
+var obj_collection = s.map(item -> { return new Foo(i[0], i[1]); }).collect(Collectors.toList());
+
+System.out.println(obj_collection.get(0).data1)     // should print 1
 ```
 
 ## STRINGS
