@@ -128,7 +128,8 @@ HashMap<String, Integer> m = new HashMap<String, Integer>(100); // can pass in i
 ```
 ### STACKS
 ```java
-Stack<Integer> s = new Stack<>();
+// Many implementations, has a default, but types like LinkedList support interface
+Stack<Integer> s = new Stack<Integer>();
 s.push(1);  // [ 1 ]
 s.push(3);  // [1, 3]
 s.size() // returns 2
@@ -137,6 +138,19 @@ s.peek(); // see next stack item without removing, returns 1 here
 s.empty();  // returns false
 s.pop(); // return 1
 s.pop(); // raises EmptyStackException sinc it's empty
+```
+### QUEUE
+```java
+// java.util.Queue is main interface. main implementation: LinkedList, ArrayDequeue, PriorityQueue
+Queue<String> queue = new LinkedList<>();
+queue.add("a");     // add to queue, returns `true` if successful, throws `IllegalStateException` if it's full
+queue.add("b");
+queue.offer("b");  // same as add but returns false if adding fails
+queue.peek():    // retrieves, but does not remove next item in queue, returns null if queue empty
+queue.element():    // like peek, but throws exception if queue is empty
+queue.poll();     // retreives and removes next item in queue, returns null if empty
+queue.remove();     // like poll but throws exception if queue is empty
+queue.clear();  // clear queue
 ```
 ### COMPOUND TYPES
 ```java

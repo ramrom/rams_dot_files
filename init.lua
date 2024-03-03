@@ -323,6 +323,8 @@ RunAction = function(arg)
             vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%") .. ' && ./a.out')
         elseif curftype == 'scala' then
             vim.cmd(":VtrSendCommandToRunner! scala ".. vim.fn.expand("%"))
+        elseif curftype == 'java' then
+            vim.cmd(":VtrSendCommandToRunner! java-ramrom")
         else
             print("filetype " .. curftype .. " undefined for execute action")
         end

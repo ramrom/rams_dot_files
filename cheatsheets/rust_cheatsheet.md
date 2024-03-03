@@ -227,11 +227,15 @@
 - `core` relies on nothing
 - `alloc` requires on a memory allocator
     - most collections in this crate, except hashmap which relies on random data, so its in `std`
-### FILE IO
+
+## IO
 - read a file to var - `let contents = std::fs::read_to_string(file_path).unwrap()`
 - incremental read - `let f = File::open(file_path)?; let reader = BufReader::new(f); for line in reader.lines() { ... }`
+- `eprintln!` is macro to print to stderr
+    - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
+- `print!` - same as `println!` but no new line
 
-## COLLECTIONS
+## DATA STRUCTURES
 - https://doc.rust-lang.org/std/collections/index.html
 - may2023 - good vid on collections - https://www.youtube.com/watch?v=EF3Z4jdD1EQ&list=WL&ab_channel=JonGjengset
     - many collections need to use unsafe code(raw pointers) in order to be feasible/performant, borrow checker couldnt reason about it well
@@ -267,9 +271,6 @@
             - `s1 = String::from("tic"); s2 = String::from("tac"); s3 = String::from("toe"); s = format!("{s1}-{s2}-{s3}")`
                 - `format!` is more succinct for concat of many strings
                 - doesnt take ownership of any of the params
-- `eprintln!` is macro to print to stderr
-    - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
-- `print!` - same as `println!` but no new line
 ### ARRAYS
 - cannot change size
 - function argument type annotation: unsized `[T]`, sized `[T, 3]`
@@ -349,6 +350,11 @@
 ### BINARY HEAP
 - `BinaryHeap` - backed by vector, inserts(push) very fast, pop always extracts highest value item
     - use for priority queues, need to order jobs by priority and process them by priority
+### LINKED LISTS
+- std lib has it, but linked lists are generally dumb: https://rust-unofficial.github.io/too-many-lists/
+    - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
+        - the linear search through linked list dominates slowness, and for array moving n/2 items is not that slow (caches good at this)
+    - see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
 
 
 ## FUNCTIONS
