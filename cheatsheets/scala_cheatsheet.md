@@ -274,6 +274,8 @@
 ## BUILD TOOLS
 - sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
 - mill, see [build tools](build_dependency_tools_cheatsheet.md#mill)
+- scala-cli, see [build tools](build_dependency_tools_cheatsheet.md#scala-cli)
+    - not really a build tool, more for scripting/prototyping
 
 ## MACWIRE/DEPENDENCY-INJECT
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own

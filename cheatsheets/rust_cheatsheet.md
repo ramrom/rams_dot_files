@@ -83,6 +83,7 @@
 - `cargo install --list` - print all gobally installed crates
 - `cargo install --version 0.3.10 someprogram` - install version x of program
 - `cargo install someprogram` - will install _and_ upgrade(as of rust 1.4.1) a program
+- `cargo uninstall someprogram` - will remove a program
 - `cargo add tokio --features rt` - add `tokio` as dep to toml with feature `rt`
 - `cargo tree` - print dependency tree
 - `cargo build -v` - show exactly what commands it's running

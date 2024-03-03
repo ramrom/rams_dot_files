@@ -305,8 +305,8 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
     class Foo {
         int data;
 
-        public Foo(int i) { this.data = i; }
-        public Foo(int i, int y) { this.data = i + y; }
+        public Foo(int i) { this.data = i; }  // constructor 1
+        public Foo(int i, int y) { this.data = i + y; } // constuctor 2
     }
 
     Foo f = new Foo(3); 

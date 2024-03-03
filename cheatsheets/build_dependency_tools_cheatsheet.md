@@ -39,6 +39,11 @@
 - for for java/scala projects
 - open source built by lihaoyi, written in scala
 
+## SCALA CLI
+- https://scala-cli.virtuslab.org/
+- more for scripting and rapid prototyping
+- not really a build tool, can easily specify scala version and jvm version
+
 ## SBT
 - the main tool used in scala projects
 - files
