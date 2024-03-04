@@ -302,7 +302,7 @@ SelectTmuxRunnerPane = function()
 
     pane_selection = tonumber(pane_selection) -- user input is always string
 
-    if pane_selection ~= ni and pane_selection < #panes then  -- nil if convert to number failed
+    if pane_selection ~= nil and pane_selection < #panes then  -- nil if convert to number failed
         local pane_name = 'vtr-run-pane' .. pane_selection
         vim.fn.system({ 'tmux', 'select-pane', '-t', pane_selection, '-T', pane_name })
         print("VtrCreatedRunnerPaneName set to: " .. pane_name)

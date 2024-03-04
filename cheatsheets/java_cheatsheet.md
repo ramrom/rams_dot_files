@@ -178,11 +178,11 @@ a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // re
 a.stream().collect(Collectors.toSet()) // returns a set
 
 // create collection of objects from array data
-var s = Stream.of(new int[][] { {1,2}, {2,3}, {3,4} });
-class Foo { int data1; int data2; Foo(int i, int j) { this.data1 = i; this.data2 = j } };
-var obj_collection = s.map(item -> { return new Foo(i[0], i[1]); }).collect(Collectors.toList());
+var s = Stream.of(1,2,3);
+class Foo { int data; Foo(int i) { this.data = i; } };
+var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors.toList());
 
-System.out.println(obj_collection.get(0).data1)     // should print 1
+System.out.println(obj_collection.get(0).data)     // should print 1
 ```
 
 ## STRINGS
