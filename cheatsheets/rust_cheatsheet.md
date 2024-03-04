@@ -286,6 +286,15 @@
     -  initialize size 500 array with value zero - `let ys: [i32; 500] = [0; 500];`
 - multi-dimensional arrays, e.g. 2D array 6x4 i32: `let a: [[i32; 4]; 6];`
     - slices need to specify subarray: `let sliceofa: &[[i32; 4]] = &a;`
+### SLICES
+- like arrays but size not known at compile time
+- 2 word object: 1st word is pointer to data, 2nd word is length of slice (word size = usize)
+- allows us to borrow arrays
+- type signature `[T]`, shared/immutable type signature `&[T]`, e.g. `&[i32]`
+    - can't have a "naked" `[T]`, unknown size can't put it on the stack, use pointer redirection like `Box<[T]>` or `Rc<[T]>` or `&[T]`
+- mutable type signature `&mut [T]`
+- `let a = [1 ,2, 3, 4]; let s = &a` - `s` is a reference and immutable borrow here, `&a` is slice containing all of `a`
+    - `let s = &a[0..2]` - borrow just first and second of `a`, ending index is non-inclusive
 ### VECTORS
 - essential a struct with 3 properties: capacity, length, and pointer to base
     - generally vector struct on stack, and data in heap
@@ -299,14 +308,6 @@
     - overhead: gotta check if at end of allocation and wrap when indexing
     - disadvantage: cant turn into slice (no `DeRef` into slice), slices needs to be contiguous memory
     - disadvantage: cpu's do memory readahead optimizations for things like loops, and they dont know the ring buffer's termination
-### SLICES
-- like arrays but size not known at compile time
-- 2 word object: 1st word is pointer to data, 2nd word is length of slice
-- allow us to borrow arrays
-- shared/immutable type signature `&[T]`, e.g. `&[i32]`
-- mutable type signature `&mut [T]`
-- `let a = [1 ,2, 3, 4]; let s = &a` - `s` is a reference and immutable borrow here, `&a` is slice containing all of `a`
-    - `let s = &a[0..2]` - borrow just first and second of `a`, ending index is non-inclusive
 ### HASHMAP
 - `HashMap<K, V>` associative arrays, heap allocated
     - `K`, `V` are generic types, key and value must be one type (homogenous)
