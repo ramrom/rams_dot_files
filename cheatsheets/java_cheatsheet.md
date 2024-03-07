@@ -178,11 +178,11 @@ a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // re
 a.stream().collect(Collectors.toSet()) // returns a set
 
 // create collection of objects from array data
-var s = Stream.of(1,2,3);
-class Foo { int data; Foo(int i) { this.data = i; } };
+var s = Arrays.stream(new int[] { 1,2,3};
+class Foo { int data; Foo(int i) { this.data = i;} };
 var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors.toList());
 
-System.out.println(obj_collection.get(0).data)     // should print 1
+System.out.println(obj_collection.get(0).data1)     // should print 1
 ```
 
 ## STRINGS
@@ -442,3 +442,4 @@ finally { .. }  // finally is always exected
     - introduced `record`, aka scala case class
 - java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
 - java17, sept2021, LTS - better pattern matching
+- java21, sept2023, end at sept2031

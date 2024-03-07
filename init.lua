@@ -686,7 +686,7 @@ LoadNoice = function()
         views = { split = { enter = true } },
         presets = {
             bottom_search = false, -- use a classic bottom cmdline for search
-            command_palette = true, -- position the cmdline and popupmenu together
+            -- command_palette = true, -- position the cmdline and popupmenu together
             long_message_to_split = true, -- long messages will be sent to a split
             lsp_doc_border = true, -- add a border to hover docs and signature help
         },
@@ -1031,6 +1031,7 @@ end
 ------------- KOTLIN-------------------------------------
 -- https://github.com/fwcd/kotlin-language-server
 
+-- NOTE: mar2024 - brew install needed JVM 21 installed for the server to start
 LoadKotlinLSP = function()
     require'lspconfig'.kotlin_language_server.setup{
         cmd = { "kotlin-language-server" },

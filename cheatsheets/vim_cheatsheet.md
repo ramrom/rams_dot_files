@@ -280,6 +280,7 @@ C             " make selected dir node the new root node
 - `:autocmd` - print all autocmd definitions
     - `:autocmd BufEnter` - print just `BufEnter` autocmds
 ### LOGS / MESSAGES
+- mar2024 - logs stored in `~/.local/state/nvim`
 - `:messages` - see history of runtime messages (usually shown in command window)
     - `:messages clear` will clear messages
     - fzf's Command to fuzzy search em!
