@@ -1116,6 +1116,17 @@ vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined sess
 vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
 vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
 
+--------- FASTER INDENT
+vim.keymap.set('n', '<C-n>', '>>')
+vim.keymap.set('n', '<C-p>', '<<')
+vim.keymap.set('v', '<C-n>', '<S->>gv')
+vim.keymap.set('v', '<C-p>', '<S-<>gv')
+
+--- ADD NEWLINE AND STAY IN NORMAL 
+vim.keymap.set("n", "<C-m>", "o<Esc>")      -- NOTE: C-m is the same keyboard signal as <CR> ("Enter") on many systems
+vim.keymap.set("n", "<C-h>", "O<Esc>")
+-- vim.keymap.set("n", "<BS>", "O<Esc>")
+
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
 vim.keymap.set('n', '<leader>;', "<cmd>lua require('fzf-lua').commands()<CR>", { desc = "fzf vim commands" })
@@ -1146,12 +1157,6 @@ vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
 vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
 vim.keymap.set('n', '<leader>gf', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
-
---------- FASTER INDENT
-vim.keymap.set('n', '<C-n>', '>>')
-vim.keymap.set('n', '<C-p>', '<<')
-vim.keymap.set('v', '<C-n>', '<S->>gv')
-vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
 ---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')

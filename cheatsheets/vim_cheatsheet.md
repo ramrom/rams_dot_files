@@ -416,8 +416,8 @@ i - insert before the cursor
 I - insert at the beginning of the line
 a - insert (append) after the cursor
 A - insert (append) at the end of the line
-o - append (open) a new line below the current line
-O - append (open) a new line above the current line
+o - append (open) a new line below the current line, goto insert mode
+O - append (open) a new line above the current line, goto insert mode
 s - delete character and substitute text
 S - delete line and substitute text (same as cc)
 ea - insert (append) at the end of the word
