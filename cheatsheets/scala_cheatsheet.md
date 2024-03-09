@@ -90,7 +90,13 @@
 - constructor params are `val`s by default
 - get a default `apply` and `unapply` automatically defined
     - pattern matching needs `unapply` defined if you want to match on fields
-- get `toString` and `equal` methods auto-implemented
+- `toString`, `equal`, and `hashcode` methods auto-implemented
+- `copy` method - guarantees shallow copies only
+- `Product` trait autoimplemented, get `productArity`, `productElement`, `productIterator`
+    - case classes can't have more than 22 parameters b/c it implements this trait
+- `tupled` method - `case class Foo(i: Int, b: String); (Foo.apply _).tupled((3, "hi"))`  - creates `Foo` object from tuple
+- *CANNOT* inherit from another case class
+- implements `Serializable` trait
 ### FUNCTIONS
 - partial application - can pass subset of arguments to function invocation, then pass rest in later
 - call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`

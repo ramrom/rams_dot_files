@@ -526,7 +526,7 @@ gi   - go to last cursor position in insert mode
 - y - yank (copy) text
 - d - delete text
 - c - delete text and insert to change
-- ~ - switch case
+- ~ - toggle selected text between upper/lower case
 - r - replace a single character
 - R - enter replace mode to repeatedly replace the character under the cursor
 - J - join line below to the current one with one space in between
