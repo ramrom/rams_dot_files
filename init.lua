@@ -1053,19 +1053,19 @@ end
 -------------------------------------------------------------------------------------------------------
 vim.g.mapleader = " "
 
---- TODO: Prime open real estate for normal mode!
+--- TODO: Prime open real estate for key remapping
     -- NORMAL MODE
         -- <leader>,
         -- <Leader><Leader>  (most open)
-        -- c-m, c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
+        -- <CR>, <BS>
+        -- c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
         -- ;  - semicolon repeats last f/F motions
         -- ,  - in reverse direction
     -- INSERT MODE
         -- c-s, c-space
 -- TODO: i think these maps are probably useful
--- nnoremap <C-J> a<CR><Esc>k$
--- nnoremap <CR> o<Esc>
+-- vim.keymap.set("n", "<C-j>", "a<CR><Esc>k$")
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only (){}, not if/else/end
@@ -1124,7 +1124,7 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
 --- ADD NEWLINE AND STAY IN NORMAL 
 vim.keymap.set("n", "<C-m>", "o<Esc>")      -- NOTE: C-m is the same keyboard signal as <CR> ("Enter") on many systems
-vim.keymap.set("n", "<C-h>", "O<Esc>")
+vim.keymap.set("n", "<C-g>", "O<Esc>")
 -- vim.keymap.set("n", "<BS>", "O<Esc>")
 
 --------- FZF ---------------------
