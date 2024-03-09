@@ -13,6 +13,15 @@
 ## COMPILER
 - `restrict` keyword - https://en.wikipedia.org/wiki/Restrict - tell compiler pointer is only "owner", no other pointers to data
 
+## SCOPE
+```c
+void foo() {
+    int i = 1;
+    { int p = 1; }   // code blocks are scoped, p will be dropped when scope ends
+    p = 3;          // will fail
+}
+```
+
 ## MEMORY
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
 - `memcpy` - mem copy, copy raw bytes from one memory location to another regardless of types

@@ -235,6 +235,13 @@
 - `eprintln!` is macro to print to stderr
     - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
 - `print!` - same as `println!` but no new line
+```rust
+let num = 0b0000000000101100u16;
+println!("{:?}", num);    // prints 44  , "?" uses Debug trait
+println!("{:0b}", num);    // prints "101100",  "b" means Binary trait
+println!("{:0x}", num);    // prints "2c",  "b" means LowerHex trait
+println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
+```
 
 ## DATA STRUCTURES
 - https://doc.rust-lang.org/std/collections/index.html

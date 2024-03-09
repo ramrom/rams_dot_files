@@ -284,6 +284,9 @@
 ### URL ECODING
 - unreserved characters are `A-Z`, `a-z`, `0-9`, `-`, `_`, `.`, `~`
 - https://en.wikipedia.org/wiki/Percent-encoding
+### ASCII
+- table - https://simple.wikipedia.org/wiki/File:ASCII-Table-wide.svg
+    - 48-57 is `0`-`9`, 65-90 is `A`-`Z`, 97-122 is `a`-`z`
 
 ## FLOATS
 - https://en.wikipedia.org/wiki/IEEE_754-1985
