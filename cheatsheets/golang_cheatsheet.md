@@ -6,6 +6,12 @@
     - they all had to agree on features they liked
     - golang is object-oriented _but_ has not classes, you can be object-oriented without classes
 - early version didnt use `libc` much, and implemented their own syscalls in go
+- critique of why go is bad: https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride
+
+## LEARNING GUIDES
+- good quick intro: https://www.golang-book.com/books/intro
+- good solid intro: https://go.dev/doc/effective_go
+- go playground: https://go.dev/play/
 
 ## HISTORY
 - 1.18 added generics
@@ -14,6 +20,9 @@
 - compiler performs escape analysis: determine if data goes on heap or stack
     - if data is used outside of scope (e.g. data is returned) it needs to be on the heap
     - other cases are if data is really big, it'll be on the heap
+
+## CONCURRENCY
+- blog opinion on why channels not so great: https://www.jtolio.com/2016/03/go-channels-are-bad-and-you-should-feel-bad/
 
 ## GOOD LIBS
 - solid big decimal package: https://github.com/shopspring/decimal

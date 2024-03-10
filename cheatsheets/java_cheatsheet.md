@@ -304,6 +304,14 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
    ```java
     class Foo {
         int data;
+        static int staticdata;  // member belongs to class itself, has kind of class-global scope
+
+        static void hello(); // static method member
+
+        int getter() { return data; } // b/c not specified has "default" scope, can be access by anything in package
+        public int pubgetter() { return data; } // public can be accessed by anyone
+        private int privgetter() { return data; } // private can only be accessed within class
+        protected int protgetter() { return data; } // protected can be seen within class and subclass
 
         public Foo(int i) { this.data = i; }  // constructor 1
         public Foo(int i, int y) { this.data = i + y; } // constuctor 2

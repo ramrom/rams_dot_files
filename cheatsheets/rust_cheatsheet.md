@@ -242,6 +242,7 @@ println!("{:0b}", num);    // prints "101100",  "b" means Binary trait
 println!("{:0x}", num);    // prints "2c",  "b" means LowerHex trait
 println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 ```
+- fill/alignment padding https://doc.rust-lang.org/std/fmt/#fillalignment
 
 ## DATA STRUCTURES
 - https://doc.rust-lang.org/std/collections/index.html
