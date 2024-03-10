@@ -8,6 +8,9 @@
 - early version didnt use `libc` much, and implemented their own syscalls in go
 - critique of why go is bad: https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride
 
+## MEMORY
+- good article on memory alignment and padding: https://go101.org/article/memory-layout.html
+
 ## LEARNING GUIDES
 - good quick intro: https://www.golang-book.com/books/intro
 - good solid intro: https://go.dev/doc/effective_go

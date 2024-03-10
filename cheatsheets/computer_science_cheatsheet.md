@@ -19,3 +19,20 @@ public static void main(String[] args) {
     System.out.println(bar.data);       // this prints 1 in java, if java was pass-by-ref it would print 2
 }
 ```
+
+### BASE2 REPRESENTATION OF BASE10
+- cant reprent base10 `0.1` in base2 in finite way, in binary it repeats forever: `0.00011001100110011...`
+    - types like java `BigDecimal` can represent these values
+- floating point in any laungage of `0.1` is not exactly `0.1`
+- https://www.educative.io/answers/why-does-01-not-exist-in-floating-point
+
+
+## NUMERIC REPRSENTATIONS
+### TWOS COMPLEMENT
+- unlike one's complement, there is only one representation for zero
+- arithmetic implementations can use both signed and unsigned values
+### IEEE754 FLOAT
+- has 2 representations for zero
+
+## MEMORY ALIGNMENT
+- n-byte (where n is a power of 2) alignment means the address has a minimum of log2(n) least-significant zeros when represented in binary

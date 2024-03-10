@@ -4,6 +4,8 @@
 - java is by comp sci def pass-by-value: https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
     - for objects, variables store values that are references to objects
         - so reassigned a variable passed into a function with new value, will not change the variable assignment in caller
+    - so every variable holds "references" that essentially those references are copied in a function call
+        - the exception is some primitive types like integer, which are just direct values
 
 ## JAVA RUNTIME
 `/usr/libexec/java_home -V`
@@ -61,6 +63,7 @@ int[][] tdarray = { {1, 3}, {4, 5} };
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
 mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
+mylist.size()   // returns 2, size returns length, not capacity of ArrayList
 mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
@@ -70,6 +73,7 @@ mylist.equals(anotherlist); // compare 2 arraylists, values and order
 
 // variables can be of interface types, and thus contain any value that implements that type
 List<String> mylist = new ArrayList<String>();
+List<String> mylist = new ArrayList<String>(Arrays.asList("hi","there"));
 
 // LinkedList is a doubly linked list
 LinkedList<String> ll = new LinkedList<String>();  // linked lists
@@ -187,6 +191,7 @@ System.out.println(obj_collection.get(0).data1)     // should print 1
 
 ## STRINGS
 ```java
+// type String is immutable
 "hi there".length()     // length of string
 "  trim a str  ".trim()   // returns "trim a str"
 "uPPer Case".toUpperCase()   // returns "UPPER CASE"
@@ -249,6 +254,7 @@ sb.toString();          // covert to a string when done
 ```java
 int a = Integer.parseInt("3");    // String -> int
 int a = Integer.parseInt("foo");  // will raise NumberFormatException, also for int too big
+Integer.toString(3)     // converts to String "3"
 
 float f = Float.parseFloat("25.1");    // String -> Float
 String s = Float.toString(25.0f);      // Float -> String

@@ -127,7 +127,7 @@
         let foo = vec![1,2];
 
         for i in foo { println!("{i}"); }  // passes ownership, same as i.into_iter() foo becomes invalid
-        for i in foo.int_iter() { println!("{i}"); } // same as above
+        for i in foo.into_iter() { println!("{i}"); } // same as above
 
         for i in foo.iter() { println!("{i}"); } // explicitly calling iter passes ref, &T
         for i in &foo { println!("{i}"); } // same as foo.iter()
