@@ -43,21 +43,21 @@ printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
 printf "foo bar baz" | grep 'bar' | grep 'foo'      #method1
 printf "foo bar baz" | grep -E 'bar.*foo|foo.*bar'  #method2
 
-#tar
+# TAR
 tar –xvzf documents.tar.gz   # uncompress tar file
     # -x extract, -v verbose, -z decompress each file, -f filename of tar file
 
-#zip
+# ZIP
 zip -r outputfile folder1 folder2
 
-#awk - multi purpose tool
+# AWK - multi purpose tool, really a mini programming language
 echo "foo bar baz" | awk '{print $2}'  # will print bar
 echo "foo bar baz" | awk '{print $1"  "$3}'  # will print `foo  baz` , two spaces in between
 awk '{$1=""; print $0}' somefile        # print all but the first field/column
 awk '{$1=$2=""; print $0}' somefile        # print all but the first and second field/column
 awk '/blah/{getline; print}' logfile   # print the next line after the line that matches patter "blah"
 
-# cut - select data in each line by byte/char position or delimiter char
+# CUT - select data in each line by byte/char position or delimiter char
 echo "foo; bar - baz" | cut -d ';' -f 2     # delimiter semicolon , extract field 2, so " bar - baz" will print
 echo "foo; bar - baz" | cut -c 5-           # remove first 4 chars of each line
 
@@ -68,7 +68,7 @@ echo "2.03" | tr -d .              # -d to delete, this will print 203
 echo foo:bar:baz | tr : \\n        # split on ":" delimiter, replace ":" with newline
 echo "\u0001 hi" | tr -cd '[:print:]' # strip out nonprintable characters, -c is complement(opposite of)
 
-# sed - streaming editor
+# SED - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
@@ -76,16 +76,16 @@ echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
 sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
 cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
 
-# goaccess - log file analyzer
+# GOACCESS - log file analyzer
 goaccess logfile.log  # interactive TUI
 goaccess logfile.log  -o report.html # generate a pretty html webpage report
 goaccess --log-format=COMBINED logfile.log # specify logformat
     # nginx/apache logs are COMBINED format by default
 
-# base64 - encode and decode base64
+# BASE64 - encode and decode base64
 echo "foobar" | base64      # encode from stdin
 
-# column
+# COLUMN
 column -t -s, somecsv  # use comma to delimit columns and print csv file with aligned columns
 awk -F',' '{print $2","$4}' some.csv | column -t -s  # only print column 4,2 with aligned columns
 
@@ -93,12 +93,12 @@ awk -F',' '{print $2","$4}' some.csv | column -t -s  # only print column 4,2 wit
 xsv table somecsv.csv  # pretty print table to stdout
 xsv count somecsv.csv  # print # of rows
 
-# tput - terminal settings and capabilities
+# TPUT - terminal settings and capabilities
 tput cols     # number of columns in terminal window
 tput rows     # number of rows in terminal window
 tput setaf 1  # outpt ansi code for red foreground color
 
-# date
+# DATE
 sudo date --set 1998-11-02  # change date
 date +%s       # print unix time in number of seconds (since 1970)
 date '+%Y-%m-%d'  # e.g. "2021-04-24"
@@ -121,35 +121,35 @@ timedatectl status  # show current time settings
 timedatectl list-timeszones
 timedatectl set-ntp on   # enable NTP
 
-# netcat
+# NETCAT
 nc -l 127.0.0.1 9001     #listen on 9001
 
-# wc - word count
+# WC - word count
 wc -l somefile   # count # of lines in file
 wc -c somefile   # count # of chars in file
 cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
 
-# xq - convert xml to json and then use jq queries
+# XQ - convert xml to json and then use jq queries
 xq . some.sml  # would spit our JSON conversion
 xq .somekey some.xml
 
-# pandoc -universal doc converter
+# PANDOC -universal doc converter
     # https://pandoc.org/MANUAL.html#general-options
 pandoc foo.md -o foo.docx   # convert markdown to docx
 pandoc foo.md -o foo.odt   # convert markdown to opendocument
 pandoc foo.md --to jira -o output.jira  # explicitly specify output format
 
-# subsync - https://github.com/spion/subsync
+# SUBSYNC - https://github.com/spion/subsync
 subsync @+5 < input.srt > output.srt  # shift all subtitles forward 5 seconds
 
-# sort - sort stdin of lines, waits for all input till EOF
+# SORT - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line
 
-# shuf - generate random permutation of input lines
+# SHUF - generate random permutation of input lines
 echo "a\nb\nc" | shuf  # will randomly 3 lines of some order of "a", "b", and "c"
 echo "a\nb\nc" | shuf -n 1  # will select the first line in the randmly generated permutation
 
-# uniq - remove identical value **adjacent** lines, use sort first if u want to remove non adjacent dups
+# UNIQ - remove identical value **adjacent** lines, use sort first if u want to remove non adjacent dups
 echo "foo\nfoo\n\bar" | uniq        # will print one foo and then bar
 echo "foo\nbar\n\foo" | uniq        # will print foo, then bar, then foo!, b/c the 2nd foo isn't adjacent
 
