@@ -121,13 +121,15 @@
 - `while bool_expre { ... }` - while loops
 - for loops
     ```rust
-        for a in 1..10 { println!("{i}"); };  // create a range and iterate over it, does 1,2..9, 10 is excluded
-        for a in 1..=10 { println!("{i}"); };  // inclusive of 10
+        for i in 1..10 { println!("{i}"); };  // create a range and iterate over it, does 1,2..9, 10 is excluded
+        (1..10).for_each( |i| { println!("{i}"); } ) // same as above, ranges implement iterator
+        for i in 1..=10 { println!("{i}"); };  // inclusive of 10
 
         let foo = vec![1,2];
 
         for i in foo { println!("{i}"); }  // passes ownership, same as i.into_iter() foo becomes invalid
         for i in foo.into_iter() { println!("{i}"); } // same as above
+        foo.into_iter().for_each ( |i| { println!("{i}"); } )  // same as above
 
         for i in foo.iter() { println!("{i}"); } // explicitly calling iter passes ref, &T
         for i in &foo { println!("{i}"); } // same as foo.iter()

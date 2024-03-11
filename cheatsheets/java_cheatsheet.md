@@ -69,6 +69,7 @@ mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 
 mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies existing list
+Arrays.sort(mylist);        // another way to sort
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
 
 // variables can be of interface types, and thus contain any value that implements that type
@@ -82,8 +83,8 @@ LinkedList<String> ll = new LinkedList<String>();  // linked lists
 List<String> v = new Vector<String>();
 
 // caveat: these are immutable structures, underlying type List contains is basic array
-List<Integer> l = List.of(1,2,3);  // java9 has List#of method to quickly create/initialize list
-List<Integer> l = Arrays.asList(1,2,3)  // another fast way to create list
+List<Integer> l = List.of(1,2,3);  // java9 has List#of, it's immutable, fixed-size, null values not allowed
+List<Integer> l = Arrays.asList(1,2,3)  // unlike List#of, can update elements, backed by array, still fixed-size, allows null items
 List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
 ```
 ### SET
@@ -92,9 +93,13 @@ List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
+hs.size()  // returns # of items in set
 hs.contains("c") // false
 hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
 HashSet<String> hsnew = new HashSet<>(hs)  //  create a new set initialized with another set
+
+String[] s = new String[hs.size()];
+hs.toArray(s); // convert set to Array of strings
 
 // iterate over items in set
 var iter = hs.iterator();
@@ -302,42 +307,42 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 
 ## TYPE SYSTEM
 - `final` keyword means it can't be changed (synonymous to `val` in scala)
+- `static` keyword - belongs to type itself, and not instance of the type, all instances share the static member (aka class global)
+- scope/visibility: member of can be: default, public, private, protected
+    - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
 - `java.lang.Object` is root class of Java class hierarchy, every class is descendant of this class
     - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
     - a class defined with no superclass automatically extends `Object`
 ### CLASSES
-- function overload with different constructors 
-   ```java
-    class Foo {
-        int data;
-        static int staticdata;  // member belongs to class itself, has kind of class-global scope
+```java
+class Foo {
+    int data;
+    static int staticdata;  // member belongs to class itself, has kind of class-global scope
 
-        static void hello(); // static method member
+    static void hello(); // static method member
 
-        int getter() { return data; } // b/c not specified has "default" scope, can be access by anything in package
-        public int pubgetter() { return data; } // public can be accessed by anyone
-        private int privgetter() { return data; } // private can only be accessed within class
-        protected int protgetter() { return data; } // protected can be seen within class and subclass
+    int getter() { return data; } // b/c not specified has "default" scope, can be access by anything in package
+    public int pubgetter() { return data; } // public can be accessed by anyone
+    private int privgetter() { return data; } // private can only be accessed within class
+    protected int protgetter() { return data; } // protected can be seen within class and subclass
 
-        public Foo(int i) { this.data = i; }  // constructor 1
-        public Foo(int i, int y) { this.data = i + y; } // constuctor 2
-    }
+    public Foo(int i) { this.data = i; }  // constructor 1
+    public Foo(int i, int y) { this.data = i + y; } // constuctor 2
+}
 
-    Foo f = new Foo(3); 
-    Foo f2 = new Foo(1,2);
-   ```
-- member of can be: default, public, private, protected
-    - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
+Foo f = new Foo(3); 
+Foo f2 = new Foo(1,2);
+```
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
-- Generic classes
-    ```java
-    public class Box<T> {       // example generic class
-        private T t;
-        public void set(T t) { this.t = t; }
-        public T get() { return t; }
-    }
-    ```
+#### GENERIC CLASSES
+```java
+public class Box<T> {       // example generic class
+    private T t;
+    public void set(T t) { this.t = t; }
+    public T get() { return t; }
+}
+```
 ### INTERFACE
 - cannot be instantiated
 - cannot implement any methods
@@ -399,6 +404,11 @@ for (int i = 0; i < 10; i++) {
 for (int i = 3; i * 2 < 10; i = (i * 10) + 30) { 
     System.out.println(i); 
 } 
+
+// say we have HashSet s, we can iterate over it's elements
+for (int i: s) {
+    System.out.println(i);
+}
 
 while (i < 10 && x != 3) {
     i++;

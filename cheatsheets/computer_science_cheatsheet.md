@@ -36,3 +36,22 @@ public static void main(String[] args) {
 
 ## MEMORY ALIGNMENT
 - n-byte (where n is a power of 2) alignment means the address has a minimum of log2(n) least-significant zeros when represented in binary
+
+## CONCURRENCY
+### PROCESSES VS THREADS
+- both involve kernel intervention
+- in process context switch (but not thread context switch)
+    - virtual memory space is changed
+    - cpu cache is flushed
+    - TLB(translation lookaside buffer) is flushed
+    - process control block is changed
+### MUTEX
+- spin locks implementation is where thread will loop constantly to check if lock is unlocked, a type of busy waiting
+
+## ATOMICS
+- MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
+    - basically says memory location(really cache location) can be in shared state or exclusive state
+- compare_and_exchage atomic operation requires exclusive access to memory location
+    - really x86 arch has compare and exchange/swap, on ARM you have LDREX and STREX (load exclusive and store exclusive)
+    - on ARM compare_and_exchange implemented with loop of LDREX and STREX
+- while a lock is held, it's nice to have memory location in shared state, versus exclusive (which is inefficient)
