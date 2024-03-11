@@ -7,6 +7,12 @@
     - so every variable holds "references" that essentially those references are copied in a function call
         - the exception is some primitive types like integer, which are just direct values
 
+## FEATURES
+- varargs(variadic arguments) for functions, e.g. `void foo(String... vals) {..}; foo("one"); foo("one","two");`
+    - they have an array-like API
+    - method can only have one varargs param
+    - it must be the last param
+
 ## JAVA RUNTIME
 `/usr/libexec/java_home -V`
     - see all jvm version installed
@@ -99,7 +105,7 @@ hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
 HashSet<String> hsnew = new HashSet<>(hs)  //  create a new set initialized with another set
 
 String[] s = new String[hs.size()];
-hs.toArray(s); // convert set to Array of strings
+hs.toArray(s); // convert set to Array of strings, NOTE: toArray returns type Object[]
 
 // iterate over items in set
 var iter = hs.iterator();
@@ -363,6 +369,7 @@ public class Box<T> {       // example generic class
 ### VAR
 - `var` keyword introduced in java10. can declare variable without type, type will be inferred from value
 - `var x = 3`   - inferred `x` is of type `Integer`
+
 
 ## INTROSPECTION
 - `(object) instanceof (type)` - test if object is instance of type, or subtype of type, or implements an interface

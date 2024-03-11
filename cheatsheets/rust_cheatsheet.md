@@ -474,7 +474,11 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - types direct implementation takes precedence
 ### CONVERSION/CASTING
 - `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
-- `From` and `Into` are main traits to convert, complex types like `Vec` and `String` support this
+- `From` and `Into` are main traits to convert, `From<T> for U` implies `Into<U> for T`
+    - complex types like `Vec` and `String` support this
+    - correct practice is implement `From<T> for U`, `Into<U> for T` blanket implementation will be done
+- `TryFrom` and `TryInto` exist for conversions that could fail, and return `Result` type
+- `AsRef` and `AsMut` convert reference types
 ### OTHER
 - type alias - synonymous to another type
     - one use case: syntax sugar convenient for long/verbose types

@@ -100,6 +100,10 @@
 ### FUNCTIONS
 - partial application - can pass subset of arguments to function invocation, then pass rest in later
 - call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
+- repeated arguments, `*` identifier, e.g. `def foo(a: String*)`, arg `a` here is treated as an array
+    - if we want to pass in `List` type, need to use splat operator to convert it
+        - e.g. `val mylist = List("a","b"); foo(mylist:_*)`
+    - this is similar to varargs feature in Java
 
 
 ## COLLECTIONS

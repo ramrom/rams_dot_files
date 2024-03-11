@@ -10,7 +10,7 @@
     - `shadow` contains hashed passwords and other management fields, is readable only by root
 - swap partition - using a filesystem generally on a HD as storage for data on RAM, usually when RAM is full
 - ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
-- cron: task scheduler, great site: https://crontab.guru/
+- cron: great site for deciphering a cron schedule: https://crontab.guru/
 - procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
     - most unix-like OSes support it, notably OSX doesn't
 
