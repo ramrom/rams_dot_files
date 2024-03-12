@@ -515,6 +515,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - `Sync` trait, these types allows many references to same value in different threads
         - type `T` is `Sync` if immutable ref `&T` is `Send`
         - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
+        - generic parameters need ty be `Sync` for container type to be `Sync`
     - `Send` trait, these types are safe to transfer ownership to different thread
 - good tokio issue on structured concurrency: https://github.com/tokio-rs/tokio/issues/1879 (also see "goto is bad" blog)
 ### THREADS - STD LIB
@@ -581,9 +582,15 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - like golang WaitGroup
 - std lib and tokio also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
 - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
+### LOCKS
+- std lib `RWLock` - allows one writer OR multiple readers (not both)
+- std lib `Mutex` - allows one writer OR one reader
 ### SEMAPHORES
 - issue limited "permits" to do things, can limit concurrency level
 - tokio has sempahores
+### ATOMICS AND MEMORY ORDERING
+- good read: https://doc.rust-lang.org/nomicon/atomics.html
+- memory model for atomics from c++20
 
 ## ANNOTATION
 - `derive` - tells rust to automatically generate a trait implementation for a type

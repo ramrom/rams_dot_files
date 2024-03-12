@@ -50,6 +50,9 @@ public static void main(String[] args) {
 
 ## ATOMICS
 - MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
+    - MESI is acronym for 4 states: **M**odify **E**xclusive **S**hared **I**nvalid
+    - its a state machine for describing the memory and cache
+    - each cache line has its own state machine, no global statemachine, cores coordiate via async message passing
     - basically says memory location(really cache location) can be in shared state or exclusive state
 - compare_and_exchage atomic operation requires exclusive access to memory location
     - really x86 arch has compare and exchange/swap, on ARM you have LDREX and STREX (load exclusive and store exclusive)
