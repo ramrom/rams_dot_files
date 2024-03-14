@@ -91,6 +91,9 @@ vim.api.nvim_create_autocmd('FileType', {
 -- any file name starting with Jenkinsfile should be groovy
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, { pattern = 'Jenkinsfile*', command = 'set filetype=groovy' })
 
+-- use indent folding on scala files b/c treesitter sucks at it
+vim.api.nvim_create_autocmd({ 'FileType' }, { pattern = 'scala', command = 'set foldmethod=indent' })
+
 -- disable autocommenting on o and O in normal
 vim.api.nvim_create_autocmd('FileType', { pattern = '*', command ='setlocal formatoptions-=o' })
 

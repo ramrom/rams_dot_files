@@ -80,7 +80,6 @@ mylist.equals(anotherlist); // compare 2 arraylists, values and order
 
 // variables can be of interface types, and thus contain any value that implements that type
 List<String> mylist = new ArrayList<String>();
-List<String> mylist = new ArrayList<String>(Arrays.asList("hi","there"));
 
 // LinkedList is a doubly linked list
 LinkedList<String> ll = new LinkedList<String>();  // linked lists
@@ -92,6 +91,9 @@ List<String> v = new Vector<String>();
 List<Integer> l = List.of(1,2,3);  // java9 has List#of, it's immutable, fixed-size, null values not allowed
 List<Integer> l = Arrays.asList(1,2,3)  // unlike List#of, can update elements, backed by array, still fixed-size, allows null items
 List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
+
+ArrayList<String> mylist = new ArrayList<>(Arrays.asList("hi","there"));  // can create dynamic Arraylist this way
+var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var, and inferred this way
 ```
 ### SET
 ```java
@@ -259,6 +261,12 @@ sb.toString();          // covert to a string when done
 - `int` vs `Integer` -> `Integer` is class with underlying `int` and adds properties and methods
     - same for `long`/`Long`, `double`/`Double`, `float`/`Float`
 - get max/min of `Integer`/`Long`/`Short`/`Byte` -> e.g. `Long.MAX_VALUE` , `Integer.MIN_VALUE`
+### BOOLEANS
+```java
+// can store expressions 
+boolean b = ("a" == "a");       // b stores true
+boolean b2 = (3 == 4);         // b2 stores false
+```
 
 
 ## CONVERSIONS
@@ -268,15 +276,24 @@ int a = Integer.parseInt("foo");  // will raise NumberFormatException, also for 
 Integer.toString(3)     // converts to String "3"
 
 float f = Float.parseFloat("25.1");    // String -> Float
+double d = Double.parseDouble("25.1");    // String -> Double
 String s = Float.toString(25.0f);      // Float -> String
 String s = Character.toString('a')   //  char -> String, 'a' to "a"
 
+Double d = new Double(3);  // create double from int, will be 3.0D
+Double d = new Double(3.43F);  // double from float
+Double d = new Double("3.44");  // double from string
+Float f = new Float(4);  // create float from int, will be 4.0F
+
 char[] c = "hi there".toCharArray();
+String s = new String(c);   // create String from char array
 
 int a = Integer.toString(3);     // int -> String
 
 int a = (int)1.6         // cast float to int, a rounded down to 1
 int a = (long)11         // cast int to long, long is 64bit
+Float f = (float)4      // cast int to float
+Double d = (double)4    // cast int to double
 int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each other
 
 (char) 49   // returns char '1'
@@ -435,7 +452,7 @@ switch (a) {
                      break;
         }
 
-//trinary
+//ternary operator
 String bar = (3 < 10) ? "A" : "B";
 ```
 ### EXCEPTIONS

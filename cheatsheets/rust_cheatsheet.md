@@ -211,6 +211,7 @@
         - multiple inputs each get a different lifetime parametes
         - if only one input then the output gets the same lifetime
         - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
+- variance relationships - https://doc.rust-lang.org/reference/subtyping.html
 ### UNSAFE
 - raw pointers - can create in safe areas, start with `*`, (`*` + `mut`/`const` )
     - can have any number of immutable and mutable pointers at same time

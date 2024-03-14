@@ -110,3 +110,15 @@ git commit --amend --author="Joe Shmoe <email@address.com>"
     - API to render HTML from markdown: https://docs.github.com/en/rest/reference/markdown
     - supported languages in code blocks: https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 - render mermaid code in markdown code block: https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/
+### API
+```sh
+# these examples need to add auth headers
+xh --no-verbose https://api.github.com/users/fooOrganization/repos | jq '.[] | .url'
+xh --no-verbose https://api.github.com/repos/fooOrganization/fooRepo/pulls/123
+
+# all comments on pull with user and comment
+xh --no-verbose https://api.github.com/repos/fooOrganization/fooRepo/pulls/123/comments | jq '.[] | {user: .user.login, message: .body}'
+
+# post comment with reply-to-id
+xh POST https://api.github.com/repos/fooOrganization/fooRepo/pulls/123/comments body=test in_reply_to:=289468653
+```
