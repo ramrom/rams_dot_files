@@ -276,6 +276,15 @@
     - dont have a entirely seperate env (like another k8 cluster), but use spare nodes in the same cluster
     - cutover a small percentage of live traffic at a time (versus 100% in blue-green)
 
+
+## ENCRYPTION
+- envelope encryption
+    - DEK - data encryption key - encrypt payload/data
+        - DEKs encrypted by KEK at rest, DEKs stored close to data
+        - one practice to use entirely new DEK when writing data
+    - KEK - key encryption key - encrypt DEK
+        - store centrally
+
 ## ENCODING
 ### BASE64 
 - 64 safe ASCII chars
@@ -567,6 +576,7 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - martin fowler ruby scripting to do oauth 2.0 with google: https://martinfowler.com/articles/command-line-google.html
 - OpenID Connect(OIDC) - built on top of oauth 2.0, includes identity stuff, has an IdP
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
+    - advantages: SSO for all RPs that use that IDP server, only one db instead of many with ur creds
 - TOTP - time based one time password
 - passwordless auth - umbrella term for any tech that doesnt requires entering a password or knowledge based secret
 - Passkey 

@@ -94,6 +94,10 @@ List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
 
 ArrayList<String> mylist = new ArrayList<>(Arrays.asList("hi","there"));  // can create dynamic Arraylist this way
 var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var, and inferred this way
+
+// from String[] to ArrayList<String>
+var strs = new String[]{"hi","there"};
+var alstrs = new ArrayList<String>(Arrays.asList(strs)); // Arrays#asList converts to List<String>, need ArrayList<String>
 ```
 ### SET
 ```java
@@ -298,6 +302,13 @@ int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each
 
 (char) 49   // returns char '1'
 (int) '1'   // returns int 49
+
+// introspection and conversion with casting
+class Foo() {};
+Foo convert(Object o) {
+    if (o instanceof Foo) { return (Foo)o; }
+    return null;
+}
 ```
 
 ## MATH
@@ -330,13 +341,27 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
 
 ## TYPE SYSTEM
 - `final` keyword means it can't be changed (synonymous to `val` in scala)
+    - a `final` member cannot be overridden by child class
 - `static` keyword - belongs to type itself, and not instance of the type, all instances share the static member (aka class global)
 - scope/visibility: member of can be: default, public, private, protected
     - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
 - `java.lang.Object` is root class of Java class hierarchy, every class is descendant of this class
     - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
     - a class defined with no superclass automatically extends `Object`
+    - `Object#equals` compares identity, not content so:
+        ```java
+        class Foo { int data; Foo(int i) { this.data = i; } }
+        var f = new Foo(3);
+        var f2 = new Foo(3);
+        f.equals(f2) // return false, data is identical but #equals compares identity, and these are 2 diff objects
+        ```
+    - `hashCode` has same contract as `equals`
+        - objects with same hashcode must be equal
+        - but two objects not-equal to each other can have the same hashcode
 ### CLASSES
+- regular inheritence: `class Foo {}; class SubFoo extends Foo {};`
+- multiple inheritence: `class Foo {}; class Bar {}; class FooBar extends Foo, Bar {};`
+- can call `super` to invoke the parent classes implementation of a overridden method
 ```java
 class Foo {
     int data;

@@ -90,7 +90,12 @@
 - constructor params are `val`s by default
 - get a default `apply` and `unapply` automatically defined
     - pattern matching needs `unapply` defined if you want to match on fields
-- `toString`, `equal`, and `hashcode` methods auto-implemented
+- `toString`, `equal`, and `hashcode` methods auto-implemented and overridden
+    - `equal` will test if content of two objects are the same, not identity
+    ```scala
+    case class Foo(i: Int); f = Foo(1); f2 = Foo(1); f == f2  // return true
+    class Bar(i: Int); b = Bar(1); b2 = Bar(1); b == b2  // returns false
+    ```
 - `copy` method - guarantees shallow copies only
 - `Product` trait autoimplemented, get `productArity`, `productElement`, `productIterator`
     - case classes can't have more than 22 parameters b/c it implements this trait
