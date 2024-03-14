@@ -4,3 +4,6 @@
 
 ## MEMORY
 - allocations/frees mainly done with `new` and `delete`
+
+## FEATURES
+- supports proper pass-by-reference semantics, using the `&` modifier on a parameter

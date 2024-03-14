@@ -7,11 +7,15 @@
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"
 - Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM
+
+## LUAJIT
 - LuaJIT uses JIT compiler that generates machine code directly
     - JIT still compiles to byte code before being interpreted by Lua VM
     - LuaJIT interpreter records runtime stats when executing byte code, loops and function calls are tracked
         - when threshold exceeded, JIT compiler triggers, and converts that to machine code using it's IR(intermediate representation)
 - LuaJIT only supports Lua 5.1
+- often used as "scripting engines" for extensibility 
+    - big applications like nginx, redis, neovim, vlc, apache HTTP server, weeChat, wireshark
 
 ## FEATURES
 - has "metamechanisms" to build complex language features: tables, closures, coroutines
