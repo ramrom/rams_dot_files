@@ -98,6 +98,16 @@ var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var
 // from String[] to ArrayList<String>
 var strs = new String[]{"hi","there"};
 var alstrs = new ArrayList<String>(Arrays.asList(strs)); // Arrays#asList converts to List<String>, need ArrayList<String>
+
+// NESTED LIST
+List<List<Foo>>() ll = new List<ArrayList<Foo>>();        // obviously fails, outer List is abstract here
+List<List<Foo>>() ll = new ArrayList<List<Foo>>();                  // OK
+ArrayList<ArrayList<Foo>>() ll = new ArrayList<ArrayList<Foo>>();   // OK
+List<ArrayList<Foo>>() ll = new ArrayList<ArrayList<Foo>>();        // OK
+// following are throw "incompatible types cant convert" errors
+ArrayList<ArrayList<Foo>>() ll = new ArrayList<List<Foo>>();   // value inner list can be say LinkedList but variable guarantees ArrayList
+ArrayList<List<Foo>>() ll = new ArrayList<ArrayList<Foo>>();   // var inner list implies a LinkedList can be set, but value doesnt
+List<List<Foo>>() ll = new ArrayList<ArrayList<Foo>>();        // same as above
 ```
 ### SET
 ```java
