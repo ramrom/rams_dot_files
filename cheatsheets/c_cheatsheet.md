@@ -79,8 +79,22 @@ void foo() {
             - `struct myStruct struct1; struct1.number = 1;`
 - general stack size is platform dependent but like 2MB - 8MB
     - e.g. 2022 mbp `int foo[2000000]` was ok, but `int foo[2100000]` segfaulted
-### ALIGNMENT
+### ALIGNMENT AND PADDING
 - generally the fields in a struct are stored in the same order in memory
+- compiler will pad in order to ensure memory alignment in order to minimize memory accesses
+    - e.g. `struct foo { char x; int i; }` 
+        - for 32bit cpu, x is 1byte, i is 4bytes, no padding the int would span two 32bit words and cause 2 cpu cyles to fetch
+        - compiler will prolly pad 3 bytes after char, so int i will be aligned with word boundary
+        - `sizeof(foo)` will return 8
+- minimize padding by choosing good field order
+    - `struct bar { char x; int i; char y; }` - `sizeof(bar)` returns 12
+        - b/c int is ordered after x, and must be aligned, we have more padding
+    - `struct bar { char x; char y; int i; }` - `sizeof(bar)` returns 8
+        - with this order the 2 chars can be put in the first word b/c getting each is still one word memory access
+- sometime you want memory space efficiency
+    - can force compiler not to padd by using `#pragma pack(1)` directive
+    - can use `_attribute__((packed))`
+    - can use `memset`
 
 ## DATA STRUCTURES
 - strings

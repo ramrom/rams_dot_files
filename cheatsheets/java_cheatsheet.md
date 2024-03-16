@@ -94,6 +94,10 @@ List<String> mylist = Arrays.asList("a", "b", "c"); // e.g. for strings
 
 ArrayList<String> mylist = new ArrayList<>(Arrays.asList("hi","there"));  // can create dynamic Arraylist this way
 var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var, and inferred this way
+
+// from String[] to ArrayList<String>
+var strs = new String[]{"hi","there"};
+var alstrs = new ArrayList<String>(Arrays.asList(strs)); // Arrays#asList converts to List<String>, need ArrayList<String>
 ```
 ### SET
 ```java
