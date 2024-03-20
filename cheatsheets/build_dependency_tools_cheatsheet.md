@@ -76,6 +76,8 @@
 - uninstalling: https://docs.npmjs.com/misc/removing-npm.html
 - `~/.npm` dir caches modules already downloaded
 - `package.json` - specification file for a projects module dependencies
+- `package-lock.json` - specific version of all libs and transitive deps installed based on `package.json`
+    - npm v7 will read `yarn.lock` file for metadata if it exists, but still generate `package-lock.json` file
 - `.npmrc` - configuration for how npm behaves
 - bins are located in `node_modules/.bin` dir
 - global vs local
@@ -102,6 +104,7 @@
 - package manager for javascript
 - developed by facebook and open sourced
 - generally faster than npm, uses local caches for speedups, does parrallel installs
+- 
 
 ## NVM
 - node version manager, install/manage/switch between different node versions

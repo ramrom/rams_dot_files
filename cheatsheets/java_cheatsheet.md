@@ -56,6 +56,8 @@ names[1] = "newval"
 names[10000]    // raises java.lang.ArrayIndexOutOfBoundsException
 names.length    // => 4, the num items in the array
 
+var clone = y.clone();  // make a copy of the array
+
 //2D ARRAY
 // allocating array initializes depending on type, String,Dobule -> null, boolean -> false, int -> 0
 boolean[][] boolarr = new boolean[1][1];  

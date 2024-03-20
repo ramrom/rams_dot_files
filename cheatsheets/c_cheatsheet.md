@@ -113,10 +113,10 @@ void foo() {
     - multi-dimensional arrays
         ```c
         int abc[2][2] = { { 1, 2 }, { 3, 4 } }  /* Valid declaration, preferred*/
-        int abc[2][2] = {1, 2, 3 ,4 }  /* Valid declaration*/
-        int abc[][2] = {1, 2, 3 ,4 }  /* Valid declaration*/ 
-        int abc[][] = {1, 2, 3 ,4 }   /* Invalid declaration – you must specify second dimension*/
-        int abc[2][] = {1, 2, 3 ,4 } /* Invalid because of the same reason  mentioned above*/
+        int abc[2][2] = { 1, 2, 3 ,4 }  /* Valid declaration*/
+        int abc[][2] = { 1, 2, 3 ,4 }  /* Valid declaration*/ 
+        int abc[][] = { 1, 2, 3 ,4 }   /* Invalid declaration – you must specify second dimension*/
+        int abc[2][] = { 1, 2, 3 ,4 } /* Invalid because of the same reason  mentioned above*/
         ```
 - 2D array - `a[i][j]`
     - static alloc - `int a[3][3];`
