@@ -142,6 +142,7 @@ alias sd='sudo docker'
 # FZF, RG (ripgrep), FD, GREP
 alias fdh1='fd -H -d 1'
 alias grep='grep --colour=always'
+alias rg_hidden_nogit="rg -uu -g '!.git/'"
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""

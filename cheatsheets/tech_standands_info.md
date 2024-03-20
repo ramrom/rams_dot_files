@@ -269,10 +269,10 @@
 ### DEPLOYMENT STRATEGIES
 - rolling deployments - incremental deploy in same env
     - take down and upgrade each service instance at a time
- - blue-green deploy - uses 2 different "environments" (e.g. 2 diff k8 clusters)
+- blue-green deploy - uses 2 different "environments" (e.g. 2 diff k8 clusters)
     - deploy new version of services on green, can internally test green while ingress still serving to blue
         - when ready switch traffic to green
- - canary deploy
+- canary deploy
     - dont have a entirely seperate env (like another k8 cluster), but use spare nodes in the same cluster
     - cutover a small percentage of live traffic at a time (versus 100% in blue-green)
 
@@ -449,6 +449,10 @@
     - no device limits, native linux/osx/windows clients, has offline file access for entire folders and all files
 - google drive
     - offline access for idvidual files (and only gdocs like their spreadsheet and word doc)
+
+## FILE TRANSFER
+- snapdrop, pairdrop
+- localsend, on all platforms, local only no internet, written in dart/flutter
 
 ## BOOTING
 - BIOS - basic input output system, firmware used to boostrap into a full OS, IBM PCs started with this in 1980

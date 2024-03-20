@@ -17,7 +17,7 @@
 ```c
 void foo() {
     int i = 1;
-    { int p = 1; }   // code blocks are scoped, p will be dropped when scope ends
+    { int p = 1; }   // code blocks are scoped, local varible p will be dropped when scope ends
     p = 3;          // will fail
 }
 ```
