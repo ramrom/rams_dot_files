@@ -62,6 +62,22 @@ public static void main(String[] args) {
 - good quick blog post: https://fy.blackhats.net.au/blog/2019-07-16-cpu-atomics-and-orderings-explained/
 - jon gjengset 3hr rust vid: https://www.youtube.com/watch?v=rMGWeSjctlY&t=5188s&ab_channel=JonGjengset
 
+## DATASTRUCTURES
+### TREES
+- BST - binary search tree, a binary tree but ordered
+- B-Tree - stores sorted data, self-balancing
+    - has order m, meaning a node can have up to m children, every node except for root and leaves must have at least m/2 children
+        - BST is special case of B-Tree with 2 children
+    - most common data struct used in database indexes
+- red-black trees - stored ordered data, self-balancing
+    - nodes have a color property, red or black, that help with balancing
+    - red nodes can only have black children
+- splay trees
+
+## PROGRAMMING LANGUAGES
+- ML (meta language) - functional
+- OCaml - dialect of ML
+
 ## COOL ALGOS
 - jon carmack fast 1/sqrt(x) calc: https://www.youtube.com/watch?v=p8u_k2LIZyo&ab_channel=Nemean
 - linus on clever remove from linkedlist with double pointer: https://github.com/mkirchner/linked-list-good-taste

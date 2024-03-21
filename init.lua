@@ -1056,7 +1056,7 @@ vim.g.mapleader = " "
     -- NORMAL MODE
         -- <leader>,
         -- <Leader><Leader>  (most open)
-        -- <CR>, <BS>
+        -- <BS>
         -- c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
         -- ;  - semicolon repeats last f/F motions

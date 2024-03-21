@@ -347,6 +347,7 @@
         - used by Node.js, neovim
     - libevent - C async lib, similar to libuv, uses callbacks on IO events
         - memcached, tmux, chrome, transmission use it
+    - libev - C async lib, claims it's better than libevent
 
 ## GRAPHICS FRAMEWORK/ENGINES
 - cryengine - by crytech
@@ -518,6 +519,7 @@
 - WebDAV - HTTP based protocol for data manipulation
 - CalDAV - based on WebDAV for sharing and syncing calander data
     - uses iCalander format for the data
+- CardDAV - protocol for sharing contact data
 ### ADDRESS RESOLUTION
 - ARP - address resolution protocol, get layer 2(MAC) address from a given layer 3(IP) address
 - InARP(inverse ARP)/RARP(Reverse ARP) - get layer 3 address from a layer 2 address

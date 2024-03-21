@@ -196,8 +196,11 @@
     - danger is mixing `Rc` and `RefCell` to create circular references that leak memory
     - can create weak references, `Weak<T>` with `Rc::downgrade`, weak refs dont increment "strong" count, inc the "weak" count
         - weak ref might point to nothing, so test it with `upgrade` method which returns `Option<Rc<T>>`, `None` if it was dropped
-- `RefCell<T>` - interior mutability that's checked at runtime
-    - single ownership like `Box<T>`, except borrowing rules enforced at runtime, and will panic if borrow rules violated
+- `UnsafeCell<T>` - `RefCell<T>` with no guard, gives you mutable raw pointer/ref without any safety checks
+- `Cell<T>` - can replace `T` and get a copy of `T`, but can't get a reference to `T`
+- `RefCell<T>` - has interior mutability, unlike `Cell` can get a reference
+    - single ownership like `Box<T>`, except borrowing rules checked at runtime, will panic if borrow rules violated
+    - uses `UnsafeCell` like `Cell`
     - `let r = RefCell::new(1); *r.borrow_mut() = 2`
     - `let r = RefCell::new(1); let r1 = r.borrow_mut(); let r2 = r.borrow_mut(); *r1 = 2; *r2 = 3`
         - will panic in runtime!, no comile time error
@@ -212,11 +215,12 @@
         - if only one input then the output gets the same lifetime
         - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
 - variance relationships - https://doc.rust-lang.org/reference/subtyping.html
+- `Cow<T>` - Copy-On-Write "pointer", stores a &%, and can convert by cloning the T when you write to it
 ### UNSAFE
-- raw pointers - can create in safe areas, start with `*`, (`*` + `mut`/`const` )
+- raw pointers - `*const` and `*mut`
+    - can only dereference raw pointers in unsafe blocks
     - can have any number of immutable and mutable pointers at same time
     - raw means they can be null, point to invalid mem locations, no automatic cleanup
-    - can only dereference raw pointers in unsafe blocks
     - `let address = 0x012345usize; let r = address as *const i32;` - random mem location, cast it to raw pointer
     - usage scenarios: 1. interface with C code, 2. some safe abstractions that borrow checker can't understand
 - unsafe functions
@@ -657,6 +661,7 @@ let s2 = String::from("hello");  // type String is mutable
     - `tokio::task::spawn_blocking(|| { ... })` - run blocking closure on special threads on runtime for blocking
     - graceful shutdown - pass a mpsc sender to all tasks, when all senders dropped, all tasks are done, can shutdown
 - [async-std](https://github.com/async-rs/async-std) - async version of std lib, similar to tokio
+- [crossbeam](https://github.com/crossbeam-rs/crossbeam) - concurrency toolbelt
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
