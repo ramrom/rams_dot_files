@@ -516,13 +516,20 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - the tried green threads in rust 1.0, but runtime was becoming bloated
 - rust intention is to stay a low level systems language with minimal runtime
 - https://stackoverflow.com/questions/29428318/why-did-rust-remove-the-green-threading-model-whats-the-disadvantage#29430403
-- `Sync` and `Send` are built into rust, (most of the rest is in std lib)
-    - `Sync` trait, these types allows many references to same value in different threads
-        - type `T` is `Sync` if immutable ref `&T` is `Send`
-        - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
-        - generic parameters need ty be `Sync` for container type to be `Sync`
-    - `Send` trait, these types are safe to transfer ownership to different thread
 - good tokio issue on structured concurrency: https://github.com/tokio-rs/tokio/issues/1879 (also see "goto is bad" blog)
+### SYNC + SEND
+- `Sync` and `Send` are built into rust, (most of the rest is in std lib)
+- `Sync` trait, these types allows many references to same value in different threads
+    - type `T` is `Sync` if immutable ref `&T` is `Send`
+    - generic parameters need ty be `Sync` for container type to be `Sync`
+- `Send` trait, these types are safe to transfer ownership to different thread
+- `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
+- `Mutex` itself is `Send`, but the mutex guard is not, same thread that locks must unlock
+    - mutex guard is sync b/c a shared ref in another thread cant do anything harmful
+- `Rc` isn't `Send`, can't have 2 `Rcs` in 2 threads, must be in one thread
+    - also not `Sync` b/c a shared ref can be cloned
+- `Cell` and `RefCell` are `Send` but not `Sync`
+    - with a shared ref, u can mutate interior, not safe in multiple threads
 ### THREADS - STD LIB
 - `let handle = thread::spawn( ... )` method to create new thread, takes a closure arg
     - `handle` is type `JoinHandle`, can call join `handle.join()`, which blocks to wait for completion

@@ -68,6 +68,10 @@ echo "2.03" | tr -d .              # -d to delete, this will print 203
 echo foo:bar:baz | tr : \\n        # split on ":" delimiter, replace ":" with newline
 echo "\u0001 hi" | tr -cd '[:print:]' # strip out nonprintable characters, -c is complement(opposite of)
 
+# TEE - read from STDIN and write to STDOUT and regular files
+echo "output in both" | tee /path/to/file
+echo "output in both" | tee -a /path/to/file   # append to file
+
 # SED - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
@@ -109,38 +113,15 @@ date -d @1520000000  # convert unix epoch ISO time
     date -r 123439819723 # OSX - prints "Fri Aug 26 09:48:43 CDT 5881"
 date --date "-7 days" +'%m-%d-%y' # if today is feb23-2023, this will print 01-30-23
 date +"%Z %z"  # print time zone
-
-
 date +%s%N     # print nanoseconds (%N doesnt work on OSX)
 gdate +%s.%N   # coreutils package on OSX offers gdate, which can give nanoseconds
 date +%s%3N   # nanoseconds with 3 most sig figs
 
-# timedatectl - controle system time and date, not on OSX
+# TIMEDATECTL - controle system time and date, not on OSX
 timedatectl show    # show properties of systemd-timedated
 timedatectl status  # show current time settings
 timedatectl list-timeszones
 timedatectl set-ntp on   # enable NTP
-
-# NETCAT
-nc -l 127.0.0.1 9001     #listen on 9001
-
-# WC - word count
-wc -l somefile   # count # of lines in file
-wc -c somefile   # count # of chars in file
-cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
-
-# XQ - convert xml to json and then use jq queries
-xq . some.sml  # would spit our JSON conversion
-xq .somekey some.xml
-
-# PANDOC -universal doc converter
-    # https://pandoc.org/MANUAL.html#general-options
-pandoc foo.md -o foo.docx   # convert markdown to docx
-pandoc foo.md -o foo.odt   # convert markdown to opendocument
-pandoc foo.md --to jira -o output.jira  # explicitly specify output format
-
-# SUBSYNC - https://github.com/spion/subsync
-subsync @+5 < input.srt > output.srt  # shift all subtitles forward 5 seconds
 
 # SORT - sort stdin of lines, waits for all input till EOF
 echo "b\na" | sort   # will print a on first line, b on second line
@@ -183,6 +164,27 @@ echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 
 # strings - print out text strings in a binary file or any file
 strings somebin
+
+# NETCAT
+nc -l 127.0.0.1 9001     #listen on 9001
+
+# WC - word count
+wc -l somefile   # count # of lines in file
+wc -c somefile   # count # of chars in file
+cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
+
+# XQ - convert xml to json and then use jq queries
+xq . some.sml  # would spit our JSON conversion
+xq .somekey some.xml
+
+# PANDOC -universal doc converter
+    # https://pandoc.org/MANUAL.html#general-options
+pandoc foo.md -o foo.docx   # convert markdown to docx
+pandoc foo.md -o foo.odt   # convert markdown to opendocument
+pandoc foo.md --to jira -o output.jira  # explicitly specify output format
+
+# SUBSYNC - https://github.com/spion/subsync
+subsync @+5 < input.srt > output.srt  # shift all subtitles forward 5 seconds
 
 ## EMACS
 c-x c-c to quit

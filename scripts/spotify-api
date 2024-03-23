@@ -8,9 +8,6 @@ usage () {
     echo '                   [ -m(manual) ] [ -g(test) ] [ -t(fzf tracks) ] '
 }
 
-[ -z "$SPOTIFY_TOKEN_FILE" ] && { echo "SPOTIFY_TOKEN_FILE variable not set" && exit 1; }
-[ -z "$SPOTIFY_USERNAME" ] && { echo "SPOTIFY_USERNAME variable not set" && exit 1; }
-
 ACTION=NONE
 
 while getopts 'hvardmgt' x; do
@@ -27,6 +24,9 @@ while getopts 'hvardmgt' x; do
     esac
 done
 shift $(($OPTIND - 1))
+
+[ -z "$SPOTIFY_TOKEN_FILE" ] && { echo "SPOTIFY_TOKEN_FILE variable not set" && exit 1; }
+[ -z "$SPOTIFY_USERNAME" ] && { echo "SPOTIFY_USERNAME variable not set" && exit 1; }
 
 [ "$ACTION" = "NONE" ] && { echo "no action selected" && exit 1; }
 

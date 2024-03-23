@@ -1055,6 +1055,7 @@ vim.g.mapleader = " "
 --- TODO: Prime open real estate for key remapping
     -- NORMAL MODE
         -- <leader>,
+        -- <leader><0-9>
         -- <Leader><Leader>  (most open)
         -- <BS>
         -- c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
