@@ -62,7 +62,7 @@ public static void main(String[] args) {
 - good quick blog post: https://fy.blackhats.net.au/blog/2019-07-16-cpu-atomics-and-orderings-explained/
 - jon gjengset 3hr rust vid: https://www.youtube.com/watch?v=rMGWeSjctlY&t=5188s&ab_channel=JonGjengset
 
-## DATASTRUCTURES
+## DATA STRUCTURES
 ### TREES
 - BST - binary search tree, a binary tree but ordered
 - B-Tree - stores sorted data, self-balancing
@@ -73,13 +73,24 @@ public static void main(String[] args) {
     - nodes have a color property, red or black, that help with balancing
     - red nodes can only have black children
 - splay trees
+### LINKED LISTS
+- rust book - linked lists are generally dumb: https://rust-unofficial.github.io/too-many-lists/
+- linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
+    - the linear search through linked list dominates slowness, and for array moving n/2 items is not that slow (caches good at this)
+- see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
+### BLOOM FILTERS
+- probabilistic data struct that quickly and space efficiently finds if item is part of a set
+- it is a fixed size but can represent a set with arbitrarily large number
+- can return false positive not not false negative, i.e. "item maybe part of the set or definitely is not part of the set"
+- adding element never fails, but the more you add the higher the false positive rate
+- can't remove an element beause that might remove more elments that just that one b/c of how it's represented
 
 ## PROGRAMMING LANGUAGES
 - ML (meta language) - functional
 - OCaml - dialect of ML
 
 ## COOL ALGOS
-- jon carmack fast 1/sqrt(x) calc: https://www.youtube.com/watch?v=p8u_k2LIZyo&ab_channel=Nemean
+- jon carmack fast inverse square root `1/sqrt(x)` calc: https://www.youtube.com/watch?v=p8u_k2LIZyo&ab_channel=Nemean
 - linus on clever remove from linkedlist with double pointer: https://github.com/mkirchner/linked-list-good-taste
 
 ## STORIES

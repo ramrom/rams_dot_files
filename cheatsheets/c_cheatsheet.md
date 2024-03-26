@@ -22,6 +22,13 @@ void foo() {
 }
 ```
 
+## TYPES
+- byte, char - 8bits
+- short, short int, signed short, signed short int - 16bits
+- long - 32bits
+- long long - 64bits
+- float - 32bits, double - 64bits
+
 ## CONCEPTS
 ### NULL POINTER
 - when a pointer is being compared to integer literal zero, `0`, compiler is checking if it's a null pointer
@@ -97,27 +104,28 @@ void foo() {
     - can use `memset`
 
 ## DATA STRUCTURES
-- strings
-    - C String - 1D array of chars terminated by a null character( `\0` )
-        - array init: `char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};`
-        - shortcut array init: `char greeting[6] = "hello";`
-        - C lib get length - `strlen(greeting);`
-- arrays - `int *myarr` is essentially equivalent to `int myarr[]`
-    - under the hood passing around `a[]` is really just passing `*a`
-    - array syntax does have some type checking
-        ```c
-        struct S;
-        void foo(struct S *a); // OK
-        void bar(struct S a[]); // ERROR
-        ```
-    - multi-dimensional arrays
-        ```c
-        int abc[2][2] = { { 1, 2 }, { 3, 4 } }  /* Valid declaration, preferred*/
-        int abc[2][2] = { 1, 2, 3 ,4 }  /* Valid declaration*/
-        int abc[][2] = { 1, 2, 3 ,4 }  /* Valid declaration*/ 
-        int abc[][] = { 1, 2, 3 ,4 }   /* Invalid declaration – you must specify second dimension*/
-        int abc[2][] = { 1, 2, 3 ,4 } /* Invalid because of the same reason  mentioned above*/
-        ```
+### STRINGS
+- C String - 1D array of chars terminated by a null character( `\0` )
+    - array init: `char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};`
+    - shortcut array init: `char greeting[6] = "hello";`
+    - C lib get length - `strlen(greeting);`
+### ARRAYS 
+- `int *myarr` is essentially equivalent to `int myarr[]`
+- under the hood passing around `a[]` is really just passing `*a`
+- array syntax does have some type checking
+    ```c
+    struct S;
+    void foo(struct S *a); // OK
+    void bar(struct S a[]); // ERROR
+    ```
+- multi-dimensional arrays
+    ```c
+    int abc[2][2] = { { 1, 2 }, { 3, 4 } }  /* Valid declaration, preferred*/
+    int abc[2][2] = { 1, 2, 3 ,4 }  /* Valid declaration*/
+    int abc[][2] = { 1, 2, 3 ,4 }  /* Valid declaration*/ 
+    int abc[][] = { 1, 2, 3 ,4 }   /* Invalid declaration – you must specify second dimension*/
+    int abc[2][] = { 1, 2, 3 ,4 } /* Invalid because of the same reason  mentioned above*/
+    ```
 - 2D array - `a[i][j]`
     - static alloc - `int a[3][3];`
         - can initialize - `int A[3][3]={{1,2,3},{4,5,6},{7,8,9}};`
@@ -128,6 +136,11 @@ void foo() {
             - _but_ cant use `a[x][x]` indexing syntax, can do `a[i*M + j]`
         - `int **a; a = malloc(sizeof(int *) * N); for (i = 0; i < N; i++) { two_d_array[i] = malloc(sizeof(int) * M); }`
             - many mallocs, not contigous memory
+- allocation
+    - an array of structs will have a known size since structs have a known size
+    - it will be allocated in one contguous virtual address space
+    - if it's a small size the virtual address space will probably map to a contiguous physical address space
+    - and generally the allocator will probably fit the address space to span as few page boundaries as possible
 
 ## IO
 - print int - `int v = 1; printf("%i\n",v);`

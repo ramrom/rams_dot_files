@@ -175,6 +175,7 @@ s.pop(); // raises EmptyStackException sinc it's empty
 ### QUEUE
 ```java
 // java.util.Queue is main interface. main implementation: LinkedList, ArrayDequeue, PriorityQueue
+// ArrayDequeue uses a array backing, and arrays are generally always better than linked lists
 Queue<String> queue = new LinkedList<>();
 queue.add("a");     // add to queue, returns `true` if successful, throws `IllegalStateException` if it's full
 queue.add("b");
@@ -239,6 +240,11 @@ System.out.println(obj_collection.get(0).data1)     // should print 1
 "".isEmpty() // returns true, Empty tests for zero length string
 
 "ab".repeat(3)  // String "ababab"
+
+// COMPARISON
+new String("a") == new String("a")  // false, == operator compares identity, not value
+"a" == "a"          // returns true, these are primitive string types, so "content" is compared
+new String("a").equals(new String("a"))   // returns true, use #equals method on String to compare content
 
 List<Character> c = new ArrayList<>()
 char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`

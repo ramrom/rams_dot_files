@@ -126,6 +126,10 @@
     - using usb-c: 3.2gen1 - 10Gbps, 3.2gen2 - 20Gbps
 - 4.x - suports 40Gbps
 
+## PSU
+- 80 PLUS is energystar program started in 2007 for efficiency rating, requires 80%+ efficiency at 3 diff load levels
+    - different levels of rating including bronze, silver, gold
+
 ## FIBER OPTICS
 - single-mode - small diameter, generally b/w 8-10micrometers
 - TOSLINK - used generally for digital audio, uses plastic optical fiber, very cheap, can be 100x thicker than single-mode

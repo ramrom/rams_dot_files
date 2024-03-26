@@ -524,8 +524,8 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - generic parameters need ty be `Sync` for container type to be `Sync`
 - `Send` trait, these types are safe to transfer ownership to different thread
 - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
-- `Mutex` itself is `Send`, but the mutex guard is not, same thread that locks must unlock
-    - mutex guard is sync b/c a shared ref in another thread cant do anything harmful
+- `Mutex` itself is `Send`, but the `MutexGuard` is not, same thread that locks must unlock
+    - `MutexGuard` is sync b/c a shared ref in another thread cant do anything harmful
 - `Rc` isn't `Send`, can't have 2 `Rcs` in 2 threads, must be in one thread
     - also not `Sync` b/c a shared ref can be cloned
 - `Cell` and `RefCell` are `Send` but not `Sync`
