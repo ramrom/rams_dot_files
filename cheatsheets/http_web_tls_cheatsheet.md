@@ -23,6 +23,8 @@
         - QUIC embeds TLS inside it, offer more security with more data encrypted
         - QUIC can support multiple streams at transport layer, all HTTP2 streams would be blocked if TCP connect was blocked
         - http3 was invented in order to use QUIC, QUIC wasnt compatible with HTTP2
+
+## OTHER INFO
 - chunked vs multi-part: chunked is transfer encoding, multi-part is content type
     - each chunk is preceded by it's size, transmission ends with zero sized chunk, not supported in HTTP2
     - multi-part type can use chunked encoding

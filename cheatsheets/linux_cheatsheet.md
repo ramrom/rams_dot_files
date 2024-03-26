@@ -171,6 +171,11 @@ journalctl config file: /etc/systemd/journald.conf, can restrict max size
 loginctl
     - with no args is same as `loginctl list-sessions`
 
+## LOGS
+- `/var/log/dist-upgrade/` ->  folder with dist-upgrade details
+- `/var/log/auth.log` -> logins (console, tty, ssh, etc)
+- journalctl handles a ton of logs now, including logs before a crash
+
 
 ## SYSV (OLD INIT SYSTEM)
 - cheat sheet of sysv command equivalents in systemd: https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet

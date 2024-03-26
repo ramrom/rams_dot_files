@@ -12,6 +12,7 @@
 
 ## COMPILER
 - `restrict` keyword - https://en.wikipedia.org/wiki/Restrict - tell compiler pointer is only "owner", no other pointers to data
+    - this is similar to how rust's main rule is to only have one owner per value
 
 ## SCOPE
 ```c
@@ -21,6 +22,22 @@ void foo() {
     p = 3;          // will fail
 }
 ```
+
+## TYPE SYSTEM
+- pointers constants vs constant pointers
+    ```c
+    const int* ptr;         // the pointer ptr points to a constant value, so the value it points to can't change
+    const int a = 10;
+    const int* ptr = &a;  
+    *ptr = 5;  // fails, value cant change
+    ptr++;    // works, the pointer can point to something else
+
+    int * const ptr;        // the pointer ptr is constant itself, so you cant change what the pointer points to
+    int a = 10;
+    int *const ptr = &a;
+    *ptr = 5; // works, the value can change
+    ptr++;    // fails, cant change what pointer points to
+    ```
 
 ## TYPES
 - byte, char - 8bits
