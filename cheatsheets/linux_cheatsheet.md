@@ -529,3 +529,6 @@ pulsemixer - volume manager with pulseaudio
     - NOTE: `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
 - vlc
     - play media at cli and quit `vlc somefile.mp3 vlc://quit`
+    - enable log file: `tools`->`preferences`->select `all` in show settings
+        - under `logger`, enable it, set level and filename (defaults to home dir location)
+        - restart vlc
