@@ -76,14 +76,23 @@ mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 
+
 // SORTING
 mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies existing list
-Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
 Arrays.parallelSort(mylist);    // multithreaded sort, uses merge sort (breaks array into subarrays, forkjoin pool for parralelism)
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
+Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
+
+// if mylist type doesnt implement Comparable interface can pass in anon class of Comparator interface
+class Foo { int x; Foo(int x) { this.x = x; } }
+Comparator<Foo> FooComparator = new Comparator<Foo>() { public int compare(Foo first, Foo second) { return first.x - second.x; } };
+var foos = new Foo[] { new Foo(3), new Foo(1), new Foo(-1) };
+Arrays.sort(foos, FooComparator);  // foos will be { Foo(-1), Foo(1), Foo(3) }
+
 // using lambda expression
 var myList = new String[] { "b", "a" }
 Arrays.sort(myList, (a,b) -> a.compareTo(b));  // returns String[2] { "a" , "b" }
+
 
 // variables can be of interface types, and thus contain any value that implements that type
 List<String> mylist = new ArrayList<String>();
