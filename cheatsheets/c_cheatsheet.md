@@ -94,7 +94,7 @@ void foo() {
         - `int * myarray = malloc(5 * sizeof(int));` -> dynamic variable, on the heap
     - int
         - stack - `int age = 30`
-        -  heap - `int *age = malloc(sizeof(int)); *age =3;`
+        - heap - `int *age = malloc(sizeof(int)); *age =3;`
     - struct
          `struct myStruct { int number; };`
         - heap 

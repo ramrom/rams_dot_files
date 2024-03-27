@@ -76,9 +76,14 @@ mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 
+// SORTING
 mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies existing list
-Arrays.sort(mylist);        // another way to sort
+Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
+Arrays.parallelSort(mylist);    // multithreaded sort, uses merge sort (breaks array into subarrays, forkjoin pool for parralelism)
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
+// using lambda expression
+var myList = new String[] { "b", "a" }
+Arrays.sort(myList, (a,b) -> a.compareTo(b));  // returns String[2] { "a" , "b" }
 
 // variables can be of interface types, and thus contain any value that implements that type
 List<String> mylist = new ArrayList<String>();
@@ -245,6 +250,7 @@ System.out.println(obj_collection.get(0).data1)     // should print 1
 new String("a") == new String("a")  // false, == operator compares identity, not value
 "a" == "a"          // returns true, these are primitive string types, so "content" is compared
 new String("a").equals(new String("a"))   // returns true, use #equals method on String to compare content
+new String("b").compareTo(new String("b"))  // returns an int comparing the two
 
 List<Character> c = new ArrayList<>()
 char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`
@@ -376,6 +382,7 @@ int randomNum = (int)(Math.random() * 101);  // 0 to 100
     - `hashCode` has same contract as `equals`
         - objects with same hashcode must be equal
         - but two objects not-equal to each other can have the same hashcode
+    - `toString` - `System.out.print` call this method
 ### CLASSES
 - regular inheritence: `class Foo {}; class SubFoo extends Foo {};`
 - multiple inheritence: `class Foo {}; class Bar {}; class FooBar extends Foo, Bar {};`
@@ -419,6 +426,23 @@ public class Box<T> {       // example generic class
 - can implement methods
 - no multiple inheritence
 - can have final and non-final variables, static and non-static variables
+### ANONYMOUS CLASSES
+```java
+// can create anonymous child class from a parent class, Book in this case
+new Book("foo book") {
+    @Override
+    public String description() { return "a book"; }
+}
+
+// can instaniate an anonymous class that implements an interface
+interface Iface { void afunc(); }
+// interfaces have no constructors so parens remain empty
+Iface i = new IFace() { public void afunc() { System.out.println("hi"); } }   // anonymous class that implmeents I
+
+// anonymous class from generic interface
+interface GenericIface<T> { void afunc(T t); }
+new GenericIface<String>() { void afunc(String s) {} }
+```
 ### RECORD
 - immutable
 - data struct that has a setter/getter, constructor, `equals` method, `hashCode` method, `toString` method

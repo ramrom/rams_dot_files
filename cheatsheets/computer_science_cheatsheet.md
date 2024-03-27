@@ -85,9 +85,38 @@ public static void main(String[] args) {
 - adding element never fails, but the more you add the higher the false positive rate
 - can't remove an element beause that might remove more elments that just that one b/c of how it's represented
 
+## SORTING
+- bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
+- merge sort - divide and conquer, O(nlogn)
+    - can be parralelized
+- quick sort - divide and conquer, O(nlogn)
+
 ## PROGRAMMING LANGUAGES
 - ML (meta language) - functional
 - OCaml - dialect of ML
+- VHDL
+
+## HARDWARE
+- FPGA - field programmable gate arrays
+    - can program/change the logic
+        - LE(logic elements), a LE describes flip-flops(sequential logic), LUT(lookup table) for combinatorial logic
+            - also describe memory storage and arithmetic
+        - I/O blocks for interfacing with external devices
+        - interconnects describle how LEs and I/O blocks are wired into a circuit
+    - commonly write VHDL or verilogic HDL to program them
+    - great for parrallel tasks, often used for DSPs, high performance compute, crypto
+- ASIC - application specific integrated circuit
+    - underlying logic gates are "hard-wired" and can't be changed, much faster than FPGA
+    - very exspensive to design/test/validate b/c you are designing a new chip to fab
+        - an programming error means u have to redesign and refab, versus FPGA u just re-program
+    - bitcoins are usually mined with ASICs now, use way less power than FPGAs
+- microcontroller
+    - used for small embedded systems
+    - geared to run a single task, each one has hardware that's far more specific
+        - b/c they are specialized, they will consume less resources like battery power
+    - often write the code with C, way easier than VHDL
+- SoC - system on chip, not a well defined term, but generally always means more sophisticated than microcontroller
+    - good rule is they can run a full OS on them
 
 ## COOL ALGOS
 - jon carmack fast inverse square root `1/sqrt(x)` calc: https://www.youtube.com/watch?v=p8u_k2LIZyo&ab_channel=Nemean
