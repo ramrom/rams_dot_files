@@ -97,6 +97,12 @@ public static void main(String[] args) {
 - OCaml - dialect of ML
 - VHDL
 
+## SOFTWARE PATTERNS
+- iterative vs recursive
+    - iterative is faster, no extra overhead for a function call
+    - iterative uses less space, recursion adds stack frames for each function call
+    - recursion will generally be fewer lines of code
+
 ## HARDWARE
 - FPGA - field programmable gate arrays
     - can program/change the logic

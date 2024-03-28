@@ -372,6 +372,9 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
         - the linear search through linked list dominates slowness, and for array moving n/2 items is not that slow (caches good at this)
     - see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
+- to do a doubly linked list with `Rc`, you'll want one to be a weak counter so you don't get cyclical references
+    - see https://doc.rust-lang.org/stable/book/ch15-06-reference-cycles.html#preventing-reference-cycles-turning-an-rct-into-a-weakt
+- dropping a linked list is tricky w/o incurring a stackoverflow for drop (c++ has same issue)
 
 
 ## FUNCTIONS
