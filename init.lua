@@ -861,6 +861,11 @@ LoadAutoComplete = function()
     }
 end
 
+----------------- AUTO PAIR ----------------------------------
+AutoPairConfig = {
+   map_c_h = true  -- Map the <C-h> key to delete a pair
+}
+
 ---------------- BFQ ---------------------------------------
 LoadBQF = function()
     require('bqf').setup({
@@ -1340,6 +1345,11 @@ if not vim.env.VIM_NOPLUG then
         { 'scalameta/nvim-metals',
             cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
+        { 'windwp/nvim-autopairs',
+            event = "InsertEnter",
+            config = true,
+            opts = AutoPairConfig
+        },
 
         -- AUTOCOMPLETE
         { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy',

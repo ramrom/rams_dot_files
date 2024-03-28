@@ -89,7 +89,8 @@ public static void main(String[] args) {
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
 - merge sort - divide and conquer, O(nlogn)
     - can be parralelized
-- quick sort - divide and conquer, O(nlogn)
+    - generally not done in-place so lots of extra space, _can_ be done in-place, but is hard
+- quick sort - divide and conquer, O(nlogn), in-place (no extra space)
 
 ## PROGRAMMING LANGUAGES
 - ML (meta language) - functional
