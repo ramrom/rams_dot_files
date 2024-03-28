@@ -52,20 +52,21 @@
     ```
 
 ## TABLE
-- first item starts at index _1_, not _0_
-    - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
 - only data structure, an object, used for **everything**
     - it's sorta fundamentally a associative arrays
     - can use it to make arrays, sets, lists, records, queues, etc
     - can contain a mix of many field=value and values
         - e.g. `a = { 1, f1 = 3, { "foo", 3 }, f2 = function() print("hi") end, 2, "val", function() print("a") end, z = {1, "a"} }`
     - value can be any type: number/string/bool/function or another table, field can number/string
+- 1-based indexing: first item starts at index _1_, not _0_
+    - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
 - can make modules
 - can simulate OOP style
     - define a function that takes a receiver. `a = { var = 0 }; function a.inc(self, num) self.var = self.var + num end`
-        - can call `a.inc(self, 3)`
-        - the `:` operator makes it more OOP, can call without `self`, so `a:inc(3)`
-            - can also declare method with `:` to omit `self` -> `function a:inc(num) self.var = self.var + num end`
+        - can also declare method with `:` to omit `self` -> `function a:inc(num) self.var = self.var + num end`
+        - the `:` operator is syntax suger for adding `self` param to func call
+            - so `a:inc(3)` is equivalent to `a.inc(a, 3)`
+            - operator makes it more OOP-like
     - `setmetatable` is a function build into the language
         - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
 - create table and insert - `t={} table.insert(t,"item1") table.insert(t,{})`

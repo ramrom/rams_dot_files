@@ -254,7 +254,9 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 ## DATA STRUCTURES
 - https://doc.rust-lang.org/std/collections/index.html
 - may2023 - good vid on collections - https://www.youtube.com/watch?v=EF3Z4jdD1EQ&list=WL&ab_channel=JonGjengset
-    - many collections need to use unsafe code(raw pointers) in order to be feasible/performant, borrow checker couldnt reason about it well
+    - many collections need to use unsafe code(raw pointers) in order to be feasible/performant
+    - borrow checker couldnt reason about it well
+- rust has many ADTs that languages like haskell provide: tuples, enums(tagged unions), structs(product types)
 ### STRINGS
 - use double quote `"` for strings, single quotes `'` for chars
 - raw string literal (escapes arent processed) - `r#"foo \n bar"#`
