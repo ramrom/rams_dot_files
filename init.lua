@@ -215,9 +215,11 @@ ToggleAutoPair = function ()
     if AutoPairEnabled then
         require('nvim-autopairs').disable();
         AutoPairEnabled = false
+        print("autopair disabled")
     else
         require('nvim-autopairs').enable();
         AutoPairEnabled = true
+        print("autopair enabled")
     end
 end
 
@@ -878,6 +880,13 @@ AutoPairConfig = {
    map_c_h = true,  -- Map the <C-h> key to delete a pair
 }
 
+-- TODO: figure out how to run this only if the plugin is loaded
+LoadAutoPair = function()
+    local Rule = require('nvim-autopairs.rule')
+    require('nvim-autopairs').add_rule(Rule("<",">","rust"))
+end
+
+
 ---------------- BFQ ---------------------------------------
 LoadBQF = function()
     require('bqf').setup({
@@ -1140,7 +1149,7 @@ vim.keymap.set('v', '<C-n>', '<S->>gv')
 vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
 --- ADD NEWLINE AND STAY IN NORMAL 
-vim.keymap.set("n", "<C-m>", "o<Esc>")      -- NOTE: C-m is the same keyboard signal as <CR> ("Enter") on many systems
+vim.keymap.set("n", "<C-j>", "o<Esc>")      
 vim.keymap.set("n", "<C-g>", "O<Esc>")
 -- vim.keymap.set("n", "<BS>", "O<Esc>")
 
@@ -1358,11 +1367,6 @@ if not vim.env.VIM_NOPLUG then
         { 'scalameta/nvim-metals',
             cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
-        { 'windwp/nvim-autopairs',
-            event = "InsertEnter",
-            config = true,
-            opts = AutoPairConfig
-        },
 
         -- AUTOCOMPLETE
         { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy',
@@ -1371,6 +1375,8 @@ if not vim.env.VIM_NOPLUG then
         { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
         { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
         { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
+        -- { 'windwp/nvim-autopairs', event = "InsertEnter", config = true, opts = AutoPairConfig },
+        { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair, opts = AutoPairConfig },
 
         -- SNIPPETS
         { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },

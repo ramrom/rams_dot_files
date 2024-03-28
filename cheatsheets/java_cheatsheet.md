@@ -172,6 +172,7 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 // can specify initial capacity, default is 16, use if size of dataset is know prehand
 // load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
 HashMap<String, Integer> m = new HashMap<String, Integer>(100); // can pass in initial capacity argument
+var m = new LinkedHashMap<Integer, Integer>();  // hashmap that maintains insertion order
 ```
 ### STACKS
 ```java
