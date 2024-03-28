@@ -118,6 +118,7 @@ sudo useradd foosuer sudo       - will properly add user to group sudo and some 
 - `systemctl get-default` - get the default target (probably `graphical.target` for regular desktop installs)
     - `sudo systemctl set-default multi-user.target` - set new target
 - `systemd-analyze critical-chain` - print blocking tree of daemons
+- `ls -al /lib/systemd/system/runlevel*` - the defined runlevel targets
 
 ### SYSTEMCTL
 - systemctl start/stop/restart/reload foo
@@ -470,6 +471,7 @@ pulsemixer - volume manager with pulseaudio
 - inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 - lshw - like inxi, display lots of sys info
     - `sudo lshw -C display` - show only info about display/GPU
+- lspci - ls on pci devices
 - stat - get metadata on a file
 - lsblk - show block level devices
 - mkfs - to format a disk partition
