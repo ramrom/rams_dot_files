@@ -209,6 +209,18 @@ ToggleNvimTreeDynamicWidth = function()
 end
 
 
+AutoPairEnabled = true
+
+ToggleAutoPair = function ()
+    if AutoPairEnabled then
+        require('nvim-autopairs').disable();
+        AutoPairEnabled = false
+    else
+        require('nvim-autopairs').enable();
+        AutoPairEnabled = true
+    end
+end
+
 DisplayDiagVirtualText = true
 
 ToggleLSPDiagnosticsVirtualText = function()
@@ -861,9 +873,9 @@ LoadAutoComplete = function()
     }
 end
 
------------------ AUTO PAIR ----------------------------------
+----------------- AUTOPAIR ----------------------------------
 AutoPairConfig = {
-   map_c_h = true  -- Map the <C-h> key to delete a pair
+   map_c_h = true,  -- Map the <C-h> key to delete a pair
 }
 
 ---------------- BFQ ---------------------------------------
@@ -1193,6 +1205,7 @@ vim.keymap.set('n', '<leader>ws', '<cmd>:set number!<cr>')
 vim.keymap.set('n', '<leader>wl', '<cmd>:lua UpdateLuaLineTabLine(true)<cr>')
 vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
 vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
+vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
 vim.api.nvim_create_autocmd(
