@@ -46,6 +46,7 @@
 ```java
 // regular arrays
 int[] intArray = new int[10];
+
 String[] stringArray = new String[1];
 
 int[] y = {9000, 1000, 1337};
@@ -81,6 +82,11 @@ mylist.set(0, "dude");  // mylist ==> { "dude" }
 mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies existing list
 Arrays.parallelSort(mylist);    // multithreaded sort, uses merge sort (breaks array into subarrays, forkjoin pool for parralelism)
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
+
+// BINARY SEARCH
+class Foo { int i; Foo(int i) { this.i = i;} // #implement Comparable interface } 
+var arr = new Foo[] { new Foo(1), new Foo(2); }; var key = new Foo(2); int startidx = 0; int endidx = 1;
+Arrays.binarySearch(arr, startidx, endidx, key);
 
 Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
 // if mylist type doesnt implement Comparable interface can pass in anon class of Comparator interface
@@ -275,6 +281,13 @@ sb.append("foo");       // efficiently append
 sb.reverse();           // reverse order of chars
 sb.setCharAt(1, "a");   // change character at index
 sb.toString();          // covert to a string when done
+
+Arrays.toString(new int[] { 1,2,3})  // will create string "[1,2,3]"
+System.out.println(Arrays.toString(new int[] { 1,2,3}))  // will print above to STDOUT, good for debug printing
+
+class Foo { int i; Foo(int i) { this.i = i; }; public String toString() { return "{ i: " + i + "}"; } }
+var foos = new Foo[] { new Foo(1), new Foo(2) }
+System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
 ```
 
 ## PRIMITIVE TYPES
@@ -361,6 +374,7 @@ Math.pow(3,4)   // power/exponent, this returns Double 81.0
 
 Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
 int randomNum = (int)(Math.random() * 101);  // 0 to 100
+int randomNum = (int)(Math.random() * (200-100) + 100);  // 100 to 200
 ```
 
 ## FUNCTIONAL PROGRAMMING

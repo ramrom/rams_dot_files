@@ -15,10 +15,11 @@
 - table partitioning - creating a logical table backed by many physical tables
     - in postgres 11 foreign tables can be attached to table partitions
 - foreign table - a logical table that queries data from an external source
-    - foreign data wrapper will fetch external data
+    - foreign data wrapper(FDW) will fetch external data
 - views - a virtual table, which is a stored query which can itelf be queries against
     - materialized view - a view that contains the results of a query
         - it's a type of caching of a query
+        - can combine a matrialized view and foreign table
 - locks
     - table lock vs row lock
     - common
@@ -30,6 +31,30 @@
         - optimistic compares version nums at beginning of transaction and compares it at the end to see if it changed
             - rollback/re-try if it changed
             - often used when application can't have a persistent db connection to explicit/pessimistic lock
+- when a transaction is commited, WAL transactions are written
+
+## SCALING
+- table partitioning(sharding) - each partition contains a subset of rows
+    - horizontal method: create table partitions on other servers and use FDWs to represent the logical table
+    - vertical method: create a partition on different tablespaces (on different disks)
+
+## REPLICATION
+- two major types: logical and physical
+### PHYSICAL REPLICATION
+- low level storage data (exact block address, byte-by-byte) is sync'd to replicas
+- disadvantage: must replicate all data in the db
+- basic process
+    - SQL statements are run on a master
+    - this generates WAL(write-ahead-log) records
+    - read replicas read the WAL records and replay them, so they have a copy of master
+    - log shipping is most often done with streaming, but can be logical too
+- warm standby means a replica that is only available for hot swapping when master dies
+- hot standby means a replica can be queried with reads
+### LOGICAL REPLICATION
+- high level SQL statements are sync'd to replicas
+- advantage: can control which tables and data get replicated
+- uses a pub/sub model to replicate
+    - WAL transactions are decoded and then published
 
 ## QUERY TIPS
 - counting num records in db table

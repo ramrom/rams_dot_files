@@ -102,6 +102,8 @@ public static void main(String[] args) {
     - iterative is faster, no extra overhead for a function call
     - iterative uses less space, recursion adds stack frames for each function call
     - recursion will generally be fewer lines of code
+- circuit-breaker - detect a recurrent failure and handle that failing element better
+    - one general strategy is after some thresholds of failures stop attempting the expensive operation
 
 ## HARDWARE
 - FPGA - field programmable gate arrays

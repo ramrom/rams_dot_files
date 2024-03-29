@@ -1375,6 +1375,7 @@ if not vim.env.VIM_NOPLUG then
         { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
         { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
         { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
+
         { 'windwp/nvim-autopairs', event = "InsertEnter", config = true, opts = AutoPairConfig },
         -- { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair, opts = AutoPairConfig }, -- doesnt work
 
