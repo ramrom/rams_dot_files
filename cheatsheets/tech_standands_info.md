@@ -260,7 +260,10 @@
 - JSON
 - XML
 - ProtoBufs
+    - serialized data is pretty compact, integers representation can have variable bit length
 - Capt'n'Proto
+- flatbuffers
+    - created by google, "zero-copy" serialization
 
 ## DEVOPS
 ### TERRAFORM

@@ -105,6 +105,10 @@ public static void main(String[] args) {
 - circuit-breaker - detect a recurrent failure and handle that failing element better
     - one general strategy is after some thresholds of failures stop attempting the expensive operation
 
+## LOGIC
+- "switch" statements are usually compiled to lookup tables or hash lists in most languages
+    - this are faster than a if/else-if/else equivalent, but practically only for large numbers of cases
+
 ## HARDWARE
 - FPGA - field programmable gate arrays
     - can program/change the logic
