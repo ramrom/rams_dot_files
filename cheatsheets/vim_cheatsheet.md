@@ -645,32 +645,33 @@ za (toggle), zA (toggle all)
 zm fold one level, zM - close ALL folds
 zr expand one level, zR - open ALL folds
 
-## SEARCH AND REPLACE
-/\C  - force case-sensitive search, /\c opposite
-:g/  - print line # and occurence of each search match
-/pattern - search for pattern
-?pattern - search backward for pattern
-\vpattern - 'very magic' pattern: non-alphanumeric characters
-    are interpreted as special regex symbols (no escaping needed)
-n - repeat search in same direction
-N - repeat search in opposite direction
-`#` - reverse search for word under cursor
-* - search for word under cursor
-:%s/old/new/g - replace all old with new throughout file
-:%s/old/new/gc - replace all old with new throughout file with confirmations
-- * to search next occurence of word under cursor
-- ? will search backward
-[I - show all occurences of word under cursor
-:noh - remove highlighting of search matches
-
-## Search in multiple files:
+## SEARCH
+- /pattern - search for pattern
+- ?pattern - search backward for pattern
+- \vpattern - 'very magic' pattern: non-alphanumeric characters
+-     are interpreted as special regex symbols (no escaping needed)
+- n - repeat search in same direction
+- N - repeat search in opposite direction
+- `#` - reverse search for word under cursor
+- * - search for next occurence of word under cursor
+- [I - show all occurences of word under cursor
+- /\C  - force case-sensitive search, /\c opposite
+- :g/  - print line # and occurence of each search match
+- `:noh` - remove highlighting of search matches
+### SEARCH IN MULTIPLE FILES
 :vimgrep /pattern/ {file} - search for pattern in multiple files
 e.g. ` :vimgrep /foo/ **/* `
 :cn - jump to the next match
 :cp - jump to the previous match
 :copen - open a window containing the list of matches
+### SEARCH AND REPLACE
+visual-mode select -> :s/old/new - replace old with new in all visually selected lines
+:s/old/new/g - replace all old with new in current line
+:%s/old/new/g - replace all old with new throughout file
+:%s/old/new/gc - replace all old with new throughout file with confirmations
 
-## Working with multiple files:
+
+## WORKING WITH MULTIPLE FILES
 :e file - edit a file in a new buffer
 :bnext or :bn - go to the next buffer
 :bprev or :bp - go to the previous buffer

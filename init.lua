@@ -977,6 +977,12 @@ LoadDAP = function()
     }
 end
 
+-- TODO: neovim lspconfig setup - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+----------------- LUA LSP ----------------------------
+LoadLuaLSP = function()
+    require'lspconfig'.lua_ls.setup{}
+end
+
 ---------------- RUST LSP ---------------------------
 LoadRustLSP = function()
     local rust_on_attach = function(client)
@@ -1068,6 +1074,7 @@ end
 -----------BUILTIN LSPCONFIGS ---------------------
 
 LoadLSPConfig = function()
+    -- LoadLuaLSP()
     LoadRustLSP() 
     LoadGolangLSP()
     LoadKotlinLSP()
