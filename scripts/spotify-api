@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 # TODO: should while loop to get all playlists instead of 2 iters, this assume < 100 playlists
 # TODO: combine multiple track files for one playlist into one file
 
@@ -28,7 +29,7 @@ shift $(($OPTIND - 1))
 [ -z "$SPOTIFY_TOKEN_FILE" ] && { echo "SPOTIFY_TOKEN_FILE variable not set" && exit 1; }
 [ -z "$SPOTIFY_USERNAME" ] && { echo "SPOTIFY_USERNAME variable not set" && exit 1; }
 
-[ "$ACTION" = "NONE" ] && { echo "no action selected" && exit 1; }
+[ "$ACTION" = "NONE" ] && { echo && echo "no action selected" && echo && usage && exit 1; }
 
 if [ "$ACTION" != "AUTH" ]; then
     [ ! -f "$SPOTIFY_TOKEN_FILE" ] && { echo "token file $SPOTIFY_TOKEN_FILE not found" && exit 1; }
