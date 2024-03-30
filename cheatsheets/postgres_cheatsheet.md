@@ -20,6 +20,9 @@
     - materialized view - a view that contains the results of a query
         - it's a type of caching of a query
         - can combine a matrialized view and foreign table
+- MVCC - multi-version concurrency control
+    - each transaction gets it's own isolation view of the database
+    - more similar to optimistic locking where each transaction doesn't directly block others
 - locks
     - table lock vs row lock
     - common
@@ -37,6 +40,10 @@
 - table partitioning(sharding) - each partition contains a subset of rows
     - horizontal method: create table partitions on other servers and use FDWs to represent the logical table
     - vertical method: create a partition on different tablespaces (on different disks)
+- read replicas - for just read queries, a replica can be made hot standby
+- multi-master (active-active) setup
+    - has eventual data consistency
+    - bi-direction replication, changes made to one master are replicated to other masters
 
 ## REPLICATION
 - two major types: logical and physical

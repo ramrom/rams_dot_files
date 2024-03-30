@@ -324,6 +324,7 @@ boolean b2 = (3 == 4);         // b2 stores false
 ```java
 int a = Integer.parseInt("3");    // String -> int
 int a = Integer.parseInt("foo");  // will raise NumberFormatException, also for int too big
+Integer.valueOf("1");        // String -> Integer, and allows null inputs unlike parseInt
 Integer.toString(3)     // converts to String "3"
 
 float f = Float.parseFloat("25.1");    // String -> Float

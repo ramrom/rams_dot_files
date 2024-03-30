@@ -13,6 +13,7 @@ function ldrallytools() { load('/Users/sreeram.mittapalli/code/rally_ram_dot_fil
 function ldramtools() { load('/Users/sreeram.mittapalli/rams_dot_files/mongo/mongo_ram_tools.js'); }
 
 // http://tylerbrock.github.com/mongo-hacker
+// TODO: mar'24 - above not maintained - it links to https://github.com/mongodb-js/mongosh
 function ldmongohacker() {
     if (typeof(mongo_hacker_config) == "object") {  // loading the js multiple times definitely will screw things up
         print("!! mongo_hacker_config object defined, mongo hacker already loaded!!")
