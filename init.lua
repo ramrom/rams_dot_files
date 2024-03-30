@@ -1156,8 +1156,8 @@ vim.keymap.set('v', '<C-n>', '<S->>gv')
 vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
 --- ADD NEWLINE AND STAY IN NORMAL 
-vim.keymap.set("n", "<C-j>", "o<Esc>")
-vim.keymap.set("n", "<C-g>", "O<Esc>")
+vim.keymap.set("n", "<C-h>", "O<Esc>")   -- C-h, per help same as BS, or move right one space
+vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
 -- vim.keymap.set("n", "<BS>", "O<Esc>")
 
 --------- FZF ---------------------
