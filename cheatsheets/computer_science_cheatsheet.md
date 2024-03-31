@@ -1,6 +1,21 @@
 # COMPUTER SCIENCE
 - null character value, represented as ASCII code point zero, bits will all be zero value
 
+
+## NUMERIC REPRESENTATIONS
+### TWOS COMPLEMENT
+- unlike one's complement, there is only one representation for zero
+- arithmetic implementations can use both signed and unsigned values
+### IEEE754 FLOAT
+- has 2 representations for zero
+### BASE2 REPRESENTATION OF BASE10
+- cant reprent base10 `0.1` in base2 in finite way, in binary it repeats forever: `0.00011001100110011...`
+    - types like java `BigDecimal` can represent these values
+- floating point in any laungage of `0.1` is not exactly `0.1`
+- https://www.educative.io/answers/why-does-01-not-exist-in-floating-point
+
+
+## MEMORY
 ### PASS BY VALUE VS REFERENCE
 - refers to the nature of variables
     - pass-by-value means value is pass to the function
@@ -17,23 +32,14 @@ public static void main(String[] args) {
     System.out.println(bar.data);       // this prints 1 in java, if java was pass-by-ref it would print 2
 }
 ```
-
-### BASE2 REPRESENTATION OF BASE10
-- cant reprent base10 `0.1` in base2 in finite way, in binary it repeats forever: `0.00011001100110011...`
-    - types like java `BigDecimal` can represent these values
-- floating point in any laungage of `0.1` is not exactly `0.1`
-- https://www.educative.io/answers/why-does-01-not-exist-in-floating-point
-
-
-## NUMERIC REPRSENTATIONS
-### TWOS COMPLEMENT
-- unlike one's complement, there is only one representation for zero
-- arithmetic implementations can use both signed and unsigned values
-### IEEE754 FLOAT
-- has 2 representations for zero
-
-## MEMORY ALIGNMENT
+### MEMORY ALIGNMENT
 - n-byte (where n is a power of 2) alignment means the address has a minimum of log2(n) least-significant zeros when represented in binary
+### ALLOCATION
+- arena(zone/area) allocation strategy
+    - esentially allocating a very large contiguous chunk of heap memory and managing it yourself, then deallocating the entire thing
+    - purported advantages are that many normal allocators (e.g. libc `malloc` and `free`) are slower and inefficient in some cases
+    - an arena is very similar to stack allocation in this respect, except arenas can last longer than the stack frame
+
 
 ## CONCURRENCY
 ### PROCESSES VS THREADS
@@ -48,6 +54,7 @@ public static void main(String[] args) {
     - https://en.wikipedia.org/wiki/Read%E2%80%93modify%E2%80%93write
 - spin locks implementation is where thread will loop constantly to check if lock is unlocked, a type of busy waiting
 
+
 ## ATOMICS
 - MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
     - MESI is acronym for 4 states: **M**odify **E**xclusive **S**hared **I**nvalid
@@ -61,6 +68,7 @@ public static void main(String[] args) {
 ### ORDERING
 - good quick blog post: https://fy.blackhats.net.au/blog/2019-07-16-cpu-atomics-and-orderings-explained/
 - jon gjengset 3hr rust vid: https://www.youtube.com/watch?v=rMGWeSjctlY&t=5188s&ab_channel=JonGjengset
+
 
 ## DATA STRUCTURES
 ### TREES
@@ -104,6 +112,23 @@ public static void main(String[] args) {
     - recursion will generally be fewer lines of code
 - circuit-breaker - detect a recurrent failure and handle that failing element better
     - one general strategy is after some thresholds of failures stop attempting the expensive operation
+- dependency injection - A class accepts the objects it requires from an injector instead of creating the objects directly
+- object pool - dont alloc/dealloc all the time, reuse the same memory
+    - same idea as thread pools and connection pools but for objects
+- RAII - resource acquisition is initialization - resources are tied to their objects and their lifetimes, released with the object death
+- singleton - single global instance of class, class can have only one instance and has global scope
+- observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
+    - very similar to pub/sub in that it decouples 2 related entities, observer pattern is usually implemented intra-process
+
+## PHILOSOPHIES AND DESIGN
+- [SOLID](https://en.wikipedia.org/wiki/SOLID)
+    - SRP - single responsibility principle
+    - interface segregation principle - Clients should not be forced to depend upon interfaces that they do not use
+    - Liskov substitution principle 
+        - Functions that use pointers/references to base classes must be able to use objects of derived classes without knowing it
+    - open-closed principle - component should be open for extension, not modification
+    - dependency inversion - depend on abstractions, not concretes
+- REST - representational state transfer
 
 ## LOGIC
 - "switch" statements are usually compiled to lookup tables or hash lists in most languages

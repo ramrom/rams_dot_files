@@ -284,6 +284,7 @@ sb.toString();          // covert to a string when done
 
 Arrays.toString(new int[] { 1,2,3})  // will create string "[1,2,3]"
 System.out.println(Arrays.toString(new int[] { 1,2,3}))  // will print above to STDOUT, good for debug printing
+Arrays.deepToString(new int[] {{1,2},{3,4}})  // deepToString for nested arrays
 
 class Foo { int i; Foo(int i) { this.i = i; }; public String toString() { return "{ i: " + i + "}"; } }
 var foos = new Foo[] { new Foo(1), new Foo(2) }

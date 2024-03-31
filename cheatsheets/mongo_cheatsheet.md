@@ -1,4 +1,6 @@
 # MONGO CHEATSHEET
+- BSON - a binary json data type created by mongodb team and used in mongodb
+    - also has types like datetime, floating point, byte array and other that json doesn't
 
 ```javascript
 //load external file

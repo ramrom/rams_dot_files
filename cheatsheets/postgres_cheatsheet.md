@@ -1,5 +1,17 @@
 # POSTGRES
 - also see [datastore](datastore_cheatsheet.md)
+- decent blog on postgres jsonb vs mongodb
+    - https://medium.com/@yurexus/can-postgresql-with-its-jsonb-column-type-replace-mongodb-30dc7feffaf3
+
+## TYPES
+- `json` - same as varchar or string, but enforces it's a valid json string
+- `jsonb` - binary format of json, takes more time to store, but you can build indexes on it
+    - postgres team was looking at mongodb `bson` but went with their own instead
+
+## INDEXES
+- BTREE
+- GIN - generalized inverted index
+- GIST
 
 ## PSQL
 - `\?` output help menu
