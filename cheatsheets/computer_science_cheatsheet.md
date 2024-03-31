@@ -120,6 +120,14 @@ public static void main(String[] args) {
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
     - very similar to pub/sub in that it decouples 2 related entities, observer pattern is usually implemented intra-process
 
+## FUNCTIONAL CONCEPTS
+- pure function 
+    1. a function that returns same values for same input values
+    2. no side-effects, no mutation of local static or global variables, no I/O
+- referential transparency - when replacing an expression with the concrete value yields the exact same behaviour for the program
+    - not fullfilling this means the code/expression is referentially opaque
+    - there is a fair amount of disagreement on the definition by experts
+
 ## PHILOSOPHIES AND DESIGN
 - [SOLID](https://en.wikipedia.org/wiki/SOLID)
     - SRP - single responsibility principle

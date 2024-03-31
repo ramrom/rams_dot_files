@@ -304,11 +304,12 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - multi-dimensional arrays, e.g. 2D array 6x4 i32: `let a: [[i32; 4]; 6];`
     - slices need to specify subarray: `let sliceofa: &[[i32; 4]] = &a;`
 ### SLICES
-- like arrays but size not known at compile time
+- like arrays but size not known at compile time, it's a kind of reference
 - 2 word object: 1st word is pointer to data, 2nd word is length of slice (word size = usize)
 - allows us to borrow arrays
 - type signature `[T]`, shared/immutable type signature `&[T]`, e.g. `&[i32]`
-    - can't have a "naked" `[T]`, unknown size can't put it on the stack, use pointer redirection like `Box<[T]>` or `Rc<[T]>` or `&[T]`
+    - term "slice" is overloaded: almost always means `&[T]`, a fat pointer(address + len), not `[T]`
+    - "naked" `[T]` has unknown size, can't put it on the stack, use pointer redirection like `Box<[T]>` or `Rc<[T]>` or `&[T]`
 - mutable type signature `&mut [T]`
 - `let a = [1 ,2, 3, 4]; let s = &a` - `s` is a reference and immutable borrow here, `&a` is slice containing all of `a`
     - `let s = &a[0..2]` - borrow just first and second of `a`, ending index is non-inclusive

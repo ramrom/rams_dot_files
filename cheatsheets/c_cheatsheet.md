@@ -144,10 +144,13 @@ void foo() {
     int abc[2][] = { 1, 2, 3 ,4 } /* Invalid because of the same reason  mentioned above*/
     ```
 - 2D array - `a[i][j]`
-    - static alloc - `int a[3][3];`
+    - static(stack) alloc - `int a[3][3];`
         - can initialize - `int A[3][3]={{1,2,3},{4,5,6},{7,8,9}};`
         - entirely occupies one contiguous area of memory, so for 3x3, `a[0][2]` is right before `a[1][0]` in memory location
-    - dynamic alloc
+    - there is dynamic stack allocation in C99 - `void creatarr(int size) { int arr[size]; }`  , `arr` is dynamically size on stack
+        - https://stackoverflow.com/questions/27859822/is-it-possible-to-have-stack-allocated-arrays-with-the-size-determined-at-runtim
+        - it's apparently not a good idea for various reasons
+    - dynamic(heap) alloc
         - `int *a = mallco(3 * 3 * sizeof(int));`
             - efficient, one `malloc` call, contiguous in memory
             - _but_ cant use `a[x][x]` indexing syntax, can do `a[i*M + j]`
