@@ -10,6 +10,13 @@
 
 ## MEMORY
 - good article on memory alignment and padding: https://go101.org/article/memory-layout.html
+### GC
+- compiler performs escape analysis: determine if data goes on heap or stack
+    - if data is used outside of scope (e.g. data is returned) it needs to be on the heap
+    - other cases are if data is really big, it'll be on the heap
+
+## TYPE SYSTEM
+- has pointers for "pass by reference" style, but you cant do pointer arithmetic like C/C++
 
 ## LEARNING GUIDES
 - good quick intro: https://www.golang-book.com/books/intro
@@ -19,10 +26,6 @@
 ## HISTORY
 - 1.18 added generics
 
-## GC
-- compiler performs escape analysis: determine if data goes on heap or stack
-    - if data is used outside of scope (e.g. data is returned) it needs to be on the heap
-    - other cases are if data is really big, it'll be on the heap
 
 ## CONCURRENCY
 - blog opinion on why channels not so great: https://www.jtolio.com/2016/03/go-channels-are-bad-and-you-should-feel-bad/
@@ -32,8 +35,9 @@
     - uses stdlib's big.Int
 - protobuf: https://github.com/golang/protobuf
 
-## print src code for go doc symbol/type/func
-go doc -src fmt.Println
+## DOCS
+- print src code for go doc symbol/type/func
+    - `go doc -src fmt.Println`
 
 ## RUNTIME SCHEDULING
 - https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
@@ -42,7 +46,7 @@ go doc -src fmt.Println
     - yield points are injected in parts of code to allow runtime to pre-empt to ensure fair scheduling
 - GC generally done by concurrently running dedicated goroutines
 
-# GO MOD
+# DEPENDENCY MANAGEMENT
 - module is collection of packages
 - https://blog.golang.org/using-go-modules
 - `go.mod` specifies dependent modules/packages, `go.sum` contains crypto hashes of specific mod packages
