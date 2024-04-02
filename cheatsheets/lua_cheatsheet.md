@@ -16,6 +16,8 @@
 - LuaJIT only supports Lua 5.1
 - often used as "scripting engines" for extensibility 
     - big applications like nginx, redis, neovim, vlc, apache HTTP server, weeChat, wireshark
+- LuaJIT is only like 8k lines of extra code!!!
+    - https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_features.html
 
 ## FEATURES
 - has "metamechanisms" to build complex language features: tables, closures, coroutines
@@ -34,6 +36,14 @@
 
 ## CONTROL STRUCTURES AND LOOPS
 ```lua
+if (a = 1) then
+    print("hi")
+elseif (b=2) then
+    print("b="..b)
+else
+    print("else")
+end
+
 while (i < 10) do
     i = i + 1
     if (z == 30) then break end  -- break will exit the current loop scope
@@ -90,7 +100,8 @@ onearg "dude"
     - the `:` operator is syntax suger for adding `self` param to func call
     - so `a:inc(3)` is equivalent to `a.inc(a, 3)`
     - operator makes it more OOP-like
-- `setmetatable` is a function build into the language
+- metatables are tables with functions in it
+- `setmetatable` is a function build into the language, lets you override behaviour of other tables
     - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
 - OOP style can be simulated with the `:` and `setmetatable` features
 - key/value("associate-array"-like) items dont affect the index order of non-key/value ("array"-like) items
@@ -125,19 +136,19 @@ onearg "dude"
 - api is exposed throgh `coroutine` table
 - programmer sets yield points to yield control, programmer has to resume exection
 - each coroutine has it's own stack and local vars
-- examples
-    ```lua
-    c = coroutine.create(function() print('hi') end); 
-    print(c) -- thread: 0x8071d98
-    print(coroutine.status(c))  -- suspended
-    coroutine.resume(c)  -- prints hi
-    print(coroutine.status(c))  -- dead
+```lua
+-- examples
+c = coroutine.create(function() print('hi') end); 
+print(c) -- thread: 0x8071d98
+print(coroutine.status(c))  -- suspended
+coroutine.resume(c)  -- prints hi
+print(coroutine.status(c))  -- dead
 
-    c2 = coroutine.create(function() print('hi'); coroutine.yield(); print('hi again') end); 
-    coroutine.resume(c2)  -- prints hi
-    coroutine.resume(c2)  -- prints hi again
-    print(coroutine.status(c2))  -- dead
-    ```
+c2 = coroutine.create(function() print('hi'); coroutine.yield(); print('hi again') end); 
+coroutine.resume(c2)  -- prints hi
+coroutine.resume(c2)  -- prints hi again
+print(coroutine.status(c2))  -- dead
+```
 
 ## HELPFUL CODE
 - deep query a table, handling nils

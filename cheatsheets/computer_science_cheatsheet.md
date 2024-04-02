@@ -112,6 +112,9 @@ public static void main(String[] args) {
     - recursion will generally be fewer lines of code
 - circuit-breaker - detect a recurrent failure and handle that failing element better
     - one general strategy is after some thresholds of failures stop attempting the expensive operation
+- retry logic 
+    - exponential back off - if we keep failing wait longer than the last time before trying
+    - jitter - add random offset to retry so many entities retrying arent sync'd
 - dependency injection - A class accepts the objects it requires from an injector instead of creating the objects directly
 - object pool - dont alloc/dealloc all the time, reuse the same memory
     - same idea as thread pools and connection pools but for objects
@@ -127,6 +130,10 @@ public static void main(String[] args) {
 - referential transparency - when replacing an expression with the concrete value yields the exact same behaviour for the program
     - not fullfilling this means the code/expression is referentially opaque
     - there is a fair amount of disagreement on the definition by experts
+- eventual consistency - when a cluster eventually will all reach the same state
+    - e.g. postgres replicas/followers are always behind to some degree, but will eventually get all the writes
+- tunable consistency - e.g. cassandra offers this
+- dead-letter queue - a store for when jobs cant be routed to their destinations
 
 ## PHILOSOPHIES AND DESIGN
 - [SOLID](https://en.wikipedia.org/wiki/SOLID)
@@ -137,6 +144,8 @@ public static void main(String[] args) {
     - open-closed principle - component should be open for extension, not modification
     - dependency inversion - depend on abstractions, not concretes
 - REST - representational state transfer
+- batch processing - generally non-real time, usually store data to persistent store, then can slowly process it background
+- stream processing - real-time crunching of data, generally no persistent data store step as data is received
 
 ## LOGIC
 - "switch" statements are usually compiled to lookup tables or hash lists in most languages

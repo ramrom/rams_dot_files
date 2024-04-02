@@ -77,16 +77,16 @@ mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 
+// BINARY SEARCH
+class Foo { int i; Foo(int i) { this.i = i;} // #implement Comparable interface } 
+var arr = new Foo[] { new Foo(1), new Foo(2); }; var key = new Foo(2); int startidx = 0; int endidx = 1;
+Arrays.binarySearch(arr, startidx, endidx, key);
+
 
 // SORTING
 mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies existing list
 Arrays.parallelSort(mylist);    // multithreaded sort, uses merge sort (breaks array into subarrays, forkjoin pool for parralelism)
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
-
-// BINARY SEARCH
-class Foo { int i; Foo(int i) { this.i = i;} // #implement Comparable interface } 
-var arr = new Foo[] { new Foo(1), new Foo(2); }; var key = new Foo(2); int startidx = 0; int endidx = 1;
-Arrays.binarySearch(arr, startidx, endidx, key);
 
 Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
 // if mylist type doesnt implement Comparable interface can pass in anon class of Comparator interface
@@ -144,6 +144,8 @@ HashSet<String> hsnew = new HashSet<>(hs)  //  create a new set initialized with
 
 String[] s = new String[hs.size()];
 hs.toArray(s); // convert set to Array of strings, NOTE: toArray returns type Object[]
+int i=0;
+for (String s: hs) { s[i] = s; i++; }  // prolly easiest way to convert to String[]
 
 // iterate over items in set
 var iter = hs.iterator();
@@ -173,12 +175,25 @@ m.put("foo", 3);
 m.get("boo");       // returns null if it doesnt exist
 m.remove("foo");    // returns null if it doesnt exit, the value of the key if key does exist
 m.size();           // return number of items
+m.getOrDefault(4, 1)   // if get value doesnt exist return the default value in 2nd arg
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 
 // can specify initial capacity, default is 16, use if size of dataset is know prehand
 // load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
 HashMap<String, Integer> m = new HashMap<String, Integer>(100); // can pass in initial capacity argument
 var m = new LinkedHashMap<Integer, Integer>();  // hashmap that maintains insertion order
+m.keySet()      // return a Set containing all the keys
+m.valueSet()      // return a Set containing all the values
+
+// iterating over a map
+Map<String, String> map = ...
+for (Map.Entry<String, String> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + "/" + entry.getValue());
+}
+// java10+
+for (var entry : map.entrySet()) {
+    System.out.println(entry.getKey() + "/" + entry.getValue());
+}
 ```
 ### STACKS
 ```java
@@ -294,6 +309,8 @@ System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
 ## PRIMITIVE TYPES
 - 8 primitive types: Java-byte, short, char, int, long, double, float, boolean
 - `int` - 4 bytes, `short` - 2 bytes, `long` 8 bytes, `byte` - 1 byte
+    - all are signed 2's complement
+    - `char` is 16bit unsigned
 ### CHARACTER
 - `Character` is wrapper for `char`
 - `Character.isDigit('3')`   - returns true
@@ -573,6 +590,7 @@ finally { .. }  // finally is always exected
     - uses the reactor pattern
     - uses java NIO channels - non-blocking IO
 ### NIO
+- added in java 1.4
 - new input/output - collection of java APIs for heavy IO ops
 ### REACTIVE STREAMS
 - really a standard for async stream processing, also supports non-blocking backpressure

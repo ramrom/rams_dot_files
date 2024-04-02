@@ -1,6 +1,10 @@
 # DATASTORES
 - for postgres see [postgres](postgres_cheatsheet.md)
 
+## CONCEPTS
+- normalization - reducing the duplication of data to different levels
+- NoSQL: term can refer to many different paradigms bug are generally: column, document, key-value, and graph
+
 
 ## RELATIONAL
 - cardinality - the amount of unique values in a column relative to the table size
@@ -20,6 +24,34 @@
     - great for `<`, `>`, `=` on primitve data types
 ### DOCS
 - https://use-the-index-luke.com/
+
+## COLUMN DB
+### HBASE 
+- unlike cassandra has leader/master based replication
+- also wide-column like cassandra
+### CASSANDRA
+- doesnt have a master/leader, uses masterless async replication peer-to-peer communication
+- data is replicated between the peers
+- uses gossip protocol to send new state data to neighbors
+- uses quorum writes - send requests to replicate data in many other nodes, dont have to wait for all nodes to respond
+- reqd quorum - if a minimum number of nodes agree on a response it is used
+
+## DOCUMENT DB
+- dynamodb - created by AWS
+### MONGO
+- uses leader-based replication
+- also see [mongo](mongo_cheatsheet.md)
+
+## KEY-VALUE
+- memcached
+- redis
+
+## TIME SERIES
+- graphite
+- influxDB
+
+## GRAPH
+- Neo4j
 
 ## LOCKS
 - pessimistic vs optimistic
@@ -41,3 +73,8 @@
 - `.tables` - list tables
 - `.schema footable` - get a table's description
 - `.mode line` - display each records column in seperate line
+
+## TECH
+- vitess - a db clustering system using mysql, created by google
+    - each mysql server is a horizontal shard abstracted as a single entity by vitess
+    - used by youtube sincd 2011, composed of tens of thousands of mysql instances

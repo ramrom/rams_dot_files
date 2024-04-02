@@ -257,8 +257,13 @@
 - RPC - Remote Procedure Call
 
 ## DATA FORMATS
+### TEXT
 - JSON
 - XML
+- CSV
+### BINARY
+- messagepack
+- apache avro
 - ProtoBufs
     - serialized data is pretty compact, integers representation can have variable bit length
 - Capt'n'Proto

@@ -692,6 +692,7 @@ let s2 = String::from("hello");  // type String is mutable
     - generally faster than react!
     - uses a `html!` macro to generate valid html at rust compile time!
 - [tauri](https://tauri.app/) - build native apps for desktop and mobile
+- [pprof](https://github.com/tikv/pprof-rs) - good profiler, flame graphs, like golangs pprof
 - CLI
     - [clap](https://docs.rs/clap/latest/clap/) - awesome CLI argument parser lib
     - [colored](https://lib.rs/crates/colored) - good ANSI terminal color lib for strings
