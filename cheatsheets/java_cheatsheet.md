@@ -64,6 +64,9 @@ var clone = y.clone();  // make a copy of the array
 boolean[][] boolarr = new boolean[1][1];  
 int[][] tdarray = new int[10][20];
 int[][] tdarray = { {1, 3}, {4, 5} };
+Arrays.sort(tdarray, (x,y) -> (x[0] - y[0]))       // sort in ascending order of first element in each sub array
+Arrays.sort(tdarray, (x,y) -> (y[1] - x[1]))       // sort in descending order of second element in each sub array
+System.out.println(Arrays.deepToString(tdarray))  // deepToString great for printing nested arrays
 ```
 ### LIST
 ```java
@@ -221,6 +224,31 @@ queue.element():    // like peek, but throws exception if queue is empty
 queue.poll();     // retreives and removes next item in queue, returns null if empty
 queue.remove();     // like poll but throws exception if queue is empty
 queue.clear();  // clear queue
+```
+#### PRIORITY QUEUE
+- PriorityQueue uses a binary balanced heap data struct, efficiently get lowest(or highest) priority item (O(logN) time)
+- the type the queue contains must implement `Comparable` interface or pass in a `Comparator` instance when initializing queue
+```java
+PriorityQueue<Integer> intQ = new PriorityQueue<>();  // uses natural ordering (null comparator)
+PriorityQueue<Integer> intQcomparator = new PriorityQueue<>((Integer c1, Integer c2) -> Integer.compare(c1, c2)); // specify comparator
+
+integerQueueWithComparator.add(3);  // add inserts a item, and heap internall will restructure so root is min(or max)
+integerQueue.add(3);
+integerQueueWithComparator.add(2);
+integerQueue.add(2);
+integerQueue.peek();   // peek will look at root without removing it, this returns 2, null if empty
+
+// poll will remove and return root, returns null if empty
+assertThat(integerQueue.poll()).isEqualTo(2).isEqualTo(integerQueueWithComparator.poll());  // nautral ordering is lowest to highest
+assertThat(integerQueue.poll()).isEqualTo(3).isEqualTo(integerQueueWithComparator.poll());
+integerQueue.remove();   // remove is same as poll, except it throws exception if empty
+
+PriorityQueue<Integer> reversedQueue = new PriorityQueue<>(Collections.reverseOrder());  // inverse ordering of Integer
+
+reversedQueue.add(1); reversedQueue.add(2);
+
+assertThat(reversedQueue.poll()).isEqualTo(2);  // inverse gives higher number first
+assertThat(reversedQueue.poll()).isEqualTo(1);
 ```
 ### COMPOUND TYPES
 ```java

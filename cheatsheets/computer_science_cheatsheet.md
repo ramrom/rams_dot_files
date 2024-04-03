@@ -72,6 +72,10 @@ public static void main(String[] args) {
 
 ## DATA STRUCTURES
 ### TREES
+- binary tree
+    - complete - every level is full except maybe last one, and last level all must be left sided
+    - perfect - every level is full, perfect trees are always complete
+    - full - every node has either 0 children or two
 - BST - binary search tree, a binary tree but ordered
 - B-Tree - stores sorted data, self-balancing
     - has order m, meaning a node can have up to m children, every node except for root and leaves must have at least m/2 children
@@ -86,6 +90,15 @@ public static void main(String[] args) {
 - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
     - the linear search through linked list dominates slowness, and for array moving n/2 items is not that slow (caches good at this)
 - see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
+### HEAP
+- a tree data struct that fullfills the heap property
+    - for a min heap, parent node value is less than it's child nodes values. for max heap it's greater than
+- most often a binary tree, and a complete one
+- performance is `Nlog(k)` - where k is top k things heap tracks, better than `Nlog(N)` for full sort to get top k
+- can be constructed and stored in an array, usually an array is used
+    - parent and children indices are defined based on complete and left-filled leafs properties
+- it is used to implement priority queues (often conflated with heaps)
+    - the next item is the root, which will have the highest or lowest value guaranteed by the heap structure
 ### BLOOM FILTERS
 - probabilistic data struct that quickly and space efficiently finds if item is part of a set
 - it is a fixed size but can represent a set with arbitrarily large number
