@@ -233,10 +233,10 @@ PriorityQueue<Integer> intQ = new PriorityQueue<>();  // uses natural ordering (
 PriorityQueue<Integer> intQcomparator = new PriorityQueue<>((Integer c1, Integer c2) -> Integer.compare(c1, c2)); // specify comparator
 
 integerQueueWithComparator.add(3);  // add inserts a item, and heap internall will restructure so root is min(or max)
-integerQueue.add(3);
+integerQueue.add(3);                // add returns true normally, but for capacity-limited queue, it throws if full
 integerQueueWithComparator.add(2);
-integerQueue.add(2);
-integerQueue.peek();   // peek will look at root without removing it, this returns 2, null if empty
+integerQueue.offer(2);              // offer is same as add but returns false if capacity is reached
+integerQueue.peek();                // peek will look at root without removing it, this returns 2, null if empty
 
 // poll will remove and return root, returns null if empty
 assertThat(integerQueue.poll()).isEqualTo(2).isEqualTo(integerQueueWithComparator.poll());  // nautral ordering is lowest to highest
@@ -354,6 +354,8 @@ System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
 ### NUMBERS
 - a literal `3` is inferred as `int`, a literal `1.0` is inferred as `double`
     - use `1L`(long), `1.0F`(float)
+- hex notation - `long hex = 0xF1FZ`
+- binary notation - `long b = 0b110101011`
 - `var v = 1L`  - `L` means literal type `long`, `1D` - `D` for double, `F` for float
 - `int` vs `Integer` -> `Integer` is class with underlying `int` and adds properties and methods
     - same for `long`/`Long`, `double`/`Double`, `float`/`Float`

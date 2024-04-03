@@ -95,7 +95,7 @@ public static void main(String[] args) {
     - for a min heap, parent node value is less than it's child nodes values. for max heap it's greater than
 - most often a binary tree, and a complete one
 - performance is `Nlog(k)` - where k is top k things heap tracks, better than `Nlog(N)` for full sort to get top k
-- can be constructed and stored in an array, usually an array is used
+- can be constructed and stored in an array, usually an array is used b/c it's fast(no pointer follows to children)
     - parent and children indices are defined based on complete and left-filled leafs properties
 - it is used to implement priority queues (often conflated with heaps)
     - the next item is the root, which will have the highest or lowest value guaranteed by the heap structure
@@ -105,6 +105,8 @@ public static void main(String[] args) {
 - can return false positive not not false negative, i.e. "item maybe part of the set or definitely is not part of the set"
 - adding element never fails, but the more you add the higher the false positive rate
 - can't remove an element beause that might remove more elments that just that one b/c of how it's represented
+- Count min sketch is a counting bloom filter - https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch
+    - uses sub-linear space, innaccurate due to collisions
 
 ## SORTING
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
@@ -159,6 +161,19 @@ public static void main(String[] args) {
 - REST - representational state transfer
 - batch processing - generally non-real time, usually store data to persistent store, then can slowly process it background
 - stream processing - real-time crunching of data, generally no persistent data store step as data is received
+- MapReduce and hadoop
+     - Map -> takes data and breaks it down into smaller key/value pairs(tuples)
+     - Reduce -> takes tuples from map output and combines into smaller set of tuples
+     - HDFS (hadoop distributed file system) - can store petabytes of data
+### LAMBDA ARCHITECTURE
+- uses stream processing and batch processing in parralel to ingest data
+- data comming in is read-only and append only by timestamp
+- batch layer aims at being very accurate, but is slow
+    - Apache Hadoop was big original batch system, but others like Snowflake, Big Query, Redshift came along
+- stream layer is real-time and fast but not accurate, doesnt process all the data
+    - Apache Spark, Apache Storm, Kafka, Knesis
+- serving layer - stores outputs from stream and batch layer for querying
+- described by Nathan Marz in 2011, also introduced the CAP theorem
 
 ## LOGIC
 - "switch" statements are usually compiled to lookup tables or hash lists in most languages

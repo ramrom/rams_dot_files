@@ -4,6 +4,11 @@
 - coffeescript
 - typescript
 
+## INTROSPECTION
+- `typeof` - return a string describing the type
+    - `typeof(3)` -> returns `'number'`, `typeof("foo")` -> `'string'`, `typeof(nil)` -> `'undefined'`
+    - `typeof({})` -> `'object'`, `typeof(false)` -> `'boolean'`, `typeof([1,2])` -> `'object'`
+
 ## NPM
 - node package manager
 - see [build cheat](build_dependency_tools_cheatsheet.md)
