@@ -16,3 +16,4 @@
     - layer 4: TCP, UDP, TLS
 - ELB - elastic load balancer
     - https://aws.amazon.com/elasticloadbalancing/features/
+- Classic load blaancer

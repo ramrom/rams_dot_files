@@ -468,16 +468,18 @@ pulsemixer - volume manager with pulseaudio
     - *NOTE* dec2022 - old and unmaintained, removed from debian and ubuntu22
 - smartmontools - query SMART device, e.g. HDDs and SSDs
     - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
+- dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 - inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
 - lshw - like inxi, display lots of sys info
     - `sudo lshw -C display` - show only info about display/GPU
-- lspci - ls on pci devices
-- stat - get metadata on a file
+- lsusb - `lsusb -D /dev/bus/usb/002/004`
+    - get detailed info about a specific usb device
+- lspci - ls on pci and bus devices
 - lsblk - show block level devices
+- stat - get metadata on a file
 - mkfs - to format a disk partition
 - fdisk - show partitions and block devices, sizes, sectors
 - /etc/fstab - file systems mounted at boot
-- dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
 - efibootmgr - UEFI boot manager, list boot devices and order, change order, delete boot option
 - dkms - cli for dynamic kernel modules
     - `dkms status` - list all loaded kernel modules and show status
@@ -490,8 +492,6 @@ pulsemixer - volume manager with pulseaudio
 - iwlist - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - notify-send - pops up notification
-- lsusb - `lsusb -D /dev/bus/usb/002/004`
-    - get detailed info about a specific usb device
 - upower - sys util, get power/battery info and stats about devices
 - bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices

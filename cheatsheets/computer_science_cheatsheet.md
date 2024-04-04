@@ -74,6 +74,7 @@ public static void main(String[] args) {
 ### TREES
 - binary tree
     - complete - every level is full except maybe last one, and last level all must be left sided
+        - b/c of these properties, particularly left sided compaction on last level, can be represented as an array
     - perfect - every level is full, perfect trees are always complete
     - full - every node has either 0 children or two
 - BST - binary search tree, a binary tree but ordered
@@ -94,11 +95,16 @@ public static void main(String[] args) {
 - a tree data struct that fullfills the heap property
     - for a min heap, parent node value is less than it's child nodes values. for max heap it's greater than
 - most often a binary tree, and a complete one
-- performance is `Nlog(k)` - where k is top k things heap tracks, better than `Nlog(N)` for full sort to get top k
 - can be constructed and stored in an array, usually an array is used b/c it's fast(no pointer follows to children)
     - parent and children indices are defined based on complete and left-filled leafs properties
 - it is used to implement priority queues (often conflated with heaps)
-    - the next item is the root, which will have the highest or lowest value guaranteed by the heap structure
+- PERFORMANCE
+    - deletion -> `O(1)` for removing root, then take right most leaf put it at root, and bubble down, `log(N)` worse case to bubble down
+        - bubble: if larger(min heap) than either child, then swap with smaller of two children
+    - insertion -> add node to last leaf, then bubble up until it's greater than parent(min heap), `log(N)` worst case bubble to root
+    - removing top k items -> takes `Nlog(k)` time, better than `Nlog(N)` for full sort of data and then get top k
+        - the next item is the root, which will have the highest or lowest value guaranteed by the heap structure
+- heapsort uses a heap and runs in `O(Nlog(N))`
 ### BLOOM FILTERS
 - probabilistic data struct that quickly and space efficiently finds if item is part of a set
 - it is a fixed size but can represent a set with arbitrarily large number
@@ -107,13 +113,37 @@ public static void main(String[] args) {
 - can't remove an element beause that might remove more elments that just that one b/c of how it's represented
 - Count min sketch is a counting bloom filter - https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch
     - uses sub-linear space, innaccurate due to collisions
+### CACHE
+- LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
+    - head of linkedlist is most recent, and tail is least recent
+#### DISTRIBUTED CACHE
+- usually TCP/UDP used to talk to cache server/shards (b/c it's fast)
+- usually use a client lib, it figures out which cache shard to hit
+    - store all servers in sorted order, use binary search to find server
+    - server discovery: 1. deploy-time file, 2. list in shared db that services call periodically to refresh
+        - 3. use configuration service(e.g. aws zookeeper), cache shards send heartbeats to config server for health
+            - services periodically talk to config service to udpate their server list
+- which shard holds which keys
+    - mod hashing - mod on hashkey is naive approach to determine cache shart to query (lots of misses when adding/removing shards)
+    - consistent hashing is good algo, way fewer cache misses
+        - disadvantages: the circle is not split evenly
+        - disadvantage: domino effect, a server failure causes it's whole load to go to next shard, and that can snowball
+        - simple mitigations: have a server appear multiple times on circle
+        - good algos: jump hash by google in 2014, or yahoo video platform proportional hashing
+- heirarchical cache strategy - service check a local cache (in-memory) before checking a distribted cache
+    - often the cache client will implement the local cache
+- cache server picking
+    - client lib could do heavy lifting of maintaing list
+    - proxy server, all client libs call proxy, and proxy figures out which cache shard to hit
+    - client lib hits a random cache shard, and cache shard reroutes to proper shard, redis clusters do this
 
 ## SORTING
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
 - merge sort - divide and conquer, O(nlogn)
     - can be parralelized
     - generally not done in-place so lots of extra space, _can_ be done in-place, but is hard
-- quick sort - divide and conquer, O(nlogn), in-place (no extra space)
+- quick sort - divide and conquer, O(nlogn), in-place (no extra space), worst case O(n^2)
+- heap sort - uses a heap, O(nlogn), not stable, in-place, worst case O(nlogN)
 
 ## PROGRAMMING LANGUAGES
 - ML (meta language) - functional
