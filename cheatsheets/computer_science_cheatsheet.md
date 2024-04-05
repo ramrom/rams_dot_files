@@ -167,6 +167,11 @@ public static void main(String[] args) {
 - singleton - single global instance of class, class can have only one instance and has global scope
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
     - very similar to pub/sub in that it decouples 2 related entities, observer pattern is usually implemented intra-process
+- leaky bucket
+    - a buffer/queue with some capacity, items are "leaked" at a fixed rate
+    - if items are added faster than they are leaked, when capacity is reached, they are thrown away
+    - common algo used for rate-limiting, it's a great way to see if traffic conforms to some average rate or exceeds it
+    - used often in packet switched networks, ATM uses it
 
 ## FUNCTIONAL CONCEPTS
 - pure function 

@@ -416,7 +416,15 @@ pulsemixer - volume manager with pulseaudio
     pulsemixer --mute
     pulsemixer --change-volume +5
 
+## KERNEL MODULES
+- can be dynamically loaded/unloaded from kernel at runtime
+- great for easily removing/adding device drivers without rebooting
+    - so needed for things like usb storage drives, usb bluetooth devices, basically any usb dongle device
+
 ## DEVICES
+- kernel drivers interact directly with hardware
+    - handle all hardware devices like: graphics cards, NICs, keyboards/mice, sound card, etc.
+    - they are loaded with kernel code at boot, in kernel privileged mode
 - device drivers are basically part of the kernel (prolly make up 50% of the code or more)
     - old hardware support does get removed but conservatively, e.g. kernel3.8 removed i386 intel support
 - `hidraw` - raw data access to HID(human interface device)s - https://docs.kernel.org/hid/hidraw.html
@@ -440,6 +448,10 @@ pulsemixer - volume manager with pulseaudio
 - /dev/zero   - obtain null characters from this device
     - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
 - /dev/random - generate pseduorandom numbers from this device
+### GRAPHIC DEVICES
+- nvidia propietary drivers - https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers
+    - drivers compiled against kernel: composed of a kernel module and X11 driver
+- ubuntu(like around 2022) - uses nouveau open source drivers as default if nvidia GPU exists
 
 
 ## FILE SYSTEMS
