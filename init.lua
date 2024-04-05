@@ -1097,8 +1097,9 @@ vim.g.mapleader = " "
         -- ;  - semicolon repeats last f/F motions
         -- ,  - in reverse direction
     -- INSERT MODE
-        -- c-s, c-space
--- TODO: i think these maps are probably useful
+        -- c-b, c-v, c-s, c-space, c-y
+
+-- TODO: i think this map is probably useful
 -- vim.keymap.set("n", "<C-j>", "a<CR><Esc>k$")
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
@@ -1156,8 +1157,11 @@ vim.keymap.set('n', '<C-p>', '<<')
 vim.keymap.set('v', '<C-n>', '<S->>gv')
 vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
---- ADD NEWLINE AND STAY IN NORMAL 
+--- ADD NEWLINE AND STAY IN NORMAL
 vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
+
+-- GOTO END OF LINE IN INSERT MODE
+vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-g default is to print file name and other metadata
 
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })

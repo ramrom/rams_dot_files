@@ -377,10 +377,10 @@ C             " make selected dir node the new root node
 
 ## INSERT MODE
 Esc - exit insert mode
-C-[ - exit insert mode (most sysmtes, htting esc is this char)
+C-[ - exit insert mode (most systems, hitting esc is this char)
 C-C - exit insert mode, dont trigger autocommands
-C-T - insert shiftwidth of indent
 C-I - same as Tab
+C-T - insert shiftwidth of indent
 C-D - un-indent current line by shiftwidth
 C-J - begin new line
 C-M - begin new line
@@ -398,7 +398,7 @@ C-X - subcommand mode used with autocomplete stuff
 C-G k - move cursor up one
 C-G j - move cursor down one
 C-R i - insert from reg i
-C-L - when insertmode on, go to normal mode
+C-L - search backwards for line that starts with the same chars as in current line b4 cursor
 C-K - enter char with digraph, e.g. ñ or ë
 C-Y - insert char above the cursor
 C-E - insert char below the cursor
@@ -470,6 +470,7 @@ B - jump backwards to the start of a word
     (default supported pairs: '()', '{}', '[]'
     - use <code>:h matchpairs</code> in vim for more info)
 0 - jump to the start of the line
+| - jump to the start of the line
 ^ - jump to the first non-blank character of the line
 _ - jump to the first non-blank character of the line
 $ - jump to the end of the line
