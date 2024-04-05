@@ -9,5 +9,5 @@ ht="100%"; [ -n "$half" ] && ht="50%"
 
 git branch -a --color=always | grep -v '/HEAD\s' | sort |
 fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
-    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES  |
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)'$LINES  |
 sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'

@@ -15,6 +15,8 @@
     - get all values for a config key from system, global, and local; as well as where those files are located as well
 
 ```sh
+git branch --delete foobranch  #delete a local branch
+
 git rm -rf --cached foo bar # keep on disk but rm from git
 git show-ref --tags         # tags with it's commit
 git show-ref --tags -d      # above + what commit tag points to

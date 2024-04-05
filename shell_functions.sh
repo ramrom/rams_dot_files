@@ -42,7 +42,7 @@ function require_vars() {
     return 0
 }
 
-# TODO: /bin/sh in osx does not like the printf's
+# FIXME: /bin/sh in osx does not like the printf's
 function debug_vars() {
     local spacing="\n"; [ -n "$tab" ] && spacing=";    "
 
@@ -260,15 +260,17 @@ function display_notif() {
 
 ############### OSX ############################################
 
-# TODO: oftentimes do nothing, peeps rec brew brightness tool
-function osx_inc_brightness() { osascript -e 'tell application "System Events"' -e 'key code 144' -e ' end tell'; }
-function osx_dec_brightness() { osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell'; }
+if [ "$(uname)" = "Darwin" ]; then
+    # FIXME: oftentimes do nothing, peeps rec brew brightness tool
+    function osx_inc_brightness() { osascript -e 'tell application "System Events"' -e 'key code 144' -e ' end tell'; }
+    function osx_dec_brightness() { osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell'; }
 
-function osx_activate_slack() { osascript -e 'tell application "Slack" to activate'; }
+    function osx_activate_slack() { osascript -e 'tell application "Slack" to activate'; }
 
-function osx_mute() { osascript -e "set Volume 0"; }
-function osx_set_volume() { osascript -e "set Volume $1"; }   # 0 mute, 10 max
-function osx_get_volume() { osascript -e 'get volume settings'; }
+    function osx_mute() { osascript -e "set Volume 0"; }
+    function osx_set_volume() { osascript -e "set Volume $1"; }   # 0 mute, 10 max
+    function osx_get_volume() { osascript -e 'get volume settings'; }
+fi
 
 #################### IOT ###################################################
 function toggle_bulb() {
@@ -368,8 +370,6 @@ function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 function terminate_db_connections() {
     psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres
 }
-
-function ruby_base64_dec() { ruby -e 'require "base64"; puts Base64.decode64(ARGV[0])' "$@"; }
 
 function yamltojson() {
     ruby -e 'require "yaml"; require "json"; puts YAML.load_file(ARGV[0]).to_json' "$@"

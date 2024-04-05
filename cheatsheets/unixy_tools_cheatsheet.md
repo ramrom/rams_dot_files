@@ -92,13 +92,14 @@ goaccess --log-format=COMBINED logfile.log # specify logformat
     # nginx/apache logs are COMBINED format by default
 
 # BASE64 - encode and decode base64
-echo "foobar" | base64      # encode from stdin
+echo "foobar" | base64                      # encode from stdin
+echo "foobar" | base64 | base64 --decode      # decode from stdin, should print "foobar" here
 
 # COLUMN
 column -t -s, somecsv  # use comma to delimit columns and print csv file with aligned columns
 awk -F',' '{print $2","$4}' some.csv | column -t -s  # only print column 4,2 with aligned columns
 
-# XSV - a tool to manipulate csvs
+# XSV - a tool to manipulate CSVs
 xsv table somecsv.csv  # pretty print table to stdout
 xsv count somecsv.csv  # print # of rows
 

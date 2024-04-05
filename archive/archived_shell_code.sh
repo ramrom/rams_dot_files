@@ -57,6 +57,9 @@ function fullpath() {
     ' "$@"
 }
 
+# use base64 C bin that exists on osx and prolly linux
+function ruby_base64_dec() { ruby -e 'require "base64"; puts Base64.decode64(ARGV[0])' "$@"; }
+
 # BASHRC RUBY
 if [ -d ~/.rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
