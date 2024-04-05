@@ -70,11 +70,20 @@ search:
 
 
 ## FD
-fd -p        - match on full path (default file/dir name)
-fd -e pdf    - find all files with extension pdf
-fd --type f  - close to find, old match on file types
-fd -t f -d 1 -H "foo$" -x ls -al   - find all files in current dir, including hidden, that end in "foo" and run ls -al on them
-fd . somedir/ -x sh -c 'printf "something"; echo {}; echo "hi"'            - use sh trick here to run complex commands
+```sh 
+fd -p        # match on full path (default file/dir name)
+fd -e pdf    # find all files with extension pdf
+fd --type f  # close to find, old match on file types
+
+fd . foo/ -S +2ki    # find all files greater than 2kb in folder foo
+fd . foo/ -S +2ki -x du -hs   # find all files greater than 2kb in folder foo and print their human readable size
+
+# find all files in current dir, including hidden, that end in "foo" and run ls -al on them
+fd -t f -d 1 -H "foo$" -x ls -al
+
+# use sh trick here to run complex commands
+fd . somedir/ -x sh -c 'printf "something"; echo {}; echo "hi"'
+```
 
 
 ## BAT

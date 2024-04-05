@@ -22,7 +22,7 @@ function detect_shell() {
 function cmds_defined() {
     caller_msg=""; [ -n "$caller" ] && caller_msg="caller: $caller -- "
     for cmd in "$@"; do
-        command -v $cmd > /dev/null || { echo >&2 "${caller_msg}${cmd} not defined!" && return 1; }
+        command -v $cmd > /dev/null || { echo >&2 "${caller_msg}ERROR: $(ansi256 -f red ${cmd}) not defined!" && return 1; }
     done
 }
 
@@ -35,7 +35,7 @@ function require_vars() {
         if [ -z "$var_value" ]; then
             vars_required=1
             [ -z "$quiet" ] && \
-                echo "${caller_msg}RLY-ERROR: Variable "$(ansi256 -f yellow "$arg")" is required!" >&2
+                echo "${caller_msg}ERROR: Variable "$(ansi256 -f red "$arg")" is required!" >&2
         fi
     done
     [ "$vars_required" = "1" ] && return 1
@@ -154,7 +154,7 @@ function run_cmd_timestamp() {
 }
 
 # LF shell func wrapper that will change to current dir when quitting
-l() {
+function l() {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
@@ -216,7 +216,7 @@ function ffgt() {  # ff(fuzzy)g(git)t(tag)
         --preview 'git show --color=always {} | head -'$LINES
 }
 
-# fzf query is the rg pattern to filter on, this is what the Rg comamnd in vim#fzf plugin does
+# LIVE GREP: fzf query is the rg pattern to filter on, this is what the Rg comamnd in vim#fzf plugin does
 # TODO: add fzf --expect and optionally edit file if expect given
 # TODO: add preview for more context
 function frgl() {  # frg (live)
@@ -394,15 +394,5 @@ function gsettings_set_keyboard() {
     # gsettings set org.gnome.desktop.peripherals.keyboard numlock-state false
 }
 
-
-function f_findfilesbysize() { sudo find "$1" -type f -size +"$2" | xargs du -sh; }
-
 function tabname { printf "\e]1;$1\a"; }
 function winname { printf "\e]2;$1\a"; }
-
-function fullpath() {
-    ruby -e '
-        $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
-        ARGV.each { |path| puts File.expand_path path }         unless ARGV.empty?
-    ' "$@"
-}

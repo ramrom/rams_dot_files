@@ -1,16 +1,18 @@
-# 'NIX general tooling type stuff
+# UNIXY TOOLS
 
 ## CURL
 - SEE [http cheatsheet](http_web_tls_cheatsheet.md)
 
 ```sh
 # FIND: find files recursive starting with current dir
-find . -type f -name "*pattern*"
+find . -type f -name "*.exe"        #  simpler patterns, find files ending in string .exe
+find . -type f -regex ".*pattern.*"     # search filename using regular expression pattern
 # find all hard links to /path/foo that exist in /searchdir
 find /searchdir/ -samefile /path/foo
 find /searchdir/ -xdev -samefile /path/foo  # xdev means only search same partiion (deviceid) as what foo is on
 find /tmp/ -inum 4065089 # find all hard links with a inode #
 find /foo/bar/ -type d -d 1  -name "*yar*" # find all dirs, search depth 1, has "yar" in name, in dir/foo/bar/
+find foo/ -type f -size +10M | xargs du -sh   # find files > 10mb in filder foo, and then print it's size
 
 # get terminal info
 infocmp
@@ -23,6 +25,9 @@ tac file
 
 # touch - create an empty file
 touch foofile
+
+# readlink - get full absolute path of file (osx coreutils has this)
+readlink foo        # might print /users/foouser/folder/foo
 
 # truncate - shrink or extend file size
 truncate --size 1 foofile  # only keep the first byte of file, truncate rest

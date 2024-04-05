@@ -49,6 +49,14 @@ alias be="bundle exec"
 alias ber="bundle exec rspec"
 alias bi="bundle install"
 
+# apr'24 - use readlink instead
+function fullpath() {
+    ruby -e '
+        $stdin.each_line { |path| puts File.expand_path path }  if ARGV.empty?
+        ARGV.each { |path| puts File.expand_path path }         unless ARGV.empty?
+    ' "$@"
+}
+
 # BASHRC RUBY
 if [ -d ~/.rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"

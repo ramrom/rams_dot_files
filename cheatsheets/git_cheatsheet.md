@@ -1,4 +1,5 @@
 # GIT
+- blog on why facebook migrated to mercurial from git: https://graphite.dev/blog/why-facebook-doesnt-use-git
 
 ## RERFERNCES
 - https://git-scm.com/
