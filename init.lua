@@ -160,6 +160,7 @@ end
 ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_linehl')
     vim.cmd(':Gitsigns toggle_word_diff')
+    vim.cmd(':Gitsigns toggle_current_line_blame')
 end
 
 ToggleIndentBlankLine = function()
@@ -1188,8 +1189,11 @@ vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive p
 vim.keymap.set('n', '<leader>gm', "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "fzf git commits" })
 vim.keymap.set('n', '<leader>gb', "<cmd>lua require('fzf-lua').git_bcommits()<CR>", { desc = "fzf buffer git commits" })
 vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
+vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
+vim.keymap.set('n', '<leader>gL', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
+-- FIXME: apr'24 - opening in new tab basically fails
 vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
 vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
 vim.keymap.set('n', '<leader>gf', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
