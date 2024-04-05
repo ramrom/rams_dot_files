@@ -1104,7 +1104,7 @@ vim.g.mapleader = " "
 -- vim.keymap.set("n", "<C-j>", "a<CR><Esc>k$")
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
-vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only (){}, not if/else/end
+vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only [](){}, not if/else/end
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
@@ -1347,14 +1347,14 @@ if not vim.env.VIM_NOPLUG then
         'nvim-lua/plenary.nvim',
         { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
         { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
-        'nvim-tree/nvim-web-devicons',
         { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
             build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+        'nvim-tree/nvim-web-devicons',
         'tpope/vim-commentary',
         'tpope/vim-surround',
         'tpope/vim-repeat',
 
-        --- COLORSCHEMES
+        --- COLORSCHEME
         -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
         -- { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },

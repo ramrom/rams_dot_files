@@ -37,6 +37,7 @@
 - upgrade all formulas
     `brew upgrade`
     - NOTE: brew does seem to support upgrading just one formula
+- `brew list --cask`  - list all the casks
 - `brew services` -> list services
 - `brew services start redis` -> start a service
 
@@ -133,9 +134,6 @@
 
 ## FILESYSTEMS
 - ISO filesystems can be mounted through disk utitlity application
-- MacFUSE defunct, used to be only way to mount NTFS
-- MacFUSE replaced by OSXFuse (FUSE = Filesystem in USErland)
-    - with Fuse-ext2, can mount a ext2/3/4 filesystem
 - NTFS
     - natively has read only support
     - write support
@@ -148,6 +146,12 @@
 - mount afp share in osx
     mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
 - Finder mount, CMD+k -> someuser@192.168.1.1/folder
+### FUSE
+- with Fuse-ext2, can mount a ext2/3/4 filesystem - https://github.com/alperakcan/fuse-ext2?tab=readme-ov-file
+- aug'21 - MacFUSE issues
+    - sshfs and ntfs-3g brew install fail b/c of macfuse issue (macfuse closed-source or something)
+- may'22 - osxfuse rebranded to macfuse: https://github.com/osxfuse/osxfuse/issues/888
+    - osxfuse github just points to macfuse: https://github.com/osxfuse/osxfuse?tab=readme-ov-file
 
 
 ## OTHER:

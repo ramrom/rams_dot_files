@@ -132,6 +132,9 @@
 -     `:cfirst` and `:clast`
 -     :0Glog      - logs only that change current file
 
+### VIM-COMMENTARY
+- `gcu` or `gcgc` - uncomment current and contiguous adjacent commented lines
+
 ### FIRENVIM
 - https://github.com/glacambre/firenvim
 - INSTALLATION - SEPERATE INIT.LUA FILE
