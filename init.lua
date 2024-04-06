@@ -880,6 +880,31 @@ LoadAutoComplete = function()
     }
 end
 
+--------------------- TABOUT --------------------------------
+LoadTabOut = function()
+    require('tabout').setup {
+        tabkey = '<C-e>', -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = '<C-d>', -- reverse shift default action,
+        enable_backwards = true, -- well ...
+        completion = false, -- if the tabkey is used in a completion pum
+        tabouts = {
+            { open = "'", close = "'" },
+            { open = '"', close = '"' },
+            { open = '`', close = '`' },
+            { open = '(', close = ')' },
+            { open = '[', close = ']' },
+            { open = '{', close = '}' }
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {} -- tabout will ignore these filetypes
+    }
+end
+
+
 ----------------- AUTOPAIR ----------------------------------
 AutoPairConfig = {
    map_c_h = true,  -- Map the <C-h> key to delete a pair
@@ -1165,7 +1190,7 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
 
 -- GOTO END OF LINE IN INSERT MODE
-vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-g default is to print file name and other metadata
+vim.keymap.set("i", "<C-s>", "<C-o>$")   -- C-g default is to print file name and other metadata
 
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
@@ -1198,7 +1223,7 @@ vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 -- FIXME: apr'24 - using the :tab command directly with Gvdiffsplit doesnt work right
     -- vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
--- FIXME: markdown files (vim-markdown or treesitter) dont set foldmethod=diff, folds collapse
+-- FIXME: vim-markdown(treesitter works fine) for md files does not set foldmethod=diff, folds collapse
     -- sorta related https://github.com/tpope/vim-fugitive/issues/1911
 vim.keymap.set('n', '<leader>gd', '<cmd>:tab sb<cr><cmd>Gvdiffsplit<cr>', {desc = "diff from HEAD"})
 vim.keymap.set('n', '<leader>gD', '<cmd>:tab sb<cr><cmd>Gvdiffsplit master<cr>', {desc = "diff from master branch"})
@@ -1398,6 +1423,19 @@ if not vim.env.VIM_NOPLUG then
 
         { 'windwp/nvim-autopairs', event = "InsertEnter", config = true, opts = AutoPairConfig },
         -- { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair, opts = AutoPairConfig }, -- doesnt work
+        { 'abecodes/tabout.nvim',
+            lazy = false,
+            config = LoadTabOut,
+            requires = {
+                "nvim-treesitter/nvim-treesitter",
+                -- "L3MON4D3/LuaSnip",
+                -- "hrsh7th/nvim-cmp"
+            },
+            cond = not vim.env.NO_TAB,
+            opt = true,  -- Set this to true if the plugin is optional
+            event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
+            priority = 1000,
+        },
 
         -- SNIPPETS
         { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },

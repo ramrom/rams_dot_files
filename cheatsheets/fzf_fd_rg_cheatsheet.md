@@ -1,7 +1,7 @@
 # FZF RG FD
 - fd + rg synergy: `fd filenamepattern | xargs rg contentpattern`
     - fd offers more power filtering that rg's globs and whatnot
-    - but rg outputs results nicer, fd's `-x` isnt as nice
+    - rg outputs results nicer, fd's `-x` with rg isnt as pretty, so piping into rg better
 
 ## RG
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax

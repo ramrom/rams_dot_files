@@ -123,6 +123,7 @@ date +"%Z %z"  # print time zone
 date +%s%N     # print nanoseconds (%N doesnt work on OSX)
 gdate +%s.%N   # coreutils package on OSX offers gdate, which can give nanoseconds
 date +%s%3N   # nanoseconds with 3 most sig figs
+perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)'   # not date, but universal way to get millisecond time in any OS
 
 # TIMEDATECTL - controle system time and date, not on OSX
 timedatectl show    # show properties of systemd-timedated
