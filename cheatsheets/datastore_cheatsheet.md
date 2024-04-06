@@ -69,6 +69,7 @@
 - Neo4j - most established and well known
 
 ## SQLLITE
+- an embedded database written in C, it's not a standalone process/server
 - `.quit` - exit the sql client
 - `.tables` - list tables
 - `.schema footable` - get a table's description

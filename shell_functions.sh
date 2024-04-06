@@ -228,11 +228,6 @@ function frgl() {  # frg (live)
         --height=50% --layout=reverse
 }
 
-# actual regex on full path, e.g. ".*go$" (any # of chars, ending literal go)
-function findgrepp() { find . -type f -regex $1 -exec grep $2 ; }
-# last component of pathname, pattern not regex, e.g. ("*go")
-function findgrep() { find . -type f -name $1 -exec grep $2 ; }
-
 # needs psx alias
 function psxg() { psx | grep $1 | grep -v grep; }
 

@@ -13,6 +13,7 @@ find /searchdir/ -xdev -samefile /path/foo  # xdev means only search same partii
 find /tmp/ -inum 4065089 # find all hard links with a inode #
 find /foo/bar/ -type d -d 1  -name "*yar*" # find all dirs, search depth 1, has "yar" in name, in dir/foo/bar/
 find foo/ -type f -size +10M | xargs du -sh   # find files > 10mb in filder foo, and then print it's size
+find . -type f -regex ".*\.exe$" -exec grep foo {} \;    # exec runs a command on each result, grep pattern foo in thise case
 
 # get terminal info
 infocmp
