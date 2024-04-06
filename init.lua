@@ -1196,10 +1196,13 @@ vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer g
 vim.keymap.set('n', '<leader>gL', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
--- FIXME: apr'24 - opening in new tab basically fails
-vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
-vim.keymap.set('n', '<leader>gD', '<cmd>:tab Gvdiffsplit master<cr>', {desc = "diff from master branch"})
-vim.keymap.set('n', '<leader>gf', '<cmd>:tab Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
+-- FIXME: apr'24 - using the :tab command directly with Gvdiffsplit doesnt work right
+    -- vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+-- FIXME: markdown files (vim-markdown or treesitter) dont set foldmethod=diff, folds collapse
+    -- sorta related https://github.com/tpope/vim-fugitive/issues/1911
+vim.keymap.set('n', '<leader>gd', '<cmd>:tab sb<cr><cmd>Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+vim.keymap.set('n', '<leader>gD', '<cmd>:tab sb<cr><cmd>Gvdiffsplit master<cr>', {desc = "diff from master branch"})
+vim.keymap.set('n', '<leader>gf', '<cmd>:tab sb<cr><cmd>Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
 
 ---------- NVIM TREE
 vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
