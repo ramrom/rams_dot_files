@@ -68,6 +68,10 @@ Arrays.sort(tdarray, (x,y) -> (x[0] - y[0]))       // sort in ascending order of
 Arrays.sort(tdarray, (x,y) -> (y[1] - x[1]))       // sort in descending order of second element in each sub array
 System.out.println(Arrays.deepToString(tdarray))  // deepToString great for printing nested arrays
 ```
+### COLLECTION
+- the Collection is a superinterface of List and Set
+- List adds order and can be indexed
+- Set is a Collection that guarantees unique values
 ### LIST
 ```java
 // ArrayList and LinkedList are main implementation of List interface
@@ -124,15 +128,18 @@ var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var
 var strs = new String[]{"hi","there"};
 var alstrs = new ArrayList<String>(Arrays.asList(strs)); // Arrays#asList converts to List<String>, need ArrayList<String>
 
+// create streams
+mylist.stream().forEach(i -> System.out.println(i));
+
 // NESTED LIST
-List<List<Foo>>() ll = new List<ArrayList<Foo>>();        // obviously fails, outer List is abstract here
-List<List<Foo>>() ll = new ArrayList<List<Foo>>();                  // OK
-ArrayList<ArrayList<Foo>>() ll = new ArrayList<ArrayList<Foo>>();   // OK
-List<ArrayList<Foo>>() ll = new ArrayList<ArrayList<Foo>>();        // OK
+List<List<Foo>> ll = new List<ArrayList<Foo>>();        // obviously fails, outer List is abstract here
+List<List<Foo>> ll = new ArrayList<List<Foo>>();                  // OK
+ArrayList<ArrayList<Foo>> ll = new ArrayList<ArrayList<Foo>>();   // OK
+List<ArrayList<Foo>> ll = new ArrayList<ArrayList<Foo>>();        // OK
 // following are throw "incompatible types cant convert" errors
-ArrayList<ArrayList<Foo>>() ll = new ArrayList<List<Foo>>();   // value inner list can be say LinkedList but variable guarantees ArrayList
-ArrayList<List<Foo>>() ll = new ArrayList<ArrayList<Foo>>();   // var inner list implies a LinkedList can be set, but value doesnt
-List<List<Foo>>() ll = new ArrayList<ArrayList<Foo>>();        // same as above
+ArrayList<ArrayList<Foo>> ll = new ArrayList<List<Foo>>();   // value inner list can be say LinkedList but variable guarantees ArrayList
+ArrayList<List<Foo>> ll = new ArrayList<ArrayList<Foo>>();   // var inner list implies a LinkedList can be set, but value doesnt
+List<List<Foo>> ll = new ArrayList<ArrayList<Foo>>();        // same as above
 ```
 ### SET
 ```java
@@ -185,8 +192,13 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 // load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
 HashMap<String, Integer> m = new HashMap<String, Integer>(100); // can pass in initial capacity argument
 var m = new LinkedHashMap<Integer, Integer>();  // hashmap that maintains insertion order
-m.keySet()      // return a Set containing all the keys
-m.valueSet()      // return a Set containing all the values
+
+// getting keys and values
+Set<String> key = m.keySet()                             // return a Set containing all the keys
+Set<Map.Entry<Integer, Integer>> pairs = m.entrySet();  // entrySet returns a set of key-val mappings
+Collection<Integer> vals = m.values()                      // return a Collection of values
+for (v: vals) { System.out.println(v); }                // can iterate over a Collection
+
 
 // iterating over a map
 Map<String, String> map = ...
@@ -197,6 +209,13 @@ for (Map.Entry<String, String> entry : map.entrySet()) {
 for (var entry : map.entrySet()) {
     System.out.println(entry.getKey() + "/" + entry.getValue());
 }
+
+//equality
+map1.equals(map2)  // works if key and value type both support equals method 
+
+// the values of hashmap are a doubly linked list
+// it maintains insertion order, one application is LRU cache
+var lhm = new LinkedHashMap<String, String>();
 ```
 ### STACKS
 ```java
