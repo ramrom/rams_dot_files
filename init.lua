@@ -664,10 +664,8 @@ LoadTreeSitter = function()
             -- NOTE: names of the parsers and not the filetype. (for example if you want to
             -- disable highlighting for the `tex` filetype, you need to include `latex`, this is the name of the parser)
             disable = mark_disabled,
-            -- disable = { "markdown" },
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- additional_vim_regex_highlighting = { "markdown" },
             additional_vim_regex_highlighting = false,
         },
         indent = { enable = true },
@@ -712,6 +710,11 @@ LoadNoice = function()
                 -- mini view will hide after short time, cmdline persists forever...
         },
     }
+
+    -- FIXME: apr'24 - get this working
+    vim.keymap.set("c", "<S-Enter>", function()
+        require("noice").redirect(vim.fn.getcmdline())
+    end, { desc = "Redirect Cmdline" })
 end
 
 ------------------------- FLASH -----------------------------------------------

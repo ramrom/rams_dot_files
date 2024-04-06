@@ -1,3 +1,7 @@
+# FZF RG FD
+- fd and rg synergy:
+    - `fd filenamepattern | xargs rg contentpattern`
+
 ## RG
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
