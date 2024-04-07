@@ -1426,13 +1426,12 @@ if not vim.env.VIM_NOPLUG then
         { 'abecodes/tabout.nvim',
             lazy = false,
             config = LoadTabOut,
-            requires = {
+            dependencies = {
                 "nvim-treesitter/nvim-treesitter",
                 -- "L3MON4D3/LuaSnip",
                 -- "hrsh7th/nvim-cmp"
             },
             cond = not vim.env.NO_TAB,
-            opt = true,  -- Set this to true if the plugin is optional
             event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
             priority = 1000,
         },

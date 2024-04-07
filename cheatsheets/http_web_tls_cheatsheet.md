@@ -9,10 +9,12 @@
     - supports pipelining requests (can send request 2 before waiting for response of request 1)
         - many browsers stopped supporting it, b/c many proxies did not implement pipelining correctly
 - http 2: https://developers.google.com/web/fundamentals/performance/http2
+    - good docs: https://http2.github.io/faq/
     - started as SPDY protocol by google, released by IETF in 2015
     - all data sent as binary (1.1 uses plain text)
     - smallest "packet" is a frame, a message is made up of many frames
     - frames/messages allow multiplexing of many streams, no HOL blocking
+        - with 1.1 clients would do complex strategies with multiple TCP connections to get resources in parralel
         - streams can have priorites, with weights
     - server push - the server can send data without a request
     - has HPACK header compression

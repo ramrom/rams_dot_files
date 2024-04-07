@@ -209,6 +209,11 @@ public static void main(String[] args) {
     - Apache Spark, Apache Storm, Kafka, Knesis
 - serving layer - stores outputs from stream and batch layer for querying
 - described by Nathan Marz in 2011, also introduced the CAP theorem
+- CAP - Consistency Availability Partition-tolerance
+    - C in CAP is different from C in ACID
+    - in a partitioned distrubted system if a partition fails, you can either have consistency or availability
+- Durability usually means does ur system preserve state/data when EVERYTHING fails (total power outage)
+    - so often is your data backed up to persistent storage often
 
 ## LOGIC
 - "switch" statements are usually compiled to lookup tables or hash lists in most languages
