@@ -215,6 +215,7 @@
         - if only one input then the output gets the same lifetime
         - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
 - variance relationships - https://doc.rust-lang.org/reference/subtyping.html
+    - jon genjset on variance - https://www.youtube.com/watch?v=iVYWDIW71jk&t=4953s&ab_channel=JonGjengset
 - `Cow<T>` - Copy-On-Write "pointer", stores a &%, and can convert by cloning the T when you write to it
 ### UNSAFE
 - raw pointers - `*const` and `*mut`
@@ -446,6 +447,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - for manualy drop you can call `std::mem::drop`, e.g. `drop(somevar)`
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 - associated function - belongs to the type itself, doesn't need `self`, the `new` method convention is a common use case of this
+- variance - https://doc.rust-lang.org/nomicon/subtyping.html
 ### TRAITS
 - follows orphan rule
     - cannot implement _external_ traits on _external_ types

@@ -53,6 +53,11 @@ public static void main(String[] args) {
 - mutexes are generally implement with atomics at the low-level in order to aquire locks
     - https://en.wikipedia.org/wiki/Read%E2%80%93modify%E2%80%93write
 - spin locks implementation is where thread will loop constantly to check if lock is unlocked, a type of busy waiting
+- FUTEX (Fast Userspace Mutex) - kernel sys call used to create a mutex lock
+- https://en.wikipedia.org/wiki/Wait-for_graph - technique to prevent deadlocks
+    - a entity tracks shared resources and what entities want/hold them
+    - every entity checks the graph before trying to aquire resources, graph detects if entity's request would cause a deadlock
+    - cycles or knots in the graph indicate if a deadlock could happen
 
 
 ## ATOMICS
@@ -72,20 +77,26 @@ public static void main(String[] args) {
 
 ## DATA STRUCTURES
 ### TREES
-- binary tree
+- k-ary -> node can have k branches/children
+- BINARY TREE
     - complete - every level is full except maybe last one, and last level all must be left sided
         - b/c of these properties, particularly left sided compaction on last level, can be represented as an array
     - perfect - every level is full, perfect trees are always complete
     - full - every node has either 0 children or two
 - BST - binary search tree, a binary tree but ordered
-- B-Tree - stores sorted data, self-balancing
+- B-TREE - stores sorted data, self-balancing
     - has order m, meaning a node can have up to m children, every node except for root and leaves must have at least m/2 children
         - BST is special case of B-Tree with 2 children
     - most common data struct used in database indexes
-- red-black trees - stored ordered data, self-balancing
+- RED-BLACK trees - stored ordered data, self-balancing
     - nodes have a color property, red or black, that help with balancing
     - red nodes can only have black children
-- splay trees
+- SPLAY trees
+- TRIE - sometimes called a prefix tree
+    - type of k-ary search tree, a tree data structure used for locating specific keys from within a set
+    - each node stores one part of the key, a key is constructed from the sum of the parts from the root to it's leaf
+    - one application is build entire dictionary of a language, e.g. english, to see if word is valid
+        - could do a hash map, but trie tells you if a word is a prefix of another valid word quickly
 ### LINKED LISTS
 - rust book - linked lists are generally dumb: https://rust-unofficial.github.io/too-many-lists/
 - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
@@ -149,6 +160,16 @@ public static void main(String[] args) {
 - ML (meta language) - functional
 - OCaml - dialect of ML
 - VHDL
+
+## TYPES
+- covariance/contravariance/invariance - https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
+    - how do subtyping relationship between simple types correspond to their complex types
+    - if `Dog` is subtype of `Animal`, and `List(Dog)` is subtype of `List(Animal)` then List type is covariant
+        - true for OCaml lists, and Rust array and slices
+    - if `func(Animal)->nil` is subtype of `func(Dog)->nil` then this function subtype is contravariant
+        - `func(func(Animal)->nil)` can be passed in where `func(func(Dog)->nil)` but not the other way around
+        - this is try in Ocaml functions, and in Rust for `Fn(T)->()`
+    - in rust variance mostly affects lifetimes - https://doc.rust-lang.org/reference/subtyping.html
 
 ## SOFTWARE PATTERNS
 - iterative vs recursive

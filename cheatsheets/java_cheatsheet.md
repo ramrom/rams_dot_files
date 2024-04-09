@@ -179,7 +179,11 @@ new ArrayList<String>(hs); // can create a ArrayList from the HashSet
 ```
 ### MAP
 ```java
-// HashMap and TreeMap are main implementations of Map interface
+// HashMap and TreeMap are main implementations of AbstractMap class
+    // HashMap, implements Map interface, uses array("buckets"), #hashCode method on key called to find bucket
+        // in collisions a list for that bucket is created
+    // TreeMap, implements NavigableMap interface, uses red-black tree
+    // order guaranteed in TreeMap, not HashMap
 Map<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
 m.put("foo", 3);
 m.get("boo");       // returns null if it doesnt exist
@@ -339,9 +343,12 @@ System.out.println("the formatted string: " + result)
 
 // StringBuilder not thread-safe, similar class StringBuffer is thread-safe
 StringBuilder sb = new StringBuilder();     // fast builder for appending
+StringBuilder sb2 = new StringBuilder("foo");     // initialize with string
 sb.append("foo");       // efficiently append
+sb.length();            // get length
 sb.reverse();           // reverse order of chars
 sb.setCharAt(1, "a");   // change character at index
+sb.deleteCharAt(3);     // delete character at index
 sb.toString();          // covert to a string when done
 
 Arrays.toString(new int[] { 1,2,3})  // will create string "[1,2,3]"
