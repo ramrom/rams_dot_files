@@ -472,6 +472,13 @@ pulsemixer - volume manager with pulseaudio
 - /export   - data shared over the network mount
 - /media    - removable devices like usb (so not internal HDD)
 
+## KERNEL API
+- epoll
+    - kernel add fd to ready list without waiting for process to call `epoll_wait`
+    - when process call `epoll_wait` kernel just returns ready list
+    - good blog - https://copyconstruct.medium.com/the-method-to-epolls-madness-d9d2d6378642
+- select/poll - kernel has to scan all N items when it's asked by process
+    - and a full list of N items is returned, so process has to scan all to find ready ones
 
 
 ## OTHER LINUX/UBUNTU TOOLS
