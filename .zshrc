@@ -113,9 +113,7 @@ fi
 ### RUST
 # set rust PATH if rustc compiler is installed via https://www.rust-lang.org/tools/install
 [ -x ~/.cargo/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
-
-# below line is for a brew install
-# [ -x /opt/homebrew/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"
+# [ -x /opt/homebrew/bin/rustc ] && append_dir_to_path "$HOME/.cargo/bin"   # use this for a brew install
 
 # added zsh completions for rust (cargo and rustup) here
 fpath+=~/.zfunc

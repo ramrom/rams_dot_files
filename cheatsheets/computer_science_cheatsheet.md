@@ -266,6 +266,7 @@ public static void main(String[] args) {
     - in a partitioned distrubted system if a partition fails, you can either have consistency or availability
 - Durability usually means does ur system preserve state/data when EVERYTHING fails (total power outage)
     - so often is your data backed up to persistent storage often
+- backup 3-2-1 rule: at leaset 3 copies of data, on at least 2 different media types, and one in different location
 
 ## LOGIC
 - "switch" statements are usually compiled to lookup tables or hash lists in most languages
