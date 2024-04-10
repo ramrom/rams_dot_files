@@ -1,7 +1,17 @@
 # PUB SUB MESSAGE BUS CHEATSHEET
 
 ## KAFKA
+- apache kafka 2 is like 20% scala (0.7 was like 50%)
+    - 3.1.0 - `core` (most important module) written in scala
 - each partition is replicated on many brokers
+- apache zookeeper often used to maintain kafka cluster
+    - tracks which broker is responsible for which partitions and topics
+- messages
+    - has a key, and hash of key decides target partition
+    - if key is empty, partion field is used
+    - if key and partition empty, then message is round robin sent to all partitions
+- each broker is a seperate server
+    - replicas of partitions are on different brokers
 - brokers support acknowledgement of the delivery of messages from producers, there are 3 acknowledgement modes:
     - acks=0 -> no acks, producer doesnt wait for acks
     - ack=1 -> waits for leader broker ack

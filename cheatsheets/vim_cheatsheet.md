@@ -74,6 +74,9 @@
     - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
 - async libuv shell command - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
 - sync regular shell command - `vim.fn.system({'ls', '-a', '-l'})`
+- get OS name
+    - `:lua print(vim.loop.os_uname().sysname)`
+    - `:lua if vim.fn.has('Linux') then print 'has linux' end`
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
