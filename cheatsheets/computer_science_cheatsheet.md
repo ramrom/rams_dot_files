@@ -267,6 +267,12 @@ public static void main(String[] args) {
 - Durability usually means does ur system preserve state/data when EVERYTHING fails (total power outage)
     - so often is your data backed up to persistent storage often
 - backup 3-2-1 rule: at leaset 3 copies of data, on at least 2 different media types, and one in different location
+- message queues (e.g. kafka, rabbitMQ)
+    - comparison to service-to-service synchronous model:
+        - advantage: can have many consumers receive same message, in p2p each "consumer" would have to be called by "producer"
+        - advantage: can use fewer consumers to process same producer volume
+        - advantage: lower latency, emitting event to queue is fast
+        - advantage: more robust retry, consumer can reenqueue message if it failed
 
 ## LOGIC
 - "switch" statements are usually compiled to lookup tables or hash lists in most languages

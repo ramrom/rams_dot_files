@@ -323,6 +323,16 @@ System.out.println(obj_collection.get(0).data1)     // should print 1
             System.out.println("Entering again"); 
     } }
     ```
+- create a thread - extend `Thread` class and define `run`
+    ```java
+    public class NewThread extends Thread {
+    public void run() {
+        System.out.println(this.getName() + ": New Thread is running...");
+        Thread.sleep(1000);
+    } }
+    ```
+- thread pools `ExecutorService executor = Executors.newFixedThreadPool(10);`
+    - run task in pool - `executor.submit(() -> { new Task(); });`
 
 ## STRINGS
 ```java
