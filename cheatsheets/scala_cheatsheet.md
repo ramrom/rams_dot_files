@@ -226,9 +226,13 @@
 - `for (i <- 1 until 5) println(i)`  - regular for loop
 - `for (i <- List(1,2,3)) println(i)`  - regular for loop
 
+## RANDOM
+- sleep for 1 second: `Thread.sleep(1000)`
+
 ## CONCURRENCY
 ### FUTURES
 - is a monad
+- is *eager*, starts running moment it's declared
 - async with execution contexts: `Future { 1 + 1 }`
     - `import scala.concurrent.ExecutionContext.Implicits.global`
 - an execution context is a abstraction that include a thread pool
@@ -429,22 +433,26 @@
 ## OTHER MAJOR LIBS/FRAMEWORKS
 - [http4s](https://http4s.org/) - minimal highly FP web framework
     - compiles to Scala.js and Scala Native, uses fs2
-- fs2 - streaming library
-- cats: https://typelevel.org/cats/datatypes/ior.html
-    - lots of useful FP types
-- catseffect: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
-    - `IO` type and "non-effecting" types
-- fs2 - streaming and concurrency, build on cats-effects and cats
 - great http lib (inspired by python requests) - https://github.com/com-lihaoyi/requests-scala
 - upickle - https://com-lihaoyi.github.io/upickle/
      - parse json text - `val s:String = """{"a":1}"""; ujson.read(s)`
 - apache kafka 2 is like 20% scala (0.7 was like 50%)
     - 3.1.0 - `core` (most important module) written in scala
 - apache spark is like 70% scala
+### CATS
+- https://typelevel.org/cats/datatypes/ior.html
+- lots of useful FP types
+- CATSEFFECT: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
+    - `IO` type and "non-effecting" types
+- fs2 - streaming library
+    - streaming and concurrency, build on cats-effects and cats
+### ZIO
+- good vid(yr2020): https://www.youtube.com/watch?v=mGxcaQs3JWI&ab_channel=HimanshuYadav
+- ZIO Effect - define computation, purely functional
+    - vs Future: 100x faster, can cancel/timeout, has effect combinators
+    - core type is `ZIO[R, E, A]` - R(env/resources needed) E(error) A(success)
+        - common type aliases using this `Task` `UIO`(cant fail) `TaskR`(needs env) `IO`(returns E)
 ### AKKA
 - one of akka streams main goals is to implement backpressure
 ### SLICK
 - print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
-
-### RANDOM
-- sleep for 1 second: `Thread.sleep(1000)`

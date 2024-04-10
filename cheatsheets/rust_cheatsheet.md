@@ -605,6 +605,8 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 ### LOCKS
 - std lib `RWLock` - allows one writer OR multiple readers (not both)
 - std lib `Mutex` - allows one writer OR one reader
+- `Condvar` - conditional variable, used to block a thread until a event happens
+    - takes a mutex guard
 ### SEMAPHORES
 - issue limited "permits" to do things, can limit concurrency level
 - tokio has sempahores

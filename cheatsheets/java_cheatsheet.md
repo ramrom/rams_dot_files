@@ -306,6 +306,24 @@ var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors
 System.out.println(obj_collection.get(0).data1)     // should print 1
 ```
 
+## CONCURRENCY
+- `synchronized` keyword 
+    - on instance method - ensures method can only by run by one thread per object instance
+        - e.g. `public synchronized void foo(int x) { // do stuff }`
+    - on static method - ensures only thread can execute the method at any time (since only one Class object)
+        - e.g. `public static synchronized void foo(int x) { // do stuff }`
+    - code block - basically mutex on some code, takes an argument for the object to lock on
+        - `synchronized (this) { //do stuff }`
+    - thread can obtain lock over and over
+    ```java
+    Object lock = new Object();
+    synchronized (lock) {
+        System.out.println("First time acquiring it");
+        synchronized (lock) {
+            System.out.println("Entering again"); 
+    } }
+    ```
+
 ## STRINGS
 ```java
 // type String is immutable
