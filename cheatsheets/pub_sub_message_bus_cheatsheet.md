@@ -32,3 +32,6 @@
     - if a topic lives on one partition, message order is guaranteed at topic level
         - disadvantage here is that this caps the throughput/scalability
     - if on many partitions, messages are distibuted and topic-level order not guaranteed obviously, but partition level is
+
+## RABBITMQ
+- pushes messages to consumer

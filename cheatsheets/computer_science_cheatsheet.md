@@ -84,6 +84,8 @@ public static void main(String[] args) {
 
 ## DATA STRUCTURES
 ### TREES
+- trees are graphs where nodes have only one parent AND a root that has zero parents
+    - this also implies there are no cycles
 - k-ary -> node can have k branches/children
 - BINARY TREE
     - complete - every level is full except maybe last one, and last level all must be left sided

@@ -421,6 +421,14 @@ boolean b = ("a" == "a");       // b stores true
 boolean b2 = (3 == 4);         // b2 stores false
 ```
 
+## OPERATORS
+### BITWISE OPERATORS
+- `^` bitwise XOR, `|` bitwise OR, `&` bitwise AND
+- `int` `short` `long` `char` `byte` support it
+- `'a' ^ 0b000100000` - can do bitwise ops on characters, here we toggle(XOR with 1) 5th bit 
+    - by toggling 5th bit we add or sub 32, in ASCII this is cool way to toggles upper to lower case, we get integer for `A` here
+    - bitwise op will give `int`, so convert back to char by `(char)('a' ^ 0b000100000)`
+
 
 ## CONVERSIONS
 ```java
