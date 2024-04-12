@@ -22,6 +22,9 @@
 ### INDEXES
 - BTREE tree is the most common index type
     - great for `<`, `>`, `=` on primitve data types
+- Geospatial
+    - redis GEOHASH
+    - postgres PostGIS extension
 ### DOCS
 - https://use-the-index-luke.com/
 
