@@ -461,14 +461,20 @@ pulsemixer - volume manager with pulseaudio
 ### DIR CONVENTIONS
 - see FHS(linux filesystem hierarchy standard): https://www.pathname.com/fhs/
 - /         - root filesystem
+- /usr      - UserSystemResources(not! user)
+    - /usr/lib - shared libs for usr executables (e.g. gtk, qt, language runtimes)
+- /sbin     - system binaries/executables, generally run by root for core sys stuff like sshd, iptable
+- /bin      - executables
+- /etc      - config files (fstab, ssh_config, etc)
 - /home     - user directories
 - /root     - home dir for root user
 - /dev      - devices themselves
 - /sys      - info on devices, drivers, kernel modules (similar to proc but maybe better)
 - /proc     - psuedo filesystem that shows details on process info and general system info
-- /lib      - shared libraries between different binaries
+- /lib      - shared libraries between different binaries for core system executables, e.g. for booting up
 - /mnt      - temporary mount point
 - /var      - sys specific variable(changing) files: logs, spool files, web server data files
+- /run      - volatile runtime info (user session, systemd session)
 - /export   - data shared over the network mount
 - /media    - removable devices like usb (so not internal HDD)
 

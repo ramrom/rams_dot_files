@@ -281,15 +281,19 @@
 - agentless, all the client needs is ssh server
 - uses jinja2 (.j2 files) for templating
 ### DEPLOYMENT STRATEGIES
+- big bang deployment - shutdown the service cluster to deploy all new versions
+    - sometimes unavoidable, e.g. a intricate database upgrade
 - rolling deployments - incremental deploy in same env
-    - take down and upgrade each service instance at a time
+    - take down and upgrade each service instance at a time, so during deployment different versions exist live
 - blue-green deploy - uses 2 different "environments" (e.g. 2 diff k8 clusters)
-    - deploy new version of services on green, can internally test green while ingress still serving to blue
-        - when ready switch traffic to green
+    - if blue is currently live, deploy new version of services on green, when ready switch traffic to green
+    - advantage: can internally test green while ingress still serving to blue
+    - advantage: can quickly rollback to old version
+    - disadvantage: extra cost to have a whole dulplicate environment
 - canary deploy
     - dont have a entirely seperate env (like another k8 cluster), but use spare nodes in the same cluster
     - cutover a small percentage of live traffic at a time (versus 100% in blue-green)
-
+- feature toggle - not really a deployment, but another way to get a different version of service effectively running
 
 ## ENCRYPTION
 - envelope encryption

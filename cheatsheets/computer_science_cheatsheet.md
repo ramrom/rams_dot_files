@@ -212,8 +212,6 @@ public static void main(String[] args) {
     - exponential back off - if we keep failing wait longer than the last time before trying
     - jitter - add random offset to retry so many entities retrying arent sync'd
 - dependency injection - A class accepts the objects it requires from an injector instead of creating the objects directly
-- object pool - dont alloc/dealloc all the time, reuse the same memory
-    - same idea as thread pools and connection pools but for objects
 - RAII - resource acquisition is initialization - resources are tied to their objects and their lifetimes, released with the object death
 - singleton - single global instance of class, class can have only one instance and has global scope
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
@@ -226,6 +224,12 @@ public static void main(String[] args) {
     - used often in packet switched networks, ATM uses it
 - leaky bucket
     - outputs requests at a fixed rate, smoothes out traffic, token bucket allows bursty traffic through and is more flexible
+- thread pool - spawning threads is expensive, reuse the same ones
+- object pool - dont alloc/dealloc all the time, reuse the same memory
+    - same idea as thread pools and connection pools but for objects
+- connection pool
+    - creating/destroying a connection like TCP is expensive
+    - create a pool of persistent connection that are reused, and a entity that manages the pool and takes requests
 
 ## FUNCTIONAL CONCEPTS
 - pure function 
