@@ -23,6 +23,11 @@ void foo() {
 }
 ```
 
+## CONTROL STRUCTURES
+- for small number of conditionals if/else-if/else logic is same speed as switch
+- compiler in many cases will use jump tables for switch statements, if/else will always be compare and branch
+    - jump tables are much faster than comparison but you dont see perf gains until the # of conditions is large
+
 ## TYPE SYSTEM
 - pointers constants vs constant pointers
     ```c

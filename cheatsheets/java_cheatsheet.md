@@ -184,6 +184,7 @@ new ArrayList<String>(hs); // can create a ArrayList from the HashSet
         // in collisions a list for that bucket is created
     // TreeMap, implements NavigableMap interface, uses red-black tree
     // order guaranteed in TreeMap, not HashMap
+// Key type must implement #hashCode and #equals methods, cant use primitive types like int and char (use Integer and Character)
 Map<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
 m.put("foo", 3);
 m.get("boo");       // returns null if it doesnt exist
@@ -464,7 +465,7 @@ int b = (Double)1.6f     // FAILS, doubles and floats cant be converted b/w each
 // introspection and conversion with casting
 class Foo() {};
 Foo convert(Object o) {
-    if (o instanceof Foo) { return (Foo)o; }
+    if (o instanceof Foo) { return (Foo) o; }
     return null;
 }
 ```
@@ -521,6 +522,14 @@ int randomNum = (int)(Math.random() * (200-100) + 100);  // 100 to 200
         - the default `Object#toString` will return a string of the class name and hashCode seperated by `@`
             - *NOTE* the hashcode is represented as hexadecimal, not decimal
         - `System.out.print` calls this method
+- equality
+    - generally when non-primites are compares with `==` we are comparing identity, is it the same object? (same memory address)
+        - `new Integer(1) == new Integer(1)` -> returns `false`
+        - `new String("foo") == new String("foo")` -> returns `false`
+            - `"foo" == "foo"` -> returns `true`, we are comparing `Strings` but special case with literals
+    - by default `Object#equals` method behaves like `==` operator but most types will override it, like `Integer` and `String`
+        - `new String("foo").equals(new String("foo"))` -> true
+
 ### CLASSES
 - regular inheritence: `class Foo {}; class SubFoo extends Foo {};`
 - multiple inheritence: `class Foo {}; class Bar {}; class FooBar extends Foo, Bar {};`

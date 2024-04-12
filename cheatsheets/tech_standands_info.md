@@ -153,7 +153,7 @@
     - QLC - quad layer cells - 4 bits per memory cell
     - PLC - penta ayer cells - 5 bits per memory cell
 
-## COMPUTER BUS INTERFACES
+## COMPUTER INTERFACES
 - PATA - parallel ATA(advanced technology attachment)
     - designed for magnetic spinning hard disk drives
 - SATA(serial ATA) - successor to PATA
@@ -162,6 +162,8 @@
     - uses PCIe, which can be order of magnitude faster than SATA
     - NVME devices usually use M.2 physical interface, but other like 2.5" U.2 or PCIe card slot are also used
 - M.2 - interface form factor
+- DMA - Direct Memory Access - a subsystem that lets hardware access sys memory without CPU intervention
+    - hardware transfer to memory or vice versa directly
 
 ## HDD
 - LMR - longitudinal magnetic recording
@@ -468,12 +470,19 @@
 - localsend, on all platforms, local only no internet, written in dart/flutter
 
 ## BOOTING
+- BOOT sequence
+     - POST - verify core devices work (CPU, memory, system timer, storage, keyboard)
+     - boot loader to load OS kernel and run it
+        - for UEFI, a disk will have a special EFI partition for this
+        - for linux GRUB2(LILO is outdated) loader will put kernel in memory and let it take over
+        - kernel loads all device drivers, loads kernel modules, and goes through init system(e.g. systemd)
 - BIOS - basic input output system, firmware used to boostrap into a full OS, IBM PCs started with this in 1980
+    - limitations vs UEFI: 16-bit real mode, only 1MB adressable space, only assembly language, no network support, and more
+    - it's tied to MBR(master boot record), and limits disk size to 2TB
 - UEFI - Unified Extensible Firmware Interface, a new firmware architecture to replaces BIOS
     - specifications written by the UEFI Forum
-    - uses GPT partition scheme and supports greater drive sizes natively
-    - other BIOS limitations: 16-bit real mode, only 1MB adressable space, only assembly language, no network support, and lots more
-    - also offers security with secure boot
+    - uses GPT (GUID partition table) and supports greater drive sizes natively
+    - offers security with secure boot
     - microsoft drove adoption in 2010 b/c in win8 they wanted secure boot
 - firmware - low level code that controls hardware, for PCs first loaded and bootstraps main OS
     - for embedded systems is probably main layer of code
