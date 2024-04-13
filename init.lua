@@ -707,6 +707,8 @@ LoadNoice = function()
           { filter = { event = "msg_show", find = "Saved session: " }, view = "mini", },
           { filter = { event = "msg_show", find = "B written" }, view = "mini", },
           { filter = { event = "msg_show", find = " change; before" }, view = "mini", },
+          { filter = { find = "E162" }, view = "mini", },       -- no write since last change error
+          { filter = { find = "E37" }, view = "mini", },       -- no write since last change error
                 -- mini view will hide after short time, cmdline persists forever...
         },
     }

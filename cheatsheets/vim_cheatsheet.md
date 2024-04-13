@@ -340,8 +340,24 @@ C             " make selected dir node the new root node
 - :h insert-index  - insert default mappings
 - :h ex-cmd-index  - command and ex mode
 
+## QUICKFIX
+- a special window for storing a list of lines for quick navigation
+    - list of errors or warnings to traverse through and fix
+    - `vimgrep` and `make` use it
+- `copen` - open the quickfix window, `ccl`, `cclose` - close qf window
+- `cnext`/`cprev` or `cn`/`cp` next-item/previous-item,  `cfirst`/`clast` - goto first/last item, `cc<N>` - goto Nth item
+- `cdo` - run a Ex command for every item in the quickfix list
+- `cexpr` - run a command and put output in qf list
+    `:cexpr system('ls -al')` - would do `ls -al` in current dir and put output in qf list
+    `:cexpr "foo\nbar\nyar` - can pass in string, uses newline for line seperator, so qf would have 3 lines in this case
+### LOCATION LIST
+- is local to a window, QF list is global to whole vim session
+- can have 5 location lists
+- use `lvimgrep`, `lgrep`, `lhelpgrep` `lmake` to send to location list
+
+
 ## EX MODE
-- a shitty REPL - run commands and see the output
+- a shitty REPL - essentiall Command-Line mode but you dont exit ex mode after running a command
 - to enter Ex mode
     - vim - `Q` in normal
     - neovim - `gQ` in normal
@@ -350,7 +366,7 @@ C             " make selected dir node the new root node
     `vi` - short for visual
 
 
-## COMMAND MODE
+## COMMAND-LIKE MODE
 - running shell commands
     - *NOTE* basically all these are synchronous and will block the vim session until done
     - `:!` - run a shell command, e.g. `:!echo hi`
