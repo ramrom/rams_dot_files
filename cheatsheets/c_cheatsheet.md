@@ -61,7 +61,8 @@ void foo() {
 
 ## MEMORY MANAGEMENT
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
-- `memcpy` - mem copy, copy raw bytes from one memory location to another regardless of types
+- `memcpy` - mem copy, copy bytes/char from one memory location to another
+    - since byte/char is smallest unit of data to operate on, can copy any other type this way, usually using `sizeof(sometype)`
 ### MAJOR TYPES
 - text - where the program itself is stored
 - static - initialized at program start, released when program ends, global scope generally

@@ -182,7 +182,7 @@ new ArrayList<String>(hs); // can create a ArrayList from the HashSet
 // HashMap and TreeMap are main implementations of AbstractMap class
     // HashMap, implements Map interface, uses array("buckets"), #hashCode method on key called to find bucket
         // in collisions a list for that bucket is created
-    // TreeMap, implements NavigableMap interface, uses red-black tree
+    // TreeMap, implements NavigableMap(SortedMap?) interface, uses red-black tree
     // order guaranteed in TreeMap, not HashMap
 // Key type must implement #hashCode and #equals methods, cant use primitive types like int and char (use Integer and Character)
 Map<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
@@ -218,9 +218,12 @@ for (var entry : map.entrySet()) {
 //equality
 map1.equals(map2)  // works if key and value type both support equals method 
 
-// the values of hashmap are a doubly linked list
+// LinkedHashMap (extends HashMap) - the values of hashmap are a doubly linked list
 // it maintains insertion order, one application is LRU cache
 var lhm = new LinkedHashMap<String, String>();
+
+// ConcurrentHashMap - allows many threads to access Map at same time, each thread accesses different segment of Map
+Map<String,String> concurrentMap = new ConcurrentHashMap<>();
 ```
 ### STACKS
 ```java
@@ -248,6 +251,8 @@ queue.element():    // like peek, but throws exception if queue is empty
 queue.poll();     // retreives and removes next item in queue, returns null if empty
 queue.remove();     // like poll but throws exception if queue is empty
 queue.clear();  // clear queue
+queue.size();       // return # of items in queue
+queue.isEmpty();       // return true if empty
 ```
 #### PRIORITY QUEUE
 - PriorityQueue uses a binary balanced heap data struct, efficiently get lowest(or highest) priority item (O(logN) time)

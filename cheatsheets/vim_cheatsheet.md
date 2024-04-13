@@ -347,6 +347,7 @@ C             " make selected dir node the new root node
 - `copen` - open the quickfix window, `ccl`, `cclose` - close qf window
 - `cnext`/`cprev` or `cn`/`cp` next-item/previous-item,  `cfirst`/`clast` - goto first/last item, `cc<N>` - goto Nth item
 - `cdo` - run a Ex command for every item in the quickfix list
+    - `:cdo s/foo/bar/gc` - rename `foo` to `bar` for all(`g`) and confirm each(`c`)
 - `cexpr` - run a command and put output in qf list
     `:cexpr system('ls -al')` - would do `ls -al` in current dir and put output in qf list
     `:cexpr "foo\nbar\nyar` - can pass in string, uses newline for line seperator, so qf would have 3 lines in this case
