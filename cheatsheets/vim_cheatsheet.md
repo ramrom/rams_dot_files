@@ -110,7 +110,7 @@
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
 
-### FZF
+### FZF.VIM
 - Rg            - ripgrep dynamic fuzzy search with bat preview!
 - Files, ctrl-v - opens in new vert split
 - Files, ctrl-x - opens in new horizontal split
@@ -121,6 +121,10 @@
 - BCommits    - commit hist for current buffer
 - FZF-MRU:
     - does MRU for local sessions, other vim session no affectd
+
+### FZF-LUA
+- uses fzf but plugin written in lua, lots more pickers and features than fzf.vim
+- multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
 
 ### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
@@ -355,6 +359,7 @@ C             " make selected dir node the new root node
 - `cexpr` - run a command and put output in qf list
     `:cexpr system('ls -al')` - would do `ls -al` in current dir and put output in qf list
     `:cexpr "foo\nbar\nyar` - can pass in string, uses newline for line seperator, so qf would have 3 lines in this case
+- `caddexpr {expr}` - evaluate expression and add it to the quickfix
 ### LOCATION LIST
 - is local to a window, QF list is global to whole vim session
 - can have 5 location lists
@@ -687,16 +692,16 @@ zr expand one level, zR - open ALL folds
 - :g/  - print line # and occurence of each search match
 - `:noh` - remove highlighting of search matches
 ### SEARCH IN MULTIPLE FILES
-:vimgrep /pattern/ {file} - search for pattern in multiple files
-e.g. ` :vimgrep /foo/ **/* `
-:cn - jump to the next match
-:cp - jump to the previous match
-:copen - open a window containing the list of matches
+- `:vimgrep /pattern/ {file}` - search for pattern in multiple files
+    - e.g. ` :vimgrep /foo/ **/*`
+- `:cn` - jump to the next match
+- `:cp` - jump to the previous match
+- `:copen` - open a window containing the list of matches
 ### SEARCH AND REPLACE
-visual-mode select -> :s/old/new - replace old with new in all visually selected lines
-:s/old/new/g - replace all old with new in current line
-:%s/old/new/g - replace all old with new throughout file
-:%s/old/new/gc - replace all old with new throughout file with confirmations
+- visual-mode select -> :s/old/new - replace old with new in all visually selected lines
+- `:s/old/new/g` - replace all old with new in current line
+- `:%s/old/new/g` - replace all old with new throughout file
+- `:%s/old/new/gc` - replace all old with new throughout file with confirmations
 
 
 ## WORKING WITH MULTIPLE FILES

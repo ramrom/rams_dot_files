@@ -96,7 +96,7 @@ Arrays.parallelSort(mylist);    // multithreaded sort, uses merge sort (breaks a
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
 
 Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
-// if mylist type doesnt implement Comparable interface can pass in anon class of Comparator interface
+// if mylist type doesnt implement Comparable interface can pass in anonymous class of the Comparator interface
 class Foo { int x; Foo(int x) { this.x = x; } }
 Comparator<Foo> FooComparator = new Comparator<Foo>() { public int compare(Foo first, Foo second) { return first.x - second.x; } };
 var foos = new Foo[] { new Foo(3), new Foo(1), new Foo(-1) };

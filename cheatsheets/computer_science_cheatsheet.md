@@ -182,8 +182,8 @@ public static void main(String[] args) {
 - merge sort - divide and conquer, O(nlogn)
     - can be parralelized
     - generally not done in-place so lots of extra space, _can_ be done in-place, but is hard
-- quick sort - divide and conquer, O(nlogn), in-place (no extra space), worst case O(n^2)
-- heap sort - uses a heap, O(nlogn), not stable, in-place, worst case O(nlogN)
+- quick sort - divide and conquer, O(nlogn), in-place (no extra space), worst case O(n^2), most implementations not stable
+- heap sort - uses a heap, O(nlogn), not stable, in-place, worst case O(nlogn)
 
 ## PROGRAMMING LANGUAGES
 - ML (meta language) - functional
@@ -216,6 +216,7 @@ public static void main(String[] args) {
 - singleton - single global instance of class, class can have only one instance and has global scope
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
     - very similar to pub/sub in that it decouples 2 related entities, observer pattern is usually implemented intra-process
+- strategy pattern - select the algorithm to use at runtime, code allows receiving a strategy/algo as a parameter/argument
 - token bucket
     - sys design vid rate limiter - https://www.youtube.com/watch?v=FU4WlwfS3G0&ab_channel=SystemDesignInterview
     - a buffer/queue with some capacity, items are "leaked" at a fixed rate
