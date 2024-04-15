@@ -23,9 +23,6 @@
     - google voice as of 2023 doesn't have RCS
 - iMessage - next gen by Apple to replace SMS/MMS
 
-## PROCESSORS
-- TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
-
 ## PROCESS SIGNALS
 - most official definition - https://pubs.opengroup.org/onlinepubs/009695399/basedefs/signal.h.html
 - SIGKILL - `kill -9`, forceful terminate without any cleanup
@@ -164,6 +161,19 @@
 - M.2 - interface form factor
 - DMA - Direct Memory Access - a subsystem that lets hardware access sys memory without CPU intervention
     - hardware transfer to memory or vice versa directly
+
+
+## CPU
+- TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
+- ALU - arithmetic logic unit
+- FPU - floating point unit
+- AGU - address generation unit - fetches a value from memory
+### ARCHITECTURES
+### X86
+- REAL MODE - CPU directly access physical memory locations, no redirection or virtual addresses
+### RISC
+- is a philosophy of cpu design, stands for reduced instruction set
+
 
 ## HDD
 - LMR - longitudinal magnetic recording

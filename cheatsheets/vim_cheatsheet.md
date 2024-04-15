@@ -217,6 +217,10 @@ C             " make selected dir node the new root node
 - blame-view: <leader>gb
 - repo-view: <leader>go
 
+### FLASH.NVIM
+- quickly jump to a word on screen, or quick select
+- similar plugins: vim-sneak, vim-easymotion
+
 ### TABULAR
 - `:Tabularize /| `
     - autodetect lines above and below and align on `|` char
