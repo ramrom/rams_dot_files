@@ -64,21 +64,11 @@ function debug_vars() {
     [ -n "$tab" ] && echo
 }
 
-function pppath() { 
+function print_mypath() { 
     local IFS=":"; 
     for p in $PATH; do
         echo $p
     done 
-}
-
-# given port number return if ssh(or polipo) is listening on it
-# polipo used to create HTTP proxy to a SOCKS proxy
-function print_ssh_listening_ports() {
-    [ -z "$1" ] && echo "need 1st arg for port number" && return 1
-    local process_type=ssh; [ -n "$polipo" ] && process_type=polipo
-    ports="$(lsof -nP -iTCP -sTCP:LISTEN)"
-    # space occurs after last digit, so match full number (e.g. otherwise 313 matches on 3131)
-    echo "$ports" | grep "$1 " > /dev/null | grep $process_type > /dev/null
 }
 
 # FIXME: osx/sh(detect_shell says bash) doesnt print "alias " prefix for alias names
@@ -134,12 +124,6 @@ function batwhich() {
     esac
 }
 
-# use for json formatted file
-function print_bitwarden_columize() {
-    [ -z "$1" ] && echo "need arg for filename" && return 1
-    jq -r '.items | .[] | .name + "," + .login.username + "," + .login.password' $1 | column -t -s,
-}
-
 function run_cmd_timestamp() {
     local start=$(date +%s)
     echo; echo $(ansi256 -f red -b green "_-----------------------")" $(date) "\
@@ -164,13 +148,20 @@ function l() {
     fi
 }
 
-# FF script function wrapper - if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
-function ff() {
-    # source ~/bin/ff -w "$@"
-    local result=$(~/bin/ff -w "$@")
-    [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
-    echo "$result" | grep -E '^vi|^nvi' > /dev/null && eval "$result" && return
-    echo "$result"
+# given port number return if ssh(or polipo) is listening on it
+# polipo used to create HTTP proxy to a SOCKS proxy
+function print_ssh_listening_ports() {
+    [ -z "$1" ] && echo "need 1st arg for port number" && return 1
+    local process_type=ssh; [ -n "$polipo" ] && process_type=polipo
+    ports="$(lsof -nP -iTCP -sTCP:LISTEN)"
+    # space occurs after last digit, so match full number (e.g. otherwise 313 matches on 3131)
+    echo "$ports" | grep "$1 " > /dev/null | grep $process_type > /dev/null
+}
+
+# use for json formatted file
+function print_bitwarden_columize() {
+    [ -z "$1" ] && echo "need arg for filename" && return 1
+    jq -r '.items | .[] | .name + "," + .login.username + "," + .login.password' $1 | column -t -s,
 }
 
 function binlink() {
@@ -192,6 +183,15 @@ function fdisk_find() {
 }
 
 ############# FZF ##############################
+
+# FF script function wrapper - if fzf output starts with "cd " then cd to dir, scripts cant change parent process working dir
+function ff() {
+    # source ~/bin/ff -w "$@"
+    local result=$(~/bin/ff -w "$@")
+    [ "$(echo "$result" | awk '{print $1}')" == "cd" ] && eval "$result" && return
+    echo "$result" | grep -E '^vi|^nvi' > /dev/null && eval "$result" && return
+    echo "$result"
+}
 
 # FIXME: aliases fail to preview in ubuntu/bash
     # fzf --preview "alias foo='echo hi'; foo"  ---- FAILS, WHY????
@@ -237,20 +237,6 @@ function batgod() { go doc $@ | bat -l go; }
 function yts_query() {
     xh -do /tmp/yts_query https://yts.mx/ajax/search query=="$1"
     jq . /tmp/yts_query
-}
-
-function display_notif() {
-    [ -z "$1" ] && echo "no message given!" && return 1
-    if [ $(uname) = "Darwin" ]; then
-        # osascript -e 'display notification "hi!" with title "my title" subtitle "a subtitle"'
-        local script="display notification \"$1\""
-        local title=${2:-notification}
-        script=$script" with title \"$title\""
-        osascript -e "$script"
-    else  # really for ubuntu
-        local title=${2:-notitle}
-        notify-send -i face-wink "$title" "$1"
-    fi
 }
 
 ############### OSX ############################################
