@@ -596,8 +596,15 @@ interface GenericIface<T> { void afunc(T t); }
 new GenericIface<String>() { void afunc(String s) {} }
 ```
 ### RECORD
-- immutable
-- data struct that has a setter/getter, constructor, `equals` method, `hashCode` method, `toString` method
+- immutable type introduced in java14
+- data struct that has getters, a constructor, `equals` method, `hashCode` method, `toString` method
+    - `equals` and `hashCode` really contents
+- e.g. `public record Person (String name, String address) {}`
+    - constructor: `Person person = new Person("John Doe", "100 Linda Ln.")`
+    - getters: `person.name()`, `person.address()`
+    - equals: `person1.equals(person2)`
+    - hashcode: if they are equal hashcode will be equal: `assertEquals(person1.hashCode(), person2.hashCode());`
+    - tostring: will print in the form: `[field1=value1, field2=value2]`
 ### INFERENCE
 - java10 introduces some local var inference: 
     - `var a = 3; var b = "hi"`, compiler will inference these `var`s
