@@ -262,18 +262,6 @@ function toggle_bulb() {
 
 #####################  SYSTEM DATA/HEALTH ####################################################
 
-# TODO: finish this
-# TODO: benchmark: 1) momoization and grep 2) dont memoize
-# hyperfine aliases: https://github.com/sharkdp/hyperfine/issues/270
-function sensor_data() {
-    [ ! "$(uname)" = "Linux" ] && { echo "this is for linux sensors" && return 1; }
-
-    local s=$(sensors)
-    echo "$s" | grep -E "CPU Temperature" | awk '{print $3;}' # | grep --color=never -Eoi '[0-9]+.[0-9]+'
-    # echo $cputemp | sed 's/+//g' | grep --color=never -Eo '^[0-9]+'
-    echo "$s" | grep -E "CPU Fan"
-}
-
 function top_cpu_processes() {
     if [ $(uname) = "Darwin" ]; then
         # ps -Ao user,uid,command,pid,pcpu,tty -r | head -n 6   # -r sorts by cpu usage
@@ -347,11 +335,7 @@ function gitclean() {
 
 function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
-#####  DB  ############
-function terminate_db_connections() {
-    psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres
-}
-
+###### OTHER ###############
 function yamltojson() {
     ruby -e 'require "yaml"; require "json"; puts YAML.load_file(ARGV[0]).to_json' "$@"
 }
@@ -359,8 +343,6 @@ function yamltojson() {
 function csvtojson() {
     ruby -e 'require "csv"; require "json"; puts CSV.open(ARGV[0], headers: true).map { |x| x.to_h }.to_json' "$@"
 }
-
-###### OTHER ###############
 
 function weather() { xh --print=b https://wttr.in/$1; }
 

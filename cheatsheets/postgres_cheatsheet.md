@@ -76,6 +76,8 @@
     - WAL transactions are decoded and then published
 
 ## QUERY TIPS
+- terminate db connections
+    - `psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres`
 - counting num records in db table
     - `select count(1) from footable;` - for big table, slow but accurate
     - https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
