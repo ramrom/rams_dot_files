@@ -1221,6 +1221,7 @@ vim.keymap.set('n', '<leader>gb', "<cmd>lua require('fzf-lua').git_bcommits()<CR
 vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
 vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
 vim.keymap.set('n', '<leader>gL', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
+vim.keymap.set('n', '<leader>ga', "<cmd>Git blame<cr>", { desc = "fugitive git blame" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
 -- FIXME: apr'24 - using the :tab command directly with Gvdiffsplit doesnt work right
