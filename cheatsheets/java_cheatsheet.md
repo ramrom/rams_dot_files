@@ -222,7 +222,13 @@ map1.equals(map2)  // works if key and value type both support equals method
 // it maintains insertion order, one application is LRU cache
 var lhm = new LinkedHashMap<String, String>();
 
-// ConcurrentHashMap - allows many threads to access Map at same time, each thread accesses different segment of Map
+// Collections.synchronizedMap - thread-safe and consistent, gaurantees serial access b/c lock at whole object level
+// will throw ConcurrentModificationException if one thread tries to modify it while another is iterating over it
+Map<String, Integer> m = new HashMap<String, Integer>();
+m.put("3", 1);
+Map<String, String> synmap = Collections.synchronizedMap(m);
+
+// ConcurrentHashMap - allows many threads to access Map at same time, uses bucket level lock, each thread accesses diff segment of Map
 Map<String,String> concurrentMap = new ConcurrentHashMap<>();
 ```
 ### STACKS

@@ -323,7 +323,16 @@
 - https://en.wikipedia.org/wiki/Percent-encoding
 ### ASCII
 - table - https://simple.wikipedia.org/wiki/File:ASCII-Table-wide.svg
+    - basically all "regularly" used human characters encoded between 32-127
     - 48-57 is `0`-`9`, 65-90 is `A`-`Z`, 97-122 is `a`-`z`
+### UNICODE
+- is a description of all characters imaginable in every language, a unique character has a code point (e.g. `U+00639`)
+- different implementations of unicode specify how to encode the codepoints of unicode in a file
+- UTF8 - an implementation of unicode characters that's backwards compatible with ASCII
+    - a UTF8 parser will fully be able to read a ASCII formatted file (but NOT vice versa)
+    - all codepoints between 0-127 is encoded as one byte, code points above 128 are stored in 2,3 and up to 6 bytes
+- UTF16 - uses a minimum of 2bytes, java natively uses UTF16
+    - not backwards compatible with ASCII
 
 ## FLOATS
 - https://en.wikipedia.org/wiki/IEEE_754-1985
