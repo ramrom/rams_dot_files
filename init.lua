@@ -652,18 +652,18 @@ LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
     -- only disable markdown if vim-markdown plugin is enabled
-    local mark_disabled = {}
-    if LazyPluginEnabled('vim-markdown') then mark_disabled = { "markdown" } end
+    local disabled_list = {}
+    if LazyPluginEnabled('vim-markdown') then disabled_list = { "markdown" } end
 
     require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
         highlight = {
-            enable = true,     -- `false` will isable the whole extension
+            enable = true,     -- `false` will disable the whole extension
             -- NOTE: names of the parsers and not the filetype. (for example if you want to
             -- disable highlighting for the `tex` filetype, you need to include `latex`, this is the name of the parser)
-            disable = mark_disabled,
+            disable = disabled_list,
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
             additional_vim_regex_highlighting = false,
@@ -1245,7 +1245,7 @@ vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd
     { desc = "fzf cheatsheet files" })
 vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf notes files" })
 vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf work files" })
-vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>')
+vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>', { desc = "open work TODO in-progress in new tab"})
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
 
@@ -1382,7 +1382,7 @@ if not vim.env.VIM_NOPLUG then
         'nvim-lua/plenary.nvim',
         { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
         { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
-        { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
+        { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
             build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
         'nvim-tree/nvim-web-devicons',
         'tpope/vim-commentary',

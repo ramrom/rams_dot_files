@@ -3,6 +3,7 @@
     - feb27-24 the above line with `vim:` instead of `vim -` will cause neovim(not vim) to try to read the hyperlink somehow... wtf
 - official neovim docs: https://neovim.io/doc/
 - awesome cheatsheet: https://github.com/ibhagwan/vim-cheatsheet
+- good config/starter for first time vimmers: https://github.com/nvim-lua/kickstart.nvim
 - Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
     - *NOT* totally backwards compatible with old VimL

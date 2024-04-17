@@ -461,6 +461,7 @@ Float f = new Float(4);  // create float from int, will be 4.0F
 
 char[] c = "hi there".toCharArray();
 String s = new String(c);   // create String from char array
+Character.toString('a')     // convert a char to String
 
 int a = Integer.toString(3);     // int -> String
 
