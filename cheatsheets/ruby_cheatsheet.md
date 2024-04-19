@@ -5,6 +5,8 @@
 
 ## DOCS
 - https://www.tutorialspoint.com/ruby/index.htm
+- XinYmin: https://learnxinyminutes.com/docs/ruby/
+
 
 ## VARIABLES
 - Scope
@@ -26,6 +28,17 @@
     - return statement will return from proc and calling function
 - code blocks
     - an anonymous function that can be invoked from within another function
+
+## ITERATORS
+```ruby
+[1,2,3].each_with_object([]) do |item, obj|
+    puts "item is #{item}"
+    obj << item * 2
+end                                     # output is [2,4,6]
+ 
+# NOTE: collect is essentially the same method as map
+[1,2,3,4].map{ |a| a * 3 }.filter{ |a| a.even? }   # output is [6,12]
+```
 
 ## INTROSPECTION
 ```ruby

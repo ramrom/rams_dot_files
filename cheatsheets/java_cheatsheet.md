@@ -1,6 +1,7 @@
 # JAVA
 - https://learnxinyminutes.com/docs/java/
 - `jshell` start REPL env in terminal
+    - *NOTE* make sure to switch to appropriate java (e.g. 11 or 17) in shell before launching
 - java is by comp sci def pass-by-value: https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
     - for objects, variables store values that are references to objects
         - so reassigned a variable passed into a function with new value, will not change the variable assignment in caller
@@ -79,6 +80,7 @@ System.out.println(Arrays.deepToString(tdarray))  // deepToString great for prin
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
 mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
+mylist.toString();      // prints "[new, hi]"  , toString calls toString on each item in the List
 mylist.size()   // returns 2, size returns length, not capacity of ArrayList
 mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
@@ -316,6 +318,11 @@ class Foo { int data; Foo(int i) { this.data = i;} };
 var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors.toList());
 
 System.out.println(obj_collection.get(0).data1)     // should print 1
+
+// example of distinct with record types
+public record Far(Integer i, String s)
+var b = new ArrayList<Far>(List.of(new Far(1,"a"), new Far(3,"b"), new Far(1,"z"), new Far(3,"b")))
+b.stream().distinct().collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=3, s=b], Far[i=1, s=z]]
 ```
 
 ## CONCURRENCY
@@ -361,6 +368,15 @@ System.out.println(obj_collection.get(0).data1)     // should print 1
 
 "hi there".contains("hi") // returns true
 "hi there".isBlank() // returns false
+
+// REGEX
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+Pattern pattern = Pattern.compile("foobar", Pattern.CASE_INSENSITIVE);
+Matcher matcher = pattern.matcher("some foobar string to search");
+boolean matchFound = matcher.find();
+if(matchFound) { System.out.println("Match found"); } else { System.out.println("Match not found"); }
+
 
 " ".isBlank() // returns true, Blank tests for non-whitespace
 " ".isEmpty() // returns false
@@ -480,6 +496,14 @@ Foo convert(Object o) {
     if (o instanceof Foo) { return (Foo) o; }
     return null;
 }
+
+// List conversion from reference array type to primitive array type because java blows
+// METHOD 1: plain ol loop
+List<Integer> list = new ArrayList<Integer>(List.of(1,2,3));
+int[] array = new int[list.size()];
+for(int i = 0; i < list.size(); i++) array[i] = list.get(i);
+// METHOD 2: streams
+int[] arr = list.stream().mapToInt(i -> i).toArray();
 ```
 
 ## MATH
@@ -517,6 +541,7 @@ int randomNum = (int)(Math.random() * (200-100) + 100);  // 100 to 200
 - `static` keyword - belongs to type itself, and not instance of the type, all instances share the static member (aka class global)
 - scope/visibility: member of can be: default, public, private, protected
     - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
+    - a public class must live in a file of the same name, e.g. `public class Foo{}` must be defined in `Foo.java`
 - `java.lang.Object` is root class of Java class hierarchy, every class is descendant of this class
     - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
     - a class defined with no superclass automatically extends `Object`
@@ -613,7 +638,7 @@ new GenericIface<String>() { void afunc(String s) {} }
     - hashcode: if they are equal hashcode will be equal: `assertEquals(person1.hashCode(), person2.hashCode());`
     - tostring: will print in the form: `[field1=value1, field2=value2]`
 ### INFERENCE
-- java10 introduces some local var inference: 
+- java10 introduces some local var inference
     - `var a = 3; var b = "hi"`, compiler will inference these `var`s
     - `var f = new HashMapString, Integer>();`
 ### VAR

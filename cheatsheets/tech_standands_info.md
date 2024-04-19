@@ -273,6 +273,7 @@
 - JSON
 - XML
 - CSV
+- TSV (tab seperated values)
 ### BINARY
 - messagepack
 - apache avro
