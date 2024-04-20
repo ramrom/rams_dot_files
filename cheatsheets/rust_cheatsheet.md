@@ -143,6 +143,8 @@
             .filter( |&x| x > 1 ).collect() // collect will execute iterator and return collection
                                            // adapters are efficient, no intermediate collection is made!
 
+        let result = [1,2,3].iter().map(|i| i * 2).fold(3, |acc, item| { acc + item } ) // fold
+
         vec!["foo","bar"].into_iter().map(String::from) // shorthand map syntax if one arg, compiler infers params
 
         foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
@@ -177,6 +179,7 @@
     - e.g. `String` implements `DeRef` and `deref` method produces `&str` so a `&String` can be passed into a arg of type `&str`
     - multiple nested `DeRef` types be called, e.g. `Box<String>>` passed into arg taking `&str`
         - `Box<String>` derefs to `String`, `String` derefs to string slice `&String`, `&String` derefs to `&str`
+    - `let m = Rc::new(vec![1,2])` -> `m.len()` is same as `(*m).len()`, `m` gets deref'd b/c `len` derefs it's receiver
 - why aren't multiple mutable references allowed in a single threaded context
     - https://manishearth.github.io/blog/2015/05/17/the-problem-with-shared-mutability/
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/

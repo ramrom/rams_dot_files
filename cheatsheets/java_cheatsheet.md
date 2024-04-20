@@ -146,9 +146,12 @@ List<List<Foo>> ll = new ArrayList<ArrayList<Foo>>();        // same as above
 ### SET
 ```java
 // HashSet and TreeSet and main implementations of interface Set
+    // HashSet uses hashcode method to judge uniqueness
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
+hs.addAll(List.of("x", "z"))  // add many items by passing in a immutable list
+hs.addAll(new ArrayList<Integer>(List.of("x","z")))  // can pass in ArrayList/List
 hs.size()  // returns # of items in set
 hs.contains("c") // false
 hs.remove("a") // returns true if a existed b4 removal, false if it didn't exist
@@ -177,6 +180,12 @@ List<Integer> l = new ArrayList<>(s)  // can also create a ArrayList from a set
 // compare if two sets are identical
 s.equals(s2)  // returns true; 
 
+// use List.of for sets of "tuple" of same type, item must implement #hashcode, List types all do
+    // ArrayList hashcode combines hashcode of all it's elements
+var s = new HashSet<List<Integer>>();
+s.add(List.of(1,2))         // s has [1,2]
+s.add(Arrays.asList(1,2))   // s will still have [1,2]
+
 new ArrayList<String>(hs); // can create a ArrayList from the HashSet
 ```
 ### MAP
@@ -193,7 +202,14 @@ m.get("boo");       // returns null if it doesnt exist
 m.remove("foo");    // returns null if it doesnt exit, the value of the key if key does exist
 m.size();           // return number of items
 m.getOrDefault(4, 1)   // if get value doesnt exist return the default value in 2nd arg
+m.put(1,1+m.getOrDefault(1, 0))   // common pattern, inc count at key 1, start count at 0 if it doesnt exist
+m.putIfAbsent(4, 3)   // if key exists returns the value, otherwise puts 2nd arg into key
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
+
+//nice way to do a "tuple" of same type as key, use List.of
+var hm = new HashMap<List<Integer>,String>();
+hm.put(List.of(1,2),3);     // key [1,2] contains value 3
+hm.put(List.of(3,4,5),1);     // key [3,4,5] contains value 1
 
 // can specify initial capacity, default is 16, use if size of dataset is know prehand
 // load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
@@ -504,6 +520,11 @@ int[] array = new int[list.size()];
 for(int i = 0; i < list.size(); i++) array[i] = list.get(i);
 // METHOD 2: streams
 int[] arr = list.stream().mapToInt(i -> i).toArray();
+
+// List conversion from static to ArrayList
+var l = new Integer[] { 1,2,3};
+List<Integer> li = Arrays.asList(l);  // wraps static array in AbstractList, exposing a List interface, BUT not really, e.g. `remove` errors
+ArrayList<Integer> al = new ArrayList<Integer>(li);     // converts to real dynamic list, can call `remove` on this
 ```
 
 ## MATH
@@ -688,6 +709,7 @@ for (int i = 3; i * 2 < 10; i = (i * 10) + 30) {
 } 
 
 // say we have HashSet s, we can iterate over it's elements
+// this for syntax is supported by implementing Iterable<T>
 for (int i: s) {
     System.out.println(i);
 }
@@ -711,7 +733,7 @@ switch (a) {
         }
 
 //ternary operator
-String bar = (3 < 10) ? "A" : "B";
+String bar = (3 < 10) ? "A" : "B";  // bar = "A"
 ```
 ### EXCEPTIONS
 - to throw method must declare it, e.g. `public int foo(int a) throws Exception { throw new Exception("foo"); }`
