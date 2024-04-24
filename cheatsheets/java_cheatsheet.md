@@ -2,6 +2,7 @@
 - https://learnxinyminutes.com/docs/java/
 - `jshell` start REPL env in terminal
     - *NOTE* make sure to switch to appropriate java (e.g. 11 or 17) in shell before launching
+    - hit `<tab>` key for signature help after first `(` e.g. `var.somemethod(<tab>`
 - java is by comp sci def pass-by-value: https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
     - for objects, variables store values that are references to objects
         - so reassigned a variable passed into a function with new value, will not change the variable assignment in caller
@@ -89,7 +90,9 @@ mylist.set(0, "dude");  // mylist ==> { "dude" }
 // BINARY SEARCH
 class Foo { int i; Foo(int i) { this.i = i;} // #implement Comparable interface } 
 var arr = new Foo[] { new Foo(1), new Foo(2); }; var key = new Foo(2); int startidx = 0; int endidx = 1;
-Arrays.binarySearch(arr, startidx, endidx, key);
+// returns the index of key, UB if array isnt sorted, random index if value is duplicated
+    // if key not found return (-(insertion_idx) - 1), the negative of the where key would be inserted
+Arrays.binarySearch(arr, startidx, endidx, key);  
 
 
 // SORTING
@@ -104,9 +107,12 @@ Comparator<Foo> FooComparator = new Comparator<Foo>() { public int compare(Foo f
 var foos = new Foo[] { new Foo(3), new Foo(1), new Foo(-1) };
 Arrays.sort(foos, FooComparator);  // foos will be { Foo(-1), Foo(1), Foo(3) }
 
-// using lambda expression
+// using lambda expression (for plain array)
 var myList = new String[] { "b", "a" }
 Arrays.sort(myList, (a,b) -> a.compareTo(b));  // returns String[2] { "a" , "b" }
+// for List types, use built in sort method
+var list = new ArrayList<Integer>(List.of(2,1,3));
+list.sort((x,y) -> x-y)
 
 
 // variables can be of interface types, and thus contain any value that implements that type
@@ -130,6 +136,16 @@ var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var
 var strs = new String[]{"hi","there"};
 var alstrs = new ArrayList<String>(Arrays.asList(strs)); // Arrays#asList converts to List<String>, need ArrayList<String>
 
+// Iteratable - List (and Set) offer iterator() methods that return Iterator<T>
+    // Iterable is a superinterface of Collection interface
+for (Element e: mylist) { System.out.println(e); }   // for loop is sugar for using iterator
+mylist.forEach(e -> System.out.println(e) )         // forEach concise way to iterate
+
+// similar to Iterable is the Iterator interface in java 1.2, also part of Collections framework
+var i = mylist.iterator()
+i.hasNext();        // check if another item in iterator exists
+i.next();           // get next item, throws an exception if none (use hasNext to check)
+i.remove();         // remove an element from collection and not raise ConcurrentModificationException
 // create streams
 mylist.stream().forEach(i -> System.out.println(i));
 
@@ -163,6 +179,7 @@ int i=0;
 for (String s: hs) { s[i] = s; i++; }  // prolly easiest way to convert to String[]
 
 // iterate over items in set
+// there is no guarantee of order in which they are iterated, unlike List
 var iter = hs.iterator();
 while (iter.hasNext()) {
     System.out.println(iter.next());
@@ -176,6 +193,9 @@ Set<Integer> s = new HashSet<>(Arrays.asList(1,2,3))
 Set<Integer> s2 = new HashSet<>(Arrays.asList(1,2,3))
 
 List<Integer> l = new ArrayList<>(s)  // can also create a ArrayList from a set
+
+// Set.of for immutable set creation
+var s = Set.of(1,2,3)
 
 // compare if two sets are identical
 s.equals(s2)  // returns true; 
@@ -210,6 +230,14 @@ TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree str
 var hm = new HashMap<List<Integer>,String>();
 hm.put(List.of(1,2),3);     // key [1,2] contains value 3
 hm.put(List.of(3,4,5),1);     // key [3,4,5] contains value 1
+
+// Map.of for fast creation, can create up to 10 key/value pairs, it's immutable
+Map.of(1,2,3,4)             // is map, prolly inferenced to Map<Integer,Integer>:  { 1->2, 3->4}
+Map<Integer, Object> m = Map.of(1,"hi",3,Map.of(1,1))     // explicit type
+var mm = new HashMap<Integer, Object>(m)    // create mutable map from this immutable one
+// Map.ofEntries can take unlimted args
+Map<Long, String> longUserMap = Map.ofEntries(Map.entry(1L, "User A"), Map.entry(2L, "User B"));
+
 
 // can specify initial capacity, default is 16, use if size of dataset is know prehand
 // load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
@@ -285,6 +313,10 @@ queue.isEmpty();       // return true if empty
 PriorityQueue<Integer> intQ = new PriorityQueue<>();  // uses natural ordering (null comparator)
 PriorityQueue<Integer> intQcomparator = new PriorityQueue<>((Integer c1, Integer c2) -> Integer.compare(c1, c2)); // specify comparator
 
+var pq = new PriorityQueue<int[]>((a, b) -> Integer.compare(b[1], a[1]));  // can use arrays as "tuples", max heap by 2nd element
+pq.offer(new int[] {1,2});
+pq.offer(new int[] {3,4});
+
 integerQueueWithComparator.add(3);  // add inserts a item, and heap internall will restructure so root is min(or max)
 integerQueue.add(3);                // add returns true normally, but for capacity-limited queue, it throws if full
 integerQueueWithComparator.add(2);
@@ -323,6 +355,8 @@ Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on s
 
 Stream.of("a","b").forEach(i -> System.out.println(i));
 
+IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
+
 var a = new ArrayList<Integer>(); a.add(1); a.add(2);
 // Collector interface also has toMap, toSet
 a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
@@ -339,6 +373,7 @@ System.out.println(obj_collection.get(0).data1)     // should print 1
 public record Far(Integer i, String s)
 var b = new ArrayList<Far>(List.of(new Far(1,"a"), new Far(3,"b"), new Far(1,"z"), new Far(3,"b")))
 b.stream().distinct().collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=3, s=b], Far[i=1, s=z]]
+b.stream().filter(item -> item.i() == 1).collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=1, s=z]]
 ```
 
 ## CONCURRENCY
@@ -437,6 +472,7 @@ System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
 - `int` - 4 bytes, `short` - 2 bytes, `long` 8 bytes, `byte` - 1 byte
     - all are signed 2's complement
     - `char` is 16bit unsigned
+- primitive types cannot be null! (but boxed types like Integer can be null)
 ### CHARACTER
 - `Character` is wrapper for `char`
 - `Character.isDigit('3')`   - returns true
@@ -544,11 +580,38 @@ Math.pow(3,4)   // power/exponent, this returns Double 81.0
 Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
 int randomNum = (int)(Math.random() * 101);  // 0 to 100
 int randomNum = (int)(Math.random() * (200-100) + 100);  // 100 to 200
+
+var rand = new Random();        // can also use Random object for random numbers
+rand.nextInt(1000);             // generate random int from 0 to 999
 ```
 
 ## FUNCTIONAL PROGRAMMING
-- java17 has `Optional<T>`
-- has lambda expressions
+- has immutable data struct `Record` like scala case classes
+- lambda expressions `e.g. (x,y) -> { x + y; }`
+### OPTIONAL 
+```java
+// java8 introduced `Optional<T>`
+Optional<String> opt = Optional.of("hi");
+Optional<String> empty = Optional.empty();
+if (opt.isPresent()) { System.out.println("hi"); }  // will print hi
+if (empty.isPresent()) { System.out.println("hi"); }  // wont print anything
+```
+### RESULT/EITHER
+- doesnt really exist but can create your own, e.g.
+```java
+Result<String> result = new Ok<>("foo");
+//Result<String> result = new Err<>(new Exception());
+
+switch (result) {
+    case Ok<String> ok -> System.out.println(ok.value());
+    case Err<?> fail -> fail.error().printStackTrace();
+}
+
+// in another file
+sealed interface Result<T> permits Err, Ok { }
+record Err<T>(Throwable error) implements Result<T> { }
+record Ok<T>(T value) implements Result<T> { }
+```
 
 ## GC/ALLOCATION
 - generally all variables store on the heap

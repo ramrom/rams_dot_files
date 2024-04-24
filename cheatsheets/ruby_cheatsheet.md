@@ -15,8 +15,14 @@
     - class(global within all class instances) `@@var`
     - global(program) `$var`
 
-## GEM
+## BUILD TOOLS
+### GEM
+- the way to package libraries and code
 - `gem install --user-install somegem` - install as user (root is default)
+
+## IDIOMS
+- `!` - methods ending in exclamation marks mutate the internal data
+- `?` - methods ending in question mark return a boolean
 
 ## HIGHER ORDER FUNCTIONS
 - lambda
@@ -30,6 +36,7 @@
     - an anonymous function that can be invoked from within another function
 
 ## ITERATORS
+- Enumerable module that mixed into array and maps
 ```ruby
 [1,2,3].each_with_object([]) do |item, obj|
     puts "item is #{item}"

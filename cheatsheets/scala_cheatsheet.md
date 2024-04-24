@@ -86,6 +86,7 @@
     - `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
 - companion class and object can access each others private members
 ### CASE CLASS
+- similar to Java's Record types
 - e.g. `case class Foo(i: Int, s: String)`
 - constructor params are `val`s by default
 - get a default `apply` and `unapply` automatically defined

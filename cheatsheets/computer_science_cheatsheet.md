@@ -106,11 +106,16 @@ public static void main(String[] args) {
     - each node stores one part of the key, a key is constructed from the sum of the parts from the root to it's leaf
     - one application is build entire dictionary of a language, e.g. english, to see if word is valid
         - could do a hash map, but trie tells you if a word is a prefix of another valid word quickly
+    - text editors using things like autocomplete search are much faster than hash tables or arrays
+- QUADTREE - tree where each internal node has exactly 4 children
+    - used to split a 2D square space into 4 pieces, good for indexing spatial data
+    - fast location based insertion and seaches
 ### LINKED LISTS
 - rust book - linked lists are generally dumb: https://rust-unofficial.github.io/too-many-lists/
 - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
     - the linear search through linked list dominates slowness, and for array moving n/2 items is not that slow (caches good at this)
 - see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
+- skip-list - multiple levels of linked lists that allow faster lookup of value versus linear search
 ### HEAP
 - a tree data struct that fullfills the heap property
     - for a min heap, parent node value is less than it's child nodes values. for max heap it's greater than
@@ -265,6 +270,10 @@ public static void main(String[] args) {
      - Map -> takes data and breaks it down into smaller key/value pairs(tuples)
      - Reduce -> takes tuples from map output and combines into smaller set of tuples
      - HDFS (hadoop distributed file system) - can store petabytes of data
+- CONSENSUS
+    - Raft protocol - simple and efficient, protocol for leader/follower replication and election
+        - kafka and etcd use raft
+    - Paxos - predates Raft, more complex
 ### LAMBDA ARCHITECTURE
 - uses stream processing and batch processing in parralel to ingest data
 - data comming in is read-only and append only by timestamp

@@ -38,6 +38,7 @@
 - uses gossip protocol to send new state data to neighbors
 - uses quorum writes - send requests to replicate data in many other nodes, dont have to wait for all nodes to respond
 - reqd quorum - if a minimum number of nodes agree on a response it is used
+- uses consistent hashing for sharding
 
 ## DOCUMENT DB
 - dynamodb - created by AWS
@@ -48,6 +49,8 @@
 ## KEY-VALUE
 - memcached
 - redis
+    - apr'24 - redis went partially closed source, cant host on cloud for free
+    - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
 
 ## TIME SERIES
 - graphite

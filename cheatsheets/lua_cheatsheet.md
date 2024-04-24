@@ -77,6 +77,9 @@ function foo(...)
 end
 foo("hi", "there") -- will splat to `print("hi","there")` in function foo
 
+function foo() return 1,2 end   -- function can return multiple values
+x,y = foo()                     -- assign multiple return values to variables
+
 -- if function has single argument and it's a literal string or table, then no parens are needed
 function onearg(myarg)
     print(myarg)

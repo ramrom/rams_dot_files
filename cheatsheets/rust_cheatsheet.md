@@ -294,7 +294,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
                 - `format!` is more succinct for concat of many strings
                 - doesnt take ownership of any of the params
 ### ARRAYS
-- cannot change size
+- is a primitive type, cannot change size
 - function argument type annotation: unsized `[T]`, sized `[T, 3]`
 - indexing starts at zero, e.g. `a[0]` is first element
 - stored in contiguous sections of memory on the stack
@@ -401,6 +401,14 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - `fn` pointers all implement `Fn`, `FnMut`, and `FnOnce`, so can pass `fn` to something expecting a closure
         - can also pass a closure that doesn't capture it's environment into a `fn`
         - can vary based on ABI, e.g. `extern` type, e.g. external C function: `extern "C" fn()`
+- every function is a seperate type, a var cant hold another fucntion with same signature, need to use func pointers `fn` for indirection
+    ```rust
+    let mut f = |x: i32| -> i32 { x + x }
+    f = |x: i32| -> i32 { x }           // compiler error!, will get `note: no two closures, even if identical, have the same type`
+
+    let mut f2: fn(i32) -> i32 = |x: i32| -> i32 { x + x }
+    f2 = |x: i32| -> i32 { x }           // this works
+    ```
 ### CLOSURES
 - are anonymous functions that can capture their environment
 - compiler auto-implments each closure into 3 traits
