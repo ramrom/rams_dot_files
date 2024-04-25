@@ -146,7 +146,7 @@ var i = mylist.iterator()
 i.hasNext();        // check if another item in iterator exists
 i.next();           // get next item, throws an exception if none (use hasNext to check)
 i.remove();         // remove an element from collection and not raise ConcurrentModificationException
-// create streams
+// streams, much more powerful, has map and filter and way more
 mylist.stream().forEach(i -> System.out.println(i));
 
 // NESTED LIST
@@ -471,6 +471,7 @@ System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
 - 8 primitive types: Java-byte, short, char, int, long, double, float, boolean
 - `int` - 4 bytes, `short` - 2 bytes, `long` 8 bytes, `byte` - 1 byte
     - all are signed 2's complement
+    - there are no unsigned primitve types
     - `char` is 16bit unsigned
 - primitive types cannot be null! (but boxed types like Integer can be null)
 ### CHARACTER
@@ -561,6 +562,11 @@ int[] arr = list.stream().mapToInt(i -> i).toArray();
 var l = new Integer[] { 1,2,3};
 List<Integer> li = Arrays.asList(l);  // wraps static array in AbstractList, exposing a List interface, BUT not really, e.g. `remove` errors
 ArrayList<Integer> al = new ArrayList<Integer>(li);     // converts to real dynamic list, can call `remove` on this
+
+// Object array coersion
+var objectarr = new Object[] { 1, "string" };
+Integer i = (Integer) objectarr[0];
+String s = (String) objectarr[1];
 ```
 
 ## MATH
@@ -655,6 +661,9 @@ record Ok<T>(T value) implements Result<T> { }
 - regular inheritence: `class Foo {}; class SubFoo extends Foo {};`
 - multiple inheritence: `class Foo {}; class Bar {}; class FooBar extends Foo, Bar {};`
 - can call `super` to invoke the parent classes implementation of a overridden method
+- `this` keyword
+    - instance variables don't need `this.some_instance_var`, can be ref directly with `some_instance_var`
+        - only when a method has a argument with the same name do you need to specify `this`
 ```java
 class Foo {
     int data;
@@ -676,6 +685,14 @@ Foo f2 = new Foo(1,2);
 ```
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
+### GENERICS
+- type erasure - compiler erases generic types and replaces with their bounds, to ensure no runtime overhead
+    - generally replaced by the bound, so if no bound replaced with `Object`
+```java
+public <T> void foo(T arg) { /* stuff */ }                      // declare generic method
+public <T extends Number> void foo(T arg) { /* stuff */ }      // generic with upper bounds, here must be Number class or it's subclasses
+public <T extends Number & Comparable> void foo(T arg) { /* stuff */ }   // multiple bounds, bounds can be interface
+```
 #### GENERIC CLASSES
 ```java
 public class Box<T> {       // example generic class

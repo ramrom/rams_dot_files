@@ -5,7 +5,11 @@
 ## NUMERIC REPRESENTATIONS
 ### TWOS COMPLEMENT
 - unlike one's complement, there is only one representation for zero
+- first bit is sign bit (1 is negative, 0 is positive)
 - arithmetic implementations can use both signed and unsigned values
+- methods to calc:
+    1. flip bits and add one, `0110` (6) -> `1001`(flip) -> `1010`(add one), we have -6
+    2. right->left complementing each bit after first 1
 ### IEEE754 FLOAT
 - has 2 representations for zero
 ### BASE2 REPRESENTATION OF BASE10
