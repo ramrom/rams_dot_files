@@ -244,6 +244,9 @@ public static void main(String[] args) {
 - connection pool
     - creating/destroying a connection like TCP is expensive
     - create a pool of persistent connection that are reused, and a entity that manages the pool and takes requests
+- Dynamic programming - solving a problem iteratively or breaking it down into subproblems
+    - often use memoization to store the solution of a subproblem
+- Memoization - remembering/caching the output of a previous computation
 
 ## FUNCTIONAL CONCEPTS
 - pure function 

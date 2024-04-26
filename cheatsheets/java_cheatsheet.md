@@ -74,6 +74,15 @@ System.out.println(Arrays.deepToString(tdarray))  // deepToString great for prin
 - the Collection is a superinterface of List and Set
 - List adds order and can be indexed
 - Set is a Collection that guarantees unique values
+- HEIRARCHY
+    - I=interface, C=class
+    - Collection(I) -- List(I) -- ArrayList(C),LinkedList(C),Vector(C),Stack(C)
+    - Collection(I) -- Set(I) -- HashSet(C),LinkedHashSet(C)
+    - Collection(I) -- SortedSet(I) -- TreeSet(C)
+    - Collection(I) -- Queue(I) -- PriorityQueue(C)
+    - Collection(I) -- Deque(I) -- ArrayQueue(C)
+    - Map(I) -- AbstractMap(C) -- EnumMap(C),HashMap(C)
+    - Map(I) -- SortedMap(I) -- NavigableMap(I) -- TreeMap(C)
 ### LIST
 ```java
 // ArrayList and LinkedList are main implementation of List interface
@@ -676,6 +685,7 @@ class Foo {
     private int privgetter() { return data; } // private can only be accessed within class
     protected int protgetter() { return data; } // protected can be seen within class and subclass
 
+    public Foo() {}                     // this default constructor only implicilty declared if NONE are declared
     public Foo(int i) { this.data = i; }  // constructor 1
     public Foo(int i, int y) { this.data = i + y; } // constuctor 2
 }
