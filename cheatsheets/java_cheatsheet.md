@@ -66,6 +66,7 @@ var clone = y.clone();  // make a copy of the array
 boolean[][] boolarr = new boolean[1][1];  
 int[][] tdarray = new int[10][20];
 int[][] tdarray = { {1, 3}, {4, 5} };
+var tdarray = new int[][] { {1, 3}, {4, 5} };
 Arrays.sort(tdarray, (x,y) -> (x[0] - y[0]))       // sort in ascending order of first element in each sub array
 Arrays.sort(tdarray, (x,y) -> (y[1] - x[1]))       // sort in descending order of second element in each sub array
 System.out.println(Arrays.deepToString(tdarray))  // deepToString great for printing nested arrays
@@ -95,6 +96,7 @@ mylist.size()   // returns 2, size returns length, not capacity of ArrayList
 mylist.get(1)  // ==> "hi", get value at index 1
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
+mylist.addAll(new ArrayList<Integer>(List.of("ya","foo")))   // mylist ==> { "dude", "ya", "foo" }
 
 // BINARY SEARCH
 class Foo { int i; Foo(int i) { this.i = i;} // #implement Comparable interface } 
@@ -236,7 +238,7 @@ m.putIfAbsent(4, 3)   // if key exists returns the value, otherwise puts 2nd arg
 TreeMap<String, Integer> m = new TreeMap<String, Integer>(); // keys in tree struct, sorted
 
 //nice way to do a "tuple" of same type as key, use List.of
-var hm = new HashMap<List<Integer>,String>();
+var hm = new HashMap<List<Integer>, Integer>();
 hm.put(List.of(1,2),3);     // key [1,2] contains value 3
 hm.put(List.of(3,4,5),1);     // key [3,4,5] contains value 1
 
@@ -383,6 +385,10 @@ public record Far(Integer i, String s)
 var b = new ArrayList<Far>(List.of(new Far(1,"a"), new Far(3,"b"), new Far(1,"z"), new Far(3,"b")))
 b.stream().distinct().collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=3, s=b], Far[i=1, s=z]]
 b.stream().filter(item -> item.i() == 1).collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=1, s=z]]
+
+Stream.of(1,2,3,4).skip(2).forEach(System.out::println);       // skip discards for n elements, this prints 3,4
+Stream.of(1,2,3,4).limit(3).forEach(System.out::println);      // limit only gives first x elements, this prints 1,2,3
+Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this prints 2,3
 ```
 
 ## CONCURRENCY

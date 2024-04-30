@@ -193,6 +193,8 @@ public static void main(String[] args) {
     - generally not done in-place so lots of extra space, _can_ be done in-place, but is hard
 - quick sort - divide and conquer, O(nlogn), in-place (no extra space), worst case O(n^2), most implementations not stable
 - heap sort - uses a heap, O(nlogn), not stable, in-place, worst case O(nlogn)
+- quickselect - find the kth smallest element in an unordered list, also called Haore's selection algorithm
+    - related to quicksort, done in-place
 ### NON-COMPARISON
 - bucket sort
     - 1.create array of "buckets" 2. put items in their buckets 3. sort each non-empty bucket 4. visit buckets and put them toegether

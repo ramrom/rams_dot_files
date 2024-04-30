@@ -10,12 +10,11 @@ alias vs='[ -f MyCurrentVimSession.vim ] && v -S MyCurrentVimSession.vim || echo
 alias vdiff='nvim -d'
 
 # LS
-alias ll='ls -l'
 alias la='ls -A'
-alias lal='ls -al'
-alias lahl='ls -hal'
-alias lail='ls -hail'
-alias lrt='ls -lrt'
+alias ll='ls -hl'
+alias lal='ls -hal'     # -l long format, -h human readable
+alias lail='ls -hail'    # -i for inode value
+alias lrt='ls -lrt'     # sort by mod time, -r reverse order
 
 # CD
 alias rd='cd ~/rams_dot_files'
