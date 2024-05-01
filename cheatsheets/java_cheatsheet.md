@@ -428,6 +428,8 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 "uPPer Case".toLowerCase()   // returns "upper case"
 
 "hello world".split(" ")   // return type String[], { "hello", "world" }
+"3+4/5*1".split("\\+|\\/|\\*")   // return type String[], { "3", "4", "5", "1" }
+"3+4*1".split("((?=\\+|\\*)|(?<=\\+|\\*))")   // return type String[], { "3", "+", "4", "*", "1" }
 
 "hello world".charAt(2)    // index string, reuturns "l"
 "get a substring".substring(2,7)  // returns "t a s", from begIndex to (endIndex - 1)
@@ -498,6 +500,9 @@ System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
     Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
     Character.isDigit('a')  //false
     Character.isDigit('1')  //true
+    Character.isAlphabetical('a')  //true
+    Character.isSpace(' ')  //true
+    Character.isWhitespace('\t')  //true
     'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
     '1' == 49       // return true, 49 is ASCII val for char `1`
     ```

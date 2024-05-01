@@ -52,6 +52,8 @@ printf "foo bar baz" | grep -E 'bar.*foo|foo.*bar'  #method2
 # TAR
 tar –xvzf documents.tar.gz   # uncompress tar file
     # -x extract, -v verbose, -z decompress each file, -f filename of tar file
+tar –tvzf documents.tar.gz   # uncompress tar file
+    # -t to list contents
 
 # ZIP
 zip -r outputfile folder1 folder2
