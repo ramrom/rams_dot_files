@@ -20,8 +20,15 @@
     - uses predefined commands as the conventions
 - way more sophisticated than ant, this is a full framework that supports plugins
 - `pom.xml` - project object model, core config file
+- maven in 5min: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+- has `goals` and `phases`
+    - building a phase will build all phases dependenent on it
+- default phases: `validate`(validate project info), `compile`, `test`, `package`(build jar)
+    - `integration-test`, `verify`, `install`, `deploy`
 ### COMMANDS
 - `mvn --version` -> show maven version, show home bin, show current java version
+- `mvn package` -> build the `package` phase, generally a later phase
+    - will compile, run tests, build jar
 
 ## GRADLE
 - newest and honeslty best, itself written in groovy

@@ -183,8 +183,12 @@ wc -l somefile   # count # of lines in file
 wc -c somefile   # count # of chars in file
 cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
 
+# YQ - data file processor
+yq some.xml -o yaml     # convert xml to yaml
+yq some.xml -o json     # convert xml to json
+
 # XQ - convert xml to json and then use jq queries
-xq . some.sml  # would spit our JSON conversion
+xq . some.xml  # would spit our JSON conversion
 xq .somekey some.xml
 
 # PANDOC -universal doc converter

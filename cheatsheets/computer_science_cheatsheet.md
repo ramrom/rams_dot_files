@@ -145,8 +145,11 @@ public static void main(String[] args) {
 
 
 ## CACHE
-- LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
-    - head of linkedlist is most recent, and tail is least recent
+- EVICTION POLICY
+    - LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
+        - head of linkedlist is most recent, and tail is least recent
+    - TTL - time-to-live, evict when it expires
+    - LFU - least frequently used, keep a count of hits for each cache entry
 - cache updating
     - write-through - write the data to the cache and main memory, wait for this to finish before program can continue
         - it's slow but simple, and no cache coherency issues, good when use case is few write operations
@@ -306,7 +309,7 @@ public static void main(String[] args) {
         - advantage: more robust retry, consumer can reenqueue message if it failed
 
 ## LOGIC
-- "switch" statements are usually compiled to lookup tables or hash lists in most languages
+- "switch" statements are often compiled to lookup tables or hash lists in most languages
     - this are faster than a if/else-if/else equivalent, but practically only for large numbers of cases
 
 ## HARDWARE
