@@ -150,7 +150,9 @@
         foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
         foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
     ```
-- adapters - `Iterator`s that return `Iterator`s, main examples: `map`, `filter`, `enumerate`, `take`, `zip`, `flatten`
+- adapters - `Iterator`s that return `Iterator`s, main examples: `map`, `filter`, `enumerate`, `take`, `zip`, `flatten`, `chain`
+    - slice has `windows` but `Iterator` doesn't
+        - `(1..10).collect::<Vec<usize>>().as_slice().windows(3).for_each(|i| println!("{:?}", i));`
 - consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `reduce`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
 - unrolling - means to flatten a loop, compiler does this optimization often if it's a small number of known iterations
     - e.g. `for i in (1..5) { ... }`
@@ -335,6 +337,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - `K`, `V` are generic types, key and value must be one type (homogenous)
     - no macros to build them
     - backed by a vector with buckets and linear probing
+    - 2016 reddit post on hash - https://www.reddit.com/r/rust/comments/52grcl/rusts_stdcollections_is_absolutely_horrible/
     - linear probing: for insert, if bucket is taken compute hash with occupying key + insertion key, goto that bucket, repeat till vacancy
         - newest imp uses `hashbrown::hash_map` crate (invented by google, called SwissTable, uses quadratic probing and SIMD, very fast)
             - hashbrown doesnt require random num generation for `Hasher`, so can be used in more places (embedded systems, kernels)

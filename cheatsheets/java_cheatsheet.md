@@ -224,8 +224,9 @@ new ArrayList<String>(hs); // can create a ArrayList from the HashSet
 // HashMap and TreeMap are main implementations of AbstractMap class
     // HashMap, implements Map interface, uses array("buckets"), #hashCode method on key called to find bucket
         // in collisions a list for that bucket is created
-    // TreeMap, implements NavigableMap(SortedMap?) interface, uses red-black tree
-    // order guaranteed in TreeMap, not HashMap
+    // TreeMap, implements NavigableMap(SortedMap?) interface, uses red-black tree, the keys are sorted
+    // IdentityHashMap    - HashMap uses chaining, this uses probing
+    // LinkedHashMap     - values are doubly linked list
 // Key type must implement #hashCode and #equals methods, cant use primitive types like int and char (use Integer and Character)
 Map<String, Integer> m = new HashMap<String, Integer>(); // impl of Map, hashtable at core, constant time lookup and insert
 m.put("foo", 3);

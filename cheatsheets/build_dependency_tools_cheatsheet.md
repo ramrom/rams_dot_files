@@ -25,6 +25,7 @@
     - building a phase will build all phases dependenent on it
 - default phases: `validate`(validate project info), `compile`, `test`, `package`(build jar)
     - `integration-test`, `verify`, `install`, `deploy`
+- cool extension that lets u use non-xml formats: https://github.com/takari/polyglot-maven
 ### COMMANDS
 - `mvn --version` -> show maven version, show home bin, show current java version
 - `mvn package` -> build the `package` phase, generally a later phase

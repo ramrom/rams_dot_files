@@ -47,6 +47,19 @@ public static void main(String[] args) {
     - most OSes and langauges support this (e.g. python: https://docs.python.org/3/library/multiprocessing.shared_memory.html)
     - forking is a also common case, with copy-on-write parent and child share memory until a write
     - also shared dynamic libs - executables linking to same dynamic lib technically share the same memory
+### GARBAGE COLLECTION
+- Reference counting
+    - have a count of refs for each object, when refs go to zero, deallocate object
+- Tracing garbage collection
+    - naive mark-and-sweep
+         - mark phase that follows trees from root objects, and marks all reachable objects
+         - sweep phase - scan all memory for each object, any object not marked is deallocated
+    - tri-color mark-and-sweep
+        - naive is stop-the-world in that entire program supsended for a GC cycle, can't modify working set
+        - uses 3 colors: 
+            - white - candidates for collection
+            - black - reachable from root, have no refs to objects in white set, not candidates for collection
+            - grey - reachable from root, not scanned for ref's to white objects yet
 
 
 ## CONCURRENCY
@@ -87,6 +100,30 @@ public static void main(String[] args) {
 
 
 ## DATA STRUCTURES
+### ASSOCIATIVE ARRAYS / MAPS
+- **HASHMAP**
+    - which use hash functions to find where a key goes
+        - perfect hash function - injective function - maps a distinct set S to m integer with no collisions
+            - used for lookup tables
+            - basically needs knowledge of the set S in order to create a perfect hash function
+    - https://en.wikipedia.org/wiki/Hash_table
+    - two main collision resolution methods: chaining and open-addressing
+    - CHAINING - create a linked-list or some collection to store all the colliding keys
+        - each bucket is a linked-list
+        - each bucket is a another hashmap (two-level hashmap)
+    - OPEN-ADDRESSING - find a different location to store the key
+        - probing is a very common open-addressing method
+            - faster than open-addressing with low load factor: with no collision probe is 1 lookup, chain is 2 lookups
+            - high load factor (> 0.8), chain is _much_ faster, tons of extra lookups b/c of constant collisions
+                - typically 0.7-0.8 load factor is when back storage is resized/increased
+                - want to avoid clustering and get even distribution
+            - linear probing - each probe is 1 more
+            - quadratic probing - each probe is n^2 (1,2,4...)
+            - double hash - each probe intervals is computed by 2nd hash function
+        - robinhood
+- **TREEMAP** - store key/values in something like a binary search tree, when you want to access the keys in sorted order
+    - insertion/deletion/lookup are all log(n) versus constant time for hashmap
+    - java has TreeMap
 ### TREES
 - trees are graphs where nodes have only one parent AND a root that has zero parents
     - this also implies there are no cycles
@@ -268,7 +305,7 @@ public static void main(String[] args) {
 ## PHILOSOPHIES AND DESIGN
 - Moore's law - transistor count will double every 2 years
 - Amdahl's law - total perf gained by optimizing one part of system limited by fraction of total time part is used
-- [SOLID](https://en.wikipedia.org/wiki/SOLID)
+- [SOLID](https://en.wikipedia.org/wiki/SOLID) - Robert C. Martin credited with coining it
     - SRP - single responsibility principle
     - interface segregation principle - Clients should not be forced to depend upon interfaces that they do not use
     - Liskov substitution principle 
@@ -311,6 +348,10 @@ public static void main(String[] args) {
 ## LOGIC
 - "switch" statements are often compiled to lookup tables or hash lists in most languages
     - this are faster than a if/else-if/else equivalent, but practically only for large numbers of cases
+
+## COMPILER
+- lexer -> read a string and split into tokens
+- parser -> take tokens from lexer and build a AST based on grammer
 
 ## HARDWARE
 - FPGA - field programmable gate arrays
