@@ -19,6 +19,9 @@ python -c 'print("hi")'  # prints "hi"
     - https://virtualenv.pypa.io/en/latest/
     - `virtualenv venv` - create a new virtual env
         - creates a `venv` dir that stores all tools/metadata for env
+- `pipx` - https://github.com/pypa/pipx
+    - install and run python programs in isolated environments
+    - unlike `pip`, which has no ioslation and made for libs and apps, pipx is for app installs
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
 
