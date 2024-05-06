@@ -211,6 +211,8 @@ RANDOM  # contains a different random number every time u access it
 
 echo $$ # print PID of current shell process
 echo $? # print exit code of last command
+echo $# # the number of arguments
+X=3 && echo ${!X}  # will print the 3rd argument
 
 # splat argument that expands to all command-line arguments seperated by spaces
 # note: $0 is not passed in $@

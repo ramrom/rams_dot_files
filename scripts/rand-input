@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# take a list of inputs and return one randomly to stdout
+NUM_ARG=$(echo $#)
+
+RAND_NUM=$(echo $RANDOM)
+PICK=$(( $RAND_NUM % $NUM_ARG + 1 ))
+
+echo ${!PICK}

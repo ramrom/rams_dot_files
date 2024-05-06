@@ -175,10 +175,15 @@ public static void main(String[] args) {
 - probabilistic data struct that quickly and space efficiently finds if item is part of a set
 - it is a fixed size but can represent a set with arbitrarily large number
 - can return false positive not not false negative, i.e. "item maybe part of the set or definitely is not part of the set"
-- adding element never fails, but the more you add the higher the false positive rate
-- can't remove an element beause that might remove more elments that just that one b/c of how it's represented
-- Count min sketch is a counting bloom filter - https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch
+- use a space of n bits and k hash functions, each item inserted we calculate k hash functions which sets k of n bits to 1
+    - on a get for an item, if _any_ of they k bits are zero, its not present
+    - if all are 1, then either it's in the set _or_ each one is a collision with some other item (false positive)
+- can't remove an element - cant set the bit back to one b/c we dont know if other items have set this to one
+- adding element never fails, every extra item means more collisions, and higher false positive rate
+- COUNT MIN SKETCH - is a counting bloom filter - https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch
+    - instead of a bit(boolean), you have a integer counter
     - uses sub-linear space, innaccurate due to collisions
+    - unlike boom filter can remove items, b/c u can decrement
 
 
 ## CACHE

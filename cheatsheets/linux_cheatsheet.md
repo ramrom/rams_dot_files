@@ -13,6 +13,7 @@
 - cron: great site for deciphering a cron schedule: https://crontab.guru/
 - procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
     - most unix-like OSes support it, notably OSX doesn't
+- `io_uring`, syscalls for async IO, interface added in 5.1, addresses deficiencies of Linux AIO
 
 
 ## GNU
