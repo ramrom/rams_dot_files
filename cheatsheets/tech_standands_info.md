@@ -285,6 +285,10 @@
 ### DATE/TIME
 - ISO
 - unix time - number of non-leap seconds since jan1-1970 UTC, can also be microseconds,nanoseconds
+### OTHER
+- GUID - microsoft invented, basically the same as UUID
+- UUID - universal unique identifier - 128bits long
+    - https://datatracker.ietf.org/doc/html/rfc4122
 
 ## DEVOPS
 ### TERRAFORM

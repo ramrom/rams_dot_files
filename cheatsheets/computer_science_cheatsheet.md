@@ -133,6 +133,9 @@ public static void main(String[] args) {
         - b/c of these properties, particularly left sided compaction on last level, can be represented as an array
     - perfect - every level is full, perfect trees are always complete
     - full - every node has either 0 children or two
+- QUADTREE
+    - quadtree is a tree with exactly 4 children, often used to represent 2D structures, each 4 children represent one quadrant of 2D space
+    - octtree - has 8 children, for 3D spaces, one for each of 8 quadrants
 - BST - binary search tree, a binary tree but ordered
 - B-TREE - stores sorted data, self-balancing
     - has order m, meaning a node can have up to m children, every node except for root and leaves must have at least m/2 children
@@ -357,6 +360,7 @@ public static void main(String[] args) {
 ## COMPILER
 - lexer -> read a string and split into tokens
 - parser -> take tokens from lexer and build a AST based on grammer
+- https://godbolt.org/ - badass tool to see assembly code compiled by many languages
 
 ## HARDWARE
 - FPGA - field programmable gate arrays

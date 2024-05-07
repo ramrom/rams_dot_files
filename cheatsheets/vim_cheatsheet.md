@@ -196,6 +196,7 @@ C             " make selected dir node the new root node
 - `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
 - `o` - open with window picker, if multiple windows open, select a labeled (e.g. "A" "B" "C" for 3windows) window
 - `O` - open no window picker, in the main window
+- `tab` - open("preview") - open in window but keep tree window as active window
 - `q` - close (help menu, or nvim tree sidebar)
 - `f`/`F` - filter / clear filer
 - `E` - expand all

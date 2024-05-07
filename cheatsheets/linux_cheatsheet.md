@@ -1,6 +1,4 @@
 # LINUX
-- cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
-- namespaces - linux kernel feature, isolates sets of processes and resources
 - linus rant on app development in linux - https://www.youtube.com/watch?v=Pzl1B7nB9Kc
     > If people are using it, it's not a bug, it's a feature - Linus
 - `/etc/passwd` and `/etc/shadow`
@@ -13,28 +11,15 @@
 - cron: great site for deciphering a cron schedule: https://crontab.guru/
 - procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
     - most unix-like OSes support it, notably OSX doesn't
+- cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
+- namespaces - linux kernel feature, isolates sets of processes and resources
 - `io_uring`, syscalls for async IO, interface added in 5.1, addresses deficiencies of Linux AIO
-
-
-## GNU
-- started by richard stallman in 1984
-- gaol is to make free open source software, believes selling propietary software is immoral
-- big projects
-    - GIMP - Gnu image processing/editor
-    - GNOME - a graphical desktop environment
-        - KDE came first, but some devs didnt like that Qt wasnt totally free, so started GNOME
-            - Qt is owned by trolltech, an oslo company, and offers it for free if u build free software
-    - gcc/g++ - GNU compiler/toolchain for c/c++
-    - Hurd - a OS, never took off as linux dominated
-
-## UBUNTU/DEBIAN
-- lsb_release -a        - show distro name and version
-    - LTS releases every 2 years, support for 5 years
-    - regular releases every year, support for 9 months
-- cat /etc/issue        - show distro and version
-- `lscpu` or `cat /proc/cpuinfo` for cpu info
 - `ldd /some/executable` - see all .so (shared objects, dynamically linked libraries) dependency files of an executable
 - shared/dynamic libs in linux: https://developer.ibm.com/technologies/linux/tutorials/l-dynamic-libraries/
+- ELF - file format for binary files, used for ABI for c programs to find functions to call
+    - ELF ABI specifies table of functions/symbol-table that external programs can call
+- cat /etc/issue        - show distro and version
+- `lscpu` or `cat /proc/cpuinfo` for cpu info
 - `ctr` + `alt` + `FnX` - switch to tty x
     - from cli to switch to vtty2 can do: `sudo chvt 2`
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
@@ -52,6 +37,23 @@ xclip       # like osx pbpaste/bcopy, needs a DISPLAY set
 xclip -selection clipboard    # copy to clipboard
 xclip -selection clipboard -o # paste from clipboard
 ```
+
+
+## GNU
+- started by richard stallman in 1984
+- gaol is to make free open source software, believes selling propietary software is immoral
+- big projects
+    - GIMP - Gnu image processing/editor
+    - GNOME - a graphical desktop environment
+        - KDE came first, but some devs didnt like that Qt wasnt totally free, so started GNOME
+            - Qt is owned by trolltech, an oslo company, and offers it for free if u build free software
+    - gcc/g++ - GNU compiler/toolchain for c/c++
+    - Hurd - a OS, never took off as linux dominated
+
+## UBUNTU/DEBIAN
+- lsb_release -a        - show distro name and version
+    - LTS releases every 2 years, support for 5 years
+    - regular releases every year, support for 9 months
 
 ## RASPBIAN
 - `rpi-imager` deb package
