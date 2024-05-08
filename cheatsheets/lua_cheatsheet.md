@@ -97,6 +97,7 @@ onearg "dude"
     - value can be any type: number/string/bool/function or another table, field can number/string
 - 1-based indexing: first item starts at index _1_, not _0_
     - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
+    - tjdevries on why 1 index makes sense - https://www.youtube.com/watch?v=0uQ3bkiW5SE&ab_channel=TJDeVries
 - tables are basis for modules, you attach all functions and data to them
 - can define a function that takes a receiver. `a = { var = 0 }; function a.inc(self, num) self.var = self.var + num end`
 - function with `:` operator - can omit `self`, e.g. `function a:inc(num) self.var = self.var + num end`

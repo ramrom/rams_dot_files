@@ -289,6 +289,15 @@
 - GUID - microsoft invented, basically the same as UUID
 - UUID - universal unique identifier - 128bits long
     - https://datatracker.ietf.org/doc/html/rfc4122
+    - v1 - embeds time, time since oct10-1568 (gregorian calander started), grows in 100ns increments
+    - v2 - like v1 but low_time changed to POSIX user ID (to trace uuid to user that created it)
+    - v4 - value of entire UUID is random, except first pos of 3rd segment is always 4
+    - v3,v5 - generated deterministically, given same info same UUID generated
+        - based on namespace(itself a UUID) and name, run through hash function to get 128bit value, v3 is MD5, v5 is SHA1
+    - v6 - identical to v1, bits used to capture timestamp are flipped
+    - v7 - time based like v1, but uses unix time instead of gregorian calander
+    - v8 - latest version that permits vendor specific implementations while adhereing to RFC
+- Cuid2 - secure collision-resistant IDs optimized for horizontal scaling and performance, aim to be better than UUID/GUID
 
 ## DEVOPS
 ### TERRAFORM

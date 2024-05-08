@@ -1103,10 +1103,26 @@ LoadKotlinLSP = function()
     }
 end
 
+-- ruby-lsp - https://shopify.github.io/ruby-lsp/
+-- TODO: also check out rails LSP: https://github.com/Shopify/ruby-lsp-rails
+----------------- RUBY ---------------------------------------
+LoadRubyLSP = function()
+    require'lspconfig'.ruby_lsp.setup{ 
+        -- below are default opts
+
+        -- cmd = { "ruby-lsp" },
+        -- filetypes = { "ruby" },
+        -- init_options = { formatter = "auto" },
+        -- root_patterns = { "Gemfile", ".git" },
+        -- single_file_support = true,
+    }
+end
+
 -----------BUILTIN LSPCONFIGS ---------------------
 
 LoadLSPConfig = function()
     -- LoadLuaLSP()
+    -- LoadRubyLSP()
     LoadRustLSP() 
     LoadGolangLSP()
     LoadKotlinLSP()

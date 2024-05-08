@@ -8,32 +8,24 @@
 - XinYmin: https://learnxinyminutes.com/docs/ruby/
 
 
-## VARIABLES
-- Scope
-    - local(method scope) `var`
-    - instance(object scope) `@var`
-    - class(global within all class instances) `@@var`
-    - global(program) `$var`
-
 ## BUILD TOOLS
 ### GEM
 - the way to package libraries and code
 - `gem install --user-install somegem` - install as user (root is default)
+### BUNDLER
+- gem that lets you specify project dependencies
+
+## VARIABLES
+### SCOPE
+- local(method scope) `var`
+- instance(object scope) `@var`
+- class(global within all class instances) `@@var`
+- global(program) `$var`
 
 ## IDIOMS
 - `!` - methods ending in exclamation marks mutate the internal data
 - `?` - methods ending in question mark return a boolean
 
-## HIGHER ORDER FUNCTIONS
-- lambda
-    - will error if exact number of args are not given
-    - return statement will return control to calling function
-- proc
-    - very similar to lambda
-    - if proc takes N args, and called with N-1, last arg will be `nil`, if called with N+1, last arg is ignored
-    - return statement will return from proc and calling function
-- code blocks
-    - an anonymous function that can be invoked from within another function
 
 ## ITERATORS
 - Enumerable module that mixed into array and maps
@@ -45,12 +37,60 @@ end                                     # output is [2,4,6]
  
 # NOTE: collect is essentially the same method as map
 [1,2,3,4].map{ |a| a * 3 }.filter{ |a| a.even? }   # output is [6,12]
+["a", "b", 4].any? { |i| i.class == Integer }   # output true
+["a", [1,2], 4].all? { |i| i.class == String }   # output false
 ```
 
-## INTROSPECTION
+## IO
 ```ruby
 # puts
 STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout
+```
+
+## CONTROL FLOW
+```ruby
+# lonely operator (safe navigation), if expression evaluates to nil, then lonely operator on nil will return nil
+a = nil
+a.foo           # throws no method error
+a&.foo&.bar  # returns nil
+```
+
+## TYPES
+```ruby
+# CLASSES
+class Foo
+    attr_accessor :field1
+    attr_writer :field2
+    attr_reader :field2
+
+    def initialize(f1, f2)
+        @field1 = f1
+        @field2 = f2
+    end
+end
+
+f = Foo.new
+```
+### HIGHER ORDER FUNCTIONS
+- lambda
+    - will error if exact number of args are not given
+    - return statement will return control to calling function
+- proc
+    - very similar to lambda
+    - if proc takes N args, and called with N-1, last arg will be `nil`, if called with N+1, last arg is ignored
+    - return statement will return from proc and calling function
+- code blocks
+    - an anonymous function that can be invoked from within another function
+
+
+## INTROSPECTION
+```ruby
+a=1
+a.object_id             # will return some integer, uniquely identifies an object
+a.class                 # return Integer
+a.class.class           # return Class
+a.class.class.class     # return Class  :)
+a.kind_of? Integer      # returns true
 
 # Find all objects of a type and do something to them
 ObjectSpace.each_object(Array) { |ob| puts ob.object_id }
