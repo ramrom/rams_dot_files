@@ -49,6 +49,17 @@ STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout
 
 ## CONTROL FLOW
 ```ruby
+i=1; num=5;
+while i < num  do
+   puts("Inside the loop i = #{i}" )
+   i +=1
+end
+
+begin
+    puts "in loop"
+    i -= 1
+end while i > 0
+
 # lonely operator (safe navigation), if expression evaluates to nil, then lonely operator on nil will return nil
 a = nil
 a.foo           # throws no method error

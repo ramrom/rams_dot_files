@@ -543,7 +543,7 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - `Sync` and `Send` are built into rust, (most of the rest is in std lib)
 - `Sync` trait, these types allows many references to same value in different threads
     - type `T` is `Sync` if immutable ref `&T` is `Send`
-    - generic parameters need ty be `Sync` for container type to be `Sync`
+    - generic parameters need to be `Sync` for container type to be `Sync`
 - `Send` trait, these types are safe to transfer ownership to different thread
 - `Mutex`, `RWLock`, and `Atomic`s are `Sync` type
 - `Mutex` itself is `Send`, but the `MutexGuard` is not, same thread that locks must unlock
@@ -699,7 +699,7 @@ let s2 = String::from("hello");  // type String is mutable
 - [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/tokio
 - [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await
 - [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower, uses async/await
-- [serde](https://serde.rs/) - awesome serial/deserialization framework
+- [serde](https://serde.rs/) - awesome defacto serial/deserialization framework
     - `Serializer`/`Deserializer` traits define how parse data into/out-of the serde data model
         - deserialization uses the visitor pattern, centered around the `Visitor` trait
     - `Serialize`/`Deserialize` traits defined on struct to convert from/into any serde data model

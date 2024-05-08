@@ -42,6 +42,7 @@
     - externalize UI: multigrid, floating windows, messages
 - 0.5
     - introduced built in LSP client (lua written ofcourse)
+    - 2021 - jdevries on why it was built-in: https://www.youtube.com/watch?v=ArwDgvYEZYk&ab_channel=TJDeVries
         - doesnt have an autocompletion engine
     - added `init.lua` (versus old `init.vim`) for configuring editor
     - experimental tree-sitter integration

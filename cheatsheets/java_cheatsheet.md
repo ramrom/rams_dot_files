@@ -761,6 +761,15 @@ new GenericIface<String>() { void afunc(String s) {} }
     - hashcode: if they are equal hashcode will be equal: `assertEquals(person1.hashCode(), person2.hashCode());`
     - tostring: will print in the form: `[field1=value1, field2=value2]`
 - you cant mutate a field, so common pattern is to write a "setter" method that returns a new record object with that field changed
+### ENUM
+- java 5 added `enum`
+- each item is a constant, and only one defined, so `==` works
+```java
+public enum Colors { Red, Green, Blue }
+var e = Colors.Red;
+var e2 = Colors.Red;
+e == e2        // return true, since they are constant and only one instance defined
+```
 ### INFERENCE
 - java10 introduces some local var inference
     - `var a = 3; var b = "hi"`, compiler will inference these `var`s
