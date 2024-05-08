@@ -86,3 +86,4 @@
 - vitess - a db clustering system using mysql, created by google
     - each mysql server is a horizontal shard abstracted as a single entity by vitess
     - used by youtube sincd 2011, composed of tens of thousands of mysql instances
+    - also used by slack

@@ -834,15 +834,31 @@ if (true && true) { System.out.println("hi"); }
 else if (false || false) { System.out.println("elseif"); }
 else  System.out.println("else"); }
 
+// basic switch statement
 int a = 3
 switch (a) {
-            case 1: System.out.println("it's 1")
-                    break;
-            case 3: System.out.println("it's 3")
-                    break;
-            default: System.out.println("something else")
-                     break;
-        }
+        case 1: System.out.println("it's 1");
+                break;
+        case 2: System.out.println("it's 1");
+                break;
+        case 3: System.out.println("it's 3");
+                break;
+        default: System.out.println("something else");
+                 break;
+}
+
+// java12+13 have switch expression
+// no break keyword, uses `->`, can have comma-delimited criteria, can specify a code block
+// they must be exhaustive
+switch (a) {
+    case 1,2 -> System.out.println("it's 1 or 2");
+    case 3 -> { 
+        System.out.println("it's 3");
+        System.out.println("it's 3 again");
+    }
+    default -> System.out.println("something else");
+}
+
 
 //ternary operator
 String bar = (3 < 10) ? "A" : "B";  // bar = "A"

@@ -156,6 +156,54 @@
 - consumers - methods that consume `Iterators`, e.g. `collect`, `fold`, `reduce`, `sum`, `all`, `any`, `max`, `min`, `count`, `find`
 - unrolling - means to flatten a loop, compiler does this optimization often if it's a small number of known iterations
     - e.g. `for i in (1..5) { ... }`
+### CONTROL FLOW
+```rust
+// loop
+outer: loop {
+    println!("Entered the outer loop");
+    'inner: loop {
+        println!("Entered the inner loop");
+        // This would break only the inner loop
+        //break;
+
+        // This breaks the outer loop
+        break 'outer;
+    }
+    println!("This point will never be reached");
+}
+
+while n < 10 {
+    n += 1;
+}
+
+// PATTERN MATCHING
+let number=100;
+let num2=3;
+match number {
+    1 => println!("One!"),                              // Match a single value
+    1 if num2 == 3 => println!("One!"),                 // can take guard statements
+    2 | 3 | 5 | 7 | 11 => println!("This is a prime"),  // Match several values
+    13..=19 => println!("A teen"),                      // Match an inclusive range
+    _ => println!("Ain't special"),                     // Handle the rest of cases
+}
+
+// match on many items
+let astr: String = String::from("hi");
+match (number, astr) {
+    (1,"foo") => println!("match"),
+    _ => println!("default"),
+}
+
+// Match can be used to destructure a tuple
+let triple = (0, -2, 3);
+match triple {
+    (0, y, z) => println!("First is `0`, `y` is {:?}, and `z` is {:?}", y, z), // Destructure the second and third elements
+    (1, ..)  => println!("First is `1` and the rest doesn't matter"),
+    (.., 2)  => println!("last is `2` and the rest doesn't matter"), // `..` can be used to ignore the rest of the tuple
+    (3, .., 4)  => println!("First is `3`, last is `4`, and the rest doesn't matter"),
+    _  => println!("It doesn't matter what they are"),  // `_` means don't bind the value to a variable
+}
+```
 ### OPERATORS
 - bitwise ops: `&` bitwise AND, `|` bitwise OR, `^` bitwise XOR
     - only some types support it, e.g. integer types like `i32`, `u32`, etc

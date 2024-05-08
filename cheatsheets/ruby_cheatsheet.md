@@ -39,6 +39,20 @@ end                                     # output is [2,4,6]
 [1,2,3,4].map{ |a| a * 3 }.filter{ |a| a.even? }   # output is [6,12]
 ["a", "b", 4].any? { |i| i.class == Integer }   # output true
 ["a", [1,2], 4].all? { |i| i.class == String }   # output false
+
+x = [ { a: 1, b: 2}, { a: 2, b: 2}, {a: 1, b: 10} ]
+x.group_by { |i| i[:a] }  # output {1=>[{:a=>1, :b=>2}, {:a=>1, :b=>10}], 2=>[{:a=>2, :b=>2}]}
+```
+
+## DATA STRUCTS
+- Hash for associative array and Array for arrays are core built-in data structs
+```ruby
+# slice returns subhash of a hash
+a = { "a" => 3, b: 4, 1 => "dude" }
+a.slice("a", :b)        # returns { "a" => 3, b: 4 }
+
+# ActiveSupport has except, the opposite of slice
+a.except("a", :b)        # returns { 1 => "dude" }
 ```
 
 ## IO
