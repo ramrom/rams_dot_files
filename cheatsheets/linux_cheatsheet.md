@@ -1,11 +1,6 @@
 # LINUX
 - linus rant on app development in linux - https://www.youtube.com/watch?v=Pzl1B7nB9Kc
     > If people are using it, it's not a bug, it's a feature - Linus
-- `/etc/passwd` and `/etc/shadow`
-    - `passwd` used to contain passwords, this is deprecated, security issue as u could dictionary attack it
-        - file remains b/c programs like `ls` still use it
-        - still contains UID, full name, home dir, default shell
-    - `shadow` contains hashed passwords and other management fields, is readable only by root
 - swap partition - using a filesystem generally on a HD as storage for data on RAM, usually when RAM is full
 - ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
 - cron: great site for deciphering a cron schedule: https://crontab.guru/
@@ -14,34 +9,16 @@
 - cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
 - namespaces - linux kernel feature, isolates sets of processes and resources
 - `io_uring`, syscalls for async IO, interface added in 5.1, addresses deficiencies of Linux AIO
-- `ldd /some/executable` - see all .so (shared objects, dynamically linked libraries) dependency files of an executable
 - shared/dynamic libs in linux: https://developer.ibm.com/technologies/linux/tutorials/l-dynamic-libraries/
 - ELF - file format for binary files, used for ABI for c programs to find functions to call
     - ELF ABI specifies table of functions/symbol-table that external programs can call
-- cat /etc/issue        - show distro and version
-- `lscpu` or `cat /proc/cpuinfo` for cpu info
-- `ctr` + `alt` + `FnX` - switch to tty x
-    - from cli to switch to vtty2 can do: `sudo chvt 2`
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
 - dash is used as /bin/sh b/c it's much faster than bash, so boots are faster
     - it doesnt have command completion, or ctrl-r search, or command history search, as this would make the shell slow
-```sh
-sudo shutdown -h now (halt now)
-sudo shutdown -k (kick everyone off and login disabled, no halting)
-sudo shutdown -r now (reboot now)
-
-lsof +f -- /media/usb0   # assuming usb0 is root of filesystem, shows all proceses with file handles in that system
-xdg-open    # like osx "open", will open file with default application for that file type
-xdg-mime query default text/html    # query the default x app to open a given mimetype
-xclip       # like osx pbpaste/bcopy, needs a DISPLAY set
-xclip -selection clipboard    # copy to clipboard
-xclip -selection clipboard -o # paste from clipboard
-```
-
 
 ## GNU
-- started by richard stallman in 1984
-- gaol is to make free open source software, believes selling propietary software is immoral
+- project started by richard stallman in 1984
+- goal is to make free open source software, believes selling propietary software is immoral
 - big projects
     - GIMP - Gnu image processing/editor
     - GNOME - a graphical desktop environment
@@ -51,9 +28,9 @@ xclip -selection clipboard -o # paste from clipboard
     - Hurd - a OS, never took off as linux dominated
 
 ## UBUNTU/DEBIAN
-- lsb_release -a        - show distro name and version
-    - LTS releases every 2 years, support for 5 years
-    - regular releases every year, support for 9 months
+- `lsb_release -a`        - show distro name and version
+- LTS releases every 2 years, support for 5 years
+- regular releases every year, support for 9 months
 
 ## RASPBIAN
 - `rpi-imager` deb package
@@ -73,16 +50,42 @@ xclip -selection clipboard -o # paste from clipboard
 - dirs/files
     - `~/RetroPie/roms/` - roms locations
 
+## COMMON COMMANDS
+- `cat /etc/issue`        - show distro and version
+- `lscpu` or `cat /proc/cpuinfo` for cpu info
+- `ctr` + `alt` + `FnX` - switch to tty x
+    - from cli to switch to vtty2 can do: `sudo chvt 2`
+```sh
+sudo shutdown -h now (halt now)
+sudo shutdown -k (kick everyone off and login disabled, no halting)
+sudo shutdown -r now (reboot now)
+
+lsof +f -- /media/usb0   # assuming usb0 is root of filesystem, shows all proceses with file handles in that system
+xdg-open    # like osx "open", will open file with default application for that file type
+xdg-mime query default text/html    # query the default x app to open a given mimetype
+xclip       # like osx pbpaste/bcopy, needs a DISPLAY set
+xclip -selection clipboard    # copy to clipboard
+xclip -selection clipboard -o # paste from clipboard
+```
+- `ldd /some/executable` - see all .so (shared objects, dynamically linked libraries) dependency files of an executable
+
 
 ## USER STUFF
-su - foouser               - login as foouser (need to enter foouser password)
-sudo -u foouser cmd         - run command `cmd` as foouser
-sudo -u foouser bash         - basically login as foouser, since `bash` cmd here starts a shell process
-sudo useradd foouser        - create new user with home dir
-sudo passwd foouser         - change any users password, seems to bypass strength rules
-passwd                      - change your password
-sudo usermod -a -G foogroup foouser  - add foouser to group foogroup
-sudo useradd foosuer sudo       - will properly add user to group sudo and some others, for sudo access
+- `/etc/passwd` and `/etc/shadow`
+    - `passwd` used to contain passwords, this is deprecated, security issue as u could dictionary attack it
+        - file remains b/c programs like `ls` still use it
+        - still contains UID, full name, home dir, default shell
+    - `shadow` contains hashed passwords and other management fields, is readable only by root
+```sh
+su - foouser                            # login as foouser (need to enter foouser password)
+sudo -u foouser cmd                      # run command `cmd` as foouser
+sudo -u foouser bash                     # basically login as foouser, since `bash` cmd here starts a shell process
+sudo useradd foouser                     # create new user with home dir
+sudo passwd foouser                      # change any users password, seems to bypass strength rules
+passwd                                   # change your password
+sudo usermod -a -G foogroup foouser     # add foouser to group foogroup
+sudo useradd foosuer sudo               # will properly add user to group sudo and some others, for sudo access
+```
 
 ## PERMISSIONS
 - group `input` - user has full control over all devices in `/dev/input`

@@ -119,6 +119,10 @@ z - undo
 r - refresh
 esc - return to calender grid from event details
 
+## GOOGLE MESSAGES
+- android app that can be default SMS message app
+- can also message on the web: https://messages.google.com/web/ (requires pairing)
+
 ## VOICE
 - voice legacy: in very top left menu, botton item is "legacy google voice"
 - legacy voice lets you screen calls just for certain groups

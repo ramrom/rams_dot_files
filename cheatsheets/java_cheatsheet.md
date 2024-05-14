@@ -59,7 +59,11 @@ names[1] = "newval"
 names[10000]    // raises java.lang.ArrayIndexOutOfBoundsException
 names.length    // => 4, the num items in the array
 
-var clone = y.clone();  // make a copy of the array
+var clone = y.clone();                  // make a copy of the array
+var c =  Arrays.copyOf(y,y.length);      // make a copy
+var c =  Arrays.copyOf(y,2);            // make a copy of just the first 2 elements
+var c =  Arrays.copyOf(y,y.length+3);    // make a copy, copy all of y and 3 extra elements with zero value (or nulls if Objects)
+var c = Arrays.copyOfRange(y,1,5)       // copy elements 1-4 of y
 
 //2D ARRAY
 // allocating array initializes depending on type, String,Dobule -> null, boolean -> false, int -> 0

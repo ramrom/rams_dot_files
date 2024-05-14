@@ -30,6 +30,12 @@
 ## ITERATORS
 - Enumerable module that mixed into array and maps
 ```ruby
+# RANGE
+(-1..2).to_a                # returns [-1, 0, 1, 2]
+('a'..'c').to_a             # returns ['a', 'b', 'c']
+(0..2) == Range.new(0,2)    # true
+(1..4).each { |i| puts i }  # supports enumerator
+
 [1,2,3].each_with_object([]) do |item, obj|
     puts "item is #{item}"
     obj << item * 2
@@ -53,6 +59,16 @@ a.slice("a", :b)        # returns { "a" => 3, b: 4 }
 
 # ActiveSupport has except, the opposite of slice
 a.except("a", :b)        # returns { 1 => "dude" }
+
+## ARRAY
+a = [1,2]
+a.first                    # returns 1
+a.last                     # returns 2
+a = [3,1,2]; a.sort        # return [1,2,3]
+a = [3,1,2]; a.sort!       # modifies a to [1,2,3]
+a.include?(10)             # return false
+[1,2,3].max                # returns 3
+[1,2,3].min                # returns 1
 ```
 
 ## IO
