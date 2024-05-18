@@ -1305,6 +1305,8 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")
     vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
+    vim.keymap.set("n", "glh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
+        {desc = "toggle inlay hints"})
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
     vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
@@ -1424,7 +1426,7 @@ if not vim.env.VIM_NOPLUG then
         { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
-        { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig },
+        { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },

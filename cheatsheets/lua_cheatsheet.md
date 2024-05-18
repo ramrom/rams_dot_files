@@ -69,6 +69,13 @@ end
 
 ## FUNCTIONS
 ```lua
+local foo = function(a, b)
+    print(a)
+    print(b)
+end
+
+foo(1)          -- unspecified args are set to nil,  this prints 1 , then nil
+foo(1,2,3)      -- exta args are silently discarded, this prints 1, then 2
 
 -- variadic args , `...` means variable number of args
 -- all arguments are collected into a table, accessible as hidden param named `arg`
