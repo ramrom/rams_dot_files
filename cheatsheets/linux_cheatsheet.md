@@ -395,6 +395,9 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 
 ## DBUS
 - message bus standard that is used for IPC
+    - has messages with data formats, unlike most IPC which is raw bytes
+    - can be publish-subscribe (service broadcast to listening clients) or one-to-one request/response
+- implementations include: freedesktop.orgs ref impl, GDBus(GNOME), QtDBus(Qt), dbus-java, sd-bus(systemd)
 - good short desc of it's function: https://www.cardinalpeak.com/blog/using-dbus-in-embedded-linux
 - `busctl` - cli to introspect the bus
     - `sudo busctl monitor org.bluez` - see all live events for bus name `org.bluez`

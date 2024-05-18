@@ -103,7 +103,7 @@ mylist.set(0, "dude");  // mylist ==> { "dude" }
 mylist.addAll(new ArrayList<Integer>(List.of("ya","foo")))   // mylist ==> { "dude", "ya", "foo" }
 
 // BINARY SEARCH
-class Foo { int i; Foo(int i) { this.i = i;} // #implement Comparable interface } 
+class Foo { int i; Foo(int i) { this.i = i; } } // #implement Comparable interface } 
 var arr = new Foo[] { new Foo(1), new Foo(2); }; var key = new Foo(2); int startidx = 0; int endidx = 1;
 // returns the index of key, UB if array isnt sorted, random index if value is duplicated
     // if key not found return (-(insertion_idx) - 1), the negative of the where key would be inserted

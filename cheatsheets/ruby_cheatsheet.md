@@ -40,6 +40,10 @@
     puts "item is #{item}"
     obj << item * 2
 end                                     # output is [2,4,6]
+
+[:a, :b, :c].each_with_index do |val, idx|
+    puts "#{idx}; #{val}"
+end
  
 # NOTE: collect is essentially the same method as map
 [1,2,3,4].map{ |a| a * 3 }.filter{ |a| a.even? }   # output is [6,12]
@@ -61,7 +65,14 @@ a.slice("a", :b)        # returns { "a" => 3, b: 4 }
 a.except("a", :b)        # returns { 1 => "dude" }
 
 ## ARRAY
+a = Array.new(3)          # initialze array of size 3 with nils
 a = [1,2]
+a.append(3)                # append to end of array
+a << 4                     # same as append 
+a.prepend(7)               # add to beginning of array
+b = [1,2]
+b.insert(1, 10)            # insert value 10 at index 2, so [1,10,2]
+b.insert(4, 20)            # insert 20 at idx 4, if len exceeded nils values padded in, so this is [1,10,2,nil,20]
 a.first                    # returns 1
 a.last                     # returns 2
 a = [3,1,2]; a.sort        # return [1,2,3]
@@ -69,6 +80,27 @@ a = [3,1,2]; a.sort!       # modifies a to [1,2,3]
 a.include?(10)             # return false
 [1,2,3].max                # returns 3
 [1,2,3].min                # returns 1
+a=[1,2,3]; a(1..2)         # slice, inclusive, returns [2,3]
+[1,2,3,4].find{ |i| i.even? }  # will return 2
+
+# HASH
+h = { foo: {bar: {baz: 1}}}
+h.dig(:foo, :bar, :baz)     #=> 1
+h.dig(:foo, :zot, :xyz)     #=> nil
+
+g = { foo: [10, 11, 12] }
+g.dig(:foo, 1)              #=> 11
+g.dig(:foo, 1, 0)           #=> TypeError: Integer does not have #dig method
+g.dig(:foo, :bar)           #=> TypeError: no implicit conversion of Symbol into Integer
+
+h = {a: 1, b: 2}
+h.keys          # returns  [ :a, :b ]
+h.key?(:a)      # return true
+h.value?(3)     # return false
+```
+### STRINGS
+```ruby
+"hi there"[1..2]            # returns "ub"
 ```
 
 ## IO
@@ -79,6 +111,14 @@ STDERR.puts "failure!" # this writes to stderr, puts normally writes to stdout
 
 ## CONTROL FLOW
 ```ruby
+if true
+    "is true"
+elsif false
+    "else if"
+else
+    "else"
+end
+
 i=1; num=5;
 while i < num  do
    puts("Inside the loop i = #{i}" )

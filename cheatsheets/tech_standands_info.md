@@ -30,6 +30,9 @@
 - SIGTERM - terminate the process, let process cleanup
 - SIGQUIT - same as SIGTERM but also core dump
 
+## MOCA
+- MoCA - multimedia over co-axial cable
+
 ## ETHERNET
 - https://en.wikipedia.org/wiki/Ethernet_crossover_cable#Automatic_crossover
     - generally since 1998, no need for straight vs crossover cables, ports autodetect
@@ -350,6 +353,10 @@
     - all codepoints between 0-127 is encoded as one byte, code points above 128 are stored in 2,3 and up to 6 bytes
 - UTF16 - uses a minimum of 2bytes, java natively uses UTF16
     - not backwards compatible with ASCII
+### RLE
+- run length encoding, a simple lossless compression encoding
+### HUFFMAN ENCODING
+- lossless compression that uses a tree and represents the most frequent symbols with the smallest bit sequences
 
 ## FLOATS
 - https://en.wikipedia.org/wiki/IEEE_754-1985
