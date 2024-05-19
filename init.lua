@@ -647,7 +647,8 @@ LoadTreeSitter = function()
             keymaps = {
                 init_selection = 'gn',
                 node_incremental = '<TAB>',
-                node_decremental = '<S-TAB>',
+                -- node_decremental = '<S-TAB>',
+                node_decremental = '<c-k>',
                 scope_incremental = '<CR>',
             },
         },
