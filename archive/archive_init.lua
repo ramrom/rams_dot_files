@@ -32,6 +32,41 @@ end
 --     { bang = true, nargs = '*' }
 -- )
 
+
+
+----- JOSH DICK ONE DARK COLORSCHEME -----
+---- ISSUE: doesnt support highlight groups for noice notifs
+LoadOneDarkConfig = function()
+    vim.g.onedark_termcolors=256
+    vim.g.onedark_terminal_italics=1
+
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })' })
+
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH1", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH2", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH1", { "fg": { "cterm": "196" } })'})
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH2", { "fg": { "cterm": "196" } })'})
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH2", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH1", { "cterm": "underline" })' })
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })'})
+    vim.api.nvim_create_autocmd('ColorScheme',
+            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH1", { "fg": { "cterm": "196" } })'})
+
+    vim.cmd.colorscheme('onedark')
+    vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
+    vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
+end
+
+
+
 ---- MAPS
 vim.keymap.set('n', '<leader>wf', '<cmd>:lua ToggleFoldMethod()<cr>:set foldmethod?<cr>', { desc = "toggle fold method" })
 

@@ -381,11 +381,10 @@ local LoadNavarasuOneDarkConfig = function()
 end
 
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
--------- FIXME: treesitter markdown: hyperlinks no underline, H1/H2 below hilight dont work
-local LoadOneDarkProConfig = function()
-    -- may'24 TODO: vim-markdown uses this group for hyperlinks, try to get this working along with treesitter
+--- TODO: treesitter markdown: get hyperlinks to be blue+underlined (vim-markdown does this)
+    -- may'24 vim-markdown uses this group for hyperlinks, try to get this working along with treesitter
     -- vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
-
+local LoadOneDarkProConfig = function()
     require("onedarkpro").setup({
         highlights = {
             -- vim-markdown uses html*, not markdown*
@@ -404,38 +403,6 @@ local LoadOneDarkProConfig = function()
     })
     vim.cmd.colorscheme("onedark_dark")
 end
-
------ JOSH DICK ONE DARK COLORSCHEME -----
----- ISSUE: doesnt support highlight groups for noice notifs
-LoadOneDarkConfig = function()
-    vim.g.onedark_termcolors=256
-    vim.g.onedark_terminal_italics=1
-
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("Normal", { "bg": { "cterm": "000" } })' })
-
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH1", { "cterm": "underline" })' })
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH2", { "cterm": "underline" })' })
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH1", { "fg": { "cterm": "196" } })'})
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("markdownH2", { "fg": { "cterm": "196" } })'})
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH2", { "cterm": "underline" })' })
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH1", { "cterm": "underline" })' })
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH2", { "fg": { "cterm": "196" } })'})
-    vim.api.nvim_create_autocmd('ColorScheme',
-            { pattern='onedark', command = 'call onedark#extend_highlight("htmlH1", { "fg": { "cterm": "196" } })'})
-
-    vim.cmd.colorscheme('onedark')
-    vim.cmd.highlight({'clear','Search'})   -- will set custom search highlight below
-    vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
-end
-
 
 ----------------------------- FZF LUA --------------------------------------------------
 LoadFzfLua = function()
@@ -1416,7 +1383,6 @@ if not vim.env.VIM_NOPLUG then
         --- COLORSCHEME
         -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
-        -- { 'joshdick/onedark.vim', config = LoadOneDarkConfig, lazy=false, priority = 1000 },
 
         --- GIT
         { 'tpope/vim-fugitive', event = 'VeryLazy' },
