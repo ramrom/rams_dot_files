@@ -61,6 +61,13 @@
 - `deployments`
     - main rules: ingress routing, vertical scaling, env vars, etc
     - dont include HPA
+- deploys
+    - recreate -> all pods are updated at the same time
+    - rolling -> one pod is updated at a time
+    - blue/green -> deploy new versions to a seperate cluster, switch DNS to it
+    - canary -> see https://kubernetes.io/docs/concepts/workloads/management/#canary-deployments
+        - this is basic, lets u have both vers at the same time, if x of y total are new version, then x/y percent reqs goto new ver
+- istio -> service mesh for kubernetes that lets you do cool things like complicated canary deploys
 
 ## HELM
 - package manager and configuration for kubernetes

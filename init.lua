@@ -383,16 +383,22 @@ end
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
 -------- FIXME: treesitter markdown: hyperlinks no underline, H1/H2 below hilight dont work
 local LoadOneDarkProConfig = function()
+    -- may'24 TODO: vim-markdown uses this group for hyperlinks, try to get this working along with treesitter
+    -- vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
+
     require("onedarkpro").setup({
         highlights = {
             -- vim-markdown uses html*, not markdown*
             htmlH1 = { fg = "#FF0000", underline = true },
             htmlH3 = { fg = "#ef596f" }, htmlH4 = { fg = "#ef596f" }, htmlH5 = { fg = "#ef596f" }, htmlH6 = { fg = "#ef596f" },
             htmlLink = { fg = '#61afef', underline = true },
-            -- markdownH1 = { fg = "#FF0000", underline = true },
-            -- markdownH3 = { fg = "#ef596f" }, markdownH4 = { fg = "#ef596f" },
-            -- markdownH5 = { fg = "#ef596f" }, markdownH6 = { fg = "#ef596f" },
-            -- markdownLinkText = { fg = '#61afef', underline = true },
+            -- mkdInlineURL = { fg = '#61afef', underline = true },
+
+            -- treesitter uses these group names for markdown headers
+            ['@markup.heading.1.markdown'] = { fg = "#FF0000", underline = true },
+            ['@markup.heading.2.markdown'] = { fg = "#FF0000", underline = true },
+            ['@markup.heading.3.markdown'] = { fg = "#ef596f" },
+
             Search = { underline = true, italic = true, reverse = true },
         }
     })
@@ -1255,7 +1261,6 @@ vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree
 
 ---------- CHEATS + NOTES
 vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
-vim.keymap.set('n', '<leader>cg', '<cmd>:map g<CR>')
 vim.keymap.set('n', '<leader>ch', "<cmd>lua require('fzf-lua').help_tags()<CR>", { desc = "fzf help tags" })
 vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", 
     { desc = "fzf cheatsheet files" })
@@ -1264,6 +1269,7 @@ vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.en
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>', { desc = "open work TODO in-progress in new tab"})
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
 
 -------------- OTHER
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")

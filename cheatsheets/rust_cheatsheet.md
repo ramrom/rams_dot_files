@@ -119,37 +119,37 @@
     - use `break` conditions internally to terminate
     - use `continue` to skip to next iteration
 - `while bool_expre { ... }` - while loops
-- for loops
-    ```rust
-        for i in 1..10 { println!("{i}"); };  // create a range and iterate over it, does 1,2..9, 10 is excluded
-        (1..10).for_each( |i| { println!("{i}"); } ) // same as above, ranges implement iterator
-        for i in 1..=10 { println!("{i}"); };  // inclusive of 10
+### ITERATORS
+```rust
+for i in 1..10 { println!("{i}"); };  // create a range and iterate over it, does 1,2..9, 10 is excluded
+(1..10).for_each( |i| { println!("{i}"); } ) // same as above, ranges implement iterator
+for i in 1..=10 { println!("{i}"); };  // inclusive of 10
 
-        let foo = vec![1,2];
+let foo = vec![1,2];
 
-        for i in foo { println!("{i}"); }  // passes ownership, same as i.into_iter() foo becomes invalid
-        for i in foo.into_iter() { println!("{i}"); } // same as above
-        foo.into_iter().for_each ( |i| { println!("{i}"); } )  // same as above
+for i in foo { println!("{i}"); }  // passes ownership, same as i.into_iter() foo becomes invalid
+for i in foo.into_iter() { println!("{i}"); } // same as above
+foo.into_iter().for_each ( |i| { println!("{i}"); } )  // same as above
 
-        for i in foo.iter() { println!("{i}"); } // explicitly calling iter passes ref, &T
-        for i in &foo { println!("{i}"); } // same as foo.iter()
+for i in foo.iter() { println!("{i}"); } // explicitly calling iter passes ref, &T
+for i in &foo { println!("{i}"); } // same as foo.iter()
 
-        for i in foo.iter_mut() { println!("{i}"); } // passes &mut T
-        for i in &mut foo { println!("{i}"); } // same as iter_mut
+for i in foo.iter_mut() { println!("{i}"); } // passes &mut T
+for i in &mut foo { println!("{i}"); } // same as iter_mut
 
-        foo.iter().map( |x| println!("{x}") ) // iterators are lazy, maps just returns another iterator with the closure
-        foo.iter().map( |x| x + 1 ).filter( |&x| x > 1 ) // iterator adapters are useful for chaining
-        foo.iter().map( |x| x + 1 )
-            .filter( |&x| x > 1 ).collect() // collect will execute iterator and return collection
-                                           // adapters are efficient, no intermediate collection is made!
+foo.iter().map( |x| println!("{x}") ) // iterators are lazy, maps just returns another iterator with the closure
+foo.iter().map( |x| x + 1 ).filter( |&x| x > 1 ) // iterator adapters are useful for chaining
+foo.iter().map( |x| x + 1 )
+    .filter( |&x| x > 1 ).collect() // collect will execute iterator and return collection
+                                   // adapters are efficient, no intermediate collection is made!
 
-        let result = [1,2,3].iter().map(|i| i * 2).fold(3, |acc, item| { acc + item } ) // fold
+let result = [1,2,3].iter().map(|i| i * 2).fold(3, |acc, item| { acc + item } ) // fold
 
-        vec!["foo","bar"].into_iter().map(String::from) // shorthand map syntax if one arg, compiler infers params
+vec!["foo","bar"].into_iter().map(String::from) // shorthand map syntax if one arg, compiler infers params
 
-        foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
-        foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
-    ```
+foo.iter().for_each( |x| println!("{x}") )  // for each side effects, executing on the iterator
+foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit (), so last line is staetment, not expression
+```
 - adapters - `Iterator`s that return `Iterator`s, main examples: `map`, `filter`, `enumerate`, `take`, `zip`, `flatten`, `chain`
     - slice has `windows` but `Iterator` doesn't
         - `(1..10).collect::<Vec<usize>>().as_slice().windows(3).for_each(|i| println!("{:?}", i));`

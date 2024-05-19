@@ -52,6 +52,7 @@
     - treesitter API: use queries to define spellcheck regions
     - clickable statusline
 - 0.9 - TUI and remote UI
+- 0.10 - built-in commenting(vim-commentary), LSP inlay hints
 ### LUA
 - vim settings
     - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
@@ -217,6 +218,7 @@ C             " make selected dir node the new root node
 - good article - https://thevaluable.dev/tree-sitter-neovim-overview/
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
+- neovim 0.10 - `InspectTree` pops open window on right to see the whole syntax tree
 
 ### VIM-GH-LINE
 - *NOTE* vim-rhubarb also supports this functionality
@@ -296,6 +298,10 @@ C             " make selected dir node the new root node
     - verbose to tell u what last set it
 - `:autocmd` - print all autocmd definitions
     - `:autocmd BufEnter` - print just `BufEnter` autocmds
+- `Inspect` - print info about all items at given position, with no args the cursor position
+    - will show highlight group (by regular vim regex syntax or treesitter)
+- `ga` -> show character encoding under cursor
+    - can also call `:ascii` or `:as` at command line
 ### LOGS / MESSAGES
 - mar2024 - logs stored in `~/.local/state/nvim`
     - vim's regular `log`, but also `lsp.log`
@@ -328,8 +334,6 @@ C             " make selected dir node the new root node
     - `:later 1hr` - go forward 1 hour
 - `:set filetype=json` - manually set filetype to json
 - `:set lazyredraw` - for macros dont redraw screen, faster replay
-- `ga` -> show character encoding under cursor
-    - can also call `:ascii` or `:as` at command line
 - insert mode, ctrl-v, 3-digit ascii code e.g. 050 = "2"
 - utf, type "u2713" => ✓, for > 4digits, "U1F30D" => 🌍
 - :vsp or :vs filename, open file in vertical split

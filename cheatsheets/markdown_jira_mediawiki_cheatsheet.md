@@ -22,9 +22,9 @@ ___
 __________________________
 
 
-# header 1
-## header 2
-###### header 6
+# HEADER 1
+## HEADER 2
+###### HEADER 6
 
 __bold__  
 **bold**  (double asterix is more compatible than double underscore, esp in middle of word)  
@@ -80,6 +80,9 @@ def foo
     puts "hi"
 end
 ```
+
+- Some markdown flavors support latex code between dollar signs
+$some latex code$
 
 \* \_ \{ \) \[ \- \! \| \# \+ \. \` - backslash will escape these characters
 
