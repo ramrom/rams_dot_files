@@ -983,21 +983,17 @@ LoadDAP = function()
     }
 end
 
--- TODO: neovim lspconfig setup - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
 ----------------- LUA LSP ----------------------------
+-- TODO: neovim lspconfig setup - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
 LoadLuaLSP = function()
     require'lspconfig'.lua_ls.setup{}
 end
 
----------------- RUST LSP ---------------------------
-LoadRustLSP = function()
-    local rust_on_attach = function(client)
-        require'completion'.rust_on_attach(client)
-    end
 
+---------------- RUST LSP ---------------------------
+-- config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+LoadRustLSP = function()
     require'lspconfig'.rust_analyzer.setup({
-        on_attach=rust_on_attach,
-        -- autostart = false,   -- dont automatically start
         settings = {
             ["rust-analyzer"] = {
                 imports = {

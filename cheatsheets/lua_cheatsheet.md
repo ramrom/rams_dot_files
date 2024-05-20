@@ -4,6 +4,7 @@
 - 5.3 ref guide: https://www.lua.org/manual/5.3/
 - programming in lua is great guide - https://www.lua.org/pil/
 - learn lua in y min - https://learnxinyminutes.com/docs/lua/
+- nice comparison to other langs: http://lua-users.org/wiki/LuaComparison
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"
 - Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM

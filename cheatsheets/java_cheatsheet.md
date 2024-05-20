@@ -95,6 +95,7 @@ System.out.println(Arrays.deepToString(tdarray))  // deepToString great for prin
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
 mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
+mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
 mylist.toString();      // prints "[new, hi]"  , toString calls toString on each item in the List
 mylist.size()   // returns 2, size returns length, not capacity of ArrayList
 mylist.get(1)  // ==> "hi", get value at index 1
@@ -362,7 +363,7 @@ ha.put("foo", a);
 
 ## STREAMS
 - introduced in java8, improved in java9
-- also supports `sort`, `min`, `max`, `distinct`(remove dups), `allMatch`, `anyMatch`, `noneMatch`
+- also supports `sort`, `min`, `max`, `distinct`(remove dups), `allMatch`, `anyMatch`, `noneMatch`, `reduce`
 - parllelism (concurrent) via `parralel` e.g. `Stream.of(1,2).parallel().map(i->i+1)`
 - has infinite streams via `generate` and `iterate`
 ```java
@@ -712,7 +713,19 @@ Foo f2 = new Foo(1,2);
 - static and member variables not initialized have a `null` value
 - `Object` is root of the class heirarchy, all objects are a decendent of `Object`
 ### GENERICS
-- type erasure - compiler erases generic types and replaces with their bounds, to ensure no runtime overhead
+- they are syntax sugar
+```java
+// Generic Code
+Vector<String> v = new Vector<String>();
+vector.add(new String("foo"));
+String str = vector.get(0);
+
+// What it compiles to
+Vector v = new Vector();
+vector.add(new String("foo"));
+String str = (String) vector.get(0);  // so really storing Object, and compiler injects type casting
+```
+- based on "type erasure" - compiler erases generic types and replaces with their bounds, to ensure no runtime overhead
     - generally replaced by the bound, so if no bound replaced with `Object`
 ```java
 public <T> void foo(T arg) { /* stuff */ }                      // declare generic method
@@ -720,6 +733,7 @@ public <T extends Number> void foo(T arg) { /* stuff */ }      // generic with u
 public <T extends Number & Comparable> void foo(T arg) { /* stuff */ }   // multiple bounds, bounds can be interface
 ```
 #### GENERIC CLASSES
+- b/c of the syntax sugar, static variables for instances of `Foo<Bar>` and `Foo<Yar>` are shared
 ```java
 public class Box<T> {       // example generic class
     private T t;
