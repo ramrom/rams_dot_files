@@ -127,6 +127,8 @@ esc - return to calender grid from event details
 - voice legacy: in very top left menu, botton item is "legacy google voice"
 - legacy voice lets you screen calls just for certain groups
     - e.g. you can turn off for all contacts group, and screen for anonymous callers
+- may'24 - has been using bandwidth.com as VoIP provider for a while
+    - bandwidth.com supports RCS, but google voice still doesn't :(
 
 ## ANDROID
 - top swipe bar is called "quick settings"

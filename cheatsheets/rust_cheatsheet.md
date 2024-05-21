@@ -158,7 +158,16 @@ foo.iter().for_each( |x| x + 1 )  // fails compile, for_each must return a unit 
     - e.g. `for i in (1..5) { ... }`
 ### CONTROL FLOW
 ```rust
-// loop
+// IF STATEMENTS
+if n == 1 {
+    "one"
+} else if (n == 2) {
+    "two"
+} else {
+    "other"
+}
+
+// LOOP
 outer: loop {
     println!("Entered the outer loop");
     'inner: loop {
@@ -172,6 +181,7 @@ outer: loop {
     println!("This point will never be reached");
 }
 
+// WHILE
 while n < 10 {
     n += 1;
 }
@@ -225,6 +235,7 @@ match triple {
     - a owner can lend out one mutable reference
     - a owner can lend out multiple immutable references
     - can _not_ lend out a mutable reference and an immutable reference
+- dot operator is smart to convert to/from reference/pointer types: https://doc.rust-lang.org/nomicon/dot-operator.html
 - Dereference coersion - convert a type that implements `DeRef` into a reference when passed in as func param
     - e.g. `String` implements `DeRef` and `deref` method produces `&str` so a `&String` can be passed into a arg of type `&str`
     - multiple nested `DeRef` types be called, e.g. `Box<String>>` passed into arg taking `&str`
@@ -311,6 +322,8 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - many collections need to use unsafe code(raw pointers) in order to be feasible/performant
     - borrow checker couldnt reason about it well
 - rust has many ADTs that languages like haskell provide: tuples, enums(tagged unions), structs(product types)
+### TUPLE
+- `let a = (1, "hi"); let secondfield = a.1;`
 ### STRINGS
 - use double quote `"` for strings, single quotes `'` for chars
 - raw string literal (escapes arent processed) - `r#"foo \n bar"#`

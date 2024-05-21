@@ -244,6 +244,7 @@ C             " make selected dir node the new root node
 
 ## STARTING VIM
 - `vim -u somevimrc` - specify a vimrc file (otherwise ~/.vimrc)
+    - `vim -u different_init.lua` - can also specify a different init.lua file
 - `vim -u NONE`     - start without running vimrc
 - `vim -S sess.vim` - load sess.vim session file
 - `vim foo bar`     - foo and bar buffers
