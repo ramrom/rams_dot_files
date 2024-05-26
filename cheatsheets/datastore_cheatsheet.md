@@ -82,6 +82,12 @@
 - `.schema footable` - get a table's description
 - `.mode line` - display each records column in seperate line
 
+## CDN
+- content delivery network
+- pull vs push 
+    - push: engineers need to manually push content to CDN for clients to find
+    - pull: when the client requests content from CDN, the CDN retreives it from the origin server
+
 ## TECH
 - vitess - a db clustering system using mysql, created by google
     - each mysql server is a horizontal shard abstracted as a single entity by vitess

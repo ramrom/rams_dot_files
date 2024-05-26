@@ -31,6 +31,9 @@
 - `mvn --version` -> show maven version, show home bin, show current java version
 - `mvn package` -> build the `package` phase, generally a later phase
     - will compile, run tests, build jar
+- running tests
+    - `mvn test -Dtest=TestCircle` - run all tests in class name `TestCircle`
+        - `mvn test -Dtest=TestCircle#xyz test` - same as above but also only with method name `xyz test`
 
 ## GRADLE
 - newest and honeslty best, itself written in groovy

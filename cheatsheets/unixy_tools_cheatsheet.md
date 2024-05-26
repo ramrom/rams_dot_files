@@ -197,6 +197,9 @@ pandoc foo.md -o foo.docx   # convert markdown to docx
 pandoc foo.md -o foo.odt   # convert markdown to opendocument
 pandoc foo.md --to jira -o output.jira  # explicitly specify output format
 
+# FFMPEG - video conversion tool
+ffmpeg -i path/to/video.mp4 -vn path/to/sound.mp3   # extract sound from a mp4 vid file and save as mp3
+
 # SUBSYNC - https://github.com/spion/subsync
 subsync @+5 < input.srt > output.srt  # shift all subtitles forward 5 seconds
 

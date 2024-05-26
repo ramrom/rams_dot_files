@@ -178,7 +178,7 @@ List<List<Foo>> ll = new ArrayList<ArrayList<Foo>>();        // same as above
 ### SET
 ```java
 // HashSet and TreeSet and main implementations of interface Set
-    // HashSet uses hashcode method to judge uniqueness
+    // HashSet uses underlying HashMap, TreeSet uses TreeMap underlying
 HashSet<String> hs = new HashSet<String>();  // set, elements must be unique
 hs.add("a"); hs.add("b");  // will return true
 hs.add("a")  // returns false, "a" already in set
@@ -311,6 +311,7 @@ s.pop(); // raises EmptyStackException sinc it's empty
 ```java
 // java.util.Queue is main interface. main implementation: LinkedList, ArrayDequeue, PriorityQueue
 // ArrayDequeue uses a array backing, and arrays are generally always better than linked lists
+    // also ArrayDequeue immplements Deque interface (which implement Queue), is a double ended queue
 Queue<String> queue = new LinkedList<>();
 queue.add("a");     // add to queue, returns `true` if successful, throws `IllegalStateException` if it's full
 queue.add("b");

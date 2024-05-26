@@ -13,10 +13,8 @@
 - bottle: pre-compiled code, just installs
 - cask: installs a program exactly as if it were a native osx appliation install
 - tap: a repository of formula
-
 ### INFO
 - aug2022, base bin dir is `/opt/homebrew/bin`
-
 ### USEFUL COMMANDS
 - `brew --prefix` - show base dir
 - stop brew from auto update:
@@ -38,8 +36,11 @@
     `brew upgrade`
     - NOTE: brew does seem to support upgrading just one formula
 - `brew list --cask`  - list all the casks
+    - `brew remove --cask someformula` - to remove a cask
 - `brew services` -> list services
 - `brew services start redis` -> start a service
+### PACKAGES
+- colima - Containers on LIMA (linux on mac) `brew install colima`
 
 
 ## CLI
@@ -155,7 +156,7 @@
     - osxfuse github just points to macfuse: https://github.com/osxfuse/osxfuse?tab=readme-ov-file
 
 
-## OTHER:
+## OTHER
 - find out power cable watt usage and info: about-this-mac -> system-info -> power
     - https://discussions.apple.com/thread/8008792
 - options key in osx is same as alt key in other Oses (like windows)

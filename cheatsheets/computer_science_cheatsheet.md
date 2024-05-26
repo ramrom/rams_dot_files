@@ -244,6 +244,8 @@ public static void main(String[] args) {
 - quickselect - find the kth smallest element in an unordered list, also called Haore's selection algorithm
     - related to quicksort, done in-place
 ### NON-COMPARISON
+- counting sort - sort by counting each value, with the value being the index in an array
+    - this depends on a dataset of small positive integers
 - bucket sort
     - 1.create array of "buckets" 2. put items in their buckets 3. sort each non-empty bucket 4. visit buckets and put them toegether
 - radix sort (often conflated with bucket sort)
