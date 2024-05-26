@@ -100,6 +100,11 @@ public static void main(String[] args) {
 
 
 ## DATA STRUCTURES
+### STACK
+- stack underlying data struct is almost always a simple array, but could also do linked list
+- monotonic stack - items ordered in ascending or descending
+### QUEUE
+- queue underling data stuct is often a ring buffer, but could do linked list
 ### ASSOCIATIVE ARRAYS / MAPS
 - **HASHMAP**
     - which use hash functions to find where a key goes
@@ -299,6 +304,31 @@ public static void main(String[] args) {
 - Dynamic programming - solving a problem iteratively or breaking it down into subproblems
     - often use memoization to store the solution of a subproblem
 - Memoization - remembering/caching the output of a previous computation
+
+## AI
+### LLM
+- great video by kaparthy(former tesla AI chief) - https://www.youtube.com/watch?v=zjkBMFhNj_g&t=453s&ab_channel=AndrejKarpathy
+     - we know the architecture and exact equations/params and know outtput is predicting better as we train
+        - but we dont know how the params "interact" or change in order to do this
+    - many of these LLMs like chatGPT can use external tools 
+        - web browser to search and generate response on the search results
+        - a calculator for math, python REPL, generate a chart, Dall-E for image generation, etc
+- training 
+    - first iteration might be train via random data on internet (pre-training stage), output is often called base model
+    - but better models will further train on hand picked and written data by humans (fine-tuning stage), output is assistant model
+        - maybe 100k Q&A responses here, only takes maybe a day to train this
+- large language model - generally all use large neural networks
+    - words are fed into model, and output is next predicted word
+- e.g. facebook open sourced llama-2-70b model (base model)
+    - just 2 files: 140GB of parameter data (70bil params, each param 2B), 2nd file is 500 lines of c code
+    - training took prolly 10TB of text data from internet, 60000 GPUs for 12 days ($2M, 1e24 FLOPS)
+    - the parameters essentially encapsulate/represent the text, so in a way 140GB/10TB so 1/71 compression ratio
+- modern (2024) - training rounds are 10x bigger than llama-2-70b, so training rounds cost 10-100mil dollars
+- openAI chatgpt model architecture is closed source
+### REINFORCEMENT
+- give AI model a goal(a reward criteria), and throught constant iterations of trial and error get better at reaching the goal
+- AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training
+    - AlphaGo Zero, had zero initial human game traing, was pure reinforcement learning, and surpassed AlphaGo Lee and Master
 
 ## FUNCTIONAL CONCEPTS
 - pure function 

@@ -403,6 +403,7 @@
 - AI / Machine-learning
     - TensorFlow
     - PyTorch
+    - Dall-E - generative AI tool created by OpenAI
 - event/IO libs
     - libuv - C async lib, uses epoll/kqueue/IOCP, event ports
         - used by Node.js, neovim
