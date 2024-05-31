@@ -242,7 +242,7 @@ public static void main(String[] args) {
 ## SORTING
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
 - merge sort - divide and conquer, O(nlogn)
-    - can be parralelized
+    - can be parralelized, worse and average is o(nlogn)
     - generally not done in-place so lots of extra space, _can_ be done in-place, but is hard
 - quick sort - divide and conquer, O(nlogn), in-place (no extra space), worst case O(n^2), most implementations not stable
 - heap sort - uses a heap, O(nlogn), not stable, in-place, worst case O(nlogn)
@@ -307,6 +307,7 @@ public static void main(String[] args) {
 
 ## AI
 ### LLM
+- good LLM read: https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/
 - great video by kaparthy(former tesla AI chief) - https://www.youtube.com/watch?v=zjkBMFhNj_g&t=453s&ab_channel=AndrejKarpathy
      - we know the architecture and exact equations/params and know outtput is predicting better as we train
         - but we dont know how the params "interact" or change in order to do this

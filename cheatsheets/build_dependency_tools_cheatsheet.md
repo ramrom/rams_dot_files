@@ -33,7 +33,9 @@
     - will compile, run tests, build jar
 - running tests
     - `mvn test -Dtest=TestCircle` - run all tests in class name `TestCircle`
+        - `mvn test -Dtest=com.full.path.SomeTest` - can specify full path
         - `mvn test -Dtest=TestCircle#xyz test` - same as above but also only with method name `xyz test`
+        - `mvn test -Dtest=Test*#xyz*` - can use `*` wildcard in test class and method name
 
 ## GRADLE
 - newest and honeslty best, itself written in groovy

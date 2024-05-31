@@ -41,6 +41,7 @@
 - `brew services start redis` -> start a service
 ### PACKAGES
 - colima - Containers on LIMA (linux on mac) `brew install colima`
+    - need to cd to `~/.docker/run/` and `ln -s ~/.colima/default/docker.sock` - otherwise cant find docker daemon
 
 
 ## CLI

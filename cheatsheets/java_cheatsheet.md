@@ -810,11 +810,21 @@ e == e2        // return true, since they are constant and only one instance def
 
 ## IO
 ```java
+// Files
+Path path = java.nio.file.Paths.get("foo.txt");
+List<String> lines = java.nio.file.Files.readAllLines(path); // can read lines
+byte[] fileBytes = Files.readAllBytes(path);                 // can read bytes
+
+// write to file
+Path path2 = java.nio.file.Paths.get("bar.txt");
+java.nio.file.Files.write(path2, fileBytes);
+
+// Scanner
 Scanner scanner = new Scanner(System.in);
 String name = scanner.next();  // read string input
 byte numByte = scanner.nextByte();
 
-
+// STDOUT
 System.out.println("hi")
 ```
 
