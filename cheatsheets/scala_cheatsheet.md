@@ -50,7 +50,8 @@
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
 - integer types - `Short` (16bit), `Int` (32bit?), `Long` (64bit?)
     - `Long` instantiation - `1000000000000000000L` or `100000: Long`
-- `Any` - all objects implement this, `Nothing` - opposite of `Any`, no object implements this
+- `Any` - root type in scala class heirarchy - https://www.scala-lang.org/api/current/scala/Any.html
+    - all objects implement this, `Nothing` - opposite of `Any`, no object implements this
 - generics are a compile time check, and suffer from type erasure during runtime on the JVM
     ```scala
     val l1 = List(1, 2, 3)
@@ -110,6 +111,12 @@
     - if we want to pass in `List` type, need to use splat operator to convert it
         - e.g. `val mylist = List("a","b"); foo(mylist:_*)`
     - this is similar to varargs feature in Java
+### INTROSPECTION
+```scala
+val a: Any = "hi"
+a.isInstanceOf[String]  // returns true
+a.isInstanceOf[Int]     // returns false
+```
 
 
 ## COLLECTIONS

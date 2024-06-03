@@ -420,7 +420,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
      scores.insert(String::from("Yellow"), 50);
 
      // iterate over key/vals
-     for (key, value) in &scores {  println!("{key}: {value}"); }
+     for (key, value) in &scores { println!("{key}: {value}"); }
 
      // will overwrite the old value of 10
      scores.insert(String::from("Blue"), 25);

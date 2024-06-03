@@ -99,6 +99,7 @@ mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "h
 mylist.toString();      // prints "[new, hi]"  , toString calls toString on each item in the List
 mylist.size()   // returns 2, size returns length, not capacity of ArrayList
 mylist.get(1)  // ==> "hi", get value at index 1
+mylist.indexOf("new")  // returns 0, will return lowest index if value is duplicated, return -1 if not found
 mylist.remove(1);  // mylist ==> { "new" }
 mylist.set(0, "dude");  // mylist ==> { "dude" }
 mylist.addAll(new ArrayList<Integer>(List.of("ya","foo")))   // mylist ==> { "dude", "ya", "foo" }
@@ -558,8 +559,6 @@ Float f = new Float(4);  // create float from int, will be 4.0F
 char[] c = "hi there".toCharArray();
 String s = new String(c);   // create String from char array
 Character.toString('a')     // convert a char to String
-
-int a = Integer.toString(3);     // int -> String
 
 int a = (int)1.6         // cast float to int, a rounded down to 1
 int a = (long)11         // cast int to long, long is 64bit
