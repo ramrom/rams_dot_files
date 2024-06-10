@@ -172,6 +172,27 @@ a.isInstanceOf[Int]     // returns false
     mu += (2->3)    // append (2->3) to mu
     mu -= 2    // remove key/val with key=2 from mu
     ```
+### RANGE
+```scala
+val r = Range.inclusive(1,10)   // includes 10
+val r2 = Range(1,10)   // wont include 10
+r.toList        // convert to List
+
+val rangeTo = 1 to 10           // includes 10
+val rangeUntil = 1 until 10     // exlcudes 10
+val oddRange = 1 to 100 by 2
+
+Range(1,10000).foreach { i => i * i }  // supports iterator
+```
+### ITERATOR
+```scala
+val l = List(1,2)
+val i = l.iterator      // will return type Iterator[Int]
+i.hasNext       // true
+i.next       // return 1
+i.next       // return 2
+i.next       // throw NoSuchElementException
+```
 ### STREAMS
 - `List(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10)` -> will have 2 more intermediate collections/allocations
 - `Stream(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10).toList`
@@ -186,6 +207,7 @@ a.isInstanceOf[Int]     // returns false
 - toString method is called if fooObject isnt a String
 - index returns a `Char` - `val s = "hello"; s(1);` returns `e`
 - `map` operates on each char in string, `"hi".map(_+"a")` -> returns `ArraySeq("ha", "ia")`
+- string interpolation: `val i = 3; String s = s"i is $i"`
 - multi-line string with `"""` - e.g. `val s: String = """ i can add literal " double quote """`
 - escape with `\` - `val s: String = "escaped with \" \\ new line \n woo"`
 - findandreplace: ` "foo bar baz".replaceAll("ba","zz")` -> outputs `"foo zzr zzz"`
@@ -194,7 +216,7 @@ a.isInstanceOf[Int]     // returns false
 - get substring(aka slice): `val s = "hello there"; s.substring(2,4)` - returns `String` `ll`
 - prints `this is Foo(3)`
     ```scala
-    case Class Foo(a: Int); foo = Foo(3); println("this is ${foo}")
+    case Class Foo(a: Int); foo = Foo(3); println(s"this is $foo")
     ```
 
 ## MATH
@@ -241,7 +263,7 @@ a.isInstanceOf[Int]     // returns false
 ### FUTURES
 - is a monad
 - is *eager*, starts running moment it's declared
-- async with execution contexts: `Future { 1 + 1 }`
+- async with execution contexts: `scala.concurrent.Future { 1 + 1 }`
     - `import scala.concurrent.ExecutionContext.Implicits.global`
 - an execution context is a abstraction that include a thread pool
 - `map` and `flatMap` chain futures together in a linear sequence, each async runs when the previous one finishes
