@@ -267,8 +267,9 @@ i.next       // throw NoSuchElementException
     - `import scala.concurrent.ExecutionContext.Implicits.global`
 - an execution context is a abstraction that include a thread pool
 - `map` and `flatMap` chain futures together in a linear sequence, each async runs when the previous one finishes
-- `Future.sequence()` takes a `List[Future]` and produces a `Future[List]`
+- `Future.sequence()` takes a `List[Future[T]]` and produces a `Future[List[T]]`
     - all run in parralel, if any one of the futures fails then the output future fails
+    - e.g. `Future.sequence(List(Future { 1 }, Future { 2 }))` => `Future(Success(List(1,2)))`
 ### MUTEX
 - mutex on variables: `synchronize { 1 + 1 }`
 

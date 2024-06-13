@@ -79,13 +79,13 @@ System.out.println(Arrays.deepToString(tdarray))  // deepToString great for prin
 - the Collection is a superinterface of List and Set
 - List adds order and can be indexed
 - Set is a Collection that guarantees unique values
-- HEIRARCHY
-    - I=interface, C=class
+- HEIRARCHY - I=interface, C=class
+    - Iterable(I) -- Collection(I)
     - Collection(I) -- List(I) -- ArrayList(C),LinkedList(C),Vector(C),Stack(C)
     - Collection(I) -- Set(I) -- HashSet(C),LinkedHashSet(C)
     - Collection(I) -- SortedSet(I) -- TreeSet(C)
-    - Collection(I) -- Queue(I) -- PriorityQueue(C)
-    - Collection(I) -- Deque(I) -- ArrayQueue(C)
+    - Collection(I) -- Queue(I) -- PriorityQueue(C), LinkedList(C)
+    - Collection(I) -- Queue(I) -- Deque(I) -- ArrayDeque(C)
     - Map(I) -- AbstractMap(C) -- EnumMap(C),HashMap(C)
     - Map(I) -- SortedMap(I) -- NavigableMap(I) -- TreeMap(C)
 ### LIST
@@ -905,6 +905,11 @@ finally { .. }  // finally is always exected
 - java 14 has switch expressions (vs the switch statement above)
     - no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
     - dont have to be exhaustive
+
+### BEANS
+- specification: https://www.oracle.com/java/technologies/javase/javabeans-spec.html
+- 3 major reqs: 1. serializable, 2. data is private, access only via getters/setter, 3. has a zero-arg constructor
+- kind of a reusable software component
 
 
 ## MAJOR LIBS/FRAMEWORKS

@@ -269,7 +269,20 @@
      - web services using XML based messaging protocol, usually over HTTP
 - REST - REpresentational State Transfer
      - roy fielding created it in his dissertation to replace SOAP as model for WWW and used HTTP as reference implementation
+     - JSON API standard - https://jsonapi.org/
 - RPC - Remote Procedure Call
+- GraphQL - invented by facebook ~2016
+    - 2024 - good primeagen vid on weaknesses - https://www.youtube.com/watch?v=XBUsRVepF-8&t=953s&ab_channel=ThePrimeTime
+        - easy to craft query that will DoS - hard to limit number of records
+        - hard to implement auth, restricting access for each field
+    - many frontend engineers love graphql as they can specify complex data easier
+    - advantage is it's self-documenting and type safe, but openapi has made documentation way easier for REST
+- OpenApi
+    - descended from swagger and also makes use of json schema
+    - https://editor.swagger.io/  - good place to validate an openapi yaml file
+- TypeSpec - https://typespec.io/
+    - API and schema description language
+    - can compile it to a OpenApi spec, or json schema spec, or protobuf spec
 
 ## DATA FORMATS
 ### TEXT
@@ -363,9 +376,6 @@
 
 ## PLANTUML
 - https://plantuml.com/sequence-diagram
-
-## OpenApi / Swagger
-- https://editor.swagger.io/  - good place to validate an openapi yaml file
 
 ## Smithy
 - a service and SDK description language created by AWS
