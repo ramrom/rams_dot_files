@@ -52,7 +52,8 @@
     - treesitter API: use queries to define spellcheck regions
     - clickable statusline
 - 0.9 - TUI and remote UI
-- 0.10 - built-in commenting(vim-commentary), LSP inlay hints
+- 0.10 - built-in commenting(vim-commentary), LSP inlay hints 
+    - comments: https://github.com/neovim/neovim/pull/28176
 ### LUA
 - vim settings
     - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
@@ -144,6 +145,7 @@
 
 ### VIM-COMMENTARY
 - `gcu` or `gcgc` - uncomment current and contiguous adjacent commented lines
+- neovim 0.10 has built in commentary (from mini.vim maintainer), API very similar to vim-commentary regardless
 
 ### FIRENVIM
 - https://github.com/glacambre/firenvim
@@ -206,6 +208,7 @@ C             " make selected dir node the new root node
 
 ### TREE-SITTER
 - a general semantic file parser, available to neovim as a plugin
+    - main page - https://tree-sitter.github.io/tree-sitter/
 - intended to be better than the regex-based systems that IDEs (including vim) use
 - language parsers files by language and creates ASTs
     - can query AST to do things like:

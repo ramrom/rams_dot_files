@@ -1373,7 +1373,6 @@ if not vim.env.VIM_NOPLUG then
         { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
             build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
         'nvim-tree/nvim-web-devicons',
-        'tpope/vim-commentary',
         'tpope/vim-surround',
         'tpope/vim-repeat',
 
