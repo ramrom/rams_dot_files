@@ -31,6 +31,8 @@
 - `lsb_release -a`        - show distro name and version
 - LTS releases every 2 years, support for 5 years
 - regular releases every year, support for 9 months
+- june'24 - upgrading to ubuntu 23 and 24 - third party apt sources were disabled
+    - apparently done not to break the upgrade
 
 ## RASPBIAN
 - `rpi-imager` deb package
@@ -349,6 +351,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - alt+ctr+l, super+l  - lock screen
 - super+tab, alt+tab  - switch between running apps
 - super+left/right-arrow - snap to left or right half of desktop
+- super+home - switch to 1st workspace
 - super+up/down-arrow - full screen, original
 - super + page-up/page-down - go forward/back workspaces
 - super + shift + page-up/page-down - move active window to next/previous workspace
@@ -359,7 +362,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - ctrl+alt arrow - move between desktops
 - ctrl+alt+delete - logout
 - ctrl+shift+ c/p - copy and paste
-- super+shift+NUM  - click the NUM icon in the dash(quick launch)
+- super+NUM  - click the NUM icon in the dash(quick launch)
 - screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
     - Prnt-Screen - full desktop screenshot
     - Prnt-Screen + Alt - active window screenshot
