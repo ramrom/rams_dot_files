@@ -326,6 +326,7 @@ public static void main(String[] args) {
     - the parameters essentially encapsulate/represent the text, so in a way 140GB/10TB so 1/71 compression ratio
 - modern (2024) - training rounds are 10x bigger than llama-2-70b, so training rounds cost 10-100mil dollars
 - openAI chatgpt model architecture is closed source
+- Tokens - a measure of the amount of data that can be remembered in a conversation, so limited context
 ### REINFORCEMENT
 - give AI model a goal(a reward criteria), and throught constant iterations of trial and error get better at reaching the goal
 - AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training

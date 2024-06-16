@@ -309,6 +309,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     xdotool windowsize 123 800 600
     xdotool windowmove 123 0 1080
 - nvidia-smi - show nvidia card mem usage, gpu temp, X processes
+    - cli tool uses the [NVML](https://developer.nvidia.com/management-library-nvml) library
 - nvidia-xconfig - show nvidia config
     - `nvidia-xconfig --query-gpu-info` - get basic gpu info
 

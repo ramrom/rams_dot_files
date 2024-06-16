@@ -232,7 +232,7 @@ i.next       // throw NoSuchElementException
 ### Either
 - `flatMap` and `map` are right-biased, mapping on left val returns same val
     - `Right(1).map { x => x + 1 }   # returns Right(2)`
-    - `val a: Either[Int, Int] = Left(1).map { x => x + 1 }   # returns Left(1)`
+    - `val a: Either[Int, Int] = Left(1); a..map { x => x + 1 }   # returns Left(1)`
 ### Option
 - `flatMap`/`map` operate on `Some` and pass on `None`
 - `foo.getOrElse(2)` - if `foo` is `Some(1)` returns `1`, if `None` returns `2`
