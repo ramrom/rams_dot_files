@@ -172,8 +172,8 @@ ToggleIndentBlankLine = function()
     IndentBlankLineEnabled = not IndentBlankLineEnabled
 end
 
--- NOTE jun'23, v0.9.1: https://neovim.io/doc/user/lsp.html#lsp-log has vim.lsp.log.get_filename(), but this method doesnt exist
--- NOTE jun'23: still see logs in vim LspLog tab even if metal.log file(verified with cat) is cleared...
+-- NOTE jun'24 - https://neovim.io/doc/user/lsp.html#lsp-log , has vim.lsp.log.get_filename(), seems to return same as get_log_path
+-- NOTE jun'23 - still see logs in vim LspLog tab even if metal.log file(verified with cat) is cleared...
 ClearLspLog = function()
     local logpath = vim.lsp.get_log_path()
     vim.cmd(':SilentRedraw cat /dev/null > ' .. logpath)
@@ -622,6 +622,8 @@ NvimTreeConfig =
 
 LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
+
+
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
     -- only disable markdown if vim-markdown plugin is enabled
@@ -640,6 +642,7 @@ LoadTreeSitter = function()
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
             additional_vim_regex_highlighting = false,
+            -- additional_vim_regex_highlighting = { "markdown" },
         },
         indent = { enable = true },
         incremental_selection = {
@@ -662,6 +665,17 @@ LoadTreeSitter = function()
             vim.opt_local.foldexpr=""
         end
     })
+
+    -- hightlight hyperlinks that are in regular paragraph/text regions in markdown files
+    if not LazyPluginEnabled('vim-markdown') then
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = 'markdown', 
+            callback = function() 
+                vim.cmd.highlight("link mkdInlineURL htmlLink")
+                vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
+            end,
+        })
+    end
 
     vim.opt.foldmethod='expr'
     vim.opt.foldexpr='nvim_treesitter#foldexpr()'
