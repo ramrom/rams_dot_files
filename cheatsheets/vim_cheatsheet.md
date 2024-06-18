@@ -139,9 +139,9 @@
 - G diff          - git diff
 - G blame         - sidepane with git blame
 - G log %         - git log <current file>
--     `:cnext`, `:cprevious`,
--     `:cfirst` and `:clast`
--     :0Glog      - logs only that change current file
+- `:cnext`, `:cprevious`,
+- `:cfirst` and `:clast`
+- `:0Glog`      - logs only that change current file
 
 ### VIM-COMMENTARY
 - `gcu` or `gcgc` - uncomment current and contiguous adjacent commented lines

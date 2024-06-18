@@ -260,7 +260,9 @@ Map<Long, String> longUserMap = Map.ofEntries(Map.entry(1L, "User A"), Map.entry
 // can specify initial capacity, default is 16, use if size of dataset is know prehand
 // load factor is metric for rehashing(increasing capacity and recalculating hashes of keys), rehashing occurs with threshold crossed
 HashMap<String, Integer> m = new HashMap<String, Integer>(100); // can pass in initial capacity argument
-var m = new LinkedHashMap<Integer, Integer>();  // hashmap that maintains insertion order
+
+// hashmap that maintains insertion order (direct application is for LRU cache)
+var m = new LinkedHashMap<Integer, Integer>(10, .8f, true);  // init cap 10, .8 load factor, true - access order false - insert order
 
 // getting keys and values
 Set<String> key = m.keySet()                             // return a Set containing all the keys
@@ -923,6 +925,8 @@ finally { .. }  // finally is always exected
 ### REACTIVE STREAMS
 - really a standard for async stream processing, also supports non-blocking backpressure
 - akka streams, spring framework v5, play framework, kafka, cassandra, elasticsearch all use it
+### WIREMOCK
+- testing library that lets you spawn live http server with test responses on endpoints
 
 ## HISTORY
 - java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),

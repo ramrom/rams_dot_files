@@ -118,7 +118,7 @@ public static void main(String[] args) {
         - each bucket is a another hashmap (two-level hashmap)
     - OPEN-ADDRESSING - find a different location to store the key
         - probing is a very common open-addressing method
-            - faster than open-addressing with low load factor: with no collision probe is 1 lookup, chain is 2 lookups
+            - faster than chaining with low load factor: with no collision probe is 1 lookup, chain is 2 lookups
             - high load factor (> 0.8), chain is _much_ faster, tons of extra lookups b/c of constant collisions
                 - typically 0.7-0.8 load factor is when back storage is resized/increased
                 - want to avoid clustering and get even distribution

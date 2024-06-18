@@ -8,3 +8,6 @@
 ##OUTLOOK
 ### KEYBOARD SHORTCUTS
 - `cmd` + `b/i/u` - bold/italic/underline highlighted text in text editor window in outlook
+
+## WORD
+- convert docx to txt file: use just LF chars for end of line
