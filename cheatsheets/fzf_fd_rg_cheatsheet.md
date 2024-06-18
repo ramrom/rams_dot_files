@@ -29,6 +29,8 @@
         - order matter, for multiple matches, later globs take precedence
 - search for files with a pattern but not another pattern
     `rg --files-with-matches 'somepattern' | xargs rg --files-without-match 'notthispattern'`
+- get context (lines before or after) a search hit
+    - `rg -A 1 -B 2 'foo'` - print the one line after and 2 lines before each search hit
 
 ## FZF
 - https://github.com/junegunn/fzf, main README has good docs

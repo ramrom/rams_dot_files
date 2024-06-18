@@ -6,7 +6,7 @@
 # FIXME: if i multiselect, pbcopy only has one copy
 # TODO: add binding to checkout a commit
 
-usage () { echo "Usage: ffgl [ -h(help) ] [ -s(short preview) ]"; }
+usage () { echo "Usage: ffgl [ -h(help) ] [ -s(short preview) ] [filename1 filename2 ...]"; }
 
 while getopts 'hs' x; do
     case $x in

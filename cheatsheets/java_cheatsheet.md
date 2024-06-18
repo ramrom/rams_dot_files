@@ -456,9 +456,9 @@ boolean matchFound = matcher.find();
 if(matchFound) { System.out.println("Match found"); } else { System.out.println("Match not found"); }
 
 
+"".isEmpty()  // returns true, Empty tests for zero length string
 " ".isBlank() // returns true, Blank tests for non-whitespace
 " ".isEmpty() // returns false
-"".isEmpty() // returns true, Empty tests for zero length string
 
 "ab".repeat(3)  // String "ababab"
 

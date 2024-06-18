@@ -62,9 +62,12 @@
 
 ## LOCKS
 - pessimistic vs optimistic
-    - pessimistic -> aquire expclit locks, e.g. strict two-phase locking (2PL)
-    - optimistic -> assume conflicts wont occur, check if so at end and then cancel/rollback if conflict did occur
-        - postgres MVCC is optimistic
+    - pessimistic -> aquire expclit locks, good for if conflicts can occur often
+        - strict two-phase locking (2PL) is a common type of this
+    - optimistic -> good when conflicts are rare, check if so at end and then cancel/rollback if conflict did occur
+        - also called OCC (optimistic concurrency control)
+        - MVCC (postgres uses this) is optimistic
+        - timestamp-based control is the other major type
 
 ## ACID
 - Atomicity

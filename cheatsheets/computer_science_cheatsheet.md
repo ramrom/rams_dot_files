@@ -20,6 +20,13 @@
 
 
 ## MEMORY
+- MAU - minimally adressable unit
+    - most platforms MAU is byte-addressing
+- addressability - what is the size of the data that a address can point to
+    - byte-addressing - each address points to a byte of data
+    - word-addressing - each address points to a word of data, word size is platform dependent
+- address space - a 32-bit systems can address 2^32 addresses
+    - so if it's byte-addressable then a 32 bit system can address 4 GiB(gibibytes) of data
 ### PASS BY VALUE VS REFERENCE
 - refers to the nature of variables
     - pass-by-value means value is pass to the function

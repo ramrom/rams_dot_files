@@ -295,7 +295,8 @@
 - apache avro
 - ProtoBufs
     - serialized data is pretty compact, integers representation can have variable bit length
-- Capt'n'Proto
+- [Capt'n'Proto](https://capnproto.org/)
+    - there is no serialization/deserialization, i.e. bits on the wire can directly be copied to memory for native object
 - flatbuffers
     - created by google, "zero-copy" serialization
 ### DATE/TIME

@@ -36,6 +36,9 @@
         - `mvn test -Dtest=com.full.path.SomeTest` - can specify full path
         - `mvn test -Dtest=TestCircle#xyz test` - same as above but also only with method name `xyz test`
         - `mvn test -Dtest=Test*#xyz*` - can use `*` wildcard in test class and method name
+    - `mvn -DexcludeGroups="foo"`  - dont run suites/tests tagged with `foo`
+    - `mvn -Dgroups="bar"`  - only run suites/tests tagged with `bar`
+        - see https://howtodoinjava.com/junit5/junit-5-tag-annotation-example/
 
 ## GRADLE
 - newest and honeslty best, itself written in groovy
