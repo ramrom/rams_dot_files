@@ -79,9 +79,10 @@ vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*',
 })
 
 -- for jsonc format, which supports commenting, this will highlight comments
--- FIXME may'23: not working, code in .vimrc not working either
+-- NOTE: using `callback` with a function doesn work, but `command` does
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'json', callback = function() vim.cmd.syntax([[match Comment +\/\/.\+$+]]) end
+    -- pattern = 'json', callback = function() vim.cmd.syntax([[match Comment +\/\/.\+$+]]) end
+    pattern = 'json', command = [[match Comment +\/\/.\+$+]]
 })
 
 -- any file name starting with Jenkinsfile should be groovy
@@ -667,9 +668,12 @@ LoadTreeSitter = function()
     })
 
     -- hightlight hyperlinks that are in regular paragraph/text regions in markdown files
+    -- jun'24: placing this autocmd outside this loadtreesitter func fails, autocommand runs but vim.cmd.syntax doesnt do anything...
+        -- might be similar to the json comment autocommand issue, i switched from callback to command and it worked
     if not LazyPluginEnabled('vim-markdown') then
         vim.api.nvim_create_autocmd('FileType', {
             pattern = 'markdown', 
+            desc = 'highlight hyperlinks in regular paragraph/text of markdown',
             callback = function() 
                 vim.cmd.highlight("link mkdInlineURL htmlLink")
                 vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
@@ -1405,7 +1409,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- MARKDOWN
         { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
-        { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
+        -- { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
