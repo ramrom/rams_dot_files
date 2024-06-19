@@ -2,12 +2,36 @@
 
 # FFGB (Fzf Git Branch)
 
-# TODO: add binding to checkout a branch
+# FIXME: if checking out a new remote branch need to do `git checkout --track remotes/remotename/branchname`
+usage () { echo "Usage: ffgb [ -h(help) ] [ -l(non-remote branches only) ]"; }
+
+while getopts 'hl' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        l) NON_REMOTE=1 ;;
+        *) usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
 
 git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
-ht="100%"; [ -n "$half" ] && ht="50%"
 
-git branch -a --color=always | grep -v '/HEAD\s' | sort |
-fzf --height $ht --border --ansi --multi --tac --preview-window right:70% \
-    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)'$LINES  |
-sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##'
+OPTS="-a"
+[ -n "$NON_REMOTE" ] && OPTS=""
+
+out=$(git branch ${OPTS} --color=always | grep -v '/HEAD\s' | sort |
+fzf --height 100% --border --ansi --tac --preview-window right:70% \
+    --header 'ctrl-o->checkout' --expect='ctrl-o' \
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)')
+
+key=$(echo "$out" | head -1)
+branch=$(echo "$out" | tail -1)
+branch=$(echo "$branch" | sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##')
+
+if [ -n "$branch" ]; then
+    case "$key" in
+        "ctrl-o")
+            git checkout "$branch" ;;
+        *) echo "$branch" ;;
+    esac
+fi

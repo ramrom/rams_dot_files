@@ -915,6 +915,9 @@ finally { .. }  // finally is always exected
 
 
 ## MAJOR LIBS/FRAMEWORKS
+### JUNIT
+- version 4 uses Categories
+- version 5 uses Tags (ver 5 can use ver 4 tests that use Categories, itl will have it's class name as a string)
 ### NETTY
 - async non-blocking event-driven network-centric framework, does HTTP and other protocols
     - uses the reactor pattern
