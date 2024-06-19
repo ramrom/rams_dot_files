@@ -91,6 +91,9 @@ fd . foo/ -S +2ki -x du -hs   # find all files greater than 2kb in folder foo an
 # find all files in current dir, including hidden, that end in "foo" and run ls -al on them
 fd -t f -d 1 -H "foo$" -x ls -al
 
+fd -d 4 --min-depth 2   # only show items with depth between 2 and 4
+fd --exact-depth 3      # only show items exactly 3 dirs deep
+
 # use sh trick here to run complex commands
 fd . somedir/ -x sh -c 'printf "something"; echo {}; echo "hi"'
 ```
