@@ -1059,8 +1059,7 @@ end
 LoadJDTLSServer = function()
     local config = {
         cmd = { '/opt/homebrew/bin/jdtls' },
-        -- root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
-        root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew"}),
+        root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         settings = {
             java = {
                 -- `name` must match a value in enum ExecutionEnvironment
@@ -1079,13 +1078,26 @@ LoadJDTLSServer = function()
                             name = "JavaSE-17",
                             path = "~/.sdkman/candidates/java/17.0.6-tem"
                         },
+                        {
+                            name = "JavaSE-21",
+                            path = "~/.sdkman/candidates/java/21.0.2-tem"
+                        },
                     }
                 }
             }
         }
     }
     require('jdtls').start_or_attach(config)
+
+    -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
+        -- previously i didnt have this and goto def was not working
+    vim.api.nvim_create_autocmd("Filetype", {
+        pattern = "java",
+        callback = function() require("jdtls").start_or_attach(config) end,
+    })
 end
+
+
 ------------- KOTLIN-------------------------------------
 -- https://github.com/fwcd/kotlin-language-server
 
@@ -1424,7 +1436,7 @@ if not vim.env.VIM_NOPLUG then
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer },
+        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
         { 'scalameta/nvim-metals',
             cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },

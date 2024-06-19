@@ -302,6 +302,7 @@ C             " make selected dir node the new root node
     - verbose to tell u what last set it
 - `:autocmd` - print all autocmd definitions
     - `:autocmd BufEnter` - print just `BufEnter` autocmds
+    - `:verbose autocmd` - verbose will show things like what code last set the autocmd
 - `Inspect` - print info about all items at given position, with no args the cursor position
     - will show highlight group (by regular vim regex syntax or treesitter)
 - `ga` -> show character encoding under cursor
