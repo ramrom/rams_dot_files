@@ -16,6 +16,11 @@
     - latency spikes due to GC pauses were a big issue
 - https://matklad.github.io - awesome blog by core maintiner of `rust-analyzer` and tigerbeetle
     - nice zig vs. rust thoughts: https://matklad.github.io/2023/03/26/zig-and-rust.html
+- std lib is very bare on purpose
+    - rust community gaurantees std lib is very stable long term, even across new editions, can do this b/c it's small
+    - also small b/c crate system is so robust, it's easy to include a crate that does what you want
+    - e.g. this is a big reason rust std lib doesnt support http
+    - pythons std lib is massive and a mess, many things are not reccommended by python community
 
 ## LEARNING RESOURCES
 ### DOCS

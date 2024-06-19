@@ -111,6 +111,8 @@
     - if we want to pass in `List` type, need to use splat operator to convert it
         - e.g. `val mylist = List("a","b"); foo(mylist:_*)`
     - this is similar to varargs feature in Java
+- variadic arguments: type with postfix `*`
+    - e.g. `def foo(a: String*) = { for( arg <- args ){ println("Arg: " + arg) }}; foo("hi","there"); foo("onearg")`
 ### INTROSPECTION
 ```scala
 val a: Any = "hi"

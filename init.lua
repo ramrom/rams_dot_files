@@ -1059,18 +1059,25 @@ end
 LoadJDTLSServer = function()
     local config = {
         cmd = { '/opt/homebrew/bin/jdtls' },
-        root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+        -- root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+        root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew"}),
         settings = {
             java = {
+                -- `name` must match a value in enum ExecutionEnvironment
+                -- see https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line
                 configuration = {
                     runtimes = {
                         {
+                            name = "JavaSE-1.8",
+                            path = "~/.sdkman/candidates/java/8.0.345-zulu"
+                        },
+                        {
                             name = "JavaSE-11",
-                            path = "/opt/homebrew/opt/openjdk@11",
+                            path = "~/.sdkman/candidates/java/11.0.16.1-tem"
                         },
                         {
                             name = "JavaSE-17",
-                            path = "/opt/homebrew/opt/openjdk@17",
+                            path = "~/.sdkman/candidates/java/17.0.6-tem"
                         },
                     }
                 }
@@ -1141,7 +1148,8 @@ vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
-vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
+vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highlights' })
+-- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'remove search highlights' })
 
 -- SMART RUN ACTIONS
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('exe')<cr>", { desc = "execute program" })
