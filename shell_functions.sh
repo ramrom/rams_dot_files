@@ -283,17 +283,6 @@ function tmux_pane_bg_jobs() {
         | xargs -I PANE tmux run-shell -t PANE PN=PANE; "echo ${PN}:$(whoami) >> /tmp/tmux_pane_bg_jobs"
 }
 
-function tmux_open_pane() {
-    # for pane in $(tmux list-panes -F "#{pane_index};#{pane_pid}"); do  # works if no IFS splitting is on
-    local panes=$(tmux list-panes -F "#{pane_index};#{pane_pid}")
-    for pane in $panes; do
-        local pane_index=$(echo $pane | cut -d ';' -f 1)
-        local pane_pid=$(echo $pane | cut -d ';' -f 2)
-        pgrep -P $pane_pid > /dev/null || { echo $pane_index && return; } # if pane has no child processes return it
-    done
-    echo "NO-OPEN-PANES" && return 1
-}
-
 function tmux_run_in_pane() {
     local open_pane=$(tmux_open_pane)
     echo $open_pane | grep "NO-OPEN" && echo "No open panes" && return 1

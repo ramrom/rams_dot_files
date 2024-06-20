@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# for pane in $(tmux list-panes -F "#{pane_index};#{pane_pid}"); do  # works if no IFS splitting is on
+panes=$(tmux list-panes -F "#{pane_index};#{pane_pid}")
+for pane in $panes; do
+    pane_index=$(echo $pane | cut -d ';' -f 1)
+    pane_pid=$(echo $pane | cut -d ';' -f 2)
+    pgrep -P $pane_pid > /dev/null || { echo $pane_index && exit; } # if pane has no child processes return it
+done
+echo "NO-OPEN-PANES" && return 1

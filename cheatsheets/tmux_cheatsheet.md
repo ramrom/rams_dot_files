@@ -23,23 +23,26 @@
 - 2 methods to multi-key bindings: https://stackoverflow.com/questions/25294283/bindings-with-key-sequences
 - change to a preset layout: `tmux select-layout even-horizontal`
 
-## running shell command on a tmux hook
-- tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'
+## RUNNING SHELL COMMAND ON A TMUX HOOK
+- `tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'`
 - expanded using FORAMTS before execution
 - can use -b to run in background
 
-tmux show -s    - show server options
-tmux show       - show session options
-tmux show -g    - show global session options
-tmux showw      - show window options
-tmux showw -g   - show global window options
-tmux show -p    - show pane options
+## SHOW OPTS
+```sh
+tmux show -s    # show server options
+tmux show       # show session options
+tmux show -g    # show global session options
+tmux showw      # show window options
+tmux showw -g   # show global window options
+tmux show -p    # show pane options
+```
 
-## display menu
+## DISPLAY MENU
 tmux display-menu -x S foomenu a "display-message hello" bar b "display-message world"
     - will display 2 item menu, hit "a" or "b" as valid inputs
 
-## clients
+## CLIENTS
 tmux list-clients -t some_session      # show clients
 prefix D                               # show client list, and basically detach the rest
 
@@ -47,7 +50,7 @@ good resource on condition version checks in tmux conf file:
 - https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
     - it also details the changes, breaking changes, with increasing versions
 
-## Keybindings
+## KEYBINDINGS
 prefix + ?  - show the current key bindings
 prefix + S  - swap windows
 prefix + y  - swap panes
