@@ -80,9 +80,10 @@ else
 fi
 
 if [ "$(uname)" = "Linux" ]; then
+    alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
     alias bat='batcat'
-    alias batman="MANPAGER=\"sh -c 'col -bx | batcat -l man -p'\" man"
     alias open='xdg-open'
+    alias batman="MANPAGER=\"sh -c 'col -bx | batcat -l man -p'\" man"
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
     alias smd='systemctl'
@@ -92,7 +93,6 @@ if [ "$(uname)" = "Linux" ]; then
     alias psxfull='ps auxhfww'
     alias netstatip='sudo netstat -lpnut'
     alias iorealtime='iostat -x -d 1'      #show ext stats, device util, every 1 second'
-    alias fd='fdfind'  # fd is some file management bin, but i dont plan to install it
     alias dfl='df -khT | grep -v loop | grep -v tmpfs' # grep out loop and tmpfs in ubuntu
     alias mountdev='mount | grep "/dev"'
     alias blkidnoloop='sudo blkid | grep -v loop'
@@ -138,13 +138,15 @@ alias gbranchclean='git branch --merged master | egrep -v "^\*|master" | xargs -
 alias d='docker'
 alias sd='sudo docker'
 
-# FZF, RG (ripgrep), FD, GREP
+# RIPGREP, GREP
 alias grep='grep --colour=always'
 alias rg_hidden_nogit="rg -uu -g '!.git/'"
 alias rgst='rg -tscala'
 alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
+
+# FZF
 alias f="fzf"
 alias fa='ff -t 1'
 alias fh='ff ~'

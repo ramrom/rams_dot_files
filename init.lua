@@ -292,7 +292,8 @@ function moduleExists(name)
     end
 end
 
--- FIXME: june25-23 doesn't really work, dont really need it tho, vtr plugin is pretty smart
+ActiveTmuxPane=nil
+
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window
     vim.fn.system({'tmux', 'display-panes' })
@@ -319,12 +320,20 @@ SelectTmuxRunnerPane = function()
     pane_selection = tonumber(pane_selection) -- user input is always string
 
     if pane_selection ~= nil and pane_selection < #panes then  -- nil if convert to number failed
-        local pane_name = 'vtr-run-pane' .. pane_selection
-        vim.fn.system({ 'tmux', 'select-pane', '-t', pane_selection, '-T', pane_name })
-        print("VtrCreatedRunnerPaneName set to: " .. pane_name)
-        vim.g.VtrCreatedRunnerPaneName = pane_name
+        print("ActiveTmuxPane set to: " .. pane_selection)
+        ActiveTmuxPane=pane_selection
     else
         print("pane number " .. pane_selection .. " not found!")
+    end
+end
+
+
+TmuxPaneRun = function(cmd)
+    if ActiveTmuxPane == nil then
+        print('ActiveTmuxPane is nil')
+    else
+        -- os.execute('tmux send-keys -t ' .. ActiveTmuxPane .. ' \'' .. cmd .. '\' C-m')
+        vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxPane, cmd, 'C-m'})
     end
 end
 
@@ -332,33 +341,33 @@ RunAction = function(arg)
     curftype = vim.bo.filetype
     if arg == "exe" then
         if curftype == "rust" then
-            vim.cmd(':VtrSendCommandToRunner! cargo run')
+            TmuxPaneRun("cargo run")
         elseif curftype == 'go' then
-            vim.cmd(":VtrSendCommandToRunner! go run ".. vim.fn.expand("%"))
+            TmuxPaneRun("go run ".. vim.fn.expand("%"))
         elseif curftype == 'c' then
-            vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%") .. ' && ./a.out')
+            TmuxPaneRun("gcc ".. vim.fn.expand("%") .. ' && ./a.out')
         elseif curftype == 'scala' then
-            vim.cmd(":VtrSendCommandToRunner! scala ".. vim.fn.expand("%"))
+            TmuxPaneRun("scala ".. vim.fn.expand("%"))
         elseif curftype == 'java' then
-            vim.cmd(":VtrSendCommandToRunner! java-ramrom")
+            TmuxPaneRun("java-ramrom")
         else
             print("filetype " .. curftype .. " undefined for execute action")
         end
     elseif arg == 'test' then
         if curftype == "rust" then
-            vim.cmd(':VtrSendCommandToRunner! cargo test')
+            TmuxPaneRun('cargo test')
         elseif curftype == 'go' then
-            vim.cmd(":VtrSendCommandToRunner! go test ".. vim.fn.expand("%"))
+            TmuxPaneRun("go test ".. vim.fn.expand("%"))
         else
             print("filetype " .. curftype .. " undefined for test action")
         end
     elseif arg == 'build' then
         if curftype == "rust" then
-            vim.cmd(':VtrSendCommandToRunner! cargo build')
+            TmuxPaneRun('cargo build')
         elseif curftype == 'go' then
-            vim.cmd(":VtrSendCommandToRunner! go build ".. vim.fn.expand("%"))
+            TmuxPaneRun("go build ".. vim.fn.expand("%"))
         elseif curftype == 'c' then
-            vim.cmd(":VtrSendCommandToRunner! gcc ".. vim.fn.expand("%"))
+            TmuxPaneRun("gcc ".. vim.fn.expand("%"))
         else
             print("filetype " .. curftype .. " undefined for build action")
         end
@@ -1485,7 +1494,6 @@ if not vim.env.VIM_NOPLUG then
             } 
         },
         { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = FlashOpts, },
-        'christoomey/vim-tmux-runner',
 
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
