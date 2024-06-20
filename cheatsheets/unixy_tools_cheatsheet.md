@@ -87,6 +87,7 @@ printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if li
 echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
 sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
 cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
+cat somefile | sed -n '2p'          # print just the 2nd line of the file
 
 # GOACCESS - log file analyzer
 goaccess logfile.log  # interactive TUI

@@ -146,7 +146,7 @@ alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 alias f="fzf"
-alias fa="ls -alh --color=always | tail -n+4 | fzf --ansi"
+# alias fa="ls -alh --color=always | tail -n+4 | fzf --ansi"
 alias ffh='ff ~'
 alias ffd='ff -d ~'
 alias fs="print_alias_funcs_scripts | fzf"

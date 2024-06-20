@@ -25,8 +25,7 @@ fzf --height 100% --border --ansi --tac --preview-window right:70% \
     --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)')
 
 key=$(echo "$out" | head -1)
-branch=$(echo "$out" | tail -1)
-branch=$(echo "$branch" | sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##')
+branch=$(echo "$out" | tail -1 | sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##')
 
 if [ -n "$branch" ]; then
     case "$key" in

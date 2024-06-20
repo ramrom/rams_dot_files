@@ -210,6 +210,20 @@ function fcd() {
     cd $(fd --type d --hidden --exclude .git '.*' $1 | fzf --preview "tree -C {} | head -40")
 }
 
+function fa() {
+    out=$(ls -alh --color=always | tail -n+4 | fzf --ansi \
+    --header 'ctrl-o->cd-to-dir' --expect='ctrl-o')
+    key=$(echo "$out" | head -1)
+    dir=$(echo "$out" | tail -1 | awk '{print $9}' )
+
+    if [ -n "$dir" ]; then
+        case "$key" in
+            "ctrl-o") cd "$dir" ;;
+            *) echo "$dir" ;;
+        esac
+    fi
+}
+
 function ffgt() {  # ff(fuzzy)g(git)t(tag)
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     git tag --sort -version:refname | fzf --multi --preview-window right:80% \

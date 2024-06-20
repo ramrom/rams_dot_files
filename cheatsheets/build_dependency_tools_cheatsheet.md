@@ -39,6 +39,8 @@
     - `mvn -DexcludeGroups="foo"`  - dont run suites/tests tagged with `foo`
     - `mvn -Dgroups="bar"`  - only run suites/tests tagged with `bar`
         - see https://howtodoinjava.com/junit5/junit-5-tag-annotation-example/
+    - `mvn -X ...`  - debug level console logging, `mvn -q ...` (quiet) no logging, 
+        - *NOTE* this controls only maven logs itself, not like java application logs
 
 ## GRADLE
 - newest and honeslty best, itself written in groovy
