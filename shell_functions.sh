@@ -207,13 +207,13 @@ function fsn() {
 
 function fa() {
     out=$(ls -alh --color=always | tail -n+4 | fzf --ansi \
-    --header 'ctrl-o->cd-to-dir' --expect='ctrl-o')
+    --header 'ctrl-space->cd-to-dir' --expect='ctrl-space')
     key=$(echo "$out" | head -1)
     dir=$(echo "$out" | tail -1 | awk '{print $9}' )
 
     if [ -n "$dir" ]; then
         case "$key" in
-            "ctrl-o") cd "$dir" ;;
+            "ctrl-space") cd "$dir" ;;
             *) echo "$dir" ;;
         esac
     fi
