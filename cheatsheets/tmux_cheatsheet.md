@@ -22,6 +22,7 @@
     - NOTE: 3.1 and above, "?" does not show all keybindings...
 - 2 methods to multi-key bindings: https://stackoverflow.com/questions/25294283/bindings-with-key-sequences
 - change to a preset layout: `tmux select-layout even-horizontal`
+- any program running in a pane will be a child process of that panes' PID
 
 ## RUNNING SHELL COMMAND ON A TMUX HOOK
 - `tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'`

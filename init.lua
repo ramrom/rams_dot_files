@@ -292,7 +292,7 @@ function moduleExists(name)
     end
 end
 
-ActiveTmuxPane=nil
+ActiveTmuxRunnerPane=nil
 
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window
@@ -320,8 +320,8 @@ SelectTmuxRunnerPane = function()
     pane_selection = tonumber(pane_selection) -- user input is always string
 
     if pane_selection ~= nil and pane_selection < #panes then  -- nil if convert to number failed
-        print("ActiveTmuxPane set to: " .. pane_selection)
-        ActiveTmuxPane=pane_selection
+        print("ActiveTmuxRunnerPane set to: " .. pane_selection)
+        ActiveTmuxRunnerPane=pane_selection
     else
         print("pane number " .. pane_selection .. " not found!")
     end
@@ -329,11 +329,11 @@ end
 
 
 TmuxPaneRun = function(cmd)
-    if ActiveTmuxPane == nil then
-        print('ActiveTmuxPane is nil')
+    if ActiveTmuxRunnerPane == nil then
+        print('ActiveTmuxRunnerPane is nil')
     else
-        -- os.execute('tmux send-keys -t ' .. ActiveTmuxPane .. ' \'' .. cmd .. '\' C-m')
-        vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxPane, cmd, 'C-m'})
+        -- os.execute('tmux send-keys -t ' .. ActiveTmuxRunnerPane .. ' \'' .. cmd .. '\' C-m')
+        vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxRunnerPane, cmd, 'C-m'})
     end
 end
 
