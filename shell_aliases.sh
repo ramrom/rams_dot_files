@@ -151,13 +151,6 @@ alias fh='ff ~'
 alias fhd='ff -d ~'
 alias ffd='ff -d'
 alias fs="print_alias_funcs_scripts | fzf"
-if [ "$(uname)" = "Linux" ]; then
-    alias fp="fzf --preview 'batcat --style=numbers --color=always {} | head -500' --height 100%"
-    alias fph="fzf --preview 'batcat --style=numbers --color=always {} | head -500'"
-else
-    alias fp="fzf --preview 'bat --style=numbers --color=always {} | head -500' --height 100%"
-    alias fph="fzf --preview 'bat --style=numbers --color=always {} | head -500'"
-fi
 
 # GO
 alias gosr='cd ~/go/src'
