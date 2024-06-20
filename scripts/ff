@@ -5,14 +5,15 @@
 # actions: open, edit, cd to location, or add to clipboard
 
 usage() { echo 'Usage: ff [ -h(help) ] [ -i(ignore-hidden-files) ] [ -j FZF_HEIGHT ] [ -d(directories only) ]';
-          echo '          [ -w(FUNC_WRAP) ] BASE_DIR( `~` = home, no arg means cur dir)'; }
+          echo '          [ -w(FUNC_WRAP) ] [ -t DEPTH ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
-while getopts 'hidwj:' x; do
+while getopts 'hidt:wj:' x; do
     case $x in
         h) usage && exit 1 ;;
         i) NO_HIDDEN_FILES=1 ;;
         d) DIRS_ONLY=1 ;;
         j) FZF_HEIGHT="$OPTARG" ;;
+        t) DEPTH="$OPTARG" ;;
         w) FUNC_WRAP=1 ;;
         *) echo && usage && exit 1 ;;
     esac
@@ -25,13 +26,16 @@ OPENBIN="open"; [ $(uname) = "Linux" ] && OPENBIN='xdg-open'
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 
-FZF_DEFAULT_COMMAND="$FDNAME --exclude .git"
+FZF_DEFAULT_COMMAND="$FDNAME --color=always --exclude .git"
 
 HIDDEN_OPT="--hidden"; [ -n "$NO_HIDDEN_FILES" ] && HIDDEN_OPT=""
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $HIDDEN_OPT"
 
-FILE_OPT=" --type f"; [ -n "$DIRS_ONLY" ] && FILE_OPT="--type d"
+FILE_OPT=""; [ -n "$DIRS_ONLY" ] && FILE_OPT="--type d"
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $FILE_OPT"
+
+DEPTH_OPT=""; [ -n "$DEPTH" ] && DEPTH_OPT="-d $DEPTH"
+FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $DEPTH_OPT"
 
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND ."
 
@@ -65,7 +69,7 @@ PREVIEW_CMD="if [ -d {} ]; then; tree -C {}; else $BATBIN --style=numbers --colo
 
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
-out=$(fzf +m --exit-0 --height "$FZF_HEIGHT"% \
+out=$(fzf --ansi +m --exit-0 --height "$FZF_HEIGHT"% \
     --header=$'ctrl-i->open, ctrl-o->vim, ctrl-space->cd, ctrl-y->pbcopy\nctrl-s->open-in-github' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \

@@ -205,20 +205,6 @@ function fsn() {
         --preview-window=:wrap --preview-window right:70%
 }
 
-function fa() {
-    out=$(ls -alh --color=always | tail -n+4 | fzf --ansi \
-    --header 'ctrl-space->cd-to-dir' --expect='ctrl-space')
-    key=$(echo "$out" | head -1)
-    dir=$(echo "$out" | tail -1 | awk '{print $9}' )
-
-    if [ -n "$dir" ]; then
-        case "$key" in
-            "ctrl-space") cd "$dir" ;;
-            *) echo "$dir" ;;
-        esac
-    fi
-}
-
 function ffgt() {  # ff(fuzzy)g(git)t(tag)
     git rev-parse HEAD > /dev/null 2>&1 || { echo "not git repo" && return 1; }
     git tag --sort -version:refname | fzf --multi --preview-window right:80% \
