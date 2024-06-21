@@ -382,9 +382,6 @@ end
 ------------------------------------- -------------------------------------------------------------------
 
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
---- TODO: treesitter markdown: get hyperlinks to be blue+underlined (vim-markdown does this)
-    -- may'24 vim-markdown uses this group for hyperlinks, try to get this working along with treesitter
-    -- vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
 local LoadOneDarkProConfig = function()
     require("onedarkpro").setup({
         highlights = {
@@ -900,12 +897,8 @@ end
 
 
 ----------------- AUTOPAIR ----------------------------------
-AutoPairConfig = {
-   map_c_h = true,  -- Map the <C-h> key to delete a pair
-}
-
--- TODO: figure out how to run this only if the plugin is loaded
 LoadAutoPair = function()
+    require('nvim-autopairs').setup({ map_c_h = true }) -- Map the <C-h> key to delete a pair
     local Rule = require('nvim-autopairs.rule')
     require('nvim-autopairs').add_rule(Rule("<",">","rust"))
 end
@@ -1448,8 +1441,7 @@ if not vim.env.VIM_NOPLUG then
         { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
         { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
 
-        { 'windwp/nvim-autopairs', event = "InsertEnter", config = true, opts = AutoPairConfig },
-        -- { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair, opts = AutoPairConfig }, -- doesnt work
+        { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair },
         { 'abecodes/tabout.nvim',
             lazy = false,
             config = LoadTabOut,
