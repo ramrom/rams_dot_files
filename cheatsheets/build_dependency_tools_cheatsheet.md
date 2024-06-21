@@ -36,8 +36,8 @@
         - `mvn test -Dtest=com.full.path.SomeTest` - can specify full path
         - `mvn test -Dtest=TestCircle#xyz test` - same as above but also only with method name `xyz test`
         - `mvn test -Dtest=Test*#xyz*` - can use `*` wildcard in test class and method name
-    - `mvn -DexcludeGroups="foo"`  - dont run suites/tests tagged with `foo`
-    - `mvn -Dgroups="bar"`  - only run suites/tests tagged with `bar`
+    - `mvn -DexcludeGroups="foo"`  - dont run suites/tests tagged with `foo` (Junit5)
+    - `mvn -Dgroups="bar"`  - only run suites/tests tagged with `bar` (Junit5)
         - see https://howtodoinjava.com/junit5/junit-5-tag-annotation-example/
     - `mvn -X ...`  - debug level console logging, `mvn -q ...` (quiet) no logging, 
         - *NOTE* this controls only maven logs itself, not like java application logs

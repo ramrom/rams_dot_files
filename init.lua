@@ -328,6 +328,7 @@ SelectTmuxRunnerPane = function()
 end
 
 
+-- TODO: maybe add logic to set default pane, look for pane with no child processes (see tmux-open-pane script)
 TmuxPaneRun = function(cmd)
     if ActiveTmuxRunnerPane == nil then
         print('ActiveTmuxRunnerPane is nil')
@@ -379,16 +380,6 @@ end
 ----------------------------------------------------------------------------------------------------------
 ---------------------------------- PLUGIN CONFIG ----------------------------------------------------------
 ------------------------------------- -------------------------------------------------------------------
-
----------- NAVARASU ONE DARK COLORSCHEME -------------
--------- TODO: get full dark background to work
--------- TODO: treesitter markdown mostly works, H1/2/3/4/5/6 dont have diff colors
-local LoadNavarasuOneDarkConfig = function()
-    require('onedark').setup { style = 'darker' }
-    vim.cmd('highlight Normal ctermbg=000')
-    vim.cmd('highlight NonText ctermbg=000')
-    require('onedark').load()
-end
 
 ---- ONE DARK PRO: https://github.com/olimorris/onedarkpro.nvim
 --- TODO: treesitter markdown: get hyperlinks to be blue+underlined (vim-markdown does this)
@@ -1424,7 +1415,6 @@ if not vim.env.VIM_NOPLUG then
         'tpope/vim-repeat',
 
         --- COLORSCHEME
-        -- { 'navarasu/onedark.nvim', lazy = false, config = LoadNavarasuOneDarkConfig },
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
 
         --- GIT
