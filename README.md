@@ -9,14 +9,18 @@ My dot files and scripts for Unix-like environments
 - nvim-tree - file/tree explorer (replaces NERDTree)
 - treesitter - build AST of filetypes (tons of uses, replaces vim regex highlighting)
 - onedarkpro - colorscheme
-- gitsigns - git intelligence (replaces vim-signify)
+- git stuff
+    - vim-fugitive
+    - gitsigns - git intelligence (replaces vim-signify)
+- LSP/code-intelligence
+    - built-in client + nvim-lspconfig
+    - auto-completion - nvim-cmp
+    - snippets - LuaSnip
 
 ## VIM
 - june2023 - *deprecated* vim, all in on neovim, definitely not worth maintaining both
     - .vimrc around for the rare case I might use vim
 - Vim Plug for plugin manager
-- neovim for better integration with coc and scala metals
-    - init.vim just loads my vimrc, to maintain vim parity
 ### PLUGINS
 - **FZF**
     - fzf-mru (fzf over most recently opened files)
@@ -31,12 +35,6 @@ My dot files and scripts for Unix-like environments
 - vim-gh-line
 - vim-markdown
 - nvim-treesitter (syntax highlighting, folding)
-- LSP
-    - vim and old neovim
-        - coc (conqueror of completion), only used for old vim
-    - modern neovim
-        - native lsp client
-        - nvim-lspconfig
 
 ## CORE TOOLS
 - vi
