@@ -112,7 +112,7 @@
     use old_http::SomeType;  // rust 2018 and 2021
     ```
 
-## GRAMMER
+## CONTROL STRUCTURES
 - in C/C++ methods are invoked with `.` on object, and `->` operator on pointers
     - in rust the `.` operator works on pointers or direct struct/object, pointers are automatically dereferenced
 - if a expression is followed by semicolon `;`, then it'll discard the result and become a statement
@@ -733,11 +733,6 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - type 2: attribute-like
     - type 3: function-like
 
-## EXAMPLES
-```rust
-let s1 = "foo" // immutable string
-let s2 = String::from("hello");  // type String is mutable
-```
 
 ## LIBS/FRAMEWORKS/APPS
 - [mio](https://github.com/tokio-rs/mio) - low level lib for OS non-blocking IO API

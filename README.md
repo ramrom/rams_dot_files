@@ -5,6 +5,7 @@ My dot files and scripts for Unix-like environments
 - Lazy.nvim for plugin management
 ### PLUGINS
 - lualine - statusline (replaces vim-airline)
+- fzf.lua - fuzzy finding (replaces fzf.vim)
 - nvim-tree - file/tree explorer (replaces NERDTree)
 - treesitter - build AST of filetypes (tons of uses, replaces vim regex highlighting)
 - onedarkpro - colorscheme

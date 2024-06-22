@@ -1,13 +1,20 @@
 # JAVA
 - https://learnxinyminutes.com/docs/java/
-- `jshell` start REPL env in terminal
-    - *NOTE* make sure to switch to appropriate java (e.g. 11 or 17) in shell before launching
-    - hit `<tab>` key for signature help after first `(` e.g. `var.somemethod(<tab>`
 - java is by comp sci def pass-by-value: https://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
     - for objects, variables store values that are references to objects
         - so reassigned a variable passed into a function with new value, will not change the variable assignment in caller
     - so every variable holds "references" that essentially those references are copied in a function call
         - the exception is some primitive types like integer, which are just direct values
+
+## HISTORY
+- java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),
+- java8, mar2014, LTS(till 2025) - lamba functions
+- java11, sept2018, LTS - TLS, http client, epsilon garbage collector
+- java14
+    - introduced `record`, aka scala case class
+- java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
+- java17, sept2021, LTS - better pattern matching
+- java21, sept2023, end at sept2031
 
 ## FEATURES
 - varargs(variadic arguments) for functions, e.g. `void foo(String... vals) {..}; foo("one"); foo("one","two");`
@@ -15,7 +22,7 @@
     - method can only have one varargs param
     - it must be the last param
 
-## JAVA RUNTIME
+## RUNTIME
 `/usr/libexec/java_home -V`
     - see all jvm version installed
 - set JAVA_HOME env var to a specific jvm
@@ -365,41 +372,6 @@ a.add(3);
 ha.put("foo", a);
 ```
 
-## STREAMS
-- introduced in java8, improved in java9
-- also supports `sort`, `min`, `max`, `distinct`(remove dups), `allMatch`, `anyMatch`, `noneMatch`, `reduce`
-- parllelism (concurrent) via `parralel` e.g. `Stream.of(1,2).parallel().map(i->i+1)`
-- has infinite streams via `generate` and `iterate`
-```java
-Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()) // returns List(2,3,4)
-Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on seperate lines
-
-Stream.of("a","b").forEach(i -> System.out.println(i));
-
-IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
-
-var a = new ArrayList<Integer>(); a.add(1); a.add(2);
-// Collector interface also has toMap, toSet
-a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
-a.stream().collect(Collectors.toSet()) // returns a set
-
-// create collection of objects from array data
-var s = Arrays.stream(new int[] { 1,2,3};
-class Foo { int data; Foo(int i) { this.data = i;} };
-var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors.toList());
-
-System.out.println(obj_collection.get(0).data1)     // should print 1
-
-// example of distinct with record types
-public record Far(Integer i, String s)
-var b = new ArrayList<Far>(List.of(new Far(1,"a"), new Far(3,"b"), new Far(1,"z"), new Far(3,"b")))
-b.stream().distinct().collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=3, s=b], Far[i=1, s=z]]
-b.stream().filter(item -> item.i() == 1).collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=1, s=z]]
-
-Stream.of(1,2,3,4).skip(2).forEach(System.out::println);       // skip discards for n elements, this prints 3,4
-Stream.of(1,2,3,4).limit(3).forEach(System.out::println);      // limit only gives first x elements, this prints 1,2,3
-Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this prints 2,3
-```
 
 ## CONCURRENCY
 - `synchronized` keyword 
@@ -610,6 +582,7 @@ Math.abs(-1)   // returns 1
 Math.abs(-1.1)   // returns 1.1
 Math.max(1.1f, 2)   // can mix floats with ints, returns 2
 Math.pow(3,4)   // power/exponent, this returns Double 81.0
+Math.sqrt(4)    // return Double 2.0
 
 Math.random()   // return num between 0.0(inclusive) to 1.0(exclusive)
 int randomNum = (int)(Math.random() * 101);  // 0 to 100
@@ -809,6 +782,11 @@ e == e2        // return true, since they are constant and only one instance def
     boolean b = c.isInstance(3)     // false
 ```
 
+## REPL
+- `jshell` start REPL env in terminal
+    - *NOTE* make sure to switch to appropriate java (e.g. 11 or 17) in shell before launching
+    - hit `<tab>` key for signature help after first `(` e.g. `var.somemethod(<tab>`
+
 ## IO
 ```java
 // Files
@@ -829,7 +807,7 @@ byte numByte = scanner.nextByte();
 System.out.println("hi")
 ```
 
-### OPERATORS
+## OPERATORS
 ```java
 System.out.println("11%3 = "+(11 % 3)); // => 2 , modulo
 
@@ -888,7 +866,9 @@ switch (a) {
     }
     default -> System.out.println("something else");
 }
-
+// java 14 has switch expressions (vs the switch statement above)
+    // no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
+    // dont have to be exhaustive
 
 //ternary operator
 String bar = (3 < 10) ? "A" : "B";  // bar = "A"
@@ -904,10 +884,41 @@ catch (SomeException e) { .. }
 catch (AnotherException e) { .. }
 finally { .. }  // finally is always exected
 ```
-- java 14 has switch expressions (vs the switch statement above)
-    - no break statement, can have a default case, can combine constants, has blocked scope(using curly braces)
-    - dont have to be exhaustive
+### STREAMS
+- introduced in java8, improved in java9
+- also supports `sort`, `min`, `max`, `distinct`(remove dups), `allMatch`, `anyMatch`, `noneMatch`, `reduce`
+- parllelism (concurrent) via `parralel` e.g. `Stream.of(1,2).parallel().map(i->i+1)`
+- has infinite streams via `generate` and `iterate`
+```java
+Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()) // returns List(2,3,4)
+Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on seperate lines
 
+Stream.of("a","b").forEach(i -> System.out.println(i));
+
+IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
+
+var a = new ArrayList<Integer>(); a.add(1); a.add(2);
+// Collector interface also has toMap, toSet
+a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
+a.stream().collect(Collectors.toSet()) // returns a set
+
+// create collection of objects from array data
+var s = Arrays.stream(new int[] { 1,2,3};
+class Foo { int data; Foo(int i) { this.data = i;} };
+var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors.toList());
+
+System.out.println(obj_collection.get(0).data1)     // should print 1
+
+// example of distinct with record types
+public record Far(Integer i, String s)
+var b = new ArrayList<Far>(List.of(new Far(1,"a"), new Far(3,"b"), new Far(1,"z"), new Far(3,"b")))
+b.stream().distinct().collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=3, s=b], Far[i=1, s=z]]
+b.stream().filter(item -> item.i() == 1).collect(Collectors.toList())  // output is  [Far[i=1, s=a], Far[i=1, s=z]]
+
+Stream.of(1,2,3,4).skip(2).forEach(System.out::println);       // skip discards for n elements, this prints 3,4
+Stream.of(1,2,3,4).limit(3).forEach(System.out::println);      // limit only gives first x elements, this prints 1,2,3
+Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this prints 2,3
+```
 ### BEANS
 - specification: https://www.oracle.com/java/technologies/javase/javabeans-spec.html
 - 3 major reqs: 1. serializable, 2. data is private, access only via getters/setter, 3. has a zero-arg constructor
@@ -930,13 +941,3 @@ finally { .. }  // finally is always exected
 - akka streams, spring framework v5, play framework, kafka, cassandra, elasticsearch all use it
 ### WIREMOCK
 - testing library that lets you spawn live http server with test responses on endpoints
-
-## HISTORY
-- java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),
-- java8, mar2014, LTS(till 2025) - lamba functions
-- java11, sept2018, LTS - TLS, http client, epsilon garbage collector
-- java14
-    - introduced `record`, aka scala case class
-- java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
-- java17, sept2021, LTS - better pattern matching
-- java21, sept2023, end at sept2031

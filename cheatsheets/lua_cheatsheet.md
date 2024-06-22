@@ -143,8 +143,8 @@ onearg "dude"
 - pretty print a table
     - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
 
-## COROUTINES
-- is fundamental type, a cooperatively scheduled conncurent primitive
+## CONCURRENCY
+- lua has coroutines, it is fundamental type, a cooperatively scheduled conncurent primitive
 - api is exposed throgh `coroutine` table
 - programmer sets yield points to yield control, programmer has to resume exection
 - each coroutine has it's own stack and local vars
