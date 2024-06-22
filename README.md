@@ -1,17 +1,22 @@
-# Rams Dot Files
-
+# RAMS DOT FILES
 My dot files and scripts for Unix-like environments
 
 ## NEOVIM
 - Lazy.nvim for plugin management
+### PLUGINS
+- lualine - statusline (replaces vim-airline)
+- nvim-tree - file/tree explorer (replaces NERDTree)
+- treesitter - build AST of filetypes (tons of uses, replaces vim regex highlighting)
+- onedarkpro - colorscheme
+- gitsigns - git intelligence (replaces vim-signify)
 
-## Vim
+## VIM
 - june2023 - *deprecated* vim, all in on neovim, definitely not worth maintaining both
     - .vimrc around for the rare case I might use vim
 - Vim Plug for plugin manager
 - neovim for better integration with coc and scala metals
     - init.vim just loads my vimrc, to maintain vim parity
-### Plugins
+### PLUGINS
 - **FZF**
     - fzf-mru (fzf over most recently opened files)
 - one-dark (inspired by atom colorscheme)
@@ -33,7 +38,8 @@ My dot files and scripts for Unix-like environments
         - nvim-lspconfig
 
 ## CORE TOOLS
-- TMUX
+- vi
+- tmux
 - rg
 - fzf
 - fd

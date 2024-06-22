@@ -4,9 +4,9 @@
 - nice quick overview - https://www.w3schools.com/c/index.php
 
 ## HISTORY
-- C99 standard - released 1999
+- ANSI C99 standard - released 1999
     - IEEE 754 floating point support, `float` single precision (IEEE 32bit), `double` (64bit), `long double` (IEEE extended precision)
-- C11 standard - releases 2011, replaced C99
+- ANSI C11 standard - releases 2011, replaced C99
     - multi-thread support - create/manage, mutexes, thread-specific storage, atomics
     - better unicode support
 
@@ -128,6 +128,7 @@ void foo() {
 
 ## DATA STRUCTURES
 ### STRINGS
+- main lib `string.h`
 - C String - 1D array of chars terminated by a null character( `\0` )
     - array init: `char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};`
     - shortcut array init: `char greeting[6] = "hello";`
@@ -168,17 +169,27 @@ void foo() {
     - if it's a small size the virtual address space will probably map to a contiguous physical address space
     - and generally the allocator will probably fit the address space to span as few page boundaries as possible
 
+## CONCURRENCY
+- main lib `threads.h`
+- also `pthreads.h` - this is POSIX threads, and thus very portable b/c POSIX is a widely used standard on many platforms
+
 ## IO
 - print int - `int v = 1; printf("%i\n",v);`
 - print string - `char *s = "hi"; printf("%s\n",s);`
 
 ## LIBS
-- `libc` - core lib - on many archs
+- APIs for library are declared in header files
+### C STANDARD LIBRARY
+- "C standard library" usually means some implementation of ANSI C Standard
+    - see https://en.wikipedia.org/wiki/C_standard_library
+    - C POSIX library is a superset of C standard library, where there is conflict C standard lib take precedence over POSIX
+        - some new additions are `fctnl.h`(fd io),  `unist.d`(POSIX OS API, e.g. `fork`, `pipe`,`read`) and `pthreads.h`
     - API for most syscalls
-    - memory management(`malloc`, `free`,etc)
-    - also io, string, math
-- `stdlib` 
+    - memory management(`malloc`, `free`,etc), io, string, math, macros
+- `libc` - name of c standard lib on many archs
+- `glibc` - GNU libc, what linux uses
+- `stdlib` - part of standard library
     - memory allocation (`malloc`/`alloc`/`realloc`/`free`)
     - process control (`exit`, `getenv`, `system`)
     - conversions (ASCII(string)-to-int e.g. `atoi`)
-- `stdio` - `printf`
+- `stdio` - part of standard library, funcs like `printf`
