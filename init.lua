@@ -1412,8 +1412,8 @@ if not vim.env.VIM_NOPLUG then
 
         --- GIT
         { 'tpope/vim-fugitive', event = 'VeryLazy' },
-        { 'tpope/vim-rhubarb', -- GBrowse handler for github, open gh link in browser or copy to clipboard
-                config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
+            -- rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
+        { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
         --- FUZZY FIND
@@ -1429,8 +1429,7 @@ if not vim.env.VIM_NOPLUG then
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
         { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
-        { 'scalameta/nvim-metals',
-            cond = not vim.env.NO_LSP,
+        { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
         -- AUTOCOMPLETE
@@ -1443,16 +1442,9 @@ if not vim.env.VIM_NOPLUG then
 
         { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair },
         { 'abecodes/tabout.nvim',
-            lazy = false,
-            config = LoadTabOut,
-            dependencies = {
-                "nvim-treesitter/nvim-treesitter",
-                -- "L3MON4D3/LuaSnip",
-                -- "hrsh7th/nvim-cmp"
-            },
-            cond = not vim.env.NO_TAB,
+            lazy = false, config = LoadTabOut, cond = not vim.env.NO_TAB, priority = 1000,
+            dependencies = { "nvim-treesitter/nvim-treesitter", },
             event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
-            priority = 1000,
         },
 
         -- SNIPPETS
@@ -1460,23 +1452,17 @@ if not vim.env.VIM_NOPLUG then
         { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
         { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
 
+        -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim",
-            event = "VeryLazy",
             init = function() vim.o.timeout = true vim.o.timeoutlen = 600 end,
-            config = LoadWhichKey,
-            opts = { }
-        },
+            config = LoadWhichKey, opts = {}, event = "VeryLazy", },
         { "folke/noice.nvim", event = "VeryLazy", opts = { },
-            config = LoadNoice,
-            cond = not vim.env.NO_NOICE,
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
-            } 
-        },
+            }, config = LoadNoice, cond = not vim.env.NO_NOICE, },
         { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = FlashOpts, },
-
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     })

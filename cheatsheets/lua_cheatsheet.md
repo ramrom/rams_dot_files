@@ -29,9 +29,10 @@
 - technically all functions are anonymous
     - declaring a named func e.g. `function foo(x) return x end` is same as `foo = function(x) return x end`
         - so named functions are really anonymous and stored in a var
-- there is no exception handling/throwing, i.e. the try/catch stuff
-    - a big reason is C doesnt support this
-    - use `pcall` func that takes a func and args, calls that func and returns `true` is success or `false`,`err_msg` if failure
+- lua [throws exceptions](https://www.lua.org/pil/24.3.html) (uses `setjmp` from C)
+    - there is no exception handling however, i.e. the try/catch stuff
+        - a big reason is C doesnt support this
+    - can use `pcall` func that takes a func and args, calls that func and returns `true` is success or `false`,`err_msg` if failure
 - all variables are global by default (placed in a table named `_G`)
     - declare local vars with `local v = 'hi'`
 

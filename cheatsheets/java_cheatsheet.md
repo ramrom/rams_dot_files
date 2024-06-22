@@ -927,8 +927,13 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 
 ## MAJOR LIBS/FRAMEWORKS
 ### JUNIT
-- version 4 uses Categories
-- version 5 uses Tags (ver 5 can use ver 4 tests that use Categories, itl will have it's class name as a string)
+- version 4 (release 2006)
+    - tagging: uses `Categories` and other annotations
+- version 5 (release 2017)
+    - 4 is one big package, 5 splits itself into smaller libs u can select (`platform`, `jupiter`, `vintage`)
+    - `jupiter` introduces Extension API, `Extension` is core marker interface
+    - `vintage` for backwards compatibilty to run JUnit 3 and 4 tests
+    - uses Tags (ver 5 can use ver 4 tests that use Categories, itl will have it's class name as a string)
 ### NETTY
 - async non-blocking event-driven network-centric framework, does HTTP and other protocols
     - uses the reactor pattern
