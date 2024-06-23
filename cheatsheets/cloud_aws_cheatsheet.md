@@ -10,10 +10,12 @@
 - AWS WAF - web access firewall (firewall, bot detection, other rules)
 
 ## LOAD BALANCERS
+- ELB - elastic load balancer - https://aws.amazon.com/elasticloadbalancing/features/
 - ALB - application load balancer
     - layer 7: HTTP, HTTPS, gRPC
+    - very flexible
 - NLB - network load balancer
     - layer 4: TCP, UDP, TLS
-- ELB - elastic load balancer
-    - https://aws.amazon.com/elasticloadbalancing/features/
+    - for high performance, using static IPs
 - Classic load blaancer
+    - if system built with EC-2 classic network

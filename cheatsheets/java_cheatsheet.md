@@ -374,23 +374,14 @@ ha.put("foo", a);
 
 
 ## CONCURRENCY
-- `synchronized` keyword 
-    - on instance method - ensures method can only by run by one thread per object instance
-        - e.g. `public synchronized void foo(int x) { // do stuff }`
-    - on static method - ensures only thread can execute the method at any time (since only one Class object)
-        - e.g. `public static synchronized void foo(int x) { // do stuff }`
-    - code block - basically mutex on some code, takes an argument for the object to lock on
-        - `synchronized (this) { //do stuff }`
-    - thread can obtain lock over and over
-    ```java
-    Object lock = new Object();
-    synchronized (lock) {
-        System.out.println("First time acquiring it");
-        synchronized (lock) {
-            System.out.println("Entering again"); 
-    } }
-    ```
-- create a thread - extend `Thread` class and define `run`
+- `CompletableFuture` - added in java8, a promise of a future result, done async(doesnt block main thread)
+    - can chain these futures together
+    - very similar to scala `Future`
+### THREADS
+- 2 main ways to create a thread, `Runnable` or subclass `Thread`
+- `Runnable` interface
+    - a class should implement this, so that it can be scheduled on a thread
+- subclass `Thread` class and define `run`
     ```java
     public class NewThread extends Thread {
     public void run() {
@@ -398,8 +389,26 @@ ha.put("foo", a);
         Thread.sleep(1000);
     } }
     ```
+### SYNCHRONIZE
+- `synchronized` keyword 
+- on instance method - ensures method can only by run by one thread per object instance
+    - e.g. `public synchronized void foo(int x) { // do stuff }`
+- on static method - ensures only thread can execute the method at any time (since only one Class object)
+    - e.g. `public static synchronized void foo(int x) { // do stuff }`
+- code block - basically mutex on some code, takes an argument for the object to lock on
+    - `synchronized (this) { //do stuff }`
+- thread can obtain lock over and over
+```java
+Object lock = new Object();
+synchronized (lock) {
+    System.out.println("First time acquiring it");
+    synchronized (lock) {
+        System.out.println("Entering again"); 
+} }
+```
 - thread pools `ExecutorService executor = Executors.newFixedThreadPool(10);`
     - run task in pool - `executor.submit(() -> { new Task(); });`
+
 
 ## STRINGS
 ```java
@@ -885,8 +894,13 @@ catch (AnotherException e) { .. }
 finally { .. }  // finally is always exected
 ```
 ### STREAMS
-- introduced in java8, improved in java9
-- also supports `sort`, `min`, `max`, `distinct`(remove dups), `allMatch`, `anyMatch`, `noneMatch`, `reduce`
+- introduced in java8, improved in java9, really simulating monads from the FP world
+- intermediate operations
+    - these are lazy, dont get immediately evaluated
+    - example ops: `map`, `filter`, `limit`, `skip`, `sort`, `distinct`(remove dups)
+- terminating operations
+    - causes full stream to evaluate
+    - `forEach`, `min`, `max`, `findFirst`, `allMatch`, `anyMatch`, `noneMatch`, `reduce`, `collect`, `toArray`
 - parllelism (concurrent) via `parralel` e.g. `Stream.of(1,2).parallel().map(i->i+1)`
 - has infinite streams via `generate` and `iterate`
 ```java
@@ -897,8 +911,8 @@ Stream.of("a","b").forEach(i -> System.out.println(i));
 
 IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
 
-var a = new ArrayList<Integer>(); a.add(1); a.add(2);
 // Collector interface also has toMap, toSet
+var a = new ArrayList<Integer>(); a.add(1); a.add(2);
 a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
 a.stream().collect(Collectors.toSet()) // returns a set
 

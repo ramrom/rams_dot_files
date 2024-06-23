@@ -203,9 +203,9 @@ public static void main(String[] args) {
 
 ## CACHE
 - EVICTION POLICY
+    - TTL - time-to-live, evict when it expires
     - LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
         - head of linkedlist is most recent, and tail is least recent
-    - TTL - time-to-live, evict when it expires
     - LFU - least frequently used, keep a count of hits for each cache entry
 - cache updating
     - write-through - write the data to the cache and main memory, wait for this to finish before program can continue
@@ -224,6 +224,7 @@ public static void main(String[] args) {
         - if 2nd cpu thread reads from a 1st cpu Exclusive cache, then 1st cpu must downgrade cache to Shared
         - if 2nd cpu thread reads a cache in Modify, Modified cache is written to main memory, and downgrade to Shared
     - if cache line is Shared, and thread writes to it, it is marked Modified, and other Shared lines are marked Invalid
+- [redis](datastore_cheatsheet.md) and memcached are popular in-memory servers used for caching
 #### DISTRIBUTED CACHE
 - usually TCP/UDP used to talk to cache server/shards (b/c it's fast)
 - usually use a client lib, it figures out which cache shard to hit
@@ -245,6 +246,14 @@ public static void main(String[] args) {
     - proxy server, all client libs call proxy, and proxy figures out which cache shard to hit
     - client lib hits a random cache shard, and cache shard reroutes to proper shard, redis clusters do this
 
+
+## LOAD BALANCING
+- strategies
+    - round robin
+    - rule-based: e.g. by node latency, node volume, node reliability
+- sofware vs hardware
+    - software: AWS ELB(NLB/ALB), HAProxy, nginx
+    - hardware: F5, cisco, barracuda, citrix
 
 ## SORTING
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
@@ -433,3 +442,4 @@ public static void main(String[] args) {
 - discord switch from golang->rust: https://discord.com/blog/why-discord-is-switching-from-go-to-rust
     - latency spikes due to GC pauses were a big issue
 - whatsapp using erlang: https://thechipletter.substack.com/p/ericsson-to-whatsapp-the-story-of
+- blog on why facebook migrated to mercurial from git: https://graphite.dev/blog/why-facebook-doesnt-use-git
