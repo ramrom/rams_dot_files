@@ -9,11 +9,7 @@ vim.opt.backup = false                 -- no backup files
 vim.opt.writebackup = false            -- only in case you don't want a backup file while editing
 vim.opt.swapfile = false               -- no swap files
 
--- per nvim-tree docs, it's highly reccomended to disable netrw
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
-vim.opt.mouse=null                     -- turn off all mouse support by default
+vim.opt.mouse=""                         -- turn off all mouse support by default
 
 --- MAIN
 vim.opt.autoread = true                         -- reload file's buffer if file was changed externally
@@ -51,6 +47,13 @@ vim.opt.expandtab = true        -- use spaces when tab is pressed
 -- AUTO COMPLETION
 vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
+-- NETRW
+-- layout of files and dir in netrw file explorer
+vim.g.netrw_liststyle = 3
+-- TODO: per nvim-tree docs, it's highly reccomended to disable netrw
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
 --- STATUS LINE
 vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
@@ -69,9 +72,6 @@ vim.g.editorconfig = false
 
 -- use ripgrep for default vi grep
 if vim.fn.executable('rg') == 1 then vim.opt.grepprg='rg --vimgrep --follow' end
-
--- layout of files and dir in netrw file explorer
-vim.g.netrw_liststyle = 3
 
 -- highlight lines yanked
 vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*', 
