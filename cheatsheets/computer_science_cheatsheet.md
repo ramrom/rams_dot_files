@@ -254,6 +254,10 @@ public static void main(String[] args) {
 - sofware vs hardware
     - software: AWS ELB(NLB/ALB), HAProxy, nginx
     - hardware: F5, cisco, barracuda, citrix
+- HA/redundancy
+    - active-active - multiple instances balancing traffic, heartbeats b/w them to stay informed of state
+    - active-passive - passives dont serve traffic, just wait for active to die and them they promote
+
 
 ## SORTING
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
@@ -348,17 +352,27 @@ public static void main(String[] args) {
 - AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training
     - AlphaGo Zero, had zero initial human game traing, was pure reinforcement learning, and surpassed AlphaGo Lee and Master
 
-## FUNCTIONAL CONCEPTS
+## FUNCTIONAL PROGRAMMING CONCEPTS
 - pure function 
     1. a function that returns same values for same input values
     2. no side-effects, no mutation of local static or global variables, no I/O
 - referential transparency - when replacing an expression with the concrete value yields the exact same behaviour for the program
     - not fullfilling this means the code/expression is referentially opaque
     - there is a fair amount of disagreement on the definition by experts
-- eventual consistency - when a cluster eventually will all reach the same state
-    - e.g. postgres replicas/followers are always behind to some degree, but will eventually get all the writes
-- tunable consistency - e.g. cassandra offers this
-- dead-letter queue - a store for when jobs cant be routed to their destinations
+- typeclasses - invented by haskell, essentially ad-hoc polymorphism
+### ALGEBRAIC DATA TYPES
+- in type theory, it classifies composite types (types made of other types)
+- main high level categories are sum and product types, and the names come from how we count the total values they can have
+- SUM TYPE - total values that can be represented are the sum of the component types
+    - e.g. tagged unions, enums
+    - take enum { x: boolean, y: char }, char(ASCII) has 256 values, boolean has 2, total # of diff values for enum is sum: 2 + 256
+- PRODUCT TYPE - total values that can be represented are the product of the component types
+    - e.g. struct, records, tuples
+    - take the tuple type: (char, bool, uint16) - char(ASCII) can have 256 values, bool 2, uint16 2^16
+        - so the total # of diff values tuple can have is the product of the three: 256 * 2 * 2^16
+### ALGEBRAIC DATA STRUCTURES
+- kinda describe software patterns, but have formal mathematical definitions
+- e.g. like Functor(has `map` which preserves outer functor type), Monoid, Monad, Applicative
 
 ## PHILOSOPHIES AND DESIGN
 - Moore's law - transistor count will double every 2 years
@@ -381,18 +395,13 @@ public static void main(String[] args) {
     - Raft protocol - simple and efficient, protocol for leader/follower replication and election
         - kafka and etcd use raft
     - Paxos - predates Raft, more complex
-### LAMBDA ARCHITECTURE
-- uses stream processing and batch processing in parralel to ingest data
-- data comming in is read-only and append only by timestamp
-- batch layer aims at being very accurate, but is slow
-    - Apache Hadoop was big original batch system, but others like Snowflake, Big Query, Redshift came along
-- stream layer is real-time and fast but not accurate, doesnt process all the data
-    - Apache Spark, Apache Storm, Kafka, Knesis
-- serving layer - stores outputs from stream and batch layer for querying
-- described by Nathan Marz in 2011, also introduced the CAP theorem
 - CAP - Consistency Availability Partition-tolerance
     - C in CAP is different from C in ACID
     - in a partitioned distrubted system if a partition fails, you can either have consistency or availability
+- eventual consistency - when a cluster eventually will all reach the same state
+    - e.g. postgres replicas/followers are always behind to some degree, but will eventually get all the writes
+- tunable consistency - e.g. cassandra offers this
+- dead-letter queue - a store for when jobs cant be routed to their destinations
 - Durability usually means does ur system preserve state/data when EVERYTHING fails (total power outage)
     - so often is your data backed up to persistent storage often
 - backup 3-2-1 rule: at leaset 3 copies of data, on at least 2 different media types, and one in different location
@@ -402,6 +411,15 @@ public static void main(String[] args) {
         - advantage: can use fewer consumers to process same producer volume
         - advantage: lower latency, emitting event to queue is fast
         - advantage: more robust retry, consumer can reenqueue message if it failed
+### LAMBDA ARCHITECTURE
+- uses stream processing and batch processing in parralel to ingest data
+- data comming in is read-only and append only by timestamp
+- batch layer aims at being very accurate, but is slow
+    - Apache Hadoop was big original batch system, but others like Snowflake, Big Query, Redshift came along
+- stream layer is real-time and fast but not accurate, doesnt process all the data
+    - Apache Spark, Apache Storm, Kafka, Knesis
+- serving layer - stores outputs from stream and batch layer for querying
+- described by Nathan Marz in 2011, also introduced the CAP theorem
 
 ## LOGIC
 - "switch" statements are often compiled to lookup tables or hash lists in most languages

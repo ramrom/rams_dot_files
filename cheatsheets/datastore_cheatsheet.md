@@ -38,10 +38,14 @@
 - https://use-the-index-luke.com/
 
 ## COLUMN DB
+### BIGTABLE
+- invented by google in 2004
+- it inspired HBASE and Cassandra
 ### HBASE 
 - unlike cassandra has leader/master based replication
 - also wide-column like cassandra
 ### CASSANDRA
+- first version created by facebook in 2008, released as open source
 - doesnt have a master/leader, uses masterless async replication peer-to-peer communication
 - data is replicated between the peers
 - uses gossip protocol to send new state data to neighbors
