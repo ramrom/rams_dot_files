@@ -40,6 +40,9 @@ foo site:www.site.com   - search a specific site
 - can edit keyboard shortcuts for extensions, goto chrome:://extensions -> keyboard shortcuts(left bar)
 - OSX bookmarks are stored in `~/Library/Application Support/Google/Chrome/Default/Bookmarks` file, it's json
     - normal bookmakr export is in html format
+- manifest - file format used to describe extensions(permissions, content strips, background processes, etc)
+    - v3 to release in 2024 - focusing on security/performance
+    - v3 will limit effectiveness of ad-blockers
 
 ## CHROMEBOOK
 - mounting a samba share, chromebook needs samba ver 2 or higher

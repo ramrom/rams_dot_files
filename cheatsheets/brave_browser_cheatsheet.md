@@ -3,6 +3,8 @@
 - `brave://extensions/shortcuts` -> set shortcuts
 - darkreader extension causes issues with some websites
     - dec'23 - discover.com, couldnt see modals, couldnt hit "ok" button on popup
+- 2024 - shield adblocker is written in rust and seperate from extension system
+    - thus v3 wont impare it's ad-blocking ability
 
 ## KEYBOARD SHORTCUTS
 - `ctrl+shift+a`-> bring up tab search menu

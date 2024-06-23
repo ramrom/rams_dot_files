@@ -3,15 +3,33 @@
 - decent blog on postgres jsonb vs mongodb
     - https://medium.com/@yurexus/can-postgresql-with-its-jsonb-column-type-replace-mongodb-30dc7feffaf3
 
+## HISTORY
+- ver7.1 (release 2010)
+    - WAL introduced
+- ver8.0 (release 2005) - point-in-time recovery
+- ver8.3 (release 2008) - pg_standby
+- ver9.0 (release 2010) - hot standby, streaming replication
+- ver9.1 (release 2011) - sync replication, pg_basebackup
+- ver9.2 (release 2012) - cascading replication
+- ver9.4 (release 2014) - replication slots, logical decoding(building blocks for logical replication)
+- ver10 (release 2022?) - full logical replication
+
 ## TYPES
 - `json` - same as varchar or string, but enforces it's a valid json string
 - `jsonb` - binary format of json, takes more time to store, but you can build indexes on it
     - postgres team was looking at mongodb `bson` but went with their own instead
 
 ## INDEXES
+### CORE TYPES
 - BTREE
+- HASH
 - GIN - generalized inverted index
-- GIST
+- GIST - generalized search trees
+- SP-GIST - space partitioned GIST
+- BRIN - block ranged index
+### FEATURE
+- expression - index based on result of expression/function, and not just value of a column
+- partial - only index some rows, usually specified by a WHERE clause
 
 ## PSQL
 - `\?` output help menu
@@ -24,6 +42,8 @@
 - `\i somefile` execute commands from a file
 
 ## CONCEPTS
+- postgres schema - really a namespace in a database, not to be confused with general software concept of structure of data and relations
+- table inheritence - child tables can inhert properties from parent table
 - table partitioning - creating a logical table backed by many physical tables
     - in postgres 11 foreign tables can be attached to table partitions
 - foreign table - a logical table that queries data from an external source
@@ -52,28 +72,52 @@
 - table partitioning(sharding) - each partition contains a subset of rows
     - horizontal method: create table partitions on other servers and use FDWs to represent the logical table
     - vertical method: create a partition on different tablespaces (on different disks)
-- read replicas - for just read queries, a replica can be made hot standby
+### SINGLE VS MULTI
+- single master - replicas just for backup, replica can be hot(do read queries)
 - multi-master (active-active) setup
     - has eventual data consistency
     - bi-direction replication, changes made to one master are replicated to other masters
 
 ## REPLICATION
+- good doc: https://en.wikibooks.org/wiki/PostgreSQL/Replication
 - two major types: logical and physical
+- synchronicity
+    - syncronous replication - master waits till atleast one replica wrote a transaction to it's log
+        - fine-grain tunable, can specify per-db, per-user, per-session
+    - async - data send without waiting for confirmation replicas got each message
+- trigger replication, SUPER old, table triggers used to send data to replicas, this predates WAL
+### WAL
+- WAL = Write-ahead logs, a type of journaling, describing low level binary data changes
+- if server fails, WAL logs always exist to retreive lost data, it provides the durability in ACID for postgres
+- WAL file fast to write (sequential data), and b/c we dont have to write the data (data pages are slow to write)
+- log shipping - old school way to send WALs to replicas
+    - log shipping is most often done with physical replication, but can be logical too
+    - when a WAL log file is full (~16MB), master not writing to it, then whole file is sent to replica
+- continuous archiving - means old WAL files can be archived when not needed
 ### PHYSICAL REPLICATION
+- aka binary replication
 - low level storage data (exact block address, byte-by-byte) is sync'd to replicas
+- offers HA
+    - warm standby - replica available for hot swapping when master dies, can't do read queries
+    - hot standby - warm + can do read queries
+    - cold standy - not official term, often refers to replica that uses log shipping, WALs not processed until standby starts up
 - disadvantage: must replicate all data in the db
 - basic process
-    - SQL statements are run on a master
-    - this generates WAL(write-ahead-log) records
+    - SQL statements are run on a master node
+    - transaction is commited
+    - this generates WAL
+        - the [WAL](https://www.postgresql.org/docs/current/wal-intro.html) is written first before the data it describes is written
+    - WALs sent to replicas
     - read replicas read the WAL records and replay them, so they have a copy of master
-    - log shipping is most often done with streaming, but can be logical too
-- warm standby means a replica that is only available for hot swapping when master dies
-- hot standby means a replica can be queried with reads
 ### LOGICAL REPLICATION
-- high level SQL statements are sync'd to replicas
+- introduced in version 10
+- essentially high level SQL statements are sync'd to replicas
 - advantage: can control which tables and data get replicated
 - uses a pub/sub model to replicate
-    - WAL transactions are decoded and then published
+    - WAL transactions are decoded to high level sql statements and then published
+    - advantage: flexibility and changing where the data goes, can add subscriberes in various location dynamically and fast
+- disadvantage: cant copy sequences, large objects, materialized views, partition root tables, and foreign tables
+- can only do DMLs, not DDLs (subscribers need to manually do DDLs)
 
 ## QUERY TIPS
 - terminate db connections

@@ -1,5 +1,4 @@
 # DATASTORES
-- for postgres see [postgres](postgres_cheatsheet.md)
 
 ## CONCEPTS
 - normalization - reducing the duplication of data to different levels
@@ -7,11 +6,20 @@
 
 
 ## RELATIONAL
+- 2024 - oracle generally still considered more scalable/performant vs postgres, particularly with write-heavy complex queries
+- postgres: see [postgres](postgres_cheatsheet.md)
 - cardinality - the amount of unique values in a column relative to the table size
     - boolean column only has 2 unique values, super low cardinality
 - tablespace vs schema - https://stackoverflow.com/questions/35120219/a-database-schema-vs-a-database-tablespace
 - transactional DDL - can rollback DDLs like transactional DMLs
     - rolloback whole table creations even
+### SQLLITE
+- an embedded database written in C, it's not a standalone process/server
+- `.quit` - exit the sql client
+- `.tables` - list tables
+- `.schema footable` - get a table's description
+- `.mode line` - display each records column in seperate line
+
 ### SQL
 - joins - query that joins two tables
     - inner join - (left or right), will only return records with hits
@@ -77,13 +85,6 @@
 
 ## GRAPH
 - Neo4j - most established and well known
-
-## SQLLITE
-- an embedded database written in C, it's not a standalone process/server
-- `.quit` - exit the sql client
-- `.tables` - list tables
-- `.schema footable` - get a table's description
-- `.mode line` - display each records column in seperate line
 
 ## CDN
 - content delivery network
