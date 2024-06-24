@@ -42,7 +42,7 @@ foo site:www.site.com   - search a specific site
     - normal bookmakr export is in html format
 - manifest - file format used to describe extensions(permissions, content strips, background processes, etc)
     - v3 to release in 2024 - focusing on security/performance
-    - v3 will limit effectiveness of ad-blockers
+    - v3 will limit what extensions can do, effectiveness of ad-blockers and tracker-blockers
 
 ## CHROMEBOOK
 - mounting a samba share, chromebook needs samba ver 2 or higher

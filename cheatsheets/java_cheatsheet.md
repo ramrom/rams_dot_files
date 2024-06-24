@@ -390,7 +390,7 @@ ha.put("foo", a);
     } }
     ```
 ### SYNCHRONIZE
-- `synchronized` keyword 
+- `synchronized` keyword, essentially a mutex on a piece of code
 - on instance method - ensures method can only by run by one thread per object instance
     - e.g. `public synchronized void foo(int x) { // do stuff }`
 - on static method - ensures only thread can execute the method at any time (since only one Class object)

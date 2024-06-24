@@ -66,6 +66,11 @@
     - covariant: given B is subtype of A, then `F[_]]` is covariant if `F[B]` is subtype of `F[A]`, denoted by `F[+T]`
     - contravariant: inverse of covariant, given B subtype of A, `F[A]` is subtype of `F[B]`, denoted by `F[-T]`
     - invariant: no gaurantee of subtyping relationship between `F[A]` and `F[B]`
+### ADT
+- sum types - usually implemented with inheritence and case classes
+    - `Either[A,B]`(2.13) is sealed abstract class, 2 subtypes, both case classes `Left` and `Right`
+    - similar for `Option[A]`
+- product types - usually a case class, but also regular class
 ### CLASSES
 - multiple inheritence, diamond problem -> scala serializes the tree
     - order matters, so last trait that implements same method will get defined

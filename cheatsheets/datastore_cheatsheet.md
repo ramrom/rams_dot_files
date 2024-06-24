@@ -61,9 +61,14 @@
 
 ## KEY-VALUE
 - memcached
-- redis
-    - apr'24 - redis went partially closed source, cant host on cloud for free
-    - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
+### REDIS
+- apr'24 - redis went partially closed source, cant host on cloud for free
+- apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
+- COMMANDS
+    - FLUSHALL
+    - KEYS *
+    - MONITOR
+    - HGETALL <key name>
 
 ## TIME SERIES
 - graphite

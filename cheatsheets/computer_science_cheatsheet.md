@@ -207,12 +207,17 @@ public static void main(String[] args) {
     - LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
         - head of linkedlist is most recent, and tail is least recent
     - LFU - least frequently used, keep a count of hits for each cache entry
-- cache updating
-    - write-through - write the data to the cache and main memory, wait for this to finish before program can continue
+    - sliding-window
+- INVALIDATION STRATEGIES
+    - write-through - write the data to the cache and backing storage, wait for this to finish before program can continue
         - it's slow but simple, and no cache coherency issues, good when use case is few write operations
-    - write-back(write-deferred) - update cache, dont immediately write to main memory, mark it dirty
-        - when cache line set to be replaced/expire, write the data to main memory
-    - write-around - write direclty to main memory and not touch the cache (used when data wont be used again)
+    - write-back - update cache only, write to backing store done later
+        - when cache line set to be replaced/expire, write the data to backing storage, often called lazy write
+            - or periodically write-backed entries are written to backing store
+        - this is much more complex to implement than write-through
+    - write-dirty - update backing storage, mark cache dirty
+    - write-around - if cache miss, write direclty to backing storage and skip cache
+        - this is good when we dont expect subsequent reads
 - MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
     - MESI is acronym for 4 states: **M**odify **E**xclusive **S**hared **I**nvalid
         - Modify - data in cache line is modified and guaranteed to only be in this cache, main memory not updated
@@ -224,6 +229,8 @@ public static void main(String[] args) {
         - if 2nd cpu thread reads from a 1st cpu Exclusive cache, then 1st cpu must downgrade cache to Shared
         - if 2nd cpu thread reads a cache in Modify, Modified cache is written to main memory, and downgrade to Shared
     - if cache line is Shared, and thread writes to it, it is marked Modified, and other Shared lines are marked Invalid
+- Thrashing - when you never get a cache hit, constantly going to backing storage
+    - in this case cache is counterproductive and makes system slower
 - [redis](datastore_cheatsheet.md) and memcached are popular in-memory servers used for caching
 #### DISTRIBUTED CACHE
 - usually TCP/UDP used to talk to cache server/shards (b/c it's fast)
@@ -292,7 +299,7 @@ public static void main(String[] args) {
 
 
 ## SOFTWARE PATTERNS
-- iterative vs recursive
+- iterative v and tracker-blockerss recursive
     - iterative is faster, no extra overhead for a function call
     - iterative uses less space, recursion adds stack frames for each function call
     - recursion will generally be fewer lines of code
@@ -301,6 +308,8 @@ public static void main(String[] args) {
 - retry logic 
     - exponential back off - if we keep failing wait longer than the last time before trying
     - jitter - add random offset to retry so many entities retrying arent sync'd
+- visitor pattern - seperate object from algorithm
+    - a seperate algo/code handles the diff types of objects, versus each object type knowing how to handle itself
 - dependency injection - A class accepts the objects it requires from an injector instead of creating the objects directly
 - RAII - resource acquisition is initialization - resources are tied to their objects and their lifetimes, released with the object death
 - singleton - single global instance of class, class can have only one instance and has global scope
