@@ -1,4 +1,4 @@
-# POSTGRES
+# POSTGRESQL
 - also see [datastore](datastore_cheatsheet.md)
 - decent blog on postgres jsonb vs mongodb
     - https://medium.com/@yurexus/can-postgresql-with-its-jsonb-column-type-replace-mongodb-30dc7feffaf3

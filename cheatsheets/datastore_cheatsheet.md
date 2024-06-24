@@ -7,12 +7,13 @@
 
 ## RELATIONAL
 - 2024 - oracle generally still considered more scalable/performant vs postgres, particularly with write-heavy complex queries
-- postgres: see [postgres](postgres_cheatsheet.md)
 - cardinality - the amount of unique values in a column relative to the table size
     - boolean column only has 2 unique values, super low cardinality
 - tablespace vs schema - https://stackoverflow.com/questions/35120219/a-database-schema-vs-a-database-tablespace
 - transactional DDL - can rollback DDLs like transactional DMLs
     - rolloback whole table creations even
+### POSTGRESQL
+- see [postgresql](postgresql_cheatsheet.md)
 ### SQLLITE
 - an embedded database written in C, it's not a standalone process/server
 - `.quit` - exit the sql client

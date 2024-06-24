@@ -62,6 +62,7 @@
 - sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
 - vm_stat - show some raw memory usage
 - nettop - like top but for tcp/udp sockets only and their bandwidth usage!
+- 2024 - cool keyboard customizer for osx - https://karabiner-elements.pqrs.org/
 - skhd
     - `brew services` to see if it's running
     - `skhd -r` to reload config file with shortcuts
