@@ -197,7 +197,7 @@ function ff() {
     # fzf --preview "alias foo='echo hi'; foo"  ---- FAILS, WHY????
 # FIXME: aliases and funcs are double printing in bash
 # fuzzy search aliases and functions, with previews for some sources
-function fsn() {
+function fn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
     aliasname=1 funcname=1 print_alias_funcs_scripts | fzf --height 100% --preview "$fzf_pafn_preview_sources; batwhich {}" \
         --header='ctrl-y->pbcopy' \

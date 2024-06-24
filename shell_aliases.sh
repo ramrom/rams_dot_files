@@ -152,7 +152,7 @@ alias fa='ff -t 1'
 alias fh='ff ~'
 alias fhd='ff -d ~'
 alias ffd='ff -d'
-alias fs="print_alias_funcs_scripts | fzf"
+alias fnn="print_alias_funcs_scripts | fzf --height 100%"
 
 # GO
 alias gosr='cd ~/go/src'
