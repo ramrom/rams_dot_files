@@ -4,16 +4,17 @@
 # FF - Fzf on files in a dir with file prev
 # actions: open, edit, cd to location, or add to clipboard
 
-usage() { echo 'Usage: ff [ -h(help) ] [ -i(ignore-hidden-files) ] [ -j FZF_HEIGHT ] [ -d(directories only) ]';
-          echo '          [ -w(FUNC_WRAP) ] [ -t DEPTH ] BASE_DIR( `~` = home, no arg means cur dir)'; }
+usage() { echo 'Usage: ff [ -h(help) ] [ -i(ignore-hidden-files) ] [ -j FZF_HEIGHT ]'
+          echo '          [ -t FILE_TYPE(d = dir-only, f = file-only, not specified means all) ]';
+          echo '          [ -w(FUNC_WRAP) ] [ -d DEPTH ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
-while getopts 'hidt:wj:' x; do
+while getopts 'hid:t:wj:' x; do
     case $x in
         h) usage && exit 1 ;;
         i) NO_HIDDEN_FILES=1 ;;
-        d) DIRS_ONLY=1 ;;
+        t) FILE_TYPE="$OPTARG" ;;
         j) FZF_HEIGHT="$OPTARG" ;;
-        t) DEPTH="$OPTARG" ;;
+        d) DEPTH="$OPTARG" ;;
         w) FUNC_WRAP=1 ;;
         *) echo && usage && exit 1 ;;
     esac
@@ -31,7 +32,9 @@ FZF_DEFAULT_COMMAND="$FDNAME --color=always --exclude .git"
 HIDDEN_OPT="--hidden"; [ -n "$NO_HIDDEN_FILES" ] && HIDDEN_OPT=""
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $HIDDEN_OPT"
 
-FILE_OPT=""; [ -n "$DIRS_ONLY" ] && FILE_OPT="--type d"
+FILE_OPT=""; 
+[ "$FILE_TYPE" = "d" ] && FILE_OPT="--type d"
+[ "$FILE_TYPE" = "f" ] && FILE_OPT="--type f"
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $FILE_OPT"
 
 DEPTH_OPT=""; [ -n "$DEPTH" ] && DEPTH_OPT="-d $DEPTH"

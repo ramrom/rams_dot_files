@@ -1090,7 +1090,8 @@ LoadJDTLSServer = function()
     })
 end
 
------------ GROOVY LSP -------------------------------------
+---------------- GROOVY LSP -------------------------------------
+-- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#groovyls
 LoadGroovyLSP = function()
     local home_dir = vim.env.HOME
     require'lspconfig'.groovyls.setup{
@@ -1100,7 +1101,7 @@ end
 
 
 ------------- KOTLIN LSP -------------------------------------
--- https://github.com/fwcd/kotlin-language-server
+-- lang server - https://github.com/fwcd/kotlin-language-server
 
 -- NOTE: mar2024 - brew install needed JVM 21 installed for the server to start
 LoadKotlinLSP = function()
@@ -1111,9 +1112,9 @@ LoadKotlinLSP = function()
     }
 end
 
--- ruby-lsp - https://shopify.github.io/ruby-lsp/
--- TODO: also check out rails LSP: https://github.com/Shopify/ruby-lsp-rails
 ----------------- RUBY LSP ---------------------------------------
+-- lang server - https://shopify.github.io/ruby-lsp/
+-- TODO: also check out rails LSP: https://github.com/Shopify/ruby-lsp-rails
 LoadRubyLSP = function()
     require'lspconfig'.ruby_lsp.setup{ 
         -- below are default opts
