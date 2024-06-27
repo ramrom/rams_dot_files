@@ -147,7 +147,6 @@ alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 
 # FZF
-alias f="fzf"
 alias fa='ff -t 1'
 alias fh='ff ~'
 alias fhd='ff -d ~'

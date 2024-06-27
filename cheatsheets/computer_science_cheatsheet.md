@@ -382,6 +382,9 @@ public static void main(String[] args) {
 ### ALGEBRAIC DATA STRUCTURES
 - kinda describe software patterns, but have formal mathematical definitions
 - e.g. like Functor(has `map` which preserves outer functor type), Monoid, Monad, Applicative
+- Functor -> unit(wraps a type) + map(apply func over inner type A -> B)
+- Monad -> unit(wraps a type) + flatMap(apply func over inner type A -> F[B])
+    - a Monad can be thought of as a subset of Functor (so not all Functors are Monads)
 
 ## PHILOSOPHIES AND DESIGN
 - Moore's law - transistor count will double every 2 years
@@ -420,6 +423,7 @@ public static void main(String[] args) {
         - advantage: can use fewer consumers to process same producer volume
         - advantage: lower latency, emitting event to queue is fast
         - advantage: more robust retry, consumer can reenqueue message if it failed
+- [impedance mismatch](datastore_cheatsheet.md)
 ### LAMBDA ARCHITECTURE
 - uses stream processing and batch processing in parralel to ingest data
 - data comming in is read-only and append only by timestamp

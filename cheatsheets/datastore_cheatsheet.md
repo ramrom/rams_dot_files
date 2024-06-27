@@ -3,6 +3,8 @@
 ## CONCEPTS
 - normalization - reducing the duplication of data to different levels
 - NoSQL: term can refer to many different paradigms bug are generally: column, document, key-value, and graph
+- impedance mismatch - concept of friction/incompatibility of ORMs, OO <-> relational data mapping issues
+- N+1 query problem - app code that translates to 1 query from a table and N extra seperate queries from a related table
 
 
 ## RELATIONAL

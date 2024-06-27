@@ -266,10 +266,11 @@
 
 ## API ARCHITECTURES
 - SOAP - Simple Object Access Protocol
-     - web services using XML based messaging protocol, usually over HTTP
+    - developed at microsoft in 1998/99 
+    - web services using XML based messaging protocol, supported SMTP and HTTP, but HTTP dominated
 - REST - REpresentational State Transfer
-     - roy fielding created it in his dissertation to replace SOAP as model for WWW and used HTTP as reference implementation
-     - JSON API standard - https://jsonapi.org/
+    - roy fielding in 200 created it in his dissertation to replace SOAP as model for WWW and used HTTP as reference implementation
+    - JSON API standard - https://jsonapi.org/
 - RPC - Remote Procedure Call
 - GraphQL - invented by facebook ~2016
     - 2024 - good primeagen vid on weaknesses - https://www.youtube.com/watch?v=XBUsRVepF-8&t=953s&ab_channel=ThePrimeTime
@@ -388,6 +389,11 @@
     - Logstache(aggregation+processing) -> Elasticahe(db for indexing/storing) -> Kibana(front-end for visualization/human-analysis)
 - splunk is commercial solution that does all 3
     - bills/pricing revenue mainly from indexing volume
+- StatsD - application monitoring system
+    - Invented by Etcy originally, datadog is big on statsD
+    - StatD messages are text based and simple, clients are super thin (no threads, no buffers)
+    - many language-specific client libs implement the protocol for emitting UDP events to a StatsD Daemon
+    - StatsD daemon can store data to many backends/dbs, e.g. influxDB or graphite
 
 ## LANGUAGES/FRAMEWORKS
 - WASM - web assembly, supported my most browsers, it's a compile target supported by rust, python, kotlin, and many more
@@ -624,7 +630,7 @@
     - `mount` will show the extensions/flags set on the samba share
     - supports hardlinks with unix extensions and/or servinfo
     - osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
-### NOTE!!!
+#### SAMBA NOTE
 samba share ver 3, nounix set, serverino set, serverino seems to sorta support hard links
 hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
 Also when i rsync they are diff inode # files on destination

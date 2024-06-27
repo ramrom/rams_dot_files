@@ -30,6 +30,8 @@
 - chunked vs multi-part: chunked is transfer encoding, multi-part is content type
     - each chunk is preceded by it's size, transmission ends with zero sized chunk, not supported in HTTP2
     - multi-part type can use chunked encoding
+- GET requests body - for http 1.1, can techincally have a body but RFC 7231 doesnt define semantics, so a server doesnt have to use it
+    - many servers reject or drop the body of a GET request
 
 ## SSL/TLS
 - certificate data is formatted according to X.509 standard: https://en.wikipedia.org/wiki/X.509
