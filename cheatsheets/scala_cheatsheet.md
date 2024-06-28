@@ -66,6 +66,26 @@
     - covariant: given B is subtype of A, then `F[_]]` is covariant if `F[B]` is subtype of `F[A]`, denoted by `F[+T]`
     - contravariant: inverse of covariant, given B subtype of A, `F[A]` is subtype of `F[B]`, denoted by `F[-T]`
     - invariant: no gaurantee of subtyping relationship between `F[A]` and `F[B]`
+### HIGHER KINDED TYPES
+- A higher-kinded type is a type that abstracts over some type that, in turn, abstracts over another type
+- introduced in scala 2.5, example usage is in scala std lib
+- examples:
+    ```scala
+    // a "interface", could be used for many "container" types like List, Array, Option
+    // good fast read; https://www.baeldung.com/scala/higher-kinded-types
+    trait Collection[T[_]] {
+      def wrap[A](a: A): T[A]
+      def first[B](b: T[B]): B
+    }
+
+    trait Collection[T[F]] { ... } // F here is same as _ , _ more common syntax b/c it's more clear
+
+    // monad could be defined like
+    trait Monad[M[_]] {
+      def unit[A](value: A): M[A]
+      def flatMap[A,B](instance: M[A])(func: A => M[B]): M[B]
+    }
+    ```
 ### ADT
 - sum types - usually implemented with inheritence and case classes
     - `Either[A,B]`(2.13) is sealed abstract class, 2 subtypes, both case classes `Left` and `Right`

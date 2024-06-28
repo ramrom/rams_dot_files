@@ -525,9 +525,11 @@ let one = || 1;         // closure takes zero args, single line expressions dont
     - trait has one method `drop` that you can't call explicitly on a `Drop` type
         - otherwise compiler cant gaurantee memory safety, double drops or dangling pointers
     - for manualy drop you can call `std::mem::drop`, e.g. `drop(somevar)`
-- Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 - associated function - belongs to the type itself, doesn't need `self`, the `new` method convention is a common use case of this
 - variance - https://doc.rust-lang.org/nomicon/subtyping.html
+### GENERICS
+- rust doesnt have higher kinded types, e.g. something like `Option<V<T>>` with `V` and `T` as generic params
+- Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
 ### TRAITS
 - follows orphan rule
     - cannot implement _external_ traits on _external_ types
