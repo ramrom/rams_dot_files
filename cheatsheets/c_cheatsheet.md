@@ -136,6 +136,13 @@ void foo() {
 ### ARRAYS 
 - `int *myarr` is essentially equivalent to `int myarr[]`
 - under the hood passing around `a[]` is really just passing `*a`
+- arrays have a known size at compile time, e.g. `int arr[3]` is diff type than `int arr[4]`
+    - thus an array type doesnt store metadata about it's size, b/c the size is known at compile time
+    - `sizeof()` is not a real function call in runtime, it is replaced at compile time with the known size
+- array passing to a function e.g. `void foo(int arr[1])`, (or `int *arr`), your really copying a pointer
+    - thus funtion is still modifying the same underlying array data
+    - to force pass by value semantics, declare wrapper struct for array, and pass that in func
+        - e.g. `struct ArrWrap { int arr[1]; }; void foo(struct ArrWrap a) { ... }`
 - array syntax does have some type checking
     ```c
     struct S;

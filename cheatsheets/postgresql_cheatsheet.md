@@ -90,9 +90,11 @@
 - WAL = Write-ahead logs, a type of journaling, describing low level binary data changes
 - if server fails, WAL logs always exist to retreive lost data, it provides the durability in ACID for postgres
 - WAL file fast to write (sequential data), and b/c we dont have to write the data (data pages are slow to write)
-- log shipping - old school way to send WALs to replicas
-    - log shipping is most often done with physical replication, but can be logical too
-    - when a WAL log file is full (~16MB), master not writing to it, then whole file is sent to replica
+- shipping
+    - log shipping - old school way to send WALs to replicas
+        - log shipping is most often done with physical replication, but can be logical too
+        - when a WAL log file is full (~16MB), master not writing to it, then whole file is sent to replica
+    - streaming is sending each WAL log on a TCP connection
 - continuous archiving - means old WAL files can be archived when not needed
 ### PHYSICAL REPLICATION
 - aka binary replication

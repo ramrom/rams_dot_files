@@ -241,11 +241,12 @@ match triple {
     - a owner can lend out multiple immutable references
     - can _not_ lend out a mutable reference and an immutable reference
 - dot operator is smart to convert to/from reference/pointer types: https://doc.rust-lang.org/nomicon/dot-operator.html
+    - this makes using smart pointers like `Box<T>` easy to use as methods on `T` can basically be called on `Box<T>` 
 - Dereference coersion - convert a type that implements `DeRef` into a reference when passed in as func param
     - e.g. `String` implements `DeRef` and `deref` method produces `&str` so a `&String` can be passed into a arg of type `&str`
     - multiple nested `DeRef` types be called, e.g. `Box<String>>` passed into arg taking `&str`
         - `Box<String>` derefs to `String`, `String` derefs to string slice `&String`, `&String` derefs to `&str`
-    - `let m = Rc::new(vec![1,2])` -> `m.len()` is same as `(*m).len()`, `m` gets deref'd b/c `len` derefs it's receiver
+    - `let m = Rc::new(vec![1,2])` -> `m.len()` is same as `(*m).len()`, `m` gets deref'd b/c dot(`.`) operator derefs it's receiver
 - why aren't multiple mutable references allowed in a single threaded context
     - https://manishearth.github.io/blog/2015/05/17/the-problem-with-shared-mutability/
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
@@ -512,13 +513,16 @@ let one = || 1;         // closure takes zero args, single line expressions dont
      - for enums compiler uses size of largest variant
      - it's automatically implemented for types whos size is known at compile time, very few types are not `Sized`
 - `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)
-    - cannot be implemented on `Drop` types
     - generaly a `Copy` type can be duplicated by simply copying it's bits
-    - `Clone` types more complex and general, a `Copy` type can probably easily also implement `Clone`
     - have a known size, and allocated on the stack, happens implicitly e.g. `x = y`
-    - they copy on new variable assignments vs tx of ownership `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
-    - e.g. `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
+    - if type has `Copy` follows "copy" semantics, as opposed to "move" semantics
+        - value is copied and not moved when assigned to new variable or passed into a function
+        - e.g. `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
+    - cannot be implemented on `Drop` types, `Drop` types are basically owned types
+    - primitive types are `Copy`: `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
         - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
+        - tuples `(T1,T2,...,Tn)` if all fields of a tuple are `Copy` tuple is also `Copy`
+    - `Clone` types more complex and general, a `Copy` type can probably easily also implement `Clone`
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
     - deallocating at end of scope is similar to RAII(resource aquisition is initialization), used in c++
     - compiler will essentially insert the `drop` on a `Drop` type at the end of it's scope

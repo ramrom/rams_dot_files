@@ -257,7 +257,9 @@ public static void main(String[] args) {
 ## LOAD BALANCING
 - strategies
     - round robin
+        - DNS based strategy: a DNS entry can have many A records, and will round-robin each of those A records
     - rule-based: e.g. by node latency, node volume, node reliability
+        - can't use DNS method for this, need a server
 - sofware vs hardware
     - software: AWS ELB(NLB/ALB), HAProxy, nginx
     - hardware: F5, cisco, barracuda, citrix
@@ -283,6 +285,11 @@ public static void main(String[] args) {
 - radix sort (often conflated with bucket sort)
 
 ## PROGRAMMING LANGUAGES
+- FORTRAN - old and math focused
+- COBOL - invented in 1959, dominated in 1970
+    - designed for large amounts of data, read like plain english so non-experts could learn (versus assembly)
+    - tons of core systems: finance/banking, insurance(healthcare particularly), etc. use it today
+        - 2024: 95% ATM machines, 43% banking systems, 80% in-person transactions, 60% healthcare records/dbs use COBOL
 - ML (meta language) - functional
 - OCaml - dialect of ML
 - VHDL

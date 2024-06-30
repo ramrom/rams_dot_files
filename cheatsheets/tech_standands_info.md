@@ -619,6 +619,13 @@
 - AAAA record - needed for IPv6
 - MX record - name for email server for a domain
 - TXT record - contains textual data
+### IP
+- IPv4 - 32bits, 4bil addresses
+    - private address ranges: 10.x.x.x(class A), 172.16.x.x - 172.31.x.x(class B), 192.168.x.x(class C)
+- IPv8 - 128bits
+    - private address range added:
+        - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
+        - fec0::/10 address block = deprecated (RFC 3879)
 
 ### NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP

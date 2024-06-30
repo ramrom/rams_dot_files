@@ -292,6 +292,8 @@ function moduleExists(name)
     end
 end
 
+
+----------------------------------- RUN IN TMUX PANE -----------------------------------------------------
 ActiveTmuxRunnerPane=nil
 
 SelectTmuxRunnerPane = function()
@@ -1093,9 +1095,8 @@ end
 ---------------- GROOVY LSP -------------------------------------
 -- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#groovyls
 LoadGroovyLSP = function()
-    local home_dir = vim.env.HOME
     require'lspconfig'.groovyls.setup{
-        cmd = { "java", "-jar", home_dir .. "/bin/groovy-language-server-all.jar" },
+        cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
     }
 end
 

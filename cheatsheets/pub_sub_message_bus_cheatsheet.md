@@ -6,7 +6,11 @@
 - each partition is replicated on many brokers
 - apache zookeeper often used to maintain kafka cluster
     - tracks which broker is responsible for which partitions and topics
-- messages
+- kafka has _logs_ not _messages_
+    - logs are persistent, they stick around until the TTL expires
+    - in message queues, messages are deleted immediately after consumers get them
+    - b/c it's persistent, consumer requests an offset # of the log, and can rerequest or get older messages
+- logs/messages
     - has a key, and hash of key decides target partition
     - if key is empty, partion field is used
     - if key and partition empty, then message is round robin sent to all partitions
@@ -18,7 +22,10 @@
     - ack=2 -> wait for acks from all in-sync replicas of a partition
         - leader broker waits for all in-sync replicas to receive b4 sending ack
 - consuming is pull based, so consumer can choose what pace they consume
-    - being pull based, there is some inefficienty in that it polls
+    - advantage: is backpressure management, as consumer wont get overwhelmed as it consumes at a rate it can handle
+    - advantage: efficient batching(mult msgs in one pull), consumer knows better the batch size and timing
+    - polling is has it's issues: higher latency as u dont get msg until u ask, consumer has to implement a polling loop
+        - kafka supports "long poll", consumer can specify this in request with timer, poll wont return till msg return or timer expires
 - consumer groups
     - each consumer group is a seperate subscriber, consumers are identified by group ID
     - message are uniquely read by one consumer in a consumer group
@@ -32,6 +39,18 @@
     - if a topic lives on one partition, message order is guaranteed at topic level
         - disadvantage here is that this caps the throughput/scalability
     - if on many partitions, messages are distibuted and topic-level order not guaranteed obviously, but partition level is
+
+## APACHE FLUME
+- messsages are pushed to consumer
+
+## AMAZON SNS/SQS
+### SQS
+- standard queue: messages can out of order, at-least one delivery, but have higher throughput
+- FIFO queue: guaruntees order of messages, has unique message IDs to handle duplication
+- latency in milliseconds, max msg size 256kB
+- consumers pull from queue
+### SNS
+- messages pushed to conusmer, can configure to push a SQS that consumer owns/pulls from
 
 ## RABBITMQ
 - pushes messages to consumer
