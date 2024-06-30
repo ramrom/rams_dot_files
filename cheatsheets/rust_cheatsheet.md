@@ -234,7 +234,6 @@ match triple {
 
 
 ## REFERENCES/OWNERSHIP
-- structs and values in generally are placed on stack by default, general way to heap alloc is pointer wrappers like `Box` or `Rc`
 - references are a "pointer" to data, and in rust they also mean borrowing the data from an owner
 - 2 main rules of references
     - a owner can lend out one mutable reference
@@ -301,26 +300,148 @@ match triple {
 - static variables that are mutable - unsafe in a multi-threaded scenario
 
 
-## LIBS
-- `std` relies on OS primitives
-- `core` relies on nothing
-- `alloc` requires on a memory allocator
-    - most collections in this crate, except hashmap which relies on random data, so its in `std`
+## TYPE SYSTEM
+### STRUCT
+- very similar to C/C++/golang structs
+- e.g. `struct Foo{ i: i32, b: bool, s: String }`
+- tuple struct:  struct witih no field names, e.g. `struct Bar(i32, bool)`
+### TUPLE
+- `let a = (1, "hi"); let secondfield = a.1;`
+### ARRAYS
+- is a primitive type, cannot change size
+- function argument type annotation: unsized `[T]`, sized `[T, 3]`
+- indexing starts at zero, e.g. `a[0]` is first element
+- stored in contiguous sections of memory on the stack
+    - if array is too large, at runtime will get stack overflow
+- len/size
+    - `a.len()` - get length
+    - `mem::size_of_val(&[1,2]))` - get num bytes in memory
+- `let a = [ 1, 2 ]` - declaration
+    - example type annotation declaration `let xs: [i32; 5] = [1, 2, 3, 4, 5];`
+    -  initialize size 500 array with value zero - `let ys: [i32; 500] = [0; 500];`
+- multi-dimensional arrays, e.g. 2D array 6x4 i32: `let a: [[i32; 4]; 6];`
+    - slices need to specify subarray: `let sliceofa: &[[i32; 4]] = &a;`
+### SLICES
+- like arrays but size not known at compile time, it's a kind of reference
+- 2 word object: 1st word is pointer to data, 2nd word is length of slice (word size = usize)
+- allows us to borrow arrays
+- type signature `[T]`, shared/immutable type signature `&[T]`, e.g. `&[i32]`
+    - term "slice" is overloaded: almost always means `&[T]`, a fat pointer(address + len), not `[T]`
+    - "naked" `[T]` has unknown size, can't put it on the stack, use pointer redirection like `Box<[T]>` or `Rc<[T]>` or `&[T]`
+- mutable type signature `&mut [T]`
+- `let a = [1 ,2, 3, 4]; let s = &a` - `s` is a reference and immutable borrow here, `&a` is slice containing all of `a`
+    - `let s = &a[0..2]` - borrow just first and second of `a`, ending index is non-inclusive
+### CONSTANTS 
+- contants, `const` keyword - cannot be mutable, type must be annotated, can declare in global scope
+    - can use constant expressions, but not expression that evaluate at runtime
+    - naming convention is to use upper snake case
+    - `const MY_CONST: i32 = 1; const CONST_EXP: i32 = 10 * 10 * 3600;`
+- static, similar to `const` but can be mutated, lives in a static memory space, have static lifetime (so forever)
+    - type must have `Sync` to be shared for multi-threaded access
+### GENERICS
+- rust doesnt have higher kinded types, e.g. something like `Option<V<T>>` with `V` and `T` as generic params
+- Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
+### TRAITS
+- follows orphan rule
+    - cannot implement _external_ traits on _external_ types
+    - **can** implment _internal_ trait on _external_ type and _external_ trait on _internal_ type
+    - without rule, 2 crates could implement same trait on same type, this is a conflict and rust wouldnt know which to pick
+    - newtype pattern can get around orphan rule, by creating a new type in a tuple struct
+- blanket implementations - conditionally implement a trait for all types that implement another trait (using generics)
+    - `impl<T: Display> ToString for T { // --snip-- }`  - from stdlib, this implements `ToString` if `T` implements `Display`
+- auto traits - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
+    - e.g. Structs, enums, unions and tuples implement the trait if all of their fields do.
+    - Function item types and function pointers automatically implement the trait.
+    - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
+    - `Send`, `Sync`, `Unpin`, `UnwindSafe` are all autotraits
+- **TRAIT OBJECT** - a wrapping type that contains anything that implements the trait
+    - generally use a fat/smart pointer and the vtable of methods
+    - for trait `Trait`, `Box<dyn Trait>` is a trait object
+        - even a ref, `&dyn Trait` is a trait object
+    - compiles to single function that does a dispatch at runtime based on the object concrete type
+    - cannot create trait object for more than one trait directly: `&(dyn Trait1 + Trait2)`
+        - the way to achieve this is using a supertrait: `pub trait Trait1and2: Trait1 + Trait2 {}`, then `&dyn Trait1and2`
+        - compiler _could_ create a combined vtable of both traits, or fat pointers get fatter for each vtable, but supertrait works
+    - assoicated type traits wont work unless u specify a default `&dyn Trait1<assType = SomeType>`
+    - non-self types dont work, need a receiver, so no associated methods
+    - traits with generics dont work, vtable cant really store which concrete type the generic represents
+        - you could have diff vtables for diff combinations of types in each crate, but now you have many diff vtable implementations
+    - vtable for trait object always implements `drop`(from `Drop`), needed for GC
+        - size and alignment of concrete type in vtable (allocator needs this for `drop`)
+- generic traits can specify a default concrete type with `<T = DefaultConcreteType>`
+- associated type - a placeholder type that must be defined by the implementing struct/enum
+    - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
+    - why not generic trait? - can implement the trait many times (per generic param)
+        - with associated type we can only implement trait one time
+- supertraits - defining a trait to depend on implementor implementing another trait
+    - `trait SuperTrait: Trait { ... }` - implementor must implement `Trait` here before implementing `SuperTrait`
+    - concept is similar to trait bounds on generics
+- fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
+    - types direct implementation takes precedence
+### CONVERSION/CASTING
+- `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
+- `From` and `Into` are main traits to convert, `From<T> for U` implies `Into<U> for T`
+    - complex types like `Vec` and `String` support this
+    - correct practice is implement `From<T> for U`, `Into<U> for T` blanket implementation will be done
+- `TryFrom` and `TryInto` exist for conversions that could fail, and return `Result` type
+- `AsRef` and `AsMut` convert reference types
+### OTHER
+- `enum` - in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers
+- `union` - like struct, but all fields share the same storage, size of union type is size of largest field
+- `Option<T>` - generic enum which can be `Some<T>` or `None`
+    - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
+- `Sized` - trait, known size at compile time, doesnt change size
+     - data put on stack _must_ be `Sized`, un-`Sized` have to go on the heap
+     - for enums compiler uses size of largest variant
+     - it's automatically implemented for types whos size is known at compile time, very few types are not `Sized`
+- structs and values in generally are placed on stack by default, general way to heap alloc is pointer wrappers like `Box` or `Rc`
+- COPY vs MOVE semantics
+    - a move is moving ownership
+    - if type has `Copy` follows "copy" semantics, as opposed to "move" semantics
+        - value is copied and not moved when assigned to new variable or passed into a function
+        - e.g. `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
+    - if moved, compiler might copy the bytes, depending on the situation
+- `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)
+    - generaly a `Copy` type can be duplicated by simply copying it's bits
+    - have a known size, and allocated on the stack, happens implicitly e.g. `x = y`
+    - cannot be implemented on `Drop` types, `Drop` types are basically owned types
+    - primitive types are `Copy`: `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
+        - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
+        - tuples `(T1,T2,...,Tn)` if all fields of a tuple are `Copy` tuple is also `Copy`
+    - `Clone` types more complex and general, a `Copy` type can probably easily also implement `Clone`
+- `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
+    - deallocating at end of scope is similar to RAII(resource aquisition is initialization), used in c++
+    - compiler will essentially insert the `drop` on a `Drop` type at the end of it's scope
+    - trait has one method `drop` that you can't call explicitly on a `Drop` type
+        - otherwise compiler cant gaurantee memory safety, double drops or dangling pointers
+    - for manualy drop you can call `std::mem::drop`, e.g. `drop(somevar)`
+- associated function - belongs to the type itself, doesn't need `self`, the `new` method convention is a common use case of this
+- variance - https://doc.rust-lang.org/nomicon/subtyping.html
+- type alias - synonymous to another type
+    - one use case: syntax sugar convenient for long/verbose types
+        - e.g. `Box<dyn Fn() + Send + 'static>` aliased as `type Thunk = Box<dyn Fn() + Send + 'static>`
+- rust does not really support downcasting (can't `match` on a trait object's implementor types)
+    - traits objects can't be downcast back to the original type with casting or coersion
+    - the `Any` trait with `unsafe` code can do this, it's downcasting on trait objects
+    - one idomatic way is to use `enums` variants in place of the trait implementors
+- for `trait Trait {}`, a param of type `impl Trait` is basically syntax sugar for generic with trait bound `<T: Trait>`
+    ```rust
+    trait Trait {}
+    fn foo<T: Trait>(arg: T) { }
 
-## IO
-- read a file to var - `let contents = std::fs::read_to_string(file_path).unwrap()`
-- incremental read - `let f = File::open(file_path)?; let reader = BufReader::new(f); for line in reader.lines() { ... }`
-- `eprintln!` is macro to print to stderr
-    - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
-- `print!` - same as `println!` but no new line
-```rust
-let num = 0b0000000000101100u16;
-println!("{:?}", num);    // prints 44  , "?" uses Debug trait
-println!("{:0b}", num);    // prints "101100",  "b" means Binary trait
-println!("{:0x}", num);    // prints "2c",  "b" means LowerHex trait
-println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
-```
-- fill/alignment padding https://doc.rust-lang.org/std/fmt/#fillalignment
+    fn foo(arg: impl Trait) { }
+    ```
+    - generic with trait bound will have a concrete type at compiletime due to monomorphization
+    - trait objects contain concrete type only known at run time
+    - big use case for trait objects is a array/vector/collection of heterogenous concrete types, can't do that with a generic trait
+- DST - dynamically sized types - https://doc.rust-lang.org/nomicon/exotic-sizes.html
+    - types can only exist behind a fat/wide pointer
+    - main cases of DST
+        - trait objects `dyn MyTrait` -> "wide" pointer has pointer to data and pointer to vtable
+        - slices(`[T]`), `str`
+        - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
+    - vtable - each vtable for a type generally built at compile time
+
 
 ## DATA STRUCTURES
 - https://doc.rust-lang.org/std/collections/index.html
@@ -328,8 +449,6 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - many collections need to use unsafe code(raw pointers) in order to be feasible/performant
     - borrow checker couldnt reason about it well
 - rust has many ADTs that languages like haskell provide: tuples, enums(tagged unions), structs(product types)
-### TUPLE
-- `let a = (1, "hi"); let secondfield = a.1;`
 ### STRINGS
 - use double quote `"` for strings, single quotes `'` for chars
 - raw string literal (escapes arent processed) - `r#"foo \n bar"#`
@@ -362,30 +481,6 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
             - `s1 = String::from("tic"); s2 = String::from("tac"); s3 = String::from("toe"); s = format!("{s1}-{s2}-{s3}")`
                 - `format!` is more succinct for concat of many strings
                 - doesnt take ownership of any of the params
-### ARRAYS
-- is a primitive type, cannot change size
-- function argument type annotation: unsized `[T]`, sized `[T, 3]`
-- indexing starts at zero, e.g. `a[0]` is first element
-- stored in contiguous sections of memory on the stack
-    - if array is too large, at runtime will get stack overflow
-- len/size
-    - `a.len()` - get length
-    - `mem::size_of_val(&[1,2]))` - get num bytes in memory
-- `let a = [ 1, 2 ]` - declaration
-    - example type annotation declaration `let xs: [i32; 5] = [1, 2, 3, 4, 5];`
-    -  initialize size 500 array with value zero - `let ys: [i32; 500] = [0; 500];`
-- multi-dimensional arrays, e.g. 2D array 6x4 i32: `let a: [[i32; 4]; 6];`
-    - slices need to specify subarray: `let sliceofa: &[[i32; 4]] = &a;`
-### SLICES
-- like arrays but size not known at compile time, it's a kind of reference
-- 2 word object: 1st word is pointer to data, 2nd word is length of slice (word size = usize)
-- allows us to borrow arrays
-- type signature `[T]`, shared/immutable type signature `&[T]`, e.g. `&[i32]`
-    - term "slice" is overloaded: almost always means `&[T]`, a fat pointer(address + len), not `[T]`
-    - "naked" `[T]` has unknown size, can't put it on the stack, use pointer redirection like `Box<[T]>` or `Rc<[T]>` or `&[T]`
-- mutable type signature `&mut [T]`
-- `let a = [1 ,2, 3, 4]; let s = &a` - `s` is a reference and immutable borrow here, `&a` is slice containing all of `a`
-    - `let s = &a[0..2]` - borrow just first and second of `a`, ending index is non-inclusive
 ### VECTORS
 - essential a struct with 3 properties: capacity, length, and pointer to base
     - generally vector struct on stack, and data in heap
@@ -467,7 +562,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - fully supports higher-order/first-class functions
     - `fn twice(f: fn(T) -> (), i: T) -> () { f(i); f(i); }`
 - `fn` is type, a function pointer, that refers to named fuctions, `Fn` is trait for closures
-    - e.g. `fn f1(i: i32) -> i32 { i }; fn twice(f: fn(i32) -> i32) -> i32 { f(); f() }`
+    - e.g. `fn f1(i: i32) -> i32 { i }; fn twice(f: fn(i32) -> i32) -> i32 { f(1); f(1) }`
     - `fn` pointers all implement `Fn`, `FnMut`, and `FnOnce`, so can pass `fn` to something expecting a closure
         - can also pass a closure that doesn't capture it's environment into a `fn`
         - can vary based on ABI, e.g. `extern` type, e.g. external C function: `extern "C" fn()`
@@ -498,111 +593,27 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 ```
 - dont have concrete type that are returnable, can use dyn Box, e.g. `Box<dyn Fn(i32) -> i32>`
 
-## TYPE SYSTEM
-- contants, `const` keyword - cannot be mutable, type must be annotated, can declare in global scope
-    - can use constant expressions, but not expression that evaluate at runtime
-    - naming convention is to use upper snake case
-    - `const MY_CONST: i32 = 1; const CONST_EXP: i32 = 10 * 10 * 3600;`
-- static, similar to `const` but can be mutated, lives in a static memory space, have static lifetime (so forever)
-    - type must have `Sync` to be shared for multi-threaded access
-- `enum` in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers
-- `Option<T>` - generic enum which can be `Some<T>` or `None`
-    - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
-- `Sized` - trait, known size at compile time, doesnt change size
-     - data put on stack _must_ be `Sized`, un-`Sized` have to go on the heap
-     - for enums compiler uses size of largest variant
-     - it's automatically implemented for types whos size is known at compile time, very few types are not `Sized`
-- `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)
-    - generaly a `Copy` type can be duplicated by simply copying it's bits
-    - have a known size, and allocated on the stack, happens implicitly e.g. `x = y`
-    - if type has `Copy` follows "copy" semantics, as opposed to "move" semantics
-        - value is copied and not moved when assigned to new variable or passed into a function
-        - e.g. `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
-    - cannot be implemented on `Drop` types, `Drop` types are basically owned types
-    - primitive types are `Copy`: `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
-        - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
-        - tuples `(T1,T2,...,Tn)` if all fields of a tuple are `Copy` tuple is also `Copy`
-    - `Clone` types more complex and general, a `Copy` type can probably easily also implement `Clone`
-- `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
-    - deallocating at end of scope is similar to RAII(resource aquisition is initialization), used in c++
-    - compiler will essentially insert the `drop` on a `Drop` type at the end of it's scope
-    - trait has one method `drop` that you can't call explicitly on a `Drop` type
-        - otherwise compiler cant gaurantee memory safety, double drops or dangling pointers
-    - for manualy drop you can call `std::mem::drop`, e.g. `drop(somevar)`
-- associated function - belongs to the type itself, doesn't need `self`, the `new` method convention is a common use case of this
-- variance - https://doc.rust-lang.org/nomicon/subtyping.html
-### GENERICS
-- rust doesnt have higher kinded types, e.g. something like `Option<V<T>>` with `V` and `T` as generic params
-- Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
-### TRAITS
-- follows orphan rule
-    - cannot implement _external_ traits on _external_ types
-    - **can** implment _internal_ trait on _external_ type and _external_ trait on _internal_ type
-    - without rule, 2 crates could implement same trait on same type, this is a conflict and rust wouldnt know which to pick
-    - newtype pattern can get around orphan rule, by creating a new type in a tuple struct
-- blanket implementations - conditionally implement a trait for all types that implement another trait (using generics)
-    - `impl<T: Display> ToString for T { // --snip-- }`  - from stdlib, this implements `ToString` if `T` implements `Display`
-- auto traits - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
-    - e.g. Structs, enums, unions and tuples implement the trait if all of their fields do.
-    - Function item types and function pointers automatically implement the trait.
-    - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
-    - `Send`, `Sync`, `Unpin`, `UnwindSafe` are all autotraits
-- **TRAIT OBJECT** - a wrapping type that contains anything that implements the trait
-    - generally use a fat/smart pointer and the vtable of methods
-    - for trait `Trait`, `Box<dyn Trait>` is a trait object
-        - even a ref, `&dyn Trait` is a trait object
-    - compiles to single function that does a dispatch at runtime based on the object concrete type
-    - cannot create trait object for more than one trait directly: `&(dyn Trait1 + Trait2)`
-        - the way to achieve this is using a supertrait: `pub trait Trait1and2: Trait1 + Trait2 {}`, then `&dyn Trait1and2`
-        - compiler _could_ create a combined vtable of both traits, or fat pointers get fatter for each vtable, but supertrait works
-    - assoicated type traits wont work unless u specify a default `&dyn Trait1<assType = SomeType>`
-    - non-self types dont work, need a receiver, so no associated methods
-    - traits with generics dont work, vtable cant really store which concrete type the generic represents
-        - you could have diff vtables for diff combinations of types in each crate, but now you have many diff vtable implementations
-    - vtable for trait object always implements `drop`(from `Drop`), needed for GC
-        - size and alignment of concrete type in vtable (allocator needs this for `drop`)
-- generic traits can specify a default concrete type with `<T = DefaultConcreteType>`
-- associated type - a placeholder type that must be defined by the implementing struct/enum
-    - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
-    - why not generic trait? - can implement the trait many times (per generic param)
-        - with associated type we can only implement trait one time
-- supertraits - defining a trait to depend on implementor implementing another trait
-    - `trait SuperTrait: Trait { ... }` - implementor must implement `Trait` here before implementing `SuperTrait`
-    - concept is similar to trait bounds on generics
-- fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
-    - types direct implementation takes precedence
-### CONVERSION/CASTING
-- `as` keyword used to turn primitive types (e.g. `i32`, `char`, `bool`) into other primitive types
-- `From` and `Into` are main traits to convert, `From<T> for U` implies `Into<U> for T`
-    - complex types like `Vec` and `String` support this
-    - correct practice is implement `From<T> for U`, `Into<U> for T` blanket implementation will be done
-- `TryFrom` and `TryInto` exist for conversions that could fail, and return `Result` type
-- `AsRef` and `AsMut` convert reference types
-### OTHER
-- type alias - synonymous to another type
-    - one use case: syntax sugar convenient for long/verbose types
-        - e.g. `Box<dyn Fn() + Send + 'static>` aliased as `type Thunk = Box<dyn Fn() + Send + 'static>`
-- rust does not really support downcasting (can't `match` on a trait object's implementor types)
-    - traits objects can't be downcast back to the original type with casting or coersion
-    - the `Any` trait with `unsafe` code can do this, it's downcasting on trait objects
-    - one idomatic way is to use `enums` variants in place of the trait implementors
-- for `trait Trait {}`, a param of type `impl Trait` is basically syntax sugar for generic with trait bound `<T: Trait>`
-    ```rust
-    trait Trait {}
-    fn foo<T: Trait>(arg: T) { }
+## LIBS
+- `std` relies on OS primitives
+- `core` relies on nothing
+- `alloc` requires on a memory allocator
+    - most collections in this crate, except hashmap which relies on random data, so its in `std`
 
-    fn foo(arg: impl Trait) { }
-    ```
-    - generic with trait bound will have a concrete type at compiletime due to monomorphization
-    - trait objects contain concrete type only known at run time
-    - big use case for trait objects is a array/vector/collection of heterogenous concrete types, can't do that with a generic trait
-- DST - dynamically sized types - https://doc.rust-lang.org/nomicon/exotic-sizes.html
-    - types can only exist behind a fat/wide pointer
-    - main cases of DST
-        - trait objects `dyn MyTrait` -> "wide" pointer has pointer to data and pointer to vtable
-        - slices(`[T]`), `str`
-        - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
-    - vtable - each vtable for a type generally built at compile time
+## IO
+- read a file to var - `let contents = std::fs::read_to_string(file_path).unwrap()`
+- incremental read - `let f = File::open(file_path)?; let reader = BufReader::new(f); for line in reader.lines() { ... }`
+- `eprintln!` is macro to print to stderr
+    - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
+- `print!` - same as `println!` but no new line
+```rust
+let num = 0b0000000000101100u16;
+println!("{:?}", num);    // prints 44  , "?" uses Debug trait
+println!("{:0b}", num);    // prints "101100",  "b" means Binary trait
+println!("{:0x}", num);    // prints "2c",  "b" means LowerHex trait
+println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
+```
+- fill/alignment padding https://doc.rust-lang.org/std/fmt/#fillalignment
+
 
 ## CONCURRENCY
 - rust itself(lang/runtime) only implements native threads
