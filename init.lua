@@ -1240,6 +1240,7 @@ vim.keymap.set('n', '<leader>eo', "<cmd>lua require('fzf-lua').blines()<CR>", { 
 vim.keymap.set('n', '<leader>ei', "<cmd>lua require('fzf-lua').lines()<CR>", { desc = "fzf all buffer lines" })
 vim.keymap.set('n', '<leader>ec', "<cmd>lua require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'})<CR>", 
     { desc = "fzf grep cheatsheet dir" })
+vim.keymap.set('n', '<leader>en', "<cmd>lua require('fzf-lua').grep({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf grep notes files" })
 
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
