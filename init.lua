@@ -295,6 +295,7 @@ end
 
 ----------------------------------- RUN IN TMUX PANE -----------------------------------------------------
 ActiveTmuxRunnerPane=nil
+ClearActiveTmuxRunnerPane=false
 
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window
@@ -329,12 +330,20 @@ SelectTmuxRunnerPane = function()
     end
 end
 
+-- if set, clear the runner pane before command is run
+ToggleClearTmuxRunnerPane = function()
+    ClearActiveTmuxRunnerPane = not ClearActiveTmuxRunnerPane
+    print("ClearActiveTmuxRunnerPane: " .. tostring(ClearActiveTmuxRunnerPane))
+end
 
 -- TODO: maybe add logic to set default pane, look for pane with no child processes (see tmux-open-pane script)
 TmuxPaneRun = function(cmd)
     if ActiveTmuxRunnerPane == nil then
         print('ActiveTmuxRunnerPane is nil')
     else
+        if ClearActiveTmuxRunnerPane then
+            vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxRunnerPane, 'clear', 'C-m'})
+        end
         -- os.execute('tmux send-keys -t ' .. ActiveTmuxRunnerPane .. ' \'' .. cmd .. '\' C-m')
         vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxRunnerPane, cmd, 'C-m'})
     end
@@ -1170,6 +1179,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highli
 -- SMART RUN ACTIONS
 vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('exe')<cr>", { desc = "execute program" })
 vim.keymap.set("n", "<leader>ar", SelectTmuxRunnerPane, { desc = "set tmux pane runner" })
+vim.keymap.set("n", "<leader>ac", ToggleClearTmuxRunnerPane, { desc = "toggle if runner pane is cleared before cmd execution" })
 vim.keymap.set("n", "<leader>at", "<cmd>:lua RunAction('test')<cr>", { desc = "run tests" })
 vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('build')<cr>", { desc = "build/compile program" })
 
