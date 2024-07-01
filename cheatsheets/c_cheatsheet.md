@@ -187,6 +187,7 @@ void foo() {
 ## LIBS
 - APIs for library are declared in header files
 ### C STANDARD LIBRARY
+- comparisons of diff version: https://www.etalabs.net/compare_libcs.html
 - "C standard library" usually means some implementation of ANSI C Standard
     - see https://en.wikipedia.org/wiki/C_standard_library
     - C POSIX library is a superset of C standard library, where there is conflict C standard lib take precedence over POSIX
