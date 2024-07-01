@@ -306,6 +306,7 @@ match triple {
 - e.g. `struct Foo{ i: i32, b: bool, s: String }`
 - tuple struct:  struct witih no field names, e.g. `struct Bar(i32, bool)`
 ### TUPLE
+- https://doc.rust-lang.org/std/primitive.tuple.html
 - `let a = (1, "hi"); let secondfield = a.1;`
 ### ARRAYS
 - is a primitive type, cannot change size

@@ -374,6 +374,7 @@ ha.put("foo", a);
 
 
 ## CONCURRENCY
+- Reactive system - new paradigm which means async/non-blocking systems/applications
 - `CompletableFuture` - added in java8, a promise of a future result, done async(doesnt block main thread)
     - can chain these futures together
     - very similar to scala `Future`
@@ -408,6 +409,20 @@ synchronized (lock) {
 ```
 - thread pools `ExecutorService executor = Executors.newFixedThreadPool(10);`
     - run task in pool - `executor.submit(() -> { new Task(); });`
+### CONCURRENT DATA STRUCTURES
+- `LinkedBlockingQueue` - linked list, so infinite size
+    - put and take are seperate locks
+    - has to alloc/dealloc every put/take
+- `ArrayBlockingQueue` - array backed, fixed size
+    - faster as no alloc/dealloc on put/take
+    - put/take are same lock
+- `PriorityBlockingQueue` - array based binary heap
+    - consume items in specific order
+    - single lock underlying, but take can happens simul to put (using spinlocks)
+- `ConcurrentLinkedQueue` - non-blocking queue
+    - add and poll thread-safe and return
+    - uses CAS(compare-and-swap) instead of locks
+    - used in reactive systems
 
 
 ## STRINGS
@@ -955,6 +970,8 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 ### NIO
 - added in java 1.4
 - new input/output - collection of java APIs for heavy IO ops
+### SPRING FRAMEWORK
+- the latest hotness
 ### REACTIVE STREAMS
 - really a standard for async stream processing, also supports non-blocking backpressure
 - akka streams, spring framework v5, play framework, kafka, cassandra, elasticsearch all use it

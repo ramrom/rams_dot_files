@@ -27,9 +27,15 @@
 - `docker login foo.com` - login to a docker registry
     - `~/.docker/config.json` will show list of sessions for registries
 ### UNDERLYING TECH
+- docker engine is the main package - https://docs.docker.com/engine
+    - includes: core daemon process is `dockerd`, cli tool, APIs
+    - docker engine API(REST) docs: https://docs.docker.com/engine/api/
+        - cli uses API to talk to `dockerd`
+        - `dockerd` daemon talks grpc to `containerd`
 - `containerd` is a container runtime developed by Docker
     - uses linux cgroups to enforce limits CPU and memory
     - uses linux namespaces to isolate processes, filesystems, network, users(UIDs,GUID), env vars
+    - talked to `runc` to for running containers using a shim process
 ### ISSUES
 - symlinks in volumes that point to files in other volumes dont work
     - https://axell.dev/mounted-docker-volume-contains-symlinks/
