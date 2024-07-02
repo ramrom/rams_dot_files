@@ -216,7 +216,7 @@ public static void main(String[] args) {
             - or periodically write-backed entries are written to backing store
         - this is much more complex to implement than write-through
     - write-dirty - update backing storage, mark cache dirty
-    - write-around - if cache miss, write direclty to backing storage and skip cache
+    - write-around - if cache miss on write, write direclty to backing storage and skip cache
         - this is good when we dont expect subsequent reads
 - MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
     - MESI is acronym for 4 states: **M**odify **E**xclusive **S**hared **I**nvalid

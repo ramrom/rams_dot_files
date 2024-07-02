@@ -88,6 +88,7 @@
 - trigger replication, SUPER old, table triggers used to send data to replicas, this predates WAL
 ### WAL
 - WAL = Write-ahead logs, a type of journaling, describing low level binary data changes
+    - when transaction is commited, WAL log is written first, then eventually the real data storage(tables, index)
 - if server fails, WAL logs always exist to retreive lost data, it provides the durability in ACID for postgres
 - WAL file fast to write (sequential data), and b/c we dont have to write the data (data pages are slow to write)
 - shipping

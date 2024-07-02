@@ -27,6 +27,9 @@
 - `docker login foo.com` - login to a docker registry
     - `~/.docker/config.json` will show list of sessions for registries
 ### UNDERLYING TECH
+- docker uses linux kernel to manage resources, for osx docker uses a linux VM layer in order to run, so inherently worse
+    - since 2016 - uses apple hyperkit to run a linux vm, and it's integrated into the docker desktop package
+    - before 2016 - used virtualbox to run a linux vm
 - docker engine is the main package - https://docs.docker.com/engine
     - includes: core daemon process is `dockerd`, cli tool, APIs
     - docker engine API(REST) docs: https://docs.docker.com/engine/api/

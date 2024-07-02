@@ -59,12 +59,25 @@
 ## DOCUMENT DB
 - dynamodb - created by AWS
 ### MONGO
+- supports schemas for collections - https://www.mongodb.com/docs/manual/core/schema-validation/
+    - for JSON uses json-schema (jul2024 - draft 4)
 - uses leader-based replication
 - also see [mongo](mongo_cheatsheet.md)
 
 ## KEY-VALUE
 - memcached
 ### REDIS
+- modes
+    - single - one instance
+    - cluster - horizontal scaling with sharding
+        - key divided into hash slots(16384 total), calculated by CRC16 of the key modulo 16384
+        - every node responsible for subset of hash slot space (e.g. 3 nodes: A=(0-5500), B=(5501-11000), C=(11001-16383))
+            - this does NOT use consistent hashing
+        - supports master/replica, so each shard has replica, A,B,C has A1,B1,C1, if A goes down A1 takes over
+        - no strong consistency gaurantee, b/c of async replication, some writes can be lost
+            - 1. client writes to master, 2. master replies OK, 3. master sends to replicas.
+            - if master dies b4 replication, replica promoted, and write lost but client thinks it happened
+    - sentinel - high availibility (not clustering)
 - apr'24 - redis went partially closed source, cant host on cloud for free
 - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
 - COMMANDS
