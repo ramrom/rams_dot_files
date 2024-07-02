@@ -11,6 +11,8 @@
 - an image is built from the code in a Dockerfile
     - `docker build MyDockerfile`
     - `docker images` - list images
+    - `docker image history fooimage` - list the history of layers on image `fooimage`
+        - a blank value in `CREATED_BY` column generally means it's manually commited changes from a container run
     - `docker create someimage` - create container from image
     - `docker rmi someimage`  - remove image
 - a container is an instantiation of an image
@@ -27,18 +29,37 @@
 - `docker login foo.com` - login to a docker registry
     - `~/.docker/config.json` will show list of sessions for registries
 ### UNDERLYING TECH
+- image - represents an immutable state
+    - it's composed of layers and you cant modify existing layers
+    - can create new changes on top of it and save them, this adds a layer, can also create a new image that points to a layer
+    - can instantiate an image as a container
+        - as the container runs it adds changes, can commit those changes to a new layer
+        - `Dockerfile`s used to create new images, results from each command basically become a new layer
+    - creating a root base image: https://docs.docker.com/build/building/base-images/
+- container - an instantiation of an image
+    - can spawn many containers from the same image
+    - can use `docker container commit` to save containers state as a new image layer
+        - in practice this is rarely done, `Dockefile`s are used to create the layers
 - docker uses linux kernel to manage resources, for osx docker uses a linux VM layer in order to run, so inherently worse
     - since 2016 - uses apple hyperkit to run a linux vm, and it's integrated into the docker desktop package
     - before 2016 - used virtualbox to run a linux vm
+- `containerd` is a container runtime developed by Docker
+    - uses linux cgroups to enforce limits CPU and memory
+    - uses linux namespaces to isolate processes, filesystems, network, users(UIDs,GUID), env vars
+    - talked to `runc` to for running containers using a shim process
+### PACKAGES
+- buildx - docker cli plugin that uses BuildKit under the hood to build images with `docker build`
+    - old docker versions(of cli i think) you did `docker buildx build`
+    - buildx is sophisticated, and has a builder concept it supports: https://docs.docker.com/build/architecture/#builders
 - docker engine is the main package - https://docs.docker.com/engine
     - includes: core daemon process is `dockerd`, cli tool, APIs
     - docker engine API(REST) docs: https://docs.docker.com/engine/api/
         - cli uses API to talk to `dockerd`
         - `dockerd` daemon talks grpc to `containerd`
-- `containerd` is a container runtime developed by Docker
-    - uses linux cgroups to enforce limits CPU and memory
-    - uses linux namespaces to isolate processes, filesystems, network, users(UIDs,GUID), env vars
-    - talked to `runc` to for running containers using a shim process
+- docker desktop - docker engine + extra tooling (Docker Build, Docker Extensions, Docker Compose, Kubernetes, cred helper)
+- [colima](https://github.com/abiosoft/colima) - co(container) for lima
+    - a runtime for containers, supports docker, supports osx(Mx/arm and x86/64)/linux
+    - [uses LIMA](https://github.com/lima-vm/lima), linux VMs for macOS, but supports netBSD and others
 ### ISSUES
 - symlinks in volumes that point to files in other volumes dont work
     - https://axell.dev/mounted-docker-volume-contains-symlinks/

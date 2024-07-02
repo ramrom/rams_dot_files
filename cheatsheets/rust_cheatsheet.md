@@ -623,6 +623,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - rust intention is to stay a low level systems language with minimal runtime
 - https://stackoverflow.com/questions/29428318/why-did-rust-remove-the-green-threading-model-whats-the-disadvantage#29430403
 - good tokio issue on structured concurrency: https://github.com/tokio-rs/tokio/issues/1879 (also see "goto is bad" blog)
+- good book on rust atomics/locks: https://marabos.nl/atomics/
 ### SYNC + SEND
 - `Sync` and `Send` are built into rust, (most of the rest is in std lib)
 - `Sync` trait, these types allows many references to same value in different threads

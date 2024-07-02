@@ -178,7 +178,11 @@ void foo() {
 
 ## CONCURRENCY
 - main lib `threads.h`
-- also `pthreads.h` - this is POSIX threads, and thus very portable b/c POSIX is a widely used standard on many platforms
+- also `pthreads.h` - this is POSIX concurrency library (also has mutexes, condvars, rwlocks, spinlocks, barriers)
+    - it's an iterface and how pthreads is implemented under the hood depends on platform
+    - very portable b/c POSIX is a widely used standard on many platforms, see https://en.wikipedia.org/wiki/Pthreads
+    - e.g. linux2.6, spawning a pthread is a NPTL, a 1x1, a pthread corresponds to a kernel thread
+         - prior to 2.6 a pthread was implemented as a [LinuxThread](https://en.wikipedia.org/wiki/LinuxThreads)
 
 ## IO
 - print int - `int v = 1; printf("%i\n",v);`

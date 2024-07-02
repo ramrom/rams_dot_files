@@ -94,6 +94,8 @@
 ### CLASSES
 - multiple inheritence, diamond problem -> scala serializes the tree
     - order matters, so last trait that implements same method will get defined
+- can specify extra constructors using methods named `this`
+    - each `this` must have diff signature, and must internally call another constructor
 ### IMPLICITS
 - good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - implicit conversion: automatically convert a type to another type if a implicit converter func exists in scope

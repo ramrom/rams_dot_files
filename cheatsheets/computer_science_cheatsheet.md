@@ -80,6 +80,13 @@ public static void main(String[] args) {
     - cpu cache is flushed
     - TLB(translation lookaside buffer) is flushed
     - process control block is changed
+### NON-NATIVE/NON-KERNEL THREAD
+- green thread - a "thread" managed by the userland process runtime, will run until preempted by the runtime scheduler
+- fibers - cooperative multitasking, each fiber yields volutarily, then a scheduler then schedules next fiber to run
+    - Fibers can implement coroutines by allowing each fiber to communicate to the scheduler which fiber should be run when it yields
+- co-routine - green threads where pause/yields are specified by the programmer, no scheduler
+    - essentially a coroutine will yield and call another coroutine
+    - Coroutines can be used to implement fibers by always yielding to a scheduler coroutine
 ### CONDITIONAL VARIABLES
 - conceptually a wait queue of threads, waiting for some event
 - often waiting for a mutex to release, and notified/awakened when that happens
@@ -95,6 +102,9 @@ public static void main(String[] args) {
 - thread/processes go on kernel wait queue based on userspace value checking of the atomic integer
 - linux kernel supports it since 2003 in ver 2.6.x, windows8 and winserver2012 with WaitOnAddress, openBSD in 2016
 - often used to implement conditional variables
+### BARRIERS
+- a structure that lets multiple threads synchronize when they start or end
+- e.g. [rust Barrier](https://doc.rust-lang.org/std/sync/struct.Barrier.html) or golang WaitGroups
 ### DEADLOCKS
 - https://en.wikipedia.org/wiki/Wait-for_graph - technique to prevent deadlocks
     - a entity tracks shared resources and what entities want/hold them
@@ -103,12 +113,14 @@ public static void main(String[] args) {
 
 
 ## ATOMICS
-- in multi-core/cpu systems atomics need to use MESI protocol to make guarantees when dealing with cache coherency
-    - MESI is normally async (sync msgs sent later and other cores process messages later)
-    - for various memory orderings(barriers) guarantees, MESI messages are sent/handled
+- use often for many non-blocking implementations of algorithms and data structures
 - CAS (compare and swap) atomic operation requires exclusive access to memory location
     - really x86 arch has compare and exchange/swap, on ARM you have LDREX and STREX (load exclusive and store exclusive)
     - on ARM compare_and_exchange implemented with loop of LDREX and STREX
+- memory ordering is usually tied to the use of atomics, as often times atomics aren't useful without instruction order gaurantees
+- in multi-core/cpu systems atomics need to use MESI protocol to make guarantees when dealing with cache coherency
+    - MESI is normally async (sync msgs sent later and other cores process messages later)
+    - for various memory orderings(barriers) guarantees, MESI messages are sent/handled
 - while a lock is held, it's nice to have memory location in shared state, versus exclusive (which is inefficient)
 - most CPUs have built in instructions for doing fetch-add, fetch-sub, fetch-bitwise-and
 ### ORDERING

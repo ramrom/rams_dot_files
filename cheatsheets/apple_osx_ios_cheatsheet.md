@@ -10,9 +10,20 @@
 ## BREW
 ### TERMINOLOGY
 - see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
-- bottle: pre-compiled code, just installs
 - cask: installs a program exactly as if it were a native osx appliation install
-- tap: a repository of formula
+- caskroom: directory containing one or more named casks
+- formula: a package definition written in ruby DSL
+    - e.g. `/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/f/foo.rb`
+- tap: directory (and usually Git repository) of formulae, casks and/or external commands
+    - `/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core`
+- cellar: directory containing one or more named racks
+    - e.g. `/usr/local/Cellar`
+- rack: directory containing one or more versioned kegs
+    - e.g. `/usr/local/Cellar/foo`
+- keg: installation destination directory of a given formula version
+    - e.g. `/usr/local/Cellar/foo/0.1`
+- bottle: pre-built keg poured into a rack of the Cellar instead of building from upstream sources
+    - generally pre-compiled code
 ### INFO
 - aug2022, base bin dir is `/opt/homebrew/bin`
 ### USEFUL COMMANDS

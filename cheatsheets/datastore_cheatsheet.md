@@ -77,6 +77,7 @@
         - no strong consistency gaurantee, b/c of async replication, some writes can be lost
             - 1. client writes to master, 2. master replies OK, 3. master sends to replicas.
             - if master dies b4 replication, replica promoted, and write lost but client thinks it happened
+        - clients hits a master shard, and it will redirect client to correct shard, client remembers, shards do not proxying
     - sentinel - high availibility (not clustering)
 - apr'24 - redis went partially closed source, cant host on cloud for free
 - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
@@ -85,6 +86,10 @@
     - KEYS *
     - MONITOR
     - HGETALL <key name>
+### AWS ELASTICACHE
+- has a redis-compatible imitator mode, and also memcached mode
+- https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.corecomponents.html
+    - uses proxy layer (load balancers and proxy nodes) to manage connect to cluster and getting to right shard
 
 ## TIME SERIES
 - graphite

@@ -17,6 +17,7 @@
     `rg -tgo -tsh -Tjs`
 - print results in json!
     `rg --json`
+- max dir deptt `rg --max-depth=1 foo` (search `foo` only 1 dir deep)
 - would search in file /bar/befooyar/dude/wut
     - `rg -g '**/*foo*/**' pattern`
 - -o to to only return what matched, and -r to replace what was matched with capture groups or whatever
