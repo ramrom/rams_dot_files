@@ -4,14 +4,15 @@
 # FF - Fzf on files in a dir with file prev
 # actions: open, edit, cd to location, or add to clipboard
 
-usage() { echo 'Usage: ff [ -h(help) ] [ -i(ignore-hidden-files) ] [ -j FZF_HEIGHT ]'
+usage() { echo 'Usage: ff [ -h(help) ] [ -i(ignore-hidden-files) ] [ k(set fd --no-ignore) ] [ -j FZF_HEIGHT ]'
           echo '          [ -t FILE_TYPE(d = dir-only, f = file-only, not specified means all) ]';
           echo '          [ -w(FUNC_WRAP) ] [ -d DEPTH ] BASE_DIR( `~` = home, no arg means cur dir)'; }
 
-while getopts 'hid:t:wj:' x; do
+while getopts 'hikd:t:wj:' x; do
     case $x in
         h) usage && exit 1 ;;
         i) NO_HIDDEN_FILES=1 ;;
+        k) IGNORE_INGOREFILES=1 ;;
         t) FILE_TYPE="$OPTARG" ;;
         j) FZF_HEIGHT="$OPTARG" ;;
         d) DEPTH="$OPTARG" ;;
@@ -28,6 +29,9 @@ FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 
 FZF_DEFAULT_COMMAND="$FDNAME --color=always --exclude .git"
+
+IGFILE_OPT=""; [ -n "$IGNORE_INGOREFILES" ] && IGFILE_OPT="--no-ignore"
+FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $IGFILE_OPT"
 
 HIDDEN_OPT="--hidden"; [ -n "$NO_HIDDEN_FILES" ] && HIDDEN_OPT=""
 FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND $HIDDEN_OPT"

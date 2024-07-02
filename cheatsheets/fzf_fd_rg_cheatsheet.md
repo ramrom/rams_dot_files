@@ -78,6 +78,7 @@ search:
 
 
 ## FD
+- *NOTE* jul'24 - if .gitigore has `!.foo` then fd will show the hidden file, `.foo` even if you ask it to ignore hidden files
 ```sh
 fd "^\.foo|yar$"  # regex search, here find all files starting with ".foo" OR files ending with "yar"
 fd -H "foo"       # search hidden files
