@@ -701,6 +701,8 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - std lib and tokio also has Barrier https://doc.rust-lang.org/std/sync/struct.Barrier.html
 - crossbeam waitgroup: https://docs.rs/crossbeam/latest/crossbeam/sync/struct.WaitGroup.html
 ### LOCKS
+- 2022 - PR on making locks/condvars better: https://github.com/rust-lang/rust/issues/93740
+    - discussion to use parking_lot, use futex on linux/BSD
 - std lib `RWLock` - allows one writer OR multiple readers (not both)
 - std lib `Mutex` - allows one writer OR one reader
 - `Condvar` - conditional variable, used to block a thread until a event happens
@@ -710,6 +712,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - tokio has sempahores
 ### ATOMICS AND MEMORY ORDERING
 - good read: https://doc.rust-lang.org/nomicon/atomics.html
+- AtomicUsize - `fetch_update` - really compare_exchange loop that tries to apply the closure
 - memory model for atomics from c++20
 
 ## ANNOTATION
@@ -772,6 +775,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - graceful shutdown - pass a mpsc sender to all tasks, when all senders dropped, all tasks are done, can shutdown
 - [async-std](https://github.com/async-rs/async-std) - async version of std lib, similar to tokio
 - [crossbeam](https://github.com/crossbeam-rs/crossbeam) - concurrency toolbelt
+- [parking lot](https://crates.io/crates/parking_lot) - better mutex/rwlock/condvar
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest

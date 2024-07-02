@@ -80,14 +80,22 @@ public static void main(String[] args) {
     - cpu cache is flushed
     - TLB(translation lookaside buffer) is flushed
     - process control block is changed
+### CONDITIONAL VARIABLES
+- conceptually a wait queue of threads, waiting for some event
+- often waiting for a mutex to release, and notified/awakened when that happens
 ### MUTEX
 - mutexes are generally implement with atomics at the low-level in order to aquire locks
     - https://en.wikipedia.org/wiki/Read%E2%80%93modify%E2%80%93write
 - spin locks implementation is where thread will loop constantly to check if lock is unlocked, a type of busy waiting
-- FUTEX (Fast Userspace Mutex) - kernel sys call used to create a lock
-    - a kernel space wait queue attached to atomic integer in userspace
-    - thread/processes go on kernel wait queue based on userspace value checking of the atomic integer
-    - linux kernel supports it since 2003 in ver 2.6.x, windows8 and winserver2012 with WaitOnAddress, openBSD in 2016
+- many mutex implementations will put a thread waiting for a lock to sleep
+#### FUTEX 
+- Fast Userspace Mutex - kernel sys call used to create a lock
+- a kernel space wait queue attached to atomic integer in userspace
+    - userspace allows process to avoid sys calls and is faster
+- thread/processes go on kernel wait queue based on userspace value checking of the atomic integer
+- linux kernel supports it since 2003 in ver 2.6.x, windows8 and winserver2012 with WaitOnAddress, openBSD in 2016
+- often used to implement conditional variables
+### DEADLOCKS
 - https://en.wikipedia.org/wiki/Wait-for_graph - technique to prevent deadlocks
     - a entity tracks shared resources and what entities want/hold them
     - every entity checks the graph before trying to aquire resources, graph detects if entity's request would cause a deadlock
@@ -96,10 +104,13 @@ public static void main(String[] args) {
 
 ## ATOMICS
 - in multi-core/cpu systems atomics need to use MESI protocol to make guarantees when dealing with cache coherency
+    - MESI is normally async (sync msgs sent later and other cores process messages later)
+    - for various memory orderings(barriers) guarantees, MESI messages are sent/handled
 - CAS (compare and swap) atomic operation requires exclusive access to memory location
     - really x86 arch has compare and exchange/swap, on ARM you have LDREX and STREX (load exclusive and store exclusive)
     - on ARM compare_and_exchange implemented with loop of LDREX and STREX
 - while a lock is held, it's nice to have memory location in shared state, versus exclusive (which is inefficient)
+- most CPUs have built in instructions for doing fetch-add, fetch-sub, fetch-bitwise-and
 ### ORDERING
 - good quick blog post: https://fy.blackhats.net.au/blog/2019-07-16-cpu-atomics-and-orderings-explained/
 - jon gjengset 3hr rust vid: https://www.youtube.com/watch?v=rMGWeSjctlY&t=5188s&ab_channel=JonGjengset
@@ -207,6 +218,8 @@ public static void main(String[] args) {
     - LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
         - head of linkedlist is most recent, and tail is least recent
     - LFU - least frequently used, keep a count of hits for each cache entry
+    - MRU - most recently used evicted first, good when oldest record is most accessed
+        - good use case:  file is being repeatedly scanned in a looping sequential reference pattern
     - sliding-window
 - INVALIDATION STRATEGIES
     - write-through - write the data to the cache and backing storage, wait for this to finish before program can continue

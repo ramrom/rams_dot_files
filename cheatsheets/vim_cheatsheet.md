@@ -29,6 +29,7 @@
         - errors like `vimL function must not be called in a lua loop callback`
 - for keymaps, mode definitions https://neovim.io/doc/user/map.html#map-overview
     - `i` insert, `n` normal, `v` visual+select, `x` visual, `o` operator pending, `c` command-line, `t` terminal, `s` select
+- has API that is RPC with messagepack. thus can support server/client models
 ### VERSION HISTORY
 - roadmap: https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
