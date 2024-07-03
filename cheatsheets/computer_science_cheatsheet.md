@@ -283,10 +283,10 @@ public static void main(String[] args) {
 - strategies
     - round robin
         - DNS based strategy: a DNS entry can have many A records, and will round-robin each of those A records
-    - rule-based: e.g. by node latency, node volume, node reliability
+    - rule-based: e.g. by node latency, node volume, node reliability, fewest acive connections, least bandwidth
         - can't use DNS method for this, need a server
 - sofware vs hardware
-    - software: AWS ELB(NLB/ALB), HAProxy, nginx
+    - software: AWS ELB(NLB/ALB), HAProxy, nginx, traefik
     - hardware: F5, cisco, barracuda, citrix
 - HA/redundancy
     - active-active - multiple instances balancing traffic, heartbeats b/w them to stay informed of state

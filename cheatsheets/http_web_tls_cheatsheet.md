@@ -99,6 +99,8 @@
 - written in Go, great reverse proxy and load balancer
 - built in admin gui
 - can dynamicaly update configs without restart, unlike nginx
+### HA PROXY
+- popular load balancer choice
 
 ## DNS
 - can use tools like `dig` to get info on dns records

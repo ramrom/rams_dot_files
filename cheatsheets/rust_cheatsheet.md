@@ -222,6 +222,8 @@ match triple {
 ### OPERATORS
 - bitwise ops: `&` bitwise AND, `|` bitwise OR, `^` bitwise XOR
     - only some types support it, e.g. integer types like `i32`, `u32`, etc
+- `?` - https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
+    - postfix operator for `Result<T, E>`, or `Option<T>`
 ### VISIBLITY/SCOPE
 - all things are private by default and can be made public with `pub` keyword
     - public items can be used by anything in the crate
@@ -248,6 +250,9 @@ match triple {
     - `let m = Rc::new(vec![1,2])` -> `m.len()` is same as `(*m).len()`, `m` gets deref'd b/c dot(`.`) operator derefs it's receiver
 - why aren't multiple mutable references allowed in a single threaded context
     - https://manishearth.github.io/blog/2015/05/17/the-problem-with-shared-mutability/
+        - example 1 - 2nd mut ref to insides of variants' insides could be invalid when 1st mut ref of enum changes base variant
+        - example 2- iterator can be invalid
+            - `let buf = vec![1,2,3,4]; for i in &buf { buf.push(i); }` - loops forever
     - https://www.reddit.com/r/rust/comments/95ky6u/why_arent_multiple_mutable_references_allowed_in/
 - `Box<T>` - pointer to heap allocated data, single ownership and can mutate contents
     - implements `DeRef` and `DeRefMut` so can be used as reference, mutable too
@@ -635,6 +640,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - `MutexGuard` is sync b/c a shared ref in another thread cant do anything harmful
 - `Rc` isn't `Send`, can't have 2 `Rcs` in 2 threads, must be in one thread
     - also not `Sync` b/c a shared ref can be cloned
+    - use `Arc<T>` (atomic ref counter) if sharing b/w threads, it's `Sync` + `Send` if `T` is
 - `Cell` and `RefCell` are `Send` but not `Sync`
     - with a shared ref, u can mutate interior, not safe in multiple threads
 ### THREADS - STD LIB

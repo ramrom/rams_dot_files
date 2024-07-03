@@ -353,8 +353,9 @@
 - 64 safe ASCII chars
 - standard one is `A-Z` `a-z` `0-9` `+` `/`
 - url safe one replaces `+` and `/` with `_` and `-`
-### URL ECODING
+### URL/URI ECODING
 - unreserved characters are `A-Z`, `a-z`, `0-9`, `-`, `_`, `.`, `~`
+    - reserved(special) chars include: `/`, `!`, `&`, `#`, `:`, `%`, and more
 - https://en.wikipedia.org/wiki/Percent-encoding
 ### ASCII
 - table - https://simple.wikipedia.org/wiki/File:ASCII-Table-wide.svg

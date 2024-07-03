@@ -8,14 +8,14 @@
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
 - https://docs.docker.com/
-- an image is built from the code in a Dockerfile
-    - `docker build MyDockerfile`
+- IMAGES
+    - `docker build -f foo/MyDockerfile` - build from a Dockerfile with custom path/name
     - `docker images` - list images
     - `docker image history fooimage` - list the history of layers on image `fooimage`
         - a blank value in `CREATED_BY` column generally means it's manually commited changes from a container run
     - `docker create someimage` - create container from image
     - `docker rmi someimage`  - remove image
-- a container is an instantiation of an image
+- CONTAINERS
     - `docker start somecontainer`, `docker restart somecontainer` - start/restart a container
     - `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
     - `docker rm somecontainer` - delete the container
