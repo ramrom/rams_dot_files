@@ -53,6 +53,7 @@ public static void main(String[] args) {
 - SHARED MEMORY - 2 seperate processes sharing memory (e.g. for fast IPC) - https://en.wikipedia.org/wiki/Shared_memory
     - most OSes and langauges support this (e.g. python: https://docs.python.org/3/library/multiprocessing.shared_memory.html)
     - forking is a also common case, with copy-on-write parent and child share memory until a write
+        - for linux `fork` only individual pages that are modified are copied-on-write
     - also shared dynamic libs - executables linking to same dynamic lib technically share the same memory
 ### GARBAGE COLLECTION
 - Reference counting
@@ -70,6 +71,8 @@ public static void main(String[] args) {
 
 
 ## CONCURRENCY
+- 2016 - parking_lot lib - good article on mutexes/condvars https://webkit.org/blog/6161/locking-in-webkit/
+    - inspired by futexes
 - wait queue - linux kernel uses these to manage threads that are waiting for a condition to happen
     - blocked or sleeping threads are tracked this way in kernel
     - process/thread woken on the wait queue woken up when event occurs
@@ -96,7 +99,7 @@ public static void main(String[] args) {
 - spin locks implementation is where thread will loop constantly to check if lock is unlocked, a type of busy waiting
 - many mutex implementations will put a thread waiting for a lock to sleep
 #### FUTEX 
-- Fast Userspace Mutex - kernel sys call used to create a lock
+- Fast Userspace Mutex - kernel sys call used to create a lock - https://man7.org/linux/man-pages/man2/futex.2.html
 - a kernel space wait queue attached to atomic integer in userspace
     - userspace allows process to avoid sys calls and is faster
 - thread/processes go on kernel wait queue based on userspace value checking of the atomic integer
