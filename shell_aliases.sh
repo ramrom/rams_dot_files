@@ -154,6 +154,9 @@ alias fhd='ff -t d ~'
 alias ffd='ff -t d'
 alias fnn="print_alias_funcs_scripts | fzf --height 100%"
 
+# LUA
+alias luar='lua -i ~/rams_dot_files/ram-lua-helpers.lua'
+
 # GO
 alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'

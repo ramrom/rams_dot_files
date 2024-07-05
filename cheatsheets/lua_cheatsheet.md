@@ -8,6 +8,7 @@
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"
 - Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM
+- start REPL just by typing `lua`, or start with script `lua -e some-script.lua`
 
 ## LUAJIT
 - LuaJIT uses JIT compiler that generates machine code directly
@@ -54,16 +55,23 @@ end
 repeat
 until (somevar == 3)
 
-for i=1,5 do
-    print("hi")
+-- regular for loop will print nil if integer index doesnt exist
+a = { 1,2 }  -- traditional looking array
+for i=1,4 do
+    print(a[i])   -- prints  1,2,nil,nil
 end
 
--- iterate through array-like tables, use `ipairs`, i is index
-for i,v in ipairs(t) do 
-    -- body
+-- ipairs is builtin function, first arg i is index
+-- iterate through array-like tables, will treat first index with nil as a terminaion
+a = { 10,20 }; a[4] = 30   -- a has a gap, 3rd index is nil
+-- below will print  1,10,2,20
+for i,v in ipairs(a) do 
+    print(i)
+    print(v)
 end
 
--- iterate through record-like tables, use `pairs`
+-- `pairs` iterates through record-like tables
+-- this will iterate through every item, not just integer keys, and doesnt stop when it sees a nil
 for k,v in pairs(t) do 
     -- body
 end
@@ -98,12 +106,15 @@ onearg "dude"
 ```
 
 ## TABLE
+- main docs: https://www.lua.org/pil/2.5.html
 - only data structure, an object, used for **everything**
     - it's sorta fundamentally a associative arrays
     - can use it to make arrays, sets, lists, records, queues, etc
-    - can contain a mix of many field=value and values
-        - e.g. `a = { 1, f1 = 3, { "foo", 3 }, f2 = function() print("hi") end, 2, "val", function() print("a") end, z = {1, "a"} }`
     - value can be any type: number/string/bool/function or another table, field can number/string
+        - e.g. `a = { 1, f1 = 3, { "foo", 3 }, f2 = function() print("hi") end, 2, "val", function() print("a") end, z = {1, "a"} }`
+            - index 1 has `1`, index 2 has `{"foo", 3 }`, index 3 has `2`, index 4 has `"val"`, index 5 has a function
+- to represent a conventional array use integer keys
+    - `a = { 1, x = 2 }; a[3] = 10; a[6] = 3` , `a` has `nil` at index 2, 4, and 5
 - 1-based indexing: first item starts at index _1_, not _0_
     - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
     - tjdevries on why 1 index makes sense - https://www.youtube.com/watch?v=0uQ3bkiW5SE&ab_channel=TJDeVries
@@ -132,7 +143,13 @@ onearg "dude"
     a[2]                    -- returns 3
     table.insert(a,"hi")    -- {1, 3, "hi", "k": 4, 10: {1,2} }
     a[3]                    -- returns "hi"
-    a = nil                 -- assign nil to delete a table
+
+    b = a                   -- b points to same table as a
+    b['k'] = 10
+    print(a['k'])           -- prints 10
+    b['k'] = nil            -- like global vars, assign nil to a table field to delete it
+    a = nil                 -- remove variable/reference to table
+    b = nil                 -- now table has zero references to it, memory manager will garbage collect table
     ```
 
 ## LIBRARIES
