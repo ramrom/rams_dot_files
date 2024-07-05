@@ -363,7 +363,18 @@ public static void main(String[] args) {
     - jitter - add random offset to retry so many entities retrying arent sync'd
 - visitor pattern - seperate object from algorithm
     - a seperate algo/code handles the diff types of objects, versus each object type knowing how to handle itself
+- composition - seperate types/classes for different behaviors, then compose them together in a new class
+    - versus pure inherience approach where they are all related in the same inheritence tree
 - dependency injection - A class accepts the objects it requires from an injector instead of creating the objects directly
+- composition vs dependency injection
+    - seem like very similar ideaas, but dependency injection is more decoupled
+    - good SO example: https://stackoverflow.com/questions/21022012/difference-between-dependency-and-composition
+        - `Address` is a injected(it's **outside**) into `Employee`, user could inject a diff `Address` type, has access to it's API still
+        - `Car` **internally** instantiates an `Engine` type, and is composed of it
+            - in non-composition, functionality of `Engine` might be part of `Car` code or `Car` superclass code
+            - it's not DI b/c we can't choose what `Engine` type to inject or access it's API
+- decorator pattern - add functionality without modifying underlying type
+    - really for classes, so don't create child class, but add a wrapper class for the target class
 - RAII - resource acquisition is initialization - resources are tied to their objects and their lifetimes, released with the object death
 - singleton - single global instance of class, class can have only one instance and has global scope
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
