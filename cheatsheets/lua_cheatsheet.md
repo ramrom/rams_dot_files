@@ -26,10 +26,7 @@
 - it's simple, very fast, super C-compatible
     - binary size is 200KB for embedding
 - it's garbage collected
-- has closures, functions that capture variables one scope up from the env
-- technically all functions are anonymous
-    - declaring a named func e.g. `function foo(x) return x end` is same as `foo = function(x) return x end`
-        - so named functions are really anonymous and stored in a var
+- `function`s are closures, they capture thier environment
 - lua [throws exceptions](https://www.lua.org/pil/24.3.html) (uses `setjmp` from C)
     - there is no exception handling however, i.e. the try/catch stuff
         - a big reason is C doesnt support this
@@ -103,6 +100,10 @@ function onearg(myarg)
 end
 onearg("dude")  -- same as below
 onearg "dude"
+
+-- technically all functions are anonymous, so named functions are really anonymous and stored in a var
+function foo(x) return x end
+foo = function(x) return x end      -- same as above
 ```
 
 ## TABLE
@@ -124,10 +125,6 @@ onearg "dude"
     - the `:` operator is syntax suger for adding `self` param to func call
     - so `a:inc(3)` is equivalent to `a.inc(a, 3)`
     - operator makes it more OOP-like
-- metatables are tables with functions in it
-- `setmetatable` is a function build into the language, lets you override behaviour of other tables
-    - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
-- OOP style can be simulated with the `:` and `setmetatable` features
 - key/value("associate-array"-like) items dont affect the index order of non-key/value ("array"-like) items
     ```lua
     a = {}              -- create blank table
@@ -151,6 +148,16 @@ onearg "dude"
     a = nil                 -- remove variable/reference to table
     b = nil                 -- now table has zero references to it, memory manager will garbage collect table
     ```
+### METATABLE
+- a metatable is a way for tables to "inherit" methods/behaviour and data
+- `setmetatable` is a function build into the language, lets you override behaviour of other tables
+    - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
+- OOP style can be simulated with the `:` and `setmetatable` features
+- `getmetatable` will print the metatable of a table
+- metatables have special fields for various operators:
+    - arithmetic: `+` -> `__add`, `-` -> `__sub`, `*` -> `__mul`, and also `__div`, `__unm`, `__pow`, `__concat`
+    - comparison: `>` -> `__gt`, `<` -> `__lt`, `=` -> `__eq`
+    - other: `__tostring`, `__index`
 
 ## LIBRARIES
 - build in `require` method is main way to load a external file and it's modules
