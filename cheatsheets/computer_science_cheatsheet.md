@@ -77,19 +77,34 @@ public static void main(String[] args) {
     - blocked or sleeping threads are tracked this way in kernel
     - process/thread woken on the wait queue woken up when event occurs
 ### PROCESSES VS THREADS
+- generally a process has many threads
+- processes have thier own memory address space, threads of share the address space of other threads within their process
 - both involve kernel intervention
 - in process context switch (but not thread context switch)
     - virtual memory space is changed
     - cpu cache is flushed
     - TLB(translation lookaside buffer) is flushed
     - process control block is changed
+- "kernel-thread" - confusing term but usually refers to a thread that only executes in the kernels context, no userland connection
 ### NON-NATIVE/NON-KERNEL THREAD
 - green thread - a "thread" managed by the userland process runtime, will run until preempted by the runtime scheduler
+    - some definitions say managed by a "virtual machine", which is prolly much heavier than a runtime
+    - really conflated or coined from java's green threads
 - fibers - cooperative multitasking, each fiber yields volutarily, then a scheduler then schedules next fiber to run
     - Fibers can implement coroutines by allowing each fiber to communicate to the scheduler which fiber should be run when it yields
 - co-routine - green threads where pause/yields are specified by the programmer, no scheduler
     - essentially a coroutine will yield and call another coroutine
     - Coroutines can be used to implement fibers by always yielding to a scheduler coroutine
+- light-weight process
+    - erlang is a popular example of using these, BEAM is the vm
+    - often refers to userland threads associated with kernel-threads
+### ACTOR MODEL
+- erlang kind of invented the first version of the idea, modern examples are akka framework
+- actor is a concurrent thing, generally operating as a userland "thread"
+    - is **isolated**, can only talk to other actors via message passing to each actors mailbox
+        - in erlang each actor has it's own head/stack/program-counter
+- hierarchical, you have a parent/supervisor actor than manages it's child actors
+    - supervisor responsible for handle a failed/erroring child actor
 ### CONDITIONAL VARIABLES
 - conceptually a wait queue of threads, waiting for some event
 - often waiting for a mutex to release, and notified/awakened when that happens
@@ -331,6 +346,9 @@ public static void main(String[] args) {
         - `func(func(Animal)->nil)` can be passed in where `func(func(Dog)->nil)` but not the other way around
         - this is try in Ocaml functions, and in Rust for `Fn(T)->()`
     - in rust variance mostly affects lifetimes - https://doc.rust-lang.org/reference/subtyping.html
+- generics - aka parametric programming - language that support abstracting a type a function/class/struct can take
+- ADT - algebraic data types, [see functional programming section](#functional-programming)
+- higher kinded types - [see functional programming section](#functional-programming)
 
 
 ## SOFTWARE PATTERNS
@@ -396,7 +414,7 @@ public static void main(String[] args) {
 - AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training
     - AlphaGo Zero, had zero initial human game traing, was pure reinforcement learning, and surpassed AlphaGo Lee and Master
 
-## FUNCTIONAL PROGRAMMING CONCEPTS
+## FUNCTIONAL PROGRAMMING
 - pure function 
     1. a function that returns same values for same input values
     2. no side-effects, no mutation of local static or global variables, no I/O

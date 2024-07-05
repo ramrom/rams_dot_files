@@ -15,6 +15,9 @@
 - when you boot, hit escape to go into GRUB bootloader for boot options (can do recovery mode)
 - dash is used as /bin/sh b/c it's much faster than bash, so boots are faster
     - it doesnt have command completion, or ctrl-r search, or command history search, as this would make the shell slow
+- linus key principle is to never break kernel-to-userspace API(or ABI), that contract will always hold
+    - however internal kernel APIs (and ABIs) b/w kernel components break all the time
+    - so userland programs wont break but expect like your binary device driver to break over diff kernel versions
 
 ## GNU
 - project started by richard stallman in 1984
@@ -427,9 +430,9 @@ pulsemixer - volume manager with pulseaudio
     - https://github.com/GeorgeFilipkin/pulsemixer
     - can see input and output devices and processes using each and modify volume on each
         - can move a source(process outputting audio) to another sink(output device) or kill or mute in TUI
-    pulsemixer --toggle-mute
-    pulsemixer --mute
-    pulsemixer --change-volume +5
+    - `pulsemixer --toggle-mute`
+    - `pulsemixer --mute`
+    - `pulsemixer --change-volume +5`
 
 ## KERNEL MODULES
 - can be dynamically loaded/unloaded from kernel at runtime
@@ -451,9 +454,9 @@ pulsemixer - volume manager with pulseaudio
     - specify rules what on how to identify device, regardless of what port it's plugged into
         - e.g. plug in same device into diff usb ports and see `/dev/foo` and not `/dev/usb0`/`dev/usb1`
 - loop devices
-    - regular files in a filesystem that can act as a block device, usually named something like /dev/loopX
+    - regular files in a filesystem that can act as a block device, usually named something like `/dev/loopX`
 - if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
-- tmpfs - ram drives, for temporary and fast storage of data in RAM
+- `tmpfs` - ram drives, for temporary and fast storage of data in RAM
 - drive naming convention
     - fd - SATA, sd - SCSI/SATA, hd - IDE
     - fda - first SATA drive, hdb - 2nd IDE drive

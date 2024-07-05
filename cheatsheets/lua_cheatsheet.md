@@ -135,12 +135,23 @@ onearg "dude"
     a = nil                 -- assign nil to delete a table
     ```
 
+## LIBRARIES
+- build in `require` method is main way to load a external file and it's modules
+- see https://www.lua.org/pil/8.1.html
+- `require("foo")` will look for a `foo.lua` file to load
+- `require` looks in a path, but path is really a list of patterns, not dirs like in shell
+    - looks for path in global `LUA_PATH`, then env var `LUA_PATH`, then some default like `"?;?.lua"`
+- `dofile` vs `require`
+    - require wont reload a file if already loaded
+    - require will search a path for a file
+
 ## METHODS AND SYNTAX
 - global variables evaluate to `nil` if not initialized
 - `pcall` lua method catches errors
     - `local ok, _ = pcall(vim.cmd, 'boguscmd')`, `ok` is bool, `false` if error was raised
 - `[[ some multi line text ]]` - use double brackets for multi-line string literals
 - introspect type - `a=1; print(type(a))` -> prints string `number`
+    - `"str"` -> `"string"`, `nil`->`"nil"`, `false`->`"false"`, `{}` -> `"table"`, `function() end` -> `"function"`
 - pretty print a table
     - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
 

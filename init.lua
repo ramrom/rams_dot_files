@@ -885,7 +885,7 @@ end
 --------------------- TABOUT --------------------------------
 LoadTabOut = function()
     require('tabout').setup {
-        tabkey = '<C-e>', -- key to trigger tabout, set to an empty string to disable
+        tabkey = '<C-s>', -- key to trigger tabout, set to an empty string to disable
         backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
         act_as_tab = true, -- shift content if tab out is not possible
         act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
@@ -1158,7 +1158,7 @@ vim.g.mapleader = " "
         -- <leader> + ,/l/u/x/<0-9>
         -- <Leader><Leader>  (most open)
         -- <BS>
-        -- c-g, c-s, c-q(same c-v), c-j(newline), c-k(digraph)
+        -- c-q(same c-v), c-j(newline), c-k(digraph)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
         -- ;  - semicolon repeats last f/F motions
         -- ,  - in reverse direction
@@ -1228,8 +1228,10 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 --- ADD NEWLINE AND STAY IN NORMAL
 vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
 
--- GOTO END OF LINE IN INSERT MODE
-vim.keymap.set("i", "<C-s>", "<C-o>$")   -- C-g default is to print file name and other metadata
+-- INSERT MODE NAVIGATION
+vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-s default per nvim docs does nothing
+vim.keymap.set("i", "<C-b>", "<C-o>h")   -- C-b default per nvim docs does nothing
+vim.keymap.set("i", "<C-f>", "<C-o>l")   -- C-f default per nvim docs does indenting for chars */!
 
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
