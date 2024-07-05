@@ -1229,9 +1229,10 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
 
 -- INSERT MODE NAVIGATION
-vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-s default per nvim docs does nothing
-vim.keymap.set("i", "<C-b>", "<C-o>h")   -- C-b default per nvim docs does nothing
-vim.keymap.set("i", "<C-f>", "<C-o>l")   -- C-f default per nvim docs does indenting for chars */!
+vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-s default per nvim docs - does nothing
+vim.keymap.set("i", "<C-a>", "<C-o>0")   -- C-a default per nvim docs - insert previously inserted text
+vim.keymap.set("i", "<C-b>", "<C-o>h")   -- C-b default per nvim docs - does nothing
+vim.keymap.set("i", "<C-f>", "<C-o>l")   -- C-f default per nvim docs - indenting for chars */!
 
 --------- FZF ---------------------
 vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
