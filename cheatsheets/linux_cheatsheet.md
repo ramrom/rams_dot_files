@@ -423,7 +423,9 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 
 ## SOUND
 - ALSA: is base sound stack for all linux distro
-- pluseaudio: builds on top of ALSA, can do things like mix many sound streams together
+- pluseaudio - builds on top of ALSA, can do things like mix many sound streams together
+- pipewire - aims to fix deficencies of pulseaudio, default sound server in ubuntu22, fedora34
+    - originally called pulsevideo, and for video. devs renamed it and decided to handle audio
 amixer - cli for ALSA
     amixer sset Master 5%+
 pulsemixer - volume manager with pulseaudio
