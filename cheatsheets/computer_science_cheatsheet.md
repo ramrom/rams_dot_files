@@ -86,15 +86,27 @@ public static void main(String[] args) {
     - TLB(translation lookaside buffer) is flushed
     - process control block is changed
 - "kernel-thread" - confusing term but usually refers to a thread that only executes in the kernels context, no userland connection
+- models
+    - 1:1 - userland thread corresponds to one native thread
+    - N:1 - many userland threads map to one native thread, and cant be moved to another native thread
+    - M:N - many userland threads can be mapped to many native threads, userland scheduler is complex
 ### NON-NATIVE/NON-KERNEL THREAD
 - green thread - a "thread" managed by the userland process runtime, will run until preempted by the runtime scheduler
     - some definitions say managed by a "virtual machine", which is prolly much heavier than a runtime
     - really conflated or coined from java's green threads
 - fibers - cooperative multitasking, each fiber yields volutarily, then a scheduler then schedules next fiber to run
     - Fibers can implement coroutines by allowing each fiber to communicate to the scheduler which fiber should be run when it yields
-- co-routine - green threads where pause/yields are specified by the programmer, no scheduler
-    - essentially a coroutine will yield and call another coroutine
-    - Coroutines can be used to implement fibers by always yielding to a scheduler coroutine
+- coroutine - cooperative multitasking, where pause/yields are specified by the programmer, no scheduler
+    - used since 1958, defined by Knuth
+        - generalization of subroutine, subroutine has beg and end, coroutines can be suspended in the middle and resume
+        - most common definition/concept is: coroutine will yield and call another coroutine
+    - coroutines can be used to implement fibers by always yielding to a scheduler coroutine
+    - symmetric vs assymetric
+        - symmetric coroutine often means coroutine can only yield to another coroutine
+        - asymetric(or semicoroutine) - has a func to suspend/resume a coroutine, lua coroutines are an example of this
+    - stackful vs stackless
+        - stackful - uses an interface adapter on top of a threads stack, sometimes fibers are called this
+        - stackless - compiler constructs a state machine data structure
 - light-weight process
     - erlang is a popular example of using these, BEAM is the vm
     - often refers to userland threads associated with kernel-threads

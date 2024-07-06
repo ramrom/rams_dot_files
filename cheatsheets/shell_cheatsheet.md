@@ -247,6 +247,8 @@ noglob http
 # kill background job 1
 kill %1
 
+
+########### REDIRECTION
 # redirect stderr to out
 cat 2>&1 blah
 
@@ -256,7 +258,10 @@ cat 2>&1 blah
 # redir stderr and stdout to /dev/null
 cat > /dev/null 2>&1 blah
 
-# PIPES
+echo "hi" > somefile    # > will redirect output to a regular file, writing/overwriting it
+echo "hi" >> somefile    # >> will append to regular file
+
+########### PIPES
 # most commands line-buffer STDOUT if its goin to a terminal
 # but if STDOUT goes to a pipe input, they will buffer more than a line (e.g. 4k bytes)
 # grep buffers like this, tail used to but modern versions dont, echo does
