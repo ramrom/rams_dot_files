@@ -86,7 +86,7 @@ System.out.println(Arrays.deepToString(tdarray))  // deepToString great for prin
 - the Collection is a superinterface of List and Set
 - List adds order and can be indexed
 - Set is a Collection that guarantees unique values
-- HEIRARCHY - I=interface, C=class
+- HEIRARCHY - I=`interface`, C=`class`
     - Iterable(I) -- Collection(I)
     - Collection(I) -- List(I) -- ArrayList(C),LinkedList(C),Vector(C),Stack(C)
     - Collection(I) -- Set(I) -- HashSet(C),LinkedHashSet(C)
@@ -101,7 +101,6 @@ System.out.println(Arrays.deepToString(tdarray))  // deepToString great for prin
 // ArrayList can dynamically change size
 ArrayList<String> mylist = new ArrayList<String>();
 mylist.add("hi");
-mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
 mylist.add(0, "new");  // add "new" string at index 0, so mylist ==> { "new", "hi" }
 mylist.toString();      // prints "[new, hi]"  , toString calls toString on each item in the List
 mylist.size()   // returns 2, size returns length, not capacity of ArrayList

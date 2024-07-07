@@ -1158,12 +1158,12 @@ vim.g.mapleader = " "
         -- <leader> + ,/l/u/x/<0-9>
         -- <Leader><Leader>  (most open)
         -- <BS>
-        -- c-q(same c-v), c-j(newline), c-k(digraph)
+        -- c-q(same c-v), c-s(pause ctrl flow)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
         -- ;  - semicolon repeats last f/F motions
         -- ,  - in reverse direction
     -- INSERT MODE
-        -- c-b, c-v, c-s, c-space, c-y
+        -- c-v, c-q(same as c-v) c-space, c-y
 
 -- TODO: i think this map is probably useful
 -- vim.keymap.set("n", "<C-j>", "a<CR><Esc>k$")
@@ -1229,7 +1229,7 @@ vim.keymap.set('v', '<C-p>', '<S-<>gv')
 vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
 
 -- INSERT MODE NAVIGATION
-vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-s default per nvim docs - does nothing
+vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-e default per nvim docs - does nothing
 vim.keymap.set("i", "<C-a>", "<C-o>0")   -- C-a default per nvim docs - insert previously inserted text
 vim.keymap.set("i", "<C-b>", "<C-o>h")   -- C-b default per nvim docs - does nothing
 vim.keymap.set("i", "<C-f>", "<C-o>l")   -- C-f default per nvim docs - indenting for chars */!
@@ -1445,7 +1445,10 @@ if not vim.env.VIM_NOPLUG then
         { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
         -- MARKDOWN
-        { "iamcco/markdown-preview.nvim", build = function() vim.fn["mkdp#util#install"]() end },
+        { "iamcco/markdown-preview.nvim",
+            cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, ft = { "markdown" },
+            build = function() vim.fn["mkdp#util#install"]() end,
+        },
         -- { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
