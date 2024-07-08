@@ -241,6 +241,14 @@ htop
 # IOTOP - top like temrinal UI, but show io/disk usage by process (on osx and linux)
 sudo iotop -o
 
+# ULIMIT - see user limits (per process)
+# hard limit is max a soft limit can be increased to, raising hard limits requires root
+ulimit -a       # get all user limits (soft)
+ulimit -a -H    # get all hard user limits
+ulimit -H -n   # get hard limit for simultaneous opened files
+ulimit -S -n   # get soft limit for simultaneous opened files
+ulimit -u 30   # set max per-user process limit to 30
+
 # sysstat (linux pkg with many tools), has great colors
 iostat          # show per device/filesystem disk read, with no arg calculated *since* last reboot
 iostat -m       # display in megabytes
