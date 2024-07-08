@@ -78,6 +78,8 @@ public static void main(String[] args) {
 - wait queue - linux kernel uses these to manage threads that are waiting for a condition to happen
     - blocked or sleeping threads are tracked this way in kernel
     - process/thread woken on the wait queue woken up when event occurs
+### ASYNC
+- 2015 - nice blog on red/blue(sync/async) colored functions: https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
 ### PROCESSES VS THREADS
 - generally a process has many threads
 - processes have thier own memory address space, threads of share the address space of other threads within their process

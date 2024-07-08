@@ -184,6 +184,7 @@ foo = function(x) return x end      -- same as above
 - api is exposed throgh `coroutine` table
 - programmer sets yield points to yield control, programmer has to resume exection
 - each coroutine has it's own stack and local vars
+    - *UNSURE* each cortouine has 1:1 mapping to a OS thread
 ```lua
 -- examples
 c = coroutine.create(function() print('hi') end); 

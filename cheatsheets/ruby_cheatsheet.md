@@ -3,6 +3,10 @@
 - https://www.ruby-lang.org/en/news/2020/12/25/ruby-3-0-0-released/
     - Matz said "3x3" - ruby 3 JIT is 3x faster than ruby 2
 
+## HISTORY
+- ruby 3
+    - introduced `Ractor`(ruby actors) class, each one has it's own RIL(ruby interpreter lock), this allows true OS thread parallelism
+
 ## DOCS
 - https://www.tutorialspoint.com/ruby/index.htm
 - XinYmin: https://learnxinyminutes.com/docs/ruby/

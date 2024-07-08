@@ -653,7 +653,9 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
 ### FUTURES/ASYNC
 - run many concurrent tasks on a small number of OS threads
-- are inert - the make progress only when polled
+- `Future` are inert - the make progress only when polled by `await`
+    - can create a `Future` in sync code, but can only `await` a `Future` if it's in a `async`(`Future`) function itself
+        - i.e. top level `main` function in the thread has be `async` (and basically an executor to poll it)
 - zero cost - can use them without heap allocation or dynamic dispatch
 - `async`/`await` keywords introduced in 2018 edition, it returns a `Future`, `Future` trait defined in std lib
     - `async fn() -> T { ... }` is basically `fn() -> Future<T> { async { ... } }`

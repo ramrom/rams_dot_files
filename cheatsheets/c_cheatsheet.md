@@ -45,11 +45,29 @@ void foo() {
     ```
 
 ## TYPES
+### PRIMITVE TYPES
 - byte, char - 8bits
 - short, short int, signed short, signed short int - 16bits
 - long - 32bits
 - long long - 64bits
 - float - 32bits, double - 64bits
+### STRUCTS
+- structs are pass by value, they get copied when passed into a function or assigned to a different var
+```c
+struct foo { int val; char name[10]; };
+typedef struct foo foo;     // use typedef to declare foo as a formal type
+
+struct foo g;       // no init, global/static-global/static-local/static-member, it's initialized to zero values
+
+int main() {
+    struct foo f;           // no initialization, in local scope will have garbage/random values
+    struct foo f2 = { 3, "hi" }   // initialize with initializer list
+    struct foo f3 = { .name = "hi", .val = 3 }   // initialize with designated initializer list, can be out of order
+    struct foo f4 = f2;               // this makes a copy of struct f2
+
+    foo f5; // because we typedef'd foo we dont need the struct keyword
+}
+```
 
 ## CONCEPTS
 ### NULL POINTER
