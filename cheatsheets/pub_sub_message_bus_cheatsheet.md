@@ -1,9 +1,17 @@
 # PUB SUB MESSAGE BUS CHEATSHEET
+- message delivery semantics
+    - at-most once - messages can be lost but are never redelivered
+    - at-least once - never lost but could be redelivered
+    - once only - delivered once and only once
+- push vs pull
+    - push - messages are pushed to consumer
+    - pull - conumser must request for messages
+- order
+    - FIFO - message order gauranteed, consumer gets messages in order they were added to queue
 
 ## KAFKA
 - apache kafka 2 is like 20% scala (0.7 was like 50%)
     - 3.1.0 - `core` (most important module) written in scala
-- each partition is replicated on many brokers
 - apache zookeeper often used to maintain kafka cluster
     - tracks which broker is responsible for which partitions and topics
 - kafka has _logs_ not _messages_
@@ -39,6 +47,11 @@
     - if a topic lives on one partition, message order is guaranteed at topic level
         - disadvantage here is that this caps the throughput/scalability
     - if on many partitions, messages are distibuted and topic-level order not guaranteed obviously, but partition level is
+    - for many producers, a db sequence or distributed counter could be leveraged to ensure unique seq # b/w all producers
+- duplication
+    - has idempotent producer feature, uses a Producer ID (PID) and a sequence number as idempotency key
+        - idempotency key must be unique for a given partition, a msg with same idempotency key is a dup and discarded
+        - e.g. could happen if producer retries b/c of network fault(didnt reach kafka) or not getting an ack from kafka
 
 ## APACHE FLUME
 - messsages are pushed to consumer

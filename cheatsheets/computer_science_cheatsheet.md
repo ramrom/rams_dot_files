@@ -491,7 +491,10 @@ public static void main(String[] args) {
     - Paxos - predates Raft, more complex
 - CAP - Consistency Availability Partition-tolerance
     - C in CAP is different from C in ACID
-    - in a partitioned distrubted system if a partition fails, you can either have consistency or availability
+    - in a distrubted system if a partition fails, you can either have consistency or availability
+        - take the system offline or stop processing requests until partiion is available
+        - or keep processing requests, but lose consistency
+            - e.g. async replication, partition causes replica to lose updates, master dies, replica promoted with outdated state
 - eventual consistency - when a cluster eventually will all reach the same state
     - e.g. postgres replicas/followers are always behind to some degree, but will eventually get all the writes
 - tunable consistency - e.g. cassandra offers this
