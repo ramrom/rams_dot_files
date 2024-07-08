@@ -514,5 +514,7 @@ i.next       // throw NoSuchElementException
         - common type aliases using this `Task` `UIO`(cant fail) `TaskR`(needs env) `IO`(returns E)
 ### AKKA
 - one of akka streams main goals is to implement backpressure
+### PEKKO
+- spawned by apache project from akka 2.6, written mostly in scala and some java
 ### SLICK
 - print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick

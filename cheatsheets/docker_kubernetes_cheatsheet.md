@@ -83,6 +83,11 @@
         - containers in a pod can talk to each other using `localhost`
         - containers in same pod can use IPC like shared memory
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
+- liveliness vs rediness
+    - liveliness - verify pod is running, app/process didnt deadlock or crash or run out of memory, so cant respond to requests
+        - k8 will generally restart pod
+    - readiness - pod could be live but not ready to receive traffic yet, e.g. waiting for other pods/services, or populating dataset
+        - k8 will just stop serving traffic to pod (but wont kill/restart it)
 - tailing logs
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
 - HPA - horizontal pod autoscaler

@@ -620,6 +620,10 @@
 - AAAA record - needed for IPv6
 - MX record - name for email server for a domain
 - TXT record - contains textual data
+### TCP
+- a connection, is identified by 4 fields: source IP, source port, dest IP, dest port
+    - techincally a socket is 5 fields, above 4 plus protocol(UDP or TCP)
+    - a client(single IP) can thus have 2^16(~65k) connections to a server IP and port
 ### IP
 - IPv4 - 32bits, 4bil addresses
     - private address ranges: 10.x.x.x(class A), 172.16.x.x - 172.31.x.x(class B), 192.168.x.x(class C)
@@ -669,6 +673,10 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - NFC and EMV both use RF protocol, ISO 14443 B
 
 ## AUTHENTICATION
+- OOBA - out-of-band authentication - authenticate from a different band
+    - e.g. getting a code on cell/mobile when logging into a website on browser, in-band would be the code/auth in the same browser
+- MFA - multi-factor authentication - using more than one piece of authentication data
+    - e.g. website user/password and then a security question, e.g. fingerprint + SMS code
 - Oauth - invented in 2006 out of twitter OpenID standard
     - https://oauth.net/
     - oauth 1.0 came out in 2007, by google engineer

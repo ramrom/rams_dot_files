@@ -84,6 +84,15 @@
 - IIS - internet information services, by microsoft
 ### NGINX
 - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
+- popular choice for reverse proxy, load balancing, HTTP caching and more
+- created in 2004 by igor sysoev to solve C10K problem while working at Rambler, FOSS on BSD liscense
+    - Sysoev founded company Nginx Inc. and created nginx plus(propietary) in 2011, they were bought by F5 in 2019
+- FEATURES
+    - load balancing: round robin, least connections, server weights(for assymetric upstream servers), does IPHash session persistence
+    - failure detection: `max_fails` and `fail_timeout` configs, nginx plus has out-of-band healthchecks(HTTP tests)
+    - connection pooling/reuse - can maintain persistent tcp connection with upstreams
+        - for HTTP/layer7 proxy can multiplex many client connections onto one upstream connection
+        - for TCP/layer4 usually it's a 1:1 client connection per upstream connection
 - `site-available` and `sites-enabled` are 2 folders
     - design is to define all site with conf files in `sites-avaialble` and symlink to `sites-enabled` for ones to be active
     - jan2023 - per internet this pattern is deprecated, now just create `your-site.conf` in the `/etc/nginx/conf.d` folder

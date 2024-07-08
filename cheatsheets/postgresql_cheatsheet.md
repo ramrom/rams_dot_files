@@ -82,7 +82,7 @@
 - good doc: https://en.wikibooks.org/wiki/PostgreSQL/Replication
 - two major types: logical and physical
 - synchronicity
-    - syncronous replication - master waits till atleast one replica wrote a transaction to it's log
+    - synchronous replication - master waits till atleast one replica wrote a transaction to it's log
         - fine-grain tunable, can specify per-db, per-user, per-session
     - async - data send without waiting for confirmation replicas got each message
 - trigger replication, SUPER old, table triggers used to send data to replicas, this predates WAL

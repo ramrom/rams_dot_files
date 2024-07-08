@@ -1204,6 +1204,9 @@ vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
 vim.keymap.set("n", "<leader><leader>t", "<C-w>T")
 vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
 vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
+-- Quickly switch between vimtab indexes 1 to 9
+for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
+
 
 ---- SMART QUITTING
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
@@ -1316,9 +1319,6 @@ vim.api.nvim_create_autocmd(
             [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]], { buffer = true })
       end,
 })
-
--- Quickly switch between vimtab indexes 1 to 9
-for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 
 
 ----------- LSP KEYBINDINGS --------------------------------------------

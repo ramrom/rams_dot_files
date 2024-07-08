@@ -5,6 +5,8 @@
 - NoSQL: term can refer to many different paradigms bug are generally: column, document, key-value, and graph
 - impedance mismatch - concept of friction/incompatibility of ORMs, OO <-> relational data mapping issues
 - N+1 query problem - app code that translates to 1 query from a table and N extra seperate queries from a related table
+- sequential access is faster than random access on underlying storage mediums
+    - particularly true for HDD, lot of physical movement, needle movement, platter movement
 
 
 ## RELATIONAL
@@ -59,10 +61,10 @@
 ## DOCUMENT DB
 - dynamodb - created by AWS
 ### MONGO
+- [main cheatsheet](mongo_cheatsheet.md)
 - supports schemas for collections - https://www.mongodb.com/docs/manual/core/schema-validation/
     - for JSON uses json-schema (jul2024 - draft 4)
 - uses leader-based replication
-- also see [mongo](mongo_cheatsheet.md)
 
 ## KEY-VALUE
 - memcached
@@ -109,9 +111,16 @@
 
 ## ACID
 - Atomicity
+    - a transaction, which means all operations in transaction happen or none of them do
 - Consistency
+    - atomicity, isolation, and durability are properties of db itself, consistency is specified by programmer
+    - consistency in data, features that facilitate data validatity
+        - e.g. can create a FK relationship, a row that has a FK to it can't be deleted
+        - e.g uniqueness index, data in column cannot be duplicated
 - Isolation
+    - transactions run in ioslation of other transactions
 - Durability
+    - committed transactions cannot be lost, i.e. persisted on durable non-volatile storage
 
 ## GRAPH
 - Neo4j - most established and well known

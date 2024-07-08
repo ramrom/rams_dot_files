@@ -954,6 +954,12 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 
 
 ## MAJOR LIBS/FRAMEWORKS
+### SPRING FRAMEWORK
+- FOSS application framework, originated in 2003, supports many programming models
+    - spring 5, ~2018 releaese, uses reactive streams
+- uses IoC(inversion of control) - IoC container is main component of framework, main methods: dependency injection, dependecy lookup
+- Sprint Boot - convention-over-config set of tools/applications
+- other major Spring modules/libs: MVC framework, data access framework, integration framework, websockets, webflux
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
@@ -969,10 +975,9 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 ### NIO
 - added in java 1.4
 - new input/output - collection of java APIs for heavy IO ops
-### SPRING FRAMEWORK
-- the latest hotness
 ### REACTIVE STREAMS
-- really a standard for async stream processing, also supports non-blocking backpressure
+- ~2013 inception, play and akka teams at lightbend started it with netflix/pivotal
+- really a standard for async stream processing that supports non-blocking backpressure
 - akka streams, spring framework v5, play framework, kafka, cassandra, elasticsearch all use it
 ### WIREMOCK
 - testing library that lets you spawn live http server with test responses on endpoints

@@ -16,7 +16,7 @@
     - if key and partition empty, then message is round robin sent to all partitions
 - each broker is a seperate server
     - replicas of partitions are on different brokers
-- brokers support acknowledgement of the delivery of messages from producers, there are 3 acknowledgement modes:
+- brokers support acknowledgement of the delivery of messages from producers, there are 3 acknowledgement modes
     - ack=0 -> no acks, producer doesnt wait for acks
     - ack=1 -> waits for leader broker ack
     - ack=2 -> wait for acks from all in-sync replicas of a partition

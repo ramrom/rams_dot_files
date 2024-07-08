@@ -1,5 +1,7 @@
 # COMPUTER SCIENCE
 - null character value, represented as ASCII code point zero, bits will all be zero value
+- scalable vs elastic: scalable means it can handle greater capacity, elastic means it also dynamically adapts to current capacity
+    - e.g. my systems can deploy 10x servers to handle 10x demand, but wont scale down, elasic would scale up/down to match load
 
 
 ## NUMERIC REPRESENTATIONS
@@ -310,7 +312,11 @@ public static void main(String[] args) {
 
 
 ## LOAD BALANCING
-- strategies
+- layer type
+    - layer 3(network)
+    - layer 4(TCP/UDP)
+    - layer 7(e.g. HTTP)
+- balancing strategies
     - round robin
         - DNS based strategy: a DNS entry can have many A records, and will round-robin each of those A records
     - rule-based: e.g. by node latency, node volume, node reliability, fewest acive connections, least bandwidth
