@@ -53,6 +53,18 @@
         - idempotency key must be unique for a given partition, a msg with same idempotency key is a dup and discarded
         - e.g. could happen if producer retries b/c of network fault(didnt reach kafka) or not getting an ack from kafka
 
+## APACHE FLINK
+- real-time large data stream/batch processing framework, simlar to kafka streams or apache spark
+    - has a JobManager and TaskManager(aka workers), jobmanager schedules jobs to taskmanagers
+    - flink apps can be written in java/scala/python or sql
+- versus spark, it's considered more lower latency and real-time
+- historically started as a stream framework, then batch
+
+## APACHE SPARK
+- analytics engine that can stream/batch process, can also do ML and graph processing
+    - used for data warehousing, ETL, ML, and more
+- historically started as a batch framework, then stream
+
 ## APACHE FLUME
 - messsages are pushed to consumer
 

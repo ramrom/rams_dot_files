@@ -323,12 +323,11 @@ s.pop(); // raises EmptyStackException sinc it's empty
     // also ArrayDequeue immplements Deque interface (which implement Queue), is a double ended queue
 Queue<String> queue = new LinkedList<>();
 queue.add("a");     // add to queue, returns `true` if successful, throws `IllegalStateException` if it's full
-queue.add("b");
 queue.offer("b");  // same as add but returns false if adding fails
-queue.peek():    // retrieves, but does not remove next item in queue, returns null if queue empty
-queue.element():    // like peek, but throws exception if queue is empty
 queue.poll();     // retreives and removes next item in queue, returns null if empty
 queue.remove();     // like poll but throws exception if queue is empty
+queue.peek():    // retrieves, but does not remove next item in queue, returns null if queue empty
+queue.element():    // like peek, but throws exception if queue is empty
 queue.clear();  // clear queue
 queue.size();       // return # of items in queue
 queue.isEmpty();       // return true if empty

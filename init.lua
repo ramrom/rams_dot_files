@@ -406,6 +406,9 @@ local LoadOneDarkProConfig = function()
             ['@markup.heading.1.markdown'] = { fg = "#FF0000", underline = true },
             ['@markup.heading.2.markdown'] = { fg = "#FF0000", underline = true },
             ['@markup.heading.3.markdown'] = { fg = "#ef596f" },
+            ['@markup.heading.4.markdown'] = { fg = "#ef596f" },
+            ['@markup.heading.5.markdown'] = { fg = "#ef596f" },
+            ['@markup.heading.6.markdown'] = { fg = "#ef596f" },
 
             Search = { underline = true, italic = true, reverse = true },
         }
