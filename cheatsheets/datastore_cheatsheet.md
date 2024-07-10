@@ -69,6 +69,9 @@
 ## KEY-VALUE
 - memcached
 ### REDIS
+- redis does have a native compare-and-swap operation but you could write a lua script easily
+- redis has a lua JIT inside it for scripting
+    - a lua script runs atomically
 - modes
     - single - one instance
     - cluster - horizontal scaling with sharding

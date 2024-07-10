@@ -12,12 +12,15 @@
 ## KAFKA
 - apache kafka 2 is like 20% scala (0.7 was like 50%)
     - 3.1.0 - `core` (most important module) written in scala
+- uses apache zookeeper to manage it
+    - 2024 - zookeeper has limitations and work ongoing to remove it
 - apache zookeeper often used to maintain kafka cluster
     - tracks which broker is responsible for which partitions and topics
 - kafka has _logs_ not _messages_
     - logs are persistent, they stick around until the TTL expires
     - in message queues, messages are deleted immediately after consumers get them
     - b/c it's persistent, consumer requests an offset # of the log, and can rerequest or get older messages
+    - reads start from an offset and are sequential, with all data zero-copied from the disk buffer to the network buffer
 - logs/messages
     - has a key, and hash of key decides target partition
     - if key is empty, partion field is used
@@ -52,6 +55,11 @@
     - has idempotent producer feature, uses a Producer ID (PID) and a sequence number as idempotency key
         - idempotency key must be unique for a given partition, a msg with same idempotency key is a dup and discarded
         - e.g. could happen if producer retries b/c of network fault(didnt reach kafka) or not getting an ack from kafka
+
+## APACHE PULSAR
+- similar to kafka, written entirely in java
+- more complex, has 4 main components: pulsar servers, apache zookeeper, apache bookeeper, rocksDB 
+- write to a index-based storage system, fast for random access, but slow for overall througput compared to kafka sequential logs
 
 ## APACHE FLINK
 - real-time large data stream/batch processing framework, simlar to kafka streams or apache spark

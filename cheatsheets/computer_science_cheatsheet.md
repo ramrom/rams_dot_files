@@ -329,6 +329,26 @@ public static void main(String[] args) {
 - HA/redundancy
     - active-active - multiple instances balancing traffic, heartbeats b/w them to stay informed of state
     - active-passive - passives dont serve traffic, just wait for active to die and them they promote
+### EXAMPLE
+- facebook load balancing (2016) - https://www.youtube.com/watch?v=LLBT70yexZo&ab_channel=USENIX
+    - user -> L3-ecmp(equal-cost-multipath) -> L4LB(ipvs) -> L7LB(proxygen) -> HHVM(hiphop vm that serves FE tasks)
+        - l7lb does tls/ssl termination
+        - l4->l7 use consistent hashing(on socket 4tuple) to l7LB, must maintain same target to maintain TCP connections
+            - if l4lb dies, the l4lb that takes the failover traffic uses same consistent hashing algo to send to same l7lb
+            - if l7lb dies, tcp conn def breaks, l4lb consistenly hashes to new l7lb, remembers in it's local state if old l7 comes back
+    - one cluster: ~10s of l4 lb, ~100s of l7 lbs, ~1000s of HHVMs
+        - there are other cluster types that arent FE, e.g. a database
+        - all components(not l3 router) run on commodity x86 hosts/VMs with k8s/docker type system to deploy onto
+    - l3-ecmp advertises BGP routes to l4LB(yea they're not l3 routers) and l4LBs respond with VIP
+    - use service discovery(based on zookeeper) to keep track of l7LBs for l4LBs
+    - multiple clusters are a datacenter
+    - edge POPs - handle just TCP and TLS termination, no HHVM(or core stuff), nice compromise 
+        - as fewer datacenters for HTTP/core stuff, but much lower response times (tcp + tls handshake are fast)
+    - Cartographer (DNS LB) - system that configures dns servers so optimal POP server is selected for that region
+        - gets real-time data from POPs and data centers globally
+        - Sonar - a system measure closesness to POP based on network address, test by sending pics and measuring route/time
+        - also measure data center health and capacity(total rps, cpu util, network util, etc)
+        - updates on a one-two minute cycle, then DNS maps are torrented to thousands of DNS servers
 
 
 ## SORTING

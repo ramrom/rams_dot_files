@@ -624,6 +624,7 @@
 - a connection, is identified by 4 fields: source IP, source port, dest IP, dest port
     - techincally a socket is 5 fields, above 4 plus protocol(UDP or TCP)
     - a client(single IP) can thus have 2^16(~65k) connections to a server IP and port
+    - uses 3-way handshake to establish connection: SYN -> SYN ACK -> ACK
 ### IP
 - IPv4 - 32bits, 4bil addresses
     - private address ranges: 10.x.x.x(class A), 172.16.x.x - 172.31.x.x(class B), 192.168.x.x(class C)

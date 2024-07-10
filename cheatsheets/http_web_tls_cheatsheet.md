@@ -34,6 +34,8 @@
     - many servers reject or drop the body of a GET request
 
 ## SSL/TLS
+- uses 4 way handshake to estable connection: ClientHello -> ServerHello -> ChangeCipherSpec -> ChangeCipherSpec
+### CERTIFICATES
 - certificate data is formatted according to X.509 standard: https://en.wikipedia.org/wiki/X.509
 - root CA certs can last 20 years or more
     - the root CA cert is self-signed and inherently trusted
