@@ -5,7 +5,7 @@
 -- firenvim binstub - $HOME/.local/share/firenvim/firenvim
 
 ---------------------------- PLUGINS --------------------------------------
-print("firevim start")
+print("firevim config init")
 local lazypath = vim.fn.stdpath("data") .. "/firelazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -180,3 +180,5 @@ vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set('n', '<leader><leader>r', '<cmd>:History:<cr>', { desc = "command history" })
 vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
 vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
+
+print("firevim config complete")

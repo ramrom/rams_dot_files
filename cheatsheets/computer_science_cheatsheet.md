@@ -333,11 +333,12 @@ public static void main(String[] args) {
 - facebook load balancing (2016) - https://www.youtube.com/watch?v=LLBT70yexZo&ab_channel=USENIX
     - user -> L3-ecmp(equal-cost-multipath) -> L4LB(ipvs) -> L7LB(proxygen) -> HHVM(hiphop vm that serves FE tasks)
         - l7lb does tls/ssl termination
-        - l4->l7 use consistent hashing(on socket 4tuple) to l7LB, must maintain same target to maintain TCP connections
+        - l3->l4 and l4->l7 use consistent hashing(on socket 4tuple) to l7LB, must maintain same target to maintain TCP connections
+            - ipvs = IP virtual server
             - if l4lb dies, the l4lb that takes the failover traffic uses same consistent hashing algo to send to same l7lb
             - if l7lb dies, tcp conn def breaks, l4lb consistenly hashes to new l7lb, remembers in it's local state if old l7 comes back
     - one cluster: ~10s of l4 lb, ~100s of l7 lbs, ~1000s of HHVMs
-        - there are other cluster types that arent FE, e.g. a database
+        - final layer doesn't have to be HHVM, this is biz logic layer, could be dbs or some other backend service
         - all components(not l3 router) run on commodity x86 hosts/VMs with k8s/docker type system to deploy onto
     - l3-ecmp advertises BGP routes to l4LB(yea they're not l3 routers) and l4LBs respond with VIP
     - use service discovery(based on zookeeper) to keep track of l7LBs for l4LBs

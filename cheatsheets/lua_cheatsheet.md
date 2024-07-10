@@ -17,7 +17,7 @@
         - when threshold exceeded, JIT compiler triggers, and converts that to machine code using it's IR(intermediate representation)
 - LuaJIT only supports Lua 5.1
 - often used as "scripting engines" for extensibility 
-    - big applications like nginx, redis, neovim, vlc, apache HTTP server, weeChat, wireshark
+    - major applications that use it: roblox, nginx, redis, neovim, vlc, apache HTTP server, weeChat, wireshark
 - LuaJIT is only like 8k lines of extra code!!!
     - https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_features.html
 

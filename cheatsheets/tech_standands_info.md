@@ -602,6 +602,10 @@
 - standar for files for apps and configs
 
 ## NETWORK PROTOCOLS
+- AS = autonomous system, ASN = autonomous system number
+    - IANA assigns blocks of ASNs to RIRs(regional internet registries) which in turn assign ASNs to LIR(local internet registires)
+    - BGP routers advertise path vectors b/w ASes to each other
+    - routing within as AS is an IGRP(interior gateway routing protocol)
 ### LAYER 7
 - WebDAV - HTTP based protocol for data manipulation
 - CalDAV - based on WebDAV for sharing and syncing calander data
@@ -626,6 +630,9 @@
     - a client(single IP) can thus have 2^16(~65k) connections to a server IP and port
     - uses 3-way handshake to establish connection: SYN -> SYN ACK -> ACK
 ### IP
+- VIP - virtual IPs, IPs that are not connected to any physical interface
+    - commonly used with 1-to-many NATs or for redudnancy with a cluster of servers or HSRP(hot standby router protocol)
+    - can direct traffic to one VIP and have many IPs behind it
 - IPv4 - 32bits, 4bil addresses
     - private address ranges: 10.x.x.x(class A), 172.16.x.x - 172.31.x.x(class B), 192.168.x.x(class C)
 - IPv8 - 128bits
@@ -633,7 +640,7 @@
         - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
         - fec0::/10 address block = deprecated (RFC 3879)
 
-### NETWORK FILESYSTEM PROTOCOLS
+## NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP
 - SFTP is FTP over SSH
 - FTPS is FTP + TLS/SSL

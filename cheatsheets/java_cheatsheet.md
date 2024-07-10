@@ -679,7 +679,6 @@ record Ok<T>(T value) implements Result<T> { }
             - `"foo" == "foo"` -> returns `true`, we are comparing `Strings` but special case with literals
     - by default `Object#equals` method behaves like `==` operator but most types will override it, like `Integer` and `String`
         - `new String("foo").equals(new String("foo"))` -> true
-
 ### CLASSES
 - regular inheritence: `class Foo {}; class SubFoo extends Foo {};`
 - multiple inheritence: `class Foo {}; class Bar {}; class FooBar extends Foo, Bar {};`
