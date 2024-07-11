@@ -611,6 +611,9 @@
 - CalDAV - based on WebDAV for sharing and syncing calander data
     - uses iCalander format for the data
 - CardDAV - protocol for sharing contact data
+### WEBSOCKETS
+- layer 7 protocol, fully bidirectional semantics b/w two hosts
+- http2 gets close to websockets, one major advantage of websockets is no header is required for every message
 ### ADDRESS RESOLUTION
 - ARP - address resolution protocol, get layer 2(MAC) address from a given layer 3(IP) address
 - InARP(inverse ARP)/RARP(Reverse ARP) - get layer 3 address from a layer 2 address

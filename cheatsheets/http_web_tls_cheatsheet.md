@@ -14,8 +14,9 @@
     - all header data sent as binary (1.1 uses plain text)
     - smallest "packet" is a frame, a message is made up of many frames
     - frames/messages allow multiplexing of many streams, no HOL blocking
+        - each message is a logical HTTP message, e.g. a request or reply
         - with 1.1 clients would do complex strategies with multiple TCP connections to get resources in parralel
-        - streams can have priorites, with weights
+        - streams can have priorites, with weights, max num of streams can be millions but ~100 is reccomended
     - server push - the server can send data without a request
     - has HPACK header compression
 - http 3
@@ -92,7 +93,7 @@
 - FEATURES
     - load balancing: round robin, least connections, server weights(for assymetric upstream servers), does IPHash session persistence
     - failure detection: `max_fails` and `fail_timeout` configs, nginx plus has out-of-band healthchecks(HTTP tests)
-    - connection pooling/reuse - can maintain persistent tcp connection with upstreams
+    - connection pooling/reuse - can maintain persistent tcp connection(`keepalive` option) with upstreams
         - for HTTP/layer7 proxy can multiplex many client connections onto one upstream connection
         - for TCP/layer4 usually it's a 1:1 client connection per upstream connection
 - `site-available` and `sites-enabled` are 2 folders

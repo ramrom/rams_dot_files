@@ -979,3 +979,5 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - akka streams, spring framework v5, play framework, kafka, cassandra, elasticsearch all use it
 ### WIREMOCK
 - testing library that lets you spawn live http server with test responses on endpoints
+### REST ASSURED
+- testing library that focuses around creating and validating HTTP requests

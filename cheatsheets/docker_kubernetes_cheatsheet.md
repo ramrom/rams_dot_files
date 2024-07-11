@@ -88,6 +88,11 @@
         - k8 will generally restart pod
     - readiness - pod could be live but not ready to receive traffic yet, e.g. waiting for other pods/services, or populating dataset
         - k8 will just stop serving traffic to pod (but wont kill/restart it)
+- events (e.g. HPA actions, ingress rule reloads, pod delete/restart actions, pulling images, etc.)
+    - `kubectl events --all-namespaces` - print all events(tons of stuff)
+    - `kubectl events -n foospace` - for a namespace 
+    - `kubectl events --for somepod --watch` - for a pod and continue to watch and print to shell
+    - `kubectl events --types=Warning,Normal` - only show events of warning and normal
 - tailing logs
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
 - HPA - horizontal pod autoscaler

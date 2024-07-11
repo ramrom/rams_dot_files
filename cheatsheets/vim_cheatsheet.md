@@ -255,6 +255,7 @@ C             " make selected dir node the new root node
 - `vim -e`          - start in Ex mode
 - `vim -o  foo bar` - foo and bar in diff windows
 - `vim -p  foo bar` - foo and bar in diff tabs
+- `vim -R foo`      - read-only mode, all buffers opened will be read-only
 - `vim -V  foo`     - verbose output
     - has many level, see `:help vbs`
 - `vim --startuptime outputfile` - record startup time and record to file
