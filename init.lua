@@ -592,10 +592,7 @@ LoadLuaLine = function()
 end
 
 ---------------------- WHICH-KEY CONFIG -------------------------------
-LoadWhichKey = function()
-    local wk = require("which-key")
-
-    wk.add({
+WhichKeyOpts = {
         { "g",  group = "LSP + more"},
         { "gl", group = "LSP conf cmds" },
         { "gw", group = "LSP diagnostics" },
@@ -607,10 +604,11 @@ LoadWhichKey = function()
         { "<leader>e", group = "fzf grepping" },
         { "<leader>w", group = "misc config" },
         { "<leader>u", group = "unicode" }
-    })
-end
+}
 
+LoadWhichKey = function() require("which-key").add(WhichKeyOpts) end
 ---------------------- NVIM-TREE CONFIG -------------------------------
+
 NvimTreeConfig = 
     { 
         on_attach = function(bufnr)
@@ -1486,9 +1484,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
-        { "folke/which-key.nvim",
-            init = function() vim.o.timeout = true vim.o.timeoutlen = 600 end,
-            config = LoadWhichKey, opts = {}, event = "VeryLazy", },
+        { "folke/which-key.nvim", opts = { spec = WhichKeyOpts }, event = "VeryLazy", },
         { "folke/noice.nvim", event = "VeryLazy", opts = { },
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
