@@ -595,20 +595,34 @@ end
 LoadWhichKey = function()
     local wk = require("which-key")
 
+    wk.add({
+        { "g",  group = "LSP + more"},
+        { "gl", group = "LSP conf cmds" },
+        { "gw", group = "LSP diagnostics" },
+        { "gk", group = "DAP stuff" },
+        { "<leader>l", group = "LSP fzf search" },
+        { "<leader>a", group = "smart run/execute" },
+        { "<leader>c", group = "cheatsheets+notes" },
+        { "<leader>g", group = "git/github stuff" },
+        { "<leader>e", group = "fzf grepping" },
+        { "<leader>w", group = "misc config" },
+        { "<leader>u", group = "unicode" }
+    })
+
     -- prefix keys descs in popup menu for LSP related things
-    wk.register( { g = { name = "LSP + more" } })
-    wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
-    wk.register( { w = { name = "LSP diagnostics" } }, { prefix = "g" } )
-    wk.register( { k = { name = "DAP stuff" } }, { prefix = "g" } )
-    wk.register( { l = { name = "LSP fzf search" } }, { prefix = "<leader>" } )
+    -- wk.register( { g = { name = "LSP + more" } })
+    -- wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
+    -- wk.register( { w = { name = "LSP diagnostics" } }, { prefix = "g" } )
+    -- wk.register( { k = { name = "DAP stuff" } }, { prefix = "g" } )
+    -- wk.register( { l = { name = "LSP fzf search" } }, { prefix = "<leader>" } )
 
     -- other things
-    wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
-    wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
-    wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
-    wk.register( { e = { name = "fzf grepping" } }, { prefix = "<leader>" } )
-    wk.register( { w = { name = "misc config" } }, { prefix = "<leader>" } )
-    wk.register( { u = { name = "unicode" } }, { prefix = "<leader>" } )
+    -- wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
+    -- wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
+    -- wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
+    -- wk.register( { e = { name = "fzf grepping" } }, { prefix = "<leader>" } )
+    -- wk.register( { w = { name = "misc config" } }, { prefix = "<leader>" } )
+    -- wk.register( { u = { name = "unicode" } }, { prefix = "<leader>" } )
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
@@ -1443,7 +1457,7 @@ if not vim.env.VIM_NOPLUG then
         --- GIT
         { 'tpope/vim-fugitive', event = 'VeryLazy' },
             -- rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
-        { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' } },
+        { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' }, event = 'VeryLazy' },
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
         --- FUZZY FIND

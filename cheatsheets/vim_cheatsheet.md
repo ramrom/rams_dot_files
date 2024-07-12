@@ -715,9 +715,10 @@ zr expand one level, zR - open ALL folds
 - `:copen` - open a window containing the list of matches
 ### SEARCH AND REPLACE
 - visual-mode select -> :s/old/new - replace old with new in all visually selected lines
-- `:s/old/new/g` - replace all old with new in current line
-- `:%s/old/new/g` - replace all old with new throughout file
-- `:%s/old/new/gc` - replace all old with new throughout file with confirmations
+- `:s/old/new` - replace next `old` with `new` in current line
+- `:s/old/new/g` - replace all `old` with `new` in current line
+- `:%s/old/new/g` - replace all `old` with `new` throughout file
+- `:%s/old/new/gc` - replace all `old` with `new` throughout file with confirmations
 
 
 ## WORKING WITH MULTIPLE FILES

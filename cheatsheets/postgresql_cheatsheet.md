@@ -32,6 +32,8 @@
 - partial - only index some rows, usually specified by a WHERE clause
 
 ## PSQL
+- `\conninfo` - get db name, user name, host IP, port #, SSL info
+- `select version();` - get postgres server version, host arch/os
 - `\?` output help menu
 - `\c` to connect to database
 - `\l` to list database
@@ -40,6 +42,18 @@
 - `\d sometable` to describe a table
 - `\o somefile` output to a file
 - `\i somefile` execute commands from a file
+- `select * from foobale where barcolumn is not null;` - find non-null rows
+### ARRAYS
+```sql
+-- assume we have text[] type column
+select * from footable where arrcol[1] = 'dude';  -- find all where first element of array is 'dude'
+
+-- find all where arrcol contains 'dude' 
+--NOTE: ANY must be right hand side
+select * from footable where 'dude' = ANY (arrcol);  
+
+select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in array becomes a new row in results
+```
 
 ## CONCEPTS
 - postgres schema - really a namespace in a database, not to be confused with general software concept of structure of data and relations
