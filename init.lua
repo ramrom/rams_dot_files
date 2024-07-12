@@ -489,33 +489,31 @@ end
 LuaTabLineTabIndicator = function() return "tabs" end
 LuaTabLineBufferIndicator = function() return "buffers" end
 
-LuaLineTabComponentConfig = 
-    {
-        'tabs',
-        mode = 2,
-        use_mode_colors = true,
-        max_length = vim.o.columns,
+LuaLineTabComponentConfig = {
+    'tabs',
+    mode = 2,
+    use_mode_colors = true,
+    max_length = vim.o.columns,
 
-        fmt = function(name, context)
-            -- Show + if buffer is modified in tab
-            local buflist = vim.fn.tabpagebuflist(context.tabnr)
-            local winnr = vim.fn.tabpagewinnr(context.tabnr)
-            local bufnr = buflist[winnr]
-            local mod = vim.fn.getbufvar(bufnr, '&mod')
+    fmt = function(name, context)
+        -- Show + if buffer is modified in tab
+        local buflist = vim.fn.tabpagebuflist(context.tabnr)
+        local winnr = vim.fn.tabpagewinnr(context.tabnr)
+        local bufnr = buflist[winnr]
+        local mod = vim.fn.getbufvar(bufnr, '&mod')
 
-            return name .. (mod == 1 and ' +' or '')
-        end
-    }
+        return name .. (mod == 1 and ' +' or '')
+    end
+}
 
 LuaLineBufferComponentConfig = { 'buffers', show_modified_status = true, mode = 4 }
 
-LuaLineBufferDimComponentConfig = 
-    {
-        'buffers',
-        show_modified_status = true,
-        mode = 4,
-        buffers_color = { inactive = { fg = 'grey', bg = 'black' }, active = 'grey', },
-    }
+LuaLineBufferDimComponentConfig = {
+    'buffers',
+    show_modified_status = true,
+    mode = 4,
+    buffers_color = { inactive = { fg = 'grey', bg = 'black' }, active = 'grey', },
+}
 
 UpdateLuaLineTabLine = function(args)
     local tabinfo = vim.fn.gettabinfo()
@@ -609,25 +607,24 @@ WhichKeyOpts = {
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
 
-NvimTreeConfig = 
-    { 
-        on_attach = function(bufnr)
-            local api = require('nvim-tree.api')
+NvimTreeConfig = { 
+    on_attach = function(bufnr)
+        local api = require('nvim-tree.api')
 
-            local function opts(desc)
-                return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-            end
+        local function opts(desc)
+            return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
 
-            api.config.mappings.default_on_attach(bufnr)
+        api.config.mappings.default_on_attach(bufnr)
 
-            vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
-        end,
-        -- sort_by = 'extension',
-        renderer = { full_name = true }, -- if highlighted item's full path is longer than nvim window width, render into next window
-        -- FIXME: sept'23 - nvim-tree warns that padding settings is unkonwn option, looks correct per help page...
-        view = { width = { min = 10, max = 40, padding = 1 }, },
-        filters = { git_ignored = false },   -- show gitignored files
-    }
+        vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
+    end,
+    -- sort_by = 'extension',
+    renderer = { full_name = true }, -- if highlighted item's full path is longer than nvim window width, render into next window
+    -- FIXME: sept'23 - nvim-tree warns that padding settings is unkonwn option, looks correct per help page...
+    view = { width = { min = 10, max = 40, padding = 1 }, },
+    filters = { git_ignored = false },   -- show gitignored files
+}
 
 LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
@@ -720,12 +717,11 @@ LoadNoice = function()
 end
 
 ------------------------- FLASH -----------------------------------------------
-FlashOpts = 
-    {
-        modes = {
-            search = { enabled = false }   -- dont add flash keys for regular search
-        }
+FlashOpts = {
+    modes = {
+        search = { enabled = false }   -- dont add flash keys for regular search
     }
+}
 
 FlashKeyDefinitions = {
     {
