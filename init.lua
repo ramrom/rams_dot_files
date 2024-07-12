@@ -608,21 +608,6 @@ LoadWhichKey = function()
         { "<leader>w", group = "misc config" },
         { "<leader>u", group = "unicode" }
     })
-
-    -- prefix keys descs in popup menu for LSP related things
-    -- wk.register( { g = { name = "LSP + more" } })
-    -- wk.register( { l = { name = "LSP conf cmds" } }, { prefix = "g" } )
-    -- wk.register( { w = { name = "LSP diagnostics" } }, { prefix = "g" } )
-    -- wk.register( { k = { name = "DAP stuff" } }, { prefix = "g" } )
-    -- wk.register( { l = { name = "LSP fzf search" } }, { prefix = "<leader>" } )
-
-    -- other things
-    -- wk.register( { a = { name = "smart run/execute" } }, { prefix = "<leader>" } )
-    -- wk.register( { c = { name = "cheatsheets+notes" } }, { prefix = "<leader>" } )
-    -- wk.register( { g = { name = "git/github stuff" } }, { prefix = "<leader>" } )
-    -- wk.register( { e = { name = "fzf grepping" } }, { prefix = "<leader>" } )
-    -- wk.register( { w = { name = "misc config" } }, { prefix = "<leader>" } )
-    -- wk.register( { u = { name = "unicode" } }, { prefix = "<leader>" } )
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
