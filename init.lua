@@ -592,21 +592,21 @@ LoadLuaLine = function()
 end
 
 ---------------------- WHICH-KEY CONFIG -------------------------------
+-- LoadWhichKey = function() require("which-key").add(WhichKeyOpts) end
 WhichKeyOpts = {
-        { "g",  group = "LSP + more"},
-        { "gl", group = "LSP conf cmds" },
-        { "gw", group = "LSP diagnostics" },
-        { "gk", group = "DAP stuff" },
-        { "<leader>l", group = "LSP fzf search" },
-        { "<leader>a", group = "smart run/execute" },
-        { "<leader>c", group = "cheatsheets+notes" },
-        { "<leader>g", group = "git/github stuff" },
-        { "<leader>e", group = "fzf grepping" },
-        { "<leader>w", group = "misc config" },
-        { "<leader>u", group = "unicode" }
+    { "g",  group = "LSP + more"},
+    { "gl", group = "LSP conf cmds" },
+    { "gw", group = "LSP diagnostics" },
+    { "gk", group = "DAP stuff" },
+    { "<leader>l", group = "LSP fzf search" },
+    { "<leader>a", group = "smart run/execute" },
+    { "<leader>c", group = "cheatsheets+notes" },
+    { "<leader>g", group = "git/github stuff" },
+    { "<leader>e", group = "fzf grepping" },
+    { "<leader>w", group = "misc config" },
+    { "<leader>u", group = "unicode" }
 }
 
-LoadWhichKey = function() require("which-key").add(WhichKeyOpts) end
 ---------------------- NVIM-TREE CONFIG -------------------------------
 
 NvimTreeConfig = 
@@ -727,53 +727,52 @@ FlashOpts =
         }
     }
 
-FlashKeyDefinitions =
+FlashKeyDefinitions = {
     {
-        {
-            "s",
-            mode = { "n", "x", "o" },
-            -- match only beg of words
-            function()
-                require("flash").jump({
-                  search = {
-                    mode = function(str)
-                      return "\\<" .. str
-                    end,
-                  },
-                })
-            end,
-            desc = "Flash",
-        },
-        -- visual select fast based on treesitter objects
-        -- FIXME: can remote , then flash treesitter combo
-            -- but "y""s" sequence conflicts with vim-surround
-        {
-            "S",
-            mode = { "n", "o", "x" },
-            function()
-                require("flash").treesitter()
-            end,
-            desc = "Flash Treesitter",
-        },
-        -- remote key, do an op and return to original cursor location
-        -- e.g. `yrfa$` - yank remote letter f, (say sel 'a'), to end of line
-        {
-            "r",
-            mode = "o",
-            function()
-                require("flash").remote()
-            end,
-            desc = "Remote Flash",
-        },
-        {
-            "<c-s>",            -- toggle off this flash search in search mode
-            mode = { "c" },     -- search `/` or `?` falls under command mode
-            function()
-                require("flash").toggle()
-            end,
-            desc = "Toggle Flash Search",
-        },
-    }
+        "s",
+        mode = { "n", "x", "o" },
+        -- match only beg of words
+        function()
+            require("flash").jump({
+              search = {
+                mode = function(str)
+                  return "\\<" .. str
+                end,
+              },
+            })
+        end,
+        desc = "Flash",
+    },
+    -- visual select fast based on treesitter objects
+    -- FIXME: can remote , then flash treesitter combo
+        -- but "y""s" sequence conflicts with vim-surround
+    {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+            require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+    },
+    -- remote key, do an op and return to original cursor location
+    -- e.g. `yrfa$` - yank remote letter f, (say sel 'a'), to end of line
+    {
+        "r",
+        mode = "o",
+        function()
+            require("flash").remote()
+        end,
+        desc = "Remote Flash",
+    },
+    {
+        "<c-s>",            -- toggle off this flash search in search mode
+        mode = { "c" },     -- search `/` or `?` falls under command mode
+        function()
+            require("flash").toggle()
+        end,
+        desc = "Toggle Flash Search",
+    },
+}
 
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
