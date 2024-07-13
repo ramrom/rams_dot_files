@@ -592,17 +592,20 @@ end
 ---------------------- WHICH-KEY CONFIG -------------------------------
 -- LoadWhichKey = function() require("which-key").add(WhichKeyOpts) end
 WhichKeyOpts = {
-    { "g",  group = "LSP + more"},
-    { "gl", group = "LSP conf cmds" },
-    { "gw", group = "LSP diagnostics" },
-    { "gk", group = "DAP stuff" },
-    { "<leader>l", group = "LSP fzf search" },
-    { "<leader>a", group = "smart run/execute" },
-    { "<leader>c", group = "cheatsheets+notes" },
-    { "<leader>g", group = "git/github stuff" },
-    { "<leader>e", group = "fzf grepping" },
-    { "<leader>w", group = "misc config" },
-    { "<leader>u", group = "unicode" }
+    preset = "modern",
+    spec = {
+        { "g",  group = "LSP + more"},
+        { "gl", group = "LSP conf cmds" },
+        { "gw", group = "LSP diagnostics" },
+        { "gk", group = "DAP stuff" },
+        { "<leader>l", group = "LSP fzf search" },
+        { "<leader>a", group = "smart run/execute" },
+        { "<leader>c", group = "cheatsheets+notes" },
+        { "<leader>g", group = "git/github stuff" },
+        { "<leader>e", group = "fzf grepping" },
+        { "<leader>w", group = "misc config" },
+        { "<leader>u", group = "unicode" }
+    }
 }
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
@@ -1479,7 +1482,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
-        { "folke/which-key.nvim", opts = { spec = WhichKeyOpts }, event = "VeryLazy", },
+        { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy", },
         { "folke/noice.nvim", event = "VeryLazy", opts = { },
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

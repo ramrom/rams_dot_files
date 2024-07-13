@@ -8,6 +8,12 @@
 - SSM - systems mananger agents - https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
 - cloudfront - CDN
 - AWS WAF - web access firewall (firewall, bot detection, other rules)
+### CONCEPTS
+- organization - contains many accounts
+- IAM(identity and access management) - https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    - policy - set of generic rules
+    - 3 types of policies: session, identity, resource
+    - when applied in context of an identity, session, and resources, define the permissions
 
 ## LOAD BALANCERS
 - ELB - elastic load balancer - https://aws.amazon.com/elasticloadbalancing/features/

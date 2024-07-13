@@ -261,6 +261,7 @@ public static void main(String[] args) {
 ## CACHE
 - EVICTION POLICY
     - TTL - time-to-live, evict when it expires
+    - FIFO - evict based on order of insertion
     - LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
         - head of linkedlist is most recent, and tail is least recent
     - LFU - least frequently used, keep a count of hits for each cache entry
@@ -268,14 +269,18 @@ public static void main(String[] args) {
         - good use case:  file is being repeatedly scanned in a looping sequential reference pattern
     - sliding-window
 - INVALIDATION STRATEGIES
+    - cahce-aside - app directly talks to cache and backing store
+        - here we say data is "lazy loaded" into cache if not present
+    - read-through - as opposed to cache-aside - app just talks to cache, and cache talks to backing store
     - write-through - write the data to the cache and backing storage, wait for this to finish before program can continue
         - it's slow but simple, and no cache coherency issues, good when use case is few write operations
     - write-back - update cache only, write to backing store done later
         - when cache line set to be replaced/expire, write the data to backing storage, often called lazy write
             - or periodically write-backed entries are written to backing store
         - this is much more complex to implement than write-through
+        - in a distributed cache scenario, more dangerous as if cache goes down you lose more data
     - write-dirty - update backing storage, mark cache dirty
-    - write-around - if cache miss on write, write direclty to backing storage and skip cache
+    - write-around - if cache miss for a write, write direclty to backing storage and skip cache
         - this is good when we dont expect subsequent reads
 - MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
     - MESI is acronym for 4 states: **M**odify **E**xclusive **S**hared **I**nvalid

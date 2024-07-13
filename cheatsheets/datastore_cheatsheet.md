@@ -16,6 +16,8 @@
 - tablespace vs schema - https://stackoverflow.com/questions/35120219/a-database-schema-vs-a-database-tablespace
 - transactional DDL - can rollback DDLs like transactional DMLs
     - rolloback whole table creations even
+### DOCS
+- https://use-the-index-luke.com/
 ### POSTGRESQL
 - see [postgresql](postgresql_cheatsheet.md)
 ### SQLLITE
@@ -24,8 +26,7 @@
 - `.tables` - list tables
 - `.schema footable` - get a table's description
 - `.mode line` - display each records column in seperate line
-
-### SQL
+### SQL LANGUAGE
 - joins - query that joins two tables
     - inner join - (left or right), will only return records with hits
     - outer join - will return all records in both tables
@@ -39,8 +40,20 @@
 - Geospatial
     - redis GEOHASH
     - postgres PostGIS extension
-### DOCS
-- https://use-the-index-luke.com/
+- index types
+    - composite - index on a tuple of two or more columns
+    - conditional/partial - only index some rows
+### PARTITIONING
+- sharding - typically means partitioning and each partition is on an different db instance
+    - allows more scalability and peformance vs partitioning
+    - more fault tolerance in that if a db shard instance goes down, other shards are still live
+        - though even in single db instance, most setups will have HA with master/slave
+- horizontal vs vertical
+    - horizontal - splitting table based on rows
+        - can infinitely scale
+    - vertial - splitting a table based on columns
+        - limited scalability, max number of partitions is number of columns
+
 
 ## COLUMN DB
 ### BIGTABLE
@@ -58,13 +71,24 @@
 - reqd quorum - if a minimum number of nodes agree on a response it is used
 - uses consistent hashing for sharding
 
+
 ## DOCUMENT DB
-- dynamodb - created by AWS
+- single "document" or blob, no normalization like relational, much more repeated data
+- a collection can specify schemas and they are generally more easily changable vs relational schemas
+- typically document dbs are designed for easier horizontal scale
+    - they typpically come ready/plug-and-play supporting easy horizontal sharding
+- disadvantage: generally to update a field you update the entire document
+- disadvantage: generally dont have the ACID gaurantees of relational
+- disadvantage: not as read optimized vs relational, usually u have to read whole document
+    - you can create indexes on fields
+### DYNAMODB 
+- created by AWS
 ### MONGO
 - [main cheatsheet](mongo_cheatsheet.md)
 - supports schemas for collections - https://www.mongodb.com/docs/manual/core/schema-validation/
     - for JSON uses json-schema (jul2024 - draft 4)
 - uses leader-based replication
+
 
 ## KEY-VALUE
 - memcached

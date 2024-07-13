@@ -84,7 +84,8 @@ select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in 
 
 ## SCALING
 - table partitioning(sharding) - each partition contains a subset of rows
-    - horizontal method: create table partitions on other servers and use FDWs to represent the logical table
+    - horizontal method 1: create table partitions on other servers and use FDWs to represent the logical table
+    - horizontal method 2: each db shard is totally seperate, a seperate service/layer uses key to route to correct shard
     - vertical method: create a partition on different tablespaces (on different disks)
 ### SINGLE VS MULTI
 - single master - replicas just for backup, replica can be hot(do read queries)
