@@ -132,7 +132,6 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
     - `sudo systemctl set-default multi-user.target` - set new target
 - `systemd-analyze critical-chain` - print blocking tree of daemons
 - `ls -al /lib/systemd/system/runlevel*` - the defined runlevel targets
-
 ### SYSTEMCTL
 - systemctl start/stop/restart/reload foo
     - reload doesnt stop and start the service, often is a HUP signal
@@ -150,7 +149,6 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
     - low levle details of units settings
 - systemctl get-default
     - print the default target for the system
-
 ### JOURNALCTL
 - journalctl was also by debian/ubuntu tool to access logs, in /var/log
 - it is the cli util to query logs by systemd's logging service, journald
@@ -179,7 +177,10 @@ journalctl --vacuum-size=200M
 journalctl --verify
     - verify integrity of logs
 journalctl config file: /etc/systemd/journald.conf, can restrict max size
-
+### NETWORKCTL
+- cli to talk to `systemd-networkd`, a network manager
+- `networkctl list` - or no args will list all network interfaces and brief status
+- `networkctl status` - more detailed info on each interface
 ### LOGINCTL
 - systemd bin interface for login sessions
 loginctl
@@ -411,6 +412,14 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `busctl introspect org.bluez /org/bluez/hci0`  - show interfaces/methods/properties on object `/org/bluez/hci0`
 
 ## NETWORK
+- `netplan` - reads a YAML file describing network layout/config and renders it to a network script
+    - either NetworkManager or systemd-networkd instruct netplan what output format to use 
+    - ubuntu16 and later use netplan
+    - yaml configs should live in `/etc/netplan/*.yaml`
+- NetworkManager vs systemd-networkd - two competing network managers
+    - NetworkManager is intended more for desktops
+- `/etc/resolv.conf` - traditional static conf file for DNS servers, often updated with DHCP client hooks
+    - for systemd use `systemd-resolved`
 - https://en.wikipedia.org/wiki/Netfilter
     - linux framework for most network related things like NAT and firewall and more
 - `iptables` - userspace bin
