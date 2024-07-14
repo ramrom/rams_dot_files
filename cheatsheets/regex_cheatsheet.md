@@ -8,13 +8,15 @@
 - test regexes: https://regex101.com/
 - PCRE search has one term but NOT onother term: https://superuser.com/questions/537619/grep-for-term-and-exclude-another-term
     - search for `foo` but *NOT* `bar`: `grep -P '(?=^((?!bar).)*$)foo'`
+- https://regexlicensing.org/
+    - funny, but true, basically a caution not to use regex as oftentimes faster/better parsing alternatives exist
 
-Linux/GNU:
-use grep -P for PCRE (perl) style regexes
-grep -E, is ERE, but doesn't have things like \d
-
-OSX:
-use grep -E, this apparently has things like \d, apple confusing shit...
+## CLI
+### Linux/GNU
+- use grep -P for PCRE (perl) style regexes
+- grep -E, is ERE, but doesn't have things like \d
+### OSX
+- use grep -E, this apparently has things like \d, apple confusing shit...
 
 
 ## Character classes

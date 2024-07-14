@@ -63,13 +63,31 @@
 - unlike cassandra has leader/master based replication
 - also wide-column like cassandra
 ### CASSANDRA
-- first version created by facebook in 2008, released as open source
-- doesnt have a master/leader, uses masterless async replication peer-to-peer communication
+- first version created by facebook in 2008, released as open source, falls under NoSQL db
+- doesnt have a formal master/leader, uses masterless async replication peer-to-peer communication
+- uses consistent hashing for sharding
 - data is replicated between the peers
+    - replication factor of 3 means 2 peers have copies
+    - reads are load balanced between replicas
 - uses gossip protocol to send new state data to neighbors
 - uses quorum writes - send requests to replicate data in many other nodes, dont have to wait for all nodes to respond
-- reqd quorum - if a minimum number of nodes agree on a response it is used
-- uses consistent hashing for sharding
+- uses a distributed consensus protocol in case of a failure
+    - reqd quorum - if a minimum number of nodes agree on a response it is used
+    - cases for inconsistency are rare, an example where it could happen, quorum=2:
+        - node A get a write, replicates to B and C (replication factor 2)
+        - A dies, network is slow, B and C didnt get update yet
+        - user does a read
+            - cant consult A, B and C still didnt get update, quorum=2, both agree with old value and this is returned
+            - say A and B did get update before read, quorum=2, both agree with new correct value and this is returned
+            - say B gets update, C doesnt, then we dont have quorum=2 so query fails
+    - in above if quorum=3, then query always fails, b/c only B and C can possibly agree getting to 2 only
+- storage model - based on google's bigtable concept
+    - each node has an in-memory log of key/value pairs, that's stored sequentially
+    - periodically the in-memory log is flushed to a SST(sorted string table) persistent store, where it's sorted by key
+        - SST is immutable, each write/updates to same key results in a new record
+    - can use timestamps to get the latest value for a key
+    - problem is lots of extra space used from redundancy
+    - cassandra and elasticsearch offer compaction to reduce this, which uses mergesort on SSTs
 
 
 ## DOCUMENT DB
@@ -157,6 +175,10 @@
 - pull vs push 
     - push: engineers need to manually push content to CDN for clients to find
     - pull: when the client requests content from CDN, the CDN retreives it from the origin server
+
+## SPREADSHEETS
+- yea... ridiculous but many companies will use em in prod for data
+- famously level.fyi used google sheets for prod for long time
 
 ## TECH
 - vitess - a db clustering system using mysql, created by google
