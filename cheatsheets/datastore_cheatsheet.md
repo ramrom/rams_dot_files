@@ -44,15 +44,25 @@
     - composite - index on a tuple of two or more columns
     - conditional/partial - only index some rows
 ### PARTITIONING
-- sharding - typically means partitioning and each partition is on an different db instance
-    - allows more scalability and peformance vs partitioning
-    - more fault tolerance in that if a db shard instance goes down, other shards are still live
-        - though even in single db instance, most setups will have HA with master/slave
 - horizontal vs vertical
-    - horizontal - splitting table based on rows
-        - can infinitely scale
-    - vertial - splitting a table based on columns
-        - limited scalability, max number of partitions is number of columns
+- horizontal - splitting table based on rows
+    - can infinitely scale
+- vertial - splitting a table based on columns
+    - limited scalability, max number of partitions is number of columns
+### SHARDING 
+- typically means partitioning horizontally and each partition is on an different db instance
+- allows more scalability and peformance vs partitioning
+- more fault tolerance in that if a db shard instance goes down, other shards are still live
+    - though even in single db instance, most setups will have HA with master/slave
+- routing logic 
+    - clients can implement the routing logic to get to proper shard internally (like a library)
+    - or shard cluster can have a router/gateway that handles it, client just sees one logical instance
+- sharding strategy - what data do you use to create a shardkey(which determines which shard it belongs to)?
+    - business rule strategy - some business logic/domain data makes sense for the use case to shard on
+        - e.g. geolocated data, like city data, each shard should store data for cities in the same region
+    - hashing shard strategy - good when u dont have a clear key to use based on business
+        - take a hash of the shard key (maybe id) and then mod it by number of shards
+- difficulty is when you add and remove shards - you have to remap key space and means migrating data
 
 
 ## COLUMN DB

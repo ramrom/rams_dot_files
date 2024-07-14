@@ -306,16 +306,22 @@ public static void main(String[] args) {
 - which shard holds which keys
     - mod hashing - mod on hashkey is naive approach to determine cache shart to query (lots of misses when adding/removing shards)
     - consistent hashing is good algo, way fewer cache misses
-        - disadvantages: the circle is not split evenly
-        - disadvantage: domino effect, a server failure causes it's whole load to go to next shard, and that can snowball
-        - simple mitigations: have a server appear multiple times on circle
-        - good algos: jump hash by google in 2014, or yahoo video platform proportional hashing
 - heirarchical cache strategy - service check a local cache (in-memory) before checking a distribted cache
     - often the cache client will implement the local cache
 - cache server picking
     - client lib could do heavy lifting of maintaing list
     - proxy server, all client libs call proxy, and proxy figures out which cache shard to hit
     - client lib hits a random cache shard, and cache shard reroutes to proper shard, redis clusters do this
+### CONSISTENT HASHING
+- basic approach: split a space conceptually into a ring of N slots
+    - hash the key and then mod by space size: `K = h(key) % N`
+    - hash all the server IDs and mod by space size `S = h(serverID) % N`
+    - then going clockwise, the first server slot you find is the server that handles the keys request
+- issue: the circle is not split evenly b/w servers, so some take more load than other
+    - solution: have a server appear multiple times on circle (virtual servers)
+        - create multiple hash functions, one hash func for each new set of virtual servers
+- bigger issue: domino effect, a server failure causes it's whole load to go to next shard, and that can snowball
+- good algos: jump hash by google in 2014, or yahoo video platform proportional hashing
 
 
 ## LOAD BALANCING
@@ -324,37 +330,38 @@ public static void main(String[] args) {
     - layer 4(TCP/UDP)
     - layer 7(e.g. HTTP)
 - balancing strategies
-    - round robin
+    - round robin - easiest/simplest to implement, hit each one in order
         - DNS based strategy: a DNS entry can have many A records, and will round-robin each of those A records
     - rule-based: e.g. by node latency, node volume, node reliability, fewest acive connections, least bandwidth
         - can't use DNS method for this, need a server
+    - consistent hashing - nice if you want to maintain each client going to the same node
 - sofware vs hardware
     - software: AWS ELB(NLB/ALB), HAProxy, nginx, traefik
     - hardware: F5, cisco, barracuda, citrix
 - HA/redundancy
     - active-active - multiple instances balancing traffic, heartbeats b/w them to stay informed of state
     - active-passive - passives dont serve traffic, just wait for active to die and them they promote
-### EXAMPLE
+### FACEBOOK TRAFFIC LOAD BALANCING
 - facebook load balancing (2016) - https://www.youtube.com/watch?v=LLBT70yexZo&ab_channel=USENIX
-    - user -> L3-ecmp(equal-cost-multipath) -> L4LB(ipvs) -> L7LB(proxygen) -> HHVM(hiphop vm that serves FE tasks)
-        - l7lb does tls/ssl termination
-        - l3->l4 and l4->l7 use consistent hashing(on socket 4tuple) to l7LB, must maintain same target to maintain TCP connections
-            - ipvs = IP virtual server
-            - if l4lb dies, the l4lb that takes the failover traffic uses same consistent hashing algo to send to same l7lb
-            - if l7lb dies, tcp conn def breaks, l4lb consistenly hashes to new l7lb, remembers in it's local state if old l7 comes back
-    - one cluster: ~10s of l4 lb, ~100s of l7 lbs, ~1000s of HHVMs
-        - final layer doesn't have to be HHVM, this is biz logic layer, could be dbs or some other backend service
-        - all components(not l3 router) run on commodity x86 hosts/VMs with k8s/docker type system to deploy onto
-    - l3-ecmp advertises BGP routes to l4LB(yea they're not l3 routers) and l4LBs respond with VIP
-    - use service discovery(based on zookeeper) to keep track of l7LBs for l4LBs
-    - multiple clusters are a datacenter
-    - edge POPs - handle just TCP and TLS termination, no HHVM(or core stuff), nice compromise 
-        - as fewer datacenters for HTTP/core stuff, but much lower response times (tcp + tls handshake are fast)
-    - Cartographer (DNS LB) - system that configures dns servers so optimal POP server is selected for that region
-        - gets real-time data from POPs and data centers globally
-        - Sonar - a system measure closesness to POP based on network address, test by sending pics and measuring route/time
-        - also measure data center health and capacity(total rps, cpu util, network util, etc)
-        - updates on a one-two minute cycle, then DNS maps are torrented to thousands of DNS servers
+- user -> L3-ecmp(equal-cost-multipath) -> L4LB(ipvs) -> L7LB(proxygen) -> HHVM(hiphop vm that serves FE tasks)
+    - l7lb does tls/ssl termination
+    - l3->l4 and l4->l7 use consistent hashing(on socket 4tuple) to l7LB, must maintain same target to maintain TCP connections
+        - ipvs = IP virtual server
+        - if l4lb dies, the l4lb that takes the failover traffic uses same consistent hashing algo to send to same l7lb
+        - if l7lb dies, tcp conn def breaks, l4lb consistenly hashes to new l7lb, remembers in it's local state if old l7 comes back
+- one cluster: ~10s of l4 lb, ~100s of l7 lbs, ~1000s of HHVMs
+    - final layer doesn't have to be HHVM, this is biz logic layer, could be dbs or some other backend service
+    - all components(not l3 router) run on commodity x86 hosts/VMs with k8s/docker type system to deploy onto
+- l3-ecmp advertises BGP routes to l4LB(yea they're not l3 routers) and l4LBs respond with VIP
+- use service discovery(based on zookeeper) to keep track of l7LBs for l4LBs
+- multiple clusters are a datacenter
+- edge POPs - handle just TCP and TLS termination, no HHVM(or core stuff), nice compromise 
+    - as fewer datacenters for HTTP/core stuff, but much lower response times (tcp + tls handshake are fast)
+- Cartographer (DNS LB) - system that configures dns servers so optimal POP server is selected for that region
+    - gets real-time data from POPs and data centers globally
+    - Sonar - a system measure closesness to POP based on network address, test by sending pics and measuring route/time
+    - also measure data center health and capacity(total rps, cpu util, network util, etc)
+    - updates on a one-two minute cycle, then DNS maps are torrented to thousands of DNS servers
 
 
 ## SORTING
