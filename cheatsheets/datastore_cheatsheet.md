@@ -182,6 +182,7 @@
 
 ## CDN
 - content delivery network
+- famous examples: akamai, cloudfront, netflix open connect
 - pull vs push 
     - push: engineers need to manually push content to CDN for clients to find
     - pull: when the client requests content from CDN, the CDN retreives it from the origin server

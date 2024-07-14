@@ -642,6 +642,10 @@
     - private address range added:
         - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
         - fec0::/10 address block = deprecated (RFC 3879)
+### STREAMING PROTOCOLS
+- HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
+- RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
+    - like HLS it's adaptive and chunks data, base type uses TCP port 1935, RTMFP is UDP version, RTMPT uses HTTP
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP
