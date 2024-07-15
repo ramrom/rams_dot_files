@@ -160,6 +160,11 @@ a.isInstanceOf[Int]     // returns false
 - multidimensional
     - `val v = Array.ofDim(2,2)[Int]; v(0) = Array(1,1); v(0)(1)`
     - `val v = collection.mutable.ArrayBuffer.fill(3,3)(1)`
+- `take` will return new list with first n items, e.g. `List(1,2,3).take(2)` -> `List(1,2)`
+- `drop` will return new list, removing first n items, .e.g. `List(1,2,3).drop(1)` -> `List(2,3)`
+- `slice` - grab a subrange of items in list (works on `String` too)
+    - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
+    - `"hi there".slice(2,5)` -> returns `" th"`
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
@@ -171,9 +176,6 @@ a.isInstanceOf[Int]     // returns false
         - slightly confusing syntax, need one arg and specify it's a tuple
     - `List(3,4,5).zipWithIndex.foreach { case (a, b) => println(s"${a} and ${b}") }`
         - can use pattern match to unapply the tuple to name the fields
-- slice an "array" (`Array` or `List` or `String`)
-    - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
-    - `"hi there".slice(2,5)` -> returns `" th"`
 - `fold` `val l = List(1,2,3); val sum = l.fold(0)((x,y) => x + y)`    -> `sum` will = 6
     - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
 - `++` concat 2 collections, `::` prepend to list, `:+` append, `+:` prepend

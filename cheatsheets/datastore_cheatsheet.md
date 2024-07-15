@@ -48,6 +48,7 @@
 - horizontal - splitting table based on rows
     - can infinitely scale
 - vertial - splitting a table based on columns
+    - normalization is also a type of vertical partitioning
     - limited scalability, max number of partitions is number of columns
 ### SHARDING 
 - typically means partitioning horizontally and each partition is on an different db instance

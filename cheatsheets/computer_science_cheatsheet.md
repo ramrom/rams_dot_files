@@ -297,7 +297,12 @@ public static void main(String[] args) {
     - in this case cache is counterproductive and makes system slower
 - [redis](datastore_cheatsheet.md) and memcached are popular in-memory servers used for caching
 #### DISTRIBUTED CACHE
+- clustering: use replicas for HA and better read performance, sharding for more space and better write performance
 - usually TCP/UDP used to talk to cache server/shards (b/c it's fast)
+- cache server picking
+    - client lib could do heavy lifting of maintaing list
+    - proxy server, all client libs call proxy, and proxy figures out which cache shard to hit
+    - client lib hits a random cache shard, and cache shard reroutes to proper shard, redis clusters do this
 - usually use a client lib, it figures out which cache shard to hit
     - store all servers in sorted order, use binary search to find server
     - server discovery: 1. deploy-time file, 2. list in shared db that services call periodically to refresh
@@ -308,20 +313,6 @@ public static void main(String[] args) {
     - consistent hashing is good algo, way fewer cache misses
 - heirarchical cache strategy - service check a local cache (in-memory) before checking a distribted cache
     - often the cache client will implement the local cache
-- cache server picking
-    - client lib could do heavy lifting of maintaing list
-    - proxy server, all client libs call proxy, and proxy figures out which cache shard to hit
-    - client lib hits a random cache shard, and cache shard reroutes to proper shard, redis clusters do this
-### CONSISTENT HASHING
-- basic approach: split a space conceptually into a ring of N slots
-    - hash the key and then mod by space size: `K = h(key) % N`
-    - hash all the server IDs and mod by space size `S = h(serverID) % N`
-    - then going clockwise, the first server slot you find is the server that handles the keys request
-- issue: the circle is not split evenly b/w servers, so some take more load than other
-    - solution: have a server appear multiple times on circle (virtual servers)
-        - create multiple hash functions, one hash func for each new set of virtual servers
-- bigger issue: domino effect, a server failure causes it's whole load to go to next shard, and that can snowball
-- good algos: jump hash by google in 2014, or yahoo video platform proportional hashing
 
 
 ## LOAD BALANCING
@@ -364,7 +355,26 @@ public static void main(String[] args) {
     - updates on a one-two minute cycle, then DNS maps are torrented to thousands of DNS servers
 
 
-## SORTING
+## ALGORITHMS
+### TOKEN BUCKET
+- sys design vid rate limiter - https://www.youtube.com/watch?v=FU4WlwfS3G0&ab_channel=SystemDesignInterview
+- a buffer/queue with some capacity, items are "leaked" at a fixed rate
+- if items are added faster than they are leaked, when capacity is reached, they are thrown away
+- common algo used for rate-limiting, it's a great way to see if traffic conforms to some average rate or exceeds it
+- used often in packet switched networks, ATM uses it
+### LEAKY BUCKET
+- outputs requests at a fixed rate, smoothes out traffic, token bucket allows bursty traffic through and is more flexible
+### CONSISTENT HASHING
+- basic approach: split a space conceptually into a ring of N slots
+    - hash the key and then mod by space size: `K = h(key) % N`
+    - hash all the server IDs and mod by space size `S = h(serverID) % N`
+    - then going clockwise, the first server slot you find is the server that handles the keys request
+- issue: the circle is not split evenly b/w servers, so some take more load than other
+    - solution: have a server appear multiple times on circle (virtual servers)
+        - create multiple hash functions, one hash func for each new set of virtual servers
+- bigger issue: domino effect, a server failure causes it's whole load to go to next shard, and that can snowball
+- good algos: jump hash by google in 2014, or yahoo video platform proportional hashing
+### SORTING ALGORITHMS
 - bubble sort - O(n^2), really n^2 worst case (data in reverse sorted order)
 - merge sort - divide and conquer, O(nlogn)
     - can be parralelized, worse and average is o(nlogn)
@@ -373,35 +383,12 @@ public static void main(String[] args) {
 - heap sort - uses a heap, O(nlogn), not stable, in-place, worst case O(nlogn)
 - quickselect - find the kth smallest element in an unordered list, also called Haore's selection algorithm
     - related to quicksort, done in-place
-### NON-COMPARISON
+### NON-COMPARISON SORTING ALGORITHMS
 - counting sort - sort by counting each value, with the value being the index in an array
     - this depends on a dataset of small positive integers
 - bucket sort
     - 1.create array of "buckets" 2. put items in their buckets 3. sort each non-empty bucket 4. visit buckets and put them toegether
 - radix sort (often conflated with bucket sort)
-
-## PROGRAMMING LANGUAGES
-- FORTRAN - old and math focused
-- COBOL - invented in 1959, dominated in 1970
-    - designed for large amounts of data, read like plain english so non-experts could learn (versus assembly)
-    - tons of core systems: finance/banking, insurance(healthcare particularly), etc. use it today
-        - 2024: 95% ATM machines, 43% banking systems, 80% in-person transactions, 60% healthcare records/dbs use COBOL
-- ML (meta language) - functional
-- OCaml - dialect of ML
-- VHDL
-
-## TYPES
-- covariance/contravariance/invariance - https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
-    - how do subtyping relationship between simple types correspond to their complex types
-    - if `Dog` is subtype of `Animal`, and `List(Dog)` is subtype of `List(Animal)` then List type is covariant
-        - true for OCaml lists, and Rust array and slices
-    - if `func(Animal)->nil` is subtype of `func(Dog)->nil` then this function subtype is contravariant
-        - `func(func(Animal)->nil)` can be passed in where `func(func(Dog)->nil)` but not the other way around
-        - this is try in Ocaml functions, and in Rust for `Fn(T)->()`
-    - in rust variance mostly affects lifetimes - https://doc.rust-lang.org/reference/subtyping.html
-- generics - aka parametric programming - language that support abstracting a type a function/class/struct can take
-- ADT - algebraic data types, [see functional programming section](#functional-programming)
-- higher kinded types - [see functional programming section](#functional-programming)
 
 
 ## SOFTWARE PATTERNS
@@ -433,14 +420,6 @@ public static void main(String[] args) {
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
     - very similar to pub/sub in that it decouples 2 related entities, observer pattern is usually implemented intra-process
 - strategy pattern - select the algorithm to use at runtime, code allows receiving a strategy/algo as a parameter/argument
-- token bucket
-    - sys design vid rate limiter - https://www.youtube.com/watch?v=FU4WlwfS3G0&ab_channel=SystemDesignInterview
-    - a buffer/queue with some capacity, items are "leaked" at a fixed rate
-    - if items are added faster than they are leaked, when capacity is reached, they are thrown away
-    - common algo used for rate-limiting, it's a great way to see if traffic conforms to some average rate or exceeds it
-    - used often in packet switched networks, ATM uses it
-- leaky bucket
-    - outputs requests at a fixed rate, smoothes out traffic, token bucket allows bursty traffic through and is more flexible
 - thread pool - spawning threads is expensive, reuse the same ones
 - object pool - dont alloc/dealloc all the time, reuse the same memory
     - same idea as thread pools and connection pools but for objects
@@ -477,6 +456,30 @@ public static void main(String[] args) {
 - give AI model a goal(a reward criteria), and throught constant iterations of trial and error get better at reaching the goal
 - AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training
     - AlphaGo Zero, had zero initial human game traing, was pure reinforcement learning, and surpassed AlphaGo Lee and Master
+
+## PROGRAMMING LANGUAGES
+- FORTRAN - old and math focused
+- COBOL - invented in 1959, dominated in 1970
+    - designed for large amounts of data, read like plain english so non-experts could learn (versus assembly)
+    - tons of core systems: finance/banking, insurance(healthcare particularly), etc. use it today
+        - 2024: 95% ATM machines, 43% banking systems, 80% in-person transactions, 60% healthcare records/dbs use COBOL
+- ML (meta language) - functional
+- OCaml - dialect of ML
+- VHDL
+
+## TYPES
+- covariance/contravariance/invariance - https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
+    - how do subtyping relationship between simple types correspond to their complex types
+    - if `Dog` is subtype of `Animal`, and `List(Dog)` is subtype of `List(Animal)` then List type is covariant
+        - true for OCaml lists, and Rust array and slices
+    - if `func(Animal)->nil` is subtype of `func(Dog)->nil` then this function subtype is contravariant
+        - `func(func(Animal)->nil)` can be passed in where `func(func(Dog)->nil)` but not the other way around
+        - this is try in Ocaml functions, and in Rust for `Fn(T)->()`
+    - in rust variance mostly affects lifetimes - https://doc.rust-lang.org/reference/subtyping.html
+- generics - aka parametric programming - language that support abstracting a type a function/class/struct can take
+- ADT - algebraic data types, [see functional programming section](#functional-programming)
+- higher kinded types - [see functional programming section](#functional-programming)
+
 
 ## FUNCTIONAL PROGRAMMING
 - pure function 
