@@ -162,11 +162,13 @@ foo = function(x) return x end      -- same as above
 ## LIBRARIES
 - build in `require` method is main way to load a external file and it's modules
 - see https://www.lua.org/pil/8.1.html
-- `require("foo")` will look for a `foo.lua` file to load
-- `require` looks in a path, but path is really a list of patterns, not dirs like in shell
-    - looks for path in global `LUA_PATH`, then env var `LUA_PATH`, then some default like `"?;?.lua"`
+- `require("foo")`, virtual file here is `foo`
+    - looks in a path, but path is really a list of patterns, not dirs like in shell
+    - say path is `?;?.lua;/yar/?.lua`, lua tries to load file `foo` in cur dir, then `foo.lua` in cur dir, then `/yar/foo.lua`
+    - path is set by: global `LUA_PATH`, then env var `LUA_PATH`, then some default like `"?;?.lua"`
+- `_LOADED` global variable is a table of loaded files, `require` uses this to detect if a virtual file is already loaded
 - `dofile` vs `require`
-    - require wont reload a file if already loaded
+    - require wont reload a file if already loaded (by using `_LOADED`)
     - require will search a path for a file
 
 ## METHODS AND SYNTAX

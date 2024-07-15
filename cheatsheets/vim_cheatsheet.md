@@ -310,6 +310,7 @@ C             " make selected dir node the new root node
 - `ga` -> show character encoding under cursor
     - can also call `:ascii` or `:as` at command line
 - `:lua vim.fn.expand('%:p')` - print full path of current buffer regardless of CWD
+- print runtime path: `lua print(vim.inspect(vim.opt.rtp))`
 ### LOGS / MESSAGES
 - mar2024 - logs stored in `~/.local/state/nvim`
     - vim's regular `log`, but also `lsp.log`

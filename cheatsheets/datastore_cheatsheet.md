@@ -74,13 +74,13 @@
 - also wide-column like cassandra
 ### CASSANDRA
 - first version created by facebook in 2008, released as open source, falls under NoSQL db
-- doesnt have a formal master/leader, uses masterless async replication peer-to-peer communication
-- uses consistent hashing for sharding
+- doesnt have a formal master/leader, uses masterless async replication with peer-to-peer communication
+- uses consistent hashing for sharding, each peer is a main owner of a shard of the data
 - data is replicated between the peers
     - replication factor of 3 means 2 peers have copies
     - reads are load balanced between replicas
 - uses gossip protocol to send new state data to neighbors
-- uses quorum writes - send requests to replicate data in many other nodes, dont have to wait for all nodes to respond
+- uses async quorum writes - send requests to replicate data in many other nodes, dont have to wait for all nodes to respond
 - uses a distributed consensus protocol in case of a failure
     - reqd quorum - if a minimum number of nodes agree on a response it is used
     - cases for inconsistency are rare, an example where it could happen, quorum=2:
@@ -91,13 +91,49 @@
             - say A and B did get update before read, quorum=2, both agree with new correct value and this is returned
             - say B gets update, C doesnt, then we dont have quorum=2 so query fails
     - in above if quorum=3, then query always fails, b/c only B and C can possibly agree getting to 2 only
-- storage model - based on google's bigtable concept
-    - each node has an in-memory log of key/value pairs, that's stored sequentially
-    - periodically the in-memory log is flushed to a SST(sorted string table) persistent store, where it's sorted by key
-        - SST is immutable, each write/updates to same key results in a new record
-    - can use timestamps to get the latest value for a key
-    - problem is lots of extra space used from redundancy
-    - cassandra and elasticsearch offer compaction to reduce this, which uses mergesort on SSTs
+- storage model
+    - each node uses a LSMT
+    - writes to the in-memory cache are written to a WAL for durability, log only read for crash recovery scenarios
+    - uses an sparse index to speed up reads on disk - limits the number of segments to access for a read
+        - is a BTREE stored in-memory, each item in index stores first key in each segment and where segment is located on disk
+        - only need to search segments where first segment key is before desired key
+            - e.g. we want key "foo", say 10 segments in index, 3rd seg is "bar", 4th seg is "gig"
+            - segment "gig" wont have "foo", but segment "bar" might, and also 1st and 2nd segment, so just search 1st,2nd,3rd segment
+- each value for a key can represent a different set of "columns" or fields, so diff version of keys could have diff sets of fields
+    - this is why peeps call it a column DB
+
+## LSMT
+- LSMT = Log Structured Merge Tree
+    - 2 components: 1. in-memory cache(memtable), 2. on-disk/persistent component(SSTable)
+- great for high-write use cases, while still having good read performance
+    - there are no relations so cant do SQL queries really
+- used by RocksDB and Cassandra
+- read path -> search memtable first, then search SST
+### MEMTABLE
+- in-memory log of key/value pairs
+    - often a linked-list, this enables fast writes as insertions are O(1)
+    - but other structs like red-black trees, O(logN) insertion time, are good too
+    - writes to an existing key updates it's value (i'm pretty sure about this)
+- when in-memory log is full it's made immutable and new writes are made to a new in-memory log
+    - then the full log is flushed to on-disk component, a SST
+    - batching improves performance by reducing many IO calls to one
+- problem is lots of extra space used from redundancy
+### SST
+- SST = sorted string table, on-disk persistent store, composed of many segments
+    - SST inspired by a data struct in google BigTable
+    - each flush from a memtable comprises a segment of data, key/values are sorted in each segment by key
+- SST is immutable, each write/updates to same key results in a new record
+- reading on a key
+    - means starting with latest segment and binary search, if not there goto next latest segment
+    - in worst case key is in the earliest segment, so O(NlogK) time (N segments, K keys/segment)
+- bloom filter optimization (cassandra+rocksDB does this)
+    - can use a bloom filter to keep track of what keys are in the SST segment
+    - no false negatives, so can definitely ignore searching SST then, saving time for a read
+    - can increase filter size (esp during compaction) to redude false positive rate
+- compaction - merging two segments of SST into one in the background
+    - this greatly increases read performance
+    - only recent values of a key are kept, also reducing total storage
+    - hard delete of a key uses tombstones, a marker, and the key is deleted during compaction
 
 
 ## DOCUMENT DB
