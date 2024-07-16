@@ -15,7 +15,8 @@
 - ver10 (release 2022?) - full logical replication
 
 ## TYPES
-- `json` - same as varchar or string, but enforces it's a valid json string
+- `text` - unbounded string
+- `json` - same as varchar or text, but enforces it's a valid json string
 - `jsonb` - binary format of json, takes more time to store, but you can build indexes on it
     - postgres team was looking at mongodb `bson` but went with their own instead
 

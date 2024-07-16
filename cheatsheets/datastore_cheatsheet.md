@@ -7,6 +7,15 @@
 - N+1 query problem - app code that translates to 1 query from a table and N extra seperate queries from a related table
 - sequential access is faster than random access on underlying storage mediums
     - particularly true for HDD, lot of physical movement, needle movement, platter movement
+- NoSql vs relational
+    - use relational when you know your schema is well defined and narrow (know exactly what fields and types)
+    - if you have a blob of data but dont know which parts you might need later, use a blob/nosql store
+- EAV(entity-attribute-value) pattern
+    - a method to store sparse data, large number of "fields"/"attributes" and each entity fills a different set of them and usually a few
+    - common implementation: table with `entity` column, `attribute` column, and `value` column
+        - oftentimes `attribute` column is a FK to a lookup table
+        - `attribute` table might have `attribute_id`, name, desc, a data type, set of valid values, and more
+    - an modern alternative to EAV is to use a document store like JSON blob
 
 
 ## RELATIONAL
@@ -190,7 +199,7 @@
 - influxDB
 
 ## GRAPH
-- Neo4j
+- Neo4j - most established and well known
 
 ## LOCKS
 - pessimistic vs optimistic
@@ -213,9 +222,6 @@
     - transactions run in ioslation of other transactions
 - Durability
     - committed transactions cannot be lost, i.e. persisted on durable non-volatile storage
-
-## GRAPH
-- Neo4j - most established and well known
 
 ## CDN
 - content delivery network
