@@ -146,7 +146,7 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
 - systemctl list-dependencies foo
     - print a nice tree of unit dependencies for foo
 - systemctl show foo
-    - low levle details of units settings
+    - low level details of units settings
 - systemctl get-default
     - print the default target for the system
 ### JOURNALCTL
@@ -155,6 +155,8 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
 - systemd logs are stored in binary format, use journalctl to access them
 journalctl -u foo
     - show full log of service foo,  "-u is unit"
+journalctl -x -u foo
+    - -x(--catalog) mean show any additional explanation
 journalctl -u foo.service
     - same as above, if unit is not service type need to type fully, e.g. foo.socket
 journalctl -u foo -b
@@ -573,13 +575,13 @@ pulsemixer - volume manager with pulseaudio
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
 - transmission - great torrent program
-    - SETUP:
+    - SETUP
         - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/
         - https://wiki.archlinux.org/index.php/transmission
-    - DIRS:
+    - DIRS
         - `/usr/share/transmission/web` -> web assets
         - `/var/lib/transmission-daemon/.config/transmission-daemon` -> settings.json
-    - CMDs:
+    - CMDs
         - start a magnet torrent: `transmission-remote -a "magnet:?xt...."`
             - adding double quote the magnet link
     - editing `settings.json`: https://github.com/transmission/transmission/wiki/Editing-Configuration-Files
@@ -587,7 +589,7 @@ pulsemixer - volume manager with pulseaudio
             - NOTE: if you hit the turtle icon in the web GUI it will activate turtle mode but settings.json wont show
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
-    - NOTE: `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
+    - NOTE: to access GUI: use `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
 - vlc
     - play media at cli and quit `vlc somefile.mp3 vlc://quit`
     - enable log file: `tools`->`preferences`->select `all` in show settings
