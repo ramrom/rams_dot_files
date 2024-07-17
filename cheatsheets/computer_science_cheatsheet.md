@@ -560,6 +560,9 @@ public static void main(String[] args) {
 ## LOGIC
 - "switch" statements are often compiled to lookup tables or hash lists in most languages
     - this are faster than a if/else-if/else equivalent, but practically only for large numbers of cases
+- comptime - an idea made popular by zig
+    > Comptime allows the compiler to insert hardcoded values into the resulting 
+    > compiled program that are written as expressions in source code.
 
 ## COMPILER
 - lexer -> read a string and split into tokens

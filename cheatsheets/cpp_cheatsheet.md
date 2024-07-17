@@ -7,3 +7,5 @@
 
 ## FEATURES
 - supports proper pass-by-reference semantics, using the `&` modifier on a parameter
+- c11 to c14 - added shared pointers and unique pointers
+- many say older versions b4 c14 were just bad

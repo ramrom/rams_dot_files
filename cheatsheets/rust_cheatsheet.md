@@ -810,4 +810,5 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - [prettytable-rs](https://lib.rs/crates/prettytable-rs) - pprint tables to terminal
 - pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)
 - [vaultwarden](https://github.com/dani-garcia/vaultwarden) - bitwarden server written in rust!
+- [rusttls](https://github.com/rustls/rustls) - rust implementation of TLS
 

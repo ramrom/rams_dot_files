@@ -1482,7 +1482,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
-        { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy", },
+        { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
         { "folke/noice.nvim", event = "VeryLazy", opts = { },
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
