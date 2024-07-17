@@ -591,6 +591,7 @@ public static void main(String[] args) {
 ## COOL ALGOS
 - jon carmack fast inverse square root `1/sqrt(x)` calc: https://www.youtube.com/watch?v=p8u_k2LIZyo&ab_channel=Nemean
 - linus on clever remove from linkedlist with double pointer: https://github.com/mkirchner/linked-list-good-taste
+- not really cool but some silly ways to fizzbuzz - https://www.linkedin.com/pulse/efficient-way-solve-fizzbuzz-problem-denis-r/
 
 ## STORIES
 - discord switch from golang->rust: https://discord.com/blog/why-discord-is-switching-from-go-to-rust

@@ -37,6 +37,7 @@
         - `mvn test -Dtest=TestCircle#xyz test` - same as above but also only with method name `xyz test`
         - `mvn test -Dtest=Test*#xyz*` - can use `*` wildcard in test class and method name
     - `mvn -DexcludeGroups="foo"`  - dont run suites/tests tagged with `foo` (Junit5)
+        - `mvn package -Dgroups=!"bar"` - `!` negation syntax also excludes
     - `mvn -Dgroups="bar"`  - only run suites/tests tagged with `bar` (Junit5)
         - see https://howtodoinjava.com/junit5/junit-5-tag-annotation-example/
     - `mvn -X ...`  - debug level console logging, `mvn -q ...` (quiet) no logging, 

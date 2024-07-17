@@ -235,12 +235,12 @@ C             " make selected dir node the new root node
 - similar plugins: vim-sneak, vim-easymotion
 
 ### TABULAR
-- `:Tabularize /| `
+- `:Tabularize /|`
     - autodetect lines above and below and align on `|` char
-- ` :'<,'>Tabularize /| `
+- ` :'<,'>Tabularize /|`
     - visually selected area will align by `|` char
     - can accept any regex, not just simpe chars like `|`
-- ` :'<,'>Tabularize /:\zs `
+- ` :'<,'>Tabularize /:\zs`
     - \z is lookforward, align by the space char after the `:` char
 
 ### CTRLP

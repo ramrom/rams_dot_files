@@ -1,6 +1,6 @@
-# MARKDOWN/JIRA CHEATSHEET:
+# MARKDOWN/JIRA/MEDIAWIKI CHEATSHEET
 
-## MARKDOWN REFERENCES
+## MARKDOWN
 - https://en.wikipedia.org/wiki/Markdown
 - https://www.markdownguide.org/basic-syntax/
 - very original spec: https://daringfireball.net/projects/markdown
@@ -9,7 +9,7 @@
 - https://devhints.io/markdown
 - hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown
 
-## Paragraphs
+## PARAGRAPHS
 - to create paragraphs seperate lines with one or more blank lines
 - to create line breaks in same paragraph, end line wiht two or more spaces
 
@@ -86,12 +86,33 @@ $some latex code$
 
 \* \_ \{ \) \[ \- \! \| \# \+ \. \` - backslash will escape these characters
 
-Tables:
-|   |   |   |   |   |
-|---|---|---|---|---|
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+### TABLES
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
+The `:` controls alignment in rendered output: left, center, or right 
+| Syntax      | Description | Test Text     |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
+
+
+### FOOTNOTES
+footnotes are not basic markdown, definitely in extended flavors 
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    `{ my code }`
+
+    Add as many paragraphs as you like.
+
 
 
 ## MEDIAWIKI
@@ -101,7 +122,6 @@ Tables:
 - `''''bold + italic''''` - bold + italic
 - headers/levels
     - `== Level 2 ==` to `====== Level 6 ======` , level 2 biggest, 6 renders smallest
-
 
 
 

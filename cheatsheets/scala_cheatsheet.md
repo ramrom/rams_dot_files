@@ -48,6 +48,7 @@
 - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
     - be able to define a trait contract for some types without modifying those types directly
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
+    - generally implemented with generic traits and implicits
 - integer types - `Short` (16bit), `Int` (32bit?), `Long` (64bit?)
     - `Long` instantiation - `1000000000000000000L` or `100000: Long`
 - `Any` - root type in scala class heirarchy - https://www.scala-lang.org/api/current/scala/Any.html
@@ -156,7 +157,9 @@ a.isInstanceOf[Int]     // returns false
 ### LIST/ARRAY
 - `List` is immutable, underlying is linked-list, so indexing is slow
 - `Vector` is immutable, indexing is fast
-- `l.last` - return last item in collection
+- `head` - return first element
+- `tail` - return tail element
+- `tail` - return same list minus first element
 - multidimensional
     - `val v = Array.ofDim(2,2)[Int]; v(0) = Array(1,1); v(0)(1)`
     - `val v = collection.mutable.ArrayBuffer.fill(3,3)(1)`
@@ -281,6 +284,7 @@ i.next       // throw NoSuchElementException
 ## FOR COMPREHENSIONS
 - syntax sugar for chaining `flatMap`
 - good martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
+    - general form: `for ( seq ) yield expr`, where `seq` can be a generator, definition, or filter
 - generator: `for (i <- 1 until 3) yield i` -> returns `Vector(1,2,3)`
 
 ## LOOPS
