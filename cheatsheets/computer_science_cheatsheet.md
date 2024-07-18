@@ -22,6 +22,8 @@
 
 
 ## MEMORY
+- working set - amount of memory a process generally needs
+    - often means the part of virtual memory that is in physical memory (versus paged to disk)
 - MAU - minimally adressable unit
     - most platforms MAU is byte-addressing
 - addressability - what is the size of the data that a address can point to
@@ -489,6 +491,9 @@ public static void main(String[] args) {
     - not fullfilling this means the code/expression is referentially opaque
     - there is a fair amount of disagreement on the definition by experts
 - typeclasses - invented by haskell, essentially ad-hoc polymorphism
+- core concept: dont mutate values, logic is an expression of many combined functions
+    - data structures are copied, never mutated, or new data structures are created
+    - versus imperative programming where you have objects and make statements that mutate
 ### ALGEBRAIC DATA TYPES
 - in type theory, it classifies composite types (types made of other types)
 - main high level categories are sum and product types, and the names come from how we count the total values they can have

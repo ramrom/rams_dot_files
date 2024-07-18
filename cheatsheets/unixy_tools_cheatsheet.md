@@ -43,6 +43,10 @@ cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
 # not well maintained, and rec'd to use rsync or SFTP instead, in openssh 9.0 scp client actually uses SFTP
 scp /path/to/file someuser@somehost:/some/remote/path/destfilename
 
+# SYNC - flush buffer cache to storage disk
+sync
+sync /foo/bar  # flush buffer for bar file only
+
 # grep (varies widely b/w osx and gnu/linux)
 # grab only the matched text with -o, works on osx and gnu/linux
 echo "foo bar baz" | grep -o "fo." # will only return "foo"

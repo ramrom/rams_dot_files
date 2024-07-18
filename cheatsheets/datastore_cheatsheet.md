@@ -182,6 +182,10 @@
             - if master dies b4 replication, replica promoted, and write lost but client thinks it happened
         - clients hits a master shard, and it will redirect client to correct shard, client remembers, shards do not proxying
     - sentinel - high availibility (not clustering)
+- persistence
+    - RDB(Redis Database) - backups, minimum latency/perf hit, forked process does all the backup work
+    - AOF(Append Only File) - like WAL, can fsync every second, every write, no fsync
+    - can also do no-persistence or AOF+RDB
 - apr'24 - redis went partially closed source, cant host on cloud for free
 - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
 - COMMANDS
@@ -222,6 +226,8 @@
     - transactions run in ioslation of other transactions
 - Durability
     - committed transactions cannot be lost, i.e. persisted on durable non-volatile storage
+    - for POSIX systems `sync`, `fsync`(`sync` for one file) and `fdatasync`(no metadata update) flush the buffer cache to storage drive
+        - note these calls flush kernel caches only, storage drives often have internal caches
 
 ## CDN
 - content delivery network

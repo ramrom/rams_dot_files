@@ -106,6 +106,7 @@ select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in 
 - WAL = Write-ahead logs, a type of journaling, describing low level binary data changes
     - when transaction is commited, WAL log is written first, then eventually the real data storage(tables, index)
 - if server fails, WAL logs always exist to retreive lost data, it provides the durability in ACID for postgres
+    - in system crashes, logs for uncommited transactions are discarded, and commited logs not in main file is written
 - WAL file fast to write (sequential data), and b/c we dont have to write the data (data pages are slow to write)
 - shipping
     - log shipping - old school way to send WALs to replicas

@@ -103,7 +103,7 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
 - great wiki on it: https://wiki.archlinux.org/index.php/Systemd
 - inspired by and basically a ripoff of osx's launchd
 - makes heavy uses of messages and events, using dbus
-- good comment by arch linux init maintainer on why systemd is good:
+- good comment by arch linux init maintainer on why systemd is good
     - https://www.reddit.com/r/archlinux/comments/4lzxs3/why_did_archlinux_embrace_systemd/
 - supports explicit order with After/Before directives: e.g. if unit2 has `After=unit1.service`, unit1 is up b4 unit2 started
     - *NOTE* if `unit1` didn't start (e.g. not enabled), then `unit2` would still start, _unless_ `unit2` also had `Require=unit1.service`
