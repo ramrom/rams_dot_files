@@ -123,7 +123,8 @@ mylist.sort(Comparator.naturalOrder()); // sort in ascending order, modifies exi
 Arrays.parallelSort(mylist);    // multithreaded sort, uses merge sort (breaks array into subarrays, forkjoin pool for parralelism)
 mylist.equals(anotherlist); // compare 2 arraylists, values and order
 
-Arrays.sort(mylist);        // another way to sort, works for all primitive types like int/float/string
+Arrays.sort(mylist);            // another way to sort
+Arrays.sort(new int[] {3,1,2})  // works for all primitive types like int/float/string
 // if mylist type doesnt implement Comparable interface can pass in anonymous class of the Comparator interface
 class Foo { int x; Foo(int x) { this.x = x; } }
 Comparator<Foo> FooComparator = new Comparator<Foo>() { public int compare(Foo first, Foo second) { return first.x - second.x; } };
@@ -540,6 +541,7 @@ boolean b2 = (3 == 4);         // b2 stores false
 int a = Integer.parseInt("3");    // String -> int
 int a = Integer.parseInt("foo");  // will raise NumberFormatException, also for int too big
 Integer.valueOf("1");        // String -> Integer, and allows null inputs unlike parseInt
+Integer.valueOf(1);        // int -> Integer
 Integer.toString(3)     // converts to String "3"
 
 float f = Float.parseFloat("25.1");    // String -> Float

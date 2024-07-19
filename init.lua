@@ -536,10 +536,6 @@ UpdateLuaLineTabLine = function(args)
     end
 end
 
--- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
-vim.api.nvim_create_autocmd('VimResized', { pattern='*', callback = function() UpdateLuaLineTabLine(true) end, 
-      desc = 'force lualine udpate when vim resizes'})
-
 LoadLuaLine = function()
     require('lualine').setup {
         options = {
@@ -587,6 +583,10 @@ LoadLuaLine = function()
 
     -- update tabline when tabs are created or closed
     vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, { callback = UpdateLuaLineTabLine, })
+
+    -- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
+    vim.api.nvim_create_autocmd('VimResized', { pattern='*', callback = function() UpdateLuaLineTabLine(true) end, 
+          desc = 'force lualine udpate when vim resizes'})
 end
 
 ---------------------- WHICH-KEY CONFIG -------------------------------

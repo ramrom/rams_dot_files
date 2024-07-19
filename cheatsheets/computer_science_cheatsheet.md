@@ -467,7 +467,11 @@ public static void main(String[] args) {
         - 2024: 95% ATM machines, 43% banking systems, 80% in-person transactions, 60% healthcare records/dbs use COBOL
 - ML (meta language) - functional
 - OCaml - dialect of ML
-- VHDL
+- VHDL - VLSI(very large scale IC) Hardware Description Language
+- Swift - created by Christopher Arthur Lattner, he convinced apple to convert from objectiveC over the course of 10 years
+- LLVM/CLang - also created by Lattner
+- Mojo - created by Lattner, to be a python successor, speed of C + expressiveness of python
+- Zig - speed of C but with modern nicities, allocators are first class, no macros but has comptime
 
 ## TYPES
 - covariance/contravariance/invariance - https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)

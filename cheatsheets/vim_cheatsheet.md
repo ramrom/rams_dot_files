@@ -85,13 +85,11 @@
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
-
 ### PLENARY.NVIM 
 - core set of neovim lua libs
 - provides an async framework, it uses lua coroutines and libuv for async IO
 - `plenary.job` lets you run shell command in async job
     - `sync()` to block main thread, or `start()` for async/background
-
 ### LSP
 - coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
 - neovim-lsp - neovim's built in lsp client, written in lua
@@ -105,7 +103,6 @@
         - offset comparator choose matches closer to beg of word
         - exact match comparator chooses exact matches (e.g. `word` matches `word` more than `wording`)
 - fidget.nvim - show LSP progress in bottom right, noice.nvim does this too and honestly better
-
 ### PLUGIN MANAGERS
 #### PACKER
 - pure lua plugin manager
@@ -114,7 +111,6 @@
 #### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
-
 ### FZF.VIM
 - Rg            - ripgrep dynamic fuzzy search with bat preview!
 - Files, ctrl-v - opens in new vert split
@@ -126,11 +122,9 @@
 - BCommits    - commit hist for current buffer
 - FZF-MRU:
     - does MRU for local sessions, other vim session no affectd
-
 ### FZF-LUA
 - uses fzf but plugin written in lua, lots more pickers and features than fzf.vim
 - multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
-
 ### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 - Gedit HEAD~3:%  - git show HEAD~3:<current file>
@@ -143,11 +137,9 @@
 - `:cnext`, `:cprevious`,
 - `:cfirst` and `:clast`
 - `:0Glog`      - logs only that change current file
-
 ### VIM-COMMENTARY
 - `gcu` or `gcgc` - uncomment current and contiguous adjacent commented lines
 - neovim 0.10 has built in commentary (from mini.vim maintainer), API very similar to vim-commentary regardless
-
 ### FIRENVIM
 - https://github.com/glacambre/firenvim
 - INSTALLATION - SEPERATE INIT.LUA FILE
@@ -162,7 +154,6 @@
 - INSTALLATION - SHARED INIT.LUA FILE
     - use global var that gets set if firenvim was activated in browser 
     - e.g. `if not not vim.g.started_by_firenvim then ... end`
-
 ### VIM-SURROUND
 - https://github.com/tpope/vim-surround
 - `cs"'` - change surround `"` to `'`
@@ -170,7 +161,6 @@
 - for txt `<foo>bar</foo>` -> `cst"` - change surround tag(`<foo>` here) to `"`
 - `ds[` - delete surround `[`
 - `ysiw[` - select inner word and surround with `[`
-
 ### NERDTREE
 ```vim
 ?             " toggle quickhelp
@@ -190,12 +180,6 @@ P             " jump to tree root
 K J           " jmp to first/last child node of current node's parent
 C             " make selected dir node the new root node
 ```
-
-### NVIM-BQF
-- shows preview window of current item in prefix window for nvim
-- `zf` will open a fzf prompt to fuzzy search quickfix items
-    - `ctrl-t` and x/v will open in new tab or vert/hor split
-
 ### NVIM-TREE
 - `g?` - to list commands
 - `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
@@ -206,7 +190,10 @@ C             " make selected dir node the new root node
 - `f`/`F` - filter / clear filer
 - `E` - expand all
 - `W` - collapse
-
+### NVIM-BQF
+- shows preview window of current item in prefix window for nvim
+- `zf` will open a fzf prompt to fuzzy search quickfix items
+    - `ctrl-t` and x/v will open in new tab or vert/hor split
 ### TREE-SITTER
 - a general semantic file parser, available to neovim as a plugin
     - main page - https://tree-sitter.github.io/tree-sitter/
@@ -223,17 +210,14 @@ C             " make selected dir node the new root node
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 - neovim 0.10 - `InspectTree` pops open window on right to see the whole syntax tree
-
 ### VIM-GH-LINE
 - *NOTE* vim-rhubarb also supports this functionality
 - blob-view: <leader>gh
 - blame-view: <leader>gb
 - repo-view: <leader>go
-
 ### FLASH.NVIM
 - quickly jump to a word on screen, or quick select
 - similar plugins: vim-sneak, vim-easymotion
-
 ### TABULAR
 - `:Tabularize /|`
     - autodetect lines above and below and align on `|` char
@@ -242,9 +226,9 @@ C             " make selected dir node the new root node
     - can accept any regex, not just simpe chars like `|`
 - ` :'<,'>Tabularize /:\zs`
     - \z is lookforward, align by the space char after the `:` char
-
 ### CTRLP
 - ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
+
 
 ## STARTING VIM
 - `vim -u somevimrc` - specify a vimrc file (otherwise ~/.vimrc)
