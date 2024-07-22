@@ -25,6 +25,8 @@
 - tablespace vs schema - https://stackoverflow.com/questions/35120219/a-database-schema-vs-a-database-tablespace
 - transactional DDL - can rollback DDLs like transactional DMLs
     - rolloback whole table creations even
+### TYPES
+- blobs - binary large objects - a type to use if storing large files like binaries or multimedia(images, video)
 ### DOCS
 - https://use-the-index-luke.com/
 ### POSTGRESQL
@@ -136,7 +138,7 @@
 - reading on a key
     - means starting with latest segment and binary search, if not there goto next latest segment
     - in worst case key is in the earliest segment, so O(NlogK) time (N segments, K keys/segment)
-- bloom filter optimization (cassandra+rocksDB does this)
+- bloom filter optimization (cassandra and rocksDB does this)
     - can use a bloom filter to keep track of what keys are in the SST segment
     - no false negatives, so can definitely ignore searching SST then, saving time for a read
     - can increase filter size (esp during compaction) to redude false positive rate
@@ -202,6 +204,12 @@
 - graphite
 - influxDB
 
+## DISTRIBUTED FILE SYSTEMS
+- examples: GoogleFS, GlusterFS, Hadoop, NFS
+### GOOGLEFS
+- designed early by larry page an sergei brin
+- optimized for cheap commodity hardware, files split into 64MB chunks, optimized for read and append
+
 ## GRAPH
 - Neo4j - most established and well known
 
@@ -241,7 +249,8 @@
 - famously level.fyi used google sheets for prod for long time
 
 ## TECH
-- vitess - a db clustering system using mysql, created by google
+- vitess - a db clustering system using mysql, created by google engineers, those engineers later created planetscale and use vitess
     - each mysql server is a horizontal shard abstracted as a single entity by vitess
+        - prolly used mysql b/c in 2005 document store like mongoDB didnt exist
     - used by youtube sincd 2011, composed of tens of thousands of mysql instances
     - also used by slack

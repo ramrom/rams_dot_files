@@ -31,6 +31,7 @@
     - splits stream into a sequence of small HTTP-based file downloads
     - works with any firewall and proxy servers and CDNs that supports regular HTTP traffic, unlike UDP-based protocols like RTP
     - chunk size and rate can dynamically adjust based on bandwidth and device capability
+    - youtube uses HTML5 with HLS for playing videos
 
 ## OTHER INFO
 - chunked vs multi-part: chunked is transfer encoding, multi-part is content type

@@ -611,6 +611,7 @@
 - CalDAV - based on WebDAV for sharing and syncing calander data
     - uses iCalander format for the data
 - CardDAV - protocol for sharing contact data
+- XMPP - extensible messaging and presence protocol (original call jabber) - peer-to-peer, used for IM(instant messaging), uses TCP
 ### WEBSOCKETS
 - layer 7 protocol, fully bidirectional semantics b/w two hosts
 - http2 gets close to websockets, one major advantage of websockets is no header is required for every message
@@ -646,6 +647,8 @@
 - HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
 - RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
     - like HLS it's adaptive and chunks data, base type uses TCP port 1935, RTMFP is UDP version, RTMPT uses HTTP
+    - it's a true streaming protocol and has very low latency, used to live streaming and live gaming
+- RTMPS - RTMP with TLS
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP

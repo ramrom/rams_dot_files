@@ -225,6 +225,10 @@ public static void main(String[] args) {
 - QUADTREE - tree where each internal node has exactly 4 children
     - used to split a 2D square space into 4 pieces, good for indexing spatial data
     - fast location based insertion and seaches
+- R-TREE - used for storing spatial data
+    - R stands for rectangle, idea is to group things into minimum bounding rectangles and create B-Tree from it
+    - common problem to solve: find all x within y distance of z
+    - e.g. squares,polygons. but for any # of dimensions, so rectangular prisms(3D) and higher
 ### LINKED LISTS
 - rust book - linked lists are generally dumb: https://rust-unofficial.github.io/too-many-lists/
 - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
@@ -417,6 +421,7 @@ public static void main(String[] args) {
             - it's not DI b/c we can't choose what `Engine` type to inject or access it's API
 - decorator pattern - add functionality without modifying underlying type
     - really for classes, so don't create child class, but add a wrapper class for the target class
+- adapter pattern - creating bridge code to combine two incompatible interfaces
 - RAII - resource acquisition is initialization - resources are tied to their objects and their lifetimes, released with the object death
 - singleton - single global instance of class, class can have only one instance and has global scope
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
