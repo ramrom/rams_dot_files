@@ -534,9 +534,21 @@ public static void main(String[] args) {
 - batch processing - generally non-real time, usually store data to persistent store, then can slowly process it background
 - stream processing - real-time crunching of data, generally no persistent data store step as data is received
 - MapReduce and hadoop
-     - Map -> takes data and breaks it down into smaller key/value pairs(tuples)
-     - Reduce -> takes tuples from map output and combines into smaller set of tuples
-     - HDFS (hadoop distributed file system) - can store petabytes of data
+    - hadoop designed to use cluster of commodity hardware to digest big data(consequence of internet) 
+        - used in data warehousing, reccomendation systems, fraud detection, and more
+        - can be combined with hive, pig, apache spark, flume, and other data processing engines
+    - YARN - yet another resource manager - control plane that manages a hadoop cluster
+        - want to perform mapreduce on data
+            - application master requests the node manager, node manager approves/disapproves
+            - if approved node manager asks resource manager
+    - HDFS (hadoop distributed file system) - can store petabytes of data
+        - a big file is split into many blocks, each on a diff storage node (block size 128MB by default)
+        - blocks are replicated and stored on diff data nodes for durability
+    - MapReduce - a task that you want to perform on set of big data
+        - Split phase - file split into blocks and stored in HDFS
+        - Map - in parrallel, each block is worked on my a map function, e.g. counting words and generate a key/value count
+        - shuffle+sort phase - results from mapping from each block might be shuffled or sorted with each other
+        - Reduce -> takes tuples from map/shuffle output and combines into smaller set of tuples
 - CONSENSUS
     - Raft protocol - simple and efficient, protocol for leader/follower replication and election
         - kafka and etcd use raft

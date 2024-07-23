@@ -17,6 +17,7 @@
 - E.164 is the international telephone numbering plan that ensures each device on the PSTN has globally unique number.
     - format is `+` + (country code) + (number in country, for US 10digit area-code+ph#)
 - https://www.twilio.com/docs/glossary/what-e164
+- SMS - technically supports a messages size of up to 160bytes
 - RCS (Rich Communication Services) - next gen open standard to replace SMS/MMS on android by google
     - has group chat, rich media messages, real-time typing indicator, read receipts, end-to-end encryption, file share up to 100MB
     - some iphone supports RCS

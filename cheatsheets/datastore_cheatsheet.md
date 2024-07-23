@@ -129,7 +129,7 @@
 - when in-memory log is full it's made immutable and new writes are made to a new in-memory log
     - then the full log is flushed to on-disk component, a SST
     - batching improves performance by reducing many IO calls to one
-- problem is lots of extra space used from redundancy
+- one disadvantage here is that lots of extra space used from redundancy
 ### SST
 - SST = sorted string table, on-disk persistent store, composed of many segments
     - SST inspired by a data struct in google BigTable
@@ -205,7 +205,7 @@
 - influxDB
 
 ## DISTRIBUTED FILE SYSTEMS
-- examples: GoogleFS, GlusterFS, Hadoop, NFS
+- examples: GoogleFS, GlusterFS, HDFS(hadoop distributed file system), NFS
 ### GOOGLEFS
 - designed early by larry page an sergei brin
 - optimized for cheap commodity hardware, files split into 64MB chunks, optimized for read and append

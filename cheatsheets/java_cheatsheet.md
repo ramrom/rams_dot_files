@@ -16,12 +16,6 @@
 - java17, sept2021, LTS - better pattern matching
 - java21, sept2023, end at sept2031
 
-## FEATURES
-- varargs(variadic arguments) for functions, e.g. `void foo(String... vals) {..}; foo("one"); foo("one","two");`
-    - they have an array-like API
-    - method can only have one varargs param
-    - it must be the last param
-
 ## RUNTIME
 `/usr/libexec/java_home -V`
     - see all jvm version installed
@@ -793,6 +787,11 @@ e == e2        // return true, since they are constant and only one instance def
 ### VAR
 - `var` keyword introduced in java10. can declare variable without type, type will be inferred from value
 - `var x = 3`   - inferred `x` is of type `Integer`
+### VARIADIC ARGS
+- varargs(variadic arguments) for functions, e.g. `void foo(String... vals) {..}; foo("one"); foo("one","two");`
+- they have an array-like API
+- method can only have one varargs param
+- it must be the last param
 
 
 ## INTROSPECTION
@@ -899,7 +898,7 @@ String bar = (3 < 10) ? "A" : "B";  // bar = "A"
 ### EXCEPTIONS
 - to throw method must declare it, e.g. `public int foo(int a) throws Exception { throw new Exception("foo"); }`
     - the calling function must either try/catch or declare it can throw if unhandled
-- `throw new Exception("foobar")`
+- throwing an exception: `throw new Exception("foobar")`
 ```java
 //try catch
 try { ... } 

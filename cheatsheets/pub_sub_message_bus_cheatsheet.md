@@ -94,6 +94,8 @@
     - deletion API should be used (generally by same consumer) to remove them, otherwise message will become visible later
 ### SNS
 - messages pushed to conusmer, can configure to push a SQS that consumer owns/pulls from
+- e.g. consumers can be SQS, kinesis, lambda
+- SMS support: supports SMS delivery direct cell phones or to a topic(which then can delivery to cells)
 
 ## RABBITMQ
 - pushes messages to consumer
