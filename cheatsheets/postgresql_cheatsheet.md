@@ -140,16 +140,26 @@ select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in 
 - can only do DMLs, not DDLs (subscribers need to manually do DDLs)
 
 ## QUERY TIPS
+```sql
+-- date range
+SELECT * FROM events WHERE event_date >= '2023-02-01' AND event_date <= '2023-04-30'
+
+-- counting num records in db table
+SELECT count(1) from footable;  -- slow but accurate
+
+-- for big table 
+-- from https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
+-- fast but somewhat innaccurate
+SELECT reltuples AS estimate FROM pg_class where relname = 'mytable';
+-- even better
+SELECT reltuples::bigint AS estimate FROM pg_class WHERE  oid = 'myschema.mytable'::regclass;
+```
 - terminate db connections
-    - `psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres`
-- counting num records in db table
-    - `select count(1) from footable;` - for big table, slow but accurate
-    - https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
-        - `SELECT reltuples AS estimate FROM pg_class where relname = 'mytable';` - fast but somewhat innaccurate
-        - `SELECT reltuples::bigint AS estimate FROM pg_class WHERE  oid = 'myschema.mytable'::regclass;` - better
+    `psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres`
+
 
 ## SPECIAL TABLES
 - https://www.postgresql.org/docs/current/monitoring-stats.html
-    - `pg_stat_activity` a view that shows queries running per process
+- `pg_stat_activity` a view that shows queries running per process
 - `pg_locks` a view that shows locks owned by various processes and transactions
 - `pg_stat_progress_create_index` - show status of index creation
