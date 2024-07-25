@@ -391,11 +391,20 @@ match triple {
     - correct practice is implement `From<T> for U`, `Into<U> for T` blanket implementation will be done
 - `TryFrom` and `TryInto` exist for conversions that could fail, and return `Result` type
 - `AsRef` and `AsMut` convert reference types
+### ENUM
+- in rust is really a tagged union or algebraic sum type, in many other languages it's a thin layer on a list of integers
+```rust
+enum E {
+    Foo,
+    Bar(i32, usize),            // variant can have fields
+    Yar{ f1: i32, f2: string }   // a variant can be a embedded struct, and have field names
+}
+```
 ### OTHER
-- `enum` - in rust is really a tagged union or algebraic sum type, other languages it's a thin layer on a list of integers
 - `union` - like struct, but all fields share the same storage, size of union type is size of largest field
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
+- `Result<E, T>` - generic enum which can be `Err(E)` or `Ok(T)`
 - `Sized` - trait, known size at compile time, doesnt change size
      - data put on stack _must_ be `Sized`, un-`Sized` have to go on the heap
      - for enums compiler uses size of largest variant

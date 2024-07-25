@@ -44,17 +44,7 @@
 - `\o somefile` output to a file
 - `\i somefile` execute commands from a file
 - `select * from foobale where barcolumn is not null;` - find non-null rows
-### ARRAYS
-```sql
--- assume we have text[] type column
-select * from footable where arrcol[1] = 'dude';  -- find all where first element of array is 'dude'
-
--- find all where arrcol contains 'dude' 
---NOTE: ANY must be right hand side
-select * from footable where 'dude' = ANY (arrcol);  
-
-select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in array becomes a new row in results
-```
+- run a psql command from shell - `psql -c "SELECT * from footable where bar = 3;" -d postgres`
 
 ## CONCEPTS
 - postgres schema - really a namespace in a database, not to be confused with general software concept of structure of data and relations
@@ -139,7 +129,7 @@ select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in 
 - disadvantage: cant copy sequences, large objects, materialized views, partition root tables, and foreign tables
 - can only do DMLs, not DDLs (subscribers need to manually do DDLs)
 
-## QUERY TIPS
+## QUERIES
 ```sql
 -- date range
 SELECT * FROM events WHERE event_date >= '2023-02-01' AND event_date <= '2023-04-30'
@@ -153,10 +143,21 @@ SELECT count(1) from footable;  -- slow but accurate
 SELECT reltuples AS estimate FROM pg_class where relname = 'mytable';
 -- even better
 SELECT reltuples::bigint AS estimate FROM pg_class WHERE  oid = 'myschema.mytable'::regclass;
-```
-- terminate db connections
-    `psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()" -d postgres`
 
+-- terminate db connections
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()
+```
+### ARRAYS
+```sql
+-- assume we have text[] type column
+select * from footable where arrcol[1] = 'dude';  -- find all where first element of array is 'dude'
+
+-- find all where arrcol contains 'dude' 
+--NOTE: ANY must be right hand side
+select * from footable where 'dude' = ANY (arrcol);  
+
+select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in array becomes a new row in results
+```
 
 ## SPECIAL TABLES
 - https://www.postgresql.org/docs/current/monitoring-stats.html
