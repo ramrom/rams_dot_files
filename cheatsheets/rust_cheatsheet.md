@@ -405,6 +405,7 @@ enum E {
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Result<E, T>` - generic enum which can be `Err(E)` or `Ok(T)`
+    - `unwrap_or(x)` -> retrieve value `T` if `Ok<T>`, if `Err` return `x`
 - `Sized` - trait, known size at compile time, doesnt change size
      - data put on stack _must_ be `Sized`, un-`Sized` have to go on the heap
      - for enums compiler uses size of largest variant

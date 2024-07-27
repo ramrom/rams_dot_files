@@ -67,6 +67,12 @@ int main() {
 
     foo f5; // because we typedef'd foo we dont need the struct keyword
 }
+
+// this will throw an error, as a recursive struct would be infinitely sized
+typedef struct Recur {
+    int val;
+    Recur r;
+} Recur;
 ```
 
 ## CONCEPTS

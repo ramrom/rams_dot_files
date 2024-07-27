@@ -188,8 +188,10 @@
     - RDB(Redis Database) - backups, minimum latency/perf hit, forked process does all the backup work
     - AOF(Append Only File) - like WAL, can fsync every second, every write, no fsync
     - can also do no-persistence or AOF+RDB
-- apr'24 - redis went partially closed source, cant host on cloud for free
-- apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
+- supports transactions - https://redis.io/docs/latest/develop/interact/transactions/
+- HISTORY
+    - apr'24 - redis went partially closed source, cant host on cloud for free
+    - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
 - COMMANDS
     - FLUSHALL
     - KEYS *

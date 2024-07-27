@@ -329,17 +329,34 @@ i.next       // throw NoSuchElementException
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
 
 ## IO
-### FILE
-- run command and redirect to file
-    ```scala
-    import sys.process._
-    import java.io.File
-    ("ls -al" #> new File("files.txt")).!
-    ```
-### FILE READ
-- import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
-- import scala.io.Source; Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
-    - should close file too: val a = Source.fromFile("example.txt"), a.close
+### FILES
+```scala
+// run command and redirect to file
+import sys.process._
+import java.io.File
+("ls -al" #> new File("files.txt")).!
+
+import scala.io.Source; 
+Source.fromFile("/tmp/httpie_tmp_output2").getLines.toList   // list of lines
+
+Source.fromFile("/tmp/httpie_tmp_output2").getLines.mkString // file as one big string
+
+// should close file too: 
+val a = Source.fromFile("example.txt")
+a.close
+
+// FileWriter - important to close, closing ensures any remaining buffer is written to file
+val fileWriter = new FileWriter(new File("/tmp/hello.txt"))
+fileWriter.write("hello there")
+fileWriter.close()
+
+// PrintWriterm
+val writer = new PrintWriter(new File("data.txt"))
+val s = "big"
+val numberOfLines = 3000000
+writer.printf("This is a %s program with %d of code", s, new Integer(numberOfLines))
+writer.close()
+```
 ### ENVIRONMENT VARS
 - using java `System`: 
     - `System.getenv()` -> return `Map[String,String]` of env-var/value
