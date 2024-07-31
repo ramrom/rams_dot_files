@@ -63,8 +63,9 @@
     val seq : Seq = Seq(1,2,3)   // this is what JVM runtime actually has, generic type info is erased
     ```
 - VARIANCE - tells us if type constructor is subtype of another type constructor
+    - https://docs.scala-lang.org/tour/variances.html
     - 3 main variances: invariance, covariance, and contravariance
-    - covariant: given B is subtype of A, then `F[_]]` is covariant if `F[B]` is subtype of `F[A]`, denoted by `F[+T]`
+    - covariant: given B is subtype of A, then `F[[_]]` is covariant if `F[B]` is subtype of `F[A]`, denoted by `F[+T]`
     - contravariant: inverse of covariant, given B subtype of A, `F[A]` is subtype of `F[B]`, denoted by `F[-T]`
     - invariant: no gaurantee of subtyping relationship between `F[A]` and `F[B]`
 ### HIGHER KINDED TYPES
@@ -98,9 +99,10 @@
 - can specify extra constructors using methods named `this`
     - each `this` must have diff signature, and must internally call another constructor
 ### IMPLICITS
+- coder doesnt need to explicilty pass in an arg/type that is implicit, the compiler will find it within scope
+- scala 3 overhauled implicits
 - good doc on scala implicits: https://docs.scala-lang.org/tutorials/FAQ/finding-implicits.html
 - implicit conversion: automatically convert a type to another type if a implicit converter func exists in scope
-    - 
     ```scala
     implicit def inttostring(i: Int): String = { s"int is: ${i}" }
     def printstring(s: String): Unit = { println(s) }
@@ -149,6 +151,28 @@ a.isInstanceOf[Int]     // returns false
 ```
 
 
+## PATTERN MATCHING
+- matching must be exhaustive
+- `case entries @ _ :: _ :: (_: List[_]) => {`
+    - more than one record
+- can pattern match in field names, this will print `a or dude`
+    ```
+    (1,"dude") match { 
+        case (2, "z") | (3,"n") => print("1st case")
+        case (1, "a" | "dude") => print("a or dude")
+        case (_, _) => print("catch all")
+    }
+    ```
+
+## FOR COMPREHENSIONS
+- syntax sugar for chaining `flatMap`
+- good martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
+    - general form: `for ( seq ) yield expr`, where `seq` can be a generator, definition, or filter
+- generator: `for (i <- 1 until 3) yield i` -> returns `Vector(1,2,3)`
+### LOOPS
+- `for (i <- 1 until 5) println(i)`  - no `yield` makes this like a regular for loop
+- `for (i <- List(1,2,3)) println(i)`
+
 ## COLLECTIONS
 - scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
 ### TUPLES
@@ -158,7 +182,6 @@ a.isInstanceOf[Int]     // returns false
 - `List` is immutable, underlying is linked-list, so indexing is slow
 - `Vector` is immutable, indexing is fast
 - `head` - return first element
-- `tail` - return tail element
 - `tail` - return same list minus first element
 - multidimensional
     - `val v = Array.ofDim(2,2)[Int]; v(0) = Array(1,1); v(0)(1)`
@@ -191,6 +214,11 @@ a.isInstanceOf[Int]     // returns false
         - generally backed by JVM basic array, more efficient than `ArrayBuffer`
     - `ListBuffer` -> underlying data struct is linked list
         - to append: `l.append(1)` or `l += 1`
+    - `scala.collection.mutable.Set` - mutable Set
+    - `scala.collection.mutable.Map` - mutable Map
+        `m.addOne(3->4)` - add an item
+        `m.remove(4)` - remove a key, returns `None` if key didnt exist, `Some(value)` the value if it did exist
+    - also has `PriorityQueue` and others
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
 - examples
@@ -228,14 +256,14 @@ i.next       // return 2
 i.next       // throw NoSuchElementException
 ```
 ### STREAMS
-- `List(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10)` -> will have 2 more intermediate collections/allocations
-- `Stream(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10).toList`
-    - `Stream` is like an iterator, it's lazy until something consumes it, `toList` here
-    - could pass this into a for e.g. `for ( elem <- Stream(1,2,3) ) println( s"A value is ${elem}" )`
 - like collection but lazily evaluated so can be optimized when chaining them together
 - regular collections that u might chain with things like `map` and `filter` will eagerly create intermediate data structures
 - deprecated in 2.13.0 in favor of `LazyList`
 - streams/LazyList allow us to represent infinite computations, e.g. a fibonacci sequence, sequence of all natural numbers
+- `List(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10)` -> will have 2 more intermediate collections/allocations
+- `Stream(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10).toList`
+    - `Stream` is like an iterator, it's lazy until something consumes it, `toList` here
+    - could pass this into a for e.g. `for ( elem <- Stream(1,2,3) ) println( s"A value is ${elem}" )`
 
 ## STRINGS
 - toString method is called if fooObject isnt a String
@@ -252,10 +280,6 @@ i.next       // throw NoSuchElementException
     ```scala
     case Class Foo(a: Int); foo = Foo(3); println(s"this is $foo")
     ```
-
-## MATH
-- `scala.math.pow(2.1,3.4)` -> 2 to power of 3
-- mod: `10 % 3`  -> res: 1
 
 ## MONADS
 - they are monoids in the class of endofunctors, like duh!
@@ -281,16 +305,6 @@ i.next       // throw NoSuchElementException
 ### EitherT
 - type from cats
 
-## FOR COMPREHENSIONS
-- syntax sugar for chaining `flatMap`
-- good martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
-    - general form: `for ( seq ) yield expr`, where `seq` can be a generator, definition, or filter
-- generator: `for (i <- 1 until 3) yield i` -> returns `Vector(1,2,3)`
-
-## LOOPS
-- `for (i <- 1 until 5) println(i)`  - regular for loop
-- `for (i <- List(1,2,3)) println(i)`  - regular for loop
-
 ## RANDOM
 - sleep for 1 second: `Thread.sleep(1000)`
 
@@ -308,25 +322,19 @@ i.next       // throw NoSuchElementException
 ### MUTEX
 - mutex on variables: `synchronize { 1 + 1 }`
 
-### PATTERN MATCHING
-- matching must be exhaustive
-- `case entries @ _ :: _ :: (_: List[_]) => {`
-    - more than one record
-- can pattern match in field names, this will print `a or dude`
-    ```
-    (1,"dude") match { 
-        case (2, "z") | (3,"n") => print("1st case")
-        case (1, "a" | "dude") => print("a or dude")
-        case (_, _) => print("catch all")
-    }
-    ```
-
-### DATE/TIME
+## DATE/TIME
 - `System.nanoTime` - get JVMs nano time count
 - `System.currentTimeMillis` - get JVMs millisecond time count
 - TIME/DATE: use java times and date, it is now better than jodatime
 - joda time parsing and conversion:
     - https://stackoverflow.com/questions/20331163/how-to-format-joda-time-datetime-to-only-mm-dd-yyyy/20331243
+
+## MATH
+- `scala.math.pow(2.1,3.4)` -> 2 to power of 3
+- `scala.math.min(1,4)` -> returns 1
+- `scala.math.max(1,4)` -> returns 4
+- `scala.math.abs(-1)` -> returns 1
+- mod: `10 % 3`  -> res: 1
 
 ## IO
 ### FILES
@@ -368,10 +376,6 @@ writer.close()
 ## ENUMERATION
 - play 2.5 json doesnt supports scala enumerators
 - can use enumeratum
-
-## IMPLICITS
-- coder doesnt need to explicilty pass in an arg/type that is implicit, the compiler will find it within scope
-- scala 3 overhauled implicits
 
 ## BUILD TOOLS
 - sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
@@ -537,6 +541,8 @@ writer.close()
         - common type aliases using this `Task` `UIO`(cant fail) `TaskR`(needs env) `IO`(returns E)
 ### AKKA
 - one of akka streams main goals is to implement backpressure
+### AKKA STREAMS
+- built on top of akka, adheres to [reactive streams](https://www.reactive-streams.org/) concept
 ### PEKKO
 - spawned by apache project from akka 2.6, written mostly in scala and some java
 ### SLICK

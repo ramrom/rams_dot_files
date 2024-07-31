@@ -370,6 +370,9 @@ public static void main(String[] args) {
 - used often in packet switched networks, ATM uses it
 ### LEAKY BUCKET
 - outputs requests at a fixed rate, smoothes out traffic, token bucket allows bursty traffic through and is more flexible
+### BINARY SEARCH
+- for non-exact closest match great or less
+    - https://stackoverflow.com/questions/50692011/find-the-first-element-in-a-sorted-array-that-is-smaller-than-the-target
 ### CONSISTENT HASHING
 - basic approach: split a space conceptually into a ring of N slots
     - hash the key and then mod by space size: `K = h(key) % N`

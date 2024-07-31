@@ -640,10 +640,12 @@
     - can direct traffic to one VIP and have many IPs behind it
 - IPv4 - 32bits, 4bil addresses
     - private address ranges: 10.x.x.x(class A), 172.16.x.x - 172.31.x.x(class B), 192.168.x.x(class C)
-- IPv8 - 128bits
+- IPv6 - 128bits
     - private address range added:
         - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
         - fec0::/10 address block = deprecated (RFC 3879)
+- CIDR - classless inter-domain routing - make routing tables easier
+- VLSM - variable length subnet masking - make better use of address space
 ### STREAMING PROTOCOLS
 - HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
 - RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol

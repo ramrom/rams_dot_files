@@ -289,7 +289,7 @@ match triple {
         - if only one input then the output gets the same lifetime
         - if multiple inputs and one is `&self` or `&mut self` then output get the lifetime of `self`
 - variance relationships - https://doc.rust-lang.org/reference/subtyping.html
-    - jon genjset on variance - https://www.youtube.com/watch?v=iVYWDIW71jk&t=4953s&ab_channel=JonGjengset
+    - jon gjengset on variance - https://www.youtube.com/watch?v=iVYWDIW71jk&t=4953s&ab_channel=JonGjengset
 - `Cow<T>` - Copy-On-Write "pointer", stores a &%, and can convert by cloning the T when you write to it
 ### UNSAFE
 - raw pointers - `*const` and `*mut`

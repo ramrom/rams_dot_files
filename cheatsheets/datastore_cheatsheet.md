@@ -142,10 +142,14 @@
     - can use a bloom filter to keep track of what keys are in the SST segment
     - no false negatives, so can definitely ignore searching SST then, saving time for a read
     - can increase filter size (esp during compaction) to redude false positive rate
+- deletiion of key - uses tombstones; a marker that indicates key is deleted when read
+    - key can be hard deleted during compaction
 - compaction - merging two segments of SST into one in the background
     - this greatly increases read performance
     - only recent values of a key are kept, also reducing total storage
-    - hard delete of a key uses tombstones, a marker, and the key is deleted during compaction
+    - two major types: sized tiered compaction and leveled compation
+        - sized-tiered is write optimized, leveled is read optimized
+        - cassandara uses sized-tiered and rocksDB uses leveled
 
 
 ## DOCUMENT DB

@@ -923,13 +923,14 @@ Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on s
 Stream.of("a","b").forEach(i -> System.out.println(i));
 
 IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
+IntStream.range(1,100).toArray()        // convert it primitive array (int[])
 
 // Collector interface also has toMap, toSet
 var a = new ArrayList<Integer>(); a.add(1); a.add(2);
 a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
 a.stream().collect(Collectors.toSet()) // returns a set
 
-// create collection of objects from array data
+// create collection of objects from primitive array data
 var s = Arrays.stream(new int[] { 1,2,3};
 class Foo { int data; Foo(int i) { this.data = i;} };
 var obj_collection = s.map(item -> { return new Foo(item); }).collect(Collectors.toList());
