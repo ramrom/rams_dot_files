@@ -26,7 +26,7 @@
         - QUIC embeds TLS inside it, offer more security with more data encrypted
         - QUIC can support multiple streams at transport layer, all HTTP2 streams would be blocked if TCP connect was blocked
         - http3 was invented in order to use QUIC, QUIC wasnt compatible with HTTP2
-- HLS - http live streaming
+- HLS - HTTP live streaming
     - adaptive bit rate streaming protocol developed by apple in 2009
     - splits stream into a sequence of small HTTP-based file downloads
     - works with any firewall and proxy servers and CDNs that supports regular HTTP traffic, unlike UDP-based protocols like RTP

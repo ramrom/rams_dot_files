@@ -202,11 +202,14 @@ a.isInstanceOf[Int]     // returns false
         - slightly confusing syntax, need one arg and specify it's a tuple
     - `List(3,4,5).zipWithIndex.foreach { case (a, b) => println(s"${a} and ${b}") }`
         - can use pattern match to unapply the tuple to name the fields
-- `fold` `val l = List(1,2,3); val sum = l.fold(0)((x,y) => x + y)`    -> `sum` will = 6
+- `fold` `val l = List(1,2,3); val sum = l.fold(0)((cum,value) => cum + value)`    -> `sum` will = 6
     - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
-- `++` concat 2 collections, `::` prepend to list, `:+` append, `+:` prepend
-    - `1 :: List(3)` -> returns `List(1,3)`
-    - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
+- OPERATORS
+    - `++` concat 2 collections
+    - `::`, `+:` prepend to list
+        - `1 :: List(3)` -> returns `List(1,3)`
+    - `:+` append
+        - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
 - `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`
 - mutable
     - `ArrayBuffer` -> underlying data struct is array, can be resized
@@ -335,6 +338,10 @@ i.next       // throw NoSuchElementException
 - `scala.math.max(1,4)` -> returns 4
 - `scala.math.abs(-1)` -> returns 1
 - mod: `10 % 3`  -> res: 1
+- random numbers
+    - `scala.util.Random.nextInt(100)` - generate random # b/w 0 and 99
+    - `scala.util.Random.between(3,10)` - generate random # b/w 3 and 10
+    - `scala.util.Random.nextFloat()` - generate a random float b/w 0.0 and 1.0
 
 ## IO
 ### FILES

@@ -205,7 +205,8 @@ public static void main(String[] args) {
     - perfect - every level is full, perfect trees are always complete
     - full - every node has either 0 children or two
 - QUADTREE
-    - quadtree is a tree with exactly 4 children, often used to represent 2D structures, each 4 children represent one quadrant of 2D space
+    - quadtree is a tree with exactly 4 children, often used to represent 2D structures
+        - each 4 children represent one quadrant of 2D space
     - octtree - has 8 children, for 3D spaces, one for each of 8 quadrants
 - BST - binary search tree, a binary tree but ordered
 - B-TREE - stores sorted data, self-balancing
@@ -231,9 +232,9 @@ public static void main(String[] args) {
     - e.g. squares,polygons. but for any # of dimensions, so rectangular prisms(3D) and higher
 ### LINKED LISTS
 - rust book - linked lists are generally dumb: https://rust-unofficial.github.io/too-many-lists/
+- c++ founder says arrays better - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
 - linked lists are slow, even insertion/deletion are slower than array! worse as N gets bigger
     - the linear search through linked list dominates slowness, and for array moving n/2 items is not that slow (caches good at this)
-- see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
 - skip-list - multiple levels of linked lists that allow faster lookup of value versus linear search
 ### HEAP
 - a tree data struct that fullfills the heap property
@@ -369,7 +370,9 @@ public static void main(String[] args) {
 - common algo used for rate-limiting, it's a great way to see if traffic conforms to some average rate or exceeds it
 - used often in packet switched networks, ATM uses it
 ### LEAKY BUCKET
-- outputs requests at a fixed rate, smoothes out traffic, token bucket allows bursty traffic through and is more flexible
+- outputs requests at a fixed rate, smoothes out traffic
+    - token bucket allows bursty traffic
+- generally handled at packet level, where packets are added to a queue on input, and emitted at a constant rate on other side
 ### BINARY SEARCH
 - for non-exact closest match great or less
     - https://stackoverflow.com/questions/50692011/find-the-first-element-in-a-sorted-array-that-is-smaller-than-the-target
@@ -533,6 +536,8 @@ public static void main(String[] args) {
         - Functions that use pointers/references to base classes must be able to use objects of derived classes without knowing it
     - open-closed principle - component should be open for extension, not modification
     - dependency inversion - depend on abstractions, not concretes
+- seperation of concerns - each "concern" = feature, each component handles it's concerns
+    - basically very similar in principle to SRP, keep system a set of loosly connected components
 - REST - representational state transfer
 - batch processing - generally non-real time, usually store data to persistent store, then can slowly process it background
 - stream processing - real-time crunching of data, generally no persistent data store step as data is received

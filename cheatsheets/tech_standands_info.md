@@ -274,7 +274,7 @@
     - JSON API standard - https://jsonapi.org/
 - RPC - Remote Procedure Call
 - GraphQL - invented by facebook ~2016
-    - 2024 - good primeagen vid on weaknesses - https://www.youtube.com/watch?v=XBUsRVepF-8&t=953s&ab_channel=ThePrimeTime
+    - 2024 - good primeagen vid on weaknesses - https://www.youtube.com/watch?v=XBUsRVepF-8&ab_channel=ThePrimeTime
         - easy to craft query that will DoS - hard to limit number of records
         - hard to implement auth, restricting access for each field
     - many frontend engineers love graphql as they can specify complex data easier
