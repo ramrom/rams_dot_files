@@ -179,39 +179,10 @@ a.isInstanceOf[Int]     // returns false
 - `val t = ("a","b","c")`
 - access fields: `t._1` (returns `a`), `t._4` (errors, field 4 doesnt exist)
 ### LIST/ARRAY
-- `List` is immutable, underlying is linked-list, so indexing is slow
-- `Vector` is immutable, indexing is fast
-- `head` - return first element
-- `tail` - return same list minus first element
-- multidimensional
-    - `val v = Array.ofDim(2,2)[Int]; v(0) = Array(1,1); v(0)(1)`
-    - `val v = collection.mutable.ArrayBuffer.fill(3,3)(1)`
-- `take` will return new list with first n items, e.g. `List(1,2,3).take(2)` -> `List(1,2)`
-- `drop` will return new list, removing first n items, .e.g. `List(1,2,3).drop(1)` -> `List(2,3)`
-- `slice` - grab a subrange of items in list (works on `String` too)
-    - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
-    - `"hi there".slice(2,5)` -> returns `" th"`
-- remove a item
-    - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
-        - from index 2, remove 1 element with Nil (only Nil works)
-    - `List(11,12,13,14,15).zipWithIndex.filter(_._2 != 2).map(_._1)`
-        - will remove index 2
-    - `val trunced = internalIdList.take(index) ++ internalIdList.drop(index + 1)`
-- foreach over a List of tuple
-    - `List((1,2),(3,5)).foreach { (v: (Int, Int)) => println(s"v._1 and v._2") }`
-        - slightly confusing syntax, need one arg and specify it's a tuple
-    - `List(3,4,5).zipWithIndex.foreach { case (a, b) => println(s"${a} and ${b}") }`
-        - can use pattern match to unapply the tuple to name the fields
-- `fold` `val l = List(1,2,3); val sum = l.fold(0)((cum,value) => cum + value)`    -> `sum` will = 6
-    - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
-- OPERATORS
-    - `++` concat 2 collections
-    - `::`, `+:` prepend to list
-        - `1 :: List(3)` -> returns `List(1,3)`
-    - `:+` append
-        - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
-- `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`
-- mutable
+- IMMUTABLE
+    - `List` is immutable, underlying is linked-list, so indexing is slow
+    - `Vector` is immutable, indexing is fast
+- MUTABLE
     - `ArrayBuffer` -> underlying data struct is array, can be resized
     - `Array` - is mutable like `ArrayBuffer`, NOT resizable
         - generally backed by JVM basic array, more efficient than `ArrayBuffer`
@@ -222,6 +193,42 @@ a.isInstanceOf[Int]     // returns false
         `m.addOne(3->4)` - add an item
         `m.remove(4)` - remove a key, returns `None` if key didnt exist, `Some(value)` the value if it did exist
     - also has `PriorityQueue` and others
+- MULTIDIMENSIONAL
+    - `val v = Array.ofDim(2,2)[Int]; v(0) = Array(1,1); v(0)(1)`
+    - `val v = collection.mutable.ArrayBuffer.fill(3,3)(1)`
+- METHODS
+    - `head` - return first element
+    - `last` - return last element
+    - `tail` - return same list minus first element
+    - `take` will return new list with first n items, e.g. `List(1,2,3).take(2)` -> `List(1,2)`
+    - `drop` will return new list, removing first n items, .e.g. `List(1,2,3).drop(1)` -> `List(2,3)`
+    - `slice` - grab a subrange of items in list (works on `String` too)
+        - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
+        - `"hi there".slice(2,5)` -> returns `" th"`
+- `foreach` over a List of tuple
+    - `List((1,2),(3,5)).foreach { (v: (Int, Int)) => println(s"v._1 and v._2") }`
+        - slightly confusing syntax, need one arg and specify it's a tuple
+    - `List(3,4,5).zipWithIndex.foreach { case (a, b) => println(s"${a} and ${b}") }`
+        - can use pattern match to unapply the tuple to name the fields
+- `fold` `val l = List(1,2,3); val sum = l.fold(0)((cum,value) => cum + value)`    -> `sum` will = 6
+    - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
+- remove a item
+    - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
+        - from index 2, remove 1 element with Nil (only Nil works)
+    - `List(11,12,13,14,15).zipWithIndex.filter(_._2 != 2).map(_._1)`
+        - will remove index 2
+    - `val trunced = internalIdList.take(index) ++ internalIdList.drop(index + 1)`
+- `search` - binary search on a `IndexedSeq`, list must be sorted and `search` takes an `Ordering`
+    - binary search if list is `IndexedSeq`, otherwise linear search
+    - `List(1,10,15).search(10)` -> returns `Found(foundIndex = 1)`
+    - `List(1,10,15).search(11)` -> returns `InsertionPoint(insertionPoint = 2)`
+- OPERATORS
+    - `++` concat 2 collections
+    - `::`, `+:` prepend to list
+        - `1 :: List(3)` -> returns `List(1,3)`
+    - `:+` append
+        - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
+- `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
 - examples

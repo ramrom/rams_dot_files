@@ -302,7 +302,8 @@
 - flatbuffers
     - created by google, "zero-copy" serialization
 ### DATE/TIME
-- ISO
+- ISO 8601
+    - e.g. combined date/time - `2024-08-08T12:51:50-05:00` - 5hrs behind UTC, in EST
 - unix time - number of non-leap seconds since jan1-1970 UTC, can also be microseconds,nanoseconds
 ### OTHER
 - GUID - microsoft invented, basically the same as UUID
