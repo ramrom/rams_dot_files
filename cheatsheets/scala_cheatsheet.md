@@ -136,6 +136,7 @@
 - implements `Serializable` trait
 ### FUNCTIONS
 - partial application - can pass subset of arguments to function invocation, then pass rest in later
+    - e.g. `def foo(x: Int, y: Int): Int = { x + y}; foo(3, _)` -> this return a `Int => Int` function
 - call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
 - repeated arguments, `*` identifier, e.g. `def foo(a: String*)`, arg `a` here is treated as an array
     - if we want to pass in `List` type, need to use splat operator to convert it
@@ -205,13 +206,22 @@ a.isInstanceOf[Int]     // returns false
     - `slice` - grab a subrange of items in list (works on `String` too)
         - `List(1,2,3,4).slice(3,4)` -> returns `List(4)`
         - `"hi there".slice(2,5)` -> returns `" th"`
+- `zipWithIndex` -> return list of tuple with 2nd field as index value
+    `List(5,3,2).zipWithIndex` -> returns `List((5,0),(3,1),(2,2))` 
 - `foreach` over a List of tuple
     - `List((1,2),(3,5)).foreach { (v: (Int, Int)) => println(s"v._1 and v._2") }`
         - slightly confusing syntax, need one arg and specify it's a tuple
     - `List(3,4,5).zipWithIndex.foreach { case (a, b) => println(s"${a} and ${b}") }`
         - can use pattern match to unapply the tuple to name the fields
+- `map`
+    - can pass a code block with "global state", e.g. cumulative sum list:
+        - `List(1,2,3,4).map { var c = 0; i => { c = c + i; c; } }` -> returns `List(1,3,6,10)`
+- `scanLeft` , `scanRight`
+    - cumulative sum: `List(1,2,3).scanLeft(0)(_ + _)` -> returns `List(0,1,3,6,10)`
 - `fold` `val l = List(1,2,3); val sum = l.fold(0)((cum,value) => cum + value)`    -> `sum` will = 6
+    - `fold` does NOT gaurantee order, could be a tree operation, can decompose into sublists, created to support parralelism
     - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
+        - cumulative sum e.g.: `List(1,2,3,4).foldLeft(List[Int](0))( (cum, i) => cum :+ (i + cum.last)).drop(1)` -> `List(1,3,6,10)`
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
@@ -222,13 +232,13 @@ a.isInstanceOf[Int]     // returns false
     - binary search if list is `IndexedSeq`, otherwise linear search
     - `List(1,10,15).search(10)` -> returns `Found(foundIndex = 1)`
     - `List(1,10,15).search(11)` -> returns `InsertionPoint(insertionPoint = 2)`
+- `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`, `None` returned if no match found
 - OPERATORS
     - `++` concat 2 collections
     - `::`, `+:` prepend to list
         - `1 :: List(3)` -> returns `List(1,3)`
     - `:+` append
         - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
-- `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
 - examples
