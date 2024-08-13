@@ -34,6 +34,9 @@
     - youtube uses HTML5 with HLS for playing videos
 
 ## OTHER INFO
+- Authorization Header
+    - `Basic` - prodvide base64 user/password in each request, simple but pretty insecure
+    - `Bearer`- get a auth token from a different auth server (e.g. in a oauth2/oidc setup) and use the token here
 - chunked vs multi-part: chunked is transfer encoding, multi-part is content type
     - each chunk is preceded by it's size, transmission ends with zero sized chunk, not supported in HTTP2
     - multi-part type can use chunked encoding

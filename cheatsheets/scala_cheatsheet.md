@@ -248,12 +248,32 @@ a.isInstanceOf[Int]     // returns false
     m + ("foo" -> 3)        // returns a NEW map which also contains ("foo"-> 1)
     m += (2->3)             // will raise exception, cant mutate, use mutable Map
     m.keys                  // returns a Set containing keys
+    m.values                  // returns a Iterable containing values
     m.getOrElse("z",10)     // since "z" key doesnt exist, the default 10 is returned
+
     val mu = scala.collection.mutable.Map(1->2)   // mutable map (will be HashMap)
     mu + (2->3)   // like immutable man, returns a NEW map which also contains (2->3)
     mu += (2->3)    // append (2->3) to mu
     mu -= 2    // remove key/val with key=2 from mu
+
+    Map(1->2,3->4) ++ Map(1->1,5->4)  // returns Map(1->1,3->4,5->4)
     ```
+### SET
+- TYPES
+    - `scala.collection.immutable.HashSet`
+    - `scala.collection.immutable.TreeSet`
+```scala
+val set = Set("a","b","a")      // return Set("a", "b")
+
+// can remove/add items with `-`/`+` : ``
+set - "a"   // returns Set("b")
+set + "z"   // returns Set("a", "z")
+
+Set(1,2) ++ Set(2,4)  // add two sets, here you get Set(1,2,4)
+Set(1,2) -- Set(2,4)  // subtract a set, here you get Set(1)
+
+Set(1,2) & Set(2,4,5) // returns intersection of sets, so Set(2)
+```
 ### RANGE
 ```scala
 val r = Range.inclusive(1,10)   // includes 10
@@ -284,6 +304,9 @@ i.next       // throw NoSuchElementException
 - `Stream(1,2,3,4).map(_ + 1).map(_*_).filter(_ > 10).toList`
     - `Stream` is like an iterator, it's lazy until something consumes it, `toList` here
     - could pass this into a for e.g. `for ( elem <- Stream(1,2,3) ) println( s"A value is ${elem}" )`
+### LAZYLIST
+- lazy evaluation, only evaluated until something like `toList` is called
+- `LazyList(1,2,3).map(_+3).filter(_%2==0).toList`    -> returns `List(4,6)`
 
 ## STRINGS
 - toString method is called if fooObject isnt a String
@@ -460,6 +483,10 @@ writer.close()
     - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
 - docs: https://www.playframework.com/documentation
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
+- `Thread.sleep(1000)` will block thread, to delay in play we can invoke scheduler to delay scheduling future
+    - play3 can schedule later: https://www.playframework.com/documentation/3.0.x/ScheduledTasks
+    - see https://stackoverflow.com/questions/60425094/play-framework-how-to-purposely-delay-a-response
+        - can use java's [ScheduledFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html)
 - 2.8
     - supports java 11
 
