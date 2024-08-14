@@ -115,9 +115,11 @@ xsv table somecsv.csv  # pretty print table to stdout
 xsv count somecsv.csv  # print # of rows
 
 # TPUT - terminal settings and capabilities
+    # also see [ansi color cheat](ansi_color.md)
 tput cols     # number of columns in terminal window
 tput rows     # number of rows in terminal window
 tput setaf 1  # outpt ansi code for red foreground color
+tput sgr0     # reset
 
 # DATE
 sudo date --set 1998-11-02  # change date
@@ -390,6 +392,8 @@ rclone --config="/path/to/config" listremotes # specify a config file to use
 stat foo
 stat -x foo   # osx only: extended info, on osx version, linux version does this by default
 stat -t foo   # linux only: one line concise format (useful if u want to script it easier)
+stat -c %Y foo # linux: get modtime of file in unix epoch
+stat -f %m foo # osx: get modtime of file in unix epoch
 
 # NETSTAT - get network related info
 netstat     # print info about open network sockets

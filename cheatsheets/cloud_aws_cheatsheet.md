@@ -14,6 +14,7 @@
     - policy - set of generic rules
     - 3 types of policies: session, identity, resource
     - when applied in context of an identity, session, and resources, define the permissions
+    - role simply is "what can I do?", so permissions
 
 ## LOAD BALANCERS
 - ELB - elastic load balancer - https://aws.amazon.com/elasticloadbalancing/features/

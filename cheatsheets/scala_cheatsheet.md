@@ -184,7 +184,7 @@ a.isInstanceOf[Int]     // returns false
     - `List` is immutable, underlying is linked-list, so indexing is slow
     - `Vector` is immutable, indexing is fast
 - MUTABLE
-    - `ArrayBuffer` -> underlying data struct is array, can be resized
+    - `scala.collection.mutable.ArrayBuffer` -> underlying data struct is array, can be resized
     - `Array` - is mutable like `ArrayBuffer`, NOT resizable
         - generally backed by JVM basic array, more efficient than `ArrayBuffer`
     - `ListBuffer` -> underlying data struct is linked list

@@ -138,6 +138,7 @@ alias gbranchclean='git branch --merged master | egrep -v "^\*|master" | xargs -
 # DOCKER
 alias d='docker'
 alias sd='sudo docker'
+alias kk='kubectl'
 
 # RIPGREP, GREP
 alias grep='grep --colour=always'
