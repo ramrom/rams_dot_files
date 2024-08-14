@@ -16,6 +16,10 @@
     - when applied in context of an identity, session, and resources, define the permissions
     - role simply is "what can I do?", so permissions
 
+## AWS CLI
+- `aws configure --profile someprofile list`  - list sessions under that profile
+- `aws configure list-profiles`  - list profiles with sessions
+
 ## LOAD BALANCERS
 - ELB - elastic load balancer - https://aws.amazon.com/elasticloadbalancing/features/
 - ALB - application load balancer

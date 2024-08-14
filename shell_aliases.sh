@@ -20,7 +20,7 @@ alias lrt='ls -lrt'     # sort by mod time, -r reverse order
 alias rd='cd ~/rams_dot_files'
 alias docs='cd ~/Documents'
 alias down='cd ~/Downloads'
-alias repos='cd ~/repos'
+alias repos='cd ~/src'
 alias tp='cd ~/tmp'
 
 # LSOF

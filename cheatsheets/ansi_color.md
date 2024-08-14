@@ -19,9 +19,9 @@ white=`tput setaf 7`
 blue_on_yellow=`tput setaf 4; tput setab 3`
 bold=`tput bold`
 dim=`tput dim`
-und=`tput smul`
+underline=`tput smul`
 italic=`tput sitm`
-remove_und=`tput rmul`
+remove_underline=`tput rmul`
 reset=`tput sgr0`
 
 # ANSI supports italics, bold, underline, strikethrough

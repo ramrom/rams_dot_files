@@ -88,6 +88,8 @@
         - k8 will generally restart pod
     - readiness - pod could be live but not ready to receive traffic yet, e.g. waiting for other pods/services, or populating dataset
         - k8 will just stop serving traffic to pod (but wont kill/restart it)
+- `kubectl config get-contexts` - print session contexts
+- `kubectl config current-context` - print current context
 - `kubectl delete pods foopodname` - terminate a pod
 - `kubectl get pods` - print pods
 - events (e.g. HPA actions, ingress rule reloads, pod delete/restart actions, pulling images, etc.)

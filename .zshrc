@@ -81,7 +81,7 @@ load_or_err ~/rams_dot_files/shell_functions.sh
 load_or_err ~/.fzf.zsh   # "**" autocompletion and alt-c/ctrl-r/ctrl-t
 
 # fzf over command history, hijacks ctrl-r
-load_or_err ~/repos/fzf-tab/fzf-tab.plugin.zsh
+load_or_err ~/src/fzf-tab/fzf-tab.plugin.zsh
 
 # export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11
 

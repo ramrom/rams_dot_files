@@ -233,6 +233,10 @@ a.isInstanceOf[Int]     // returns false
     - `List(1,10,15).search(10)` -> returns `Found(foundIndex = 1)`
     - `List(1,10,15).search(11)` -> returns `InsertionPoint(insertionPoint = 2)`
 - `find` - `List(1,2,3).find(_ % 2 == 0)`   -> returns `Some(2)`, `None` returned if no match found
+- `groupBy` - `List(1,2,3).groupBy( v => v % 2)` - returns `HashMap(0 -> List(2), 1 -> List(1, 3))`
+- `maxBy[B](f: A => B)(implicit ord: Ordering[B])` - return element that has maximum `B`, where `B` must be ordered
+    - e.g. get mode of list of duplicate items:
+        `List("a","b","a","c","a","c").groupBy(v => v).map( (k,v) => (k, v.size)).maxBy( (k,v) => v)` -> returns `("a",3)`
 - OPERATORS
     - `++` concat 2 collections
     - `::`, `+:` prepend to list
@@ -257,6 +261,8 @@ a.isInstanceOf[Int]     // returns false
     mu -= 2    // remove key/val with key=2 from mu
 
     Map(1->2,3->4) ++ Map(1->1,5->4)  // returns Map(1->1,3->4,5->4)
+
+    Map(1->2, 2->3).map( (k,v) => (k, v*2))  // return Map(1->4, 2->6)
     ```
 ### SET
 - TYPES
