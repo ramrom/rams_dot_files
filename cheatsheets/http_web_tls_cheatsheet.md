@@ -113,6 +113,7 @@
     - https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
 - `stub_status` gives basic info (active connections, # reading/writing/waiting)
     - http://nginx.org/en/docs/http/ngx_http_stub_status_module.html
+- logs are typically in `/var/log/nginx` and `access.log` and `error.log`
 - make sure to set a default server that denies
     - https://stackoverflow.com/questions/56538783/how-to-force-exact-match-of-subdomains-with-nginx
         - otherwise if no server matches, it will select the first server to route to

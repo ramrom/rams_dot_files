@@ -12,8 +12,11 @@ func main() {
   http.Handle("/json", mwlog(auth(http.HandlerFunc(myjson))))
   http.Handle("/web", mwlog(http.HandlerFunc(web)))
   fmt.Printf("starting server on %v\n", port)
+
   // generate cert with opensll: https://www.linode.com/docs/security/ssl/create-a-self-signed-tls-certificate/
-  err := http.ListenAndServeTLS(fmt.Sprintf(":%v",port),"MyCertificate.crt","MyKey.key",nil)
+  // err := http.ListenAndServeTLS(fmt.Sprintf(":%v",port),"MyCertificate.crt","MyKey.key",nil)
+  err := http.ListenAndServe(fmt.Sprintf(":%v",port),nil)  // no TLS server
+
   if err != nil {
     panic(err)
   }
