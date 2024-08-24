@@ -83,7 +83,7 @@
 ## APACHE FLUME
 - messsages are pushed to consumer
 
-## AMAZON SNS/SQS
+## AWS SNS/SQS
 ### SQS
 - standard queue: messages can out of order, at-least one delivery, but have higher throughput
 - FIFO queue: guaruntees order of messages, has unique message IDs to handle duplication

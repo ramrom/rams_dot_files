@@ -4,6 +4,7 @@
 - https://groovy-lang.org
 - https://groovy-lang.org/install.html -> can use sdkman to install
 - https://groovy-lang.org/single-page-documentation.html - decent cheatshseet
+- it's the primary scripting language for [jenkins pipelines](jenkins_cheatsheet.md)
 
 ## INSTALL
 - `groovy -version` - get version

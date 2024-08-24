@@ -131,11 +131,19 @@
 
 ## QUERIES
 ```sql
--- date range
+-- date range for DATE fields
 SELECT * FROM events WHERE event_date >= '2023-02-01' AND event_date <= '2023-04-30'
+
+-- relative math on timestamp type
+select * from foo where created_at > CURRENT_TIMESTAMP - INTERVAL '2 days';
+select * from foo where created_at > CURRENT_TIMESTAMP - INTERVAL '5 days 10 hours 31 minutes';
 
 -- counting num records in db table
 SELECT count(1) from footable;  -- slow but accurate
+
+-- get unique values of a table
+SELECT DISTINCT col1 from table1;       -- unique values of a column
+SELECT DISTINCT col1, col2 from table1;   -- unique combo of many columns
 
 -- for big table 
 -- from https://stackoverflow.com/questions/7943233/fast-way-to-discover-the-row-count-of-a-table-in-postgresql
@@ -146,6 +154,13 @@ SELECT reltuples::bigint AS estimate FROM pg_class WHERE  oid = 'myschema.mytabl
 
 -- terminate db connections
 SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '${1}' AND pid <> pg_backend_pid()
+
+-- explain, will output query plan and estimate cost
+EXPLAIN(select * from footable)
+
+-- explain analyze - actually runs the query and measures the performance
+-- thus can be expensive, dont do it on write queries obviously unless u want to run them, do plain EXPLAIN first generally
+EXPLAIN ANALYZE(select * from footable)
 ```
 ### ARRAYS
 ```sql

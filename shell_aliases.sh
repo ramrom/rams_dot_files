@@ -41,7 +41,7 @@ alias batt='bat --color never -pp'  # no color, -pp is plain (no header or line 
 
 # XH
 alias xhv='xh -v'
-alias xhcn='xhv https://api.chucknorris.io/jokes/random'
+alias xhcn='xhv --verify no https://api.chucknorris.io/jokes/random'  # need no-verify when on work vpn
 
 # SHELL STUFF
 alias raf='source ~/rams_dot_files/shell_aliases.sh && source ~/rams_dot_files/shell_functions.sh'

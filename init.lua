@@ -1060,6 +1060,7 @@ end
 -- jdtls lang server is a java17 app itself, make sure JAVA_HOME of shell is set to java17
 LoadJDTLSServer = function()
     local config = {
+        -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
         cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
         root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         settings = {

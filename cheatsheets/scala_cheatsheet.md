@@ -586,7 +586,8 @@ writer.close()
 ### CATS
 - https://typelevel.org/cats/datatypes/ior.html
 - lots of useful FP types
-- CATSEFFECT: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
+- CATS EFFECT: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
+    - built on top fo Cats library, provides async and other concurrency stuff
     - `IO` type and "non-effecting" types
 - fs2 - streaming library
     - streaming and concurrency, build on cats-effects and cats

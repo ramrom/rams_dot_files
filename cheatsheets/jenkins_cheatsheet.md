@@ -1,5 +1,6 @@
 # JENKINS
 A CI/CD open source tool
+uses the [groovy language](groovy_cheatsheet.md)
 
 ## PIPELINE LANGUAGE
 - https://www.jenkins.io/doc/book/pipeline/syntax/

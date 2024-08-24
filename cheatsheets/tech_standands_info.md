@@ -35,8 +35,16 @@
 - MoCA - multimedia over co-axial cable
 
 ## ETHERNET
+- standard IEEE 802.3 for wired LAN/MAN/WAN networking in 1980, 802.11 is WiFi and often called wireless ethernet
+    - inspired by ALOHANET, protocol created for hawaii in 1974
+    - overtime has replaced token ring, FDDI, ARCNET
 - https://en.wikipedia.org/wiki/Ethernet_crossover_cable#Automatic_crossover
     - generally since 1998, no need for straight vs crossover cables, ports autodetect
+- a huge family of layer 1/2 protocols, generally all transmit a ethernet frame
+- original protcols supported ~3Mbps, in 2024 400Gpbs supported, 1Tbps in the works
+- phsyical mediums
+    - 10BASE5 - coaxial cable, 10BASE2 - thinner/flexible cable, BASE-T - twisted pair cable
+- ethernet frame - has source and dest 48bit MAC address, error detection for frame corruption
 
 ## WIFI
 - 2.4GHz band - ch1 2412, ch6 2437, ch11 2462
