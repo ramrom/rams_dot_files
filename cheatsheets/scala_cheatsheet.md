@@ -45,7 +45,8 @@
 - Abstract class - cant be instantiated
     - class can implement only ONE abstract class
     - can specify a constructor parameter
-- nice typeclass definition: https://scalac.io/typeclasses-in-scala/
+- typeclass - not a formal semantic feature in scala
+    - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
     - be able to define a trait contract for some types without modifying those types directly
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
     - generally implemented with generic traits and implicits
@@ -355,7 +356,7 @@ i.next       // throw NoSuchElementException
 - type from cats
 
 ## RANDOM
-- sleep for 1 second: `Thread.sleep(1000)`
+- sleep for 1 second: `java.lang.Thread.sleep(1000)`
 
 ## CONCURRENCY
 ### FUTURES
@@ -542,7 +543,7 @@ writer.close()
       }
     }
     ```
-- then can run script like so `scala Hello.scala arg1`
+    - then can run script like so `scala Hello.scala arg1`
 - exit a program: `System.exit(1)` - exit with code 1
 
 
@@ -577,8 +578,9 @@ writer.close()
 ## OTHER MAJOR LIBS/FRAMEWORKS
 - [http4s](https://http4s.org/) - minimal highly FP web framework
     - compiles to Scala.js and Scala Native, uses fs2
-- great http lib (inspired by python requests) - https://github.com/com-lihaoyi/requests-scala
-- upickle - https://com-lihaoyi.github.io/upickle/
+- [requests-scala](https://github.com/com-lihaoyi/requests-scala)
+    - great http lib (inspired by python requests) 
+- [upickle](https://com-lihaoyi.github.io/upickle)
      - parse json text - `val s:String = """{"a":1}"""; ujson.read(s)`
 - apache kafka 2 is like 20% scala (0.7 was like 50%)
     - 3.1.0 - `core` (most important module) written in scala

@@ -4,6 +4,7 @@ uses the [groovy language](groovy_cheatsheet.md)
 
 ## PIPELINE LANGUAGE
 - https://www.jenkins.io/doc/book/pipeline/syntax/
+- using shared libs: https://www.jenkins.io/doc/book/pipeline/shared-libraries/
 
 ## BUILD DEFINITIONS
 - https://stackoverflow.com/questions/50398334/what-is-the-relationship-between-environment-and-parameters-in-jenkinsfile-param

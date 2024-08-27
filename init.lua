@@ -359,7 +359,8 @@ RunAction = function(arg)
         elseif curftype == 'c' then
             TmuxPaneRun("gcc ".. vim.fn.expand("%") .. ' && ./a.out')
         elseif curftype == 'scala' then
-            TmuxPaneRun("scala ".. vim.fn.expand("%"))
+            -- TmuxPaneRun("scala ".. vim.fn.expand("%"))
+            TmuxPaneRun("sbt run")
         elseif curftype == 'java' then
             TmuxPaneRun("java-ramrom")
         else
