@@ -138,6 +138,7 @@
 - removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
 - `curl --header 'HOST: foo.com' bar.com`  
     - curl will resolve bar.com _but_ still set host header to `foo.com`
+- using SOCKS proxy: `curl -x socks5h://127.0.0.1:1234 http://foo.com`
 
 ## HTTPIE
 - https://httpie.io/docs

@@ -99,6 +99,8 @@
     - `kubectl events --types=Warning,Normal` - only show events of warning and normal
 - tailing logs
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
+- deployments
+    - get _all_ deployment info in json: `kubectl get deployments --all-namespaces -o json`
 - HPA - horizontal pod autoscaler
     - rules for min pods, max pods
     - `kubectl get hpa --all-namespaces` - get hpa status on all pods

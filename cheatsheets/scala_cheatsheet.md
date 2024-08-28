@@ -114,9 +114,12 @@
     - `given` keyword to declare implicit, `using` to pass in implicit
     - `Conversion[A,B]` typeclass introduced to define implicit conversion from A->B
 ### COMPANION OBJECT
+- essentially a singleton, only one instance
+    - `class Foo(i: Int) { ... }; object Foo { ... }`
+- companion class and companion object can access each others private members
 - defining `apply` method lets you instantiate companion class without `new` keyword
     - `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
-- companion class and object can access each others private members
+- CASE OBJECT - like companion object but is serializable, has hashCode method, has toString method
 ### CASE CLASS
 - similar to Java's Record types
 - e.g. `case class Foo(i: Int, s: String)`
@@ -167,12 +170,13 @@ a.isInstanceOf[Int]     // returns false
     ```
 
 ## FOR COMPREHENSIONS
-- syntax sugar for chaining `flatMap`
+- syntax sugar for nesting`flatMap` and `filter`
 - good martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
     - general form: `for ( seq ) yield expr`, where `seq` can be a generator, definition, or filter
 - generator: `for (i <- 1 until 3) yield i` -> returns `Vector(1,2,3)`
 ### LOOPS
-- `for (i <- 1 until 5) println(i)`  - no `yield` makes this like a regular for loop
+- `for (i <- 1 until 3) println(i)`  - no `yield` makes this like a regular for loop
+    - `for (i <- 1 until 3) yield println(i)`  - with `yield` this returns a `List((),(),())`
 - `for (i <- List(1,2,3)) println(i)`
 
 ## COLLECTIONS
@@ -341,6 +345,8 @@ i.next       // throw NoSuchElementException
 - `flatMap` and `map` are right-biased, mapping on left val returns same val
     - `Right(1).map { x => x + 1 }   # returns Right(2)`
     - `val a: Either[Int, Int] = Left(1); a..map { x => x + 1 }   # returns Left(1)`
+- `cond` - nice if/else sugar, `Left` if `false`, `Right` if `true`
+    - `Either.cond(1 == 2, "right", "left")` return `Left("left")`
 ### Option
 - `flatMap`/`map` operate on `Some` and pass on `None`
 - `foo.getOrElse(2)` - if `foo` is `Some(1)` returns `1`, if `None` returns `2`
@@ -390,7 +396,7 @@ i.next       // throw NoSuchElementException
     - `scala.util.Random.between(3,10)` - generate random # b/w 3 and 10
     - `scala.util.Random.nextFloat()` - generate a random float b/w 0.0 and 1.0
 
-## IO
+## I/O
 ### FILES
 ```scala
 // run command and redirect to file
@@ -574,6 +580,10 @@ writer.close()
     val a = "hi there"
     println(a)
     ```
+### ISSUES
+- ammonite bug with loading same file in next session
+    - https://github.com/com-lihaoyi/Ammonite/issues/959
+
 
 ## OTHER MAJOR LIBS/FRAMEWORKS
 - [http4s](https://http4s.org/) - minimal highly FP web framework
@@ -588,11 +598,16 @@ writer.close()
 ### CATS
 - https://typelevel.org/cats/datatypes/ior.html
 - lots of useful FP types
-- CATS EFFECT: https://typelevel.org/cats-effect/docs/2.x/datatypes/io
-    - built on top fo Cats library, provides async and other concurrency stuff
-    - `IO` type and "non-effecting" types
-- fs2 - streaming library
-    - streaming and concurrency, build on cats-effects and cats
+### CATS EFFECT
+- https://typelevel.org/cats-effect/docs/2.x/datatypes/io
+- built on top fo Cats library, provides async and other concurrency stuff
+- `IO` type and "non-effecting" types
+- fibers are fundamental concurrent abstraction, `IO` runtime has 150bytes/fiber
+- supports async cancellations, fiber-aware work stealing, async tracing
+### FS2 
+- [FS2](https://fs2.io/#/) - streaming library
+- streaming and concurrency, build on cats-effects
+- basis for: http4s, skunk(postgres lib), doobie(JDBC replacement)
 ### ZIO
 - good vid(yr2020): https://www.youtube.com/watch?v=mGxcaQs3JWI&ab_channel=HimanshuYadav
 - ZIO Effect - define computation, purely functional
