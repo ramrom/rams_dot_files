@@ -237,6 +237,7 @@ pass insert foo # create a password key called `foo`, will be prompted to enter 
 
 # PS
 ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes
+ps ax -o command= | grep -E "^ssh"      # print only the command executed for process and grep to find one that starts with "ssh"
 
 # HTOP
 # "/" vim-like search

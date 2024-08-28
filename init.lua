@@ -136,6 +136,10 @@ CycleColorColumn = function()
     else vim.o.colorcolumn = '121' end
 end
 
+ChangeDefinedSession = function()
+    vim.g.DefinedSessionName = vim.fn.input("Session Name: ", vim.g.DefinedSessionName)
+end
+
 SaveDefinedSession = function()
     if vim.fn.exists(vim.g.DefinedSessionName) ~= 0 then
         vim.g.DefinedSessionName = vim.fn.input("Session Name: ", "MyCurrentVimSession.vim")
@@ -1217,6 +1221,7 @@ vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
 vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
+vim.keymap.set('n', "<leader><C-S>", ChangeDefinedSession, { desc = "change defined session" })
 
 ---- COPY/PASTE to clipboard
 vim.keymap.set({"n","v"}, "<leader>y", [["+y]])

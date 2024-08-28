@@ -16,6 +16,7 @@
     - `docker create someimage` - create container from image
     - `docker rmi someimage`  - remove image
 - CONTAINERS
+    - `docker ps --format "table {{.Ports}}:\t {{.Names}}"` - print just ports/names of running containers
     - `docker start somecontainer`, `docker restart somecontainer` - start/restart a container
     - `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
     - `docker rm somecontainer` - delete the container

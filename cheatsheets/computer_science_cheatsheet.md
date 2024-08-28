@@ -509,6 +509,8 @@ public static void main(String[] args) {
 - core concept: dont mutate values, logic is an expression of many combined functions
     - data structures are copied, never mutated, or new data structures are created
     - versus imperative programming where you have objects and make statements that mutate
+- mark waks: if you squint a little, monads are an abstraction of sequential behavior, applicatives of parallel behavior.
+    - (And in practice, that's generally what they mean in code.)
 ### ALGEBRAIC DATA TYPES
 - in type theory, it classifies composite types (types made of other types)
 - main high level categories are sum and product types, and the names come from how we count the total values they can have

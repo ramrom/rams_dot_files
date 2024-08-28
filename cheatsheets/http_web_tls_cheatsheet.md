@@ -171,4 +171,3 @@ function httpie_all() {
 - https://github.com/ducaale/xh
 - a http client in rust that is near identical in interface to HTTPie
 - `xh --verify no https://foo.com` - dont verify TLS cert
-
