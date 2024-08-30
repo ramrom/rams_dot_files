@@ -99,6 +99,7 @@
     - mesh limit of 232 devices
     - range of ~100 feet
 - Zigbee, mesh network, much slower then wifi
+    - generally one controller device, many devices can act as routers to extend range from the controller
     - no certification required, so cheaper
     - 2.4Ghz band (north america)
     - mesh limit of 65000! devices

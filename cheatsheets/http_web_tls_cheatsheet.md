@@ -16,11 +16,15 @@
     - frames/messages allow multiplexing of many streams, no HOL blocking
         - each message is a logical HTTP message, e.g. a request or reply
         - with 1.1 clients would do complex strategies with multiple TCP connections to get resources in parralel
+            - domain sharing allows more TCP connects, foo1.com/foo2.com instead of just foo.com
         - streams can have priorites, with weights, max num of streams can be millions but ~100 is reccomended
+            - priorities are particularly nice when certain assets need to load first in a browser
     - server push - the server can send data without a request
     - has HPACK header compression
 - http 3
     - released as IETF standard in 2023
+    - address limits of http2: mobile traffic with changing cell towers/networks, changing wifi networks
+        - high latency and lossy, TCP not great in these situations
     - uses QUIC, runs on top of UDP
         - QUIC major advantage for mobile traffic, which have many network handoffs, TCP tends to die on network handoffs
         - QUIC embeds TLS inside it, offer more security with more data encrypted

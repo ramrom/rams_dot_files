@@ -608,6 +608,7 @@ writer.close()
 - [FS2](https://fs2.io/#/) - streaming library
 - streaming and concurrency, build on cats-effects
 - basis for: http4s, skunk(postgres lib), doobie(JDBC replacement)
+- a decent baeldung intro: https://www.baeldung.com/scala/fs2-functional-streams
 ### ZIO
 - good vid(yr2020): https://www.youtube.com/watch?v=mGxcaQs3JWI&ab_channel=HimanshuYadav
 - ZIO Effect - define computation, purely functional

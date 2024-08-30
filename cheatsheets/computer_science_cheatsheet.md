@@ -80,6 +80,8 @@ public static void main(String[] args) {
 - wait queue - linux kernel uses these to manage threads that are waiting for a condition to happen
     - blocked or sleeping threads are tracked this way in kernel
     - process/thread woken on the wait queue woken up when event occurs
+- interesting blog on goto statements are bad: https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/
+    - essentially need hierarcy in concurrent "threads", like actor model, he creates nursery lib for python
 ### ASYNC
 - 2015 - nice blog on red/blue(sync/async) colored functions: https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
 ### PROCESSES VS THREADS

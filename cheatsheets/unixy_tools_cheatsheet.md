@@ -36,6 +36,9 @@ readlink foo        # might print /users/foouser/folder/foo
 # truncate - shrink or extend file size
 truncate --size 1 foofile  # only keep the first byte of file, truncate rest
 
+# mkdir - make a dir
+mkdir -p middir/finaldir    # -p will create any intermediate dirs that might not exist
+
 # cp - copy
 cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
 
