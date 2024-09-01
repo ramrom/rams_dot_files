@@ -370,6 +370,9 @@ i.next       // throw NoSuchElementException
 - is *eager*, starts running moment it's declared
 - async with execution contexts: `scala.concurrent.Future { 1 + 1 }`
     - `import scala.concurrent.ExecutionContext.Implicits.global`
+    - `val r = scala.concurrent.Await.result(Future{1}, 10.seconds)` - blocking call to wait for future, after 10sec throw timeout error
+        - for `Future[T]` the result `r` here is `Try[T]`
+    - `scala.concurrent.Await.ready(Future{1}, 0.nanos)` - make blocking call immediately on a future, dont care about result
 - an execution context is a abstraction that include a thread pool
 - `map` and `flatMap` chain futures together in a linear sequence, each async runs when the previous one finishes
 - `Future.sequence()` takes a `List[Future[T]]` and produces a `Future[List[T]]`

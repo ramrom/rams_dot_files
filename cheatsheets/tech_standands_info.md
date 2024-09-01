@@ -478,10 +478,17 @@
 - language servers - https://langserver.org/
     - introduced in 2016 for microsoft VSC, then made an open standard
 - uses JSON RPC for message passing b/w client and server
-- BSP (build server protocol) - abstracts the build tool, complementary to LSP
+- BSP (build server protocol) - abstracts the build tool, complementary to LSP 
     - LSP server can be a _client_ to build server using BSP to talk to it
-    - e.g. bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
+    - editor/lsp-client (LSP)-> language server (BSP)-> build tool
+        - editor sends file changed event in LSP, lang serv says compile in BSP to build tool, bld tool compiles and returns diagnostic
+    - bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
 - DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
+- extension: tree view protocol
+- extension: decoration protocol, for displaying non-editable text
+- Scala Metals - language server that uses scalameta library at it's core
+    - scalameta uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
+    - a semanticDB is constructed, which powers gotodef, findrefs, etc
 
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)

@@ -103,6 +103,9 @@
         - offset comparator choose matches closer to beg of word
         - exact match comparator chooses exact matches (e.g. `word` matches `word` more than `wording`)
 - fidget.nvim - show LSP progress in bottom right, noice.nvim does this too and honestly better
+- ALE vs syntastic vs CoC
+    - syntastic is synchronous and esp large files will cause pauses
+    - ale is async and client for LSP
 ### PLUGIN MANAGERS
 #### PACKER
 - pure lua plugin manager

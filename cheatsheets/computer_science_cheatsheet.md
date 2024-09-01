@@ -32,6 +32,11 @@
 - address space - a 32-bit systems can address 2^32 addresses
     - so if it's byte-addressable then a 32 bit system can address 4 GiB(gibibytes) of data
 ### PASS BY VALUE VS REFERENCE
+- confusing and really not a good question or classification
+- pass-by-refernce really means a language feature, very uncommon
+- langs with pass-by-ref: visual basic `ByRef`, pascal `var`, C# `ref`, c++ reference parameter
+- pass-by-reference in spirit is done by most languages with some indirection (pointers, "references", objects, arrays)
+    - what this means is shared data, the caller can pass variable to reciever and receiver can modify it, caller sees changes
 - refers to the nature of variables
     - pass-by-value means value is pass to the function
     - pass-by-reference means the reference to the variable is passed to the function
