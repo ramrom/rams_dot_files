@@ -100,6 +100,7 @@
 - IIS - internet information services, by microsoft
 ### NGINX
 - written in C with a reactor pattern, great reverse proxy and load balancer, also serves files from disk
+- blog on architecture - https://aosabook.org/en/v2/nginx.html
 - popular choice for reverse proxy, load balancing, HTTP caching and more
 - created in 2004 by igor sysoev to solve C10K problem while working at Rambler, FOSS on BSD liscense
     - Sysoev founded company Nginx Inc. and created nginx plus(propietary) in 2011, they were bought by F5 in 2019

@@ -8,8 +8,10 @@
     - introduced `Ractor`(ruby actors) class, each one has it's own RIL(ruby interpreter lock), this allows true OS thread parallelism
 
 ## DOCS
+- official - https://ruby-doc.org/
 - https://www.tutorialspoint.com/ruby/index.htm
 - XinYmin: https://learnxinyminutes.com/docs/ruby/
+- cheatsheet: https://www.scribd.com/document/2944819/Ruby-Syntax-Cheatsheet
 
 
 ## BUILD TOOLS
@@ -25,6 +27,10 @@
 - instance(object scope) `@var`
 - class(global within all class instances) `@@var`
 - global(program) `$var`
+
+## CONCURRENCY
+- ruby 1.8/1.9 - https://bugfactory.io/articles/multithreading-in-the-mri-ruby-interpreter/
+- https://dev.to/enether/working-with-multithreaded-ruby-part-i-cj3
 
 ## IDIOMS
 - `!` - methods ending in exclamation marks mutate the internal data
@@ -200,6 +206,7 @@ ObjectSpace.memsize_of(i)
 # Another method, probably better to get an idea of mem size:
 Marshal.dump(a).size
 ```
+- doc on memory introspection - https://blog.skylight.io/hunting-for-leaks-in-ruby/
 
 ## SCRIPTING
 ```sh
@@ -247,3 +254,18 @@ class String
   def reverse_color;  "\e[7m#{self}\e[27m" end
 end
 ```
+
+## RAILS
+- guide - https://guides.rubyonrails.org/index.html
+- rails sessions - https://www.justinweiss.com/articles/how-rails-sessions-work/
+- rails autoload magic - https://www.urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell/
+
+## MAJOR LIBS/FRAMEWORKS
+- awesome ruby, collection of good libs - https://awesome-ruby.com/
+- sidekiq
+- arel - used by ActiveRecord to build AST for sql query
+    - https://jpospisil.com/2014/06/16/the-definitive-guide-to-arel-the-sql-manager-for-ruby
+- celluloid - used to be used by sidekiq
+    - critique - https://www.mikeperham.com/2015/10/14/should-you-use-celluloid/
+- unicorn - popular forking web server
+    - use with nginx - https://www.honeybadger.io/blog/how-unicorn-talks-to-nginx-an-introduction-to-unix-sockets-in-ruby/

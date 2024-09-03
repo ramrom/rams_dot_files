@@ -1,14 +1,18 @@
 # SCALA
-- main docs: https://www.scala-lang.org/
-    - source code repo: https://github.com/scala/docs.scala-lang.git
-- barebone cheatsheet - https://docs.scala-lang.org/cheatsheets/index.html
-- tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
 - first compiler was written in Pizza by Martin Odersky, by scala 2.0, compiler rewritten completely in scala
 - defined by the scala language specification
     - main compiler for JVM
     - Scala.js is a compiler targeted for javascript (node.js or web)
     - Scala Native uses LLVM to make native binaries
 - lightbend(formerly typesafe) founded by odersky, jonas boner(created akka), and paul phillips
+
+## DOCS
+- main docs: https://www.scala-lang.org/
+    - source code repo: https://github.com/scala/docs.scala-lang.git
+- barebone cheatsheet - https://docs.scala-lang.org/cheatsheets/index.html
+- tour of scala: https://docs.scala-lang.org/tour/tour-of-scala.html
+- good web playground: https://scastie.scala-lang.org/
+- haoyi's 2020 blog on scala's future - https://www.lihaoyi.com/post/TheDeathofHypeWhatsNextforScala.html
 
 ## SCALA VERSIONS
 ### 2.12
@@ -47,6 +51,7 @@
     - can specify a constructor parameter
 - typeclass - not a formal semantic feature in scala
     - nice typeclass definition: https://scalac.io/typeclasses-in-scala/
+    - decent blog: https://danielwestheide.com/blog/the-neophytes-guide-to-scala-part-12-type-classes/
     - be able to define a trait contract for some types without modifying those types directly
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
     - generally implemented with generic traits and implicits
@@ -494,18 +499,6 @@ writer.close()
 - INCLUDE, EXCLUDE env vars specify tags
 
 
-## PLAY FRAMEWORK
-- supports async
-    - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
-- docs: https://www.playframework.com/documentation
-- precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
-- `Thread.sleep(1000)` will block thread, to delay in play we can invoke scheduler to delay scheduling future
-    - play3 can schedule later: https://www.playframework.com/documentation/3.0.x/ScheduledTasks
-    - see https://stackoverflow.com/questions/60425094/play-framework-how-to-purposely-delay-a-response
-        - can use java's [ScheduledFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html)
-- 2.8
-    - supports java 11
-
 ## JSON PARSING
 - weePickle: https://github.com/rallyhealth/weePickle
 ### PLAY JSON
@@ -588,7 +581,18 @@ writer.close()
     - https://github.com/com-lihaoyi/Ammonite/issues/959
 
 
-## OTHER MAJOR LIBS/FRAMEWORKS
+## MAJOR LIBS/FRAMEWORKS
+### PLAY FRAMEWORK
+- supports async
+    - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
+- docs: https://www.playframework.com/documentation
+- precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
+- `Thread.sleep(1000)` will block thread, to delay in play we can invoke scheduler to delay scheduling future
+    - play3 can schedule later: https://www.playframework.com/documentation/3.0.x/ScheduledTasks
+    - see https://stackoverflow.com/questions/60425094/play-framework-how-to-purposely-delay-a-response
+        - can use java's [ScheduledFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html)
+- 2.8
+    - supports java 11
 - [http4s](https://http4s.org/) - minimal highly FP web framework
     - compiles to Scala.js and Scala Native, uses fs2
 - [requests-scala](https://github.com/com-lihaoyi/requests-scala)

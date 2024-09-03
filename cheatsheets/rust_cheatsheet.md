@@ -347,6 +347,7 @@ match triple {
 ### GENERICS
 - rust doesnt have higher kinded types, e.g. something like `Option<V<T>>` with `V` and `T` as generic params
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
+    - this is similar to how c++ templates work
 ### TRAITS
 - follows orphan rule
     - cannot implement _external_ traits on _external_ types
@@ -598,6 +599,7 @@ enum E {
     - `FnMut` - will mutate captured values, dont move them
         - e.g. trait `Iterator`'s method `map` takes a `FnMut` closure, b/c a closure is called many times on a collection
     - `Fn` - will only read captured values, dont move them, or dont even capture values from env
+- they are traits and traits are compiled to be statically allocated, so closures dont dynamic dispatch, they are static dispatch
 - if a closure implements `Fn` it will also implement `FnMut` and `FnOnce`, if closure implements `FtMut` it also does `FnOnce`
 - so a function that takes a `Fn` closure as an argument, compiler would error if a `FnOnce` or `FnMut` closure was passed in
 - a named function also implements all these three as well
@@ -662,6 +664,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - use `move` to transfer ownership, `thread::spawn(move ...)`
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
 ### FUTURES/ASYNC
+- 2016 blog by aaron turon on design async for rust - https://aturon.github.io/blog/2016/09/07/futures-design/
 - run many concurrent tasks on a small number of OS threads
 - `Future` are inert - the make progress only when polled by `await`
     - can create a `Future` in sync code, but can only `await` a `Future` if it's in a `async`(`Future`) function itself

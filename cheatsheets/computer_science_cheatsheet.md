@@ -80,6 +80,9 @@ public static void main(String[] args) {
 
 
 ## CONCURRENCY
+- 2015 good blog on async IO vs nonblocking IO and java - http://blog.omega-prime.co.uk/2015/09/03/asynchronous-and-non-blocking-io/
+- C10K problem - http://www.kegel.com/c10k.html
+    - traditional thread/request model doesnt scale, 10000 threads will kill the best server
 - 2016 - parking_lot lib - good article on mutexes/condvars https://webkit.org/blog/6161/locking-in-webkit/
     - inspired by futexes
 - wait queue - linux kernel uses these to manage threads that are waiting for a condition to happen
@@ -87,9 +90,17 @@ public static void main(String[] args) {
     - process/thread woken on the wait queue woken up when event occurs
 - interesting blog on goto statements are bad: https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/
     - essentially need hierarcy in concurrent "threads", like actor model, he creates nursery lib for python
+- arstechnica on hyperthreading - https://arstechnica.com/features/2002/10/hyperthreading/
 ### ASYNC
+- quick blog on reactor/event-loop - https://guxi.me/posts/epoll-and-event-loop-just-enough-you-need-for-interview/
+- linux epoll - https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/
+- blocking vs non-blocking
+    - blocking generally means at thread level, blocking operations wont let thread do anything else until it's done
+    - non-blocking means it yields and lets thread do other things if operation is blocked
 - 2015 - nice blog on red/blue(sync/async) colored functions: https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
+    - golang is nice b/c no red/blue distinction, only one type and runtime handles it
 ### PROCESSES VS THREADS
+- SO reply on process vs thread contex switch - https://stackoverflow.com/questions/7439608/steps-in-context-switching
 - generally a process has many threads
 - processes have thier own memory address space, threads of share the address space of other threads within their process
 - both involve kernel intervention
@@ -173,6 +184,7 @@ public static void main(String[] args) {
 
 
 ## DATA STRUCTURES
+- nice complexity summary of data structs and algos: https://www.bigocheatsheet.com/
 ### STACK
 - stack underlying data struct is almost always a simple array, but could also do linked list
 - monotonic stack - items ordered in ascending or descending

@@ -6,6 +6,7 @@
 ## RG
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
+    - ripgrep author analysis - https://blog.burntsushi.net/ripgrep/
 
 - ignoring files to search
     - search hidden: `rg --hidden`
