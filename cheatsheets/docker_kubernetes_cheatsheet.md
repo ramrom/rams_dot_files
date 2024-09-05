@@ -21,10 +21,10 @@
     - `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
     - `docker rm somecontainer` - delete the container
     - `docker inspect somecontainer` - json desc of configuration
-- `sudo docker run -d -p 1111:1111 foo/image` - create a container and start it
+- `docker run -d -p 1111:1111 foo/image` - create a container and start it
     - `-d` is detach, wont run in foreground in shell
     - `-p x:x` is to map internal port to external port
-- `sudo docker exec -it foocontainername /bin/bash` - start a bash shell in container
+- `docker exec -it foocontainername /bin/bash` - start a bash shell in container
 - `docker volume -qf dangling=true` - find dangling volumes
     - `docker volume rm $(docker volume ls -qf dangling=true)` - remove them
 - `docker login foo.com` - login to a docker registry

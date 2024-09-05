@@ -19,6 +19,7 @@
     - types like java `BigDecimal` can represent these values
 - floating point in any laungage of `0.1` is not exactly `0.1`
 - https://www.educative.io/answers/why-does-01-not-exist-in-floating-point
+- on using floats/double for currency: https://stackoverflow.com/questions/3730019/why-not-use-double-or-float-to-represent-currency
 
 
 ## MEMORY
@@ -423,6 +424,9 @@ public static void main(String[] args) {
 
 
 ## SOFTWARE PATTERNS
+- event-driven
+    - martin fowler 2017 - https://martinfowler.com/articles/201701-event-driven.html
+    - martin fowler 2005 event sourcing - https://martinfowler.com/eaaDev/EventSourcing.html
 - iterative v and tracker-blockerss recursive
     - iterative is faster, no extra overhead for a function call
     - iterative uses less space, recursion adds stack frames for each function call
@@ -432,6 +436,7 @@ public static void main(String[] args) {
 - retry logic 
     - exponential back off - if we keep failing wait longer than the last time before trying
     - jitter - add random offset to retry so many entities retrying arent sync'd
+- gang of four design patterns - https://en.wikipedia.org/wiki/Design_Patterns
 - visitor pattern - seperate object from algorithm
     - a seperate algo/code handles the diff types of objects, versus each object type knowing how to handle itself
 - composition - seperate types/classes for different behaviors, then compose them together in a new class
@@ -463,6 +468,7 @@ public static void main(String[] args) {
 - Memoization - remembering/caching the output of a previous computation
 
 ## AI
+- https://medium.com/@machadogj/ml-basics-supervised-unsupervised-and-reinforcement-learning-b18108487c5a
 ### LLM
 - good LLM read: https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/
 - great video by kaparthy(former tesla AI chief) - https://www.youtube.com/watch?v=zjkBMFhNj_g&t=453s&ab_channel=AndrejKarpathy
@@ -518,6 +524,8 @@ public static void main(String[] args) {
 
 
 ## FUNCTIONAL PROGRAMMING
+- decent vids on FP
+    - https://learn.microsoft.com/en-us/shows/c9-lectures-erik-meijer-functional-programming-fundamentals/lecture-series-erik-meijer-functional-programming-fundamentals-chapter-1
 - pure function 
     1. a function that returns same values for same input values
     2. no side-effects, no mutation of local static or global variables, no I/O
@@ -651,8 +659,12 @@ public static void main(String[] args) {
 - linus on clever remove from linkedlist with double pointer: https://github.com/mkirchner/linked-list-good-taste
 - not really cool but some silly ways to fizzbuzz - https://www.linkedin.com/pulse/efficient-way-solve-fizzbuzz-problem-denis-r/
 
+## QA
+- mock vs stub - https://stackoverflow.com/questions/3459287/whats-the-difference-between-a-mock-stub
+
 ## STORIES
 - discord switch from golang->rust: https://discord.com/blog/why-discord-is-switching-from-go-to-rust
     - latency spikes due to GC pauses were a big issue
 - whatsapp using erlang: https://thechipletter.substack.com/p/ericsson-to-whatsapp-the-story-of
 - blog on why facebook migrated to mercurial from git: https://graphite.dev/blog/why-facebook-doesnt-use-git
+- 2016 npm left-pad js microlibrary took down the world - https://en.wikipedia.org/wiki/Npm_left-pad_incident

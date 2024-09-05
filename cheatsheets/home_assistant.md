@@ -62,6 +62,7 @@
     - https://www.reddit.com/r/homeassistant/comments/10hc3vb/psa_adding_automations_to_the_left_panel
         - modifying the left sidebar in lovelace with buttons for going to automations or devices
 - dashboards are stored in `.storage` in json format
+- docs: https://www.home-assistant.io/dashboards/
 - has keyboard shortcuts: https://www.home-assistant.io/docs/tools/quick-bar/
     - _NOTE_ make sure middle main panel is active (not side panel or top panel)
     - `e` -> popup to select an entity

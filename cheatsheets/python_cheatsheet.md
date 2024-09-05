@@ -1,5 +1,10 @@
 # PYTHON CHEATSHEET
 
+## DOCS
+- https://diveintopython.org/
+- style and intro - https://docs.python-guide.org/writing/style/
+- intro to decorators - https://realpython.com/primer-on-python-decorators/
+
 ## SCRIPTING
 ```sh
 python -c 'print("hi")'  # prints "hi"

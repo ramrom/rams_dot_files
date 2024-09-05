@@ -665,6 +665,8 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
 ### FUTURES/ASYNC
 - 2016 blog by aaron turon on design async for rust - https://aturon.github.io/blog/2016/09/07/futures-design/
+    - struggle to make zero-cost, (no dynamic dispatch) async features
+    - couldnt do "completion-driven" zero-cost, but could do "demand-driven"
 - run many concurrent tasks on a small number of OS threads
 - `Future` are inert - the make progress only when polled by `await`
     - can create a `Future` in sync code, but can only `await` a `Future` if it's in a `async`(`Future`) function itself

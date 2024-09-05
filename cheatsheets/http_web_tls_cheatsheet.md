@@ -38,6 +38,12 @@
     - youtube uses HTML5 with HLS for playing videos
 
 ## OTHER INFO
+- headers - key/value pairs seperated by `:`
+    - each header field ends with a CRLF(carriage return + line feed) chars, after is body
+    - header section ending indicated by empty field line (so will see two CRLFs)
+- response content length 
+    - either a `Content-Length` header is specified or client keeps reading until connection is closed
+    - 1xx, 204, and 304 responses dont have bodies, so no content length needed
 - Authorization Header
     - `Basic` - prodvide base64 user/password in each request, simple but pretty insecure
     - `Bearer`- get a auth token from a different auth server (e.g. in a oauth2/oidc setup) and use the token here
