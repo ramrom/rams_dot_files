@@ -5,8 +5,10 @@
     - once only - delivered once and only once
 - push vs pull
     - push - messages are pushed to consumer
+        - pro: lowest latency, con: no flow control and can overwhelm client
     - pull - conumser must request for messages
-        - generally an easier system to impelment, consumer has to do more work
+        - pro: generally an easier system to impelment, con: consumer has to do more work
+        - pro: client can bulk retrieve many messages, pro: wont get overwhelmed
 - order
     - FIFO - message order gauranteed, consumer gets messages in order they were added to queue
 

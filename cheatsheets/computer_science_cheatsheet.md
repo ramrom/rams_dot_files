@@ -632,6 +632,11 @@ public static void main(String[] args) {
 - parser -> take tokens from lexer and build a AST based on grammer
 - https://godbolt.org/ - badass tool to see assembly code compiled by many languages
 
+## DEPENDENCY MANAGEMENT
+- vendoring - including a 3rd party library direclty into the project without using some dependency management tool to fetch it
+    - convention is to store the library code in the projects `/vendor` dir
+- shading - a technique to allow for multiple versions of the same library to be used in the same project without conflict
+
 ## HARDWARE
 - FPGA - field programmable gate arrays
     - can program/change the logic
@@ -668,3 +673,7 @@ public static void main(String[] args) {
 - whatsapp using erlang: https://thechipletter.substack.com/p/ericsson-to-whatsapp-the-story-of
 - blog on why facebook migrated to mercurial from git: https://graphite.dev/blog/why-facebook-doesnt-use-git
 - 2016 npm left-pad js microlibrary took down the world - https://en.wikipedia.org/wiki/Npm_left-pad_incident
+### SECURITY
+- heartbleed - openssl vulnerability found in 2014, buffer over-read attack
+- xz utils backdoor - found in feb2024 - https://en.wikipedia.org/wiki/XZ_Utils_backdoor
+- spectre - 2018 - cpu branch prediction attack - https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)

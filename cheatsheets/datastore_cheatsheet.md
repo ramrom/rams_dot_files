@@ -86,6 +86,8 @@
 - also wide-column like cassandra
 ### CASSANDRA
 - first version created by facebook in 2008, released as open source, falls under NoSQL db
+    - facebook created it handle large volumes of data, particularly for searching their facebook inbox
+    - addresses scale for growing writes, can add nodes easy for scale, and can replicate to diff data centers for lower latencies
 - doesnt have a formal master/leader, uses masterless async replication with peer-to-peer communication
 - uses consistent hashing for sharding, each peer is a main owner of a shard of the data
 - data is replicated between the peers
@@ -116,7 +118,7 @@
 
 ## LSMT
 - LSMT = Log Structured Merge Tree
-    - 2 components: 1. in-memory cache(memtable), 2. on-disk/persistent component(SSTable)
+    - 2 components: 1. in-memory cache(memtable), 2. on-disk/persistent component - SST(sorted string table)
 - great for high-write use cases, while still having good read performance
     - there are no relations so cant do SQL queries really
 - used by RocksDB and Cassandra
@@ -142,7 +144,7 @@
     - can use a bloom filter to keep track of what keys are in the SST segment
     - no false negatives, so can definitely ignore searching SST then, saving time for a read
     - can increase filter size (esp during compaction) to redude false positive rate
-- deletiion of key - uses tombstones; a marker that indicates key is deleted when read
+- deletion of key - uses tombstones; a marker that indicates key is deleted when read
     - key can be hard deleted during compaction
 - compaction - merging two segments of SST into one in the background
     - this greatly increases read performance
@@ -218,6 +220,8 @@
 
 ## GRAPH
 - Neo4j - most established and well known
+- facebook uses a graph db to store friends and their relationships to other friends
+    - facebook graph search engine uses a graph db
 
 ## LOCKS
 - pessimistic vs optimistic
@@ -245,10 +249,12 @@
 
 ## CDN
 - content delivery network
-- famous examples: akamai, cloudfront, netflix open connect
+- famous examples: akamai, cloudfront, cloudflare, netflix open connect
 - pull vs push 
     - push: engineers need to manually push content to CDN for clients to find
+        - pro: lower latency as content always there, con: wastes space if clients dont request it
     - pull: when the client requests content from CDN, the CDN retreives it from the origin server
+        - pro: only data that is needed is stored on CDN, con: higher latency than push
 
 ## SPREADSHEETS
 - yea... ridiculous but many companies will use em in prod for data

@@ -44,6 +44,7 @@
 - original protcols supported ~3Mbps, in 2024 400Gpbs supported, 1Tbps in the works
 - phsyical mediums
     - 10BASE5 - coaxial cable, 10BASE2 - thinner/flexible cable, BASE-T - twisted pair cable
+    - twisted pair - one wire carries inverted signal, both get equal external noise and when invereted and summed noise is cancelled
 - ethernet frame - has source and dest 48bit MAC address, error detection for frame corruption
 
 ## WIFI
