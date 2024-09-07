@@ -82,6 +82,10 @@
 ### HASS-CLI
 - great 3rd party: https://github.com/home-assistant-ecosystem/home-assistant-cli , `hass-cli` bin
 - `hass-cli config release` - get HASS version
+- entity state info
+    - `hass-cli state list` - get current state of all entities
+    - `hass-cli state history some.sensor` - get state history of a sensor
+    - `hass-cli state history --since 3d --end 1d some.sensor` - get state history of a sensor b/w 3day ago to 1day ago
 - calling a service
     - `hass-cli service call system_log.clear` - clear logs
     - `hass-cli service call backup.create` - create a backup
