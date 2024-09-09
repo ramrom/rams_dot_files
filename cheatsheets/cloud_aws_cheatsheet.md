@@ -19,6 +19,7 @@
 ## AWS CLI
 - `aws configure --profile someprofile list`  - list sessions under that profile
 - `aws configure list-profiles`  - list profiles with sessions
+- `aws eks --profile foo --region us-east-1 list-clusters` - list eks clusters in a region
 
 ## LOAD BALANCERS
 - ELB - elastic load balancer - https://aws.amazon.com/elasticloadbalancing/features/

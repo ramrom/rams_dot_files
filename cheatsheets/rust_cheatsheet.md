@@ -664,9 +664,13 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - use `move` to transfer ownership, `thread::spawn(move ...)`
 - `thread::sleep(Duration::from_millis(1))` - sleep for 1ms
 ### FUTURES/ASYNC
-- 2016 blog by aaron turon on design async for rust - https://aturon.github.io/blog/2016/09/07/futures-design/
+- 2016 great blog by aaron turon on async design for rust - https://aturon.github.io/blog/2016/09/07/futures-design/
     - struggle to make zero-cost, (no dynamic dispatch) async features
-    - couldnt do "completion-driven" zero-cost, but could do "demand-driven"
+    - couldnt do "completion-driven" zero-cost (no allocations), but could do "readiness-driven"
+    - defines task as a future that is being executed
+    - e.g. socket I/O, register a task to event loops dispatch table to wake task when socket ready and then can be re-polled
+        - task stays "fixed", this apparently requires no allocations to install this callback to the event loop
+    - in this readiness-driven model we get cancellation and backpressure for free
 - run many concurrent tasks on a small number of OS threads
 - `Future` are inert - the make progress only when polled by `await`
     - can create a `Future` in sync code, but can only `await` a `Future` if it's in a `async`(`Future`) function itself
@@ -698,6 +702,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
         - this call tree of cobbled futures allows for one big allocation of known size
     - a task is root level structure that a future belongs to
         - a executor will place a task on the run queue to be polled when a child future is awoken
+    - so no stack is needed, all state info within Future type itself
 - recursion is an issue b/c this statemachine like struct would refer to itself, causing the infinite size type issue
     - can get around this with indirection like `Box` or `BoxFuture`
 - async traits are hard b/c Futures don't have a known size

@@ -156,6 +156,7 @@
 
 ## DOCUMENT DB
 - single "document" or blob, no normalization like relational, much more repeated data
+- good also if document is a large size, like 1MB
 - a collection can specify schemas and they are generally more easily changable vs relational schemas
 - typically document dbs are designed for easier horizontal scale
     - they typpically come ready/plug-and-play supporting easy horizontal sharding

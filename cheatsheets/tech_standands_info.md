@@ -392,11 +392,11 @@
 ## PLANTUML
 - https://plantuml.com/sequence-diagram
 
-## Smithy
+## SMITHY
 - a service and SDK description language created by AWS
 - https://awslabs.github.io/smithy/
 
-## LOG FRAMEWORKS
+## LOG/APM FRAMEWORKS
 - ELK stack - Elasticache, Logstache, Kibana
     - all developed and maintained by Elastic, all open-source
     - Logstache(aggregation+processing) -> Elasticahe(db for indexing/storing) -> Kibana(front-end for visualization/human-analysis)

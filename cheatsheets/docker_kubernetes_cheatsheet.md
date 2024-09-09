@@ -90,6 +90,7 @@
     - readiness - pod could be live but not ready to receive traffic yet, e.g. waiting for other pods/services, or populating dataset
         - k8 will just stop serving traffic to pod (but wont kill/restart it)
 - `kubectl config get-contexts` - print session contexts
+- `kubectl config use-context foobar` - set current context
 - `kubectl config current-context` - print current context
 - `kubectl delete pods foopodname` - terminate a pod
 - `kubectl get pods` - print pods

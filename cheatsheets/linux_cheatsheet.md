@@ -479,6 +479,8 @@ pulsemixer - volume manager with pulseaudio
 - /dev/zero   - obtain null characters from this device
     - `dd if=/dev/zero of=foobar count=1024 bs=1024`, create 1 MiB file called foobar of null chars
 - /dev/random - generate pseduorandom numbers from this device
+- /dev/tcp - can establish TCP/IP connections
+    - can bash script without needing binaries like curl, wget, nc, etc.
 ### GRAPHIC DEVICES
 - nvidia propietary drivers - https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers
     - drivers compiled against kernel: composed of a kernel module and X11 driver
