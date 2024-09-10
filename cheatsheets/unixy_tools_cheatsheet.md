@@ -220,9 +220,9 @@ subsync @+5 < input.srt > output.srt  # shift all subtitles forward 5 seconds
 c-x c-c to quit
 
 # GNU GPG
-gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cahce the passphrase
-gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cahce the passphrase
-gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cahce the passphrase
+gpg -e --no-symkey-cache file.txt  # encrypt file with assym public key, and dont cache the passphrase
+gpg -c --no-symkey-cache file.txt  # encrypt file with symmetric key, and dont cache the passphrase
+gpg -d --no-symkey-cache file.txt  # decrypt file, and dont cache the passphrase
 gpg --list-keys # list all keys
 
 gpg --full-generate-key  # gen new key, with FN/LN/email, default folder to store is /home/user/.gnupg/
@@ -422,6 +422,16 @@ chafa foo.jpg
 
 # MEDIAINFO     - show mediafile metadata (like mdls for osx)
 mediainfo foo.mp4
+
+# CALCURSE
+# example config file: https://github.com/lfos/calcurse/blob/pu/contrib/caldav/config.sample
+# https://www.calcurse.org/files/calcurse-caldav.html , has section for google oauth2 cal
+# linux - caldav config file in ~/.config/calcurse/caldav/config
+# linux - oauth creds stored in ~/.config/calcurse/caldav/oauth_cred
+calcurse                # start the TUI
+calcurse -d 30          # print events for next 30 days
+calcurse-caldav         # sync caldav
+calcurse-caldav --init keep-remote  # initialize local cal, sync down from remote, dont mod remote!
 
 # VERACRYPT
 veracrypt -tc sometruecryptfile  # mount an old truecrypt file
