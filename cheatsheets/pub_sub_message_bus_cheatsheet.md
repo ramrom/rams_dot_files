@@ -81,6 +81,7 @@
 - analytics engine that can stream/batch process, can also do ML and graph processing
     - used for data warehousing, ETL, ML, and more
 - historically started as a batch framework, then stream
+- apache spark is like 70% scala
 
 ## APACHE FLUME
 - messsages are pushed to consumer

@@ -431,7 +431,8 @@ mediainfo foo.mp4
 calcurse                # start the TUI
 calcurse -d 30          # print events for next 30 days
 calcurse-caldav         # sync caldav
-calcurse-caldav --init keep-remote  # initialize local cal, sync down from remote, dont mod remote!
+DISPLAY=:1 calcurse-caldav --init keep-remote  # initialize local cal, sync down from remote, dont mod remote!
+    # set DISPLAY so xdg-open can use GUI browser, otherwise it'll open headless browser (google login fails, javascript error)
 
 # VERACRYPT
 veracrypt -tc sometruecryptfile  # mount an old truecrypt file

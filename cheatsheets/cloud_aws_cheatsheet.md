@@ -11,6 +11,9 @@
 ### CONCEPTS
 - organization - contains many accounts
 - IAM(identity and access management) - https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    - IAM vs STS(security token service) - STS issues the creds
+    - ARN(amazon resource name) structure looks like: `arn:partition:service:region:account:resource`
+        - docs: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     - policy - set of generic rules
     - 3 types of policies: session, identity, resource
     - when applied in context of an identity, session, and resources, define the permissions

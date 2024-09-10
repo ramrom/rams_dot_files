@@ -593,15 +593,9 @@ writer.close()
         - can use java's [ScheduledFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html)
 - 2.8
     - supports java 11
-- [http4s](https://http4s.org/) - minimal highly FP web framework
-    - compiles to Scala.js and Scala Native, uses fs2
-- [requests-scala](https://github.com/com-lihaoyi/requests-scala)
-    - great http lib (inspired by python requests) 
-- [upickle](https://com-lihaoyi.github.io/upickle)
-     - parse json text - `val s:String = """{"a":1}"""; ujson.read(s)`
-- apache kafka 2 is like 20% scala (0.7 was like 50%)
-    - 3.1.0 - `core` (most important module) written in scala
-- apache spark is like 70% scala
+- 2.9 -
+- 3.0 - released 2023, replaced Akka/Akka-HTTP with Pekko/Pekko-HTTP
+    - 2.9 and 3.0 offer same features and get parralel maintinence, 3.0 just switches to Pekko
 ### CATS
 - https://typelevel.org/cats/datatypes/ior.html
 - lots of useful FP types
@@ -630,3 +624,10 @@ writer.close()
 - spawned by apache project from akka 2.6, written mostly in scala and some java
 ### SLICK
 - print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
+### OTHER
+- [http4s](https://http4s.org/) - minimal highly FP web framework
+    - compiles to Scala.js and Scala Native, uses fs2
+- [requests-scala](https://github.com/com-lihaoyi/requests-scala)
+    - great http lib (inspired by python requests) 
+- [upickle](https://com-lihaoyi.github.io/upickle)
+     - parse json text - `val s:String = """{"a":1}"""; ujson.read(s)`

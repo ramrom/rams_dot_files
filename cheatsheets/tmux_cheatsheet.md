@@ -40,20 +40,23 @@ tmux show -p    # show pane options
 ```
 
 ## DISPLAY MENU
-tmux display-menu -x S foomenu a "display-message hello" bar b "display-message world"
+- `tmux display-menu -x S foomenu a "display-message hello" bar b "display-message world"`
     - will display 2 item menu, hit "a" or "b" as valid inputs
 
 ## CLIENTS
-tmux list-clients -t some_session      # show clients
-prefix D                               # show client list, and basically detach the rest
+- `tmux list-clients -t some_session`      # show clients
+- prefix + D                               # show client list, and basically detach the rest
+- `tmux switch-client -t some_session`     # attach current client to a session
 
 good resource on condition version checks in tmux conf file:
 - https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
     - it also details the changes, breaking changes, with increasing versions
 
 ## KEYBINDINGS
-prefix + ?  - show the current key bindings
-prefix + S  - swap windows
-prefix + y  - swap panes
-prefix + D  - disconnect clients
-prefix + ! - promote current active pane to become a window
+- parsing syntax: (see docs) - semilcolon is command seperator
+    - binding with multiple commands needs a `\;`, an escaped semicolon to seperate 2 commands
+- prefix + ?  - show the default key bindings
+- prefix + S  - swap windows
+- prefix + y  - swap panes
+- prefix + D  - disconnect clients
+- prefix + ! - promote current active pane to become a window
