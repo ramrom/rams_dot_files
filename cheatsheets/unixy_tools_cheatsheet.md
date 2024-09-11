@@ -50,7 +50,7 @@ scp /path/to/file someuser@somehost:/some/remote/path/destfilename
 sync
 sync /foo/bar  # flush buffer for bar file only
 
-# grep (varies widely b/w osx and gnu/linux)
+# GREP  -   (varies widely b/w osx and gnu/linux)
 # grab only the matched text with -o, works on osx and gnu/linux
 echo "foo bar baz" | grep -o "fo." # will only return "foo"
 # print just the line after a matched line, here would print baz
@@ -92,6 +92,7 @@ echo "output in both" | tee -a /path/to/file   # append to file
 
 # SED - streaming editor
 echo "2.03" | sed 's/\.//g'  # will print 203
+echo "2.03" | sed 's/[0-9][0-9]/foo/g'  # will print 2.foo
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
 printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
 echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"

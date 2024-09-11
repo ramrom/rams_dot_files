@@ -618,8 +618,8 @@ writer.close()
         - common type aliases using this `Task` `UIO`(cant fail) `TaskR`(needs env) `IO`(returns E)
 ### AKKA
 - one of akka streams main goals is to implement backpressure
-### AKKA STREAMS
-- built on top of akka, adheres to [reactive streams](https://www.reactive-streams.org/) concept
+- AKKA STREAMS - built on top of akka, adheres to [reactive streams](https://www.reactive-streams.org/) concept
+- AKKA HTTP - uses AKKA STREAMS, http requests and responses modeled as streams
 ### PEKKO
 - spawned by apache project from akka 2.6, written mostly in scala and some java
 ### SLICK

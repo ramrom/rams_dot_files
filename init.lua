@@ -150,6 +150,16 @@ SaveDefinedSession = function()
     print("Saved session: ",vim.g.DefinedSessionName)
 end
 
+ToggleLineWrap = function()
+    if vim.o.wrap then
+        vim.opt.wrap = false
+        print("line wrap off")
+    else
+        vim.opt.wrap = true
+        print("line wrap on")
+    end
+end
+
 ToggleFoldMethod = function()
     if vim.o.foldmethod == "indent" then
         vim.o.foldmethod="expr"
@@ -1311,6 +1321,7 @@ vim.keymap.set('n', '<leader>wn', '<cmd>:Noice<cr>')
 vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')
 vim.keymap.set('n', '<leader>wT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
 vim.keymap.set('n', '<leader>ws', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>ww', ToggleLineWrap, { desc = "toggle line wrap"})
 vim.keymap.set('n', '<leader>wl', '<cmd>:lua UpdateLuaLineTabLine(true)<cr>')
 vim.keymap.set('n', '<leader>wq', '<cmd>:copen<cr>', { desc = "open quickfix list" })
 vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
