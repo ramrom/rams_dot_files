@@ -640,6 +640,7 @@
 - BOOTP - superseded InARP
 - DHCP - superseded BOOTP
 ### DNS (Domain Name System)
+- good site to check dns reachability: https://dnschecker.org/
 - A record - hostname -> IP address
     - can have many IPs for failover, if main/default IP fails, the next IPs are used round robin
 - CNAME - hostname -> hostname, alias a domain to another
