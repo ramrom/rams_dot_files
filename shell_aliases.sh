@@ -53,7 +53,7 @@ alias pafn='aliasname=1 funcname=1 print_alias_funcs_scripts'
 alias rsyncl='rsync -Hhav --progress --delete'  # preserve hardlinks, archive, verbose, human-readable
 alias rsync_smb='rsync -Hhvrl -goD --progress --delete' # p(perms) and t(modtime) preserves fail to rsync to smbv1
 
-# neat trick, running aliases as sudo fails as root doesnt have them defined
+# SUDO neat trick, running aliases as sudo fails as root doesnt have them defined
 # bash only looks for the first word to alias expand, so if it's an alias it expands subsequent words
 alias sudo='sudo '
 
@@ -65,6 +65,8 @@ alias killalljobs='kill $(jobs -p)'  #TODO: fix for zsh
 alias ctag_create='ctags -R --exclude=*log --exclude=*.js --exclude=*.html --exclude=dbs --exclude=*.vim *'
 alias nvmetemp='sudo nvme smart-log /dev/nvme0n1 | grep temp'
 alias kn='k9s'   # k9s is a TUI for kubernetes
+alias cald='calcurse-caldav'
+alias cala='calcurse -d 30'
 
 
 if [ "$TERM" != "dumb" ]; then

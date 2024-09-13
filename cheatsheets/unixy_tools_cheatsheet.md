@@ -429,6 +429,7 @@ mediainfo foo.mp4
 # https://www.calcurse.org/files/calcurse-caldav.html , has section for google oauth2 cal
 # linux - caldav config file in ~/.config/calcurse/caldav/config
 # linux - oauth creds stored in ~/.config/calcurse/caldav/oauth_cred
+# linux - data stored in ~/.local/share/calcurse
 calcurse                # start the TUI
 calcurse -d 30          # print events for next 30 days
 calcurse-caldav         # sync caldav
