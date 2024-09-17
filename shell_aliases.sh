@@ -105,6 +105,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias tmr='transmission-remote'
     alias tmd='transmission-daemon'
     alias printgnomekeys='gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys'
+    alias fapti='fapt -i'
     alias printbluetoothconnected='bluetoothctl devices Connected'
 else  # assuming Darwin here
     alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
