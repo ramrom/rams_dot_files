@@ -184,7 +184,7 @@ a.isInstanceOf[Int]     // returns false
     - `for (i <- 1 until 3) yield println(i)`  - with `yield` this returns a `List((),(),())`
 - `for (i <- List(1,2,3)) println(i)`
 
-## COLLECTIONS
+## DATA STRUCTURES
 - scala 2.13 collections: https://docs.scala-lang.org/overviews/collections-2.13/overview.html
 ### TUPLES
 - `val t = ("a","b","c")`
@@ -255,25 +255,24 @@ a.isInstanceOf[Int]     // returns false
         - `val l = List(1); 4 +: l :+ 3`  returns new list `List(4,1,3)`
 ### MAP/ASSOCIATIVE-ARRAY
 - https://docs.scala-lang.org/overviews/collections-2.13/maps.html
-- examples
-    ```scala
-    val m: Map[String, Int] = Map.empty
-    val m = Map("a"->1, "b"->2)
-    m + ("foo" -> 3)        // returns a NEW map which also contains ("foo"-> 1)
-    m += (2->3)             // will raise exception, cant mutate, use mutable Map
-    m.keys                  // returns a Set containing keys
-    m.values                  // returns a Iterable containing values
-    m.getOrElse("z",10)     // since "z" key doesnt exist, the default 10 is returned
+```scala
+val m: Map[String, Int] = Map.empty
+val m = Map("a"->1, "b"->2)
+m + ("foo" -> 3)        // returns a NEW map which also contains ("foo"-> 1)
+m += (2->3)             // will raise exception, cant mutate, use mutable Map
+m.keys                  // returns a Set containing keys
+m.values                  // returns a Iterable containing values
+m.getOrElse("z",10)     // since "z" key doesnt exist, the default 10 is returned
 
-    val mu = scala.collection.mutable.Map(1->2)   // mutable map (will be HashMap)
-    mu + (2->3)   // like immutable man, returns a NEW map which also contains (2->3)
-    mu += (2->3)    // append (2->3) to mu
-    mu -= 2    // remove key/val with key=2 from mu
+val mu = scala.collection.mutable.Map(1->2)   // mutable map (will be HashMap)
+mu + (2->3)   // like immutable man, returns a NEW map which also contains (2->3)
+mu += (2->3)    // append (2->3) to mu
+mu -= 2    // remove key/val with key=2 from mu
 
-    Map(1->2,3->4) ++ Map(1->1,5->4)  // returns Map(1->1,3->4,5->4)
+Map(1->2,3->4) ++ Map(1->1,5->4)  // returns Map(1->1,3->4,5->4)
 
-    Map(1->2, 2->3).map( (k,v) => (k, v*2))  // return Map(1->4, 2->6)
-    ```
+Map(1->2, 2->3).map( (k,v) => (k, v*2))  // return Map(1->4, 2->6)
+```
 ### SET
 - TYPES
     - `scala.collection.immutable.HashSet`

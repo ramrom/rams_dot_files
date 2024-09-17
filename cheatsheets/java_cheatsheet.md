@@ -30,6 +30,8 @@
     - most peeps say the first jar in the classpath will get loaded
     - https://stackoverflow.com/questions/19339670/java-two-jars-in-project-with-same-class/19340327
     - https://www.geeksforgeeks.org/classloader-in-java/
+- getting a heap dump
+    - `jmap -dump:live,format=b,file=prime_number_heap_dump.bin <process_id>`
 ### JVM FLAGS
 - `XMX` - max memory heap size program can occupy
 - `XMS` - size of initial heap memory when program starts
@@ -917,13 +919,18 @@ finally { .. }  // finally is always exected
 - parllelism (concurrent) via `parralel` e.g. `Stream.of(1,2).parallel().map(i->i+1)`
 - has infinite streams via `generate` and `iterate`
 ```java
+import java.util.stream.Stream
 Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()) // returns List(2,3,4)
 Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on seperate lines
 
 Stream.of("a","b").forEach(i -> System.out.println(i));
 
+import java.util.stream.IntStream
 IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
 IntStream.range(1,100).toArray()        // convert it primitive array (int[])
+IntStream.range(1,100).boxed().collect(Collectors.toList())     // boxed converts `int`s in IntStream to Stream<Integer>
+IntStream.iterate(0, i->i+1)        // iterate is infinite stream, first arg is seed
+IntStream.iterate(0, i->i+1).limit(10).toArray()        // stop at 10, converts to array
 
 // Collector interface also has toMap, toSet
 var a = new ArrayList<Integer>(); a.add(1); a.add(2);

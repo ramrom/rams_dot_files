@@ -826,6 +826,8 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
 - [pprof](https://github.com/tikv/pprof-rs) - good profiler, flame graphs, like golangs pprof
 - CLI
     - [clap](https://docs.rs/clap/latest/clap/) - awesome CLI argument parser lib
+    - [ratatui](https://ratatui.rs/) - TUI builder lib
+    - [crossterm](https://github.com/crossterm-rs/crossterm) - lib for ANSI codes
     - [colored](https://lib.rs/crates/colored) - good ANSI terminal color lib for strings
     - [prettytable-rs](https://lib.rs/crates/prettytable-rs) - pprint tables to terminal
 - pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)

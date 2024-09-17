@@ -52,9 +52,12 @@
     - yield points are injected in parts of code to allow runtime to pre-empt to ensure fair scheduling
 - GC generally done by concurrently running dedicated goroutines
 
-# DEPENDENCY MANAGEMENT
+## DEPENDENCY MANAGEMENT
 - [dep](https://github.com/golang/dep) was first dep management tool, archived in 2020 in favor of mod
 - go modules is official dep management tool
 - overview - https://blog.golang.org/using-go-modules
     - https://go.dev/ref/mod
 - `go.mod` specifies dependent modules/packages, `go.sum` contains crypto hashes of specific mod packages
+
+## FRAMEWORKS
+- [cobra](https://github.com/spf13/cobra) - CLI builder lib

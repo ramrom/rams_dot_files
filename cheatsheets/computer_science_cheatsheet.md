@@ -119,9 +119,11 @@ public static void main(String[] args) {
 - green thread - a "thread" managed by the userland process runtime, will run until preempted by the runtime scheduler
     - some definitions say managed by a "virtual machine", which is prolly much heavier than a runtime
     - really conflated or coined from java's green threads
-- fibers - cooperative multitasking, each fiber yields volutarily, then a scheduler then schedules next fiber to run
+- fibers - (term inspired from physical fibers that make up a physical thread)
+    - cooperative multitasking, each fiber yields volutarily, then a scheduler then schedules next fiber to run
     - Fibers can implement coroutines by allowing each fiber to communicate to the scheduler which fiber should be run when it yields
-- coroutine - cooperative multitasking, where pause/yields are specified by the programmer, no scheduler
+- coroutine
+    - cooperative multitasking, where pause/yields are specified by the programmer, no scheduler
     - used since 1958, defined by Knuth
         - generalization of subroutine, subroutine has beg and end, coroutines can be suspended in the middle and resume
         - most common definition/concept is: coroutine will yield and call another coroutine
@@ -471,6 +473,8 @@ public static void main(String[] args) {
 - https://medium.com/@machadogj/ml-basics-supervised-unsupervised-and-reinforcement-learning-b18108487c5a
 ### LLM
 - good LLM read: https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/
+- most, including chatGPT are autoregressive, try to predict next word based on what previous words are
+    - GPT3 has like ~50k words in dictionary, has vector of probability for each word based on previous words
 - great video by kaparthy(former tesla AI chief) - https://www.youtube.com/watch?v=zjkBMFhNj_g&t=453s&ab_channel=AndrejKarpathy
      - we know the architecture and exact equations/params and know outtput is predicting better as we train
         - but we dont know how the params "interact" or change in order to do this
@@ -676,4 +680,5 @@ public static void main(String[] args) {
 ### SECURITY
 - heartbleed - openssl vulnerability found in 2014, buffer over-read attack
 - xz utils backdoor - found in feb2024 - https://en.wikipedia.org/wiki/XZ_Utils_backdoor
+    - jia tan was username doing this long con
 - spectre - 2018 - cpu branch prediction attack - https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)

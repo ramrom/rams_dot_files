@@ -116,6 +116,8 @@
     - canary -> see https://kubernetes.io/docs/concepts/workloads/management/#canary-deployments
         - this is basic, lets u have both vers at the same time, if x of y total are new version, then x/y percent reqs goto new ver
 - istio -> service mesh for kubernetes that lets you do cool things like complicated canary deploys
+- copy a file from pod to local machine
+    - `kubectl cp <pod-name>:<some-file> <our local destination directory>`
 ### K9S
 - awesome TUI for kubernetes
 - learn to use https://github.com/derailed/k9s
