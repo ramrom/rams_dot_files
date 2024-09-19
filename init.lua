@@ -414,6 +414,7 @@ local LoadOneDarkProConfig = function()
             -- vim-markdown uses html*, not markdown*
             htmlH1 = { fg = "#FF0000", underline = true },
             htmlH3 = { fg = "#ef596f" }, htmlH4 = { fg = "#ef596f" }, htmlH5 = { fg = "#ef596f" }, htmlH6 = { fg = "#ef596f" },
+
             htmlLink = { fg = '#61afef', underline = true },
             -- mkdInlineURL = { fg = '#61afef', underline = true },
 
@@ -1314,6 +1315,7 @@ vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
 -------------- OTHER
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
+vim.keymap.set("n", "<leader>wb", "<cmd>:Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
 vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
 vim.keymap.set('n', '<leader>wi', '<cmd>:lua ToggleIndentBlankLine()<cr>')
 vim.keymap.set('n', '<leader>wm', '<cmd>:messages<cr>')

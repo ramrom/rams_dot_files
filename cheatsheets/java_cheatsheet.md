@@ -7,14 +7,23 @@
         - the exception is some primitive types like integer, which are just direct values
 
 ## HISTORY
+- version history also here: https://en.wikipedia.org/wiki/Java_version_history
+### MAJOR VERSIONS
 - java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),
 - java8, mar2014, LTS(till 2025) - lamba functions
 - java11, sept2018, LTS - TLS, http client, epsilon garbage collector
 - java14
-    - introduced `record`, aka scala case class
+    - introduced `record`(similar to scala case class)
 - java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
 - java17, sept2021, LTS - better pattern matching
 - java21, sept2023, end at sept2031
+### OTHER
+- The main difference between Java EOL and extended support is that EOL software is no longer supported by the developer
+    - extended support software still receives critical security patches and some updates
+
+## BUILD TOOLS
+- uses ant, maven, gradle
+- see [build systems](build_dependency_tools_cheatsheet.md)
 
 ## RUNTIME
 `/usr/libexec/java_home -V`
@@ -31,7 +40,7 @@
     - https://stackoverflow.com/questions/19339670/java-two-jars-in-project-with-same-class/19340327
     - https://www.geeksforgeeks.org/classloader-in-java/
 - getting a heap dump
-    - `jmap -dump:live,format=b,file=prime_number_heap_dump.bin <process_id>`
+    - `jmap -dump:live,format=b,file=my_heap_dump.bin <java_process_id>`
 ### JVM FLAGS
 - `XMX` - max memory heap size program can occupy
 - `XMS` - size of initial heap memory when program starts
@@ -41,10 +50,18 @@
     - thin - app code you wrote plus app dependencies
     - hollow - inverse of thin, bits needed to run your app (i.e. the JRE)
     - fat - thin + hollow
+### COMPATIBILITY
+- java makes strong backwards comaptible gaurantees, so older bytecode will always be runnable/stable on later JVM
+    - i.e. java8 bytecode will run on a java 8 jvm
+    - even in this case it's not 100% backwards compatible, e.g. java9 removed XML parsing code from std lib
+- the opposite is definitely false, java11 bytecode will fail on java 8 jvm
+    - every new jvm version basically has a new bytecode format
 
-## BUILD TOOLS
-- uses ant, maven, gradle
-- see [build systems](build_dependency_tools_cheatsheet.md)
+## GC/ALLOCATION
+- generally all variables store on the heap
+    - primitives (ints, bools, etc) will go on the stack
+    - fixed sized plain arrays also go on the heap
+    - basically all objects go on the heap
 
 ## DATA STRUCTURES
 ### ARRAY
@@ -640,12 +657,6 @@ record Err<T>(Throwable error) implements Result<T> { }
 record Ok<T>(T value) implements Result<T> { }
 ```
 
-## GC/ALLOCATION
-- generally all variables store on the heap
-    - primitives (ints, bools, etc) will go on the stack
-    - fixed sized plain arrays also go on the heap
-    - basically all objects go on the heap
-
 ## TYPE SYSTEM
 - `final` keyword means it can't be changed (synonymous to `val` in scala)
     - a `final` member cannot be overridden by child class
@@ -927,6 +938,7 @@ Stream.of("a","b").forEach(i -> System.out.println(i));
 
 import java.util.stream.IntStream
 IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
+IntStream.range(1,100).forEach(i -> i = i * 2)      // forEach takes a lambda
 IntStream.range(1,100).toArray()        // convert it primitive array (int[])
 IntStream.range(1,100).boxed().collect(Collectors.toList())     // boxed converts `int`s in IntStream to Stream<Integer>
 IntStream.iterate(0, i->i+1)        // iterate is infinite stream, first arg is seed

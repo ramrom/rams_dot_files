@@ -1,6 +1,7 @@
 # GIT
 - blog on why facebook migrated to mercurial from git: https://graphite.dev/blog/why-facebook-doesnt-use-git
 - invented by linus torvalds in 2005 for revision control for linux kernel
+    - he was using bitkeeper, "free use" ended july1-2005, and forced linus to move and invent git
 
 ## DOCS
 - https://git-scm.com/

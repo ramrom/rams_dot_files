@@ -155,9 +155,11 @@
 - https://httpie.io/docs
 - written in python, core libs pygments and requests
 ### USAGE
-raw json fields:
-    ```bash
+- raw json fields
+    ```sh
     http POST https://api.foo.com field:='["a",2]'
+    # using escaped double quotes so you can interpolate shell vars
+    http POST https://api.foo.com field:="[\"${SOME_VAR}\",2]"
     ```
 ### CODE SNIPPET OF EXTRACTING STATUS CODE
 ```sh
