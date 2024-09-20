@@ -64,7 +64,7 @@
 - https://scalacenter.github.io/bloop/docs/what-is-bloop
 
 ## LSP
-- see [this doc](tech_standards_info.md)
+- see [LSP section in this doc](tech_standards_info.md)
 
 ## SCALA CLI
 - https://scala-cli.virtuslab.org/
