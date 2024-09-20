@@ -81,12 +81,18 @@ def foo
 end
 ```
 
+### checkboxes, supported by github markdown
+- [ ] (for unchecked checkbox)
+- [x] (for checked checkbox)
+
 - Some markdown flavors support latex code between dollar signs
 $some latex code$
 
 \* \_ \{ \) \[ \- \! \| \# \+ \. \` - backslash will escape these characters
 
 ### TABLES
+- delimiter b/w header and content is a row with only `-` chars and `|`s
+
 | Syntax      | Description |
 | ----------- | ----------- |
 | Header      | Title       |

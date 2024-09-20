@@ -14,6 +14,13 @@
 - good web playground: https://scastie.scala-lang.org/
 - haoyi's 2020 blog on scala's future - https://www.lihaoyi.com/post/TheDeathofHypeWhatsNextforScala.html
 
+## JAVA COMPATIBILITY
+- some good notes: https://docs.scala-lang.org/scala3/book/interacting-with-java.html
+    - possible to use scala traits in java and java interfaces in scala
+    - can convert java collections to scala and vice versa with coverters
+    - can convert java Optional to scala Option
+    - scala can subclass java classes and vice versa
+
 ## SCALA VERSIONS
 ### 2.12
 - compiler uses new java 8 VM features

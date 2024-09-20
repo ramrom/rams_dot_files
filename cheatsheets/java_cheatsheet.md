@@ -748,7 +748,9 @@ public class Box<T> {       // example generic class
 ```
 ### INTERFACE
 - cannot be instantiated
-- cannot implement any methods
+- cannot implement any abstract methods
+    - CAN declare and implement static methods
+    - in java8, CAN change method from abstract to default type with `default` keyword
 - a class can implement many interfaces, multiple inheritence
 - can not have non-final and non-static variables
 ### ABSTRACT CLASS

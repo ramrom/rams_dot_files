@@ -93,7 +93,8 @@
 - `kubectl config use-context foobar` - set current context
 - `kubectl config current-context` - print current context
 - `kubectl delete pods foopodname` - terminate a pod
-- `kubectl get pods` - print pods
+- `kubectl get pods` - print pods, _NOTE_ only prints in default namespace
+    - `kubectl get pods --all-namespaces` - print pods in all namespaces
 - events (e.g. HPA actions, ingress rule reloads, pod delete/restart actions, pulling images, etc.)
     - `kubectl events --all-namespaces` - print all events(tons of stuff)
     - `kubectl events -n foospace` - for a namespace 

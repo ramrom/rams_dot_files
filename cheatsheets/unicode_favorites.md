@@ -31,7 +31,9 @@
 👾  asteroid
 ☠   skull
 ✔   check mark
+✅  green check mark
 ❌  cross mark
+❓  question
 🔥  fire
 ❄   snowflake
 💧  droplet

@@ -59,6 +59,13 @@
 - for for java/scala projects
 - open source built by lihaoyi, written in scala
 
+## BLOOP
+- build server developed by scala center
+- https://scalacenter.github.io/bloop/docs/what-is-bloop
+
+## LSP
+- see [this doc](tech_standards_info.md)
+
 ## SCALA CLI
 - https://scala-cli.virtuslab.org/
 - more for scripting and rapid prototyping
