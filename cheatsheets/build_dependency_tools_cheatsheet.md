@@ -62,6 +62,9 @@
 ## BLOOP
 - build server developed by scala center
 - https://scalacenter.github.io/bloop/docs/what-is-bloop
+- supports 2 main protocols
+    -  Nailgun server protocol
+    - BSP **reccomended** (used by metals and intellij)
 
 ## LSP
 - see [LSP section in this doc](tech_standards_info.md)
@@ -94,6 +97,7 @@
  - to show test deps classpath: `sbt 'show Test/dependencyClasspath'`
     - show order of which jars are loaded for project `Test`
 - `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
+- sbt has BSP support in 1.4.0, see https://www.scala-lang.org/blog/2020/10/27/bsp-in-sbt.html
 
 ## NPM
 - package manager for javascript

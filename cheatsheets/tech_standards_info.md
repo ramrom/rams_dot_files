@@ -479,11 +479,6 @@
 - language servers - https://langserver.org/
     - introduced in 2016 for microsoft VSC, then made an open standard
 - uses JSON RPC for message passing b/w client and server
-- BSP (build server protocol) - abstracts the build tool, complementary to LSP 
-    - LSP server can be a _client_ to build server using BSP to talk to it
-    - editor/lsp-client (LSP)-> language server (BSP)-> build tool
-        - editor sends file changed event in LSP, lang serv says compile in BSP to build tool, bld tool compiles and returns diagnostic
-    - bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
 - DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
 - extension: tree view protocol
 - extension: decoration protocol, for displaying non-editable text
@@ -491,7 +486,15 @@
 - Scala Metals - language server that uses scalameta library at it's core
     - scalameta uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
     - a semanticDB is constructed, which powers gotodef, findrefs, etc
-    - 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/) as compiler
+    - 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/)
+### BSP 
+- build server protocol, abstracts the build tool, complementary to LSP 
+- see https://build-server-protocol.github.io/
+- LSP server can be a _client_ to build server using BSP to talk to it
+- editor/lsp-client (LSP)-> language server (BSP)-> build tool
+    - editor sends file changed event in LSP, lang serv says compile in BSP to build tool, bld tool compiles and returns diagnostic
+- bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
+    - sbt adds BSP support in 1.4.0
 
 ## Compilation
 - `.so`, SO(shared object) files, used mostly in Linux, similar to windows DLL or OSX DYLIB(mach-o dynamic library)
@@ -728,9 +731,12 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - main docs: https://openid.net/developers/how-connect-works/
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client
     - advantages: SSO for all RPs that use that IDP server, only one db instead of many with ur creds
-    - TERMS
-        - `scope` - a group of `claim`s
-        - `claim` - are assertions that one subject (an asserting party) makes about itself or another subject (the relying party).
+    - claims - https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+        - assertions that one subject (an asserting party) makes about itself or another subject (the relying party).
+        - OIDC standard claims: `sub`(subject,some ID of end-user by issuer), `name`(regular name of user), `email`(email of end-user)
+    - scope - a group of claims
+        - OIDC mandates `openid` scope exist
+        - other scopes examples: `profile`, `phone`
 - TOTP - time based one time password
 - passwordless auth - umbrella term for any tech that doesnt requires entering a password or knowledge based secret
 - Passkey 

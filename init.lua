@@ -961,18 +961,20 @@ LoadScalaMetals = function()
     metals_config = require("metals").bare_config()
 
     metals_config.settings = {
-      -- jan'24 default metals version was 0.11.x
-      --    see https://scalameta.org/metals/docs/editors/vim/  , 1.2.0 supported
-      serverVersion = "1.3.0",
-      showImplicitArguments = true,
-      showImplicitConversionsAndClasses = true,
-      showInferredType = true
+        -- jan'24 default metals version was 0.11.x
+        --    see https://scalameta.org/metals/docs/editors/vim/  , 1.2.0 supported
+        -- serverVersion = "1.3.0",
+        inlayHints = {
+            showImplicitArguments = { enable = true },
+            showImplicitConversionsAndClasses = { enable = true },
+            showInferredType = { enable = true },
+        }
     }
 
-    metals_config.init_options.statusBarProvider = "on"
+    metals_config.init_options.statusBarProvider = "off"
 
-    metals_config.capabilities = capabilities
-    -- metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+    -- metals_config.capabilities = capabilities
+    metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     -- Autocmd that will actually be in charging of starting the whole thing
     vim.api.nvim_create_autocmd("FileType", {

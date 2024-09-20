@@ -50,6 +50,13 @@
 - `val` - immutable variable, `var` - mutable variable
     - *NOTE* the value a `val` contains can mutate
     - e.g. changing field value works `case class Foo(var x: Int); val v = Foo(1); v.x = 10;`
+- `lazy` - keyword that makes evaluation lazy, so only on first access, not delaration
+    ```scala
+    lazy val later = { println("hi"); 3 }
+    // ...
+    later   // prints "hi" and assigns 3 to later
+    lazy val now = { println("hi"); 3 }  // prints "hi" and assigns 3 to now
+    ```
 - Trait - cant be instantiated directly
     - a class can implement MANY traits
     - can NOT specify a constructor parameter
