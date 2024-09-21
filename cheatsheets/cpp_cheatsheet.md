@@ -5,6 +5,9 @@
 ## MEMORY
 - allocations/frees mainly done with `new` and `delete`
 
+## TYPE SYSTEM
+- templates are really metaprogramming that enable generics
+
 ## FEATURES
 - supports proper pass-by-reference semantics, using the `&` modifier on a parameter
 - c11 to c14 - added shared pointers and unique pointers

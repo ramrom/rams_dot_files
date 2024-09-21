@@ -45,6 +45,7 @@ cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
 # scp - secure copy, (based on ssh protocol)
 # not well maintained, and rec'd to use rsync or SFTP instead, in openssh 9.0 scp client actually uses SFTP
 scp /path/to/file someuser@somehost:/some/remote/path/destfilename
+scp -r /path/to/folder someuser@somehost:/some/remote/path/destfolder   # copy whole folder
 
 # SYNC - flush buffer cache to storage disk
 sync

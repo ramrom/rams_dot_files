@@ -77,8 +77,13 @@
     - o is general settings: `vim.o.background = 'light'`
     - use space as a the leader key: `vim.g.mapleader = ' '`
     - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
-- async libuv shell command - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
-- sync regular shell command - `vim.fn.system({'ls', '-a', '-l'})`
+- run external process
+    - using `vim.uv.spawn` 
+        - pre 0.10.x - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
+        - `vim.uv` replaces `vim.loop`
+    - using `vim.system`
+        - noevim 0.10.x -> it's `vim.system`, see docs, can be done sync by calling `wait`
+        - pre 0.10.x - `vim.fn.system({'ls', '-a', '-l'})`
 - get OS name
     - `:lua print(vim.loop.os_uname().sysname)`
     - `:lua if vim.fn.has('Linux') then print 'has linux' end`

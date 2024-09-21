@@ -98,6 +98,9 @@
     - show order of which jars are loaded for project `Test`
 - `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
 - sbt has BSP support in 1.4.0, see https://www.scala-lang.org/blog/2020/10/27/bsp-in-sbt.html
+- create a new project
+    - scala2 - `sbt new scala/hello-world.g8`
+    - scala3 - `sbt new scala/scala3.g8`
 
 ## NPM
 - package manager for javascript

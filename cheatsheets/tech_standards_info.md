@@ -487,6 +487,9 @@
     - scalameta uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
     - a semanticDB is constructed, which powers gotodef, findrefs, etc
     - 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/)
+    - metals 1.3.x requires java 11 or java 17
+    - sept2024 - nvim-metals seems to start the latest metals server that works for that scala ver
+        - e.g. 2.13.6 scala starts 0.11.x
 ### BSP 
 - build server protocol, abstracts the build tool, complementary to LSP 
 - see https://build-server-protocol.github.io/
