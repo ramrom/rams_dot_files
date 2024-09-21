@@ -68,6 +68,9 @@ tar –tvzf documents.tar.gz   # uncompress tar file
 
 # ZIP
 zip -r outputfile folder1 folder2
+unzip -l foo.zip        # list contents, dont extract
+unzip foo.zip                       # unzip contents in cur dir
+unzip foo.zip -d /path/to/output  # unzip to specific foler
 
 # AWK - multi purpose tool, really a mini programming language
 echo "foo bar baz" | awk '{print $2}'  # will print bar
