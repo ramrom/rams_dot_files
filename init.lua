@@ -309,7 +309,7 @@ end
 
 ----------------------------------- RUN IN TMUX PANE -----------------------------------------------------
 ActiveTmuxRunnerPane=nil
-ClearActiveTmuxRunnerPane=false
+ClearActiveTmuxRunnerPane=true
 
 SelectTmuxRunnerPane = function()
     -- display pane index in tmux window

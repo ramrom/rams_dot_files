@@ -77,7 +77,7 @@ PREVIEW_CMD="if [ -d {} ]; then; tree -C {}; else $BATBIN --style=numbers --colo
 # TODO: make binding to open in GH without quitting fzf
     # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
 out=$(fzf --ansi +m --exit-0 --height "$FZF_HEIGHT"% \
-    --header=$'ctrl-i->open, ctrl-o->vim, ctrl-space->cd, ctrl-y->pbcopy\nctrl-s->open-in-github' \
+    --header=$'enter->cd, ctrl-i->open, ctrl-o->vim, ctrl-y->pbcopy\nctrl-s->open-in-github ctrl-space->echo' \
     --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \
     --preview "$PREVIEW_CMD" \
@@ -87,11 +87,6 @@ file=$(echo "$out" | tail -1)
 if [ -n "$file" ]; then
     case "$key" in
         "ctrl-i") $OPENBIN "$file" ;;
-        "ctrl-space")
-            [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
-            directoryname=$(dirname "$file")
-            [ -d "$file" ] && directoryname="$file"  # dont get dirname if it's already a dir
-            echo "cd $directoryname" ;;
         "ctrl-o")
             cmd="${EDITOR:-vim} '$file'"
             [ -z "$FUNC_WRAP" ] && eval "$cmd" && exit
@@ -100,6 +95,12 @@ if [ -n "$file" ]; then
             [ -n "$1" ] && echo "ERROR: opening in github requires same dir to detect remote/branch" && exit 1
             generate_github_link "$file" > /dev/null || exit 1
             $OPENBIN "$(generate_github_link "$file")" ;;
-        *) echo "$file" ;;
+        "ctrl-space")
+            echo "$file" ;;
+        *) 
+            [ -z "$FUNC_WRAP" ] && echo "not wrapped in shell func, so cd to dir cant be supported!" && exit 1
+            directoryname=$(dirname "$file")
+            [ -d "$file" ] && directoryname="$file"  # dont get dirname if it's already a dir
+            echo "cd $directoryname" ;;
     esac
 fi

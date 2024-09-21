@@ -59,24 +59,25 @@
 - vim settings
     - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
     - `vim.o` is more direct variable access
-    - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
-    - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
+        - set background `:lua vim.o.background = 'light'`
+        - use space as a the leader key: `:lua vim.g.mapleader = ' '`
+        - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
+        - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
+    - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
 - `vim.cmd` - run an Ex command, doesnt output
 - `vim.api.nvim_exec2` - run vimscript, can capture output
 - `vim.fn` - table exposes regular vimL functions
     - e.g. `vim.fn.printf('hi from %s', 'dude'))`
 - `vim.lsp` - LSP stuff
 - `vim.loop` - neovim eventloop using libuv
+    - replace dby `vim.uv` in 0.10.x
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
 - call lua function - `:lua somefunc()`
-- CONFIG STUFF
+- sourcing external files
     - vimscript, sourcing lua code: `:lua require('some-lua-code')`
     - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
-    - o is general settings: `vim.o.background = 'light'`
-    - use space as a the leader key: `vim.g.mapleader = ' '`
-    - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
 - run external process
     - using `vim.uv.spawn` 
         - pre 0.10.x - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
