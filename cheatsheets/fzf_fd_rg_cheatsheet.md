@@ -86,7 +86,7 @@ fd -H "foo"       # search hidden files
 fd -H -I "foo"    # search hidden files and git ignored files
 fd -p             # match on full path (default file/dir name)
 fd -e pdf         # find all files with extension pdf
-fd --type f       # close to find, old match on file types
+fd --type f       # close to find, only match on file types
 
 fd . foo/ -S +2ki    # find all files greater than 2kb in folder foo
 fd . foo/ -S +2ki -x du -hs   # find all files greater than 2kb in folder foo and print their human readable size
