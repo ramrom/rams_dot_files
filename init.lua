@@ -1073,8 +1073,42 @@ LoadGolangLSP = function()
 end
 
 -------------- JAVA JDTLS ---------------------------
+ValidateJavaInstallDirs = function(JavaInstalls)
+    local result = 0
+    for i,v in ipairs(JavaInstalls) do
+        local res = vim.fn.isdirectory(vim.fn.expand(v.path))
+        if (res == 0) then
+            print("Java install ".. v.name .. "at path: ".. v.path .. " does not exist!")
+            result = 1
+        end
+    end
+    return result
+end
+
 -- jdtls lang server is a java17 app itself, make sure JAVA_HOME of shell is set to java17
 LoadJDTLSServer = function()
+    JavaInstalls = {
+        {
+            name = "JavaSE-1.8",
+            path = "~/.sdkman/candidates/java/8.0.345-zulu"
+        },
+        {
+            name = "JavaSE-11",
+            path = "~/.sdkman/candidates/java/11.0.16.1-tem"
+        },
+        {
+            name = "JavaSE-17",
+            path = "~/.sdkman/candidates/java/17.0.6-tem"
+        },
+        {
+            name = "JavaSE-21",
+            path = "~/.sdkman/candidates/java/21.0.2-tem"
+        },
+    }
+    if (ValidateJavaInstallDirs(JavaInstalls) == 1) then
+        print("-\nAborting loading JDTLS server, missing java installs")
+        return
+    end
     local config = {
         -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
         cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
@@ -1083,26 +1117,7 @@ LoadJDTLSServer = function()
             java = {
                 -- `name` must match a value in enum ExecutionEnvironment
                 -- see https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line
-                configuration = {
-                    runtimes = {
-                        {
-                            name = "JavaSE-1.8",
-                            path = "~/.sdkman/candidates/java/8.0.345-zulu"
-                        },
-                        {
-                            name = "JavaSE-11",
-                            path = "~/.sdkman/candidates/java/11.0.16.1-tem"
-                        },
-                        {
-                            name = "JavaSE-17",
-                            path = "~/.sdkman/candidates/java/17.0.6-tem"
-                        },
-                        {
-                            name = "JavaSE-21",
-                            path = "~/.sdkman/candidates/java/21.0.2-tem"
-                        },
-                    }
-                }
+                configuration = { runtimes = JavaInstalls }
             }
         }
     }

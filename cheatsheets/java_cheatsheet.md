@@ -943,6 +943,8 @@ IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a str
 IntStream.range(1,100).forEach(i -> i = i * 2)      // forEach takes a lambda
 IntStream.range(1,100).toArray()        // convert it primitive array (int[])
 IntStream.range(1,100).boxed().collect(Collectors.toList())     // boxed converts `int`s in IntStream to Stream<Integer>
+IntStream.range(1,100).boxed().toList()     // java16 - can call toList()
+IntStream.rangeClosed(1,100)            // is inclusive of end index, 100 in this case
 IntStream.iterate(0, i->i+1)        // iterate is infinite stream, first arg is seed
 IntStream.iterate(0, i->i+1).limit(10).toArray()        // stop at 10, converts to array
 

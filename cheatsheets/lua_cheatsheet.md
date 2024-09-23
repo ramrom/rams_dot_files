@@ -36,9 +36,9 @@
 
 ## CONTROL STRUCTURES AND LOOPS
 ```lua
-if (a = 1) then
+if (a == 1) then
     print("hi")
-elseif (b=2) then
+elseif (b==2) then
     print("b="..b)
 else
     print("else")
