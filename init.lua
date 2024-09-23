@@ -1105,10 +1105,14 @@ LoadJDTLSServer = function()
             path = "~/.sdkman/candidates/java/21.0.2-tem"
         },
     }
+
     if (ValidateJavaInstallDirs(JavaInstalls) == 1) then
+        -- sept'24 - TODO: tried `echoerr` and it fails, see https://github.com/neovim/neovim/issues/13928 , err_writeln below fails too
+        -- vim.api.nvim_err_writeln("-\nAborting loading JDTLS server, missing java installs")
         print("-\nAborting loading JDTLS server, missing java installs")
         return
     end
+
     local config = {
         -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
         cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
@@ -1121,6 +1125,7 @@ LoadJDTLSServer = function()
             }
         }
     }
+
     require('jdtls').start_or_attach(config)
 
     -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
@@ -1518,6 +1523,7 @@ if not vim.env.VIM_NOPLUG then
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
+        -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
         { "folke/noice.nvim", event = "VeryLazy", opts = { },
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

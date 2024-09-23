@@ -1,11 +1,13 @@
 # MARKDOWN/JIRA/MEDIAWIKI CHEATSHEET
 
 ## MARKDOWN
-- https://en.wikipedia.org/wiki/Markdown
+- invented by John Gruber in 2004
+    - very original spec: https://daringfireball.net/projects/markdown
+- in 2014 official spec CommonMark made: https://commonmark.org/
+- see https://en.wikipedia.org/wiki/Markdown
 - https://www.markdownguide.org/basic-syntax/
-- very original spec: https://daringfireball.net/projects/markdown
-- original md: https://commonmark.org/
 - github flavored md: https://github.github.com/gfm/
+    - adds tables, fenced code block highlighting, and more
 - https://devhints.io/markdown
 - hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown
 

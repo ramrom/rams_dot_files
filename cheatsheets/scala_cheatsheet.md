@@ -193,7 +193,7 @@ a.isInstanceOf[Int]     // returns false
 - good martin example on for comprehensions: https://www.artima.com/pins1ed/for-expressions-revisited.html
     - general form: `for ( seq ) yield expr`, where `seq` can be a generator, definition, or filter
 - generator: `for (i <- 1 until 3) yield i` -> returns `Vector(1,2,3)`
-### LOOPS
+### REGULAR LOOPS
 - `for (i <- 1 until 3) println(i)`  - no `yield` makes this like a regular for loop
     - `for (i <- 1 until 3) yield println(i)`  - with `yield` this returns a `List((),(),())`
 - `for (i <- List(1,2,3)) println(i)`
