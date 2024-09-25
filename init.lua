@@ -364,7 +364,7 @@ TmuxPaneRun = function(cmd)
 end
 
 RunAction = function(arg)
-    curftype = vim.bo.filetype
+    local curftype = vim.bo.filetype
     if arg == "exe" then
         if curftype == "rust" then
             TmuxPaneRun("cargo run")
@@ -961,6 +961,8 @@ LoadScalaMetals = function()
     metals_config = require("metals").bare_config()
 
     metals_config.settings = {
+        -- NOTE: per one metals log, scala 2.13.6 last metals support 1.3.0, but fails when i try no compliaton :(
+        -- serverVersion = '1.3.5',
         verboseCompilation = true,
         inlayHints = {
             showImplicitArguments = { enable = true },
@@ -1087,7 +1089,7 @@ end
 
 -- jdtls lang server is a java17 app itself, make sure JAVA_HOME of shell is set to java17
 LoadJDTLSServer = function()
-    JavaInstalls = {
+    local JavaInstalls = {
         {
             name = "JavaSE-1.8",
             path = "~/.sdkman/candidates/java/8.0.345-zulu"
@@ -1153,7 +1155,7 @@ LoadKotlinLSP = function()
     require'lspconfig'.kotlin_language_server.setup{
         cmd = { "kotlin-language-server" },
         filetypes = { "kotlin", "kt" },
-        root_dir = require("lspconfig/util").root_pattern("settings.gradle")
+        root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts")
     }
 end
 
@@ -1441,6 +1443,7 @@ SetMetalsKeymaps = function()
     vim.keymap.set("n", "gjd", "<cmd>MetalsGotoSuperMethod<CR>")
     vim.keymap.set("n", "gll", "<cmd>MetalsToggleLogs<CR>")
     vim.keymap.set("n", "gli", "<cmd>MetalsInfo<CR>")
+    vim.keymap.set("n", "glI", "<cmd>MetalsRunDoctor<CR>")
     vim.keymap.set("n", "glst", "<cmd>MetalsStartServer<CR>")
     vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
     vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")

@@ -57,6 +57,7 @@
     later   // prints "hi" and assigns 3 to later
     lazy val now = { println("hi"); 3 }  // prints "hi" and assigns 3 to now
     ```
+- `def` - keyword to define a function
 - Trait - cant be instantiated directly
     - a class can implement MANY traits
     - can NOT specify a constructor parameter
@@ -365,6 +366,10 @@ i.next       // throw NoSuchElementException
     - `val a: Either[Int, Int] = Left(1); a..map { x => x + 1 }   # returns Left(1)`
 - `cond` - nice if/else sugar, `Left` if `false`, `Right` if `true`
     - `Either.cond(1 == 2, "right", "left")` return `Left("left")`
+- `getOrElse(arg)` - return Right value or the given arg if it's a Left value
+    - `Right(12).getOrElse(17)` -> returns 12
+    - `Left(12).getOrElse(17)`  -> returns 17
+- `left` - left projection, Either becomes left-biased instead of right-biased
 ### Option
 - `flatMap`/`map` operate on `Some` and pass on `None`
 - `foo.getOrElse(2)` - if `foo` is `Some(1)` returns `1`, if `None` returns `2`

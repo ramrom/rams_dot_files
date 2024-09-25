@@ -13,7 +13,7 @@
 - AVC(H.264, aka MPEG-4 part 10)
     - uses integer DCT 4x4 and 8x8 blocks
 
-## PHONE STUFF
+## MOBILE STUFF
 - E.164 is the international telephone numbering plan that ensures each device on the PSTN has globally unique number.
     - format is `+` + (country code) + (number in country, for US 10digit area-code+ph#)
 - https://www.twilio.com/docs/glossary/what-e164
@@ -23,6 +23,11 @@
     - some iphone supports RCS
     - google voice as of 2023 doesn't have RCS
 - iMessage - next gen by Apple to replace SMS/MMS
+- SS7 - https://en.wikipedia.org/wiki/Signalling_System_No._7
+    - protocol mobile operators use to talk to each other
+- ICCID - each SIM's unique identifier
+- IMEI - International Mobile Equipment Identity, unique ID for a device globally
+    - similar to what serial number does, but SN is manufacturer specific
 
 ## PROCESS SIGNALS
 - most official definition - https://pubs.opengroup.org/onlinepubs/009695399/basedefs/signal.h.html

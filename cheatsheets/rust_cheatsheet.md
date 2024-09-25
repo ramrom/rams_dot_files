@@ -831,7 +831,9 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - [crossterm](https://github.com/crossterm-rs/crossterm) - lib for ANSI codes
     - [colored](https://lib.rs/crates/colored) - good ANSI terminal color lib for strings
     - [prettytable-rs](https://lib.rs/crates/prettytable-rs) - pprint tables to terminal
-- pingora - a http proxy that cloudflare wrote b/c nginx *was too slow!* (pingora uses a 1/3 of cpu and memory as nginx)
+- [pingora](https://github.com/cloudflare/pingora) - a framework for building networking components
+    - cloudflare wrote it b/c nginx *was too inefficient!* (pingora uses a 1/3 of cpu and memory as nginx)
+        - specifically [river](https://github.com/memorysafety/river) is a proxy built on pingora to replace nginx
 - [vaultwarden](https://github.com/dani-garcia/vaultwarden) - bitwarden server written in rust!
 - [rusttls](https://github.com/rustls/rustls) - rust implementation of TLS
 

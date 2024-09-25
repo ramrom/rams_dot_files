@@ -1,4 +1,6 @@
 # VIM
+- OG `vi` invented by bill joy in 1970s
+- `vim` invented by Bram Moolenaar in 1988, `vim` kinda short for `Vi IMitation`
 - good resource on learning vim - http://vimcasts.org
     - feb27-24 the above line with `vim:` instead of `vim -` will cause neovim(not vim) to try to read the hyperlink somehow... wtf
 - official neovim docs: https://neovim.io/doc/

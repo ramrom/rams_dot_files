@@ -74,6 +74,10 @@
 - more for scripting and rapid prototyping
 - not really a build tool, can easily specify scala version and jvm version
 
+## COURSIER
+- pure scala written artifact fetcher
+- on osx coursier caches is located in `~/Library/Caches/Coursier/`
+
 ## SBT
 - the main tool used in scala projects
 - files
