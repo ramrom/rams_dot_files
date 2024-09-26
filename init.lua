@@ -957,6 +957,7 @@ LoadBQF = function()
 end
 
 ------------------- SCALA METALS -----------------------------
+-- NOTE: sept2024 - needs java 11 or 17 by OpenJDK or Oracle
 LoadScalaMetals = function()
     metals_config = require("metals").bare_config()
 
@@ -1150,8 +1151,20 @@ end
 ------------- KOTLIN LSP -------------------------------------
 -- lang server - https://github.com/fwcd/kotlin-language-server
 
+-- verify java is 21
+ValidateKotlinJavaDep = function()
+    local true_java = vim.fn.resolve(vim.env.JAVA_HOME)  -- follow symbolic links, sdkman sets JAVA_HOME to symlink to real java
+    print("JAVA_HOME: " .. true_java)
+    if (not string.find(true_java, "java/21%.")) then
+        print("DID NOT DETECT JAVA 21 in JAVA_HOME, aborting loading kotlin LSP")
+        return false
+    end
+    return true
+end
+
 -- NOTE: mar2024 - brew install needed JVM 21 installed for the server to start
 LoadKotlinLSP = function()
+    -- if (not ValidateKotlinJavaDep()) then return end
     require'lspconfig'.kotlin_language_server.setup{
         cmd = { "kotlin-language-server" },
         filetypes = { "kotlin", "kt" },
@@ -1179,10 +1192,17 @@ end
 LoadLSPConfig = function()
     -- LoadLuaLSP()
     -- LoadRubyLSP()
-    LoadGroovyLSP()
     LoadRustLSP() 
     LoadGolangLSP()
     LoadKotlinLSP()
+    LoadGroovyLSP()
+
+    ClearLspLog()
+    -- level 0-5, TRACE=0, 5=OFF
+    if (vim.env.LSP_LL) then
+        vim.lsp.set_log_level(tonumber(vim.env.LSP_LL));
+        print("log level set to: ".. vim.lsp.log.get_level());
+    end
 end
 
 --------------------------------------------------------------------------------------------------------
@@ -1369,6 +1389,7 @@ SetLSPKeymaps = function()
 
     -- LSP CONFIGURATION COMMANDS
     vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
+    vim.keymap.set("n", "glL", "<cmd>lua vim.fn.setreg('+', vim.lsp.get_log_path())<CR>")
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")

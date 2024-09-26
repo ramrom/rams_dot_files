@@ -80,6 +80,8 @@
 - sourcing external files
     - vimscript, sourcing lua code: `:lua require('some-lua-code')`
     - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
+    - use `dofile` if you want to constantly change the same file and run the new code
+        - e.g. in same dir as neovim session, create file `foo.lua` and in nvim run `lua dofile("foo.lua")`
 - run external process
     - using `vim.uv.spawn` 
         - pre 0.10.x - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
@@ -90,6 +92,8 @@
 - get OS name
     - `:lua print(vim.loop.os_uname().sysname)`
     - `:lua if vim.fn.has('Linux') then print 'has linux' end`
+- copy stuff to system clipboard progrmatically
+    - `lua vim.fn.setreg('+', "foobar")` - the `+` register generally maps system clipboard
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
@@ -663,6 +667,7 @@ ctrl-va] - visual block select all text of "[]" block
 - "+p - paste from sys clipboard
 - "*p - paste from sys clipboard
 - https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+- `setreg('a', "dude")` - programattically set register `a` to value `dude`
 
 ## JUMP LIST
 things that add to jump list:

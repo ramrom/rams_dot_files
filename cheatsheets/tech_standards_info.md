@@ -487,7 +487,7 @@
 - DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
 - extension: tree view protocol
 - extension: decoration protocol, for displaying non-editable text
-    - e.g. inlay hints
+    - e.g. inlay hints, dignostic virtual text
 - Scala Metals - language server that uses scalameta library at it's core
     - scalameta uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
     - a semanticDB is constructed, which powers gotodef, findrefs, etc

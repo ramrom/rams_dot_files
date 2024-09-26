@@ -159,6 +159,15 @@ foo = function(x) return x end      -- same as above
     - comparison: `>` -> `__gt`, `<` -> `__lt`, `=` -> `__eq`
     - other: `__tostring`, `__index`
 
+## STRINGS
+- patterns and character classes for finding substring - https://www.lua.org/pil/20.2.html
+```lua
+s="hi there. dude"
+s.find(s, "th")   -- will return start and end index of substring if found, nil otherwise
+s.find(s, "d.")   -- `.` is wildcard for any single charater, looks for substring start with `d` and any one char after
+s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
+```
+
 ## LIBRARIES
 - build in `require` method is main way to load a external file and it's modules
 - see https://www.lua.org/pil/8.1.html
@@ -180,6 +189,7 @@ foo = function(x) return x end      -- same as above
     - `"str"` -> `"string"`, `nil`->`"nil"`, `false`->`"false"`, `{}` -> `"table"`, `function() end` -> `"function"`
 - pretty print a table
     - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
+- `tonumber` - convert string to number
 
 ## CONCURRENCY
 - lua has coroutines, it is fundamental type, a cooperatively scheduled conncurent primitive

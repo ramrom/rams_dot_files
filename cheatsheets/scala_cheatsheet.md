@@ -137,14 +137,17 @@
 - essentially a singleton, only one instance
     - `class Foo(i: Int) { ... }; object Foo { ... }`
 - companion class and companion object can access each others private members
-- defining `apply` method lets you instantiate companion class without `new` keyword
-    - `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
+- `apply` - can call companion object w/o specifying `apply`
+    - e.g. `val a = Foo("dude")` compiles to `val a = Foo.apply("dude")`
+    - main use it to use method to instantiate companion class without `new` keyword
+    - function overload `apply` for many constructors
 - CASE OBJECT - like companion object but is serializable, has hashCode method, has toString method
 ### CASE CLASS
 - similar to Java's Record types
 - e.g. `case class Foo(i: Int, s: String)`
 - constructor params are `val`s by default
 - get a default `apply` and `unapply` automatically defined
+    - `apply` method calls the default constructor
     - pattern matching needs `unapply` defined if you want to match on fields
 - `toString`, `equal`, and `hashcode` methods auto-implemented and overridden
     - `equal` will test if content of two objects are the same, not identity
@@ -161,13 +164,24 @@
 ### FUNCTIONS
 - partial application - can pass subset of arguments to function invocation, then pass rest in later
     - e.g. `def foo(x: Int, y: Int): Int = { x + y}; foo(3, _)` -> this return a `Int => Int` function
-- call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
-- repeated arguments, `*` identifier, e.g. `def foo(a: String*)`, arg `a` here is treated as an array
+- variadic(repeated) arguments, postfix `*` identifier
+    - e.g. `def foo(a: String*) = { for( arg <- args ){ println("Arg: " + arg) }}; foo("hi","there"); foo("onearg")`
+        - arg `a` here is treated as an array
     - if we want to pass in `List` type, need to use splat operator to convert it
         - e.g. `val mylist = List("a","b"); foo(mylist:_*)`
     - this is similar to varargs feature in Java
-- variadic arguments: type with postfix `*`
-    - e.g. `def foo(a: String*) = { for( arg <- args ){ println("Arg: " + arg) }}; foo("hi","there"); foo("onearg")`
+- call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
+### ANONYMOUS FUNCTIONS
+```scala
+// `a` here is actually a object with an `apply` function defined
+// really defined Function[Int, Int] class
+val a = (x: Int) => x * 2
+a(3)        // returns 6
+a.apply(3)  // returns 6
+
+val a = (x: Int, y: (i: Int) => 10 * i) => y(x)    // anon function with a argument taking an anon function
+a(3)    // returns 30
+```
 ### INTROSPECTION
 ```scala
 val a: Any = "hi"
