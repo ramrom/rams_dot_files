@@ -28,10 +28,13 @@
 ## RUNTIME
 `/usr/libexec/java_home -V`
     - see all jvm version installed
-- set JAVA_HOME env var to a specific jvm
-    ```sh
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.6.0_65-b14-462)
-    ```
+- BUILDPATH - he list of all the resources required to build a project, including source files, class files, libs, and other deps
+- CLASSPATH
+    - an env var used by JVM to locate and load classes for a java program at runtime
+    - `java -classpath /path/to/class/files MyProgram`
+    - `java -classpath /path/to/classes:/path/to/lib.jar MyProgram` - can specify many locations using `:` seperation
+- `JAVA_HOME` - env var that specificies where the JRE is installed
+    - `export JAVA_HOME=$(/usr/libexec/java_home -v 1.6.0_65-b14-462)`
 - identical paths and names in two jars, e.g. com.bar.Foo class defined in jar1 and jar2
     - class finding is generally done by `java.lang.ClassLoader.findClass`
         - generally every frameworks implementes their own strategy

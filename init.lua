@@ -195,6 +195,11 @@ ClearLspLog = function()
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
 
+PrintCurrentJava = function()
+    local true_java = vim.fn.resolve(vim.env.JAVA_HOME)  -- follow symbolic links, sdkman sets JAVA_HOME to symlink to real java
+    print("real JAVA_HOME: " .. true_java)
+end
+
 CycleNvimTreeSortBy = function()
     if NvimTreeConfig.sort_by == 'name' then
         NvimTreeConfig.sort_by = 'extension'
@@ -1151,24 +1156,13 @@ end
 ------------- KOTLIN LSP -------------------------------------
 -- lang server - https://github.com/fwcd/kotlin-language-server
 
--- verify java is 21
-ValidateKotlinJavaDep = function()
-    local true_java = vim.fn.resolve(vim.env.JAVA_HOME)  -- follow symbolic links, sdkman sets JAVA_HOME to symlink to real java
-    print("JAVA_HOME: " .. true_java)
-    if (not string.find(true_java, "java/21%.")) then
-        print("DID NOT DETECT JAVA 21 in JAVA_HOME, aborting loading kotlin LSP")
-        return false
-    end
-    return true
-end
-
 -- NOTE: mar2024 - brew install needed JVM 21 installed for the server to start
 -- NOTE: a `kls_database.db` file and `bin` dir at root are created for metadata, should add to gitignore
 LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
     require('lspconfig').kotlin_language_server.setup{
-        -- on_attach = function() print("kot attach") end,
-        cmd = { "kotlin-language-server" },
+        -- cmd = { "kotlin-language-server" },
+        cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
         filetypes = { "kotlin", "kt" },
         root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts")
     }
@@ -1359,6 +1353,7 @@ vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
 
 -------------- OTHER
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
+vim.keymap.set("n", "<leader>wJ", "<cmd>lua PrintCurrentJava()<CR>")
 vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
 vim.keymap.set("n", "<leader>wb", "<cmd>:Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
 vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
