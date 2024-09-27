@@ -149,7 +149,7 @@ foo = function(x) return x end      -- same as above
     b = nil                 -- now table has zero references to it, memory manager will garbage collect table
     ```
 ### METATABLE
-- a metatable is a way for tables to "inherit" methods/behaviour and data
+- a metatable is a way for tables to "inherit" methods/behaviour and data, see https://www.lua.org/pil/13.html
 - `setmetatable` is a function build into the language, lets you override behaviour of other tables
     - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
 - OOP style can be simulated with the `:` and `setmetatable` features

@@ -1032,7 +1032,7 @@ end
 ---------------- RUST LSP ---------------------------
 -- config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
 LoadRustLSP = function()
-    require'lspconfig'.rust_analyzer.setup({
+    require('lspconfig').rust_analyzer.setup({
         settings = {
             ["rust-analyzer"] = {
                 imports = {
@@ -1142,7 +1142,7 @@ end
 ---------------- GROOVY LSP -------------------------------------
 -- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#groovyls
 LoadGroovyLSP = function()
-    require'lspconfig'.groovyls.setup{
+    require('lspconfig').groovyls.setup{
         cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
     }
 end
@@ -1163,9 +1163,11 @@ ValidateKotlinJavaDep = function()
 end
 
 -- NOTE: mar2024 - brew install needed JVM 21 installed for the server to start
+-- NOTE: a `kls_database.db` file and `bin` dir at root are created for metadata, should add to gitignore
 LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
-    require'lspconfig'.kotlin_language_server.setup{
+    require('lspconfig').kotlin_language_server.setup{
+        -- on_attach = function() print("kot attach") end,
         cmd = { "kotlin-language-server" },
         filetypes = { "kotlin", "kt" },
         root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts")
@@ -1176,7 +1178,7 @@ end
 -- lang server - https://shopify.github.io/ruby-lsp/
 -- TODO: also check out rails LSP: https://github.com/Shopify/ruby-lsp-rails
 LoadRubyLSP = function()
-    require'lspconfig'.ruby_lsp.setup{ 
+    require('lspconfig').ruby_lsp.setup{ 
         -- below are default opts
 
         -- cmd = { "ruby-lsp" },
@@ -1196,6 +1198,7 @@ LoadLSPConfig = function()
     LoadGolangLSP()
     LoadKotlinLSP()
     LoadGroovyLSP()
+    -- vim.api.nvim_create_autocmd("VimEnter", { callback = function() print("hi") end, })
 
     ClearLspLog()
     -- level 0-5, TRACE=0, 5=OFF
@@ -1386,7 +1389,6 @@ vim.api.nvim_create_autocmd(
 ----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 SetLSPKeymaps = function()
-
     -- LSP CONFIGURATION COMMANDS
     vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
     vim.keymap.set("n", "glL", "<cmd>lua vim.fn.setreg('+', vim.lsp.get_log_path())<CR>")
@@ -1479,82 +1481,92 @@ end
 ----------------------------------- -------------------------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
-    lazypath, })
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
 if not vim.env.VIM_NOPLUG then
     require("lazy").setup({
-        'nvim-lua/plenary.nvim',
-        { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
-        { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
-        { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
-            build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
-        'nvim-tree/nvim-web-devicons',
-        'tpope/vim-surround',
-        'tpope/vim-repeat',
+        spec = {
+            'nvim-lua/plenary.nvim',
+            { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
+            { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
+            { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
+                build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+            'nvim-tree/nvim-web-devicons',
+            'tpope/vim-surround',
+            'tpope/vim-repeat',
 
-        --- COLORSCHEME
-        { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
+            --- COLORSCHEME
+            { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
 
-        --- GIT
-        { 'tpope/vim-fugitive', event = 'VeryLazy' },
-            -- rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
-        { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' }, event = 'VeryLazy' },
-        { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
+            --- GIT
+            { 'tpope/vim-fugitive', event = 'VeryLazy' },
+                -- rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
+            { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' }, event = 'VeryLazy' },
+            { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
-        --- FUZZY FIND
-        { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
+            --- FUZZY FIND
+            { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
-        -- MARKDOWN
-        { "iamcco/markdown-preview.nvim",
-            cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, ft = { "markdown" },
-            build = function() vim.fn["mkdp#util#install"]() end,
-        },
-        -- { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
+            -- MARKDOWN
+            { "iamcco/markdown-preview.nvim",
+                cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, ft = { "markdown" },
+                build = function() vim.fn["mkdp#util#install"]() end,
+            },
+            -- { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
 
-        ----- LSP STUFF
-        { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
-        { 'mfussenegger/nvim-dap', config = LoadDAP },
-        -- 'leoluz/nvim-dap-go',
-        { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
-        { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
-            config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
+            ----- LSP STUFF
+            { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
+            { 'mfussenegger/nvim-dap', config = LoadDAP },
+            -- 'leoluz/nvim-dap-go',
+            { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
+            { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
+            { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
+                config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
-        -- AUTOCOMPLETE
-        { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'VeryLazy',
-            dependencies = { 'L3MON4D3/LuaSnip' } },
-        { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
-        { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
-        { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
-        { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
+            -- AUTOCOMPLETE
+            { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, dependencies = { 'L3MON4D3/LuaSnip' }, event = 'VeryLazy' },
+            { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
+            { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
+            { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
+            { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
 
-        { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair },
-        { 'abecodes/tabout.nvim',
-            lazy = false, config = LoadTabOut, cond = not vim.env.NO_TAB, priority = 1000,
-            dependencies = { "nvim-treesitter/nvim-treesitter", },
-            event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
-        },
+            { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair },
+            { 'abecodes/tabout.nvim',
+                lazy = false, config = LoadTabOut, cond = not vim.env.NO_TAB, priority = 1000,
+                dependencies = { "nvim-treesitter/nvim-treesitter", },
+                event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
+            },
 
-        -- SNIPPETS
-        { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },
-        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
-        { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
+            -- SNIPPETS
+            { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },
+            { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
+            { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
 
-        -- OTHER
-        { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
-        { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
-        -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
-        { "folke/noice.nvim", event = "VeryLazy", opts = { },
-            dependencies = {
-                "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-                "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
-            }, config = LoadNoice, cond = not vim.env.NO_NOICE, },
-        { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = FlashOpts, },
-        { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
-        { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
+            -- OTHER
+            { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
+            { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
+            -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
+            { "folke/noice.nvim", event = "VeryLazy", opts = { },
+                dependencies = {
+                    "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+                    "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise
+                }, config = LoadNoice, cond = not vim.env.NO_NOICE, },
+            { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = FlashOpts, },
+            { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
+            { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
+        }
     })
 end
+

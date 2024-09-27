@@ -122,7 +122,9 @@
 #### PACKER
 - pure lua plugin manager
 #### NVIM LAZY
+- https://lazy.folke.io/
 - pure lua plugin manager, newer and a bit faster than packer
+- plugins can be configed to lazy load based on events and condtions
 #### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin

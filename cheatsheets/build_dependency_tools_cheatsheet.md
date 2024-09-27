@@ -69,12 +69,8 @@
 ## LSP
 - see [LSP section in this doc](tech_standards_info.md)
 
-## SCALA CLI
-- https://scala-cli.virtuslab.org/
-- more for scripting and rapid prototyping
-- not really a build tool, can easily specify scala version and jvm version
-
 ## COURSIER
+- https://get-coursier.io/
 - pure scala written artifact fetcher
 - on osx coursier caches is located in `~/Library/Caches/Coursier/`
 

@@ -14,6 +14,12 @@
 - good web playground: https://scastie.scala-lang.org/
 - haoyi's 2020 blog on scala's future - https://www.lihaoyi.com/post/TheDeathofHypeWhatsNextforScala.html
 
+## BUILD TOOLS
+- main is sbt, but also mill and bloop
+- modern systems use coursier for artifact fetching
+- see [build systems](build_dependency_tools_cheatsheet.md)
+
+
 ## JAVA COMPATIBILITY
 - some good notes: https://docs.scala-lang.org/scala3/book/interacting-with-java.html
     - possible to use scala traits in java and java interfaces in scala
@@ -580,6 +586,10 @@ writer.close()
     - then can run script like so `scala Hello.scala arg1`
 - exit a program: `System.exit(1)` - exit with code 1
 
+## SCALA CLI
+- https://scala-cli.virtuslab.org/
+- more for scripting and rapid prototyping
+- not really a build tool, can easily specify scala version and jvm version
 
 ## AMMONITE
 - https://ammonite.io/
