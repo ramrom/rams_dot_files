@@ -195,11 +195,6 @@ ClearLspLog = function()
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
 
-PrintCurrentJava = function()
-    local true_java = vim.fn.resolve(vim.env.JAVA_HOME)  -- follow symbolic links, sdkman sets JAVA_HOME to symlink to real java
-    print("real JAVA_HOME: " .. true_java)
-end
-
 CycleNvimTreeSortBy = function()
     if NvimTreeConfig.sort_by == 'name' then
         NvimTreeConfig.sort_by = 'extension'
@@ -962,13 +957,26 @@ LoadBQF = function()
 end
 
 ------------------- SCALA METALS -----------------------------
+--- verify java is 21
+ValidateJavaVersion = function(javaVersion)
+    local true_java = vim.fn.resolve(vim.env.JAVA_HOME)  -- follow symbolic links, sdkman sets JAVA_HOME to symlink to real java
+    print("JAVA_HOME: " .. true_java)
+    if (not string.find(true_java, "java/" .. javaVersion .. "%.")) then
+        return false
+    end
+    return true
+end
+
 -- NOTE: sept2024 - needs java 11 or 17 by OpenJDK or Oracle
 LoadScalaMetals = function()
     metals_config = require("metals").bare_config()
 
+    local res = ValidateJavaVersion("17")
+    if (not res) then print("DID NOT DETECT JAVA " .. "17" .. " in JAVA_HOME, aborting loading metals"); return end
+
     metals_config.settings = {
         -- NOTE: per one metals log, scala 2.13.6 last metals support 1.3.0, but fails when i try no compliaton :(
-        -- serverVersion = '1.3.5',
+        -- serverVersion = '0.11.10',  -- logs say scala 2.13.1 is last supported by 0.11.10
         verboseCompilation = true,
         inlayHints = {
             showImplicitArguments = { enable = true },
@@ -1353,7 +1361,6 @@ vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
 
 -------------- OTHER
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
-vim.keymap.set("n", "<leader>wJ", "<cmd>lua PrintCurrentJava()<CR>")
 vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
 vim.keymap.set("n", "<leader>wb", "<cmd>:Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
 vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
