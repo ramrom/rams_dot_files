@@ -977,6 +977,7 @@ LoadScalaMetals = function()
     metals_config.settings = {
         -- NOTE: per one metals log, scala 2.13.6 last metals support 1.3.0, but fails when i try no compliaton :(
         -- serverVersion = '0.11.10',  -- logs say scala 2.13.1 is last supported by 0.11.10
+        -- javaHome = vim.env.HOME .. "/.sdkman/candidates/java/8.0.345-zulu",
         verboseCompilation = true,
         inlayHints = {
             showImplicitArguments = { enable = true },
@@ -999,8 +1000,8 @@ LoadScalaMetals = function()
         group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
     })
 
-    vim.opt.shortmess:remove('F')   -- Ensure autocmd works for filetype
-    vim.opt.shortmess:append('c')   -- Avoid showing extra message when using completion
+    vim.opt_global.shortmess:remove('F')   -- Ensure autocmd works for filetype
+    vim.opt_global.shortmess:append('c')   -- Avoid showing extra message when using completion
 
     -- for telescope
     -- vim.keymap.set('n', '<leader>fm', '<cmd>Telescope metals commands<cr>')
@@ -1393,7 +1394,8 @@ vim.api.nvim_create_autocmd(
 SetLSPKeymaps = function()
     -- LSP CONFIGURATION COMMANDS
     vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
-    vim.keymap.set("n", "glL", "<cmd>lua vim.fn.setreg('+', vim.lsp.get_log_path())<CR>")
+    vim.keymap.set("n", "glL", "<cmd>lua print('LOG PATH: ' .. vim.lsp.get_log_path()); vim.fn.setreg('+', vim.lsp.get_log_path())<CR>",
+        { desc = "print log path and copy to sys clipboard" })
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")

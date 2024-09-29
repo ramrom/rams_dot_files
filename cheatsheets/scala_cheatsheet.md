@@ -18,7 +18,7 @@
 - main is sbt, but also mill and bloop
 - modern systems use coursier for artifact fetching
 - see [build systems](build_dependency_tools_cheatsheet.md)
-
+- scala metals - main robust LSP for scala (see build system above)
 
 ## JAVA COMPATIBILITY
 - some good notes: https://docs.scala-lang.org/scala3/book/interacting-with-java.html

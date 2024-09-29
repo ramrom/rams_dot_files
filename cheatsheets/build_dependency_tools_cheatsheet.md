@@ -1,4 +1,5 @@
 # BUILD DEPENDENCY TOOLS CHEATSHEET
+- transitive dependency - if project deps on lib A and lib A deps on lib B, then project transitively deps on lib B
 
 ## MAKE
 - oldest build tool, was used for java but really focused on c/c++ ecosystem
@@ -67,7 +68,34 @@
     - BSP **reccomended** (used by metals and intellij)
 
 ## LSP
-- see [LSP section in this doc](tech_standards_info.md)
+- language servers - https://langserver.org/
+    - introduced in 2016 for microsoft VSC, then made an open standard
+- uses JSON RPC for message passing b/w client and server
+- DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
+- extension: tree view protocol
+- extension: decoration protocol, for displaying non-editable text
+    - e.g. inlay hints, dignostic virtual text
+### BSP
+- build server protocol, abstracts the build tool, complementary to LSP
+- see https://build-server-protocol.github.io/
+- LSP server can be a _client_ to build server using BSP to talk to it
+- editor/lsp-client (LSP)-> language server (BSP)-> build tool
+    - editor sends file changed event in LSP, lang serv says compile in BSP to build tool, bld tool compiles and returns diagnostic
+- bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
+    - sbt adds BSP support in 1.4.0
+### SCALA METALS 
+- a LSP built on top of [scala meta library](https://scalameta.org/), METALS = META(scalameta) + L(lsp)
+- language server that uses scalameta library at it's core
+- scalameta uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
+- a semanticDB is constructed, which powers gotodef, findrefs, etc
+- 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/)
+- metals 1.3.x requires java 11 or java 17
+- sept2024 - nvim-metals seems to start the latest metals server that works for that scala ver
+    - e.g. 2.13.6 scala starts 0.11.x
+    
+## IVY
+- [apache ivy](https://ant.apache.org/ivy/) is a dependency fetching and management tool
+- developed along side apache Ant
 
 ## COURSIER
 - https://get-coursier.io/
@@ -76,28 +104,43 @@
 
 ## SBT
 - the main tool used in scala projects
-- files
-    - `build.sbt` -> main project defs
+#### LIBRARY MANAGEMENT
+- https://www.scala-sbt.org/1.x/docs/Library-Management.html
+- [resolver](https://www.scala-sbt.org/1.x/docs/Resolvers.html) -  configuration for repository that contains jars and their dependencies
+    - uses the standard Maven2 repo by default
+- [files/dirs](https://www.scala-sbt.org/1.x/docs/Directories.html)
+    - `build.sbt` -> main project defs, written in a scala based DSL
     - `project/plugins.sbt` -> defines sbt plugins
     - `project/build.properties` -> sbt version, etc
-    - `project/Dependencies.scala` -> list deps, import in `build.sbt`
-- as of `1.3.0` it uses Coursier to fetch artifacts/dependencies
-- `%%` automatically uses scala version, `%` dev must specify
-    - `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
-- get timings of sbt tasks:
-    - time sbt -Dsbt.task.timings=true clean update test
-- sbt update resolves and fetches deps
- sbt "test-only some.path.to.test another.path.to.test"
- sbt "testOnly some.path.to.test another.path.to.test"
- integration tests: `sbt "it:testOnly some.path.to.test another.path.to.test"`
-- use test description filter `sbt 'testOnly *SSO* -- -z "foo bar desc"'`
-   - !!!NOTE!!! the "--z" filter only works with ScalaTest, not PlaySpecification
+    - `project/`  - any `*.scala` and `*.sbt` files are loaded, add helpers here
+        - common convention is have a `Dependencies.scala` file that list deps
+        - since `build.sbt` and these files are scala they need to be compiled first, this is called the `meta-build` (vs `proper-build`)
+        - can go recursive, so `project/project/*.scala`  files get compiled b4 `meta-build`, so it's a `meta-meta-build`
+    - `lib/` - store for unmanaged libraries, all included in classpath for `compile`,`test`,`run`
+- sbt 1.3.0+ uses Coursier to fetch artifacts/dependencies, instead of Ivy
+- artifact format
+    - basic pattern: `libraryDependencies += groupID % artifactID % revision`
+    - `%%` automatically uses scala version, `%` dev must specify
+        - e.g. `"org.scala-tools" % "scala-stm_2.11.1" % "0.3"` equiv to `"org.scala-tools" %% "scala-stm" % "0.3"`
+- `sbt update` resolves and fetches deps
+- conflict manager - entity that handles when dep tree requires 2 different version of same lib
+    - default manager will use latest version
+    - can use `dependencyOverrides` to override/specify a version of a dep
+### OTHER
+- sbt 1.4.0+ has BSP support, see https://www.scala-lang.org/blog/2020/10/27/bsp-in-sbt.html
+- sbt 1.0+ uses [zinc incremental compiler](https://github.com/sbt/zinc), only compiles new changes
+- get timings of sbt tasks
+    - `time sbt -Dsbt.task.timings=true clean update test`
+- Testing
+    - `sbt "test-only some.path.to.test another.path.to.test"`
+    - `sbt "testOnly some.path.to.test another.path.to.test"`
+    - use test description filter `sbt 'testOnly *SSO* -- -z "foo bar desc"'`
+       - _NOTE_ the `-z` filter only works with ScalaTest, not PlaySpecification
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
 - to show evictions: `sbt evicted`
  - to show test deps classpath: `sbt 'show Test/dependencyClasspath'`
     - show order of which jars are loaded for project `Test`
 - `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
-- sbt has BSP support in 1.4.0, see https://www.scala-lang.org/blog/2020/10/27/bsp-in-sbt.html
 - create a new project
     - scala2 - `sbt new scala/hello-world.g8`
     - scala3 - `sbt new scala/scala3.g8`
