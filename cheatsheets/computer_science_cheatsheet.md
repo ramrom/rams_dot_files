@@ -637,9 +637,7 @@ public static void main(String[] args) {
 - https://godbolt.org/ - badass tool to see assembly code compiled by many languages
 
 ## DEPENDENCY MANAGEMENT
-- vendoring - including a 3rd party library direclty into the project without using some dependency management tool to fetch it
-    - convention is to store the library code in the projects `/vendor` dir
-- shading - a technique to allow for multiple versions of the same library to be used in the same project without conflict
+- see [build_dependency_tools_cheatsheet.md]
 
 ## HARDWARE
 - FPGA - field programmable gate arrays

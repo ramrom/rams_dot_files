@@ -58,6 +58,7 @@
 - 0.10 - built-in commenting(vim-commentary), LSP inlay hints 
     - comments: https://github.com/neovim/neovim/pull/28176
 ### LUA
+- see [lua cheatsheet](lua_cheatsheet.mc) for core lua stuff
 - vim settings
     - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
     - `vim.o` is more direct variable access
@@ -75,6 +76,7 @@
 - `vim.lsp` - LSP stuff
 - `vim.loop` - neovim eventloop using libuv
     - replace dby `vim.uv` in 0.10.x
+    - _NOTE_ can NOT call `vim.fn` functions in lua `uv` callbacks, `vim.fn` are all part of the synchronous main C thread
     - user uv's event loop timers to execute callback after x time - https://neovim.io/doc/user/luvref.html#uv_timer_t
         ```lua
         local timer = vim.uv.new_timer()

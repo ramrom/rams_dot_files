@@ -1,7 +1,24 @@
 # UNICODE
 - see https://unicode.org/emoji/charts/full-emoji-list.html
 
+😨  fear
+😱  fear big
+😫  tired
+😠  angry
+😭  cry loud
+😢  cry
+🙁  frown
+😘  face throw kiss
+🤩  grin with stars
+😍  smiley face with heart
+🤪  grin with rasp
+😁  grin big
+😀  grin
+😼  cat with wiry smile
+😏  smirk
+😴  sleepy face
 🌡  thermometer
+💊  pill
 ⚡  high voltage
 🔋  battery
 💻  laptop
@@ -24,11 +41,14 @@
 🔒  locked
 🕉  om
 🗑  wastebasket
-😴  sleepy face
+🍀  clover
+🥊  glove
 💩  poop
 ❤   red heart
+💛  yellow heart
+💜  purple heart
+💔  broken heart
 🙈  see no evil monkey
-👾  asteroid
 ☠   skull
 ✔   check mark
 ✅  green check mark
@@ -37,11 +57,15 @@
 🔥  fire
 ❄   snowflake
 💧  droplet
+🏎  racing car
+🚀  rocker
+👾  asteroid
 ⭐  star
 ☀   sun
 🌓  first quarter moon
-🚀  rocker
-🌎  globe with americas
+🌙  crescent moon
+🌎  earth globe with americas
+🌍  earth with africa
 🍹  tropical drink
 🍺  beer mug
 🍸  cocktail
@@ -54,3 +78,12 @@
 🦖  rex
 🐉  dragon
 🐹  hamster
+🐴  horse face
+🐷  pig face
+🐮  cow face
+🐄  cow
+🐔  chicken
+🐐  goat
+🐶  dog
+🐈  cat
+🐱  cat face

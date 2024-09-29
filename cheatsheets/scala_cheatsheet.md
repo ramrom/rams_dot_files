@@ -667,6 +667,7 @@ writer.close()
 ### SLICK
 - print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
 ### OTHER
+- [scalameta](https://scalameta.org/) - used by scala metals, scalafix metadoc
 - [http4s](https://http4s.org/) - minimal highly FP web framework
     - compiles to Scala.js and Scala Native, uses fs2
 - [requests-scala](https://github.com/com-lihaoyi/requests-scala)

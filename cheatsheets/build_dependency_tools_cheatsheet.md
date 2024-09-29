@@ -1,5 +1,8 @@
 # BUILD DEPENDENCY TOOLS CHEATSHEET
 - transitive dependency - if project deps on lib A and lib A deps on lib B, then project transitively deps on lib B
+- vendoring - including a 3rd party library direclty into the project without using some dependency management tool to fetch it
+    - convention is to store the library code in the projects `/vendor` dir
+- shading - a technique to allow for multiple versions of the same library to be used in the same project without conflict
 
 ## MAKE
 - oldest build tool, was used for java but really focused on c/c++ ecosystem
@@ -52,9 +55,10 @@
 - building blocks are `tasks`, versus ant's `targets` and mavens `phases`
 
 ## BAZEL
-- built by google and open-sourced, for java projects
+- built by google and open-sourced, for java projects, particularly large monorepos
 - does a lot of caching
 - cares a lot about correctness and reliability and performance
+- supports BSP, see https://github.com/JetBrains/hirschgarten
 
 ## MILL
 - for for java/scala projects
@@ -62,10 +66,13 @@
 
 ## BLOOP
 - build server developed by scala center
+- uses zinc for incremental compiling
 - https://scalacenter.github.io/bloop/docs/what-is-bloop
 - supports 2 main protocols
     -  Nailgun server protocol
     - BSP **reccomended** (used by metals and intellij)
+- defines projects via JSON files: https://scalacenter.github.io/bloop/docs/configuration-format/
+- supports importing builds from other build tools like sbt, mill, gradle
 
 ## LSP
 - language servers - https://langserver.org/
@@ -84,15 +91,18 @@
 - bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
     - sbt adds BSP support in 1.4.0
 ### SCALA METALS 
-- a LSP built on top of [scala meta library](https://scalameta.org/), METALS = META(scalameta) + L(lsp)
-- language server that uses scalameta library at it's core
-- scalameta uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
-- a semanticDB is constructed, which powers gotodef, findrefs, etc
-- 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/)
+- a language server built on top of [scala meta library](https://scalameta.org/), METALS = META(scalameta) + LS(language server)
+- scalameta constructs a semanticDB(a open specification), which powers gotodef, findrefs, etc
+    - e.g. files like `FooSourceFile.scala.semanticdb` in BSP's(e.g. `.bloop`) folder
+- metals uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
+- uses scalafix for refactoring
+- 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/) by default
+    - can configure other build servers like sbt itself: https://scalameta.org/metals/docs/build-tools/sbt
 - metals 1.3.x requires java 11 or java 17
 - sept2024 - nvim-metals seems to start the latest metals server that works for that scala ver
     - e.g. 2.13.6 scala starts 0.11.x
-    
+- sept2024 - _NOTE_ for reseting project, make sure `project/.bloop` and `project/project/` dirs deleted for base bloop to install right
+
 ## IVY
 - [apache ivy](https://ant.apache.org/ivy/) is a dependency fetching and management tool
 - developed along side apache Ant
@@ -101,6 +111,9 @@
 - https://get-coursier.io/
 - pure scala written artifact fetcher
 - on osx coursier caches is located in `~/Library/Caches/Coursier/`
+- `coursier install sometool` - to install
+- `coursier uninstall sometool` - remove
+- `coursier list` - list installed apps
 
 ## SBT
 - the main tool used in scala projects

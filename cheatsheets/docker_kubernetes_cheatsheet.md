@@ -30,6 +30,8 @@
 - `docker login foo.com` - login to a docker registry
     - `~/.docker/config.json` will show list of sessions for registries
 ### UNDERLYING TECH
+- `Dockerfile` - a file specifying how to build an image
+    - must have entry point, basically the shell command that will run when container starts
 - image - represents an immutable state
     - it's composed of layers and you cant modify existing layers
     - can create new changes on top of it and save them, this adds a layer, can also create a new image that points to a layer

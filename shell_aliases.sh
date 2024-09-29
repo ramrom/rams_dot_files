@@ -2,6 +2,7 @@
 
 # VI
 alias v='nvim'
+alias vnls='NO_LSP=1 nvim'
 alias vf='NVIM_APPNAME=nvimfire nvim'
 alias vn='VIM_NOPLUG=1 v'    # simple, dont load plugins
 alias vnn='v -u NONE'        # super simple, dont even load my vimrc

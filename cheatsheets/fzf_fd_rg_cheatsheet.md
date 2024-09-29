@@ -7,7 +7,8 @@
 - uses rust regex, it's perl-like: https://docs.rs/regex/1.3.9/regex/bytes/index.html#syntax
 - rg vs ag vs ack vs grep: https://beyondgrep.com/feature-comparison/
     - ripgrep author analysis - https://blog.burntsushi.net/ripgrep/
-
+- `rg 'foo' somefile.txt` - basic syntax, regex PATTERN should be in single quotes
+- `rg 'foo\.com' somefile.txt` - like regexes use `\` for escaping a character
 - ignoring files to search
     - search hidden: `rg --hidden`
     - u:`--no-ingore`, uu:`--no-ignore --hidden`, uuu:`--no-ignore --hidden --binary`
@@ -21,7 +22,7 @@
 - max dir deptt `rg --max-depth=1 foo` (search `foo` only 1 dir deep)
 - would search in file /bar/befooyar/dude/wut
     - `rg -g '**/*foo*/**' pattern`
-- -o to to only return what matched, and -r to replace what was matched with capture groups or whatever
+- `-o` to to only return what matched, and -r to replace what was matched with capture groups or whatever
     `echo "foo-bar baz" | rg -o ".*-(b..).*$" -r 'yar'`
         - will return "yar"
 - use `-g` globs to search specific files and dirs

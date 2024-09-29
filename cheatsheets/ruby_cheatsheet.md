@@ -19,7 +19,10 @@
 - the way to package libraries and code
 - `gem install --user-install somegem` - install as user (root is default)
 ### BUNDLER
+- https://bundler.io/
 - gem that lets you specify project dependencies
+- `Gemfile` - main file where u declare deps
+- `Gemfile.lock` - exact versions or every gem to use based on last bundle on `Gemfile`
 
 ## VARIABLES
 ### SCOPE
