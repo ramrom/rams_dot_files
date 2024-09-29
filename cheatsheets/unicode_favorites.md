@@ -3,11 +3,13 @@
 
 🤯  shock, mind-blown
 🤢  nausea
+🤮  face with vomit
 🤣  laugh
 😨  fear
 😱  fear big
 😫  tired
 😠  angry
+😡  enraged face
 😭  cry loud
 😢  cry
 🙁  frown
@@ -15,6 +17,7 @@
 🤩  grin with stars
 😍  smiley face with heart
 🤪  grin with rasp
+😛  facew with tongue stuck out
 😁  grin big
 😀  grin
 😼  cat with wiry smile
@@ -23,6 +26,9 @@
 🌡  thermometer
 💊  pill
 ⚡  high voltage
+🌩  cloud with lightning
+🌧  cloud with rain
+🚦  traffic light
 🔋  battery
 💻  laptop
 🖥  desktop computer
@@ -51,8 +57,12 @@
 💛  yellow heart
 💜  purple heart
 💔  broken heart
-🙈  see no evil monkey
-☠   skull
+⚔   crossed swords
+💣  bomb
+🔫  pistol
+☢   radioactivity
+💀  skull
+☠   skull and crossbone
 ✔   check mark
 ✅  green check mark
 ❌  cross mark
@@ -60,13 +70,18 @@
 🔥  fire
 ❄   snowflake
 💧  droplet
+🛩  airplane
+⛵  sail boat
 🏎  racing car
 🚀  rocker
+🏠  house
 👾  asteroid
 ⭐  star
+🌞  sun with face
 ☀   sun
 🌓  first quarter moon
 🌙  crescent moon
+🏝  island
 🌎  earth globe with americas
 🌍  earth with africa
 🍹  tropical drink
@@ -77,6 +92,12 @@
 🍖  meat on bone
 🍕  pizza
 🍉  watermelon
+🍔  burger
+🍣  sushi
+🥒  cucumber
+🍑  peach
+🍎  red apple
+🥚  egg
 🐳  whale
 🦖  rex
 🐉  dragon
@@ -90,3 +111,16 @@
 🐶  dog
 🐈  cat
 🐱  cat face
+🙈  see no evil monkey
+👻  ghost
+👽  alien
+🤡  clown
+💯  100 points/percent
+👍  thumbs up
+👎  thumbs down
+🖕  middle finger
+👆  index finger pointed up
+👊  fist
+🙏  folded hands, pray
+💪  bicep
+🦶  foot

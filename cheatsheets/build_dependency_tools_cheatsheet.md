@@ -97,6 +97,7 @@
 - metals uses scala presentation compiler - special compiler just for IDE tooling, it's async/partial/cancellable/fast
 - uses scalafix for refactoring
 - 2024 - uses BSP to talk to [bloop](https://scalacenter.github.io/bloop/) by default
+    - will convert any build system (e.g. `build.sbt`) into bloop JSON definitions automatically
     - can configure other build servers like sbt itself: https://scalameta.org/metals/docs/build-tools/sbt
 - metals 1.3.x requires java 11 or java 17
 - sept2024 - nvim-metals seems to start the latest metals server that works for that scala ver
