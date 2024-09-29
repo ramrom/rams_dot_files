@@ -3,10 +3,11 @@
 # VI
 alias v='nvim'
 alias vnls='NO_LSP=1 nvim'
+alias vnn='NO_NOICE=1 nvim'
 alias vf='NVIM_APPNAME=nvimfire nvim'
-alias vn='VIM_NOPLUG=1 v'    # simple, dont load plugins
-alias vnn='v -u NONE'        # super simple, dont even load my vimrc
-alias ve='NO_NOICE=1 v -e'   # start in Ex mode, disable noice as it interferes
+alias vnoplug='VIM_NOPLUG=1 nvim'    # simple, dont load plugins
+alias vnone='nvim -u NONE'        # super simple, dont even load my vimrc
+alias ve='NO_NOICE=1 nvim -e'   # start in Ex mode, disable noice as it interferes
 alias vs='[ -f MyCurrentVimSession.vim ] && v -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!"'
 alias vdiff='nvim -d'
 

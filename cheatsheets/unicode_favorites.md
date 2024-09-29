@@ -1,6 +1,9 @@
 # UNICODE
 - see https://unicode.org/emoji/charts/full-emoji-list.html
 
+🤯  shock, mind-blown
+🤢  nausea
+🤣  laugh
 😨  fear
 😱  fear big
 😫  tired
