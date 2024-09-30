@@ -158,6 +158,10 @@ foo = function(x) return x end      -- same as above
     - arithmetic: `+` -> `__add`, `-` -> `__sub`, `*` -> `__mul`, and also `__div`, `__unm`, `__pow`, `__concat`
     - comparison: `>` -> `__gt`, `<` -> `__lt`, `=` -> `__eq`
     - other: `__tostring`, `__index`
+- types and metatables
+    - numbers, booleans, and nil don't have a metatable `getmetatable(3)  -- returns nil`
+        - _NOTE_ apparently ou still set a metatable for them tho
+    - every string shares the same metatable
 
 ## STRINGS
 - patterns and character classes for finding substring - https://www.lua.org/pil/20.2.html

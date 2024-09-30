@@ -155,7 +155,18 @@ function foo-bar() {
 - SCOPES
 - bash/zsh and bsd/gnu sh support local scoped variables in a function
     - https://stackoverflow.com/questions/18597697/posix-compliant-way-to-scope-variables-to-a-function-in-a-shell-script
+### IMPORTANT ENVIRONMENT VARIABLES
+- `PATH` - colon seperated list of directories to search for an executable
+- `TERM` - the type of terminal emulation, e.g. `xterm`
+- `EDITOR`- the default editor to use
+- `DISPLAY` - X windows uses this indidate what X window server to connect to
+- `HOME`- location of current users home directory
+- `USER` - name of current user
+- `SHLVL` - bash uses this to indicate number of nested bash shells we're in
+- `SHELL` - many shells set this to the location of the shell bin this is, e.g. `/bin/bash` or `/bin/zsh`
 
+
+## SHELL PROGRAMMING
 ```sh
 local foo=1   # only hold value in scope of current function and called function, once func finishes local var is removed
               # if a called function also declares a `local foo=3`, then it and it's downstream func calls will use 3

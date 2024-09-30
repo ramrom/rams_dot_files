@@ -32,6 +32,8 @@
 - for keymaps, mode definitions https://neovim.io/doc/user/map.html#map-overview
     - `i` insert, `n` normal, `v` visual+select, `x` visual, `o` operator pending, `c` command-line, `t` terminal, `s` select
 - has API that is RPC with messagepack. thus can support server/client models
+    - exposed via `vim.api` main docs: https://neovim.io/doc/user/api.html
+- modern version use `libuv` for async IO and libuv itself is generally multithreaded and uses a thread pool
 ### VERSION HISTORY
 - roadmap: https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
@@ -57,25 +59,35 @@
 - 0.9 - TUI and remote UI
 - 0.10 - built-in commenting(vim-commentary), LSP inlay hints 
     - comments: https://github.com/neovim/neovim/pull/28176
-### LUA
+### LUA 
 - see [lua cheatsheet](lua_cheatsheet.mc) for core lua stuff
 - vim settings
-    - `vim.opt` is wrapper, has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
-    - `vim.o` is more direct variable access
+    - `vim.o` - settings options and is equivalent to VimL's `set`
         - set background `:lua vim.o.background = 'light'`
         - use space as a the leader key: `:lua vim.g.mapleader = ' '`
         - `:lua vim.opt.smarttab = true` equivalent to `:set smarttab`
         - `:lua =vim.opt.smarttab` similar to `:set smarttab?`
-    - set a env var value: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
+    - `vim.opt` - wrapper for `vim.o`
+        - has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
+    - `vim.opt_local` - equiv to VimL `setlocal`
+    - `vim.opt_global` - equiv to VimL `setglobal`
+    - `vim.wo` - set window-local 
+    - `vim.bo` - set buffer-local 
+- `vim.env` - envirionment variables, set a env var: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
+- `vim.g` - lua table that stores global variables for neovim environment
+    - e.g. `vim.g.some_user_var = 'test'`, equiavlent in VimL - `let g:some_user_var = 'test'`
 - `vim.cmd` - run an Ex command, doesnt output
-- `vim.api.nvim_exec2` - run vimscript, can capture output
+    - e.g. `vim.cmd("colorscheme onedark")`
+- `vim.api` - all lua->C, main api to control nvim using msgpack/RPC
+    - main docs: https://neovim.io/doc/user/api.html
+    - `vim.api.nvim_exec2` - run vimscript, can capture output
 - `vim.fn` - table exposes regular vimL functions
     - e.g. `vim.fn.printf('hi from %s', 'dude'))`
     - `resolve` - will follow a symbolic linked file to origin
     - `expand` - do shell expansions so `~` will expand to full home dir path
 - `vim.lsp` - LSP stuff
-- `vim.loop` - neovim eventloop using libuv
-    - replace dby `vim.uv` in 0.10.x
+- `vim.loop` / `vim.uv` - neovim eventloop using libuv
+    - replace by `vim.uv` in 0.10.x
     - _NOTE_ can NOT call `vim.fn` functions in lua `uv` callbacks, `vim.fn` are all part of the synchronous main C thread
     - user uv's event loop timers to execute callback after x time - https://neovim.io/doc/user/luvref.html#uv_timer_t
         ```lua
@@ -84,7 +96,6 @@
         ```
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
-- lua run vimscript cmd - `vim.cmd("colorscheme onedark")`
 - call lua function - `:lua somefunc()`
 - sourcing external files
     - vimscript, sourcing lua code: `:lua require('some-lua-code')`
@@ -92,12 +103,14 @@
     - use `dofile` if you want to constantly change the same file and run the new code
         - e.g. in same dir as neovim session, create file `foo.lua` and in nvim run `lua dofile("foo.lua")`
 - run external process
-    - using `vim.uv.spawn` 
-        - pre 0.10.x - `vim.loop.spawn('ls', { args = { '-a', '-l' } })`
-        - `vim.uv` replaces `vim.loop`
-    - using `vim.system`
-        - noevim 0.10.x -> it's `vim.system`, see docs, can be done sync by calling `wait`
-        - pre 0.10.x - `vim.fn.system({'ls', '-a', '-l'})`
+    - old VimL function - `vim.fn.jobstart` and `vim.fn.system` 
+        - help docs say use `vim.system` instead
+    - `vim.uv.spawn` - `vim.uv.spawn('ls', { args = { '-a', '-l' } })`
+    - `vim.system`
+        - uses `uv.spawn` under the hood and is simpler API
+            - unlike `spawn` it will throw error if command can't be run
+        - can be called syncronously by calling `wait`
+        - neovim 0.10.x -> it's `vim.system`, pre 0.10.x - `vim.fn.system({'ls', '-a', '-l'})`
 - get OS name
     - `:lua print(vim.loop.os_uname().sysname)`
     - `:lua if vim.fn.has('Linux') then print 'has linux' end`
@@ -109,10 +122,13 @@
 ### PLENARY.NVIM 
 - core set of neovim lua libs
 - provides an async framework, it uses lua coroutines and libuv for async IO
+    - main benefit is instead of arrowhead callback chaining API of lib.uv, it gives u a flat imperative async/await style
 - `plenary.job` lets you run shell command in async job
     - `sync()` to block main thread, or `start()` for async/background
 ### LSP
-- coc.vim - supports vim and neovim, but it's beefy, mar2022 it's **DEPRECATED**, nvim-metals is successor
+- [coc.vim](https://github.com/neoclide/coc.nvim) - very mature project and full featured
+    - written in typescript, mostly runs in a seperate node.js process
+    - supports vim and neovim, it's beefy, was best LSP experience before nvim/lsp-client
 - neovim-lsp - neovim's built in lsp client, written in lua
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
     - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -584,6 +600,7 @@ gv   - reselect the last visually selected text
 gi   - go to last cursor position in insert mode
 ### EDITING
 - y - yank (copy) text
+    - yl - yank char to the right
 - d - delete text
 - c - delete text and insert to change
 - ~ - toggle selected text between upper/lower case
