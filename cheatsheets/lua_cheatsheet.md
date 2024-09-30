@@ -101,6 +101,9 @@ end
 onearg("dude")  -- same as below
 onearg "dude"
 
+-- lua only supports positional args, named args are conventionally done by passing tables
+somefunc { arg1=3, arg2="value" }
+
 -- technically all functions are anonymous, so named functions are really anonymous and stored in a var
 function foo(x) return x end
 foo = function(x) return x end      -- same as above
@@ -120,11 +123,6 @@ foo = function(x) return x end      -- same as above
     - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
     - tjdevries on why 1 index makes sense - https://www.youtube.com/watch?v=0uQ3bkiW5SE&ab_channel=TJDeVries
 - tables are basis for modules, you attach all functions and data to them
-- can define a function that takes a receiver. `a = { var = 0 }; function a.inc(self, num) self.var = self.var + num end`
-- function with `:` operator - can omit `self`, e.g. `function a:inc(num) self.var = self.var + num end`
-    - the `:` operator is syntax suger for adding `self` param to func call
-    - so `a:inc(3)` is equivalent to `a.inc(a, 3)`
-    - operator makes it more OOP-like
 - key/value("associate-array"-like) items dont affect the index order of non-key/value ("array"-like) items
     ```lua
     a = {}              -- create blank table
@@ -152,7 +150,8 @@ foo = function(x) return x end      -- same as above
 - a metatable is a way for tables to "inherit" methods/behaviour and data, see https://www.lua.org/pil/13.html
 - `setmetatable` is a function build into the language, lets you override behaviour of other tables
     - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
-- OOP style can be simulated with the `:` and `setmetatable` features
+    - `t = {}; mt = {}; setmetatable(t, mt);` - `mt` is metatable of `t`
+        - `setmetatable` returns the table whom we set a metable on, `t` in the above case
 - `getmetatable` will print the metatable of a table
 - metatables have special fields for various operators:
     - arithmetic: `+` -> `__add`, `-` -> `__sub`, `*` -> `__mul`, and also `__div`, `__unm`, `__pow`, `__concat`
@@ -187,13 +186,26 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
 ## METHODS AND SYNTAX
 - global variables evaluate to `nil` if not initialized
 - `pcall` lua method catches errors
-    - `local ok, _ = pcall(vim.cmd, 'boguscmd')`, `ok` is bool, `false` if error was raised
+    - `local ok, res = pcall(vim.cmd, 'boguscmd')` 
+        - `ok` is bool, `true` for no error, `false` if error was raised
+        - `res` is result - error string if exception, result if no exception
 - `[[ some multi line text ]]` - use double brackets for multi-line string literals
 - introspect type - `a=1; print(type(a))` -> prints string `number`
     - `"str"` -> `"string"`, `nil`->`"nil"`, `false`->`"false"`, `{}` -> `"table"`, `function() end` -> `"function"`
 - pretty print a table
     - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
 - `tonumber` - convert string to number
+### OOP 
+- simulate object oriented style - https://www.lua.org/pil/16.html
+- can define a function that takes a receiver. `a = { var = 0 }; function a.inc(self, num) self.var = self.var + num end`
+- function with `:` operator - can omit `self`, e.g. `function a:inc(num) self.var = self.var + num end`
+    - the `:` operator is syntax suger for passing in the calling table as the first param to func call
+    - so `a:inc(3)` is equivalent to `a.inc(a, 3)`
+    - _NOTE_ `self` itself is not a keyword
+        - say `a.foo = function(x,y) print(x); print(y) end` then `a:foo(3)` = `a.foo(a, 3)`
+- can use metatables to create a "class" that tables(aka "objects") are "instantiated" from
+    - `setmetatable(a, {__index = b})` - here we kinda say `a` has all methods of `b`, `b` is kinda the "class"
+- can even simulate class inheritence further using techniques metatable
 
 ## CONCURRENCY
 - lua has coroutines, it is fundamental type, a cooperatively scheduled conncurent primitive

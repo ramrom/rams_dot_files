@@ -86,7 +86,7 @@
     - `resolve` - will follow a symbolic linked file to origin
     - `expand` - do shell expansions so `~` will expand to full home dir path
 - `vim.lsp` - LSP stuff
-- `vim.loop` / `vim.uv` - neovim eventloop using libuv
+- `vim.uv` / `vim.loop` - neovim eventloop using libuv
     - replace by `vim.uv` in 0.10.x
     - _NOTE_ can NOT call `vim.fn` functions in lua `uv` callbacks, `vim.fn` are all part of the synchronous main C thread
     - user uv's event loop timers to execute callback after x time - https://neovim.io/doc/user/luvref.html#uv_timer_t
@@ -133,6 +133,7 @@
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
     - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
+    - also see [metals section in cheatsheet](build_dependency_tools_cheatsheet.md)
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93
 - nvim-dap - plugin to support debug adapter protocol
 - nvim-cmp - autocompletion plugin, lua

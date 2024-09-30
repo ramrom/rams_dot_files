@@ -390,6 +390,12 @@
 - run length encoding, a simple lossless compression encoding
 ### HUFFMAN ENCODING
 - lossless compression that uses a tree and represents the most frequent symbols with the smallest bit sequences
+### ERROR CORRECTION AND DETECTION
+- reed-solomon codes - error correction and detection codes
+    - voyager probes were given encoders when launched, to be used when SNR gets so low at current distances, and they worked!
+    - used by QR codes
+- hamming codes - hamming distance b/w two symbols(of equal length) is number of positions in which they are different
+    - hamming encoding can correct for (N-1) / 2 errors, where N is hamming distance
 
 ## FLOATS
 - https://en.wikipedia.org/wiki/IEEE_754-1985
