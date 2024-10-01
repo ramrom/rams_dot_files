@@ -443,11 +443,11 @@ public static void main(String[] args) {
     - a seperate algo/code handles the diff types of objects, versus each object type knowing how to handle itself
 - composition - seperate types/classes for different behaviors, then compose them together in a new class
     - versus pure inherience approach where they are all related in the same inheritence tree
-- dependency injection - A class accepts the objects it requires from an injector instead of creating the objects directly
+- dependency injection - A class accepts the objects it requires from an injector instead of creating the objects itself internally
 - composition vs dependency injection
     - seem like very similar ideaas, but dependency injection is more decoupled
     - good SO example: https://stackoverflow.com/questions/21022012/difference-between-dependency-and-composition
-        - `Address` is a injected(it's **outside**) into `Employee`, user could inject a diff `Address` type, has access to it's API still
+        - `Address` is injected(it's **outside**) into `Employee`, user could inject a diff `Address` type, has access to it's API still
         - `Car` **internally** instantiates an `Engine` type, and is composed of it
             - in non-composition, functionality of `Engine` might be part of `Car` code or `Car` superclass code
             - it's not DI b/c we can't choose what `Engine` type to inject or access it's API
@@ -459,12 +459,13 @@ public static void main(String[] args) {
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
     - very similar to pub/sub in that it decouples 2 related entities, observer pattern is usually implemented intra-process
 - strategy pattern - select the algorithm to use at runtime, code allows receiving a strategy/algo as a parameter/argument
-- thread pool - spawning threads is expensive, reuse the same ones
-- object pool - dont alloc/dealloc all the time, reuse the same memory
-    - same idea as thread pools and connection pools but for objects
-- connection pool
-    - creating/destroying a connection like TCP is expensive
-    - create a pool of persistent connection that are reused, and a entity that manages the pool and takes requests
+- pooling
+    - thread pool - spawning threads is expensive, reuse the same ones
+    - object pool - dont alloc/dealloc all the time, reuse the same memory
+        - same idea as thread pools and connection pools but for objects
+    - connection pool
+        - creating/destroying a connection like TCP is expensive
+        - create a pool of persistent connection that are reused, and a entity that manages the pool and takes requests
 - Dynamic programming - solving a problem iteratively or breaking it down into subproblems
     - often use memoization to store the solution of a subproblem
 - Memoization - remembering/caching the output of a previous computation

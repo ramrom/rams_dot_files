@@ -24,8 +24,9 @@
 
 ## LEARNING RESOURCES
 ### DOCS
-- https://www.rust-lang.org/
-- quick ref: https://doc.rust-lang.org/rust-by-example/index.html
+- official docs - https://www.rust-lang.org/
+- quick ref of every feature -  https://doc.rust-lang.org/reference/introduction.html
+- nice simple examples for most features - https://doc.rust-lang.org/rust-by-example/index.html
 - the rust book (walkthrough of core concepts): https://doc.rust-lang.org/stable/book/title-page.html
 - technical reference: https://doc.rust-lang.org/reference/introduction.html
 - rust in Y minutes: https://learnxinyminutes.com/docs/rust/
@@ -219,20 +220,11 @@ match triple {
     _  => println!("It doesn't matter what they are"),  // `_` means don't bind the value to a variable
 }
 ```
-### OPERATORS
-- bitwise ops: `&` bitwise AND, `|` bitwise OR, `^` bitwise XOR
-    - only some types support it, e.g. integer types like `i32`, `u32`, etc
-- `?` - https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
-    - postfix operator for `Result<T, E>`, or `Option<T>`
 ### VISIBLITY/SCOPE
 - all things are private by default and can be made public with `pub` keyword
     - public items can be used by anything in the crate
     - a struct/enum can be marked public, but fields are still private unless fields are declared public
 - private items are only visible in the current module and decendant modules
-- no exception handling, `Result<T, E>` is commonly used to return errors as values
-    - `unwrap` - panic if `Err`, `expect('failure!')` - panic if `Err` with message
-    - `unwrap_or_else(|err| ...)` - error handler func if `Err`
-    - propogate errors to caller with `?` operator
 
 
 ## REFERENCES/OWNERSHIP
@@ -306,6 +298,8 @@ match triple {
 
 
 ## TYPE SYSTEM
+- no exception handling, (`panic` doesnt count), `Result<T, E>` is commonly used to return errors as values
+- no `null` concept, use `Option<T>` for similar uses in langs with `null` concept
 ### STRUCT
 - very similar to C/C++/golang structs
 - e.g. `struct Foo{ i: i32, b: bool, s: String }`
@@ -406,7 +400,10 @@ enum E {
 - `Option<T>` - generic enum which can be `Some<T>` or `None`
     - `unwrap_or(x)` -> retrieve value `T` if `Some<T>`, if `None` return `x`
 - `Result<E, T>` - generic enum which can be `Err(E)` or `Ok(T)`
+    - `unwrap` - panic if `Err`, `expect('failure!')` - panic if `Err` with message
     - `unwrap_or(x)` -> retrieve value `T` if `Ok<T>`, if `Err` return `x`
+    - `unwrap_or_else(|err| ...)` - error handler func if `Err`
+    - propogate errors to caller with `?` operator
 - `Sized` - trait, known size at compile time, doesnt change size
      - data put on stack _must_ be `Sized`, un-`Sized` have to go on the heap
      - for enums compiler uses size of largest variant
@@ -458,6 +455,12 @@ enum E {
         - slices(`[T]`), `str`
         - structs can store a DST in a field `struct foo { a: [i32], b: u32 }`, making the struct DST itself
     - vtable - each vtable for a type generally built at compile time
+### OPERATORS
+- bitwise ops: `&` bitwise AND, `|` bitwise OR, `^` bitwise XOR
+    - only some types support it, e.g. integer types like `i32`, `u32`, etc
+- `?` - https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
+    - postfix operator for `Result<T, E>`, or `Option<T>`
+    - essentially returns the error if an error occured and also calls `From::from` to convert
 
 
 ## DATA STRUCTURES

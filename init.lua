@@ -59,7 +59,7 @@ vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
 
 -- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
-vim.api.nvim_create_autocmd('VimResized', 
+vim.api.nvim_create_autocmd('VimResized',
     { pattern='*', command = 'wincmd =', desc = 'force window resize when vim resizes'})
 
 --- TRAILING SPACES
@@ -74,7 +74,7 @@ vim.g.editorconfig = false
 if vim.fn.executable('rg') == 1 then vim.opt.grepprg='rg --vimgrep --follow' end
 
 -- highlight lines yanked
-vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*', 
+vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*',
     callback = function() vim.highlight.on_yank {higroup="IncSearch", on_visual=false, timeout=150} end
 })
 
@@ -371,7 +371,7 @@ RunAction = function(arg)
         elseif curftype == 'go' then
             TmuxPaneRun("go run ".. vim.fn.expand("%"))
         elseif curftype == 'c' then
-            TmuxPaneRun("gcc ".. vim.fn.expand("%") .. ' && ./a.out')
+            TmuxPaneRun("gcc " .. vim.fn.expand("%") .. ' && ./a.out')
         elseif curftype == 'scala' then
             -- TmuxPaneRun("scala ".. vim.fn.expand("%"))
             TmuxPaneRun("sbt run")
@@ -498,7 +498,7 @@ LoadGitSigns = function()
 end
 
 --------------------------------- LUALINE -------------------------------------------------------
-MyCustomLuaLineFlags = function() 
+MyCustomLuaLineFlags = function()
     if not DisplayDiagVirtualText then return [[ VTXTOFF ]] else return "" end
 end
 
@@ -534,7 +534,7 @@ LuaLineBufferDimComponentConfig = {
 UpdateLuaLineTabLine = function(args)
     local tabinfo = vim.fn.gettabinfo()
     -- print("number of tabs: " .. #tabinfo)
-    if #tabinfo == 1 then 
+    if #tabinfo == 1 then
         local config = require('lualine').get_config()
         config.tabline.lualine_a = { { LuaTabLineBufferIndicator, color = { fg = 207, bg = 016 } }, LuaLineBufferComponentConfig }
         -- config.tabline.lualine_a = { LuaLineBufferComponentConfig }
@@ -577,9 +577,9 @@ LoadLuaLine = function()
             lualine_a = {'mode' },
             lualine_b = {'branch', 'diff', 'diagnostics'},
             -- lualine_b = { { 'branch', icons_enabled = true, {'branch', icon = 'ᛘ'} }, 'diff', 'diagnostics' },
-            lualine_c = { 
-                { 'filename', file_status = true, path = 1 }, 
-                { MyCustomLuaLineFlags, color = { fg = 001, bg = 022 } } 
+            lualine_c = {
+                { 'filename', file_status = true, path = 1 },
+                { MyCustomLuaLineFlags, color = { fg = 001, bg = 022 } }
             },
             lualine_x = {'filetype', 'encoding', 'fileformat'},
             lualine_y = {'progress'},
@@ -601,7 +601,7 @@ LoadLuaLine = function()
     vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, { callback = UpdateLuaLineTabLine, })
 
     -- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
-    vim.api.nvim_create_autocmd('VimResized', { pattern='*', callback = function() UpdateLuaLineTabLine(true) end, 
+    vim.api.nvim_create_autocmd('VimResized', { pattern='*', callback = function() UpdateLuaLineTabLine(true) end,
           desc = 'force lualine udpate when vim resizes'})
 end
 
@@ -626,7 +626,7 @@ WhichKeyOpts = {
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
 
-NvimTreeConfig = { 
+NvimTreeConfig = {
     on_attach = function(bufnr)
         local api = require('nvim-tree.api')
 
@@ -684,8 +684,8 @@ LoadTreeSitter = function()
 
     -- june'23 treesitter supports groovy, but wont fold on Jenkinsfiles
     vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'groovy', 
-        callback = function() 
+        pattern = 'groovy',
+        callback = function()
             vim.opt_local.foldmethod="indent"
             vim.opt_local.foldexpr=""
         end
@@ -696,9 +696,9 @@ LoadTreeSitter = function()
         -- might be similar to the json comment autocommand issue, i switched from callback to command and it worked
     if not LazyPluginEnabled('vim-markdown') then
         vim.api.nvim_create_autocmd('FileType', {
-            pattern = 'markdown', 
+            pattern = 'markdown',
             desc = 'highlight hyperlinks in regular paragraph/text of markdown',
-            callback = function() 
+            callback = function()
                 vim.cmd.highlight("link mkdInlineURL htmlLink")
                 vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
             end,
@@ -1181,7 +1181,7 @@ end
 -- lang server - https://shopify.github.io/ruby-lsp/
 -- TODO: also check out rails LSP: https://github.com/Shopify/ruby-lsp-rails
 LoadRubyLSP = function()
-    require('lspconfig').ruby_lsp.setup{ 
+    require('lspconfig').ruby_lsp.setup{
         -- below are default opts
 
         -- cmd = { "ruby-lsp" },
@@ -1197,7 +1197,7 @@ end
 LoadLSPConfig = function()
     -- LoadLuaLSP()
     -- LoadRubyLSP()
-    LoadRustLSP() 
+    LoadRustLSP()
     LoadGolangLSP()
     LoadKotlinLSP()
     LoadGroovyLSP()
@@ -1318,7 +1318,7 @@ vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>"
 vim.keymap.set('n', '<leader>ew', "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", { desc = "fzf cursor grep cWORD" })
 vim.keymap.set('n', '<leader>eo', "<cmd>lua require('fzf-lua').blines()<CR>", { desc = "fzf current buffer lines" })
 vim.keymap.set('n', '<leader>ei', "<cmd>lua require('fzf-lua').lines()<CR>", { desc = "fzf all buffer lines" })
-vim.keymap.set('n', '<leader>ec', "<cmd>lua require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'})<CR>", 
+vim.keymap.set('n', '<leader>ec', "<cmd>lua require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
     { desc = "fzf grep cheatsheet dir" })
 vim.keymap.set('n', '<leader>en', "<cmd>lua require('fzf-lua').grep({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf grep notes files" })
 
@@ -1349,9 +1349,9 @@ vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree
 ---------- CHEATS + NOTES
 vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
 vim.keymap.set('n', '<leader>ch', "<cmd>lua require('fzf-lua').help_tags()<CR>", { desc = "fzf help tags" })
-vim.keymap.set('n', '<leader>cc', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", 
+vim.keymap.set('n', '<leader>cc', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
     { desc = "fzf cheatsheet files" })
-vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>", 
+vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
     { desc = "fzf cheatsheet files" })
 vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf notes files" })
 vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf work files" })
@@ -1383,7 +1383,7 @@ vim.api.nvim_create_autocmd(
     "Filetype",
     { pattern = 'markdown',
       callback = function()
-        vim.keymap.set('n', '<leader>gg', 
+        vim.keymap.set('n', '<leader>gg',
             [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]], { buffer = true })
       end,
 })
