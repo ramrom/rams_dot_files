@@ -122,7 +122,7 @@
 ### PLENARY.NVIM 
 - core set of neovim lua libs
 - provides an async framework, it uses lua coroutines and libuv for async IO
-    - main benefit is instead of arrowhead callback chaining API of lib.uv, it gives u a flat imperative async/await style
+    - main benefit is instead of arrowhead callback chaining API of `lib.uv`, it gives u a flat imperative async/await style
 - `plenary.job` lets you run shell command in async job
     - `sync()` to block main thread, or `start()` for async/background
 ### LSP
@@ -347,15 +347,15 @@ C             " make selected dir node the new root node
 - `:echo errmsg` - shows last error message
 
 
-
-### VIMSCRIPT / VimL
+## VIMSCRIPT
+- aka VimL
 - nice cheatsheet: https://devhints.io/vimscript
 - commands -> can only accept string arguments, no return value, used for UI, invoke: `:SomeCommand`
 - functions -> can accept any type arg and return a value, to invoke `:call somefunc(var1,var2)`
 - checking existence of variable
     if exists('g:some_global_var') | echo "hi" | endif
 
-### MISC COMMANDS AND INFO
+## MISC COMMANDS AND INFO
 - so $VIMRUNTIME/syntax/hitest.vim
 - 100G or 100gg - goes to line 100 like :100<CR> in command
 - "120gg3yy -  yank lines 20-23 into reg 1
@@ -411,7 +411,8 @@ C             " make selected dir node the new root node
 
 
 ## EX MODE
-- a shitty REPL - essentiall Command-Line mode but you dont exit ex mode after running a command
+- a shitty REPL to run Ex commands
+    - essentiall Command-Line mode but you dont exit ex mode after running a command
 - to enter Ex mode
     - vim - `Q` in normal
     - neovim - `gQ` in normal

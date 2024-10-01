@@ -205,7 +205,7 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
         - say `a.foo = function(x,y) print(x); print(y) end` then `a:foo(3)` = `a.foo(a, 3)`
 - can use metatables to create a "class" that tables(aka "objects") are "instantiated" from
     - `setmetatable(a, {__index = b})` - here we kinda say `a` has all methods of `b`, `b` is kinda the "class"
-- can even simulate class inheritence further using techniques metatable
+- can even simulate class inheritence, multiple inheritence, and private methods (see docs)
 
 ## CONCURRENCY
 - lua has coroutines, it is fundamental type, a cooperatively scheduled conncurent primitive

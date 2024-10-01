@@ -512,7 +512,14 @@ public static void main(String[] args) {
 - Swift - created by Christopher Arthur Lattner, he convinced apple to convert from objectiveC over the course of 10 years
 - LLVM/CLang - also created by Lattner
 - Mojo - created by Lattner, to be a python successor, speed of C + expressiveness of python
-- Zig - speed of C but with modern nicities, allocators are first class, no macros but has comptime
+- [golang](https://go.dev/) - static, memory managed, fast and easy to learn, invented at google
+- [Carbon](https://github.com/carbon-language/carbon-lang) - tries to be a better c++, google invented
+- [Rust](https://www.rust-lang.org/) - static, systems language, memory safe and fast
+- [Zig](https://ziglang.org/) - speed of C but with modern nicities, allocators are first class, no macros but has comptime
+- [Nim](https://nim-lang.org/) - static typed, system language, inspired from python, ada, modula
+- Erlang - uses BEAM, invented actor model
+- Elixir - a new dialtect of Erlang, uses BEAM
+- Gleam - even newer Erlang dialect, uses BEAM
 
 ## TYPES
 - covariance/contravariance/invariance - https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
