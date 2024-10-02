@@ -9,6 +9,7 @@
 - motto: "mechanisms instead of policy"
 - Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM
 - start REPL just by typing `lua`, or start with script `lua -e some-script.lua`
+- teal is a typed dialect of lua: https://github.com/teal-language/tl
 
 ## LUAJIT
 - LuaJIT uses JIT compiler that generates machine code directly
@@ -119,11 +120,12 @@ a = function() return 1 end  -- works fine, returns 1
 - main docs: https://www.lua.org/pil/2.5.html
 - only data structure, an object, used for **everything**
     - it's sorta fundamentally a associative arrays
-    - can use it to make arrays, sets, lists, records, queues, etc
+    - can use it to make arrays, sets, lists, records, queues, modules etc
     - value can be any type: number/string/bool/function or another table, field can number/string
         - e.g. `a = { 1, f1 = 3, { "foo", 3 }, f2 = function() print("hi") end, 2, "val", function() print("a") end, z = {1, "a"} }`
             - index 1 has `1`, index 2 has `{"foo", 3 }`, index 3 has `2`, index 4 has `"val"`, index 5 has a function
-- to represent a conventional array use integer keys
+    - keys can basically be any type including numbers, strings, functions and tables themselves!
+- an array is just a table with integer keys
     - `a = { 1, x = 2 }; a[3] = 10; a[6] = 3` , `a` has `nil` at index 2, 4, and 5
 - 1-based indexing: first item starts at index _1_, not _0_
     - lua inspired from Sol language, designed by petroleum engineers with no programming experience, they didnt get why u start from 0
@@ -151,6 +153,13 @@ a = function() return 1 end  -- works fine, returns 1
     b['k'] = nil            -- like global vars, assign nil to a table field to delete it
     a = nil                 -- remove variable/reference to table
     b = nil                 -- now table has zero references to it, memory manager will garbage collect table
+
+    f=function() return 1 end
+    t1={}       -- empty table
+    t2={}       -- t2 kinda is the same "value" as t1 but it's a different object/table "instance"
+    a[f] = "a func is the key!"
+    a[t1] = function() print("im a func pointed to by a key thats a func!") end
+    a[t2] = "another empty table is the key!"
     ```
 ### METATABLE
 - a metatable is a way for tables to "inherit" methods/behaviour and data, see https://www.lua.org/pil/13.html
@@ -196,6 +205,8 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
         - `ok` is bool, `true` for no error, `false` if error was raised
         - `res` is result - error string if exception, result if no exception
 - `[[ some multi line text ]]` - use double brackets for multi-line string literals
+- `assert(asserted_value, error_msg)` - if `asserted_value` in `nil` or `false` error is raised with optional `error_msg`
+- `error(msg)` - raise an error with message `msg`
 - introspect type - `a=1; print(type(a))` -> prints string `number`
     - `"str"` -> `"string"`, `nil`->`"nil"`, `false`->`"false"`, `{}` -> `"table"`, `function() end` -> `"function"`
 - pretty print a table

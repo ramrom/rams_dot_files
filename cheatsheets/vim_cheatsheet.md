@@ -106,10 +106,16 @@
         ```
     - `vim.uv.sleep(2000)` - sleep for 2 sec on the current thread
         - _NOTE_ VimL `sleep` pauses main neovim thread, by default so will `vim.uv.sleep`, unless done from a different thread context
-    - [threads](https://neovim.io/doc/user/luvref.html#luv-threading-and-synchronization-utilities) - follows pthread API mostly
-        - `vim.uv.new_thread(f)` - spawn new thread passing in entry func `f` or `string` of raw lua source code
-            - e.g. `entry=function() for i=1,1000000 do z = i*i end; vim.uv.new_thread(entry)`
-            - _NOTE_ thread runs in new Lua state context, the entry func(closure) can't capture globals from calling thread
+    - multi-threading
+        - [threads](https://neovim.io/doc/user/luvref.html#luv-threading-and-synchronization-utilities) - follows pthread API mostly
+            - `vim.uv.new_thread(f, threadargs...)` - spawn thread
+                - pass in entry func `f`(or `string` of raw lua source code) and args for `f`
+                - e.g. `entry=function(num) for i=1,num do z = i*i end; vim.uv.new_thread(entry, 1000)`
+                - the `threadargs` can NOT be a table
+            - _NOTE_ thread's entry func(closure) can't capture globals from calling thread
+            - to pass data b/w threads, could use `us.async_send` to create a callback and pass handle to different thread
+        - [thread pools](https://neovim.io/doc/user/luvref.html#_thread-pool-work-scheduling) are generally nicer
+            - the `after_work_callback` func can access local tables
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - call lua function - `:lua somefunc()`
@@ -117,6 +123,7 @@
     - VimL `source`
         - vimscript file - `:source ~/.config/nvim/keymaps.vim`
         - lua file - `:source ~/foo.lua`, will run the lua code, `dofile` is essentially the same
+    - VimL `luafile` - `:luafile mycode.lua` or `:luafile %` to execute current buffer
     - lua `require` - `:lua require('some-lua-code')`
         - _NOTE_ this is a lua `require`, so this caches in result in `package.loaded`, and uses lua PATH finding for source file
     - `dofile` - if you want to constantly change the same file and run the new code

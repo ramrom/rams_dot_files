@@ -929,6 +929,7 @@ finally { .. }  // finally is always exected
 - intermediate operations
     - these are lazy, dont get immediately evaluated
     - example ops: `map`, `filter`, `limit`, `skip`, `sort`, `distinct`(remove dups)
+        - _NOTE_ methods like `sort` make it *eager* b/c sort needs to traverse the whole list to do it's thing
 - terminating operations
     - causes full stream to evaluate
     - `forEach`, `min`, `max`, `findFirst`, `allMatch`, `anyMatch`, `noneMatch`, `reduce`, `collect`, `toArray`
@@ -944,6 +945,8 @@ Stream.of("a","b").forEach(i -> System.out.println(i));
 import java.util.stream.IntStream
 IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
 IntStream.range(1,100).forEach(i -> i = i * 2)      // forEach takes a lambda
+IntStream.range(1,100).map(i -> i * 2)      // apply lamba to each item, map method here only allows int return values
+IntStream.range(1,100).mapToObj(i -> String.valueOf(i))      // mapToObj lets u map but return any reference type object
 IntStream.range(1,100).toArray()        // convert it primitive array (int[])
 IntStream.range(1,100).boxed().collect(Collectors.toList())     // boxed converts `int`s in IntStream to Stream<Integer>
 IntStream.range(1,100).boxed().toList()     // java16 - can call toList()
