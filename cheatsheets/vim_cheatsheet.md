@@ -24,7 +24,7 @@
 - decent blog on vimscript and lua config: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 - good discussion on async/await and more sugar on concurrency in lua
     - https://github.com/neovim/neovim/issues/19624
-- `vim.cmd` or `vim.api` can't be done async
+- `vim.cmd` or `vim.api` can't really be done async
     - see https://www.reddit.com/r/neovim/comments/13kgl3f/how_can_i_run_a_vimcmd_asynchronously/
     - this is b/c these are wrappers around core vim code that inherently is synchronous on the main thread
     - if you tried to run this in `vim.loop`, it won't work (or in `plenary.job` which wraps libuv)
@@ -33,7 +33,9 @@
     - `i` insert, `n` normal, `v` visual+select, `x` visual, `o` operator pending, `c` command-line, `t` terminal, `s` select
 - has API that is RPC with messagepack. thus can support server/client models
     - exposed via `vim.api` main docs: https://neovim.io/doc/user/api.html
-- modern version use `libuv` for async IO and libuv itself is generally multithreaded and uses a thread pool
+- modern version use `libuv` for async IO and libuv itself can be multithreaded and supports the uses thread pools
+    - see https://neovim.io/doc/user/luvref.html#_thread-pool-work-scheduling
+    - can also more directly spawn threads: https://neovim.io/doc/user/luvref.html#_threading-and-synchronization-utilities
 ### VERSION HISTORY
 - roadmap: https://neovim.io/roadmap/
 - started in 2014 by Thiago Padilha, when his patch to enable multi-threading in vim was rejected
@@ -43,7 +45,7 @@
 - 0.4
     - Lua standad modules, full scripting engine as replacement for VimL
         - particularly `vim` module introduced
-    - `vim.loop` wraps the Lua binding(https://github.com/luvit/luv) for C libuv(big async IO lib)
+    - `vim.loop` wraps the Lua binding(https://github.com/luvit/luv) for `libuv`(big C async IO lib, used by node.js)
     - externalize UI: multigrid, floating windows, messages
 - 0.5
     - introduced built in LSP client (lua written ofcourse)
@@ -59,8 +61,10 @@
 - 0.9 - TUI and remote UI
 - 0.10 - built-in commenting(vim-commentary), LSP inlay hints 
     - comments: https://github.com/neovim/neovim/pull/28176
-### LUA 
+### LUA
 - see [lua cheatsheet](lua_cheatsheet.mc) for core lua stuff
+- [userdata type](https://neovim.io/doc/user/luaref.html#lua-userdatatype) - stores artitrary C data in lua variable
+    - cannot be created/modified by lua code, only C API
 - vim settings
     - `vim.o` - settings options and is equivalent to VimL's `set`
         - set background `:lua vim.o.background = 'light'`
@@ -81,35 +85,50 @@
 - `vim.api` - all lua->C, main api to control nvim using msgpack/RPC
     - main docs: https://neovim.io/doc/user/api.html
     - `vim.api.nvim_exec2` - run vimscript, can capture output
-- `vim.fn` - table exposes regular vimL functions
+- `vim.fn` - table exposes regular vimL functions (all builtin functions: https://neovim.io/doc/user/builtin.html#builtin-functions)
     - e.g. `vim.fn.printf('hi from %s', 'dude'))`
     - `resolve` - will follow a symbolic linked file to origin
     - `expand` - do shell expansions so `~` will expand to full home dir path
 - `vim.lsp` - LSP stuff
-- `vim.uv` / `vim.loop` - neovim eventloop using libuv
-    - replace by `vim.uv` in 0.10.x
-    - _NOTE_ can NOT call `vim.fn` functions in lua `uv` callbacks, `vim.fn` are all part of the synchronous main C thread
-    - user uv's event loop timers to execute callback after x time - https://neovim.io/doc/user/luvref.html#uv_timer_t
+- `vim.defer_fn(f, x)` - defer calling a function `f` after `x` seconds, `f` is `vim.schedule_wrap`'ed so can call `vim.api` functions
+    - `vim.defer_fn(function() vim.uv.sleep(2000) end, 3000)` - in 3sec, schedule on main loop a func that sleeps for 2sec
+- `vim.schedule_wrap(f)` - return a function that calls `f` with `vim.schedule`
+- `vim.schedule(f)` - schedule a function `f` to be invoked later in main event loop
+- `vim.uv` - neovim eventloop using libuv
+    - good 4min TJDevries vid on async/libuv/main-loop misconception - https://www.youtube.com/watch?v=GToxQKi7LZg&ab_channel=TJDeVries
+    - `vim.loop` renamed to `vim.uv` in 0.10.x
+    - _NOTE_ can NOT directly call `vim.fn`/`vim.api`/`vim.cmd` functions in lua `uv` callbacks, done as a safety guard
+        - call the functions wrapped in a `vim.schedule`, this is allowed as schedule will put it in the queue for main event loop
+    - [timers](https://neovim.io/doc/user/luvref.html#uv_timer_t) - execute callback after x time and/or on interval 
         ```lua
         local timer = vim.uv.new_timer()
         timer:start(1000, 0, function () timer:stop(); timer:close(); print("1 second delayed message") end)
         ```
+    - `vim.uv.sleep(2000)` - sleep for 2 sec on the current thread
+        - _NOTE_ VimL `sleep` pauses main neovim thread, by default so will `vim.uv.sleep`, unless done from a different thread context
+    - [threads](https://neovim.io/doc/user/luvref.html#luv-threading-and-synchronization-utilities) - follows pthread API mostly
+        - `vim.uv.new_thread(f)` - spawn new thread passing in entry func `f` or `string` of raw lua source code
+            - e.g. `entry=function() for i=1,1000000 do z = i*i end; vim.uv.new_thread(entry)`
+            - _NOTE_ thread runs in new Lua state context, the entry func(closure) can't capture globals from calling thread
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - call lua function - `:lua somefunc()`
 - sourcing external files
-    - vimscript, sourcing lua code: `:lua require('some-lua-code')`
-    - source a vimscript file: `vim.cmd 'source ~/.config/nvim/keymaps.vim'`
-    - use `dofile` if you want to constantly change the same file and run the new code
+    - VimL `source`
+        - vimscript file - `:source ~/.config/nvim/keymaps.vim`
+        - lua file - `:source ~/foo.lua`, will run the lua code, `dofile` is essentially the same
+    - lua `require` - `:lua require('some-lua-code')`
+        - _NOTE_ this is a lua `require`, so this caches in result in `package.loaded`, and uses lua PATH finding for source file
+    - `dofile` - if you want to constantly change the same file and run the new code
         - e.g. in same dir as neovim session, create file `foo.lua` and in nvim run `lua dofile("foo.lua")`
 - run external process
     - old VimL function - `vim.fn.jobstart` and `vim.fn.system` 
-        - help docs say use `vim.system` instead
+        - help docs say use `vim.system` instead, b/c `vim.fn.system` are always synchronous and will block the main thread
     - `vim.uv.spawn` - `vim.uv.spawn('ls', { args = { '-a', '-l' } })`
     - `vim.system`
         - uses `uv.spawn` under the hood and is simpler API
             - unlike `spawn` it will throw error if command can't be run
-        - can be called syncronously by calling `wait`
+        - can be cajled syncronously(blocking main thread) by calling `wait`
         - neovim 0.10.x -> it's `vim.system`, pre 0.10.x - `vim.fn.system({'ls', '-a', '-l'})`
 - get OS name
     - `:lua print(vim.loop.os_uname().sysname)`

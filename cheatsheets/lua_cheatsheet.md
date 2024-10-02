@@ -58,8 +58,8 @@ for i=1,4 do
     print(a[i])   -- prints  1,2,nil,nil
 end
 
--- ipairs is builtin function, first arg i is index
 -- iterate through array-like tables, will treat first index with nil as a terminaion
+-- ipairs is builtin function, first arg i is index
 a = { 10,20 }; a[4] = 30   -- a has a gap, 3rd index is nil
 -- below will print  1,10,2,20
 for i,v in ipairs(a) do 
@@ -75,6 +75,7 @@ end
 ```
 
 ## FUNCTIONS
+- they are also closures
 ```lua
 local foo = function(a, b)
     print(a)
@@ -107,6 +108,11 @@ somefunc { arg1=3, arg2="value" }
 -- technically all functions are anonymous, so named functions are really anonymous and stored in a var
 function foo(x) return x end
 foo = function(x) return x end      -- same as above
+
+-- lua doesnt support expressions
+a = function() 1 end         -- will error
+a = function() z=1 end         -- works fine, returns nil
+a = function() return 1 end  -- works fine, returns 1
 ```
 
 ## TABLE
@@ -208,11 +214,15 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
 - can even simulate class inheritence, multiple inheritence, and private methods (see docs)
 
 ## CONCURRENCY
+- good doc of multitasking strategies in lua world - http://lua-users.org/wiki/MultiTasking
 - lua has coroutines, it is fundamental type, a cooperatively scheduled conncurent primitive
-- api is exposed throgh `coroutine` table
+    - a lua VM is essentially single-threaded with it's own Lua state, all coroutines are scheduled on it
+        - see http://lua-users.org/wiki/ThreadsTutorial
+    - when you create a corouting it'll return a desc with `thread` number, named confusing and misleads one to think it's an OS thread
+        - this guy in 2007 suggests renaming `thread` to `fiber` - http://lua-users.org/lists/lua-l/2007-08/msg00207.html
+- api is exposed through `coroutine` table
 - programmer sets yield points to yield control, programmer has to resume exection
 - each coroutine has it's own stack and local vars
-    - *UNSURE* each cortouine has 1:1 mapping to a OS thread
 ```lua
 -- examples
 c = coroutine.create(function() print('hi') end); 
