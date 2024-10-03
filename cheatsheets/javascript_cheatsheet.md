@@ -1,4 +1,5 @@
 # JAVASCRIPT
+- decent doc on js event loop in browser - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop
 
 ## DIALECTS
 - coffeescript

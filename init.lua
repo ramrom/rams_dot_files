@@ -1379,6 +1379,7 @@ vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column
 vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
+-- TODO: can make this a keymap that calls plain lua func, lua func can call vim.o.filetype, if markdown print error, else commit
 vim.api.nvim_create_autocmd(
     "Filetype",
     { pattern = 'markdown',
