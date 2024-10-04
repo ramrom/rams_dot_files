@@ -85,7 +85,8 @@
 - `vim.api` - all lua->C, main api to control nvim using msgpack/RPC
     - main docs: https://neovim.io/doc/user/api.html
     - `vim.api.nvim_exec2` - run vimscript, can capture output
-- `vim.fn` - table exposes regular vimL functions (all builtin functions: https://neovim.io/doc/user/builtin.html#builtin-functions)
+- `vim.fn` - table exposes regular vimL functions 
+    - all builtin functions: https://neovim.io/doc/user/builtin.html#builtin-functions)
     - e.g. `vim.fn.printf('hi from %s', 'dude'))`
     - `resolve` - will follow a symbolic linked file to origin
     - `expand` - do shell expansions so `~` will expand to full home dir path

@@ -517,7 +517,7 @@ public static void main(String[] args) {
 - [Rust](https://www.rust-lang.org/) - static, systems language, memory safe and fast
 - [Zig](https://ziglang.org/) - speed of C but with modern nicities, allocators are first class, no macros but has comptime
 - [Nim](https://nim-lang.org/) - static typed, system language, inspired from python, ada, modula
-- Erlang - uses BEAM, invented actor model
+- [Erlang](https://www.erlang.org/) - uses BEAM, invented actor model
 - Elixir - a new dialtect of Erlang, uses BEAM
 - Gleam - even newer Erlang dialect, uses BEAM
 

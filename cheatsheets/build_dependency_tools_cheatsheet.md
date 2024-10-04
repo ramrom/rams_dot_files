@@ -143,6 +143,13 @@
 ### OTHER
 - sbt 1.4.0+ has BSP support, see https://www.scala-lang.org/blog/2020/10/27/bsp-in-sbt.html
 - sbt 1.0+ uses [zinc incremental compiler](https://github.com/sbt/zinc), only compiles new changes
+- `sbt help foo` - help on command `foo`
+- Projects
+    - `sbt projects` - list projects
+    - `sbt 'project foo' compile` - only compile project `foo`
+    - create project
+        - scala2 - `sbt new scala/hello-world.g8`
+        - scala3 - `sbt new scala/scala3.g8`
 - get timings of sbt tasks
     - `time sbt -Dsbt.task.timings=true clean update test`
 - Testing
@@ -151,13 +158,14 @@
     - use test description filter `sbt 'testOnly *SSO* -- -z "foo bar desc"'`
        - _NOTE_ the `-z` filter only works with ScalaTest, not PlaySpecification
 - possible to define diff scala versions for subprojects, but has limits, can work around limits though
+### DEPENDENCIES
 - to show evictions: `sbt evicted`
  - to show test deps classpath: `sbt 'show Test/dependencyClasspath'`
     - show order of which jars are loaded for project `Test`
+- full: `sbt "inspect tree clean"`
+- more specific sbt: `whatDependsOn <org> <module> <version>`
+    - needs plugin [dep graph](https://www.scala-sbt.org/sbt-dependency-graph/index.html)
 - `sbt dependencyTree` to show dep tree (needs sbt 1.5 or greater)
-- create a new project
-    - scala2 - `sbt new scala/hello-world.g8`
-    - scala3 - `sbt new scala/scala3.g8`
 
 ## NPM
 - package manager for javascript

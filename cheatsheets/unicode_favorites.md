@@ -75,6 +75,7 @@
 🏎  racing car
 🚀  rocker
 🏠  house
+🥾  boot
 👾  asteroid
 ⭐  star
 🌞  sun with face
