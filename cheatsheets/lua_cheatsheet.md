@@ -1,15 +1,17 @@
 # LUA
-- devhits: https://devhints.io/lua
 - home page - https://www.lua.org/home.html
-- 5.3 ref guide: https://www.lua.org/manual/5.3/
-- programming in lua is great guide - https://www.lua.org/pil/
-- learn lua in y min - https://learnxinyminutes.com/docs/lua/
-- nice comparison to other langs: http://lua-users.org/wiki/LuaComparison
 - created in brazil in 1993
 - motto: "mechanisms instead of policy"
 - Lua is compiled by Lua compiler into byte code, then byte code interpreted by Lua VM
 - start REPL just by typing `lua`, or start with script `lua -e some-script.lua`
 - teal is a typed dialect of lua: https://github.com/teal-language/tl
+
+## DOCS
+- 5.3 ref guide: https://www.lua.org/manual/5.3/
+- programming in lua is great guide - https://www.lua.org/pil/
+- learn lua in y min - https://learnxinyminutes.com/docs/lua/
+- nice comparison to other langs: http://lua-users.org/wiki/LuaComparison
+- devhits: https://devhints.io/lua
 
 ## LUAJIT
 - LuaJIT uses JIT compiler that generates machine code directly
@@ -24,7 +26,7 @@
     - https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_features.html
 
 ## FEATURES
-- has "metamechanisms" to build complex language features: tables, closures, coroutines
+- has 3 "metamechanisms" to build complex language features: 1. tables 2. closures 3. coroutines
 - it's simple, very fast, super C-compatible
     - binary size is 200KB for embedding
 - it's garbage collected

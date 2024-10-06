@@ -178,9 +178,12 @@ ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_current_line_blame')
 end
 
-GitAddCommitMarkdownStuff=function()
-    local curftype = vim.bo.filetype
-    if curftype == "markdown" then
+GitAddCommitMarkdownStuff = function()
+    if not (vim.uv.cwd() == vim.env.MY_NOTES_DIR) then
+        print("current working dir not the notes dir! returning")
+        return
+    end
+    if vim.bo.filetype == "markdown" then
         vim.cmd(':w')
         vim.cmd([[:SilentRedraw git add . && git commit -m 'added stuff']])
     else
