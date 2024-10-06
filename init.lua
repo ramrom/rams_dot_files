@@ -178,6 +178,16 @@ ToggleGitSignsHighlight = function()
     vim.cmd(':Gitsigns toggle_current_line_blame')
 end
 
+GitAddCommitMarkdownStuff=function()
+    local curftype = vim.bo.filetype
+    if curftype == "markdown" then
+        vim.cmd(':w')
+        vim.cmd([[:SilentRedraw git add . && git commit -m 'added stuff']])
+    else
+        print("Not a markdown file!, wont add all and commit")
+    end
+end
+
 ToggleIndentBlankLine = function()
     if IndentBlankLineEnabled then
         require("ibl").update { enabled = false }
@@ -1325,6 +1335,7 @@ vim.keymap.set('n', '<leader>en', "<cmd>lua require('fzf-lua').grep({cwd=vim.env
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
 vim.keymap.set('n', '<leader>gm', "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "fzf git commits" })
+vim.keymap.set('n', '<leader>gg', GitAddCommitMarkdownStuff, { desc = "git add all + commit" })
 vim.keymap.set('n', '<leader>gb', "<cmd>lua require('fzf-lua').git_bcommits()<CR>", { desc = "fzf buffer git commits" })
 vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
 vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
@@ -1378,16 +1389,6 @@ vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method
 vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
 vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
-
--- TODO: can make this a keymap that calls plain lua func, lua func can call vim.o.filetype, if markdown print error, else commit
-vim.api.nvim_create_autocmd(
-    "Filetype",
-    { pattern = 'markdown',
-      callback = function()
-        vim.keymap.set('n', '<leader>gg',
-            [[<cmd>:w<CR>:SilentRedraw git add . && git commit -m 'added stuff'<CR>]], { buffer = true })
-      end,
-})
 
 
 ----------- LSP KEYBINDINGS --------------------------------------------
