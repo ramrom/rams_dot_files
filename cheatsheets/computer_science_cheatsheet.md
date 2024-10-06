@@ -100,6 +100,8 @@ public static void main(String[] args) {
     - non-blocking means it yields and lets thread do other things if operation is blocked
 - 2015 - nice blog on red/blue(sync/async) colored functions: https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
     - golang is nice b/c no red/blue distinction, only one type and runtime handles it
+- async regular file I/O - linux has bad support for it, but windows has good support for it
+    - for linux many langs/frameworks use a pool of blocking threads for this I/O (e.g. rust tokio and GNU libc)
 ### PROCESSES VS THREADS
 - SO reply on process vs thread contex switch - https://stackoverflow.com/questions/7439608/steps-in-context-switching
 - generally a process has many threads
@@ -641,8 +643,17 @@ public static void main(String[] args) {
 
 ## COMPILER
 - lexer -> read a string and split into tokens
-- parser -> take tokens from lexer and build a AST based on grammer
+- parser -> take tokens from lexer and build a AST based on grammar
+    - AST is then converted to native machine code
+    - for iterpretted language, the target virtual machine. e.g. javac makes java bytecode for java virtual machine
 - https://godbolt.org/ - badass tool to see assembly code compiled by many languages
+### JIT VS AOT
+- JIT(just-in-time) = dynamic compilation durning runtime,  AOT(ahead-of-time) = static compilation before runtime
+- AOT has shorter startup time, generally has smaller binary size as it can elimiate unused code immediately
+- JIT compilers can make optimziations based on runtime behaviour, which AOT can't
+- java: JIT compiler means it'll find "hot spots" in java bytecode and compile those sections to machine code
+    - next encounter of hot spot it will execute the whole section, instead of interpretting byte code one by one
+    - AOT compiler enables java bytecode to be tranformed into native machine code b4 application is run
 
 ## DEPENDENCY MANAGEMENT
 - see [build_dependency_tools_cheatsheet.md]

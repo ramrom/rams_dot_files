@@ -17,6 +17,7 @@
     - LuaJIT interpreter records runtime stats when executing byte code, loops and function calls are tracked
         - when threshold exceeded, JIT compiler triggers, and converts that to machine code using it's IR(intermediate representation)
 - LuaJIT only supports Lua 5.1
+- generally LuaJIT is much faster than regular Lua
 - often used as "scripting engines" for extensibility 
     - major applications that use it: roblox, nginx, redis, neovim, vlc, apache HTTP server, weeChat, wireshark
 - LuaJIT is only like 8k lines of extra code!!!

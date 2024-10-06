@@ -521,6 +521,7 @@ pulsemixer - volume manager with pulseaudio
 
 
 ## OTHER LINUX/UBUNTU TOOLS
+- chroot - change the root dir of a process
 - sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
 - hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
     - *NOTE* dec2022 - old and unmaintained, removed from debian and ubuntu22

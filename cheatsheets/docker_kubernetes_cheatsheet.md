@@ -1,7 +1,7 @@
 # DOCKER/KUBERNETES
 
 ## DOCKER
-- created around 2012, used LXC and runtime at first, then libcontainer(written in golang) later
+- created around 2012, used [LXC](https://en.wikipedia.org/wiki/LXC) and runtime at first, then libcontainer(written in golang) later
 - good article on UID/GID user mapping
     - https://www.fullstaq.com/knowledge-hub/blogs/docker-and-the-host-filesystem-owner-matching-problem
 ### USAGE

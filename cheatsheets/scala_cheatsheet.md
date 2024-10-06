@@ -406,8 +406,10 @@ i.next       // throw NoSuchElementException
 
 ## RANDOM
 - sleep for 1 second: `java.lang.Thread.sleep(1000)`
+- get system properties `scala.sys.props` - e.g. os name, java home, java version, java class path
 
 ## CONCURRENCY
+- `scala.sys.allThreads` - method to return list of a active threads in current thread's group
 ### FUTURES
 - is a monad
 - is *eager*, starts running moment it's declared
@@ -472,12 +474,13 @@ writer.printf("This is a %s program with %d of code", s, new Integer(numberOfLin
 writer.close()
 ```
 ### ENVIRONMENT VARS
-- using java `System`: 
-    - `System.getenv()` -> return `Map[String,String]` of env-var/value
-    - `System.getenv("SHELL")` -> get value of a var, will be `null` if var doesnt exist
-- using `scala.util.Properties`
+- `scala.sys.env` - returns immutable `Map[String,String]` of env vars
+- `scala.util.Properties`
     - `scala.util.Properties.envOrElse("PWD", "undefined")` -> get value of var `PWD` or default to value `undefined`
     - `scala.util.Properties.envOrNone("PWD")` -> return `Option` instead, `None` if env var doesnt exist
+- java `System`: 
+    - `System.getenv()` -> return `Map[String,String]` of env-var/value
+    - `System.getenv("SHELL")` -> get value of a var, will be `null` if var doesnt exist
 
 ## ENUMERATION
 - play 2.5 json doesnt supports scala enumerators
