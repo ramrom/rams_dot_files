@@ -446,29 +446,11 @@
     - PyTorch
     - Dall-E - generative AI tool created by OpenAI
 - event/IO libs
-    - libuv - C async lib, uses epoll/kqueue/IOCP, event ports
-        - used by Node.js, neovim
+    - libuv - cross-platform C lib for async stuff and more, uses epoll/kqueue/IOCP, event ports
+        - used by Node.js, neovim, Julia, luvit project
     - libevent - C async lib, similar to libuv, uses callbacks on IO events
         - memcached, tmux, chrome, transmission use it
     - libev - C async lib, claims it's better than libevent
-
-## GRAPHICS FRAMEWORK/ENGINES
-- cryengine - by crytech
-    - implementors: far cry
-- id Tech - C++ codebase by id software
-    - john carmack left in 2013, Tiago Sousa(came from crytech) took over
-    - id Tech 5
-        - implementors: Rage
-    - id Tech 6 released 2015?, supports vulkan and openGL
-        - implementors: Doom 2016
-    - id Tech 7 released 2018?, supports only vulkan, ray tracing, no "main thread" (all "jobs")
-        - implementors: Doom Eternal
-- unreal - C++ codebase by epic games
-    - 5.0 - major goal to make game content/assets easy to create
-        - nanite - no LOD(level of detail) limitation, high polygon count with dynamic detail
-            - import photographic source into game
-        - lumen - full real-time global illumination, no manual lightmap creation for a scene
-        - Niagara - fluid/particle dynamics, Chaos - physics engine
 
 ## GARBAGE COLLECTION
 - reference counting
@@ -494,6 +476,23 @@
 
 ## GRAPHICS
 - DLSS (deep learning super sampling) - using AI to interpolate frames and thus more cheaply increase frame rates
+### FRAMEWORK/ENGINES
+- cryengine - by crytech
+    - implementors: far cry
+- id Tech - C++ codebase by id software
+    - john carmack left in 2013, Tiago Sousa(came from crytech) took over
+    - id Tech 5
+        - implementors: Rage
+    - id Tech 6 released 2015?, supports vulkan and openGL
+        - implementors: Doom 2016
+    - id Tech 7 released 2018?, supports only vulkan, ray tracing, no "main thread" (all "jobs")
+        - implementors: Doom Eternal
+- unreal - C++ codebase by epic games
+    - 5.0 - major goal to make game content/assets easy to create
+        - nanite - no LOD(level of detail) limitation, high polygon count with dynamic detail
+            - import photographic source into game
+        - lumen - full real-time global illumination, no manual lightmap creation for a scene
+        - Niagara - fluid/particle dynamics, Chaos - physics engine
 ### APIs
 - Metals - apple API
 - Vulkan - open source platform independent generic API for 3D graphics and computing, managed by Khronos Group
@@ -638,6 +637,7 @@
 - BOOTP - superseded InARP
 - DHCP - superseded BOOTP
 ### DNS (Domain Name System)
+- layer 7 protocol, generally uses UDP by default, but can use TCP too
 - good site to check dns reachability: https://dnschecker.org/
 - A record - hostname -> IP address
     - can have many IPs for failover, if main/default IP fails, the next IPs are used round robin

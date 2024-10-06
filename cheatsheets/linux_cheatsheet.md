@@ -518,6 +518,9 @@ pulsemixer - volume manager with pulseaudio
     - good blog - https://copyconstruct.medium.com/the-method-to-epolls-madness-d9d2d6378642
 - select/poll - kernel has to scan all N items when it's asked by process
     - and a full list of N items is returned, so process has to scan all to find ready ones
+- inotify (inode notify) - monitor changes to filesystem
+    - main commands: `inotifywait` and `inotifywatch`
+    - replaces older dnotify
 
 
 ## OTHER LINUX/UBUNTU TOOLS

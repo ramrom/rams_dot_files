@@ -420,6 +420,7 @@ md5sum somefile # ubuntu bin, same deal
 watch -n 2 -d date  # run `date` every 2 seconds, -d highlight differences
 
 # fswatch - monitor some files and print changes
+# on linux it uses inotify, kqueue on BSD, FSEvent on OSX
 fswatch some/dir/ another/dir/ dir/somefile
 
 # CHAFA - view images(jpg, png etc) in ASCII/text in terminal! (ugly but still cool)
