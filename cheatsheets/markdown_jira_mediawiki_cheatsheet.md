@@ -8,6 +8,9 @@
 - https://www.markdownguide.org/basic-syntax/
 - github flavored md: https://github.github.com/gfm/
     - adds tables, fenced code block highlighting, and more
+    - GH has API to convert markdown source to html 
+        - https://docs.github.com/en/rest/markdown/markdown?apiVersion=2022-11-28#render-a-markdown-document
+    - [grip](https://github.com/joeyespo/grip) is python cli tool that calls GH API to convert markdown to html/css
 - https://devhints.io/markdown
 - hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown
 

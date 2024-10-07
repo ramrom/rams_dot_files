@@ -203,7 +203,6 @@
 - package manager for javascript
 - developed by facebook and open sourced
 - generally faster than npm, uses local caches for speedups, does parrallel installs
-- 
 
 ## NVM
 - node version manager, install/manage/switch between different node versions

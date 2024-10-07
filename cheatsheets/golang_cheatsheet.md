@@ -59,5 +59,6 @@
     - https://go.dev/ref/mod
 - `go.mod` specifies dependent modules/packages, `go.sum` contains crypto hashes of specific mod packages
 
-## FRAMEWORKS
+## LIBS/FRAMEWORKS
 - [cobra](https://github.com/spf13/cobra) - CLI builder lib
+- [glow](https://github.com/charmbracelet/glow) - CLI markdown viewer

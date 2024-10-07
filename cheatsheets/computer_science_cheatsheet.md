@@ -503,6 +503,8 @@ public static void main(String[] args) {
     - AlphaGo Zero, had zero initial human game traing, was pure reinforcement learning, and surpassed AlphaGo Lee and Master
 
 ## PROGRAMMING LANGUAGES
+- fast cheatsheets for any PL: https://learnxinyminutes.com/
+- not so bad even faster cheats on PLs: https://devhints.io/
 - FORTRAN - old and math focused
 - COBOL - invented in 1959, dominated in 1970
     - designed for large amounts of data, read like plain english so non-experts could learn (versus assembly)

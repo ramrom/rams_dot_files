@@ -24,3 +24,6 @@
 - javascriptcore - used in safari
 - deno - modern runtime in rust, uses V8, supports typescript/javascript
 - bun - runtime written in zig
+
+## LIBS
+- [chartjs](https://github.com/chartjs/Chart.js) - popular charting lib
