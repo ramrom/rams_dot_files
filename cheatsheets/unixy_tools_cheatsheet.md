@@ -21,28 +21,28 @@ find . -type f -regex ".*\.exe$" -exec grep foo {} \;    # exec runs a command o
 # get terminal info
 infocmp
 
-# cat - output content of file to stdout
+# CAT - output content of file to stdout
 cat file
 
-# tac - opposite of cat, output file in reverse order of lines to stdout
+# TAC - opposite of cat, output file in reverse order of lines to stdout
 tac file
 
-# touch - create an empty file
+# TOUCH - create an empty file
 touch foofile
 
-# readlink - get full absolute path of file (osx coreutils has this)
+# READLINK - get full absolute path of file (osx coreutils has this)
 readlink foo        # might print /users/foouser/folder/foo
 
-# truncate - shrink or extend file size
-truncate --size 1 foofile  # only keep the first byte of file, truncate rest
-
-# mkdir - make a dir
+# MKDIR - Make a dir
 mkdir -p middir/finaldir    # -p will create any intermediate dirs that might not exist
 
-# cp - copy
+# CP - copy
 cp -al dirA dirB  # recursively hardlink everything in dirA to dirB
+cp -l               # make copies but just hard links, gnu/linux has this, osx does not
+cp -rl dirA dirB # recursively copy all of dir a to b, but just hard links, gnu/linux supports this, not osx
 
-# scp - secure copy, (based on ssh protocol)
+
+# SCP - secure copy, (based on ssh protocol)
 # not well maintained, and rec'd to use rsync or SFTP instead, in openssh 9.0 scp client actually uses SFTP
 scp /path/to/file someuser@somehost:/some/remote/path/destfilename
 scp -r /path/to/folder someuser@somehost:/some/remote/path/destfolder   # copy whole folder
@@ -60,24 +60,22 @@ printf "foo\nbar\nbaz\n" | grep -A1 'bar' | grep -v 'bar'
 printf "foo bar baz" | grep 'bar' | grep 'foo'      #method1
 printf "foo bar baz" | grep -E 'bar.*foo|foo.*bar'  #method2
 
-# TAR
-tar –xvzf documents.tar.gz   # uncompress tar file
-    # -x extract, -v verbose, -z decompress each file, -f filename of tar file
-tar –tvzf documents.tar.gz   # uncompress tar file
-    # -t to list contents
-
-# ZIP
-zip -r outputfile folder1 folder2
-unzip -l foo.zip        # list contents, dont extract
-unzip foo.zip                       # unzip contents in cur dir
-unzip foo.zip -d /path/to/output  # unzip to specific foler
-
 # AWK - multi purpose tool, really a mini programming language
 echo "foo bar baz" | awk '{print $2}'  # will print bar
 echo "foo bar baz" | awk '{print $1"  "$3}'  # will print `foo  baz` , two spaces in between
 awk '{$1=""; print $0}' somefile        # print all but the first field/column
 awk '{$1=$2=""; print $0}' somefile        # print all but the first and second field/column
 awk '/blah/{getline; print}' logfile   # print the next line after the line that matches patter "blah"
+
+# SED - streaming editor
+echo "2.03" | sed 's/\.//g'  # will print 203
+echo "2.03" | sed 's/[0-9][0-9]/foo/g'  # will print 2.foo
+echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
+printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
+echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
+sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
+cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
+cat somefile | sed -n '2p'          # print just the 2nd line of the file
 
 # CUT - select data in each line by byte/char position or delimiter char
 echo "foo; bar - baz" | cut -d ';' -f 2     # delimiter semicolon , extract field 2, so " bar - baz" will print
@@ -90,19 +88,12 @@ echo "2.03" | tr -d .              # -d to delete, this will print 203
 echo foo:bar:baz | tr : \\n        # split on ":" delimiter, replace ":" with newline
 echo "\u0001 hi" | tr -cd '[:print:]' # strip out nonprintable characters, -c is complement(opposite of)
 
+# TRUNCATE - shrink or extend file size
+truncate --size 1 foofile  # only keep the first byte of file, truncate rest
+
 # TEE - read from STDIN and write to STDOUT and regular files
 echo "output in both" | tee /path/to/file
 echo "output in both" | tee -a /path/to/file   # append to file
-
-# SED - streaming editor
-echo "2.03" | sed 's/\.//g'  # will print 203
-echo "2.03" | sed 's/[0-9][0-9]/foo/g'  # will print 2.foo
-echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
-printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
-echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
-sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
-cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
-cat somefile | sed -n '2p'          # print just the 2nd line of the file
 
 # GOACCESS - log file analyzer
 goaccess logfile.log  # interactive TUI
@@ -110,17 +101,9 @@ goaccess logfile.log  -o report.html # generate a pretty html webpage report
 goaccess --log-format=COMBINED logfile.log # specify logformat
     # nginx/apache logs are COMBINED format by default
 
-# BASE64 - encode and decode base64
-echo "foobar" | base64                      # encode from stdin
-echo "foobar" | base64 | base64 --decode      # decode from stdin, should print "foobar" here
-
 # COLUMN
 column -t -s, somecsv  # use comma to delimit columns and print csv file with aligned columns
 awk -F',' '{print $2","$4}' some.csv | column -t -s  # only print column 4,2 with aligned columns
-
-# XSV - a tool to manipulate CSVs
-xsv table somecsv.csv  # pretty print table to stdout
-xsv count somecsv.csv  # print # of rows
 
 # TPUT - terminal settings and capabilities
     # also see [ansi color cheat](ansi_color.md)
@@ -162,7 +145,7 @@ echo "a\nb\nc" | shuf -n 1  # will select the first line in the randmly generate
 echo "foo\nfoo\n\bar" | uniq        # will print one foo and then bar
 echo "foo\nbar\n\foo" | uniq        # will print foo, then bar, then foo!, b/c the 2nd foo isn't adjacent
 
-# random number generation
+# RANDOM NUMBER GENERATION
 echo $RANDOM    # RANDOM is a special env var that will contain some value from 0 - 32767
 od -An -N1 -i /dev/random  # get a random byte from the special file /dev/random
 
@@ -201,9 +184,30 @@ wc -l somefile   # count # of lines in file
 wc -c somefile   # count # of chars in file
 cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
 
-# YQ - data file processor
+# TAR
+tar –xvzf documents.tar.gz   # uncompress tar file
+    # -x extract, -v verbose, -z decompress each file, -f filename of tar file
+tar –tvzf documents.tar.gz   # uncompress tar file
+    # -t to list contents
+
+# ZIP
+zip -r outputfile folder1 folder2
+unzip -l foo.zip        # list contents, dont extract
+unzip foo.zip                       # unzip contents in cur dir
+unzip foo.zip -d /path/to/output  # unzip to specific foler
+
+# BASE64 - encode and decode base64
+echo "foobar" | base64                      # encode from stdin
+echo "foobar" | base64 | base64 --decode      # decode from stdin, should print "foobar" here
+
+# XSV - a tool to manipulate CSVs
+xsv table somecsv.csv  # pretty print table to stdout
+xsv count somecsv.csv  # print # of rows
+
+# YQ - data file processor for YAML/XML/JSON, has similar language as jq
 yq some.xml -o yaml     # convert xml to yaml
 yq some.xml -o json     # convert xml to json
+yq '.a.b[0].c' file.yaml  # read a jq like path in yaml file
 
 # XQ - convert xml to json and then use jq queries
 xq . some.xml  # would spit our JSON conversion
@@ -243,16 +247,6 @@ gpg --export --armor --output pubkeys.asc johndoe@example.com # create file of p
 pass init ABCDEF12  # create new pass db in default location(/home/user/.password-store) with gpg id ABCDEF12(is last 8hex of pub key)
 pass insert foo # create a password key called `foo`, will be prompted to enter password
 
-# PS
-ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes
-ps ax -o command= | grep -E "^ssh"      # print only the command executed for process and grep to find one that starts with "ssh"
-
-# HTOP
-# "/" vim-like search
-# quitting by hitting F10 will remember settings in .htoprc
-# l - list FDs(files) open by process, k - kill process, x - list file locks
-htop
-
 # IOTOP - top like temrinal UI, but show io/disk usage by process (on osx and linux)
 sudo iotop -o
 
@@ -264,7 +258,7 @@ ulimit -H -n   # get hard limit for simultaneous opened files
 ulimit -S -n   # get soft limit for simultaneous opened files
 ulimit -u 30   # set max per-user process limit to 30
 
-# sysstat (linux pkg with many tools), has great colors
+# SYSSTAT (linux pkg with many tools), has great colors
 iostat          # show per device/filesystem disk read, with no arg calculated *since* last reboot
 iostat -m       # display in megabytes
 iostat sda sdb  # only display stats for certain devices
@@ -279,14 +273,14 @@ free -h   # -h is human readale
 # /proc/meminfo
 cat /proc/meminfo   # shows detailed memory usage
 
-# vmstat
+# VMSTAT
 vmstat     # just one measurement, will calculate since last reboot
 vmstat 3   # every 3 sec show free/swap/used/total memory usage, cpu performance, i/o
 
-#fio - flexible io tester
+# FIO - flexible io tester
 fio [options] [jobfile]
 
-# stress (add load on cpu memory or io)
+# STRESS (add load on cpu memory or io)
 stress --cpu 2      # 2 threads, do hard cpu problem like square-root function
 stress --io 4       # 4 threads add io activity to system
 stress --vm 4       # 4 threads to do lots of memory ops
@@ -332,12 +326,23 @@ sudo -u foouser ls  # run ls command as foouser
 sudo bash           # start a bash session as root
 su foouser          # login as foouser
 
-# processes
+
+#### PROCESSES
+# PS
+ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes
+ps ax -o command= | grep -E "^ssh"      # print only the command executed for process and grep to find one that starts with "ssh"
+
+# HTOP
+# "/" vim-like search
+# quitting by hitting F10 will remember settings in .htoprc
+# l - list FDs(files) open by process, k - kill process, x - list file locks
+htop
+
 kill            # send signal to process, by default sigterm
 pgrep foo       # search for processes with "foo" in command and return PIDs
 killall -3 foo  # send sigquit to all proceses with foo in the name, default is sigterm
 
-# signals
+# SIGNALS
 1 -  sighup    # hangup
 2 -  sigint    # interrupt, what ctrl-c usually sends
 3 -  sigquit   # exit, and dump core, what ctrl-\ usually does
@@ -416,10 +421,10 @@ file foo   # example output: "foo: ASCII text"
 md5 somefile    # osx bin, spits out md5 fingerprint of file
 md5sum somefile # ubuntu bin, same deal
 
-# watch - run a command periodically
+# WATCH - run a command periodically
 watch -n 2 -d date  # run `date` every 2 seconds, -d highlight differences
 
-# fswatch - monitor some files and print changes
+# FSWATCH - monitor some files and print changes
 # on linux it uses inotify, kqueue on BSD, FSEvent on OSX
 fswatch some/dir/ another/dir/ dir/somefile
 
@@ -448,7 +453,7 @@ veracrypt -tc sometruecryptfile  # mount an old truecrypt file
 youtube-dl -F https://www.youtube.com/watch?v=dfidfa     # show available formats
 youtube-dl -f 140 https://www.youtube.com/watch?v=dfidfa     # download specific format
 
-# list all files recursively in dir and their disk usage
+# DU - list all files recursively in dir and their disk usage
 du -a /foo
 
 # CHOWN - change owner of files and dirs
@@ -456,11 +461,7 @@ chown newuser file
 chown newuser:newgroup file
 chown -R newuser dir
 
-# CP
-cp -l     # make copies but just hard links, gnu/linux has this, osx does not
-cp -rl dirA dirB # recursively copy all of dir a to b, but just hard links, gnu/linux supports this, not osx
-
-# shred  - overwrite data in file or whole device
+# SHRED  - overwrite data in file or whole device
 sudo shred -v /dev/sdb1
 shred foofile
 

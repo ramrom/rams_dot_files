@@ -226,6 +226,7 @@ end
 
 NvimTreeDynamicWidthEnabled = true
 
+-- TODO: use nvim-tree-api.tree.resize() instead of calling setup
 ToggleNvimTreeDynamicWidth = function()
     if NvimTreeDynamicWidthEnabled then
         NvimTreeConfig.view = { width = { min = 30, max = 30, padding = 1 } }

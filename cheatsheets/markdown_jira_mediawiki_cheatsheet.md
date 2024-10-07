@@ -10,11 +10,16 @@
     - adds tables, fenced code block highlighting, and more
     - GH has API to convert markdown source to html 
         - https://docs.github.com/en/rest/markdown/markdown?apiVersion=2022-11-28#render-a-markdown-document
-    - [grip](https://github.com/joeyespo/grip) is python cli tool that calls GH API to convert markdown to html/css
 - https://devhints.io/markdown
 - hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown
+### TOOLS
+- pandoc can do basic markdown conversion to html/odf/docx and others
+- [marked](https://github.com/markedjs/marked) - nice js tool that converts md to html
+    - has support for CommonMark and GH flavored md
+- [grip](https://github.com/joeyespo/grip) is python cli tool that calls GH API to convert markdown to html/css
 
-## PARAGRAPHS
+```markdown
+### PARAGRAPHS
 - to create paragraphs seperate lines with one or more blank lines
 - to create line breaks in same paragraph, end line wiht two or more spaces
 
@@ -41,12 +46,18 @@ HEADER 2 ALT
 ##### HEADER 5
 ###### HEADER 6
 
+double asterix is more compatible than double underscore, esp in middle of word
 __bold__  
-**bold**  (double asterix is more compatible than double underscore, esp in middle of word)  
+**bold**  
+
+asterix is more compatible than underscore, esp in middle of word
 _italic_  
-*italic*  (asterix is more compatible than underscore, esp in middle of word)  
+*italic*  
+
+triple asterix is more compatible than triple underscore, esp in middle of word
 ___boldanditalic___  
-***boldanditalic*** (triple asterix is more compatible than triple underscore, esp in middle of word)  
+***boldanditalic*** 
+
 `monospace`  
 ``monospece with `embedded` backticks``
 ~~strikethrough~~  
@@ -89,13 +100,6 @@ ___boldanditalic___
 ![image name](someimage.png "icon")
 ![image name](https://somewhere/someimage.png)
 
-### Code blocks
-```ruby
-def foo
-    puts "hi"
-end
-```
-
 ### checkboxes, supported by github markdown
 - [ ] (for unchecked checkbox)
 - [x] (for checked checkbox)
@@ -133,6 +137,14 @@ Here's a simple footnote,[^1] and here's a longer one.[^bignote]
     `{ my code }`
 
     Add as many paragraphs as you like.
+```
+
+### CODE BLOCKS
+```ruby
+def foo
+    puts "hi"
+end
+```
 
 
 
