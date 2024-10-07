@@ -209,14 +209,14 @@ ClearLspLog = function()
 end
 
 CycleNvimTreeSortBy = function()
-    if NvimTreeConfig.sort_by == 'name' then
-        NvimTreeConfig.sort_by = 'extension'
+    if NvimTreeConfig.sort.sorter == 'name' then
+        NvimTreeConfig.sort.sorter = 'extension'
         print("nvim-tree: sorting by extension")
-    elseif NvimTreeConfig.sort_by == 'extension' then
-        NvimTreeConfig.sort_by = 'modification_time'
+    elseif NvimTreeConfig.sort.sorter == 'extension' then
+        NvimTreeConfig.sort.sorter = 'modification_time'
         print("nvim-tree: sorting by modification time")
     else
-        NvimTreeConfig.sort_by = 'name'
+        NvimTreeConfig.sort.sorter = 'name'
         print("nvim-tree: sorting by name")
     end
 
@@ -229,8 +229,10 @@ NvimTreeDynamicWidthEnabled = true
 ToggleNvimTreeDynamicWidth = function()
     if NvimTreeDynamicWidthEnabled then
         NvimTreeConfig.view = { width = { min = 30, max = 30, padding = 1 } }
+        print("DISABLE nvim-tree dynamic width (setting min=30 max=30)")
     else
         NvimTreeConfig.view = { width = { min = 10, max = 50, padding = 1 } }
+        print("ENABLE nvim-tree dynamic width (setting min=10 max=50)")
     end
 
     NvimTreeDynamicWidthEnabled = not NvimTreeDynamicWidthEnabled
@@ -424,12 +426,7 @@ end
 local LoadOneDarkProConfig = function()
     require("onedarkpro").setup({
         highlights = {
-            -- vim-markdown uses html*, not markdown*
-            htmlH1 = { fg = "#FF0000", underline = true },
-            htmlH3 = { fg = "#ef596f" }, htmlH4 = { fg = "#ef596f" }, htmlH5 = { fg = "#ef596f" }, htmlH6 = { fg = "#ef596f" },
-
             htmlLink = { fg = '#61afef', underline = true },
-            -- mkdInlineURL = { fg = '#61afef', underline = true },
 
             -- treesitter uses these group names for markdown headers
             ['@markup.heading.1.markdown'] = { fg = "#FF0000", underline = true },
@@ -641,9 +638,8 @@ NvimTreeConfig = {
 
         vim.keymap.del('n', '<C-e>', { buffer = bufnr })  -- remove open-in-place, want scroll up by one line
     end,
-    -- sort_by = 'extension',
+    sort = { sorter = "name" },
     renderer = { full_name = true }, -- if highlighted item's full path is longer than nvim window width, render into next window
-    -- FIXME: sept'23 - nvim-tree warns that padding settings is unkonwn option, looks correct per help page...
     view = { width = { min = 10, max = 40, padding = 1 }, },
     filters = { git_ignored = false },   -- show gitignored files
 }
@@ -1265,7 +1261,6 @@ vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
 -- Quickly switch between vimtab indexes 1 to 9
 for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 
-
 ---- SMART QUITTING
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
 vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
@@ -1497,6 +1492,7 @@ if not vim.env.VIM_NOPLUG then
         'tpope/vim-surround',
         'tpope/vim-repeat',
         "aklt/plantuml-syntax",
+        -- "MeanderingProgrammer/render-markdown.nvim",
 
         --- COLORSCHEME
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },

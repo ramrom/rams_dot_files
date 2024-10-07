@@ -65,7 +65,7 @@ LoadOneDarkConfig = function()
     vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
 end
 
----- VIM-MARKDOWN
+-------------- VIM-MARKDOWN ------------------------
 -- lazyvim defintion
 { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown }
 
@@ -78,7 +78,14 @@ LoadVimMarkdown = function()
     vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
 end
 
--- LoadTreeSitter code 
+-- OneDark mods
+-- NOTE: vim-markdown uses html*, not markdown*
+htmlH1 = { fg = "#FF0000", underline = true }
+htmlH3 = { fg = "#ef596f" }, htmlH4 = { fg = "#ef596f" }, htmlH5 = { fg = "#ef596f" }, htmlH6 = { fg = "#ef596f" }
+-- mkdInlineURL = { fg = '#61afef', underline = true },
+
+
+-- LoadTreeSitter code  -----------------------------
 -- only disable markdown if vim-markdown plugin is enabled
 local disabled_list = {}
 if LazyPluginEnabled('vim-markdown') then disabled_list = { "markdown" } end

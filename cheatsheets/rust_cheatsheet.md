@@ -72,7 +72,7 @@
     - `rustup update` - update/upgrade `rustc`, `cargo` and other tools including docs, clippy
     - `rustup show` - show rustc ver, rustup home dir, host arch
 - `rustc` is compiler bin
-- [cargo](#CARGO) is main dependency manager and build tool(fetch deps, compile/build, run, test, bench, lint)
+- [cargo](#cargo) is main dependency manager and build tool(fetch deps, compile/build, run, test, bench, lint)
 - `rustfmt` - formatter, invoked by `cargo fmt`
     - docs on rules: https://rust-lang.github.io/rustfmt/
     - `cargo fmt` - apply formatting rules to source files

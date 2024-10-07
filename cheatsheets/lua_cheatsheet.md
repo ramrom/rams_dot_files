@@ -184,6 +184,7 @@ a = function() return 1 end  -- works fine, returns 1
 - patterns and character classes for finding substring - https://www.lua.org/pil/20.2.html
 ```lua
 s="hi there. dude"
+print(#"hello")     -- print size of string, prints 5 here
 s.find(s, "th")   -- will return start and end index of substring if found, nil otherwise
 s.find(s, "d.")   -- `.` is wildcard for any single charater, looks for substring start with `d` and any one char after
 s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`

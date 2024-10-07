@@ -771,7 +771,8 @@ zr expand one level, zR - open ALL folds
 - `:cn` - jump to the next match
 - `:cp` - jump to the previous match
 - `:copen` - open a window containing the list of matches
-### SEARCH AND REPLACE
+### SED
+- find and replace
 - visual-mode select -> :s/old/new - replace old with new in all visually selected lines
 - `:s/old/new` - replace next `old` with `new` in current line
 - `:s/old/new/g` - replace all `old` with `new` in current line
