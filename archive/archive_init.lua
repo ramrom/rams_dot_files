@@ -65,6 +65,23 @@ LoadOneDarkConfig = function()
     vim.cmd.highlight({'Search','cterm=italic,underline,inverse'})
 end
 
+---- VIM-MARKDOWN
+-- lazyvim defintion
+{ 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown }
+
+LoadVimMarkdown = function()
+    -- plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
+    vim.g.vim_markdown_follow_anchor = 1
+    vim.g.vim_markdown_strikethrough = 1
+    vim.g.vim_markdown_new_list_item_indent = 0
+    vim.g.vim_markdown_edit_url_in = 'tab'
+    vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
+end
+
+-- LoadTreeSitter code 
+-- only disable markdown if vim-markdown plugin is enabled
+local disabled_list = {}
+if LazyPluginEnabled('vim-markdown') then disabled_list = { "markdown" } end
 
 
 ---- MAPS

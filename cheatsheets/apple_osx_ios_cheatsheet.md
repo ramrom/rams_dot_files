@@ -7,6 +7,15 @@
     - looks like the 2nd factor will pop up a 6 digit code in a trusted device, and if none maybe the trusted ph #?
 - safari mac: bring up seperate window for dev tools - `cmd` + `shift` + `j`
 
+## HARDWARE
+### M PROCESSORS
+- M2 - 4 high-performance cores, 4 high-efficiency cores, 8/16/24 GB unified DDR5 memory
+    - 10 GPU cores, each has 16 EU(execution units), each EU has 8 ALUs
+    - 16core neural network chip
+    - also has an image signal processor, USB4 controller, thunderbolt 3/4, PCI Express storage controller
+- M2/M1 support OpenGL 4.6 and OpenGL ES 3.2
+- generally vulkan support wont exist b/c they don't want a dependency from chronos
+
 ## BREW
 ### TERMINOLOGY
 - see https://docs.brew.sh/Formula-Cookbook#homebrew-terminology
@@ -60,26 +69,26 @@
 - say - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
         - -o will save it to an audio file
-- screencapture - capture screenshot images
-- mdfind - cli way to find whatever spotlight does
-- open - open a app like u would double click on it
+- `screencapture` - capture screenshot images
+- `mdfind` - cli way to find whatever spotlight does
+- `open` - open a app like u would double click on it
     - open an app by name: `open -a "Slack"`
     - open a dir in Finder: `open somedir` or `open .`(cur dir)
-- pbcopy  - cli way to copy to sys clipboard
+- `pbcopy`  - cli way to copy to sys clipboard
     - lal | pbcopy   (copy ls long listing to clipboard)
-- pbpaste - cli way to paste from clipboard
+- `pbpaste` - cli way to paste from clipboard
     - pbpaste | grep foo
-- mdls    - get metadata on a file
+- `mdls`    - get metadata on a file
 - sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
-- vm_stat - show some raw memory usage
-- nettop - like top but for tcp/udp sockets only and their bandwidth usage!
+- `vm_stat` - show some raw memory usage
+- `nettop` - like top but for tcp/udp sockets only and their bandwidth usage!
 - 2024 - cool keyboard customizer for osx - https://karabiner-elements.pqrs.org/
-- skhd
+- `skhd`
     - `brew services` to see if it's running
     - `skhd -r` to reload config file with shortcuts
 - force color to pipe output, be default ls wont colorize
     - `CLICOLOR_FORCE=1 ls -l | less`
-- lp - print from command line
+- `lp` - print from command line
 
 
 
@@ -196,14 +205,14 @@
 - microsoft word ctrl-h doesnt work, it opens a find and replace
 - ~/Library/LaunchAgents - user dir of plist files for starting processes at user login
 
-## GUI Components:
+## OSX GUI COMPONENTS
 - menu bar                - top screen bar with apple menu on left, app menus, status menu and date/user on right
 - notification center     - side bar (by default) with widgets for weather and stocks and notifs and so on
 - dock                    - bottom (by default) panel with app shortcuts
 
 ## APPLESCRIPT
 - shell script inline applescript with multiline in one line example
-    ```zsh
+```sh
     function osx_spotify_dec_volume() {
         osascript -e 'tell application "Spotify"' -e 'set sound volume to (sound volume - 10)' -e 'end tell'
     }

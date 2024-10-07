@@ -476,6 +476,7 @@
 
 ## GRAPHICS
 - DLSS (deep learning super sampling) - using AI to interpolate frames and thus more cheaply increase frame rates
+- GPGPU - general purpose GPU - grahics cards that can perform traditionally CPU tasks
 ### FRAMEWORK/ENGINES
 - cryengine - by crytech
     - implementors: far cry

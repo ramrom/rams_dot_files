@@ -434,7 +434,7 @@ local LoadOneDarkProConfig = function()
             -- treesitter uses these group names for markdown headers
             ['@markup.heading.1.markdown'] = { fg = "#FF0000", underline = true },
             ['@markup.heading.2.markdown'] = { fg = "#FF0000", underline = true },
-            ['@markup.heading.3.markdown'] = { fg = "#ef596f" },
+            ['@markup.heading.3.markdown'] = { fg = "#EE596f" },
             ['@markup.heading.4.markdown'] = { fg = "#ef596f" },
             ['@markup.heading.5.markdown'] = { fg = "#ef596f" },
             ['@markup.heading.6.markdown'] = { fg = "#ef596f" },
@@ -473,16 +473,6 @@ LoadFzfLua = function()
             }
         }
     }
-end
-
------------------------------ VIM-MARKDOWN --------------------------------------------------
-LoadVimMarkdown = function()
-    -- plasticboy-md: `ge` command will follow anchors in links (of the form file#anchor or #anchor)
-    vim.g.vim_markdown_follow_anchor = 1
-    vim.g.vim_markdown_strikethrough = 1
-    vim.g.vim_markdown_new_list_item_indent = 0
-    vim.g.vim_markdown_edit_url_in = 'tab'
-    vim.g.vim_markdown_anchorexpr = "substitute(v:anchor,'-',' ','g')"   -- customize the way to parse an anchor link
 end
 
 ----------------------------- Rhubarb --------------------------------------------------
@@ -664,23 +654,17 @@ LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
-    -- only disable markdown if vim-markdown plugin is enabled
-    local disabled_list = {}
-    if LazyPluginEnabled('vim-markdown') then disabled_list = { "markdown" } end
-
     require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
         highlight = {
             enable = true,     -- `false` will disable the whole extension
-            -- NOTE: names of the parsers and not the filetype. (for example if you want to
-            -- disable highlighting for the `tex` filetype, you need to include `latex`, this is the name of the parser)
-            disable = disabled_list,
+            -- NOTE: parsers names are not the filetype name. (for `tex` filetype, include `latex`, as this is the name of the parser)
+            disable = {},
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
             additional_vim_regex_highlighting = false,
-            -- additional_vim_regex_highlighting = { "markdown" },
         },
         indent = { enable = true },
         incremental_selection = {
@@ -707,16 +691,14 @@ LoadTreeSitter = function()
     -- hightlight hyperlinks that are in regular paragraph/text regions in markdown files
     -- jun'24: placing this autocmd outside this loadtreesitter func fails, autocommand runs but vim.cmd.syntax doesnt do anything...
         -- might be similar to the json comment autocommand issue, i switched from callback to command and it worked
-    if not LazyPluginEnabled('vim-markdown') then
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = 'markdown',
-            desc = 'highlight hyperlinks in regular paragraph/text of markdown',
-            callback = function()
-                vim.cmd.highlight("link mkdInlineURL htmlLink")
-                vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
-            end,
-        })
-    end
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        desc = 'highlight hyperlinks in regular paragraph/text of markdown',
+        callback = function()
+            vim.cmd.highlight("link mkdInlineURL htmlLink")
+            vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
+        end,
+    })
 
     vim.opt.foldmethod='expr'
     vim.opt.foldexpr='nvim_treesitter#foldexpr()'
@@ -1533,7 +1515,6 @@ if not vim.env.VIM_NOPLUG then
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, ft = { "markdown" },
             build = function() vim.fn["mkdp#util#install"]() end,
         },
-        -- { 'preservim/vim-markdown', enabled = not vim.env.NO_MARK, config = LoadVimMarkdown },
 
         ----- LSP STUFF
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
