@@ -721,6 +721,7 @@ in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this beh
     - oauth 1.0 came out in 2007, by google engineer
     - 2.0 came out in 2013, not backwards compatible with 1.0
     - martin fowler ruby scripting to do oauth 2.0 with google: https://martinfowler.com/articles/command-line-google.html
+    - PKCE(proof key for code exchange) - extra security to prevend MIMT attacks, uses unique string `code_verifier`
 - OpenID Connect(OIDC) - built on top of oauth 2.0, includes identity stuff, has an IdP
     - main docs: https://openid.net/developers/how-connect-works/
     - dont need a user/pass for each website, can have one idp and an RP for each website/application/client

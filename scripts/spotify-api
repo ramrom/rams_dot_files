@@ -77,6 +77,7 @@ auth() {
       AUTH_ENDPOINT=$AUTH_ENDPOINT\&scope=$ENCODED_SCOPES
     fi
 
+    # NOTE: calling GET authorize with curl(xh) results in redirect to account.spotify.com with continue
     [ -n "$verbose" ] && echo "AUTH ENDPOINT:\n$AUTH_ENDPOINT"
     open $AUTH_ENDPOINT             # open the oauth flow endpoint in a browser(hopefully)
     echo

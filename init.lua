@@ -226,19 +226,16 @@ end
 
 NvimTreeDynamicWidthEnabled = true
 
--- TODO: use nvim-tree-api.tree.resize() instead of calling setup
 ToggleNvimTreeDynamicWidth = function()
     if NvimTreeDynamicWidthEnabled then
-        NvimTreeConfig.view = { width = { min = 30, max = 30, padding = 1 } }
+        require("nvim-tree.api").tree.resize({ width = { min = 30, max = 30, padding = 1 }})
         print("DISABLE nvim-tree dynamic width (setting min=30 max=30)")
     else
-        NvimTreeConfig.view = { width = { min = 10, max = 50, padding = 1 } }
+        require("nvim-tree.api").tree.resize({ width = { min = 10, max = 50, padding = 1 }})
         print("ENABLE nvim-tree dynamic width (setting min=10 max=50)")
     end
 
     NvimTreeDynamicWidthEnabled = not NvimTreeDynamicWidthEnabled
-    require('nvim-tree').setup(NvimTreeConfig)
-    vim.cmd 'NvimTreeFindFileToggle'
 end
 
 
@@ -641,7 +638,7 @@ NvimTreeConfig = {
     end,
     sort = { sorter = "name" },
     renderer = { full_name = true }, -- if highlighted item's full path is longer than nvim window width, render into next window
-    view = { width = { min = 10, max = 40, padding = 1 }, },
+    view = { width = { min = 10, max = 50, padding = 1 }, },
     filters = { git_ignored = false },   -- show gitignored files
 }
 

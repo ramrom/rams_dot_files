@@ -205,9 +205,10 @@ xsv table somecsv.csv  # pretty print table to stdout
 xsv count somecsv.csv  # print # of rows
 
 # YQ - data file processor for YAML/XML/JSON, has similar language as jq
+yq '.a.b[0].c' file.yaml  # read a jq like path in yaml file
 yq some.xml -o yaml     # convert xml to yaml
 yq some.xml -o json     # convert xml to json
-yq '.a.b[0].c' file.yaml  # read a jq like path in yaml file
+yq some.yaml -o xml     # convert yaml to xml
 
 # XQ - convert xml to json and then use jq queries
 xq . some.xml  # would spit our JSON conversion

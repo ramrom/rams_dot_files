@@ -21,7 +21,17 @@ graph TD;
 
 ## SEQUENCE DIAGRAM
 ```mermaid
+%%{
+  init: {
+    "sequence": {
+      "actorFontFamily": "monospace",
+      "noteFontWeight": "bolder"
+    }
+  }
+}%%
+
 sequenceDiagram
+    %% a comment
     A-->B: some info
     activate B
     B-->A: return info<br/>with new line
