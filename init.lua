@@ -442,9 +442,11 @@ end
 
 ----------------------------- FZF LUA --------------------------------------------------
 LoadFzfLua = function()
+    local help_menu_key = "<C-w><C-w>"
     require'fzf-lua'.setup {
         -- NOTE: bat previewer doesnt support toggle-preview-cw and cww (rotations)
-        winopts = { preview = { default = "bat" } },
+        winopts = { preview = { default = "bat" },
+            title = "NOTE: " .. help_menu_key .." for help menu", title_pos = 'center' },
         previewers = {
             bat = { cmd = vim.loop.os_uname().sysname == "Darwin" and "bat" or "batcat" } },
         keymap = {
@@ -459,7 +461,7 @@ LoadFzfLua = function()
             },
             -- NOTE: c-w based movement for windows in tab disabled when fzflua term window is open anyway
             builtin = {
-                ["<c-w><c-w>"]        = "toggle-help",
+                [help_menu_key]       = "toggle-help",
                 ["<f1>"]              = "toggle-help",
                 ["<c-w><c-f>"]        = "toggle-fullscreen",
                 ["<f2>"]              = "toggle-fullscreen",

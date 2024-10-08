@@ -826,6 +826,8 @@ gT or :tabprev or :tabp - move to the previous tab
 ]S/[S - next/prev major (non-regional) spelling error
 z= - bring up autocorrect menu
 zg - exclude word
+    - for vim, in `.vim` folder, words are added in `spell/en.utf-8.add` file
+    - for nvim base folder is `.config/nvim`
 zug - undo exclude adding word
 zw - add to wrong word list
 zuw - remove from wrong word list

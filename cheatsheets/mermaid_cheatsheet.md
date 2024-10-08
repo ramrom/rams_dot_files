@@ -20,6 +20,8 @@ graph TD;
 ```
 
 ## SEQUENCE DIAGRAM
+- the `theme` value of `null` looks best on both light and dark modes
+    - `forest`, `default`, `base` have light lines/arrow/messages in dark mode, `dark` doesnt look good in light mode
 ```mermaid
 %%{
   init: {
