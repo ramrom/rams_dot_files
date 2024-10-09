@@ -179,7 +179,8 @@ ToggleGitSignsHighlight = function()
 end
 
 GitAddCommitMarkdownStuff = function()
-    if not (vim.uv.cwd() == vim.env.MY_NOTES_DIR) then
+    -- NOTE: oct'23 - uv.cwd lowercased a letter (`S` to `s`) in path, just comparing lower case path for both as workaround
+    if not (string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_NOTES_DIR)) then
         print("current working dir not the notes dir! returning")
         return
     end
