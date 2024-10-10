@@ -516,11 +516,11 @@ public static void main(String[] args) {
 - Swift - created by Christopher Arthur Lattner, he convinced apple to convert from objectiveC over the course of 10 years
 - LLVM/CLang - also created by Lattner
 - Mojo - created by Lattner, to be a python successor, speed of C + expressiveness of python
-- [golang](https://go.dev/) - static, memory managed, fast and easy to learn, invented at google
-- [Carbon](https://github.com/carbon-language/carbon-lang) - tries to be a better c++, google invented
+- [Golang](https://go.dev/) - static, memory managed, fast and easy to learn, invented at google
+- [Nim](https://nim-lang.org/) - static typed, system language, inspired from python, ada, modula
 - [Rust](https://www.rust-lang.org/) - static, systems language, memory safe and fast
 - [Zig](https://ziglang.org/) - speed of C but with modern nicities, allocators are first class, no macros but has comptime
-- [Nim](https://nim-lang.org/) - static typed, system language, inspired from python, ada, modula
+- [Carbon](https://github.com/carbon-language/carbon-lang) - tries to be a better c++, google invented
 - [Erlang](https://www.erlang.org/) - uses BEAM, invented actor model
 - Elixir - a new dialtect of Erlang, uses BEAM
 - Gleam - even newer Erlang dialect, uses BEAM
@@ -570,6 +570,7 @@ public static void main(String[] args) {
 - Functor -> unit(wraps a type) + map(apply func over inner type A -> B)
 - Monad -> unit(wraps a type) + flatMap(apply func over inner type A -> F[B])
     - a Monad can be thought of as a subset of Functor (so not all Functors are Monads)
+    - more pratically speaking it's a mechanism to describe sequential behaviour
 
 ## PHILOSOPHIES AND DESIGN
 - Moore's law - transistor count will double every 2 years

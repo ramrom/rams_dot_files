@@ -17,6 +17,7 @@
 - [marked](https://github.com/markedjs/marked) - nice js tool that converts md to html
     - has support for CommonMark and GH flavored md
 - [grip](https://github.com/joeyespo/grip) is python cli tool that calls GH API to convert markdown to html/css
+- [markdownlint](https://github.com/markdownlint/markdownlint) - linter for markdown, ruby project
 
 ```markdown
 ### PARAGRAPHS

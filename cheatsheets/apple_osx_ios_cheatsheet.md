@@ -124,6 +124,7 @@
 - cmd + shift [/]         - back/forward tabs in window
 - cmd + \`  (cmd + backtick) - cycle through windows
 - cmd + L                 - select url bar
+- cmd + option + i        - toggle open developer tools
 - spacebar                - scroll down
 - spacebar + shift        - scroll up
 - tab/shift+tab           - goto next/prev field in browsertab+page

@@ -177,7 +177,9 @@ echo "11 * 3 / 4" | bc      # = 8, it rounds down for division
 strings somebin
 
 # NETCAT
-nc -l 127.0.0.1 9001     #listen on 9001
+nc -l 127.0.0.1 9001     # TCP listen on 9001
+nc -u -l 127.0.0.1 9001     # UDP listen on 9001
+nc -u 127.0.0.1 3000        # create connect ton 127.0.0.1 port 3000
 
 # WC - word count
 wc -l somefile   # count # of lines in file
