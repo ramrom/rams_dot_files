@@ -1,13 +1,18 @@
 # GOOGLE
-- console.developers.google.com     - configure my apps and whatnot as google developer
-- cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
+- `console.developers.google.com`     - configure my apps and whatnot as google developer
 - how google knows device is the same/familiar
     - https://security.stackexchange.com/questions/103976/how-exactly-does-google-account-decide-my-device-or-location-is-familiar
 - takeout - https://takeout.google.com
     - download basically *any* google data, including all photos
+
+## CACHE
+- google caches the internet, their web crawler indexes the internet and caches it
+- https://blog.hubspot.com/marketing/google-cache
 - example to search google cache for slashdot: http://webcache.googleusercontent.com/search?q=cache:http://www.slashdot.org
+    - *NOTE* oct'24 - this doesnt work
 
 ## OAUTH
+- cli script with oauth2: https://martinfowler.com/articles/command-line-google.html
 - https://developers.google.com/identity/protocols/oauth2
     - jan2023, refresh tokens unused for 6 months expire
 

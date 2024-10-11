@@ -8,15 +8,19 @@
     - WAL introduced
 - ver8.0 (release 2005) - point-in-time recovery
 - ver8.3 (release 2008) - pg_standby
+    - added `hstore` type
 - ver9.0 (release 2010) - hot standby, streaming replication
 - ver9.1 (release 2011) - sync replication, pg_basebackup
 - ver9.2 (release 2012) - cascading replication
 - ver9.4 (release 2014) - replication slots, logical decoding(building blocks for logical replication)
+    - added `jsonb`
 - ver10 (release 2022?) - full logical replication
 
 ## TYPES
 - `text` - unbounded string
+- `hstore` - first unstructured data type in posgres, a flat key/value type, no nesting
 - `json` - same as varchar or text, but enforces it's a valid json string
+    - `jsonb` almost always better, maybe `json` if never querying a key/value in the data
 - `jsonb` - binary format of json, takes more time to store, but you can build indexes on it
     - postgres team was looking at mongodb `bson` but went with their own instead
 
@@ -31,6 +35,10 @@
 ### FEATURE
 - expression - index based on result of expression/function, and not just value of a column
 - partial - only index some rows, usually specified by a WHERE clause
+### DOCS
+- https://dba.stackexchange.com/questions/74879/how-to-tell-which-indexes-are-not-being-used
+    - big query that reads metatables to figure out what indexes are being used
+- https://www.datadoghq.com/blog/postgresql-monitoring/ - good tips on monitoring postgres
 
 ## PSQL
 - `\conninfo` - get db name, user name, host IP, port #, SSL info
@@ -61,6 +69,8 @@
     - each transaction gets it's own isolation view of the database
     - more similar to optimistic locking where each transaction doesn't directly block others
 - locks
+    - https://raghavt.blogspot.com/2011/11/deadlocks-in-postgresql.html?utm_source=postgresweekly&utm_medium=email
+        - decent doc on row/table, share/exclusive locks
     - table lock vs row lock
     - common
         - access share - anyone can read on table, cant write to table
@@ -72,6 +82,9 @@
             - rollback/re-try if it changed
             - often used when application can't have a persistent db connection to explicit/pessimistic lock
 - when a transaction is commited, WAL transactions are written
+- [statistics](https://www.postgresql.org/docs/10/planner-stats.html)
+    - https://www.citusdata.com/blog/2018/03/06/postgres-planner-and-its-usage-of-statistics/
+    - postgres gathers stats of table usage, `EXPLAIN` uses this data to query plan
 
 ## SCALING
 - table partitioning(sharding) - each partition contains a subset of rows

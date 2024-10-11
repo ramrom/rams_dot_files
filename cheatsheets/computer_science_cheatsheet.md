@@ -55,6 +55,12 @@ public static void main(String[] args) {
 ```
 ### MEMORY ALIGNMENT
 - n-byte (where n is a power of 2) alignment means the address has a minimum of log2(n) least-significant zeros when represented in binary
+### ENDIANNESS
+- the order in which data is trasmitted over a medium, particularly the bytes in a word
+- little endian vs big endian - big endian means most significant byte of word stored at smallest memory address
+    - digits/numbers in english are written big endian, most significant digits on left side
+- network protocols inc modern internet related ones, are all big endian, often just called "network order"
+- process/cpu architecture are generally little endian
 ### ALLOCATION
 - arena(zone/area) allocation strategy
     - esentially allocating a very large contiguous chunk of heap memory and managing it yourself, then deallocating the entire thing

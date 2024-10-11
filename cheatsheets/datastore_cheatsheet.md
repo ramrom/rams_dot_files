@@ -1,5 +1,8 @@
 # DATASTORES
 
+## DOCS
+- w3 school sql for dummies - https://www.w3schools.com/sql/sql_syntax.asp
+
 ## CONCEPTS
 - normalization - reducing the duplication of data to different levels
 - NoSQL: term can refer to many different paradigms bug are generally: column, document, key-value, and graph
@@ -16,6 +19,10 @@
         - oftentimes `attribute` column is a FK to a lookup table
         - `attribute` table might have `attribute_id`, name, desc, a data type, set of valid values, and more
     - an modern alternative to EAV is to use a document store like JSON blob
+- OLTP vs OLAP
+    - OLTP = online transaction processing - realtime, large volume, usually use a relation DB
+    - OLAP = online analytic processing - slow complex queries, used by analysts for BI
+    - https://www.datawarehouse4u.info/OLTP-vs-OLAP.html
 
 
 ## RELATIONAL
@@ -25,10 +32,13 @@
 - tablespace vs schema - https://stackoverflow.com/questions/35120219/a-database-schema-vs-a-database-tablespace
 - transactional DDL - can rollback DDLs like transactional DMLs
     - rolloback whole table creations even
+- primary key
+    - blog on UUID as primary key: https://tomharrisonjr.com/uuid-or-guid-as-primary-keys-be-careful-7b2aa3dcb439
 ### TYPES
 - blobs - binary large objects - a type to use if storing large files like binaries or multimedia(images, video)
 ### DOCS
-- https://use-the-index-luke.com/
+- https://thoughtbot.com/blog/reading-an-explain-analyze-query-plan - lesson on how `EXPLAIN ANALYZE` works
+- https://use-the-index-luke.com/ - good tutorial on how indexes work
 ### POSTGRESQL
 - see [postgresql](postgresql_cheatsheet.md)
 ### SQLLITE
@@ -171,6 +181,8 @@
 - supports schemas for collections - https://www.mongodb.com/docs/manual/core/schema-validation/
     - for JSON uses json-schema (jul2024 - draft 4)
 - uses leader-based replication
+- [mongo hacker](https://github.com/TylerBrock/mongo-hacker) - good lib for mongo scripting
+    - *UNMAINTAINED* - use https://github.com/mongodb-js/mongosh instead maybe
 
 
 ## KEY-VALUE
@@ -232,6 +244,8 @@
         - also called OCC (optimistic concurrency control)
         - MVCC (postgres uses this) is optimistic
         - timestamp-based control is the other major type
+- https://vladmihalcea.com/how-does-mvcc-multi-version-concurrency-control-work/ - nice examples on MVCC
+    - has an insert, delete, update example
 
 ## ACID
 - Atomicity
@@ -262,6 +276,8 @@
 - famously level.fyi used google sheets for prod for long time
 
 ## TECH
+- [tigerbeetle](https://github.com/tigerbeetle/tigerbeetle) - 2023ish newish financial transaction db
+    - built in zig, super high volume, high performance, high fault tolerance
 - vitess - a db clustering system using mysql, created by google engineers, those engineers later created planetscale and use vitess
     - each mysql server is a horizontal shard abstracted as a single entity by vitess
         - prolly used mysql b/c in 2005 document store like mongoDB didnt exist
