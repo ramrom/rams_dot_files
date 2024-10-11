@@ -4,6 +4,7 @@
 - https://diveintopython.org/
 - style and intro - https://docs.python-guide.org/writing/style/
 - intro to decorators - https://realpython.com/primer-on-python-decorators/
+- leary in y minutes - https://learnxinyminutes.com/docs/python/
 
 ## SCRIPTING
 ```sh

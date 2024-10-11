@@ -8,6 +8,19 @@
 - early version didnt use `libc` much, and implemented their own syscalls in go
 - critique of why go is bad: https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride
 
+## DOCS
+- https://learnxinyminutes.com/docs/go/ - learn go in y minutes
+- https://www.golang-book.com/books/intro - gentle intro to go
+- https://go.dev/doc/effective_go - great tips on writing good go
+- https://github.com/enova/saigo - nice programming exercises from enova
+- json and go - https://go.dev/blog/json
+- `go doc` - tool is great for cli access to docs
+    - print src code for go doc symbol/type/func - `go doc -src fmt.Println`
+
+## TOOLS
+- https://go.dev/play/ - go playground, test go code on the web
+- https://github.com/fatih/vim-go - full featured go integration for vi: uses `gopls`, `delve`, Tagbar
+
 ## HISTORY
 - 1.18 added generics
 
@@ -19,6 +32,8 @@
 
 ## MEMORY
 - good article on memory alignment and padding: https://go101.org/article/memory-layout.html
+- memory alignment and atomics
+    - https://dave.cheney.net/2018/01/06/if-aligned-memory-writes-are-atomic-why-do-we-need-the-sync-atomic-package
 ### GC
 - compiler performs escape analysis: determine if data goes on heap or stack
     - if data is used outside of scope (e.g. data is returned) it needs to be on the heap
@@ -26,6 +41,8 @@
 
 ## TYPE SYSTEM
 - has pointers for "pass by reference" style, but you cant do pointer arithmetic like C/C++
+- array slices
+    - slice tricks - https://go.dev/wiki/SliceTricks
 
 ## LEARNING GUIDES
 - good quick intro: https://www.golang-book.com/books/intro
@@ -35,15 +52,15 @@
 
 ## CONCURRENCY
 - blog opinion on why channels not so great: https://www.jtolio.com/2016/03/go-channels-are-bad-and-you-should-feel-bad/
+- some caveats on channels - https://dave.cheney.net/2013/04/30/curious-channels
+    - `nil` channel always blocks, closed channels never block
+- critique of channels - https://www.jtolio.com/2016/03/go-channels-are-bad-and-you-should-feel-bad/
+    - says oftentimes things like simple mutexes are better
 
 ## GOOD LIBS
 - solid big decimal package: https://github.com/shopspring/decimal
     - uses stdlib's big.Int
 - protobuf: https://github.com/golang/protobuf
-
-## DOCS
-- print src code for go doc symbol/type/func
-    - `go doc -src fmt.Println`
 
 ## RUNTIME SCHEDULING
 - https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
@@ -51,6 +68,8 @@
     - many of these are inserted before/after function calls by compiler
     - yield points are injected in parts of code to allow runtime to pre-empt to ensure fair scheduling
 - GC generally done by concurrently running dedicated goroutines
+- quora answer on how scheduling works - https://www.quora.com/How-does-the-golang-scheduler-work
+    - Processes, Goroutines, and OS Threads
 
 ## DEPENDENCY MANAGEMENT
 - [dep](https://github.com/golang/dep) was first dep management tool, archived in 2020 in favor of mod
@@ -60,5 +79,6 @@
 - `go.mod` specifies dependent modules/packages, `go.sum` contains crypto hashes of specific mod packages
 
 ## LIBS/FRAMEWORKS
+- [awesome go](https://awesome-go.com/) - list of great go libs/code
 - [cobra](https://github.com/spf13/cobra) - CLI builder lib
 - [glow](https://github.com/charmbracelet/glow) - CLI markdown viewer
