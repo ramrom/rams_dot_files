@@ -96,8 +96,8 @@ a.include?(10)             # return false
 a=[1,2,3]; a(1..2)         # slice, inclusive, returns [2,3]
 [1,2,3,4].find{ |i| i.even? }  # will return 2
 
-# HASH
-h = { foo: {bar: {baz: 1}}}
+# HASH (associative array)
+h = { foo: { bar: { baz: 1 }}}
 h.dig(:foo, :bar, :baz)     #=> 1
 h.dig(:foo, :zot, :xyz)     #=> nil
 

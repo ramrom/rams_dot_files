@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd ~/.rustup/toolchains/stable-aarch64-apple-darwin/share/doc/rust/html/std
+out=$(fd "html$" | fzf --preview 'bat --style=numbers --color=always {} | head -500')
+open $out

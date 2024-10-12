@@ -43,6 +43,22 @@ void foo() {
     *ptr = 5; // works, the value can change
     ptr++;    // fails, cant change what pointer points to
     ```
+- has function pointers but not really first class functions
+```c
+#include <stdio.h>
+
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+
+int main() {
+    int (*operation)(int, int);  // Function pointer declaration
+    operation = add;
+    printf("Result of addition: %d\n", operation(5, 3));
+    operation = subtract;
+    printf("Result of subtraction: %d\n", operation(5, 3));
+    return 0;
+}
+```
 
 ## TYPES
 ### PRIMITVE TYPES

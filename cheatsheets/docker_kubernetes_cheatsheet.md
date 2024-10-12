@@ -76,21 +76,46 @@
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true
 - https://kubernetes.io/docs/
 - workload types: deployments(identity-less),statefulset(unique pods, persistent storage),daemonset(manages nodes)
-- pods have many containers, but typical setup is one container per pod
-- each pod gets an IP
-- node: contains many pods, can be a virtual machine or physical machine
-- ingress rules describe routing and load balancing
-    - needs an ingress controller, can use AWS, GCE, or nginx
-- containers in a pod share storage volumes and networking
-    - each pod has a unique IP, containers in a prod share the IP address and network ports
-        - containers in a pod can talk to each other using `localhost`
-        - containers in same pod can use IPC like shared memory
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
 - liveliness vs rediness
     - liveliness - verify pod is running, app/process didnt deadlock or crash or run out of memory, so cant respond to requests
         - k8 will generally restart pod
     - readiness - pod could be live but not ready to receive traffic yet, e.g. waiting for other pods/services, or populating dataset
         - k8 will just stop serving traffic to pod (but wont kill/restart it)
+- DEPLOY TYPES
+    - recreate -> all pods are updated at the same time
+    - rolling -> one pod is updated at a time
+    - blue/green -> deploy new versions to a seperate cluster, switch DNS to it
+    - canary -> see https://kubernetes.io/docs/concepts/workloads/management/#canary-deployments
+        - this is basic, lets u have both vers at the same time, if x of y total are new version, then x/y percent reqs goto new ver
+- HPA - horizontal pod autoscaler - rules for min pods, max pods
+- DEPLOYMENT
+    - main rules: ingress routing, vertical scaling, env vars, etc
+    - dont include HPA
+- istio -> service mesh for kubernetes that lets you do cool things like complicated canary deploys
+### ARCHITECTURE
+- CLUSTER - an instance of a kubernetes system
+    - has a control plane and composed of many nodes
+    - all pods/containers talk to each other internally via a virtual network
+- NODE - contains many pods, can be a virtual machine or physical machine
+- POD - a deployable entity
+    - have many containers, but typical setup is one container per pod
+    - containers in a pod share storage volumes and networking
+    - each pod has a unique IP, containers in a prod share the IP address and network ports
+        - containers in a pod can talk to each other using `localhost`
+        - containers in same pod can use IPC like shared memory
+- SERVICE - has a stable IP and DNS, pods don't
+- INGRESS - rules to describe routing and load balancing for external ingress traffic
+    - needs an ingress controller, can use AWS, GCE, or nginx
+    - ingress route to the services
+- KUBELET - a agent that lives in each node, manages that node and communicates with control plane
+- CONTROL PLANE - orchestrates and manages the entire cluster, talks to the kubelets
+    - API server - communication hub, all clients talk to it, including CLI tools, GUI admin tools, and pods and kubelets in cluster
+    - controller manager - manages the desired state of cluster by monitoring the cluster
+    - scheduler - figures out where to deploy new pods based on requirements and availability
+    - etcd - key/value store - persistent stores all config data, real time status of nodes/pods
+- can deploy multiple control planes for HA in production
+### CLI
 - `kubectl config get-contexts` - print session contexts
 - `kubectl config use-context foobar` - set current context
 - `kubectl config current-context` - print current context
@@ -104,23 +129,10 @@
     - `kubectl events --types=Warning,Normal` - only show events of warning and normal
 - tailing logs
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
-- deployments
-    - get _all_ deployment info in json: `kubectl get deployments --all-namespaces -o json`
-- HPA - horizontal pod autoscaler
-    - rules for min pods, max pods
-    - `kubectl get hpa --all-namespaces` - get hpa status on all pods
-- `deployments`
-    - main rules: ingress routing, vertical scaling, env vars, etc
-    - dont include HPA
-- deploys
-    - recreate -> all pods are updated at the same time
-    - rolling -> one pod is updated at a time
-    - blue/green -> deploy new versions to a seperate cluster, switch DNS to it
-    - canary -> see https://kubernetes.io/docs/concepts/workloads/management/#canary-deployments
-        - this is basic, lets u have both vers at the same time, if x of y total are new version, then x/y percent reqs goto new ver
-- istio -> service mesh for kubernetes that lets you do cool things like complicated canary deploys
 - copy a file from pod to local machine
     - `kubectl cp <pod-name>:<some-file> <our local destination directory>`
+- get _all_ deployment info in json: `kubectl get deployments --all-namespaces -o json`
+- `kubectl get hpa --all-namespaces` - get hpa status on all pods
 ### K9S
 - awesome TUI for kubernetes
 - learn to use https://github.com/derailed/k9s

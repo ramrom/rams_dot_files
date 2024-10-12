@@ -31,6 +31,7 @@
 - technical reference: https://doc.rust-lang.org/reference/introduction.html
 - rust in Y minutes: https://learnxinyminutes.com/docs/rust/
 - `rustup doc` - open local copy of docs in browser
+    - `rustup doc std::collections::HashMap` - open a specific topic in browser
     - `rustup doc --std` to jump straight to std lib
     - `rustup doc --book` to jump straight to "The Rust Programming Language" book
 ### REPL
@@ -79,6 +80,7 @@
     - `cargo fmt --file=/path/to/file` - format just one file
     - `cargo fmt --check`  - print diff of format changes to shell
 - `rust-analyzer` - Rust LSP
+- `rustdoc` - generate docs for the project
 
 ## CARGO
 - native package manager
@@ -94,7 +96,10 @@
 - `cargo tree` - print dependency tree
 - `cargo build -v` - show exactly what commands it's running
 - `cargo build --manifest-path /path/to/Cargo.toml` - specify `Cargo.toml` file in another location
-- `cargo doc --open` - open a crates built docs in browser
+- `cargo doc` - build docs for current crate, including dependencies
+    - `cargo doc --open` - open docs for crate in browser
+    - `cargo doc --document-private-items` - docs private items too
+    - `cargo doc --all-features` - docs for every feature flag
 ### CRATE
 - package versions of a crate cant be deleted, they can be yanked
     - this means lock files with yanked versions can still be used, but new projects cannot use this version
@@ -309,7 +314,7 @@ match triple {
 - `let a = (1, "hi"); let secondfield = a.1;`
 ### ARRAYS
 - is a primitive type, cannot change size
-- function argument type annotation: unsized `[T]`, sized `[T, 3]`
+- function argument type annotation: unsized `[T]`, sized `[T; 3]`
 - indexing starts at zero, e.g. `a[0]` is first element
 - stored in contiguous sections of memory on the stack
     - if array is too large, at runtime will get stack overflow
@@ -324,7 +329,7 @@ match triple {
 ### SLICES
 - like arrays but size not known at compile time, it's a kind of reference
 - 2 word object: 1st word is pointer to data, 2nd word is length of slice (word size = usize)
-- allows us to borrow arrays
+- allows us to borrow arrays, vec supports it too
 - type signature `[T]`, shared/immutable type signature `&[T]`, e.g. `&[i32]`
     - term "slice" is overloaded: almost always means `&[T]`, a fat pointer(address + len), not `[T]`
     - "naked" `[T]` has unknown size, can't put it on the stack, use pointer redirection like `Box<[T]>` or `Rc<[T]>` or `&[T]`
@@ -479,6 +484,7 @@ enum E {
     - they are stored in a special read-only memory of executable
 - `String`
     - is a heap-allocated `Drop` type, it's mutable/growable
+    - `lines` - split string by `\n` or `\r\n` as delimiter, then create iterator
     - it's really a wrapper around a `Vec<u8>` of bytes
     - indexing/iterating
         - you cant index (`s[1]`) because it's confusing/ambiguous, for UTF8 is it byte value? character value? grapheme cluster value?

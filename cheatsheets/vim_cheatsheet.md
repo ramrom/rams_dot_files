@@ -90,6 +90,7 @@
     - e.g. `vim.fn.printf('hi from %s', 'dude'))`
     - `resolve` - will follow a symbolic linked file to origin
     - `expand` - do shell expansions so `~` will expand to full home dir path
+        - `expand('<cword>')` - get word under cursor, `expand('<cWORD>')` - get full WORD(series of non-blank chars) under cursor
 - `vim.lsp` - LSP stuff
 - `vim.defer_fn(f, x)` - defer calling a function `f` after `x` seconds, `f` is `vim.schedule_wrap`'ed so can call `vim.api` functions
     - `vim.defer_fn(function() vim.uv.sleep(2000) end, 3000)` - in 3sec, schedule on main loop a func that sleeps for 2sec
@@ -136,7 +137,7 @@
     - `vim.system`
         - uses `uv.spawn` under the hood and is simpler API
             - unlike `spawn` it will throw error if command can't be run
-        - can be cajled syncronously(blocking main thread) by calling `wait`
+        - can be called syncronously(blocking main thread) by calling `wait`
         - neovim 0.10.x -> it's `vim.system`, pre 0.10.x - `vim.fn.system({'ls', '-a', '-l'})`
 - get OS name
     - `:lua print(vim.loop.os_uname().sysname)`
