@@ -3,6 +3,7 @@
 # VI
 alias v='nvim'
 alias vnls='NO_LSP=1 nvim'
+alias vnlsa='NO_LSP_AUTOSTART=1 nvim'
 alias vnn='NO_NOICE=1 nvim'
 alias vf='NVIM_APPNAME=nvimfire nvim'
 alias vnoplug='VIM_NOPLUG=1 nvim'    # simple, dont load plugins

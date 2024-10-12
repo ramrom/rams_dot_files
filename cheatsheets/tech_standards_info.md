@@ -415,8 +415,10 @@
     - bills/pricing revenue mainly from indexing volume
 - StatsD - application monitoring system
     - Invented by Etcy originally, datadog is big on statsD
+        - 2011 etcy blog: https://www.etsy.com/codeascraft/measure-anything-measure-everything/
     - StatD messages are text based and simple, clients are super thin (no threads, no buffers)
     - many language-specific client libs implement the protocol for emitting UDP events to a StatsD Daemon
+    - UDP b/c it's fire-and-forget, and ur app performance will never take a hit
     - StatsD daemon can store data to many backends/dbs, e.g. influxDB or graphite
 
 ## LANGUAGES/FRAMEWORKS

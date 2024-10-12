@@ -85,6 +85,7 @@
 - `vim.api` - all lua->C, main api to control nvim using msgpack/RPC
     - main docs: https://neovim.io/doc/user/api.html
     - `vim.api.nvim_exec2` - run vimscript, can capture output
+- `vim.json.decode` - decode a JSON encoded string into a lua object
 - `vim.fn` - table exposes regular vimL functions 
     - all builtin functions: https://neovim.io/doc/user/builtin.html#builtin-functions)
     - e.g. `vim.fn.printf('hi from %s', 'dude'))`

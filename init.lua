@@ -795,6 +795,39 @@ LoadLuaSnip = function()
     require("luasnip.loaders.from_vscode").lazy_load()
 end
 
+--------------------- TABOUT --------------------------------
+LoadTabOut = function()
+    require('tabout').setup {
+        tabkey = '<C-s>', -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = '<C-d>', -- reverse shift default action,
+        enable_backwards = true, -- well ...
+        completion = false, -- if the tabkey is used in a completion pum
+        tabouts = {
+            { open = "'", close = "'" },
+            { open = '"', close = '"' },
+            { open = '`', close = '`' },
+            { open = '(', close = ')' },
+            { open = '[', close = ']' },
+            { open = '{', close = '}' }
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {} -- tabout will ignore these filetypes
+    }
+end
+
+
+----------------- AUTOPAIR ----------------------------------
+LoadAutoPair = function()
+    require('nvim-autopairs').setup({ map_c_h = true }) -- Map the <C-h> key to delete a pair
+    local Rule = require('nvim-autopairs.rule')
+    require('nvim-autopairs').add_rule(Rule("<",">","rust"))
+end
+
+
 --------------------------------------------------------------------------------------------------------
 -------------------------------- LSP CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -805,6 +838,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+LSPAutoStartEnable = not vim.env.NO_LSP_AUTOSTART
 
 -------------------------------- NVIM-CMP -------------------------------------------
 LoadAutoComplete = function()
@@ -887,39 +921,6 @@ LoadAutoComplete = function()
         },
     }
 end
-
---------------------- TABOUT --------------------------------
-LoadTabOut = function()
-    require('tabout').setup {
-        tabkey = '<C-s>', -- key to trigger tabout, set to an empty string to disable
-        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-        act_as_tab = true, -- shift content if tab out is not possible
-        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-        default_shift_tab = '<C-d>', -- reverse shift default action,
-        enable_backwards = true, -- well ...
-        completion = false, -- if the tabkey is used in a completion pum
-        tabouts = {
-            { open = "'", close = "'" },
-            { open = '"', close = '"' },
-            { open = '`', close = '`' },
-            { open = '(', close = ')' },
-            { open = '[', close = ']' },
-            { open = '{', close = '}' }
-        },
-        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-        exclude = {} -- tabout will ignore these filetypes
-    }
-end
-
-
------------------ AUTOPAIR ----------------------------------
-LoadAutoPair = function()
-    require('nvim-autopairs').setup({ map_c_h = true }) -- Map the <C-h> key to delete a pair
-    local Rule = require('nvim-autopairs.rule')
-    require('nvim-autopairs').add_rule(Rule("<",">","rust"))
-end
-
 
 ---------------- BFQ ---------------------------------------
 LoadBQF = function()
@@ -1029,16 +1030,17 @@ LoadDAP = function()
 end
 
 ----------------- LUA LSP ----------------------------
--- TODO: neovim lspconfig setup - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+-- TODO: neovim lspconfig setup - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
 LoadLuaLSP = function()
     require'lspconfig'.lua_ls.setup{}
 end
 
 
 ---------------- RUST LSP ---------------------------
--- config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+-- config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
 LoadRustLSP = function()
     require('lspconfig').rust_analyzer.setup({
+        autostart = LSPAutoStartEnable,
         settings = {
             ["rust-analyzer"] = {
                 imports = {
@@ -1063,6 +1065,7 @@ end
 ------------ GOLANG gopls LSP ----------------------
 LoadGolangLSP = function()
     require'lspconfig'.gopls.setup{
+        autostart = LSPAutoStartEnable,
         cmd = {"gopls", "serve"},
         filetypes = {"go", "gomod", "gotmpl" },
         root_dir = require("lspconfig/util").root_pattern("go.mod", ".git"),
@@ -1123,6 +1126,7 @@ LoadJDTLSServer = function()
     end
 
     local config = {
+        autostart = LSPAutoStartEnable,
         -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
         cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
         root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
@@ -1149,6 +1153,7 @@ end
 -- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#groovyls
 LoadGroovyLSP = function()
     require('lspconfig').groovyls.setup{
+        autostart = LSPAutoStartEnable,
         cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
     }
 end
@@ -1162,6 +1167,7 @@ end
 LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
     require('lspconfig').kotlin_language_server.setup{
+        autostart = LSPAutoStartEnable,
         -- cmd = { "kotlin-language-server" },
         cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
         filetypes = { "kotlin", "kt" },
@@ -1208,12 +1214,12 @@ end
 -------------------------------------------------------------------------------------------------------
 vim.g.mapleader = " "
 
---- TODO: Prime open real estate for key remapping
+--- NOTE: Prime open real estate for key remapping
     -- NORMAL MODE
         -- <leader> + ,/l/u/x/<0-9>
         -- <Leader><Leader>  (most open)
         -- <BS>
-        -- c-q(same c-v), c-s(pause ctrl flow)
+        -- c-q(same as c-v), c-s(pause ctrl flow)
         -- c-x (opposite of c-a, i clobber c-a for tmux meta)
         -- ;  - semicolon repeats last f/F motions
         -- ,  - in reverse direction
@@ -1371,6 +1377,8 @@ vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column
 vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
+-- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
+vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
 
 ----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
