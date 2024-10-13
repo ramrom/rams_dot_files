@@ -840,6 +840,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- NOTE: vim.env.FOO will be `nil` if env var isnt set, not `nil` = `true`, if set and a string not `someval` is `false`
 LSPAutoStartEnable = not vim.env.NO_LSP_AUTOSTART
+-- print("autostart: " .. tostring(LSPAutoStartEnable))
 
 -------------------------------- NVIM-CMP -------------------------------------------
 LoadAutoComplete = function()

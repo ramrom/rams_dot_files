@@ -76,7 +76,7 @@
 
 ## LSP
 - language servers - https://langserver.org/
-    - introduced in 2016 for microsoft VSC, then made an open standard
+    - introduced in 2016 for microsoft VSCode, then made an open standard
 - uses JSON RPC for message passing b/w client and server
 - DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
 - extension: tree view protocol

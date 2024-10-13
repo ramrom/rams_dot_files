@@ -663,17 +663,21 @@ public static void main(String[] args) {
 - java: JIT compiler means it'll find "hot spots" in java bytecode and compile those sections to machine code
     - next encounter of hot spot it will execute the whole section, instead of interpretting byte code one by one
     - AOT compiler enables java bytecode to be tranformed into native machine code b4 application is run
-### TREE-SITTER
+### TREESITTER
 - a general fast incremental parsing for any lang/format intended for text editor
     - intended to be better than the regex-based systems that IDEs (including vim) use, faster and more accurate
 - invented by github for atom editor in 2018
 - official site - https://tree-sitter.github.io/tree-sitter/
-- language parsers files by language and creates ASTs
-    - can query AST to do things like:
-        - smarter syntax highlighting (better than vim's regex)
-        - better formatting(e.g. `=`)
-        - better folding
-    - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- a grammar for a language/format is defined by rules in `grammar.js`, CLI read this and outputs C parser `parser.c`
+- language parsers files by language and creates CST(concrete syntax trees)
+- modules can use query on the CST to do things like:
+    - syntax highlighting
+        - generally more accurate and faster (especially since it's incremental) than regex highlighting that most editors use
+    - formatting, e.g. indentation
+    - folding
+    - incremental selection
+- parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- 2024 most modern editors integrate it including: atom, neovim, zed, helix, emacs
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 

@@ -37,6 +37,10 @@
     - can use `pcall` func that takes a func and args, calls that func and returns `true` is success or `false`,`err_msg` if failure
 - all variables are global by default (placed in a table named `_G`)
     - declare local vars with `local v = 'hi'`
+### TYPES
+- has `boolean`, `nil`, `number`, `string`, `table`, `function`, and `userdata`
+- [userdata type](https://neovim.io/doc/user/luaref.html#lua-userdatatype) - stores artitrary C data in lua variable
+    - cannot be created/modified by lua code, only C API
 
 ## CONTROL STRUCTURES AND LOOPS
 ```lua
@@ -216,6 +220,7 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
 - pretty print a table
     - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
 - `tonumber` - convert string to number
+- `tostring` - convert to string (`print` - need to convert `nil`, `boolean`, `table`, `function` types b4 concat)
 - truthiness - `nil` and `false` are both falsey, everything else is truthy
     ```lua
     not nil     -- true

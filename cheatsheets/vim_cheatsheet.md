@@ -14,7 +14,13 @@
 - vim codebase is basically single-threaded and sychronous, core vim code can only run in main loop
 
 ## NEOVIM
-- nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
+- 👍 key design decisions over vim
+    - lua over vimL as scripting language
+    - treesitter over regex
+    - built-in LSP client
+    - de-coupled UI components
+    - msgpack RPC API
+    - libuv integration
 - sept2020 good video on why lua is good for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
     - by core nvim maintainer [TJ Devries](https://www.google.com/search?q=tj+devries)
 - 2019 video on why nvim is awesome by core maintainer: https://www.youtube.com/watch?v=Bt-vmPC_-Ho
@@ -42,6 +48,8 @@
 - 0.2 - added support for Lua 5.1
     - mostly b/c LuaJIT only supports 5.1, LuaJIT much faster than standard Lua compiler
     - externalize UI: tabline, popupmenu
+- 0.3
+    - externalize UI: cmdline, wildmenu
 - 0.4
     - Lua standad modules, full scripting engine as replacement for VimL
         - particularly `vim` module introduced
@@ -52,19 +60,20 @@
     - 2021 - jdevries on why it was built-in: https://www.youtube.com/watch?v=ArwDgvYEZYk&ab_channel=TJDeVries
         - doesnt have an autocompletion engine
     - added `init.lua` (versus old `init.vim`) for configuring editor
-    - experimental tree-sitter integration
+    - experimental [tree-sitter integration](https://neovim.io/doc/user/treesitter.html)
 - 0.6 - unified diagnostics API
-- 0.7 - treeistter integration, global statusline, TUI: extended keys(ctrl-i vs tab, shift modifier)
+- 0.7 - more treesitter integration, global statusline, TUI: extended keys(ctrl-i vs tab, shift modifier)
 - 0.8 - LSP improvements (v3.16 spec coverage, LspAttach)
     - treesitter API: use queries to define spellcheck regions
+    - highlight groups can be treesitter captures like `@repeat` or `@conditional`, `TS` prefixed groups like `TSBoolean` deprecated
     - clickable statusline
+    - iterators! - `vim.iter` gives us `filter` and `map` and more!
 - 0.9 - TUI and remote UI
 - 0.10 - built-in commenting(vim-commentary), LSP inlay hints 
     - comments: https://github.com/neovim/neovim/pull/28176
 ### LUA
+- nvim-lua-guide: https://neovim.io/doc/user/lua-guide.html#lua-guide
 - see [lua cheatsheet](lua_cheatsheet.mc) for core lua stuff
-- [userdata type](https://neovim.io/doc/user/luaref.html#lua-userdatatype) - stores artitrary C data in lua variable
-    - cannot be created/modified by lua code, only C API
 - vim settings
     - `vim.o` - settings options and is equivalent to VimL's `set`
         - set background `:lua vim.o.background = 'light'`
@@ -174,9 +183,9 @@
     - syntastic is synchronous and esp large files will cause pauses
     - ale is async and client for LSP
 ### PLUGIN MANAGERS
-#### PACKER
+#### PACKER.NVIM
 - pure lua plugin manager
-#### NVIM LAZY
+#### LAZY.NVIM
 - https://lazy.folke.io/
 - pure lua plugin manager, newer and a bit faster than packer
 - plugins can be configed to lazy load based on events and condtions
@@ -266,12 +275,10 @@ C             " make selected dir node the new root node
 - shows preview window of current item in prefix window for nvim
 - `zf` will open a fzf prompt to fuzzy search quickfix items
     - `ctrl-t` and x/v will open in new tab or vert/hor split
-### TREE-SITTER
-- nvim plugin for [tree-sitter](./computer_science_cheatsheet.md)
-- a general semantic file parser, available to neovim as a plugin
+### NVIM-TREESITTER
+- nvim plugin for [treesitter](./computer_science_cheatsheet.md) 
+- makes installing parsers easy
 - good article - https://thevaluable.dev/tree-sitter-neovim-overview/
-- pre neovim 0.8.0 treesitter highlight groups all prefixed with `TS`, e.g. `TSBoolean`, later depercated
-- AST of a file buffer is constantly parsed as changes are made
 - neovim 0.10 - `InspectTree` pops open window on right to see the whole syntax tree
 - markdown parser used - https://github.com/tree-sitter-grammars/tree-sitter-markdown
 ### VIM-GH-LINE
