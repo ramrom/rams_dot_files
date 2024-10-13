@@ -44,10 +44,13 @@ sequenceDiagram
 ```
 
 ## PLANTUML
+- https://github.com/plantuml/plantuml
 - https://plantuml.com/
+- can do ascii diagrams! - https://plantuml.com/ascii-art
 - far more sophisticated in features than mermaid
 
 ## ASCII
-- https://metacpan.org/dist/App-Asciio/view/lib/App/Asciio.pm
+- [asciio](https://metacpan.org/dist/App-Asciio/view/lib/App/Asciio.pm)
 - drawit vim plugin: https://www.thegeekstuff.com/2009/12/how-to-create-ascii-drawings-in-vim-editor-draw-boxes-lines-ellipses-arrows-inside-text-file/#more-2732
 - asciiflow - https://asciiflow.com/
+- [monodraw](https://monodraw.helftone.com/) - sophisticated by not free, mac only

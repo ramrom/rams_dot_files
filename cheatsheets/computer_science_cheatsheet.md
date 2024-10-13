@@ -663,6 +663,20 @@ public static void main(String[] args) {
 - java: JIT compiler means it'll find "hot spots" in java bytecode and compile those sections to machine code
     - next encounter of hot spot it will execute the whole section, instead of interpretting byte code one by one
     - AOT compiler enables java bytecode to be tranformed into native machine code b4 application is run
+### TREE-SITTER
+- a general fast incremental parsing for any lang/format intended for text editor
+    - intended to be better than the regex-based systems that IDEs (including vim) use, faster and more accurate
+- invented by github for atom editor in 2018
+- official site - https://tree-sitter.github.io/tree-sitter/
+- language parsers files by language and creates ASTs
+    - can query AST to do things like:
+        - smarter syntax highlighting (better than vim's regex)
+        - better formatting(e.g. `=`)
+        - better folding
+    - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- good article on it https://teknologiumum.com/posts/introductory-to-treesitter
+    - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
+
 
 ## DEPENDENCY MANAGEMENT
 - see [build_dependency_tools_cheatsheet.md]

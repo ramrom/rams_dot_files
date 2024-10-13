@@ -216,6 +216,11 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
 - pretty print a table
     - see func in https://stackoverflow.com/questions/41942289/display-contents-of-tables-in-lua
 - `tonumber` - convert string to number
+- truthiness - `nil` and `false` are both falsey, everything else is truthy
+    ```lua
+    not nil     -- true
+    not ""      -- false
+    ```
 ### OOP 
 - simulate object oriented style - https://www.lua.org/pil/16.html
 - can define a function that takes a receiver. `a = { var = 0 }; function a.inc(self, num) self.var = self.var + num end`

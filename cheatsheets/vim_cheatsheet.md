@@ -267,21 +267,13 @@ C             " make selected dir node the new root node
 - `zf` will open a fzf prompt to fuzzy search quickfix items
     - `ctrl-t` and x/v will open in new tab or vert/hor split
 ### TREE-SITTER
+- nvim plugin for [tree-sitter](./computer_science_cheatsheet.md)
 - a general semantic file parser, available to neovim as a plugin
-    - main page - https://tree-sitter.github.io/tree-sitter/
-- intended to be better than the regex-based systems that IDEs (including vim) use
-- language parsers files by language and creates ASTs
-    - can query AST to do things like:
-        - smarter syntax highlighting (better than vim's regex)
-        - better formatting(e.g. `=`)
-        - better folding
-    - parsing is restricted to just file, so LSPs will be way more accurate, but LSPs generally slower, treesitter is fast async c code
+- good article - https://thevaluable.dev/tree-sitter-neovim-overview/
 - pre neovim 0.8.0 treesitter highlight groups all prefixed with `TS`, e.g. `TSBoolean`, later depercated
 - AST of a file buffer is constantly parsed as changes are made
-- good article - https://thevaluable.dev/tree-sitter-neovim-overview/
-- good article on it https://teknologiumum.com/posts/introductory-to-treesitter
-    - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 - neovim 0.10 - `InspectTree` pops open window on right to see the whole syntax tree
+- markdown parser used - https://github.com/tree-sitter-grammars/tree-sitter-markdown
 ### VIM-GH-LINE
 - *NOTE* vim-rhubarb also supports this functionality
 - blob-view: <leader>gh

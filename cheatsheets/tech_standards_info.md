@@ -303,7 +303,7 @@
 
 ## DATA FORMATS
 ### TEXT
-- JSON
+- JSON, [see cheat](./json_jq_cheatsheet.md)
 - XML
 - CSV
 - TSV (tab seperated values)

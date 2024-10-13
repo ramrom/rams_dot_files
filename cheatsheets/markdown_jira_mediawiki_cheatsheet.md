@@ -12,6 +12,7 @@
         - https://docs.github.com/en/rest/markdown/markdown?apiVersion=2022-11-28#render-a-markdown-document
 - https://devhints.io/markdown
 - hack to add comments (and metadata) to a markdown: https://stackoverflow.com/questions/4823468/comments-in-markdown
+- treesitter grammar for markdown: https://github.com/tree-sitter-grammars/tree-sitter-markdown
 ### TOOLS
 - pandoc can do basic markdown conversion to html/odf/docx and others
 - [marked](https://github.com/markedjs/marked) - nice js tool that converts md to html

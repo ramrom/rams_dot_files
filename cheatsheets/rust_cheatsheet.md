@@ -838,7 +838,8 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
     - [clap](https://docs.rs/clap/latest/clap/) - awesome CLI argument parser lib
     - [ratatui](https://ratatui.rs/) - TUI builder lib
     - [crossterm](https://github.com/crossterm-rs/crossterm) - lib for ANSI codes
-    - [colored](https://lib.rs/crates/colored) - good ANSI terminal color lib for strings
+    - [termcolor](https://github.com/BurntSushi/termcolor) - good ANSI termical color lib
+    - [colored](https://crates.io/crates/colored) - looks easier to use than termcolor
     - [prettytable-rs](https://lib.rs/crates/prettytable-rs) - pprint tables to terminal
 - [pingora](https://github.com/cloudflare/pingora) - a framework for building networking components
     - cloudflare wrote it b/c nginx *was too inefficient!* (pingora uses a 1/3 of cpu and memory as nginx)

@@ -838,6 +838,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+-- NOTE: vim.env.FOO will be `nil` if env var isnt set, not `nil` = `true`, if set and a string not `someval` is `false`
 LSPAutoStartEnable = not vim.env.NO_LSP_AUTOSTART
 
 -------------------------------- NVIM-CMP -------------------------------------------
@@ -912,6 +913,7 @@ LoadAutoComplete = function()
                 mode = "symbol_text",
                 menu = ({
                     buffer = "[Buffer]",
+                    path = "[Path]",
                     nvim_lsp = "[LSP]",
                     luasnip = "[LuaSnip]",
                     nvim_lua = "[Lua]",
@@ -1097,6 +1099,7 @@ ValidateJavaInstallDirs = function(JavaInstalls)
     return result
 end
 
+-- TODO: like kotlin LS, use a binstub to start server with JAVA_HOME to java17
 -- jdtls lang server is a java17 app itself, make sure JAVA_HOME of shell is set to java17
 LoadJDTLSServer = function()
     local JavaInstalls = {
@@ -1390,7 +1393,6 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")
-    vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
     vim.keymap.set("n", "glh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
         {desc = "toggle inlay hints"})
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
