@@ -205,9 +205,8 @@
     - good for archival storage
     - easy cache overflow, and slow for frequent writing
 
-## [HTTP](http_web_tls_cheatsheet.md)
-
-## [WEB SERVERS](http_web_tls_cheatsheet.md)
+## WEB SERVERS
+- see [WEB SERVERS](http_web_tls_cheatsheet.md)
 
 ## RSS/ATOM
 - RSS(Really Simple Syndication)
@@ -621,16 +620,20 @@
 - standar for files for apps and configs
 
 ## NETWORK PROTOCOLS
+### CONCEPTS
 - AS = autonomous system, ASN = autonomous system number
     - IANA assigns blocks of ASNs to RIRs(regional internet registries) which in turn assign ASNs to LIR(local internet registires)
     - BGP routers advertise path vectors b/w ASes to each other
     - routing within as AS is an IGRP(interior gateway routing protocol)
+- CIDR - classless inter-domain routing - make routing tables easier
+- VLSM - variable length subnet masking - make better use of address space
 ### LAYER 7
 - WebDAV - HTTP based protocol for data manipulation
 - CalDAV - based on WebDAV for sharing and syncing calander data
     - uses iCalander format for the data
 - CardDAV - protocol for sharing contact data
 - XMPP - extensible messaging and presence protocol (original call jabber) - peer-to-peer, used for IM(instant messaging), uses TCP
+- HTTP - [see these notes](http_web_tls_cheatsheet.md)
 ### WEBSOCKETS
 - layer 7 protocol, fully bidirectional semantics b/w two hosts
 - http2 gets close to websockets, one major advantage of websockets is no header is required for every message
@@ -654,6 +657,20 @@
     - techincally a socket is 5 fields, above 4 plus protocol(UDP or TCP)
     - a client(single IP) can thus have 2^16(~65k) connections to a server IP and port
     - uses 3-way handshake to establish connection: SYN -> SYN ACK -> ACK
+- Nagle's algorithm - reduce # of packets sent over the network, for efficiency since 
+    - each packet has overhead from a headers: 20bytes for TCP header + 20 bytes IP header
+    - is an outstanding packet w/o an ack exists, sender should buffer data until a full TCP packet can be sent
+    - common issue was telnet session, keyboard press is 1 byte, which sends a 41byte packet, very inefficient
+    - `TCP_NODELAY` is a option to disable nagle's algo
+### UDP
+- conectionless - no handshakes to establish a connection
+    - being connectionless it can broadcast/multicast
+- no ackknowlegements of packets, so delivery not gauranteed, and order is not gauranteed
+- no congestion control, TCP has sliding window for this
+- datagrams, you get the entire packet of data as one logical piece, max size is 65,527bytes + 8byte header
+    - a receive/read on a udp socket will yield the whole datagram
+### SCTP
+- stream control transmission protocol - datagrams like UDP but in-order, has congestion control, and reliable
 ### IP
 - VIP - virtual IPs, IPs that are not connected to any physical interface
     - commonly used with 1-to-many NATs or for redudnancy with a cluster of servers or HSRP(hot standby router protocol)
@@ -664,8 +681,6 @@
     - private address range added:
         - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
         - fec0::/10 address block = deprecated (RFC 3879)
-- CIDR - classless inter-domain routing - make routing tables easier
-- VLSM - variable length subnet masking - make better use of address space
 ### STREAMING PROTOCOLS
 - HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
 - RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
@@ -678,26 +693,23 @@
 - SFTP is FTP over SSH
 - FTPS is FTP + TLS/SSL
 - AFP (apple filing protocol), NFS (unix designed), SMB/CIFS(windows designed, supported well by all)
-- osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
+- NFS
+    - best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
+    - supports hard links well
 - CIFS/SMB info: https://linux.die.net/man/8/mount.cifs
     - `mount` will show the extensions/flags set on the samba share
     - supports hardlinks with unix extensions and/or servinfo
     - osx wont let you create hard links on samba share, but ls -i seems to recognize them fine
-#### SAMBA NOTE
-samba share ver 3, nounix set, serverino set, serverino seems to sorta support hard links
-hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
-Also when i rsync they are diff inode # files on destination
-
-in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this behavious doesnt happen
-- samba 2/3 dont support hard links:
-   - https://unix.stackexchange.com/questions/403509/how-to-enable-unix-file-permissions-on-samba-share-with-smb-2-0
-   - https://en.wikipedia.org/wiki/Server_Message_Block
-- nfs
-    - best for linux-to-linux, better than smb in this case. windows and osx dont support nfs really
-    - supports hard links well
-- NOTE: to see flags/options/attributes on a samba share, just look at `mount` command output
-- OSX samba share -v verbose
-- `-o` with username(or user) does not work
+    - osx: smbv3 performs > afs ( https://photographylife.com/afp-vs-nfs-vs-smb-performance)
+    - samba share ver 3, nounix set, serverino set, serverino seems to sorta support hard links
+    - hard link a file, then modify one: it shows same inode number, BUT `du -hs` shows usage for 2 files
+    - Also when i rsync they are diff inode # files on destination
+    - in linux if i mnt with ver=1.0, i see unix set (and serverino set), and this behavious doesnt happen
+    - samba 2/3 dont support hard links
+       - https://unix.stackexchange.com/questions/403509/how-to-enable-unix-file-permissions-on-samba-share-with-smb-2-0
+       - https://en.wikipedia.org/wiki/Server_Message_Block
+    - NOTE: to see flags/options/attributes on a samba share, just look at `mount` command output
+    - `-o` with username(or user) does not work
 
 ## OPTIONS TRADING
 - strike price - the price of the stock for which the option can be exercized at

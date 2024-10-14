@@ -1,6 +1,5 @@
 # UNICODE
 - see https://unicode.org/emoji/charts/full-emoji-list.html
-
 🤯  shock, mind-blown
 🤢  nausea
 🤮  face with vomit
@@ -36,7 +35,7 @@
 🔌  electric plug
 🎮  gamepad
 🕹  joystick
-🧸   teddy bear
+🧸  teddy bear
 🔇  muted speaker
 🔈  low speaker
 🔊  high speaker
@@ -117,6 +116,7 @@
 👽  alien
 🤡  clown
 💯  100 points/percent
+✋  hand
 👍  thumbs up
 👎  thumbs down
 🖕  middle finger
@@ -125,3 +125,7 @@
 🙏  folded hands, pray
 💪  bicep
 🦶  foot
+👌  OK hand
+🤝  handshake
+🤞  fingers crossed
+🤟  hand of the devil

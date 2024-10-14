@@ -3,9 +3,7 @@
 - `vim` invented by Bram Moolenaar in 1988, `vim` kinda short for `Vi IMitation`
 - good resource on learning vim - http://vimcasts.org
     - feb27-24 the above line with `vim:` instead of `vim -` will cause neovim(not vim) to try to read the hyperlink somehow... wtf
-- official neovim docs: https://neovim.io/doc/
 - awesome cheatsheet: https://github.com/ibhagwan/vim-cheatsheet
-- good config/starter for first time vimmers: https://github.com/nvim-lua/kickstart.nvim
 - Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
     - *NOT* totally backwards compatible with old VimL
@@ -14,13 +12,15 @@
 - vim codebase is basically single-threaded and sychronous, core vim code can only run in main loop
 
 ## NEOVIM
+- official neovim docs: https://neovim.io/doc/
+- good config/starter for first time noevimmers: https://github.com/nvim-lua/kickstart.nvim
 - 👍 key design decisions over vim
-    - lua over vimL as scripting language
-    - treesitter over regex
-    - built-in LSP client
-    - de-coupled UI components
-    - msgpack RPC API
-    - libuv integration
+    - ⭐ lua over vimL as scripting language
+    - ⭐ treesitter over regex
+    - ⭐ built-in LSP client
+    - ⭐ de-coupled UI components
+    - ⭐ msgpack RPC API
+    - ⭐ libuv integration
 - sept2020 good video on why lua is good for neovim: https://www.youtube.com/watch?v=IP3J56sKtn0
     - by core nvim maintainer [TJ Devries](https://www.google.com/search?q=tj+devries)
 - 2019 video on why nvim is awesome by core maintainer: https://www.youtube.com/watch?v=Bt-vmPC_-Ho
