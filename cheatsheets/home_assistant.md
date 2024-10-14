@@ -86,14 +86,19 @@
     - `hass-cli state list` - get current state of all entities
     - `hass-cli state history some.sensor` - get state history of a sensor
     - `hass-cli state history --since 3d --end 1d some.sensor` - get state history of a sensor b/w 3day ago to 1day ago
-- calling a service
+- calling an action(formerly service)
+    - *NOTE* check docs for exact argument names to use
+        - e.g. for google assistant, actions: https://www.home-assistant.io/integrations/google_assistant_sdk
     - `hass-cli service call system_log.clear` - clear logs
     - `hass-cli service call backup.create` - create a backup
     - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever` - send notif
     - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
     - `hass-cli service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
         - play a specific track or playlist in spotify
-    - `hass-cli service call media_player.media_play_pause --arguments entity_id=media_player.living_room_tv` - toggle play on a media player entity
+    - `hass-cli service call media_player.media_play_pause --arguments entity_id=media_player.living_room_tv` 
+        - toggle play on a media player entity
+    - `hass-cli service call google_assistant_sdk.send_text_command --arguments command="what time is it",media_player=media_player.living_room_speaker`
+        - send voice command/query to google assistant, a google home speaker in this case
 - toggle entity: `hass-cli state toggle someentity`
 - call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
 
