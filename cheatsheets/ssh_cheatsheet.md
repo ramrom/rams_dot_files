@@ -3,6 +3,8 @@
 ```sh
 # ssh into host and run single command and set a VAR for the command as well
 ssh foo@host.bar VAR=1 somecommand arg1
+ssh foo@host.bar 'echo $PATH'  # use single quote literals to avoid local expansion, this causes $PATH to be expanded remotely
+ssh foo@host.bar 'source .zshrc && echo $PATH'  # source remote rc file to get all those goodies
 
 # ssh-agent can remember the passphrase of a private key, if the key has a passphrase, which is a good idea
 # this ssh-agent only applies to the current shell/terminal session!

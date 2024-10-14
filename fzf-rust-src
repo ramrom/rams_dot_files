@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    cd ~/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/src/rust/library
+    out=$(fd -t f rs$ | fzf +m --height 100% --preview 'bat --style=numbers --color=always {} | head -500')
+    [ -n "$out" ] && $EDITOR $out
+else 
+    cd ~/.rustup/toolchains/stable-aarch64-apple-darwin/share/doc/rust/html/std
+    out=$(fd "html$" | fzf +m --height 100% --preview 'bat --style=numbers --color=always {} | head -500')
+    [ -n "$out" ] && open $out
+fi
