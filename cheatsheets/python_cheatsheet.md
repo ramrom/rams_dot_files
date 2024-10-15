@@ -6,9 +6,10 @@
 - intro to decorators - https://realpython.com/primer-on-python-decorators/
 - leary in y minutes - https://learnxinyminutes.com/docs/python/
 
-## SCRIPTING
-```sh
-python -c 'print("hi")'  # prints "hi"
+## DATA STRUCTURES
+```python
+arr = [1,2]   # array
+assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
 ```
 
 ## DEPENDENCY MANAGEMENT
@@ -31,12 +32,20 @@ python -c 'print("hi")'  # prints "hi"
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
 
+## INTROSPECTION
+- `type(foo)`   - print type
+
 ## DEBUGGING
 - breakpoints
     ```python
     import pdb
     pdb.set_trace()
     ```
+
+## SCRIPTING
+```sh
+python -c 'print("hi")'  # prints "hi"
+```
 
 ## GREAT LIBS
 - https://github.com/Textualize/rich - add rich text ANSI colors and formats to text

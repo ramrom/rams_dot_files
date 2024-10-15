@@ -1563,8 +1563,8 @@ if not vim.env.VIM_NOPLUG then
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
-        -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
-        { "folke/noice.nvim", event = "VeryLazy", opts = { },
+        { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
+        -- { "folke/noice.nvim", event = "VeryLazy", opts = { },
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise

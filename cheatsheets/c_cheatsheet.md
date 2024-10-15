@@ -29,38 +29,6 @@ void foo() {
     - jump tables are much faster than comparison but you dont see perf gains until the # of conditions is large
 
 ## TYPE SYSTEM
-- pointers constants vs constant pointers
-    ```c
-    const int* ptr;         // the pointer ptr points to a constant value, so the value it points to can't change
-    const int a = 10;
-    const int* ptr = &a;  
-    *ptr = 5;  // fails, value cant change
-    ptr++;    // works, the pointer can point to something else
-
-    int * const ptr;        // the pointer ptr is constant itself, so you cant change what the pointer points to
-    int a = 10;
-    int *const ptr = &a;
-    *ptr = 5; // works, the value can change
-    ptr++;    // fails, cant change what pointer points to
-    ```
-- has function pointers but not really first class functions
-```c
-#include <stdio.h>
-
-int add(int a, int b) { return a + b; }
-int subtract(int a, int b) { return a - b; }
-
-int main() {
-    int (*operation)(int, int);  // Function pointer declaration
-    operation = add;
-    printf("Result of addition: %d\n", operation(5, 3));
-    operation = subtract;
-    printf("Result of subtraction: %d\n", operation(5, 3));
-    return 0;
-}
-```
-
-## TYPES
 ### PRIMITVE TYPES
 - byte, char - 8bits
 - short, short int, signed short, signed short int - 16bits
@@ -90,6 +58,37 @@ typedef struct Recur {
     Recur r;
 } Recur;
 ```
+### POINTERS CONSTANTS VS CONSTANT POINTERS
+```c
+const int* ptr;         // the pointer ptr points to a constant value, so the value it points to can't change
+const int a = 10;
+const int* ptr = &a;  
+*ptr = 5;  // fails, value cant change
+ptr++;    // works, the pointer can point to something else
+
+int * const ptr;        // the pointer ptr is constant itself, so you cant change what the pointer points to
+int a = 10;
+int *const ptr = &a;
+*ptr = 5; // works, the value can change
+ptr++;    // fails, cant change what pointer points to
+```
+### FUNCTION POINTERS
+- has function pointers but not really first class functions
+```c
+#include <stdio.h>
+
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+
+int main() {
+    int (*operation)(int, int);  // Function pointer declaration
+    operation = add;
+    printf("Result of addition: %d\n", operation(5, 3));
+    operation = subtract;
+    printf("Result of subtraction: %d\n", operation(5, 3));
+    return 0;
+}
+```
 
 ## CONCEPTS
 ### NULL POINTER
@@ -99,7 +98,7 @@ typedef struct Recur {
     - bit representation for null pointer could be anything, e.g. `0xDEADBEEF`, compiler's job to know
     - i.e. it's not the same bit representation for the unsigned integer literal zero
 
-## MEMORY MANAGEMENT
+## MEMORY
 - stack is smaller than heap, and bytes constantly resused, thus almost always on CPU cache, making it fast
 - `memcpy` - mem copy, copy bytes/char from one memory location to another
     - since byte/char is smallest unit of data to operate on, can copy any other type this way, usually using `sizeof(sometype)`
@@ -181,8 +180,11 @@ typedef struct Recur {
     - `sizeof()` is not a real function call in runtime, it is replaced at compile time with the known size
 - array passing to a function e.g. `void foo(int arr[1])`, (or `int *arr`), your really copying a pointer
     - thus funtion is still modifying the same underlying array data
-    - to force pass by value semantics, declare wrapper struct for array, and pass that in func
-        - e.g. `struct ArrWrap { int arr[1]; }; void foo(struct ArrWrap a) { ... }`
+    - have to explicitly make a copy and pass it
+        - copy contents of string array to another string array `strncpy(array2, array1, 18)`
+            - some caveats: make sure target array is bigger than source
+        - make a new buffer and do `memcpy`
+        - loop over every item and copy
 - array syntax does have some type checking
     ```c
     struct S;

@@ -2,7 +2,7 @@
 - OG `vi` invented by bill joy in 1970s
 - `vim` invented by Bram Moolenaar in 1988, `vim` kinda short for `Vi IMitation`
 - good resource on learning vim - http://vimcasts.org
-    - feb27-24 the above line with `vim:` instead of `vim -` will cause neovim(not vim) to try to read the hyperlink somehow... wtf
+    - feb27-24 above line with `vim:` give error: `BufReadPost Autocommands for "*": Vim(append):Error executing lua callback`
 - awesome cheatsheet: https://github.com/ibhagwan/vim-cheatsheet
 - Vim9.0 introduces new version of VimL scripting language
     - 10x to 100x performance improvement, commands compiled into fast executable instructions
@@ -16,7 +16,7 @@
 - good config/starter for first time noevimmers: https://github.com/nvim-lua/kickstart.nvim
 - 👍 key design decisions over vim
     - ⭐ lua over vimL as scripting language
-    - ⭐ treesitter over regex
+    - ⭐ treesitter (replaces regex syntax groups)
     - ⭐ built-in LSP client
     - ⭐ de-coupled UI components
     - ⭐ msgpack RPC API
@@ -189,6 +189,7 @@
 - https://lazy.folke.io/
 - pure lua plugin manager, newer and a bit faster than packer
 - plugins can be configed to lazy load based on events and condtions
+- `lazy-lock.json` file (generally in `~/.config/nvim/lazy-lock.json`) - has current version(branch/commit) of plugins installed
 #### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
@@ -206,6 +207,7 @@
 ### FZF-LUA
 - uses fzf but plugin written in lua, lots more pickers and features than fzf.vim
 - multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
+- file search many root dirs: `lua require('fzf-lua').files({ cmd = "fd . dir1/sub1 dir2"  })`
 ### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 - Gedit HEAD~3:%  - git show HEAD~3:<current file>
@@ -443,6 +445,7 @@ C             " make selected dir node the new root node
 
 
 ## EX MODE
+- AKA **COMMAND-LINE MODE**
 - a shitty REPL to run Ex commands
     - essentiall Command-Line mode but you dont exit ex mode after running a command
 - to enter Ex mode
@@ -452,8 +455,14 @@ C             " make selected dir node the new root node
     `visual` - exit ex mode
     `vi` - short for visual
 
+## COMMAND-LINE WINDOW
+- has history of Ex commands run, can edit and rerun them
+- can edit as if in insert/normal, super nice as you have vim motions available
+- from normal mode: `q:` - edit command history, `q/` - edit search history, `q?` - serach history reverse
+- from command mode: `ctrl-f` edit command history
+- then can yank/edit/run old command history, edit and hit enter on command
 
-## COMMAND-LIKE MODE
+## COMMAND MODE
 - running shell commands
     - *NOTE* basically all these are synchronous and will block the vim session until done
     - `:!` - run a shell command, e.g. `:!echo hi`
@@ -463,11 +472,6 @@ C             " make selected dir node the new root node
     - `:silent!!` - run shell command, suppress all messgs (stdout + stderr), e.g. `:silent!! ls`
 - run two commands in one line with `|`
     - `:echo "hi" | echo "hi again"`
-- Command-line window
-    - command-line-window, edit as if in insert/normal
-        - from normal mode: `q:` - edit command history, `q/` - edit search history, `q?` - serach history reverse
-        - from command mode: `ctrl-f` edit command history
-    - then can yank/edit/run old command history, edit and hit enter on command
 - Keymaps
     - C-h - delete last char
     - C-w - delete last word
