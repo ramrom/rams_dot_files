@@ -223,6 +223,7 @@
 - neovim 0.10 has built in commentary (from mini.vim maintainer), API very similar to vim-commentary regardless
 ### FIRENVIM
 - https://github.com/glacambre/firenvim
+    - a similar project: https://github.com/fregante/GhostText
 - INSTALLATION - SEPERATE INIT.LUA FILE
     - create `~/.config/myfirenvimdir/init.lua` and symlink it to dedicated firenvim `init.lua` file
     - export `NVIM_APPNAME=myfirenvimdir`
@@ -281,6 +282,9 @@ C             " make selected dir node the new root node
 - good article - https://thevaluable.dev/tree-sitter-neovim-overview/
 - neovim 0.10 - `InspectTree` pops open window on right to see the whole syntax tree
 - markdown parser used - https://github.com/tree-sitter-grammars/tree-sitter-markdown
+- `TSBufDisable highlight` - turn off TS highlight for current buffer
+    - *NOTE* 2024 -if treesitter highlight is off, then vim regex default turns on
+    - see https://github.com/nvim-treesitter/nvim-treesitter/issues/2846
 ### VIM-GH-LINE
 - *NOTE* vim-rhubarb also supports this functionality
 - blob-view: <leader>gh

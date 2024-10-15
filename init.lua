@@ -647,9 +647,10 @@ NvimTreeConfig = {
 
 LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
-
-
 ---------------------- TREE-SITTER CONFIG -------------------------------
+-- NOTE: is TS is disabled for a buffer, old vim regex highlighting turns on
+-- vim.cmd(':syntax off') 
+
 LoadTreeSitter = function()
     require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
@@ -658,7 +659,14 @@ LoadTreeSitter = function()
         highlight = {
             enable = true,     -- `false` will disable the whole extension
             -- NOTE: parsers names are not the filetype name. (for `tex` filetype, include `latex`, as this is the name of the parser)
-            disable = {},
+            -- NOTE: oct2024 - tested on 36MB json file, opening file took ~35sec, with OR without disabling TS and vim-regex
+            disable = function(lang, buf)
+                local max_filesize = 20 * 1024 * 1024 -- 20 MB 
+                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                if ok and stats and stats.size > max_filesize then
+                    return true
+                end
+            end,
 
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
             additional_vim_regex_highlighting = false,
@@ -877,8 +885,8 @@ LoadAutoComplete = function()
         },
         sources = {
             { name = 'nvim_lsp' },
-            { name = 'buffer' },
             { name = 'path' },
+            { name = 'buffer' },
             { name = 'luasnip' },
         },
 
@@ -1504,7 +1512,7 @@ if not vim.env.VIM_NOPLUG then
         'tpope/vim-surround',
         'tpope/vim-repeat',
         "aklt/plantuml-syntax",
-        -- "MeanderingProgrammer/render-markdown.nvim",
+        -- "MeanderingProgrammer/render-markdown.nvim",  -- make markdown in syntax highlighting prettier in neovim
 
         --- COLORSCHEME
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },

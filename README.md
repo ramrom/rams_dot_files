@@ -16,6 +16,8 @@ My dot files and scripts for Unix-like environments
     - built-in client + nvim-lspconfig
     - auto-completion - nvim-cmp
     - snippets - LuaSnip
+- which-key - great real time help menu of my keymaps
+- noice - awesome new UI for neovim
 
 ## VIM
 - june2023 - *deprecated* vim, all in on neovim, definitely not worth maintaining both
@@ -37,7 +39,7 @@ My dot files and scripts for Unix-like environments
 - nvim-treesitter (syntax highlighting, folding)
 
 ## CORE TOOLS
-- vi
+- vim/neovim
 - tmux
 - rg
 - fzf
