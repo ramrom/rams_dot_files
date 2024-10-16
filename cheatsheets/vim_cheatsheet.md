@@ -182,15 +182,14 @@
 - ALE vs syntastic vs CoC
     - syntastic is synchronous and esp large files will cause pauses
     - ale is async and client for LSP
-### PLUGIN MANAGERS
-#### PACKER.NVIM
+### PACKER.NVIM
 - pure lua plugin manager
-#### LAZY.NVIM
+### LAZY.NVIM
 - https://lazy.folke.io/
 - pure lua plugin manager, newer and a bit faster than packer
 - plugins can be configed to lazy load based on events and condtions
 - `lazy-lock.json` file (generally in `~/.config/nvim/lazy-lock.json`) - has current version(branch/commit) of plugins installed
-#### VIM-PLUG
+### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
 ### FZF.VIM
@@ -204,6 +203,9 @@
 - BCommits    - commit hist for current buffer
 - FZF-MRU:
     - does MRU for local sessions, other vim session no affectd
+### CTRLP
+- really old fuzzy finder - https://github.com/ctrlpvim/ctrlp.vim
+- ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 ### FZF-LUA
 - uses fzf but plugin written in lua, lots more pickers and features than fzf.vim
 - multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
@@ -250,26 +252,8 @@
 - for txt `<foo>bar</foo>` -> `cst"` - change surround tag(`<foo>` here) to `"`
 - `ds[` - delete surround `[`
 - `ysiw[` - select inner word and surround with `[`
-### NERDTREE
-```vim
-?             " toggle quickhelp
-m             " bring up menu to move/rename/delete
-q             " close nerdtree
-A             " toggle zooming the nerdtree window
-r R           " refresh dir/refresh tree root
-I             " toggle showing hidden files
-F             " toggle showing file nodes
-NERDTreeFind  " no args, show file for buf in tree
-go            " open file but stay in nerdtree
-i gi          " open in new split/new split stay cursor
-s gs          " open in new/ vert split
-x             " close current dir
-p             " jump to parent node of selected node
-P             " jump to tree root
-K J           " jmp to first/last child node of current node's parent
-C             " make selected dir node the new root node
-```
 ### NVIM-TREE
+- written in lua, competing plugin is NERDTree
 - `g?` - to list commands
 - `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
 - `o` - open with window picker, if multiple windows open, select a labeled (e.g. "A" "B" "C" for 3windows) window
@@ -279,6 +263,11 @@ C             " make selected dir node the new root node
 - `f`/`F` - filter / clear filer
 - `E` - expand all
 - `W` - collapse
+### NOICE.NVIM
+- awesome new UI components for neovim https://github.com/folke/noice.nvim
+- uses nvim-notify for pretty floating notifications
+- uses nui for other components including nicer cmdline
+- `:Noice pick` - will pull up msgs/notifications in a fzf-lua or telescope picker window!
 ### NVIM-BQF
 - shows preview window of current item in prefix window for nvim
 - `zf` will open a fzf prompt to fuzzy search quickfix items
@@ -292,11 +281,9 @@ C             " make selected dir node the new root node
 - `TSBufDisable highlight` - turn off TS highlight for current buffer
     - *NOTE* 2024 -if treesitter highlight is off, then vim regex default turns on
     - see https://github.com/nvim-treesitter/nvim-treesitter/issues/2846
-### VIM-GH-LINE
-- *NOTE* vim-rhubarb also supports this functionality
-- blob-view: <leader>gh
-- blame-view: <leader>gb
-- repo-view: <leader>go
+### VIM-RHUBARB
+- rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
+- used to use vim-gh-line, but rhubarb looks better
 ### FLASH.NVIM
 - quickly jump to a word on screen, or quick select
 - similar plugins: vim-sneak, vim-easymotion
@@ -308,8 +295,6 @@ C             " make selected dir node the new root node
     - can accept any regex, not just simpe chars like `|`
 - ` :'<,'>Tabularize /:\zs`
     - \z is lookforward, align by the space char after the `:` char
-### CTRLP
-- ctrl-r toggle regex, ctrl-f/ctrl-b cycle mru/buffer/file
 
 
 ## STARTING VIM

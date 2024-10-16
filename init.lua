@@ -457,7 +457,7 @@ ToggleHarpoonBufNav = function()
         -- vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
         -- vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
         -- vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
-        print("Active harpoon mode! 𐃆 ")
+        print("Harpoon mode activated! 𐃆 ")
     else
         vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
         vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
@@ -488,7 +488,7 @@ LoadHarpoon = function()
     -- NOTE: this actually leaves a blank line in harpon file, better to use quick menu and `dd`
     vim.keymap.set("n", "<leader>kx", function() harpoon:list():remove() end, {desc = "harpoon delete"}) 
 
-    vim.keymap.set("n", "<leader>wh", ToggleHarpoonBufNav)
+    vim.keymap.set("n", "<leader>wh", ToggleHarpoonBufNav, { desc = "toggle harpoon mode" })
 end
 
 ----------------------------- FZF LUA --------------------------------------------------
@@ -671,6 +671,7 @@ WhichKeyOpts = {
         { "<leader>g", group = "git/github stuff" },
         { "<leader>e", group = "fzf grepping" },
         { "<leader>w", group = "misc config" },
+        { "<leader>k", group = "harpoon 𐃆" },
         { "<leader>u", group = "unicode" }
     }
 }
@@ -770,12 +771,12 @@ LoadNoice = function()
             lsp_doc_border = true, -- add a border to hover docs and signature help
         },
         routes = {
+          { filter = { event = "msg_show", min_height = 20 }, view = "split", },
           { filter = { event = "msg_show", find = "Saved session: " }, view = "mini", },
           { filter = { event = "msg_show", find = "B written" }, view = "mini", },
           { filter = { event = "msg_show", find = " change; before" }, view = "mini", },
           { filter = { find = "E162" }, view = "mini", },       -- no write since last change error
           { filter = { find = "E37" }, view = "mini", },       -- no write since last change error
-                -- mini view will hide after short time, cmdline persists forever...
         },
     }
 
@@ -1574,7 +1575,6 @@ if not vim.env.VIM_NOPLUG then
 
         --- GIT
         { 'tpope/vim-fugitive', event = 'VeryLazy' },
-            -- rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
         { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' }, event = 'VeryLazy' },
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
