@@ -208,6 +208,8 @@
 - uses fzf but plugin written in lua, lots more pickers and features than fzf.vim
 - multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
 - file search many root dirs: `lua require('fzf-lua').files({ cmd = "fd . dir1/sub1 dir2"  })`
+### HARPOON
+- harpoon files stored in `~/.local/share/nvim/harpoon/`
 ### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 - Gedit HEAD~3:%  - git show HEAD~3:<current file>
@@ -223,6 +225,9 @@
 ### VIM-COMMENTARY
 - `gcu` or `gcgc` - uncomment current and contiguous adjacent commented lines
 - neovim 0.10 has built in commentary (from mini.vim maintainer), API very similar to vim-commentary regardless
+### VIM-NOTIFY
+- `require('notify')("This is an message")`   - green notification
+- `require('notify')("This is an error message", "error")`   - red error notification
 ### FIRENVIM
 - https://github.com/glacambre/firenvim
     - a similar project: https://github.com/fregante/GhostText

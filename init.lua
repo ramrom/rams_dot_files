@@ -180,15 +180,18 @@ end
 
 GitAddCommitMarkdownStuff = function()
     -- NOTE: oct'23 - uv.cwd lowercased a letter (`S` to `s`) in path, just comparing lower case path for both as workaround
-    if not (string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_NOTES_DIR)) then
-        print("current working dir not the notes dir! returning")
-        return
-    end
-    if vim.bo.filetype == "markdown" then
-        vim.cmd(':w')
-        vim.cmd([[:SilentRedraw git add . && git commit -m 'added stuff']])
+    local is_notes_dir = string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_NOTES_DIR)
+    local is_work_dir = string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_WORK_DIR)
+
+    if (is_notes_dir or is_work_dir) then
+        if vim.bo.filetype == "markdown" then
+            vim.cmd(':w')
+            vim.cmd([[:SilentRedraw git add . && git commit -m 'added stuff']])
+        else
+            print("Not a markdown file!, wont add all and commit")
+        end
     else
-        print("Not a markdown file!, wont add all and commit")
+        print("current working dir not the notes dir! returning")
     end
 end
 
@@ -439,6 +442,58 @@ local LoadOneDarkProConfig = function()
         }
     })
     vim.cmd.colorscheme("onedark_dark")
+end
+
+----------------------------- HARPOON --------------------------------------------------
+UseHarpoonBufNav = false
+ToggleHarpoonBufNav = function()
+    UseHarpoonBufNav = not UseHarpoonBufNav
+
+    if UseHarpoonBufNav then
+        local harpoon = require("harpoon")
+        vim.keymap.set("n", "<leader>f", function() harpoon:list():prev() end)
+        vim.keymap.set("n", "<leader>d", function() harpoon:list():next() end)
+        -- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+        -- vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+        -- vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+        -- vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
+        print("Active harpoon mode! 𐃆 ")
+    else
+        vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
+        vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
+        -- vim.keymap.set("n", "<C-l>", "<C-w>l")
+        -- vim.keymap.set("n", "<C-h>", "<C-w>h")
+        -- vim.keymap.set("n", "<C-j>", "<C-w>j")
+        -- vim.keymap.set("n", "<C-k>", "<C-w>k")
+        print("using tab/buf nav")
+    end
+
+end
+
+LoadHarpoon = function()
+    local harpoon = require("harpoon")
+
+    vim.keymap.set("n", "<leader>wh", ToggleHarpoonBufNav)
+    -- REQUIRED
+    harpoon:setup()
+
+    vim.keymap.set("n", "<leader>kg", function() harpoon:list():add() end)
+    vim.keymap.set("n", "<leader>kk", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+    -- NOTE: this actually leaves a blank line in harpon file, better to use quick menu and `dd`
+    vim.keymap.set("n", "<leader>kd", function() harpoon:list():remove() end) 
+
+    vim.keymap.set("n", "<leader>ka", function() harpoon:list():select(1) end)
+    vim.keymap.set("n", "<leader>ks", function() harpoon:list():select(2) end)
+    vim.keymap.set("n", "<leader>kd", function() harpoon:list():select(3) end)
+    vim.keymap.set("n", "<leader>kf", function() harpoon:list():select(4) end)
+
+
+    -- Toggle previous & next buffers stored within Harpoon list
+    vim.keymap.set("n", "<leader>hn", function() harpoon:list():prev() end)
+    vim.keymap.set("n", "<leader>hp", function() harpoon:list():next() end)
+    -- vim.keymap.set("n", "<C S-P>", function() harpoon:list():prev() end)
+    -- vim.keymap.set("n", "<C S-N>", function() harpoon:list():next() end)
 end
 
 ----------------------------- FZF LUA --------------------------------------------------
@@ -1226,23 +1281,27 @@ end
 -------------------------------------------------------------------------------------------------------
 vim.g.mapleader = " "
 
---- NOTE: Prime open real estate for key remapping
-    -- NORMAL MODE
-        -- <leader> + ,/l/u/x/<0-9>
-        -- <Leader><Leader>  (most open)
-        -- <BS>
-        -- c-q(same as c-v), c-s(pause ctrl flow)
-        -- c-x (opposite of c-a, i clobber c-a for tmux meta)
-        -- ;  - semicolon repeats last f/F motions
-        -- ,  - in reverse direction
-    -- INSERT MODE
-        -- c-v, c-q(same as c-v) c-space, c-y
+------------ NOTE: Prime open real estate for key remapping -------------------
+-- NORMAL MODE
+    -- <leader> + ,/l/u/x/<0-9>
+    -- <Leader><Leader>  (most open)
+    -- <BS>
+    -- c-q (same as c-v)
+    -- c-s (pause ctrl flow)
+    -- c-x (opposite of c-a, i clobber c-a for tmux meta)
+    -- c-p currently i use for indent left, but i should just use <<
+    -- c-n currently i use for indent right, but i should just use >>
+    -- ;  - semicolon repeats last f/F motions
+    -- ,  - in reverse direction
+-- INSERT MODE
+    -- c-v, c-q(same as c-v) c-space, c-y
 
 -- TODO: i think this map is probably useful
 -- vim.keymap.set("n", "<C-j>", "a<CR><Esc>k$")
+-- NOTE: oct'24 - using <leader>k for harpoon for now
+-- vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only [](){}, not if/else/end
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
-vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only [](){}, not if/else/end
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
@@ -1514,6 +1573,7 @@ if not vim.env.VIM_NOPLUG then
         "aklt/plantuml-syntax",
         -- "MeanderingProgrammer/render-markdown.nvim",  -- make markdown in syntax highlighting prettier in neovim
 
+
         --- COLORSCHEME
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
 
@@ -1523,8 +1583,9 @@ if not vim.env.VIM_NOPLUG then
         { 'tpope/vim-rhubarb', config = LoadRhubarb, dependencies = { 'tpope/vim-fugitive' }, event = 'VeryLazy' },
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
-        --- FUZZY FIND
+        --- NAVIGATION
         { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
+        { 'ThePrimeagen/harpoon', config = LoadHarpoon, branch = "harpoon2", dependencies = { 'nvim-lua/plenary.nvim'} },
 
         -- MARKDOWN
         { "iamcco/markdown-preview.nvim",
@@ -1574,4 +1635,3 @@ if not vim.env.VIM_NOPLUG then
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     } })
 end
-

@@ -1,10 +1,11 @@
 # UNIXY TOOLS
 
 ## TOOLS NOT HERE
-- CURL: [http cheatsheet](http_web_tls_cheatsheet.md)
-- fd or fdfind (better `find`) [FD](fzf_fd_rg_cheatsheet.md)
-- ripgrep (better `grep -r`) [RG](fzf_fd_rg_cheatsheet.md)
-- fzf [FZF](fzf_fd_rg_cheatsheet.md)
+- [curl](http_web_tls_cheatsheet.md)
+- [xh, a better curl](http_web_tls_cheatsheet.md)
+- [fd or fdfind, a better find](fzf_fd_rg_cheatsheet.md)
+- [ripgrep, better grep -r](fzf_fd_rg_cheatsheet.md)
+- [fzf](fzf_fd_rg_cheatsheet.md)
 
 ```sh
 # FIND: find files recursive starting with current dir

@@ -168,15 +168,15 @@
 - *CANNOT* inherit from another case class
 - implements `Serializable` trait
 ### FUNCTIONS
-- partial application - can pass subset of arguments to function invocation, then pass rest in later
+- PARTIAL APPLICATION - can pass subset of arguments to function invocation, then pass rest in later
     - e.g. `def foo(x: Int, y: Int): Int = { x + y}; foo(3, _)` -> this return a `Int => Int` function
-- variadic(repeated) arguments, postfix `*` identifier
+- VARIADIC (repeated) arguments, postfix `*` identifier
     - e.g. `def foo(a: String*) = { for( arg <- args ){ println("Arg: " + arg) }}; foo("hi","there"); foo("onearg")`
         - arg `a` here is treated as an array
     - if we want to pass in `List` type, need to use splat operator to convert it
         - e.g. `val mylist = List("a","b"); foo(mylist:_*)`
     - this is similar to varargs feature in Java
-- call-by-name parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
+- CALL-BY-NAME parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
 ### ANONYMOUS FUNCTIONS
 ```scala
 // `a` here is actually a object with an `apply` function defined

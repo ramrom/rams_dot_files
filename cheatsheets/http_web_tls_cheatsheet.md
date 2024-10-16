@@ -141,7 +141,6 @@
 
 ## CURL
 - `curl --insecure https://foo.com`  - skip cert TLS verification
-- `curl -X POST -H "Content-Type: application/json" -d '{"foo": 3, "bar": 1}' https://foo.com/yar/bar`
 - `curl -v --http1.1 -X POST -F 'name=foo' https://foo.com`  
     - `-v` for verbose, `--http.1.1` to force http1.1
 - `curl -X POST -d 'name=foo' https://foo.com` 
@@ -149,6 +148,7 @@
 - removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends
 - `curl --header 'HOST: foo.com' bar.com`  
     - curl will resolve bar.com _but_ still set host header to `foo.com`
+- `curl -X POST -H "Content-Type: application/json" -d '{"foo": 3, "bar": 1}' https://foo.com/yar/bar`
 - using SOCKS proxy: `curl -x socks5h://127.0.0.1:1234 http://foo.com`
 
 ## HTTPIE
@@ -184,3 +184,4 @@ function httpie_all() {
 - https://github.com/ducaale/xh
 - a http client in rust that is near identical in interface to HTTPie
 - `xh --verify no https://foo.com` - dont verify TLS cert
+- `xh https://foo.com "Cookie:CookieOne=cookievalue;CookieTwo=anothervalue` - add cookies

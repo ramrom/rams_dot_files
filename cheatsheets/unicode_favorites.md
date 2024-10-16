@@ -24,7 +24,7 @@
 😴  sleepy face
 🌡  thermometer
 💊  pill
-⚡  high voltage
+⚡ high voltage
 🌩  cloud with lightning
 🌧  cloud with rain
 🚦  traffic light
@@ -58,6 +58,8 @@
 💔  broken heart
 ⚔   crossed swords
 💣  bomb
+𐃆   spear
+𐃉   sword
 🔫  pistol
 ☢   radioactivity
 💀  skull
