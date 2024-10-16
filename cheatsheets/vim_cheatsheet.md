@@ -209,9 +209,10 @@
 ### FZF-LUA
 - uses fzf but plugin written in lua, lots more pickers and features than fzf.vim
 - multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
+    - also: `ctrl-t` to tabs, `ctrl-v` to vert splits
 - file search many root dirs: `lua require('fzf-lua').files({ cmd = "fd . dir1/sub1 dir2"  })`
 ### HARPOON
-- harpoon files stored in `~/.local/share/nvim/harpoon/`
+- harpoon remembers file lists in every dir, and those are stored in `~/.local/share/nvim/harpoon/`
 ### VIM-FUGITIVE
 - cheats: https://gist.github.com/mikaelz/38600d22b716b39b031165cd6d201a67
 - Gedit HEAD~3:%  - git show HEAD~3:<current file>
@@ -344,6 +345,8 @@
 - `:hi clear` - reset highlighting
 - `:syntax` - spits out current syntax rules
     - force set syntax highlight to ruby: `set syntax=ruby`
+    - supports line range regions `:syntax region`
+        - e.g. `:syntax region Green start=/\%20l/ end=/\%30l/` - define `Green` group from line 20-30
 - `:echo $SOME_ENV_VAR` - output value of a environment variable
 - `:filter *pattern* let g:`
     - works on `let`, `set`, `map`, `hi` and `fun`
@@ -733,10 +736,12 @@ things that add to jump list:
     - text block jumps: ( ) { }
 
 ## MARKS
-:marks - list of marks
-ma - set current position for mark A
-`a - jump to position of mark A
-y`a - yank text to position of mark A
+- `A-Z` uppercase are global to files, `a-z` lower case are for local file, `0-9` set in shada file
+    - lower case `a-z` marks lost if buffer removed from list
+- `:marks` - list of marks
+- `ma` - set current position for mark A
+- `'a` - jump to position of mark A
+- `y'a` - yank lines from current line to mark `a`
 
 ## MACROS
 qa - record macro a

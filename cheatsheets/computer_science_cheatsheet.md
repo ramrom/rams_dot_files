@@ -669,10 +669,12 @@ public static void main(String[] args) {
 - invented by github for atom editor in 2018
 - official site - https://tree-sitter.github.io/tree-sitter/
 - a grammar for a language/format is defined by rules in `grammar.js`, CLI read this and outputs C parser `parser.c`
-- language parsers files by language and creates CST(concrete syntax trees)
-- modules can use query on the CST to do things like:
+- language parser creates CSTs(concrete syntax trees) in real-time and incrementally, which can be queried
+    - sometimes we only need ASTs, treesitter has named and anonymous nodes, ASTs can just use named nodes
+- module is something that does query on the CST, example modules:
     - syntax highlighting
         - generally more accurate and faster (especially since it's incremental) than regex highlighting that most editors use
+        - can handle embedded/nested languages: https://tree-sitter.github.io/tree-sitter/syntax-highlighting#language-injection
     - formatting, e.g. indentation
     - folding
     - incremental selection

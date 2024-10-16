@@ -61,6 +61,7 @@ alias rsync_smb='rsync -Hhvrl -goD --progress --delete' # p(perms) and t(modtime
 alias sudo='sudo '
 
 # OTHER
+alias cpu_total_util='ps -A -o %cpu | awk '\''{s+=$1} END {print s "%"}'\' # loops over all procs, sums the cpu consumption
 alias ifschar='printf "%q\n" "$IFS"'
 alias findlargefiles='find . -type f -size +1G -exec du -h {} \;'  # osx works
 alias findlargefiles2='sudo find -X . -type f -size +1M | xargs du -h' # osx sorta works
@@ -94,7 +95,7 @@ if [ "$(uname)" = "Linux" ]; then
     alias pbpaste='xclip -selection clipboard -o'
     alias smd='systemctl'
     alias bt='bluetoothctl'
-    alias watch_top_cpu="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
+    alias top_cpu_procs_watch="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"
     alias psx='ps auxhf'
     alias psxfull='ps auxhfww'
     alias netstatip='sudo netstat -lpnut'
@@ -114,7 +115,8 @@ else  # assuming Darwin here
     alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
     alias lc='launchctl'
     alias psx='ps -hef'
-    alias watch_top_cpu="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
+    alias top_cpu_procs_watch="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
+    alias top_cpu_procs='ps -Ao pcpu,user,command -r | head -n 6'   # do command last so it string doesnt get truncated
     alias watch_istats='watch -n 1 -c istats all'
     alias oc='open -a "Google Chrome"'
     alias ow='open -a Whatsapp'

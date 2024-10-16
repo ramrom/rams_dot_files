@@ -58,6 +58,12 @@ typedef struct Recur {
     Recur r;
 } Recur;
 ```
+### POINTERS
+```c
+// arrow operator dereferences a pointer value of struct field
+(*(*(*a).b).c).d
+a->b->c->d          // same as above
+```
 ### POINTERS CONSTANTS VS CONSTANT POINTERS
 ```c
 const int* ptr;         // the pointer ptr points to a constant value, so the value it points to can't change
@@ -174,6 +180,7 @@ int main() {
     - C lib get length - `strlen(greeting);`
 ### ARRAYS 
 - `int *myarr` is essentially equivalent to `int myarr[]`
+- `int arr[10]`  - array arent initialized, have garbage values
 - under the hood passing around `a[]` is really just passing `*a`
 - arrays have a known size at compile time, e.g. `int arr[3]` is diff type than `int arr[4]`
     - thus an array type doesnt store metadata about it's size, b/c the size is known at compile time

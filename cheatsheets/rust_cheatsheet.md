@@ -224,6 +224,10 @@ match triple {
     (3, .., 4)  => println!("First is `3`, last is `4`, and the rest doesn't matter"),
     _  => println!("It doesn't matter what they are"),  // `_` means don't bind the value to a variable
 }
+
+// a `!` return type means the func never returns
+fn neverreturn() -> ! { panic!("no return") }   // panics dont return
+fn neverreturn() -> ! { loop{}; }    // infinte loop will never return
 ```
 ### VISIBLITY/SCOPE
 - all things are private by default and can be made public with `pub` keyword
@@ -420,14 +424,15 @@ enum E {
         - value is copied and not moved when assigned to new variable or passed into a function
         - e.g. `x = 1; y = x` (`y` is a copy of `x` with value 1, no ownership transfer)
     - if moved, compiler might copy the bytes, depending on the situation
-- `Copy` - trait, value can be copied(memcpy, so direct bit by bit copy)
-    - generaly a `Copy` type can be duplicated by simply copying it's bits
+- `Copy` - trait
+    - value can be safely copied, i.e. `memcpy` used, so direct bit by bit copy
     - have a known size, and allocated on the stack, happens implicitly e.g. `x = y`
     - cannot be implemented on `Drop` types, `Drop` types are basically owned types
     - primitive types are `Copy`: `i32`, `char`, `bool`, references themselves like `&T` and `&mut T`
         - arrays `[T; N]` are `Copy` type too if elements if `T` is `Copy` type
         - tuples `(T1,T2,...,Tn)` if all fields of a tuple are `Copy` tuple is also `Copy`
     - `Clone` types more complex and general, a `Copy` type can probably easily also implement `Clone`
+        - it's a trait and implementation can be arbitrarily complex to create a new `T`
 - `Drop` trait, types that drop/free when they go out of scope, so need ownership tracking
     - deallocating at end of scope is similar to RAII(resource aquisition is initialization), used in c++
     - compiler will essentially insert the `drop` on a `Drop` type at the end of it's scope

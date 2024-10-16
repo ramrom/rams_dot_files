@@ -255,23 +255,6 @@ function toggle_bulb() {
         ' $1
 }
 
-#####################  SYSTEM DATA/HEALTH ####################################################
-
-function top_cpu_processes() {
-    if [ $(uname) = "Darwin" ]; then
-        # ps -Ao user,uid,command,pid,pcpu,tty -r | head -n 6   # -r sorts by cpu usage
-        ps -Ao pcpu,user,command -r | head -n 6   # do command last so it string doesnt get truncated
-        # TODO: parsing, if /Applications in string then get app name after /
-    fi
-}
-
-function cpu_util() {
-    # top -l 2 | grep -E "^CPU"  # very slow relatively speaking (-l doesnt work in linux)
-
-    # loops over all processes and adds eachs consumption of cpu
-    ps -A -o %cpu | awk '{s+=$1} END {print s "%"}'
-}
-
 ################################################################################
 #############                  TMUX                   ##########################
 ################################################################################

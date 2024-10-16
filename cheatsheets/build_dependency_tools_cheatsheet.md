@@ -9,8 +9,8 @@
 - main build defintion file is `Makefile`
 
 # ANT
--  built by apache
--  stand for Another Neat Tool
+- built by apache
+- stand for Another Neat Tool
 - initially part of tomcat codebase built around year 2000
 - doesnt support plugins, mainly a just a build tool
 - all xml based and main file is `build.xml`
@@ -31,6 +31,11 @@
 - default phases: `validate`(validate project info), `compile`, `test`, `package`(build jar)
     - `integration-test`, `verify`, `install`, `deploy`
 - cool extension that lets u use non-xml formats: https://github.com/takari/polyglot-maven
+- setting java version
+    - maven will use the shell's `JAVA_HOME` java version
+    - baeldung - https://www.baeldung.com/maven-java-version
+        - in `configuration` tag we can set a target and source java version
+        - spring boot lets u set a `property` `<java.version>17</java.version>` in `pom.xml`
 ### COMMANDS
 - `mvn --version` -> show maven version, show home bin, show current java version
 - `mvn package` -> build the `package` phase, generally a later phase

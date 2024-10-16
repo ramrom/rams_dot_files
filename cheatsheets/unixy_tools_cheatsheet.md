@@ -332,9 +332,9 @@ sudo bash           # start a bash session as root
 su foouser          # login as foouser
 
 
-#### PROCESSES
+######## PROCESSES ###########
 # PS
-ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes
+ps -Ao pcpu,user,command -r | head -n 6   # Linux: get top 6 cpu consuming processes, -r (sort by current cpu usage)
 ps ax -o command= | grep -E "^ssh"      # print only the command executed for process and grep to find one that starts with "ssh"
 
 # HTOP
