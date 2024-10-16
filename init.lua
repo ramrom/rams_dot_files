@@ -451,8 +451,8 @@ ToggleHarpoonBufNav = function()
 
     if UseHarpoonBufNav then
         local harpoon = require("harpoon")
-        vim.keymap.set("n", "<leader>f", function() harpoon:list():prev() end)
-        vim.keymap.set("n", "<leader>d", function() harpoon:list():next() end)
+        vim.keymap.set("n", "<leader>d", function() harpoon:list():prev() end, {desc = "harpoon prev"})
+        vim.keymap.set("n", "<leader>f", function() harpoon:list():next() end, {desc = "harpoon next"})
         -- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
         -- vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
         -- vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
@@ -472,28 +472,23 @@ end
 
 LoadHarpoon = function()
     local harpoon = require("harpoon")
-
-    vim.keymap.set("n", "<leader>wh", ToggleHarpoonBufNav)
-    -- REQUIRED
     harpoon:setup()
 
-    vim.keymap.set("n", "<leader>kg", function() harpoon:list():add() end)
-    vim.keymap.set("n", "<leader>kk", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "<leader>ka", function() harpoon:list():add() end, { desc = "harpoon add"})
+    vim.keymap.set("n", "<leader>ks", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "harpoon quickmenu"})
+
+    vim.keymap.set("n", "<leader>kd", function() harpoon:list():prev() end, {desc = "harpoon prev"})
+    vim.keymap.set("n", "<leader>kf", function() harpoon:list():next() end, {desc = "harpoon next"})
+
+    vim.keymap.set("n", "<leader>kq", function() harpoon:list():select(1) end, {desc ="harpoon list 1"})
+    vim.keymap.set("n", "<leader>kw", function() harpoon:list():select(2) end, {desc ="harpoon list 2"})
+    vim.keymap.set("n", "<leader>ke", function() harpoon:list():select(3) end, {desc ="harpoon list 3"})
+    vim.keymap.set("n", "<leader>kr", function() harpoon:list():select(4) end, {desc ="harpoon list 4"})
 
     -- NOTE: this actually leaves a blank line in harpon file, better to use quick menu and `dd`
-    vim.keymap.set("n", "<leader>kd", function() harpoon:list():remove() end) 
+    vim.keymap.set("n", "<leader>kx", function() harpoon:list():remove() end, {desc = "harpoon delete"}) 
 
-    vim.keymap.set("n", "<leader>ka", function() harpoon:list():select(1) end)
-    vim.keymap.set("n", "<leader>ks", function() harpoon:list():select(2) end)
-    vim.keymap.set("n", "<leader>kd", function() harpoon:list():select(3) end)
-    vim.keymap.set("n", "<leader>kf", function() harpoon:list():select(4) end)
-
-
-    -- Toggle previous & next buffers stored within Harpoon list
-    vim.keymap.set("n", "<leader>hn", function() harpoon:list():prev() end)
-    vim.keymap.set("n", "<leader>hp", function() harpoon:list():next() end)
-    -- vim.keymap.set("n", "<C S-P>", function() harpoon:list():prev() end)
-    -- vim.keymap.set("n", "<C S-N>", function() harpoon:list():next() end)
+    vim.keymap.set("n", "<leader>wh", ToggleHarpoonBufNav)
 end
 
 ----------------------------- FZF LUA --------------------------------------------------
