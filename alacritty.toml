@@ -1,5 +1,19 @@
 # import = [ "~/src/alacritty-theme/themes/github_dark_high_contrast.toml", ]
 
+[window]
+padding.x = 10
+padding.y = 10
+
+decorations = "Buttonless"
+opacity = 0.5 
+blur = true
+
+startup_mode = "Maximized"
+
+[font]
+normal.family = "Hack Nerd Font Mono"
+size = 12.5
+
 # Colors - https://github.com/olimorris/onedarkpro.nvim
 # obtained from neovim command `OnedarkproExportToAlacritty`
 [colors.primary]
