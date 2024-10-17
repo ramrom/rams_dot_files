@@ -393,7 +393,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
 
 ### XSCREENSAVER
-- https://www.jwz.org/xscreensaver/
+- https://www.jwz.org/xscreensaver/  - main maintainer is Jamie Zawinski, been doin it for a while
 - it's in the name, designed for X, but compatible with wayland through XWayland compatibility lib
     - it works well on ubuntu22 GNOME/wayland
 - https://linux.die.net/man/1/xscreensaver-command - CLI tool
