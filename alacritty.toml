@@ -1,0 +1,4 @@
+import = [
+    # "~/src/alacritty-theme/themes/aura.toml",
+    "~/src/alacritty-theme/themes/github_dark_high_contrast.toml",
+]

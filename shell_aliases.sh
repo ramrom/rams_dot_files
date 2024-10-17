@@ -115,7 +115,8 @@ else  # assuming Darwin here
     alias batman="MANPAGER=\"sh -c 'col -bx | bat -l man -p'\" man"
     alias lc='launchctl'
     alias psx='ps -hef'
-    alias top_cpu_procs_watch="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
+    # alias top_cpu_procs_watch="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
+    alias top_cpu_procs_watch="viddy -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
     alias top_cpu_procs='ps -Ao pcpu,user,command -r | head -n 6'   # do command last so it string doesnt get truncated
     alias watch_istats='watch -n 1 -c istats all'
     alias oc='open -a "Google Chrome"'
