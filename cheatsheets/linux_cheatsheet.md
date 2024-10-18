@@ -37,6 +37,7 @@
 - june'24 - upgrading to ubuntu 23 and 24 - third party apt sources were disabled
     - apparently done not to break the upgrade
 
+
 ## RASPBIAN
 - `rpi-imager` deb package
     - `DISPLAY=:1 rpi-imager` - launch imager
@@ -522,7 +523,6 @@ pulsemixer - volume manager with pulseaudio
     - main commands: `inotifywait` and `inotifywatch`
     - replaces older dnotify
 
-
 ## OTHER LINUX/UBUNTU TOOLS
 - chroot - change the root dir of a process
 - sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
@@ -550,6 +550,7 @@ pulsemixer - volume manager with pulseaudio
 - udevadm - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
 - dmesg - kernel ring buffer, print messages or control it
+    - `sudo dmesg -w`   - `-w` will wait for new messages, i.e. like `tail`ing
 - dconf  - sorta related to gsettings, configure database for settings
 - iwlist - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
@@ -574,13 +575,14 @@ pulsemixer - volume manager with pulseaudio
     - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
         - https://ubuntuforums.org/showthread.php?t=1810812
 - ss  - good way to see socket usage
+- AppArmor - a linux security module used in ubuntu
 - pcsx2
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
 - retroarch
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
-- transmission - great torrent program
+- **transmission** - great torrent program
     - SETUP
         - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/
         - https://wiki.archlinux.org/index.php/transmission
@@ -596,7 +598,7 @@ pulsemixer - volume manager with pulseaudio
     - transmission-daemon --auth  --username foouser --password foopass --port 9091 --allowed "192.168.1.*"
         - configuring daemon with a user and allow a private address range
     - NOTE: to access GUI: use `http://192.168.1.2:9091/transmission` and NOT `.../transmission/` with trailing slash
-- vlc
+- **vlc**
     - play media at cli and quit `vlc somefile.mp3 vlc://quit`
     - enable log file: `tools`->`preferences`->select `all` in show settings
         - under `logger`, enable it, set level and filename (defaults to home dir location)
