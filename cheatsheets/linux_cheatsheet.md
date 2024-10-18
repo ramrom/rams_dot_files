@@ -553,21 +553,20 @@ pulsemixer - volume manager with pulseaudio
     - `sudo dmesg -w`   - `-w` will wait for new messages, i.e. like `tail`ing
     - `sudo dmesg -T`   - `-T` print human readable timestamps
 - `dconf`  - sorta related to gsettings, configure database for settings
-- iwlist - get info on wireless(wifi) lan
+- `iwlist` - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
-- notify-send - pops up notification
-- upower - sys util, get power/battery info and stats about devices
+- `notify-send` - pops up notification
+- `upower` - sys util, get power/battery info and stats about devices
 - `bluetoothctl` - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device
     - `bluetoothctl` alone will start a interactive cli console session
 - https://askubuntu.com/questions/557906/problem-starting-jack-server-jack-server-is-not-running-or-cannot-be-started
-- `pulseaudio` - `pulseaudio --kill` and `pulseaudio --start` to restart
 - `hciconfig` - config bluetooth devices
     - `hciconfig -a` - print all info of bluetooth controllers
     - `hciconfig hci0 down` - turn off bluetooth controller `hci0`
         - in ubuntu settings the bluetooth toggle button will also turn off (it reads this devices state)
-- `jstest-gtk` - decent util to test and configure gamepad/game-controllers
+- `pulseaudio` - `pulseaudio --kill` and `pulseaudio --start` to restart
 - `pacmd` - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
@@ -582,6 +581,7 @@ pulsemixer - volume manager with pulseaudio
         - `complain` - allows logs/policy violations, doesn't block them, good for testing
         - `enforce` - default mode, enforces policy and logs
         - `unconfined` - does not load docker-default profile for container, does not show the PID running in enforced mode
+- `jstest-gtk` - decent util to test and configure gamepad/game-controllers
 - pcsx2
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
 - retroarch
