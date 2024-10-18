@@ -94,10 +94,12 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
 ```
 
 ## PERMISSIONS
+- group `sudo` - can do sudo commands
 - group `input` - user has full control over all devices in `/dev/input`
 - group `dialout` - user can admin serial ports and modems
 - group `docker` - can admin the docker daemon
 - group `bluetooth` - can admin bluetooth stack
+- group `debian-transmission` - transmission program creates this user
 
 
 ## SYSTEMD
@@ -195,7 +197,8 @@ loginctl
 - journalctl handles a ton of logs now, including logs before a crash
 
 
-## SYSV (OLD INIT SYSTEM)
+## SYSV 
+- older init system, largely replaced by systemd in many distros
 - cheat sheet of sysv command equivalents in systemd: https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
 - uses pidfile in /var/run
 - script that generally defines bin,conf/pidfile, defines start/stop/reload/status functions for ur bin
