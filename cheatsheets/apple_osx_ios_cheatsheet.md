@@ -89,7 +89,13 @@
 - force color to pipe output, be default ls wont colorize
     - `CLICOLOR_FORCE=1 ls -l | less`
 - `lp` - print from command line
+- `launchctl` - the cli tool that talks to `launchd`, which control apples background daemons(aka services)
 
+## LAUNCHD
+- `launchd` is a management system which control apples background daemons(aka services)
+- see https://support.apple.com/guide/terminal/script-management-with-launchd-apdc6c1077b-5d5d-4d35-9c19-60f2397b2369/mac
+    - `~/Library/LaunchAgents` - user dir of plist files for starting processes at user login, i.e. autostart apps
+    - `/Library/LaunchAgents` - same as above but applies to _all_ users
 
 
 ## KEYBOARD SHORTCUTS
@@ -99,24 +105,22 @@
 - command + H - goto home screen
 - command + N - compose new email in mail app
 - command + ctrl + q  - lock the screen
-
 - command + c copy
 - command + v paste
 - command + x cut
 - command + a select all
 - command + z undo
 - command + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
-
 - cmd + shift + 3           - screenshot
 - cmd + shift + 4           - screenshot area
 - cmd + shift + 4, space    - screenshot window
-
 - cmd + ctrl + space    - bring up emoji menu in text field
 - :<foo>:               - in text field typing `:` then text desc of emoji, then `:` will insert emoji
                           works in slack and whatsapp, not safari for google voice
 - fn + E                - from a text box, bring up emoji window
 
-### BROWSER(CHROME/FIREFOX verified)
+### BROWSER
+- *NOTE* these are verified in chrome and firefox
 - cmd + [number]          - goto that number tab (works for 1-8), 9/0 goto rightmost tab
 - cmd + forward/back-arrow  - back and forth web page history
 - cmd + [/]               - back/forward page history
@@ -204,7 +208,6 @@
 - hold command mac key, hover over link, clickable
     - works in iterm and terminal
 - microsoft word ctrl-h doesnt work, it opens a find and replace
-- ~/Library/LaunchAgents - user dir of plist files for starting processes at user login
 
 ## OSX GUI COMPONENTS
 - menu bar                - top screen bar with apple menu on left, app menus, status menu and date/user on right
@@ -218,3 +221,4 @@
         osascript -e 'tell application "Spotify"' -e 'set sound volume to (sound volume - 10)' -e 'end tell'
     }
     ```
+- can also add `#!/usr/bin/osascript` as first line in executable source script

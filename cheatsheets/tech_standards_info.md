@@ -407,9 +407,10 @@
 - https://awslabs.github.io/smithy/
 
 ## LOG/APM FRAMEWORKS
-- ELK stack - Elasticache, Logstache, Kibana
+- ELK stack - Elasticsearch, Logstache, Kibana
     - all developed and maintained by Elastic, all open-source
-    - Logstache(aggregation+processing) -> Elasticahe(db for indexing/storing) -> Kibana(front-end for visualization/human-analysis)
+    - Logstache(aggregation+processing) -> Elastisearch(db for indexing/storing) -> Kibana(front-end for visualization/human-analysis)
+    - Elasticsearch in 2021 switch to a non-FOSS liscense, a nice fork is [OpenSearch](https://github.com/opensearch-project/OpenSearch)
 - splunk is commercial solution that does all 3
     - bills/pricing revenue mainly from indexing volume
 - StatsD - application monitoring system

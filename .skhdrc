@@ -1,5 +1,6 @@
 # SKHDRC
 
+cmd + lshift - return : ~/bin/toggle-alacritty-visibility
 f13 : ~/bin/vort-volume down
 f14 : ~/bin/vort-volume up
 f18 : ~/bin/vort-volume

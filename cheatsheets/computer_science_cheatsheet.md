@@ -88,6 +88,8 @@ public static void main(String[] args) {
 
 ## CONCURRENCY
 - 2015 good blog on async IO vs nonblocking IO and java - http://blog.omega-prime.co.uk/2015/09/03/asynchronous-and-non-blocking-io/
+    - AIO(async IO) for OSX and linux really geared towards regular file IO, not sockets, b/c kqueue/epoll already are awesome
+    - generally *nix AIO is not great, just use a dedicated thread pool and call blocking IO, for windows AIO is nice
 - C10K problem - http://www.kegel.com/c10k.html
     - traditional thread/request model doesnt scale, 10000 threads will kill the best server
 - 2016 - parking_lot lib - good article on mutexes/condvars https://webkit.org/blog/6161/locking-in-webkit/

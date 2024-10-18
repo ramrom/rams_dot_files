@@ -1,3 +1,6 @@
+# Alacritty Config
+# config docs: https://alacritty.org/config-alacritty.html
+
 # import = [ "~/src/alacritty-theme/themes/github_dark_high_contrast.toml", ]
 
 [window]

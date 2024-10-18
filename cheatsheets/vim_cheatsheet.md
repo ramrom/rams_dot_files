@@ -17,7 +17,7 @@
 - 👍 key design decisions over vim
     - ⭐ lua over vimL as scripting language
     - ⭐ treesitter (replaces regex syntax groups)
-    - ⭐ built-in LSP client
+    - ⭐ built-in LSP client (written in lua)
     - ⭐ de-coupled UI components
     - ⭐ msgpack RPC API
     - ⭐ libuv integration
