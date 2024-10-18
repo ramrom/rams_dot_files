@@ -110,9 +110,12 @@ awk -F',' '{print $2","$4}' some.csv | column -t -s  # only print column 4,2 wit
 # TPUT - terminal settings and capabilities
     # also see [ansi color cheat](ansi_color.md)
 tput cols     # number of columns in terminal window
-tput rows     # number of rows in terminal window
+tput lines    # number of rows in terminal window
 tput setaf 1  # outpt ansi code for red foreground color
 tput sgr0     # reset
+
+# STTY
+stty size    # get rows x column dimensions
 
 # DATE
 sudo date --set 1998-11-02  # change date

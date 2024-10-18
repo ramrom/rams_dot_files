@@ -524,58 +524,64 @@ pulsemixer - volume manager with pulseaudio
     - replaces older dnotify
 
 ## OTHER LINUX/UBUNTU TOOLS
-- chroot - change the root dir of a process
-- sensors - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
-- hddtemp - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
+- `chroot` - change the root dir of a process
+- `sensors` - from lm-sensors package, gives cpu/mobo temps, fan speeds, voltages
+- `hddtemp` - `sudo hddtemp /dev/sda1` - will show temp of sba1 hard drive
     - *NOTE* dec2022 - old and unmaintained, removed from debian and ubuntu22
-- smartmontools - query SMART device, e.g. HDDs and SSDs
+- `smartmontools` - query SMART device, e.g. HDDs and SSDs
     - can do `smartctl -A /dev/sda` to get temperature (since hddtemp id deprecated)
-- dmidecode - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
-- inxi - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
-- lshw - like inxi, display lots of sys info
+- `dmidecode` - sudo this, get DMI(SMBIOS) system/hardware info, e.g. the motherboard exact chipset version
+- `inxi` - cli tool to spit out sys info (cpu, audio, video), `inxi -Fxxx`
+- `lshw` - like inxi, display lots of sys info
     - `sudo lshw -C display` - show only info about display/GPU
-- lsusb - `lsusb -D /dev/bus/usb/002/004`
+- `lsusb` - `lsusb -D /dev/bus/usb/002/004`
     - get detailed info about a specific usb device
-- lspci - ls on pci and bus devices
-- lsblk - show block level devices
-- stat - get metadata on a file
-- mkfs - to format a disk partition
-- fdisk - show partitions and block devices, sizes, sectors
+- `lspci` - ls on pci and bus devices
+- `lsblk` - show block level devices
+- `stat` - get metadata on a file
+- `mkfs` - to format a disk partition
+- `fdisk` - show partitions and block devices, sizes, sectors
 - /etc/fstab - file systems mounted at boot
-- efibootmgr - UEFI boot manager, list boot devices and order, change order, delete boot option
-- dkms - cli for dynamic kernel modules
+- `efibootmgr` - UEFI boot manager, list boot devices and order, change order, delete boot option
+- `dkms` - cli for dynamic kernel modules
     - `dkms status` - list all loaded kernel modules and show status
-- lsmod - show status of kernel modules
-- modprobe - add/remove modules from linux kernel
-- udevadm - query info about udev events
+- `lsmod` - show status of kernel modules
+- `modprobe` - add/remove modules from linux kernel
+- `udevadm` - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
-- dmesg - kernel ring buffer, print messages or control it
+- `dmesg` - kernel ring buffer, print messages or control it
     - `sudo dmesg -w`   - `-w` will wait for new messages, i.e. like `tail`ing
-- dconf  - sorta related to gsettings, configure database for settings
+    - `sudo dmesg -T`   - `-T` print human readable timestamps
+- `dconf`  - sorta related to gsettings, configure database for settings
 - iwlist - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - notify-send - pops up notification
 - upower - sys util, get power/battery info and stats about devices
-- bluetoothctl - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
+- `bluetoothctl` - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device
     - `bluetoothctl` alone will start a interactive cli console session
 - https://askubuntu.com/questions/557906/problem-starting-jack-server-jack-server-is-not-running-or-cannot-be-started
 - `pulseaudio` - `pulseaudio --kill` and `pulseaudio --start` to restart
-- hciconfig - config bluetooth devices
+- `hciconfig` - config bluetooth devices
     - `hciconfig -a` - print all info of bluetooth controllers
     - `hciconfig hci0 down` - turn off bluetooth controller `hci0`
         - in ubuntu settings the bluetooth toggle button will also turn off (it reads this devices state)
-- jstest-gtk - decent util to test and configure gamepad/game-controllers
-- pacmd - pulseaudio cli tool, query sound devices
+- `jstest-gtk` - decent util to test and configure gamepad/game-controllers
+- `pacmd` - pulseaudio cli tool, query sound devices
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
     - pulseaudio is userland program, can mix many
 - Pavucontrol - pulseaudio cli tool, CHECK IT OUT
     - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
         - https://ubuntuforums.org/showthread.php?t=1810812
-- ss  - good way to see socket usage
-- AppArmor - a linux security module used in ubuntu
+- `ss`  - good way to see socket usage
+- AppArmor - a linux security module used by ubuntu, a MAC(mandatory access control)
+    - `sudo aa-status` - check which profiles are loaded
+    - modes:
+        - `complain` - allows logs/policy violations, doesn't block them, good for testing
+        - `enforce` - default mode, enforces policy and logs
+        - `unconfined` - does not load docker-default profile for container, does not show the PID running in enforced mode
 - pcsx2
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
 - retroarch

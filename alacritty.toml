@@ -8,13 +8,14 @@ padding.x = 10
 padding.y = 10
 
 decorations = "Buttonless"
-opacity = 0.5 
+opacity = 1.0
 blur = true
 
 startup_mode = "Maximized"
 
 [font]
 normal.family = "Hack Nerd Font Mono"
+# normal.family = "monaco"
 size = 12.5
 
 # Colors - https://github.com/olimorris/onedarkpro.nvim

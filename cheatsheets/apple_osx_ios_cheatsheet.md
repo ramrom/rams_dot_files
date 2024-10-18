@@ -84,7 +84,8 @@
 - `nettop` - like top but for tcp/udp sockets only and their bandwidth usage!
 - 2024 - cool keyboard customizer for osx - https://karabiner-elements.pqrs.org/
 - `skhd`
-    - `brew services` to see if it's running
+    - `launchctl list` to see skhd service is running
+        - *DEPRECATED* oct'24 - `brew services` to see if it's running
     - `skhd -r` to reload config file with shortcuts
 - force color to pipe output, be default ls wont colorize
     - `CLICOLOR_FORCE=1 ls -l | less`
