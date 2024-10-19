@@ -2,12 +2,12 @@
 
 echo "VIM MODES:"
 echo "   n -->  NO_NOICE=1 nvim"
-echo "   p -->  VIM_NOPLUG=1 nvim"
-echo "   u -->  nvim -u NONE"
+echo "   p -->  VIM_NOPLUG=1 nvim           - simple, don't load plugins"
+echo "   u -->  nvim -u NONE                - super simple, done load any rc file"
 echo "   l -->  NO_LSP=1 nvim"
 echo "   a -->  NO_LSP_AUTOSTART=1 nvim"
 echo "   f -->  NVIM_APPNAME=nvimfire nvim"
-echo "   e -->  NO_NOICE=1 nvim -e"
+echo "   e -->  NO_NOICE=1 nvim -e          - start in Ex mode, disable noice as it interferes"
 echo '   s -->  [ -f MyCurrentVimSession.vim ] && nvim -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!'
 read -n1 -p "vim mode: " modesel
 
