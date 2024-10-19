@@ -8,6 +8,7 @@ echo "   l -->  NO_LSP=1 nvim"
 echo "   a -->  NO_LSP_AUTOSTART=1 nvim"
 echo "   f -->  NVIM_APPNAME=nvimfire nvim"
 echo "   e -->  NO_NOICE=1 nvim -e"
+echo '   s -->  [ -f MyCurrentVimSession.vim ] && nvim -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!'
 read -n1 -p "vim mode: " modesel
 
 echo
@@ -20,5 +21,6 @@ case "$modesel" in
     "p") VIM_NOPLUG=1 nvim;;
     "a") NO_LSP_AUTOSTART=1 nvim;;
     "f") NVIM_APPNAME=nvimfire nvim;;
+    "s") [ -f MyCurrentVimSession.vim ] && nvim -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!";;
     *) echo "\`${modesel}\` not valid option" ;;
 esac
