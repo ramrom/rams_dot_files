@@ -53,6 +53,7 @@
 - ethernet frame - has source and dest 48bit MAC address, error detection for frame corruption
 
 ## WIFI
+- technically ethernet, standard IEEE 802.11<x>
 - 2.4GHz band - ch1 2412, ch6 2437, ch11 2462
 ### STANDARDS
 - WiFi 6E, e = extended, supports 6Ghz band
@@ -62,6 +63,12 @@
 - WiFi 3 to identify devices that support 802.11g (released 2003)
 - WiFi 2 to identify devices that support 802.11a (released 1999)
 - WiFi 1 to identify devices that support 802.11b (released 1999)
+### INFO
+- uses CSMA/CA - CSMA = only transmit when channel idle
+- can't do CD(collision detection) b/c wireless transmitters desensing (turning off) their receivers during packet transmission.
+- in wifi, hosts can send RTS(request-to-send), and access-points can send CTS(clear-to-send) signals to coordinate, but not always
+- access point will send ACK packets back to host(received+checksum good), otherwise host goes into binary backoff to retransmit
+- hosts talk directly to access points, but it's possible for hosts on same wifi to directly talk to each other
 ### MESH
 - all nodes part of the same SSID
     - many wifi extenders use a seperate SSID for each extender

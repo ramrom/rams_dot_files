@@ -176,7 +176,7 @@
     mount -t afp afp://someuser:somepass@192.168.1.4/folder destfolder/
 - Finder mount, CMD+k -> someuser@192.168.1.1/folder
 ### FUSE
-- sshfs, veracrypt, and ntfs-3g program suse FUSE
+- sshfs, veracrypt, and ntfs-3g programs use FUSE
 - with Fuse-ext2, can mount a ext2/3/4 filesystem - https://github.com/alperakcan/fuse-ext2?tab=readme-ov-file
 - aug'21 - MacFUSE issues
     - sshfs and ntfs-3g brew install fail b/c of macfuse issue (macfuse closed-source or something)

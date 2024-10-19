@@ -184,7 +184,7 @@ strings somebin
 # NETCAT
 nc -l 127.0.0.1 9001     # TCP listen on 9001
 nc -u -l 127.0.0.1 9001     # UDP listen on 9001
-nc -u 127.0.0.1 3000        # create connect ton 127.0.0.1 port 3000
+nc -u 127.0.0.1 3000        # create UDP connection to 127.0.0.1 port 3000
 
 # WC - word count
 wc -l somefile   # count # of lines in file
