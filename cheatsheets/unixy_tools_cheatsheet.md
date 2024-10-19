@@ -296,6 +296,10 @@ stress-ng --cpu 2   # improved version of stress, many more advanced tests
 
 
 ###### NETWORK TOOLS
+# IP (linux, not OSX)
+ip -stats link show lo    # show statistics on a network link named `lo`
+ip addr                   # show IP addr, ethernet addr, state, etc
+
 # ARP cache
 arp -a   # display the apr cache
 arp -i en1 -a  # display arp cache through specific interface

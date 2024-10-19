@@ -507,7 +507,7 @@ pulsemixer - volume manager with pulseaudio
 - /root     - home dir for root user
 - /dev      - devices themselves
 - /sys      - info on devices, drivers, kernel modules (similar to proc but maybe better)
-- /proc     - psuedo filesystem that shows details on process info and general system info
+- /proc     - psuedo filesystem that shows details on process info and general system info, [see proc](#proc)
 - /lib      - shared libraries between different binaries for core system executables, e.g. for booting up
 - /mnt      - temporary mount point
 - /var      - sys specific variable(changing) files: logs, spool files, web server data files
@@ -525,6 +525,18 @@ pulsemixer - volume manager with pulseaudio
 - inotify (inode notify) - monitor changes to filesystem
     - main commands: `inotifywait` and `inotifywatch`
     - replaces older dnotify
+
+## PROC
+- proc dir shows system info in the files-as-API philosophy of linux
+- /proc/net/             - network stuff
+- /proc/cpuinfo          - cpu stuff
+- /proc/meminfo          - memory stuff
+- /proc/filesystem      - filesystems
+- /proc/partitions
+- /proc/uptime
+- /proc/loadavg
+- /proc/modules
+- /proc/version         - linux version
 
 ## OTHER LINUX/UBUNTU TOOLS
 - `chroot` - change the root dir of a process
