@@ -211,6 +211,8 @@
 - multi-file selection (calling `files()` method) and hitting enter will send it to quickfix list
     - also: `ctrl-t` to tabs, `ctrl-v` to vert splits
 - file search many root dirs: `lua require('fzf-lua').files({ cmd = "fd . dir1/sub1 dir2"  })`
+### TELESCOPE.NVIM
+- `?` toggle help in normal, `C-/` toggle help in insert
 ### HARPOON
 - harpoon remembers file lists in every dir, and those are stored in `~/.local/share/nvim/harpoon/`
 ### VIM-FUGITIVE
@@ -364,7 +366,9 @@
 - `ga` -> show character encoding under cursor
     - can also call `:ascii` or `:as` at command line
 - `:lua vim.fn.expand('%:p')` - print full path of current buffer regardless of CWD
-- print runtime path: `lua print(vim.inspect(vim.opt.rtp))`
+- print runtime path: 
+    - full info (big table) `lua print(vim.inspect(vim.opt.rtp))`
+    - just the paths: `lua print(vim.inspect(vim.api.nvim_list_runtime_paths()))`
 ### LOGS / MESSAGES
 - mar2024 - logs stored in `~/.local/state/nvim`
     - vim's regular `log`, but also `lsp.log`

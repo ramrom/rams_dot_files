@@ -384,8 +384,12 @@ rsync --stats /src /dest      # show very detailed summary info
 rsync -h --progress /src /dest      # show progress(bytes transferred for each file), -h output numbers in human readable format
 rsync -h --dry-run /src /dest       # (also -n), show just what would happens withotu doing it
     # dry-run shows if a hard-link is copied (-H option enabled), shows file deletions (--delete options)
-rsync -vh --checksum /src /dest       # use checksum algorithm instead of file-size/mod-time to figure out if copying is needed
-# NOTE: delta-transfers wont really work if remote is a network file share, e.g. samaba
+rsync -vh --checksum /src /dest       # use checksum algorithm instead of file-size/mod-time to figure out if file needs transferring
+# DELTA TRANSFERS
+# for each file copied, rsync can tx just parts of file that changed
+# each chunk of file on both sides has a md5 hash and cheap "rolling checksum" calculated
+# oct'24 - BELOW NEEDS VERIFICATION:
+    # delta-transfers wont really work if remote is a network file share, e.g. samaba
     # this is because entire file has to be read and thus transfered over network anyway to caluclate rolling checksums
     # ideally with network file share, you connect local rsync client to rsync server on remote file share
 

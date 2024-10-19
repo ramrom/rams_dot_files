@@ -26,8 +26,8 @@
     `echo "foo-bar baz" | rg -o ".*-(b..).*$" -r 'yar'`
         - will return "yar"
 - use `-g` globs to search specific files and dirs
-    `rg -g 'foo/bar/**' -g '!*bar*' -g 'yar/xy*'`
-        - match all files in foo/bar and recurce, and filenames starting with xy in folder yar
+    `rg -g 'foo/bar/**' -g '!*bar*' -g 'yar/xy*' somepattern`
+        - match all files in foo/bar and recurse, and filenames starting with xy in folder yar
         - but exclude any file/folder with bar in it.
         - order matter, for multiple matches, later globs take precedence
 - search for files with a pattern but not another pattern
