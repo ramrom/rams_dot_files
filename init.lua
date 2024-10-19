@@ -498,6 +498,9 @@ LoadTelescope = function()
             scroll_strategy = "limit",
             -- file_sorter = require("telescope.sorters").get_fzf_sorter,
             -- generic_sorter = require("telescope.sorters").get_fzf_sorter,
+            preview = {
+                filesize_limit = 2,  -- NOTE: oct'24 - floats round up, so 1.01 rounds up to 2, so 1.9MB file will preview
+            },
             mappings = {
                 -- default: ctrl u/d scroll on preview, ctrl n/p next/prev selection, ctrl k/j not mapped
                 i = {
@@ -1405,6 +1408,7 @@ LoadMyKeyMaps = function()
     vim.keymap.set('n', '<leader><leader>r', "<cmd>lua require('fzf-lua').command_history()<CR>", { desc = "fzf command history" })
     vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "fzf buffers" })
     ------ FZF FILES
+    -- FIXME: go back to passing in cmd string, not lua funcs, as this breaks NO_PLUG
     vim.keymap.set('n', '<leader>O', require('telescope.builtin').find_files, { desc = 'Telescope find files' })
     vim.keymap.set('n', '<leader>o', require('fzf-lua').files, { desc = "fzf files" })
     vim.keymap.set('n', '<leader><leader>o', "<cmd>lua require('fzf-lua').files({cwd='~/'})<CR>", { desc = "fzf files homedir" })

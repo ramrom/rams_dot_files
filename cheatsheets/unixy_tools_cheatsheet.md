@@ -445,7 +445,11 @@ watch -n 2 -d date  # run `date` every 2 seconds, -d highlight differences
 fswatch some/dir/ another/dir/ dir/somefile
 
 # CHAFA - view images(jpg, png etc) in ASCII/text in terminal! (ugly but still cool)
+    # supports sixels, kitty, iterm2
 chafa foo.jpg
+
+# CATIMG - like chafa
+catimg foo.jpg
 
 # MEDIAINFO     - show mediafile metadata (like mdls for osx)
 mediainfo foo.mp4

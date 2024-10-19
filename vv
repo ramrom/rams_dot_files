@@ -1,0 +1,24 @@
+#!/bin/sh
+
+echo "VIM MODES:"
+echo "   n -->  NO_NOICE=1 nvim"
+echo "   p -->  VIM_NOPLUG=1 nvim"
+echo "   u -->  nvim -u NONE"
+echo "   l -->  NO_LSP=1 nvim"
+echo "   a -->  NO_LSP_AUTOSTART=1 nvim"
+echo "   f -->  NVIM_APPNAME=nvimfire nvim"
+echo "   e -->  NO_NOICE=1 nvim -e"
+read -n1 -p "vim mode: " modesel
+
+echo
+
+case "$modesel" in
+    "n") NO_NOICE=1 nvim;;
+    "e") NO_NOICE=1 nvim -e;;
+    "l") NO_LSP=1 nvim;;
+    "u") nvim -u NONE;;
+    "p") VIM_NOPLUG=1 nvim;;
+    "a") NO_LSP_AUTOSTART=1 nvim;;
+    "f") NVIM_APPNAME=nvimfire nvim;;
+    *) echo "\`${modesel}\` not valid option" ;;
+esac
