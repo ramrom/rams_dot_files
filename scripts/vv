@@ -9,8 +9,8 @@ echo "   a -->  NO_LSP_AUTOSTART=1 nvim"
 echo "   f -->  NVIM_APPNAME=nvimfire nvim"
 echo "   e -->  NO_NOICE=1 nvim -e          - start in Ex mode, disable noice as it interferes"
 echo '   s -->  [ -f MyCurrentVimSession.vim ] && nvim -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!'
+echo
 read -n1 -p "vim mode: " modesel
-
 echo
 
 case "$modesel" in

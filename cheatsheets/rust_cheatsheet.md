@@ -851,4 +851,8 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
         - specifically [river](https://github.com/memorysafety/river) is a proxy built on pingora to replace nginx
 - [vaultwarden](https://github.com/dani-garcia/vaultwarden) - bitwarden server written in rust!
 - [rusttls](https://github.com/rustls/rustls) - rust implementation of TLS
-
+### MORE REWRITE IN RUST
+- zed,helix     - vi
+- skim          - fzf
+- zellij        - tmux
+- alacritty     - terminal

@@ -496,8 +496,6 @@ LoadTelescope = function()
     require('telescope').setup{
         defaults = {
             scroll_strategy = "limit",
-            -- file_sorter = require("telescope.sorters").get_fzf_sorter,
-            -- generic_sorter = require("telescope.sorters").get_fzf_sorter,
             preview = {
                 filesize_limit = 2,  -- NOTE: oct'24 - floats round up, so 1.01 rounds up to 2, so 1.9MB file will preview
             },
@@ -518,6 +516,10 @@ LoadTelescope = function()
             }
         },
     }
+
+    -- README: https://github.com/nvim-telescope/telescope-fzf-native.nvim
+    -- oct'24 - failing b/c fzf-native's `make` command failed, i had to remove/readd pluging from lazy spec for `make` to trigger
+    require('telescope').load_extension('fzf')
 end
 
 ----------------------------- FZF LUA --------------------------------------------------
@@ -1446,8 +1448,8 @@ LoadMyKeyMaps = function()
     ---------- NVIM TREE
     vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
     vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
-    vim.keymap.set('n', '<leader>wt', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
-    vim.keymap.set('n', '<leader>wu', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
+    vim.keymap.set('n', '<leader>wd', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
+    vim.keymap.set('n', '<leader>wt', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
 
     ---------- CHEATS + NOTES
     vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
@@ -1480,6 +1482,7 @@ LoadMyKeyMaps = function()
     vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
     vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
     vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
+    vim.keymap.set('n', '<leader>wu', "<cmd>:Telescope emoji<CR>", { desc = "telescope emoji" } )
     vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
     -- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
@@ -1608,7 +1611,6 @@ if not vim.env.VIM_NOPLUG then
         "aklt/plantuml-syntax",
         -- "MeanderingProgrammer/render-markdown.nvim",  -- make markdown in syntax highlighting prettier in neovim
 
-
         --- COLORSCHEME
         { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
 
@@ -1618,12 +1620,15 @@ if not vim.env.VIM_NOPLUG then
         { 'lewis6991/gitsigns.nvim', config = LoadGitSigns, event = "VeryLazy" },
 
         --- NAVIGATION
-        { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
-        { 'nvim-telescope/telescope.nvim', config = LoadTelescope, event = 'VeryLazy', tag = '0.1.8',
-            dependencies = { 'nvim-lua/plenary.nvim' }, event = "VeryLazy" }, 
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', event = "VeryLazy" },
-        { "xiyaowong/telescope-emoji.nvim", config = LoadTelescopeEmoji, event = "VeryLazy" },
         { 'ThePrimeagen/harpoon', config = LoadHarpoon, branch = "harpoon2", dependencies = { 'nvim-lua/plenary.nvim'} },
+        { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
+
+        --- TELESCOPE
+        { 'nvim-telescope/telescope.nvim', config = LoadTelescope, event = 'VeryLazy', tag = '0.1.8',
+            dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' }, event = "VeryLazy" }, 
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', event = "VeryLazy" },
+        { "xiyaowong/telescope-emoji.nvim", config = LoadTelescopeEmoji, event = "VeryLazy",
+            dependencies = { 'nvim-telescope/telescope.nvim' } },
 
         -- MARKDOWN
         { "iamcco/markdown-preview.nvim",
