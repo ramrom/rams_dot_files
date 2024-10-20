@@ -1608,7 +1608,7 @@ if not vim.env.VIM_NOPLUG then
         'nvim-tree/nvim-web-devicons',
         'tpope/vim-surround',
         'tpope/vim-repeat',
-        "aklt/plantuml-syntax",
+        {"aklt/plantuml-syntax", ft = 'plantuml' },
         -- "MeanderingProgrammer/render-markdown.nvim",  -- make markdown in syntax highlighting prettier in neovim
 
         --- COLORSCHEME
