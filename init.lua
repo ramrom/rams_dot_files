@@ -325,10 +325,11 @@ end
 
 
 ----------------------------------- RUN IN TMUX PANE -----------------------------------------------------
-ActiveTmuxRunnerPane=nil
-ClearActiveTmuxRunnerPane=true
+TmuxPaneRunner = {}
+TmuxPaneRunner.activePane = nil
+TmuxPaneRunner.clearPaneBeforeRun = true
 
-SelectTmuxRunnerPane = function()
+TmuxPaneRunner.selectPane = function()
     -- display pane index in tmux window
     vim.fn.system({'tmux', 'display-panes' })
 
@@ -355,63 +356,63 @@ SelectTmuxRunnerPane = function()
 
     if pane_selection ~= nil and pane_selection < #panes then  -- nil if convert to number failed
         print("ActiveTmuxRunnerPane set to: " .. pane_selection)
-        ActiveTmuxRunnerPane=pane_selection
+        TmuxPaneRunner.activePane = pane_selection
     else
         print("pane number " .. pane_selection .. " not found!")
     end
 end
 
 -- if set, clear the runner pane before command is run
-ToggleClearTmuxRunnerPane = function()
-    ClearActiveTmuxRunnerPane = not ClearActiveTmuxRunnerPane
-    print("ClearActiveTmuxRunnerPane: " .. tostring(ClearActiveTmuxRunnerPane))
+TmuxPaneRunner.toggleClearOnRun = function()
+    TmuxPaneRunner.clearPaneBeforeRun = not TmuxPaneRunner.clearPaneBeforeRun
+    print("ClearActiveTmuxRunnerPane: " .. tostring(TmuxPaneRunner.clearPaneBeforeRun))
 end
 
+
 -- TODO: maybe add logic to set default pane, look for pane with no child processes (see tmux-open-pane script)
-TmuxPaneRun = function(cmd)
-    if ActiveTmuxRunnerPane == nil then
+TmuxPaneRunner.paneRun = function(cmd)
+    if TmuxPaneRunner.activePane == nil then
         print('ActiveTmuxRunnerPane is nil')
     else
-        if ClearActiveTmuxRunnerPane then
-            vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxRunnerPane, 'clear', 'C-m'})
+        if TmuxPaneRunner.clearPaneBeforeRun then
+            vim.fn.system({'tmux', 'send-keys', '-t', TmuxPaneRunner.activePane, 'clear', 'C-m'})
         end
-        -- os.execute('tmux send-keys -t ' .. ActiveTmuxRunnerPane .. ' \'' .. cmd .. '\' C-m')
-        vim.fn.system({'tmux', 'send-keys', '-t', ActiveTmuxRunnerPane, cmd, 'C-m'})
+        vim.fn.system({'tmux', 'send-keys', '-t', TmuxPaneRunner.activePane, cmd, 'C-m'})
     end
 end
 
-RunAction = function(arg)
+TmuxPaneRunner.run = function(arg)
     local curftype = vim.bo.filetype
     if arg == "exe" then
         if curftype == "rust" then
-            TmuxPaneRun("cargo run")
+            TmuxPaneRunner.paneRun("cargo run")
         elseif curftype == 'go' then
-            TmuxPaneRun("go run ".. vim.fn.expand("%"))
+            TmuxPaneRunner.paneRun("go run ".. vim.fn.expand("%"))
         elseif curftype == 'c' then
-            TmuxPaneRun("gcc " .. vim.fn.expand("%") .. ' && ./a.out')
+            TmuxPaneRunner.paneRun("gcc " .. vim.fn.expand("%") .. ' && ./a.out')
         elseif curftype == 'scala' then
-            -- TmuxPaneRun("scala ".. vim.fn.expand("%"))
-            TmuxPaneRun("sbt run")
+            -- TmuxPaneRunner.paneRun("scala ".. vim.fn.expand("%"))
+            TmuxPaneRunner.paneRun("sbt run")
         elseif curftype == 'java' then
-            TmuxPaneRun("java-ramrom")
+            TmuxPaneRunner.paneRun("java-ramrom")
         else
             print("filetype " .. curftype .. " undefined for execute action")
         end
     elseif arg == 'test' then
         if curftype == "rust" then
-            TmuxPaneRun('cargo test')
+            TmuxPaneRunner.paneRun('cargo test')
         elseif curftype == 'go' then
-            TmuxPaneRun("go test ".. vim.fn.expand("%"))
+            TmuxPaneRunner.paneRun("go test ".. vim.fn.expand("%"))
         else
             print("filetype " .. curftype .. " undefined for test action")
         end
     elseif arg == 'build' then
         if curftype == "rust" then
-            TmuxPaneRun('cargo build')
+            TmuxPaneRunner.paneRun('cargo build')
         elseif curftype == 'go' then
-            TmuxPaneRun("go build ".. vim.fn.expand("%"))
+            TmuxPaneRunner.paneRun("go build ".. vim.fn.expand("%"))
         elseif curftype == 'c' then
-            TmuxPaneRun("gcc ".. vim.fn.expand("%"))
+            TmuxPaneRunner.paneRun("gcc ".. vim.fn.expand("%"))
         else
             print("filetype " .. curftype .. " undefined for build action")
         end
@@ -1343,11 +1344,11 @@ LoadMyKeyMaps = function()
     -- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'remove search highlights' })
 
     -- SMART RUN ACTIONS
-    vim.keymap.set("n", "<leader>aa", "<cmd>:lua RunAction('exe')<cr>", { desc = "execute program" })
-    vim.keymap.set("n", "<leader>ar", SelectTmuxRunnerPane, { desc = "set tmux pane runner" })
-    vim.keymap.set("n", "<leader>ac", ToggleClearTmuxRunnerPane, { desc = "toggle if runner pane is cleared before cmd execution" })
-    vim.keymap.set("n", "<leader>at", "<cmd>:lua RunAction('test')<cr>", { desc = "run tests" })
-    vim.keymap.set("n", "<leader>ab", "<cmd>:lua RunAction('build')<cr>", { desc = "build/compile program" })
+    vim.keymap.set("n", "<leader>aa", "<cmd>:lua TmuxPaneRunner.run('exe')<cr>", { desc = "execute program" })
+    vim.keymap.set("n", "<leader>ar", TmuxPaneRunner.selectPane, { desc = "set tmux pane runner" })
+    vim.keymap.set("n", "<leader>ac", TmuxPaneRunner.toggleClearOnRun, { desc = "toggle if runner pane is cleared before cmd execution" })
+    vim.keymap.set("n", "<leader>at", "<cmd>:lua TmuxPaneRunner.run('test')<cr>", { desc = "run tests" })
+    vim.keymap.set("n", "<leader>ab", "<cmd>:lua TmuxPaneRunner.run('build')<cr>", { desc = "build/compile program" })
 
     ------ WINDOW RESIZE/MOVE/CREATE
     local default_opts = { noremap = true, silent = true }
