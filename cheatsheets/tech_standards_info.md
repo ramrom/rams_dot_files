@@ -427,6 +427,9 @@
     - many language-specific client libs implement the protocol for emitting UDP events to a StatsD Daemon
     - UDP b/c it's fire-and-forget, and ur app performance will never take a hit
     - StatsD daemon can store data to many backends/dbs, e.g. influxDB or graphite
+- grafana - a FOSS data visualization app, has a backend and often is connected to time-series dbs like graphite or influxDB
+    - kibana is very similar product, fewer features, and is designed only for elasticcache backend
+    - grafana's UI is designed from kibana version 3
 
 ## LANGUAGES/FRAMEWORKS
 - WASM - web assembly, supported my most browsers, it's a compile target supported by rust, python, kotlin, and many more
@@ -628,13 +631,6 @@
 - standar for files for apps and configs
 
 ## NETWORK PROTOCOLS
-### CONCEPTS
-- AS = autonomous system, ASN = autonomous system number
-    - IANA assigns blocks of ASNs to RIRs(regional internet registries) which in turn assign ASNs to LIR(local internet registires)
-    - BGP routers advertise path vectors b/w ASes to each other
-    - routing within as AS is an IGRP(interior gateway routing protocol)
-- CIDR - classless inter-domain routing - make routing tables easier
-- VLSM - variable length subnet masking - make better use of address space
 ### LAYER 7
 - WebDAV - HTTP based protocol for data manipulation
 - CalDAV - based on WebDAV for sharing and syncing calander data
@@ -670,15 +666,26 @@
     - is an outstanding packet w/o an ack exists, sender should buffer data until a full TCP packet can be sent
     - common issue was telnet session, keyboard press is 1 byte, which sends a 41byte packet, very inefficient
     - `TCP_NODELAY` is a option to disable nagle's algo
+- is a streaming protocol, means a sender is adding a stream of bytes constantly
+    - this stream gets buffered and sent in diff packets, receiver doesn't know how many times the sender add bytes to the buffer
+    - it's up to higher layers to add "message" semantics, versus UDP is a datagram protocol and reciever sees the whole message
 ### UDP
 - conectionless - no handshakes to establish a connection
     - being connectionless it can broadcast/multicast
 - no ackknowlegements of packets, so delivery not gauranteed, and order is not gauranteed
+    - if you send UDP packet to IP host that's not listening to the port, it will just drop it
+    - if u send to a bogus IP, prolly some network downstream will send a ICMP "Destination Unreachable" message
 - no congestion control, TCP has sliding window for this
 - datagrams, you get the entire packet of data as one logical piece, max size is 65,527bytes + 8byte header
     - a receive/read on a udp socket will yield the whole datagram
 ### SCTP
 - stream control transmission protocol - datagrams like UDP but in-order, has congestion control, and reliable
+### STREAMING PROTOCOLS
+- HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
+- RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
+    - like HLS it's adaptive and chunks data, base type uses TCP port 1935, RTMFP is UDP version, RTMPT uses HTTP
+    - it's a true streaming protocol and has very low latency, used to live streaming and live gaming
+- RTMPS - RTMP with TLS
 ### IP
 - VIP - virtual IPs, IPs that are not connected to any physical interface
     - commonly used with 1-to-many NATs or for redudnancy with a cluster of servers or HSRP(hot standby router protocol)
@@ -689,12 +696,14 @@
     - private address range added:
         - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
         - fec0::/10 address block = deprecated (RFC 3879)
-### STREAMING PROTOCOLS
-- HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
-- RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
-    - like HLS it's adaptive and chunks data, base type uses TCP port 1935, RTMFP is UDP version, RTMPT uses HTTP
-    - it's a true streaming protocol and has very low latency, used to live streaming and live gaming
-- RTMPS - RTMP with TLS
+### IP NETWORK CONCEPTS
+- AS = autonomous system, ASN = autonomous system number
+    - IANA assigns blocks of ASNs to RIRs(regional internet registries) which in turn assign ASNs to LIR(local internet registires)
+    - BGP routers advertise path vectors b/w ASes to each other
+    - routing within as AS is an IGRP(interior gateway routing protocol)
+- CIDR - classless inter-domain routing - classful networks eat too much IPv4 space, this lets routers do non-classful routing
+    - needs VLSM to support variable length network prefixes
+- VLSM - variable length subnet masking - make better use of address space
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP

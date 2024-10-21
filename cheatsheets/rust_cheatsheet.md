@@ -818,6 +818,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
         - *NOTE* future is polled in executor even if you dont await the handle
     - `tokio::task::spawn_blocking(|| { ... })` - run blocking closure on special threads on runtime for blocking
     - graceful shutdown - pass a mpsc sender to all tasks, when all senders dropped, all tasks are done, can shutdown
+- [tokio console](https://github.com/tokio-rs/console) - awesome TUI for diag/debug tool for tokio
 - [async-std](https://github.com/async-rs/async-std) - async version of std lib, similar to tokio
 - [crossbeam](https://github.com/crossbeam-rs/crossbeam) - concurrency toolbelt
 - [parking lot](https://crates.io/crates/parking_lot) - better mutex/rwlock/condvar

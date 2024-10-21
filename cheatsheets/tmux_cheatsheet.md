@@ -24,6 +24,12 @@
 - change to a preset layout: `tmux select-layout even-horizontal`
 - any program running in a pane will be a child process of that panes' PID
 
+## COMMANDS
+```tmux
+# new window takes a manual shell command to run, zsh -f will start zsh shell with no rc files loaded
+tmux new-window zsh -f
+```
+
 ## RUNNING SHELL COMMAND ON A TMUX HOOK
 - `tmux set-hook pane-focus-out 'run-shell "echo hi >> ~/foo"'`
 - expanded using FORAMTS before execution

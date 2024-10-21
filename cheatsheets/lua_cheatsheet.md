@@ -8,10 +8,15 @@
 
 ## DOCS
 - 5.3 ref guide: https://www.lua.org/manual/5.3/
-- programming in lua is great guide - https://www.lua.org/pil/
+- programming in lua is **great** guide - https://www.lua.org/pil/
 - learn lua in y min - https://learnxinyminutes.com/docs/lua/
 - nice comparison to other langs: http://lua-users.org/wiki/LuaComparison
 - devhits: https://devhints.io/lua
+
+## LUA VM
+- the Lua VM is encapsulated in a single data struct called the Lua State
+- the Lua State lives in one thread, and thus kinda single threaded
+- can create many threads to spawn a Lua State and VM on each
 
 ## LUAJIT
 - LuaJIT uses JIT compiler that generates machine code directly

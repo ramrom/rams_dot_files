@@ -11,6 +11,7 @@
     - linux: global zshrc, zlogin, zlogout, zprofile, zshenv in `/etc/zsh` dir (at least ubuntu22)
         - this global zshrc calls `compinit`
     - osx: globals located at `/etc/zshrc` `/etc/zprofile` directly
+- `zsh -f` or `zsh -o NO_RCS` or `zsh --no-rcs` - start zsh without loading rc files
 ### COMPLETIONS
 - official(and confusing): https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Completion-System
 - good doc: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
