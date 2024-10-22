@@ -17,6 +17,7 @@
 - the Lua VM is encapsulated in a single data struct called the Lua State
 - the Lua State lives in one thread, and thus kinda single threaded
 - can create many threads to spawn a Lua State and VM on each
+- C talking to lua uses a virtual stack, big challanges are static vs dynamic typing, and GC vs manual memory management
 
 ## LUAJIT
 - LuaJIT uses JIT compiler that generates machine code directly

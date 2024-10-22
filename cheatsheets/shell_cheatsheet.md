@@ -345,6 +345,14 @@ do
     i=$((i + 1))
 done
 
+# read input from keyboard with a prompt
+read -n -p "a prompt: " inputdata
+echo "keyboard input given: $inputdata"
+
+# bash-only: read just one character
+read -n1 -p "a prompt: " inputdata
+echo "keyboard input given: $inputdata"
+
 # read lines from file
 while read p; do
   echo "$p"

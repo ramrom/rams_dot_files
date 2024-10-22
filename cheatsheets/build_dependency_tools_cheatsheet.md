@@ -233,3 +233,9 @@
     - see all java versions available to install, which are installed, and which one is currently used
 - `sdk default java 17.0.6-tem` - set default java version for all shells
 - `sdk config`  - will open to edit the default config file
+
+## JENKINS
+- a FOSS build system: [see main cheat](./jenkins_cheatsheet.md)
+
+## GITHUB ACTIONS
+- a build system in github, competes with Jenkins

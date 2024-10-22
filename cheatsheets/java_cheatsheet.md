@@ -937,27 +937,28 @@ finally { .. }  // finally is always exected
 - has infinite streams via `generate` and `iterate`
 ```java
 import java.util.stream.Stream
-Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()) // returns List(2,3,4)
+Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()); // returns List(2,3,4)
 Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on seperate lines
 
 Stream.of("a","b").forEach(i -> System.out.println(i));
 
+// IntStreams
 import java.util.stream.IntStream
-IntStream.range(1,100).forEach(System.out::println)  // IntStream produces a stream of items sequentially
-IntStream.range(1,100).forEach(i -> i = i * 2)      // forEach takes a lambda
-IntStream.range(1,100).map(i -> i * 2)      // apply lamba to each item, map method here only allows int return values
-IntStream.range(1,100).mapToObj(i -> String.valueOf(i))      // mapToObj lets u map but return any reference type object
-IntStream.range(1,100).toArray()        // convert it primitive array (int[])
-IntStream.range(1,100).boxed().collect(Collectors.toList())     // boxed converts `int`s in IntStream to Stream<Integer>
-IntStream.range(1,100).boxed().toList()     // java16 - can call toList()
-IntStream.rangeClosed(1,100)            // is inclusive of end index, 100 in this case
-IntStream.iterate(0, i->i+1)        // iterate is infinite stream, first arg is seed
-IntStream.iterate(0, i->i+1).limit(10).toArray()        // stop at 10, converts to array
+IntStream.range(1,100).forEach(System.out::println);  // IntStream produces a stream of items sequentially
+IntStream.range(1,100).forEach(i -> i = i * 2);      // forEach takes a lambda
+IntStream.range(1,100).map(i -> i * 2);      // apply lamba to each item, map method here only allows int return values
+IntStream.range(1,100).mapToObj(i -> String.valueOf(i));      // mapToObj lets u map but return any reference type object
+IntStream.range(1,100).toArray();        // convert it primitive array (int[])
+IntStream.range(1,100).boxed().collect(Collectors.toList());     // boxed converts `int`s in IntStream to Stream<Integer>
+IntStream.range(1,100).boxed().toList();     // java16 - can call toList()
+IntStream.rangeClosed(1,100);            // is inclusive of end index, 100 in this case
+IntStream.iterate(0, i->i+1);       // iterate is infinite stream, first arg is seed
+IntStream.iterate(0, i->i+1).limit(10).toArray();        // stop at 10, converts to array
 
 // Collector interface also has toMap, toSet
 var a = new ArrayList<Integer>(); a.add(1); a.add(2);
-a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()) // returns List(4)
-a.stream().collect(Collectors.toSet()) // returns a set
+a.stream().map(i -> i + 2).filter(i -> i > 3).collect(Collectors.toList()); // returns List(4)
+a.stream().collect(Collectors.toSet()); // returns a set
 
 // create collection of objects from primitive array data
 var s = Arrays.stream(new int[] { 1,2,3};
