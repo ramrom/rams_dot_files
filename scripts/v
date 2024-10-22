@@ -1,5 +1,7 @@
 #!/bin/sh
 
+##### wrapper for all the various ways I want to start vi
+
 # if we passed in args just run nvim normally
 [ -n "$1" ] && nvim "$@" && exit
 
@@ -12,7 +14,7 @@ echo "   a -->  NO_LSP_AUTOSTART=1 nvim"
 echo "   f -->  NVIM_APPNAME=nvimfire nvim"
 echo "   e -->  NO_NOICE=1 nvim -e          - start in Ex mode, disable noice as it interferes"
 echo '   s -->  [ -f MyCurrentVimSession.vim ] && nvim -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!'
-echo '   v -->  regular'
+echo '   v -->  nvim (no mods)'
 echo
 read -n1 -p "vim mode: " modesel
 echo

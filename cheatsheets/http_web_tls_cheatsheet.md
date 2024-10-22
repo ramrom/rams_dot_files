@@ -152,17 +152,12 @@
     - curl will resolve bar.com _but_ still set host header to `foo.com`
 - `curl -X POST -H "Content-Type: application/json" -d '{"foo": 3, "bar": 1}' https://foo.com/yar/bar`
 - using SOCKS proxy: `curl -x socks5h://127.0.0.1:1234 http://foo.com`
+- `curl -f` - fail fast, exit code is non-zero if response is 4xx, but exceptions exist like 401 or 407 will still return 0 exit code
 
 ## HTTPIE
-- https://httpie.io/docs
+- cli docs - https://httpie.io/docs/cli
 - written in python, core libs pygments and requests
-### USAGE
-- raw json fields
-    ```sh
-    http POST https://api.foo.com field:='["a",2]'
-    # using escaped double quotes so you can interpolate shell vars
-    http POST https://api.foo.com field:="[\"${SOME_VAR}\",2]"
-    ```
+- see [xh usage](#XH) as it should be 99% same as HTTPie
 ### CODE SNIPPET OF EXTRACTING STATUS CODE
 ```sh
 function httpie_all() {
@@ -185,6 +180,23 @@ function httpie_all() {
 ## XH
 - https://github.com/ducaale/xh
 - a http client in rust that is near identical in interface to HTTPie
-- `xh --verify no https://foo.com` - dont verify TLS cert
-- `xh https://foo.com "Cookie:CookieOne=cookievalue;CookieTwo=anothervalue` - add cookies
-- `xh --curl POST https://foo.com`    - `--curl` will print the curl coverted command
+### USAGE
+```sh
+# raw json fields
+http POST https://api.foo.com field:='["a",2]'
+
+# using escaped double quotes so you can interpolate shell vars
+http POST https://api.foo.com field:="[\"${SOME_VAR}\",2]"
+
+# dont verify TLS cert
+xh --verify no https://foo.com      
+
+# add cookies
+xh https://foo.com "Cookie:CookieOne=cookievalue;CookieTwo=anothervalue"
+
+# `--curl` will print the curl coverted command
+xh --curl POST https://foo.com    
+
+# debug - print more info like what options xh is run with, sessions, certs, proxy, etc
+xh --debug http://foo.com
+```
