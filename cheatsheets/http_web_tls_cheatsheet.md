@@ -143,6 +143,8 @@
 - `curl --insecure https://foo.com`  - skip cert TLS verification
 - `curl -v --http1.1 -X POST -F 'name=foo' https://foo.com`  
     - `-v` for verbose, `--http.1.1` to force http1.1
+    - `--trace out.log` output more details like response body, will show hex values of text
+    - `--trace-ascii out.log`, just show ascii values of body
 - `curl -X POST -d 'name=foo' https://foo.com` 
     - `-d` forces Content-Type to be `application/x-www-form-urlencoded`
 - removing a header: https://stackoverflow.com/questions/31293181/how-can-i-remove-default-headers-that-curl-sends

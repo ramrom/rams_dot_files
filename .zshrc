@@ -25,17 +25,17 @@ setopt sh_word_split    # use IFS word splitting
 # oct2022: tmux on osx runs path_helper(from /etc/profile) which messus up path entries
     # see https://superuser.com/questions/544989/does-tmux-sort-the-path-variable
 # this workaround fixes this issue
-if [ "$(uname)" = "Darwin" -a -f /etc/profile ]; then
-    PATH=""
-    source /etc/profile
-fi
+# if [ "$(uname)" = "Darwin" -a -f /etc/profile ]; then
+#     PATH=""
+#     source /etc/profile
+# fi
 
 export FCEDIT=nvim      # set fc(command history editor) to vim
 
 export EDITOR=nvim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
-bindkey -s '^o' 'v\n'   # set ctrl-o to open neovim
+bindkey -s '^o' 'nvim\n'   # set ctrl-o to open neovim
 
 # Colorize
 if [ $(uname) = "Darwin" ]; then
