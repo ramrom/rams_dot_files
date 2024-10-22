@@ -185,3 +185,4 @@ function httpie_all() {
 - a http client in rust that is near identical in interface to HTTPie
 - `xh --verify no https://foo.com` - dont verify TLS cert
 - `xh https://foo.com "Cookie:CookieOne=cookievalue;CookieTwo=anothervalue` - add cookies
+- `xh --curl POST https://foo.com`    - `--curl` will print the curl coverted command

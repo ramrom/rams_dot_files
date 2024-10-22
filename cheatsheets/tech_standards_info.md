@@ -93,6 +93,10 @@
 - LQI (Link Quality Indicator) - quality of data packets received
 - RSS (Recieved Signal Strength) - quality of signal strength
 
+## SDR
+- stands for software defined radio
+- usually analog/digital is handled by DSPs/FPGAs/ASICs, here we have general purpose CPUs able to do these tasks
+
 ## IOT
 - Matter - is a new standard to rule all IoT for communication but still a big WIP (sept 2021)
     - https://buildwithmatter.com/

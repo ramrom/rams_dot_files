@@ -416,6 +416,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - `busctl` - cli to introspect the bus
     - `sudo busctl monitor org.bluez` - see all live events for bus name `org.bluez`
     - `busctl introspect org.bluez /org/bluez/hci0`  - show interfaces/methods/properties on object `/org/bluez/hci0`
+- `dbus-monitor` cli tool
 
 ## NETWORK
 - `netplan` - reads a YAML file describing network layout/config and renders it to a network script
@@ -525,9 +526,11 @@ pulsemixer - volume manager with pulseaudio
 - inotify (inode notify) - monitor changes to filesystem
     - main commands: `inotifywait` and `inotifywatch`
     - replaces older dnotify
+- sysfs - pseudo file system exposes kernel provides access to kernel subsystems, hardware devices, and associated device drivers
 
 ## PROC
-- proc dir shows system info in the files-as-API philosophy of linux
+- is a virtual file system that exposes info about sys hardware, processes, and more
+    - proc dir shows system info in the files-as-API philosophy of linux
 - /proc/net/             - network stuff
 - /proc/cpuinfo          - cpu stuff
 - /proc/meminfo          - memory stuff
@@ -564,6 +567,7 @@ pulsemixer - volume manager with pulseaudio
 - `modprobe` - add/remove modules from linux kernel
 - `udevadm` - query info about udev events
     - `udevadm info -a -n /dev/nvme0` - show info about device
+- `sysctl` - read and modifies kernel attributes like version #, max limits, security settings
 - `dmesg` - kernel ring buffer, print messages or control it
     - `sudo dmesg -w`   - `-w` will wait for new messages, i.e. like `tail`ing
     - `sudo dmesg -T`   - `-T` print human readable timestamps

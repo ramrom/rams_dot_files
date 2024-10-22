@@ -31,6 +31,8 @@ assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
     - unlike `pip`, which has no ioslation and made for libs and apps, pipx is for app installs
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
+### UV
+- rust written replacement for PIP: https://github.com/astral-sh/uv
 
 ## INTROSPECTION
 - `type(foo)`   - print type

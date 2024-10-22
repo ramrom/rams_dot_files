@@ -641,8 +641,8 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 let num = 0b0000000000101100u16;
 println!("{:?}", num);    // prints 44  , "?" uses Debug trait
 println!("{:0b}", num);    // prints "101100",  "b" means Binary trait
-println!("{:0x}", num);    // prints "2c",  "b" means LowerHex trait
-println!("{:0e}", num);    // prints "4.4e1",  "" means LowerExp trait
+println!("{:0x}", num);    // prints "2c",  "x" means LowerHex trait
+println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
 ```
 - fill/alignment padding https://doc.rust-lang.org/std/fmt/#fillalignment
 

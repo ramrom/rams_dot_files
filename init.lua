@@ -1424,7 +1424,7 @@ LoadMyKeyMaps = function()
     vim.keymap.set('n', '<leader>ei', "<cmd>lua require('fzf-lua').lines()<CR>", { desc = "fzf all buffer lines" })
     vim.keymap.set('n', '<leader>ec', "<cmd>lua require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
         { desc = "fzf grep cheatsheet dir" })
-    local str_grep_mydirs = function() 
+    local str_grep_mydirs = function()
         local sr = vim.fn.input("Query: ")
         require('telescope.builtin').grep_string({ search = sr, search_dirs = {'~/rams_dot_files/cheatsheets', vim.env.MY_NOTES_DIR }})
     end
