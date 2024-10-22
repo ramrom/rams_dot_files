@@ -1,10 +1,6 @@
 ### SHELL ALIASES
 
 # VI
-alias v='nvim'
-alias vf='NVIM_APPNAME=nvimfire nvim'
-alias vnone='nvim -u NONE'        # super simple, dont even load my vimrc
-alias vs='[ -f MyCurrentVimSession.vim ] && v -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!"'
 alias vdiff='nvim -d'
 
 # LS
