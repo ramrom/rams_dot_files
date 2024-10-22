@@ -1633,7 +1633,7 @@ if not vim.env.VIM_NOPLUG then
         { 'nvim-telescope/telescope.nvim', config = LoadTelescope, event = 'VeryLazy', tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' }, event = "VeryLazy" }, 
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', event = "VeryLazy" },
-        { "xiyaowong/telescope-emoji.nvim", config = LoadTelescopeEmoji, event = "VeryLazy",
+        { "xiyaowong/telescope-emoji.nvim", config = LoadTelescopeEmoji, cmd = { "Telescope emoji" },
             dependencies = { 'nvim-telescope/telescope.nvim' } },
 
         -- MARKDOWN
