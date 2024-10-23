@@ -1000,7 +1000,6 @@ LoadAutoComplete = function()
             { name = 'buffer' },
             { name = 'luasnip' },
         },
-
         -- see https://www.reddit.com/r/neovim/comments/14k7pbc/what_is_the_nvimcmp_comparatorsorting_you_are/
         sorting = {
             comparators = {
@@ -1337,7 +1336,7 @@ end
 -------------------------------------------------------------------------------------------------------
 vim.g.mapleader = " "
 
------------- NOTE: Prime open real estate for key remapping -------------------
+------------ NOTE: Prime open real estate for key -------------------
 -- NORMAL MODE
     -- <leader> + ,/l/u/x/<0-9>
     -- <Leader><Leader>  (most open)
@@ -1364,6 +1363,7 @@ LoadMyKeyMaps = function()
     vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
     vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highlights' })
     -- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'remove search highlights' })
+    vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 
     -- SMART RUN ACTIONS
     vim.keymap.set("n", "<leader>aa", "<cmd>:lua TmuxPaneRunner.run('exe')<cr>", { desc = "execute program" })
@@ -1494,7 +1494,6 @@ LoadMyKeyMaps = function()
     vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
 
     -------------- OTHER
-    vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
     vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
     vim.keymap.set("n", "<leader>wb", "<cmd>:Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
     vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
@@ -1510,7 +1509,8 @@ LoadMyKeyMaps = function()
     vim.keymap.set("n", "<leader>wg", function() ToggleMainNavKeys("quickfix") end, { desc = "toggle quickfix mode" })
     vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
     vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
-    vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
+    vim.keymap.set('n', '<leader>wp', ToggleAutoPair, { desc = "toggle autopair" } )
+    vim.keymap.set("n", "<leader>wa", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
     vim.keymap.set('n', '<leader>wu', "<cmd>:Telescope emoji<CR>", { desc = "telescope emoji" } )
     vim.keymap.set("n", "<leader>wh", function() ToggleMainNavKeys("harpoon") end, { desc = "toggle harpoon mode" })
     vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
@@ -1532,7 +1532,6 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "glh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
         {desc = "toggle inlay hints"})
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
-    vim.keymap.set("n", "gla", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
 
     -- ACTIONS
     vim.keymap.set("n", "gH", vim.lsp.codelens.run, { desc = "lsp codelens run" }) -- TODO: gH enters select mode

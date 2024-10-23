@@ -1,5 +1,7 @@
 # JAVASCRIPT
 - decent doc on js event loop in browser - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop
+    - main thread is the event loop on queue, that handle any javascript code
+    - there are other threads, particularly ones that handle networking calls and will add to event queue
 
 ## DIALECTS
 - coffeescript

@@ -51,6 +51,7 @@
     - 10BASE5 - coaxial cable, 10BASE2 - thinner/flexible cable, BASE-T - twisted pair cable
     - twisted pair - one wire carries inverted signal, both get equal external noise and when invereted and summed noise is cancelled
 - ethernet frame - has source and dest 48bit MAC address, error detection for frame corruption
+    - frame v2 MTU is 1500bytes
 
 ## WIFI
 - technically ethernet, standard IEEE 802.11<x>
@@ -69,6 +70,7 @@
 - in wifi, hosts can send RTS(request-to-send), and access-points can send CTS(clear-to-send) signals to coordinate, but not always
 - access point will send ACK packets back to host(received+checksum good), otherwise host goes into binary backoff to retransmit
 - hosts talk directly to access points, but it's possible for hosts on same wifi to directly talk to each other
+- MTU 2304 bytes b4 encryption
 ### MESH
 - all nodes part of the same SSID
     - many wifi extenders use a seperate SSID for each extender
@@ -667,12 +669,13 @@
     - uses 3-way handshake to establish connection: SYN -> SYN ACK -> ACK
 - Nagle's algorithm - reduce # of packets sent over the network, for efficiency since 
     - each packet has overhead from a headers: 20bytes for TCP header + 20 bytes IP header
-    - is an outstanding packet w/o an ack exists, sender should buffer data until a full TCP packet can be sent
+    - if an outstanding packet w/o an ACK exists, sender should buffer data until a full TCP packet can be sent
     - common issue was telnet session, keyboard press is 1 byte, which sends a 41byte packet, very inefficient
     - `TCP_NODELAY` is a option to disable nagle's algo
 - is a streaming protocol, means a sender is adding a stream of bytes constantly
     - this stream gets buffered and sent in diff packets, receiver doesn't know how many times the sender add bytes to the buffer
     - it's up to higher layers to add "message" semantics, versus UDP is a datagram protocol and reciever sees the whole message
+- max size of a packet is 64K
 ### UDP
 - conectionless - no handshakes to establish a connection
     - being connectionless it can broadcast/multicast
@@ -684,6 +687,7 @@
     - a receive/read on a udp socket will yield the whole datagram
 ### SCTP
 - stream control transmission protocol - datagrams like UDP but in-order, has congestion control, and reliable
+- new protocol, that is sorta the best of UDP and TCP, but no OSes or network equipment really implement it
 ### STREAMING PROTOCOLS
 - HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
 - RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol

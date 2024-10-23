@@ -8,6 +8,8 @@
     - supports persistent TCP (dont need to open a new TCP connection for every request)
     - supports pipelining requests (can send request 2 before waiting for response of request 1)
         - many browsers stopped supporting it, b/c many proxies did not implement pipelining correctly
+    - often uses gzip/DEFLATE to compress data
+        - DEFLATE is vulnerable to CRIME attack, many edge networks like cloudflare disable compression b/c of this
 - http 2: https://developers.google.com/web/fundamentals/performance/http2
     - good docs: https://http2.github.io/faq/
     - started as SPDY protocol by google, released by IETF in 2015
@@ -20,7 +22,8 @@
         - streams can have priorites, with weights, max num of streams can be millions but ~100 is reccomended
             - priorities are particularly nice when certain assets need to load first in a browser
     - server push - the server can send data without a request
-    - has HPACK header compression
+    - uses HPACK header compression
+        - designed to resist CRIME attack, uses static huffman encoding(DEFLATE uses dynamic)
 - http 3
     - released as IETF standard in 2023
     - address limits of http2: mobile traffic with changing cell towers/networks, changing wifi networks

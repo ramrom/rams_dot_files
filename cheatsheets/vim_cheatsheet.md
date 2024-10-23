@@ -256,7 +256,8 @@
 - `ds[` - delete surround `[`
 - `ysiw[` - select inner word and surround with `[`
 ### NVIM-TREE
-- written in lua, competing plugin is NERDTree
+- written in lua
+- similar: plugin is NERDTree(vimscript), neo-tree(lua)
 - `g?` - to list commands
 - `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
 - `o` - open with window picker, if multiple windows open, select a labeled (e.g. "A" "B" "C" for 3windows) window
@@ -286,10 +287,10 @@
     - see https://github.com/nvim-treesitter/nvim-treesitter/issues/2846
 ### VIM-RHUBARB
 - rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
-- used to use vim-gh-line, but rhubarb looks better
+- used to use `vim-gh-line`, but rhubarb looks better
 ### FLASH.NVIM
 - quickly jump to a word on screen, or quick select
-- similar plugins: vim-sneak, vim-easymotion
+- similar plugins: `vim-sneak,` `vim-easymotion`
 ### TABULAR
 - `:Tabularize /|`
     - autodetect lines above and below and align on `|` char
