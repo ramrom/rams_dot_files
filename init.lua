@@ -104,6 +104,53 @@ vim.api.nvim_create_user_command(
     {bang = true, nargs = "*" }
 )
 
+---------------------------- NAV MODE (HARPOON, TABBBUF, QUICKFIX) --------------------
+MainNavKeyMode = "bufnav"
+
+ToggleMainNavKeys = function(togglemode)
+    local function setTabBuf()
+        vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
+        vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
+        -- vim.keymap.set("n", "<C-l>", "<C-w>l")
+        -- vim.keymap.set("n", "<C-h>", "<C-w>h")
+        -- vim.keymap.set("n", "<C-j>", "<C-w>j")
+        -- vim.keymap.set("n", "<C-k>", "<C-w>k")
+        print("tab/buf nav mode activated")
+    end
+
+    local function setHarpoon()
+        local harpoon = require("harpoon")
+        vim.keymap.set("n", "<leader>d", function() harpoon:list():prev() end, {desc = "harpoon prev"})
+        vim.keymap.set("n", "<leader>f", function() harpoon:list():next() end, {desc = "harpoon next"})
+        -- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+        -- vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+        -- vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+        -- vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
+        print("Harpoon mode activated! 𐃆 ")
+    end
+
+    local function setQuickQuickList()
+        vim.keymap.set("n", "<leader>d", "<cmd>:cn<CR>", {desc = "harpoon prev"})
+        vim.keymap.set("n", "<leader>f", "<cmd>:cp<CR>", {desc = "harpoon next"})
+        print("quickfix mode activated")
+    end
+
+    if (togglemode == "harpoon") then
+        if (MainNavKeyMode ~= "harpoon") then MainNavKeyMode = "harpoon" else MainNavKeyMode = "tab-buf" end
+    else
+        if (MainNavKeyMode ~= "quickfix") then MainNavKeyMode = "quickfix" else MainNavKeyMode = "tab-buf" end
+    end
+
+    if (MainNavKeyMode == "harpoon") then
+        setHarpoon()
+    elseif (MainNavKeyMode == "quickfix") then
+        setQuickQuickList()
+    else
+        setTabBuf()
+    end
+
+end
+
 -- if there is one tab, move forward buffer, otherwise forward tabs
 TabBufNavForward = function()
     local tabinfo = vim.fn.gettabinfo()
@@ -115,6 +162,8 @@ TabBufNavBackward = function()
     local tabinfo = vim.fn.gettabinfo()
     if #tabinfo == 1 then vim.cmd(':bp!') else vim.cmd(':tabprevious') end
 end
+
+-------------------------------------------------------
 
 -- close tabs and windows if more than one of either, otherwise closes buffers until one left and then quit vim
 -- NOTE: aug'23 - for one tab, the #tabinfo[1]['windows'] returns more than one window id, when there is only one window...
@@ -446,30 +495,6 @@ local LoadOneDarkProConfig = function()
 end
 
 ----------------------------- HARPOON --------------------------------------------------
-UseHarpoonBufNav = false
-ToggleHarpoonBufNav = function()
-    UseHarpoonBufNav = not UseHarpoonBufNav
-
-    if UseHarpoonBufNav then
-        local harpoon = require("harpoon")
-        vim.keymap.set("n", "<leader>d", function() harpoon:list():prev() end, {desc = "harpoon prev"})
-        vim.keymap.set("n", "<leader>f", function() harpoon:list():next() end, {desc = "harpoon next"})
-        -- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-        -- vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
-        -- vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
-        -- vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
-        print("Harpoon mode activated! 𐃆 ")
-    else
-        vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
-        vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
-        -- vim.keymap.set("n", "<C-l>", "<C-w>l")
-        -- vim.keymap.set("n", "<C-h>", "<C-w>h")
-        -- vim.keymap.set("n", "<C-j>", "<C-w>j")
-        -- vim.keymap.set("n", "<C-k>", "<C-w>k")
-        print("using tab/buf nav")
-    end
-
-end
 
 LoadHarpoon = function()
     local harpoon = require("harpoon")
@@ -488,8 +513,6 @@ LoadHarpoon = function()
 
     -- NOTE: this actually leaves a blank line in harpon file, better to use quick menu and `dd`
     vim.keymap.set("n", "<leader>kx", function() harpoon:list():remove() end, {desc = "harpoon delete"}) 
-
-    vim.keymap.set("n", "<leader>wh", ToggleHarpoonBufNav, { desc = "toggle harpoon mode" })
 end
 
 ----------------------------- TELESCOPE 🔭 --------------------------------------------------
@@ -1485,10 +1508,12 @@ LoadMyKeyMaps = function()
     vim.keymap.set('n', '<leader>ww', ToggleLineWrap, { desc = "toggle line wrap"})
     vim.keymap.set('n', '<leader>wl', '<cmd>:lua UpdateLuaLineTabLine(true)<cr>')
     vim.keymap.set('n', '<leader>wq', '<cmd>:copen<cr>', { desc = "open quickfix list" })
+    vim.keymap.set("n", "<leader>wg", function() ToggleMainNavKeys("quickfix") end, { desc = "toggle quickfix mode" })
     vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
     vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
     vim.keymap.set('n', '<leader>wa', ToggleAutoPair, { desc = "toggle autopair" } )
     vim.keymap.set('n', '<leader>wu', "<cmd>:Telescope emoji<CR>", { desc = "telescope emoji" } )
+    vim.keymap.set("n", "<leader>wh", function() ToggleMainNavKeys("harpoon") end, { desc = "toggle harpoon mode" })
     vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
     -- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
@@ -1658,17 +1683,18 @@ if not vim.env.VIM_NOPLUG then
         { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
         { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
 
+        -- SNIPPETS
+        { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },
+        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
+        { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
+
+        -- AUTOPAIR + TABOUT
         { 'windwp/nvim-autopairs', event = "InsertEnter", config = LoadAutoPair },
         { 'abecodes/tabout.nvim',
             lazy = false, config = LoadTabOut, cond = not vim.env.NO_TAB, priority = 1000,
             dependencies = { "nvim-treesitter/nvim-treesitter", },
             event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
         },
-
-        -- SNIPPETS
-        { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },
-        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
-        { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
 
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
