@@ -294,7 +294,7 @@ end
 
 AutoPairEnabled = true
 
-ToggleAutoPair = function ()
+ToggleAutoPair = function()
     if AutoPairEnabled then
         require('nvim-autopairs').disable();
         AutoPairEnabled = false
@@ -964,17 +964,16 @@ LSPAutoStartEnable = not vim.env.NO_LSP_AUTOSTART
 
 -------------------------------- NVIM-CMP -------------------------------------------
 LoadAutoComplete = function()
-    local cmp = require 'cmp'
-    local initial_auto_completion = false;
+    local cmp = require('cmp')
+    local initial_auto_completion = false   -- dont show autocomplete menu be default
 
     if AutoAutoCompleteEnabled then
         initial_auto_completion =  { require('cmp.types').cmp.TriggerEvent.TextChanged }
-    else
-        initial_auto_completion = false   -- dont show autocomplete menu be default
     end
 
     cmp.setup {
         completion = { autocomplete = initial_auto_completion, },
+        experimental = { ghost_text = true },    -- show virtual text of what the current autocompletion selection would look like
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
