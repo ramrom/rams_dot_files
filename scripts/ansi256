@@ -19,20 +19,20 @@ ansi16_name () {
     esac
 }
 
-# TODO: remove callers that use these vars with using optargs
-maybereset="\033[0m"; [ -n "$noreset" ] && maybereset=""
-maybestrike="";       [ -n "$strike" ] && maybestrike="\033[9m"
-maybebld="";          [ -n "$bld" ] && maybebld="\033[1m"
-maybeund="";          [ -n "$und" ] && maybeund="\033[4m"
-maybeit="";           [ -n "$it" ] && maybeit="\033[3m"
-maybeinverse="";      [ -n "$inv" ] && maybeinverse="\033[7m"
-lbg=016;              [ -n "$bg" ] && lbg=$(ansi16_name $bg)
-lfg=007;              [ -n "$fg" ] && lfg=$(ansi16_name $fg)
-
 usage () { 
     echo "Usage: ansi256 [ -h(help) ] [ -f FOREGROUND_COLOR ] [ -b BACKGROUND_COLOR ]"
     echo "               [ -i(italics) ] [ -u(underline) ] [ -s(strikethrough) ] [ -r(no reset) ] [ -e(bold) ] [ -n(inverse) ]";
 }
+
+# DEFAULTS
+maybereset="\033[0m";
+maybestrike="";
+maybebld="";
+maybeund="";
+maybeit="";
+maybeinverse="";
+lbg=016;
+lfg=007;
 
 while getopts 'f:b:heiusnr' x; do
     case $x in
