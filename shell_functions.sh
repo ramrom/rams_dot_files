@@ -172,8 +172,6 @@ function binlink() {
     ln -s "$fullpath" ~/bin/$(basename "$1")
 }
 
-function vil() { v -p $(cat $1); }
-
 function fdisk_find() {
     [ -z "$1" ] && echo "arg for diskname needed!" && return 1
     [ $(uname) = "Linux" ] || { echo "only works on linux" && return 1; }
@@ -246,7 +244,7 @@ function tmux_pane_bg_jobs() {
 }
 
 function tmux_run_in_pane() {
-    local open_pane=$(tmux_open_pane)
+    local open_pane=$(tmux-open-pane)
     echo $open_pane | grep "NO-OPEN" && echo "No open panes" && return 1
     tmux send-keys -t $open_pane "$1" Enter
 }

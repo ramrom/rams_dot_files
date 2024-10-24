@@ -579,7 +579,7 @@ E - jump forwards to the end of a word
 b - jump backwards to the start of a word
 B - jump backwards to the start of a word
     (words can contain punctuation)
-% - move to matching character
+% - move to matching character (comes form matchit.vim, modern vims have it built in)
     (default supported pairs: '()', '{}', '[]'
     - use <code>:h matchpairs</code> in vim for more info)
 0 - jump to the start of the line

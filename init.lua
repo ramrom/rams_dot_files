@@ -1674,15 +1674,17 @@ if not vim.env.VIM_NOPLUG then
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
         -- AUTOCOMPLETE
-        { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, dependencies = { 'L3MON4D3/LuaSnip' }, event = 'VeryLazy' },
-        { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' }, -- LSP completions
-        { 'hrsh7th/cmp-buffer', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete words in buffers
-        { 'hrsh7th/cmp-path', dependencies = { 'hrsh7th/nvim-cmp' }, event = 'VeryLazy' },  -- complete filesystem paths
-        { 'onsails/lspkind.nvim', event = 'VeryLazy' },     -- show formatting info in autocomplete menu, icons and more source info
+        { 'hrsh7th/nvim-cmp', config = LoadAutoComplete, event = 'InsertEnter', 
+            dependencies = { 
+                'hrsh7th/cmp-nvim-lsp',         -- LSP completions
+                'hrsh7th/cmp-buffer',           -- complete words in buffers
+                'hrsh7th/cmp-path',             -- complete filesystem paths
+                'saadparwaiz1/cmp_luasnip',     -- be able to add luasnip as completion source for nvim-cmp
+                'onsails/lspkind.nvim' }        -- show formatting info in autocomplete menu, icons and more source info
+        },
 
         -- SNIPPETS
         { 'L3MON4D3/LuaSnip', config = LoadLuaSnip, event = 'VeryLazy', dependencies = { "rafamadriz/friendly-snippets" } },
-        { 'saadparwaiz1/cmp_luasnip', event = 'VeryLazy' },     -- be able to add luasnip as completion source for nvim-cmp
         { "rafamadriz/friendly-snippets", event = 'VeryLazy' }, -- actual snippet library
 
         -- AUTOPAIR + TABOUT
