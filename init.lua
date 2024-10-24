@@ -1391,8 +1391,8 @@ LoadMyKeyMaps = function()
     vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
     vim.keymap.set("n", "<leader>m", ":tabm<Space>", { desc = "move tab" })
     vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>", { desc = "create tab"} )
-    vim.keymap.set("n", "<leader><leader>t", "<cmd>:tabnew %<CR>", { desc = "duplicate split into new tab" })
-    vim.keymap.set("n", "<leader><leader>T", "<C-w>T", { desc = "move split to new tab" })
+    vim.keymap.set("n", "<leader><leader>T", "<cmd>:tabnew %<CR>", { desc = "duplicate split into new tab" })
+    vim.keymap.set("n", "<leader><leader>t", "<C-w>T", { desc = "move split to new tab" })
     vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
     -- Quickly switch between vimtab indexes 1 to 9
     for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end

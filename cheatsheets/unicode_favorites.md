@@ -1,5 +1,8 @@
 # UNICODE
 - see https://unicode.org/emoji/charts/full-emoji-list.html
+- dude cheatsheet of 4000 emojis in a json: https://gist.github.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb
+
+## EMOJI
 🤯  shock, mind-blown
 🤢  nausea
 🤮  face with vomit

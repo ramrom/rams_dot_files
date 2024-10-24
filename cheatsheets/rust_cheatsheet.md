@@ -133,7 +133,7 @@
 ### ITERATORS
 ```rust
 for i in 1..10 { println!("{i}"); };  // create a range and iterate over it, does 1,2..9, 10 is excluded
-(1..10).for_each( |i| { println!("{i}"); } ) // same as above, ranges implement iterator
+(1..10).for_each( |i| { println!("{i}"); } ) // range is iterator, almost same as above, this takes a closure unlike above
 for i in 1..=10 { println!("{i}"); };  // inclusive of 10
 
 let foo = vec![1,2];
@@ -259,6 +259,9 @@ fn neverreturn() -> ! { loop{}; }    // infinte loop will never return
     - implements `DeRef` and `DeRefMut` so can be used as reference, mutable too
     - implements `Send`, so can tx ownership to a different thread
     - can create recursive types using Box: e.g. `enum E { Nil, Cons(i32, Box<E>) }`, or `struct S { a: i32, b: Option<Box<S>> }`
+    - can "unbox" by just derefing: `let b = Box::new(1); let i = *b;`
+        - does a deref and move really
+            - see https://stackoverflow.com/questions/33653946/dereferencing-boxt-gives-back-value-instead-of-reference
 - `Rc<T>` - reference counter heap allocated data, multiple ownership, tracks # of references, and cleans up when count is zero
     - it is only used for single-threaded scenarios
     - it's immutable for same reason as borrow rules allowing one mutable reference, prevent data races/inconsistencies
@@ -279,6 +282,9 @@ fn neverreturn() -> ! { loop{}; }    // infinte loop will never return
     - `let r = RefCell::new(1); *r.borrow_mut() = 2`
     - `let r = RefCell::new(1); let r1 = r.borrow_mut(); let r2 = r.borrow_mut(); *r1 = 2; *r2 = 3`
         - will panic in runtime!, no comile time error
+- taking ownership from struct field - can use `Option::take` or `std::mem::replace`
+    - see https://users.rust-lang.org/t/how-to-take-ownership-of-a-field-of-uniquely-borrowed-struct/16169
+- swapping ownership with `std::mem::swap` - `let mut x=1; let mut y=2; std::mem::swap(&mut x, &mut y)`
 ### LIFETIMES
 - references are tracked by lifetimes and lifetime annotations are needed in cases in order to help the compiler/borrow-checker
 - a parameters with an annotation has a input lifetimes, a return values have output lifetime
@@ -309,6 +315,11 @@ fn neverreturn() -> ! { loop{}; }    // infinte loop will never return
 ## TYPE SYSTEM
 - no exception handling, (`panic` doesnt count), `Result<T, E>` is commonly used to return errors as values
 - no `null` concept, use `Option<T>` for similar uses in langs with `null` concept
+### PRIMITIVES
+- primitive integers 
+    - `i32` - signed 32bit integer, `u64` unsigned 64bit integer
+    - also 8,16,32,64,128 bit sized integers supported
+    - can explicitly declare a integer literal as such: `let a = 42i64` - number `42` as a `i64`
 ### STRUCT
 - very similar to C/C++/golang structs
 - e.g. `struct Foo{ i: i32, b: bool, s: String }`
@@ -577,7 +588,16 @@ enum E {
     - see c++ founder - https://www.youtube.com/watch?v=YQs6IC-vgmo&ab_channel=AlessandroStamatto
 - to do a doubly linked list with `Rc`, you'll want one to be a weak counter so you don't get cyclical references
     - see https://doc.rust-lang.org/stable/book/ch15-06-reference-cycles.html#preventing-reference-cycles-turning-an-rct-into-a-weakt
-- dropping a linked list is tricky w/o incurring a stackoverflow for drop (c++ has same issue)
+- dropping a linked list is tricky w/o incurring a stackoverflow for recursive drop calls (c++ has same issue)
+    - general solution is to write a drop that loops, can make use of `std::mem::replace`
+- my example of building a singly linked list 100 nodes long
+    ```rust
+    struct LL { data: i32, next: Option<Box<LL>> }
+    let l = LL { data: 1, next: None }
+    let mut lref = &mut l;
+    // NOTE: the `as_mut` on next is key, it gives me a ref to what's inside Box, an `unwrap` on Option would move and error
+    for i in (1..100) { lref.next = Some(Box::new(LL{data: i, next: None})); lref = lref.next.as_mut().unwrap(); }
+    ```
 
 
 ## FUNCTIONS
@@ -607,6 +627,7 @@ enum E {
     ```
 ### CLOSURES
 - are anonymous functions that can capture their environment
+    - really are anonymous structs that have members which are references to the captured values and an anonymous function
 - compiler auto-implments each closure into 3 traits
     - `FnOnce`- can only be run once, basically if ownership is transfered, aka moved out of it's environment
         - all closures can be called at least once so they all implement this

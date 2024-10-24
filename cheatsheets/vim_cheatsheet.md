@@ -301,6 +301,8 @@
     - can accept any regex, not just simpe chars like `|`
 - ` :'<,'>Tabularize /:\zs`
     - \z is lookforward, align by the space char after the `:` char
+### UNICODE
+- good plugin - https://github.com/chrisbra/unicode.vim
 
 
 ## STARTING VIM

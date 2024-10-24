@@ -26,6 +26,10 @@
     - can convert java collections to scala and vice versa with coverters
     - can convert java Optional to scala Option
     - scala can subclass java classes and vice versa
+- tail recursion call
+    - tail recursion can be changed to a loop and that’s what Scala compiler does. 
+    - tail calls in general require stack frame replacement support from the underlying platform, but Java doesn’t provide that
+    - IntelliJ has a nice feature which can show which funcs it thinks are tail recursive
 
 ## SCALA VERSIONS
 ### 2.12
