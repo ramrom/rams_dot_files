@@ -979,6 +979,8 @@ LoadAutoComplete = function()
             end,
         },
         mapping = cmp.mapping.preset.insert({
+            ['<C-k>'] = cmp.mapping.select_prev_item(),     -- ctrl-k/j are nicer to hit that ctrl-n/p
+            ['<C-j>'] = cmp.mapping.select_next_item(),
             ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
             ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
             -- C-b (back) C-f (forward) for snippet placeholder navigation.
@@ -1337,7 +1339,7 @@ vim.g.mapleader = " "
 
 ------------ NOTE: Prime open real estate for key -------------------
 -- NORMAL MODE
-    -- <leader> + ,/l/u/x/<0-9>
+    -- <leader> + ,/u/z/x/<0-9>
     -- <Leader><Leader>  (most open)
     -- <BS>
     -- c-q (same as c-v)
@@ -1387,10 +1389,10 @@ LoadMyKeyMaps = function()
     ------ TAB MOVE/NAV/CREATE
     vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
     vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
-    vim.keymap.set("n", "<leader>m", ":tabm<Space>")
-    vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
-    vim.keymap.set("n", "<leader><leader>t", "<C-w>T")
-    vim.keymap.set("n", "<leader>z", "<cmd>:tabnew %<CR>")
+    vim.keymap.set("n", "<leader>m", ":tabm<Space>", { desc = "move tab" })
+    vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>", { desc = "create tab"} )
+    vim.keymap.set("n", "<leader><leader>t", "<cmd>:tabnew %<CR>", { desc = "duplicate split into new tab" })
+    vim.keymap.set("n", "<leader><leader>T", "<C-w>T", { desc = "move split to new tab" })
     vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
     -- Quickly switch between vimtab indexes 1 to 9
     for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
