@@ -234,27 +234,6 @@ function yts_query() {
     jq . /tmp/yts_query
 }
 
-############### OSX ############################################
-
-if [ "$(uname)" = "Darwin" ]; then
-    # FIXME: oftentimes do nothing, peeps rec brew brightness tool
-    function osx_inc_brightness() { osascript -e 'tell application "System Events"' -e 'key code 144' -e ' end tell'; }
-    function osx_dec_brightness() { osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell'; }
-
-    function osx_activate_slack() { osascript -e 'tell application "Slack" to activate'; }
-
-    function osx_mute() { osascript -e "set Volume 0"; }
-    function osx_set_volume() { osascript -e "set Volume $1"; }   # 0 mute, 10 max
-    function osx_get_volume() { osascript -e 'get volume settings'; }
-fi
-
-#################### IOT ###################################################
-function toggle_bulb() {
-    python3 -c 'import sys; import magichue; print(sys.argv[1]); l = magichue.Light(sys.argv[1]); \
-        l.on = False if l.on else True
-        ' $1
-}
-
 ################################################################################
 #############                  TMUX                   ##########################
 ################################################################################

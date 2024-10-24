@@ -1,0 +1,36 @@
+#!/bin/sh
+
+function usage() { 
+    echo 'Usage: osx-cli-control [ -h(help) ]'
+    echo '          [ -m(mute volume) ] [ -v SET_VOLUME ] [ -g(get current volume) ]'; 
+    echo '          [ -b(inc brightness) ] [ -d(decreate brightness) ]'; 
+    echo '          [ -s(activate slack) ]'; 
+}
+
+ACTION=""
+while getopts 'hmv:gbds' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        m) ACTION="mute";;
+        v) ACTION="set-volume"; VOLUME=$OPTARG;;
+        g) ACTION="get-volume";;
+        b) ACTION="inc-brightness";;
+        d) ACTION="dec-brightness";;
+        s) ACTION="activate-slack";;
+        *) echo && usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+[ -z "$ACTION" ] && echo "NO ACTION SELECTED" && usage && exit 1
+
+# FIXME: oftentimes do nothing, peeps rec brew brightness tool
+case "$ACTION" in
+    "mute") osascript -e "set Volume 0" ;;
+    "set-volume")  osascript -e "set Volume $VOLUME" ;;
+    "get-volume") osascript -e 'get volume settings' ;;
+    "inc-brightness") osascript -e 'tell application "System Events"' -e 'key code 144' -e ' end tell' ;;
+    "dec-brightness") osascript -e 'tell application "System Events"' -e 'key code 145' -e ' end tell' ;;
+    "activate-slack") osascript -e 'tell application "Slack" to activate';;
+    *) echo "$ACTION not found" && exit 1
+esac

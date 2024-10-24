@@ -48,8 +48,7 @@ vim.opt.expandtab = true        -- use spaces when tab is pressed
 vim.opt_global.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
 -- NETRW
--- layout of files and dir in netrw file explorer
-vim.g.netrw_liststyle = 3
+vim.g.netrw_liststyle = 3        -- tree style layout for netrw
 -- TODO: per nvim-tree docs, it's highly reccomended to disable netrw
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -57,10 +56,6 @@ vim.g.netrw_liststyle = 3
 --- STATUS LINE
 vim.opt.ls=2                    -- line status, two lines for status and command
 vim.opt.statusline=[[ %F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v][%p%%]\ ]]
-
--- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
-vim.api.nvim_create_autocmd('VimResized',
-    { pattern='*', command = 'wincmd =', desc = 'force window resize when vim resizes'})
 
 --- TRAILING SPACES
 vim.opt.list = true
@@ -70,6 +65,10 @@ vim.cmd.highlight('WhiteSpace', 'ctermfg=8 guifg=DimGrey')
 -- disable editorconfig file support (https://neovim.io/doc/user/editorconfig.html)
 vim.g.editorconfig = false
 
+-- if terminal size changes (e.g. resizing tmux pane vim lives in) automatically resize the vim windows
+vim.api.nvim_create_autocmd('VimResized',
+    { pattern='*', command = 'wincmd =', desc = 'force window resize when vim resizes'})
+
 -- use ripgrep for default vi grep
 if vim.fn.executable('rg') == 1 then vim.opt.grepprg='rg --vimgrep --follow' end
 
@@ -78,12 +77,8 @@ vim.api.nvim_create_autocmd('TextYankPost', { pattern = '*',
     callback = function() vim.highlight.on_yank {higroup="IncSearch", on_visual=false, timeout=150} end
 })
 
--- for jsonc format, which supports commenting, this will highlight comments
--- NOTE: using `callback` with a function doesn work, but `command` does
-vim.api.nvim_create_autocmd('FileType', {
-    -- pattern = 'json', callback = function() vim.cmd.syntax([[match Comment +\/\/.\+$+]]) end
-    pattern = 'json', command = [[match Comment +\/\/.\+$+]]
-})
+-- disable autocommenting on o and O in normal
+vim.api.nvim_create_autocmd('FileType', { pattern = '*', command ='setlocal formatoptions-=o' })
 
 -- any file name starting with Jenkinsfile should be groovy
 vim.filetype.add({ pattern = { ['Jenkinsfile.*'] = 'groovy' } })
@@ -92,8 +87,12 @@ vim.filetype.add({ pattern = { ['Jenkinsfile.*'] = 'groovy' } })
 -- use indent folding on scala files b/c treesitter sucks at it
 vim.api.nvim_create_autocmd({ 'FileType' }, { pattern = 'scala', command = 'set foldmethod=indent' })
 
--- disable autocommenting on o and O in normal
-vim.api.nvim_create_autocmd('FileType', { pattern = '*', command ='setlocal formatoptions-=o' })
+-- for jsonc format, which supports commenting, this will highlight comments
+-- NOTE: using `callback` with a function doesn work, but `command` does
+vim.api.nvim_create_autocmd('FileType', {
+    -- pattern = 'json', callback = function() vim.cmd.syntax([[match Comment +\/\/.\+$+]]) end
+    pattern = 'json', command = [[match Comment +\/\/.\+$+]]
+})
 
 --------------------------------------------------------------------------------------------------------
 -------------------------------- FUNCTIONS --------------------------------------------------------------
