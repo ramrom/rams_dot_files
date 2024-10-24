@@ -601,6 +601,8 @@ pulsemixer - volume manager with pulseaudio
         - `enforce` - default mode, enforces policy and logs
         - `unconfined` - does not load docker-default profile for container, does not show the PID running in enforced mode
 - `jstest-gtk` - decent util to test and configure gamepad/game-controllers
+- `fc-cache` - font cache tool
+    - `fc-cache -f` - force regenerate font cache searching through all lookup dirs
 - pcsx2
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
 - retroarch

@@ -285,6 +285,8 @@
 - `TSBufDisable highlight` - turn off TS highlight for current buffer
     - *NOTE* 2024 -if treesitter highlight is off, then vim regex default turns on
     - see https://github.com/nvim-treesitter/nvim-treesitter/issues/2846
+- `-` - set root node to parent dir of current root
+- `c-]` - set root node to dir on cursor
 ### VIM-RHUBARB
 - rhubarb has GBrowse handler for github, open gh link in browser or copy to clipboard
 - used to use `vim-gh-line`, but rhubarb looks better
