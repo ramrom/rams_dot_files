@@ -1357,168 +1357,166 @@ vim.g.mapleader = " "
 -- NOTE: oct'24 - using <leader>k for harpoon for now
 -- vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only [](){}, not if/else/end
 
-LoadMyKeyMaps = function()
-    vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
-    vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
-    vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
-    vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
-    vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highlights' })
-    -- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'remove search highlights' })
-    vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
+vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
+vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
+vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
+vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
+vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highlights' })
+-- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'remove search highlights' })
+vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 
-    -- SMART RUN ACTIONS
-    vim.keymap.set("n", "<leader>aa", "<cmd>:lua TmuxPaneRunner.run('exe')<cr>", { desc = "execute program" })
-    vim.keymap.set("n", "<leader>ar", TmuxPaneRunner.selectPane, { desc = "set tmux pane runner" })
-    vim.keymap.set("n", "<leader>ac", TmuxPaneRunner.toggleClearOnRun, { desc = "toggle if runner pane is cleared before cmd execution" })
-    vim.keymap.set("n", "<leader>at", "<cmd>:lua TmuxPaneRunner.run('test')<cr>", { desc = "run tests" })
-    vim.keymap.set("n", "<leader>ab", "<cmd>:lua TmuxPaneRunner.run('build')<cr>", { desc = "build/compile program" })
+-- SMART RUN ACTIONS
+vim.keymap.set("n", "<leader>aa", function() TmuxPaneRunner.run('exe') end, { desc = "execute program" })
+vim.keymap.set("n", "<leader>ar", TmuxPaneRunner.selectPane, { desc = "set tmux pane runner" })
+vim.keymap.set("n", "<leader>ac", TmuxPaneRunner.toggleClearOnRun, { desc = "toggle if runner pane is cleared before cmd execution" })
+vim.keymap.set("n", "<leader>at", function() TmuxPaneRunner.run('test') end, { desc = "run tests" })
+vim.keymap.set("n", "<leader>ab", function() TmuxPaneRunner.run('build') end, { desc = "build/compile program" })
 
-    ------ WINDOW RESIZE/MOVE/CREATE
-    local default_opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
-    vim.keymap.set("n", "<Right>", ":vertical resize -1<CR>", default_opts)
-    vim.keymap.set("n", "<Up>", ":resize -1<CR>", default_opts)
-    vim.keymap.set("n", "<Down>", ":resize +1<CR>", default_opts)
-    vim.keymap.set("n", "<C-l>", "<C-w>l")
-    vim.keymap.set("n", "<C-h>", "<C-w>h")
-    vim.keymap.set("n", "<C-j>", "<C-w>j")
-    vim.keymap.set("n", "<C-k>", "<C-w>k")
-    vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
-    vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
+------ WINDOW RESIZE/MOVE/CREATE
+local default_opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Left>", ":vertical resize +1<CR>", default_opts)
+vim.keymap.set("n", "<Right>", ":vertical resize -1<CR>", default_opts)
+vim.keymap.set("n", "<Up>", ":resize -1<CR>", default_opts)
+vim.keymap.set("n", "<Down>", ":resize +1<CR>", default_opts)
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set('n', '<leader>v', ':vsplit<CR><leader>w')
+vim.keymap.set('n', '<leader>h', ':split<CR><leader>w')
 
-    ------ TAB MOVE/NAV/CREATE
-    vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
-    vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
-    vim.keymap.set("n", "<leader>m", ":tabm<Space>", { desc = "move tab" })
-    vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>", { desc = "create tab"} )
-    vim.keymap.set("n", "<leader><leader>T", "<cmd>:tabnew %<CR>", { desc = "duplicate split into new tab" })
-    vim.keymap.set("n", "<leader><leader>t", "<C-w>T", { desc = "move split to new tab" })
-    vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
-    -- Quickly switch between vimtab indexes 1 to 9
-    for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
+------ TAB MOVE/NAV/CREATE
+vim.keymap.set("n", "<leader>f", TabBufNavForward, { desc = "tab/buf navigate forward" })
+vim.keymap.set("n", "<leader>d", TabBufNavBackward, { desc = "tab/buf navigate backward" })
+vim.keymap.set("n", "<leader>m", ":tabm<Space>", { desc = "move tab" })
+vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>", { desc = "create tab"} )
+vim.keymap.set("n", "<leader><leader>T", "<cmd>:tabnew %<CR>", { desc = "duplicate split into new tab" })
+vim.keymap.set("n", "<leader><leader>t", "<C-w>T", { desc = "move split to new tab" })
+vim.keymap.set("n", "gb", "<cmd>:tabprevious<CR>")
+-- Quickly switch between vimtab indexes 1 to 9
+for i=0,9,1 do vim.keymap.set('n',"g"..i,"<cmd>:tabn "..i.."<CR>") end
 
-    ---- SMART QUITTING
-    vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
-    vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
-    vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
+---- SMART QUITTING
+vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
+vim.keymap.set("n", "<leader>Q", "<cmd>:q!<CR>")
+vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 
-    ------ SMART WRITING
-    vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
-    vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
-    vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
-    vim.keymap.set('n', "<leader><C-S>", ChangeDefinedSession, { desc = "change defined session" })
+------ SMART WRITING
+vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
+vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
+vim.keymap.set('n', "<leader>S", SaveDefinedSession, { desc = "save defined session" })
+vim.keymap.set('n', "<leader><C-S>", ChangeDefinedSession, { desc = "change defined session" })
 
-    ---- COPY/PASTE to clipboard
-    vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
-    vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
+---- COPY/PASTE to clipboard
+vim.keymap.set({"n","v"}, "<leader>y", [["+y]])
+vim.keymap.set({"n","v"}, "<leader>p", [["+p]])
 
-    --------- FASTER INDENT
-    vim.keymap.set('n', '<C-n>', '>>')
-    vim.keymap.set('n', '<C-p>', '<<')
-    vim.keymap.set('v', '<C-n>', '<S->>gv')
-    vim.keymap.set('v', '<C-p>', '<S-<>gv')
+--------- FASTER INDENT
+vim.keymap.set('n', '<C-n>', '>>')
+vim.keymap.set('n', '<C-p>', '<<')
+vim.keymap.set('v', '<C-n>', '<S->>gv')
+vim.keymap.set('v', '<C-p>', '<S-<>gv')
 
-    --- ADD NEWLINE AND STAY IN NORMAL
-    vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
+--- ADD NEWLINE AND STAY IN NORMAL
+vim.keymap.set("n", "<C-g>", "o<Esc>")   -- C-g default is to print file name and other metadata
 
-    -- INSERT MODE NAVIGATION
-    vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-e default per nvim docs - does nothing
-    vim.keymap.set("i", "<C-a>", "<C-o>0")   -- C-a default per nvim docs - insert previously inserted text
-    vim.keymap.set("i", "<C-b>", "<C-o>h")   -- C-b default per nvim docs - does nothing
-    vim.keymap.set("i", "<C-f>", "<C-o>l")   -- C-f default per nvim docs - indenting for chars */!
+-- INSERT MODE NAVIGATION
+vim.keymap.set("i", "<C-e>", "<C-o>$")   -- C-e default per nvim docs - does nothing
+vim.keymap.set("i", "<C-a>", "<C-o>0")   -- C-a default per nvim docs - insert previously inserted text
+vim.keymap.set("i", "<C-b>", "<C-o>h")   -- C-b default per nvim docs - does nothing
+vim.keymap.set("i", "<C-f>", "<C-o>l")   -- C-f default per nvim docs - indenting for chars */!
 
-    --------- FZF ---------------------
-    vim.keymap.set('n', '<leader><leader>f', "<cmd>lua require('fzf-lua').builtin()<CR>", { desc = "fzf lua meta finder" })
-    vim.keymap.set('n', '<leader>;', "<cmd>lua require('fzf-lua').commands()<CR>", { desc = "fzf vim commands" })
-    vim.keymap.set('n', '<leader><leader>h', "<cmd>lua require('fzf-lua').help_tags()<CR>", { desc = "fzf help tags" })
-    vim.keymap.set('n', '<leader><leader>r', "<cmd>lua require('fzf-lua').command_history()<CR>", { desc = "fzf command history" })
-    vim.keymap.set('n', '<leader>b', "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "fzf buffers" })
-    ------ FZF FILES
-    vim.keymap.set('n', '<leader>O', "<cmd>lua require('telescope.builtin').find_files()<CR>", { desc = 'Telescope find files' })
-    vim.keymap.set('n', '<leader>o', "<cmd>lua require('fzf-lua').files()<CR>", { desc = "fzf files" })
-    vim.keymap.set('n', '<leader><leader>o', "<cmd>lua require('fzf-lua').files({cwd='~/'})<CR>", { desc = "fzf files homedir" })
-    vim.keymap.set('n', '<leader>i', "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "fzf lua oldfiles" })
-    ------ FZF GREP
-    vim.keymap.set('n', '<leader>ef', "<cmd>lua require('fzf-lua').grep()<CR>", { desc = "fzf grep (rg query, then fzf results)" })
-    vim.keymap.set('n', '<leader>el', "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "fzf live grep" })
-    vim.keymap.set('n', '<leader>ee', "<cmd>lua require('fzf-lua').grep_cword()<CR>", { desc = "fzf cursor grep word" })
-    vim.keymap.set('n', '<leader>ew', "<cmd>lua require('fzf-lua').grep_cWORD()<CR>", { desc = "fzf cursor grep cWORD" })
-    vim.keymap.set('n', '<leader>eo', "<cmd>lua require('fzf-lua').blines()<CR>", { desc = "fzf current buffer lines" })
-    vim.keymap.set('n', '<leader>ei', "<cmd>lua require('fzf-lua').lines()<CR>", { desc = "fzf all buffer lines" })
-    vim.keymap.set('n', '<leader>ec', "<cmd>lua require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
-        { desc = "fzf grep cheatsheet dir" })
-    local str_grep_mydirs = function()
-        local sr = vim.fn.input("Query: ")
-        require('telescope.builtin').grep_string({ search = sr, search_dirs = {'~/rams_dot_files/cheatsheets', vim.env.MY_NOTES_DIR }})
-    end
-    vim.keymap.set('n', '<leader>ej', str_grep_mydirs, { desc = "fzf grep cheatsheet + notes dir" })
-    vim.keymap.set('n', '<leader>en', "<cmd>lua require('fzf-lua').grep({cwd=vim.env.MY_NOTES_DIR})<CR>", 
-        { desc = "fzf grep notes files" })
-
-    --------- GIT STUFF
-    vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
-    vim.keymap.set('n', '<leader>gm', "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "fzf git commits" })
-    vim.keymap.set('n', '<leader>gg', GitAddCommitMarkdownStuff, { desc = "git add all + commit" })
-    vim.keymap.set('n', '<leader>gb', "<cmd>lua require('fzf-lua').git_bcommits()<CR>", { desc = "fzf buffer git commits" })
-    vim.keymap.set('n', '<leader>gs', "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "fzf git status" })
-    vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
-    vim.keymap.set('n', '<leader>gL', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
-    vim.keymap.set('n', '<leader>ga', "<cmd>Git blame<cr>", { desc = "fugitive git blame" })
-    vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
-    vim.keymap.set('n', '<leader>gh', '<cmd>:lua ToggleGitSignsHighlight()<cr>')
-    -- FIXME: apr'24 - using the :tab command directly with Gvdiffsplit doesnt work right
-        -- vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
-    -- FIXME: vim-markdown(treesitter works fine) for md files does not set foldmethod=diff, folds collapse
-        -- sorta related https://github.com/tpope/vim-fugitive/issues/1911
-    vim.keymap.set('n', '<leader>gd', '<cmd>:tab sb<cr><cmd>Gvdiffsplit<cr>', {desc = "diff from HEAD"})
-    vim.keymap.set('n', '<leader>gD', '<cmd>:tab sb<cr><cmd>Gvdiffsplit master<cr>', {desc = "diff from master branch"})
-    vim.keymap.set('n', '<leader>gf', '<cmd>:tab sb<cr><cmd>Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
-
-    ---------- NVIM TREE
-    vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
-    vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
-    vim.keymap.set('n', '<leader>wd', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
-    vim.keymap.set('n', '<leader>wt', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
-
-    ---------- CHEATS + NOTES
-    vim.keymap.set('n', '<leader>cm', "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "fzf key mappings" })
-    vim.keymap.set('n', '<leader>ch', "<cmd>lua require('fzf-lua').help_tags()<CR>", { desc = "fzf help tags" })
-    vim.keymap.set('n', '<leader>cc', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
-        { desc = "fzf cheatsheet files" })
-    vim.keymap.set('n', '<leader><leader>c', "<cmd>lua require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'})<CR>",
-        { desc = "fzf cheatsheet files" })
-    vim.keymap.set('n', '<leader>cn', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR})<CR>", { desc = "fzf notes files" })
-    vim.keymap.set('n', '<leader>cw', "<cmd>lua require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR})<CR>", { desc = "fzf work files" })
-    vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>', { desc = "open work TODO in-progress in new tab"})
-    vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
-    vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
-    vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
-
-    -------------- OTHER
-    vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
-    vim.keymap.set("n", "<leader>wb", "<cmd>:Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
-    vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
-    vim.keymap.set('n', '<leader>wi', '<cmd>:lua ToggleIndentBlankLine()<cr>')
-    vim.keymap.set('n', '<leader>wm', '<cmd>:messages<cr>')
-    vim.keymap.set('n', '<leader>wn', '<cmd>:Noice<cr>')
-    vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')
-    vim.keymap.set('n', '<leader>wT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
-    vim.keymap.set('n', '<leader>ws', '<cmd>:set number!<cr>')
-    vim.keymap.set('n', '<leader>ww', ToggleLineWrap, { desc = "toggle line wrap"})
-    vim.keymap.set('n', '<leader>wl', '<cmd>:lua UpdateLuaLineTabLine(true)<cr>')
-    vim.keymap.set('n', '<leader>wq', '<cmd>:copen<cr>', { desc = "open quickfix list" })
-    vim.keymap.set("n", "<leader>wg", function() ToggleMainNavKeys("quickfix") end, { desc = "toggle quickfix mode" })
-    vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
-    vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
-    vim.keymap.set('n', '<leader>wp', ToggleAutoPair, { desc = "toggle autopair" } )
-    vim.keymap.set("n", "<leader>wa", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
-    vim.keymap.set('n', '<leader>wu', "<cmd>:Telescope emoji<CR>", { desc = "telescope emoji" } )
-    vim.keymap.set("n", "<leader>wh", function() ToggleMainNavKeys("harpoon") end, { desc = "toggle harpoon mode" })
-    vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
-
-    -- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
-    vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
+--------- FZF ---------------------
+vim.keymap.set('n', '<leader><leader>f', function() require('fzf-lua').builtin() end, { desc = "fzf lua meta finder" })
+vim.keymap.set('n', '<leader>;',function() require('fzf-lua').commands() end, { desc = "fzf vim commands" })
+vim.keymap.set('n', '<leader><leader>h',function() require('fzf-lua').help_tags() end, { desc = "fzf help tags" })
+vim.keymap.set('n', '<leader><leader>r',function() require('fzf-lua').command_history() end, { desc = "fzf command history" })
+vim.keymap.set('n', '<leader>b',function() require('fzf-lua').buffers() end, { desc = "fzf buffers" })
+------ FZF FILES
+vim.keymap.set('n', '<leader>O',function() require('telescope.builtin').find_files() end, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>o',function() require('fzf-lua').files() end, { desc = "fzf files" })
+vim.keymap.set('n', '<leader><leader>o',function() require('fzf-lua').files({cwd='~/'}) end, { desc = "fzf files homedir" })
+vim.keymap.set('n', '<leader>i',function() require('fzf-lua').oldfiles() end, { desc = "fzf lua oldfiles" })
+------ FZF GREP
+vim.keymap.set('n', '<leader>ef',function() require('fzf-lua').grep() end, { desc = "fzf grep (rg query, then fzf results)" })
+vim.keymap.set('n', '<leader>el',function() require('fzf-lua').live_grep() end, { desc = "fzf live grep" })
+vim.keymap.set('n', '<leader>ee',function() require('fzf-lua').grep_cword() end, { desc = "fzf cursor grep word" })
+vim.keymap.set('n', '<leader>ew',function() require('fzf-lua').grep_cWORD() end, { desc = "fzf cursor grep cWORD" })
+vim.keymap.set('n', '<leader>eo',function() require('fzf-lua').blines() end, { desc = "fzf current buffer lines" })
+vim.keymap.set('n', '<leader>ei',function() require('fzf-lua').lines() end, { desc = "fzf all buffer lines" })
+vim.keymap.set('n', '<leader>ec',function() require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'}) end,
+    { desc = "fzf grep cheatsheet dir" })
+local str_grep_mydirs = function()
+    local sr = vim.fn.input("Query: ")
+    require('telescope.builtin').grep_string({ search = sr, search_dirs = {'~/rams_dot_files/cheatsheets', vim.env.MY_NOTES_DIR }})
 end
+vim.keymap.set('n', '<leader>ej', str_grep_mydirs, { desc = "fzf grep cheatsheet + notes dir" })
+vim.keymap.set('n', '<leader>en',function() require('fzf-lua').grep({cwd=vim.env.MY_NOTES_DIR}) end, 
+    { desc = "fzf grep notes files" })
+
+--------- GIT STUFF
+vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
+vim.keymap.set('n', '<leader>gm', function() require('fzf-lua').git_commits() end, { desc = "fzf git commits" })
+vim.keymap.set('n', '<leader>gg', GitAddCommitMarkdownStuff, { desc = "git add all + commit" })
+vim.keymap.set('n', '<leader>gb', function() require('fzf-lua').git_bcommits() end, { desc = "fzf buffer git commits" })
+vim.keymap.set('n', '<leader>gs', function() require('fzf-lua').git_status() end, { desc = "fzf git status" })
+vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
+vim.keymap.set('n', '<leader>gL', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
+vim.keymap.set('n', '<leader>ga', "<cmd>Git blame<cr>", { desc = "fugitive git blame" })
+vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
+vim.keymap.set('n', '<leader>gh', ToggleGitSignsHighlight, { desc = "toggle git signs highlighting"} )
+-- FIXME: apr'24 - using the :tab command directly with Gvdiffsplit doesnt work right
+    -- vim.keymap.set('n', '<leader>gd', '<cmd>:tab Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+-- FIXME: vim-markdown(treesitter works fine) for md files does not set foldmethod=diff, folds collapse
+    -- sorta related https://github.com/tpope/vim-fugitive/issues/1911
+vim.keymap.set('n', '<leader>gd', '<cmd>:tab sb<cr><cmd>Gvdiffsplit<cr>', {desc = "diff from HEAD"})
+vim.keymap.set('n', '<leader>gD', '<cmd>:tab sb<cr><cmd>Gvdiffsplit master<cr>', {desc = "diff from master branch"})
+vim.keymap.set('n', '<leader>gf', '<cmd>:tab sb<cr><cmd>Gvdiffsplit HEAD^<cr>', {desc = "diff since last commit"})
+
+---------- NVIM TREE
+vim.keymap.set('n', '<leader>N', '<cmd>:NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>n', '<cmd>:NvimTreeFindFileToggle<CR>')
+vim.keymap.set('n', '<leader>wd', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
+vim.keymap.set('n', '<leader>wt', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
+
+---------- CHEATS + NOTES
+vim.keymap.set('n', '<leader>cm',function() require('fzf-lua').keymaps() end, { desc = "fzf key mappings" })
+vim.keymap.set('n', '<leader>ch',function() require('fzf-lua').help_tags() end, { desc = "fzf help tags" })
+vim.keymap.set('n', '<leader>cc',function() require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'}) end,
+    { desc = "fzf cheatsheet files" })
+vim.keymap.set('n', '<leader><leader>c',function() require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'}) end,
+    { desc = "fzf cheatsheet files" })
+vim.keymap.set('n', '<leader>cn',function() require('fzf-lua').files({cwd=vim.env.MY_NOTES_DIR}) end, { desc = "fzf notes files" })
+vim.keymap.set('n', '<leader>cw',function() require('fzf-lua').files({cwd=vim.env.MY_WORK_DIR}) end, { desc = "fzf work files" })
+vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>', { desc = "open work TODO in-progress in new tab"})
+vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
+
+-------------- OTHER
+vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
+vim.keymap.set("n", "<leader>wb", "<cmd>:Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
+vim.keymap.set("n", "<leader>wc", "<cmd>:messages clear<CR>", { desc = "clear messages" })
+vim.keymap.set('n', '<leader>wi', ToggleIndentBlankLine, { desc = "toggle indent blankline"})
+vim.keymap.set('n', '<leader>wm', '<cmd>:messages<cr>')
+vim.keymap.set('n', '<leader>wn', '<cmd>:Noice<cr>')
+vim.keymap.set('n', '<leader>wM', '<cmd>:MarkdownPreviewToggle<cr>')
+vim.keymap.set('n', '<leader>wT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
+vim.keymap.set('n', '<leader>ws', '<cmd>:set number!<cr>')
+vim.keymap.set('n', '<leader>ww', ToggleLineWrap, { desc = "toggle line wrap"})
+vim.keymap.set('n', '<leader>wl', function() UpdateLuaLineTabLine(true) end, { desc = "update lualine tabline" })
+vim.keymap.set('n', '<leader>wq', '<cmd>:copen<cr>', { desc = "open quickfix list" })
+vim.keymap.set("n", "<leader>wg", function() ToggleMainNavKeys("quickfix") end, { desc = "toggle quickfix mode" })
+vim.keymap.set('n', '<leader>wf', ToggleFoldMethod, { desc = "toggle fold method" })
+vim.keymap.set('n', '<leader>wo', CycleColorColumn, { desc = "cycle color column" } )
+vim.keymap.set('n', '<leader>wp', ToggleAutoPair, { desc = "toggle autopair" } )
+vim.keymap.set("n", "<leader>wa", ToggleAutoAutoComplete, { desc = "toggle always showing autocomplete menu when typing"})
+vim.keymap.set('n', '<leader>wu', "<cmd>:Telescope emoji<CR>", { desc = "telescope emoji" } )
+vim.keymap.set("n", "<leader>wh", function() ToggleMainNavKeys("harpoon") end, { desc = "toggle harpoon mode" })
+vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
+
+-- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
+vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
 
 ----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
@@ -1711,5 +1709,3 @@ if not vim.env.VIM_NOPLUG then
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     } })
 end
-
-LoadMyKeyMaps()
