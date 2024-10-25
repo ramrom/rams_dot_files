@@ -128,7 +128,7 @@ ToggleMainNavKeys = function(togglemode)
         print("Harpoon mode activated! 𐃆 ")
     end
 
-    local function setQuickQuickList()
+    local function setQuickList()
         vim.keymap.set("n", "<leader>d", "<cmd>:cn<CR>", {desc = "harpoon prev"})
         vim.keymap.set("n", "<leader>f", "<cmd>:cp<CR>", {desc = "harpoon next"})
         print("quickfix mode activated")
@@ -143,7 +143,7 @@ ToggleMainNavKeys = function(togglemode)
     if (MainNavKeyMode == "harpoon") then
         setHarpoon()
     elseif (MainNavKeyMode == "quickfix") then
-        setQuickQuickList()
+        setQuickList()
     else
         setTabBuf()
     end

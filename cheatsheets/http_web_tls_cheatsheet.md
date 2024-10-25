@@ -188,18 +188,24 @@ function httpie_all() {
 # raw json fields
 http POST https://api.foo.com field:='["a",2]'
 
+# read input from file
+xh http://foo.com @file.json
+
 # using escaped double quotes so you can interpolate shell vars
 http POST https://api.foo.com field:="[\"${SOME_VAR}\",2]"
 
-# dont verify TLS cert
-xh --verify no https://foo.com      
+# basic HTTP auth
+xh -a user:pass http://foo.com
 
 # add cookies
 xh https://foo.com "Cookie:CookieOne=cookievalue;CookieTwo=anothervalue"
 
-# `--curl` will print the curl coverted command
-xh --curl POST https://foo.com    
-
 # debug - print more info like what options xh is run with, sessions, certs, proxy, etc
 xh --debug http://foo.com
+
+# dont verify TLS cert
+xh --verify no https://foo.com
+
+# `--curl` will print the curl coverted command
+xh --curl POST https://foo.com
 ```

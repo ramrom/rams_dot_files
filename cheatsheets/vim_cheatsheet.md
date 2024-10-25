@@ -254,7 +254,13 @@
 - for txt `[blah]` -> `cs[<yar>]` - change surround `[` to `<yar>`/`</yar>` 
 - for txt `<foo>bar</foo>` -> `cst"` - change surround tag(`<foo>` here) to `"`
 - `ds[` - delete surround `[`
-- `ysiw[` - select inner word and surround with `[`
+- `ys`
+    - using left vs right changes spacing, left (`[`, `(`, `{`) adds a space b/w new char, right(`]`, `)`, `}`) does not
+    - `ysiw]` - select inner word and surround with `[`
+    - `ysa"]` - surround "around" `""` with `[]`  - `"dude"` becomes `["dude"]`
+        - `ysa'[` -> becomes `[ "dude" ]` - using left bracket will add a space 
+    - `ysi(}` - surround "inside" `()` with `{}`  - `(dude)` becomes `({dude})`
+        - `ysi({` -> becomes `({ dude })` - left squigly adds a space
 ### NVIM-TREE
 - written in lua
 - similar: plugin is NERDTree(vimscript), neo-tree(lua)
