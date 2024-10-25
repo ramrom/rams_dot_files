@@ -1366,9 +1366,9 @@ vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highli
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 
 -- SMART RUN ACTIONS
-vim.keymap.set("n", "<leader>aa", function() TmuxPaneRunner.run('exe') end, { desc = "execute program" })
 vim.keymap.set("n", "<leader>ar", TmuxPaneRunner.selectPane, { desc = "set tmux pane runner" })
 vim.keymap.set("n", "<leader>ac", TmuxPaneRunner.toggleClearOnRun, { desc = "toggle if runner pane is cleared before cmd execution" })
+vim.keymap.set("n", "<leader>aa", function() TmuxPaneRunner.run('exe') end, { desc = "execute program" })
 vim.keymap.set("n", "<leader>at", function() TmuxPaneRunner.run('test') end, { desc = "run tests" })
 vim.keymap.set("n", "<leader>ab", function() TmuxPaneRunner.run('build') end, { desc = "build/compile program" })
 
@@ -1491,7 +1491,7 @@ vim.keymap.set('n', '<leader>cw',function() require('fzf-lua').files({cwd=vim.en
 vim.keymap.set('n', '<leader>ca', '<cmd>:tabnew $MY_WORK_TODO<cr>', { desc = "open work TODO in-progress in new tab"})
 vim.keymap.set('n', '<leader>cS', '<cmd>:vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>:tabnew ~/tmp/scratch.md<cr>')
-vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>')
+vim.keymap.set('n', '<leader>ci', '<cmd>:Inspect<cr>', { desc = "treesitter Inspect" })
 
 -------------- OTHER
 vim.keymap.set("n", "<leader>wj", "<cmd>:NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
@@ -1523,12 +1523,12 @@ vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
 SetLSPKeymaps = function()
     -- LSP CONFIGURATION COMMANDS
     vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
-    vim.keymap.set("n", "glL", "<cmd>lua print('LOG PATH: ' .. vim.lsp.get_log_path()); vim.fn.setreg('+', vim.lsp.get_log_path())<CR>",
+    vim.keymap.set("n", "glL", function() print('LOG PATH: ' .. vim.lsp.get_log_path()); vim.fn.setreg('+', vim.lsp.get_log_path()) end,
         { desc = "print log path and copy to sys clipboard" })
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
     vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
     vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")
-    vim.keymap.set("n", "glh", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
+    vim.keymap.set("n", "glh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
         {desc = "toggle inlay hints"})
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
 
@@ -1550,13 +1550,14 @@ SetLSPKeymaps = function()
     vim.keymap.set("n", "gwr", vim.lsp.buf.document_symbol, { desc = "lsp document symbol" })
     vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol, { desc = "lsp workspace symbol" })
     vim.keymap.set("n", "gwd", vim.diagnostic.setqflist, { desc = "setqflist" }) -- all workspace diagnostics
-    vim.keymap.set("n", "gwe", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
-    vim.keymap.set("n", "gww", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
+    vim.keymap.set("n", "gwe", function() vim.diagnostic.setqflist({severity = "E"}) end) -- all workspace errors
+    vim.keymap.set("n", "gww", function() vim.diagnostic.setqflist({severity = "W"}) end) -- all workspace warnings
     vim.keymap.set("n", "gwb", vim.diagnostic.setloclist, { desc = "set loc list" }) -- buffer diagnostics only
-    vim.keymap.set("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
-    vim.keymap.set("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
-    vim.keymap.set('n', 'gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
-    vim.keymap.set('n', 'gz', ' <cmd>lua vim.lsp.diagnostic.open_float()<CR>')
+    vim.keymap.set("n", "[c", function() vim.diagnostic.goto_prev { wrap = false } end, { desc = "goto prev diagnostic" })
+    vim.keymap.set("n", "]c", function() vim.diagnostic.goto_next { wrap = false } end, { desc = "goto next diagnostic" })
+    vim.keymap.set('n', 'gq', function() vim.lsp.diagnostic.set_loclist() end, { desc = "set loclist" })
+    vim.keymap.set('n', 'gz', function() vim.lsp.diagnostic.open_float() end, { desc = "open float " })
+    -- vim.keymap.set('n', 'gz', vim.lsp.diagnostic.open_float)
 
     if LazyPluginEnabled('noice.nvim') then
         -- can scroll in lsp hover doc
@@ -1574,23 +1575,23 @@ SetLSPKeymaps = function()
     end
 
     -- FZF SEARCH
-    vim.keymap.set('n', '<leader>lr', "<cmd>lua require('fzf-lua').lsp_references()<CR>", { desc = "refs" })
-    vim.keymap.set('n', '<leader>li', "<cmd>lua require('fzf-lua').lsp_implementations()<CR>", { desc = "implementations" })
-    vim.keymap.set('n', '<leader>le', "<cmd>lua require('fzf-lua').lsp_declarations()<CR>", { desc = "declarations" })
-    vim.keymap.set('n', '<leader>lf', "<cmd>lua require('fzf-lua').lsp_definitions()<CR>", { desc = "defs" })
-    vim.keymap.set('n', '<leader>ld', "<cmd>lua require('fzf-lua').lsp_typedefs()<CR>", { desc = "typedefs" })
-    vim.keymap.set('n', '<leader>ll', "<cmd>lua require('fzf-lua').lsp_finder()<CR>", { desc = "all lsp finder" })
-    vim.keymap.set('n', '<leader>lw', "<cmd>lua require('fzf-lua').lsp_workspace_symbols()<CR>", { desc = "workspace symbols" })
-    vim.keymap.set('n', '<leader>ls', "<cmd>lua require('fzf-lua').lsp_document_symbols()<CR>", { desc = "doc symbols" })
+    vim.keymap.set('n', '<leader>lr', function() require('fzf-lua').lsp_references() end, { desc = "refs" })
+    vim.keymap.set('n', '<leader>li', function() require('fzf-lua').lsp_implementations() end, { desc = "implementations" })
+    vim.keymap.set('n', '<leader>le', function() require('fzf-lua').lsp_declarations() end, { desc = "declarations" })
+    vim.keymap.set('n', '<leader>lf', function() require('fzf-lua').lsp_definitions() end, { desc = "defs" })
+    vim.keymap.set('n', '<leader>ld', function() require('fzf-lua').lsp_typedefs() end, { desc = "typedefs" })
+    vim.keymap.set('n', '<leader>ll', function() require('fzf-lua').lsp_finder() end, { desc = "all lsp finder" })
+    vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').lsp_workspace_symbols() end, { desc = "workspace symbols" })
+    vim.keymap.set('n', '<leader>ls', function() require('fzf-lua').lsp_document_symbols() end, { desc = "doc symbols" })
 
     ---- DAP COMMANDS
-    vim.keymap.set("n", "gkc", [[<cmd>lua require"dap".continue()<CR>]])
-    vim.keymap.set("n", "gkr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
-    vim.keymap.set("n", "gkK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
-    vim.keymap.set("n", "gkt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
-    vim.keymap.set("n", "gkso", [[<cmd>lua require"dap".step_over()<CR>]])
-    vim.keymap.set("n", "gksi", [[<cmd>lua require"dap".step_into()<CR>]])
-    vim.keymap.set("n", "gkl", [[<cmd>lua require"dap".run_last()<CR>]])
+    vim.keymap.set("n", "gkc", function() require("dap").continue() end, { desc = "continue" })
+    vim.keymap.set("n", "gkr", function() require("dap").repl.toggle() end, { desc = "toggle" })
+    vim.keymap.set("n", "gkK", function() require"dap.ui.widgets".hover() end, { desc = "hover"})
+    vim.keymap.set("n", "gkt", function() require"dap".toggle_breakpoint() end, { desc = "toggle breakpoint" })
+    vim.keymap.set("n", "gkl", function() require"dap".run_last() end, { desc = "run last" })
+    vim.keymap.set("n", "gkso", function() require"dap".step_over() end, { desc = "step over" })
+    vim.keymap.set("n", "gksi", function() require"dap".step_into() end, { desc = "step into" })
 end
 
 SetMetalsKeymaps = function()
@@ -1602,8 +1603,8 @@ SetMetalsKeymaps = function()
     vim.keymap.set("n", "glo", "<cmd>MetalsOrganizeImports<CR>")
     vim.keymap.set("n", "gld", "<cmd>MetalsShowSemanticdbDetailed<CR>")
     -- NOTE: in the tree window hit 'r' to navigate to that item
-    vim.keymap.set("n", "glT", '<cmd>lua require"metals.tvp".toggle_tree_view()<CR>')
-    vim.keymap.set("n", "glr", '<cmd>lua require"metals.tvp".reveal_in_tree()<CR>')
+    vim.keymap.set("n", "glT", function() require"metals.tvp".toggle_tree_view() end, { desc = "toggle tree view" })
+    vim.keymap.set("n", "glr", function() require"metals.tvp".reveal_in_tree() end, { desc = "reveal in tree" })
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
 end
 
