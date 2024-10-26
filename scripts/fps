@@ -16,7 +16,7 @@ shift $(($OPTIND - 1))
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
 # TODO: how to show /proc like info in OSX for preview
-if [ "$(uname)" == "Linux" ]; then
+if [ "$(uname)" = "Linux" ]; then
     FZF_DEFAULT_COMMAND="ps auxhf"
     prev_cmd='ls -l /proc/$(echo {} | awk '\''{print $2}'\'')/fd'
 else
