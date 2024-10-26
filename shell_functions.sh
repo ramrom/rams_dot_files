@@ -293,6 +293,3 @@ function gsettings_set_keyboard() {
     # gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state true
     # gsettings set org.gnome.desktop.peripherals.keyboard numlock-state false
 }
-
-function tabname { printf "\e]1;$1\a"; }
-function winname { printf "\e]2;$1\a"; }

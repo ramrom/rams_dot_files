@@ -35,14 +35,23 @@ tmux new-window zsh -f
 - expanded using FORAMTS before execution
 - can use -b to run in background
 
-## SHOW OPTS
+## INTROSPECT COMMANDS
 ```sh
+# SHOW OPTS
 tmux show -s    # show server options
 tmux show       # show session options
 tmux show -g    # show global session options
 tmux showw      # show window options
 tmux showw -g   # show global window options
 tmux show -p    # show pane options
+
+# list windows in current session, will `*` the active window
+tmux list-windows
+
+# list panes in current window, will show `(active)` pane
+tmux list-panes
+# list panes with formatting, here showing index and title
+tmux list-panes -F #{pane_index},#{pane_title}
 ```
 
 ## DISPLAY MENU

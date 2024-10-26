@@ -207,11 +207,11 @@ unzip foo.zip -d /path/to/output  # unzip to specific foler
 echo "foobar" | base64                      # encode from stdin
 echo "foobar" | base64 | base64 --decode      # decode from stdin, should print "foobar" here
 
-# XSV - a tool to manipulate CSVs
+# XSV - a rust tool to manipulate CSVs
 xsv table somecsv.csv  # pretty print table to stdout
 xsv count somecsv.csv  # print # of rows
 
-# YQ - data file processor for YAML/XML/JSON, has similar language as jq
+# YQ - a golang data file processor for YAML/XML/JSON, has similar language as jq
 yq '.a.b[0].c' file.yaml  # read a jq like path in yaml file
 yq some.xml -o yaml     # convert xml to yaml
 yq some.xml -o json     # convert xml to json

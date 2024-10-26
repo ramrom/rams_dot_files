@@ -531,6 +531,7 @@ enum E {
 - initialize `Vec::with_capacity(n)`, for large n, instead of `new`, if you know u will push tons of items
     - this avoids a lot of copies and allocations
 - it implements `Debug`, but not `Display`, and can be printed with `let v = vec![1, 2]; println!("{v:?}");`
+- `let v = vec![1,2,3]; v[4]`, index out of bounds will panic, `v.get(4)` returns Option, `None` if out of bounds
 - `VecDeque` - basically a ring buffer that uses a beginning and end pointer
     - good for queues and stacks, esp queue, u can append to beginning without having to move all items in array
     - overhead: gotta check if at end of allocation and wrap when indexing
