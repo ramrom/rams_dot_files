@@ -1631,7 +1631,7 @@ if not vim.env.VIM_NOPLUG then
     require("lazy").setup({ spec = {
         'nvim-lua/plenary.nvim',
         { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
-        { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, event = 'VeryLazy' },
+        { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, cmd = {"NvimTreeFindFileToggle", "NvimTreeToggle"} },
         { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
             build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
         'nvim-tree/nvim-web-devicons',

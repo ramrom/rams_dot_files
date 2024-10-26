@@ -216,6 +216,9 @@ Marshal.dump(a).size
 ruby -e 'puts "hi"'   # execute ruby code
 ruby -e 'puts ARGV[0]' foo   # read inputs, will print "foo"
 ruby -e 'puts ARGV[0].to_i + ARGV[1].to_i' 1 2    # read inputs, which are always strings, prints "3"
+
+# convert yaml to json
+ruby -e 'require "yaml"; require "json"; puts YAML.load_file(ARGV[0]).to_json' "$@"
 ```
 
 ## FILE HANDLING

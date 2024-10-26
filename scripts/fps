@@ -15,14 +15,18 @@ shift $(($OPTIND - 1))
 
 FZF_HEIGHT=${FZF_HEIGHT:=100}
 
-FZF_DEFAULT_COMMAND="ps -hef"
-[ $(uname) = "Linux" ] && FZF_DEFAULT_COMMAND="ps auxhf"
+# TODO: how to show /proc like info in OSX for preview
+if [ "$(uname)" == "Linux" ]; then
+    FZF_DEFAULT_COMMAND="ps auxhf"
+    prev_cmd='ls -l /proc/$(echo {} | awk '\''{print $2}'\'')/fd'
+else
+    FZF_DEFAULT_COMMAND="ps -hef"
+    prev_cmd='ps -p $(echo {} | awk '\''{print $2}'\'')'
+fi
 
-# TODO: /proc/x only works on Linux, find another solution for OSX
-prev_cmd='ls -l /proc/$(echo {} | awk '\''{print $2}'\'')/fd'
 
 fzf --bind "ctrl-r:reload($FZF_DEFAULT_COMMAND)" \
     --header 'Press CTRL-R to reload' --header-lines=1 \
     --height "$FZF_HEIGHT"% --layout=reverse \
     --preview "$prev_cmd" \
-    --preview-window=:wrap
+    --preview-window=bottom:wrap

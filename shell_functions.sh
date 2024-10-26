@@ -221,9 +221,6 @@ function frgl() {  # frg (live)
         --height=50% --layout=reverse
 }
 
-# needs psx alias
-function psxg() { psx | grep $1 | grep -v grep; }
-
 # go docs with syntax highlighting!
 function batgod() { go doc $@ | bat -l go; }
 
@@ -280,10 +277,6 @@ function gitclean() {
 function getbranchname() { git branch | grep "*" | awk '{print $2}'; }
 
 ###### OTHER ###############
-function yamltojson() {
-    ruby -e 'require "yaml"; require "json"; puts YAML.load_file(ARGV[0]).to_json' "$@"
-}
-
 function csvtojson() {
     ruby -e 'require "csv"; require "json"; puts CSV.open(ARGV[0], headers: true).map { |x| x.to_h }.to_json' "$@"
 }

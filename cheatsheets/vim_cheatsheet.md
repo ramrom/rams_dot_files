@@ -395,7 +395,7 @@
 - commands -> can only accept string arguments, no return value, used for UI, invoke: `:SomeCommand`
 - functions -> can accept any type arg and return a value, to invoke `:call somefunc(var1,var2)`
 - checking existence of variable
-    if exists('g:some_global_var') | echo "hi" | endif
+    - `if exists('g:some_global_var') | echo "hi" | endif`
 
 ## MISC COMMANDS AND INFO
 - so $VIMRUNTIME/syntax/hitest.vim
@@ -807,6 +807,7 @@ zr expand one level, zR - open ALL folds
 :ls - list all open buffers
 
 ## WINDOWS
+- a window is a viewport into a buffer
 :sp file - open a file in a new buffer and split window
 :vsp file - open a file in a new buffer and vertically split window
 Ctrl + ws - split window
@@ -826,6 +827,7 @@ ctrl + wo - close all windows except current one in tab
 
 
 ## TABS
+- a tab is a collection of windows
 :tabnew or :tabnew file - open a file in a new tab
 Ctrl + wT - move the current split window into its own tab
 gt or :tabnext or :tabn - move to the next tab

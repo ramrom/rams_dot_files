@@ -216,6 +216,7 @@ yq '.a.b[0].c' file.yaml  # read a jq like path in yaml file
 yq some.xml -o yaml     # convert xml to yaml
 yq some.xml -o json     # convert xml to json
 yq some.yaml -o xml     # convert yaml to xml
+yq some.yaml -o json     # convert yaml to json
 
 # XQ - convert xml to json and then use jq queries
 xq . some.xml  # would spit our JSON conversion
