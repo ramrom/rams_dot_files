@@ -60,7 +60,8 @@
 - building blocks are `tasks`, versus ant's `targets` and mavens `phases`
 
 ## BAZEL
-- built by google and open-sourced, for java projects, particularly large monorepos
+- built by google in 2015 from internal tool Blaze
+- bazel was open-sourced version of Blaze, intended for java projects, particularly large monorepos
 - does a lot of caching
 - cares a lot about correctness and reliability and performance
 - supports BSP, see https://github.com/JetBrains/hirschgarten
@@ -70,7 +71,7 @@
 - open source built by lihaoyi, written in scala
 
 ## BLOOP
-- build server developed by scala center
+- build server developed by scala center - https://scalacenter.github.io/bloop/
 - uses zinc for incremental compiling
 - https://scalacenter.github.io/bloop/docs/what-is-bloop
 - supports 2 main protocols
@@ -106,7 +107,7 @@
     - can configure other build servers like sbt itself: https://scalameta.org/metals/docs/build-tools/sbt
 - metals 1.3.x requires java 11 or java 17
 - sept2024 - nvim-metals seems to start the latest metals server that works for that scala ver
-    - e.g. 2.13.6 scala starts 0.11.x
+    - e.g. 2.13.6 scala starts metals ver 0.11.x
 - sept2024 - _NOTE_ for reseting project, make sure `project/.bloop` and `project/project/` dirs deleted for base bloop to install right
 
 ## IVY

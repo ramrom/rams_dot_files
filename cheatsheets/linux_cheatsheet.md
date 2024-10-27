@@ -4,11 +4,8 @@
 - swap partition - using a filesystem generally on a HD as storage for data on RAM, usually when RAM is full
 - ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
 - cron: great site for deciphering a cron schedule: https://crontab.guru/
-- procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
-    - most unix-like OSes support it, notably OSX doesn't
 - cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
 - namespaces - linux kernel feature, isolates sets of processes and resources
-- `io_uring`, syscalls for async IO, interface added in 5.1, addresses deficiencies of Linux AIO
 - shared/dynamic libs in linux: https://developer.ibm.com/technologies/linux/tutorials/l-dynamic-libraries/
 - ELF - file format for binary files, used for ABI for c programs to find functions to call
     - ELF ABI specifies table of functions/symbol-table that external programs can call
@@ -526,11 +523,16 @@ pulsemixer - volume manager with pulseaudio
 - inotify (inode notify) - monitor changes to filesystem
     - main commands: `inotifywait` and `inotifywatch`
     - replaces older dnotify
-- sysfs - pseudo file system exposes kernel provides access to kernel subsystems, hardware devices, and associated device drivers
-
-## PROC
-- is a virtual file system that exposes info about sys hardware, processes, and more
+- `io_uring`, syscalls for async IO, interface added in 5.1, addresses deficiencies of Linux AIO
+    - uses 2 circular queues, SQ(submission queue) and CQ(completion queue)
+    - many security vulnerabilities as it's hard to integrate into linux security subsystem; android, googleOS disable io_uring
+- SYSFS - pseudo file system exposes kernel provides access to kernel subsystems, hardware devices, and associated device drivers
+    - exposed in `/sys`
+### PROCFS
+- procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
     - proc dir shows system info in the files-as-API philosophy of linux
+- is a virtual file system that exposes info about sys hardware, processes, and more
+- most unix-like OSes support it, notably OSX doesn't
 - /proc/net/             - network stuff
 - /proc/cpuinfo          - cpu stuff
 - /proc/meminfo          - memory stuff

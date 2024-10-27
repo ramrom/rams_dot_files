@@ -105,11 +105,17 @@ public static void main(String[] args) {
 - quick blog on reactor/event-loop - https://guxi.me/posts/epoll-and-event-loop-just-enough-you-need-for-interview/
 - linux epoll - https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/
 - blocking vs non-blocking
+    - best definition: waiting for something to become readable or writable
     - blocking generally means at thread level, blocking operations wont let thread do anything else until it's done
     - non-blocking means it yields and lets thread do other things if operation is blocked
 - 2015 - nice blog on red/blue(sync/async) colored functions: https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
     - golang is nice b/c no red/blue distinction, only one type and runtime handles it
-- async regular file I/O - linux has bad support for it, but windows has good support for it
+- async regular file I/O
+    - generally a regular file is always readable or writable and thus won't "block", unlike network socket IO
+        - write call copies userspace buffer written to kernel buffer in call, kernel flushes later, so generally no block
+            - maybe unless kernel buffer becomes full?
+        - reading from disk is always available until it hits EOF, and can't really block
+    - linux has bad support for it, but windows has good support for it
     - for linux many langs/frameworks use a pool of blocking threads for this I/O (e.g. rust tokio and GNU libc)
 ### PROCESSES VS THREADS
 - SO reply on process vs thread contex switch - https://stackoverflow.com/questions/7439608/steps-in-context-switching

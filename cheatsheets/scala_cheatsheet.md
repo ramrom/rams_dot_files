@@ -5,6 +5,11 @@
     - Scala.js is a compiler targeted for javascript (node.js or web)
     - Scala Native uses LLVM to make native binaries
 - lightbend(formerly typesafe) founded by odersky, jonas boner(created akka), and paul phillips
+- major entities using scala: 
+    - twitter - used where ruby/rails is slow/poor
+    - netflix - search algos, RESET apis and reccomendations
+    - airbnb - used fast data processing, in data pipelines
+    - others: foursquare, databricks, netflix, tumblr, disney streaming, tubi
 
 ## DOCS
 - main docs: https://www.scala-lang.org/
@@ -16,9 +21,12 @@
 
 ## BUILD TOOLS
 - main is sbt, but also mill and bloop
+- sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
+- mill, see [build tools](build_dependency_tools_cheatsheet.md#mill)
 - modern systems use coursier for artifact fetching
-- see [build systems](build_dependency_tools_cheatsheet.md)
 - scala metals - main robust LSP for scala (see build system above)
+    - see [LSP in build systems](build_dependency_tools_cheatsheet.md#LSP)
+
 
 ## JAVA COMPATIBILITY
 - some good notes: https://docs.scala-lang.org/scala3/book/interacting-with-java.html
@@ -489,12 +497,6 @@ writer.close()
 ## ENUMERATION
 - play 2.5 json doesnt supports scala enumerators
 - can use enumeratum
-
-## BUILD TOOLS
-- sbt, see [sbt](build_dependency_tools_cheatsheet.md#sbt)
-- mill, see [build tools](build_dependency_tools_cheatsheet.md#mill)
-- scala-cli, see [build tools](build_dependency_tools_cheatsheet.md#scala-cli)
-    - not really a build tool, more for scripting/prototyping
 
 ## MACWIRE/DEPENDENCY-INJECT
 - macwire are basically macros, except written in scala, versus c++ macros which are a syntax of their own
