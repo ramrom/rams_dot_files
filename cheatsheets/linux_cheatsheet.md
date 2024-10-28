@@ -562,6 +562,8 @@ pulsemixer - volume manager with pulseaudio
 - `mkfs` - to format a disk partition
 - `fdisk` - show partitions and block devices, sizes, sectors
 - /etc/fstab - file systems mounted at boot
+- `chmod` - change permissions for existing files
+- `umask` - change default permissions for new files
 - `efibootmgr` - UEFI boot manager, list boot devices and order, change order, delete boot option
 - `dkms` - cli for dynamic kernel modules
     - `dkms status` - list all loaded kernel modules and show status

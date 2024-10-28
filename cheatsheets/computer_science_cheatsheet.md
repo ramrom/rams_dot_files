@@ -692,6 +692,20 @@ public static void main(String[] args) {
 - good article on it https://teknologiumum.com/posts/introductory-to-treesitter
     - it links to this good watch: https://www.youtube.com/watch?v=Jes3bD6P0To
 
+## OPERATING SYSTEMS
+- kernel vs userspace - many CPUs support different priviliege modes, higher privilige means they can run more instructions
+    - oct2024 - dry but good vid: https://www.youtube.com/watch?v=H4SDPLiUnv4&t=1125s&ab_channel=CoreDumped
+    - often a mode bit, if bit is set then it can run priviliedged instructions
+    - privilege mode was designed for OS kernel, why it's often called kernel mode
+    - priv mode lets u change MMU(memory manage unit), MMU controls which memory regions CPU has access to
+    - OS exposes an API to userland, i.e. system calls, so that userland can ultimately do privilieged things
+- interrupts - stop current process to do something, interrupts run in privileged mode
+    - usually hardware that triggers interrupts like HID(mice, keyboards) or NICs
+        - software can too, system calls by userland are interrupts
+        - if software triggers interrupt, ISR must set mode bit back to non-privileged at the end
+    - main program interupted, program counter points to ISR(interrupt service routine) and it runs
+        - state of interrupted process saved, meat of interrupter logic happens, interrupt source resotred, return instruction calls
+    - interrrupt used to also flip mode bit
 
 ## DEPENDENCY MANAGEMENT
 - see [build_dependency_tools_cheatsheet.md]

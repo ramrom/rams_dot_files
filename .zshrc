@@ -24,11 +24,12 @@ setopt sh_word_split    # use IFS word splitting
 
 # oct2022: tmux on osx runs path_helper(from /etc/profile) which messus up path entries
     # see https://superuser.com/questions/544989/does-tmux-sort-the-path-variable
+    # oct2024 - turned off and back on, ctags broke(i want homebrew one, not one in /usr/bin/)
 # this workaround fixes this issue
-# if [ "$(uname)" = "Darwin" -a -f /etc/profile ]; then
-#     PATH=""
-#     source /etc/profile
-# fi
+if [ "$(uname)" = "Darwin" -a -f /etc/profile ]; then
+    PATH=""
+    source /etc/profile
+fi
 
 export FCEDIT=nvim      # set fc(command history editor) to vim
 
