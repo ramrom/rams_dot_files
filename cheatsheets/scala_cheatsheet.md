@@ -29,6 +29,7 @@
 
 
 ## JAVA COMPATIBILITY
+- master list: https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html
 - some good notes: https://docs.scala-lang.org/scala3/book/interacting-with-java.html
     - possible to use scala traits in java and java interfaces in scala
     - can convert java collections to scala and vice versa with coverters
@@ -107,6 +108,9 @@
     - covariant: given B is subtype of A, then `F[[_]]` is covariant if `F[B]` is subtype of `F[A]`, denoted by `F[+T]`
     - contravariant: inverse of covariant, given B subtype of A, `F[A]` is subtype of `F[B]`, denoted by `F[-T]`
     - invariant: no gaurantee of subtyping relationship between `F[A]` and `F[B]`
+### CONTROL STRUCTURES
+- `if` statements are expressions, not statements
+    - `val a = if (somebool) 1 else 2`  - u can basically to ternary operators like this
 ### HIGHER KINDED TYPES
 - A higher-kinded type is a type that abstracts over some type that, in turn, abstracts over another type
 - introduced in scala 2.5, example usage is in scala std lib
@@ -594,6 +598,28 @@ writer.close()
     ```
     - then can run script like so `scala Hello.scala arg1`
 - exit a program: `System.exit(1)` - exit with code 1
+
+## CATS EFFECTS
+- 2021 reddit, good comment of `IO` runtime - https://www.reddit.com/r/scala/comments/s23dve/cats_effect_how_it_works_technically/
+```scala
+import cats.effect._
+
+IO.println("Hello") flatMap { _ => IO.println("World") }
+// since it's flatMap we can use for comps with IO
+for {
+  _ <- IO.println("Hello")
+  _ <- IO.println("World")
+} yield ()
+// can use `>>` when throwing away result of pref effect
+IO.println("Hello") >> IO.println("World")
+
+// macros that support async/await style programming
+import cats.effect.cps._
+async[IO] {
+  IO.println("Hello").await
+  IO.println("World").await
+}
+```
 
 ## SCALA CLI
 - https://scala-cli.virtuslab.org/

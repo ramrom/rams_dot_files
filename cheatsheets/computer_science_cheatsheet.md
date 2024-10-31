@@ -63,7 +63,7 @@ public static void main(String[] args) {
 - network protocols inc modern internet related ones, are all big endian, often just called "network order"
 - process/cpu architecture are generally little endian
 ### ALLOCATION
-- arena(zone/area) allocation strategy
+- ARENA(zone/area) allocation strategy
     - esentially allocating a very large contiguous chunk of heap memory and managing it yourself, then deallocating the entire thing
     - purported advantages are that many normal allocators (e.g. libc `malloc` and `free`) are slower and inefficient in some cases
     - an arena is very similar to stack allocation in this respect, except arenas can last longer than the stack frame

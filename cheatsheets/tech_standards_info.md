@@ -677,8 +677,10 @@
     - it's up to higher layers to add "message" semantics, versus UDP is a datagram protocol and reciever sees the whole message
 - max size of a packet is 64K
 ### UDP
-- conectionless - no handshakes to establish a connection
-    - being connectionless it can broadcast/multicast
+- conectionless - no handshakes to establish a connection - being connectionless it can broadcast/multicast
+- used by DNS, NTP, DHCP protocols
+- "connected" sockets - 4-tuple sourceIP/port+destIP/port, "unconnected" sockets are 2-tuple bindIP/port
+    - servers usually bind and use unconnected sockets
 - no ackknowlegements of packets, so delivery not gauranteed, and order is not gauranteed
     - if you send UDP packet to IP host that's not listening to the port, it will just drop it
     - if u send to a bogus IP, prolly some network downstream will send a ICMP "Destination Unreachable" message
@@ -688,12 +690,14 @@
 ### SCTP
 - stream control transmission protocol - datagrams like UDP but in-order, has congestion control, and reliable
 - new protocol, that is sorta the best of UDP and TCP, but no OSes or network equipment really implement it
-### STREAMING PROTOCOLS
+### LAYER 7 STREAMING PROTOCOLS
 - HLS - HTTP live streaming - see [HTTP](http_web_tls_cheatsheet.md)
 - RTMP - real-time messaging protocol - see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
     - like HLS it's adaptive and chunks data, base type uses TCP port 1935, RTMFP is UDP version, RTMPT uses HTTP
     - it's a true streaming protocol and has very low latency, used to live streaming and live gaming
 - RTMPS - RTMP with TLS
+- RTP - real-time transport protocol, generally runs on UDP, delivery audio/video like VoIP
+- RTCP - RTP control protocol, monitors transmission stats, QoS, and helps sync multiple streams
 ### IP
 - VIP - virtual IPs, IPs that are not connected to any physical interface
     - commonly used with 1-to-many NATs or for redudnancy with a cluster of servers or HSRP(hot standby router protocol)

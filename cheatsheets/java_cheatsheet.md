@@ -16,7 +16,7 @@
     - introduced `record`(similar to scala case class)
 - java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
 - java17, sept2021, LTS - better pattern matching
-- java21, sept2023, end at sept2031
+- java21, sept2023, LTS, end at sept2031
 ### OTHER
 - The main difference between Java EOL and extended support is that EOL software is no longer supported by the developer
     - extended support software still receives critical security patches and some updates

@@ -124,6 +124,7 @@
 - if a expression is followed by semicolon `;`, then it'll discard the result and become a statement
 ### CONDITIONALS
 - `if` is an expression
+    - `let res: &str = if someval == 10 { "truecond" } else { "falsecond" };`
     - takes blocks of code called "arms" that must evaluate to a `bool`, there is no truthiness like ruby or javascript
 ### LOOPS
 - `loop { ... }` - infinite loop
