@@ -97,7 +97,15 @@
 - supports many container runtimes including `containerd` and `CRI-O`
 - glossary: https://kubernetes.io/docs/reference/glossary/?fundamental=true
 - https://kubernetes.io/docs/
-- workload types: deployments(identity-less),statefulset(unique pods, persistent storage),daemonset(manages nodes)
+- workload types
+    - replicaset - stateless pods, pods can be killed and spawned
+        - generally use deployments to specify and manage a replicaset
+    - statefulset - stateful pods, persistent storage, has sticky identity
+    - daemonset - ensure one pod per node, node-local facilities
+        - e.g. log collection/aggregator pod, metrics collection/aggregator pod
+    - jobs - one off tasks that complete and then stop
+        - job tracks successful completions, when a specified number is reached, job finishes
+    - cronjobs - recurring jobs on schedule
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
 - liveliness vs rediness
     - liveliness - verify pod is running, app/process didnt deadlock or crash or run out of memory, so cant respond to requests
@@ -111,11 +119,13 @@
     - canary -> see https://kubernetes.io/docs/concepts/workloads/management/#canary-deployments
         - this is basic, lets u have both vers at the same time, if x of y total are new version, then x/y percent reqs goto new ver
 - HPA - horizontal pod autoscaler - rules for min pods, max pods
-- DEPLOYMENT
+- DEPLOYMENT - declarative updates for pods and replicasets
     - main rules: ingress routing, vertical scaling, env vars, etc
     - dont include HPA
 - istio -> service mesh for kubernetes that lets you do cool things like complicated canary deploys
 ### ARCHITECTURE
+- CLUSTER NETWORK
+    - main article - https://kubernetes.io/docs/concepts/cluster-administration/networking/
 - CLUSTER - an instance of a kubernetes system
     - has a control plane and composed of many nodes
     - all pods/containers talk to each other internally via a virtual network
@@ -123,13 +133,16 @@
 - POD - a deployable entity
     - have many containers, but typical setup is one container per pod
     - containers in a pod share storage volumes and networking
-    - each pod has a unique IP, containers in a prod share the IP address and network ports
+    - each pod has a unique IP, containers in a pod share the IP address and network ports
         - containers in a pod can talk to each other using `localhost`
         - containers in same pod can use IPC like shared memory
-- SERVICE - has a stable IP and DNS, pods don't
-- INGRESS - rules to describe routing and load balancing for external ingress traffic
+- SERVICE - identifies a set of pods as a logical "service"
+    - groups of pods are identified using labels or selectors (e.g. service `fooservice` adds all pods with label `foo`)
+    - have VIPs only routable within cluster network
+    - VIP and DNS is stable, pods don't have stable IPs
+- INGRESS - rules to describe routing for traffic from outside cluster into services
+    - ingress controllers can also load balance and do TLS/SSL termination
     - needs an ingress controller, can use AWS, GCE, or nginx
-    - ingress route to the services
 - KUBELET - a agent that lives in each node, manages that node and communicates with control plane
 - CONTROL PLANE - orchestrates and manages the entire cluster, talks to the kubelets
     - API server - communication hub, all clients talk to it, including CLI tools, GUI admin tools, and pods and kubelets in cluster

@@ -648,12 +648,6 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 ```
 - dont have concrete type that are returnable, can use dyn Box, e.g. `Box<dyn Fn(i32) -> i32>`
 
-## LIBS
-- `std` relies on OS primitives
-- `core` relies on nothing
-- `alloc` requires on a memory allocator
-    - most collections in this crate, except hashmap which relies on random data, so its in `std`
-
 ## IO
 - read a file to var - `let contents = std::fs::read_to_string(file_path).unwrap()`
 - incremental read - `let f = File::open(file_path)?; let reader = BufReader::new(f); for line in reader.lines() { ... }`
@@ -731,7 +725,6 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
     - scala futures are eager, cant be cancelled, use a callback style (like javascript promises) with `map`/`flatMap`
     - reddit post on scala futures vs rust async - https://www.reddit.com/r/scala/comments/f9o4gq/rust_vs_scala_futures/
 - rust's Futures themselves dont depend on thread locals, tokio does use it in order to get runtime context
-- - `Pin` types prevent data from being moved unless type implements `UnPin`
 - **FUTURE** internal representation
     - futures contain a "state machine", each state being a chunk of work seperated by an await
     - each chunk/state contains all it's state data, this includes local vars that need to be kept across await points
@@ -778,10 +771,15 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
 ### SEMAPHORES
 - issue limited "permits" to do things, can limit concurrency level
 - tokio has sempahores
+
+## MEMORY
 ### ATOMICS AND MEMORY ORDERING
 - good read: https://doc.rust-lang.org/nomicon/atomics.html
-- AtomicUsize - `fetch_update` - really compare_exchange loop that tries to apply the closure
+- `AtomicUsize` - `fetch_update` - really compare_exchange loop that tries to apply the closure
 - memory model for atomics from c++20
+### PIN
+- `Pin` types prevent data from being moved in memory unless type implements `UnPin`
+- one prime use case is `Future`s, some Future types need pinning, the ones that don't can implement `Unpin`
 
 ## ANNOTATION
 - `derive` - tells rust to automatically generate a trait implementation for a type
@@ -822,6 +820,12 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
     - type 2: attribute-like
     - type 3: function-like
 
+
+## STD LIB
+- `std` relies on OS primitives
+- `core` relies on nothing
+- `alloc` requires on a memory allocator
+    - most collections in this crate, except hashmap which relies on random data, so its in `std`
 
 ## LIBS/FRAMEWORKS/APPS
 - [mio](https://github.com/tokio-rs/mio) - low level lib for OS non-blocking IO API

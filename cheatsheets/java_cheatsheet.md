@@ -395,8 +395,14 @@ ha.put("foo", a);
     - very similar to scala `Future`
 ### THREADS
 - 2 main ways to create a thread, `Runnable` or subclass `Thread`
+    - probably writing a `Runnable` is preferred as it's composable, you're running code isn't coupled to the thread characteristics
 - `Runnable` interface
     - a class should implement this, so that it can be scheduled on a thread
+    ```java
+    var r = new Runnable() { public void run() { System.out.println("im running"); }}    // annonymous class of type Runnable
+    var t = new Thread(r)
+    t.start()           // prints "im running"
+    ```
 - subclass `Thread` class and define `run`
     ```java
     public class NewThread extends Thread {

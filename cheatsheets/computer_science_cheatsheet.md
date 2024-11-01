@@ -117,6 +117,9 @@ public static void main(String[] args) {
         - reading from disk is always available until it hits EOF, and can't really block
     - linux has bad support for it, but windows has good support for it
     - for linux many langs/frameworks use a pool of blocking threads for this I/O (e.g. rust tokio and GNU libc)
+- STYLES
+    - callbacks - get ugly arrowheaded programming, hard to read
+    - `async`/`await` offers direct style programming, as opposed to callback-hell
 ### PROCESSES VS THREADS
 - SO reply on process vs thread contex switch - https://stackoverflow.com/questions/7439608/steps-in-context-switching
 - generally a process has many threads
@@ -381,15 +384,15 @@ public static void main(String[] args) {
 ### FACEBOOK TRAFFIC LOAD BALANCING
 - facebook load balancing (2016) - https://www.youtube.com/watch?v=LLBT70yexZo&ab_channel=USENIX
 - user -> L3-ecmp(equal-cost-multipath) -> L4LB(ipvs) -> L7LB(proxygen) -> HHVM(hiphop vm that serves FE tasks)
-    - l7lb does tls/ssl termination
-    - l3->l4 and l4->l7 use consistent hashing(on socket 4tuple) to l7LB, must maintain same target to maintain TCP connections
+    - L7lb does tls/ssl termination
+    - L3->L4 and L4->L7 use consistent hashing(on socket 4tuple) to L7LB, must maintain same target to maintain TCP connections
         - ipvs = IP virtual server
         - if l4lb dies, the l4lb that takes the failover traffic uses same consistent hashing algo to send to same l7lb
         - if l7lb dies, tcp conn def breaks, l4lb consistenly hashes to new l7lb, remembers in it's local state if old l7 comes back
-- one cluster: ~10s of l4 lb, ~100s of l7 lbs, ~1000s of HHVMs
+- one cluster: ~10s of L4 lb, ~100s of L7 lbs, ~1000s of HHVMs
     - final layer doesn't have to be HHVM, this is biz logic layer, could be dbs or some other backend service
     - all components(not l3 router) run on commodity x86 hosts/VMs with k8s/docker type system to deploy onto
-- l3-ecmp advertises BGP routes to l4LB(yea they're not l3 routers) and l4LBs respond with VIP
+- L3-ecmp advertises BGP routes to l4LB(yea they're not l3 routers) and l4LBs respond with VIP
 - use service discovery(based on zookeeper) to keep track of l7LBs for l4LBs
 - multiple clusters are a datacenter
 - edge POPs - handle just TCP and TLS termination, no HHVM(or core stuff), nice compromise 

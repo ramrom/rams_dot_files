@@ -389,6 +389,10 @@ i.next       // throw NoSuchElementException
     ```scala
     case Class Foo(a: Int); foo = Foo(3); println(s"this is $foo")
     ```
+### REGEX
+```scala
+val myregex = """\d\d..\d\d""".r    // returns type `Regex`
+```
 
 ## MONADS
 - they are monoids in the class of endofunctors, like duh!
