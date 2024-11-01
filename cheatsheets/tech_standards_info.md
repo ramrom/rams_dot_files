@@ -524,6 +524,15 @@
     - doesnt support ray tracing or video decoding
     - really being succeeded by vulkan
 - DirectX - microsoft APIs for graphics and more
+### TERMINAL PROTOCOLS
+- KITTY - draw pixel graphics for terminal clients, see https://sw.kovidgoyal.net/kitty/graphics-protocol/
+    - many apps support it - chafa, ranger, fzf, mpv, broot
+    - used/created by kitty terminal - https://sw.kovidgoyal.net/kitty/
+- SIXEL - a bitmap graphics format for terminals/printers
+    - use pattern of six pixels high and one wide, each pattern assigned an ASCII char
+    - originally used to send graphics to DEC dot matrix printers, then used for VT200 and VT320 terminals
+    - support: https://www.arewesixelyet.com/
+        - tmux, xterm, wezterm, alacritty support it
 
 ## GAME CONSOLES
 ### XBOX 

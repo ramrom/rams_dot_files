@@ -24,6 +24,12 @@
 - change to a preset layout: `tmux select-layout even-horizontal`
 - any program running in a pane will be a child process of that panes' PID
 
+## GRAHICS SUPPORT
+- yazi(terminal file explorer) image preview support - https://yazi-rs.github.io/docs/image-preview/#tmux-users
+### SIXEL
+- in 2021 tmux versions support SIXEL
+- check if compiled with sixel suppport - https://github.com/tmux/tmux/issues/4104
+
 ## COMMANDS
 ```tmux
 # new window takes a manual shell command to run, zsh -f will start zsh shell with no rc files loaded

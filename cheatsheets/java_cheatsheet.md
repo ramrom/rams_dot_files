@@ -83,9 +83,9 @@ names[10000]    // raises java.lang.ArrayIndexOutOfBoundsException
 names.length    // => 4, the num items in the array
 
 var clone = y.clone();                  // make a copy of the array
-var c =  Arrays.copyOf(y,y.length);      // make a copy
-var c =  Arrays.copyOf(y,2);            // make a copy of just the first 2 elements
-var c =  Arrays.copyOf(y,y.length+3);    // make a copy, copy all of y and 3 extra elements with zero value (or nulls if Objects)
+var c = Arrays.copyOf(y,y.length);      // make a copy
+var c = Arrays.copyOf(y,2);            // make a copy of just the first 2 elements
+var c = Arrays.copyOf(y,y.length+3);    // make a copy, copy all of y and 3 extra elements with zero value (or nulls if Objects)
 var c = Arrays.copyOfRange(y,1,5)       // copy elements 1-4 of y
 
 //2D ARRAY
@@ -176,16 +176,18 @@ var mylist = new ArrayList<String>(Arrays.asList("hi","there"));  // can use var
 var strs = new String[]{"hi","there"};
 var alstrs = new ArrayList<String>(Arrays.asList(strs)); // Arrays#asList converts to List<String>, need ArrayList<String>
 
-// Iteratable - List (and Set) offer iterator() methods that return Iterator<T>
-    // Iterable is a superinterface of Collection interface
-for (Element e: mylist) { System.out.println(e); }   // for loop is sugar for using iterator
+// Iteratable - an interface with one method #iterator - which returns Iterator<T>, Iterator interface added in java 1.2
+// Iterable is a superinterface of Collection interface, so List and Set support it
+// Iterable's support a for-each loop, enhanced versions of for loop
+for (Element e: mylist) { System.out.println(e); }   // for-each loop is sugar for using iterator
 mylist.forEach(e -> System.out.println(e) )         // forEach concise way to iterate
 
-// similar to Iterable is the Iterator interface in java 1.2, also part of Collections framework
+// Iterator interface has 3 methods, unlike Iterable it stores current iteration state and can remove
 var i = mylist.iterator()
 i.hasNext();        // check if another item in iterator exists
 i.next();           // get next item, throws an exception if none (use hasNext to check)
-i.remove();         // remove an element from collection and not raise ConcurrentModificationException
+i.remove();         // remove current element from collection and not raise ConcurrentModificationException
+
 // streams, much more powerful, has map and filter and way more
 mylist.stream().forEach(i -> System.out.println(i));
 
@@ -396,21 +398,28 @@ ha.put("foo", a);
 ### THREADS
 - 2 main ways to create a thread, `Runnable` or subclass `Thread`
     - probably writing a `Runnable` is preferred as it's composable, you're running code isn't coupled to the thread characteristics
-- `Runnable` interface
-    - a class should implement this, so that it can be scheduled on a thread
-    ```java
-    var r = new Runnable() { public void run() { System.out.println("im running"); }}    // annonymous class of type Runnable
-    var t = new Thread(r)
-    t.start()           // prints "im running"
-    ```
-- subclass `Thread` class and define `run`
-    ```java
-    public class NewThread extends Thread {
-    public void run() {
-        System.out.println(this.getName() + ": New Thread is running...");
-        Thread.sleep(1000);
-    } }
-    ```
+```java
+// `Runnable` interface - a class should implement this, so that it can be scheduled on a thread
+var r = new Runnable() { public void run() { System.out.println("im running"); }}    // annonymous class of type Runnable
+var t = new Thread(r)
+t.start()           // prints "im running"
+
+// subclass `Thread` class and define `run`
+public class MyThread extends Thread {
+public void run() {
+    System.out.println(this.getName() + ": New Thread is running...");
+    try {
+        Thread.sleep(1000);  // it can throw InterrutedException, catching here so i dont have to delcare run as throwing
+    } catch (InterruptedException e) { System.out.println(e); }
+} }
+
+var t = new MyThread();         // declare a new thread, t is the thread handle
+t.run()         // calling run executes in current thread
+t.start()       // start a new thread and calls run in there
+t.getState()    // could be NEW, TIMED_WAITING, TERMINATED, etc
+t.suspend()     // suspend the thread
+t.stop()        // stop the thread
+```
 ### SYNCHRONIZE
 - `synchronized` keyword, essentially a mutex on a piece of code
 - on instance method - ensures method can only by run by one thread per object instance
@@ -606,7 +615,7 @@ int[] arr = list.stream().mapToInt(i -> i).toArray();
 
 // List conversion from static to ArrayList
 var l = new Integer[] { 1,2,3};
-List<Integer> li = Arrays.asList(l);  // wraps static array in AbstractList, exposing a List interface, BUT not really, e.g. `remove` errors
+List<Integer> li = Arrays.asList(l);  // wraps static array in AbstractList, a List interface, BUT not really, e.g. `remove` errors
 ArrayList<Integer> al = new ArrayList<Integer>(li);     // converts to real dynamic list, can call `remove` on this
 
 // Object array coersion
@@ -691,7 +700,7 @@ record Ok<T>(T value) implements Result<T> { }
             - *NOTE* the hashcode is represented as hexadecimal, not decimal
         - `System.out.print` calls this method
 - equality
-    - generally when non-primites are compares with `==` we are comparing identity, is it the same object? (same memory address)
+    - when non-primites are compared using `==` we are comparing identity, is it the same object? (same ref/memory-address)
         - `new Integer(1) == new Integer(1)` -> returns `false`
         - `new String("foo") == new String("foo")` -> returns `false`
             - `"foo" == "foo"` -> returns `true`, we are comparing `Strings` but special case with literals

@@ -8,6 +8,8 @@
 #   B tier: cuboctahedron eversion, gravity well, pacman, scooter, splodesic
 #   C tier: deep stars, intermomentary
 
+# HIGH CPU: marbling(maybe b/c no GL?)
+
 timeout:	0:05:00
 cycle:		0:01:00
 lock:		True

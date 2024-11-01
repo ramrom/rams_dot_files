@@ -324,6 +324,19 @@ Map(1->2,3->4) ++ Map(1->1,5->4)  // returns Map(1->1,3->4,5->4)
 
 Map(1->2, 2->3).map( (k,v) => (k, v*2))  // return Map(1->4, 2->6)
 ```
+### STACK
+```scala
+import scala.collection.mutable.Stack
+
+val s = Stack[Int]()
+s.push(1)
+s.pop()     // return 1
+s.pop()     // raises NoSuchElementException when empty
+s.push(4,5) // can push many items in one call
+s.length      // num of elements in stack
+s.clear()   // delete all elements in stack
+s.head      // peek the top element on the stack
+```
 ### SET
 - TYPES
     - `scala.collection.immutable.HashSet`
@@ -664,19 +677,23 @@ async[IO] {
 
 ## MAJOR LIBS/FRAMEWORKS
 ### PLAY FRAMEWORK
-- supports async
-    - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
 - docs: https://www.playframework.com/documentation
+- has backend that uses Akka-HTTP to process requests, it converts to/from Akka `HttpRequest`/`HttpResponse` into plays models
+    - AkkaHTTP handles nitty gritty of processing http requests, play add routing and application logic on top
+    - can use Netty backend as well(play 2.9), play 3 uses Pekko
+- generally async
+    - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
+    - AkkaHTTP is non-blocking
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 - `Thread.sleep(1000)` will block thread, to delay in play we can invoke scheduler to delay scheduling future
     - play3 can schedule later: https://www.playframework.com/documentation/3.0.x/ScheduledTasks
     - see https://stackoverflow.com/questions/60425094/play-framework-how-to-purposely-delay-a-response
         - can use java's [ScheduledFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html)
-- 2.8
-    - supports java 11
-- 2.9 -
-- 3.0 - released 2023, replaced Akka/Akka-HTTP with Pekko/Pekko-HTTP
-    - 2.9 and 3.0 offer same features and get parralel maintinence, 3.0 just switches to Pekko
+- MAJOR VERSIONS
+    - 2.8 - supports java 11
+    - 2.9 -
+    - 3.0 - released 2023, replaced Akka/Akka-HTTP with Pekko/Pekko-HTTP
+        - 2.9 and 3.0 offer same features and get parralel maintinence, 3.0 just switches to Pekko
 ### CATS
 - https://typelevel.org/cats/datatypes/ior.html
 - lots of useful FP types
@@ -687,7 +704,8 @@ async[IO] {
 - fibers are fundamental concurrent abstraction, `IO` runtime has 150bytes/fiber
 - supports async cancellations, fiber-aware work stealing, async tracing
 ### FS2 
-- [FS2](https://fs2.io/#/) - streaming library
+- [FS2](https://fs2.io/#/) - streaming library, similar to Akka Streams
+- doesn't conform to reactive streams philosophy, devs think it's complicated/unsafe/mutable
 - streaming and concurrency, build on cats-effects
 - basis for: http4s, skunk(postgres lib), doobie(JDBC replacement)
 - a decent baeldung intro: https://www.baeldung.com/scala/fs2-functional-streams
