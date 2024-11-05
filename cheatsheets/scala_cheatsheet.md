@@ -131,6 +131,10 @@
       def flatMap[A,B](instance: M[A])(func: A => M[B]): M[B]
     }
     ```
+- monad transformer
+    - generally refers to alterning a nested monad type
+    - two of the most popular transformers are cats' `EitherT` and `OptionT`
+        - e.g. `IO[Option[A]]` -> `OptionT[A]`
 ### ADT
 - sum types - usually implemented with inheritence and case classes
     - `Either[A,B]`(2.13) is sealed abstract class, 2 subtypes, both case classes `Left` and `Right`
@@ -724,6 +728,7 @@ async[IO] {
 ### SLICK
 - print sql statement: https://stackoverflow.com/questions/23434286/view-sql-query-in-slick
 ### OTHER
+- [sttp](https://github.com/softwaremill/sttp) - great HTTP client lib, really just an API layer for supporting many backends
 - [scalameta](https://scalameta.org/) - used by scala metals, scalafix metadoc
 - [http4s](https://http4s.org/) - minimal highly FP web framework
     - compiles to Scala.js and Scala Native, uses fs2

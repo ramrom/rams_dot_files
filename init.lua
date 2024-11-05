@@ -227,7 +227,7 @@ ToggleGitSignsHighlight = function()
 end
 
 GitAddCommitMarkdownStuff = function()
-    -- NOTE: oct'23 - uv.cwd lowercased a letter (`S` to `s`) in path, just comparing lower case path for both as workaround
+    -- NOTE: oct'24 - uv.cwd lowercased a letter (`S` to `s`) in path, just comparing lower case path for both as workaround
     local is_notes_dir = string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_NOTES_DIR)
     local is_work_dir = string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_WORK_DIR)
 
@@ -1714,10 +1714,15 @@ end
 -- TODO: how to load after noice is loaded so i get pretty nvim-notify msg, can i hack into `VeryLazy` event somehow?
 --       the 1sec timer works but is not as elegant as evented
 if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
-    print("Loading ~/.nvim_local.lua")
-    vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
+    -- vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
+    local loadLocal = function()
+        local msg = "Loading ~/.nvim_local.lua"
 
-    -- local timer = vim.uv.new_timer()
-    -- timer:start(1000, 0, function () timer:stop(); timer:close(); 
-    --     vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end) end)
+        local res, notif = pcall(require,'notify')      -- if notify isnt available use regular print
+        if res then notif(msg, "info", { timeout = 0 }) else print(msg) end  -- want notify msg with lowest timeout
+        vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
+    end
+
+    local timer = vim.uv.new_timer()
+    timer:start(1000, 0, function () timer:stop(); timer:close(); loadLocal() end)
 end

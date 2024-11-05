@@ -6,6 +6,13 @@
 - intro to decorators - https://realpython.com/primer-on-python-decorators/
 - leary in y minutes - https://learnxinyminutes.com/docs/python/
 
+## HISTORY
+- python 3 breaking changes
+    - print statement is a function, so parentheses are required
+    - integer division always includes decimals, 2 always returned an integer
+    - 2 uses ASCII strings, 3 uses unicode
+    - 3 wont let you mix binary and text data
+
 ## DATA STRUCTURES
 ```python
 arr = [1,2]   # array
