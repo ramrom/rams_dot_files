@@ -184,7 +184,9 @@ a = function() return 1 end  -- works fine, returns 1
 - metatables have special fields for various operators:
     - arithmetic: `+` -> `__add`, `-` -> `__sub`, `*` -> `__mul`, and also `__div`, `__unm`, `__pow`, `__concat`
     - comparison: `>` -> `__gt`, `<` -> `__lt`, `=` -> `__eq`
-    - other: `__tostring`, `__index`
+    - `__tostring`  -> func to define a string representation
+    - `__index`  -> if a table doesnt have an key, but metatable has a `__index` metamethod, this is queried for that key
+    - `__newindex` -> when assigning value to absent key, if metatable has this metamethod, it's called
 - types and metatables
     - numbers, booleans, and nil don't have a metatable `getmetatable(3)  -- returns nil`
         - _NOTE_ apparently ou still set a metatable for them tho
@@ -242,7 +244,7 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
         - say `a.foo = function(x,y) print(x); print(y) end` then `a:foo(3)` = `a.foo(a, 3)`
 - can use metatables to create a "class" that tables(aka "objects") are "instantiated" from
     - `setmetatable(a, {__index = b})` - here we kinda say `a` has all methods of `b`, `b` is kinda the "class"
-- can even simulate class inheritence, multiple inheritence, and private methods (see docs)
+- can simulate class inheritence, multiple inheritence, and private methods (see docs)
 
 ## CONCURRENCY
 - good doc of multitasking strategies in lua world - http://lua-users.org/wiki/MultiTasking

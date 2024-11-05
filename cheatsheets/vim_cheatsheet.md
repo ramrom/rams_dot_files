@@ -33,7 +33,7 @@
 - `vim.cmd` or `vim.api` can't really be done async
     - see https://www.reddit.com/r/neovim/comments/13kgl3f/how_can_i_run_a_vimcmd_asynchronously/
     - this is b/c these are wrappers around core vim code that inherently is synchronous on the main thread
-    - if you tried to run this in `vim.loop`, it won't work (or in `plenary.job` which wraps libuv)
+    - if you tried to run this in `vim.loop`(now `vim.uv`), it won't work (or in `plenary.job` which wraps libuv)
         - errors like `vimL function must not be called in a lua loop callback`
 - for keymaps, mode definitions https://neovim.io/doc/user/map.html#map-overview
     - `i` insert, `n` normal, `v` visual+select, `x` visual, `o` operator pending, `c` command-line, `t` terminal, `s` select

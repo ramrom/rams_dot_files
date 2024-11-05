@@ -836,6 +836,8 @@ e == e2        // return true, since they are constant and only one instance def
     boolean b = c.isInstance("hi")  // true
     boolean b = c.isInstance(3)     // false
 ```
+- `assert` - built in func that takes a boolean, throws `AssertionError` if `false`
+    - need to do `java –enableassertion Test` (or `java –ea Test`) to turn on this keyword
 
 ## REPL
 - `jshell` start REPL env in terminal

@@ -1456,12 +1456,12 @@ vim.keymap.set('n', '<leader>en',function() require('fzf-lua').grep({cwd=vim.env
 
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>:G<CR>', { desc = 'G - fugitive panel' })
-vim.keymap.set('n', '<leader>gm', function() require('fzf-lua').git_commits() end, { desc = "fzf git commits" })
+vim.keymap.set('n', '<leader>gl', function() require('fzf-lua').git_commits() end, { desc = "fzf git commits" })
 vim.keymap.set('n', '<leader>gg', GitAddCommitMarkdownStuff, { desc = "git add all + commit" })
 vim.keymap.set('n', '<leader>gb', function() require('fzf-lua').git_bcommits() end, { desc = "fzf buffer git commits" })
 vim.keymap.set('n', '<leader>gs', function() require('fzf-lua').git_status() end, { desc = "fzf git status" })
-vim.keymap.set('n', '<leader>gl', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
-vim.keymap.set('n', '<leader>gL', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
+vim.keymap.set('n', '<leader>gm', "<cmd>0Gclog<cr>", { desc = "fugitive buffer git log" })
+vim.keymap.set('n', '<leader>gM', "<cmd>Gclog<cr>", { desc = "fugitive repo git log" })
 vim.keymap.set('n', '<leader>ga', "<cmd>Git blame<cr>", { desc = "fugitive git blame" })
 vim.keymap.set('n', '<leader>gS', '<cmd>:Gitsigns toggle_signs<cr>')
 vim.keymap.set('n', '<leader>gh', ToggleGitSignsHighlight, { desc = "toggle git signs highlighting"} )
@@ -1709,4 +1709,15 @@ if not vim.env.VIM_NOPLUG then
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
     } })
+end
+
+-- TODO: how to load after noice is loaded so i get pretty nvim-notify msg, can i hack into `VeryLazy` event somehow?
+--       the 1sec timer works but is not as elegant as evented
+if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
+    print("Loading ~/.nvim_local.lua")
+    vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
+
+    -- local timer = vim.uv.new_timer()
+    -- timer:start(1000, 0, function () timer:stop(); timer:close(); 
+    --     vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end) end)
 end

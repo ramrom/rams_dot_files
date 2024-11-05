@@ -29,4 +29,5 @@
 - bun - runtime written in zig
 
 ## LIBS
+- [jquery](https://jquery.com/) - manipulate HTML DOM
 - [chartjs](https://github.com/chartjs/Chart.js) - popular charting lib
