@@ -163,6 +163,9 @@ alias gosr='cd ~/go/src'
 alias gosrghub='cd ~/go/src/github.com'
 alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 
+# JAVA
+alias jsv='jshell --feedback verbose'
+
 # SDKMAN
 alias java21='sdk use java 21.0.2-tem'
 alias java17zulu='sdk use java 17.0.9.fx-zulu'

@@ -264,15 +264,19 @@
 ### NVIM-TREE
 - written in lua
 - similar: plugin is NERDTree(vimscript), neo-tree(lua)
-- `g?` - to list commands
-- `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
-- `o` - open with window picker, if multiple windows open, select a labeled (e.g. "A" "B" "C" for 3windows) window
-- `O` - open no window picker, in the main window
-- `tab` - open("preview") - open in window but keep tree window as active window
-- `q` - close (help menu, or nvim tree sidebar)
-- `f`/`F` - filter / clear filer
-- `E` - expand all
-- `W` - collapse
+- core keybindings
+    - `ctrl-]` - make dir under cursor new root tree
+        - hitting `enter`/`ctrl-m` on current root tree at top will make root dir go up a dir
+    - `delete` key - close the dir, if cursor on closed dir close parent dir and select it
+    - `g?` - to list commands
+    - `ctrl-k` - show info on file(full path, size, access/mod/create datetime)
+    - `o` - open with window picker, if multiple windows open, select a labeled (e.g. "A" "B" "C" for 3windows) window
+    - `O` - open no window picker, in the main window
+    - `tab` - open("preview") - open in window but keep tree window as active window
+    - `q` - close (help menu, or nvim tree sidebar)
+    - `f`/`F` - filter / clear filer
+    - `E` - expand all
+    - `W` - collapse
 ### NOICE.NVIM
 - awesome new UI components for neovim https://github.com/folke/noice.nvim
 - uses nvim-notify for pretty floating notifications

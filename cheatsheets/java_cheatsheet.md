@@ -842,7 +842,14 @@ e == e2        // return true, since they are constant and only one instance def
 ## REPL
 - `jshell` start REPL env in terminal
     - *NOTE* make sure to switch to appropriate java (e.g. 11 or 17) in shell before launching
+    - `jshell --feedback verbose` - start jshell with feeback setting to `verbose`
     - hit `<tab>` key for signature help after first `(` e.g. `var.somemethod(<tab>`
+    - `/set feedback verbose` - verbose shows a variables type
+    - `/import` - show all imports currently
+    - `/methods` - show defined methods
+    - `/var` - show defined variables
+    - `/save foo.java` - save expression history to file
+    - `/open foo.java` - load expression history
 
 ## IO
 ```java
@@ -956,6 +963,8 @@ finally { .. }  // finally is always exected
 import java.util.stream.Stream
 Stream.of(1,2,3).map(i -> i + 1).collect(Collectors.toList()); // returns List(2,3,4)
 Stream.of(1,2,3).forEach(System.out::println);          // will print 1 2 3 on seperate lines
+Arrays.stream(new int{1,2,3})       // create a stream from array, this returns IntStream
+Arrays.stream(new String[]{"hello", "world"})       // also stream
 
 Stream.of("a","b").forEach(i -> System.out.println(i));
 
@@ -1005,7 +1014,8 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - FOSS application framework, originated in 2003, supports many programming models
     - spring 5, ~2018 releaese, uses reactive streams
 - uses IoC(inversion of control) - IoC container is main component of framework, main methods: dependency injection, dependecy lookup
-- Sprint Boot - convention-over-config set of tools/applications
+- Sprint Boot - convention-over-config set of tools for building applications/services
+- Sprint Cloud - tool for configuring communication b/w services, service discovery, configuration
 - other major Spring modules/libs: MVC framework, data access framework, integration framework, websockets, webflux
 ### JUNIT
 - version 4 (release 2006)
@@ -1031,3 +1041,6 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - testing library that lets you spawn live http server with test responses on endpoints
 ### REST ASSURED
 - testing library that focuses around creating and validating HTTP requests
+### TESTCONTAINERS
+- a libarary for spinning up docker containers for test frameworks
+- ryuk container - https://github.com/testcontainers/moby-ryuk

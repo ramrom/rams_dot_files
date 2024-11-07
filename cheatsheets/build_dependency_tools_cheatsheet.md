@@ -36,6 +36,11 @@
     - baeldung - https://www.baeldung.com/maven-java-version
         - in `configuration` tag we can set a target and source java version
         - spring boot lets u set a `property` `<java.version>17</java.version>` in `pom.xml`
+- artifacts
+    - looks in local cache at `/.m2/repository/` for artifacts before trying to fetch
+    - if not in cache, looks in repo list, which can be anywhere including local or remote networks
+        - `~/.m2/settings.xml` might specify a repository
+    - a `mirror` is a repository that syncs with another repo, usually more remote repo
 ### COMMANDS
 - `mvn --version` -> show maven version, show home bin, show current java version
 - `mvn package` -> build the `package` phase, generally a later phase

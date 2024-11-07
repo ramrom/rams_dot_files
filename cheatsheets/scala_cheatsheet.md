@@ -89,6 +89,9 @@
     - be able to define a trait contract for some types without modifying those types directly
     - essentially ad-hoc polymorphism, inspired from haskell type classes, and very similar to golang interfaces
     - generally implemented with generic traits and implicits
+    - nice 30min vid - https://www.youtube.com/watch?v=VDSWjHgM5HA&list=WL
+        - scala typelcasses are concise. are compile-time (F#/java/kotlin all runtime reflection)
+        - major examples: `scala.CanEqual[A,B]`, `scala.math.Ordering[A]`, `cats.Show[A]`, `io.circe.Codec[A]`
 - integer types - `Short` (16bit), `Int` (32bit?), `Long` (64bit?)
     - `Long` instantiation - `1000000000000000000L` or `100000: Long`
 - `Any` - root type in scala class heirarchy - https://www.scala-lang.org/api/current/scala/Any.html
@@ -197,6 +200,14 @@
         - e.g. `val mylist = List("a","b"); foo(mylist:_*)`
     - this is similar to varargs feature in Java
 - CALL-BY-NAME parameters are evaluated only when val is used in func body, e.g. func sig: `foo(i: => Boolean)`
+### IMPLICITS
+- implicit args must be in seperate curry and at end
+```scala
+case class Foo()
+implicit val f: Foo = Foo()
+def func(msg: String)(implicit f: Foo) = msg + f.toString
+func("hi")      // return `hiFoo()`
+```
 ### ANONYMOUS FUNCTIONS
 ```scala
 // `a` here is actually a object with an `apply` function defined
@@ -287,6 +298,12 @@ a.isInstanceOf[Int]     // returns false
     - `fold` does NOT gaurantee order, could be a tree operation, can decompose into sublists, created to support parralelism
     - `foldLeft` iterates from leftmost element to right, `foldRight` iterates from rightmost element to left
         - cumulative sum e.g.: `List(1,2,3,4).foldLeft(List[Int](0))( (cum, i) => cum :+ (i + cum.last)).drop(1)` -> `List(1,3,6,10)`
+- String conversion
+    ```scala
+    List(1,2).toString                 //  returns "Seq(1, 2)"
+    List(1,2).mkString("/")            // returns "1/2"
+    List(1,2).mkString("[", ",", "]")  // returns "[1,2]"
+    ```
 - remove a item
     - `List(11, 12, 13, 14, 15).patch(2, Nil, 1)`
         - from index 2, remove 1 element with Nil (only Nil works)
