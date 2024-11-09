@@ -473,6 +473,8 @@ synchronized (lock) {
 "hi there".contains("hi") // returns true
 "hi there".isBlank() // returns false
 
+"a".compareTo("b")  // return -1,   compareTo lexographically compares two strings
+
 // REGEX
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
