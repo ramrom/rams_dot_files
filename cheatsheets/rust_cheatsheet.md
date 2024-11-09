@@ -852,9 +852,9 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
-- [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/tokio
-- [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await
-- [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower, uses async/await
+- [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/await w/tokio
+- [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await w/tokio
+- [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower/tokio, uses async/await
 - [serde](https://serde.rs/) - awesome defacto serial/deserialization framework
     - `Serializer`/`Deserializer` traits define how parse data into/out-of the serde data model
         - deserialization uses the visitor pattern, centered around the `Visitor` trait

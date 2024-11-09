@@ -91,6 +91,8 @@
     - `CLICOLOR_FORCE=1 ls -l | less`
 - `lp` - print from command line
 - `launchctl` - the cli tool that talks to `launchd`, which control apples background daemons(aka services)
+    - see list of daemons - `launchctl list`
+    - e.g. start/stop dockerdameon `sudo launchctl stop com.docker.docker`
 
 ## LAUNCHD
 - `launchd` is a management system which control apples background daemons(aka services)

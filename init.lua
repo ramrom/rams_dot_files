@@ -283,8 +283,8 @@ ToggleNvimTreeDynamicWidth = function()
         require("nvim-tree.api").tree.resize({ width = { min = 30, max = 30, padding = 1 }})
         print("DISABLE nvim-tree dynamic width (setting min=30 max=30)")
     else
-        require("nvim-tree.api").tree.resize({ width = { min = 10, max = 50, padding = 1 }})
-        print("ENABLE nvim-tree dynamic width (setting min=10 max=50)")
+        require("nvim-tree.api").tree.resize({ width = { min = 10, max = -1, padding = 1 }})
+        print("ENABLE nvim-tree dynamic width (setting min=10 max=-1(unbounded))")
     end
 
     NvimTreeDynamicWidthEnabled = not NvimTreeDynamicWidthEnabled
@@ -543,6 +543,7 @@ LoadTelescope = function()
     -- README: https://github.com/nvim-telescope/telescope-fzf-native.nvim
     -- oct'24 - failing b/c fzf-native's `make` command failed, i had to remove/readd pluging from lazy spec for `make` to trigger
     require('telescope').load_extension('fzf')
+    require("telescope").load_extension("ui-select")
 end
 
 ----------------------------- FZF LUA --------------------------------------------------
@@ -1651,6 +1652,7 @@ if not vim.env.VIM_NOPLUG then
         { 'nvim-telescope/telescope.nvim', config = LoadTelescope, event = 'VeryLazy', tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' }, event = "VeryLazy" }, 
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', event = "VeryLazy" },
+        { 'nvim-telescope/telescope-ui-select.nvim' },
         { "xiyaowong/telescope-emoji.nvim", config = LoadTelescopeEmoji, cmd = { "Telescope emoji" },
             dependencies = { 'nvim-telescope/telescope.nvim' } },
 
@@ -1694,8 +1696,8 @@ if not vim.env.VIM_NOPLUG then
         -- OTHER
         { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
-        { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
-        -- { "folke/noice.nvim", event = "VeryLazy", opts = { },
+        -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
+        { "folke/noice.nvim", event = "VeryLazy", opts = { },
             dependencies = {
                 "MunifTanjim/nui.nvim", -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
                 "rcarriga/nvim-notify", -- optional notification view, noice will default to mini(lower right corner messages) otherwise

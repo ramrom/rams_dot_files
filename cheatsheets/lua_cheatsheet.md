@@ -102,7 +102,9 @@ foo(1,2,3)      -- exta args are silently discarded, this prints 1, then 2
 -- variadic args , `...` means variable number of args
 -- all arguments are collected into a table, accessible as hidden param named `arg`
 function foo(...) 
-    print(...) 
+  for i,v in ipairs(arg) do
+    print(tostring(v))
+  end
 end
 foo("hi", "there") -- will splat to `print("hi","there")` in function foo
 
@@ -175,12 +177,13 @@ a = function() return 1 end  -- works fine, returns 1
     a[t2] = "another empty table is the key!"
     ```
 ### METATABLE
-- a metatable is a way for tables to "inherit" methods/behaviour and data, see https://www.lua.org/pil/13.html
+- see https://www.lua.org/pil/13.html
 - `setmetatable` is a function build into the language, lets you override behaviour of other tables
     - can call it to tie to a table, and table contains member data, and can take a methods as references with `self`
     - `t = {}; mt = {}; setmetatable(t, mt);` - `mt` is metatable of `t`
         - `setmetatable` returns the table whom we set a metable on, `t` in the above case
 - `getmetatable` will print the metatable of a table
+- `rawget` - explicitly dont use metatable, `rawget(table, "amethod")`
 - metatables have special fields for various operators:
     - arithmetic: `+` -> `__add`, `-` -> `__sub`, `*` -> `__mul`, and also `__div`, `__unm`, `__pow`, `__concat`
     - comparison: `>` -> `__gt`, `<` -> `__lt`, `=` -> `__eq`
@@ -191,6 +194,11 @@ a = function() return 1 end  -- works fine, returns 1
     - numbers, booleans, and nil don't have a metatable `getmetatable(3)  -- returns nil`
         - _NOTE_ apparently ou still set a metatable for them tho
     - every string shares the same metatable
+- a metatable is a way for tables to "inherit" methods/behaviour and data - see https://www.lua.org/pil/16.2.html
+    - say `a` has metatable of `b`, `__index` of `b` is `b`
+    - say `b` has metatable of `c`, `__index` of `b` is `c`
+    - say `c` has method `foo`
+    - if we call `a.foo()`, `a` doesnt have it, looks up `b`, `b` doesnt have it, looks at `c` and finds it and calls it
 
 ## STRINGS
 - patterns and character classes for finding substring - https://www.lua.org/pil/20.2.html
@@ -220,9 +228,10 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
     - `local ok, res = pcall(vim.cmd, 'boguscmd')` 
         - `ok` is bool, `true` for no error, `false` if error was raised
         - `res` is result - error string if exception, result if no exception
+    - `fn = function(a,b) print(a + b) end; pcall(fn, 1,2,3)` - 3rd arg `3` will be thrown away
 - `[[ some multi line text ]]` - use double brackets for multi-line string literals
 - `assert(asserted_value, error_msg)` - if `asserted_value` in `nil` or `false` error is raised with optional `error_msg`
-- `error(msg)` - raise an error with message `msg`
+- `error(msg)` - raise an error with string message `msg`
 - introspect type - `a=1; print(type(a))` -> prints string `number`
     - `"str"` -> `"string"`, `nil`->`"nil"`, `false`->`"false"`, `{}` -> `"table"`, `function() end` -> `"function"`
 - pretty print a table
@@ -244,7 +253,7 @@ s.find(s, "e%.")  -- `%` is escape, here we look for literal substring `e.`
         - say `a.foo = function(x,y) print(x); print(y) end` then `a:foo(3)` = `a.foo(a, 3)`
 - can use metatables to create a "class" that tables(aka "objects") are "instantiated" from
     - `setmetatable(a, {__index = b})` - here we kinda say `a` has all methods of `b`, `b` is kinda the "class"
-- can simulate class inheritence, multiple inheritence, and private methods (see docs)
+- with metatables we can simulate class inheritence, multiple inheritence, and private methods (see docs)
 
 ## CONCURRENCY
 - good doc of multitasking strategies in lua world - http://lua-users.org/wiki/MultiTasking

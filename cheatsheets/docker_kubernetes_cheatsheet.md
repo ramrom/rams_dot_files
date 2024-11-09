@@ -29,8 +29,11 @@
 - `docker exec -it foocontainername /bin/bash` - start a bash shell in container
 - `docker volume -qf dangling=true` - find dangling volumes
     - `docker volume rm $(docker volume ls -qf dangling=true)` - remove them
-- `docker login foo.com` - login to a docker registry
-    - `~/.docker/config.json` will show list of sessions for registries
+- REGISTRIES
+    - `docker login foo.com` - login to a docker registry
+        - `~/.docker/config.json` will show list of sessions for registries
+    - add mirrors - see https://docs.docker.com/docker-hub/mirror/
+        - can start dockerd with `--registry` or manually add to `~/.docker/daemon.json`
 - `priveleged_mode: true` - exposes a _lot_
     - can see every `/dev/` in the host, `fdisk -l` shows all host devices
     - good read https://learn.snyk.io/lessons/container-runs-in-privileged-mode/kubernetes/
