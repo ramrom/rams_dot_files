@@ -62,7 +62,7 @@
 - foreign table - a logical table that queries data from an external source
     - foreign data wrapper(FDW) will fetch external data
 - views - a virtual table, which is a stored query which can itelf be queries against
-    - materialized view - a view that contains the results of a query
+    - materialized view - a view that stores the results of a query
         - it's a type of caching of a query
         - can combine a matrialized view and foreign table
 - MVCC - multi-version concurrency control

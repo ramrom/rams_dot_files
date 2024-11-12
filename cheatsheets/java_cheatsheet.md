@@ -529,21 +529,22 @@ System.out.println(Arrays.toString(foos))   // will print [ { i: 1 }, { i: 2 } ]
     - there are no unsigned primitve types
     - `char` is 16bit unsigned
 - primitive types cannot be null! (but boxed types like Integer can be null)
+- primives of arrays(e.g. `int[2]`) or say `ArrayList<int>` will use contiguous memory allocations
+    - `ArrayList<Integer>` is actually an array of pointers, b/c `Integer` is an `Object` type
 ### CHARACTER
 - `Character` is wrapper for `char`
 - `Character.isDigit('3')`   - returns true
-- 
-    ```java
-    char c = 'a'    // literal chars use single quotes
-    Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
-    Character.isDigit('a')  //false
-    Character.isDigit('1')  //true
-    Character.isAlphabetical('a')  //true
-    Character.isSpace(' ')  //true
-    Character.isWhitespace('\t')  //true
-    'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
-    '1' == 49       // return true, 49 is ASCII val for char `1`
-    ```
+```java
+char c = 'a'    // literal chars use single quotes
+Character c = 'a'    // char is primitve type(unicode), Character type wraps char type, making it object-like
+Character.isDigit('a')  //false
+Character.isDigit('1')  //true
+Character.isAlphabetical('a')  //true
+Character.isSpace(' ')  //true
+Character.isWhitespace('\t')  //true
+'c' - 'a'       // returns 2, minus/plus operators do addition/subtraction of their ascii codes
+'1' == 49       // return true, 49 is ASCII val for char `1`
+```
 ### NUMBERS
 - a literal `3` is inferred as `int`, a literal `1.0` is inferred as `double`
     - use `1L`(long), `1.0F`(float)
@@ -681,6 +682,9 @@ record Ok<T>(T value) implements Result<T> { }
 - `final` keyword means it can't be changed (synonymous to `val` in scala)
     - a `final` member cannot be overridden by child class
 - `static` keyword - belongs to type itself, and not instance of the type, all instances share the static member (aka class global)
+- `static` codeblock `static { ... }` - code called only once when class is loaded in JVM
+    - often used to initialize static vars, esp when logic is complex, i.e. more than simple assignement
+    - also for loading one time data (load config from file, create db connection)
 - scope/visibility: member of can be: default, public, private, protected
     - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
     - a public class must live in a file of the same name, e.g. `public class Foo{}` must be defined in `Foo.java`
@@ -773,6 +777,8 @@ public class Box<T> {       // example generic class
     - in java8, CAN change method from abstract to default type with `default` keyword
 - a class can implement many interfaces, multiple inheritence
 - can not have non-final and non-static variables
+- marker interface - aka tagging interface, a interface with no methods or constants
+    - used to indicate a property of a class, e.g. `Serializable`, `Cloneable`, `RandomAccess`
 ### ABSTRACT CLASS
 - cannot be instantiated
 - can implement methods

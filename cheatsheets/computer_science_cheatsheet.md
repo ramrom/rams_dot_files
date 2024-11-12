@@ -308,7 +308,7 @@ public static void main(String[] args) {
 
 
 ## CACHE
-- EVICTION POLICY
+- EVICTION POLICY - what to do when cache is full
     - TTL - time-to-live, evict when it expires
     - FIFO - evict based on order of insertion
     - LRU cache is prolly most common, use a hash table whose values are nodes in a doubly linked list
@@ -334,7 +334,7 @@ public static void main(String[] args) {
 - MESI protocol talks about low-level coordination, deals with cache coherency, supports write-back caches
     - MESI is acronym for 4 states: **M**odify **E**xclusive **S**hared **I**nvalid
         - Modify - data in cache line is modified and guaranteed to only be in this cache, main memory not updated
-        - Exclusive - data is cache line is unmodified, and only in this cache
+        - Exclusive - data in cache line is unmodified, and only in this cache
         - Shared - data in cache unmodified, but copies in other caches
         - Invalid - cache line has invalid data
     - each cache line has its own state machine, no global statemachine, cores coordiate via async message passing
@@ -471,9 +471,10 @@ public static void main(String[] args) {
         - `Car` **internally** instantiates an `Engine` type, and is composed of it
             - in non-composition, functionality of `Engine` might be part of `Car` code or `Car` superclass code
             - it's not DI b/c we can't choose what `Engine` type to inject or access it's API
-- decorator pattern - add functionality without modifying underlying type
+- decorator pattern - add functionality without modifying underlying type without changing type
     - really for classes, so don't create child class, but add a wrapper class for the target class
 - adapter pattern - creating bridge code to combine two incompatible interfaces
+    - e.g create class that implements old interface but it's implementation of old interface calls new interface under the hood
 - RAII - resource acquisition is initialization - resources are tied to their objects and their lifetimes, released with the object death
 - singleton - single global instance of class, class can have only one instance and has global scope
 - observer pattern - registering many observers for state changes, state change notifies observers and their update logic is run
@@ -492,10 +493,17 @@ public static void main(String[] args) {
 
 ## AI
 - https://medium.com/@machadogj/ml-basics-supervised-unsupervised-and-reinforcement-learning-b18108487c5a
+- machine learning = using data directly to determine how a model behaves
+    - as opposed to explicitly design procedure (e.g. write code) to define how a model behaves, early days of AI did this
+    - regression is sorta machine learning, data used to create a function that fits the data(e.g. linear) and use function for predictions
+    - models are just a bunch of tunable parmeters, in case of linear regression just 2 params (slope and y-intercept)
+- deep learning - machine learning using many layers of neural networks to train a model
+    - each layer of "nuerons" essentially doin matrix multiplication on output vector/matrix from previous layer
 ### LLM
+- nov'24 - good vid on LLM transformers - https://www.youtube.com/watch?v=wjZofJX0v4M&list=WL&ab_channel=3Blue1Brown
 - good LLM read: https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/
 - most, including chatGPT are autoregressive, try to predict next word based on what previous words are
-    - GPT3 has like ~50k words in dictionary, has vector of probability for each word based on previous words
+    - GPT3 has like ~50k words in dictionary, output is vector of probability for each word based on previous words
 - great video by kaparthy(former tesla AI chief) - https://www.youtube.com/watch?v=zjkBMFhNj_g&t=453s&ab_channel=AndrejKarpathy
      - we know the architecture and exact equations/params and know outtput is predicting better as we train
         - but we dont know how the params "interact" or change in order to do this
@@ -515,6 +523,7 @@ public static void main(String[] args) {
 - modern (2024) - training rounds are 10x bigger than llama-2-70b, so training rounds cost 10-100mil dollars
 - openAI chatgpt model architecture is closed source
 - Tokens - a measure of the amount of data that can be remembered in a conversation, so limited context
+- GPT3 - has 175B params/weights, organized into 28k matrices, ~50k words, ~12k embedding "dimenions", 2048 word context size
 ### REINFORCEMENT
 - give AI model a goal(a reward criteria), and throught constant iterations of trial and error get better at reaching the goal
 - AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training

@@ -8,6 +8,9 @@
 - coffeescript
 - typescript
 
+## TYPE SYSTEM
+- javascript arrays are hashmaps under the hood, so an index is really a key into the hashmap
+
 ## INTROSPECTION
 - `typeof` - return a string describing the type
     - `typeof(3)` -> returns `'number'`, `typeof("foo")` -> `'string'`, `typeof(nil)` -> `'undefined'`
