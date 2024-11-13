@@ -492,6 +492,8 @@ pulsemixer - volume manager with pulseaudio
 - a linux security module used by ubuntu, a MAC(mandatory access control)
 - https://ubuntu.com/server/docs/apparmor
     - *NOTE* nov2024 - says you can disable/stop the systemd service but `aa-status` will still show loaded with active profiles
+- profiles defined in `/etc/apparmor.d`
+    - ubuntu24 - `docker-default` profile not in `/etc/apparmor.d`, in `tmpfs` - https://docs.docker.com/engine/security/apparmor/
 - `sudo aa-status` - check which profiles are loaded
 - `sudo aa-teardown` - unload all profiles
 - `sudo aa-complain some-profile` - set profile to complain mode (need `apparmor-utils` package)

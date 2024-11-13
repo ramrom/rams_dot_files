@@ -106,6 +106,7 @@
 - speedtest by defaults polls every hour, can configure this in ingrations section
 - spotify
     - creds in `.storage/application_credentials`
+    - can see in UI: https://myhass.com:8123/config/application_credentials
 - command line integrations
     - [shell command](https://www.home-assistant.io/integrations/shell_command/)
         - just run a plain shell command

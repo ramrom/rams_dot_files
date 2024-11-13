@@ -194,7 +194,7 @@ cat somefile | tr -cd ',' | wc -c   # count the number of commas in a file
 # TAR
 tar –xvzf documents.tar.gz   # uncompress tar file
     # -x extract, -v verbose, -z decompress each file, -f filename of tar file
-tar –tvzf documents.tar.gz   # uncompress tar file
+tar –tvzf documents.tar.gz   # list tar file contents
     # -t to list contents
 
 # ZIP

@@ -499,6 +499,9 @@ public static void main(String[] args) {
     - models are just a bunch of tunable parmeters, in case of linear regression just 2 params (slope and y-intercept)
 - deep learning - machine learning using many layers of neural networks to train a model
     - each layer of "nuerons" essentially doin matrix multiplication on output vector/matrix from previous layer
+### NEURAL NETWORKS
+- a "neuron" holds a number, and is "activated" by neurons in other layers
+- each nueron is connected to neurons in previous layer and to neurons in next layer, each connection has a weight
 ### LLM
 - nov'24 - good vid on LLM transformers - https://www.youtube.com/watch?v=wjZofJX0v4M&list=WL&ab_channel=3Blue1Brown
 - good LLM read: https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/
