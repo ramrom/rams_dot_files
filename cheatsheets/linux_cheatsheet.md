@@ -488,6 +488,23 @@ pulsemixer - volume manager with pulseaudio
     - drivers compiled against kernel: composed of a kernel module and X11 driver
 - ubuntu(like around 2022) - uses nouveau open source drivers as default if nvidia GPU exists
 
+## APPARMOR 
+- a linux security module used by ubuntu, a MAC(mandatory access control)
+- https://ubuntu.com/server/docs/apparmor
+    - *NOTE* nov2024 - says you can disable/stop the systemd service but `aa-status` will still show loaded with active profiles
+- `sudo aa-status` - check which profiles are loaded
+- `sudo aa-teardown` - unload all profiles
+- `sudo aa-complain some-profile` - set profile to complain mode (need `apparmor-utils` package)
+- `apparmor_parser` - bin that does a lot, manipulate profiles, load/reload profiles
+    - `apparmor_parser -r /etc/apparmor.d/some-profile`
+- generating a profile
+    - `sudo aa-genprof /path/to/your/profile`
+        - then edit the file and specify profile
+    - `sudo apparmor_parser -r /path/to/your/profile`
+- modes:
+    - `complain` - allows logs/policy violations, doesn't block them, good for testing
+    - `enforce` - default mode, enforces policy and logs
+    - `unconfined` - does not load docker-default profile for container, does not show the PID running in enforced mode
 
 ## FILE SYSTEMS
 - file ownership
@@ -598,16 +615,6 @@ pulsemixer - volume manager with pulseaudio
     - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
         - https://ubuntuforums.org/showthread.php?t=1810812
 - `ss`  - good way to see socket usage
-- AppArmor - a linux security module used by ubuntu, a MAC(mandatory access control)
-    - https://ubuntu.com/server/docs/apparmor
-        - *NOTE* nov2024 - says you can disable/stop the systemd service but `aa-status` will still show loaded with active profiles
-    - `sudo aa-status` - check which profiles are loaded
-    - `sudo aa-teardown` - unload all profiles
-    - `sudo aa-complain some-profile` - set profile to complain mode (need `apparmor-utils` package)
-    - modes:
-        - `complain` - allows logs/policy violations, doesn't block them, good for testing
-        - `enforce` - default mode, enforces policy and logs
-        - `unconfined` - does not load docker-default profile for container, does not show the PID running in enforced mode
 - `jstest-gtk` - decent util to test and configure gamepad/game-controllers
 - `fc-cache` - font cache tool
     - `fc-cache -f` - force regenerate font cache searching through all lookup dirs
