@@ -172,6 +172,10 @@ public static void main(String[] args) {
     - https://en.wikipedia.org/wiki/Read%E2%80%93modify%E2%80%93write
 - spin locks implementation is where thread will loop constantly to check if lock is unlocked, a type of busy waiting
 - many mutex implementations will put a thread waiting for a lock to sleep
+- read-share write-exclusive lock (often called RWLock) - multiple readers at one time or only one writer
+    - "fair" RWLock, aka write-preferred lock, give preference to writer if a writer is waiting
+        - one implementation is if writer is waiting, new readers are not allowed to aquire the lock and those readers wait
+    - "unfair" RWLock, aka read-preferred lock, a waiting writer gets starved if tons of readers constantly aquiring the lock
 #### FUTEX 
 - Fast Userspace Mutex - kernel sys call used to create a lock - https://man7.org/linux/man-pages/man2/futex.2.html
 - a kernel space wait queue attached to atomic integer in userspace

@@ -765,6 +765,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
 - 2022 - PR on making locks/condvars better: https://github.com/rust-lang/rust/issues/93740
     - discussion to use parking_lot, use futex on linux/BSD
 - std lib `RWLock` - allows one writer OR multiple readers (not both)
+    - Tokio and parking_lot libs have RWLocks that are write-preferring
 - std lib `Mutex` - allows one writer OR one reader
 - `Condvar` - conditional variable, used to block a thread until a event happens
     - takes a mutex guard

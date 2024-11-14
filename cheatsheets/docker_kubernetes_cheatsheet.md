@@ -110,7 +110,7 @@
         - job tracks successful completions, when a specified number is reached, job finishes
     - cronjobs - recurring jobs on schedule
 - AWS eks permissions: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
-- liveliness vs rediness
+- liveliness vs readiness
     - liveliness - verify pod is running, app/process didnt deadlock or crash or run out of memory, so cant respond to requests
         - k8 will generally restart pod
     - readiness - pod could be live but not ready to receive traffic yet, e.g. waiting for other pods/services, or populating dataset
@@ -140,12 +140,15 @@
         - containers in a pod can talk to each other using `localhost`
         - containers in same pod can use IPC like shared memory
 - SERVICE - identifies a set of pods as a logical "service"
+    - docs: https://kubernetes.io/docs/concepts/services-networking/service/
     - groups of pods are identified using labels or selectors (e.g. service `fooservice` adds all pods with label `foo`)
     - have VIPs only routable within cluster network
     - VIP and DNS is stable, pods don't have stable IPs
 - INGRESS - rules to describe routing for traffic from outside cluster into services
     - ingress controllers can also load balance and do TLS/SSL termination
     - needs an ingress controller, can use AWS, GCE, or nginx
+- GATEWAY - https://gateway-api.sigs.k8s.io/
+    - API to kinda replace/complement ingress/service-mesh/LB
 - KUBELET - a agent that lives in each node, manages that node and communicates with control plane
 - CONTROL PLANE - orchestrates and manages the entire cluster, talks to the kubelets
     - API server - communication hub, all clients talk to it, including CLI tools, GUI admin tools, and pods and kubelets in cluster

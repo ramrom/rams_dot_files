@@ -490,23 +490,27 @@ pulsemixer - volume manager with pulseaudio
 
 ## APPARMOR 
 - a linux security module used by ubuntu, a MAC(mandatory access control)
-- https://ubuntu.com/server/docs/apparmor
+- apparmor on ubuntu - https://ubuntu.com/server/docs/apparmor
     - *NOTE* nov2024 - says you can disable/stop the systemd service but `aa-status` will still show loaded with active profiles
+- debugging: use `dmseg` to see `DENIED` actions from apparmor
 - profiles defined in `/etc/apparmor.d`
     - ubuntu24 - `docker-default` profile not in `/etc/apparmor.d`, in `tmpfs` - https://docs.docker.com/engine/security/apparmor/
 - `sudo aa-status` - check which profiles are loaded
 - `sudo aa-teardown` - unload all profiles
-- `sudo aa-complain some-profile` - set profile to complain mode (need `apparmor-utils` package)
+    - for ubuntu/systemd - `sudo systemctl reload apparmor.service`, this unit file basically reload all profiles using `apparmor_parse`
 - `apparmor_parser` - bin that does a lot, manipulate profiles, load/reload profiles
-    - `apparmor_parser -r /etc/apparmor.d/some-profile`
-- generating a profile
+    - reload - `apparmor_parser -r /etc/apparmor.d/some-profile`
+- generating profile
     - `sudo aa-genprof /path/to/your/profile`
         - then edit the file and specify profile
     - `sudo apparmor_parser -r /path/to/your/profile`
-- modes:
+- modes
     - `complain` - allows logs/policy violations, doesn't block them, good for testing
     - `enforce` - default mode, enforces policy and logs
     - `unconfined` - does not load docker-default profile for container, does not show the PID running in enforced mode
+- changing modes
+    - `sudo aa-complain some-profile` - set profile to complain mode (need `apparmor-utils` package)
+    - `sudo aa-enforce some-profile` - set profile to enforce mode (need `apparmor-utils` package)
 
 ## FILE SYSTEMS
 - file ownership
