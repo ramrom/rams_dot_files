@@ -133,59 +133,40 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
 - `systemd-analyze critical-chain` - print blocking tree of daemons
 - `ls -al /lib/systemd/system/runlevel*` - the defined runlevel targets
 ### SYSTEMCTL
-- systemctl start/stop/restart/reload foo
+- `systemctl start/stop/restart/reload foo.service`
     - reload doesnt stop and start the service, often is a HUP signal
-- systemctl status
-    - show full status of systemd with helpful tree structure
-- systemctl status foo
-    - show status of a unit named foo
-- systemctl status foo*
-    - status of all units that starts with foo
-- systemctl cat foo
-    - get contents of unit file defintion of foo
-- systemctl list-dependencies foo
-    - print a nice tree of unit dependencies for foo
-- systemctl show foo
-    - low level details of units settings
-- systemctl get-default
-    - print the default target for the system
+- `systemctl status` - show full status of systemd with helpful tree structure
+    - `systemctl status foo.service` - show status of a unit named foo
+    - `systemctl status foo*` - status of all units that starts with foo
+- `systemctl cat foo.service` - get contents of unit file defintion of foo
+- `systemctl list-dependencies foo.service` - print a nice tree of unit dependencies for foo
+- `systemctl show foo.service` - low level details of units settings
+- `systemctl get-default` - print the default target for the system
 ### JOURNALCTL
+- cli util to query logs by systemd's logging service, `journald`
 - journalctl was also by debian/ubuntu tool to access logs, in /var/log
-- it is the cli util to query logs by systemd's logging service, journald
+- journalctl config file: `/etc/systemd/journald.conf`, can restrict max size
 - systemd logs are stored in binary format, use journalctl to access them
-journalctl -u foo
-    - show full log of service foo,  "-u is unit"
-journalctl -x -u foo
-    - -x(--catalog) mean show any additional explanation
-journalctl -u foo.service
-    - same as above, if unit is not service type need to type fully, e.g. foo.socket
-journalctl -u foo -b
-    - show logs since last boot
-journalctl -b -1 -e
-    - show logs of boot before current (e.g. -2 would from 2 boots ago)
+- `journalctl -u foo.service` - show full log of service foo,  `-u` is unit
+- `journalctl -x -u foo.service` - `-x`(--catalog) mean show any additional explanation
+- `journalctl -u foo.service` - same as above, if unit is not service type need to type fully, e.g. foo.socket
+- `journalctl -u foo.service -b` - show logs since last boot
+- `journalctl -b -1 -e` - show logs of boot before current (e.g. -2 would from 2 boots ago)
     - -e means jump to end of pager
-journalctl --list-boots
-    - show list of times system was booted up
-journalctl -f -u foounit
-    - -f is follow or tail the unit's log
-journalctl -f
-    - tail ALL units
-journalctl -n 100 -u foo
-    - see just last 100 last lines for foo unit
-journalctl --disk-usage
-    - show disk usage of journal
-journalctl --vacuum-size=200M
-    - delete journal entries
-journalctl --verify
-    - verify integrity of logs
-journalctl config file: /etc/systemd/journald.conf, can restrict max size
+- `journalctl --list-boots` - show list of times system was booted up
+- `journalctl -f -u foounit` - `-f` is follow or tail the unit's log
+- `journalctl -f` - tail ALL units
+- `journalctl -n 100 -u foo.service` - see just last 100 last lines for foo unit
+- `journalctl --disk-usage` - show disk usage of journal
+- `journalctl --vacuum-size=200M` - delete journal entries
+- `journalctl --verify` - verify integrity of logs
 ### NETWORKCTL
 - cli to talk to `systemd-networkd`, a network manager
 - `networkctl list` - or no args will list all network interfaces and brief status
 - `networkctl status` - more detailed info on each interface
 ### LOGINCTL
 - systemd bin interface for login sessions
-loginctl
+- loginctl
     - with no args is same as `loginctl list-sessions`
 
 ## LOGS
