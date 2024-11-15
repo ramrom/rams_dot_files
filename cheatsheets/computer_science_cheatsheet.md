@@ -136,13 +136,13 @@ public static void main(String[] args) {
     - N:1 - many userland threads map to one native thread, and cant be moved to another native thread
     - M:N - many userland threads can be mapped to many native threads, userland scheduler is complex
 ### NON-NATIVE/NON-KERNEL THREAD
-- green thread - a "thread" managed by the userland process runtime, will run until preempted by the runtime scheduler
+- GREEN THREAD - a "thread" managed by the userland process runtime, will run until preempted by the runtime scheduler
     - some definitions say managed by a "virtual machine", which is prolly much heavier than a runtime
     - really conflated or coined from java's green threads
-- fibers - (term inspired from physical fibers that make up a physical thread)
+- FIBERS - (term inspired from physical fibers that make up a physical thread)
     - cooperative multitasking, each fiber yields volutarily, then a scheduler then schedules next fiber to run
     - Fibers can implement coroutines by allowing each fiber to communicate to the scheduler which fiber should be run when it yields
-- coroutine
+- COROUTINE
     - cooperative multitasking, where pause/yields are specified by the programmer, no scheduler
     - used since 1958, defined by Knuth
         - generalization of subroutine, subroutine has beg and end, coroutines can be suspended in the middle and resume
@@ -154,7 +154,7 @@ public static void main(String[] args) {
     - stackful vs stackless
         - stackful - uses an interface adapter on top of a threads stack, sometimes fibers are called this
         - stackless - compiler constructs a state machine data structure
-- light-weight process
+- LIGHT-WEIGHT PROCESS
     - erlang is a popular example of using these, BEAM is the vm
     - often refers to userland threads associated with kernel-threads
 ### ACTOR MODEL
@@ -618,6 +618,9 @@ public static void main(String[] args) {
     - dependency inversion - depend on abstractions, not concretes
 - seperation of concerns - each "concern" = feature, each component handles it's concerns
     - basically very similar in principle to SRP, keep system a set of loosly connected components
+- inversion of control - app programer doesnt control low level flow of program, just programs modules that something else digests
+    - often big "framework" (e.g. web frameworks) do this for example, like rails or django, both handle HTTP/low-level stuff
+    - another exmaple is an event loop framework, app programmer might just write event handlers
 - REST - representational state transfer
 - batch processing - generally non-real time, usually store data to persistent store, then can slowly process it background
 - stream processing - real-time crunching of data, generally no persistent data store step as data is received

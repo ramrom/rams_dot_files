@@ -532,11 +532,20 @@ pulsemixer - volume manager with pulseaudio
     - many security vulnerabilities as it's hard to integrate into linux security subsystem; android, googleOS disable io_uring
 - SYSFS - pseudo file system exposes kernel provides access to kernel subsystems, hardware devices, and associated device drivers
     - exposed in `/sys`
-### PROCFS
-- procfs - special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
-    - proc dir shows system info in the files-as-API philosophy of linux
+
+## PROCFS
+- a special filesystem, an API, kernel exposes process and system info, in the `/proc` dir
+- proc dir shows system info in the files-as-API philosophy of linux
 - is a virtual file system that exposes info about sys hardware, processes, and more
 - most unix-like OSes support it, notably OSX doesn't
+### DIRS
+- /proc/123     - a dir for data on process ID 123
+    - /proc/123/comm    - file shows the base bin command
+    - /proc/123/cmdline  - file that shows all the args of the command string given to the binary
+    - /proc/123/environ  - file with every environment variable process inherted
+    - /proc/123/fd      - folder of all fd numbers, each is a symbolic link, could point to regular file or pipe or whatever
+        - /proc/123/fd/10    - fd 10 for process id 123
+    - /proc/123/fdinfo      - folder of files, each file has stats(e.g. inode #) for each fd
 - /proc/net/             - network stuff
 - /proc/cpuinfo          - cpu stuff
 - /proc/meminfo          - memory stuff

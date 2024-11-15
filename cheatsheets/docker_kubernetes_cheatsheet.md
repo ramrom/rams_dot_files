@@ -6,44 +6,52 @@
     - https://www.fullstaq.com/knowledge-hub/blogs/docker-and-the-host-filesystem-owner-matching-problem
     - major point: the `UID` and `GUID` values in container will be identical to host for mapped drives
         - e.g. `UID` 1000 in container, owns file that's mapped to host, `UID` of file on host is also 1000
-### USAGE
+### DOCKER CLI
 - `docker ps` - list running containers
 - `docker ps -a` - list containers in all states
 - https://docs.docker.com/
-- IMAGES
-    - `docker build -f foo/MyDockerfile` - build from a Dockerfile with custom path/name
-    - `docker images` - list images
-    - `docker image history fooimage` - list the history of layers on image `fooimage`
-        - a blank value in `CREATED_BY` column generally means it's manually commited changes from a container run
-    - `docker create someimage` - create container from image
-    - `docker rmi someimage`  - remove image
-- CONTAINERS
-    - `docker ps --format "table {{.Ports}}:\t {{.Names}}"` - print just ports/names of running containers
-    - `docker start somecontainer`, `docker restart somecontainer` - start/restart a container
-    - `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
-    - `docker rm somecontainer` - delete the container
-    - `docker inspect somecontainer` - json desc of configuration
+### DOCKER CLI IMAGES
+- `docker build -f foo/MyDockerfile` - build from a Dockerfile with custom path/name
+- `docker images` - list images
+- `docker image history fooimage` - list the history of layers on image `fooimage`
+    - a blank value in `CREATED_BY` column generally means it's manually commited changes from a container run
+- `docker create someimage` - create container from image
+- `docker rmi someimage`  - remove image
+### DOCKER CLI CONTAINERS
+- `docker container ls` - list running containers
+    - `docker container ls -a` - list containers in all states
+- `docker ps --format "table {{.Ports}}:\t {{.Names}}"` - print just ports/names of running containers
+- `docker start somecontainer`, `docker restart somecontainer` - start/restart a container
+- `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
+- `docker rm somecontainer` - delete the container
+- `docker inspect somecontainer` - json desc of configuration
 - `docker run -d -p 1111:1111 foo/image` - create a container and start it
     - `-d` is detach, wont run in foreground in shell
     - `-p x:x` is to map internal port to external port
+    - `docker run --platform linux/amd64` - run the container on a specific platform
+        - e.g. for errors like `The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8)`
 - `docker exec -it foocontainername /bin/bash` - start a bash shell in container
+    - `docker run -d --entrypoint sleep YOUR_IMAGE 3600` - start a container with different entrypoint, `sleep` command here
+        - this is a clever trick to start a container that can't start with it's existing entrypoint for whatever reason
 - `docker volume -qf dangling=true` - find dangling volumes
     - `docker volume rm $(docker volume ls -qf dangling=true)` - remove them
-- REGISTRIES
-    - `docker login foo.com` - login to a docker registry
-        - `~/.docker/config.json` will show list of sessions for registries
-    - add mirrors - see https://docs.docker.com/docker-hub/mirror/
-        - can start dockerd with `--registry` or manually add to `~/.docker/daemon.json`
+### REGISTRIES
+- `docker login foo.com` - login to a docker registry
+    - `~/.docker/config.json` will show list of sessions for registries
+- add mirrors - see https://docs.docker.com/docker-hub/mirror/
+    - can start dockerd with `--registry` or manually add to `~/.docker/daemon.json`
+### SECURITY
 - `priveleged_mode: true` - exposes a _lot_
     - can see every `/dev/` in the host, `fdisk -l` shows all host devices
     - good read https://learn.snyk.io/lessons/container-runs-in-privileged-mode/kubernetes/
         - container runtime does a lot shield container from host, this mode disables/bypasses most of these checks
         - so a root user in container has essentially root privs on host system
         - one legit use case for running nested docker, docker in a docker
-- NETWORK
-    - `network_mode: host` - copies host networking, `ifconfig` in container shows the exact same interfaces as on the host
-    - `network_mode: bridged` mode - use a private network created in docker
-    - `ports` - specify just some ports to be exposed to host
+- `--security-opt no-new-privileges` prevents things like a regular user sudo'ing as root in the container
+### NETWORK
+- `network_mode: bridged`(compose syntax) mode - use a private network created in docker
+- `network_mode: host` - copies host networking, `ifconfig` in container shows the exact same interfaces as on the host
+- `ports` - specify just some ports to be exposed to host
 ### UNDERLYING TECH
 - `Dockerfile` - a file specifying how to build an image
     - must have entry point, basically the shell command that will run when container starts
@@ -82,7 +90,7 @@
 - symlinks in volumes that point to files in other volumes dont work
     - https://axell.dev/mounted-docker-volume-contains-symlinks/
 
-## COMPOSE
+## DOCKER COMPOSE
 - `docker compose pull` - will get latest versions of images
 - `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
     - https://docs.docker.com/compose/reference/
@@ -91,7 +99,6 @@
 - `docker compose -f some-compose-file.yml pull fooserv` - pull only `fooserv`
 - `docker compose -f some-compose-file.yml down --rmi all`
     - `down` stop containers, `--rmi all` removes all images specified in compose
-- `--security-opt no-new-privileges` prevents things like a regular user sudo'ing as root in the container
 
 ## KUBERNETES
 - means "helmsman" or "pilot" in ancient greek
