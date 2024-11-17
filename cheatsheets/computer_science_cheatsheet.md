@@ -729,6 +729,12 @@ public static void main(String[] args) {
     - main program interupted, program counter points to ISR(interrupt service routine) and it runs
         - state of interrupted process saved, meat of interrupter logic happens, interrupt source resotred, return instruction calls
     - interrrupt used to also flip mode bit
+- IPC
+    - shared memory - diff processes sharing same memory space
+        - e.g. chromium, 3 components, each seperate process: browsers, renderers, plugins. 1 renderer process per tab
+    - network sockets
+    - unix sockets
+    - pipes
 
 ## DEPENDENCY MANAGEMENT
 - see [build_dependency_tools_cheatsheet.md]

@@ -371,6 +371,13 @@ function moduleExists(name)
     end
 end
 
+-- print msg with vim-notify, if not loaded/available use regular print
+function trynotify(msg, loglevel, opts)
+    local opts = opts or {}
+    local res, notif = pcall(require,'notify')      -- if notify isnt available use regular print
+    if res then notif(msg, loglevel, opts) else print(msg) end  -- want notify msg with lowest timeout
+end
+
 
 ----------------------------------- RUN IN TMUX PANE -----------------------------------------------------
 TmuxPaneRunner = {}
@@ -420,7 +427,7 @@ end
 -- TODO: maybe add logic to set default pane, look for pane with no child processes (see tmux-open-pane script)
 TmuxPaneRunner.paneRun = function(cmd)
     if TmuxPaneRunner.activePane == nil then
-        print('ActiveTmuxRunnerPane is nil')
+        trynotify('ActiveTmuxRunnerPane is nil', "error", { title = "error" })
     else
         if TmuxPaneRunner.clearPaneBeforeRun then
             vim.fn.system({'tmux', 'send-keys', '-t', TmuxPaneRunner.activePane, 'clear', 'C-m'})
@@ -444,7 +451,7 @@ TmuxPaneRunner.run = function(arg)
         elseif curftype == 'java' then
             TmuxPaneRunner.paneRun("java-ramrom")
         else
-            print("filetype " .. curftype .. " undefined for execute action")
+            trynotify("filetype " .. curftype .. " undefined for execute action", "error", { title = "error" })
         end
     elseif arg == 'test' then
         if curftype == "rust" then
@@ -452,7 +459,7 @@ TmuxPaneRunner.run = function(arg)
         elseif curftype == 'go' then
             TmuxPaneRunner.paneRun("go test ".. vim.fn.expand("%"))
         else
-            print("filetype " .. curftype .. " undefined for test action")
+            trynotify("filetype " .. curftype .. " undefined for test action", "error", { title = "error" })
         end
     elseif arg == 'build' then
         if curftype == "rust" then
@@ -462,10 +469,10 @@ TmuxPaneRunner.run = function(arg)
         elseif curftype == 'c' then
             TmuxPaneRunner.paneRun("gcc ".. vim.fn.expand("%"))
         else
-            print("filetype " .. curftype .. " undefined for build action")
+            trynotify("filetype " .. curftype .. " undefined for build action", "error", { title = "error" })
         end
     else
-        print("undefined action: " .. arg)
+       trynotify("undefined action: " .. arg, "error", { title = "error" })
     end
 end
 
@@ -1713,10 +1720,7 @@ end
 if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
     -- vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
     local loadLocal = function()
-        local msg = "Loading ~/.nvim_local.lua"
-
-        local res, notif = pcall(require,'notify')      -- if notify isnt available use regular print
-        if res then notif(msg, "info", { timeout = 0 }) else print(msg) end  -- want notify msg with lowest timeout
+        trynotify("Loading ~/.nvim_local.lua", "info", { timeout = 0 , title = "info" })
         vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
     end
 
