@@ -7,6 +7,7 @@
     - can set "extend battery life", minimizes power usage
 - screenshot - press volume down and power button at same time
 - hold down home button -> AI assistant, e.g. google
+- mobile hotspot - (worked in nov2024) - settings -> connections -> "mobile hotspot and tethering"
 
 ## GALAXY WATCH
 - touch screen for a couple sec to change watch face

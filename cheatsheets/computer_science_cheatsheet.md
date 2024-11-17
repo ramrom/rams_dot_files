@@ -554,6 +554,7 @@ public static void main(String[] args) {
 - [Nim](https://nim-lang.org/) - static typed, system language, inspired from python, ada, modula
 - [Rust](https://www.rust-lang.org/) - static, systems language, memory safe and fast
 - [Zig](https://ziglang.org/) - speed of C but with modern nicities, allocators are first class, no macros but has comptime
+    - compatible with C ABI, zig can directly compile C code
 - [Carbon](https://github.com/carbon-language/carbon-lang) - tries to be a better c++, google invented
 - [Erlang](https://www.erlang.org/) - uses BEAM, invented actor model
 - Elixir - a new dialtect of Erlang, uses BEAM

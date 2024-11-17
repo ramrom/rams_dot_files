@@ -3,6 +3,9 @@
     - main thread is the event loop on queue, that handle any javascript code
     - there are other threads, particularly ones that handle networking calls and will add to event queue
 - callack hell: http://callbackhell.com/
+- ECMAScript Modules (ESM) - official standard for packaging javascript code into modules
+    - uses `import` and `export` keywords
+- typescript uses `require` function to import modules when targetting CommonJS module format.
 
 ## DIALECTS
 - coffeescript

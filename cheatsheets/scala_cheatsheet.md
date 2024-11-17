@@ -704,6 +704,7 @@ async[IO] {
     - can use Netty backend as well(play 2.9), play 3 uses Pekko
 - generally async
     - Play WS(webservice) - client HTTP lib, a wrapper that uses diff backend like Netty and AsyncHttpClient
+        - built on https://github.com/AsyncHttpClient/async-http-client , which is built on Netty
     - AkkaHTTP is non-blocking
 - precompile routes file is converted to scala code, then it's compiled and macwire can dep inj there
 - `Thread.sleep(1000)` will block thread, to delay in play we can invoke scheduler to delay scheduling future
@@ -740,6 +741,7 @@ async[IO] {
 - one of akka streams main goals is to implement backpressure
 - AKKA STREAMS - built on top of akka, adheres to [reactive streams](https://www.reactive-streams.org/) concept
 - AKKA HTTP - uses AKKA STREAMS, http requests and responses modeled as streams
+    - also uses java Netty for transport layer
 ### PEKKO
 - spawned by apache project from akka 2.6, written mostly in scala and some java
 ### SLICK

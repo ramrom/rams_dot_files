@@ -512,6 +512,12 @@
             - import photographic source into game
         - lumen - full real-time global illumination, no manual lightmap creation for a scene
         - Niagara - fluid/particle dynamics, Chaos - physics engine
+    - 5.5 
+        - megalights, improvement on lumen, lumen constrained to few lights to maintain real-time
+            - megalights can have 100s of lights in a real-time global illumnation scene
+            - works well with nanite
+        - metahuman animator - uses AI to generated human facial animations, can just provide text/sound
+            - average metahuman is 950MB, now 5.5 offers compressed versions that are only 60MB
 ### APIs
 - Metals - apple API
 - Vulkan - open source platform independent generic API for 3D graphics and computing, managed by Khronos Group

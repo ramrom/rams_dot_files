@@ -11,6 +11,7 @@
 ### MAJOR VERSIONS
 - java5(1.5), sept2004 - generics, annotations, enumerations(`enum`),
 - java8, mar2014, LTS(till 2025) - lamba functions
+    - `java.nio` has new ` java.nio.channels.SelectorProvider` that uses linux `epoll`
 - java11, sept2018, LTS - TLS, http client, epsilon garbage collector
 - java14
     - introduced `record`(similar to scala case class)
@@ -1037,7 +1038,7 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - https://netty.io/
 - async non-blocking event-driven network-centric framework, does HTTP and other protocols
     - uses the reactor pattern
-    - uses java NIO channels - non-blocking IO
+    - uses java NIO channels - non-blocking IO, modern versions uses linux `epoll`
 ### NIO
 - added in java 1.4
 - new input/output - collection of java APIs for heavy IO ops
