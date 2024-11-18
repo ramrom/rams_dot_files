@@ -224,6 +224,13 @@ a(3)    // returns 30
 val a: Any = "hi"
 a.isInstanceOf[String]  // returns true
 a.isInstanceOf[Int]     // returns false
+
+// CLASS TAGS, for 2.13 - https://www.scala-lang.org/api/2.12.3/scala/reflect/ClassTag.html
+// can store the given type for erased generic type T, using runtimeClass field
+// ClassTag is a a type of TypeTag - https://docs.scala-lang.org/overviews/reflection/typetags-manifests.html
+import scala.reflect.ClassTag
+def mkArray[T : ClassTag](elems: T*) = Array[T](elems: _*)
+mkArray(42, 13)
 ```
 
 
@@ -666,6 +673,8 @@ async[IO] {
 
 ## AMMONITE
 - https://ammonite.io/
+- launch different scala versions
+    - can use coursier - `coursier launch ammonite:2.0.4 --scala 2.13.14`
 - block input:
     @ { <enter>
         x + y...

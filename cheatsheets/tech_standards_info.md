@@ -90,8 +90,12 @@
 ## ZIGBEE
 - based on IEEE 802.15.4 standard
 - supports star and tree network topologies as well as generic mesh
+    - generally one controller device, many devices can act as routers to extend range from the controller
     - in star coordinator must be central node, mesh and tree allow router nodes to extend reach
-- ch11 - ch26 between 2400Mhz - 2480Mhz
+    - mesh limit of 65000! devices
+- no certification required, so cheaper
+- range of 33-66 feet
+- ch11 - ch26 between 2400Mhz - 2480Mhz, for north america
 - LQI (Link Quality Indicator) - quality of data packets received
 - RSS (Recieved Signal Strength) - quality of signal strength
 
@@ -117,12 +121,7 @@
     - 900 MHz band (north america)
     - mesh limit of 232 devices
     - range of ~100 feet
-- Zigbee, mesh network, much slower then wifi
-    - generally one controller device, many devices can act as routers to extend range from the controller
-    - no certification required, so cheaper
-    - 2.4Ghz band (north america)
-    - mesh limit of 65000! devices
-    - range of 33-66 feet
+- [Zigbee](#zigbee)
 - ONVIF - Open Network Video Interface Forum
     - create global open standards for IP-based security, particularly for video cameras
     - ONVIF.PTZ specifies Pan/Tilt/Zoom functions

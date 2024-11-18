@@ -470,7 +470,9 @@ pulsemixer - volume manager with pulseaudio
 - ubuntu(like around 2022) - uses nouveau open source drivers as default if nvidia GPU exists
 
 ## APPARMOR 
-- a linux security module used by ubuntu, a MAC(mandatory access control)
+- apparmor is a LSM(linux security module) that uses MAC(mandatory access control) 
+    - SELinux is another major LSM, that also uses MAC, much more complicated and strict
+    - used by ubuntu
 - apparmor on ubuntu - https://ubuntu.com/server/docs/apparmor
     - *NOTE* nov2024 - says you can disable/stop the systemd service but `aa-status` will still show loaded with active profiles
 - debugging: use `dmseg` to see `DENIED` actions from apparmor

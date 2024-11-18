@@ -476,6 +476,12 @@ synchronized (lock) {
 
 "a".compareTo("b")  // return -1,   compareTo lexographically compares two strings
 
+"".isEmpty()  // returns true, Empty tests for zero length string
+" ".isBlank() // returns true, Blank tests for non-whitespace
+" ".isEmpty() // returns false
+
+"ab".repeat(3)  // String "ababab"
+
 // REGEX
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -484,27 +490,20 @@ Matcher matcher = pattern.matcher("some foobar string to search");
 boolean matchFound = matcher.find();
 if(matchFound) { System.out.println("Match found"); } else { System.out.println("Match not found"); }
 
-
-"".isEmpty()  // returns true, Empty tests for zero length string
-" ".isBlank() // returns true, Blank tests for non-whitespace
-" ".isEmpty() // returns false
-
-"ab".repeat(3)  // String "ababab"
-
 // COMPARISON
 new String("a") == new String("a")  // false, == operator compares identity, not value
 "a" == "a"          // returns true, these are primitive string types, so "content" is compared
 new String("a").equals(new String("a"))   // returns true, use #equals method on String to compare content
 new String("b").compareTo(new String("b"))  // returns an int comparing the two
 
-List<Character> c = new ArrayList<>()
-char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`
-
+// INTERPOLATION
+String a = "a" + "b" + 3 + 1.1               // use + operator, int and floats will be converted to string
+// using FORMAT method
 String first = "hi"; Float second = 1.1f; Integer third = 342;
 String result = String.format("String %s in %s with some %s examples.", first, second, third);
-System.out.println("the formatted string: " + result)
+StringBuilder sb = new StringBuilder()       // can also use Stringbuilder
 
-// StringBuilder not thread-safe, similar class StringBuffer is thread-safe
+// NOTE: StringBuilder not thread-safe, similar class StringBuffer is thread-safe
 StringBuilder sb = new StringBuilder();     // fast builder for appending
 StringBuilder sb2 = new StringBuilder("foo");     // initialize with string
 sb.append("foo");       // efficiently append
@@ -514,8 +513,10 @@ sb.setCharAt(1, "a");   // change character at index
 sb.deleteCharAt(3);     // delete character at index
 sb.toString();          // covert to a string when done
 
+List<Character> c = new ArrayList<>()
+char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`
+
 Arrays.toString(new int[] { 1,2,3})  // will create string "[1,2,3]"
-System.out.println(Arrays.toString(new int[] { 1,2,3}))  // will print above to STDOUT, good for debug printing
 Arrays.deepToString(new int[] {{1,2},{3,4}})  // deepToString for nested arrays
 
 class Foo { int i; Foo(int i) { this.i = i; }; public String toString() { return "{ i: " + i + "}"; } }
@@ -840,8 +841,14 @@ e == e2        // return true, since they are constant and only one instance def
 - `(object) instanceof (type)` - test if object is instance of type, or subtype of type, or implements an interface
     - e.g. if `Dog` is subclass of `Animal`; `Dog foo = new Dog(); assertTrue(foo instanceof Animal)`
 ```java
-    Class c = Class.forName("java.lang.String")
-    Class c = java.lang.String.class  // 2nd method to get Class of class
+    Class c = new String("foo").getClass()          // get class of a instance
+    Class c = java.lang.String.class                // get Class of class
+    Class c = Class.forName("java.lang.String")     // get Class by string desc of a class
+    c.toString()                    // print "java.lang.String"
+    c.getMethods()                  // return a collection of methods on class
+    c.isInterface()                 // bool if interface type
+
+    // can test if a Object is instance of a class
     boolean b = c.isInstance("hi")  // true
     boolean b = c.isInstance(3)     // false
 ```
