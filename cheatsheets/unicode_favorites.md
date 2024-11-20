@@ -134,3 +134,23 @@
 🤝  handshake
 🤞  fingers crossed
 🤟  hand of the devil
+
+## OTHER
+█  - U2588
+▇  - U2587
+▆  - U2586
+▅  - U2585
+▄  - U2584
+▃  - U2583
+▂  - U2582
+▁  - U2581
+
+❚  - U275A(heavy vertical bar)
+❙  - U2759(medium vertical bar)
+╹   - U2579(heavy bar up)
+╻   - U257B(heavy bar down)
+
+⎺   - U23BA(horizontal scan line 1)
+⎻   - U23BB(line 3)
+⎼   - U23BC(line 5)
+⎽   - U23BD(line 9)
