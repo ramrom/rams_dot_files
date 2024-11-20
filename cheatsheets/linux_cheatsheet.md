@@ -341,9 +341,9 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - super+tab, alt+tab  - switch between running apps
 - super+left/right-arrow - snap to left or right half of desktop
 - super+home - switch to 1st workspace
-- super+up/down-arrow - full screen, original
 - super + page-up/page-down - go forward/back workspaces
 - super + shift + page-up/page-down - move active window to next/previous workspace
+- super+up/down-arrow - full screen, original
 - super+m - toggle notif tray
 - shift + ctr + c - copy
 - shift + ctr + v - paste
