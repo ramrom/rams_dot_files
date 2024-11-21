@@ -80,6 +80,7 @@ cat somefile | sed -n '2p'          # print just the 2nd line of the file
 
 # CUT - select data in each line by byte/char position or delimiter char
 echo "foo; bar - baz" | cut -d ';' -f 2     # delimiter semicolon , extract field 2, so " bar - baz" will print
+echo "foo;bar;baz;yar" | cut -d ';' -f 2-     # delimiter semicolon , extract all from field 2, so " bar;baz;yar" will print
 echo "foo; bar - baz" | cut -c 5-           # remove first 4 chars of each line
 
 # TR - translate chars, find and replace on specific chars

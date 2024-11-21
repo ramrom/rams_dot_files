@@ -135,22 +135,35 @@
 🤞  fingers crossed
 🤟  hand of the devil
 
-## OTHER
-█  - U2588
-▇  - U2587
-▆  - U2586
-▅  - U2585
-▄  - U2584
-▃  - U2583
-▂  - U2582
-▁  - U2581
+## VERTICAL BARS
+█  - u2588
+▇  - u2587
+▆  - u2586
+▅  - u2585
+▄  - u2584
+▃  - u2583
+▂  - u2582
+▁  - u2581
 
-❚  - U275A(heavy vertical bar)
-❙  - U2759(medium vertical bar)
-╹   - U2579(heavy bar up)
-╻   - U257B(heavy bar down)
+## BRAILE PATTERNS
+- https://en.wikipedia.org/wiki/Braille_Patterns
+⡀   - u2840
+⡄   - u2844
+⡆   - u2846
+⡇   - u2847
+┇   - u2507
+┈   - u2508
+┉   - u2509
+┋   - u250A
+┊   - u250B
+⋮   - u22EE
 
-⎺   - U23BA(horizontal scan line 1)
-⎻   - U23BB(line 3)
-⎼   - U23BC(line 5)
-⎽   - U23BD(line 9)
+❚  - u275A(heavy vertical bar)
+❙  - u2759(medium vertical bar)
+╹   - u2579(heavy bar up)
+╻   - u257B(heavy bar down)
+
+⎺   - u23BA(horizontal scan line 1)
+⎻   - u23BB(line 3)
+⎼   - u23BC(line 5)
+⎽   - u23BD(line 9)

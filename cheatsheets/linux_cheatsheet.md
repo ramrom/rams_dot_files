@@ -333,7 +333,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - nautilus is the file explorer
     - ubuntu22 - uses RDP for gnome remote desktop
 
-### GNONME DESKTOP SHORTCUTS
+### GNOME DESKTOP SHORTCUTS
 - see https://help.ubuntu.com/community/KeyboardShortcuts
 - super - usually the "windows" key on keyboards
 - alt+ctr+t - open terminal
