@@ -72,7 +72,7 @@ awk '/blah/{getline; print}' logfile   # print the next line after the line that
 echo "2.03" | sed 's/\.//g'  # will print 203
 echo "2.03" | sed 's/[0-9][0-9]/foo/g'  # will print 2.foo
 echo "(foo)" | sed 's/[()]//g'  # will print "foo", dont have to escape parens like \( and \) with regex
-printf "foo\nbar\nbaz\n" | sed -n 2p # get 2nd line of stdin, blank output if line exceeds highest index
+printf "foo\nbar\nbaz\n" | sed -n 2p # get nth line of stdin, here the 2nd, blank output if line exceeds highest index
 echo "foobar" | sed 's/..$//'   # remove last 2 chars, so output is "foob"
 sed -i 's/foo/bar/g' file.txt   # inline substitute foo for bar in file.txt
 cat somefile | sed -e 's/,/,\n/g'  # add a newline after every comma in file and output to stdout
