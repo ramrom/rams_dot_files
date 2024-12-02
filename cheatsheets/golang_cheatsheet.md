@@ -2,11 +2,19 @@
 - https://go.dev
 - cgo lets you add c code in go programs: https://golang.org/cmd/cgo/
 - supported architectures and OSes: https://golang.org/doc/install/source#environment
+- critique of why go is bad: https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride
+
+## HISTORY
+- early version didnt use `libc` much, and implemented their own syscalls in go
+- big motivation was c++ builds at google were slow, rob pike said go wouldn't have been invented if c++ builds were fast
 - ken thomson, robert pike, Robert Griesemer invented it to fix everything they hated about c++
     - they all had to agree on features they liked
     - golang is object-oriented _but_ has not classes, you can be object-oriented without classes
-- early version didnt use `libc` much, and implemented their own syscalls in go
-- critique of why go is bad: https://fasterthanli.me/articles/i-want-off-mr-golangs-wild-ride
+- early on called a system langauge, but rob pike regretted, said should be called server writing language
+- 2015 - go compiler written in go, replacing c compiler
+- 1.18 added generics
+    - use partial monomorphization (rust and c++ generics full monomorphization)
+    - only generates diff code for diff GCShapes, two types have same GCShape if they have same memory layout from GC perspective
 
 ## DOCS
 - https://learnxinyminutes.com/docs/go/ - learn go in y minutes
@@ -20,9 +28,6 @@
 ## TOOLS
 - https://go.dev/play/ - go playground, test go code on the web
 - https://github.com/fatih/vim-go - full featured go integration for vi: uses `gopls`, `delve`, Tagbar
-
-## HISTORY
-- 1.18 added generics
 
 ## IMPLEMENTATIONS
 - "go spec", the official specification: https://go.dev/ref/spec

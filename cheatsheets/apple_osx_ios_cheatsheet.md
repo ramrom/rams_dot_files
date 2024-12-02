@@ -162,6 +162,7 @@
 - Files app in iOS wont let me edit `.md` file extensions (markdowns)
     - apple case id 101308658353, https://support.apple.com/kb/HT201232
     - https://support.apple.com/en-us/HT211808 : 14.1 changelog address Files issue with cloud provider content as unavailable
+- scanning - https://support.apple.com/en-us/108963 , can use notes app
 
 ## FILESYSTEMS
 - ISO filesystems can be mounted through disk utitlity application

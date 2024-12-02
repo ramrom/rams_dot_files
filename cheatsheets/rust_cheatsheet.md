@@ -595,7 +595,7 @@ enum E {
 - my example of building a singly linked list 100 nodes long
     ```rust
     struct LL { data: i32, next: Option<Box<LL>> }
-    let l = LL { data: 1, next: None }
+    let mut l = LL { data: 1, next: None }
     let mut lref = &mut l;
     // NOTE: the `as_mut` on next is key, it gives me a ref to what's inside Box, an `unwrap` on Option would move and error
     for i in (1..100) { lref.next = Some(Box::new(LL{data: i, next: None})); lref = lref.next.as_mut().unwrap(); }

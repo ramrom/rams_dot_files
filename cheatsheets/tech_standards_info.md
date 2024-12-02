@@ -506,6 +506,7 @@
     - id Tech 7 released 2018?, supports only vulkan, ray tracing, no "main thread" (all "jobs")
         - implementors: Doom Eternal
 - unreal - C++ codebase by epic games
+    - supports directx, openGL, vulkan, and metal, uses RHI abstraction layer for these 3
     - 5.0 - major goal to make game content/assets easy to create
         - nanite - no LOD(level of detail) limitation, high polygon count with dynamic detail
             - import photographic source into game

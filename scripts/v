@@ -31,5 +31,5 @@ case "$modesel" in
     "s") [ -f MyCurrentVimSession.vim ] && nvim -S MyCurrentVimSession.vim || echo "no MyCurrentVimSession.vim file!";;
     "v") nvim;;
     "q") ;;
-    *) echo "\`${modesel}\` not valid option" ;;
+    *) nvim ;;
 esac

@@ -34,7 +34,6 @@
 - june'24 - upgrading to ubuntu 23 and 24 - third party apt sources were disabled
     - apparently done not to break the upgrade
 
-
 ## RASPBIAN
 - `rpi-imager` deb package
     - `DISPLAY=:1 rpi-imager` - launch imager
@@ -45,6 +44,7 @@
 - gpu temp celcius - `sudo vcgencmd measure_temp`
 - cpu temp celcius - `cat /sys/class/thermal/thermal_zone0/temp`, divide this number by 1000
 ### RETROPI
+- retropi = raspbian ➕ retroarch
 - location of config files
     - gamepads - https://retropie.org.uk/forum/topic/24965/location-of-joystick-configuration-files
 - home page - https://retropie.org.uk/
@@ -617,7 +617,7 @@ pulsemixer - volume manager with pulseaudio
 - `jstest-gtk` - decent util to test and configure gamepad/game-controllers
 - `fc-cache` - font cache tool
     - `fc-cache -f` - force regenerate font cache searching through all lookup dirs
-- pcsx2
+- pcsx2 - ps2 emulator
     - keyboard map: esdf-up/dn/lft/rgt, ijkl-tri/sq/cross/circle, n-start, v-select, aw-l1/l2, ;p-r1/r2
 - retroarch
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
