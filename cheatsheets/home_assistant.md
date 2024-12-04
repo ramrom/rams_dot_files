@@ -117,6 +117,10 @@
     - must specify a target phone number (that in twilio API is approved), example ph format: `12223334444`
 - aug'23 - camera support: any ONVIF camera, amcrest
     - other good brands: hikvision, reolink, dahua, anran (generally all support RTSP and ONVIF)
+- rhasspy - https://rhasspy.readthedocs.io/en/latest/ - voice assistant service
+- wyoming protocol integration - https://www.home-assistant.io/integrations/wyoming/
+    - allows hass assist to connect to external services like TTS(e.g. piper), STT(e.g. whisper), wake-word-detection and more
+- ollama - great integration for free ollama LLM
 
 ## COMPANION/MOBILE APP
 - troubleshooting doc: https://companion.home-assistant.io/docs/troubleshooting/faqs/

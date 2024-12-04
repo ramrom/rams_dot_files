@@ -610,7 +610,8 @@ pulsemixer - volume manager with pulseaudio
     - pacmd list-sinks  # list audio out devices
     - ALSA is sound manager for kernel, can only do one stream
     - pulseaudio is userland program, can mix many
-- Pavucontrol - pulseaudio cli tool, CHECK IT OUT
+- `arecord` - Sound recorder for ALSA soundcard driver
+- `Pavucontrol` - pulseaudio cli tool, CHECK IT OUT
     - simul audio streams two diff audio devices, e.g. movie with sound to hdmi, game and sound to base mobo audio dev
         - https://ubuntuforums.org/showthread.php?t=1810812
 - `ss`  - good way to see socket usage
