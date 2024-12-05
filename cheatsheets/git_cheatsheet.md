@@ -9,6 +9,7 @@
 - git lfs: https://git-lfs.github.com/, nice if u want to version large files
 - undo a git rebase - https://stackoverflow.com/questions/134882/undoing-a-git-rebase
 - SO what is git index - https://stackoverflow.com/questions/4084921/what-does-the-git-index-contain-exactly
+- submodule vs subtrees - both let you "embed" a external repo in another repo
 
 
 ## CONFIGS
@@ -57,7 +58,7 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
     - `git ls-remote https://someremote.url`
     - `git ls-remote --tags https://someremote.url`
 
-### PUSH/TRACKING
+## PUSH/TRACKING
 ```sh
 git branch --set-upstream-to=origin/foobranch foobranch
 git push -u remote local_branch # push branch to remote

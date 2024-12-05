@@ -347,12 +347,12 @@
 
 ## DEVOPS
 ### TERRAFORM
-- more declarative style of programming, used more for provisioning
+- more declarative style of programming(HCL = hashicorp configuration language), used more for provisioning
 - agentless, all the client needs is ssh server
 ### ANSIBLE
 - more procedural style of programming, used more for configuration
 - agentless, all the client needs is ssh server
-- uses jinja2 (.j2 files) for templating
+- uses jinja2 (.j2 files) for templating, written in python
 ### DEPLOYMENT STRATEGIES
 - big bang deployment - shutdown the service cluster to deploy all new versions
     - sometimes unavoidable, e.g. a intricate database upgrade

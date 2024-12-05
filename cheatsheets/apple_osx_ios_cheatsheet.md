@@ -207,7 +207,9 @@
     - works with iterm2 tabs, chrome tabs, whatsapp convos
 - option + cmd + esc  - bring up force quit menu for applications
 - ctrl left/right arrow   - left/right desktops
-    - ctrl 1/2          - move to desktop 1/2
+- switch to desktop x
+    - keyboard shortcuts has ctrl 1/2, nothin past 2, can turn these on
+    - https://apple.stackexchange.com/questions/362614/macos-navigating-between-desktops-using-keyboard-shortcuts
 - cmd-/  - highlight the cursor, iterm thing, not vim
 - hold command mac key, hover over link, clickable
     - works in iterm and terminal

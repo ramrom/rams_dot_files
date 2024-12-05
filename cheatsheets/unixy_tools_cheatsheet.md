@@ -167,6 +167,9 @@ echo "foo bar baz" | xargs -I % echo "prefix % postfix"  # can specify where to 
 echo "foo bar baz" | xargs -I _ sh -c 'echo before; echo "_"; echo after' # sh trick here to run many commands
 # print0 in find says to seperate items with a null char, -0 in xargs tells it to seperate by null char (vs space/newline)
 
+# PARALLEL - GNU cli util to run tasks in parallel, will default to number of cores/cpus
+cat file | parallel grep somepattern
+
 # HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
 head -n-2 foofile  # print all except the last 2 lines

@@ -1,4 +1,4 @@
-# HTTP
+# HTTP WEB
 - good site to test HTTP requests: https://httpbin.org/
 
 ## STANDARDS
@@ -137,6 +137,15 @@
 - can dynamicaly update configs without restart, unlike nginx
 ### HA PROXY
 - popular load balancer choice
+
+## WEB TOOLS
+- static site toolkits 
+    - [hugo](https://github.com/gohugoio/hugo) - golang based
+    - [jekyll](https://jekyllrb.com/) - ruby based
+- [bootstrap](https://github.com/twbs/bootstrap) - lib of FE(HTML, CSS) assets
+### WEB HOSTING
+- github pages
+- hostinger
 
 ## DNS
 - can use tools like `dig` to get info on dns records

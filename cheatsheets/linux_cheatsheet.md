@@ -476,6 +476,7 @@ pulsemixer - volume manager with pulseaudio
     - used by ubuntu
 - apparmor on ubuntu - https://ubuntu.com/server/docs/apparmor
     - *NOTE* nov2024 - says you can disable/stop the systemd service but `aa-status` will still show loaded with active profiles
+        - apparmor.service unit file just loads a one time script that loads all apparmor profiles in `/etc/apparmor.d/` dir
 - debugging: use `dmseg` to see `DENIED` actions from apparmor
 - profiles defined in `/etc/apparmor.d`
     - ubuntu24 - `docker-default` profile not in `/etc/apparmor.d`, in `tmpfs` - https://docs.docker.com/engine/security/apparmor/
@@ -624,6 +625,7 @@ pulsemixer - volume manager with pulseaudio
     - main menu - backspace to back, up/down/left/right, (in-game) f1 show main menu
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
+    - netplay - host/clients architecture to play any multiplayer game with peeps over the internet
 - **transmission** - great torrent program
     - SETUP
         - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/

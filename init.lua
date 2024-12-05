@@ -374,8 +374,8 @@ end
 -- print msg with vim-notify, if not loaded/available use regular print
 function trynotify(msg, loglevel, opts)
     local opts = opts or {}
-    local res, notif = pcall(require,'notify')      -- if notify isnt available use regular print
-    if res then notif(msg, loglevel, opts) else print(msg) end  -- want notify msg with lowest timeout
+    local success, notif = pcall(require,'notify')      -- if notify isnt available use regular print
+    if success then notif(msg, loglevel, opts) else print(msg) end  -- want notify msg with lowest timeout
 end
 
 
@@ -1336,7 +1336,7 @@ LoadLSPConfig = function()
 end
 
 --------------------------------------------------------------------------------------------------------
--------------------------------- KEY MAPS --------------------------------------------------------------
+-------------------------------- KEYMAPS --------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------
 vim.g.mapleader = " "
 
