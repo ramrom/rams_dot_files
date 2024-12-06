@@ -24,6 +24,7 @@
 - `docker start somecontainer`, `docker restart somecontainer` - start/restart a container
 - `docker kill somecontainer`, `docker stop somecontainer` - stop = SIGTERM, kill = SIGKILL
 - `docker rm somecontainer` - delete the container
+- `docker logs -f somecontainer` - `-f` follow the logs like `tail -f`
 - `docker inspect somecontainer` - json desc of configuration
 - `docker run -d -p 1111:1111 foo/image` - create a container and start it
     - `-d` is detach, wont run in foreground in shell
