@@ -503,12 +503,20 @@ public static void main(String[] args) {
     - models are just a bunch of tunable parmeters, in case of linear regression just 2 params (slope and y-intercept)
 - deep learning - machine learning using many layers of neural networks to train a model
     - each layer of "nuerons" essentially doin matrix multiplication on output vector/matrix from previous layer
+- TPUs made trasformers feasible
 ### NEURAL NETWORKS
 - a "neuron" holds a number, and is "activated" by neurons in other layers
-- each nueron is connected to neurons in previous layer and to neurons in next layer, each connection has a weight
+- each neuron is connected to neurons in previous layer and to neurons in next layer, each connection has a weight
+- deep NN - using many NN layers, often hundred to thousands
+- feeforward NN - data flows only one direction, input -> layers -> output
+- CNN - convolution NN, is feedforward, commonly used in deep learning NN
+- RNN - Recurrent NN, is bidirectional and not feedforward
 ### LLM
 - nov'24 - good vid on LLM transformers - https://www.youtube.com/watch?v=wjZofJX0v4M&list=WL&ab_channel=3Blue1Brown
 - good LLM read: https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/
+- common datasets
+    - https://en.wikipedia.org/wiki/Common_Crawl - org that crawls web and curates/filters data from internet
+    - Wikipedia corpus - all knowledge from wikipedia
 - most, including chatGPT are autoregressive, try to predict next word based on what previous words are
     - GPT3 has like ~50k words in dictionary, output is vector of probability for each word based on previous words
     - first nnet layer is embedding matrix, 50k columns, each column represents a word from dictionary
@@ -521,6 +529,7 @@ public static void main(String[] args) {
         - MLPs and facts - https://www.youtube.com/watch?v=9-Jl0dxWQs8&list=WL&index=5&ab_channel=3Blue1Brown
             - MLPs basically kinda embed facts
     - unembedding matrix is last layer that transforms tokens to words, predictively using probability
+- ReLU - rectified linear unit - makes negative numbers 0, positive numbers same
 - softmax - a function that transforms set of values to a discrete probability distribution (total sums to 1)
     - summary it takes e to power of number and divides by that sum
     - temperature, exponent modifier T to change bias, T of zero means largest # will have near 1 probability

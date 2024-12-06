@@ -195,15 +195,21 @@
 
 
 ## CPU
+### TYPES
 - TPU - tensor processing unit - developed by google in 2015, made public in 2018, a AI ASIC specializing in tensorflow software
+    - like GPU, designed for high volume low precision(e.g. 8bit precision) computation, particularly more computation per unit of energy
 - ALU - arithmetic logic unit
 - FPU - floating point unit
 - AGU - address generation unit - fetches a value from memory
-### ARCHITECTURES
-### X86
-- REAL MODE - CPU directly access physical memory locations, no redirection or virtual addresses
-### RISC
-- is a philosophy of cpu design, stands for reduced instruction set
+### BRANDS
+- server chips: amazon graviton, microsoft cobalt, google axion
+    - all ARM 64bit processers optimized for cloud servers
+### INSTRUCTION SETS
+- X86
+    - REAL MODE - CPU directly access physical memory locations, no redirection or virtual addresses
+- ARM
+- RISC
+    - is a philosophy of cpu design, stands for reduced instruction set
 
 
 ## HDD
