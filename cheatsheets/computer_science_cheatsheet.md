@@ -504,6 +504,8 @@ public static void main(String[] args) {
 - deep learning - machine learning using many layers of neural networks to train a model
     - each layer of "nuerons" essentially doin matrix multiplication on output vector/matrix from previous layer
 - TPUs made trasformers feasible
+- prompt - in AI parlance it means a set of instructions or questions given to an AI system to elicit a different type of response
+    - i.e. how to ask AI something in a way to get what you want
 ### NEURAL NETWORKS
 - a "neuron" holds a number, and is "activated" by neurons in other layers
 - each neuron is connected to neurons in previous layer and to neurons in next layer, each connection has a weight
@@ -557,7 +559,9 @@ public static void main(String[] args) {
 - openAI chatgpt model architecture is closed source
 - Tokens - a measure of the amount of data that can be remembered in a conversation, so limited context
     - input text is broken into smaller pieces, each called a token
+### CHATGPT LLM
 - GPT3 - has 175B params/weights, organized into 28k matrices, ~50k words, ~12k embedding "dimenions", 2048 word context size
+- model `gpt-4o-mini` - release 2024, free to use
 ### REINFORCEMENT
 - give AI model a goal(a reward criteria), and throught constant iterations of trial and error get better at reaching the goal
 - AlphaGo, Lee and Master, was first trained on top human player games, then rounds of self-training

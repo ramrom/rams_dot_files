@@ -22,6 +22,11 @@ find . -type f -regex ".*\.exe$" -exec grep foo {} \;    # exec runs a command o
 # get terminal info
 infocmp
 
+# CHOWN - change owner of files and dirs
+chown newuser file
+chown newuser:newgroup file
+chown -R newuser dir
+
 # CAT - output content of file to stdout
 cat file
 
@@ -456,6 +461,16 @@ chafa foo.jpg
 # CATIMG - like chafa
 catimg foo.jpg
 
+# FABRIC - awesome cli tool
+cat someprose.txt | fabric -sp some_pattern             # -p for pattern, -s means stream the result
+cat someprose.txt | fabric -sp some_pattern --model=gpt-4o-mini   # specify a AI/LLM model to use
+fabric -y https://www.youtube.com/watch?v=123 | fabric -sp some_pattern   # -y fabric transcribes a youtube video
+# surround yt link in quotes if `&` in url, otherwise shell sees `&` runs it in background
+fabric -y "https://www.youtube.com/watch?v=123&yar=3" | fabric -sp some_pattern
+fabric -u "https://somewebsite.com"     # get transcript of text of a webpage using Jina AI
+echo "what is the meaning of life" | fabric -p some_pattern --dry-run   # dry run will show what prompt, model, input it would send
+cat someprose.txt | fabric -p summarize | fabric -p write_essay  # can chain! :), first summarize, then write an essay from summary
+
 # MEDIAINFO     - show mediafile metadata (like mdls for osx)
 mediainfo foo.mp4
 
@@ -474,17 +489,12 @@ DISPLAY=:1 calcurse-caldav --init keep-remote  # initialize local cal, sync down
 # VERACRYPT
 veracrypt -tc sometruecryptfile  # mount an old truecrypt file
 
-# YOUTUBE-DL
+# YOUTUBE-DL - https://github.com/ytdl-org/youtube-dl
 youtube-dl -F https://www.youtube.com/watch?v=dfidfa     # show available formats
 youtube-dl -f 140 https://www.youtube.com/watch?v=dfidfa     # download specific format
 
 # DU - list all files recursively in dir and their disk usage
 du -a /foo
-
-# CHOWN - change owner of files and dirs
-chown newuser file
-chown newuser:newgroup file
-chown -R newuser dir
 
 # SHRED  - overwrite data in file or whole device
 sudo shred -v /dev/sdb1

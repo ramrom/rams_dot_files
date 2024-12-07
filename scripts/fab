@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# FABRIC shell wrapper
+
+fabric -y "$1" | fabric -sp summarize --model=gpt-4o-mini

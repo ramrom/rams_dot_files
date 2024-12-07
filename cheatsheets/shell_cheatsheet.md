@@ -1,6 +1,8 @@
 # SHELL SCRIPT CHEAT SHEET
 - history of /bin/sh and shells: https://unix.stackexchange.com/questions/145522/what-does-it-mean-to-be-sh-compatible
 - good references: https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html
+- for long commands you can type in multiple lines using `\`
+    - type in part of a command then type `\` and hit enter, will see new line prompt with `>` where you can continue command
 
 ## ZSH
 - feature overview: https://github.com/hmml/awesome-zsh
