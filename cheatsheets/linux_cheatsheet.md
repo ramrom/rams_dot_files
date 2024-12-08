@@ -301,18 +301,17 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - nvidia-xconfig - show nvidia config
     - `nvidia-xconfig --query-gpu-info` - get basic gpu info
 
-### GNOME
+## GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
+    - also https://help.ubuntu.com/stable/ubuntu-help/shell-introduction.html.en
+- COMPONENTS
     - gnome panel means the top and side bar with clock/date status icons/wdigets, app shortcuts/favs
         - appindicators mean icons in this panel of running apps with their status, can click with dropdown menus
     - dash is side bar with quick launch icons and running apps
-- if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
+    - application switcher - hitting meta+tab will cycle through and select a running gnome application
+    - activities overview - can search for apps and files
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 - extensions management in browser: https://extensions.gnome.org/
-- keyboard shortcuts
-    - https://wiki.gnome.org/Design/OS/KeyboardShortcuts
-    - need full path to executables, apparently no PATH set, so `/usr/bin/foo` and not just `foo`
-        - some apps, like `vlc` and `spotify` work w/o full path, maybe cause they are GUI apps?
 - GSETTINGS - cli tool to get and set items in the settings menu
     - `gsettings list-schemas`, `gsettings list-recursively org.gnome.desktop.wm.keybindings`
     - can change basically any setting at cli like you could in GNOME settings menu
@@ -329,13 +328,19 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `ctrl + c/v` work but not when involving terminal
     - `shift + ctrl + c/v` when coping from terminal or pasting to terminal
         - due to quirk of my setup(emacs keys?) press `ctrl`, then `shift`, then `c/v`
-- common Tools
-    - nautilus is the file explorer
+- common tools
+    - nautilus - file explorer
+    - remmina - remote client for RDP, VNC, SSH, and more
     - ubuntu22 - uses RDP for gnome remote desktop
-
-### GNOME DESKTOP SHORTCUTS
-- see https://help.ubuntu.com/community/KeyboardShortcuts
+- TIP: if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
+### GNOME HOTKEYS
+- https://wiki.gnome.org/Design/OS/KeyboardShortcuts
+- also https://help.ubuntu.com/community/KeyboardShortcuts
+- creating custom keyboard hotkeys
+    - need full path to executables, apparently no PATH set, so `/usr/bin/foo` and not just `foo`
+    - some apps, like `vlc` and `spotify` work w/o full path, maybe cause they are GUI apps?
 - super - usually the "windows" key on keyboards
+    - hitting super will bring up activities overview
 - alt+ctr+t - open terminal
 - alt+ctr+l, super+l  - lock screen
 - super+tab, alt+tab  - switch between running apps
@@ -369,13 +374,13 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - shift-click - open link in new window
 - space/space-shift - scroll up/down page
 
-### WINE-GRAPHICS
+## WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
 - steam play, lets you play windows only games in linux steam, uses protonDB
 - lutris, lets you play windows only games (including steam installs) and has wine configurations configured
 - dxvk, vulkan implementation to provide compatibility with directx 9/10/11, to get 3d graphics support for windows games
 
-### XSCREENSAVER
+## XSCREENSAVER
 - https://www.jwz.org/xscreensaver/  - main maintainer is Jamie Zawinski, been doin it for a while
 - it's in the name, designed for X, but compatible with wayland through XWayland compatibility lib
     - it works well on ubuntu22 GNOME/wayland
