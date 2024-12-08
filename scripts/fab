@@ -2,4 +2,32 @@
 
 # FABRIC shell wrapper
 
-fabric -y "$1" | fabric -sp summarize --model=gpt-4o-mini
+usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -p PATTERN ] QUERY'; }
+
+PATTERN=summarize
+ACTION=query
+while getopts 'hp:y:' x; do
+    case $x in
+        h) usage && exit 1 ;;
+        y) ACTION=youtube; LINK="$OPTARG" ;;
+        p) PATTERN="$OPTARG" ;;
+        *) echo && usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+[ -z "$1" -a "$ACTION" = "query" ] && echo "1st arg missing!" && exit 1
+
+CURRENT_MONTH=$(date '+%b')
+CURRENT_DAY=$(date '+%d')
+CURRENT_YEAR=$(date '+%y')
+SESSION_NAME=default-${CURRENT_MONTH}${CURRENT_DAY}-${CURRENT_YEAR}
+
+case "$ACTION" in
+    query)
+        fabric -p $PATTERN --session=$SESSION_NAME "$@"
+        ;;
+    youtube)
+        fabric -y "$LINK" | fabric -sp summarize --session=$SESSION_NAME
+        ;;
+esac
