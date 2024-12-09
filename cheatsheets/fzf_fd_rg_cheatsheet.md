@@ -77,6 +77,8 @@ search:
     - at cmd line, fzf over files/dir and selection text inserted after `foo some string bar`
 - `<alt-c>`  (option is alt in osx)
     - at cmd line, fzf over dirs and cd to selection
+- preview window layout
+    - `fzf --preview "ls {}" --preview-window=down,80%` - preview is on bottom and 80% of fzf total size
 
 
 ## FD
