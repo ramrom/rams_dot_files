@@ -2,16 +2,23 @@
 
 # FABRIC shell wrapper
 
-usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -c(FROM CLIPBOARD) ] [ -p PATTERN ] [ -i(fzf print session) ] QUERY'; }
+# TODO: better printsession, have entries show query, or "clipboard" if a pbpaste, or the url if youtube summarize
+    # then fzf selection shows as part of item, prolly will need a seperate json file to track this
+
+usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -c(FROM CLIPBOARD) ]  [ -p PATTERN ] [ -i(fzf print session) ] QUERY';
+          echo '              [ -P(fzf over patterns) ]'; }
+
+BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 
 PATTERN=summarize
 ACTION=query
-while getopts 'hcip:y:' x; do
+while getopts 'hPcip:y:' x; do
     case $x in
         h) usage && exit 1 ;;
         c) ACTION=clipboard;;
         y) ACTION=youtube; LINK="$OPTARG" ;;
         p) PATTERN="$OPTARG" ;;
+        P) FZF_PATTERN=1 ;;
         i) ACTION=printsession ;;
         *) echo && usage && exit 1 ;;
     esac
@@ -20,23 +27,30 @@ shift $(($OPTIND - 1))
 
 [ -z "$1" -a "$ACTION" = "query" ] && echo "1st arg missing!" && exit 1
 
-CURRENT_MONTH=$(date '+%b')
-CURRENT_DAY=$(date '+%d')
-CURRENT_YEAR=$(date '+%y')
-SESSION_NAME=default-${CURRENT_MONTH}${CURRENT_DAY}-${CURRENT_YEAR}
+# CURRENT_MONTH=$(date '+%b')
+# CURRENT_DAY=$(date '+%d')
+# CURRENT_YEAR=$(date '+%y')
+# SESSION_NAME=default-${CURRENT_MONTH}${CURRENT_DAY}-${CURRENT_YEAR}
+TIMESTAMP=$(date '+%Y-%m-%d---%H-%M-%S')
+SESSION_NAME=default-${TIMESTAMP}
+
+if [ -n "$FZF_PATTERN" ]; then
+    PATTERN=$(fabric --listpatterns | fzf)
+fi
 
 case "$ACTION" in
     query)
-        fabric -p $PATTERN --session=$SESSION_NAME "$@"
+        fabric -p $PATTERN --session=$SESSION_NAME "$@" | $BATBIN -l md --paging never
         ;;
     clipboard)
-        pbpaste | fabric -p $PATTERN --session=$SESSION_NAME
+        pbpaste | fabric -p $PATTERN --session=$SESSION_NAME | $BATBIN -l md --paging never
         ;;
     printsession)
-        sess=$(fabric --listsessions | fzf)
-        fabric --printsession=${sess}
+        PREVIEW_CMD="fabric --printsession={} | $BATBIN -l md --color always"
+        sess=$(fabric --listsessions | fzf --preview "${PREVIEW_CMD}")
+        fabric --printsession=${sess} | $BATBIN -l md --paging never
         ;;
     youtube)
-        fabric -y "$LINK" | fabric -sp summarize --session=$SESSION_NAME
+        fabric -y "$LINK" | fabric -sp summarize --session=$SESSION_NAME | $BATBIN -l md --paging never
         ;;
 esac

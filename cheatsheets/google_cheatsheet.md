@@ -107,6 +107,18 @@ up/down arrow, or `j`/`k`    - next/prev email in chain
 - up/down arrow (while video is active element) - up/down volume by 5%
 - add timestamp to a video link: append `&t=1m30s`
 
+## YOUTUBE API
+- API docs - https://developers.google.com/youtube/v3/docs
+- get subscriptions call
+   - `xh https://www.googleapis.com/youtube/v3/subscriptions key==myyoutubeapikey channelId=UCD5vKSv4XXoY6wn7jpaO7-A`
+- to get RSS feed just need channelId 
+    - going to channel page, e.g. `https://www.youtube.com/@veritasium` , "view source", then grep `RSS`
+        - e.g. `https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA` for veritasium
+    - or any video for a channel, in "view source", grep for `channelId`
+- accessing personal data needs oauth2 with scopes
+    - docs - https://developers.google.com/youtube/v3/guides/auth/server-side-web-apps
+- dec2024 - looks like youtube removed getting watch history 4 years back
+
 ## SPREADSHEET
 - full func list: https://support.google.com/docs/table/25273?hl=en&page=table.cs&tab=1240291&visit_id=638291857469023287-758844995&rd=1
 

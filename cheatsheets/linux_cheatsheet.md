@@ -631,6 +631,9 @@ pulsemixer - volume manager with pulseaudio
     - enter=start, p=pause, f=fullscreen, escesc=quit, space=runtimefast
     - z=a button, x=b button, h=reset state, o=toggle record movie
     - netplay - host/clients architecture to play any multiplayer game with peeps over the internet
+- newsboat - good CLI RSS reader and more
+    - main page: https://newsboat.org/
+        - docs - https://newsboat.org/releases/2.37/docs/newsboat.html
 - **transmission** - great torrent program
     - SETUP
         - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/
