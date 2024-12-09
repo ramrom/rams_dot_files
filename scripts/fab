@@ -35,7 +35,8 @@ TIMESTAMP=$(date '+%Y-%m-%d---%H-%M-%S')
 SESSION_NAME=default-${TIMESTAMP}
 
 if [ -n "$FZF_PATTERN" ]; then
-    PATTERN=$(fabric --listpatterns | fzf)
+    PREVIEW_CMD="$BATBIN --color always ~/.config/fabric/patterns/{}/system.md"
+    PATTERN=$(fabric --listpatterns | fzf --height 100% --preview "${PREVIEW_CMD}" --preview-window=right,75%)
 fi
 
 case "$ACTION" in
@@ -47,7 +48,7 @@ case "$ACTION" in
         ;;
     printsession)
         PREVIEW_CMD="fabric --printsession={} | $BATBIN -l md --color always"
-        sess=$(fabric --listsessions | fzf --height 100% --preview "${PREVIEW_CMD}" --preview-window=down,80%)
+        sess=$(fabric --listsessions | fzf --height 100% --preview "${PREVIEW_CMD}" --preview-window=right,75%)
         fabric --printsession=${sess} | $BATBIN -l md --paging never
         ;;
     youtube)
