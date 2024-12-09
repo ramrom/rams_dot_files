@@ -148,6 +148,9 @@ alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 
+# FABRIC
+alias fabe="cd ~/.config/fabric"
+
 # FZF
 alias fa='ff -d 1 -k'
 alias fh='ff ~'

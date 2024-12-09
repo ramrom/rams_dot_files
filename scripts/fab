@@ -2,15 +2,17 @@
 
 # FABRIC shell wrapper
 
-usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -p PATTERN ] QUERY'; }
+usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -c(FROM CLIPBOARD) ] [ -p PATTERN ] [ -i(fzf print session) ] QUERY'; }
 
 PATTERN=summarize
 ACTION=query
-while getopts 'hp:y:' x; do
+while getopts 'hcip:y:' x; do
     case $x in
         h) usage && exit 1 ;;
+        c) ACTION=clipboard;;
         y) ACTION=youtube; LINK="$OPTARG" ;;
         p) PATTERN="$OPTARG" ;;
+        i) ACTION=printsession ;;
         *) echo && usage && exit 1 ;;
     esac
 done
@@ -26,6 +28,13 @@ SESSION_NAME=default-${CURRENT_MONTH}${CURRENT_DAY}-${CURRENT_YEAR}
 case "$ACTION" in
     query)
         fabric -p $PATTERN --session=$SESSION_NAME "$@"
+        ;;
+    clipboard)
+        pbpaste | fabric -p $PATTERN --session=$SESSION_NAME
+        ;;
+    printsession)
+        sess=$(fabric --listsessions | fzf)
+        fabric --printsession=${sess}
         ;;
     youtube)
         fabric -y "$LINK" | fabric -sp summarize --session=$SESSION_NAME
