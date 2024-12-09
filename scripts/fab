@@ -5,8 +5,8 @@
 # TODO: better printsession, have entries show query, or "clipboard" if a pbpaste, or the url if youtube summarize
     # then fzf selection shows as part of item, prolly will need a seperate json file to track this
 
-usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -c(FROM CLIPBOARD) ]  [ -p PATTERN ] [ -i(fzf print session) ] QUERY';
-          echo '              [ -P(fzf over patterns) ]'; }
+usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -c(FROM CLIPBOARD) ]  [ -p PATTERN ] [ -i(fzf print session) ]';
+          echo '              [ -P(fzf over patterns) ] QUERY'; }
 
 BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 
@@ -27,10 +27,6 @@ shift $(($OPTIND - 1))
 
 [ -z "$1" -a "$ACTION" = "query" ] && echo "1st arg missing!" && exit 1
 
-# CURRENT_MONTH=$(date '+%b')
-# CURRENT_DAY=$(date '+%d')
-# CURRENT_YEAR=$(date '+%y')
-# SESSION_NAME=default-${CURRENT_MONTH}${CURRENT_DAY}-${CURRENT_YEAR}
 TIMESTAMP=$(date '+%Y-%m-%d---%H-%M-%S')
 SESSION_NAME=default-${TIMESTAMP}
 
