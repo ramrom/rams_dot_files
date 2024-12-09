@@ -282,21 +282,25 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - wmctrl - window manager control
     - NEEDS DISPLAY VAR SET
     - display window number/ID in hexadecimal, xdotool display in decimal
-    - `wmctrl -l`, will list all windows in window manager, `wmctrl -d` list desktops, `wmctrl -m` list name of window manager
-    - `-G` option tells geometry info, heightxwidth, and x,y position on desktop
-        - *NOTE* the height and widght are just content area
+    - `wmctrl -l`, will list all windows in window manager
+        - `-G` option tells geometry info, heightxwidth, and x,y position on desktop
+            - *NOTE* the height and widght are just content area
+    - `wmctrl -d` list desktops
+    - `wmctrl -m` list name of window manager
     - moving a "firefox" named window, `wmctrl -r Firefox -e '0,6,0,1040,708'`
         - can target window by ID with -i `wmctrl -i -r 0x03000003 -t 2`
     - `wmctrl - 1`, set active desktop to 1
     - `wmctrl -r Psensor -b toggle,fullscreen` , goto fullscreen
     - `wmctrl -r :ACTIVE: -b toggle,shaded` - toggle shade on active window
     - `wmctrl -c` , close window gracefull
+    - `wmctrl -ia <window_id>` - make window active, will also un-minimize a window
 - xdotool - http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html
     - NEEDS DISPLAY VAR SET
-    xdotool search --onlyvisible --name firefox  # say firefox is window id 123
-    xdotool getwindowname 123   # should print `firefox`
-    xdotool windowsize 123 800 600
-    xdotool windowmove 123 0 1080
+    - `xdotool search --onlyvisible --name firefox`  # say firefox is window id 123
+    - `xdotool getwindowname 123`   # should print `firefox`
+    - `xdotool windowsize 123 800 600`
+    - `xdotool windowmove 123 0 1080`
+    - `xdotool windowminimize <window_id>` - minimize window with window id
 - nvidia-smi - show nvidia card mem usage, gpu temp, X processes
     - cli tool uses the [NVML](https://developer.nvidia.com/management-library-nvml) library
 - nvidia-xconfig - show nvidia config
@@ -347,6 +351,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - super+tab, alt+tab  - switch between running apps
 - super+left/right-arrow - snap to left or right half of desktop
 - super+home - switch to 1st workspace
+- super+H - hide active window
 - super + 1-9 - launch application 1-9 in quicklaunch menu
 - super + page-up/page-down - go forward/back workspaces
 - ctrl + alt + up-arrow/down-arrow - go forward/back workspaces
