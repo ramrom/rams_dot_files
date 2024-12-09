@@ -56,7 +56,8 @@
 ## COMMON COMMANDS
 - `cat /etc/issue`        - show distro and version
 - `lscpu` or `cat /proc/cpuinfo` for cpu info
-- `ctr` + `alt` + `FnX` - switch to tty x
+- `ctrl` + `alt` + `FnX` - switch to ttyX, from 1 to 6
+    - for ubuntu22 and later, X is 3 to 6
     - from cli to switch to vtty2 can do: `sudo chvt 2`
 ```sh
 sudo shutdown -h now (halt now)
