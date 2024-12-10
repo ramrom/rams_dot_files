@@ -338,7 +338,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - remmina - remote client for RDP, VNC, SSH, and more
     - ubuntu22 - uses RDP for gnome remote desktop
 - TIP: if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
-### GNOME HOTKEYS
+### HOTKEYS
 - https://wiki.gnome.org/Design/OS/KeyboardShortcuts
 - also https://help.ubuntu.com/community/KeyboardShortcuts
 - creating custom keyboard hotkeys
@@ -346,23 +346,24 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - some apps, like `vlc` and `spotify` work w/o full path, maybe cause they are GUI apps?
 - super - usually the "windows" key on keyboards
     - hitting super will bring up activities overview
+### DEFAULT HOTKEYS
 - alt+ctr+t - open terminal
 - alt+ctr+l, super+l  - lock screen
 - super+tab, alt+tab  - switch between running apps
 - super+left/right-arrow - snap to left or right half of desktop
-- super+home - switch to 1st workspace
 - super+H - hide active window
 - super + 1-9 - launch application 1-9 in quicklaunch menu
-- super + page-up/page-down - go forward/back workspaces
-- ctrl + alt + up-arrow/down-arrow - go forward/back workspaces
-- super + shift + page-up/page-down - move active window to next/previous workspace
 - super+up/down-arrow - app full screen, app original size
+- workspaces
+    - super+home - switch to 1st workspace
+    - super + page-up/page-down - go forward/back workspaces
+    - ctrl + alt + up-arrow/down-arrow - go forward/back workspaces
+    - super + shift + page-up/page-down - move active window to next/previous workspace
 - super+m - toggle notif tray
-- shift + ctr + c - copy
-- shift + ctr + v - paste
+- ctrl + shift + c - copy
+- ctrl + shift + v - paste
 - alt+f2  - bring up prompt to run a shell command
 - ctrl+alt+delete - logout
-- ctrl+shift+ c/p - copy and paste
 - super+NUM  - click the NUM icon in the dash(quick launch)
 - screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
     - Prnt-Screen - full desktop screenshot
