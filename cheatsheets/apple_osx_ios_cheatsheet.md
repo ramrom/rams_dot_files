@@ -101,19 +101,30 @@
     - `/Library/LaunchAgents` - same as above but applies to _all_ users
 
 
-## KEYBOARD SHORTCUTS
-- full list: https://support.apple.com/en-us/HT201236
-- command + tab  - switch between apps
-- command + space - spotlight search
-- command + H - goto home screen
-- command + N - compose new email in mail app
-- command + ctrl + q  - lock the screen
-- command + c copy
-- command + v paste
-- command + x cut
-- command + a select all
-- command + z undo
-- command + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
+## KEYBOARD SHORTCUTS / HOTKEYS
+- full list: https://support.apple.com/en-us/102650
+- cmd + tab  - switch between apps
+- cmd + space - spotlight search
+- cmd + H - hide the window of active app
+- cmd + N - compose new email in mail app
+- cmd + J - display view options within app
+    - chrome -> find: jump to selection
+- cmd + L - ???
+    - chrome: make url bar active field
+- cmd + K - opens window related to connection to a server, clears screen in terminal
+- cmd + ctrl + q  - lock the screen
+- cmd + W - close window
+- cmd + Q - quit application
+- cmd + O - open file
+- cmd + T - open new tab
+- cmd + C - copy
+- cmd + V - paste
+- cmd + X - cut
+- cmd + A - select all
+- cmd + Z - undo
+- cmd + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
+- cmd + 1-9 - for safari/chrome select tab X
+- cmd + shift + N           - open new folder in finder
 - cmd + shift + 3           - screenshot
 - cmd + shift + 4           - screenshot area
 - cmd + shift + 4, space    - screenshot window
