@@ -39,6 +39,9 @@
 ### REGISTRIES
 - `docker login foo.com` - login to a docker registry
     - `~/.docker/config.json` will show list of sessions for registries
+    - OSX error: `exec: "docker-credential-desktop.exe": executable file not found in $PATH`
+        - see https://stackoverflow.com/questions/65896681/exec-docker-credential-desktop-exe-executable-file-not-found-in-path
+            - renaming `credsStore` to `credStore` worked fine
 - add mirrors - see https://docs.docker.com/docker-hub/mirror/
     - can start dockerd with `--registry` or manually add to `~/.docker/daemon.json`
 ### SECURITY

@@ -6,19 +6,20 @@
     # then fzf selection shows as part of item, prolly will need a seperate json file to track this
 
 usage() { echo 'Usage: fabric [ -h(help) ] [ -y YOUTUBE_LINK ] [ -c(FROM CLIPBOARD) ]  [ -p PATTERN ] [ -i(fzf print session) ]';
-          echo '              [ -P(fzf over patterns) ] QUERY'; }
+          echo '              [ -N(no pattern) ] [ -P(fzf over patterns) ] QUERY'; }
 
 BATBIN="bat"; [ $(uname) = "Linux" ] && BATBIN='batcat'
 
 PATTERN=summarize
 ACTION=query
-while getopts 'hPcip:y:' x; do
+while getopts 'hNPcip:y:' x; do
     case $x in
         h) usage && exit 1 ;;
         c) ACTION=clipboard;;
         y) ACTION=youtube; LINK="$OPTARG" ;;
         p) PATTERN="$OPTARG" ;;
         P) FZF_PATTERN=1 ;;
+        N) NO_PATTERN=1 ;;
         i) ACTION=printsession ;;
         *) echo && usage && exit 1 ;;
     esac
@@ -35,19 +36,23 @@ if [ -n "$FZF_PATTERN" ]; then
     PATTERN=$(fabric --listpatterns | fzf --height 100% --preview "${PREVIEW_CMD}" --preview-window=right,75%)
 fi
 
+if [ -n "$NO_PATTERN" ]; then
+    PATTERN=no_pattern
+fi
+
 case "$ACTION" in
     query)
-        fabric -p $PATTERN --session=$SESSION_NAME "$@" | $BATBIN -l md --paging never
+        fabric -p $PATTERN --session=$SESSION_NAME "$@" | $BATBIN -p -l md --paging never
         ;;
     clipboard)
-        pbpaste | fabric -p $PATTERN --session=$SESSION_NAME | $BATBIN -l md --paging never
+        pbpaste | fabric -p $PATTERN --session=$SESSION_NAME | $BATBIN -p -l md --paging never
         ;;
     printsession)
-        PREVIEW_CMD="fabric --printsession={} | $BATBIN -l md --color always"
+        PREVIEW_CMD="fabric --printsession={} | $BATBIN -p -l md --color always"
         sess=$(fabric --listsessions | fzf --height 100% --preview "${PREVIEW_CMD}" --preview-window=right,75%)
-        fabric --printsession=${sess} | $BATBIN -l md --paging never
+        fabric --printsession=${sess} | $BATBIN -p -l md --paging never
         ;;
     youtube)
-        fabric -y "$LINK" | fabric -sp $PATTERN --session=$SESSION_NAME | $BATBIN -l md --paging never
+        fabric -y "$LINK" | fabric -sp $PATTERN --session=$SESSION_NAME | $BATBIN -p -l md --paging never
         ;;
 esac
