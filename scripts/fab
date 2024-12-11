@@ -33,19 +33,20 @@ SESSION_NAME=default-${TIMESTAMP}
 if [ -n "$FZF_PATTERN" ]; then
     PREVIEW_CMD="$BATBIN --color always ~/.config/fabric/patterns/{}/system.md"
     PATTERN=$(fabric --listpatterns | fzf --height 100% --preview "${PREVIEW_CMD}" --preview-window=right,75%)
+    PATTERN_ARG="-p $PATTERN"
 fi
 
 
 case "$ACTION" in
     query)
-        [ -z "$PATTERN" ] && PATTERN=no_pattern
-        [ -n "$SUMMARIZE" ] && PATTERN=summarize
-        fabric -p $PATTERN --session=$SESSION_NAME "$@" | $BATBIN -p -l md --paging never
+        [ -z "$PATTERN" ] && PATTERN_ARG=
+        [ -n "$SUMMARIZE" ] && PATTERN_ARG="-p summarize"
+        fabric $PATTERN_ARG --session=$SESSION_NAME "$@" | $BATBIN -p -l md --paging never
         ;;
     clipboard)
-        [ -z "$PATTERN" ] && PATTERN=no_pattern
-        [ -n "$SUMMARIZE" ] && PATTERN=summarize
-        pbpaste | fabric -p $PATTERN --session=$SESSION_NAME | $BATBIN -p -l md --paging never
+        [ -z "$PATTERN" ] && PATTERN_ARG=
+        [ -n "$SUMMARIZE" ] && PATTERN_ARG="-p summarize"
+        pbpaste | fabric $PATTERN_ARG --session=$SESSION_NAME | $BATBIN -p -l md --paging never
         ;;
     printsession)
         PREVIEW_CMD="fabric --printsession={} | $BATBIN -p -l md --color always"
@@ -53,7 +54,7 @@ case "$ACTION" in
         fabric --printsession=${sess} | $BATBIN -p -l md --paging never
         ;;
     youtube)
-        [ -z "$PATTERN" ] && PATTERN=summarize
-        fabric -y "$LINK" | fabric -sp $PATTERN --session=$SESSION_NAME | $BATBIN -p -l md --paging never
+        [ -z "$PATTERN" ] && PATTERN_ARG="-p summarize"
+        fabric -y "$LINK" | fabric -s $PATTERN_ARG --session=$SESSION_NAME | $BATBIN -p -l md --paging never
         ;;
 esac
