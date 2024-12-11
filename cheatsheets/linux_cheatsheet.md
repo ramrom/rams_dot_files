@@ -348,7 +348,10 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - hitting super will bring up activities overview
 ### DEFAULT HOTKEYS
 - alt+ctr+t - open terminal
+- super+S - open quick settings(top right) menu
+- super+A - show all app views
 - super+M - toggle notif tray
+    - super+V - toggle notif tray
 - super+H - hide active window
 - super+L - lock screen
     - also alt+ctr+l
