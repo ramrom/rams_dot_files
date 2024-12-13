@@ -572,7 +572,7 @@
     - cmd+shift+Y activate extension
     - cmd+shift+L for autofill
     - cmd+shift+9 generate new password and copy to clipboard
-- excluded domains: browser ext -> settings -> excluded domains
+- excluded domains: browser ext -> settings -> notifications -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
 
 ## XBROWSWERSYNC

@@ -72,3 +72,5 @@
 ### CHATGPT LLM
 - GPT3 - has 175B params/weights, organized into 28k matrices, ~50k words, ~12k embedding "dimenions", 2048 word context size
 - model `gpt-4o-mini` - release 2024, free to use
+### KHANMIGO
+- openAI and sal khan(of khan academy) collaborated to create a AI tutor for kids

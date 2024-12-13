@@ -2,32 +2,34 @@
 
 [ ! "$(uname)" = "Darwin" ] && echo "RLY-ERROR: chrome-json-summary needs applescript, only Darwin os" >&2 && exit 1
 
-usage () { echo "Usage: chrome-save-state [ -h(help) ] [ -s(summary only) ] [ -r(restore) ] "; }
+usage () { echo "Usage: browser-save-state [ -h(help) ] [-b BROWSER(default chrome) ] [ -s(summary only) ] [ -r(restore) ] "; }
 
 ACTION=SAVE_STATE
 
-while getopts 'hsr' x; do
+BROWSER="Google Chrome"
+while getopts 'hb:sr' x; do
     case $x in
         h) usage && exit 1 ;;
         s) ACTION=SUMMARY_ONLY ;;
+        b) BROWSER="$OPTARG" ;;
         r) ACTION=RESTORE ;;
         *) usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
 
-chrome_json_summary() {
-    wincount=$(osascript -e 'tell application "Google Chrome" to get number of windows')
+browser_json_summary() {
+    wincount=$(osascript -e "tell application \"${BROWSER}\" to get number of windows")
     [ "$wincount" -eq 0 ] && echo "zero windows!" && return
 
     json="["
     for (( i=1; i<=$wincount; i++)); do
         json="$json""["
-        cmd="osascript -e 'tell application \"Google Chrome\" to get number of tabs in window $i'"
+        cmd="osascript -e 'tell application \"${BROWSER}\" to get number of tabs in window $i'"
         tabcount=$(eval $cmd)
         for (( j=1; j<=$tabcount; j++)); do
             #osascript -e 'tell application "Google Chrome" to get {URL,title} of tab 1 of window 1'
-            cmd="osascript -e 'tell application \"Google Chrome\" to get URL of tab $j of window $i'"
+            cmd="osascript -e 'tell application \"${BROWSER}\" to get URL of tab $j of window $i'"
             url=$(eval $cmd)
             [ $j -eq $tabcount ] && json="$json\"$url\"" || json="$json\"$url\","
         done
@@ -36,8 +38,7 @@ chrome_json_summary() {
     echo "$json]"
 }
 
-# NOTE: restore should only be used by chrome isnt set to remember state or if it crashed and failed to remember state.
-#       otherwise duplicate tabs and windows will be opened
+# NOTE: new windows and tabs will be opened, if browser is set to remember on restart this will create additional windows/tabs
 restore () {
     json="$(cat $1)"
     wincount=$(echo "$json" | jq '. | length')
@@ -52,11 +53,13 @@ restore () {
     done
 }
 
+BNAME=$(echo "${BROWSER}" | tr ' ' _)   # replace space with underscore
+
 case $ACTION in
-    SAVE_STATE) echo $(chrome_json_summary) > ~/Documents/chrome_tabs_backup.json ;;
-    SUMMARY_ONLY) chrome_json_summary ;;
+    SAVE_STATE) echo $(browser_json_summary) > ~/Documents/${BNAME}_tabs_backup.json ;;
+    SUMMARY_ONLY) browser_json_summary ;;
     RESTORE)
-        [ -z "$RESTORE_FILE" ] && RESTORE_FILE=~/Documents/chrome_tabs_backup.json
+        [ -z "$RESTORE_FILE" ] && RESTORE_FILE=~/Documents/${BNAME}_tabs_backup.json
         restore "$RESTORE_FILE"
         ;;
     *) echo "$ACTION not a valid option" && exit 1 ;;
