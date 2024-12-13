@@ -111,7 +111,8 @@
     - chrome -> find: jump to selection
 - cmd + L - ???
     - chrome: make url bar active field
-- cmd + K - opens window related to connection to a server, clears screen in terminal
+- cmd + K - opens window related to connection to a server, clears screen in terminal/iterm
+- cmd + ; - does some wierd autocompletion in terminal/iterm
 - cmd + ctrl + q  - lock the screen
 - cmd + W - close window
 - cmd + Q - quit application
@@ -123,7 +124,7 @@
 - cmd + A - select all
 - cmd + Z - undo
 - cmd + ,   typically bring up preferences window in many apps (chrome, spotify, slack, whatsapp, vlc, iterm)
-- cmd + 1-9 - for safari/chrome select tab X
+- cmd + 1-9 - for safari/chrome/iterm select tab X
 - cmd + shift + N           - open new folder in finder
 - cmd + shift + 3           - screenshot
 - cmd + shift + 4           - screenshot area
