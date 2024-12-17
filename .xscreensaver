@@ -1,14 +1,6 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.08 for ramrom on Wed Aug 28 15:37:17 2024.
+# Written by xscreensaver-settings 6.08 for ramrom on Tue Dec 17 11:20:44 2024.
 # https://www.jwz.org/xscreensaver/
-
-# FAVORITES
-#   S tier: hex trail, hexadrop, coral
-#   A tier: IFS, Hypertorus, cube grid, etruscan venus, flurry, noof, surfaces
-#   B tier: cuboctahedron eversion, gravity well, pacman, scooter, splodesic
-#   C tier: deep stars, intermomentary
-
-# HIGH CPU: marbling(maybe b/c no GL?)
 
 timeout:	0:05:00
 cycle:		0:01:00
@@ -45,7 +37,7 @@ textFile:
 textProgram:	fortune
 textURL:	https://feeds.feedburner.com/ubuntu-news
 dialogTheme:	default
-settingsGeom:	1165,396 -1,-1
+settingsGeom:	1373,332 -1,-1
 
 programs:								      \
 -				maze --root				    \n\
@@ -161,7 +153,7 @@ programs:								      \
 - GL: 				boxed --root				    \n\
 - GL: 				cubenetic --root			    \n\
 - GL: 				endgame --root				    \n\
--				euler2d --root				    \n\
+				euler2d --root				    \n\
 -				fluidballs --root			    \n\
   GL: 				flurry --root				    \n\
 - GL: 				glblur --root				    \n\
@@ -219,7 +211,7 @@ programs:								      \
 				wormhole --root				    \n\
 - GL: 				antmaze --root				    \n\
 - GL: 				boing --root				    \n\
--				boxfit --root				    \n\
+				boxfit --root				    \n\
 - GL: 				carousel --root				    \n\
 -				celtic --root				    \n\
 - GL: 				crackberg --root			    \n\
@@ -293,7 +285,7 @@ programs:								      \
   GL: 				sphereeversion --root			    \n\
 - GL: 				dnalogo --root				    \n\
 				binaryhorizon --root			    \n\
-				marbling --root				    \n\
+-				marbling --root				    \n\
 - GL: 				chompytower --root			    \n\
   GL: 				hextrail --root				    \n\
 - GL: 				mapscroller --root			    \n\
