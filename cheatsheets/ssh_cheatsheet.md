@@ -69,4 +69,9 @@ curl -x socks5h://127.0.0.1:1234 https://google.com
 # create local TCP 8080 to forward to remote port 8080
 # -n (redir stdin from /dev/.null, so run in background), -N(dont execute remote command), -f(go to background b4 cmd execution)
 ssh -f -N -n -L8080:127.0.0.1:8080 someremotehost
+
+# DEBUG
+ssh -v somehost     # LEVEL 1 DEBUG
+ssh -vv somehost    # LEVEL 2 DEBUG
+ssh -vvv somehost   # LEVEL 3 DEBUG
 ```

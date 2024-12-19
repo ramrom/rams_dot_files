@@ -17,6 +17,8 @@
     - no transcoding, tested 5 simulatenous HD streams (mix of webplayer and vlc local) no problem, low cpu usage
     - 2 transcodes of sub 1080p movies barely kept up, once in a while one paused to buffer, 100%cpu on server
 - web player generally supports most codecs
+- if dashboard shows a stream as "indirect connection" 
+    - it means stream is being relayed through plex cloud servers, not direct from plex server to client
 - media support for plex player: https://support.plex.tv/articles/203810286-what-media-formats-are-supported/
 - direct video playback limit on iphone app, get plexpass
     - https://support.plex.tv/articles/202526943-plex-free-vs-paid/

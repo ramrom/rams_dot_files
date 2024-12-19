@@ -1,0 +1,219 @@
+{
+    "schemeVersion": 2,
+    "enabled": true,
+    "fetchNews": true,
+    "theme": {
+        "mode": 1,
+        "brightness": 100,
+        "contrast": 100,
+        "grayscale": 0,
+        "sepia": 0,
+        "useFont": false,
+        "fontFamily": "Helvetica Neue",
+        "textStroke": 0,
+        "engine": "dynamicTheme",
+        "stylesheet": "",
+        "darkSchemeBackgroundColor": "#181a1b",
+        "darkSchemeTextColor": "#e8e6e3",
+        "lightSchemeBackgroundColor": "#dcdad7",
+        "lightSchemeTextColor": "#181a1b",
+        "scrollbarColor": "",
+        "selectionColor": "auto",
+        "styleSystemControls": false,
+        "lightColorScheme": "Default",
+        "darkColorScheme": "Default",
+        "immediateModify": false
+    },
+    "presets": [],
+    "customThemes": [
+        {
+            "builtIn": true,
+            "theme": {
+                "mode": 1,
+                "brightness": 100,
+                "contrast": 100,
+                "grayscale": 0,
+                "sepia": 0,
+                "useFont": false,
+                "fontFamily": "Helvetica Neue",
+                "textStroke": 0,
+                "engine": "svgFilter",
+                "stylesheet": "",
+                "darkSchemeBackgroundColor": "#181a1b",
+                "darkSchemeTextColor": "#e8e6e3",
+                "lightSchemeBackgroundColor": "#dcdad7",
+                "lightSchemeTextColor": "#181a1b",
+                "scrollbarColor": "",
+                "selectionColor": "auto",
+                "styleSystemControls": false,
+                "lightColorScheme": "Default",
+                "darkColorScheme": "Default",
+                "immediateModify": false
+            },
+            "url": [
+                "*.officeapps.live.com"
+            ]
+        },
+        {
+            "builtIn": true,
+            "theme": {
+                "mode": 1,
+                "brightness": 100,
+                "contrast": 100,
+                "grayscale": 0,
+                "sepia": 0,
+                "useFont": false,
+                "fontFamily": "Helvetica Neue",
+                "textStroke": 0,
+                "engine": "svgFilter",
+                "stylesheet": "",
+                "darkSchemeBackgroundColor": "#181a1b",
+                "darkSchemeTextColor": "#e8e6e3",
+                "lightSchemeBackgroundColor": "#dcdad7",
+                "lightSchemeTextColor": "#181a1b",
+                "scrollbarColor": "",
+                "selectionColor": "auto",
+                "styleSystemControls": false,
+                "lightColorScheme": "Default",
+                "darkColorScheme": "Default",
+                "immediateModify": false
+            },
+            "url": [
+                "*.sharepoint.com"
+            ]
+        },
+        {
+            "builtIn": true,
+            "theme": {
+                "mode": 1,
+                "brightness": 100,
+                "contrast": 100,
+                "grayscale": 0,
+                "sepia": 0,
+                "useFont": false,
+                "fontFamily": "Helvetica Neue",
+                "textStroke": 0,
+                "engine": "svgFilter",
+                "stylesheet": "",
+                "darkSchemeBackgroundColor": "#181a1b",
+                "darkSchemeTextColor": "#e8e6e3",
+                "lightSchemeBackgroundColor": "#dcdad7",
+                "lightSchemeTextColor": "#181a1b",
+                "scrollbarColor": "",
+                "selectionColor": "auto",
+                "styleSystemControls": false,
+                "lightColorScheme": "Default",
+                "darkColorScheme": "Default",
+                "immediateModify": false
+            },
+            "url": [
+                "docs.google.com"
+            ]
+        },
+        {
+            "builtIn": true,
+            "theme": {
+                "mode": 1,
+                "brightness": 100,
+                "contrast": 100,
+                "grayscale": 0,
+                "sepia": 0,
+                "useFont": false,
+                "fontFamily": "Helvetica Neue",
+                "textStroke": 0,
+                "engine": "svgFilter",
+                "stylesheet": "",
+                "darkSchemeBackgroundColor": "#181a1b",
+                "darkSchemeTextColor": "#e8e6e3",
+                "lightSchemeBackgroundColor": "#dcdad7",
+                "lightSchemeTextColor": "#181a1b",
+                "scrollbarColor": "",
+                "selectionColor": "auto",
+                "styleSystemControls": false,
+                "lightColorScheme": "Default",
+                "darkColorScheme": "Default",
+                "immediateModify": false
+            },
+            "url": [
+                "onedrive.live.com"
+            ]
+        }
+    ],
+    "enabledByDefault": false,
+    "enabledFor": [
+        "fivethirtyeight.com",
+        "www.space.com",
+        "understandingwar.org",
+        "slashdot.org",
+        "www.cnbc.com",
+        "accountsettings.ebay.com",
+        "finance.yahoo.com",
+        "crates.io",
+        "cnn.com",
+        "www.levels.fyi",
+        "www.cbsnews.com",
+        "abcnews.go.com",
+        "typelevel.org",
+        "www.npr.org",
+        "www.cnn.com"
+    ],
+    "disabledFor": [],
+    "changeBrowserTheme": false,
+    "syncSettings": true,
+    "syncSitesFixes": true,
+    "automation": {
+        "behavior": "OnOff",
+        "enabled": false,
+        "mode": ""
+    },
+    "time": {
+        "activation": "18:00",
+        "deactivation": "9:00"
+    },
+    "location": {
+        "latitude": null,
+        "longitude": null
+    },
+    "previewNewDesign": false,
+    "previewNewestDesign": false,
+    "enableForPDF": false,
+    "enableForProtectedPages": false,
+    "enableContextMenus": false,
+    "detectDarkTheme": false,
+    "displayedNews": [
+        "filter-mode",
+        "news-2023",
+        "thanks-2023",
+        "g-search-crash"
+    ],
+    "installation": {
+        "date": 1726500666111,
+        "reason": "update",
+        "version": "4.9.90"
+    },
+    "readNews": [
+        "filter-mode",
+        "v5-survey",
+        "mobile",
+        "detect-dark-theme",
+        "no-war",
+        "chrome-favorites-2021",
+        "thanks-2021",
+        "5m-users",
+        "v4-9-16",
+        "v4-9",
+        "attention",
+        "dr-5-announcement",
+        "2m-users",
+        "automation",
+        "product-hunt-golden-kitty-2018",
+        "time-settings",
+        "safari",
+        "500k-users",
+        "stylish",
+        "product-hunt",
+        "custom-site-settings",
+        "thanks-for-contribution",
+        "dynamic-theme"
+    ]
+}
