@@ -365,11 +365,11 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `super` + `page-up/page-down` - go forward/back workspaces
     - `ctrl` + alt + `up-arrow/down-arrow` - go forward/back workspaces
     - `super` + `shift` + `page-up/page-down` - move active window to next/previous workspace
-- ctrl + shift + c - copy
-- ctrl + shift + v - paste
-- alt+f2  - bring up prompt to run a shell command
-- ctrl+alt+delete - logout
-- super+NUM  - click the NUM icon in the dash(quick launch)
+- `ctrl` + `shift` + `c` - copy
+- `ctrl` + `shift` + `v` - paste
+- `alt`+`f2`  - bring up prompt to run a shell command
+- `ctrl`+`alt`+`delete` - logout
+- `super`+`NUM`  - click the NUM icon in the dash(quick launch)
 - screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
     - Prnt-Screen - full desktop screenshot
     - Prnt-Screen + Alt - active window screenshot
