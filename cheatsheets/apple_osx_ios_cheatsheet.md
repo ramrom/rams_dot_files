@@ -65,8 +65,11 @@
 
 
 ## CLI
-- ref: https://www.mitchchn.me/2014/os-x-terminal/
-- say - speech synth to audio out a sentence
+- reference: https://www.mitchchn.me/2014/os-x-terminal/
+- 2024 - cool keyboard customizer for osx - https://karabiner-elements.pqrs.org/
+- force color to pipe output, be default ls wont colorize
+    - `CLICOLOR_FORCE=1 ls -l | less`
+- `say` - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
         - -o will save it to an audio file
 - `screencapture` - capture screenshot images
@@ -79,16 +82,13 @@
 - `pbpaste` - cli way to paste from clipboard
     - pbpaste | grep foo
 - `mdls`    - get metadata on a file
-- sudo powermetrics  - spits out thermals and LOTS of info, network usage, gpu usage, etc
+- `sudo powermetrics`  - spits out thermals and LOTS of info, network usage, gpu usage, etc
 - `vm_stat` - show some raw memory usage
 - `nettop` - like top but for tcp/udp sockets only and their bandwidth usage!
-- 2024 - cool keyboard customizer for osx - https://karabiner-elements.pqrs.org/
 - `skhd`
     - `launchctl list` to see skhd service is running
         - *DEPRECATED* oct'24 - `brew services` to see if it's running
     - `skhd -r` to reload config file with shortcuts
-- force color to pipe output, be default ls wont colorize
-    - `CLICOLOR_FORCE=1 ls -l | less`
 - `lp` - print from command line
 - `launchctl` - the cli tool that talks to `launchd`, which control apples background daemons(aka services)
     - see list of daemons - `launchctl list`
