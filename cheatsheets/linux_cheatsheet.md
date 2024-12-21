@@ -318,14 +318,22 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 - extensions management in browser: https://extensions.gnome.org/
 - GSETTINGS - cli tool to get and set items in the settings menu
-    - `gsettings list-schemas`, `gsettings list-recursively org.gnome.desktop.wm.keybindings`
+    - `gsettings list-schemas` - get schemas
+    - `gsettings list-recursively org.gnome.desktop.wm.keybindings` - list all in a schema
     - can change basically any setting at cli like you could in GNOME settings menu
-    - list all keyboard shortcuts
-        - `gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys`
+    - keyboard shortcuts schemas (list using `gsetttings list-recursively`)
+        - `org.gnome.settings-daemon.plugins.media-keys`
+            - media/volume/custom-keybindings/touchpad/screen-brightness/etc
+        - `org.gnome.desktop.wm.keybindings`
+            - workspaces switch/move/etc
+        - `org.gnome.shell.keybindings`
+            - open-new-window, switch-to-app
     - list just custom shortcuts
         - `gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings`
-    - how to set a custom shortcut from the cli
-        - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
+    - setting keybindings
+        - `gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Shift><Super>5']"`
+        - custom keybinding that runs a script
+            - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
 - `Startup Applications` - run commands and programs at startup
     - will create `.desktop` files in `~/.config/autostart` folder
 - copy + paste
@@ -609,7 +617,11 @@ pulsemixer - volume manager with pulseaudio
 - `dmesg` - kernel ring buffer, print messages or control it
     - `sudo dmesg -w`   - `-w` will wait for new messages, i.e. like `tail`ing
     - `sudo dmesg -T`   - `-T` print human readable timestamps
-- `dconf`  - sorta related to gsettings, configure database for settings
+- `dconf` - manipulate the dconf database
+    - `dconf dump / > allconfs.ini` - dump all configuration data to file
+- `gsettings` - set gnome settings, accessing/changing the dconf db
+    - it is built on top of `dconf`
+- `gnome-control-center` - cli tool that launches the GUI GNOME settings menu
 - `iwlist` - get info on wireless(wifi) lan
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - `notify-send` - pops up notification
