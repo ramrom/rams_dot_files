@@ -144,6 +144,9 @@ esc - return to calender grid from event details
 - can also message on the web: https://messages.google.com/web/ (requires pairing)
 
 ## VOICE
+- https://en.wikipedia.org/wiki/Google_Voice
+    - limited international texting: can send SMS to canada only, can receive from any country tho
+    - cant make 911 calls from voice
 - voice legacy: in very top left menu, botton item is "legacy google voice"
 - legacy voice lets you screen calls just for certain groups
     - e.g. you can turn off for all contacts group, and screen for anonymous callers

@@ -341,9 +341,13 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `ctrl + c/v` work but not when involving terminal
     - `shift + ctrl + c/v` when coping from terminal or pasting to terminal
         - due to quirk of my setup(emacs keys?) press `ctrl`, then `shift`, then `c/v`
-- common tools
-    - nautilus - file explorer
-    - remmina - remote client for RDP, VNC, SSH, and more
+- COMMON TOOLS
+    - NAUTILUS - file explorer
+    - REMMINA - remote client for RDP, VNC, SSH, and more
+    - THUNDERBIRD - email client
+    - TRANSMISSION - torrent server and client software
+    - SYSTEM MONITOR - shows cpu/mem/disk/net/processes graphs and info
+    - POWER STATISTICS - basic ac power adapter and battery usage
     - ubuntu22 - uses RDP for gnome remote desktop
 - TIP: if a GNOME shell freezes, use: `gnome-shell --replace` from a console tty or ssh session
 ### KEYBOARD SHORTCUTS

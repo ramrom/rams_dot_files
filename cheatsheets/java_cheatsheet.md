@@ -856,6 +856,7 @@ e == e2        // return true, since they are constant and only one instance def
     - need to do `java –enableassertion Test` (or `java –ea Test`) to turn on this keyword
 
 ## REPL
+- online: https://www.jdoodle.com/online-java-compiler
 - `jshell` start REPL env in terminal
     - *NOTE* make sure to switch to appropriate java (e.g. 11 or 17) in shell before launching
     - `jshell --feedback verbose` - start jshell with feeback setting to `verbose`

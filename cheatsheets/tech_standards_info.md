@@ -28,6 +28,9 @@
 - ICCID - each SIM's unique identifier
 - IMEI - International Mobile Equipment Identity, unique ID for a device globally
     - similar to what serial number does, but SN is manufacturer specific
+- eSIM - electronic SIM without a physical SIM card
+    - iphone11+ support it, samsung S20+ supporit it, pixel 3,4,8,9 all support it
+    - compatible phones: https://saily.com/esim-supported-devices/
 
 ## PROCESS SIGNALS
 - most official definition - https://pubs.opengroup.org/onlinepubs/009695399/basedefs/signal.h.html
@@ -737,6 +740,9 @@
 - CIDR - classless inter-domain routing - classful networks eat too much IPv4 space, this lets routers do non-classful routing
     - needs VLSM to support variable length network prefixes
 - VLSM - variable length subnet masking - make better use of address space
+### OTHER
+- signal protocol - https://en.wikipedia.org/wiki/Signal_Protocol , end-to-end encryption for voice and text
+    - used by Signal app, whatsapp, google messages uses it with RCS, messenger and skype offer it as a privacy option
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP

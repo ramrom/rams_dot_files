@@ -6,6 +6,7 @@
     - is required (can't turn it off in https://appleid.apple.com)
     - looks like the 2nd factor will pop up a 6 digit code in a trusted device, and if none maybe the trusted ph #?
 - safari mac: bring up seperate window for dev tools - `cmd` + `shift` + `j`
+- set default browser -> system prefs -> desktop+dock -> default web browser (select browser from dropdown)
 
 ## HARDWARE
 ### M PROCESSORS
