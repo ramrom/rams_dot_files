@@ -67,6 +67,7 @@
     - _NOTE_ make sure middle main panel is active (not side panel or top panel)
     - `e` -> popup to select an entity
     - `c` -> popup to run a command (navigate to a page or run some various actions)
+    - `d` -> popup to select a device (in 2025.1)
     - `my` -> create `my` link
 - feb2023 - `input_number` entity will show a movable slider if in `entities` card, not single `entity` card
 
@@ -163,6 +164,9 @@
 ## BACKUPS
 - they store _all_ files in the config dir, so any custom new files you create
 - base backup is not gzipped tar so `tar -xvf backup.tar`, then the enbedded tar file with the actual backup data is gzipped
+- 2025.1 release - backups are now encrypted https://www.home-assistant.io/integrations/backup/
+    - can't locally tar to unzip since it's encrypted, this was true for the automatic backup
+    - used my script to call hass-cli call manual backup, and i was able to tar unzip it
 
 ## DATA
 - https://www.home-assistant.io/integrations/recorder/
