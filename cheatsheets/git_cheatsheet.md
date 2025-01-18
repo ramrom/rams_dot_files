@@ -50,6 +50,11 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
     git co -b foobranch
     git push --set-upstream remote foobranch
     ```
+- checkout a commit or tag
+    ```sh
+    git checkout 32ab23     # checkout a SHA explicitly
+    git checkout 1.1        # checkout a tag
+    ```
 
 - show tags in a proper sorted order
     - `git tag --sort -version:refname`

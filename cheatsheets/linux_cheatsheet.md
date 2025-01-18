@@ -280,6 +280,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - off: `xrandr --output HDMI-0 --off`, on: `xrandr --output HDMI-0 --auto`
     - turn on and be left of other display: `xrandr --output HDMI-0 --auto --left-of DP-0`
 - wmctrl - window manager control
+    - wmctrl wayland issue - https://bugs.launchpad.net/ubuntu/+source/gnome-terminal/+bug/1725991
     - NEEDS DISPLAY VAR SET
     - display window number/ID in hexadecimal, xdotool display in decimal
     - `wmctrl -l`, will list all windows in window manager
