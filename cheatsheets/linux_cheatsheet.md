@@ -306,6 +306,9 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - cli tool uses the [NVML](https://developer.nvidia.com/management-library-nvml) library
 - nvidia-xconfig - show nvidia config
     - `nvidia-xconfig --query-gpu-info` - get basic gpu info
+- radeontop - top for radeon GPUs
+    - `radeontop -c` - start TUI in color
+    - `radeontop -d - -l 1` - dump file (to stdout here), and sample just once
 
 ## GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
@@ -361,6 +364,8 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - hitting super will bring up activities overview
 ### DEFAULT HOTKEYS
 - `alt`+`ctr`+`t` - open terminal
+- `ctrl`+`shift`+`t` - open new terminal tab
+- `ctrl`+`shift`+`n` - open new terminal window
 - `super`+`S` - open quick settings(top right) menu
 - `super`+`A` - show all app views
 - `super`+`M` - toggle notif tray
