@@ -761,6 +761,7 @@ things that add to jump list:
 - `ma` - set current position for mark A
 - `'a` - jump to position of mark A
 - `y'a` - yank lines from current line to mark `a`
+- `:5,10norm! @a` - apply macro in `a` to lines 5-10
 
 ## MACROS
 qa - record macro a

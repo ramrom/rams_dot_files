@@ -578,6 +578,10 @@
 - excluded domains: browser ext -> settings -> notifications -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
 
+## FIREFOX
+- goto `about:config` in url to see full settings
+- `ctrl`+`tab` - goto next tab, add `shift` to go in reverse
+
 ## XBROWSWERSYNC
 - full FOSS, can self host, works in firefox/chrome/brave/edge
 - `ctrl + space` is shortcut to bring up extension to search bookmarks

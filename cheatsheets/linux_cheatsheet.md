@@ -321,7 +321,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - activities overview - can search for apps and files
 - GNOME/gtk use emacs keys: use gnome-tweaks or https://superuser.com/questions/9950/ctrlh-as-backspace-in-linux-gui-apps
 - extensions management in browser: https://extensions.gnome.org/
-- GSETTINGS - cli tool to get and set items in the settings menu
+- GSETTINGS - cli tool to get and set items in the settings menu(manipulating the underling dconf db)
     - `gsettings list-schemas` - get schemas
     - `gsettings list-recursively org.gnome.desktop.wm.keybindings` - list all in a schema
     - can change basically any setting at cli like you could in GNOME settings menu
@@ -338,6 +338,8 @@ apt-cache showpkg pkg - shows deps and reverse deps,
         - `gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Shift><Super>5']"`
         - custom keybinding that runs a script
             - https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal
+    - night shift
+        - `gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true` - turn on night shift
 - `Startup Applications` - run commands and programs at startup
     - will create `.desktop` files in `~/.config/autostart` folder
 - copy + paste
