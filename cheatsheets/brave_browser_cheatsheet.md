@@ -5,6 +5,7 @@
     - dec'23 - discover.com, couldnt see modals, couldnt hit "ok" button on popup
 - 2024 - shield adblocker is written in rust and seperate from extension system
     - thus v3 wont impare it's ad-blocking ability
+- sync code changes daily, particularly 25th word
 
 ## KEYBOARD SHORTCUTS
 - `ctrl+shift+a`-> bring up tab search menu
