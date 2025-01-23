@@ -46,6 +46,7 @@ alias pafn='aliasname=1 funcname=1 print_alias_funcs_scripts'
 # BACKUP AND MOUNT
 alias rsyncl='rsync -Hhav --progress --delete'  # preserve hardlinks, archive, verbose, human-readable
 alias rsync_smb='rsync -Hhvrl -goD --progress --delete' # p(perms) and t(modtime) preserves fail to rsync to smbv1
+alias dufon='duf -only network,local'
 
 # SUDO neat trick, running aliases as sudo fails as root doesnt have them defined
 # bash only looks for the first word to alias expand, so if it's an alias it expands subsequent words
