@@ -385,8 +385,9 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `super` + `page-up/page-down` - go forward/back workspaces
     - `ctrl` + alt + `up-arrow/down-arrow` - go forward/back workspaces
     - `super` + `shift` + `page-up/page-down` - move active window to next/previous workspace
-- `ctrl` + `shift` + `c` - copy
-- `ctrl` + `shift` + `v` - paste
+- `ctrl`+`shift`+`c` - copy
+- `ctrl`+`shift`+`v` - paste
+- `ctrl`+`shift`+`w` - close a window
 - `alt`+`f2`  - bring up prompt to run a shell command
 - `ctrl`+`alt`+`delete` - logout
 - `super`+`NUM`  - click the NUM icon in the dash(quick launch)
