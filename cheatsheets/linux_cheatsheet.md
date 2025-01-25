@@ -263,17 +263,19 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - https://unix.stackexchange.com/questions/20385/windows-managers-vs-login-managers-vs-display-managers-vs-desktop-environment
 - Display servers and display managers
     - `XDG_SESSION_TYPE` env var will generally tell u if it's tty or wayland or x11
+    - `WAYLAND_DISPLAY` if this env var is set, means it's wayland
     - X Windowing System - core system for drawing bitmaps, X11 is latest version since 1987
     - Wayland, new (also FOSS) protocol b/w display server and clients, (often includes C implementations), to replace X
         - Weston is a reference implementation
         - good doc on architectures: https://wayland.freedesktop.org/architecture.html
 - desktop environments - GNOME, KDE, XFCE
-- Windows managers:
+- Windows managers
     - compiz
     - mutter(GNOME 3 uses it), particularly GNOMEShell is a plugin for mutter
     - metalicity(GNOME 2 uses it)
 - DISPLAY env var
-    - `who` will show users logged in and the `FROM` column will show where, if you see just `:1` that's the DISPLAY value of X session
+    - `who` will show users logged in and the `FROM` column will show where
+        - if you see just `:1` that's the DISPLAY value of X session
 - xrandr  - check graphics stuff
     - ssh session, i `export DISPLAY=:1` and xrandr finds displays
     - xrandr --output DP-0 --mode 2560x1440
@@ -309,6 +311,8 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - radeontop - top for radeon GPUs
     - `radeontop -c` - start TUI in color
     - `radeontop -d - -l 1` - dump file (to stdout here), and sample just once
+### WAYLAND
+- `wl-clipboard` - X's `xclip` equivalent tool for wayland
 
 ## GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
