@@ -16,12 +16,15 @@ shift $(($OPTIND - 1))
 
 preview_cmd="entity=\$(echo {} | awk '{print \$1}'); hass-cli --output yaml --server http://127.0.0.1:8123 entity list \$entity"
 FZF_DEFAULT_COMMAND= FZF_DEFAULT_COMMAND="hass-cli --token $HASS_TOKEN state list"
-# state_cmd="hass-cli --token $HASS_TOKEN state list"
+state_cmd="hass-cli --token $HASS_TOKEN state list"
+
+# TODO: support showing entity list and refreshing
 # entity_cmd="hass-cli --token $HASS_TOKEN entity list"
 
 out=$(fzf +m --height 100% --header-lines=1 \
     --header='ctrl-r->refresh states, ctrl-s->refresh entities' \
     --bind "ctrl-r:reload(${state_cmd})" \
+    --preview-window=bottom:40% \
     --preview "$preview_cmd")
 
 echo $out
