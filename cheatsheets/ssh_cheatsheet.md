@@ -44,6 +44,7 @@ AllowUsers foouser@* baruser@192.168.*
 # creating keys
 # good ref: https://linuxnatives.net/2019/how-to-create-good-ssh-keys
 ssh-keygen
+ssh-keygen -t ed25519 -C "foo@foo.com"      # create with specific keytype and email
 
 # change passphrase on particular private key
 ssh-keygen -p -f ~/.ssh/id_rsa
