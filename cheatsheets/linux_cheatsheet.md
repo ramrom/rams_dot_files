@@ -273,6 +273,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - compiz
     - mutter(GNOME 3 uses it), particularly GNOMEShell is a plugin for mutter
     - metalicity(GNOME 2 uses it)
+### X WINDOW SYSTEM
 - DISPLAY env var
     - `who` will show users logged in and the `FROM` column will show where
         - if you see just `:1` that's the DISPLAY value of X session
@@ -304,6 +305,10 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `xdotool windowsize 123 800 600`
     - `xdotool windowmove 123 0 1080`
     - `xdotool windowminimize <window_id>` - minimize window with window id
+- xclip - manipulate copy and paste to clipboard
+### WAYLAND
+- `wl-clipboard` - X's `xclip` equivalent tool for wayland
+### GPU TOOLS
 - nvidia-smi - show nvidia card mem usage, gpu temp, X processes
     - cli tool uses the [NVML](https://developer.nvidia.com/management-library-nvml) library
 - nvidia-xconfig - show nvidia config
@@ -311,8 +316,6 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - radeontop - top for radeon GPUs
     - `radeontop -c` - start TUI in color
     - `radeontop -d - -l 1` - dump file (to stdout here), and sample just once
-### WAYLAND
-- `wl-clipboard` - X's `xclip` equivalent tool for wayland
 
 ## GNOME
 - gnomeshell design: https://wiki.gnome.org/Projects/GnomeShell/Design
