@@ -308,6 +308,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - xclip - manipulate copy and paste to clipboard
 ### WAYLAND
 - `wl-clipboard` - X's `xclip` equivalent tool for wayland
+    - gives `wl-copy` and `wl-paste`
 ### GPU TOOLS
 - nvidia-smi - show nvidia card mem usage, gpu temp, X processes
     - cli tool uses the [NVML](https://developer.nvidia.com/management-library-nvml) library
