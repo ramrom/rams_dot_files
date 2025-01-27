@@ -1,0 +1,22 @@
+#!/bin/sh
+
+detect_display_system() {
+    if [ $(uname) = "Darwin" ]; then
+        echo "darwin"
+    else # assume linux
+        if [ -n ${WAYLAND_DISPLAY} ]; then
+            echo "wayland"
+        else
+            echo "xorg"
+        fi
+    fi
+}
+
+DISPLAY_TYPE=$(detect_display_system)
+
+case $DISPLAY_TYPE in
+    darwin) pbcopy ;;
+    wayland) wl-copy ;;
+    xorg) xclip -selection clipboard ;;
+    *) echo "ERROR!" ;;
+esac
