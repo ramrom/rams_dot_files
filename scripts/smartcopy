@@ -1,10 +1,15 @@
 #!/bin/sh
 
+
+# echo "dis: $WAYLAND_DISPLAY"
+# echo "dis: $XDG_SESSION_TYPE"
+
 detect_display_system() {
     if [ $(uname) = "Darwin" ]; then
         echo "darwin"
     else # assume linux
-        if [ -n ${WAYLAND_DISPLAY} ]; then
+        # if [ -n ${WAYLAND_DISPLAY} ]; then  # FIXME: this gets set on x11...
+        if [ ${XDG_SESSION_TYPE} = "wayland" ]; then
             echo "wayland"
         else
             echo "xorg"
@@ -13,6 +18,7 @@ detect_display_system() {
 }
 
 DISPLAY_TYPE=$(detect_display_system)
+# echo $DISPLAY_TYPE
 
 case $DISPLAY_TYPE in
     darwin) pbcopy ;;
