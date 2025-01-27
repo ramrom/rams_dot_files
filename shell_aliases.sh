@@ -83,8 +83,6 @@ if [ "$(uname)" = "Linux" ]; then
     alias bat='batcat'
     alias open='xdg-open'
     alias batman="MANPAGER=\"sh -c 'col -bx | batcat -l man -p'\" man"
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
     alias smd='systemctl'
     alias bt='bluetoothctl'
     alias cpu_top_procs_watch="watch -n 1 'ps -eo pcpu,user,command | sort -k 1 -r | head -10'"

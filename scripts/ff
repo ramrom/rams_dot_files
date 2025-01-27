@@ -75,10 +75,10 @@ generate_github_link() {
 PREVIEW_CMD="if [ -d {} ]; then; tree -C {}; else $BATBIN --style=numbers --color=always {} | head -500; fi"
 
 # TODO: make binding to open in GH without quitting fzf
-    # --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort,ctrl-\:execute(opengh "{}")' \
+    # --bind 'ctrl-y:execute-silent(echo {} | smartcopy)+abort,ctrl-\:execute(opengh "{}")' \
 out=$(fzf --ansi +m --exit-0 --height "$FZF_HEIGHT"% \
-    --header=$'enter->cd, ctrl-i->open, ctrl-o->vim, ctrl-y->pbcopy\nctrl-s->open-in-github ctrl-space->echo' \
-    --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
+    --header=$'enter->cd, ctrl-i->open, ctrl-o->vim, ctrl-y->copy-clipbrd\nctrl-s->open-in-github ctrl-space->echo' \
+    --bind 'ctrl-y:execute-silent(echo {} | smartcopy)+abort' \
     --expect='ctrl-o,ctrl-i,ctrl-space,ctrl-s' \
     --preview "$PREVIEW_CMD" \
     --preview-window=:wrap)

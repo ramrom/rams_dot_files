@@ -198,8 +198,8 @@ function ff() {
 function fn() {
     : "${fzf_pafn_preview_sources:="source ~/rams_dot_files/shell_functions.sh"}"
     aliasname=1 funcname=1 print_alias_funcs_scripts | fzf --height 100% --preview "$fzf_pafn_preview_sources; batwhich {}" \
-        --header='ctrl-y->pbcopy' \
-        --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' \
+        --header='ctrl-y->smartcopy' \
+        --bind 'ctrl-y:execute-silent(echo {} | smartcopy)+abort' \
         --preview-window=:wrap --preview-window right:70%
 }
 

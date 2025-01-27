@@ -26,8 +26,8 @@ FZF_HEIGHT=${FZF_HEIGHT:=100}
 PREV_CMD="rg --pretty --context 10 -e '\$1' {}"
 CMD="rg ${RG_FILTER} --files-with-matches --no-messages -e \"$1\" \"${RG_DIR}\""
 CMD="$CMD | fzf +m --exit-0 --preview \"${PREV_CMD}\""
-CMD="$CMD --height ${FZF_HEIGHT}% --header='ctrl-e->vim, ctrl-y->pbcopy, ctrl-space->cd'"
-CMD="$CMD --bind 'ctrl-y:execute-silent(echo {} | pbcopy)+abort' --expect='ctrl-e,ctrl-space'"
+CMD="$CMD --height ${FZF_HEIGHT}% --header='ctrl-e->vim, ctrl-y->copy-clipboard, ctrl-space->cd'"
+CMD="$CMD --bind 'ctrl-y:execute-silent(echo {} | smartcopy)+abort' --expect='ctrl-e,ctrl-space'"
 OUT=$(eval "$CMD")
 
 KEY=$(echo "$OUT" | head -1)

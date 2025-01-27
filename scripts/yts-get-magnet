@@ -44,7 +44,7 @@ magnetclean=$(echo "$magnet" | sed 's/amp;//g')
 if [ "$(uname)" = "Linux" ]; then
     echo $magnetclean | xclip -selection clipboard
 else
-    echo $magnetclean | pbcopy
+    echo $magnetclean | smartcopy
 fi
 
 echo -e "\nUNMODIFIED MAGNET LINK:"
