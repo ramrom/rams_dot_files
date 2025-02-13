@@ -74,3 +74,6 @@
 - model `gpt-4o-mini` - release 2024, free to use
 ### KHANMIGO
 - openAI and sal khan(of khan academy) collaborated to create a AI tutor for kids
+### DEEPSEEK
+- jan'25 - came out and beat chatgpt's best model o1
+- claims they spent on ly $6mil training it on 2000 nvidia H800s
