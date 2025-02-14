@@ -189,6 +189,9 @@ service --status-all
 
 ## APT
 - see history in `/var/log/apt/history.log`
+- install a deb package
+    - `sudo apt install ./name.deb`
+    - `sudo dpkg -i /path/to/deb/file && sudo apt-get install -f`
 ### DEPENDENCIES
 apt depends pkg
     - find direct deps of pkg
