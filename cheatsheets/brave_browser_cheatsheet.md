@@ -6,6 +6,7 @@
 - 2024 - shield adblocker is written in rust and seperate from extension system
     - thus v3 wont impare it's ad-blocking ability
 - sync code changes daily, particularly 25th word
+- brave shield, the ad and tracker blocker, isn't an extension, won't be affected by MV3/MV2
 
 ## KEYBOARD SHORTCUTS
 - `ctrl+shift+a`-> bring up tab search menu
