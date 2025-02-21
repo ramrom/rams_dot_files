@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export JAVA_HOME=~/.sdkman/candidates/21.0.2-tem
+~/src/jdtls/bin/jdtls
