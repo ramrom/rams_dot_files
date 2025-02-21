@@ -687,6 +687,7 @@
     - can have many IPs for failover, if main/default IP fails, the next IPs are used round robin
 - CNAME - hostname -> hostname, alias a domain to another
     - if client DNS requests returns CNAME, it continues to make requests until it gets an A name
+- NS - identify a authoritative NS(name server) for a given record
 - AAAA record - needed for IPv6
 - MX record - name for email server for a domain
 - TXT record - contains textual data

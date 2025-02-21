@@ -73,14 +73,19 @@ public static void main(String[] args) {
         - for linux `fork` only individual pages that are modified are copied-on-write
     - also shared dynamic libs - executables linking to same dynamic lib technically share the same memory
 ### GARBAGE COLLECTION
+- generational
+    - if objects survive GC cycle they get promoted to older generations
+    - java, .NET, and others all employ the generational strategy
 - Reference counting
     - have a count of refs for each object, when refs go to zero, deallocate object
 - Tracing garbage collection
     - naive mark-and-sweep
          - mark phase that follows trees from root objects, and marks all reachable objects
          - sweep phase - scan all memory for each object, any object not marked is deallocated
+         - drawback: GC cycle is long(stop-the-world), esp with large heap
     - tri-color mark-and-sweep
         - naive is stop-the-world in that entire program supsended for a GC cycle, can't modify working set
+        - tri-color splits long cycle to smaller ones essentially
         - uses 3 colors: 
             - white - candidates for collection
             - black - reachable from root, have no refs to objects in white set, not candidates for collection

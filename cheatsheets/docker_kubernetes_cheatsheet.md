@@ -183,6 +183,9 @@
     - `kubectl --namespace=foospace logs --follow mypod-fda234`
 - copy a file from pod to local machine
     - `kubectl cp <pod-name>:<some-file> <our local destination directory>`
+- port-forward to a pod
+    - `kubectl port-forward -n core svc/myservice-svc 8080:80` - this forwards remote 80 to local 8080
+        - if webservice then `curl localhost:8080/myservice/someendpoint`
 - get _all_ deployment info in json: `kubectl get deployments --all-namespaces -o json`
 - `kubectl get hpa --all-namespaces` - get hpa status on all pods
 ### K9S

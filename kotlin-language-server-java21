@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export JAVA_HOME=/Users/smittap6/.sdkman/candidates/java/21.0.2-tem
+kotlin-language-server
