@@ -683,6 +683,9 @@ pulsemixer - volume manager with pulseaudio
 - newsboat - good CLI RSS reader and more
     - main page: https://newsboat.org/
         - docs - https://newsboat.org/releases/2.37/docs/newsboat.html
+- geoclue - https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home
+    - Uses WiFi, GPS, 3G modems, and GeoIP to determine location
+    - often runs as systemd unit file `geoclue.service` (ubuntu24 uses it)
 - **transmission** - great torrent program
     - SETUP
         - https://www.smarthomebeginner.com/install-transmission-web-interface-on-ubuntu-1204/
