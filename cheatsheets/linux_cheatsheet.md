@@ -139,6 +139,8 @@ sudo useradd foosuer sudo               # will properly add user to group sudo a
 - `systemctl status` - show full status of systemd with helpful tree structure
     - `systemctl status foo.service` - show status of a unit named foo
     - `systemctl status foo*` - status of all units that starts with foo
+    - `systemctl --failed` - show unit files that have failed to run
+        - `systemctl --reset-failed` - restart/reset failed unit files
 - `systemctl cat foo.service` - get contents of unit file defintion of foo
 - `systemctl list-dependencies foo.service` - print a nice tree of unit dependencies for foo
 - `systemctl show foo.service` - low level details of units settings
@@ -464,6 +466,10 @@ apt-cache showpkg pkg - shows deps and reverse deps,
         - `iptables -F INPUT` - flush(drop) all rules in INPUT chain
         - `iptables -F` - flush all rules
     - `iptables -S` - list all rules by specification
+- `ip` - show/manipulate routing, network devices, interfaces
+    - `ip addr` - show interfaces, their assigned addresses and status
+    - `ip route` - show routing table
+    - `ip neighbor` - show discovered hosts in local network
 
 ## SOUND
 - ALSA: is base sound stack for all linux distro
