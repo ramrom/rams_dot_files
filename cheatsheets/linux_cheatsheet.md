@@ -650,6 +650,7 @@ pulsemixer - volume manager with pulseaudio
     - `iwlist wlan0 scan` (`wlan0` being wifi intface name) will show all wifis, base frequency, channel, signal stregnth, SSID name, etc
 - `notify-send` - pops up notification
 - `upower` - sys util, get power/battery info and stats about devices
+- `timedatectl` - check system time and date settings
 - `bluetoothctl` - main linux cli bluetooth tool, can see device list, paired, unpaired, connect/disconnect
     - `bluetoothctl info` print trusted/paired/connected status, UUIDs of profiles, on all devices
     - `bluetoothctl info DC:0C:2D:A5:36:A9` will print info of just one device

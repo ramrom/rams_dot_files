@@ -129,12 +129,18 @@
     - create global open standards for IP-based security, particularly for video cameras
     - ONVIF.PTZ specifies Pan/Tilt/Zoom functions
 
+## SOUND
+- dolby
+- DTS
 
 ## HDMI
 - 50 foot MAX reliable length, really shouldn't ever exceed 25ft
     - but there are options like optical and wireless hdmi
 - standard does not mandate versions be printed on cables, so only way to know is to test them...
 - CEC (consumer electronics control) - protcol to control HDMI devices
+    - many company has version of this, e.g. Anynet+, SimpleLink, BRAVIA Sync
+- eARC (enhanced audio return channel) - feature of HDMI 2.1, allows sound to be output to soundbar
+    - ARC supports dolby atmos, eARC is higher bandwidth for dolby trueHD and DTS-HD master audio
 - standards
     - 1.0 - supports 5Gbps
     - 1.1 - supports 5Gbps
