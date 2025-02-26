@@ -512,6 +512,8 @@ sb.reverse();           // reverse order of chars
 sb.setCharAt(1, "a");   // change character at index
 sb.deleteCharAt(3);     // delete character at index
 sb.toString();          // covert to a string when done
+sb.insert(2,'c')        // insert char 'c' at index 2, (prev index 2 is at index 3)
+sb.insert(2,"foo")        // insert "foo" at index 2, (prev starting char at index 2 is pushed to index 5)
 
 List<Character> c = new ArrayList<>()
 char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`

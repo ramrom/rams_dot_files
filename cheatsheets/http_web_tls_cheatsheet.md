@@ -197,6 +197,9 @@ function httpie_all() {
 # raw json fields
 http POST https://api.foo.com field:='["a",2]'
 
+# base type is a array
+http POST https://api.foo.com []:='3' []:="{\"a\":$(cat /some/file)}" []:='[3,4,5]'
+
 # read input from file
 xh http://foo.com @file.json
 
