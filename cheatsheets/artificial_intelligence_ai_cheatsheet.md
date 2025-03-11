@@ -10,6 +10,9 @@
 - prompt - in AI parlance it means a set of instructions or questions given to an AI system to elicit a different type of response
     - i.e. how to ask AI something in a way to get what you want
 
+## LEARNING RESOURCES
+- https://brilliant.org/courses/
+
 ## NEURAL NETWORKS
 - a "neuron" holds a number, and is "activated" by neurons in other layers
 - each neuron is connected to neurons in previous layer and to neurons in next layer, each connection has a weight

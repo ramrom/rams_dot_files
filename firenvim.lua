@@ -159,6 +159,8 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 
+vim.keymap.set("n", "<leader>o", "<cmd>:Files<CR>")
+
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
