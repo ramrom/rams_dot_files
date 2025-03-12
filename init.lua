@@ -1226,8 +1226,7 @@ ValidateJavaInstallDirs = function(JavaInstalls)
     return result
 end
 
--- TODO: like kotlin LS, use a binstub to start server with JAVA_HOME to java17
--- jdtls lang server is a java17 app itself, make sure JAVA_HOME of shell is set to java17
+-- jdtls lang server requires java 21, make sure JAVA_HOME of shell is set to java21
 LoadJDTLSServer = function()
     local JavaInstalls = {
         {
