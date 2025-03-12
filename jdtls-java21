@@ -1,4 +1,5 @@
 #!/bin/sh
 
-export JAVA_HOME=~/.sdkman/candidates/21.0.2-tem
+export JAVA_HOME=~/.sdkman/candidates/java/21.0.2-tem
+[ ! -d "$JAVA_HOME" ] && echo "$JAVA_HOME not a valid directory!, exitting" && exit 1
 ~/src/jdtls/bin/jdtls
