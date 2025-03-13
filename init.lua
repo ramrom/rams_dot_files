@@ -1279,7 +1279,7 @@ LoadJDTLSServer = function()
 end
 
 ---------------- GROOVY LSP -------------------------------------
--- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#groovyls
+-- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#groovyls
 LoadGroovyLSP = function()
     require('lspconfig').groovyls.setup{
         autostart = LSPAutoStartEnable,

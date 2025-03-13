@@ -513,7 +513,7 @@ sb.setCharAt(1, "a");   // change character at index
 sb.deleteCharAt(3);     // delete character at index
 sb.toString();          // covert to a string when done
 sb.insert(2,'c')        // insert char 'c' at index 2, (prev index 2 is at index 3)
-sb.insert(2,"foo")        // insert "foo" at index 2, (prev starting char at index 2 is pushed to index 5)
+sb.insert(2,"foo")      // insert "foo" at index 2, (prev starting char at index 2 is pushed to index 5)
 
 List<Character> c = new ArrayList<>()
 char[] c = "hi there".toCharArray()  // returns char[8] type `char[8] { 'h', 'i', ' ', 't', 'h', 'e', 'r', 'e' }`
@@ -689,9 +689,9 @@ record Ok<T>(T value) implements Result<T> { }
 - `static` codeblock `static { ... }` - code called only once when class is loaded in JVM
     - often used to initialize static vars, esp when logic is complex, i.e. more than simple assignement
     - also for loading one time data (load config from file, create db connection)
-- scope/visibility: member of can be: default, public, private, protected
-    - member is default if one of 3 not specified, default accessible in class and package (not world or subclass)
-    - a public class must live in a file of the same name, e.g. `public class Foo{}` must be defined in `Foo.java`
+- scope/visibility: member of can be: `default`, `public`, `private`, `protected`
+    - member is `default` if one of 3 not specified, default accessible in class and package (not world or subclass)
+    - a `public` class must live in a file of the same name, e.g. `public class Foo{}` must be defined in `Foo.java`
 - `java.lang.Object` is root class of Java class hierarchy, every class is descendant of this class
     - defines `toString()`, `equals(Object o)`, `hashCode()`, `getClass()`, `notify()`
     - a class defined with no superclass automatically extends `Object`
