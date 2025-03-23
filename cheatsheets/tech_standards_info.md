@@ -326,6 +326,12 @@
 - TypeSpec - https://typespec.io/
     - API and schema description language
     - can compile it to a OpenApi spec, or json schema spec, or protobuf spec
+- SPA - single page application - complex javascript apps that fully manage HTML/CSS
+    - generally one big js asset loads and it loads all HTML/CSS and multimedia via js
+    - breaks REST, dynamically rewrites all or parts of the DOM
+- PWA - progressive web apps - websites that can act like native apps
+    - chromium has best support, firefox adding it back in(circa 2025), safari limited support
+    - has service workers
 
 ## DATA FORMATS
 ### TEXT
@@ -733,6 +739,7 @@
 - RTMPS - RTMP with TLS
 - RTP - real-time transport protocol, generally runs on UDP, delivery audio/video like VoIP
 - RTCP - RTP control protocol, monitors transmission stats, QoS, and helps sync multiple streams
+- RTSP - real time streaming protocol, for streaming multimedia
 ### IP
 - VIP - virtual IPs, IPs that are not connected to any physical interface
     - commonly used with 1-to-many NATs or for redudnancy with a cluster of servers or HSRP(hot standby router protocol)
