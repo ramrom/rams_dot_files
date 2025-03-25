@@ -470,6 +470,7 @@ synchronized (lock) {
 
 "hello world".charAt(2)    // index string, reuturns "l"
 "get a substring".substring(2,7)  // returns "t a s", from begIndex to (endIndex - 1)
+"hello".substring(2)  // returns "llo" , from index 2 to end of string
 
 "hi there".contains("hi") // returns true
 "hi there".isBlank() // returns false
@@ -572,7 +573,11 @@ boolean b2 = (3 == 4);         // b2 stores false
 - `'a' ^ 0b000100000` - can do bitwise ops on characters, here we toggle(XOR with 1) 5th bit 
     - by toggling 5th bit we add or sub 32, in ASCII this is cool way to toggles upper to lower case, we get integer for `A` here
     - bitwise op will give `int`, so convert back to char by `(char)('a' ^ 0b000100000)`
-
+```java
+int i = 7   //  0b00000111
+i >> 1      //  returns 3
+i << 1      // returns 14
+```
 
 ## CONVERSIONS
 ```java

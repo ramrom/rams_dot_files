@@ -111,9 +111,11 @@
     - https://buildwithmatter.com/
     - collaberation b/w tons of companies including big names apple, google, amazon, samsung
     - highly based on apple's homekit protocol
+    - a standard/protocol that operates on layer 7 of OSI Ref model
 - Thread - networking tech that Matter is built on
     - low-power mesh network like zigbee
-    - any device can be a thread edge router, it is IPv6 based
+    - any device can be a thread edge router
+    - it is IPv6 based for addressing, which matter needs
 - Wifi (power hungry)
     - hub-and-spoke only, so must be near a access point
     - doesnt scale
