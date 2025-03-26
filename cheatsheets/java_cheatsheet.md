@@ -584,8 +584,9 @@ i << 1      // returns 14
 int a = Integer.parseInt("3");    // String -> int
 int a = Integer.parseInt("foo");  // will raise NumberFormatException, also for int too big
 Integer.valueOf("1");        // String -> Integer, and allows null inputs unlike parseInt
-Integer.valueOf(1);        // int -> Integer
-Integer.toString(3)     // converts to String "3"
+Integer.valueOf(1);         // int -> Integer
+Integer.toString(3)         // converts to String "3"
+Integer.toBinaryString(10)  // returns "1010"
 
 float f = Float.parseFloat("25.1");    // String -> Float
 double d = Double.parseDouble("25.1");    // String -> Double
