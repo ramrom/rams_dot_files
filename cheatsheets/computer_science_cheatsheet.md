@@ -632,6 +632,10 @@ see [ai cheat](artificial_intelligence_ai_cheatsheet.md)
         - advantage: lower latency, emitting event to queue is fast
         - advantage: more robust retry, consumer can reenqueue message if it failed
 - [impedance mismatch](datastore_cheatsheet.md)
+- distributed transactions
+    - https://medium.com/@dongfuye/the-seven-most-classic-solutions-for-distributed-transaction-management-3f915f331e15
+    - SAGA
+    - 2 phase commit
 ### LAMBDA ARCHITECTURE
 - uses stream processing and batch processing in parralel to ingest data
 - data comming in is read-only and append only by timestamp

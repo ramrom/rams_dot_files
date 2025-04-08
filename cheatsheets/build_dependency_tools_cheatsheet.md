@@ -201,6 +201,13 @@
     `npm list --depth=1`
 - remove extranous packages
     `npm prune`
+- list all dependency paths dependend on `foo-package`
+    - `npm ls --all foo-package`
+- dependencies
+    - docs: https://docs.npmjs.com/cli/v8/configuring-npm/package-json#dependencies
+    - `^` carat in package name, e.g. `foo: "^1.2.3"` , npm allowed to upgrade to newer versions in same major version
+    - `~` carat in package name, e.g. `foo: "~1.2.3"` , npm allowed to upgrade to newer versions in same minor version
+
 
 ## FRONT END TOOLING
 - babel - javascript traspiler
