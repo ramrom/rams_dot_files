@@ -23,6 +23,14 @@
     - OLTP = online transaction processing - realtime, large volume, usually use a relation DB
     - OLAP = online analytic processing - slow complex queries, used by analysts for BI
     - https://www.datawarehouse4u.info/OLTP-vs-OLAP.html
+- data warehouse
+    - historically batch process would ETL data from OLTP DBs overnight
+- data lake
+    - genreally an evolution from data warehouse, really kind of a distributed file system 
+    - general idea is to get away from schemas and complications of ETLing for different schemas
+    - initally done by hadoop
+    - diff b/w datawarehouse is you dont transform before entering data lake, it's transformed later
+    - oftentimes just S3 buckets
 
 
 ## RELATIONAL
