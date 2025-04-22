@@ -80,6 +80,8 @@ git commit --amend --no-edit  # amend the previous commit with no edit screen
 ```
 - editing past commit metadata like author and email
     - https://www.codeconcisely.com/posts/change-author-data-for-all-existing-commits/
+- CHERRY PICK
+    - `git checkout some-commit-or-branch path/to/file`
 
 ## AUTH
 - TFA(two factor auth)
