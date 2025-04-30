@@ -77,6 +77,9 @@ git merge-base b1 b2 b3     # find most recent common ancestor commit of n branc
 git show-branch b1 b2 b3    #  show sidebyside columar what commits exist in each branch
 git commit --amend --author="Joe Shmoe <email@address.com>"
 git commit --amend --no-edit  # amend the previous commit with no edit screen
+
+git rev-parse HEAD   # print commit # of HEAD commit
+git rev-parse --abbrev-ref HEAD  # print branch name of HEAD commit
 ```
 - editing past commit metadata like author and email
     - https://www.codeconcisely.com/posts/change-author-data-for-all-existing-commits/
