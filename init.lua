@@ -550,7 +550,11 @@ LoadTelescope = function()
     -- README: https://github.com/nvim-telescope/telescope-fzf-native.nvim
     -- oct'24 - failing b/c fzf-native's `make` command failed, i had to remove/readd pluging from lazy spec for `make` to trigger
     require('telescope').load_extension('fzf')
-    require("telescope").load_extension("ui-select")
+    -- mostly used b/c noice UI popups dont always show up still
+    if not vim.env.NO_NOICE then
+        -- require("telescope").load_extension("ui-select")
+    end
+    
 end
 
 ----------------------------- FZF LUA --------------------------------------------------
@@ -1674,6 +1678,7 @@ if not vim.env.VIM_NOPLUG then
         },
 
         ----- LSP STUFF
+        { 'zbirenbaum/copilot.lua', cmd = 'Copilot', event = 'InsertEnter', config = true, },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',

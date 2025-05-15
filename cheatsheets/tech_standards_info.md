@@ -837,3 +837,11 @@
         - so an authneticator can be pure software (using trusted execution env of cpu)
     - great b/c it's highly phishing resistant
     - backwards compatible and successor to FIDO U2F(universal 2nd factor)
+
+## RSA
+- general rule of format type in pem file by looking at header
+    - `-----BEGIN RSA PRIVATE KEY-----` - PKCS#1 format
+    - `-----BEGIN PRIVATE KEY-----` - PKCS#8 format
+- generate a new keypair 
+    - `openssl genrsa -out keypair.pem 2048` - should generate format PKCS#1, but could be PKCS#8
+    - `openssl genrsa -traditional -out signer-keypair.pem 2048` - force generating PKCS#1
