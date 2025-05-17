@@ -683,7 +683,7 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
 - `Mutex` itself is `Send`, but the `MutexGuard` is not, same thread that locks must unlock
     - `MutexGuard` is sync b/c a shared ref in another thread cant do anything harmful
     - a `Mutex` is poisoned when a thread holding it panics, now other threads cant unlock it
-- `Rc` isn't `Send`, can't have 2 `Rcs` in 2 threads, must be in one thread
+- `Rc` isn't `Send`, can't have 2 `Rc`'s in 2 threads, must be in one thread
     - also not `Sync` b/c a shared ref can be cloned
     - use `Arc<T>` (atomic ref counter) if sharing b/w threads, it's `Sync` + `Send` if `T` is
 - `Cell` and `RefCell` are `Send` but not `Sync`
