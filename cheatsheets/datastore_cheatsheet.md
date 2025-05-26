@@ -266,6 +266,7 @@
         - e.g uniqueness index, data in column cannot be duplicated
 - Isolation
     - transactions run in ioslation of other transactions
+    - serializable is a property meaning concurrent transactions are applied as if the server was single threaded
 - Durability
     - committed transactions cannot be lost, i.e. persisted on durable non-volatile storage
     - for POSIX systems `sync`, `fsync`(`sync` for one file) and `fdatasync`(no metadata update) flush the buffer cache to storage drive
