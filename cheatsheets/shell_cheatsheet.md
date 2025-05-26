@@ -22,6 +22,7 @@
 
 ## BASH (AND AFAIK ZSH)
 - good bash ref: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
+- AWESOME repo of bash scripts/tasks - https://github.com/dylanaraps/pure-bash-bible
 - BASH SHELL EXPANSION ORDER (FOR ZSH TOO I THINK)
     - https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html
 ```sh

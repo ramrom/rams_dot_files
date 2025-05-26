@@ -96,6 +96,8 @@
 
 
 ## COLUMN DB
+- each value for a key can represent a different set of "columns" or fields, so diff version of keys could have diff sets of fields
+    - this is why peeps call it a column DB
 ### BIGTABLE
 - invented by google in 2004
 - it inspired HBASE and Cassandra
@@ -126,13 +128,6 @@
 - storage model
     - each node uses a LSMT
     - writes to the in-memory cache are written to a WAL for durability, log only read for crash recovery scenarios
-    - uses an sparse index to speed up reads on disk - limits the number of segments to access for a read
-        - is a BTREE stored in-memory, each item in index stores first key in each segment and where segment is located on disk
-        - only need to search segments where first segment key is before desired key
-            - e.g. we want key "foo", say 10 segments in index, 3rd seg is "bar", 4th seg is "gig"
-            - segment "gig" wont have "foo", but segment "bar" might, and also 1st and 2nd segment, so just search 1st,2nd,3rd segment
-- each value for a key can represent a different set of "columns" or fields, so diff version of keys could have diff sets of fields
-    - this is why peeps call it a column DB
 
 ## LSMT
 - LSMT = Log Structured Merge Tree
@@ -158,6 +153,12 @@
 - reading on a key
     - means starting with latest segment and binary search, if not there goto next latest segment
     - in worst case key is in the earliest segment, so O(NlogK) time (N segments, K keys/segment)
+- sparse index (cassandra uses this)
+    - used to speed up reads on disk - limits the number of segments to access for a read
+    - is a BTREE stored in-memory, each item in index stores first key in each segment and where segment is located on disk
+    - only need to search segments where first segment key is before desired key
+        - e.g. we want key "foo", say 10 segments in index, 3rd seg is "bar", 4th seg is "gig"
+        - segment "gig" wont have "foo", but segment "bar" might, and also 1st and 2nd segment, so just search 1st,2nd,3rd segment
 - bloom filter optimization (cassandra and rocksDB does this)
     - can use a bloom filter to keep track of what keys are in the SST segment
     - no false negatives, so can definitely ignore searching SST then, saving time for a read

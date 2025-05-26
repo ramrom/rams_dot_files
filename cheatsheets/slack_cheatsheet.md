@@ -6,7 +6,8 @@
 - option + shift + up/down-arrow - up/down next unread channel/person
 - cmd + shift + [/] - switch up/down workspaces
 - cmd (number) - switch to (number) workspace
-- command K/T , quick search/switch
+- cmd + k/t - quick search channels/people/files
+- cmd + g - quick search all
 - page up/down - scroll up and down convo
 - press "up" arrow to edit last message
 
