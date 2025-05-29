@@ -86,6 +86,7 @@
 - `sudo powermetrics`  - spits out thermals and LOTS of info, network usage, gpu usage, etc
 - `vm_stat` - show some raw memory usage
 - `nettop` - like top but for tcp/udp sockets only and their bandwidth usage!
+- `wdutil` - get wireless diag info, dump temp wifi logs
 - `skhd`
     - `launchctl list` to see skhd service is running
         - *DEPRECATED* oct'24 - `brew services` to see if it's running
