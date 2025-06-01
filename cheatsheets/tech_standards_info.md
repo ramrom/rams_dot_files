@@ -22,6 +22,7 @@
     - has group chat, rich media messages, real-time typing indicator, read receipts, end-to-end encryption, file share up to 100MB
     - some iphone supports RCS
     - google voice as of 2023 doesn't have RCS
+    - 2025 - google messages on the web is similar to imessage for android messaging
 - iMessage - next gen by Apple to replace SMS/MMS
 - SS7 - https://en.wikipedia.org/wiki/Signalling_System_No._7
     - protocol mobile operators use to talk to each other
