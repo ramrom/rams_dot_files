@@ -462,7 +462,7 @@ chafa foo.jpg
 # CATIMG - like chafa
 catimg foo.jpg
 
-# FABRIC - awesome cli tool
+# FABRIC - awesome cli tool for AI
 cat someprose.txt | fabric -sp some_pattern             # -p for pattern, -s means stream the result
 cat someprose.txt | fabric -sp some_pattern --model=gpt-4o-mini   # specify a AI/LLM model to use
 fabric -y https://www.youtube.com/watch?v=123 | fabric -sp some_pattern   # -y fabric transcribes a youtube video

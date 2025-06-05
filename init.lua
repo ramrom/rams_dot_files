@@ -1678,7 +1678,14 @@ if not vim.env.VIM_NOPLUG then
         },
 
         ----- LSP STUFF
-        { 'zbirenbaum/copilot.lua', cmd = 'Copilot', event = 'InsertEnter', config = true, },
+        { "CopilotC-Nvim/CopilotChat.nvim",
+            dependencies = {
+               { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+               { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+            },
+            build = "make tiktoken", -- Only on MacOS or Linux
+            opts = {},
+        },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
