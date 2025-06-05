@@ -80,3 +80,7 @@
 ### DEEPSEEK
 - jan'25 - came out and beat chatgpt's best model o1
 - claims they spent on ly $6mil training it on 2000 nvidia H800s
+### OTHER INFO
+- tiktoken - open-source byte pair encoding (BPE) develeoped by OpenAPI to quickly encode text into tokens for input into LLMs
+    - good for faster conversion into text tokens
+    - token counting - determinte # of tokens in text tring (for API costs, LLMs have max token limits)
