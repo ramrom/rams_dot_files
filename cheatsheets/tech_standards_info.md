@@ -838,6 +838,8 @@
         - so an authneticator can be pure software (using trusted execution env of cpu)
     - great b/c it's highly phishing resistant
     - backwards compatible and successor to FIDO U2F(universal 2nd factor)
+- kerberos - protocol for authenticating service requests b/w trusted hosts across untrusted network
+    - support built into all major OSes including windows, OSX, BSD, linux
 
 ## RSA
 - general rule of format type in pem file by looking at header

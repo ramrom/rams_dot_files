@@ -23,6 +23,8 @@
 - Aurora - their own complex relation database system
 - firecracker - very lightweight VM, low latency, written in rust, that is used by their lamdba serverless and fargate
     - one way it's lightweight is very minimal device support, e.g. no USB support
+- lambda - serverless functions
+- fargate - like lambda but runs containers
 
 ## AWS CLI
 - `aws configure --profile someprofile list`  - list sessions under that profile
