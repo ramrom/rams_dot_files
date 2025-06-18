@@ -592,6 +592,7 @@ LoadFzfLua = function()
             }
         }
     }
+    -- require('fzf-lua').register_ui_select()
 end
 
 LoadTelescopeEmoji = function()
@@ -1451,7 +1452,7 @@ vim.keymap.set('n', '<leader>i',function() require('fzf-lua').oldfiles() end, { 
 vim.keymap.set('n', '<leader>ef',function() require('fzf-lua').grep() end, { desc = "fzf grep (rg query, then fzf results)" })
 vim.keymap.set('n', '<leader>el',function() require('fzf-lua').live_grep() end, { desc = "fzf live grep" })
 vim.keymap.set('n', '<leader>ee',function() require('fzf-lua').grep_cword() end, { desc = "fzf cursor grep word" })
-vim.keymap.set('n', '<leader>ew',function() require('fzf-lua').grep_cWORD() end, { desc = "fzf cursor grep cWORD" })
+vim.keymap.set('n', '<leader>eE',function() require('fzf-lua').grep_cWORD() end, { desc = "fzf cursor grep cWORD" })
 vim.keymap.set('n', '<leader>eo',function() require('fzf-lua').blines() end, { desc = "fzf current buffer lines" })
 vim.keymap.set('n', '<leader>ei',function() require('fzf-lua').lines() end, { desc = "fzf all buffer lines" })
 vim.keymap.set('n', '<leader>ec',function() require('fzf-lua').grep({cwd='~/rams_dot_files/cheatsheets/'}) end,
@@ -1461,8 +1462,8 @@ local str_grep_mydirs = function()
     require('telescope.builtin').grep_string({ search = sr, search_dirs = {'~/rams_dot_files/cheatsheets', vim.env.MY_NOTES_DIR }})
 end
 vim.keymap.set('n', '<leader>ej', str_grep_mydirs, { desc = "fzf grep cheatsheet + notes dir" })
-vim.keymap.set('n', '<leader>en',function() require('fzf-lua').grep({cwd=vim.env.MY_NOTES_DIR}) end, 
-    { desc = "fzf grep notes files" })
+vim.keymap.set('n', '<leader>en',function() require('fzf-lua').grep({cwd=vim.env.MY_NOTES_DIR}) end, { desc = "fzf grep notes files" })
+vim.keymap.set('n', '<leader>ew',function() require('fzf-lua').grep({cwd=vim.env.MY_WORK_DIR}) end, { desc = "fzf grep work files" })
 
 --------- GIT STUFF
 vim.keymap.set('n', '<leader><leader>g', '<cmd>G<CR>', { desc = 'G - fugitive panel' })
