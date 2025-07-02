@@ -188,7 +188,13 @@
 - `package.json` - specification file for a projects module dependencies
 - `package-lock.json` - specific version of all libs and transitive deps installed based on `package.json`
     - npm v7 will read `yarn.lock` file for metadata if it exists, but still generate `package-lock.json` file
+- `npm config list` - see the current configuration
+    - will display the location of `.npmrc` files that are applied
 - `.npmrc` - configuration for how npm behaves
+    - per-project - e.g.`/path/to/projct/.npmrc`
+    - per-user - e.g.`~/.npmrc`
+    - global - e.g.`$PREFIX/.npmrc`
+    - built-in npm - e.g.`/path/to/npminstall/.npmrc`
 - bins are located in `node_modules/.bin` dir
 - global vs local
     - a local/regular install will be scoped to current dir and all sub dirs, current dir will have `node_modules` folder
@@ -224,6 +230,10 @@
 
 ## NVM
 - node version manager, install/manage/switch between different node versions
+- commands
+    - `nvm list` - list installed node.js versions
+    - `nvm version` - current active node.js versoin
+    - `nvm --version` - version of nvm itself
 
 ## BOWER
 - package manager for javascript specialized for just front-end
