@@ -10,6 +10,7 @@
 - cmd + g - quick search all
 - page up/down - scroll up and down convo
 - press "up" arrow to edit last message
+- hit escape to mark all messages as read in a channel
 
 - syntax highlighted code snippets, click lightning icon on left side of input text bar
     - cmd + shift + enter  - will bring up the snippet creator window

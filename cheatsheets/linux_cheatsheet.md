@@ -2,7 +2,6 @@
 - linus rant on app development in linux - https://www.youtube.com/watch?v=Pzl1B7nB9Kc
     > If people are using it, it's not a bug, it's a feature - Linus
 - swap partition - using a filesystem generally on a HD as storage for data on RAM, usually when RAM is full
-- ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
 - cron: great site for deciphering a cron schedule: https://crontab.guru/
 - cgroups - linux kernel feature (version 2.6.24+), limits/isolates resource usage(cpu/memory/disk/network) for set of processes
 - namespaces - linux kernel feature, isolates sets of processes and resources
@@ -511,6 +510,7 @@ pulsemixer - volume manager with pulseaudio
     - regular files in a filesystem that can act as a block device, usually named something like `/dev/loopX`
 - if this file itself has a filesystem it can be mounted, useful for mounting ISO images and such
 - `tmpfs` - ram drives, for temporary and fast storage of data in RAM
+    - ramdisk - area of RAM acting as a virtual filesystem, `tmpfs` and `ramfs` are the two main types
 - drive naming convention
     - fd - SATA, sd - SCSI/SATA, hd - IDE
     - fda - first SATA drive, hdb - 2nd IDE drive
