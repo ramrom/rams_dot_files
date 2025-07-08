@@ -1530,7 +1530,8 @@ vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR
 vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
 
 ----------- CO-PILOT KEYBINDINGS --------------------------------------------
-vim.keymap.set('n', '<leader>lc', '<cmd>CopilotChatToggle<cr>' , { desc = "toggle copilot chat window" })
+vim.keymap.set('n', '<leader>lc', '<cmd>CopilotChatToggle<cr>' , { desc = "copilot toggle chat window" })
+vim.keymap.set('v', '<leader>le', "<cmd>'<,'> CopilotChatExplain<cr>" , { desc = "copilot explain current line range" })
 
 ----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
