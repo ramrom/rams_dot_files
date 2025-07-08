@@ -1529,6 +1529,9 @@ vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR
 -- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
 vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
 
+----------- CO-PILOT KEYBINDINGS --------------------------------------------
+vim.keymap.set('n', '<leader>lc', '<cmd>CopilotChatToggle<cr>' , { desc = "toggle copilot chat window" })
+
 ----------- LSP KEYBINDINGS --------------------------------------------
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 SetLSPKeymaps = function()
