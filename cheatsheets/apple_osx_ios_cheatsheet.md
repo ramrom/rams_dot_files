@@ -135,6 +135,7 @@
 - :<foo>:               - in text field typing `:` then text desc of emoji, then `:` will insert emoji
                           works in slack and whatsapp, not safari for google voice
 - fn + E                - from a text box, bring up emoji window
+- cmd + option + ctrl + left/right arrow - move window to next/prev display
 
 ### BROWSER
 - *NOTE* these are verified in chrome and firefox

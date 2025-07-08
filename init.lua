@@ -1685,7 +1685,7 @@ if not vim.env.VIM_NOPLUG then
                { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
             },
             build = "make tiktoken", -- Only on MacOS or Linux
-            opts = {},
+            cond = not vim.env.NO_COPILOT, opts = {},
         },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
