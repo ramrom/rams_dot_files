@@ -246,15 +246,16 @@
 - https://sdkman.io/usage#use
 ### COMMANDS
 - `sdk install java 17.0.6-tem` - install a java version
+- `sdk default java 17.0.6-tem` - set default java version for all shells
+    - this changes the `current` symlink in `~/.sdkman/candidates/java/current` to point to the new version
 - `sdk current`
-    - show current versions of all candidates
+    - show current default versions of all candidates
 - `sdk current java`
-    - show current version of java
+    - show current default version of java
 - `sdk use java foo-11`
     - use foo-11 version for just current shell
 - `sdk list java`
     - see all java versions available to install, which are installed, and which one is currently used
-- `sdk default java 17.0.6-tem` - set default java version for all shells
 - `sdk config`  - will open to edit the default config file
     - file located at `~/.sdkman/etc/config`
 

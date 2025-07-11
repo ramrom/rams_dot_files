@@ -776,7 +776,7 @@ LoadTreeSitter = function()
     -- require("nvim-treesitter.install").prefer_git = true
     require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
-        -- ignore_install = { "ipkg" },
+        ignore_install = { "ipkg" },
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
         highlight = {
@@ -1273,7 +1273,8 @@ LoadJDTLSServer = function()
     local config = {
         autostart = LSPAutoStartEnable,
         -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
-        cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
+        -- cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
+        cmd = { vim.env.HOME .. '/bin/jdtls' },
         root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         settings = {
             java = {

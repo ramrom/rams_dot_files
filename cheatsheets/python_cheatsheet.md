@@ -21,10 +21,10 @@ assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
 
 ## DEPENDENCY MANAGEMENT
 - it **SUCKS**: https://xkcd.com/1987/
-- `pipenv` is successor to `virtualenv` and does more, uses `Pipfile` and `Pipfile.lock`
 - `pip` uses requirements.txt
     - u can specify packages and pin versions you want
-- `pipenv` introduces `Pipfile` and `Pipfile.lock`
+- `pipenv`
+    - introduces `Pipfile` and `Pipfile.lock`
     - it's the official package management tool rec'd by python
     - `pipenv` uses `virtualenv` and `pip` under the hood
     - this replaces the `requirements.txt` mechanism
