@@ -554,19 +554,22 @@ LoadTelescope = function()
     if not vim.env.NO_NOICE then
         -- require("telescope").load_extension("ui-select")
     end
-    
 end
 
+LoadTelescopeEmoji = function()
+    require("telescope").load_extension("emoji")
+end
 ----------------------------- FZF LUA --------------------------------------------------
 LoadFzfLua = function()
     local help_menu_key = "<C-w><C-w>"
     require'fzf-lua'.setup {
         files = {
-             fd_opts = [[--color=never --type f --type l --hidden --exclude .git]],
+             fd_opts = [[--color=never --type f --type l --hidden --no-ignore --exclude .git]],
         },
         -- NOTE: bat previewer doesnt support toggle-preview-cw and cww (rotations)
         winopts = { preview = { default = "bat" },
-            title = "NOTE: " .. help_menu_key .." for help menu", title_pos = 'center' },
+            title = "NOTE: " .. help_menu_key .." for help menu", 
+            title_pos = "center" },
         previewers = {
             bat = { cmd = vim.loop.os_uname().sysname == "Darwin" and "bat" or "batcat" } },
         keymap = {
@@ -593,10 +596,6 @@ LoadFzfLua = function()
         }
     }
     -- require('fzf-lua').register_ui_select()
-end
-
-LoadTelescopeEmoji = function()
-    require("telescope").load_extension("emoji")
 end
 
 ----------------------------- Rhubarb --------------------------------------------------
@@ -774,8 +773,10 @@ LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 -- vim.cmd(':syntax off') 
 
 LoadTreeSitter = function()
+    -- require("nvim-treesitter.install").prefer_git = true
     require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
+        -- ignore_install = { "ipkg" },
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
 
         highlight = {
