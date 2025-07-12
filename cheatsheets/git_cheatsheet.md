@@ -29,6 +29,9 @@ git remote prune foo        # remove outdated references in remote
 git push origin --delete somebranch # delete branch on remote
 git branch -m OLD_B NEW_B   # rename branch
 git rebase -i HEAD~3        # interactive rebase over last 3 commits
+
+git clean -fd               # remove all untracked files and directories
+git clean -fd --dry-run     # dry run, show what would be deleted
 ```
 
 - assuming master branch is local branch, this will overwrite local

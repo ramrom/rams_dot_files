@@ -228,8 +228,8 @@ end
 
 GitAddCommitMarkdownStuff = function()
     -- NOTE: oct'24 - uv.cwd lowercased a letter (`S` to `s`) in path, just comparing lower case path for both as workaround
-    local is_notes_dir = string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_NOTES_DIR)
-    local is_work_dir = string.lower(vim.uv.cwd()) == string.lower(vim.env.MY_WORK_DIR)
+    local is_notes_dir = string.lower(vim.uv.cwd()) == (vim.env.MY_NOTES_DIR and string.lower(vim.env.MY_NOTES_DIR))
+    local is_work_dir = string.lower(vim.uv.cwd()) == (vim.env.MY_WORK_DIR and string.lower(vim.env.MY_WORK_DIR))
 
     if (is_notes_dir or is_work_dir) then
         if vim.bo.filetype == "markdown" then
