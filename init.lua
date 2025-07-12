@@ -1383,7 +1383,8 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
-vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>")
+vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>", { desc = "explore current dir" })
+vim.keymap.set("n", "<leader><leader>l", "<cmd>:Lazy<CR>", { desc = "lazy.nvim plugin manager" })
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>", { desc = 'remove search highlights' })
 -- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'remove search highlights' })
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
