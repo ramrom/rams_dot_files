@@ -95,6 +95,10 @@
 - `launchctl` - the cli tool that talks to `launchd`, which control apples background daemons(aka services)
     - see list of daemons - `launchctl list`
     - e.g. start/stop dockerdameon `sudo launchctl stop com.docker.docker`
+- `spctl` - controls Gatekeeper, which is the security system that checks if an app is signed by a trusted developer
+    - `spctl --status` - check if Gatekeeper is enabled
+    - `spctl --master-disable` - disable Gatekeeper
+    - `spctl --master-enable` - enable Gatekeeper
 
 ## LAUNCHD
 - `launchd` is a management system which control apples background daemons(aka services)
@@ -230,6 +234,11 @@
 - hold command mac key, hover over link, clickable
     - works in iterm and terminal
 - microsoft word ctrl-h doesnt work, it opens a find and replace
+- hostname
+    - `hostname` - get the hostname, will be what tmux sees as hostname
+    - `scutil --get ComputerName` - get the computer name
+    - `scutil --get HostName` - get the hostname
+    - `scutil --get LocalHostName` - get the local hostname
 
 ## OSX GUI COMPONENTS
 - menu bar                - top screen bar with apple menu on left, app menus, status menu and date/user on right
