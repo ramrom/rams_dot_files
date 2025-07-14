@@ -825,6 +825,8 @@ new GenericIface<String>() { void afunc(String s) {} }
 ### ENUM
 - java 5 added `enum`
 - each item is a constant, and only one defined, so `==` works
+- cant instantiate an `enum`
+- all values are `public`, `final`, and `static`
 ```java
 public enum Colors { Red, Green, Blue }
 var e = Colors.Red;

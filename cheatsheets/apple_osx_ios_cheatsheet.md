@@ -60,6 +60,8 @@
     - `brew remove --cask someformula` - to remove a cask
 - `brew services` -> list services
 - `brew services start redis` -> start a service
+- `brew info foo` - get status of a formula, is it installed, it's required deps, size, is it a bottle, etc.
+- `brew ls foo` - get install locations of a formula
 ### PACKAGES
 - colima - Containers on LIMA (linux on mac) `brew install colima`
     - need to cd to `~/.docker/run/` and `ln -s ~/.colima/default/docker.sock` - otherwise cant find docker daemon

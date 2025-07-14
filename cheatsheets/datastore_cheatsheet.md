@@ -221,10 +221,16 @@
     - apr'24 - redis went partially closed source, cant host on cloud for free
     - apr'24 - FOSS fork of redis: https://github.com/valkey-io/valkey
 - COMMANDS
-    - FLUSHALL
-    - KEYS *
-    - MONITOR
-    - HGETALL <key name>
+    - full list - https://redis.io/docs/latest/commands/
+    - `FLUSHALL` - remove all keys in all databases
+    - `KEYS *` - list all keys
+    - `MONITOR`
+    - `HGETALL <key name>` - get all data in key
+    - `INFO` - get server info, e.g. cpu, replication, modules, cluster, stats, clients, etc
+- CLI
+    - default host = `localhost`, default port = `6379`
+    - `redis-cli -a foopass` - connect with password `foopass`
+    - `redis-cli PING` - connect to redis (default host/port here), and run `PING` command
 ### AWS ELASTICACHE
 - has a redis-compatible imitator mode, and also memcached mode
 - https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.corecomponents.html
