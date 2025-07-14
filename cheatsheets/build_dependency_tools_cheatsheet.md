@@ -1,5 +1,6 @@
 # BUILD DEPENDENCY TOOLS CHEATSHEET
 - transitive dependency - if project deps on lib A and lib A deps on lib B, then project transitively deps on lib B
+    - direct dependency - explicitly specified in build file
 - vendoring - including a 3rd party library direclty into the project without using some dependency management tool to fetch it
     - convention is to store the library code in the projects `/vendor` dir
 - shading - a technique to allow for multiple versions of the same library to be used in the same project without conflict
@@ -42,7 +43,9 @@
         - `~/.m2/settings.xml` might specify a repository
     - a `mirror` is a repository that syncs with another repo, usually more remote repo
 ### COMMANDS
-- `mvn --version` -> show maven version, show home bin, show current java version
+- `mvn --version` - show maven version, show home bin, show current java version
+- `mvn dependency:tree` - show full dep tree maven builds
+    - `mvn dependency:tree -Dincludes=some.groupname:artifactname` - show tree of specific artifact(s)
 - `mvn package` -> build the `package` phase, generally a later phase
     - will compile, run tests, build jar
 - running tests
