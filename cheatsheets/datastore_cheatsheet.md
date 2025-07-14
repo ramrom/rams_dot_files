@@ -227,6 +227,11 @@
     - `MONITOR`
     - `HGETALL <key name>` - get all data in key
     - `INFO` - get server info, e.g. cpu, replication, modules, cluster, stats, clients, etc
+    - `SET A B` - set key `A` to value `B`
+    - `GET A` - get value of key `A`
+    - `HSET H A B` - set key `A` to value `B` in hash `H`
+    - `HGET H A` - get key `A` of hash `H`
+    - `HGETALL H` - get all key/values in hash `H`
 - CLI
     - default host = `localhost`, default port = `6379`
     - `redis-cli -a foopass` - connect with password `foopass`
