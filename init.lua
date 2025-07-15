@@ -859,7 +859,15 @@ LoadNoice = function()
 end
 
 ------------------------- COPILOT OPTS -----------------------------------------------
-CoPilotOpts = {
+LoadCopilot = function()
+    vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+      expr = true,
+      replace_keycodes = false
+    })
+    vim.g.copilot_no_tab_map = true
+end
+
+CoPilotChatOpts = {
     mappings = {
         reset = {
             normal = '<C-k>',
@@ -1698,11 +1706,11 @@ if not vim.env.VIM_NOPLUG then
         ----- LSP STUFF
         { "CopilotC-Nvim/CopilotChat.nvim",
             dependencies = {
-               { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+               { "github/copilot.vim", config = LoadCopilot }, -- or zbirenbaum/copilot.lua
                { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
             },
             build = "make tiktoken", -- Only on MacOS or Linux
-            cond = not vim.env.NO_COPILOT, opts = CoPilotOpts,
+            cond = not vim.env.NO_COPILOT, opts = CoPilotChatOpts,
         },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
         { 'mfussenegger/nvim-dap', config = LoadDAP },

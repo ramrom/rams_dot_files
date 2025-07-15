@@ -17,6 +17,9 @@
     - a blank value in `CREATED_BY` column generally means it's manually commited changes from a container run
 - `docker create someimage` - create container from image
 - `docker rmi someimage`  - remove image
+- `docker image inspect someimage` - get detailed info about image
+- `docker image inspect someimage --format='{{.Architecture}}`
+    - format to search just some attributes of the info
 ### DOCKER CLI CONTAINERS
 - `docker container ls` - list running containers
     - `docker container ls -a` - list containers in all states
