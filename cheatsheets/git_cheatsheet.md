@@ -33,10 +33,15 @@ git rebase -i HEAD~3        # interactive rebase over last 3 commits
 git clean -fd               # remove all untracked files and directories
 git clean -fd --dry-run     # dry run, show what would be deleted
 ```
-
+- `includeIf` directive - conditional configs
+    - e.g. could load seperate gitconfig file if in some dir
+        - see https://superuser.com/questions/232373/how-to-tell-git-which-private-key-to-use/912281#912281
+    ```gitconfig
+    [includeIf "gitdir:~/PROJ1/"]
+        path = ~/.gitconfig-proj1
+    ```
 - assuming master branch is local branch, this will overwrite local
     `git reset --hard origin/master`
-
 - show branches with commits merged into relativebranch
     - NOTE: squash commiting changes commit hashes
     - `git branch --merged relativebranch`
@@ -44,10 +49,8 @@ git clean -fd --dry-run     # dry run, show what would be deleted
     - `git branch --no-merged relativebranch`
 - grep branches
     - `git branch --all --list *somepattern*`
-
 - delete all branches not master or current
     `git branch | egrep -v "^\*|master" | xargs git branch -D`
-
 - create branch and push to remote with tracking:
     ```sh
     git co -b foobranch
@@ -58,13 +61,12 @@ git clean -fd --dry-run     # dry run, show what would be deleted
     git checkout 32ab23     # checkout a SHA explicitly
     git checkout 1.1        # checkout a tag
     ```
-
 - show tags in a proper sorted order
     - `git tag --sort -version:refname`
-
 - get tags from remote
     - `git ls-remote https://someremote.url`
     - `git ls-remote --tags https://someremote.url`
+
 
 ## PUSH/TRACKING
 ```sh
