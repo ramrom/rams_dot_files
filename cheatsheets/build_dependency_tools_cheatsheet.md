@@ -117,6 +117,9 @@
 - sept2024 - nvim-metals seems to start the latest metals server that works for that scala ver
     - e.g. 2.13.6 scala starts metals ver 0.11.x
 - sept2024 - _NOTE_ for reseting project, make sure `project/.bloop` and `project/project/` dirs deleted for base bloop to install right
+### JDTLS
+- july'25 osx brew install and linux install (jdtls bin) both use same python script to start the jdtls jar
+    - if `-data` dir not sepecified, uses `tempfile.gettempdir` python method - this looks at `$TMPDIR` to set data dir
 
 ## IVY
 - [apache ivy](https://ant.apache.org/ivy/) is a dependency fetching and management tool
