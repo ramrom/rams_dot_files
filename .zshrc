@@ -93,8 +93,6 @@ function append_dir_to_path() {
     unset dir
 }
 
-append_dir_to_path ~/bin    # includes user's private bin if it exists and it's not already in PATH
-
 append_dir_to_path ~/node_modules/.bin  # local install of npm bins
 
 [ "$(uname)" = "Linux" ] && append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local
@@ -103,6 +101,8 @@ append_dir_to_path ~/node_modules/.bin  # local install of npm bins
 
 [ "$(uname)" = "Darwin" ] && append_dir_to_path ~/.docker/bin # oct2023, 1st party docker cli bins are here (jul'24 not colima)
 [ "$(uname)" = "Darwin" ] && append_dir_to_path /Applications/Docker.app/Contents/Resources/bin/
+
+append_dir_to_path ~/bin    # includes user's private bin if it exists and it's not already in PATH
 
 #export DISPLAY='localhost:10.0'
 
