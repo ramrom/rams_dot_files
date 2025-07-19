@@ -46,8 +46,17 @@
 - `mvn --version` - show maven version, show home bin, show current java version
 - `mvn dependency:tree` - show full dep tree maven builds
     - `mvn dependency:tree -Dincludes=some.groupname:artifactname` - show tree of specific artifact(s)
+- `mvn help:effective-pom` - print pom after applying inheritence, interpolations, and profiles
 - `mvn package` -> build the `package` phase, generally a later phase
     - will compile, run tests, build jar
+- explicitly running a plugins goals
+    - `mvn some-groupid:some-artifactid:some-goal`
+- maven spring plugin
+    - docs: goals - https://docs.spring.io/spring-boot/maven-plugin/goals.html
+        - run goal - https://docs.spring.io/spring-boot/maven-plugin/run.html
+    - `mvn spring-boot:run` - run the spring application
+    - `mvn spring-boot:help` - show help info, including all goals supported
+    - `mvn spring-boot:run -Dspring.profiles.active=dev` - run and pass in active profile to use
 - running tests
     - `mvn test -Dtest=TestCircle` - run all tests in class name `TestCircle`
         - `mvn test -Dtest=com.full.path.SomeTest` - can specify full path
