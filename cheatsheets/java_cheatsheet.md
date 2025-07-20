@@ -1041,13 +1041,19 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - FOSS application framework, originated in 2003, supports many programming models
     - spring 5, ~2018 releaese, uses reactive streams
 - uses IoC(inversion of control) - IoC container is main component of framework, main methods: dependency injection, dependecy lookup
+    - bean is object whose lifecycle(instantiate, manage, destroyed) by IoC container
 - Sprint Boot - convention-over-config set of tools for building applications/services
 - Sprint Cloud - tool for configuring communication b/w services, service discovery, configuration
 - other major Spring modules/libs: MVC framework, data access framework, integration framework, websockets, webflux
 - SPRING BOOT
+    - main class entry has `@SpringBootApplication` annotation
     - can use `application.yml` or `application.properties` files
         - don't use both, if u do `appliaction.properties` are loaded after, overriding yml
     - `application.yml` can hold many profiles, each seperated with `---`
+    - profiles
+        - allows to map different beans to different profiles
+        - `application-foo.properties` - specified for profile `foo`
+        - if in same file then path `spring.config.activate.on-profile=foo`
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
