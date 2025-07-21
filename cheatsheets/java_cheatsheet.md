@@ -27,13 +27,20 @@
 - see [build systems](build_dependency_tools_cheatsheet.md)
 
 ## RUNTIME
+- JVM = java virtual machine 
+    - compiles java bytecode to machine code and runs it
+    - it is platform independent, so you can run the same bytecode on any OS that has a JVM
+- JRE = java runtime environment
+    - the JRE is the JVM plus the standard libraries and other resources needed to run a java program
 `/usr/libexec/java_home -V`
     - see all jvm version installed
-- BUILDPATH - he list of all the resources required to build a project, including source files, class files, libs, and other deps
+- BUILDPATH - the list of all the resources required to build a project, including source files, class files, libs, and other deps
 - CLASSPATH
     - an env var used by JVM to locate and load classes for a java program at runtime
-    - `java -classpath /path/to/class/files MyProgram`
-    - `java -classpath /path/to/classes:/path/to/lib.jar MyProgram` - can specify many locations using `:` seperation
+    - `java -classpath /path/to/class/files foo.bar.MyProgram`
+    - `java -classpath /path/to/classes:/path/to/lib.jar foo.bar.MyProgram` - can specify many locations using `:` seperation
+    - `java -cp /path/to/classes:/path/to/dir/* foo.bar.MyProgram`
+        - `*` wildcard will include all jars in the specified directory, *NOTE* it does not recurse subdirectories
 - `JAVA_HOME` - env var that specificies where the JRE is installed
     - `export JAVA_HOME=$(/usr/libexec/java_home -v 1.6.0_65-b14-462)`
 - identical paths and names in two jars, e.g. com.bar.Foo class defined in jar1 and jar2
@@ -51,9 +58,11 @@
 - `XSS` - stack size of each thread
 - jar types
     - skinny - only the app code you wrote
+        - any dependent libraries(jars) are not included, so you need to have them in the classpath
     - thin - app code you wrote plus app dependencies
     - hollow - inverse of thin, bits needed to run your app (i.e. the JRE)
     - fat - thin + hollow
+        - fat jar is a single jar that contains all the code needed to run your app, including all dependencies
 ### COMPATIBILITY
 - java makes strong backwards comaptible gaurantees, so older bytecode will always be runnable/stable on later JVM
     - i.e. java8 bytecode will run on a java 8 jvm
@@ -1041,19 +1050,13 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - FOSS application framework, originated in 2003, supports many programming models
     - spring 5, ~2018 releaese, uses reactive streams
 - uses IoC(inversion of control) - IoC container is main component of framework, main methods: dependency injection, dependecy lookup
-    - bean is object whose lifecycle(instantiate, manage, destroyed) by IoC container
 - Sprint Boot - convention-over-config set of tools for building applications/services
 - Sprint Cloud - tool for configuring communication b/w services, service discovery, configuration
 - other major Spring modules/libs: MVC framework, data access framework, integration framework, websockets, webflux
 - SPRING BOOT
-    - main class entry has `@SpringBootApplication` annotation
     - can use `application.yml` or `application.properties` files
         - don't use both, if u do `appliaction.properties` are loaded after, overriding yml
     - `application.yml` can hold many profiles, each seperated with `---`
-    - profiles
-        - allows to map different beans to different profiles
-        - `application-foo.properties` - specified for profile `foo`
-        - if in same file then path `spring.config.activate.on-profile=foo`
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
