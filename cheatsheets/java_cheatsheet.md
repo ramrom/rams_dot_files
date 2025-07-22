@@ -1067,6 +1067,11 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - `jupiter` introduces Extension API, `Extension` is core marker interface
     - `vintage` for backwards compatibilty to run JUnit 3 and 4 tests
     - uses Tags (ver 5 can use ver 4 tests that use Categories, itl will have it's class name as a string)
+### TOMCAT
+- web server, created by sun, donated to apache in 1999
+- is the ref implementation for jav servlet and JSP(java server pages)
+- widely used  web server for java applications, big reasons is b/c is FOSS and light-weight
+- major alternatives are Jetty, JBoss/Wildfly, WebLogic, WebSphere, GlassFish
 ### NETTY
 - https://netty.io/
 - async non-blocking event-driven network-centric framework, does HTTP and other protocols
