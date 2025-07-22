@@ -1043,12 +1043,14 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - specification: https://www.oracle.com/java/technologies/javase/javabeans-spec.html
 - 3 major reqs: 1. serializable, 2. data is private, access only via getters/setter, 3. has a zero-arg constructor
 - kind of a reusable software component
+- in spring, a bean is a object whose lifecycle (instantiation, management, destruction) is handled the Spring IoC container
 
 
 ## MAJOR LIBS/FRAMEWORKS
 ### SPRING FRAMEWORK
 - FOSS application framework, originated in 2003, supports many programming models
     - spring 5, ~2018 releaese, uses reactive streams
+- reactive(using reactor) projects - spring webflux, spring data, spring cloud gateway
 - uses IoC(inversion of control) - IoC container is main component of framework, main methods: dependency injection, dependecy lookup
 - Sprint Boot - convention-over-config set of tools for building applications/services
 - Sprint Cloud - tool for configuring communication b/w services, service discovery, configuration
