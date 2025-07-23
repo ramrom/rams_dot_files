@@ -137,6 +137,7 @@
 - cmd + shift + 3           - screenshot
 - cmd + shift + 4           - screenshot area
 - cmd + shift + 4, space    - screenshot window
+- cmd + shift + 5           - can do screen video capture, of partial or full screen
 - cmd + ctrl + space    - bring up emoji menu in text field
 - :<foo>:               - in text field typing `:` then text desc of emoji, then `:` will insert emoji
                           works in slack and whatsapp, not safari for google voice
