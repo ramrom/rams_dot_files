@@ -1359,7 +1359,7 @@ LoadLSPConfig = function()
     -- level 0-5, TRACE=0, 5=OFF
     if (vim.env.LSP_LL) then
         vim.lsp.set_log_level(tonumber(vim.env.LSP_LL));
-        print("log level set to: ".. vim.lsp.log.get_level());
+        print("lsp log level set to: ".. vim.lsp.log.get_level());
     end
 end
 
