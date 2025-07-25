@@ -1329,7 +1329,16 @@ LoadKotlinLSP = function()
     }
 end
 
--- LoadKotlinLSP = function() vim.lsp.enable('kotlin_lsp') end
+-- july'25 - 1st party supported by jetbrains, kotlin-language-server is not maintained anymore
+-- LoadKotlinLSP = function()
+--     vim.lsp.enable('kotlin_lsp')
+--     vim.lsp.config('kotlin_lsp', {
+--         root_markers = { "settings.gradle", "settings.gradle.kts", "pom.xml",
+--             "build.gradle", "build.gradle.kts", "workspace.json" },
+--         filetypes = { "kotlin", "kt" },
+--         cmd = { "kotlin-lsp", "--stdio" }
+--     })
+-- end
 
 ----------------- RUBY LSP ---------------------------------------
 -- lang server - https://shopify.github.io/ruby-lsp/
