@@ -169,7 +169,7 @@
     - supports vim and neovim, it's beefy, was best LSP experience before nvim/lsp-client
 - neovim-lsp - neovim's built in lsp client, written in lua
 - nvim-lspconfig - a plugin with common client configs for langauges, CONFLICTS with nvim-metals (for scala)
-    - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    - LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 - nvim-metals - full metals plugin that uses nvim's builtin lsp client
     - also see [metals section in cheatsheet](build_dependency_tools_cheatsheet.md)
     - doesnt work with nnvim-lspconfig: https://github.com/scalameta/nvim-metals/discussions/93

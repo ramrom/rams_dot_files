@@ -1325,9 +1325,11 @@ LoadKotlinLSP = function()
         -- cmd = { "kotlin-language-server" },
         cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
         filetypes = { "kotlin", "kt" },
-        root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts")
+        root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
     }
 end
+
+-- LoadKotlinLSP = function() vim.lsp.enable('kotlin_lsp') end
 
 ----------------- RUBY LSP ---------------------------------------
 -- lang server - https://shopify.github.io/ruby-lsp/
@@ -1670,7 +1672,7 @@ if not vim.env.VIM_NOPLUG then
         { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
         { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, cmd = {"NvimTreeFindFileToggle", "NvimTreeToggle", "NvimTreeOpen"} },
         { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
-            build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+            build = ":TSUpdate", lazy = false },
         'nvim-tree/nvim-web-devicons',
         'tpope/vim-surround',
         'tpope/vim-repeat',
