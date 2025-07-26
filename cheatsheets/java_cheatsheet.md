@@ -1059,6 +1059,9 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - can use `application.yml` or `application.properties` files
         - don't use both, if u do `appliaction.properties` are loaded after, overriding yml
     - `application.yml` can hold many profiles, each seperated with `---`
+    - app properties docs: https://docs.spring.io/spring-boot/reference/features/external-config.html
+        - profile specific files override and overlay the base
+            - `application.properties` applies and `application-dev.properties` applies on top if `dev` profile is active
 - ANNOTATIONS 
     - are generally interpretted at runtime
         - e.g. `@Autowired` used to inject bean into another bean but if the bean is not found a runtime exception is thrown
