@@ -1059,6 +1059,8 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - can use `application.yml` or `application.properties` files
         - don't use both, if u do `appliaction.properties` are loaded after, overriding yml
     - `application.yml` can hold many profiles, each seperated with `---`
+- spring annotations are generally interpretted at runtime
+    - e.g. `@Autowired` used to inject bean into another bean but if the bean is not found a runtime exception is thrown
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
@@ -1072,6 +1074,10 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - is the ref implementation for jav servlet and JSP(java server pages)
 - widely used  web server for java applications, big reasons is b/c is FOSS and light-weight
 - major alternatives are Jetty, JBoss/Wildfly, WebLogic, WebSphere, GlassFish
+### LOMBOK
+- https://projectlombok.org/
+- library that uses annotations to generate boilerplate code like getters, setters, equals, hashcode, toString
+- annotations processed at compile time and injected into the class files
 ### NETTY
 - https://netty.io/
 - async non-blocking event-driven network-centric framework, does HTTP and other protocols
