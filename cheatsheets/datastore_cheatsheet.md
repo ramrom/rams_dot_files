@@ -60,6 +60,8 @@
     - docs: https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility
     - `sqlcmd --help` - short help
     - `sqlcmd -?` - detailed help
+    - `sqlcmd -S localhost -U sa -P yourpassword` - connect to local sql server with user `sa` and password `yourpassword`
+    - `sqlcmd -S localhost -U MYDOMAIN\\sa -P yourpassword` - domain auth using domain name `MYDOMAIN`
     - QUERY EDITOR MODE
         - `:quit` / `:exit` - terminate session
         - `:listvar` - list all vars
