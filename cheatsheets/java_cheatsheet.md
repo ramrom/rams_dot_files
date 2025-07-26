@@ -1059,8 +1059,15 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - can use `application.yml` or `application.properties` files
         - don't use both, if u do `appliaction.properties` are loaded after, overriding yml
     - `application.yml` can hold many profiles, each seperated with `---`
-- spring annotations are generally interpretted at runtime
-    - e.g. `@Autowired` used to inject bean into another bean but if the bean is not found a runtime exception is thrown
+- ANNOTATIONS 
+    - are generally interpretted at runtime
+        - e.g. `@Autowired` used to inject bean into another bean but if the bean is not found a runtime exception is thrown
+    - `@Component` - a bean that's DI'd
+    - `@Entity` - a bean that is persisted to a database, e.g. JPA entity
+    - `@Table` - used to specify the table name for a JPA entity
+    - `@Controller` - a bean that handles web requests, e.g. in MVC
+    - `@RequestMapping` - used to map a web request to a method in a controller
+    - `@Transactional` - used to mark a method as transactional, e.g. in a service
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
