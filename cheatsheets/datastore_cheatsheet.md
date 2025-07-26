@@ -55,6 +55,45 @@
 - `.tables` - list tables
 - `.schema footable` - get a table's description
 - `.mode line` - display each records column in seperate line
+### MS SQL SERVER
+- `sqlcmd` CLI
+    - docs: https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility
+    - `sqlcmd --help` - short help
+    - `sqlcmd -?` - detailed help
+    - QUERY EDITOR MODE
+        - `:quit` / `:exit` - terminate session
+        - `:listvar` - list all vars
+        - `:setvar foo "bar"` - set variable `foo` with value `bar`
+        - `:r <filename>` - read file into query editor
+        - `:out <filename>` - write output to file
+        - `:error <filename>` - write error output to file
+        - `set statistics time on` - show cpu time, elapsed time
+            - use `off` to turn it off
+    - no native way to format results in vertical/expanded view (like with `psql`)
+        - hacky performance inefficient way:
+            ```sql
+            SET NOCOUNT ON;
+            SELECT 'Column1: ' + CONVERT(NVARCHAR(MAX), Column1)
+            FROM YourTable
+            UNION ALL
+            SELECT 'Column2: ' + CONVERT(NVARCHAR(MAX), Column2)
+            FROM YourTable
+            ```
+- MS SQL Server info and syntax
+    - describing a table
+        ```sql
+        SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, IS_NULLABLE
+        FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'bt_batch_v'
+        ```
+    - `SYSOBJECTS` - info about tons of stuff, `U` = user tables
+    - `SELECT TOP 3 * FROM FOO;`
+    - `SELECT TOP 3 * FROM FOO FOR JSON AUTO;` - print result in JSON format
+    - list all tables
+        - sql server 2000 print all tables - `SELECT FROM SYSOBJECTS WHERE xtype = 'U';`
+        - server 2005+ - `SELECT FROM INFORMATION_SCHEMA.TABLES;`
+         - `SELECT FROM foodatbasename.INFORMATION_SCHEMA.TABLES;` - explicit db name
+         - `SELECT FROM foodatbasename.INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';`
+            - real tables, not views
 ### SQL LANGUAGE
 - joins - query that joins two tables
     - inner join - (left or right), will only return records with hits
