@@ -189,6 +189,12 @@
 - pure lua plugin manager, newer and a bit faster than packer
 - plugins can be configed to lazy load based on events and condtions
 - `lazy-lock.json` file (generally in `~/.config/nvim/lazy-lock.json`) - has current version(branch/commit) of plugins installed
+### MASON
+- `Mason` - open the mason UI
+- `MasonUpdate` - update all managed registries
+- `MasonInstall <package>` - install package
+- `MasonUninstall <package>` - uninstall package
+- `MasonLog` - see logs
 ### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin

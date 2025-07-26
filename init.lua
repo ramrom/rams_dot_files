@@ -243,6 +243,14 @@ GitAddCommitMarkdownStuff = function()
     end
 end
 
+ToggleSnackIndentLines = function()
+    if Snacks.indent.enabled then
+        Snacks.indent.disable()
+    else
+        Snacks.indent.enable()
+    end
+end
+
 ToggleIndentBlankLine = function()
     if IndentBlankLineEnabled then
         require("ibl").update { enabled = false }
@@ -930,6 +938,16 @@ FlashKeyDefinitions = {
     },
 }
 
+------------------------- SNACKS INDENT OPTS -----------------------------------------------
+SnacksIndentOpts = {
+    animate = {
+        enabled = true
+    },
+    chunk = {
+        enabled = true
+    },
+}
+
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
     IndentBlankLineEnabled = false
@@ -1400,6 +1418,8 @@ vim.g.mapleader = " "
 -- vim.keymap.set({'n', 'x'}, '<leader>k', '%', { desc = "go to matching pair" }) -- FIXME: doesnt work, only [](){}, not if/else/end
 
 vim.keymap.set("i", "<C-l>", "<Esc>")   ---- BETTER ESCAPE
+vim.keymap.set({ "i", "n", "s" }, "<esc>", function() vim.cmd("noh")
+    return "<esc>" end, { expr = true, desc = "Escape and Clear hlsearch" })
 vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<leader>.", "<cmd>:@:<CR>", { desc = "repeat last command" })
 vim.keymap.set("n", "<leader><leader>e", "<cmd>:Explore<CR>", { desc = "explore current dir" })
@@ -1540,7 +1560,8 @@ vim.keymap.set('n', '<leader>ci', '<cmd>Inspect<cr>', { desc = "treesitter Inspe
 vim.keymap.set("n", "<leader>wj", "<cmd>NoiceDismiss<CR>", { desc = "clear noice notifications on screen" })
 vim.keymap.set("n", "<leader>wb", "<cmd>Tabularize/|<CR>", { desc = "tabularize (pipe delimiter)" })
 vim.keymap.set("n", "<leader>wc", "<cmd>messages clear<CR>", { desc = "clear messages" })
-vim.keymap.set('n', '<leader>wi', ToggleIndentBlankLine, { desc = "toggle indent blankline"})
+-- vim.keymap.set('n', '<leader>wi', ToggleIndentBlankLine, { desc = "toggle indent blankline"})
+vim.keymap.set('n', '<leader>wi', ToggleSnackIndentLines, { desc = "toggle snacks indent lines"})
 vim.keymap.set('n', '<leader>wm', '<cmd>messages<cr>')
 vim.keymap.set('n', '<leader>wn', '<cmd>Noice<cr>')
 vim.keymap.set('n', '<leader>wM', '<cmd>MarkdownPreviewToggle<cr>')
@@ -1715,6 +1736,7 @@ if not vim.env.VIM_NOPLUG then
         },
 
         ----- LSP STUFF
+        { "mason-org/mason.nvim", opts = {} },
         { "CopilotC-Nvim/CopilotChat.nvim",
             dependencies = {
                { "github/copilot.vim", config = LoadCopilot }, -- or zbirenbaum/copilot.lua
@@ -1754,7 +1776,9 @@ if not vim.env.VIM_NOPLUG then
         },
 
         -- OTHER
-        { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
+        {
+          "folke/snacks.nvim", opts = { indent = SnacksIndentOpts } },
+        -- { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
         -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
         { "folke/noice.nvim", event = "VeryLazy", opts = { },
