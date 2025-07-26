@@ -176,7 +176,7 @@ alias java11='sdk use java 11.0.16.1-tem'
 alias java8='sdk use java 8.0.345-zulu'
 
 #POSTGRES
-alias lpsql='PAGER=$(psql-pager) /usr/local/opt/libpq/bin/psql'
+alias ppsql='PAGER=$(psql-pager) /opt/homebrew/bin/psql'
 alias psqlless='PAGER=less LESS="-iMSx4 -FX" psql'
 #alias psqlvim='PAGER=~/vimpager.sh psql'
 alias watchdbsizes="watch 'psql -c \"SELECT pg_database.datname, pg_database_size(pg_database.datname), pg_size_pretty(pg_database_size(pg_database.datname)) FROM pg_database ORDER BY pg_database_size DESC;\" -d postgres'"
