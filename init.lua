@@ -1332,8 +1332,7 @@ LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
     vim.lsp.enable('kotlin_language_server')
     vim.lsp.config('kotlin_language_server', {
-        autostart = LSPAutoStartEnable,
-        -- cmd = { "kotlin-language-server" },
+        cmd = { "kotlin-language-server" },
         -- cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
         -- filetypes = { "kotlin", "kt" },
         -- root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
@@ -1343,12 +1342,7 @@ end
 -- july'25 - 1st party supported by jetbrains, kotlin-language-server is not maintained anymore
 -- LoadKotlinLSP = function()
 --     vim.lsp.enable('kotlin_lsp')
---     vim.lsp.config('kotlin_lsp', {
---         root_markers = { "settings.gradle", "settings.gradle.kts", "pom.xml",
---             "build.gradle", "build.gradle.kts", "workspace.json" },
---         filetypes = { "kotlin", "kt" },
---         cmd = { "kotlin-lsp", "--stdio" }
---     })
+--     vim.lsp.config('kotlin_lsp', {})
 -- end
 
 ----------------- RUBY LSP ---------------------------------------
