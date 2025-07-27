@@ -1332,8 +1332,8 @@ LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
     vim.lsp.enable('kotlin_language_server')
     vim.lsp.config('kotlin_language_server', {
-        cmd = { "kotlin-language-server" },
-        -- cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
+        -- cmd = { "kotlin-language-server" },
+        cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
         -- filetypes = { "kotlin", "kt" },
         -- root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
     })
