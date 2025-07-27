@@ -1307,10 +1307,10 @@ LoadJDTLSServer = function()
 
     -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
         -- previously i didnt have this and goto def was not working
-    -- vim.api.nvim_create_autocmd("Filetype", {
-    --     pattern = "java",
-    --     callback = function() require("jdtls").start_or_attach(config) end,
-    -- })
+    vim.api.nvim_create_autocmd("Filetype", {
+        pattern = "java",
+        callback = function() require("jdtls").start_or_attach(config) end,
+    })
 end
 
 ---------------- GROOVY LSP -------------------------------------
