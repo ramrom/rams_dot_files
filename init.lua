@@ -1213,43 +1213,24 @@ end
 ----------------- LUA LSP ----------------------------
 -- TODO: neovim lspconfig setup - https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
 LoadLuaLSP = function()
-    require'lspconfig'.lua_ls.setup{}
+    if LSPAutoStartEnable then vim.lsp.enable('lua_ls') end
+    vim.lsp.config('lua_ls')
 end
 
 
 ---------------- RUST LSP ---------------------------
--- config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
+-- nvim lsp config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
+-- rust-analyzer settings: https://rust-analyzer.github.io/book/configuration.html
 LoadRustLSP = function()
-    require('lspconfig').rust_analyzer.setup({
-        autostart = LSPAutoStartEnable,
-        settings = {
-            ["rust-analyzer"] = {
-                imports = {
-                    granularity = {
-                        group = "module",
-                    },
-                    prefix = "self",
-                },
-                cargo = {
-                    buildScripts = {
-                        enable = true,
-                    },
-                },
-                procMacro = {
-                    enable = true
-                },
-            }
-        }
-    })
+    if LSPAutoStartEnable then vim.lsp.enable('rust_analyzer') end
+    vim.lsp.config('rust_analyzer', {})
 end
 
------------- GOLANG gopls LSP ----------------------
+------------ GOLANG GOPLS LS ----------------------
+-- gopls settings: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
 LoadGolangLSP = function()
-    require'lspconfig'.gopls.setup{
-        autostart = LSPAutoStartEnable,
-        cmd = {"gopls", "serve"},
-        filetypes = {"go", "gomod", "gotmpl" },
-        root_dir = require("lspconfig/util").root_pattern("go.mod", ".git"),
+    if LSPAutoStartEnable then vim.lsp.enable('gopls') end
+    vim.lsp.config('gopls', {
         settings = {
           gopls = {
             analyses = {
@@ -1258,14 +1239,13 @@ LoadGolangLSP = function()
             staticcheck = true,
           },
         },
-        single_file_support = true
-    }
+    })
 
     -- golang DAP
     -- lua require('dap-go').setup()
 end
 
--------------- JAVA JDTLS ---------------------------
+-------------- JAVA JDTLS LS ---------------------------
 ValidateJavaInstallDirs = function(JavaInstalls)
     local result = 0
     for i,v in ipairs(JavaInstalls) do
@@ -1307,11 +1287,11 @@ LoadJDTLSServer = function()
     end
 
     local config = {
-        autostart = LSPAutoStartEnable,
         -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
         -- cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
         cmd = { vim.env.HOME .. '/bin/jdtls' },
         root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
+        -- autostart = LSPAutoStartEnable, -- july'25 pretty sure this isnt supported
         settings = {
             java = {
                 -- `name` must match a value in enum ExecutionEnvironment
@@ -1322,22 +1302,24 @@ LoadJDTLSServer = function()
     }
 
     require('jdtls').start_or_attach(config)
+    -- if LSPAutoStartEnable then vim.lsp.enable('jdtls') end
+    -- vim.lsp.config('jdtls', config)
 
     -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
         -- previously i didnt have this and goto def was not working
-    vim.api.nvim_create_autocmd("Filetype", {
-        pattern = "java",
-        callback = function() require("jdtls").start_or_attach(config) end,
-    })
+    -- vim.api.nvim_create_autocmd("Filetype", {
+    --     pattern = "java",
+    --     callback = function() require("jdtls").start_or_attach(config) end,
+    -- })
 end
 
 ---------------- GROOVY LSP -------------------------------------
 -- neovim lspconfig: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#groovyls
+-- FIXME: july'25 - lsp logs show "Error: Unable to access jarfile groovy-language-server-all.jar\n"
+    -- the jar file exists in mason package dir... so dunno
 LoadGroovyLSP = function()
-    require('lspconfig').groovyls.setup{
-        autostart = LSPAutoStartEnable,
-        cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
-    }
+    if LSPAutoStartEnable then vim.lsp.enable('groovyls') end
+    vim.lsp.config('groovyls', {})
 end
 
 
@@ -1348,13 +1330,14 @@ end
 -- NOTE: a `kls_database.db` file and `bin` dir at root are created for metadata, should add to gitignore
 LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
-    require('lspconfig').kotlin_language_server.setup{
+    vim.lsp.enable('kotlin_language_server')
+    vim.lsp.config('kotlin_language_server', {
         autostart = LSPAutoStartEnable,
         -- cmd = { "kotlin-language-server" },
-        cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
-        filetypes = { "kotlin", "kt" },
-        root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
-    }
+        -- cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
+        -- filetypes = { "kotlin", "kt" },
+        -- root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
+    })
 end
 
 -- july'25 - 1st party supported by jetbrains, kotlin-language-server is not maintained anymore
@@ -1372,15 +1355,8 @@ end
 -- lang server - https://shopify.github.io/ruby-lsp/
 -- TODO: also check out rails LSP: https://github.com/Shopify/ruby-lsp-rails
 LoadRubyLSP = function()
-    require('lspconfig').ruby_lsp.setup{
-        -- below are default opts
-
-        -- cmd = { "ruby-lsp" },
-        -- filetypes = { "ruby" },
-        -- init_options = { formatter = "auto" },
-        -- root_patterns = { "Gemfile", ".git" },
-        -- single_file_support = true,
-    }
+    vim.lsp.enable('ruby_lsp')
+    -- vim.lsp.config('ruby_lsp', {})
 end
 
 -----------BUILTIN LSPCONFIGS ---------------------

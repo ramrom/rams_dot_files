@@ -190,11 +190,15 @@
 - plugins can be configed to lazy load based on events and condtions
 - `lazy-lock.json` file (generally in `~/.config/nvim/lazy-lock.json`) - has current version(branch/commit) of plugins installed
 ### MASON
-- `Mason` - open the mason UI
-- `MasonUpdate` - update all managed registries
-- `MasonInstall <package>` - install package
-- `MasonUninstall <package>` - uninstall package
-- `MasonLog` - see logs
+- osx/linux lang servers installed in `~/.local/share/nvim/mason`
+- executables symlinked to `~/.local/share/nvim/mason/bin/`
+    - these are added to neovim's PATH when it starts up
+- COMMANDS
+    - `Mason` - open the mason UI
+    - `MasonUpdate` - update all managed registries
+    - `MasonInstall <package>` - install package
+    - `MasonUninstall <package>` - uninstall package
+    - `MasonLog` - see logs
 ### VIM-PLUG
 - `Plug 'foouser/some-plugin', { 'commit': 'cd5267d2d708e908dbd668c7de74e1325eb1e1da' }`
     - can specify a commit hash version of a plugin
@@ -389,6 +393,7 @@
 - print runtime path: 
     - full info (big table) `lua print(vim.inspect(vim.opt.rtp))`
     - just the paths: `lua print(vim.inspect(vim.api.nvim_list_runtime_paths()))`
+- print shell's `PATH` - `:echo $PATH` or `lua print(vim.env.PATH)`
 ### LOGS / MESSAGES
 - mar2024 - logs stored in `~/.local/state/nvim`
     - vim's regular `log`, but also `lsp.log`

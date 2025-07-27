@@ -72,6 +72,9 @@
 - `rustup` installs and manages toolchain
     - `rustup update` - update/upgrade `rustc`, `cargo` and other tools including docs, clippy
     - `rustup show` - show rustc ver, rustup home dir, host arch
+    - `rustup component list` - list all components available for install
+    - `rustup component list --installed` - list all installed components
+    - `rustup component add rust-analyzer` - install a component
 - `rustc` is compiler bin
 - [cargo](#cargo) is main dependency manager and build tool(fetch deps, compile/build, run, test, bench, lint)
 - `rustfmt` - formatter, invoked by `cargo fmt`
