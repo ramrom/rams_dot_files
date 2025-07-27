@@ -244,11 +244,11 @@ GitAddCommitMarkdownStuff = function()
 end
 
 ToggleSnackIndentLines = function()
-    if Snacks.indent.enabled then
-        Snacks.indent.disable()
-    else
-        Snacks.indent.enable()
-    end
+    if Snacks.indent.enabled then Snacks.indent.disable() else Snacks.indent.enable() end
+end
+
+ToggleSnackDim = function()
+    if Snacks.dim.enabled then Snacks.dim.disable() else Snacks.dim.enable() end
 end
 
 ToggleIndentBlankLine = function()
@@ -940,6 +940,8 @@ FlashKeyDefinitions = {
 
 ------------------------- SNACKS OPTS -----------------------------------------------
 SnacksOpts = {
+    -- dashboard = {},
+    dim = {},
     indent = {
         hl = {
             "SnacksIndent1",
@@ -1544,6 +1546,7 @@ vim.keymap.set("n", "<leader>wb", "<cmd>Tabularize/|<CR>", { desc = "tabularize 
 vim.keymap.set("n", "<leader>wc", "<cmd>messages clear<CR>", { desc = "clear messages" })
 -- vim.keymap.set('n', '<leader>wi', ToggleIndentBlankLine, { desc = "toggle indent blankline"})
 vim.keymap.set('n', '<leader>wi', ToggleSnackIndentLines, { desc = "toggle snacks indent lines"})
+vim.keymap.set('n', '<leader>wD', ToggleSnackDim, { desc = "toggle snacks dimming"})
 vim.keymap.set('n', '<leader>wm', '<cmd>messages<cr>')
 vim.keymap.set('n', '<leader>wn', '<cmd>Noice<cr>')
 vim.keymap.set('n', '<leader>wM', '<cmd>MarkdownPreviewToggle<cr>')
