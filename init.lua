@@ -939,23 +939,25 @@ FlashKeyDefinitions = {
 }
 
 ------------------------- SNACKS INDENT OPTS -----------------------------------------------
-SnacksIndentOpts = {
-    hl = {
-        "SnacksIndent1",
-        "SnacksIndent2",
-        "SnacksIndent3",
-        "SnacksIndent4",
-        "SnacksIndent5",
-        "SnacksIndent6",
-        "SnacksIndent7",
-        "SnacksIndent8",
-    },
-    animate = {
-        enabled = true
-    },
-    chunk = {
-        enabled = false
-    },
+SnacksOpts = {
+    indent = {
+        hl = {
+            "SnacksIndent1",
+            "SnacksIndent2",
+            "SnacksIndent3",
+            "SnacksIndent4",
+            "SnacksIndent5",
+            "SnacksIndent6",
+            "SnacksIndent7",
+            "SnacksIndent8",
+        },
+        animate = {
+            enabled = true
+        },
+        chunk = {
+            enabled = false
+        },
+    }
 }
 
 ------------------------- INDENT BLANKLINE -----------------------------------------------
@@ -1757,7 +1759,7 @@ if not vim.env.VIM_NOPLUG then
 
         -- OTHER
         {
-          "folke/snacks.nvim", opts = { indent = SnacksIndentOpts } },
+          "folke/snacks.nvim", opts = SnacksOpts },
         -- { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
         -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
