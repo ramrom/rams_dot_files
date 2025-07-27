@@ -943,6 +943,7 @@ SnacksOpts = {
     -- dashboard = {},
     dim = {},
     indent = {
+        -- july'25 hl groups not "cycling", i see active line as blue, others as grey
         hl = {
             "SnacksIndent1",
             "SnacksIndent2",
@@ -954,7 +955,7 @@ SnacksOpts = {
             "SnacksIndent8",
         },
         animate = {
-            enabled = true
+            enabled = false
         },
         chunk = {
             enabled = false
