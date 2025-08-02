@@ -943,7 +943,7 @@ SnacksOpts = {
     -- dashboard = {},
     dim = {},
     indent = {
-        -- july'25 hl groups not "cycling", i see active line as blue, others as grey
+        -- FIXME: july'25 hl groups not "cycling", i see active line as blue, others as grey
         hl = {
             "SnacksIndent1",
             "SnacksIndent2",
@@ -1363,6 +1363,9 @@ end
 LoadLSPConfig = function()
     -- LoadLuaLSP()
     -- LoadRubyLSP()
+    -- require('java').setup()
+    -- vim.lsp.enable('jdtls')
+    -- vim.lsp.config('jdtls', {})
     LoadRustLSP()
     LoadGolangLSP()
     LoadKotlinLSP()
@@ -1722,7 +1725,14 @@ if not vim.env.VIM_NOPLUG then
         },
 
         ----- LSP STUFF
-        { "mason-org/mason.nvim", opts = {} },
+        -- { "mason-org/mason.nvim", opts = {} },
+        { "mason-org/mason.nvim", opts = {
+            registries = {
+                "github:nvim-java/mason-registry",
+                "github:mason-org/mason-registry",
+            }
+        } },
+        { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
         { "CopilotC-Nvim/CopilotChat.nvim",
             dependencies = {
                { "github/copilot.vim", config = LoadCopilot }, -- or zbirenbaum/copilot.lua
@@ -1732,10 +1742,36 @@ if not vim.env.VIM_NOPLUG then
             cond = not vim.env.NO_COPILOT, opts = CoPilotChatOpts,
         },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
+        -- { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig,
+        --     dependencies = { {'nvim-java/nvim-java'} },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
+        {'nvim-java/nvim-java' },
+        -- {'nvim-java/nvim-java', config = function() require('java').setup() end },
+        -- { 'nvim-java/nvim-java', config = false,
+        --   dependencies = {
+        --     {
+        --       'neovim/nvim-lspconfig',
+        --       opts = {
+        --         servers = {
+        --           jdtls = {
+        --             -- Your custom jdtls settings goes here
+        --           },
+        --         },
+        --         setup = {
+        --           jdtls = function() 
+        --                     print("load jstl")
+        --                     require('java').setup({}) 
+        --                     vim.lsp.enable('jdtls')
+        --                     vim.lsp.config('jdtls', {})
+        --                     end,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
+        -- { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
         { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
@@ -1790,3 +1826,8 @@ if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
     local timer = vim.uv.new_timer()
     timer:start(1000, 0, function () timer:stop(); timer:close(); loadLocal() end)
 end
+
+require('mason').setup()
+require('mason-tool-installer').setup({})
+require('lspconfig').jdtls.setup({})
+-- require('java').setup()
