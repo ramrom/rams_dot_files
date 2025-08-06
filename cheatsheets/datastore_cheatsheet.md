@@ -66,6 +66,7 @@
         - `:quit` / `:exit` - terminate session
         - `:listvar` - list all vars
         - `:setvar foo "bar"` - set variable `foo` with value `bar`
+        - `use dbname` - switch to database `dbname` on server
         - `:r <filename>` - read file into query editor
         - `:out <filename>` - write output to file
         - `:error <filename>` - write error output to file
