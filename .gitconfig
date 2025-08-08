@@ -54,6 +54,7 @@
   aa = add --all
   au= add -u
   cm = commit -m
+  lp = log -p
   b = branch
   d = diff
   p = pull

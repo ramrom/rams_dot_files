@@ -1,5 +1,6 @@
 # KOTLIN
-https://kotlinlang.org/
+- official home - https://kotlinlang.org/
+- https://learnxinyminutes.com/kotlin/
 
 ## FEATURES
 - `sealed` keyword - inheritance of sealed classes and interfaces must be known at compile time, so in same package/module
