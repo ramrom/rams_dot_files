@@ -3,8 +3,10 @@
 export JAVA_HOME=~/.sdkman/candidates/java/21.0.2-tem
 [ ! -d "$JAVA_HOME" ] && echo "$JAVA_HOME not a valid directory!, exitting" && exit 1
 
-if [ "$(uname)" = "Darwin" ]; then
-    /opt/homebrew/bin/jdtls
-else
-    ~/src/jdtls/bin/jdtls
-fi
+jdtls  # assuming mason install, mason injects it's bin directory in nvim's PATH
+
+# if [ "$(uname)" = "Darwin" ]; then
+#     /opt/homebrew/bin/jdtls
+# else
+#     ~/src/jdtls/bin/jdtls
+# fi

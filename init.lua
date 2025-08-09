@@ -1250,7 +1250,7 @@ LoadGolangLSP = function()
     -- lua require('dap-go').setup()
 end
 
--------------- JAVA JDTLS LS ---------------------------
+-------------- JDTLS SETTINGS -----------------------
 ValidateJavaInstallDirs = function(JavaInstalls)
     local result = 0
     for i,v in ipairs(JavaInstalls) do
@@ -1263,27 +1263,48 @@ ValidateJavaInstallDirs = function(JavaInstalls)
     return result
 end
 
+JavaInstalls = {
+    {
+        name = "JavaSE-1.8",
+        path = "~/.sdkman/candidates/java/8.0.345-zulu"
+    },
+    {
+        name = "JavaSE-11",
+        path = "~/.sdkman/candidates/java/11.0.16.1-tem"
+    },
+    {
+        name = "JavaSE-17",
+        path = "~/.sdkman/candidates/java/17.0.6-tem"
+    },
+    {
+        name = "JavaSE-21",
+        path = "~/.sdkman/candidates/java/21.0.2-tem"
+    },
+}
+
+JDTLSSettings = {
+    java = {
+        -- `name` must match a value in enum ExecutionEnvironment
+        -- see https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line
+        configuration = { runtimes = JavaInstalls }
+    }
+}
+
+----------------- NVIM-JAVA -------------------------
+LoadNvimJava = function()
+    require('java').setup()
+    vim.lsp.enable('jdtls')
+    vim.lsp.config('jdtls', { 
+        -- cmd = { "jdtls" },  -- NOTE: this is a symlink to the jdtls binary in ~/bin, which is set to use java21
+        -- root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
+        -- autostart = LSPAutoStartEnable,
+        settings = JDTLSSettings,
+    })
+end
+
+-------------- JAVA JDTLS LS ---------------------------
 -- jdtls lang server requires java 21, make sure JAVA_HOME of shell is set to java21
 LoadJDTLSServer = function()
-    local JavaInstalls = {
-        {
-            name = "JavaSE-1.8",
-            path = "~/.sdkman/candidates/java/8.0.345-zulu"
-        },
-        {
-            name = "JavaSE-11",
-            path = "~/.sdkman/candidates/java/11.0.16.1-tem"
-        },
-        {
-            name = "JavaSE-17",
-            path = "~/.sdkman/candidates/java/17.0.6-tem"
-        },
-        {
-            name = "JavaSE-21",
-            path = "~/.sdkman/candidates/java/21.0.2-tem"
-        },
-    }
-
     if (ValidateJavaInstallDirs(JavaInstalls) == 1) then
         -- sept'24 - TODO: tried `echoerr` and it fails, see https://github.com/neovim/neovim/issues/13928 , err_writeln below fails too
         -- vim.api.nvim_err_writeln("-\nAborting loading JDTLS server, missing java installs")
@@ -1292,18 +1313,10 @@ LoadJDTLSServer = function()
     end
 
     local config = {
-        -- OSX brew jdtls formula exists, on linux downloaded compiled bin and symlinked to ~/bin
-        -- cmd = { vim.loop.os_uname().sysname == "Darwin" and '/opt/homebrew/bin/jdtls' or vim.env.HOME .. '/bin/jdtls' },
         cmd = { vim.env.HOME .. '/bin/jdtls' },
         root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         -- autostart = LSPAutoStartEnable, -- july'25 pretty sure this isnt supported
-        settings = {
-            java = {
-                -- `name` must match a value in enum ExecutionEnvironment
-                -- see https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line
-                configuration = { runtimes = JavaInstalls }
-            }
-        }
+        settings = JDTLSSettings,
     }
 
     require('jdtls').start_or_attach(config)
@@ -1363,9 +1376,7 @@ end
 LoadLSPConfig = function()
     -- LoadLuaLSP()
     -- LoadRubyLSP()
-    -- require('java').setup()
-    -- vim.lsp.enable('jdtls')
-    -- vim.lsp.config('jdtls', {})
+    -- LoadNvimJava()
     LoadRustLSP()
     LoadGolangLSP()
     LoadKotlinLSP()
@@ -1725,14 +1736,13 @@ if not vim.env.VIM_NOPLUG then
         },
 
         ----- LSP STUFF
-        -- { "mason-org/mason.nvim", opts = {} },
         { "mason-org/mason.nvim", opts = {
             registries = {
-                "github:nvim-java/mason-registry",
                 "github:mason-org/mason-registry",
+                -- "github:nvim-java/mason-registry",
             }
         } },
-        { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+        -- { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
         { "CopilotC-Nvim/CopilotChat.nvim",
             dependencies = {
                { "github/copilot.vim", config = LoadCopilot }, -- or zbirenbaum/copilot.lua
@@ -1742,36 +1752,11 @@ if not vim.env.VIM_NOPLUG then
             cond = not vim.env.NO_COPILOT, opts = CoPilotChatOpts,
         },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
-        -- { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig,
-        --     dependencies = { {'nvim-java/nvim-java'} },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        {'nvim-java/nvim-java' },
-        -- {'nvim-java/nvim-java', config = function() require('java').setup() end },
-        -- { 'nvim-java/nvim-java', config = false,
-        --   dependencies = {
-        --     {
-        --       'neovim/nvim-lspconfig',
-        --       opts = {
-        --         servers = {
-        --           jdtls = {
-        --             -- Your custom jdtls settings goes here
-        --           },
-        --         },
-        --         setup = {
-        --           jdtls = function() 
-        --                     print("load jstl")
-        --                     require('java').setup({}) 
-        --                     vim.lsp.enable('jdtls')
-        --                     vim.lsp.config('jdtls', {})
-        --                     end,
-        --         },
-        --       },
-        --     },
-        --   },
-        -- },
-        -- { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
+        -- {'nvim-java/nvim-java' },
+        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
         { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
@@ -1826,8 +1811,3 @@ if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
     local timer = vim.uv.new_timer()
     timer:start(1000, 0, function () timer:stop(); timer:close(); loadLocal() end)
 end
-
-require('mason').setup()
-require('mason-tool-installer').setup({})
-require('lspconfig').jdtls.setup({})
--- require('java').setup()
