@@ -1292,10 +1292,12 @@ JDTLSSettings = {
 
 ----------------- NVIM-JAVA -------------------------
 LoadNvimJava = function()
-    require('java').setup()
+    require('java').setup({
+          java_debug_adapter = { enable = false },
+    })
     vim.lsp.enable('jdtls')
     vim.lsp.config('jdtls', { 
-        -- cmd = { "jdtls" },  -- NOTE: this is a symlink to the jdtls binary in ~/bin, which is set to use java21
+        cmd = { vim.env.HOME .. '/bin/jdtls', 'mason' },
         -- root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         -- autostart = LSPAutoStartEnable,
         settings = JDTLSSettings,
@@ -1313,7 +1315,7 @@ LoadJDTLSServer = function()
     end
 
     local config = {
-        cmd = { vim.env.HOME .. '/bin/jdtls' },
+        cmd = { vim.env.HOME .. '/bin/jdtls', 'mason' },
         root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         -- autostart = LSPAutoStartEnable, -- july'25 pretty sure this isnt supported
         settings = JDTLSSettings,
@@ -1376,7 +1378,7 @@ end
 LoadLSPConfig = function()
     -- LoadLuaLSP()
     -- LoadRubyLSP()
-    -- LoadNvimJava()
+    LoadNvimJava()
     LoadRustLSP()
     LoadGolangLSP()
     LoadKotlinLSP()
@@ -1755,8 +1757,8 @@ if not vim.env.VIM_NOPLUG then
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        -- {'nvim-java/nvim-java' },
-        { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
+        {'nvim-java/nvim-java', cond = not vim.env.NO_LSP },
+        -- { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
         { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
 
