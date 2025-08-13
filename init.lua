@@ -1290,7 +1290,7 @@ JDTLSSettings = {
     }
 }
 
------------------ NVIM-JAVA -------------------------
+----------------- NVIM-JAVA LS -------------------------
 LoadNvimJava = function()
     require('java').setup({
           java_debug_adapter = { enable = false },
@@ -1304,7 +1304,7 @@ LoadNvimJava = function()
     })
 end
 
--------------- JAVA JDTLS LS ---------------------------
+-------------- JAVA-JDTLS LS ---------------------------
 -- jdtls lang server requires java 21, make sure JAVA_HOME of shell is set to java21
 LoadJDTLSServer = function()
     if (ValidateJavaInstallDirs(JavaInstalls) == 1) then
@@ -1741,10 +1741,9 @@ if not vim.env.VIM_NOPLUG then
         { "mason-org/mason.nvim", opts = {
             registries = {
                 "github:mason-org/mason-registry",
-                -- "github:nvim-java/mason-registry",
+                "github:nvim-java/mason-registry",
             }
         } },
-        -- { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
         { "CopilotC-Nvim/CopilotChat.nvim",
             dependencies = {
                { "github/copilot.vim", config = LoadCopilot }, -- or zbirenbaum/copilot.lua
