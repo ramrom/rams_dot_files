@@ -20,3 +20,11 @@
 
 - google drive account data quota usage: https://drive.google.com/drive/quota
     - https://one.google.com/u/0/storage?hl=en
+
+## ZOOM
+- cmd + opt + 4 - clap
+- cmd + opt + 5 - thumbs up
+- cmd + opt + 6 - heart
+- cmd + opt + 7 - joy/cry
+- cmd + opt + 8 - surprise
+- cmd + opt + 9 - party
