@@ -341,6 +341,9 @@
 - JSON, [see cheat](./json_jq_cheatsheet.md)
 - XML
 - CSV
+    - main RFC - https://www.ietf.org/rfc/rfc4180.txt
+        - escape commas newline with double quotes
+    - unofficial doc similar to 4180 rfc https://creativyst.com/Doc/Articles/CSV/CSV01.shtml
 - TSV (tab seperated values)
 ### BINARY
 - messagepack
