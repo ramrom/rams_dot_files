@@ -7,7 +7,7 @@
 - [ripgrep, better grep -r](fzf_fd_rg_cheatsheet.md)
 - [fzf](fzf_fd_rg_cheatsheet.md)
 
-```sh
+```bash
 # FIND: find files recursive starting with current dir
 find . -type f -name "*.exe"        #  simpler patterns, find files ending in string .exe
 find . -type f -regex ".*pattern.*"     # search filename using regular expression pattern
@@ -447,6 +447,9 @@ file foo   # example output: "foo: ASCII text"
 # MD5 fingerprint
 md5 somefile    # osx bin, spits out md5 fingerprint of file
 md5sum somefile # ubuntu bin, same deal
+
+# DIFF - difference between files and dirs
+diff -r dir1 dir2  # can recursively do entire dirs with their files
 
 # WATCH - run a command periodically
 watch -n 2 -d date  # run `date` every 2 seconds, -d highlight differences
