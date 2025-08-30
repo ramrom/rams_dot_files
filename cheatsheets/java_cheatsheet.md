@@ -974,6 +974,12 @@ switch (a) {
 String bar = (3 < 10) ? "A" : "B";  // bar = "A"
 ```
 ### EXCEPTIONS
+- checked vs unchecked
+    - checked - developer must handle it, either try/catch or declare it can throw
+        - inherited from `java.lang.Exception` class
+        - e.g. `IOException`, `SQLException`
+    - unchecked - developer can choose to handle it or not
+        - inherited from `java.lang.RuntimeException` class
 - to throw method must declare it, e.g. `public int foo(int a) throws Exception { throw new Exception("foo"); }`
     - the calling function must either try/catch or declare it can throw if unhandled
 - throwing an exception: `throw new Exception("foobar")`
