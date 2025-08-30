@@ -978,8 +978,9 @@ String bar = (3 < 10) ? "A" : "B";  // bar = "A"
     - checked - developer must handle it, either try/catch or declare it can throw
         - inherited from `java.lang.Exception` class
         - e.g. `IOException`, `SQLException`
-    - unchecked - developer can choose to handle it or not
+    - unchecked - developer can choose to handle it or not, generally unrecoverable errors
         - inherited from `java.lang.RuntimeException` class
+        - e.g. `NullPointerException`, `IndexOutOfBoundsException`, `IllegalArgumentException`
 - to throw method must declare it, e.g. `public int foo(int a) throws Exception { throw new Exception("foo"); }`
     - the calling function must either try/catch or declare it can throw if unhandled
 - throwing an exception: `throw new Exception("foobar")`
