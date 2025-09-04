@@ -122,6 +122,8 @@
 - cmd + K - opens window related to connection to a server, clears screen in terminal/iterm
 - cmd + ; - does some wierd autocompletion in terminal/iterm
 - cmd + ctrl + q  - lock the screen
+- cmd + shift + R - hard page reload in browser
+- cmd + R - page reload in browser
 - cmd + W - close window
 - cmd + Q - quit application
 - cmd + O - open file
