@@ -13,8 +13,8 @@ vim.opt.mouse=""                         -- turn off all mouse support by defaul
 
 --- MAIN
 vim.opt.autoread = true                         -- reload file's buffer if file was changed externally
-vim.opt.splitbelow = true                       -- open new windows on bottom for horizontal, right for vertical
-vim.opt.splitright = true                       -- open new windows on bottom for horizontal, right for vertical
+vim.opt.splitbelow = true                       -- open new windows on bottom for horizontal
+vim.opt.splitright = true                       -- open new windows on right for vertical
 vim.opt.wildmenu = true                         -- display command line's tab complete options as menu
 vim.opt.wildmode = {'longest', 'list', 'full'}  -- complete longest common, list all matches, complete till next full match
 vim.opt.wrap = true                             -- wrap lines longer than width to next line
@@ -1292,6 +1292,11 @@ JDTLSSettings = {
 
 ----------------- NVIM-JAVA LS -------------------------
 LoadNvimJava = function()
+    if (ValidateJavaInstallDirs(JavaInstalls) == 1) then
+        print("-\nAborting loading JDTLS server, missing java installs")
+        return
+    end
+
     require('java').setup({
           java_debug_adapter = { enable = false },
     })
@@ -1784,8 +1789,7 @@ if not vim.env.VIM_NOPLUG then
         },
 
         -- OTHER
-        {
-          "folke/snacks.nvim", opts = SnacksOpts },
+        { "folke/snacks.nvim", opts = SnacksOpts },
         -- { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
         -- { "folke/noice.nvim", event = "VeryLazy", opts = { }, version = "4.4.7",
