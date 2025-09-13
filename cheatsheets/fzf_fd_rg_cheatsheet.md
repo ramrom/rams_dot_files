@@ -50,7 +50,8 @@
 - exact match searching only
     `fzf -e`
 - fuzzy search only the 2nd field (default delimiter is space)
-    `fzf -nth=2`
+    `fzf --nth=2`
+    `fzf --delimiter='|' --nth=2` - search on the 2nd field where fields are seperated by `|` symbol
 - enable multi select (+m means disable multi select)
     `fzf -m`
 - if 1 match select it

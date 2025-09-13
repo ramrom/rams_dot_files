@@ -63,7 +63,7 @@ generate_github_link() {
         url=$(echo "$url" | sed 's/:/\//')
         url=$(echo "$url" | sed 's/^git@/https:\/\//')
     fi
-    url=$(echo "$url" | sed 's/\.git$//')  # remote the trailing ".git" extension
+    url=$(echo "$url" | sed 's/\.git$//')  # remove the trailing ".git" extension
 
     branch=$(git rev-parse --abbrev-ref HEAD)
     [ -z "$branch" ] && echo "ERROR: git branch failed" && return 1

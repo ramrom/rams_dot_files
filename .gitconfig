@@ -76,6 +76,7 @@
   sl = stash list
   sp = stash pop
 
+  logtag = log --no-walk --tags --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   tagg = log --oneline --decorate --tags --no-walk
   logsc = log --stat --color
   hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --dense
