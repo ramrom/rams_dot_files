@@ -23,4 +23,19 @@ PREVIEW_CMD="$PREVIEW_LABEL; jq -r --arg LBL \$label \
 
 out=$(jq -r '.[] | .label + " | " + .description' "$LINKS_FILE" | \
     fzf --height 100 +m --delimiter '|' --nth=1 \
-    --header=$'enter->open' --preview $PREVIEW_CMD --preview-window=:bottom,:wrap)
+    --header=$'enter->open-in-browser; ctrl-y->copy' \
+    --bind 'ctrl-y:execute-silent(echo {} | smartcopy)+abort' \
+    --expect='ctrl-y' \
+    --preview $PREVIEW_CMD --preview-window=:bottom,:wrap)
+key=$(echo "$out" | head -1)
+link=$(echo "$out" | tail -1)
+
+if [ -n "$link" ]; then
+    case "$key" in
+        *) 
+            LABEL=$(echo "$link" | awk -F "|" '{print $1}')
+            URL=$(jq -r --arg LBL $LABEL \
+                '($LBL | trim) as $LBL | first(.[] | select(.label | contains($LBL))) | .url' $LINKS_FILE)
+            open $URL ;;
+    esac
+fi
