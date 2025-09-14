@@ -4,16 +4,20 @@
 usage() {
     echo 'Usage: fzf-links [ -h(help) ]'
     echo '                 [ -f LINKS_FILE ]';
+    echo '                 [ -l (fuzzy find label only) ]';
 }
 
-while getopts 'hf:' x; do
+while getopts 'hlf:' x; do
     case $x in
         h) echo && usage && exit 1 ;;
         f) LINKS_FILE="$OPTARG" ;;
+        l) LABEL_ONLY=1 ;;
         *) echo && usage && exit 1 ;;
     esac
 done
 shift $(($OPTIND - 1))
+
+OPENBIN="open"; [ $(uname) = "Linux" ] && OPENBIN='xdg-open'
 
 [ -z "$LINKS_FILE" ] && echo "" && echo "ERROR: need a file of links to parse" && echo "" && usage && exit 1
 
@@ -21,21 +25,33 @@ PREVIEW_LABEL='label=$(echo {} | awk -F "|" "{print \$1}")'
 PREVIEW_CMD="$PREVIEW_LABEL; jq -r --arg LBL \$label \
     '(\$LBL | trim) as \$LBL | first(.[] | select(.label | contains(\$LBL)))' $LINKS_FILE"
 
+extract_url() {
+    local LABEL=$(echo "$1" | awk -F "|" '{print $1}')
+    local URL=$(jq -r --arg LBL $LABEL \
+        '($LBL | trim) as $LBL | first(.[] | select(.label | contains($LBL))) | .url' $LINKS_FILE)
+    echo $URL
+}
+
+FZF_FIELD_SEARCH_OPT="--nth=1,2"
+[ -n "$LABEL_ONLY" ] && FZF_FIELD_SEARCH_OPT="--nth=1"
+FZF_HEADER_SEARCH="searching label AND description fields"
+[ -n "$LABEL_ONLY" ] && FZF_HEADER_SEARCH="searching ONLY label field"
+
 out=$(jq -r '.[] | .label + " | " + .description' "$LINKS_FILE" | \
-    fzf --height 100 +m --delimiter '|' --nth=1 \
-    --header=$'enter->open-in-browser; ctrl-y->copy' \
-    --bind 'ctrl-y:execute-silent(echo {} | smartcopy)+abort' \
-    --expect='ctrl-y' \
+    fzf --height 100 +m --delimiter '|' $FZF_FIELD_SEARCH_OPT \
+    --header=$'INPUT KEYS: enter->open-in-browser; ctrl-y->copy; ctrl-space->echo\n'$FZF_HEADER_SEARCH \
+    --expect='ctrl-space,ctrl-y' \
     --preview $PREVIEW_CMD --preview-window=:bottom,:wrap)
 key=$(echo "$out" | head -1)
-link=$(echo "$out" | tail -1)
+label_desc=$(echo "$out" | tail -1)
 
-if [ -n "$link" ]; then
+if [ -n "$label_desc" ]; then
     case "$key" in
+        "ctrl-space")
+            echo "$label_desc" ;;
+        "ctrl-y")
+            echo $(extract_url $label_desc) | smartcopy ;;
         *) 
-            LABEL=$(echo "$link" | awk -F "|" '{print $1}')
-            URL=$(jq -r --arg LBL $LABEL \
-                '($LBL | trim) as $LBL | first(.[] | select(.label | contains($LBL))) | .url' $LINKS_FILE)
-            open $URL ;;
+            $OPENBIN $(extract_url $label_desc) ;;
     esac
 fi
