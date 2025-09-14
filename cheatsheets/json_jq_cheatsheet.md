@@ -29,6 +29,12 @@ a="[1,2,3]"
 b="[11,4]"
 jq --argjson arg1 "$a" --argjson arg2 "$b" -n '$arg1 + $arg2'  # will output [1,2,3,11,4]
 
+# variables
+jq '10 as $FOO | $FOO' some.json  # can define and assign variables, will output "10"
+jq --arg FOO dude '$FOO' some.json  # define a variable externally
+jq '10 as $FOO | $FOO' some.json  # can define and assign variables, will output "10"
+jq '" 10 " as $FOO | ($FOO | ltrim) as $FOO | $FOO' some.json  # call func on var and reassing, will output "10 "
+
 # using contains method on sting field, need to remove null values first
 jq --arg FOO $somevar 'select(.somefield != null) | select(.somefield | contains($FOO))'
 jq --arg NUM $somenum '.[ NUM | tonumber ]'  # arg vars are strings, need to convert to number to index an array

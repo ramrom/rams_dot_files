@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+
+usage() {
+    echo 'Usage: fzf-links [ -h(help) ]'
+    echo '                 [ -f LINKS_FILE ]';
+}
+
+while getopts 'hf:' x; do
+    case $x in
+        h) echo && usage && exit 1 ;;
+        f) LINKS_FILE="$OPTARG" ;;
+        *) echo && usage && exit 1 ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+[ -z "$LINKS_FILE" ] && echo "" && echo "ERROR: need a file of links to parse" && echo "" && usage && exit 1
+
+PREVIEW_LABEL='label=$(echo {} | awk -F "|" "{print \$1}")'
+PREVIEW_CMD="$PREVIEW_LABEL; jq -r --arg LBL \$label \
+    '(\$LBL | trim) as \$LBL | first(.[] | select(.label | contains(\$LBL)))' $LINKS_FILE"
+
+out=$(jq -r '.[] | .label + " | " + .description' "$LINKS_FILE" | \
+    fzf --height 100 +m --delimiter '|' --nth=1 \
+    --header=$'enter->open' --preview $PREVIEW_CMD --preview-window=:bottom,:wrap)

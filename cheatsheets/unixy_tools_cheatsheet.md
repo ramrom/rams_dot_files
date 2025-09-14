@@ -69,6 +69,7 @@ printf "foo bar baz" | grep -E 'bar.*foo|foo.*bar'  #method2
 # AWK - multi purpose tool, really a mini programming language
 echo "foo bar baz" | awk '{print $2}'  # will print bar
 echo "foo bar baz" | awk '{print $1"  "$3}'  # will print `foo  baz` , two spaces in between
+echo "foo yar | bar | baz" | awk -F'|' '{print $2}'  # will print 'bar', based on delimiter '|'
 awk '{$1=""; print $0}' somefile        # print all but the first field/column
 awk '{$1=$2=""; print $0}' somefile        # print all but the first and second field/column
 awk '/blah/{getline; print}' logfile   # print the next line after the line that matches patter "blah"
