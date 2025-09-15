@@ -19,10 +19,11 @@ shift $(($OPTIND - 1))
 
 OPENBIN="open"; [ $(uname) = "Linux" ] && OPENBIN='xdg-open'
 
-[ -z "$LINKS_FILE" ] && echo "" && echo "ERROR: need a file of links to parse" && echo "" && usage && exit 1
+[ -z "$LINKS_FILE" ] && echo "" && \
+    echo "$(tput setaf 1)ERROR$(tput sgr0): need a file of links to parse" && echo "" && usage && exit 1
 
 PREVIEW_LABEL='label=$(echo {} | awk -F "|" "{print \$1}")'
-PREVIEW_CMD="$PREVIEW_LABEL; jq -r --arg LBL \$label \
+PREVIEW_CMD="$PREVIEW_LABEL; jq -C -r --arg LBL \$label \
     '(\$LBL | trim) as \$LBL | first(.[] | select(.label | contains(\$LBL)))' $LINKS_FILE"
 
 extract_url() {
