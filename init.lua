@@ -572,7 +572,7 @@ LoadFzfLua = function()
     local help_menu_key = "<C-w><C-w>"
     require'fzf-lua'.setup {
         files = {
-             fd_opts = [[--color=never --type f --type l --hidden --no-ignore --exclude .git]],
+             fd_opts = [[--color=never --type f --type l --hidden --no-ignore --exclude .git --exclude target]],
         },
         -- NOTE: bat previewer doesnt support toggle-preview-cw and cww (rotations)
         winopts = { preview = { default = "bat" },

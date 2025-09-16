@@ -76,6 +76,9 @@
 - `curl http://192.168.1.1/api/`
 - calling a webhook
     - `xh -v http://127.0.0.1:8123/api/webhook/webhook_id --auth-type bearer --auth sometokenvalue jsonprop1=1 jsonprop2=4`
+- firing an event
+    - dont need event types defined, `foo` is valid here
+    - `xh -v POST http://127.0.0.1:8123/api/events/foo --auth-type bearer --auth sometokenvalue prop=1 prop2=3`
 
 ## CLI
 - the official CLI: https://github.com/home-assistant/cli , `ha` bin
