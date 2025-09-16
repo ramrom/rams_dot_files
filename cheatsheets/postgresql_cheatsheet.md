@@ -44,10 +44,11 @@
 - `\conninfo` - get db name, user name, host IP, port #, SSL info
 - `select version();` - get postgres server version, host arch/os
 - `\?` output help menu
-- `\c` to connect to database
-- `\l` to list database
-- `\dn` to list all schemas
-- `\dt` to list all tables
+- `\c` connect to database
+- `\l` list database
+- `\dn` list all schemas
+- `\dt` list all tables
+- `\du` list all db users (also see `pg_roles` table)
 - `\d sometable` to describe a table
 - `\o somefile` output to a file
 - `\i somefile` execute commands from a file
@@ -185,6 +186,9 @@ select * from footable where arrcol[1] = 'dude';  -- find all where first elemen
 select * from footable where 'dude' = ANY (arrcol);  
 
 select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in array becomes a new row in results
+
+-- who am i
+select current_user;
 ```
 
 ## SPECIAL TABLES
@@ -192,3 +196,4 @@ select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in 
 - `pg_stat_activity` a view that shows queries running per process
 - `pg_locks` a view that shows locks owned by various processes and transactions
 - `pg_stat_progress_create_index` - show status of index creation
+- `pg_roles` - shows detailed attributes for roles/users
