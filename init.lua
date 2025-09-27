@@ -1761,7 +1761,7 @@ if not vim.env.VIM_NOPLUG then
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
-        {'nvim-java/nvim-java', config = LoadNvimJava, cond = not vim.env.NO_LSP },
+        { 'nvim-java/nvim-java', config = LoadNvimJava, cond = not not vim.env.NJAVA and not vim.env.NO_LSP },
         -- { 'mfussenegger/nvim-jdtls', ft = { 'java' }, config = LoadJDTLSServer, cond = not vim.env.NO_LSP },
         { 'scalameta/nvim-metals', cond = not vim.env.NO_LSP,
             config = LoadScalaMetals, ft = { 'scala', 'sbt' }, dependencies = { "nvim-lua/plenary.nvim" } },
