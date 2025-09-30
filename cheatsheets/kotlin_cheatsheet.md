@@ -16,6 +16,33 @@
     list.forEach { println(it) } // prints a, b, c
     list.forEach { item -> println(item) } // same as above
     ```
+```kotlin
+print("Hello, World!") // print without newline
+println("Hello, World!") // print to console
+
+val yourWord = readln() // read a line from stdin
+
+// function definition
+fun sum(a: Int, b: Int): Int {
+    return a + b
+}
+
+// single expression function, return type is inferred
+fun sum(a: Int, b: Int) = a + b
+
+// function with no meaningful return value, Unit is similar to void in Java/C++
+fun printSum(a: Int, b: Int): Unit {
+    println("sum of $a and $b is ${a + b}")
+}
+
+// Unit return type is optional
+fun noUnit(a: Int) { }
+
+val x = 1 // vals cannot be reassigned
+var y = 2 // vars can be reassigned
+y = 3
+val z = "dude"  // type is inferred
+```
 
 ## COLLECTIONS
 ```kotlin
@@ -29,9 +56,9 @@ m.forEach { k, v -> println("$k -> $v") } // prints a -> 1, b -> 2
 m.map { (k, v) -> "$k -> $v" } // returns [a -> 1, b -> 2]
 m.mapValues { (k, v) -> v * 2 } // returns {a=2, b=4}
 m.filter { (k, v) -> v % 2 == 0 } // returns {b=2}
-m.filterNot { (k, v) -> v % 2 == 0 } //
+m.filterNot { (k, v) -> v % 2 == 0 } // returns {a=1}
 m.filterKeys { k -> k == "a" } // returns {a=1}
-m.filterValues { v -> v % 2 == 0 } // returns {b=
+m.filterValues { v -> v % 2 == 0 } // returns {b=2}
 m.flatMap { (k, v) -> listOf(k, v) } // returns [a, 1, b, 2]
 m.flatMapValues { (k, v) -> listOf(v, v * 2) } // returns {a=[1, 2], b=[2, 4]}
 m.entries // returns [a=1, b=2]
@@ -66,6 +93,14 @@ a.addFirst(0) // adds 0 to the front
 a.addLast(4) // adds 4 to the end
 a.removeFirst() // removes and returns 0
 a.removeLast() // removes and returns 4
+
+
+///// SEQUENCES - similar to streams in java, lazily evaluated
+val numbersSequence = sequenceOf("four", "three", "two", "one")
+
+// can also convert regular collection types to sequences
+val numbers = listOf("one", "two", "three", "four")
+val numbersSequence = numbers.asSequence()
 ```
 
 ## RUNNING

@@ -210,6 +210,7 @@ tar –tvzf documents.tar.gz   # list tar file contents
 
 # ZIP
 zip -r outputfile folder1 folder2
+zip -e -r outputfile folder1 folder2   # encrypt the zip file, protected by a password
 unzip -l foo.zip        # list contents, dont extract
 unzip foo.zip                       # unzip contents in cur dir
 unzip foo.zip -d /path/to/output  # unzip to specific foler
