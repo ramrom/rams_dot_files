@@ -19,16 +19,22 @@ arr = [1,2]   # array
 assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
 ```
 
+## SYNTAX
+- `pass` - do nothing, used in places where syntax requires a statement
+- `None` - null value, similar to `null` in JS or `nil` in Ruby
+
+## STRING
+```python
+s = "hello world"
+si = f"hi {s} "   # string interpolation
+print(s, end='') # print without newline
+"  strip ".strip()  # returns "strip", it remove trailing and leading whitespace
+"  strip ".lstrip()  # returns "strip "
+"  strip ".rstrip()  # returns "  strip"
+```
+
 ## DEPENDENCY MANAGEMENT
 - it **SUCKS**: https://xkcd.com/1987/
-- `pip` uses requirements.txt
-    - u can specify packages and pin versions you want
-- `pipenv`
-    - introduces `Pipfile` and `Pipfile.lock`
-    - it's the official package management tool rec'd by python
-    - `pipenv` uses `virtualenv` and `pip` under the hood
-    - this replaces the `requirements.txt` mechanism
-    - `Pipfile` lets u specify ranges of versions
 - `virtualenv` installs packages locally vs global system dirs
     - https://virtualenv.pypa.io/en/latest/
     - `virtualenv venv` - create a new virtual env
@@ -36,13 +42,31 @@ assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
 - `pipx` - https://github.com/pypa/pipx
     - install and run python programs in isolated environments
     - unlike `pip`, which has no ioslation and made for libs and apps, pipx is for app installs
+### PIPENV
+- quickstart - https://pipenv.pypa.io/en/latest/quick_start.html
+- introduces `Pipfile` and `Pipfile.lock`
+- it's the official package management tool rec'd by python
+- `pipenv` uses `virtualenv` and `pip` under the hood
+- this replaces the `requirements.txt` mechanism
+- `Pipfile` lets u specify ranges of versions
+- `pipenv graph` - show dependency graph
+- `pipenv run pip list` - list installed packages
+- `pipenv --python 3.10` - specify a python version
+- OSX/Linux: virtual envs are stored in `~/.local/share/virtualenvs/`
 ### PIP
 - to upgrade `pip install --upgrade somepackage`
+- `pip` uses requirements.txt
+- u can specify packages and pin versions you want
 ### UV
 - rust written replacement for PIP: https://github.com/astral-sh/uv
 
 ## INTROSPECTION
 - `type(foo)`   - print type
+
+## CONVERSION
+```python
+s = str(3)  # convert int to string
+```
 
 ## DEBUGGING
 - breakpoints
@@ -54,9 +78,12 @@ assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
 ## SCRIPTING
 ```sh
 python -c 'print("hi")'  # prints "hi"
+
+sys.exit(1)  # exit a program with code 1
 ```
 
 ## GREAT LIBS
 - https://github.com/Textualize/rich - add rich text ANSI colors and formats to text
 - [NumPy](https://numpy.org/) - extremely popular math lib used by everyone in data science for ML
 - [Pandas](https://pandas.pydata.org/) - data analysis and manipulation tool, particularly time series and numerical tables
+- [requests](https://requests.readthedocs.io/)
