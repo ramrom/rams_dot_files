@@ -570,9 +570,10 @@ end
 ----------------------------- FZF LUA --------------------------------------------------
 LoadFzfLua = function()
     local help_menu_key = "<C-w><C-w>"
+    local rotate_preview_key = "<C-w><C-e>"
     require'fzf-lua'.setup {
         files = {
-             fd_opts = [[--color=never --type f --type l --hidden --no-ignore --exclude .git --exclude target]],
+             fd_opts = [[--color=never --type f --type l --hidden --exclude .git --exclude target]],
         },
         -- NOTE: bat previewer doesnt support toggle-preview-cw and cww (rotations)
         winopts = { preview = { default = "bat" },
@@ -585,10 +586,9 @@ LoadFzfLua = function()
             fzf = {
                 -- ["ctrl-n"]    = "preview-page-down",  -- unneeded, does fzflua load my FZF_DEFAULT_OPTS?
                 -- ["ctrl-p"]    = "preview-page-up",    -- same
-                ["ctrl-d"]    = "half-page-down",
-                ["ctrl-u"]    = "half-page-up",
+                -- ["ctrl-d"]    = "half-page-down",     -- sept'25 - same
+                -- ["ctrl-u"]    = "half-page-up",       -- same
                 ["f3"]        = "toggle-preview-wrap",
-                ["f4"]        = "toggle-preview",
             },
             -- NOTE: c-w based movement for windows in tab disabled when fzflua term window is open anyway
             -- FIXME: oct'24 - f5/f6 defaults don't work, and dont show up as options in help menu either...
@@ -598,7 +598,7 @@ LoadFzfLua = function()
                 ["<c-w><c-f>"]        = "toggle-fullscreen",
                 ["<F2>"]              = "toggle-fullscreen",
                 ["<F5>"]              = "toggle-preview-ccw",
-                -- ["<c-w><c-e>"]        = "toggle-preview-cw",   -- this map didnt work
+                [rotate_preview_key]  = "toggle-preview-cw",
                 ["<F6>"]              = "toggle-preview-cw",
             }
         }
