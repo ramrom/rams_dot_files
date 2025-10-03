@@ -22,6 +22,10 @@ assarr = { "a": 3, "b": [3,4] }    # associative-array (aka python dictionaries)
 ## SYNTAX
 - `pass` - do nothing, used in places where syntax requires a statement
 - `None` - null value, similar to `null` in JS or `nil` in Ruby
+```python
+# ternary logic example
+a = 1 if True else 2   # a is 1
+```
 
 ## STRING
 ```python

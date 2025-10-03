@@ -593,13 +593,13 @@ LoadFzfLua = function()
             -- NOTE: c-w based movement for windows in tab disabled when fzflua term window is open anyway
             -- FIXME: oct'24 - f5/f6 defaults don't work, and dont show up as options in help menu either...
             builtin = {
-                [help_menu_key]       = "toggle-help",
-                ["<F1>"]              = "toggle-help",
-                ["<c-w><c-f>"]        = "toggle-fullscreen",
-                ["<F2>"]              = "toggle-fullscreen",
-                ["<F5>"]              = "toggle-preview-ccw",
-                [rotate_preview_key]  = "toggle-preview-cw",
-                ["<F6>"]              = "toggle-preview-cw",
+                [help_menu_key]         = "toggle-help",
+                ["<F1>"]                = "toggle-help",
+                ["<c-w><c-f>"]          = "toggle-fullscreen",
+                ["<F2>"]                = "toggle-fullscreen",
+                ["<F5>"]                = "toggle-preview-ccw",
+                [rotate_preview_key]    = "toggle-preview-cw",
+                ["<F6>"]                = "toggle-preview-cw",
             }
         }
     }
