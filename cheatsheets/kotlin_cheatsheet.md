@@ -7,6 +7,8 @@
 - `interface` keyword - similar to java interface
     - cannot be instaniated directly, cannot contain state, can write default method implementations
 - `?` after a type means variable can contain a null
+    - by default a variable cannot contain null
+    - e.g. `var s: String? = "abc"` means s can be null
 - `data class` - primarily to hold data, very similar to scala `case class`
 
 ## SYNTAX

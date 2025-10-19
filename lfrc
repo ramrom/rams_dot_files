@@ -41,7 +41,11 @@ cmd moveto ${{
     fdname='fd'; [ $(uname) = "Linux" ] && fdname="fdfind"
     dest="$(${fdname} -t d | fzf | sed 's|~|$HOME|' )" &&
     for x in $fx; do
-        eval mv -iv \"$x\" \"$dest\"
+        if git rev-parse > /dev/null 2>&1; then
+            eval git mv \"$x\" \"$dest\"
+        else
+            eval mv -iv \"$x\" \"$dest\"
+        fi
     done &&
     echo "Files moved"
 }}
