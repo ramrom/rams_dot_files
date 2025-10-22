@@ -53,6 +53,8 @@
 - `\o somefile` output to a file
 - `\i somefile` execute commands from a file
 - `select * from foobale where barcolumn is not null;` - find non-null rows
+- `\set somevar 'foo'` - can set variables
+    - `select * from sometable where col = :'somevar';`  -- use variable in query
 - run a psql command from shell - `psql -c "SELECT * from footable where bar = 3;" -d postgres`
 
 ## CONCEPTS
