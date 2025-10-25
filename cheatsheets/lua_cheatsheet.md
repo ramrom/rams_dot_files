@@ -153,6 +153,8 @@ a = function() return 1 end  -- works fine, returns 1
     table.insert(a,3)  -- {1, 3}
     a['k'] = 4         -- {1, 3, "k": 4 }
 
+    print(#a)            -- # operator returns size of array-like part, here returns 2
+
     -- has dottable field names
     a.k                 -- returns 4
     a['k']              -- returns 4
@@ -195,7 +197,7 @@ a = function() return 1 end  -- works fine, returns 1
         - _NOTE_ apparently ou still set a metatable for them tho
     - every string shares the same metatable
 - a metatable is a way for tables to "inherit" methods/behaviour and data - see https://www.lua.org/pil/16.2.html
-    - say `a` has metatable of `b`, `__index` of `b` is `b`
+    - say `a` has metatable of `b`, `__index` of `a` is `b`
     - say `b` has metatable of `c`, `__index` of `b` is `c`
     - say `c` has method `foo`
     - if we call `a.foo()`, `a` doesnt have it, looks up `b`, `b` doesnt have it, looks at `c` and finds it and calls it

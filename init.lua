@@ -386,6 +386,17 @@ function trynotify(msg, loglevel, opts)
     if success then notif(msg, loglevel, opts) else print(msg) end  -- want notify msg with lowest timeout
 end
 
+IsNonCopilotLspAttached = function()
+    if not vim.lsp.buf_is_attached() then
+        return false
+    else
+        local clients = vim.lsp.get_clients()
+        for idx, client in ipairs(clients) do
+            if not string.match(client["_log_prefix"], "GitHub Copilot") then return true end
+        end
+        return false
+    end
+end
 
 ----------------------------------- RUN IN TMUX PANE -----------------------------------------------------
 TmuxPaneRunner = {}

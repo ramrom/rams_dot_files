@@ -91,3 +91,7 @@ sys.exit(1)  # exit a program with code 1
 - [NumPy](https://numpy.org/) - extremely popular math lib used by everyone in data science for ML
 - [Pandas](https://pandas.pydata.org/) - data analysis and manipulation tool, particularly time series and numerical tables
 - [requests](https://requests.readthedocs.io/)
+- [colored](https://pypi.org/project/colored/) - inject ansi colors to strings
+    - source code https://gitlab.com/dslackw/colored
+- [pygments](https://pygments.org/) - syntax highlighter
+    - injects ansi color codes to strings of many types of languages/syntaxes
