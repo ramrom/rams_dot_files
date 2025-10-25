@@ -1659,7 +1659,7 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', '<leader>ll', function() require('fzf-lua').lsp_finder() end, { desc = "all lsp finder" })
     vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').lsp_workspace_symbols() end, { desc = "workspace symbols" })
     vim.keymap.set('n', '<leader>ls', function() require('fzf-lua').lsp_document_symbols() end, { desc = "doc symbols" })
-    vim.keymap.set('n', '<leader>lt', "<cmd>Trouble lsp_document_symbols toggle win = { type = split, position=right}<CR>",
+    vim.keymap.set('n', '<leader>lt', "<cmd>Trouble lsp_document_symbols toggle win = { type=split, position=right, size=.3}<CR>",
         { desc = "Trouble toggle lsp doc symbols" })
     vim.keymap.set('n', '<leader>lT', "<cmd>Trouble<CR>",
         { desc = "Trouble cmd" })

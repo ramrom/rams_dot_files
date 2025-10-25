@@ -25,6 +25,7 @@ LoadTreeSitter = function()
     require'nvim-treesitter.configs'.setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
+        ignore_install = { "ipkg" },
 
         highlight = {
             enable = true,     -- `false` will isable the whole extension
@@ -82,9 +83,7 @@ require("lazy").setup({
     { 'glacambre/firenvim',
         -- cond = not not vim.g.started_by_firenvim,  -- not not makes a nil false value, a non-nil value true
         config = LoadFireNvim,
-        build = function()
-            vim.fn["firenvim#install"](0)
-        end 
+        build = ":call firenvim#install(0)",
     },
 },
 {
