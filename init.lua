@@ -391,10 +391,24 @@ IsNonCopilotLspAttached = function()
         return false
     else
         local clients = vim.lsp.get_clients()
+        local curbufnum = vim.api.nvim_get_current_buf()
         for idx, client in ipairs(clients) do
-            if not string.match(client["_log_prefix"], "GitHub Copilot") then return true end
+            -- for non co-pilot LSPs, if the current buffer has the LSP attached return true
+            if not string.match(client["_log_prefix"], "GitHub Copilot") then
+                for key, _ in pairs(client["attached_buffers"]) do
+                    if key == curbufnum then return true end
+                end
+            end
         end
         return false
+    end
+end
+
+ToggleTagbar = function()
+    if IsNonCopilotLspAttached() then
+        vim.cmd('Trouble lsp_document_symbols toggle win = { type=split, position=right, size=.3}')
+    else
+        vim.cmd('AerialToggle!')
     end
 end
 
@@ -1670,8 +1684,9 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', '<leader>ll', function() require('fzf-lua').lsp_finder() end, { desc = "all lsp finder" })
     vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').lsp_workspace_symbols() end, { desc = "workspace symbols" })
     vim.keymap.set('n', '<leader>ls', function() require('fzf-lua').lsp_document_symbols() end, { desc = "doc symbols" })
-    vim.keymap.set('n', '<leader>lt', "<cmd>Trouble lsp_document_symbols toggle win = { type=split, position=right, size=.3}<CR>",
-        { desc = "Trouble toggle lsp doc symbols" })
+    vim.keymap.set('n', '<leader>lt', function() ToggleTagbar() end, { desc = "toggle Trouble or Aerial for doc symbols" })
+    -- vim.keymap.set('n', '<leader>lt', "<cmd>Trouble lsp_document_symbols toggle win = { type=split, position=right, size=.3}<CR>",
+    --     { desc = "Trouble toggle lsp doc symbols" })
     vim.keymap.set('n', '<leader>lT', "<cmd>Trouble<CR>",
         { desc = "Trouble cmd" })
 
@@ -1806,6 +1821,8 @@ if not vim.env.VIM_NOPLUG then
         },
 
         -- OTHER
+        { 'stevearc/aerial.nvim', opts = {},
+            dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, },
         { "folke/snacks.nvim", opts = SnacksOpts },
         -- { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
         { "folke/which-key.nvim", opts = WhichKeyOpts, event = "VeryLazy" },
