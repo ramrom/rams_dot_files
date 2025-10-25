@@ -1659,6 +1659,10 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', '<leader>ll', function() require('fzf-lua').lsp_finder() end, { desc = "all lsp finder" })
     vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').lsp_workspace_symbols() end, { desc = "workspace symbols" })
     vim.keymap.set('n', '<leader>ls', function() require('fzf-lua').lsp_document_symbols() end, { desc = "doc symbols" })
+    vim.keymap.set('n', '<leader>lt', "<cmd>Trouble lsp_document_symbols win = { type = split, position=right}<CR>",
+        { desc = "Trouble lsp doc symbols" })
+    vim.keymap.set('n', '<leader>lT', "<cmd>Trouble<CR>",
+        { desc = "Trouble cmd" })
 
     ---- DAP COMMANDS
     vim.keymap.set("n", "gkc", function() require("dap").continue() end, { desc = "continue" })
@@ -1758,6 +1762,7 @@ if not vim.env.VIM_NOPLUG then
             cond = not vim.env.NO_COPILOT, opts = CoPilotChatOpts,
         },
         { 'neovim/nvim-lspconfig', cond = not vim.env.NO_LSP, config = LoadLSPConfig, },
+        { "folke/trouble.nvim" ,  opts = {}, cmd = "Trouble" },
         { 'mfussenegger/nvim-dap', config = LoadDAP },
         -- 'leoluz/nvim-dap-go',
         { 'kevinhwang91/nvim-bqf', config = LoadBQF, ft = 'qf' },
