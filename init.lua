@@ -988,6 +988,16 @@ SnacksOpts = {
     }
 }
 
+
+------------------------- AERIAL OPTS -----------------------------------------------
+
+AerialOpts = {
+    layout = {
+        min_width = .3,
+        max_width = { 50, 0.3 },  -- max width 50 cols or 30% of total width
+    },
+}
+
 ------------------------- INDENT BLANKLINE -----------------------------------------------
 LoadIndentBlankLine = function()
     IndentBlankLineEnabled = false
@@ -1821,7 +1831,7 @@ if not vim.env.VIM_NOPLUG then
         },
 
         -- OTHER
-        { 'stevearc/aerial.nvim', opts = {},
+        { 'stevearc/aerial.nvim', opts = AerialOpts,
             dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, },
         { "folke/snacks.nvim", opts = SnacksOpts },
         -- { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
