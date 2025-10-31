@@ -46,6 +46,21 @@ y = 3
 val z = "dude"  // type is inferred
 ```
 
+## TYPES
+- `Any` is the supertype of all non-nullable types
+- `Nothing` is a subtype of all types, represents "no value at all"
+- `is` operator - checks if an object is of a certain type
+```kotlin
+fun demo(x: Any) {
+    if (x is String) {
+        // x is automatically cast to String in this branch
+        println("String of length ${x.length}")
+    } else {
+        println("Not a string")
+    }
+}
+```
+
 ## COLLECTIONS
 ```kotlin
 ///////// MAPS
