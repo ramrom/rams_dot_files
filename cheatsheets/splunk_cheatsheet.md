@@ -15,6 +15,10 @@
     - comparison - `foo bar | where field2>10`
 - regular expression are supported: https://docs.splunk.com/Documentation/SCS/current/Search/AboutSplunkregularexpressions
     - they are PCRE
+    - plain search for regex, need to match to field and find where field isn't null
+        e.g. `rex "(?myfield>\s\d{2,3}\s)" | where isnotnull(myfield)`
+- truncate field if it's too long
+    - `eval long_field=if(len(long_field)>100, substr(long_field,0,100), long_field) | table long_field`
 - table will parse "fields" if text is "foo=bar" or json fields like { "foo": "bar" }
 - running a subquery and using the output of that in a new query
     - `"outside string" [ search "some string" "another string" | table Some_Field ]`

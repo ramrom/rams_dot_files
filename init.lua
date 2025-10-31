@@ -129,8 +129,8 @@ ToggleMainNavKeys = function(togglemode)
     end
 
     local function setQuickList()
-        vim.keymap.set("n", "<leader>d", "<cmd>:cn<CR>", {desc = "harpoon prev"})
-        vim.keymap.set("n", "<leader>f", "<cmd>:cp<CR>", {desc = "harpoon next"})
+        vim.keymap.set("n", "<leader>d", "<cmd>:cn<CR>", {desc = "quickfix prev"})
+        vim.keymap.set("n", "<leader>f", "<cmd>:cp<CR>", {desc = "quickfix next"})
         print("quickfix mode activated")
     end
 
