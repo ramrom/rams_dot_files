@@ -2,22 +2,7 @@
 - official home - https://kotlinlang.org/
 - https://learnxinyminutes.com/kotlin/
 
-## FEATURES
-- `sealed` keyword - inheritance of sealed classes and interfaces must be known at compile time, so in same package/module
-- `interface` keyword - similar to java interface
-    - cannot be instaniated directly, cannot contain state, can write default method implementations
-- `?` after a type means variable can contain a null
-    - by default a variable cannot contain null
-    - e.g. `var s: String? = "abc"` means s can be null
-- `data class` - primarily to hold data, very similar to scala `case class`
-
 ## SYNTAX
-- `it` - syntax sugar special variable for lambda expressions with a single parameter
-    ```kotlin
-    val list = listOf("a", "b", "c")
-    list.forEach { println(it) } // prints a, b, c
-    list.forEach { item -> println(item) } // same as above
-    ```
 ```kotlin
 print("Hello, World!") // print without newline
 println("Hello, World!") // print to console
@@ -46,20 +31,36 @@ y = 3
 val z = "dude"  // type is inferred
 ```
 
+## FEATURES
+- `it` - syntax sugar special variable for lambda expressions with a single parameter
+    ```kotlin
+    val list = listOf("a", "b", "c")
+    list.forEach { println(it) } // prints a, b, c
+    list.forEach { item -> println(item) } // same as above
+    ```
+- `?` after a type means variable can contain a null
+    - by default a variable cannot contain null
+    - e.g. `var s: String? = "abc"` means s can be null
+
+
 ## TYPES
 - `Any` is the supertype of all non-nullable types
 - `Nothing` is a subtype of all types, represents "no value at all"
 - `is` operator - checks if an object is of a certain type
-```kotlin
-fun demo(x: Any) {
-    if (x is String) {
-        // x is automatically cast to String in this branch
-        println("String of length ${x.length}")
-    } else {
-        println("Not a string")
+    ```kotlin
+    fun demo(x: Any) {
+        if (x is String) {
+            // x is automatically cast to String in this branch
+            println("String of length ${x.length}")
+        } else {
+            println("Not a string")
+        }
     }
-}
-```
+    ```
+- `sealed` keyword - inheritance of sealed classes and interfaces must be known at compile time, so in same package/module
+- `interface` keyword - similar to java interface
+    - cannot be instaniated directly, cannot contain state, can write default method implementations
+- `data class` - primarily to hold data, very similar to scala `case class`
 
 ## COLLECTIONS
 ```kotlin
