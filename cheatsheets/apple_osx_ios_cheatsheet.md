@@ -101,6 +101,17 @@
     - `spctl --status` - check if Gatekeeper is enabled
     - `spctl --master-disable` - disable Gatekeeper
     - `spctl --master-enable` - enable Gatekeeper
+- `pmset`- power management settings
+    - `pmset -g` - show current power settings
+    - `pmset -g batt` - get battery state of charge, if charging
+    - `pmset sleep 30` - set system sleep timer to 30 minutes
+    - `sudo pmset -a lowpowermode 1` - enable low power mode, `0` to disablel
+    - `pmset displaysleep 15` - set display sleep timer to 15 minutes
+    - `pmset -a hibernatemode 0` - disable hibernation (safe sleep)
+    - `pmset -a hibernatemode 3` - enable hibernation (safe sleep)
+    - `pmset -a hibernatemode 25` - deep hibernation (writes RAM to disk and powers off RAM)
+    - `pmset -a standbydelay 10800` - set standby delay to 3 hours (default is 1 hour)
+    - `pmset -a autopoweroffdelay 14400` - set autopoweroff delay to 4 hours (default is 2 hours)
 
 ## LAUNCHD
 - `launchd` is a management system which control apples background daemons(aka services)

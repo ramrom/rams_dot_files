@@ -157,6 +157,12 @@
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
+### COPILOTCHAT
+- https://github.com/CopilotC-Nvim/CopilotChat.nvim
+- plugin used on top of base copilot plugin
+- adds interactive chat window, can choose AI models
+### COPILOT
+- `Copilot` command
 ### PLENARY.NVIM 
 - core set of neovim lua libs
 - provides an async framework, it uses lua coroutines and libuv for async IO
