@@ -103,6 +103,7 @@
     - `spctl --master-enable` - enable Gatekeeper
 - `pmset`- power management settings
     - `pmset -g` - show current power settings
+    - `pmset -g log` - show power logs (e.g. when it goes to sleep)
     - `pmset -g batt` - get battery state of charge, if charging
     - `pmset sleep 30` - set system sleep timer to 30 minutes
     - `sudo pmset -a lowpowermode 1` - enable low power mode, `0` to disablel

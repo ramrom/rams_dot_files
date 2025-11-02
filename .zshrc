@@ -95,7 +95,7 @@ function append_dir_to_path() {
 
 append_dir_to_path ~/node_modules/.bin  # local install of npm bins
 
-[ "$(uname)" = "Linux" ] && append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local
+append_dir_to_path ~/.local/bin  # ubuntu has python stuff in ~/.local , oct'25 - osx claude install here
 
 [ "$(uname)" = "Darwin" ] && eval "$(/opt/homebrew/bin/brew shellenv)"  # may2024, will set PATH with bin and sbin dirs
 
