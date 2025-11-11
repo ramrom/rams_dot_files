@@ -367,14 +367,14 @@ fn neverreturn() -> ! { loop{}; }    // infinte loop will never return
 - Monomorphization: generics are expanded and defined for each type used at compile time, so no perf hit for using generics
     - this is similar to how c++ templates work
 ### TRAITS
-- follows orphan rule
+- ORPHAN RULE
     - cannot implement _external_ traits on _external_ types
     - **can** implment _internal_ trait on _external_ type and _external_ trait on _internal_ type
     - without rule, 2 crates could implement same trait on same type, this is a conflict and rust wouldnt know which to pick
     - newtype pattern can get around orphan rule, by creating a new type in a tuple struct
-- blanket implementations - conditionally implement a trait for all types that implement another trait (using generics)
+- BLANKET IMPLEMENTATIONS - conditionally implement a trait for all types that implement another trait (using generics)
     - `impl<T: Display> ToString for T { // --snip-- }`  - from stdlib, this implements `ToString` if `T` implements `Display`
-- auto traits - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
+- AUTO TRAITS - https://doc.rust-lang.org/beta/unstable-book/language-features/auto-traits.html
     - e.g. Structs, enums, unions and tuples implement the trait if all of their fields do.
     - Function item types and function pointers automatically implement the trait.
     - `&T` , `&mut T` , `*const T` , `*mut T` , `[T; n]` and `[T]` implement the trait if `T` does.
@@ -394,11 +394,11 @@ fn neverreturn() -> ! { loop{}; }    // infinte loop will never return
     - vtable for trait object always implements `drop`(from `Drop`), needed for GC
         - size and alignment of concrete type in vtable (allocator needs this for `drop`)
 - generic traits can specify a default concrete type with `<T = DefaultConcreteType>`
-- associated type - a placeholder type that must be defined by the implementing struct/enum
+- ASSOCIATED TYPE - a placeholder type that must be defined by the implementing struct/enum
     - e.g. the `Iterator` trait has a `Item` associated type. the implmentors specifies this as what it's `next` method returns
     - why not generic trait? - can implement the trait many times (per generic param)
         - with associated type we can only implement trait one time
-- supertraits - defining a trait to depend on implementor implementing another trait
+- SUPERTRAITS - defining a trait to depend on implementor implementing another trait
     - `trait SuperTrait: Trait { ... }` - implementor must implement `Trait` here before implementing `SuperTrait`
     - concept is similar to trait bounds on generics
 - fully qualified syntax - use to disambiguate when same method name in different traits or direct impl
@@ -515,7 +515,8 @@ enum E {
             - grapheme clusters are harder, so no stdlib func provided, but crates do exist
     - initalizing
         - `let s = String::new()`
-        - `let s = String::from("literal string")` or `let s = "literal string".to_string`
+        - `let s = String::from("literal string")` or `let s = "literal string".to_string()`
+        - `let s: String = "literal string".to_owned()`
     - mutating
         - appending a string slice - `s.push_str("append")`
         - append a single char - `s.push('f')`
@@ -652,7 +653,9 @@ let one = || 1;         // closure takes zero args, single line expressions dont
 - dont have concrete type that are returnable, can use dyn Box, e.g. `Box<dyn Fn(i32) -> i32>`
 
 ## IO
-- read a file to var - `let contents = std::fs::read_to_string(file_path).unwrap()`
+- use `Path` - `let file_path = std::path::Path::new("../foo/bar.json")`
+    - `let p = file_path.parent()` - `p` will be `../foo/`
+- read a file to var (`file_path` is a `Path`)  - `let contents = std::fs::read_to_string(file_path).unwrap()`
 - incremental read - `let f = File::open(file_path)?; let reader = BufReader::new(f); for line in reader.lines() { ... }`
 - `eprintln!` is macro to print to stderr
     - `println("{:b}",3)` - `:b` binary format, this prints`11` , `:o` octal `:x` hexadecimal
@@ -824,6 +827,14 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
     - type 2: attribute-like
     - type 3: function-like
 
+## CODE SNIPPETS
+```rust
+// colorize all panic messages as red
+std::panic::set_hook(Box::new(|panic_info| {
+    let msg = panic_info.to_string();
+    eprintln!("\x1b[31m{}\x1b[0m", msg); // Red text
+}));
+```
 
 ## STD LIB
 - `std` relies on OS primitives
@@ -856,6 +867,9 @@ println!("{:0e}", num);    // prints "4.4e1",  "e" means LowerExp trait
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
+- [log](https://docs.rs/log/latest/log/) - popular logging framework
+    - `flexi_logger` is more advanced, multiple outputs, formatters, colors, rotations
+    - `env_logger` - simple and straightforward
 - [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/await w/tokio
 - [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await w/tokio
 - [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower/tokio, uses async/await

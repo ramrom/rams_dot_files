@@ -98,6 +98,7 @@
     - https://axell.dev/mounted-docker-volume-contains-symlinks/
 
 ## DOCKER COMPOSE
+- `depends_on` - parameter for container that specifies other containers in the same compose file start successfuly before starting
 - `docker compose pull` - will get latest versions of images
 - `docker compose -f some-compose-file.yml up -d` - native compose in docker cli
     - https://docs.docker.com/compose/reference/
