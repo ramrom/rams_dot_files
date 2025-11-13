@@ -91,7 +91,7 @@ auth() {
     CODE=$(echo "$RESPONSE" | grep GET | cut -d' ' -f 2 | cut -d'=' -f 2)
     [ -n "$verbose" ] && echo && echo "AUTHORIZATION CODE:\n$CODE" && echo
 
-    XH_REDIRECT_URI=http://localhost:8888/callback
+    XH_REDIRECT_URI=http://localhost:${PORT}/callback
     xh -f -v -d -o $SPOTIFY_TOKEN_FILE POST https://accounts.spotify.com/api/token -a ${CLIENT_ID}:${CLIENT_SECRET} \
         grant_type==authorization_code code==${CODE} redirect_uri==${XH_REDIRECT_URI}
 }
