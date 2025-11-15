@@ -1,0 +1,5 @@
+#!/bin/sh
+# free NBA API
+
+# get full schedule in json
+xh -v https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/2020/league/00_full_schedule.json
