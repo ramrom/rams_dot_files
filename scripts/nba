@@ -2,4 +2,8 @@
 # free NBA API
 
 # get full schedule in json
-xh -v https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/2020/league/00_full_schedule.json
+xh -v -o nba_schedule.json -d \
+    https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/2020/league/00_full_schedule.json
+
+# TODO: get the correct url for this
+# xh -v -o nba_teams.json -d https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/2025/league/full_team_list.json
