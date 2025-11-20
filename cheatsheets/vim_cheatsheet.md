@@ -277,6 +277,8 @@
         - `ysa'[` -> becomes `[ "dude" ]` - using left bracket will add a space 
     - `ysi(}` - surround "inside" `()` with `{}`  - `(dude)` becomes `({dude})`
         - `ysi({` -> becomes `({ dude })` - left squigly adds a space
+    - `ysa(}` - surround "around" `()` with `{}`  - `(dude)` becomes `{(dude)}`
+        - `ysa({` -> becomes `{ (dude) }` - left squigly adds a space
 ### NVIM-TREE
 - written in lua
 - similar: plugin is NERDTree(vimscript), neo-tree(lua)

@@ -154,6 +154,12 @@ esc - return to calender grid from event details
 - may'24 - has been using bandwidth.com as VoIP provider for a while
     - bandwidth.com supports RCS, but google voice still doesn't :(
 
+## PIXEL
+- app drawer - swipe up to see this, lists all app alphabetically
+    - cannot create folders in app drawer
+- home screen - can create many screens and create folders for grouping apps
+- status bar - located on top, has status icons (e.g. wifi, cellular, battery, time)
+
 ## ANDROID
 - top swipe bar is called "quick settings"
 - APK (android application package) file defines an app
