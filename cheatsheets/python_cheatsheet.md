@@ -83,6 +83,9 @@ s = str(3)  # convert int to string
 ```sh
 python -c 'print("hi")'  # prints "hi"
 
+# delete last 4 lines of a file
+python -c "import sys; a=[]; [a.append(line) for line in sys.stdin]; [sys.stdout.write(l) for l in a[:-4]]" < foo
+
 sys.exit(1)  # exit a program with code 1
 ```
 
