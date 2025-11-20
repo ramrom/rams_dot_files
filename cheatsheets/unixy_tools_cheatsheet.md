@@ -1,11 +1,11 @@
 # UNIXY TOOLS
 
 ## TOOLS NOT HERE
-- [curl](http_web_tls_cheatsheet.md)
-- [xh, a better curl](http_web_tls_cheatsheet.md)
-- [fd or fdfind, a better find](fzf_fd_rg_cheatsheet.md)
-- [ripgrep, better grep -r](fzf_fd_rg_cheatsheet.md)
-- [fzf](fzf_fd_rg_cheatsheet.md)
+- [CURL](http_web_tls_cheatsheet.md)
+- [XH, a better curl](http_web_tls_cheatsheet.md)
+- [FD or fdfind, a better find](fzf_fd_rg_cheatsheet.md)
+- [RIPGREP, better grep -r](fzf_fd_rg_cheatsheet.md)
+- [FZF](fzf_fd_rg_cheatsheet.md)
 
 ```bash
 # FIND: find files recursive starting with current dir
@@ -179,9 +179,10 @@ cat file | parallel grep somepattern
 
 # HEAD/TAIL - spit out beggining/last lines in a file
 head foofile  # by default prints the first 10 lines of file
-head -n-2 foofile  # print all except the last 2 lines
+head -n-2 foofile  # print all except the last 2 lines, UNIX-only NOT OSX
 echo "foobar" | head -c 2  # grab first 2 chars of input, prints "fo"
 tail foofile  # last 10 lines
+tail -4 foofile  # last 4 lines
 tail -n+3 foofile # get all lines starting from line 3 and on
 tail -f foofile  # spit out last lines and continue to print them as new ones are written
 
