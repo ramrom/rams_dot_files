@@ -3,6 +3,7 @@
 - keyboard shortcuts: https://docs.splunk.com/Documentation/Splunk/9.0.4/Search/Parsingsearches
 
 ## SYNTAX
+- case sensitive search: `CASE(SoME sTrING)`
 - to search literal string with spaces use double quotes: e.g. `stringA "stringB with spaces"`
 - a query is implicitly `AND`'ed b/w strings
     - query `foo bar baz` is equivalent to `foo AND bar AND baz`

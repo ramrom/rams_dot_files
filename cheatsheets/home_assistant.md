@@ -115,8 +115,8 @@
     - [shell command](https://www.home-assistant.io/integrations/shell_command/)
         - just run a plain shell command
     - [command line](https://www.home-assistant.io/integrations/command_line/) - binary sensor
-    - [command line sensor](https://www.home-assistant.io/integrations/command_line#sensor) - sensor with some value
-    - [command line switch](https://www.home-assistant.io/integrations/command_line#switch) - a toggle switch
+        - [command line sensor](https://www.home-assistant.io/integrations/command_line#sensor) - sensor with some value
+        - [command line switch](https://www.home-assistant.io/integrations/command_line#switch) - a toggle switch
 - twilio sms -> configured in `configuration.yml` and will add a notify service
     - must specify a target phone number (that in twilio API is approved), example ph format: `12223334444`
 - aug'23 - camera support: any ONVIF camera, amcrest
