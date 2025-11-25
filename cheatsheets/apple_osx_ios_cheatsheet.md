@@ -89,6 +89,9 @@
 - `vm_stat` - show some raw memory usage
 - `nettop` - like top but for tcp/udp sockets only and their bandwidth usage!
 - `wdutil` - get wireless diag info, dump temp wifi logs
+- `diskutil` - manage local disks and volumes
+- `hdiutil` - create and manage disk images
+    - e.g. `sudo hdiutil attach /dev/disk2 -mountpoint /Volumes/mountfolder`
 - `skhd`
     - `launchctl list` to see skhd service is running
         - *DEPRECATED* oct'24 - `brew services` to see if it's running
@@ -222,6 +225,7 @@
     - sshfs and ntfs-3g brew install fail b/c of macfuse issue (macfuse closed-source or something)
 - may'22 - osxfuse rebranded to macfuse: https://github.com/osxfuse/osxfuse/issues/888
     - osxfuse github just points to macfuse: https://github.com/osxfuse/osxfuse?tab=readme-ov-file
+- july'25 - use FUSE-T over macFUSE, veracrypt reccomended
 
 
 ## OTHER

@@ -42,6 +42,7 @@
 - `/boot/config.txt` contains lots of high level rapsian configs
 - gpu temp celcius - `sudo vcgencmd measure_temp`
 - cpu temp celcius - `cat /sys/class/thermal/thermal_zone0/temp`, divide this number by 1000
+- 2025 mainline pi 4 desktop env is PIXEL, based off LXDE/OpenBox
 ### RETROPI
 - retropi = raspbian ➕ retroarch
 - location of config files

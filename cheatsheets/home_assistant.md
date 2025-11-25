@@ -46,6 +46,10 @@
     - this should clear deletedt template sensors from configuration.yml
 - `.storage/core.config_entries` has metadata (including entry_id) for integrations
     - `jq '.data.entries[] | .domain + "-----------" + .entry_id' core.config_entries` - print all friendly names and entry ids
+- `.storage/core.entity_registry` has metadata on entities
+    - `entity_id` - can be changed, intially set by system as human-readable value, still must be unique
+    - `name` - can be changed and used for lovelace UI display, same name can be used by many entities
+    - `unique_id` is stable, unchanging, generally derived from serial #s, MACs, or persistent identifiers
 
 ## SPECIAL TYPES
 - templates -> entity whose data is derived from other data
