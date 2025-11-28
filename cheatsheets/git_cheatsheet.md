@@ -99,6 +99,8 @@ git rev-parse --abbrev-ref HEAD  # print branch name of HEAD commit
         - `https://` url repos: can use personal api token as password
 - if using credential helper like osxkeychain can turn it off by setting config to empty list
     - e.g. `git -c credential.helper='' pull`
+- clone repo with fine grain token
+    - `git clone https://myuser:sometokenvalue@github.com/myorg/myrepo.git`
 ### SSH AUTH
 - specify a custom ssh command
     - can use `GIT_SSH` to specify a script that can run a custom ssh commmand

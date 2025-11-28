@@ -33,16 +33,17 @@
 - june'24 - upgrading to ubuntu 23 and 24 - third party apt sources were disabled
     - apparently done not to break the upgrade
 
-## RASPBIAN
+## RASPBERRY PI OS
+- official linux distro(based on debian) for raspberry pi
+- 2025 - Raspbian renamed to raspberry Pi OS
+    - main desktop env is PIXEL, based off LXDE/OpenBox
 - `rpi-imager` deb package
     - `DISPLAY=:1 rpi-imager` - launch imager
-- official linux distro(based on debian) for raspberry pi
 - to manually config wifi, edit `/etc/wpa_supplicant/wpa_supplicant.conf`
     - set SSID name and password
 - `/boot/config.txt` contains lots of high level rapsian configs
 - gpu temp celcius - `sudo vcgencmd measure_temp`
 - cpu temp celcius - `cat /sys/class/thermal/thermal_zone0/temp`, divide this number by 1000
-- 2025 mainline pi 4 desktop env is PIXEL, based off LXDE/OpenBox
 ### RETROPI
 - retropi = raspbian ➕ retroarch
 - location of config files
