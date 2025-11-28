@@ -36,6 +36,9 @@ ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no user@server
 # bind address, useful when there are many network interfaces on machine
 ssh -b 1.1.1.1 user@hostname   # ssh from interface with IP addr 1.1.1.1
 
+# force IPv6 address
+ssh -6 username@IPv6_Address
+
 # ssh multihop: http://sshmenu.sourceforge.net/articles/transparent-mulithop.html
 ssh -t user@foo.com ssh -t user2@bar.com
 
