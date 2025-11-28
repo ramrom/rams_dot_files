@@ -25,6 +25,9 @@ ssh-add -D   # delete all cached keys
 # copy current users public key to authorized keys in remoteserver, now you can public/private key auth instead of password
 ssh-copy-id foouser@fooserver
 
+# force password auth
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no user@server
+
 # CONFIG FILE
 # location: ~/.ssh/config
 # can turn on AddKeysToAgent, UseKeychain (for osx)
