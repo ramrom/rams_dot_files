@@ -116,6 +116,12 @@
     - `pmset -a hibernatemode 25` - deep hibernation (writes RAM to disk and powers off RAM)
     - `pmset -a standbydelay 10800` - set standby delay to 3 hours (default is 1 hour)
     - `pmset -a autopoweroffdelay 14400` - set autopoweroff delay to 4 hours (default is 2 hours)
+- `networksetup`
+    - `networksetup -listpreferredwirelessnetworks en0 | grep -v '^Preferred networks on' | head -1 | xargs   `
+        - grab top preferred SSID
+- `ipconfig`
+    - `ipconfig getiflist` - list of interfaces
+    - `ipconfig getsummary en0` - get summary of interface en0, including SSID
 
 ## LAUNCHD
 - `launchd` is a management system which control apples background daemons(aka services)
