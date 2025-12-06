@@ -33,6 +33,8 @@
 - address space - a 32-bit systems can address 2^32 addresses
     - so if it's byte-addressable then a 32 bit system can address 4 GiB(gibibytes) of data
 - dangling pointer - pointer pointing to memory that is invalid, e.g. memory was released or not owned by program
+- `mmap` - C API but general idea of a system call in OSes that map files/devices directly into a processes virtual address space
+    - allows process to access files as if they were regular memory, makes for efficient file IO
 ### PASS BY VALUE VS REFERENCE
 - confusing and really not a good question or classification
 - pass-by-refernce really means a language feature, very uncommon

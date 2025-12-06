@@ -867,9 +867,11 @@ std::panic::set_hook(Box::new(|panic_info| {
 - [hyper](https://hyper.rs/) - popular http client lib (and server lib), dep on tokio
 - [reqwest](https://github.com/seanmonstar/reqwest) - simpler http client lib, dep on tokio
     - http cli tool `xh` uses reqwest
-- [log](https://docs.rs/log/latest/log/) - popular logging framework
+- [log](https://docs.rs/log/latest/log/) - popular logging framework/facade, maintained by core rust team
     - `flexi_logger` is more advanced, multiple outputs, formatters, colors, rotations
     - `env_logger` - simple and straightforward
+- [tracing](https://github.com/tokio-rs/tracing) - awesome tokio log lib
+    - use `tracing-log` for compatibility with the `log` facade
 - [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/await w/tokio
 - [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await w/tokio
 - [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower/tokio, uses async/await
