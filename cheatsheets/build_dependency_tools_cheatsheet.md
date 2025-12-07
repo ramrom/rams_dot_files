@@ -56,6 +56,7 @@
         - run goal - https://docs.spring.io/spring-boot/maven-plugin/run.html
     - `mvn spring-boot:run` - run the spring application
     - `mvn spring-boot:help` - show help info, including all goals supported
+    - `mvn -pl modulename spring-boot:run` - start spring app in module `modulename`
     - `mvn spring-boot:run -Dspring.profiles.active=dev` - run and pass in active profile to use
 - running tests
     - `mvn test -Dtest=TestCircle` - run all tests in class name `TestCircle`
