@@ -2,6 +2,7 @@
 - https://www.home-assistant.io/
 - https://developers.home-assistant.io/
 - glossary of terms: https://www.home-assistant.io/docs/glossary/
+- cool HASS stuff - https://github.com/frenck/awesome-home-assistant
 - [HACS](https://hacs.xyz/) - home assistant community store - download 3rd party plugins on github
 - blog: https://www.home-assistant.io/blog/ , will have release notes
 
@@ -103,6 +104,8 @@
     - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
     - `hass-cli service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
         - play a specific track or playlist in spotify
+    - `hass-cli service call tts.speak --arguments message="hi there",media_player_entity_id="media_player.kitchen_speaker",entity_id=tts.google_translate_en_com`
+        - use `tts.speak` service to send voice message to speaker using google internet tts service to do tts
     - `hass-cli service call media_player.media_play_pause --arguments entity_id=media_player.living_room_tv` 
         - toggle play on a media player entity
     - `hass-cli service call google_assistant_sdk.send_text_command --arguments command="what time is it",media_player=media_player.living_room_speaker`
