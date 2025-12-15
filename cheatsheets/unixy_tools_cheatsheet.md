@@ -226,6 +226,7 @@ xsv count somecsv.csv  # print # of rows
 
 # YQ - a golang data file processor for YAML/XML/JSON, has similar language as jq
 yq '.a.b[0].c' file.yaml  # read a jq like path in yaml file
+yq some.csv -o yaml     # convert csv to json
 yq some.xml -o yaml     # convert xml to yaml
 yq some.xml -o json     # convert xml to json
 yq some.yaml -o xml     # convert yaml to xml
@@ -234,6 +235,10 @@ yq some.yaml -o json     # convert yaml to json
 # XQ - convert xml to json and then use jq queries
 xq . some.xml  # would spit our JSON conversion
 xq .somekey some.xml
+
+# CSVKIT - toolset, can convert xlsx files to csv
+in2csv input.xlsx > output.csv
+in2csv --sheet "sheetname" input.xlsx > output.csv   #specify a sheet name
 
 # PANDOC -universal doc converter
     # https://pandoc.org/MANUAL.html#general-options
