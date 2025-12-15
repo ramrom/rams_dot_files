@@ -87,6 +87,14 @@ python -c 'print("hi")'  # prints "hi"
 python -c "import sys; a=[]; [a.append(line) for line in sys.stdin]; [sys.stdout.write(l) for l in a[:-4]]" < foo
 
 sys.exit(1)  # exit a program with code 1
+
+# read a csv
+import csv
+list_of_dicts = []
+with open('some.csv', mode='r') as file:
+    csv_reader = csv.DictReader(file)
+    for row in csv_reader:
+        list_of_dicts.append(row)
 ```
 
 ## GREAT LIBS
