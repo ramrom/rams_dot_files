@@ -93,6 +93,7 @@
 - `hass-cli config release` - get HASS version
 - entity state info
     - `hass-cli state list` - get current state of all entities
+    - `hass-cli -o json state list` - get current state of all entities in JSON format
     - `hass-cli state history some.sensor` - get state history of a sensor
     - `hass-cli state history --since 3d --end 1d some.sensor` - get state history of a sensor b/w 3day ago to 1day ago
 - calling an action(formerly service)
