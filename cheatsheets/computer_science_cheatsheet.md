@@ -634,6 +634,9 @@ see [ai cheat](artificial_intelligence_ai_cheatsheet.md)
         - advantage: lower latency, emitting event to queue is fast
         - advantage: more robust retry, consumer can reenqueue message if it failed
 - [impedance mismatch](datastore_cheatsheet.md)
+    - RDMS are based on relational albegra and OOP is based on direct graphs
+    - both are good but ORM combines them and causes friction
+    - e.g. N+1 problem, OOP likes to lazy load, but this can be bad for RDMS
 - distributed transactions
     - https://medium.com/@dongfuye/the-seven-most-classic-solutions-for-distributed-transaction-management-3f915f331e15
     - SAGA

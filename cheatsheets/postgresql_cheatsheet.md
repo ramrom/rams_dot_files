@@ -191,6 +191,9 @@ select col1,unnest(arrcol) from footable;  -- unnest will flatten, each item in 
 
 -- who am i
 select current_user;
+
+-- change password
+ALTER USER some_user WITH PASSWORD 'foobar';
 ```
 
 ## SPECIAL TABLES

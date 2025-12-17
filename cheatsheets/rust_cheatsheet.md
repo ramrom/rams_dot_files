@@ -874,7 +874,7 @@ std::panic::set_hook(Box::new(|panic_info| {
     - use `tracing-log` for compatibility with the `log` facade
 - [rocket](https://rocket.rs/) - most popular rust backend web framework, uses async/await w/tokio
 - [actix](https://actix.rs/) - popular web framework, uses actor model, uses async/await w/tokio
-- [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower/tokio, uses async/await
+- [axum](https://github.com/tokio-rs/axum) - popular web framework, uses tower/hyper/tokio, uses async/await
 - [serde](https://serde.rs/) - awesome defacto serial/deserialization framework
     - `Serializer`/`Deserializer` traits define how parse data into/out-of the serde data model
         - deserialization uses the visitor pattern, centered around the `Visitor` trait
