@@ -18,6 +18,13 @@
 # new window takes a manual shell command to run, zsh -f will start zsh shell with no rc files loaded
 tmux new-window zsh -f
 
+# create popup window in center
+tmux display-popup
+# same but 70% height and 60% width and run btop in it
+# NOTE: if supplying a -E command, and command exits the popup window exits
+tmux display-popup -w 60% -h 70% -E 'btop'
+tmux bind C-y display-popup -E 'btop'    # bind it to a key
+
 # will unset that option
 tmux set -u someoption
 ```
