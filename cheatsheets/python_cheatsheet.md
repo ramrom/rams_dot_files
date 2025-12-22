@@ -63,6 +63,8 @@ print(s, end='') # print without newline
 - u can specify packages and pin versions you want
 ### UV
 - rust written replacement for PIP: https://github.com/astral-sh/uv
+- should do what pipenv does and more
+- _WAY_ faster than others
 
 ## INTROSPECTION
 - `type(foo)`   - print type

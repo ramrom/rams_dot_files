@@ -596,13 +596,26 @@
 - excluded domains: browser ext -> settings -> notifications -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
 
-## FIREFOX
+## WEB BROWSER
+### CHROMIUM
+- FOSS browser engine developed by google
+- most browers are built off it including: chrome, brave, opera, microsoft edge, vivaldi
+### CHROME
+- main browser by google that is built on chromium
+### FIREFOX
 - goto `about:config` in url to see full settings
 - `ctrl`+`tab` - goto next tab, add `shift` to go in reverse
+### SERVO
+- new web renering engine built in rust - https://github.com/servo/servo
 
 ## XBROWSWERSYNC
 - full FOSS, can self host, works in firefox/chrome/brave/edge
 - `ctrl + space` is shortcut to bring up extension to search bookmarks
+
+## FLOCCUS
+- bookmark sync browser extension, better than xbrowsersync!
+- https://github.com/floccusaddon/floccus
+- https://floccus.org/
 
 ## CLOUD DRIVES
 - dropbox
@@ -756,6 +769,7 @@
     - private address range added:
         - fc00::/7 address block = RFC 4193 Unique Local Addresses (ULA)
         - fec0::/10 address block = deprecated (RFC 3879)
+    - link local addresses will always start with `fe80`
 ### IP NETWORK CONCEPTS
 - AS = autonomous system, ASN = autonomous system number
     - IANA assigns blocks of ASNs to RIRs(regional internet registries) which in turn assign ASNs to LIR(local internet registires)
