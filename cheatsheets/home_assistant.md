@@ -13,6 +13,8 @@
     - add-ons are created in new containers
 - home assitant core - the main backend brains
 - uses a SQLite db, generally located at `config/home-assistant_v2.db`
+- entity has `state` property is it's main "value", while `attribute`s are auxilary data
+    - the `state_attr(entity_id, attribute)` method can access a entity's attribute values
 - state object: https://www.home-assistant.io/docs/configuration/state_object/
     - sensors will have a main "attribute" `state` and auxilary "attributes" listed in `attributes`
     - `last_changed` and `last_updated` (subtle differences) will store last time state "changed"
@@ -103,6 +105,8 @@
     - `hass-cli service call backup.create` - create a backup
     - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever` - send notif
     - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
+    - `hass-cli service call media_player.volume_set --arguments entity_id=media_player.kitchen_speaker,volume_level=0.3`
+        - set volume level at 30% set on a media player entity
     - `hass-cli service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
         - play a specific track or playlist in spotify
     - `hass-cli service call tts.speak --arguments message="hi there",media_player_entity_id="media_player.kitchen_speaker",entity_id=tts.google_translate_en_com`
