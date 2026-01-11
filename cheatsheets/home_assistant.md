@@ -93,15 +93,18 @@
 ### HASS-CLI
 - great 3rd party: https://github.com/home-assistant-ecosystem/home-assistant-cli , `hass-cli` bin
 - `hass-cli config release` - get HASS version
-- entity state info
+- entity
+    - `hass-cli entity list` - list all entities
     - `hass-cli state list` - get current state of all entities
-    - `hass-cli -o json state list` - get current state of all entities in JSON format
+    - `hass-cli -o yaml state list` - get current state of all entities in YAML format
+    - `hass-cli -o json state get sun.sun` - get current state of `sun.sun` entity in JSON format (with all state attribs)
     - `hass-cli state history some.sensor` - get state history of a sensor
     - `hass-cli state history --since 3d --end 1d some.sensor` - get state history of a sensor b/w 3day ago to 1day ago
-- calling an action(formerly service)
+- calling an service
     - *NOTE* check docs for exact argument names to use
         - e.g. for google assistant, actions: https://www.home-assistant.io/integrations/google_assistant_sdk
-    - `hass-cli service call system_log.clear` - clear logs
+    - `hass-cli -o yaml service list log.clear` - get details of a service call, including fields, in YAML format
+    - `hass-cli service call system_log.clear` - call clear logs service
     - `hass-cli service call backup.create` - create a backup
     - `hass-cli service call notify.some_device --arguments message="hi there",title=whatever` - send notif
     - `hass-cli service call light.toggle --arguments entity_id=light.some_entity_name`     - toggle a light
