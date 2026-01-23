@@ -29,8 +29,9 @@ alias tms='tmux-statusctl'
 alias clt='clear && tmux clear-history'
 
 # BAT
-alias b='bat'
 alias bm='batman'
+alias b='bat -pp'   # bat with no pager, no line nums
+alias bp='bat'      # bat with pager, line nums
 alias batc='bat --color never -pp'  # no color, -pp is plain (no header or line nums) and no pager, so cat...
 
 # XH

@@ -28,6 +28,7 @@
 
 ## AWS CLI
 - `aws configure --profile someprofile list`  - list sessions under that profile
+- `aws configure export-credentials --profile someprofile`  - display creds in diff format (JSON default)
 - `aws configure list-profiles`  - list profiles with sessions
 - `aws eks --profile foo --region us-east-1 list-clusters` - list eks clusters in a region
 
