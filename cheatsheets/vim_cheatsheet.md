@@ -131,6 +131,15 @@
 - print a val: `:lua =foo.myvar`, `:lua b=2; print(myvar)`
 - print internals of a table (use `vim.inspect`) - `:lua b={key={1,2},key2="string"}; print(vim.inspect(b))`
 - call lua function - `:lua somefunc()`
+- get OS name
+    - `:lua print(vim.loop.os_uname().sysname)`
+    - `:lua if vim.fn.has('Linux') then print 'has linux' end`
+- copy stuff to system clipboard progrmatically
+    - `lua vim.fn.setreg('+', "foobar")` - the `+` register generally maps system clipboard
+- sourcing code in buffers
+    - `:source %` - `%` = current buffer, source code in current buffer
+    - source visual selection
+        - run ex command `:'<,'>lua` for lua, or `:'<,'>source` for VimL 
 - sourcing external files
     - VimL `source`
         - vimscript file - `:source ~/.config/nvim/keymaps.vim`
@@ -149,11 +158,6 @@
             - unlike `spawn` it will throw error if command can't be run
         - can be called syncronously(blocking main thread) by calling `wait`
         - neovim 0.10.x -> it's `vim.system`, pre 0.10.x - `vim.fn.system({'ls', '-a', '-l'})`
-- get OS name
-    - `:lua print(vim.loop.os_uname().sysname)`
-    - `:lua if vim.fn.has('Linux') then print 'has linux' end`
-- copy stuff to system clipboard progrmatically
-    - `lua vim.fn.setreg('+', "foobar")` - the `+` register generally maps system clipboard
 
 ## PLUGINS
 - good list of neovim plugins: https://github.com/rockerBOO/awesome-neovim
