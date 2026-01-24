@@ -1044,7 +1044,6 @@ LoadAutoPair = function()
     require('nvim-autopairs').add_rule(Rule("<",">","rust"))
 end
 
-
 --------------------------------------------------------------------------------------------------------
 -------------------------------- LSP CONFIG ----------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -1724,6 +1723,19 @@ SetMetalsKeymaps = function()
     -- vim.keymap.set("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
 end
 
+LoadCellularAutomaton = function()
+    vim.keymap.set("n", "<leader>xr", "<cmd>CellularAutomaton make_it_rain<CR>")
+    vim.keymap.set("n", "<leader>xl", "<cmd>CellularAutomaton game_of_life<CR>")
+end
+
+LoadDuck = function()
+    vim.keymap.set('n', '<leader>xdh', function() require("duck").hatch() end, { desc = "hatch reg duck" })
+    vim.keymap.set('n', '<leader>xdc', function() require("duck").cook() end, { desc = "cook" })
+    vim.keymap.set('n', '<leader>xda', function() require("duck").cook_all() end, { desc = "cook all" })
+    vim.keymap.set('n', '<leader>xdd', function() require("duck").hatch("🦆", 10) end, { desc = "hatch fast duck" }) -- fast duck
+    vim.keymap.set('n', '<leader>xdc', function() require("duck").hatch("🐈", 0.75) end, { desc = "hatch cat" }) -- slow cat
+end
+
 --------------------------------------------------------------------------------------------------------
 -------------------------------- PLUGINS --------------------------------------------------------------
 ----------------------------------- -------------------------------------------------------------------
@@ -1845,6 +1857,10 @@ if not vim.env.VIM_NOPLUG then
         { "folke/flash.nvim", event = "VeryLazy", keys = FlashKeyDefinitions, opts = FlashOpts, },
         { 'chrisbra/unicode.vim', event = "VeryLazy" },     -- unicode helper
         { 'godlygeek/tabular', event = "VeryLazy" },        -- format text into aligned tables
+
+        -- FUN
+        { "eandrju/cellular-automaton.nvim", event = "VeryLazy", config = LoadCellularAutomaton, },
+        { "tamton-aquib/duck.nvim", event = "VeryLazy", config = LoadDuck, },
     } })
 end
 
