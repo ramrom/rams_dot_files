@@ -474,6 +474,13 @@ apt-cache showpkg pkg - shows deps and reverse deps,
     - `ip route` - show routing table
     - `ip neighbor` - show discovered hosts in local network
 
+## TIME
+- uses system hardware timers to generate periodic interrupts, at a fixed frequency, e.g. 100Hz or 1000Hz
+- each interrupt will increment a global counter `jiffie`, this tracks number of "ticks" since a system boot
+- kernel generally uses a `timer_list` to manage functions scheduled to run tasks in future
+    - tasks are generally set to a `jiffie` in the future
+    - every `jiffie` is incremented, the list is checked for tasks that occured in last jiffie then and exected
+
 ## SOUND
 - ALSA: is base sound stack for all linux distro
 - pluseaudio - builds on top of ALSA, can do things like mix many sound streams together
@@ -517,6 +524,8 @@ pulsemixer - volume manager with pulseaudio
     - fd - SATA, sd - SCSI/SATA, hd - IDE
     - fda - first SATA drive, hdb - 2nd IDE drive
     - hdb1 - 1st partition on 2nd IDE drive
+- `/dev/rtc` - Real-Time-Clock, represents the hardware clock, often a battery with a quartz crytal oscillator
+    - system clock device is software and often uses the RTC clock when OS boots up
 ### SPECIAL DEVICES
 - /dev/null   - write output to this device to throw it away
 - /dev/zero   - obtain null characters from this device

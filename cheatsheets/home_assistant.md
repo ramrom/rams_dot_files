@@ -113,13 +113,17 @@
     - `hass-cli service call media_player.play_media --arguments entity_id=media_player.spotify_entity,media_content_type=music,media_content_id=https://open.spotify.com/track/1hrRNhEG0ES4OC5rBCU1F8`
         - play a specific track or playlist in spotify
     - `hass-cli service call tts.speak --arguments message="hi there",media_player_entity_id="media_player.kitchen_speaker",entity_id=tts.google_translate_en_com`
-        - use `tts.speak` service to send voice message to speaker using google internet tts service to do tts
     - `hass-cli service call media_player.media_play_pause --arguments entity_id=media_player.living_room_tv` 
         - toggle play on a media player entity
     - `hass-cli service call google_assistant_sdk.send_text_command --arguments command="what time is it",media_player=media_player.living_room_speaker`
         - send voice command/query to google assistant, a google home speaker in this case
 - toggle entity: `hass-cli state toggle someentity`
 - call webhook, `hss raw post --json '{ "prop1" : "value1" }' /api/webhook/somehook`
+
+## SERVICES
+- `tts.speak` - specify backend tts engine to create sound file from speech text, specify output speaker
+    - NOTE: this service is "async" in a script action, script wont wait for speech from speaker to finish before executing next action
+        - can do something like `wait_template` on speaker state, e.g. wait until speaker is `idle`
 
 ## INTEGRATION
 - speedtest by defaults polls every hour, can configure this in ingrations section
