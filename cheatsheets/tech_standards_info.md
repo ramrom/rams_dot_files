@@ -114,9 +114,10 @@
     - highly based on apple's homekit protocol
     - a standard/protocol that operates on layer 7 of OSI Ref model
 - Thread - networking tech that Matter is built on
-    - low-power mesh network like zigbee
+    - https://en.wikipedia.org/wiki/Thread_(network_protocol)
+    - new protocol desgiend for IoT, is royalty free
     - any device can be a thread edge router
-    - it is IPv6 based for addressing, which matter needs
+    - it's IPv6 based, mesh network, low-power, uses 2.4Ghz band
 - Wifi (power hungry)
     - hub-and-spoke only, so must be near a access point
     - doesnt scale
@@ -141,7 +142,8 @@
     - but there are options like optical and wireless hdmi
 - standard does not mandate versions be printed on cables, so only way to know is to test them...
 - CEC (consumer electronics control) - protcol to control HDMI devices
-    - many company has version of this, e.g. Anynet+, SimpleLink, BRAVIA Sync
+    - many company has version of this, e.g. samsung calls it Anynet+, sony call it BRAVIA Link/Sync
+        - see https://en.wikipedia.org/wiki/Consumer_Electronics_Control#Trade_names_for_CEC_technology
 - eARC (enhanced audio return channel) - feature of HDMI 2.1, allows sound to be output to soundbar
     - ARC supports dolby atmos, eARC is higher bandwidth for dolby trueHD and DTS-HD master audio
 - standards

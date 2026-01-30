@@ -10,6 +10,10 @@
 - prompt - in AI parlance it means a set of instructions or questions given to an AI system to elicit a different type of response
     - i.e. how to ask AI something in a way to get what you want
 
+## PROTOCOLS
+- MCP - model context protocol
+    - https://modelcontextprotocol.io/docs/getting-started/intro
+
 ## LEARNING RESOURCES
 - https://brilliant.org/courses/
 
