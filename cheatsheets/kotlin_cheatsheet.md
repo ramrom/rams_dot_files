@@ -133,6 +133,10 @@ kotlinc hello.kt -include-runtime -d hello.jar
 java -jar hello.jar
 ```
 
+## REPL
+- complier - `kotlinc -Xrepl`
+- online - https://play.kotlinlang.org/
+
 ## LIBRARIES
 - [ktor](https://ktor.io/) - asynchronous framework for creating microservices, web applications, and more
     - built by jetbrains, fully kotlin, built on kotlin coroutines

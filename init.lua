@@ -1398,7 +1398,7 @@ LoadKotlinLSP = function()
         vim.lsp.enable('kotlin_language_server')
         vim.lsp.config('kotlin_language_server', {
             -- cmd = { "kotlin-language-server" },
-            cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
+            -- cmd = { "kotlin-language-server-java21" },  -- binstub that sets JAVA_HOME to java21 version, then launch LSP
             -- filetypes = { "kotlin", "kt" },
             -- root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
         })
@@ -1621,6 +1621,8 @@ vim.keymap.set('n', '<leader>wu', "<cmd>Telescope emoji<CR>", { desc = "telescop
 vim.keymap.set("n", "<leader>wh", function() ToggleMainNavKeys("harpoon") end, { desc = "toggle harpoon mode" })
 vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR>', {desc =" open a tag in a new tab"})
 
+vim.keymap.set('n', '<leader>lt', function() ToggleTagbar() end, { desc = "toggle Trouble or Aerial for doc symbols" })
+
 -- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
 vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
 
@@ -1694,7 +1696,6 @@ SetLSPKeymaps = function()
     vim.keymap.set('n', '<leader>ll', function() require('fzf-lua').lsp_finder() end, { desc = "all lsp finder" })
     vim.keymap.set('n', '<leader>lw', function() require('fzf-lua').lsp_workspace_symbols() end, { desc = "workspace symbols" })
     vim.keymap.set('n', '<leader>ls', function() require('fzf-lua').lsp_document_symbols() end, { desc = "doc symbols" })
-    vim.keymap.set('n', '<leader>lt', function() ToggleTagbar() end, { desc = "toggle Trouble or Aerial for doc symbols" })
     -- vim.keymap.set('n', '<leader>lt', "<cmd>Trouble lsp_document_symbols toggle win = { type=split, position=right, size=.3}<CR>",
     --     { desc = "Trouble toggle lsp doc symbols" })
     vim.keymap.set('n', '<leader>lT', "<cmd>Trouble<CR>",
