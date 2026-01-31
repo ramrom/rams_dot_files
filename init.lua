@@ -1389,20 +1389,21 @@ end
 -- NOTE: a `kls_database.db` file and `bin` dir at root are created for metadata, should add to gitignore
 LoadKotlinLSP = function()
     -- if (not ValidateKotlinJavaDep()) then return end
-    vim.lsp.enable('kotlin_language_server')
-    vim.lsp.config('kotlin_language_server', {
-        -- cmd = { "kotlin-language-server" },
-        cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
-        -- filetypes = { "kotlin", "kt" },
-        -- root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
-    })
-end
 
--- july'25 - 1st party supported by jetbrains, kotlin-language-server is not maintained anymore
--- LoadKotlinLSP = function()
---     vim.lsp.enable('kotlin_lsp')
---     vim.lsp.config('kotlin_lsp', {})
--- end
+    if vim.env.JETBRAINS_KOTLIN then
+        -- july'25 - 1st party supported by jetbrains, kotlin-language-server is not maintained anymore
+        vim.lsp.enable('kotlin_lsp')
+        vim.lsp.config('kotlin_lsp', {})
+    else
+        vim.lsp.enable('kotlin_language_server')
+        vim.lsp.config('kotlin_language_server', {
+            -- cmd = { "kotlin-language-server" },
+            cmd = { "kotlin-language-server-java21" },  -- use a binstub that sets JAVA_HOME to java21 version, then launch LSP
+            -- filetypes = { "kotlin", "kt" },
+            -- root_dir = require("lspconfig/util").root_pattern("settings.gradle", "settings.gradle.kts", ".git")
+        })
+    end
+end
 
 ----------------- RUBY LSP ---------------------------------------
 -- lang server - https://shopify.github.io/ruby-lsp/
