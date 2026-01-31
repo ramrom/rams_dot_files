@@ -1,0 +1,5 @@
+#!/bin/sh
+
+OUT=/tmp/out.jar
+kotlinc $1 -include-runtime -d ${OUT}
+java -jar ${OUT}
