@@ -34,6 +34,19 @@
 - deno - modern runtime in rust, uses V8, supports typescript/javascript
 - bun - runtime written in zig
 
+## CONCURRENCY
+- javascript is inherently single-threaded
+- uses a main event loop and relies on callbacks to be concurrent
+### PROMISES
+- added in ECMAScript in june 2015
+- a function that returns a value that will be completed in the future
+- created to help reduce callback hell, can chain promises together with `then` for success, `catch` for failure/exception
+### ASYNC/AWAIT
+- introduced in ECMAScript in 2017 (ES8)
+ - `async` keyword that defines a function that returns a promise
+ - `await` function is syntax sugar to use when calling a async function in another async function
+ - much nicer to read and handle promises and looks like synchronous code
+
 ## LIBS
 - [jquery](https://jquery.com/) - manipulate HTML DOM
 - [chartjs](https://github.com/chartjs/Chart.js) - popular charting lib
