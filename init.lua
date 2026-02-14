@@ -802,10 +802,84 @@ NvimTreeConfig = {
 LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
--- NOTE: is TS is disabled for a buffer, old vim regex highlighting turns on
+-- NOTE: if TS is disabled for a buffer, old vim regex highlighting turns on
 -- vim.cmd(':syntax off') 
 
 LoadTreeSitter = function()
+    -- local langs = {
+    --     'typescript', 'javascript', 'jq', 'json',
+    --     'ruby', 'python', 'lua',
+    --     'go', 'rust', 'c', 'cpp', 'zig',
+    --     'markdown', 'diff',
+    --     'html', 'css',
+    -- }
+
+    -- require'nvim-treesitter'.install(langs)
+
+    local is_largefile = function(buf)
+        local max_filesize = 20 * 1024 * 1024 -- 20 MB 
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end
+
+
+    local installed_parsers = function()
+        res = {}
+        local parsers = require("nvim-treesitter.parsers")
+        -- print(vim.inspect(parsers))
+        -- for _, parser in ipairs(parsers.available_parsers()) do
+        for foo, parser in pairs(parsers) do
+            -- if parsers.has_parser(parser) then table.insert(res, parser) end
+            table.insert(res, foo)
+        end
+        return res
+    end
+
+    -- print(vim.inspect(installed_parsers()))
+    -- print(#installed_parsers())
+
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function(event) 
+            if vim.bo.filetype == 'notify' then return end
+            if vim.bo.filetype == 'fzf' then return end
+
+            -- local lang = vim.treesitter.language.get_lang(event.match) or event.match
+            -- print(lang)
+
+            if is_largefile(event.buf) then 
+                local filename = vim.api.nvim_buf_get_name(0)
+                print(filename .. " is too large, treesitter bypassed") 
+                return
+            end
+
+            local ok, _ = pcall(vim.treesitter.start)
+            if ok then
+                vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                vim.wo[0][0].foldmethod = 'expr'
+                -- print(event.buf)
+
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+        end,
+    })
+
+    -- TODO: jan'26 - for incremental selection on main branch use flash https://github.com/folke/flash.nvim
+        -- also read https://www.reddit.com/r/neovim/comments/1nwvl85/neovim_incremental_selection_using_treesitter/
+
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        desc = 'highlight hyperlinks in regular paragraph/text of markdown',
+        callback = function()
+            vim.cmd.highlight("link mkdInlineURL htmlLink")
+            vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
+        end,
+    })
+end
+
+LoadTreeSitterOld = function()
     -- require("nvim-treesitter.install").prefer_git = true
     require('nvim-treesitter.configs').setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
@@ -1757,6 +1831,20 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- load any local nvim configs after VeryLazy event fires
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'VeryLazy',
+    once = true,
+    callback = function() 
+        if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
+            trynotify("Loading ~/.nvim_local.lua", "info", { timeout = 0 , title = "info" })
+
+            dofile(vim.fn.expand('~/.nvim_local.lua'))
+            -- vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)  --was needed for vim.uv.timer
+        end
+    end
+})
+
 if not vim.env.VIM_NOPLUG then
     require("lazy").setup({ spec = {
         'nvim-lua/plenary.nvim',
@@ -1864,17 +1952,4 @@ if not vim.env.VIM_NOPLUG then
         { "eandrju/cellular-automaton.nvim", event = "VeryLazy", config = LoadCellularAutomaton, },
         { "tamton-aquib/duck.nvim", event = "VeryLazy", config = LoadDuck, },
     } })
-end
-
--- TODO: how to load after noice is loaded so i get pretty nvim-notify msg, can i hack into `VeryLazy` event somehow?
---       the 1sec timer works but is not as elegant as evented
-if (vim.fn.filereadable(vim.fn.expand('~/.nvim_local.lua')) == 1) then
-    -- vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
-    local loadLocal = function()
-        trynotify("Loading ~/.nvim_local.lua", "info", { timeout = 0 , title = "info" })
-        vim.schedule(function() dofile(vim.fn.expand('~/.nvim_local.lua')) end)
-    end
-
-    local timer = vim.uv.new_timer()
-    timer:start(1000, 0, function () timer:stop(); timer:close(); loadLocal() end)
 end

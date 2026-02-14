@@ -298,6 +298,15 @@ print(coroutine.status(c2))  -- dead
         return t
     end
     ```
+- shallow copy
+    ```lua
+    function shallow_copy(t)
+        local copy = {}
+        for k, v in pairs(t) do copy[k] = v end
+        return copy
+    end
+
+    ```
 
 ## LIBS
 - [luv](https://github.com/luvit/luv) - lua binding for libuv
