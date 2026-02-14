@@ -851,7 +851,8 @@ LoadTreeSitter = function()
             -- local lang = vim.treesitter.language.get_lang(event.match) or event.match
             -- print(lang)
 
-            if is_largefile(event.buf) then 
+            local buf_num = event.buf
+            if is_largefile(buf_num) then 
                 local filename = vim.api.nvim_buf_get_name(0)
                 print(filename .. " is too large, treesitter bypassed") 
                 return
@@ -861,7 +862,7 @@ LoadTreeSitter = function()
             if ok then
                 vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
                 vim.wo[0][0].foldmethod = 'expr'
-                -- print(event.buf)
+                -- print(buf_num)
 
                 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end
@@ -1436,9 +1437,8 @@ LoadJDTLSServer = function()
         settings = JDTLSSettings,
     }
 
-    require('jdtls').start_or_attach(config)
-    -- if LSPAutoStartEnable then vim.lsp.enable('jdtls') end
-    -- vim.lsp.config('jdtls', config)
+    vim.lsp.enable('jdtls') end
+    vim.lsp.config('jdtls', config)
 
     -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
         -- previously i didnt have this and goto def was not working
