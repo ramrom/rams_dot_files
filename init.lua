@@ -1933,7 +1933,7 @@ if not vim.env.VIM_NOPLUG then
         },
 
         -- OTHER
-        { 'stevearc/aerial.nvim', opts = AerialOpts,
+        { 'stevearc/aerial.nvim', opts = AerialOpts, cond = not vim.env.NO_AERIAL,
             dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, },
         { "folke/snacks.nvim", opts = SnacksOpts },
         -- { 'lukas-reineke/indent-blankline.nvim', config = LoadIndentBlankLine, event = 'VeryLazy' },
