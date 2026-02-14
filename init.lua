@@ -840,6 +840,8 @@ LoadTreeSitter = function()
     -- print(vim.inspect(installed_parsers()))
     -- print(#installed_parsers())
 
+    -- TODO: feb'26 - maybe check out https://github.com/Corn207/ts-query-loader.nvim plugin instead
+        -- or use https://github.com/xaaha/dev-env/blob/main/nvim/.config/nvim/lua/xaaha/plugins/lsp-nvim-treesitter.lua
     vim.api.nvim_create_autocmd('FileType', {
         pattern = '*',
         callback = function(event) 
