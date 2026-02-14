@@ -149,7 +149,7 @@ a = function() return 1 end  -- works fine, returns 1
 - key/value("associate-array"-like) items dont affect the index order of non-key/value ("array"-like) items
     ```lua
     a = {}              -- create blank table
-    table.insert(a,1)  -- {1}
+    table.insert(a,1)  -- append to table, you get {1}
     table.insert(a,3)  -- {1, 3}
     a['k'] = 4         -- {1, 3, "k": 4 }
 

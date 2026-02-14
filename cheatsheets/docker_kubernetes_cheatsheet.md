@@ -11,7 +11,8 @@
 - `docker ps -a` - list containers in all states
 - https://docs.docker.com/
 ### DOCKER CLI IMAGES
-- `docker build -f foo/MyDockerfile` - build from a Dockerfile with custom path/name
+- `docker build -f foo/MyDockerfile -t myname:tagname`
+    - build from a Dockerfile with custom path/name, also specify a image name and tag name
 - `docker images` - list images
 - `docker image history fooimage` - list the history of layers on image `fooimage`
     - a blank value in `CREATED_BY` column generally means it's manually commited changes from a container run

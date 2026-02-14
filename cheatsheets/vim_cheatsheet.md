@@ -84,6 +84,7 @@
         - has `append`,`prepend`,`remove`, but to get value need to `get` e.g. `vim.opt.smarttab.get()`
     - `vim.opt_local` - equiv to VimL `setlocal`
     - `vim.opt_global` - equiv to VimL `setglobal`
+        - also `vim.go`
     - `vim.wo` - set window-local 
     - `vim.bo` - set buffer-local 
 - `vim.env` - envirionment variables, set a env var: `vim.env.FZF_DEFAULT_OPTS = '--layout=reverse'`
