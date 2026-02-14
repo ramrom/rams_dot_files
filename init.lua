@@ -1437,7 +1437,7 @@ LoadJDTLSServer = function()
         settings = JDTLSSettings,
     }
 
-    vim.lsp.enable('jdtls') end
+    vim.lsp.enable('jdtls')
     vim.lsp.config('jdtls', config)
 
     -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
