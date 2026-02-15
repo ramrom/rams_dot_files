@@ -35,9 +35,10 @@
     - `-p x:x` is to map internal port to external port
     - `docker run --platform linux/amd64` - run the container on a specific platform
         - e.g. for errors like `The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8)`
-- `docker exec -it foocontainername /bin/bash` - start a bash shell in container
+- `docker exec -it foocontainername /bin/bash` - start a bash shell in running container
     - `docker run -d --entrypoint sleep YOUR_IMAGE 3600` - start a container with different entrypoint, `sleep` command here
         - this is a clever trick to start a container that can't start with it's existing entrypoint for whatever reason
+    - `docker run -it fooimage` - start a new container for an image in interactive mode
 - `docker volume -qf dangling=true` - find dangling volumes
     - `docker volume rm $(docker volume ls -qf dangling=true)` - remove them
 ### REGISTRIES

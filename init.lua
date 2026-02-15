@@ -1411,13 +1411,14 @@ LoadNvimJava = function()
     require('java').setup({
           java_debug_adapter = { enable = false },
     })
-    vim.lsp.enable('jdtls')
+
     vim.lsp.config('jdtls', { 
         cmd = { vim.env.HOME .. '/bin/jdtls', 'mason' },
         -- root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         -- autostart = LSPAutoStartEnable,
         settings = JDTLSSettings,
     })
+    vim.lsp.enable('jdtls')
 end
 
 -------------- JAVA-JDTLS LS ---------------------------
@@ -1437,8 +1438,8 @@ LoadJDTLSServer = function()
         settings = JDTLSSettings,
     }
 
-    vim.lsp.enable('jdtls')
     vim.lsp.config('jdtls', config)
+    vim.lsp.enable('jdtls')
 
     -- NOTE: jun'24 - README says create a ftplugin java.lua file for this, but this is the same and it works
         -- previously i didnt have this and goto def was not working
