@@ -583,10 +583,11 @@ LoadTelescope = function()
     -- README: https://github.com/nvim-telescope/telescope-fzf-native.nvim
     -- oct'24 - failing b/c fzf-native's `make` command failed, i had to remove/readd pluging from lazy spec for `make` to trigger
     require('telescope').load_extension('fzf')
-    -- mostly used b/c noice UI popups dont always show up still
-    if not vim.env.NO_NOICE then
-        -- require("telescope").load_extension("ui-select")
-    end
+
+    -- -- mostly used b/c noice UI popups dont always show up still
+    -- if not vim.env.NO_NOICE then
+    --     require("telescope").load_extension("ui-select")
+    -- end
 end
 
 LoadTelescopeEmoji = function()
@@ -1875,7 +1876,7 @@ if not vim.env.VIM_NOPLUG then
         { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
         --- TELESCOPE
-        { 'nvim-telescope/telescope.nvim', config = LoadTelescope, event = 'VeryLazy', tag = '0.1.8',
+        { 'nvim-telescope/telescope.nvim', config = LoadTelescope, event = 'VeryLazy', -- tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' }, event = "VeryLazy" }, 
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', event = "VeryLazy" },
         { 'nvim-telescope/telescope-ui-select.nvim' },
