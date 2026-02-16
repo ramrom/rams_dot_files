@@ -63,7 +63,8 @@
 - `ports` - specify just some ports to be exposed to host
 ### UNDERLYING TECH
 - `Dockerfile` - a file specifying how to build an image
-    - must have entry point, basically the shell command that will run when container starts
+    - must have entry point `ENTRYPOINT` keyword - defines PID 1 process that will run when container starts
+        - `CMD` will define arguments sent to `ENTRYPOINT` process
 - image - represents an immutable state
     - it's composed of layers and you cant modify existing layers
     - can create new changes on top of it and save them, this adds a layer, can also create a new image that points to a layer
