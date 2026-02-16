@@ -9,6 +9,13 @@
 - TPUs made trasformers feasible
 - prompt - in AI parlance it means a set of instructions or questions given to an AI system to elicit a different type of response
     - i.e. how to ask AI something in a way to get what you want
+- vibe coding - conversation human-in-loop interaction with AI to do stuff
+- agentic coding - more autonomous than vibe coding
+
+## AGENTS
+- github copilot - propietary coding agent built for pair programming and tight integration into editors
+- opencode - opensource CLI coding agent written in typscript
+- crush - a fork of opencode, written in go
 
 ## PROTOCOLS
 - MCP - model context protocol
@@ -76,7 +83,11 @@
 - openAI chatgpt model architecture is closed source
 - Tokens - a measure of the amount of data that can be remembered in a conversation, so limited context
     - input text is broken into smaller pieces, each called a token
-### CHATGPT LLM
+### CLAUDE
+- created by anthropic
+### GEMINI
+- created by google
+### CHATGPT
 - GPT3 - has 175B params/weights, organized into 28k matrices, ~50k words, ~12k embedding "dimenions", 2048 word context size
 - model `gpt-4o-mini` - release 2024, free to use
 ### KHANMIGO
@@ -84,6 +95,8 @@
 ### DEEPSEEK
 - jan'25 - came out and beat chatgpt's best model o1
 - claims they spent on ly $6mil training it on 2000 nvidia H800s
+### OLLAMA
+- free LLM, can run it locally
 ### OTHER INFO
 - tiktoken - open-source byte pair encoding (BPE) develeoped by OpenAPI to quickly encode text into tokens for input into LLMs
     - good for faster conversion into text tokens
