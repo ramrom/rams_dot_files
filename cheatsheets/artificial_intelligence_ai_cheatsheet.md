@@ -12,10 +12,12 @@
 - vibe coding - conversation human-in-loop interaction with AI to do stuff
 - agentic coding - more autonomous than vibe coding
 
-## AGENTS
+## CODING AGENTS
 - github copilot - propietary coding agent built for pair programming and tight integration into editors
 - opencode - opensource CLI coding agent written in typscript
 - crush - a fork of opencode, written in go
+- claude code - propietary cli by anthropic for claude only
+    - good 2026 claude vs opencode comparison - https://www.builder.io/blog/opencode-vs-claude-code
 
 ## PROTOCOLS
 - MCP - model context protocol
