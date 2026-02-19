@@ -111,7 +111,7 @@ else  # assuming Darwin here
     alias cpu_top_procs_watch="viddy -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
     alias cpu_top_procs='ps -Ao pcpu,user,command -r | head -n 6'   # do command last so it string doesnt get truncated
     alias watch_istats='watch -n 1 -c istats all'
-    alias oc='open -a "Google Chrome"'
+    alias og='open -a "Google Chrome"'
     alias ow='open -a Whatsapp'
     alias os='open -a Slack'
     alias oam='open -a "Activity Monitor"'
@@ -149,8 +149,9 @@ alias rgs="rg -tscala -g '!it/' -g '!test/' -g '!nrt/'"
 alias frgs="frg -f \"-tscala -g '!it/' -g '!test/'\""
 alias frgst='frg -f "-tscala"'
 
-# FABRIC
+# AI
 alias fabe="cd ~/.config/fabric"
+alias oc='opencode'
 
 # FZF
 alias fa='ff -d 1 -k'
