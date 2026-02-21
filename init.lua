@@ -807,16 +807,6 @@ LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 -- vim.cmd(':syntax off') 
 
 LoadTreeSitter = function()
-    -- local langs = {
-    --     'typescript', 'javascript', 'jq', 'json',
-    --     'ruby', 'python', 'lua',
-    --     'go', 'rust', 'c', 'cpp', 'zig',
-    --     'markdown', 'diff',
-    --     'html', 'css',
-    -- }
-
-    -- require'nvim-treesitter'.install(langs)
-
     local is_largefile = function(buf)
         local max_filesize = 20 * 1024 * 1024 -- 20 MB 
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -825,32 +815,17 @@ LoadTreeSitter = function()
         end
     end
 
-
-    local installed_parsers = function()
-        res = {}
-        local parsers = require("nvim-treesitter.parsers")
-        -- print(vim.inspect(parsers))
-        -- for _, parser in ipairs(parsers.available_parsers()) do
-        for foo, parser in pairs(parsers) do
-            -- if parsers.has_parser(parser) then table.insert(res, parser) end
-            table.insert(res, foo)
-        end
-        return res
-    end
-
-    -- print(vim.inspect(installed_parsers()))
-    -- print(#installed_parsers())
-
     -- TODO: feb'26 - maybe check out https://github.com/Corn207/ts-query-loader.nvim plugin instead
         -- or use https://github.com/xaaha/dev-env/blob/main/nvim/.config/nvim/lua/xaaha/plugins/lsp-nvim-treesitter.lua
     vim.api.nvim_create_autocmd('FileType', {
         pattern = '*',
-        callback = function(event) 
+        callback = function(event)
             if vim.bo.filetype == 'notify' then return end
+            if vim.bo.filetype == 'noice' then return end
             if vim.bo.filetype == 'fzf' then return end
+            -- print(vim.treesitter.language.get_lang(event.match) or event.match)
 
-            -- local lang = vim.treesitter.language.get_lang(event.match) or event.match
-            -- print(lang)
+            -- require('nvim-treesitter').install('all')  -- NOTE: run this first time vim install, or :TSInstall all
 
             local buf_num = event.buf
             if is_largefile(buf_num) then 
@@ -859,12 +834,13 @@ LoadTreeSitter = function()
                 return
             end
 
+            -- vim.treesitter.start()
             local ok, _ = pcall(vim.treesitter.start)
             if ok then
                 vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
                 vim.wo[0][0].foldmethod = 'expr'
-                -- print(buf_num)
 
+                -- TODO: skip if filetype = groovy, b/c Jenkinsfiles dont work well
                 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end
         end,
@@ -872,6 +848,7 @@ LoadTreeSitter = function()
 
     -- TODO: jan'26 - for incremental selection on main branch use flash https://github.com/folke/flash.nvim
         -- also read https://www.reddit.com/r/neovim/comments/1nwvl85/neovim_incremental_selection_using_treesitter/
+        -- my keymap: `gn` init, `<TAB>` node increment, `<c-k>` node decrement, '<CR>' scope increment
 
     vim.api.nvim_create_autocmd('FileType', {
         pattern = 'markdown',
@@ -881,66 +858,6 @@ LoadTreeSitter = function()
             vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
         end,
     })
-end
-
-LoadTreeSitterOld = function()
-    -- require("nvim-treesitter.install").prefer_git = true
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = "all",   -- A list of parser names, or "all"
-        ignore_install = { "ipkg" },
-        sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
-
-        highlight = {
-            enable = true,     -- `false` will disable the whole extension
-            -- NOTE: parsers names are not the filetype name. (for `tex` filetype, include `latex`, as this is the name of the parser)
-            -- NOTE: oct2024 - tested on 36MB json file, opening file took ~35sec, with OR without disabling TS and vim-regex
-            disable = function(lang, buf)
-                local max_filesize = 20 * 1024 * 1024 -- 20 MB 
-                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then
-                    return true
-                end
-            end,
-
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = 'gn',
-                node_incremental = '<TAB>',
-                -- node_decremental = '<S-TAB>',
-                node_decremental = '<c-k>',
-                scope_incremental = '<CR>',
-            },
-        },
-    }
-
-    -- june'23 treesitter supports groovy, but wont fold on Jenkinsfiles
-    vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'groovy',
-        callback = function()
-            vim.opt_local.foldmethod="indent"
-            vim.opt_local.foldexpr=""
-        end
-    })
-
-    -- hightlight hyperlinks that are in regular paragraph/text regions in markdown files
-    -- jun'24: placing this autocmd outside this loadtreesitter func fails, autocommand runs but vim.cmd.syntax doesnt do anything...
-        -- might be similar to the json comment autocommand issue, i switched from callback to command and it worked
-    vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'markdown',
-        desc = 'highlight hyperlinks in regular paragraph/text of markdown',
-        callback = function()
-            vim.cmd.highlight("link mkdInlineURL htmlLink")
-            vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
-        end,
-    })
-
-    vim.opt.foldmethod='expr'
-    vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 end
 
 ------------------------- NOICE -----------------------------------------------
@@ -1410,11 +1327,11 @@ LoadNvimJava = function()
     end
 
     require('java').setup({
-          java_debug_adapter = { enable = false },
+          -- java_debug_adapter = { enable = false },
     })
 
     vim.lsp.config('jdtls', { 
-        cmd = { vim.env.HOME .. '/bin/jdtls', 'mason' },
+        -- cmd = { vim.env.HOME .. '/bin/jdtls', 'mason' },
         -- root_dir = vim.fs.root(0, {".git", "mvnw", "gradlew", "pom.xml"}),
         -- autostart = LSPAutoStartEnable,
         settings = JDTLSSettings,

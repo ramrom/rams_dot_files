@@ -10,6 +10,8 @@
 - AWS WAF - web access firewall (firewall, bot detection, other rules)
 ### CONCEPTS
 - organization - contains many accounts
+
+## IAM
 - IAM(identity and access management) - https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
     - IAM vs STS(security token service) - STS issues the creds
     - ARN(amazon resource name) structure looks like: `arn:partition:service:region:account:resource`
@@ -18,6 +20,12 @@
     - 3 types of policies: session, identity, resource
     - when applied in context of an identity, session, and resources, define the permissions
     - role simply is "what can I do?", so permissions
+
+## NETWORK
+### SUBNET
+- a VPC has many subnets
+- each subnet is a portion of the VPC's total address range
+- a subnet must reside within an AZ
 
 ## TECH
 - Aurora - their own complex relation database system
