@@ -43,6 +43,9 @@
         - `~/.m2/settings.xml` might specify a repository
     - a `mirror` is a repository that syncs with another repo, usually more remote repo
 ### COMMANDS
+- `mvn package` - compile and generate release artifact
+- `mvn package -DskipTests` - compile and generate release artifact without running tests
+- `mvn install` - compile and generate release artifact and move to install locations
 - `mvn --version` - show maven version, show home bin, show current java version
 - `mvn dependency:tree` - show full dep tree maven builds
     - `mvn dependency:tree -Dincludes=some.groupname:artifactname` - show tree of specific artifact(s)

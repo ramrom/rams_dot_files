@@ -17,7 +17,7 @@
     - introduced `record`(similar to scala case class)
 - java16, mar2021 - remove ahead-of-time compilation, Graal JIT, source moved to github from mercurial
 - java17, sept2021, LTS - better pattern matching
-- java21, sept2023, LTS, end at sept2031
+- java21, sept2023, LTS, end at sept2031 - added virtual(lightweight) threads
 ### OTHER
 - The main difference between Java EOL and extended support is that EOL software is no longer supported by the developer
     - extended support software still receives critical security patches and some updates
@@ -1078,6 +1078,16 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - `@Controller` - a bean that handles web requests, e.g. in MVC
     - `@RequestMapping` - used to map a web request to a method in a controller
     - `@Transactional` - used to mark a method as transactional, e.g. in a service
+- Actuator plugin - expose various metrics/state of application
+    - add `spring-boot-starter-actuator` artifact
+    - all endpoints at `/actuator/`
+    - `/actuator/health` and `/actuator/info` endpoints on by default
+    - other notable: 
+        - `env` -> environment properties including environment variables
+        - `bean` -> show defined beans, `loggers`, `metrics`
+    - adding to application.properties
+        - `management.endpoints.web.exposure.include=health,info,env,beans,metrics,loggers`
+        - exclusion - `management.endpoints.web.exposure.exclude=env,heapdump,loggers,shutdown`
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
