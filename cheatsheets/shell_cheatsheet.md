@@ -169,6 +169,12 @@ function foo-bar() {
 - `SHLVL` - bash uses this to indicate number of nested bash shells we're in
 - `SHELL` - many shells set this to the location of the shell bin this is, e.g. `/bin/bash` or `/bin/zsh`
 
+## FUNCTIONS
+- are reall just macros
+- naming conventions
+    - starting with an underscore e.g. `_foo` indicates it's private to script
+    - starting with an double underscore e.g. `__foo` indicates it's even more private, only other internal funcs can call it
+
 
 ## SHELL PROGRAMMING
 ```sh
