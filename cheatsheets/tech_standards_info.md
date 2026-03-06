@@ -464,6 +464,10 @@
 - grafana - a FOSS data visualization app, has a backend and often is connected to time-series dbs like graphite or influxDB
     - kibana is very similar product, fewer features, and is designed only for elasticcache backend
     - grafana's UI is designed from kibana version 3
+- OTEL - opentelemetry - https://opentelemetry.io/
+    - open standard for colelcting metrics, logs, traces
+    - StatsD only does metrics, StatsD is UDP, OTEL is generally gRPC/TCP(so higher overhead)
+    - OTEL can accept StatsD data
 
 ## LANGUAGES/FRAMEWORKS
 - WASM - web assembly, supported my most browsers, it's a compile target supported by rust, python, kotlin, and many more

@@ -172,6 +172,7 @@ alias gosrstdlib='cd ~/go/src/github.com/golang/go'
 alias jsv='jshell --feedback verbose'
 
 # SDKMAN
+alias java25='sdk use java 25.0.2-tem'
 alias java21='sdk use java 21.0.2-tem'
 alias java17zulu='sdk use java 17.0.9.fx-zulu'
 alias java17='sdk use java 17.0.6-tem'

@@ -133,6 +133,10 @@
 ### JDTLS
 - july'25 osx brew install and linux install (jdtls bin) both use same python script to start the jdtls jar
     - if `-data` dir not sepecified, uses `tempfile.gettempdir` python method - this looks at `$TMPDIR` to set data dir
+- feb'26 - doesnt handle kotlin files
+### KOTLIN LANGUAGE SERVER
+- https://github.com/fwcd/kotlin-language-server - deprecated, use jetbrains official one
+- official by jetbrains - https://github.com/Kotlin/kotlin-lsp
 
 ## IVY
 - [apache ivy](https://ant.apache.org/ivy/) is a dependency fetching and management tool
