@@ -14,6 +14,7 @@ fun sum(a: Int, b: Int): Int {
     return a + b
 }
 
+
 // single expression function, return type is inferred
 fun sum(a: Int, b: Int) = a + b
 
@@ -41,6 +42,13 @@ val z = "dude"  // type is inferred
 - `?` after a type means variable can contain a null
     - by default a variable cannot contain null
     - e.g. `var s: String? = "abc"` means s can be null
+```kotlin
+// If user is null, the result is "Unknown City".
+// If user is not null but address is null, the result is still "Unknown City".
+// Only if both user and address are non-null will city be assigned the actual city value.
+val user: User? = getUser()
+val city: String = user?.address?.city ?: "Unknown City"
+```
 
 
 ## TYPES
