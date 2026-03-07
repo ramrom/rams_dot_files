@@ -823,6 +823,7 @@ LoadTreeSitter = function()
             if vim.bo.filetype == 'notify' then return end
             if vim.bo.filetype == 'noice' then return end
             if vim.bo.filetype == 'fzf' then return end
+            if vim.bo.filetype == 'csv' then return end  -- mar26 - syn highlight colorizes columns, treesitter doesnt
             -- print(vim.treesitter.language.get_lang(event.match) or event.match)
 
             -- require('nvim-treesitter').install('all')  -- NOTE: run this first time vim install, or :TSInstall all
