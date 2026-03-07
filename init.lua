@@ -804,9 +804,9 @@ LoadNvimTree = function() require("nvim-tree").setup(NvimTreeConfig) end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 -- NOTE: if TS is disabled for a buffer, old vim regex highlighting turns on
--- vim.cmd(':syntax off') 
-
 LoadTreeSitter = function()
+    -- require('nvim-treesitter').install('all')  -- NOTE: run this first time vim install, or :TSInstall all
+
     local is_largefile = function(buf)
         local max_filesize = 20 * 1024 * 1024 -- 20 MB 
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -823,10 +823,12 @@ LoadTreeSitter = function()
             if vim.bo.filetype == 'notify' then return end
             if vim.bo.filetype == 'noice' then return end
             if vim.bo.filetype == 'fzf' then return end
+
+            if os.time() > 1772860228 + 60*60*24*365 then trynotify("TREESITTER CHECK CSV!", "warn") end -- after ~ mar6-27
             if vim.bo.filetype == 'csv' then return end  -- mar26 - syn highlight colorizes columns, treesitter doesnt
+
             -- print(vim.treesitter.language.get_lang(event.match) or event.match)
 
-            -- require('nvim-treesitter').install('all')  -- NOTE: run this first time vim install, or :TSInstall all
 
             local buf_num = event.buf
             if is_largefile(buf_num) then 
@@ -835,7 +837,6 @@ LoadTreeSitter = function()
                 return
             end
 
-            -- vim.treesitter.start()
             local ok, _ = pcall(vim.treesitter.start)
             if ok then
                 vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'

@@ -3,7 +3,7 @@ print('****** LOADING RAMS LUA HELPERS *************')
 -- HOW TO LOAD: in the same dir in lua shell, `require('ram-lua-helpers')`
 
 -- table pretty print
-function tpp (tbl, indent)
+function tpp(tbl, indent)
     if not indent then indent = 0 end
     local toprint = string.rep(" ", indent) .. "{\r\n"
     indent = indent + 2 
