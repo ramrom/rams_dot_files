@@ -526,6 +526,8 @@ pulsemixer - volume manager with pulseaudio
     - hdb1 - 1st partition on 2nd IDE drive
 - `/dev/rtc` - Real-Time-Clock, represents the hardware clock, often a battery with a quartz crytal oscillator
     - system clock device is software and often uses the RTC clock when OS boots up
+- `/dev/tty` - always refers to controlling terminal
+    - even if process's STD IN/OUT is redirected can always refer to controlling terminal using this special file
 ### SPECIAL DEVICES
 - /dev/null   - write output to this device to throw it away
 - /dev/zero   - obtain null characters from this device

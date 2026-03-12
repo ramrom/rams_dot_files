@@ -170,8 +170,9 @@
 - `Copilot` command
 ### PLENARY.NVIM 
 - core set of neovim lua libs
-- provides an async framework, it uses lua coroutines and libuv for async IO
-    - main benefit is instead of arrowhead callback chaining API of `lib.uv`, it gives u a flat imperative async/await style
+- provides an async framework around libuv
+    - main benefit is instead of arrowhead callback chaining API of `lib.uv`
+    - it uses lua coroutines to give flat imperative async/await style
 - `plenary.job` lets you run shell command in async job
     - `sync()` to block main thread, or `start()` for async/background
 ### LSP
