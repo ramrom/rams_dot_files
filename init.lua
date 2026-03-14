@@ -1593,6 +1593,7 @@ vim.keymap.set('n', '<leader>cw',function() require('fzf-lua').files({cwd=vim.en
 vim.keymap.set('n', '<leader>ca', '<cmd>tabnew $MY_WORK_TODO<cr>', { desc = "open work TODO in-progress in new tab"})
 vim.keymap.set('n', '<leader>cS', '<cmd>vsplit ~/tmp/scratch.md<cr>')
 vim.keymap.set('n', '<leader>cs', '<cmd>tabnew ~/tmp/scratch.md<cr>')
+vim.keymap.set('n', '<leader>cp', '<cmd>tabnew ~/bin/playshell<cr>')
 vim.keymap.set('n', '<leader>ci', '<cmd>Inspect<cr>', { desc = "treesitter Inspect" })
 
 -------------- OTHER
