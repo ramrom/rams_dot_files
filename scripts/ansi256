@@ -21,25 +21,28 @@ ansi16_name () {
 
 usage () { 
     echo "Usage: ansi256 [ -h(help) ] [ -f FOREGROUND_COLOR ] [ -b BACKGROUND_COLOR ]"
-    echo "               [ -i(italics) ] [ -u(underline) ] [ -s(strikethrough) ] [ -r(no reset) ] [ -e(bold) ] [ -n(inverse) ]";
+    echo "               [ -i(italics) ] [ -u(underline) ] [ -s(strikethrough) ] [ -r(no reset) ]";
+    echo "               [ -d(dim) ] [ -e(bold) ] [ -n(inverse) ]";
 }
 
 # DEFAULTS
 maybereset="\033[0m";
 maybestrike="";
 maybebld="";
+maybedim="";
 maybeund="";
 maybeit="";
 maybeinverse="";
 lbg=016;
 lfg=007;
 
-while getopts 'f:b:heiusnr' x; do
+while getopts 'f:b:heiusnrd' x; do
     case $x in
         f) lfg=$(ansi16_name "$OPTARG") ;;
         b) lbg=$(ansi16_name "$OPTARG") ;;
         h) usage && exit 1 ;;
         i) maybeit="\033[3m" ;;
+        d) maybedim="\033[2m" ;;
         e) maybebld="\033[1m" ;;
         u) maybeund="\033[4m" ;;
         s) maybestrike="\033[9m" ;;
@@ -51,4 +54,4 @@ done
 shift $(($OPTIND - 1))
 
 # NOTE: zsh, osx /bin/sh, dash always expand escape sequences, bash does not and needs -e option
-echo "${maybeinverse}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
+echo "${maybeinverse}${maybedim}${maybebld}${maybestrike}${maybeund}${maybeit}\033[48;5;${lbg};38;5;${lfg}m${1}${maybereset}"
