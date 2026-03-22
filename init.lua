@@ -210,12 +210,12 @@ end
 
 ToggleFoldMethod = function()
     if vim.o.foldmethod == "indent" then
-        vim.o.foldmethod="expr"
-        vim.o.foldexpr="nvim_treesitter#foldexpr()"
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo[0][0].foldmethod = 'expr'
         print("fold method: treesitter expression")
     else
-        vim.o.foldmethod="indent"
-        vim.o.foldexpr=""
+        vim.wo[0][0].foldexpr = ''
+        vim.wo[0][0].foldmethod = 'indent'
         print("fold method: indent")
     end
 end
