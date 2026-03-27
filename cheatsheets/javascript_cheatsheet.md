@@ -47,6 +47,20 @@
  - `await` function is syntax sugar to use when calling a async function in another async function
  - much nicer to read and handle promises and looks like synchronous code
 
+## ANGULAR
+- "AngularJS" - refers to old framewor, version 1.x , and is EOL
+- "Angular" refers to 2.x
+- Zone.js - core mechanism for automatic change detection
+    - monkey-patches browser APIs like `setTimeout`, `Promise`, and event listeners
+    - when async events finishes, `NgZone` service notified, which triggers check for updates across entire component tree
+    - each Zone is a execution context that persists across async tasks
+    - expensive, _every_ async event triggered a change detection cycle for whole app
+- Zoneless Angular
+    - replaces Zone.js
+    - much faster, entire component tree is not scanned
+    - signals - fine grained reactvity
+    - zoneless mode angular v20+, use DOM events, signal updates, async pipe for change detection
+
 ## LIBS
 - [jquery](https://jquery.com/) - manipulate HTML DOM
 - [chartjs](https://github.com/chartjs/Chart.js) - popular charting lib
