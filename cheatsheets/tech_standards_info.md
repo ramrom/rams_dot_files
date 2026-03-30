@@ -822,8 +822,10 @@
 - magnetic stripes stores data in plaintext, including FN, LN, acc #, expiration date, security code, same data every transaction
 - new EMVs (embedded chips) in cards, started in 2015, generate and exchange one time unique code for each transaction
     - EMV -> stands for europay, mastercard, visa (the 3 major networks)
-- NFC - also "contactless" like EMV
+- NFC - near field communication
     - NFC and EMV both use RF protocol, ISO 14443 B
+    - reader and card use magnetic induction to exchange information
+    - good b/c it's short range, problem with RFID is it's long range
 
 ## AUTHENTICATION
 - OOBA - out-of-band authentication - authenticate from a different band

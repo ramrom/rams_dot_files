@@ -1311,6 +1311,10 @@ JavaInstalls = {
         name = "JavaSE-21",
         path = "~/.sdkman/candidates/java/21.0.2-tem"
     },
+    {
+        name = "JavaSE-25",
+        path = "~/.sdkman/candidates/java/25.0.2-tem"
+    },
 }
 
 JDTLSSettings = {
