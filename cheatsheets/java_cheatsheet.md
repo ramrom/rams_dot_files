@@ -1073,8 +1073,6 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - are generally interpretted at runtime
         - e.g. `@Autowired` used to inject bean into another bean but if the bean is not found a runtime exception is thrown
     - `@Component` - a bean that's DI'd
-    - `@Entity` - a bean that is persisted to a database, e.g. JPA entity
-    - `@Table` - used to specify the table name for a JPA entity
     - `@Controller` - a bean that handles web requests, e.g. in MVC
     - `@RequestMapping` - used to map a web request to a method in a controller
     - `@Transactional` - used to mark a method as transactional, e.g. in a service
@@ -1088,6 +1086,16 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - adding to application.properties
         - `management.endpoints.web.exposure.include=health,info,env,beans,metrics,loggers`
         - exclusion - `management.endpoints.web.exposure.exclude=env,heapdump,loggers,shutdown`
+### JPA
+- Jakarta Persistence API, standard API for defining ORMs in java
+- formerly known as Java Persistence API, renamed to Jakarta in 2019
+- Annotations to define things
+    - `@Entity` - a bean that is persisted to a database, e.g. JPA entity
+    - `@Table` - used to specify the table name for a JPA entity
+        - fields on table defined with things like `@Id`
+    - relationships defined with `@OneToMany` or `@ManyToOne`
+- Hibernate is an implementation of the JPA, other like EclipseLink exist
+    - both compatible with JPA 3.2
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations
