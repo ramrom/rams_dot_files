@@ -103,6 +103,7 @@
 
 ## LSP
 - language servers - https://langserver.org/
+    - https://microsoft.github.io/language-server-protocol/
     - introduced in 2016 for microsoft VSCode, then made an open standard
 - uses JSON RPC for message passing b/w client and server
 - DAP (debug adapter protcol) - abstracts debugging tool, complementary to LSP
@@ -110,13 +111,15 @@
 - extension: decoration protocol, for displaying non-editable text
     - e.g. inlay hints, dignostic virtual text
 ### BSP
-- build server protocol, abstracts the build tool, complementary to LSP
+- BUILD SERVER PROTOCOL, abstracts the build tool, complementary to LSP
 - see https://build-server-protocol.github.io/
 - LSP server can be a _client_ to build server using BSP to talk to it
 - editor/lsp-client (LSP)-> language server (BSP)-> build tool
     - editor sends file changed event in LSP, lang serv says compile in BSP to build tool, bld tool compiles and returns diagnostic
 - bloop was first build server to implement BSP, scala metals lang server uses BSP to talk to bloop
     - sbt adds BSP support in 1.4.0
+### DAP
+- DEBUG ADAPTER PROTOCOL - https://microsoft.github.io/debug-adapter-protocol//
 ### SCALA METALS 
 - a language server built on top of [scala meta library](https://scalameta.org/), METALS = META(scalameta) + LS(language server)
 - scalameta constructs a semanticDB(a open specification), which powers gotodef, findrefs, etc

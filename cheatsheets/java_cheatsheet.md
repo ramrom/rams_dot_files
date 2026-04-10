@@ -1092,8 +1092,9 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - Annotations to define things
     - `@Entity` - a bean that is persisted to a database, e.g. JPA entity
     - `@Table` - used to specify the table name for a JPA entity
-        - fields on table defined with things like `@Id`
+        - fields on table defined with things like `@Id` `@Column`
     - relationships defined with `@OneToMany` or `@ManyToOne`
+    - `Criteria` to build queries, under the hood it builds an AST, which is converted to SQL later
 - Hibernate is an implementation of the JPA, other like EclipseLink exist
     - both compatible with JPA 3.2
 ### JUNIT

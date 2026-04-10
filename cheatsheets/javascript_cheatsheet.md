@@ -46,6 +46,16 @@
  - `async` keyword that defines a function that returns a promise
  - `await` function is syntax sugar to use when calling a async function in another async function
  - much nicer to read and handle promises and looks like synchronous code
+### TIMERS
+- `setTimeout` and `setInterval` are async non-blocking scheduler methods that are built-in to javascript
+- `setTimeout` 
+    - run a function after a time delay
+    - e.g. `let timerId = setTimeout(my_timed_func, delay, param1, param2...)`
+    - can cancel with `Window.clearTimeout()`
+- `setInterval` 
+    - run a function every x interval
+    - e.g. `let intervalId = setInterval(my_repeating_func, interval, param1, param2...)`
+    - can canel with `Window.clearInterval()`
 
 ## ANGULAR
 - "AngularJS" - refers to old framewor, version 1.x , and is EOL

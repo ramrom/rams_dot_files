@@ -423,7 +423,11 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - shift-click - open link in new window
 - space/space-shift - scroll up/down page
 
-## WINE-GRAPHICS
+## WINE
+- WINE = WINE is not an an emulator
+- wine11 introduces use of linux kernel driver NTSync, in kernel 6.14+, via `/dev/ntsync`
+    - this drastically improves multi-threaded concurrency, so cpu-bound apps (many games) from windows will be way faster
+### WINE-GRAPHICS
 - protonDB, open source configuration of wine (and dxvk) settings to run windows games, developed by steam
 - steam play, lets you play windows only games in linux steam, uses protonDB
 - lutris, lets you play windows only games (including steam installs) and has wine configurations configured
@@ -500,6 +504,10 @@ pulsemixer - volume manager with pulseaudio
 - can be dynamically loaded/unloaded from kernel at runtime
 - great for easily removing/adding device drivers without rebooting
     - so needed for things like usb storage drives, usb bluetooth devices, basically any usb dongle device
+- NTSync 
+    - provides native, kernel-level emulation of windows sync primitives (events, semaphores, mutexes)
+    - NTSync allows Wine to directly talk to kernel via `/dev/ntsync`
+    - previously Fsync/Esync would be used
 
 ## DEVICES
 - kernel drivers interact directly with hardware

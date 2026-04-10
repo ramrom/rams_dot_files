@@ -1182,7 +1182,7 @@ LoadScalaMetals = function()
 
     local is17 = ValidateJavaVersion("17")
     local is11 = ValidateJavaVersion("11")
-    if (not (is17 or is11)) then print("DID NOT DETECT JAVA " .. "17 or 11" .. " in JAVA_HOME, aborting loading metals"); return end
+    if (not (is17 or is11)) then print("DID NOT DETECT JAVA 17 or 11 in JAVA_HOME, aborting loading metals"); return end
 
     metals_config.settings = {
         -- NOTE: per one metals log, scala 2.13.6 last metals support 1.3.0, but fails when i try no compliaton :(
