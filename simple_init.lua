@@ -470,8 +470,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
-        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+    { 'nvim-treesitter/nvim-treesitter', branch = 'master', config = LoadTreeSitter, lazy = false,
+        build = ":TSUpdate" },
+        -- build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
     -- { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitterV12, cond = not vim.env.NO_TREESITTER,
     --     build = ":TSUpdate", lazy = false },
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
