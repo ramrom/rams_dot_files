@@ -65,9 +65,11 @@ auth() {
 
     PORT=8888
 
-    REDIRECT_URI=http%3A%2F%2Flocalhost%3A${PORT}%2Fcallback
+    REDIRECT_URI=https%3A%2F%2Flocalhost%3A${PORT}%2Fcallback
+    REDIRECT_URI=https%3A%2F%2F127.0.0.1%3A${PORT}%2Fcallback
 
-    AUTH_ENDPOINT=https://accounts.spotify.com/authorize/?response_type=code\&client_id=$CLIENT_ID\&redirect_uri=$REDIRECT_URI
+    AUTH_ENDPOINT=https://accounts.spotify.com/authorize/?response_type=code\&client_id=${CLIENT_ID}\&redirect_uri=${REDIRECT_URI}
+    # https://accounts.spotify.com/authorize/?response_type=code&client_id=21ada02af4314c2a84312fd53c430c1e&redirect_uri=https%3A%2F%2F127.0.0.1%3A8888%2Fcallback
 
     # Set scopes
     SCOPES="playlist-read-private user-read-private user-library-read user-read-recently-played"
@@ -78,20 +80,22 @@ auth() {
     fi
 
     # NOTE: calling GET authorize with curl(xh) results in redirect to account.spotify.com with continue
-    [ -n "$verbose" ] && echo "AUTH ENDPOINT:\n$AUTH_ENDPOINT"
+    [ -n "$VERBOSE" ] && echo "AUTH ENDPOINT:\n$AUTH_ENDPOINT"
+    exit
     open $AUTH_ENDPOINT             # open the oauth flow endpoint in a browser(hopefully)
     echo
 
     # Now the user gets redirected to our endpoint
     # Grab token and close browser window
     RESPONSE=$(echo "HTTP/1.1 200 OK\nAccess-Control-Allow-Origin:*\nContent-Length:65\n\n<html><script>open(location, '_self').close();</script></html>\n" | nc -l -C $PORT)
+    # RESPONSE=$(echo "HTTP/1.1 200 OK\nAccess-Control-Allow-Origin:*\nContent-Length:65\n\n<html><script>open(location, '_self').close();</script></html>\n" | ncat --ssl -l $PORT)
 
-    [ -n "$verbose" ] && echo && echo "AUTHORIZATION ENDPOINT RESPONSE:\n$RESPONSE" && echo
+    [ -n "$VERBOSE" ] && echo && echo "AUTHORIZATION ENDPOINT RESPONSE:\n$RESPONSE" && echo
 
     CODE=$(echo "$RESPONSE" | grep GET | cut -d' ' -f 2 | cut -d'=' -f 2)
-    [ -n "$verbose" ] && echo && echo "AUTHORIZATION CODE:\n$CODE" && echo
+    [ -n "$VERBOSE" ] && echo && echo "AUTHORIZATION CODE:\n$CODE" && echo
 
-    XH_REDIRECT_URI=http://localhost:${PORT}/callback
+    XH_REDIRECT_URI=https://localhost:${PORT}/callback
     xh -f -v -d -o $SPOTIFY_TOKEN_FILE POST https://accounts.spotify.com/api/token -a ${CLIENT_ID}:${CLIENT_SECRET} \
         grant_type==authorization_code code==${CODE} redirect_uri==${XH_REDIRECT_URI}
 }

@@ -347,6 +347,35 @@ LoadLuaLine = function()
 end
 
 ---------------------- NVIM-TREE CONFIG -------------------------------
+CycleNvimTreeSortBy = function()
+    if NvimTreeConfig.sort.sorter == 'name' then
+        NvimTreeConfig.sort.sorter = 'extension'
+        print("nvim-tree: sorting by extension")
+    elseif NvimTreeConfig.sort.sorter == 'extension' then
+        NvimTreeConfig.sort.sorter = 'modification_time'
+        print("nvim-tree: sorting by modification time")
+    else
+        NvimTreeConfig.sort.sorter = 'name'
+        print("nvim-tree: sorting by name")
+    end
+
+    require('nvim-tree').setup(NvimTreeConfig)
+    vim.cmd 'NvimTreeFindFileToggle'
+end
+
+NvimTreeDynamicWidthEnabled = true
+
+ToggleNvimTreeDynamicWidth = function()
+    if NvimTreeDynamicWidthEnabled then
+        require("nvim-tree.api").tree.resize({ width = { min = 30, max = 30, padding = 1 }})
+        print("DISABLE nvim-tree dynamic width (setting min=30 max=30)")
+    else
+        require("nvim-tree.api").tree.resize({ width = { min = 10, max = -1, padding = 1 }})
+        print("ENABLE nvim-tree dynamic width (setting min=10 max=-1(unbounded))")
+    end
+
+    NvimTreeDynamicWidthEnabled = not NvimTreeDynamicWidthEnabled
+end
 
 NvimTreeConfig = {
     on_attach = function(bufnr)
@@ -400,6 +429,10 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
+vim.keymap.set('n', '<leader>N', '<cmd>NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>n', '<cmd>NvimTreeFindFileToggle<CR>')
+vim.keymap.set('n', '<leader>wd', ToggleNvimTreeDynamicWidth, { desc = 'toggle nvim-tree width b/w dynamic and static size' })
+vim.keymap.set('n', '<leader>wt', CycleNvimTreeSortBy, { desc = 'cycle nvim-tree sortby b/w name, mod time, and extension' })
 
 ---- SMART QUITTING
 vim.keymap.set("n", "<leader>q", TabBufQuit, { desc = "smart quit" })
