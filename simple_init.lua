@@ -180,6 +180,7 @@ LoadTreeSitter = function()
     require'nvim-treesitter.configs'.setup {
         ensure_installed = "all",   -- A list of parser names, or "all"
         sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
+        ignore_install = { "ipkg", "scfg", "swift", "latex", "ocamllex", "teal", "unison", "mlir" },
 
         highlight = {
             enable = true,     -- `false` will isable the whole extension
@@ -460,7 +461,6 @@ vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc
 
 
 ---------------------------- PLUGINS --------------------------------------
-print("starting simple config init")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -487,5 +487,3 @@ require("lazy").setup({
     --- fuzzy find
     { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 })
-
-print("simple init config complete")
