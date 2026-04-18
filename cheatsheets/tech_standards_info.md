@@ -787,6 +787,16 @@
 ### OTHER
 - signal protocol - https://en.wikipedia.org/wiki/Signal_Protocol , end-to-end encryption for voice and text
     - used by Signal app, whatsapp, google messages uses it with RCS, messenger and skype offer it as a privacy option
+- RDP - remote desktop protocol
+    - first a propietary remote graphica/desktop protocol created by microsoft
+    - good FOSS RDP client rdesktop https://en.wikipedia.org/wiki/Rdesktop
+    - is lower bandwidth and generally faster than VNC, optimized for windows
+    - built in encryption and network level auth
+- VNC - virtual network computing
+    - a remote graphical/desktop sharing protocol like RDP, but far more cross-platform
+    - uses RFB(remote frame buffer) protocol under the hood
+    - mirrors physical screens
+    - no inherent security, needs to be done on SSH tunnel or TLS connection
 
 ## NETWORK FILESYSTEM PROTOCOLS
 - SSHFS uses SFTP

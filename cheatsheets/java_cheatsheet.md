@@ -1060,6 +1060,7 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
 - reactive(using reactor) projects - spring webflux, spring data, spring cloud gateway
 - uses IoC(inversion of control) - IoC container is main component of framework, main methods: dependency injection, dependecy lookup
 - Sprint Boot - convention-over-config set of tools for building applications/services
+    - unlike framework it includes an embedde server and packages to a JAR (versus WAR), includes actuator
 - Sprint Cloud - tool for configuring communication b/w services, service discovery, configuration
 - other major Spring modules/libs: MVC framework, data access framework, integration framework, websockets, webflux
 - SPRING BOOT
@@ -1097,6 +1098,9 @@ Stream.of(1,2,3,4).skip(1).limit(2).forEach(System.out::println);      // this p
     - `Criteria` to build queries, under the hood it builds an AST, which is converted to SQL later
 - Hibernate is an implementation of the JPA, other like EclipseLink exist
     - both compatible with JPA 3.2
+### DATABASE STUFF
+- JDBC - java database connectivity - driver to manage a db connection, standard API for app to talk to db
+- hikari - a library that maintains a database connection pool
 ### JUNIT
 - version 4 (release 2006)
     - tagging: uses `Categories` and other annotations

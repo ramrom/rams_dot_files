@@ -71,7 +71,7 @@ ssh -Y foouser@foo.com
 ssh -X foouser@foo.com  # -X is done without X11 authority
 
 # SOCKS PROXY
-# connect to remote server and create a locak SOCKS5 on local port 1234
+# connect to remote server and create a local SOCKS5 on local port 1234
 ssh -D 1234 foouser@yarserver
 # this curl command will use the socks5 proxy to make http request
 curl -x socks5h://127.0.0.1:1234 https://google.com

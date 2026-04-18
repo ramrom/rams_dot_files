@@ -167,6 +167,9 @@ esc - return to calender grid from event details
 - google photos: how to get a album(in gallery) to show up in google photos backup&sync folder list
     - https://forums.androidcentral.com/google-nexus-6/696364-google-photos-device-folders-missing.html
     - use a file manager(e.g. astro) to move the folder from `DCIM` folder to `Pictures` folder
+- grapheneOS and LineageOS are popular forks of android
+- F-Droid is a popular app repo alternative to google play, only has FOSS apps
+    - so doesnt have whatsapp, facebook, netflix, chase, etc
 
 ## WEAROS
 - wearOS 3.0 is joint OS that combines google's wearOS and samsung Tizen OS
