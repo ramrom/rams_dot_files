@@ -1666,7 +1666,7 @@ SetLSPKeymaps = function()
         { desc = "print log path and copy to sys clipboard" })
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
     vim.keymap.set("n", "gli", "<cmd>:checkhealth vim.lsp<CR>")
-    vim.keymap.set("n", "glS", "<cmd>:lsp disable<CR>")
+    vim.keymap.set("n", "glS", "<cmd>:lsp disable<CR>", { desc = "disable all LSP servers" })
     vim.keymap.set("n", "glh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
         {desc = "toggle inlay hints"})
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
