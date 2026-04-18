@@ -844,13 +844,38 @@ LoadTreeSitter = function()
 
                 -- TODO: skip if filetype = groovy, b/c Jenkinsfiles dont work well
                 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+
+                --------------------- INCREMENTAL SELECTION ----------------------
+                -- NOTE: old keymap: `gn` init, `<TAB>` node increment, `<c-k>` node decrement, '<CR>' scope increment
+                -- TODO: jan'26 - maybe use flash for it https://github.com/folke/flash.nvim
+                vim.keymap.set({ 'x' }, '<leader>d', function()
+                    require 'vim.treesitter._select'.select_prev(vim.v.count1)
+                end, { desc = 'Select previous node' })
+
+                vim.keymap.set({ 'x' }, '<leader>f', function()
+                    require 'vim.treesitter._select'.select_next(vim.v.count1)
+                end, { desc = 'Select next node' })
+
+                vim.keymap.set({ "n", "x", "o" }, "<TAB>", function()
+                    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+                        require("vim.treesitter._select").select_parent(vim.v.count1)
+                    else
+                        vim.lsp.buf.selection_range(vim.v.count1)
+                    end
+                end, { desc = "Select parent treesitter node or outer incremental lsp selections" })
+
+                vim.keymap.set({ "n", "x", "o" }, "<C-k>", function()
+                    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+                        require("vim.treesitter._select").select_child(vim.v.count1)
+                    else
+                        vim.lsp.buf.selection_range(-vim.v.count1)
+                    end
+                end, { desc = "Select child treesitter node or inner incremental lsp selections" })
+
             end
         end,
     })
-
-    -- TODO: jan'26 - for incremental selection on main branch use flash https://github.com/folke/flash.nvim
-        -- also read https://www.reddit.com/r/neovim/comments/1nwvl85/neovim_incremental_selection_using_treesitter/
-        -- my keymap: `gn` init, `<TAB>` node increment, `<c-k>` node decrement, '<CR>' scope increment
 
     vim.api.nvim_create_autocmd('FileType', {
         pattern = 'markdown',
