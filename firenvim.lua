@@ -22,32 +22,86 @@ end
 
 ---------------------- TREE-SITTER CONFIG -------------------------------
 LoadTreeSitter = function()
-    require'nvim-treesitter.configs'.setup {
-        ensure_installed = "all",   -- A list of parser names, or "all"
-        sync_install = false,       -- Install parsers synchronously (only applied to `ensure_installed`)
-        ignore_install = { "ipkg" },
+    require('nvim-treesitter').install('all')  -- NOTE: run this first time vim install, or :TSInstall all
 
-        highlight = {
-            enable = true,     -- `false` will isable the whole extension
+    local is_largefile = function(buf)
+        local max_filesize = 20 * 1024 * 1024 -- 20 MB 
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end
 
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- additional_vim_regex_highlighting = { "markdown" },
-            additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = 'gn',
-                node_incremental = '<TAB>',
-                node_decremental = '<S-TAB>',
-                scope_incremental = '<CR>',
-            },
-        },
-    }
+    -- TODO: feb'26 - maybe check out https://github.com/Corn207/ts-query-loader.nvim plugin instead
+        -- or use https://github.com/xaaha/dev-env/blob/main/nvim/.config/nvim/lua/xaaha/plugins/lsp-nvim-treesitter.lua
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function(event)
+            if vim.bo.filetype == 'notify' then return end
+            if vim.bo.filetype == 'noice' then return end
+            if vim.bo.filetype == 'fzf' then return end
 
-    vim.opt.foldmethod='expr'
-    vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+            if os.time() > 1772860228 + 60*60*24*365 then trynotify("TREESITTER CHECK CSV!", "warn") end -- after ~ mar6-27
+            if vim.bo.filetype == 'csv' then return end  -- mar26 - syn highlight colorizes columns, treesitter doesnt
+
+            -- print(vim.treesitter.language.get_lang(event.match) or event.match)
+
+
+            local buf_num = event.buf
+            if is_largefile(buf_num) then 
+                local filename = vim.api.nvim_buf_get_name(0)
+                print(filename .. " is too large, treesitter bypassed") 
+                return
+            end
+
+            local ok, _ = pcall(vim.treesitter.start)
+            if ok then
+                vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                vim.wo[0][0].foldmethod = 'expr'
+
+                -- TODO: skip if filetype = groovy, b/c Jenkinsfiles dont work well
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+
+                --------------------- INCREMENTAL SELECTION ----------------------
+                -- NOTE: old keymap: `gn` init, `<TAB>` node increment, `<c-k>` node decrement, '<CR>' scope increment
+                -- TODO: jan'26 - maybe use flash for it https://github.com/folke/flash.nvim
+                vim.keymap.set({ 'x' }, '<leader>d', function()
+                    require 'vim.treesitter._select'.select_prev(vim.v.count1)
+                end, { desc = 'Select previous node' })
+
+                vim.keymap.set({ 'x' }, '<leader>f', function()
+                    require 'vim.treesitter._select'.select_next(vim.v.count1)
+                end, { desc = 'Select next node' })
+
+                vim.keymap.set({ "n", "x", "o" }, "<TAB>", function()
+                    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+                        require("vim.treesitter._select").select_parent(vim.v.count1)
+                    else
+                        vim.lsp.buf.selection_range(vim.v.count1)
+                    end
+                end, { desc = "Select parent treesitter node or outer incremental lsp selections" })
+
+                vim.keymap.set({ "n", "x", "o" }, "<C-k>", function()
+                    if vim.treesitter.get_parser(nil, nil, { error = false }) then
+                        require("vim.treesitter._select").select_child(vim.v.count1)
+                    else
+                        vim.lsp.buf.selection_range(-vim.v.count1)
+                    end
+                end, { desc = "Select child treesitter node or inner incremental lsp selections" })
+
+            end
+        end,
+    })
+
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        desc = 'highlight hyperlinks in regular paragraph/text of markdown',
+        callback = function()
+            vim.cmd.highlight("link mkdInlineURL htmlLink")
+            vim.cmd.syntax([[match mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/]])
+        end,
+    })
 end
 
 ---------------------- FIRENVIM CONFIG -------------------------------
@@ -68,16 +122,14 @@ LoadFireNvim = function()
 end
 
 require("lazy").setup({
-    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter,
-        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end },
+    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
+        build = ":TSUpdate", lazy = false },
     { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
-    'tpope/vim-commentary',
     'tpope/vim-surround',
     'tpope/vim-repeat',
 
     --- fuzzy find
-    { 'junegunn/fzf', run = ":call fzf#install()" },
-    { 'junegunn/fzf.vim' },
+    { 'ibhagwan/fzf-lua', config = LoadFzfLua, dependencies = { 'nvim-tree/nvim-web-devicons' }, event = 'VeryLazy' },
 
     -- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     { 'glacambre/firenvim',
@@ -158,8 +210,7 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 
-vim.keymap.set("n", "<leader>o", "<cmd>:Files<CR>")
-
+------ NAVIGATION
 vim.keymap.set("n", "<leader>f", TabBufNavForward)
 vim.keymap.set("n", "<leader>d", TabBufNavBackward)
 vim.keymap.set("n", "<leader>t", "<cmd>:tabnew<CR>")
@@ -173,13 +224,20 @@ vim.keymap.set("n", "<leader><leader>q", "<cmd>:qa<CR>")
 vim.keymap.set("i", "<C-k>", "<C-o>:w<cr>", { desc = "write changes staying in insert"})
 vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
 
+------- FZF
+-- vim.keymap.set("n", "<leader>o", "<cmd>:Files<CR>")
+vim.keymap.set('n', '<leader>o',function() require('fzf-lua').files() end, { desc = "fzf files" })
+vim.keymap.set('n', '<leader>cm',function() require('fzf-lua').keymaps() end, { desc = "fzf key mappings" })
+vim.keymap.set('n', '<leader>;',function() require('fzf-lua').commands() end, { desc = "fzf vim commands" })
+vim.keymap.set('n', '<leader><leader>r',function() require('fzf-lua').command_history() end, { desc = "fzf command history" })
+vim.keymap.set('n', '<leader><leader>c',function() require('fzf-lua').files({cwd='~/rams_dot_files/cheatsheets/'}) end,
+    { desc = "fzf cheatsheet files" })
+
+------ OTHER
+vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
 vim.keymap.set("n", "<C-Space>", "<cmd>:Lazy<CR>")
 vim.keymap.set("n", "<leader>j", "<cmd>:noh<CR>")
-vim.keymap.set('n', '<leader>cm', '<cmd>:Maps!<CR>')
-vim.keymap.set('n', '<leader>;', '<cmd>:Commands<cr>')
-vim.keymap.set('n', '<leader>r', 'q:', { desc = "command line history editor" })
-vim.keymap.set('n', '<leader><leader>r', '<cmd>:History:<cr>', { desc = "command history" })
-vim.keymap.set('n', '<leader><leader>c', '<cmd>:Files ~/rams_dot_files/cheatsheets/<cr>')
 vim.keymap.set('n', '<leader>gT', [[ <cmd>:execute '%s/\s\+$//e' <cr> ]], { desc = "remove trailing whitespace"})
+
 
 print("firevim config complete")
