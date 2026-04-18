@@ -260,10 +260,9 @@ ToggleIndentBlankLine = function()
     IndentBlankLineEnabled = not IndentBlankLineEnabled
 end
 
--- NOTE jun'24 - https://neovim.io/doc/user/lsp.html#lsp-log , has vim.lsp.log.get_filename(), seems to return same as get_log_path
 -- NOTE jun'23 - still see logs in vim LspLog tab even if metal.log file(verified with cat) is cleared...
 ClearLspLog = function()
-    local logpath = vim.lsp.get_log_path()
+    local logpath = vim.lsp.log.get_filename()
     vim.cmd(':SilentRedraw cat /dev/null > ' .. logpath)
     vim.cmd(':SilentRedraw cat /dev/null > .metals/metals.log')
 end
@@ -1652,7 +1651,7 @@ vim.keymap.set('n', [[<C-\>]], ':tab split<CR>:exec("tag ".expand("<cword>"))<CR
 vim.keymap.set('n', '<leader>lt', function() ToggleTagbar() end, { desc = "toggle Trouble or Aerial for doc symbols" })
 
 -- lsp keymaps start on lsp start, need this cmd if lsp isnt started obviously
-vim.keymap.set("n", "gle", "<cmd>LspStart<CR>")
+vim.keymap.set("n", "gle", "<cmd>:lsp enable<CR>")
 
 ----------- CO-PILOT KEYBINDINGS --------------------------------------------
 vim.keymap.set('n', '<leader>lc', '<cmd>CopilotChatToggle<cr>' , { desc = "copilot toggle chat window" })
@@ -1662,12 +1661,12 @@ vim.keymap.set('v', '<leader>le', "<cmd>'<,'> CopilotChatExplain<cr>" , { desc =
 -- many taken from https://github.com/scalameta/nvim-metals/discussions/39
 SetLSPKeymaps = function()
     -- LSP CONFIGURATION COMMANDS
-    vim.keymap.set("n", "gll", "<cmd>LspLog<CR>")
-    vim.keymap.set("n", "glL", function() print('LOG PATH: ' .. vim.lsp.get_log_path()); vim.fn.setreg('+', vim.lsp.get_log_path()) end,
+    vim.keymap.set("n", "gll", function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end, { desc = "view lsp logs" })
+    vim.keymap.set("n", "glL", function() print('LOG PATH: ' .. vim.lsp.log.get_filename()); vim.fn.setreg('+', vim.lsp.log.get_filename()) end,
         { desc = "print log path and copy to sys clipboard" })
     vim.keymap.set("n", "glc", ClearLspLog, { desc = "clear lsp logs" })
-    vim.keymap.set("n", "gli", "<cmd>LspInfo<CR>")
-    vim.keymap.set("n", "glS", "<cmd>LspStop<CR>")
+    vim.keymap.set("n", "gli", "<cmd>:checkhealth vim.lsp<CR>")
+    vim.keymap.set("n", "glS", "<cmd>:lsp disable<CR>")
     vim.keymap.set("n", "glh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
         {desc = "toggle inlay hints"})
     vim.keymap.set("n", "glt", ToggleLSPDiagnosticsVirtualText, { desc = "toggle diag virtual text" })
