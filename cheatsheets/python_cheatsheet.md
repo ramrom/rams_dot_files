@@ -39,6 +39,11 @@ print(s, end='') # print without newline
 
 ## DEPENDENCY MANAGEMENT
 - it **SUCKS**: https://xkcd.com/1987/
+- `setup.py` - define package metadata(version/name/deps), build source distributions, install from source
+    - called by `setuptools`
+- `setuptools` - lib that extends `distutils`, packaging/distibuting/installing packages
+- `wheels` - pre-compiled binary distribution format, `pip` uses it to install packages fast
+- `easy_install` - older deprecated package installer before `pip` came along
 - `virtualenv` installs packages locally vs global system dirs
     - https://virtualenv.pypa.io/en/latest/
     - `virtualenv venv` - create a new virtual env
@@ -49,6 +54,7 @@ print(s, end='') # print without newline
 ### PIPENV
 - quickstart - https://pipenv.pypa.io/en/latest/quick_start.html
 - introduces `Pipfile` and `Pipfile.lock`
+    - does _NOT_ support `pyproject.toml`
 - it's the official package management tool rec'd by python
 - `pipenv` uses `virtualenv` and `pip` under the hood
 - this replaces the `requirements.txt` mechanism
@@ -63,8 +69,14 @@ print(s, end='') # print without newline
 - u can specify packages and pin versions you want
 ### UV
 - rust written replacement for PIP: https://github.com/astral-sh/uv
+- uses `pyproject.toml` file
 - should do what pipenv does and more
 - _WAY_ faster than others
+### PYPROJECT.TOML
+- https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+- helps solve the build/dependency tool nightmare that is the python world
+- you must specify what build system(backend)in `[buil-system]` the python project uses
+- you _can_ specify deps in `[project]` but some build backends might use their own
 
 ## INTROSPECTION
 - `type(foo)`   - print type

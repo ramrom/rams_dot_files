@@ -347,6 +347,12 @@
         - escape commas newline with double quotes
     - unofficial doc similar to 4180 rfc https://creativyst.com/Doc/Articles/CSV/CSV01.shtml
 - TSV (tab seperated values)
+### PARQUET
+- file format created by apache, intended for big data envs like hadoop/spark/data-lakes
+- big differnce is it stores data on disk by column, not like row like JSON or CSV
+    - this makes the same fields for each record contiguous on the disk
+    - this allows for high compression
+- has a footer that stores metadata
 ### BINARY
 - messagepack
 - apache avro
@@ -836,6 +842,7 @@
     - NFC and EMV both use RF protocol, ISO 14443 B
     - reader and card use magnetic induction to exchange information
     - good b/c it's short range, problem with RFID is it's long range
+    - apr'26 - veritasium vid on NFC tap-to-pay and visa/iphone vuln - https://www.youtube.com/watch?v=PPJ6NJkmDAo
 
 ## AUTHENTICATION
 - OOBA - out-of-band authentication - authenticate from a different band
