@@ -5,6 +5,7 @@
 - option + up/down-arrow - up/down next channel/person
 - option + shift + up/down-arrow - up/down next unread channel/person
 - cmd + shift + [/] - switch up/down workspaces
+- cmd + shift + f - format/render the text in the slack chat box
 - cmd (number) - switch to (number) workspace
 - cmd + k/t - quick search channels/people/files
 - cmd + g - quick search all

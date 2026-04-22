@@ -9,6 +9,8 @@
     - ripgrep author analysis - https://blog.burntsushi.net/ripgrep/
 - `rg 'foo' somefile.txt` - basic syntax, regex PATTERN should be in single quotes
 - `rg 'foo\.com' somefile.txt` - like regexes use `\` for escaping a character
+- case insensitive word match
+    - `rg "(?i)someword`  - e.g. `SoMeword` `SOMEWORD` `someword` `somewOrD` all will match
 - ignoring files to search
     - search hidden: `rg --hidden`
     - u:`--no-ingore`, uu:`--no-ignore --hidden`, uuu:`--no-ignore --hidden --binary`

@@ -39,6 +39,10 @@ jq '" 10 " as $FOO | ($FOO | ltrim) as $FOO | $FOO' some.json  # call func on va
 jq --arg FOO $somevar 'select(.somefield != null) | select(.somefield | contains($FOO))'
 jq --arg NUM $somenum '.[ NUM | tonumber ]'  # arg vars are strings, need to convert to number to index an array
 
+# keynames with dash get interpretted as minus
+jq ".[key-dash]" file.json
+jq '."key-dash"' file.json
+
 # -r option strips `"` quotations characters from strings
 echo '{"a":"z"}' | jq '.a'    # prints `"z"`
 echo '{"a":"z"}' | jq -r '.a'    # prints `z`
