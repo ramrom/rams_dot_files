@@ -1838,12 +1838,7 @@ if not vim.env.VIM_NOPLUG then
         },
 
         ----- LSP STUFF
-        { "mason-org/mason.nvim", opts = {
-            registries = {
-                "github:mason-org/mason-registry",
-                "github:nvim-java/mason-registry",
-            }
-        } },
+        { "mason-org/mason.nvim", opts = {} },
         { "CopilotC-Nvim/CopilotChat.nvim",
             dependencies = {
                { "github/copilot.vim", config = LoadCopilot }, -- or zbirenbaum/copilot.lua
