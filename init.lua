@@ -1277,6 +1277,11 @@ LoadLuaLSP = function()
     vim.lsp.config('lua_ls')
 end
 
+---------------- PYTHON LSP ---------------------------
+LoadPythonLSP = function()
+    if LSPAutoStartEnable then vim.lsp.enable('basedpyright') end
+    vim.lsp.config('basedpyright', {})
+end
 
 ---------------- RUST LSP ---------------------------
 -- nvim lsp config: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#rust_analyzer
@@ -1445,6 +1450,7 @@ LoadLSPConfig = function()
     -- LoadLuaLSP()
     -- LoadRubyLSP()
     -- LoadNvimJava()
+    LoadPythonLSP()
     LoadRustLSP()
     LoadGolangLSP()
     LoadKotlinLSP()

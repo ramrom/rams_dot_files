@@ -33,6 +33,12 @@ ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no user@server
 # can turn on AddKeysToAgent, UseKeychain (for osx)
 # can include other config files
 
+# Only allow ssh auth but NOT password auth for a specific user
+Match User username
+    PasswordAuthentication no
+    PubkeyAuthentication yes
+    AuthenticationMethods publickey
+
 # bind address, useful when there are many network interfaces on machine
 ssh -b 1.1.1.1 user@hostname   # ssh from interface with IP addr 1.1.1.1
 ssh user@hostname%eth0   # tell ssh to explicitly ssh from interface named eth5
