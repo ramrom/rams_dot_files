@@ -157,6 +157,9 @@
 ## USB
 - usb 3.0 cable shouldn't really exceed 10 feet without repeater
 - displayport cable shouldnt exceed 10 feet
+- Power
+    - generally type B by spec can support up to 7.5W(5V x 1.5A) of power
+    - type C can handle way more than 7.5W, up to 240W (48V x 5A)
 - usbc supports usb 2.0 to 4.0
 - usb a/b supports usb 1.0 to 3.1
     - a/b can support 2A @ 5V power, most cables are 28gauge, which can only handle .5A

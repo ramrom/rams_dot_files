@@ -104,6 +104,8 @@
     - `spctl --status` - check if Gatekeeper is enabled
     - `spctl --master-disable` - disable Gatekeeper
     - `spctl --master-enable` - enable Gatekeeper
+- `system_profiler` - hardware/software info for apple silicon
+    - `system_profiler SPPowerDataType | grep -iE 'Wattage'` - get just battery info
 - `pmset`- power management settings
     - `pmset -g` - show current power settings
     - `pmset -g log` - show power logs (e.g. when it goes to sleep)
