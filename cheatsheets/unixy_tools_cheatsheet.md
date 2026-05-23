@@ -248,6 +248,8 @@ pandoc foo.md --to jira -o output.jira  # explicitly specify output format
 
 # FFMPEG - video conversion tool
 ffmpeg -i path/to/video.mp4 -vn path/to/sound.mp3   # extract sound from a mp4 vid file and save as mp3
+ffmpeg -i input.mkv -map 0:v:0 -map 0:a:1 -map 0:a:0 -c copy output.mkv # swap first and 2nd audio stream order
+ffmpeg -i input.mkv -map 0 -c copy -disposition:a:0 0 -disposition:a:1 default output.mkv # change default audio stream to 2nd stream
 
 # SUBSYNC - https://github.com/spion/subsync
 subsync @+5 < input.srt > output.srt  # shift all subtitles forward 5 seconds
