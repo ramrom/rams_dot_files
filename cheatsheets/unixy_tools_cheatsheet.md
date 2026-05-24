@@ -358,6 +358,7 @@ sudo ls             # run ls command as superuser(root)
 sudo -u foouser ls  # run ls command as foouser
 sudo bash           # start a bash session as root
 su foouser          # login as foouser
+sudo su - foouser   # login as foouser
 
 
 ######## PROCESSES ###########
