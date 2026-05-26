@@ -30,6 +30,10 @@ chown -R newuser dir
 # CAT - output content of file to stdout
 cat file
 
+# TAC - reverse CAT, output file to stdout from bottom line to top
+tac file
+tac logfile | less  # really great way to read a log file from most recent log entry
+
 # TAC - opposite of cat, output file in reverse order of lines to stdout
 tac file
 
