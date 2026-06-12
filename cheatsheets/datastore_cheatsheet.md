@@ -7,6 +7,7 @@
 - normalization - reducing the duplication of data to different levels
 - NoSQL: term can refer to many different paradigms bug are generally: column, document, key-value, and graph
 - impedance mismatch - concept of friction/incompatibility of ORMs, OO <-> relational data mapping issues
+    - good blog on why ORMs are bad - https://dev.to/cies/the-case-against-orms-5bh4
 - N+1 query problem - app code that translates to 1 query from a table and N extra seperate queries from a related table
 - sequential access is faster than random access on underlying storage mediums
     - particularly true for HDD, lot of physical movement, needle movement, platter movement

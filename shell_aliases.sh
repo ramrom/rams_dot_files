@@ -108,6 +108,7 @@ else  # assuming Darwin here
     alias lc='launchctl'
     alias psx='ps -hef'
     # alias top_cpu_procs_watch="watch -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
+    alias sysprof_wattage="system_profiler SPPowerDataType | grep -iE 'Wattage'"
     alias cpu_top_procs_watch="viddy -n 1 'ps -Ao pcpu,user,command -r | head -n 6'"
     alias cpu_top_procs='ps -Ao pcpu,user,command -r | head -n 6'   # do command last so it string doesnt get truncated
     alias watch_istats='watch -n 1 -c istats all'

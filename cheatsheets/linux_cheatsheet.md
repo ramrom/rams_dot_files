@@ -581,6 +581,7 @@ pulsemixer - volume manager with pulseaudio
     - when `ls -l` shows names, it's b/c it's mapping UID and GID to names in `/etc/passwd`
 ### DIR CONVENTIONS
 - see FHS(linux filesystem hierarchy standard): https://www.pathname.com/fhs/
+    - also https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
 - /         - root filesystem
 - /usr      - UserSystemResources(not! user)
     - /usr/lib - shared libs for usr executables (e.g. gtk, qt, language runtimes)
