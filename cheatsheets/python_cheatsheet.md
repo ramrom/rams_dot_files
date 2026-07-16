@@ -44,13 +44,17 @@ print(s, end='') # print without newline
 - `setuptools` - lib that extends `distutils`, packaging/distibuting/installing packages
 - `wheels` - pre-compiled binary distribution format, `pip` uses it to install packages fast
 - `easy_install` - older deprecated package installer before `pip` came along
-- `virtualenv` installs packages locally vs global system dirs
-    - https://virtualenv.pypa.io/en/latest/
-    - `virtualenv venv` - create a new virtual env
-        - creates a `venv` dir that stores all tools/metadata for env
 - `pipx` - https://github.com/pypa/pipx
     - install and run python programs in isolated environments
     - unlike `pip`, which has no ioslation and made for libs and apps, pipx is for app installs
+### VIRTUALENV
+- `virtualenv` installs packages locally vs global system dirs
+- https://virtualenv.pypa.io/en/latest/
+- `virtualenv venv` - create a new virtual env
+    - creates a `venv` dir that stores all tools/metadata for env
+- activate/deactive
+    - `source .venv/bin/activate` - generally default bin location to activate
+    - `deactivate` - run a base venv dir to deactivate it
 ### PIPENV
 - quickstart - https://pipenv.pypa.io/en/latest/quick_start.html
 - introduces `Pipfile` and `Pipfile.lock`
