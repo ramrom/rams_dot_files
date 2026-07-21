@@ -49,6 +49,8 @@
 - `\dn` list all schemas
 - `\dt` list all tables
 - `\du` list all db users (also see `pg_roles` table)
+- `\dv` list all views
+- `\dm` list all material views
 - `\d sometable` to describe a table
 - `\o somefile` output to a file
 - `\i somefile` execute commands from a file
@@ -147,6 +149,8 @@
 
 ## QUERIES
 ```sql
+-- get name and definition of all material views
+select matviewname, definition from pg_matviews;
 -- date range for DATE fields
 SELECT * FROM events WHERE event_date >= '2023-02-01' AND event_date <= '2023-04-30'
 
@@ -198,6 +202,7 @@ ALTER USER some_user WITH PASSWORD 'foobar';
 
 ## SPECIAL TABLES
 - https://www.postgresql.org/docs/current/monitoring-stats.html
+- `pg_matviews` - definitions for material views
 - `pg_stat_activity` a view that shows queries running per process
 - `pg_locks` a view that shows locks owned by various processes and transactions
 - `pg_stat_progress_create_index` - show status of index creation
