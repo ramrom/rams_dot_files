@@ -5,6 +5,9 @@
 -- NOTE: intended for hosts with older nvims (like raspian)
 
 ------------------------- SETTINGS ---------------------------------
+vim.opt.backup = false                 -- no backup files
+vim.opt.writebackup = false            -- only in case you don't want a backup file while editing
+vim.opt.swapfile = false               -- no swap files
 
 -------- GENERAL
 vim.opt.splitbelow = true                       -- open new windows on bottom for horizontal, right for vertical
@@ -477,8 +480,6 @@ require("lazy").setup({
     --     build = ":TSUpdate", lazy = false },
     { 'nvim-lualine/lualine.nvim', config = LoadLuaLine, event = 'VeryLazy' },
     { 'nvim-tree/nvim-tree.lua', config = LoadNvimTree, cmd = {"NvimTreeFindFileToggle", "NvimTreeToggle", "NvimTreeOpen"} },
-    { 'nvim-treesitter/nvim-treesitter', config = LoadTreeSitter, cond = not vim.env.NO_TREESITTER,
-        build = ":TSUpdate", lazy = false },
     { "olimorris/onedarkpro.nvim", lazy = false, config = LoadOneDarkProConfig, priority = 1000 },
     'tpope/vim-surround',
     'tpope/vim-repeat',
