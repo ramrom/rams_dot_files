@@ -405,6 +405,7 @@ apt-cache showpkg pkg - shows deps and reverse deps,
 - `ctrl`+`shift`+`v` - paste
 - `ctrl`+`shift`+`w` - close a window
 - `alt`+`f2`  - bring up prompt to run a shell command
+- `ctrl`+`alt`+`F3` - switch to console session `3`, `F2` is the gnome graphical desktop
 - `ctrl`+`alt`+`delete` - logout
 - `super`+`NUM`  - click the NUM icon in the dash(quick launch)
 - screenshots: https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html
