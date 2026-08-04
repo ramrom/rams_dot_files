@@ -75,7 +75,8 @@
 - `say` - speech synth to audio out a sentence
     - supports speaking a file like "say -f prose.txt -o audobook.aiff"
         - -o will save it to an audio file
-- `screencapture` - capture screenshot images
+- `screencapture filename` - capture screenshot images, save to `filename`
+    - `screencapture -R 100,100,500,600 foo.png` - capture rectangle at top left corner at 100,100, width 500, height 600
 - `mdfind` - cli way to find whatever spotlight does
 - `open` - open a app like u would double click on it
     - open an app by name: `open -a "Slack"`

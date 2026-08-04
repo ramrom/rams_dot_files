@@ -376,6 +376,10 @@ public static void main(String[] args) {
 
 
 ## LOAD BALANCING
+- reverse proxy vs gateway vs load balancer
+    - reverse proxy - SSL termination, caching, request-forwarding
+    - load balancer - traffic distribution, failover, health checks
+    - api gateway - auth, rate limiting, analytics
 - layer type
     - layer 3(network)
     - layer 4(TCP/UDP)

@@ -337,7 +337,10 @@
 - SPA - single page application - complex javascript apps that fully manage HTML/CSS
     - generally one big js asset loads and it loads all HTML/CSS and multimedia via js
     - breaks REST, dynamically rewrites all or parts of the DOM
-- PWA - progressive web apps - websites that can act like native apps
+- web application - broad class of software that runs in a browser
+    - can use SPA or MPA(multi-page application)
+- PWA - progressive web application - websites that can act like native apps
+    - like web app but uses some native app capabilities
     - chromium has best support, firefox adding it back in(circa 2025), safari limited support
     - has service workers
 
