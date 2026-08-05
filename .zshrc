@@ -1,5 +1,7 @@
 # ZSHRC
 
+# export SHELL_EXECUTION_TIME_DEBUG=1       # uncomment to trigger debug statements for shell code timings
+
 #### HISTORY #######
 setopt histignoredups    # don't put duplicate lines in the history.
 setopt histreduceblanks  # remove superfluous blanks before recording entry
