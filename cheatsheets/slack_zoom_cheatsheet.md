@@ -9,6 +9,7 @@
 - cmd (number) - switch to (number) workspace
 - cmd + k/t - quick search channels/people/files
 - cmd + g - quick search all
+    - cmd + delete in search bar deletes from cursor to beg of line
 - page up/down - scroll up and down convo
 - press "up" arrow to edit last message
 - hit escape to mark all messages as read in a channel

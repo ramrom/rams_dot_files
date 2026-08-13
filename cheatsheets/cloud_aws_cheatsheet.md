@@ -22,6 +22,9 @@
     - role simply is "what can I do?", so permissions
 
 ## NETWORK
+- VPC = virtual private cloud
+    - must belong to one AWS account
+- an aws account can contain main VPCs, limit is around 100 VPCs per account per region
 ### SUBNET
 - a VPC has many subnets
 - each subnet is a portion of the VPC's total address range
