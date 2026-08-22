@@ -63,7 +63,8 @@
 - root CA certs can last 20 years or more
     - the root CA cert is self-signed and inherently trusted
     - most OSes come pre-installed with root CA certs, get new root certs with OS udpates
-- CAs do get hacked, DigiNotar was hacked and went bankrupt, so was Comodo
+- CAs do get hacked, DigiNotar was hacked august 2011 and went bankrupt, so was Comodo in march 2011
+    - apple, microsoft, mozilla (and chrome), all maintain truststores and acted to release emergency security updates
 - generate a self-signed cert - https://letsencrypt.org/docs/
     - `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365`
 - get cert from website in PEM format and parse details and print to screen

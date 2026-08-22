@@ -43,9 +43,9 @@
 - created to help reduce callback hell, can chain promises together with `then` for success, `catch` for failure/exception
 ### ASYNC/AWAIT
 - introduced in ECMAScript in 2017 (ES8)
- - `async` keyword that defines a function that returns a promise
- - `await` function is syntax sugar to use when calling a async function in another async function
- - much nicer to read and handle promises and looks like synchronous code
+- `async` keyword that defines a function that returns a promise
+- `await` function is syntax sugar to use when calling a async function in another async function
+- much nicer to read and handle promises and looks like synchronous code
 ### TIMERS
 - `setTimeout` and `setInterval` are async non-blocking scheduler methods that are built-in to javascript
 - `setTimeout` 
