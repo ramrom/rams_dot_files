@@ -30,12 +30,23 @@
 - each subnet is a portion of the VPC's total address range
 - a subnet must reside within an AZ
 
-## TECH
+## MANAGED SERVICES
 - Aurora - their own complex relation database system
 - firecracker - very lightweight VM, low latency, written in rust, that is used by their lamdba serverless and fargate
     - one way it's lightweight is very minimal device support, e.g. no USB support
 - lambda - serverless functions
-- fargate - like lambda but runs containers
+- fargate - serverless worker(compute engine) to run a task, abstracts aways VM/server
+    - a fargate task is defines the container image, resources, network settings, etc
+    - can run on ECS or EKS
+- ECS - elastic container service
+    - manages and decides how to run containers, the orchestrator, competes with kubernetes
+    - a cluster has many services
+    - a service manages lifecycle of idential tasks, links to one or more target groups
+        - a task could be fargate task for EC2 task
+        - handles registration and removal of tasks from target groups
+    - a target group is a collection of healthy endpoints or IPs, it connects to listeners on an ALB
+    - can have one ALB route to many target groups, e.g. host-based or path-based rules
+- EKS - Elastic Kubernetes Service, AWS hosted k8 system
 
 ## AWS CLI
 - `aws configure --profile someprofile list`  - list sessions under that profile
