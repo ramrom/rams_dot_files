@@ -35,6 +35,8 @@ foo site:www.site.com   - search a specific site
 ## CHROME
 - command + option + i   - toggle dev tools
     - hit "preserve logs" checkbox to not zero logs between full html refreshes
+- command + shift + d  - toggle last position of dev tools (e.g. b/w bottom and side bar)
+- command + shift + c  - toggle mouse hover html/css inspection tool
 - chrome://flags  - see advanced/experimental options
 - accept self signed certificates
     - https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate

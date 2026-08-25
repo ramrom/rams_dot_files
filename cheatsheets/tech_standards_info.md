@@ -888,6 +888,8 @@
     - backwards compatible and successor to FIDO U2F(universal 2nd factor)
 - kerberos - protocol for authenticating service requests b/w trusted hosts across untrusted network
     - support built into all major OSes including windows, OSX, BSD, linux
+- HMAC - a auth code to verify author and data integrity of a message, ususally used b/c backend services
+    - uses symetric secrets and secure hashes to generate a signature for each message
 
 ## RSA
 - general rule of format type in pem file by looking at header
