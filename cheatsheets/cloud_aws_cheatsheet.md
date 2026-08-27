@@ -17,9 +17,12 @@
     - ARN(amazon resource name) structure looks like: `arn:partition:service:region:account:resource`
         - docs: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     - policy - set of generic rules
+        - e.g. allow/deny for some action
     - 3 types of policies: session, identity, resource
     - when applied in context of an identity, session, and resources, define the permissions
-    - role simply is "what can I do?", so permissions
+    - role vs user
+        - role is temporary, assuamble identity with short lived creds
+        - user is permanent identity with long-term creds
 
 ## NETWORK
 - VPC = virtual private cloud

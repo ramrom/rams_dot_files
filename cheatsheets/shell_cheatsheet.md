@@ -61,7 +61,6 @@ set -o vi   # bash vi mode
 - both zsh and bash use these keybindings by default
 - these key bindings originate from the emacs editor
 - see https://en.wikipedia.org/wiki/GNU_Readline#Emacs_keyboard_shortcuts
-- `ctrl-q` - Release terminal output (after being paused)
 - `ctrl-w` - delete word before cursor (cut to clipboard)
 - `ctrl-e` - goto end of line
 - `ctrl-r` - fuzzy search command history
@@ -72,6 +71,7 @@ set -o vi   # bash vi mode
 - `ctrl-o` - ???
 - `ctrl-p` - go back one command in the history
 - `ctrl-a` - goto beg of line
+- `ctrl-q` - Release terminal output (after being paused)
 - `ctrl-s` - linux pauses output to screen
 - `ctrl-d` - sends EOF or del char
     - for EOF, most shells like bash/zsh will basically run the `exit` command

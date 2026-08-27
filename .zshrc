@@ -39,6 +39,8 @@ export EDITOR=nvim
 export OPENER=xdg-open; [ $(uname) = "Darwin" ] && OPENER=open
 
 bindkey -s '^o' 'nvim\n'   # set ctrl-o to open neovim
+# bindkey -s '^s' 'yazi\n'   # FIXME: aug'26 osx didn't work
+bindkey -s '^g' 'y\n'   # set ctrl-s to start yazi
 
 # Colorize
 if [ $(uname) = "Darwin" ]; then
