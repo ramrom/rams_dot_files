@@ -137,6 +137,14 @@ function run_cmd_timestamp() {
         $(ansi256 -f red -b green "_---------------------"); echo
 }
 
+# yazi shell func wrapper that will change to current dir when quitting
+# TODO: replace l func with y when ready to switch to yazi
+function y() {
+    local TMP_FILE=~/tmp/yazi_cwd
+    yazi --cwd-file "${TMP_FILE}"
+    cd "$(cat ${TMP_FILE})"
+}
+
 # LF shell func wrapper that will change to current dir when quitting
 function l() {
     tmp="$(mktemp)"
