@@ -118,6 +118,8 @@ up/down arrow, or `j`/`k`    - next/prev email in chain
     - going to channel page, e.g. `https://www.youtube.com/@veritasium` , "view source", then grep `RSS`
         - e.g. `https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA` for veritasium
     - or any video for a channel, in "view source", grep for `channelId`
+    - or goto channel - https://www.youtube.com/@whatdamath
+        - hit "more" , scroll down popup to "share channel" and click -> copy channel ID
 - accessing personal data needs oauth2 with scopes
     - docs - https://developers.google.com/youtube/v3/guides/auth/server-side-web-apps
 - dec2024 - looks like youtube removed getting watch history 4 years back

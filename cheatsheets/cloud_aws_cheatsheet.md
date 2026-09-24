@@ -40,6 +40,7 @@
 - lambda - serverless functions
 - fargate - serverless worker(compute engine) to run a task, abstracts aways VM/server
     - a fargate task is defines the container image, resources, network settings, etc
+    - a task is a Firecracker micro-VM
     - can run on ECS or EKS
 - ECS - elastic container service
     - manages and decides how to run containers, the orchestrator, competes with kubernetes
@@ -50,6 +51,9 @@
     - a target group is a collection of healthy endpoints or IPs, it connects to listeners on an ALB
     - can have one ALB route to many target groups, e.g. host-based or path-based rules
 - EKS - Elastic Kubernetes Service, AWS hosted k8 system
+
+## TECH
+- Firecracker is a custom virtualization tech made by aws, each VM runs on a host KVM
 
 ## AWS CLI
 - `aws configure --profile someprofile list`  - list sessions under that profile

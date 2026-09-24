@@ -57,6 +57,6 @@ case "$ACTION" in
         [ -z "$PATTERN" ] && PATTERN_ARG="-p summarize"
         OUTPUT=$(fabric -y "$LINK")
         [ "$?" != 0 ] && echo "ERROR: fabric -y failed, exiting" && exit 1
-        fabric -y "$LINK" | fabric -s $PATTERN_ARG --session=$SESSION_NAME | $BATBIN -p -l md --paging never
+        echo "${OUTPUT}" | fabric -s $PATTERN_ARG --session=$SESSION_NAME | $BATBIN -p -l md --paging never
         ;;
 esac
