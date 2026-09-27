@@ -613,6 +613,8 @@
     - cmd+shift+9 generate new password and copy to clipboard
 - excluded domains: browser ext -> settings -> notifications -> excluded domains
     - list of domains/sites where banner to prompt to save creds wont appear
+- CLI
+    - ubuntu snap install stores data file at `~/snap/bw/current/Bitwarden CLI`
 
 ## WEB BROWSER
 ### CHROMIUM

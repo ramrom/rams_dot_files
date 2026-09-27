@@ -159,8 +159,10 @@ echo "a\nb\nc" | shuf  # will randomly 3 lines of some order of "a", "b", and "c
 echo "a\nb\nc" | shuf -n 1  # will select the first line in the randmly generated permutation
 
 # UNIQ - remove identical value **adjacent** lines, use sort first if u want to remove non adjacent dups
-echo "foo\nfoo\n\bar" | uniq        # will print one foo and then bar
-echo "foo\nbar\n\foo" | uniq        # will print foo, then bar, then foo!, b/c the 2nd foo isn't adjacent
+echo "foo\nfoo\n\bar" | uniq                # will print one foo and then bar
+echo "foo\nbar\n\foo" | uniq                # will print foo, then bar, then foo!, b/c the 2nd foo isn't adjacent
+echo "foo\nbar\n\foo" | uniq -c             # list unique values and give a count of occurences, count is first char
+echo "foo\nbar\n\foo" | uniq -c | sort -n   # sort numerically, so that highest count is at the end
 
 # RANDOM NUMBER GENERATION
 echo $RANDOM    # RANDOM is a special env var that will contain some value from 0 - 32767
