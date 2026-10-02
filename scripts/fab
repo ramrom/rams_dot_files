@@ -55,7 +55,9 @@ case "$ACTION" in
         ;;
     youtube)
         [ -z "$PATTERN" ] && PATTERN_ARG="-p summarize"
-        OUTPUT=$(fabric -y "$LINK")
+        # OUTPUT=$(fabric -y "$LINK")
+        # NOTE: sept'26 - got rate limit issues with above, opencode said the needed the below
+        OUTPUT=$(fabric -y "$LINK" --yt-dlp-args="--cookies-from-browser chrome --sleep-requests 1")
         [ "$?" != 0 ] && echo "ERROR: fabric -y failed, exiting" && exit 1
         echo "${OUTPUT}" | fabric -s $PATTERN_ARG --session=$SESSION_NAME | $BATBIN -p -l md --paging never
         ;;
