@@ -155,6 +155,7 @@ alias frgst='frg -f "-tscala"'
 # AI
 alias fabe="cd ~/.config/fabric"
 alias oc='opencode'
+alias occ='opencode --continue'
 
 # FZF
 alias fa='ff -d 1 -k'
