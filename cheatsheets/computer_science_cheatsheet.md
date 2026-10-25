@@ -762,6 +762,7 @@ see [ai cheat](artificial_intelligence_ai_cheatsheet.md)
 - blog on why facebook migrated to mercurial from git: https://graphite.dev/blog/why-facebook-doesnt-use-git
 - 2016 npm left-pad js microlibrary took down the world - https://en.wikipedia.org/wiki/Npm_left-pad_incident
 ### SECURITY
+- php2shell - https://en.wikipedia.org/wiki/PHP2Shell - major RCE in PHP runtime found in 2026
 - heartbleed - openssl vulnerability found in 2014, buffer over-read attack
 - xz utils backdoor - found in feb2024 - https://en.wikipedia.org/wiki/XZ_Utils_backdoor
     - jia tan was username doing this long con

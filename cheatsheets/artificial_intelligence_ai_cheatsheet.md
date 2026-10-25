@@ -87,6 +87,12 @@
     - input text is broken into smaller pieces, each called a token
 ### CLAUDE
 - created by anthropic
+### OPENCODE
+- FOSS harness that supports many backends
+- COMMANDS
+    - `opencode session list`  - list sessions
+    - `opencode -c` - continue last session
+    - `opencode -s sess_XXXX` - continue specific session
 ### GEMINI
 - created by google
 ### CHATGPT
