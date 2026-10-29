@@ -75,12 +75,20 @@ public static void main(String[] args) {
         - for linux `fork` only individual pages that are modified are copied-on-write
     - also shared dynamic libs - executables linking to same dynamic lib technically share the same memory
 ### GARBAGE COLLECTION
-- generational
+- REFERENCE COUNTING
+    - maintain a count of variables referencing each object
+    - when reference is nil or goes out of scope, decrement count. inc count for a new reference
+    - when count goes to zero, call object destructor
+    - one big challenge is cyclic references, usually use a strong and weak reference count to detect these
+    - consistence peformance, no major pauses like tracing, but overall overhead is prolly larger
+    - need an atomic ref counter for a shared object in a multi-threaded env
+- GENERATIONAL
     - if objects survive GC cycle they get promoted to older generations
     - java, .NET, and others all employ the generational strategy
-- Reference counting
-    - have a count of refs for each object, when refs go to zero, deallocate object
-- Tracing garbage collection
+- TRACING
+    - store list of global/root objects, and locals from main func, trace all other objects reachable from them
+    - does not have cyclical reference issue, as a cyclical reference b/w say A <--> B can still be detected by root object unreachability
+    - pauses, especially stop-the-world pauses causes latency/jitter
     - naive mark-and-sweep
          - mark phase that follows trees from root objects, and marks all reachable objects
          - sweep phase - scan all memory for each object, any object not marked is deallocated
